@@ -1,0 +1,10 @@
+{
+  "block.hbm.ore_uranium": "Uranium Ore",
+  "item.hbm.billet_uranium": "Uranium Billet",
+  "item.hbm.ingot_u233": "Uranium-233 Ingot",
+  "item.hbm.ingot_u235": "Uranium-235 Ingot",
+  "item.hbm.ingot_u238": "Uranium-238 Ingot",
+  "item.hbm.ingot_uranium": "Uranium Ingot",
+  "item.hbm.nugget_uranium": "Uranium Nugget",
+  "itemGroup.dalisfunmod.hbm_parts": "Industry Parts"
+}

@@ -1,0 +1,52 @@
+{
+  "variants": {
+    "concrete_color=0": {
+      "model": "hbm:block/concrete_white"
+    },
+    "concrete_color=1": {
+      "model": "hbm:block/concrete_orange"
+    },
+    "concrete_color=10": {
+      "model": "hbm:block/concrete_purple"
+    },
+    "concrete_color=11": {
+      "model": "hbm:block/concrete_blue"
+    },
+    "concrete_color=12": {
+      "model": "hbm:block/concrete_brown"
+    },
+    "concrete_color=13": {
+      "model": "hbm:block/concrete_green"
+    },
+    "concrete_color=14": {
+      "model": "hbm:block/concrete_red"
+    },
+    "concrete_color=15": {
+      "model": "hbm:block/concrete_black"
+    },
+    "concrete_color=2": {
+      "model": "hbm:block/concrete_magenta"
+    },
+    "concrete_color=3": {
+      "model": "hbm:block/concrete_light_blue"
+    },
+    "concrete_color=4": {
+      "model": "hbm:block/concrete_yellow"
+    },
+    "concrete_color=5": {
+      "model": "hbm:block/concrete_lime"
+    },
+    "concrete_color=6": {
+      "model": "hbm:block/concrete_pink"
+    },
+    "concrete_color=7": {
+      "model": "hbm:block/concrete_gray"
+    },
+    "concrete_color=8": {
+      "model": "hbm:block/concrete_colored"
+    },
+    "concrete_color=9": {
+      "model": "hbm:block/concrete_cyan"
+    }
+  }
+}

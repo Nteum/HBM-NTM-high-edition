@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "hbm:nitra_small"
+    },
+    {
+      "item": "hbm:nitra_small"
+    },
+    {
+      "item": "hbm:nitra_small"
+    },
+    {
+      "item": "hbm:nitra_small"
+    }
+  ],
+  "result": {
+    "item": "hbm:nitra"
+  }
+}

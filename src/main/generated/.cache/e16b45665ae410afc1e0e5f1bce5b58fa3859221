@@ -1,0 +1,5 @@
+// 1.20.2	2024-05-05T22:31:26.038334	Hbm's Nuclear Tech/Block Loot Tables
+b7a0685305084f005484eae0a2e55f1c9c988d84 data\hbm\loot_tables\blocks\concrete.json
+3c40213efbb86546ec3d329cdfbba8bd9aae9893 data\hbm\loot_tables\blocks\ore_uranium.json
+5189c839c131770bf2d7dad3c21a9f25f0350288 data\hbm\loot_tables\blocks\machine_electric_furnace.json
+797d68e3179154bfc0bcf91e341ef194370ee968 data\hbm\loot_tables\blocks\concrete_colored.json

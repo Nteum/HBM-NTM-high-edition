@@ -1,0 +1,40 @@
+{
+	"schemaVersion": 1,
+	"id": "hbm",
+	"version": "${version}",
+	"name": "Hbm's Nuclear Tech",
+	"description": "知名1.7.10武器核科技模组 HBM的核科技 的高版本移植。目前1.20.2Fabric版本正在开发中，未来可能考虑支持1.20和1.19版本forge。模组目前仍处在初级阶段，暂时不具备可玩性。",
+	"authors": [
+		"Dalis"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/hbm/textures/ABC123.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+          "com.hbm.DalisFunMod"
+		],
+		"client": [
+          "com.hbm.DalisFunModClient"
+		],
+		"fabric-datagen": [
+          "com.hbm.DalisFunModDataGenerator"
+		]
+	},
+	"mixins": [
+		"template-mod.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.15.7",
+		"minecraft": "~1.20.2",
+		"java": ">=17",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
