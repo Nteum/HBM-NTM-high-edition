@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "hbmxx:block/machine_lithium_battery"
+    }
+  }
+}

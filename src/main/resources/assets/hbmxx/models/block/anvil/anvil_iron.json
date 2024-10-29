@@ -1,0 +1,24 @@
+{
+  "loader": "forge:obj",
+  "flip_v": true,
+  "model": "hbmxx:models/block/anvil/anvil.obj",
+  "textures": {
+    "texture0": "hbmxx:block/anvil_iron",
+    "particle": "hbmxx:block/anvil_iron"
+  },
+  "ambientocclusion": false,
+  "display": {
+    "firstperson_righthand": {
+      "scale": [0.5,0.5,0.5],
+      "rotation": [0,90,22.5]
+    },
+    "thirdperson_righthand": {
+      "scale": [0.5,0.5,0.5],
+      "rotation": [0,90,22.5]
+    },
+    "gui": {
+      "scale": [0.7,0.7,0.7],
+      "rotation": [22.5,45,22.5]
+    }
+  }
+}

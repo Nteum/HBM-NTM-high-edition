@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "hbmxx:nugget_zirconium"
+    },
+    {
+      "item": "hbmxx:nugget_zirconium"
+    },
+    {
+      "item": "hbmxx:nugget_zirconium"
+    },
+    {
+      "item": "hbmxx:nugget_zirconium"
+    },
+    {
+      "item": "hbmxx:nugget_zirconium"
+    },
+    {
+      "item": "hbmxx:nugget_zirconium"
+    },
+    {
+      "item": "hbmxx:nugget_zirconium"
+    },
+    {
+      "item": "hbmxx:nugget_zirconium"
+    },
+    {
+      "item": "hbmxx:nugget_zirconium"
+    }
+  ],
+  "result": {
+    "item": "hbmxx:ingot_zirconium"
+  }
+}

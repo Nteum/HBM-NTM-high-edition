@@ -1,0 +1,12 @@
+{
+  "type": "hbmxx:blastfurnace_recipe",
+  "input1": {
+    "item": "minecraft:raw_iron"
+  },
+  "input2": {
+    "item": "minecraft:coal"
+  },
+  "result": {
+    "item": "hbmxx:ingot_steel"
+  }
+}

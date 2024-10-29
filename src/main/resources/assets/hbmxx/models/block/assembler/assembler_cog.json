@@ -1,0 +1,8 @@
+{
+  "loader": "forge:obj",
+  "flip_v": true,
+  "model": "hbmxx:models/block/assembler/assembler_cog.obj",
+  "textures": {
+    "texture0": "hbmxx:block/assembler/assembler_cog"
+  }
+}

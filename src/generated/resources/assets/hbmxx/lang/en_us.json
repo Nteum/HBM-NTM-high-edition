@@ -1,0 +1,22 @@
+{
+  "block.hbmxx.anvil_iron": "Tier 1 anvil",
+  "block.hbmxx.machine_battery": "Energy Storage Block",
+  "block.hbmxx.machine_boiler": "Oil Heater",
+  "block.hbmxx.machine_difurnace": "Blast Furnace",
+  "block.hbmxx.machine_dineutronium_battery": "Spark Energy Storage Block",
+  "block.hbmxx.machine_electric_boiler": "Electric Oil Heater",
+  "block.hbmxx.machine_electric_furnace": "Electric Furnace",
+  "block.hbmxx.machine_lithium_battery": "Li-Ion Energy Storage Block",
+  "block.hbmxx.machine_nuclear_boiler": "Nuclear Oil Heater",
+  "block.hbmxx.machine_schrabidium_battery": "Schrabidium Energy Storage Block",
+  "block.hbmxx.ore_uranium": "Uranium Ore",
+  "hbmxx.container.crucible": "Crucible",
+  "hbmxx.container.difurnace": "Blast Furnace",
+  "item.hbmxx.coke_coal": "Coal Coke",
+  "item.hbmxx.ingot_steel": "Steel Ignot",
+  "item.hbmxx.plate_steel": "Steel Plate",
+  "itemGroup.hbm_block": "HBM Block",
+  "itemGroup.hbm_item": "HBM Item",
+  "itemGroup.hbm_machine": "HBM Machine",
+  "itemGroup.hbm_tool": "HBM Tool"
+}
