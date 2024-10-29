@@ -32,6 +32,7 @@ import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.texture.PreloadedTexture;
 import net.minecraft.client.renderer.texture.SimpleTexture;
 import net.minecraft.core.HolderLookup;
@@ -169,6 +170,7 @@ public class HBMxx {
                 BlockEntityRenderers.register(ModBlockEntityType.NUKE_BOMB_FAT_ENTITY.get(), NukeFatRender::new);
                 //实体渲染
                 EntityRenderers.register(ModEntityType.TEST_ENTITY.get(), TestEntityRenderer::new);
+                EntityRenderers.register(ModEntityType.GRENADE_GENETIC_ENTITY.get(), ThrownItemRenderer::new);
                 //设置液体的渲染（因为液体是半透明的，所以需要设置一下）
                 ItemBlockRenderTypes.setRenderLayer(ModFluids.IRRADIATED_WATER_SOURCE_BLOCK.get(), RenderType.translucent());
                 ItemBlockRenderTypes.setRenderLayer(ModFluids.IRRADIATED_WATER_FLOW_BLOCK.get(), RenderType.translucent());
