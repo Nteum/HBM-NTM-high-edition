@@ -2,6 +2,7 @@ package com.hbm;
 
 import com.hbm.api.HBMTags;
 import com.hbm.block.ModBlocks;
+import com.hbm.entity.grenade.ThrownGrenade;
 import com.hbm.fluid.ModFluidTypes;
 import com.hbm.fluid.ModFluids;
 import com.hbm.model.Models;

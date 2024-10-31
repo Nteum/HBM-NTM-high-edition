@@ -2,36 +2,215 @@ package com.hbm.entity.grenade;
 
 import com.hbm.entity.ModEntityType;
 import com.hbm.item.ModItems;
+import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.renderer.entity.ThrownItemRenderer;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
+import net.minecraft.world.entity.projectile.*;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.TheEndGatewayBlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
-/**
- *
+/** 手榴弹实体类
+ * 主要参考throwableitemprojectile
+ * （说实话如果不是需要弹跳逻辑，直接写成它的子类都可以。）
  * */
-public class ThrownGrenade extends ThrowableItemProjectile {
-
+public class ThrownGrenade extends Projectile implements ItemSupplier {
+    private static final EntityDataAccessor<ItemStack> DATA_GRENADE_STACK = SynchedEntityData.defineId(ThrownGrenade.class, EntityDataSerializers.ITEM_STACK);
+    private static final EntityDataAccessor<Integer> DATA_FUSE_ID = SynchedEntityData.defineId(ThrownGrenade.class, EntityDataSerializers.INT);
+    private static final int DEFAULT_FUSE_TIME = 80;
     public ThrownGrenade(EntityType<?> pEntityType, Level pLevel) {
-        super((EntityType<? extends ThrowableItemProjectile>) pEntityType, pLevel);
+        super((EntityType<? extends ThrownGrenade>) pEntityType, pLevel);
     }
-    public ThrownGrenade(Level pLevel, LivingEntity pShooter) {super(ModEntityType.GRENADE_GENETIC_ENTITY.get(), pShooter, pLevel);}
-    public ThrownGrenade(Level pLevel, double pX, double pY, double pZ) {super(ModEntityType.GRENADE_GENETIC_ENTITY.get(), pX, pY, pZ, pLevel);}
+    public ThrownGrenade(Level pLevel, double pX, double pY, double pZ) {
+        this(ModEntityType.GRENADE_GENETIC_ENTITY.get(), pLevel);
+        this.setPos(pX, pY, pZ);
+    }
+    public ThrownGrenade(Level pLevel, LivingEntity pShooter) {
+        this(pLevel,pShooter.getX(), pShooter.getEyeY() - (double)0.1F, pShooter.getZ());
+        this.setOwner(pShooter);
+    }
 
-    @Override
-    protected @NotNull Item getDefaultItem() {return ModItems.grenade_generic.get();}
 
     /** 击中物品和实体的效果
-     * （参考TNT的爆炸）
      * */
     @Override
     protected void onHit(HitResult pResult) {
         super.onHit(pResult);
-        if (!this.level().isClientSide) {
-            this.level().explode(this, Math.floor(this.getX())+0.5D , this.getY(0.0625D), Math.floor(this.getZ())+0.5D , 4.0F, Level.ExplosionInteraction.TNT);
-            this.discard();
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+        boolean bounce = false;
+
+        HitResult hitresult = ProjectileUtil.getHitResultOnMoveVector(this, this::canHitEntity);
+        boolean flag = false;
+        if (hitresult.getType() == HitResult.Type.BLOCK) {
+            BlockPos blockpos = ((BlockHitResult)hitresult).getBlockPos();
+            BlockState blockstate = this.level().getBlockState(blockpos);
+            if (blockstate.is(Blocks.NETHER_PORTAL)) {
+                this.handleInsidePortal(blockpos);
+                flag = true;
+            } else if (blockstate.is(Blocks.END_GATEWAY)) {
+                BlockEntity blockentity = this.level().getBlockEntity(blockpos);
+                if (blockentity instanceof TheEndGatewayBlockEntity && TheEndGatewayBlockEntity.canEntityTeleport(this)) {
+                    TheEndGatewayBlockEntity.teleportEntity(this.level(), blockpos, blockstate, this, (TheEndGatewayBlockEntity)blockentity);
+                }
+
+                flag = true;
+            }
+            bounce = !flag;
         }
+
+        if (hitresult.getType() != HitResult.Type.MISS && !flag && !net.minecraftforge.event.ForgeEventFactory.onProjectileImpact(this, hitresult)) {
+            this.onHit(hitresult);
+        }
+
+        this.checkInsideBlocks();
+        Vec3 vec3 = this.getDeltaMovement();
+        double d0 = 0,d1 = 0,d2 = 0;
+        if (!bounce){
+            //不反弹
+            d2 = this.getX() + vec3.x;
+            d0 = this.getY() + vec3.y;
+            d1 = this.getZ() + vec3.z;
+        }else {
+            //反弹（暂定只是碰到方块，还没考虑碰到实体如何反弹）
+            BlockHitResult blockHitResult = (BlockHitResult) hitresult;
+            d2 = this.getX() + (blockHitResult.getLocation().x - this.getX()) * 0.6;
+            d0 = this.getY() + (blockHitResult.getLocation().y - this.getY()) * 0.6;
+            d1 = this.getZ() + (blockHitResult.getLocation().z - this.getZ()) * 0.6;
+
+            switch (blockHitResult.getDirection()){
+                case DOWN:
+                case UP:
+                    vec3 = new Vec3(vec3.x,-1*vec3.y, vec3.z);break;
+                case NORTH:
+                case SOUTH:
+                    vec3 = new Vec3(vec3.x,vec3.y, -1*vec3.z);break;
+                case EAST:
+                case WEST:
+                    vec3 = new Vec3(-1*vec3.x,vec3.y, vec3.z);break;
+            }
+
+            vec3 = vec3.scale(getBounceMod());
+        }
+
+        this.updateRotation();
+        float f;
+        if (this.isInWater()) {
+            for(int i = 0; i < 4; ++i) {
+                float f1 = 0.25F;
+                this.level().addParticle(ParticleTypes.BUBBLE, d2 - vec3.x * 0.25D, d0 - vec3.y * 0.25D, d1 - vec3.z * 0.25D, vec3.x, vec3.y, vec3.z);
+            }
+
+            f = 0.8F;
+        } else {
+            f = 0.99F;
+        }
+
+        this.setDeltaMovement(vec3.scale((double)f));
+        if (!this.isNoGravity() && !this.onGround()) {
+            Vec3 vec31 = this.getDeltaMovement();
+            this.setDeltaMovement(vec31.x, vec31.y - (double)this.getGravity(), vec31.z);
+        }
+
+        this.setPos(d2, d0, d1);
+
+        if (!this.level().isClientSide) {
+            int i = getFuse();
+            if (i <= 0){
+                this.discard();
+                this.level().explode(this, Math.floor(this.getX())+0.5D , this.getY(0.0625D), Math.floor(this.getZ())+0.5D , 4.0F, Level.ExplosionInteraction.TNT);
+            }else {
+                setFuse(i-1);
+            }
+        }
+    }
+    /**
+     * 实体数据以及相应的getter和setter
+     * */
+    @Override
+    protected void defineSynchedData() {
+        this.getEntityData().define(DATA_GRENADE_STACK, ItemStack.EMPTY);
+        this.entityData.define(DATA_FUSE_ID,DEFAULT_FUSE_TIME);
+    }
+
+    @Override
+    public void readAdditionalSaveData(CompoundTag pCompound) {
+        super.readAdditionalSaveData(pCompound);
+        ItemStack itemstack = ItemStack.of(pCompound.getCompound("Item"));
+        this.setItem(itemstack);
+        setFuse((int)pCompound.getShort("fuse"));
+    }
+
+    @Override
+    public void addAdditionalSaveData(CompoundTag pCompound) {
+        super.addAdditionalSaveData(pCompound);
+        ItemStack itemstack = this.getItemRaw();
+        if (!itemstack.isEmpty()) {
+            pCompound.put("Item", itemstack.save(new CompoundTag()));
+        }
+        pCompound.putShort("fuse",(short) getFuse());
+    }
+    public void setItem(ItemStack pStack) {
+        if (!pStack.is(this.getDefaultItem()) || pStack.hasTag()) {
+            this.getEntityData().set(DATA_GRENADE_STACK, pStack.copyWithCount(1));
+        }
+    }
+    protected ItemStack getItemRaw() {
+        return this.getEntityData().get(DATA_GRENADE_STACK);
+    }
+    protected @NotNull Item getDefaultItem() {return ModItems.grenade_generic.get();}
+    public @NotNull ItemStack getItem() {
+        ItemStack itemstack = this.getItemRaw();
+        return itemstack.isEmpty() ? new ItemStack(this.getDefaultItem()) : itemstack;
+    }
+
+    public void setFuse(int pLife) {
+        this.entityData.set(DATA_FUSE_ID, pLife);
+    }
+
+    public int getFuse() {
+        return this.entityData.get(DATA_FUSE_ID);
+    }
+    //判断实体在特定距离是否需要渲染（参考throwableprojectile）
+    public boolean shouldRenderAtSqrDistance(double pDistance) {
+        double d0 = this.getBoundingBox().getSize() * 4.0D;
+        if (Double.isNaN(d0)) {
+            d0 = 4.0D;
+        }
+
+        d0 *= 64.0D;
+        return pDistance < d0 * d0;
+    }
+    /*
+    * projectile的参数
+    * */
+    protected float getGravity() {
+        return 0.03F;
+    }
+
+    @Override
+    public boolean shouldRender(double pX, double pY, double pZ) {
+        return super.shouldRender(pX, pY, pZ);
+    }
+    //回弹时候的回弹系数
+    public double getBounceMod() {
+        return 0.5D;
     }
 }
