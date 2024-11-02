@@ -1,6 +1,6 @@
 package com.hbm.item;
 
-import com.hbm.HBMxx;
+import com.hbm.main.HBMxx;
 import com.hbm.fluid.ModFluids;
 import com.hbm.item.weapon.ItemDetonator;
 import com.hbm.item.weapon.grenade.ItemGrenade;
@@ -18,7 +18,10 @@ public class ModItems {
     /* weapon */
     //armor
     //grenade
-    public static final RegistryObject<Item> grenade_generic = ITEMS.register("grenade_generic",()->new ItemGrenade(new Item.Properties(),4,"generic"));
+    public static final RegistryObject<Item> grenade_generic = ITEMS.register("grenade_generic",()->new ItemGrenade(new Item.Properties(), ItemGrenade.Type.GENERIC));
+    public static final RegistryObject<Item> grenade_strong = ITEMS.register("grenade_strong",()->new ItemGrenade(new Item.Properties(), ItemGrenade.Type.STRONG));
+    public static final RegistryObject<Item> grenade_fire = ITEMS.register("grenade_fire",()->new ItemGrenade(new Item.Properties(), ItemGrenade.Type.FIRE));
+    public static final RegistryObject<Item> grenade_frag = ITEMS.register("grenade_frag",()->new ItemGrenade(new Item.Properties(), ItemGrenade.Type.FRAG));
     /* material */
     public static final RegistryObject<Item> ingot_steel = ITEMS.register("ingot_steel",()->new Item(new Item.Properties()));
     public static final RegistryObject<Item> ingot_red_copper = ITEMS.register("ingot_red_copper",()->new Item(new Item.Properties()));

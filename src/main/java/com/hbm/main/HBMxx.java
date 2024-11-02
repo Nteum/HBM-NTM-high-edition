@@ -1,11 +1,12 @@
-package com.hbm;
+package com.hbm.main;
 
 import com.hbm.api.HBMTags;
 import com.hbm.block.ModBlocks;
-import com.hbm.entity.grenade.ThrownGrenade;
 import com.hbm.fluid.ModFluidTypes;
 import com.hbm.fluid.ModFluids;
 import com.hbm.model.Models;
+import com.hbm.network.ModMessages;
+import com.hbm.particle.HBMSmokeParticle;
 import com.hbm.particle.ModParticleTypes;
 import com.hbm.render.ModTextureLoader;
 import com.hbm.render.blockentity.AssemblerRenderer;
@@ -23,18 +24,14 @@ import com.hbm.item.ModItems;
 import com.hbm.model.entity.TestEntityModel;
 import com.hbm.recipe.ModRecipes;
 import com.hbm.render.entity.TestEntityRenderer;
-import com.hbm.render.item.SpecialItemRender;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.client.gui.screens.MenuScreens;
-import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
-import net.minecraft.client.renderer.texture.PreloadedTexture;
 import net.minecraft.client.renderer.texture.SimpleTexture;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
@@ -108,6 +105,8 @@ public class HBMxx {
         LOGGER.info(Config.magicNumberIntroduction + Config.magicNumber);
 
         Config.items.forEach((item) -> LOGGER.info("ITEM >> {}", item.toString()));
+
+        ModMessages.register(); //注册所有的消息
     }
 
     public static ResourceLocation hbm(String s){return ResourceLocation.tryBuild(HBMxx.MODID,s);}
@@ -154,77 +153,5 @@ public class HBMxx {
     public void onServerStarting(ServerStartingEvent event) {
     }
 
-    @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-    public static class ClientModEvents {
 
-        @SubscribeEvent
-        public static void onClientSetup(FMLClientSetupEvent event)
-        {
-            /** 注册menu和gui */
-            event.enqueueWork(()-> {
-                MenuScreens.register(ModMenuType.DIFURNACE_MENU.get(), DifurnaceGui::new);
-                MenuScreens.register(ModMenuType.PRESS_MENU.get(), PressGui::new);
-                //方块实体渲染
-                BlockEntityRenderers.register(ModBlockEntityType.PRESS_ENTITY.get(), PressRenderer::new);
-                BlockEntityRenderers.register(ModBlockEntityType.ASSEMBLER_ENTITY.get(), AssemblerRenderer::new);
-                BlockEntityRenderers.register(ModBlockEntityType.CRUCIBLE_ENTITY.get(), CrucibleRenderer::new);
-                BlockEntityRenderers.register(ModBlockEntityType.NUKE_BOMB_FAT_ENTITY.get(), NukeFatRender::new);
-                //实体渲染
-                EntityRenderers.register(ModEntityType.TEST_ENTITY.get(), TestEntityRenderer::new);
-                EntityRenderers.register(ModEntityType.GRENADE_GENETIC_ENTITY.get(), ThrownItemRenderer::new);
-                //设置液体的渲染（因为液体是半透明的，所以需要设置一下）
-                ItemBlockRenderTypes.setRenderLayer(ModFluids.IRRADIATED_WATER_SOURCE_BLOCK.get(), RenderType.translucent());
-                ItemBlockRenderTypes.setRenderLayer(ModFluids.IRRADIATED_WATER_FLOW_BLOCK.get(), RenderType.translucent());
-                ItemBlockRenderTypes.setRenderLayer(ModFluids.IRRADIATED_POLLUTED_SOURCE_BLOCK.get(), RenderType.translucent());
-                ItemBlockRenderTypes.setRenderLayer(ModFluids.IRRADIATED_POLLUTED_FLOW_BLOCK.get(), RenderType.translucent());
-                ItemBlockRenderTypes.setRenderLayer(ModFluids.SULFURIC_ACID_SOURCE_BLOCK.get(), RenderType.translucent());
-                ItemBlockRenderTypes.setRenderLayer(ModFluids.SULFURIC_ACID_FLOW_BLOCK.get(), RenderType.translucent());
-                //尝试加载贴图
-                ResourceLocation overlay1 = new ResourceLocation(HBMxx.MODID,"fluid/irradiated_water_overlay");
-                Minecraft.getInstance().textureManager.register(overlay1,new SimpleTexture(overlay1));
-            });
-        }
-
-        @SubscribeEvent
-        public static void registerEntityLayers(EntityRenderersEvent.RegisterLayerDefinitions event)
-        {
-            /* 注册entity model */
-            event.registerLayerDefinition(TestEntityModel.LAYER_LOCATION,TestEntityModel::createBodyLayer);
-        }
-
-        @SubscribeEvent
-        public static void registerAdditional(ModelEvent.RegisterAdditional event){
-            //注册自定义加载模型
-            event.register(Models.ASSEMBLER_BODY);
-            event.register(Models.ASSEMBLER_COG);
-            event.register(Models.ASSEMBLER_ARM);
-            event.register(Models.ASSEMBLER_SLIDER);
-            event.register(Models.CRUCIBLE);
-            event.register(Models.FAT_MAN);
-        }
-
-        @SubscribeEvent
-        public static void registerParticleProvidersEvent(RegisterParticleProvidersEvent event){
-            //注册模组专属粒子效果
-//            event.registerSpriteSet();
-        }
-
-        @SubscribeEvent
-        public static void registerClientReloadListeners(RegisterClientReloadListenersEvent event){
-            //注册模组客户端专属的资源加载器
-        }
-
-        @SubscribeEvent
-        public static void registerTextures(RegisterTextureAtlasSpriteLoadersEvent event){
-            event.register("custom_texture_loader", new ModTextureLoader());
-
-        }
-
-        @SubscribeEvent
-        public static void registerColorHandler(RegisterColorHandlersEvent.Block event){
-//            event.register((state, level, pos, tintIndex) -> {
-//                return 0x00000000;
-//            }, ModBlocks.irradiated_water.get());
-        }
-    }
 }

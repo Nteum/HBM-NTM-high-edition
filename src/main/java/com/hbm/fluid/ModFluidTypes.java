@@ -1,6 +1,6 @@
 package com.hbm.fluid;
 
-import com.hbm.HBMxx;
+import com.hbm.main.HBMxx;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraftforge.common.SoundAction;
@@ -9,8 +9,6 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.joml.Vector3f;
-
-import java.util.function.Supplier;
 
 //在这个类里面注册流体类型
 public class ModFluidTypes {

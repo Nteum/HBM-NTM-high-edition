@@ -2,13 +2,10 @@ package com.hbm.recipe.loader;
 
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonWriter;
-import com.hbm.HBMxx;
 import com.hbm.recipe.BlastFurnaceRecipe;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.registries.ForgeRegistries;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;

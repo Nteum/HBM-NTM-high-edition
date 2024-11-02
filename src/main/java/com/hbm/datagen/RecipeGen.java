@@ -1,14 +1,12 @@
 package com.hbm.datagen;
 
-import com.hbm.HBMxx;
-import com.hbm.block.ModBlocks;
+import com.hbm.main.HBMxx;
 import com.hbm.item.ModItems;
 import com.hbm.recipe.BlastFurnaceRecipe;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.ForgeRegistries;

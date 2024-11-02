@@ -1,6 +1,6 @@
 package com.hbm.gui.menu;
 
-import com.hbm.HBMxx;
+import com.hbm.main.HBMxx;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.inventory.MenuType;

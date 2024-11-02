@@ -1,23 +1,16 @@
 package com.hbm.block.weapon;
 
-import com.hbm.HBMxx;
 import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.blockentity.weapon.NukeBombEntity;
 import com.hbm.blockentity.weapon.NukeBombFatEntity;
-import com.hbm.render.item.SpecialItemRender;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;

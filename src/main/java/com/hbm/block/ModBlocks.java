@@ -2,7 +2,6 @@ package com.hbm.block;
 
 import com.hbm.block.machine.*;
 import com.hbm.block.network.BlockConveyor;
-import com.hbm.block.weapon.NukeBomb;
 import com.hbm.block.weapon.NukeFat;
 import com.hbm.fluid.ModFluids;
 import com.hbm.item.ModItems;
@@ -14,7 +13,6 @@ import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -23,7 +21,7 @@ import net.minecraftforge.registries.RegistryObject;
 import java.util.function.Supplier;
 import java.util.function.ToIntFunction;
 
-import static com.hbm.HBMxx.MODID;
+import static com.hbm.main.HBMxx.MODID;
 
 public class ModBlocks {
     //方块注册表

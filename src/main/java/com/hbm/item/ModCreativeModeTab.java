@@ -4,12 +4,11 @@ import com.hbm.block.ModBlocks;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
-import static com.hbm.HBMxx.MODID;
+import static com.hbm.main.HBMxx.MODID;
 
 public class ModCreativeModeTab {
     //创造模式物品栏注册表
@@ -76,7 +75,12 @@ public class ModCreativeModeTab {
             .icon(()->ModItems.detonator.get().asItem().getDefaultInstance())
         .displayItems((parameters, output) -> {
             output.accept(ModItems.detonator.get());
+
             output.accept(ModItems.grenade_generic.get());
+            output.accept(ModItems.grenade_strong.get());
+            output.accept(ModItems.grenade_fire.get());
+            output.accept(ModItems.grenade_frag.get());
+
             output.accept(ModItems.bucket_irradiated_water.get());
             output.accept(ModItems.bucket_irradiated_polluted.get());
             output.accept(ModItems.bucket_sulfuric_acid.get());

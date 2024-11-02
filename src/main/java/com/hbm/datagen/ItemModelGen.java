@@ -1,14 +1,10 @@
 package com.hbm.datagen;
 
-import com.hbm.HBMxx;
+import com.hbm.main.HBMxx;
 import com.hbm.item.ModItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
-import net.minecraftforge.client.model.data.ModelData;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
-import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 public class ItemModelGen extends ItemModelProvider {
@@ -47,8 +43,12 @@ public class ItemModelGen extends ItemModelProvider {
         this.basicItem(ModItems.briquette_wood.get());
         this.basicItem(ModItems.briquette_lignite.get());
         this.basicItem(ModItems.briquette_coal.get());
+
         this.basicItem(ModItems.detonator.get());
         this.basicItem(ModItems.grenade_generic.get());
+        this.basicItem(ModItems.grenade_strong.get());
+        this.basicItem(ModItems.grenade_fire.get());
+        this.basicItem(ModItems.grenade_frag.get());
 
         this.basicItem(ModItems.bucket_irradiated_water.get());
         this.basicItem(ModItems.bucket_irradiated_polluted.get());

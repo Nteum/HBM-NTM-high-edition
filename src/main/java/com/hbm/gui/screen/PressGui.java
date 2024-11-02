@@ -1,17 +1,12 @@
 package com.hbm.gui.screen;
 
-import com.hbm.HBMxx;
+import com.hbm.main.HBMxx;
 import com.hbm.gui.menu.PressMenu;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.MenuType;
-import net.minecraft.world.item.ItemStack;
-import org.jetbrains.annotations.Nullable;
 
 public class PressGui extends AbstractContainerScreen<PressMenu> {
     private static final ResourceLocation TEXTURE = new ResourceLocation(HBMxx.MODID , "textures/gui/press_gui.png");

@@ -1,9 +1,6 @@
-package com.hbm.entity.grenade;
+package com.hbm.entity.weapon.grenade;
 
-import com.hbm.entity.ModEntityType;
 import com.hbm.item.ModItems;
-import net.minecraft.client.model.EntityModel;
-import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -12,7 +9,9 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.projectile.*;
+import net.minecraft.world.entity.projectile.ItemSupplier;
+import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -28,22 +27,20 @@ import org.jetbrains.annotations.NotNull;
  * 主要参考throwableitemprojectile
  * （说实话如果不是需要弹跳逻辑，直接写成它的子类都可以。）
  * */
-public class ThrownGrenade extends Projectile implements ItemSupplier {
+abstract public class ThrownGrenade extends Projectile implements ItemSupplier {
     private static final EntityDataAccessor<ItemStack> DATA_GRENADE_STACK = SynchedEntityData.defineId(ThrownGrenade.class, EntityDataSerializers.ITEM_STACK);
     private static final EntityDataAccessor<Integer> DATA_FUSE_ID = SynchedEntityData.defineId(ThrownGrenade.class, EntityDataSerializers.INT);
-    private static final int DEFAULT_FUSE_TIME = 80;
     public ThrownGrenade(EntityType<?> pEntityType, Level pLevel) {
         super((EntityType<? extends ThrownGrenade>) pEntityType, pLevel);
     }
-    public ThrownGrenade(Level pLevel, double pX, double pY, double pZ) {
-        this(ModEntityType.GRENADE_GENETIC_ENTITY.get(), pLevel);
+    public ThrownGrenade(EntityType<?> pEntityType, double pX, double pY, double pZ,Level pLevel) {
+        this(pEntityType, pLevel);
         this.setPos(pX, pY, pZ);
     }
-    public ThrownGrenade(Level pLevel, LivingEntity pShooter) {
-        this(pLevel,pShooter.getX(), pShooter.getEyeY() - (double)0.1F, pShooter.getZ());
+    public ThrownGrenade(EntityType<?> pEntityType, LivingEntity pShooter,Level pLevel) {
+        this(pEntityType,pShooter.getX(), pShooter.getEyeY() - (double)0.1F, pShooter.getZ(),pLevel);
         this.setOwner(pShooter);
     }
-
 
     /** 击中物品和实体的效果
      * */
@@ -95,17 +92,11 @@ public class ThrownGrenade extends Projectile implements ItemSupplier {
             d0 = this.getY() + (blockHitResult.getLocation().y - this.getY()) * 0.6;
             d1 = this.getZ() + (blockHitResult.getLocation().z - this.getZ()) * 0.6;
 
-            switch (blockHitResult.getDirection()){
-                case DOWN:
-                case UP:
-                    vec3 = new Vec3(vec3.x,-1*vec3.y, vec3.z);break;
-                case NORTH:
-                case SOUTH:
-                    vec3 = new Vec3(vec3.x,vec3.y, -1*vec3.z);break;
-                case EAST:
-                case WEST:
-                    vec3 = new Vec3(-1*vec3.x,vec3.y, vec3.z);break;
-            }
+            vec3 = switch (blockHitResult.getDirection()) {
+                case DOWN, UP -> new Vec3(vec3.x, -1 * vec3.y, vec3.z);
+                case NORTH, SOUTH -> new Vec3(vec3.x, vec3.y, -1 * vec3.z);
+                case EAST, WEST -> new Vec3(-1 * vec3.x, vec3.y, vec3.z);
+            };
 
             vec3 = vec3.scale(getBounceMod());
         }
@@ -131,15 +122,7 @@ public class ThrownGrenade extends Projectile implements ItemSupplier {
 
         this.setPos(d2, d0, d1);
 
-        if (!this.level().isClientSide) {
-            int i = getFuse();
-            if (i <= 0){
-                this.discard();
-                this.level().explode(this, Math.floor(this.getX())+0.5D , this.getY(0.0625D), Math.floor(this.getZ())+0.5D , 4.0F, Level.ExplosionInteraction.TNT);
-            }else {
-                setFuse(i-1);
-            }
-        }
+        countDown();
     }
     /**
      * 实体数据以及相应的getter和setter
@@ -147,7 +130,7 @@ public class ThrownGrenade extends Projectile implements ItemSupplier {
     @Override
     protected void defineSynchedData() {
         this.getEntityData().define(DATA_GRENADE_STACK, ItemStack.EMPTY);
-        this.entityData.define(DATA_FUSE_ID,DEFAULT_FUSE_TIME);
+        this.entityData.define(DATA_FUSE_ID,getDefaultFuseTime());
     }
 
     @Override
@@ -201,16 +184,21 @@ public class ThrownGrenade extends Projectile implements ItemSupplier {
     /*
     * projectile的参数
     * */
-    protected float getGravity() {
+    protected float getGravity(){
         return 0.03F;
-    }
-
-    @Override
-    public boolean shouldRender(double pX, double pY, double pZ) {
-        return super.shouldRender(pX, pY, pZ);
-    }
+    };
     //回弹时候的回弹系数
-    public double getBounceMod() {
-        return 0.5D;
+    abstract public double getBounceMod();
+    abstract public int getDefaultFuseTime();
+    public void countDown(){
+        int i = getFuse();
+        if (i <= 0){
+            if (!this.level().isClientSide) {
+                explode();
+            }
+        }else {
+            setFuse(i-1);
+        }
     }
+    abstract public void explode();
 }

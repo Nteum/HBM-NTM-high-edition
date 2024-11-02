@@ -1,7 +1,3 @@
-import com.hbm.HBMxx;
-import com.hbm.item.ModItems;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 
 public class test01 {

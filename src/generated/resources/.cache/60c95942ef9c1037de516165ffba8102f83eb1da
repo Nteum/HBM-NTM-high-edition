@@ -1,4 +1,4 @@
-// 1.20.1	2024-06-13T00:45:21.2664124	Item Models: hbmxx
+// 1.20.1	2024-11-02T08:09:32.2267421	Item Models: hbmxx
 0c85fb3ec1efd2f7265a0311ad3daaeeeeeb1a69 assets/hbmxx/models/item/briquette_coal.json
 523f2fd9c928056c21de56d6320a4480b535547a assets/hbmxx/models/item/briquette_lignite.json
 eaa133f56958ca86d8153900f5c4857dda737cb5 assets/hbmxx/models/item/briquette_wood.json
@@ -10,7 +10,10 @@ aad88beb9e21f07a96bd8dc7d6814d45dea26ab3 assets/hbmxx/models/item/bucket_sulfuri
 fddb4fd48974077d2b052df44ee5a9c4c4f3372f assets/hbmxx/models/item/coke_petroleum.json
 fb655ea68fc25db2485bf8f4f351ddfde9ca0078 assets/hbmxx/models/item/detonator.json
 e3fc2d263fa7614ae3a078f1ab21c572ec625757 assets/hbmxx/models/item/fluorite.json
+188a1dd3226c721d128889dc46ff2337f4166ab4 assets/hbmxx/models/item/grenade_fire.json
+a11a93132764557964e8e3c882020228277d7d49 assets/hbmxx/models/item/grenade_frag.json
 3077b41750b6d88ebcd6014051192ff69609d7c3 assets/hbmxx/models/item/grenade_generic.json
+f483074219bc3782f3798c632bbb7386e501509a assets/hbmxx/models/item/grenade_strong.json
 a650aba313883f95f23468f818c04aa2d32651d6 assets/hbmxx/models/item/ingot_advanced_alloy.json
 413444ad55c00122a99b90781ddc0ce3b9794519 assets/hbmxx/models/item/ingot_aluminium.json
 acf50e6a40ffdda6e708fbf40e0b0b55225e4444 assets/hbmxx/models/item/ingot_lead.json

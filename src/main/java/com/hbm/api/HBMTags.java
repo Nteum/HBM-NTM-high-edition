@@ -1,6 +1,6 @@
 package com.hbm.api;
 
-import com.hbm.HBMxx;
+import com.hbm.main.HBMxx;
 import com.hbm.item.ModItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -9,16 +9,11 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
-
-import static net.minecraft.tags.TagEntry.tag;
 
 //列出所有tag，实际添加tag的动作在itemtagprovider中
 public class HBMTags {

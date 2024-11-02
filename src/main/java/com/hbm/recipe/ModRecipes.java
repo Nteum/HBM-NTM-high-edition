@@ -1,8 +1,7 @@
 package com.hbm.recipe;
 
-import com.hbm.HBMxx;
+import com.hbm.main.HBMxx;
 import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;

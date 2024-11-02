@@ -1,6 +1,6 @@
 package com.hbm.render.entity;
 
-import com.hbm.HBMxx;
+import com.hbm.main.HBMxx;
 import com.hbm.entity.TestEntity;
 import com.hbm.model.entity.TestEntityModel;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -11,7 +11,6 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.client.resources.model.ModelManager;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 

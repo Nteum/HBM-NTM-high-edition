@@ -1,6 +1,6 @@
 package com.hbm.gui.screen;
 
-import com.hbm.HBMxx;
+import com.hbm.main.HBMxx;
 import com.hbm.blockentity.machine.DifurnaceEntity;
 import com.hbm.gui.menu.DifurnaceMenu;
 import net.minecraft.client.gui.GuiGraphics;

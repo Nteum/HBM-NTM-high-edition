@@ -1,22 +1,18 @@
 package com.hbm;
 
-import com.google.errorprone.annotations.Var;
+import com.hbm.main.HBMxx;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraftforge.client.model.geometry.StandaloneGeometryBakingContext;
-import net.minecraftforge.client.model.obj.ObjLoader;
 import net.minecraftforge.client.model.obj.ObjModel;
 import net.minecraftforge.client.model.renderable.CompositeRenderable;
 import net.minecraftforge.resource.PathPackResources;
-import org.jetbrains.annotations.Nullable;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Path;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Scanner;
 
 //我试图通过直接在mod类的构造函数里直接调用这个函数来获得obj模型，然而失败了
 //不过类确实获取了，或许只是我暂时没掌握渲染的技巧？
@@ -35,7 +31,7 @@ public class Procedure0 {
     public static Resource getAssetsResource(String path){
         return getResource(modAssetsPrefix,path);
     }
-    public static final String modAssetsPrefix = "assets/"+HBMxx.MODID+"/";
+    public static final String modAssetsPrefix = "assets/"+ HBMxx.MODID+"/";
     public static final String modDataPrefix = "data/"+HBMxx.MODID+"/";
     public static final String modModelPrefix = modAssetsPrefix + "models/";
     public static final String modTexturesPrefix = modAssetsPrefix + "textures/";

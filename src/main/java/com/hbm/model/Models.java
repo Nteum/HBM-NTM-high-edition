@@ -1,6 +1,6 @@
 package com.hbm.model;
 
-import com.hbm.HBMxx;
+import com.hbm.main.HBMxx;
 import net.minecraft.resources.ResourceLocation;
 
 public class Models {

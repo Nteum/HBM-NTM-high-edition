@@ -1,6 +1,6 @@
 package com.hbm.fluid;
 
-import com.hbm.HBMxx;
+import com.hbm.main.HBMxx;
 import com.hbm.block.ModBlocks;
 import com.hbm.item.ModItems;
 import net.minecraft.core.registries.Registries;
@@ -9,8 +9,6 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
-
-import java.util.function.Supplier;
 
 //在这个类里面注册流体
 public class ModFluids {

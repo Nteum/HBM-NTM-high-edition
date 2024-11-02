@@ -1,7 +1,7 @@
 package com.hbm.block.machine;
 
 
-import com.hbm.HBMxx;
+import com.hbm.main.HBMxx;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
