@@ -23,12 +23,6 @@ public class NukeCustom extends Block implements IBomb{
             pLevel.addFreshEntity(EntityNukeExplosionMK5.statFac(pLevel,120,pPos.getCenter()));
             pLevel.addFreshEntity(new EntityNukeTorex(pLevel,pPos.getCenter().add(0,4.5,0),120));
 
-//            ServerLevel serverLevel = (ServerLevel) pLevel;
-//            for (ServerPlayer player : serverLevel.players()) {
-//                if (player.distanceToSqr(pPos.getCenter()) < 4096.0F){
-//
-//                }
-//            }
             return BombReturnCode.DETONATED;
         }
         return BombReturnCode.UNDEFINED;
