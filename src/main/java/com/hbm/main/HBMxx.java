@@ -4,42 +4,22 @@ import com.hbm.api.HBMTags;
 import com.hbm.block.ModBlocks;
 import com.hbm.fluid.ModFluidTypes;
 import com.hbm.fluid.ModFluids;
-import com.hbm.model.Models;
 import com.hbm.network.ModMessages;
-import com.hbm.particle.HBMSmokeParticle;
 import com.hbm.particle.ModParticleTypes;
-import com.hbm.render.ModTextureLoader;
-import com.hbm.render.blockentity.AssemblerRenderer;
-import com.hbm.render.blockentity.CrucibleRenderer;
-import com.hbm.render.blockentity.NukeFatRender;
-import com.hbm.render.blockentity.PressRenderer;
 import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.datagen.*;
 import com.hbm.entity.ModEntityType;
 import com.hbm.gui.menu.ModMenuType;
-import com.hbm.gui.screen.DifurnaceGui;
-import com.hbm.gui.screen.PressGui;
 import com.hbm.item.ModCreativeModeTab;
 import com.hbm.item.ModItems;
-import com.hbm.model.entity.TestEntityModel;
 import com.hbm.recipe.ModRecipes;
-import com.hbm.render.entity.TestEntityRenderer;
+import com.hbm.utils.damage.ModDamageTypes;
 import com.mojang.logging.LogUtils;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screens.MenuScreens;
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
-import net.minecraft.client.renderer.entity.EntityRenderers;
-import net.minecraft.client.renderer.entity.ThrownItemRenderer;
-import net.minecraft.client.renderer.texture.SimpleTexture;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.*;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.common.data.ForgeAdvancementProvider;
@@ -51,7 +31,6 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -116,13 +95,12 @@ public class HBMxx {
      * */
     private void onGatherData(GatherDataEvent event){
 //        SerializableRecipe.initialize();
-
         DataGenerator generator = event.getGenerator();
         PackOutput packOutput = generator.getPackOutput();
         ExistingFileHelper helper = event.getExistingFileHelper();
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
         /** 客户端数据生成，生成到assets目录下 */
-        generator.addProvider(event.includeClient(),new EnglishLanguageProvider(packOutput,HBMxx.MODID,"en_us"));
+//        generator.addProvider(event.includeClient(),new EnglishLanguageProvider(packOutput,HBMxx.MODID,"en_us"));
         generator.addProvider(event.includeClient(),new ItemModelGen(packOutput,HBMxx.MODID,helper));
         generator.addProvider(event.includeClient(),new BlockStateGen(packOutput,HBMxx.MODID,helper));
         /** 服务端数据生成，生成到data目录下 */
@@ -131,6 +109,9 @@ public class HBMxx {
         generator.addProvider(event.includeServer(), new RecipeGen(packOutput));
         generator.addProvider(event.includeServer(), blockTagsGen);
         generator.addProvider(event.includeServer(), new HBMTags.HBMItemTags(packOutput,lookupProvider, blockTagsGen.contentsGetter(),MODID,helper));
+
+        generator.addProvider(event.includeServer(), new TagDmgTypeGen(packOutput,lookupProvider));
+        generator.addProvider(event.includeServer(), new RegistryDataGen(packOutput,lookupProvider));
 
 //        System.out.println("id: "+ ModItems.ignot_steel.getId());
 //        System.out.println("id path: " + ModItems.ignot_steel.getId().getPath());

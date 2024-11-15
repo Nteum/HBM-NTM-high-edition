@@ -3,6 +3,7 @@ package com.hbm.item.weapon.grenade;
 //import com.hbm.entity.logic.EntityGrenadeBouncyBase;
 //import com.hbm.entity.logic.GrenadeGeneticEntity;
 import com.hbm.entity.weapon.grenade.*;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
@@ -51,7 +52,7 @@ public class ItemGrenade extends Item {
     }
 
     public enum Type{
-        GENERIC,STRONG,FIRE,FRAG,
+        GENERIC,STRONG,FIRE,FRAG,BLACK_HOLE,
         TAU
     }
 
@@ -61,6 +62,7 @@ public class ItemGrenade extends Item {
             case STRONG -> new EntityGrenadeStrong(pPlayer,pLevel);
             case FIRE -> new EntityGrenadeFire(pPlayer, pLevel);
             case FRAG -> new EntityGrenadeFrag(pPlayer,pLevel);
+            case BLACK_HOLE -> new EntityGrenadeBlackHole(pPlayer,pLevel);
             case TAU -> null;
         };
     }

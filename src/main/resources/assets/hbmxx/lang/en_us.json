@@ -18,5 +18,9 @@
   "itemGroup.hbm_block": "HBM Block",
   "itemGroup.hbm_item": "HBM Item",
   "itemGroup.hbm_machine": "HBM Machine",
-  "itemGroup.hbm_tool": "HBM Tool"
+  "itemGroup.hbm_tool": "HBM Tool",
+  "item.hbmxx.detonator.tooltip1": "Shift right-click to set position,",
+  "item.hbmxx.detonator.tooltip2": "right-click to detonate!",
+  "item.hbmxx.detonator.tooltip3": "No position set!",
+  "item.hbmxx.detonator.tooltip4": "Linked to [%s, %s, %s]"
 }

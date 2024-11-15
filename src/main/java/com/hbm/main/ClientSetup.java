@@ -16,14 +16,15 @@ import com.hbm.render.blockentity.CrucibleRenderer;
 import com.hbm.render.blockentity.NukeFatRender;
 import com.hbm.render.blockentity.PressRenderer;
 import com.hbm.render.entity.TestEntityRenderer;
-import net.minecraft.client.Minecraft;
+import com.hbm.render.entity.effect.BlackHoleRender;
+import com.hbm.render.entity.EntityBlankRender;
+import com.hbm.render.entity.effect.EntityTorexRender;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
-import net.minecraft.client.renderer.texture.SimpleTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.*;
@@ -52,6 +53,10 @@ public class ClientSetup {
             EntityRenderers.register(ModEntityType.ENTITY_GRENADE_STRONG.get(), ThrownItemRenderer::new);
             EntityRenderers.register(ModEntityType.ENTITY_GRENADE_FIRE.get(), ThrownItemRenderer::new);
             EntityRenderers.register(ModEntityType.ENTITY_GRENADE_FRAG.get(), ThrownItemRenderer::new);
+            EntityRenderers.register(ModEntityType.ENTITY_GRENADE_BLACK_HOLE.get(), ThrownItemRenderer::new);
+            EntityRenderers.register(ModEntityType.ENTITY_BLACK_HOLE.get(), BlackHoleRender::new);
+            EntityRenderers.register(ModEntityType.ENTITY_NUKE_EXPLOSION_MK5.get(), EntityBlankRender::new);
+            EntityRenderers.register(ModEntityType.ENTITY_NUKE_TOREX.get(), EntityTorexRender::new);
             //设置液体的渲染（因为液体是半透明的，所以需要设置一下）
             ItemBlockRenderTypes.setRenderLayer(ModFluids.IRRADIATED_WATER_SOURCE_BLOCK.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(ModFluids.IRRADIATED_WATER_FLOW_BLOCK.get(), RenderType.translucent());
@@ -61,7 +66,7 @@ public class ClientSetup {
             ItemBlockRenderTypes.setRenderLayer(ModFluids.SULFURIC_ACID_FLOW_BLOCK.get(), RenderType.translucent());
             //尝试加载贴图
             ResourceLocation overlay1 = new ResourceLocation(HBMxx.MODID,"fluid/irradiated_water_overlay");
-            Minecraft.getInstance().textureManager.register(overlay1,new SimpleTexture(overlay1));
+//            Minecraft.getInstance().textureManager.register(overlay1,new SimpleTexture(overlay1));
         });
     }
 
@@ -81,6 +86,7 @@ public class ClientSetup {
         event.register(Models.ASSEMBLER_SLIDER);
         event.register(Models.CRUCIBLE);
         event.register(Models.FAT_MAN);
+        event.register(Models.BLACK_HOLE);
     }
 
 
@@ -107,4 +113,9 @@ public class ClientSetup {
 //                return 0x00000000;
 //            }, ModBlocks.irradiated_water.get());
     }
+
+//    @SubscribeEvent
+//    public static void renderGui(RenderGuiEvent event){
+//
+//    }
 }

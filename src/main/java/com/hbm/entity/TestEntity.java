@@ -38,7 +38,6 @@ public class TestEntity extends Entity {
     @Override
     protected void defineSynchedData() {
         this.entityData.define(COUNTER, 0);
-
     }
     //readAdditionalSaveData()：该方法用于从NBT标签中读取额外的保存数据，在该方法中，从NBT标签中读取计数器数据，并保存到实体数据中。
     @Override

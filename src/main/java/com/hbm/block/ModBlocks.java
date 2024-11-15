@@ -2,6 +2,7 @@ package com.hbm.block;
 
 import com.hbm.block.machine.*;
 import com.hbm.block.network.BlockConveyor;
+import com.hbm.block.weapon.NukeCustom;
 import com.hbm.block.weapon.NukeFat;
 import com.hbm.fluid.ModFluids;
 import com.hbm.item.ModItems;
@@ -62,6 +63,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> conveyor = registerBlockWithItem("conveyor",()->new BlockConveyor(BlockBehaviour.Properties.of()));
     //炸弹
     public static final RegistryObject<Block> bomb_fat_man = BLOCKS.register("bomb_fat_man",()->new NukeFat(BlockBehaviour.Properties.of()));
+    public static final RegistryObject<Block> bomb_custom = registerBlockWithItem("bomb_custom",()->new NukeCustom(BlockBehaviour.Properties.of()));
 
     public static ToIntFunction<BlockState> litEmission(int value){
         return state -> {

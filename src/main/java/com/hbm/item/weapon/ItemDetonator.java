@@ -1,11 +1,9 @@
 package com.hbm.item.weapon;
 
-import java.util.List;
-
 import com.hbm.block.weapon.IBomb;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.IntArrayTag;
-import net.minecraft.nbt.IntTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -14,10 +12,13 @@ import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import org.apache.logging.log4j.Level;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 
 public class ItemDetonator extends Item {
@@ -26,28 +27,28 @@ public class ItemDetonator extends Item {
         super(pProperties);
     }
 
-//    @Override
-//    public void addInformation(ItemStack itemstack, EntityPlayer player, List list, boolean bool) {
-//        list.add("Shift right-click to set position,");
-//        list.add("right-click to detonate!");
-//        if(itemstack.getTagCompound() == null) {
-//            list.add(EnumChatFormatting.RED + "No position set!");
-//        } else {
-//            list.add(EnumChatFormatting.YELLOW + "Linked to " + itemstack.stackTagCompound.getInteger("x") + ", " + itemstack.stackTagCompound.getInteger("y") + ", " + itemstack.stackTagCompound.getInteger("z"));
-//        }
-//    }
-
+    @Override
+    public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
+        super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
+        pTooltipComponents.add(Component.translatable("item.hbmxx.detonator.tooltip1"));
+        pTooltipComponents.add(Component.translatable("item.hbmxx.detonator.tooltip2"));
+        if (!pStack.hasTag() || pStack.getTag().getIntArray("pos") == null){
+            pTooltipComponents.add(Component.translatable("item.hbmxx.detonator.tooltip3").withStyle(ChatFormatting.RED));
+        }else {
+            int[] pos = pStack.getTag().getIntArray("pos");
+            pTooltipComponents.add(Component.translatable("item.hbmxx.detonator.tooltip4",pos[0],pos[1],pos[2]).withStyle(ChatFormatting.YELLOW));
+        }
+    }
 
     @Override
     public InteractionResult useOn(UseOnContext pContext) {
-        if (pContext.getPlayer().getPose().compareTo(Pose.CROUCHING)==0){
+        if (pContext.getPlayer().hasPose(Pose.CROUCHING)){
             Player player = pContext.getPlayer();
-            player.sendSystemMessage(Component.literal("player sneaking !!!"));
             BlockPos clickedPos = pContext.getClickedPos();
             ItemStack itemInHand = pContext.getItemInHand();
             itemInHand.addTagElement("pos", new IntArrayTag(new int[]{clickedPos.getX(), clickedPos.getY(), clickedPos.getZ()}));
             if(!pContext.getLevel().isClientSide) {
-                player.sendSystemMessage(Component.literal("set pos!"));
+                player.sendSystemMessage(Component.literal("nuclear in [" + clickedPos.getX() + "," + clickedPos.getY() + "," + clickedPos.getZ() + "]"));
             }
         }
         return super.useOn(pContext);
@@ -55,22 +56,28 @@ public class ItemDetonator extends Item {
 
     @Override
     public InteractionResultHolder<ItemStack> use(net.minecraft.world.level.Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
-        ItemStack itemInHand = pPlayer.getItemInHand(pUsedHand);
-        if (itemInHand.getTag() == null){
-            pPlayer.sendSystemMessage(Component.literal("please set pos"));
-        }else {
-            if (itemInHand.getTag().getIntArray("pos") == null){
-                return InteractionResultHolder.fail(itemInHand);
-            }
-            int[] pos = itemInHand.getTag().getIntArray("pos");
-            if (!pLevel.isClientSide){
-                Block block = pLevel.getBlockState(BlockPos.containing(pos[0],pos[1],pos[2])).getBlock();
-                if (block instanceof IBomb){
-                    IBomb.BombReturnCode bombReturnCode = ((IBomb) block).explode(pLevel, BlockPos.containing(pos[0], pos[1], pos[2]));
-                    itemInHand.removeTagKey("pos");
-                }else {
-                    pPlayer.displayClientMessage(Component.literal("bomb disappeared why?"),true);
+        if (!pPlayer.hasPose(Pose.CROUCHING)){
+            ItemStack itemInHand = pPlayer.getItemInHand(pUsedHand);
+            if (!itemInHand.hasTag() || itemInHand.getTag().getIntArray("pos") == null){
+                if (!pLevel.isClientSide){
+                    pPlayer.sendSystemMessage(Component.literal("No pos has been set."));
                 }
+            }else {
+                int[] pos = itemInHand.getTag().getIntArray("pos");
+                Block block = pLevel.getBlockState(BlockPos.containing(pos[0], pos[1], pos[2])).getBlock();
+                if (block instanceof IBomb){
+                    if (!pLevel.isClientSide){
+                        IBomb.BombReturnCode bombReturnCode = ((IBomb) block).explode(pLevel, BlockPos.containing(pos[0], pos[1], pos[2]));
+                        itemInHand.removeTagKey("pos");
+                        if (bombReturnCode.wasSuccessful())
+                            pPlayer.sendSystemMessage(Component.literal("nuclear bomb in [" + pos[0] + "," + pos[1] + "," + pos[2] + "] exploded!"));
+                    }
+                }else {
+                    if (!pLevel.isClientSide && itemInHand.hasTag()){
+                        pPlayer.displayClientMessage(Component.literal("bomb disappeared why?"),true);
+                    }
+                }
+                itemInHand.removeTagKey("pos");
             }
         }
         return super.use(pLevel, pPlayer, pUsedHand);

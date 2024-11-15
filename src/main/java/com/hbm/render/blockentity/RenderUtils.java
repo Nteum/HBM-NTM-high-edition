@@ -11,6 +11,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.client.event.RegisterShadersEvent;
 import net.minecraftforge.client.model.data.ModelData;
 
 public class RenderUtils {
@@ -26,4 +27,5 @@ public class RenderUtils {
             modelRenderer.renderModel(pPoseStack.last(), pBuffer.getBuffer(renderType != null ? renderType : net.minecraftforge.client.RenderTypeHelper.getEntityRenderType(rt, false)),
                     state, model, f,f1,f2, pPackedLight, pPackedOverlay, ModelData.EMPTY, rt);
     }
+
 }

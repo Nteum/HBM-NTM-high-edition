@@ -6,9 +6,13 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.util.Mth;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.Nullable;
+import org.joml.Quaternionf;
+import org.joml.Vector3f;
 
 /** 爆炸产生的烟雾的粒子
  * 主要模仿TNT爆炸的粒子 HugeExplosionParticle
@@ -51,8 +55,13 @@ public class HBMSmokeParticle extends TextureSheetParticle {
     }
 
     @Override
-    public void render(VertexConsumer pBuffer, Camera pRenderInfo, float pPartialTicks) {
-        super.render(pBuffer, pRenderInfo, pPartialTicks);
+    public void setAlpha(float pAlpha) {
+        super.setAlpha(pAlpha);
+    }
+
+    @Override
+    public Particle scale(float pScale) {
+        return super.scale(pScale*0.2F);
     }
 
     @OnlyIn(Dist.CLIENT)
