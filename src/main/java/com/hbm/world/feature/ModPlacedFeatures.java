@@ -23,7 +23,6 @@ import java.util.List;
  * 参考内容：原版OrePlacements
  * */
 public class ModPlacedFeatures {
-//    public static final DeferredRegister<PlacedFeature> PLACED_FEATURE = DeferredRegister.create(Registries.PLACED_FEATURE, HBMxx.MODID);
     /**
      * PlacementModifier用于描述矿物的生成位置和条件。
      * PlacementFeature类第一个参数是关联的configuredfeatures，第二个就是相关的PlacementModifier的列表。
@@ -34,10 +33,7 @@ public class ModPlacedFeatures {
      * - CountPlacement.of(p_195344_)指定了每个区块生成多少的矿物。
      * - RarityFilter.onAverageOnceEvery(p_195350_)是用于指定每隔多少个区块才生成一个矿物的。
      * */
-    
-//    public static final RegistryObject<PlacedFeature> URANIUM_ORE_OVERWORLD = PLACED_FEATURE.register("uranium_ore_overworld",()->new PlacedFeature(
-//            ModConfiguredFeatures.URANIUM_ORE_OVERWORLD.getHolder().get(),
-//            commonOrePlacement(7, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-80),VerticalAnchor.aboveBottom(30)))));
+
     public static final ResourceKey<PlacedFeature> URANIUM_ORE_OVERWORLD = createKey("uranium_ore_overworld");
 
     public static void bootstrap(BootstapContext<PlacedFeature> context){
@@ -60,5 +56,4 @@ public class ModPlacedFeatures {
     private static List<PlacementModifier> rareOrePlacement(int p_195350_, PlacementModifier p_195351_) {
         return orePlacement(RarityFilter.onAverageOnceEvery(p_195350_), p_195351_);
     }
-//    public static void register(IEventBus eventBus){PLACED_FEATURE.register(eventBus);}
 }

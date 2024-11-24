@@ -30,7 +30,6 @@ import java.util.List;
  * 参考内容：原版OreFeatures
  * */
 public class ModConfiguredFeatures {
-//    public static final DeferredRegister<ConfiguredFeature<?,?>> CONFIGURED_FEATURE = DeferredRegister.create(Registries.CONFIGURED_FEATURE, HBMxx.MODID);
     /*
     创建一个Supplier对象，提供一个包含了两个OreConfiguration.TargetBlockState对象的列表
     OreConfiguration.TargetBlockState 描述矿物生成时候的目标方块和替代方块。
@@ -45,11 +44,6 @@ public class ModConfiguredFeatures {
     OreConfiguration 提供生成的额外数据，其中第一一个参数是一个list<TargetBlockState>类型，第二是个参数表示了每个矿脉的生成数量。
      */
     public static final ResourceKey<ConfiguredFeature<?,?>> URANIUM_ORE_OVERWORLD = createKey("uranium_ore_overworld");
-//    public static final RegistryObject<ConfiguredFeature<?,?>> URANIUM_ORE_OVERWORLD = CONFIGURED_FEATURE.register("uranium_ore_overworld",
-//            ()->new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(List.of(
-//                    OreConfiguration.target(new TagMatchTest(BlockTags.BASE_STONE_OVERWORLD), ModBlocks.URANIUM_ORE.get().defaultBlockState()),
-//                    OreConfiguration.target(new TagMatchTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES), ModBlocks.DEEPSLATE_URANIUM_ORE.get().defaultBlockState())
-//            ),16)));
     public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context){
         //替换规则
         RuleTest stoneReplace = new TagMatchTest(BlockTags.BASE_STONE_OVERWORLD);
@@ -66,27 +60,4 @@ public class ModConfiguredFeatures {
     public static ResourceKey<ConfiguredFeature<?, ?>> createKey(String pName) {
         return ResourceKey.create(Registries.CONFIGURED_FEATURE, HBMxx.hbm(pName));
     }
-
-//    public static void register(IEventBus eventBus){
-//        CONFIGURED_FEATURE.register(eventBus);
-//    }
 }
-
-//    public static final Supplier<List<OreConfiguration.TargetBlockState>> OVERWORLD_ZIRCON_ORES = Suppliers.memoize(()-> List.of(
-//            OreConfiguration.target(OreFeatures.STONE_ORE_REPLACEABLES, ModBlocks.ZIRCON_ORE.get().defaultBlockState()),
-//            OreConfiguration.target(OreFeatures.DEEPSLATE_ORE_REPLACEABLES,ModBlocks.DEEPSLATE_ZIRCON_ORE.get().defaultBlockState())
-//    ));
-//    public static final Supplier<List<OreConfiguration.TargetBlockState>> END_ZIRCON_ORES = Suppliers.memoize(() -> List.of(
-//            OreConfiguration.target(new BlockMatchTest(Blocks.END_STONE),ModBlocks.ENDSTONE_ZIRCON_ORE.get().defaultBlockState())
-//    ));
-//    public static final Supplier<List<OreConfiguration.TargetBlockState>> NETHER_ZIRCON_ORES = Suppliers.memoize(() -> List.of(
-//            OreConfiguration.target(OreFeatures.NETHER_ORE_REPLACEABLES,ModBlocks.NETHERRACK_ZIRCON_ORE.get().defaultBlockState())
-//    ));
-//
-//
-//    public static final RegistryObject<ConfiguredFeature<?,?>> ZIRCON_ORE = CONFIGURED_FEATURES.register("zircon_ore",
-//            ()->new ConfiguredFeature<>(Feature.ORE,new OreConfiguration(OVERWORLD_ZIRCON_ORES.get(),7)));
-//    public static final RegistryObject<ConfiguredFeature<?,?>>END_ZIRCON_ORE = CONFIGURED_FEATURES.register("end_zircon_ore",
-//            () -> new ConfiguredFeature<>(Feature.ORE,new OreConfiguration(END_ZIRCON_ORES.get(),9)));
-//    public static final RegistryObject<ConfiguredFeature<?,?>>NETHER_ZIRCON_ORE = CONFIGURED_FEATURES.register("nether_zircon_ore",
-//            () -> new ConfiguredFeature<>(Feature.ORE,new OreConfiguration(NETHER_ZIRCON_ORES.get(),9)));
