@@ -1,0 +1,8 @@
+{
+  "render_type": "minecraft:cutout",
+  "parent": "hbmxx:block/abstract/cube_all_2_layer",
+  "textures": {
+    "all": "minecraft:block/bedrock",
+    "all1": "hbmxx:block/env/ore_overlay_diamond"
+  }
+}

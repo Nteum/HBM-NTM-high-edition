@@ -1,5 +1,6 @@
 package com.hbm.entity.logic;
 
+import com.hbm.badthing.ContaminationUtil;
 import com.hbm.entity.ModEntityType;
 import com.hbm.main.HBMxx;
 import com.hbm.world.level.explosion.ExplosionNukeGeneric;
@@ -11,11 +12,7 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.item.PrimedTnt;
-import net.minecraft.world.entity.raid.Raid;
-import net.minecraft.world.item.PickaxeItem;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
@@ -112,7 +109,7 @@ public class EntityNukeExplosionMK5 extends EntityExplosionChunkLoading{
             eRads /= (float)res;
             eRads /= (float)(len * len);
 
-//            ContaminationUtil.contaminate(e, HazardType.RADIATION, ContaminationType.RAD_BYPASS, eRads);
+            ContaminationUtil.contaminate(e, ContaminationUtil.HazardType.RADIATION, ContaminationUtil.ContaminationType.RAD_BYPASS, eRads);
         }
     }
 

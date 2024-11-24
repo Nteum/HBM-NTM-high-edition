@@ -13,8 +13,6 @@ public class BlockBattery extends BaseEntityBlock {
         super(pProperties);
     }
 
-
-
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {

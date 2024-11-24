@@ -1,8 +1,8 @@
 package com.hbm.datagen;
 
 import com.hbm.main.HBMxx;
-import com.hbm.item.ModItems;
 import com.hbm.recipe.BlastFurnaceRecipe;
+import com.hbm.registries.ModItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;

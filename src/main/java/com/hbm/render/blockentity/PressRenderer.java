@@ -1,7 +1,7 @@
 package com.hbm.render.blockentity;
 
-import com.hbm.block.ModBlocks;
 import com.hbm.blockentity.machine.PressEntity;
+import com.hbm.registries.ModBlocks;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;

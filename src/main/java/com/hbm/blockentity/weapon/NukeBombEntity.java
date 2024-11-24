@@ -1,8 +1,8 @@
 package com.hbm.blockentity.weapon;
 
-import com.hbm.block.ModBlocks;
 import com.hbm.block.weapon.NukeBomb;
 import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.registries.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;

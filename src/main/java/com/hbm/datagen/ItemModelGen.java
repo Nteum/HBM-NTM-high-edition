@@ -1,7 +1,7 @@
 package com.hbm.datagen;
 
 import com.hbm.main.HBMxx;
-import com.hbm.item.ModItems;
+import com.hbm.registries.ModItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.model.generators.ItemModelProvider;

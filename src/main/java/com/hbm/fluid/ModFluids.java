@@ -1,8 +1,8 @@
 package com.hbm.fluid;
 
 import com.hbm.main.HBMxx;
-import com.hbm.block.ModBlocks;
-import com.hbm.item.ModItems;
+import com.hbm.registries.ModBlocks;
+import com.hbm.registries.ModItems;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluid;

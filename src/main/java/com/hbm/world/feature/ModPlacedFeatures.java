@@ -1,0 +1,64 @@
+package com.hbm.world.feature;
+
+import com.hbm.main.HBMxx;
+import net.minecraft.core.HolderGetter;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.Structures;
+import net.minecraft.data.worldgen.placement.OrePlacements;
+import net.minecraft.data.worldgen.placement.PlacementUtils;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.levelgen.VerticalAnchor;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.placement.*;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.RegistryObject;
+
+import java.util.List;
+
+/** Placed feature
+ * 主要设置地物出现的位置
+ * 参考内容：原版OrePlacements
+ * */
+public class ModPlacedFeatures {
+//    public static final DeferredRegister<PlacedFeature> PLACED_FEATURE = DeferredRegister.create(Registries.PLACED_FEATURE, HBMxx.MODID);
+    /**
+     * PlacementModifier用于描述矿物的生成位置和条件。
+     * PlacementFeature类第一个参数是关联的configuredfeatures，第二个就是相关的PlacementModifier的列表。
+     *
+     * 查原版的PlacementModifier可以直接查PlacementModifierType这个类
+     * - InSquarePlacement.spread()表示矿物方块形状生成
+     * - BiomeFilter.biome()是指在特定的生物群系生成。
+     * - CountPlacement.of(p_195344_)指定了每个区块生成多少的矿物。
+     * - RarityFilter.onAverageOnceEvery(p_195350_)是用于指定每隔多少个区块才生成一个矿物的。
+     * */
+    
+//    public static final RegistryObject<PlacedFeature> URANIUM_ORE_OVERWORLD = PLACED_FEATURE.register("uranium_ore_overworld",()->new PlacedFeature(
+//            ModConfiguredFeatures.URANIUM_ORE_OVERWORLD.getHolder().get(),
+//            commonOrePlacement(7, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-80),VerticalAnchor.aboveBottom(30)))));
+    public static final ResourceKey<PlacedFeature> URANIUM_ORE_OVERWORLD = createKey("uranium_ore_overworld");
+
+    public static void bootstrap(BootstapContext<PlacedFeature> context){
+        HolderGetter<ConfiguredFeature<?, ?>> holdergetter = context.lookup(Registries.CONFIGURED_FEATURE);
+
+        PlacementUtils.register(context, URANIUM_ORE_OVERWORLD, holdergetter.getOrThrow(ModConfiguredFeatures.URANIUM_ORE_OVERWORLD),
+                commonOrePlacement(7, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-64),VerticalAnchor.aboveBottom(30))));
+    }
+
+    public static ResourceKey<PlacedFeature> createKey(String pKey) {
+        return ResourceKey.create(Registries.PLACED_FEATURE, HBMxx.hbm(pKey));
+    }
+
+    private static List<PlacementModifier> orePlacement(PlacementModifier p_195347_, PlacementModifier p_195348_) {
+        return List.of(p_195347_, InSquarePlacement.spread(), p_195348_, BiomeFilter.biome());
+    }
+    private static List<PlacementModifier> commonOrePlacement(int p_195344_, PlacementModifier p_195345_) {
+        return orePlacement(CountPlacement.of(p_195344_), p_195345_);
+    }
+    private static List<PlacementModifier> rareOrePlacement(int p_195350_, PlacementModifier p_195351_) {
+        return orePlacement(RarityFilter.onAverageOnceEvery(p_195350_), p_195351_);
+    }
+//    public static void register(IEventBus eventBus){PLACED_FEATURE.register(eventBus);}
+}

@@ -2,12 +2,11 @@ package com.hbm.render.blockentity;
 
 
 import com.hbm.blockentity.machine.AssemblerEntity;
-import com.hbm.item.ModItems;
 import com.hbm.model.Models;
+import com.hbm.registries.ModItems;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.client.renderer.block.ModelBlockRenderer;

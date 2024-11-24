@@ -1,8 +1,10 @@
-// 1.20.1	2024-06-23T07:40:14.9545978	Block States: hbmxx
+// 1.20.1	2024-11-24T22:19:17.9351885	Block States: hbmxx
 8c5fc3481c2251bc6fa3f0c707cffdde8fa99d5b assets/hbmxx/blockstates/anvil_bismuth.json
 b85ef067e28c3bb827abb799b89be56c54e01946 assets/hbmxx/blockstates/anvil_desh.json
 d764e685ed5120e49c14a8e719bea1a84f3187ba assets/hbmxx/blockstates/anvil_iron.json
+bbd0ede22adb1093290d00ac6ba35ec84a8b2eca assets/hbmxx/blockstates/bedrock_ore.json
 e35ed3ee4469653b7c791ce6a308beb335fd4afd assets/hbmxx/blockstates/conveyor.json
+0b8a892e56fdf0960f3c08ac7630725ea40d6986 assets/hbmxx/blockstates/deepslate_uranium_ore.json
 bd88a902b8042d0f4c04a9aa6dea22237b110fd9 assets/hbmxx/blockstates/machine_assembler.json
 1a0ed210aa4e234d9522fcc68c36a6b919bc092c assets/hbmxx/blockstates/machine_battery.json
 439ee6301a96e32775c36c47ca16329272003f64 assets/hbmxx/blockstates/machine_boiler.json
@@ -16,8 +18,11 @@ a02ee2cbdff8edd9f23a661db6b0b99591c7fe76 assets/hbmxx/blockstates/machine_cracki
 bd1b378189e82f03fe33e4456cb8c4f5ffd7b1be assets/hbmxx/blockstates/machine_nuclear_boiler.json
 7c9c276abff81b2432de99e978eb3959347cf78f assets/hbmxx/blockstates/machine_press.json
 87ce80f6f1eb181ed3344bb839081b8cae1cb599 assets/hbmxx/blockstates/machine_schrabidium_battery.json
-37f57b072ce6da82d9525d6b5d61f45d60e3809f assets/hbmxx/blockstates/ore_uranium.json
 7e1a8f17dbf88f89f30e1b92a5e1fac8fa69803a assets/hbmxx/blockstates/part_press_head.json
+056065dd484cb0a40239239f729f987c204931c2 assets/hbmxx/blockstates/uranium_ore.json
+7fd3951967d3ba1b511ad5b997efac16422142bd assets/hbmxx/blockstates/wast_earth.json
+44d81971344ae6937dcc5a278a89cd3fe1bdad0b assets/hbmxx/blockstates/wast_leaves.json
+35ed5c4225ada754413adf827b73ec73fa6126c2 assets/hbmxx/models/block/deepslate_uranium_ore.json
 f917d706873c817c321c43121100595c06c41a9f assets/hbmxx/models/block/machine_battery.json
 a8d712d80a69f37d2e7646928eb112caccfbd15c assets/hbmxx/models/block/machine_boiler_off.json
 3ec2e1dbdafb19580c477a1c247699ce75d4ba6e assets/hbmxx/models/block/machine_boiler_on.json
@@ -32,12 +37,15 @@ c87f359c6d79da5e391d8282c1decbd2dcac96d6 assets/hbmxx/models/block/machine_elect
 6c1631f8362dbb3f259af8402640f269e86448f8 assets/hbmxx/models/block/machine_nuclear_boiler_off.json
 f054521160ce4503917d38adf74109a85145b719 assets/hbmxx/models/block/machine_nuclear_boiler_on.json
 8456e706c438eed89a6c49f733d4c07ded9d15f6 assets/hbmxx/models/block/machine_schrabidium_battery.json
-db021761aab6ab9447874a4fb540aaaf52830e2d assets/hbmxx/models/block/ore_uranium.json
+70ab9c449d159a9d85365cc8f89e774e120d238b assets/hbmxx/models/block/uranium_ore.json
+f86cf86b06884c27ec42a5ee092d3bbefd197e24 assets/hbmxx/models/block/wast_earth.json
+b5cb9a94c8c31cd5412f2d3134ff34fbce1f4cc6 assets/hbmxx/models/block/wast_leaves.json
 40b11ab5a9158e833d803ab9c92e600bb86bbc78 assets/hbmxx/models/item/anvil_bismuth.json
 3ede1e7d44ac0b1ee605326da61539f435e8e59a assets/hbmxx/models/item/anvil_desh.json
 a17ea3c3563afc3c047edf60c5e046abad3f4cee assets/hbmxx/models/item/anvil_iron.json
 c25d113cafd69cae025dfcfff80b0a1246ac466f assets/hbmxx/models/item/bomb_fat_man.json
 25a618c77d708d5c11dbf3d7b58aa9a47fbca969 assets/hbmxx/models/item/conveyor.json
+e145ee71ee7c5e1502eb6c95181bcfa5c93443ad assets/hbmxx/models/item/deepslate_uranium_ore.json
 d4e8adce8fed957591086c318412f67ad273764d assets/hbmxx/models/item/machine_assembler.json
 80733b2292c3a57ade22bf427c15e50d79f68d58 assets/hbmxx/models/item/machine_battery.json
 0a907885e7e31f9cf6d3798324e4508f97b2351c assets/hbmxx/models/item/machine_boiler.json
@@ -51,4 +59,6 @@ ac8d2cebcce477947220d4bee77894f62ce6251b assets/hbmxx/models/item/machine_electr
 01624823fd3906bf49bde39f31c22a9ce74a88f9 assets/hbmxx/models/item/machine_nuclear_boiler.json
 467174776476be7607c601e1d883acbda7e2b0e9 assets/hbmxx/models/item/machine_press.json
 fbb8f0dfdc764ac1617b66244503ec0effaed195 assets/hbmxx/models/item/machine_schrabidium_battery.json
-c58b0df89919dc947f8484050f2b96722678fa49 assets/hbmxx/models/item/ore_uranium.json
+36ae080819266e7d5de0b9962d391a370a6511ca assets/hbmxx/models/item/uranium_ore.json
+a409c320db884651f849d875ded18a1f51756012 assets/hbmxx/models/item/wast_earth.json
+a88bd35261ebee29b1c942ecabc49dbdddb4a824 assets/hbmxx/models/item/wast_leaves.json

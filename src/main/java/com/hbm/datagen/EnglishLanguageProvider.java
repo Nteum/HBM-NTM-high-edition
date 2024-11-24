@@ -1,8 +1,7 @@
 package com.hbm.datagen;
 
-import com.hbm.block.ModBlocks;
-import com.hbm.item.ModCreativeModeTab;
-import com.hbm.item.ModItems;
+import com.hbm.registries.ModBlocks;
+import com.hbm.registries.ModItems;
 import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.data.LanguageProvider;
 
@@ -23,7 +22,7 @@ public class EnglishLanguageProvider extends LanguageProvider {
         this.add(ModItems.plate_steel.get(),"Steel Plate");
         this.add(ModItems.coke_coal.get(),"Coal Coke");
         //方块
-        this.add(ModBlocks.ore_uranium.get(),"Uranium Ore");
+        this.add(ModBlocks.URANIUM_ORE.get(),"Uranium Ore");
         this.add(ModBlocks.machine_difurnace.get(),"Blast Furnace");
         this.add(ModBlocks.machine_electric_furnace.get(),"Electric Furnace");
         this.add(ModBlocks.machine_boiler.get(),"Oil Heater");

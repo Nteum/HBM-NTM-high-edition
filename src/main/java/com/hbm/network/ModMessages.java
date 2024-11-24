@@ -1,7 +1,8 @@
 package com.hbm.network;
 
 import com.hbm.main.HBMxx;
-import com.hbm.network.packet.C2SExplosionEffectPacket;
+import com.hbm.network.packet.toclient.AuxParticlePacket;
+import com.hbm.network.packet.toclient.C2SExplosionEffectPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkDirection;
@@ -11,7 +12,7 @@ import net.minecraftforge.network.simple.SimpleChannel;
 
 public class ModMessages {
     //接受和发送自定义数据包的类
-    private static SimpleChannel INSTANCE;
+    public static SimpleChannel INSTANCE;
     private static int packetId = 0;
     private static int id(){return packetId++;}
 
@@ -23,11 +24,17 @@ public class ModMessages {
                 .serverAcceptedVersions(s -> true)
                 .simpleChannel();
         INSTANCE = net;
-
+        //C2SExplosionEffectPacket
         net.messageBuilder(C2SExplosionEffectPacket.class,id(), NetworkDirection.PLAY_TO_CLIENT)
                 .decoder(C2SExplosionEffectPacket::new)
                 .encoder(C2SExplosionEffectPacket::toBytes)
                 .consumerMainThread(C2SExplosionEffectPacket::handle)
+                .add();
+        //AuxParticlePacket
+        net.messageBuilder(AuxParticlePacket.class,id(), NetworkDirection.PLAY_TO_CLIENT)
+                .decoder(AuxParticlePacket::new)
+                .encoder(AuxParticlePacket::toBytes)
+                .consumerMainThread(AuxParticlePacket::handle)
                 .add();
     }
 
@@ -38,4 +45,5 @@ public class ModMessages {
     public static <MSG> void sendToPlayer(MSG message, ServerPlayer player){
         INSTANCE.send(PacketDistributor.PLAYER.with(()-> player),message);
     }
+
 }

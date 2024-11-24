@@ -1,7 +1,7 @@
 package com.hbm.datagen;
 
 import com.google.common.collect.Iterables;
-import com.hbm.block.ModBlocks;
+import com.hbm.registries.ModBlocks;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.item.Item;
@@ -18,7 +18,7 @@ public class BlockLootGen extends BlockLootSubProvider {
 
     @Override
     protected void generate() {
-        this.dropSelf(ModBlocks.ore_uranium.get());
+        this.dropSelf(ModBlocks.URANIUM_ORE.get());
         this.dropSelf(ModBlocks.machine_difurnace.get());
         this.dropSelf(ModBlocks.machine_boiler.get());
         this.dropSelf(ModBlocks.machine_electric_boiler.get());
@@ -27,6 +27,8 @@ public class BlockLootGen extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.machine_lithium_battery.get());
         this.dropSelf(ModBlocks.machine_schrabidium_battery.get());
         this.dropSelf(ModBlocks.machine_dineutronium_battery.get());
+
+        this.dropOther(ModBlocks.WAST_EARTH.get(), Blocks.DIRT);
     }
 
     @Override

@@ -1,6 +1,6 @@
 package com.hbm.entity.weapon.grenade;
 
-import com.hbm.item.ModItems;
+import com.hbm.registries.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;

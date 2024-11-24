@@ -2,8 +2,8 @@ package com.hbm.recipe;
 
 import com.google.gson.JsonObject;
 import com.hbm.main.HBMxx;
-import com.hbm.item.ModItems;
 import com.hbm.recipe.loader.SerializableRecipe;
+import com.hbm.registries.ModItems;
 import com.hbm.utils.Tuple;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.CriterionTriggerInstance;

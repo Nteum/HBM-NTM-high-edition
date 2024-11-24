@@ -1,7 +1,8 @@
 package com.hbm.main;
 
 import com.hbm.api.HBMTags;
-import com.hbm.block.ModBlocks;
+import com.hbm.config.GeneralConfig;
+import com.hbm.registries.ModBlocks;
 import com.hbm.fluid.ModFluidTypes;
 import com.hbm.fluid.ModFluids;
 import com.hbm.network.ModMessages;
@@ -10,16 +11,17 @@ import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.datagen.*;
 import com.hbm.entity.ModEntityType;
 import com.hbm.gui.menu.ModMenuType;
-import com.hbm.item.ModCreativeModeTab;
-import com.hbm.item.ModItems;
+import com.hbm.registries.ModCreativeModeTab;
+import com.hbm.registries.ModItems;
 import com.hbm.recipe.ModRecipes;
-import com.hbm.utils.damage.ModDamageTypes;
+import com.hbm.registries.ModSounds;
+import com.hbm.world.feature.ModConfiguredFeatures;
+import com.hbm.world.feature.ModPlacedFeatures;
 import com.mojang.logging.LogUtils;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.common.data.ForgeAdvancementProvider;
@@ -33,7 +35,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.slf4j.Logger;
 
 import java.util.List;
@@ -58,8 +59,6 @@ public class HBMxx {
         modEventBus.addListener(this::onGatherData);
         modEventBus.addListener(ModCreativeModeTab::addCreative);
 
-        MinecraftForge.EVENT_BUS.register(this);
-
         ModItems.ITEMS.register(modEventBus);
         ModBlocks.register(modEventBus);
         ModCreativeModeTab.CREATIVE_MODE_TABS.register(modEventBus);
@@ -70,20 +69,15 @@ public class HBMxx {
         ModFluidTypes.FLUID_TYPES.register(modEventBus);
         ModFluids.FLUIDS.register(modEventBus);
         ModParticleTypes.PARTICLE_TYPES.register(modEventBus);
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+        ModSounds.SOUNDS.register(modEventBus);
+
+        MinecraftForge.EVENT_BUS.register(this);
+
+//        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, GeneralConfig.CONFIG_SPEC);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
-        // Some common setup code
-        LOGGER.info("HELLO FROM COMMON SETUP");
-        LOGGER.info("DIRT BLOCK >> {}", ForgeRegistries.BLOCKS.getKey(Blocks.DIRT));
-
-        if (Config.logDirtBlock)
-            LOGGER.info("DIRT BLOCK >> {}", ForgeRegistries.BLOCKS.getKey(Blocks.DIRT));
-
-        LOGGER.info(Config.magicNumberIntroduction + Config.magicNumber);
-
-        Config.items.forEach((item) -> LOGGER.info("ITEM >> {}", item.toString()));
 
         ModMessages.register(); //注册所有的消息
     }
@@ -109,9 +103,9 @@ public class HBMxx {
         generator.addProvider(event.includeServer(), new RecipeGen(packOutput));
         generator.addProvider(event.includeServer(), blockTagsGen);
         generator.addProvider(event.includeServer(), new HBMTags.HBMItemTags(packOutput,lookupProvider, blockTagsGen.contentsGetter(),MODID,helper));
-
         generator.addProvider(event.includeServer(), new TagDmgTypeGen(packOutput,lookupProvider));
-        generator.addProvider(event.includeServer(), new RegistryDataGen(packOutput,lookupProvider));
+//        generator.addProvider(event.includeServer(), new RegistryDataGen(packOutput,lookupProvider));
+        generator.addProvider(event.includeServer(), new WorldGen(packOutput, lookupProvider));
 
 //        System.out.println("id: "+ ModItems.ignot_steel.getId());
 //        System.out.println("id path: " + ModItems.ignot_steel.getId().getPath());

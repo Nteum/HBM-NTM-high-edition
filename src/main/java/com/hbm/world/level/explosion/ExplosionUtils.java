@@ -1,7 +1,7 @@
 package com.hbm.world.level.explosion;
 
 import com.hbm.network.ModMessages;
-import com.hbm.network.packet.C2SExplosionEffectPacket;
+import com.hbm.network.packet.toclient.C2SExplosionEffectPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.Level;

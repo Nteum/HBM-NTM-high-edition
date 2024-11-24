@@ -1,7 +1,7 @@
 package com.hbm.api;
 
 import com.hbm.main.HBMxx;
-import com.hbm.item.ModItems;
+import com.hbm.registries.ModItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;

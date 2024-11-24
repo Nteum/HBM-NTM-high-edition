@@ -1,15 +1,23 @@
 package com.hbm.datagen;
 
+import com.hbm.block.env.BedRockOre;
 import com.hbm.main.HBMxx;
-import com.hbm.block.ModBlocks;
+import com.hbm.registries.ModBlocks;
 import com.hbm.model.Models;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraftforge.client.model.generators.*;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.Optional;
+import java.util.function.Function;
 
 public class BlockStateGen extends BlockStateProvider {
     public BlockStateGen(PackOutput output, String modid, ExistingFileHelper exFileHelper) {
@@ -19,48 +27,23 @@ public class BlockStateGen extends BlockStateProvider {
     @Override
     protected void registerStatesAndModels() {
         //简单方块和物品
-        simpleBlockWithItem(ModBlocks.ore_uranium.get(),this.cubeAll(ModBlocks.ore_uranium.get()));
-        simpleBlockWithItem(ModBlocks.machine_battery.get(),this.models().orientable("machine_battery",
-                new ResourceLocation(HBMxx.MODID, "block/battery_side"),
-                new ResourceLocation(HBMxx.MODID, "block/battery_front"),
-                new ResourceLocation(HBMxx.MODID, "block/battery_top")));
-        simpleBlockWithItem(ModBlocks.machine_lithium_battery.get(),this.models().orientable("machine_lithium_battery",
-                new ResourceLocation(HBMxx.MODID, "block/battery_lithium_side"),
-                new ResourceLocation(HBMxx.MODID, "block/battery_lithium_front"),
-                new ResourceLocation(HBMxx.MODID, "block/battery_lithium_top")));
-        simpleBlockWithItem(ModBlocks.machine_schrabidium_battery.get(),this.models().orientable("machine_schrabidium_battery",
-                new ResourceLocation(HBMxx.MODID, "block/battery_schrabidium_side"),
-                new ResourceLocation(HBMxx.MODID, "block/battery_schrabidium_front"),
-                new ResourceLocation(HBMxx.MODID, "block/battery_schrabidium_top")));
-        simpleBlockWithItem(ModBlocks.machine_dineutronium_battery.get(),this.models().orientable("machine_dineutronium_battery",
-                new ResourceLocation(HBMxx.MODID, "block/battery_dineutronium_side"),
-                new ResourceLocation(HBMxx.MODID, "block/battery_dineutronium_front"),
-                new ResourceLocation(HBMxx.MODID, "block/battery_dineutronium_top")));
-
+        simpleBlockWithItem(ModBlocks.URANIUM_ORE.get(),this.models().cubeAll("uranium_ore",HBMxx.hbm("block/env/ore_uranium")));
+        simpleBlockWithItem(ModBlocks.DEEPSLATE_URANIUM_ORE.get(),this.models().cubeAll("deepslate_uranium_ore",HBMxx.hbm("block/env/deepslate_uranium_ore")));
+        simpleBlockWithItem(ModBlocks.machine_battery.get(),this.models().orientable("machine_battery", new ResourceLocation(HBMxx.MODID, "block/battery_side"), new ResourceLocation(HBMxx.MODID, "block/battery_front"), new ResourceLocation(HBMxx.MODID, "block/battery_top")));
+        simpleBlockWithItem(ModBlocks.machine_lithium_battery.get(),this.models().orientable("machine_lithium_battery", new ResourceLocation(HBMxx.MODID, "block/battery_lithium_side"), new ResourceLocation(HBMxx.MODID, "block/battery_lithium_front"), new ResourceLocation(HBMxx.MODID, "block/battery_lithium_top")));
+        simpleBlockWithItem(ModBlocks.machine_schrabidium_battery.get(),this.models().orientable("machine_schrabidium_battery", new ResourceLocation(HBMxx.MODID, "block/battery_schrabidium_side"), new ResourceLocation(HBMxx.MODID, "block/battery_schrabidium_front"), new ResourceLocation(HBMxx.MODID, "block/battery_schrabidium_top")));
+        simpleBlockWithItem(ModBlocks.machine_dineutronium_battery.get(),this.models().orientable("machine_dineutronium_battery", new ResourceLocation(HBMxx.MODID, "block/battery_dineutronium_side"), new ResourceLocation(HBMxx.MODID, "block/battery_dineutronium_front"), new ResourceLocation(HBMxx.MODID, "block/battery_dineutronium_top")));
+        simpleBlockWithItem(ModBlocks.WAST_EARTH.get(),this.models().cubeBottomTop("wast_earth", HBMxx.hbm("block/env/waste_earth_side"),HBMxx.hbm("block/env/waste_earth_bottom"),HBMxx.hbm("block/env/waste_earth_top")));
+        simpleBlockWithItem(ModBlocks.WAST_LEAVES.get(),this.models().leaves("wast_leaves", HBMxx.hbm("block/env/waste_leaves")));
+        addEnumStateBlock(ModBlocks.BEDROCK_ORE.get(), BedRockOre.TYPE, (value)->enumModelFileFunction_BedRockOreType((BedRockOre.BedRockOreType) value));
         ModelFile.ExistingModelFile conveyorModel = this.models().getExistingFile(new ResourceLocation(HBMxx.MODID, "block/conveyor"));
         horizontalBlock(ModBlocks.conveyor.get(),conveyorModel);
         simpleBlockItem(ModBlocks.conveyor.get(),conveyorModel);
         //多状态的方块和物品
         //1. 高炉
-        BlockModelBuilder machineDifurnace_off = this.models().orientableWithBottom("machine_difurnace_off",
-            new ResourceLocation(HBMxx.MODID, "block/difurnace_side"),
-            new ResourceLocation(HBMxx.MODID, "block/difurnace_front_off"),
-            new ResourceLocation(HBMxx.MODID, "block/difurnace_bottom"),
-            new ResourceLocation(HBMxx.MODID, "block/difurnace_top_off"));
-        BlockModelBuilder machineDifurnace_on = this.models().orientableWithBottom("machine_difurnace_on",
-            new ResourceLocation(HBMxx.MODID, "block/difurnace_side"),
-            new ResourceLocation(HBMxx.MODID, "block/difurnace_front_on"),
-                new ResourceLocation(HBMxx.MODID, "block/difurnace_bottom"),
-            new ResourceLocation(HBMxx.MODID, "block/difurnace_top_on"));
-        this.getVariantBuilder(ModBlocks.machine_difurnace.get())
-            .forAllStates(state -> {
-                Boolean value = state.getValue(BlockStateProperties.LIT);
-                return ConfiguredModel.builder()
-                    .modelFile(value == Boolean.FALSE ? machineDifurnace_off : machineDifurnace_on)
-                    .rotationY(((int) state.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot() + 180) % 360)
-                    .build();
-                });
-        this.simpleBlockItem(ModBlocks.machine_difurnace.get(),machineDifurnace_off);
+        BlockModelBuilder machineDifurnace_off = this.models().orientableWithBottom("machine_difurnace_off", new ResourceLocation(HBMxx.MODID, "block/difurnace_side"), new ResourceLocation(HBMxx.MODID, "block/difurnace_front_off"), new ResourceLocation(HBMxx.MODID, "block/difurnace_bottom"), new ResourceLocation(HBMxx.MODID, "block/difurnace_top_off"));
+        BlockModelBuilder machineDifurnace_on = this.models().orientableWithBottom("machine_difurnace_on", new ResourceLocation(HBMxx.MODID, "block/difurnace_side"), new ResourceLocation(HBMxx.MODID, "block/difurnace_front_on"),new ResourceLocation(HBMxx.MODID, "block/difurnace_bottom"), new ResourceLocation(HBMxx.MODID, "block/difurnace_top_on"));
+        addBooleanStateWithFace(ModBlocks.machine_difurnace.get(), BlockStateProperties.LIT, machineDifurnace_off, machineDifurnace_on);
         //2. 电炉
         BlockModelBuilder machineElectricFurnaceOff = this.models().orientableWithBottom("machine_electric_furnace_off",
             new ResourceLocation(HBMxx.MODID, "block/machine_electric_furnace_side"),
@@ -72,15 +55,7 @@ public class BlockStateGen extends BlockStateProvider {
             new ResourceLocation(HBMxx.MODID, "block/machine_electric_furnace_front_on"),
             new ResourceLocation(HBMxx.MODID, "block/machine_electric_furnace_bottom"),
             new ResourceLocation(HBMxx.MODID,"block/machine_electric_furnace_top"));
-        this.getVariantBuilder(ModBlocks.machine_electric_furnace.get())
-                .forAllStates(state -> {
-                    Boolean value = state.getValue(BlockStateProperties.LIT);
-                    return ConfiguredModel.builder()
-                            .modelFile(value == Boolean.FALSE ? machineElectricFurnaceOff : machineElectricFurnaceOn)
-                            .rotationY(((int) state.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot() + 180) % 360)
-                            .build();
-                });
-        this.simpleBlockItem(ModBlocks.machine_electric_furnace.get(),machineElectricFurnaceOff);
+        addBooleanStateWithFace(ModBlocks.machine_electric_furnace.get(), BlockStateProperties.LIT, machineElectricFurnaceOff, machineElectricFurnaceOn);
         //3. 加热器
         BlockModelBuilder machine_boiler_off = this.models().orientable("machine_boiler_off",
                 new ResourceLocation(HBMxx.MODID, "block/machine_boiler_side"),
@@ -90,15 +65,7 @@ public class BlockStateGen extends BlockStateProvider {
                 new ResourceLocation(HBMxx.MODID, "block/machine_boiler_side"),
                 new ResourceLocation(HBMxx.MODID, "block/machine_boiler_front_lit"),
                 new ResourceLocation(HBMxx.MODID, "block/machine_boiler_top"));
-        this.getVariantBuilder(ModBlocks.machine_boiler.get())
-                .forAllStates(state -> {
-                    Boolean value = state.getValue(BlockStateProperties.LIT);
-                    return ConfiguredModel.builder()
-                            .modelFile(value == Boolean.FALSE ? machine_boiler_off : machine_boiler_on)
-                            .rotationY(((int) state.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot() + 180) % 360)
-                            .build();
-                });
-        this.simpleBlockItem(ModBlocks.machine_boiler.get(),machine_boiler_off);
+        addBooleanStateWithFace(ModBlocks.machine_boiler.get(), BlockStateProperties.LIT, machine_boiler_off, machine_boiler_on);
         //4. 电加热器
         BlockModelBuilder machine_electric_boiler_off = this.models().orientable("machine_electric_boiler_off",
                 new ResourceLocation(HBMxx.MODID, "block/machine_boiler_side"),
@@ -108,15 +75,7 @@ public class BlockStateGen extends BlockStateProvider {
                 new ResourceLocation(HBMxx.MODID, "block/machine_boiler_side"),
                 new ResourceLocation(HBMxx.MODID, "block/machine_boiler_electric_front_lit"),
                 new ResourceLocation(HBMxx.MODID, "block/machine_boiler_electric_top"));
-        this.getVariantBuilder(ModBlocks.machine_electric_boiler.get())
-                .forAllStates(state -> {
-                    Boolean value = state.getValue(BlockStateProperties.LIT);
-                    return ConfiguredModel.builder()
-                            .modelFile(value == Boolean.FALSE ? machine_electric_boiler_off : machine_electric_boiler_on)
-                            .rotationY(((int) state.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot() + 180) % 360)
-                            .build();
-                });
-        this.simpleBlockItem(ModBlocks.machine_electric_boiler.get(),machine_electric_boiler_off);
+        addBooleanStateWithFace(ModBlocks.machine_electric_boiler.get(), BlockStateProperties.LIT, machine_electric_boiler_off, machine_electric_boiler_on);
         //5. 核加热器
         BlockModelBuilder machine_nuclear_boiler_off = this.models().orientable("machine_nuclear_boiler_off",
                 new ResourceLocation(HBMxx.MODID, "block/machine_boiler_nuclear_side"),
@@ -126,15 +85,7 @@ public class BlockStateGen extends BlockStateProvider {
                 new ResourceLocation(HBMxx.MODID, "block/machine_boiler_nuclear_side"),
                 new ResourceLocation(HBMxx.MODID, "block/machine_boiler_nuclear_front_lit"),
                 new ResourceLocation(HBMxx.MODID, "block/machine_boiler_top"));
-        this.getVariantBuilder(ModBlocks.machine_nuclear_boiler.get())
-                .forAllStates(state -> {
-                    Boolean value = state.getValue(BlockStateProperties.LIT);
-                    return ConfiguredModel.builder()
-                            .modelFile(value == Boolean.FALSE ? machine_nuclear_boiler_off : machine_nuclear_boiler_on)
-                            .rotationY(((int) state.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot() + 180) % 360)
-                            .build();
-                });
-        this.simpleBlockItem(ModBlocks.machine_nuclear_boiler.get(),machine_nuclear_boiler_off);
+        addBooleanStateWithFace(ModBlocks.machine_nuclear_boiler.get(), BlockStateProperties.LIT, machine_nuclear_boiler_off, machine_nuclear_boiler_on);
         //obj机器
         addObjHorizonalModel(ModBlocks.anvil_iron.get(),"block/anvil/anvil_iron");
         addObjHorizonalModel(ModBlocks.anvil_bismuth.get(),"block/anvil/anvil_bismuth");
@@ -169,11 +120,38 @@ public class BlockStateGen extends BlockStateProvider {
         this.horizontalBlock(block,existingFile);
         this.simpleBlockItem(block,existingFile);
     }
-//    public void addBombItem(Block block,ModelFile model){
-//        this.itemModels().getBuilder(key(block).getPath())
-//                .parent(model)
-//                .customLoader();
-//    }
+    /** 添加有两个状态，并带有水平方向的方块（HBM的方块机器大部分属于此列） */
+    private void addBooleanStateWithFace(Block block, BooleanProperty booleanProperty, ModelFile model1, ModelFile model2){
+        this.getVariantBuilder(block)
+                .forAllStates(state -> {
+                    Boolean value = state.getValue(booleanProperty);
+                    return ConfiguredModel.builder()
+                            .modelFile(value == Boolean.FALSE ? model1 : model2)
+                            .rotationY(((int) state.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot() + 180) % 360)
+                            .build();
+                });
+        this.simpleBlockItem(block,model1);
+    }
+
+    private <E extends Enum<E> & StringRepresentable> void addEnumStateBlock(Block block, EnumProperty<E> enumProperty, Function<Enum<E>, ModelFile> enumModelFileFunction){
+        this.getVariantBuilder(block)
+                .forAllStates(state -> {
+                    E value = state.getValue(enumProperty);
+                    return ConfiguredModel.builder()
+                            .modelFile(enumModelFileFunction.apply(value))
+                            .build();
+                });
+    }
+
+    public ModelFile enumModelFileFunction_BedRockOreType(BedRockOre.BedRockOreType value) {
+        return switch (value){
+            case IRON -> models().getExistingFile(HBMxx.hbm("block/env/bedrock_ore_iron"));
+            case COPPER -> models().getExistingFile(HBMxx.hbm("block/env/bedrock_ore_copper"));
+            case DIA -> models().getExistingFile(HBMxx.hbm("block/env/bedrock_ore_dia"));
+            default -> null;
+        };
+    }
+
     private ResourceLocation key(Block block) {
         return ForgeRegistries.BLOCKS.getKey(block);
     }

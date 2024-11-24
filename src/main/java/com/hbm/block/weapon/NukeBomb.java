@@ -1,28 +1,16 @@
 package com.hbm.block.weapon;
 
-import com.hbm.block.ModBlocks;
 import com.hbm.block.machine.BaseMachineBlock;
-import com.hbm.blockentity.ModBlockEntityType;
-import com.hbm.blockentity.machine.PressEntity;
 import com.hbm.blockentity.weapon.NukeBombEntity;
-import com.hbm.item.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RenderShape;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.VoxelShape;
-import org.jetbrains.annotations.Nullable;
 
 public abstract class NukeBomb extends BaseMachineBlock implements IBomb {
     private boolean ready = false;
