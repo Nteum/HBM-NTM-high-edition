@@ -1,330 +1,2429 @@
 {
-	"misc.nullChopper": { "sounds": [{"name": "hbmxx:misc/null", "stream": false}]},
-	"misc.nullCrashing": { "sounds": [{"name": "hbmxx:misc/null", "stream": false}]},
-	"misc.nullMine": { "sounds": [{"name": "hbmxx:misc/null", "stream": false}]},
-
-	"block.crateBreak": { "sounds": ["hbmxx:block/crateBreak1", "hbmxx:block/crateBreak2", "hbmxx:block/crateBreak3", "hbmxx:block/crateBreak4", "hbmxx:block/crateBreak5"]},
-	"block.shutdown": { "sounds": [{"name": "hbmxx:block/shutdown", "stream": true}]},
-    "block.minerOperate": { "sounds": [{"name": "hbmxx:block/minerOperate", "stream": true}]},
-    "block.assemblerOperate": { "sounds": [{"name": "hbmxx:block/assemblerOperate", "stream": true}]},
-    "block.chemplantOperate": { "sounds": [{"name": "hbmxx:block/chemplantOperate", "stream": true}]},
-    "block.dieselOperate": { "sounds": [{"name": "hbmxx:block/dieselOperate", "stream": false}]},
-    "block.igeneratorOperate": { "sounds": [{"name": "hbmxx:block/igeneratorOperate", "stream": false}]},
-    "block.turbofanOperate": { "sounds": [{"name": "hbmxx:block/turbofanOperate", "stream": true}]},
-    "block.pressOperate": { "sounds": [{"name": "hbmxx:block/pressOperate", "stream": false}]},
-    "block.broadcast1": { "sounds": [{"name": "hbmxx:block/broadcast1", "stream": true}]},
-    "block.broadcast2": { "sounds": [{"name": "hbmxx:block/broadcast2", "stream": true}]},
-    "block.broadcast3": { "sounds": [{"name": "hbmxx:block/broadcast3", "stream": true}]},
-    "block.sonarPing": { "sounds": [{"name": "hbmxx:block/sonarPing", "stream": false}]},
-    "block.reactorStart": { "sounds": [{"name": "hbmxx:block/reactorStart", "stream": false}]},
-    "block.reactorStop": { "sounds": [{"name": "hbmxx:block/reactorStop", "stream": false}]},
-    "block.vaultScrape": { "sounds": [{"name": "hbmxx:block/vaultScrape", "stream": false}]},
-    "block.vaultThud": { "sounds": [{"name": "hbmxx:block/vaultThud", "stream": false}]},
-    "block.vaultScrapeNew": { "sounds": [{"name": "hbmxx:block/vaultScrapeNew", "stream": false}]},
-    "block.vaultThudNew": { "sounds": [{"name": "hbmxx:block/vaultThudNew", "stream": false}]},
-    "block.lockOpen": { "sounds": [{"name": "hbmxx:block/lockOpen", "stream": false}]},
-    "block.lockHang": { "sounds": [{"name": "hbmxx:block/lockHang", "stream": false}]},
-    "block.debris": { "sounds": ["hbmxx:block/debris1", "hbmxx:block/debris2", "hbmxx:block/debris3"]},
-    "block.centrifugeOperate": { "sounds": [{"name": "hbmxx:block/centrifugeOperate", "stream": false}]},
-    "block.pipePlaced": { "sounds": [{"name": "hbmxx:block/pipePlaced", "stream": false}]},
-    "block.missileAssembly": { "sounds": [{"name": "hbmxx:block/missileAssembly", "stream": false}]},
-    "block.missileAssembly2": { "sounds": [{"name": "hbmxx:block/missileAssembly2", "stream": false}]},
-	"block.openDoor": { "sounds": ["hbmxx:block/door_open_1", "hbmxx:block/door_open_2"]},
-	"block.closeDoor": { "sounds": ["hbmxx:block/door_close_1", "hbmxx:block/door_close_2"]},
-    "block.soyuzReady": { "sounds": [{"name": "hbmxx:block/soyuzReady", "stream": true}]},
-	"block.screm": { "sounds": ["hbmxx:screm/scream1", "hbmxx:screm/scream01", "hbmxx:screm/scream2", "hbmxx:screm/scream02", "hbmxx:screm/scream3", "hbmxx:screm/scream03", "hbmxx:screm/scream4", "hbmxx:screm/scream04", "hbmxx:screm/scream5", "hbmxx:screm/scream05", "hbmxx:screm/scream6", "hbmxx:screm/scream06", "hbmxx:screm/scream7", "hbmxx:screm/scream07", "hbmxx:screm/scream08", "hbmxx:screm/scream09", "hbmxx:screm/scream10", "hbmxx:screm/scream11", "hbmxx:screm/scream12", "hbmxx:screm/scream13", "hbmxx:screm/scream14", "hbmxx:screm/scream15", "hbmxx:screm/scream16", "hbmxx:screm/scream17", "hbmxx:screm/scream18", "hbmxx:screm/scream19", "hbmxx:screm/scream20", "hbmxx:screm/scream21", "hbmxx:screm/scream22", "hbmxx:screm/scream23", "hbmxx:screm/scream24", "hbmxx:screm/scream25"]},
-    "block.rbmk_explosion": { "sounds": [{"name": "hbmxx:block/rbmk_explosion", "stream": false}]},
-    "block.rbmk_az5_cover": { "sounds": [{"name": "hbmxx:block/rbmk_az5_cover", "stream": false}]},
-    "block.chungusLever": { "sounds": [{"name": "hbmxx:block/chungusLever", "stream": false}]},
-    "block.leverLarge": { "sounds": [{"name": "hbmxx:block/leverLarge", "stream": false}]},
-    "block.bobble": { "sounds": [{"name": "hbmxx:block/bobble", "stream": false}]},
-    "block.crateOpen": { "sounds": [{"name": "hbmxx:block/crateOpen", "stream": false}]},
-    "block.crateClose": { "sounds": [{"name": "hbmxx:block/crateClose", "stream": false}]},
-    "block.storageOpen": { "sounds": [{"name": "hbmxx:block/storageOpen", "stream": false}]},
-    "block.storageClose": { "sounds": [{"name": "hbmxx:block/storageClose", "stream": false}]},
-    "block.openC": { "sounds": ["hbmxx:block/openC1", "hbmxx:block/openC2", "hbmxx:block/openCSqueaky"]},
-    "block.closeC": { "sounds": ["hbmxx:block/closeC1", "hbmxx:block/closeC2", "hbmxx:block/closeC3"]},
-    "block.warnOverspeed": { "sounds": [{"name": "hbmxx:block/warnOverspeed", "stream": false}]},
-    "block.boilerGroan": { "sounds": ["hbmxx:block/boilerGroan0", "hbmxx:block/boilerGroan1", "hbmxx:block/boilerGroan2"]},
-    "block.steamEngineOperate": { "sounds": [{"name": "hbmxx:block/steamEngineOperate", "stream": false}]},
-    "block.turbinegasStartup": { "sounds": [{"name": "hbmxx:block/turbinegasStartup", "stream": false}]},
-    "block.turbinegasRunning": { "sounds": [{"name": "hbmxx:block/turbinegasRunning", "stream": false}]},
-    "block.turbinegasShutdown": { "sounds": [{"name": "hbmxx:block/turbinegasShutdown", "stream": true}]},
-    "block.chungusTurbineRunning": { "sounds": [{"name": "hbmxx:block/chungusTurbine", "stream": false}]},
-    "block.largeTurbineRunning": { "sounds": [{"name": "hbmxx:block/largeTurbine", "stream": false}]},
-    "block.damage": { "sounds": ["hbmxx:block/dam1", "hbmxx:block/dam2", "hbmxx:block/dam3", "hbmxx:block/dam4"]},
-    "block.electricHum": { "sounds": [{"name": "hbmxx:block/electricHum", "stream": false}]},
-    "block.boiler": { "sounds": [{"name": "hbmxx:block/boiler", "stream": false}]},
-    "block.hornNearSingle": { "sounds": [{"name": "hbmxx:block/hornNearSingle", "stream": false}]},
-    "block.hornNearDual": { "sounds": [{"name": "hbmxx:block/hornNearDual", "stream": false}]},
-    "block.hornFarSingle": { "sounds": [{"name": "hbmxx:block/hornFarSingle", "stream": false}]},
-    "block.hornFarDual": { "sounds": [{"name": "hbmxx:block/hornFarDual", "stream": false}]},
-    "block.reactorLoop": { "sounds": [{"name": "hbmxx:block/reactorLoop", "stream": false}]},
-    "block.fusionReactorRunning": { "sounds": [{"name": "hbmxx:block/fusionReactorSpin", "stream": false}]},
-    "block.fel": { "sounds":  [{"name": "hbmxx:block/fel", "stream":  false}]},
-    "block.hephaestusRunning": { "sounds": [{"name": "hbmxx:block/hephaestusRunning", "stream": false}]},
-    "block.squeakyToy": { "sounds": [{"name": "hbmxx:block/squeakyToy", "stream": false}]},
-    "block.pyroOperate": { "sounds": [{"name": "hbmxx:block/pyroOperate", "stream": false}]},
-    
-    "door.TransitionSealOpen": { "sounds": [{"name": "hbmxx:block/door/transition_seal_open", "stream": true}]},
-    "door.wghStart": { "sounds": [{"name": "hbmxx:block/door/wgh_start", "stream": true}]},
-    "door.wghStop": { "sounds": [{"name": "hbmxx:block/door/wgh_stop", "stream": true}]},
-    "door.alarm6": { "sounds": [{"name": "hbmxx:block/door/alarm6", "stream": true}]},
-    "door.sliding_door_shut": { "sounds": [{"name": "hbmxx:block/door/sliding_door_shut", "stream": false}]},
-    "door.sliding_door_opened": { "sounds": [{"name": "hbmxx:block/door/sliding_door_opened", "stream": false}]},
-    "door.sliding_door_opening": { "sounds": [{"name": "hbmxx:block/door/sliding_door_opening", "stream": false}]},
-
-    "door.garage_move": {  "sounds": [{"name": "hbmxx:block/door/garage_move", "stream": false}] },
-    "door.garage_stop": {  "sounds": [{"name": "hbmxx:block/door/garage_stop", "stream": false}] },
-    "door.lever": { "sounds": [{"name": "hbmxx:block/door/lever1", "stream": false}]},
-    "door.wgh_start": { "sounds": [{"name": "hbmxx:block/door/wgh_start", "stream": false}]},
-    "door.wgh_stop": { "sounds": [{"name": "hbmxx:block/door/wgh_stop", "stream": false}]},
-    "door.wgh_big_start": { "sounds": [{"name": "hbmxx:block/door/door_wgh_big_start", "stream": false}]},
-    "door.wgh_big_stop": { "sounds": [{"name": "hbmxx:block/door/door_wgh_big_stop", "stream": false}]},
-    "door.qe_sliding_shut": { "sounds": [{"name": "hbmxx:block/door/doorshut_1", "stream": false}]},
-    "door.qe_sliding_opened": { "sounds": [{"name": "hbmxx:block/door/doorslide_opened1", "stream": false}]},
-    "door.qe_sliding_opening": { "sounds": [{"name": "hbmxx:block/door/doorslide_opening1", "stream": false}]},
-    "door.sliding_seal_open": { "sounds": [{"name": "hbmxx:block/door/doormove2", "stream": false}]},
-    "door.sliding_seal_stop": { "sounds": [{"name": "hbmxx:block/door/metal_stop1", "stream": false}]},
-
-	"item.techBleep": { "sounds": [{"name": "hbmxx:tool/techBleep", "stream": false}]},
-    "item.techBoop": { "sounds": [{"name": "hbmxx:tool/techBoop", "stream": false}]},
-    "item.geiger1": { "sounds": [{"name": "hbmxx:tool/geiger1", "stream": false}]},
-    "item.geiger2": { "sounds": [{"name": "hbmxx:tool/geiger2", "stream": false}]},
-    "item.geiger3": { "sounds": [{"name": "hbmxx:tool/geiger3", "stream": false}]},
-    "item.geiger4": { "sounds": [{"name": "hbmxx:tool/geiger4", "stream": false}]},
-    "item.geiger5": { "sounds": [{"name": "hbmxx:tool/geiger5", "stream": false}]},
-    "item.geiger6": { "sounds": [{"name": "hbmxx:tool/geiger6", "stream": false}]},
-    "item.pinUnlock": { "sounds": [{"name": "hbmxx:tool/pinUnlock", "stream": false}]},
-    "item.pinBreak": { "sounds": [{"name": "hbmxx:tool/pinBreak", "stream": false}]},
-    "item.gasmaskScrew": { "sounds": [{"name": "hbmxx:tool/gasmaskScrew", "stream": false}]},
-    "item.jetpackTank": { "sounds": [{"name": "hbmxx:tool/jetpackTank", "stream": false}]},
-    "item.unpack": { "sounds": ["hbmxx:tool/extract1", "hbmxx:tool/extract2"]},
-    "item.syringe": { "sounds": [{"name": "hbmxx:tool/stim", "stream": false}]},
-    "item.radaway": { "sounds": [{"name": "hbmxx:tool/radaway", "stream": false}]},
-    "item.spray": { "sounds": [{"name": "hbmxx:tool/spray", "stream": false}]},
-    "item.repair": { "sounds": ["hbmxx:tool/repair1", "hbmxx:tool/repair2", "hbmxx:tool/repair3", "hbmxx:tool/repair4", "hbmxx:tool/repair5", "hbmxx:tool/repair6", "hbmxx:tool/repair7"]},
-    "item.vice": { "sounds": [{"name": "hbmxx:tool/vice", "stream": false}]},
-    "item.upgradePlug": { "sounds": [{"name": "hbmxx:tool/upgradePlug", "stream": false}]},
-    "item.battery": { "sounds": [{"name": "hbmxx:tool/battery", "stream": false}]},
-    "item.boltgun": { "sounds": [{"name": "hbmxx:tool/boltgun", "stream": false}]},
-
-	"music.recordLambdaCore": { "sounds": [{"name": "hbmxx:music/recordLambdaCore", "stream": true}]},
-	"music.recordSectorSweep": { "sounds": [{"name": "hbmxx:music/recordSectorSweep", "stream": true}]},
-	"music.recordVortalCombat": { "sounds": [{"name": "hbmxx:music/recordVortalCombat", "stream": true}]},
-	"music.transmission": { "sounds": [{"name": "hbmxx:music/recordGlass", "stream": true}]},
-
-	"weapon.tauShoot": { "sounds": [{"name": "hbmxx:weapon/tauShoot", "stream": false}]},
-    "weapon.tauChargeLoop": { "sounds": [{"name": "hbmxx:weapon/tauChargeLoop", "stream": true}]},
-    "weapon.tauChargeLoop2": { "sounds": [{"name": "hbmxx:weapon/tauChargeLoop2", "stream": true}]},
-    "weapon.revolverShoot": { "sounds": [{"name": "hbmxx:weapon/revolverShoot", "stream": false}]},
-    "weapon.revolverShootAlt": { "sounds": [{"name": "hbmxx:weapon/revolverShootAlt", "stream": false}]},
-	"weapon.heavyShoot": { "sounds": [{"name": "hbmxx:weapon/heavyShoot", "stream": false}]},
-	"weapon.shotgunShoot": { "sounds": [{"name": "hbmxx:weapon/shotgunShoot", "stream": false}]},
-	"weapon.shottyShoot": { "sounds": [{"name": "hbmxx:weapon/shottyShoot", "stream": false}]},
-	"weapon.schrabidiumShoot": { "sounds": [{"name": "hbmxx:weapon/schrabidiumShoot", "stream": false}]},
-	"weapon.osiprShoot": { "sounds": [{"name": "hbmxx:weapon/osiprShoot", "stream": false}]},
-	"weapon.osiprAltFire": { "sounds": [{"name": "hbmxx:weapon/osiprAltFire", "stream": false}]},
-	"weapon.osiprCharging": { "sounds": [{"name": "hbmxx:weapon/osiprCharging", "stream": false}]},
-	"weapon.osiprReload": { "sounds": [{"name": "hbmxx:weapon/osiprReload", "stream": false}]},
-	"weapon.singFlyby": { "sounds": [{"name": "hbmxx:weapon/singFlyby", "stream": false}]},
-	"weapon.rifleShoot": { "sounds": [{"name": "hbmxx:weapon/rifleShoot", "stream": false}]},
-	"weapon.rpgShoot": { "sounds": [{"name": "hbmxx:weapon/rpgShoot", "stream": false}]},
-	"weapon.fatmanShoot": { "sounds": [{"name": "hbmxx:weapon/fatmanShoot", "stream": false}]},
-	"weapon.fatmanReload": { "sounds": [{"name": "hbmxx:weapon/fatmanReload", "stream": false}]},
-	"weapon.zomgShoot": { "sounds": [{"name": "hbmxx:weapon/zomgShoot", "stream": false}]},
-	"weapon.flamethrowerIgnite": { "sounds": [{"name": "hbmxx:weapon/flamethrowerIgnite", "stream": false}]},
-	"weapon.flamethrowerShoot": { "sounds": [{"name": "hbmxx:weapon/flamethrowerShoot", "stream": false}]},
-	"weapon.immolatorIgnite": { "sounds": [{"name": "hbmxx:weapon/immolatorIgnite", "stream": false}]},
-	"weapon.immolatorShoot": { "sounds": [{"name": "hbmxx:weapon/immolatorShoot", "stream": false}]},
-	"weapon.cryolatorShoot": { "sounds": [{"name": "hbmxx:weapon/cryolatorShoot", "stream": false}]},
-	"weapon.missileTakeOff": { "sounds": [{"name": "hbmxx:weapon/missileTakeOff", "stream": false}]},
-	"weapon.defabSpinup": { "sounds": [{"name": "hbmxx:weapon/defabSpinup", "stream": false}]},
-	"weapon.defabShoot": { "sounds": [{"name": "hbmxx:weapon/defabShoot", "stream": false}]},
-	"weapon.sparkShoot": { "sounds": ["hbmxx:weapon/sparkShoot1", "hbmxx:weapon/sparkShoot2", "hbmxx:weapon/sparkShoot3"]},
-    "weapon.bang": { "sounds": [{"name": "hbmxx:weapon/bang", "stream": false}]},
-    "weapon.slice": { "sounds": [{"name": "hbmxx:weapon/slice", "stream": false}]},
-    "weapon.kapeng": { "sounds": [{"name": "hbmxx:weapon/kapeng", "stream": false}]},
-    "weapon.leverActionReload": { "sounds": [{"name": "hbmxx:weapon/leverActionReload", "stream": false}]},
-    "weapon.b92Reload": { "sounds": [{"name": "hbmxx:weapon/b92Reload", "stream": false}]},
-    "weapon.stingerLockOn": { "sounds": [{"name": "hbmxx:weapon/stingerLockOn", "stream": false}]},
-    "weapon.sawShoot": { "sounds": [{"name": "hbmxx:weapon/sawShoot", "stream": false}]},
-    "weapon.spinup": { "sounds": [{"name": "hbmxx:weapon/spinup", "stream": false}]},
-    "weapon.spindown": { "sounds": [{"name": "hbmxx:weapon/spindown", "stream": false}]},
-    "weapon.ciwsFiringLoop": { "sounds": [{"name": "hbmxx:weapon/ciwsFiringLoop", "stream": false}]},
-    "weapon.ciwsSpinup": { "sounds": [{"name": "hbmxx:weapon/ciwsSpinup", "stream": false}]},
-    "weapon.ciwsSpindown": { "sounds": [{"name": "hbmxx:weapon/ciwsSpindown", "stream": false}]},
-    "weapon.laserBang": { "sounds": ["hbmxx:weapon/laserBang1", "hbmxx:weapon/laserBang2", "hbmxx:weapon/laserBang3", "hbmxx:weapon/laserBang4"]},
-    "weapon.uziShoot": { "sounds": [{"name": "hbmxx:weapon/uziShoot", "stream": false}]},
-    "weapon.silencerShoot": { "sounds": [{"name": "hbmxx:weapon/silencerShoot", "stream": false}]},
-    "weapon.gBounce": { "sounds": ["hbmxx:weapon/gBounce1", "hbmxx:weapon/gBounce2", "hbmxx:weapon/gBounce3"]},
-    "weapon.calShoot": { "sounds": ["hbmxx:weapon/cal1", "hbmxx:weapon/cal2", "hbmxx:weapon/cal3"]},
-    "weapon.lacunaeSpinup": { "sounds": [{"name": "hbmxx:weapon/lacunaeSpinup", "stream": false}]},
-    "weapon.lacunaeSpindown": { "sounds": [{"name": "hbmxx:weapon/lacunaeSpindown", "stream": false}]},
-    "weapon.lacunaeShoot": { "sounds": [{"name": "hbmxx:weapon/lacunaeShoot", "stream": false}]},
-    "weapon.follyOpen": { "sounds": [{"name": "hbmxx:weapon/follyOpen", "stream": false}]},
-    "weapon.follyClose": { "sounds": [{"name": "hbmxx:weapon/follyClose", "stream": false}]},
-    "weapon.follyReload": { "sounds": [{"name": "hbmxx:weapon/follyReload", "stream": false}]},
-    "weapon.follyBuzzer": { "sounds": [{"name": "hbmxx:weapon/follyBuzzer", "stream": false}]},
-    "weapon.follyAquired": { "sounds": [{"name": "hbmxx:weapon/follyAquiredAlt", "stream": false}]},
-    "weapon.follyFire": { "sounds": [{"name": "hbmxx:weapon/follyFire", "stream": false}]},
-    "weapon.ricochet": { "sounds": ["hbmxx:weapon/ric1", "hbmxx:weapon/ric2", "hbmxx:weapon/ric3", "hbmxx:weapon/ric4", "hbmxx:weapon/ric5"]},
-    "weapon.revolverReload": { "sounds": [{"name": "hbmxx:weapon/revolverReload", "stream": false}]},
-    "weapon.shotgunReload": { "sounds": ["hbmxx:weapon/shotgunReload1", "hbmxx:weapon/shotgunReload2", "hbmxx:weapon/shotgunReload3"]},
-    "weapon.magReload": { "sounds": [{"name": "hbmxx:weapon/magReload", "stream": false}]},
-    "weapon.magReloadBolt": { "sounds": [{"name": "hbmxx:weapon/magReloadBolt", "stream": false}]},
-    "weapon.rpgReload": { "sounds": [{"name": "hbmxx:weapon/rpgReload", "stream": false}]},
-    "weapon.boat": { "sounds": [{"name": "hbmxx:weapon/boat", "stream": false}]},
-    "weapon.hkShoot": { "sounds": [{"name": "hbmxx:weapon/hkShoot", "stream": false}]},
-    "weapon.hkReload": { "sounds": [{"name": "hbmxx:weapon/hkReload", "stream": false}]},
-    "weapon.deagleShoot": { "sounds": [{"name": "hbmxx:weapon/deagleShoot", "stream": false}]},
-	"weapon.tesla": { "sounds": ["hbmxx:weapon/tesla1", "hbmxx:weapon/tesla2", "hbmxx:weapon/tesla3", "hbmxx:weapon/tesla4"]},
-    "weapon.teslaShoot": { "sounds": [{"name": "hbmxx:weapon/teslaShoot", "stream": false}]},
-    "weapon.flamerReload": { "sounds": [{"name": "hbmxx:weapon/flamerReload", "stream": false}]},
-	"weapon.stop": { "sounds": ["hbmxx:weapon/stop1", "hbmxx:weapon/stop2"]},
-    "weapon.bonk": { "sounds": [{"name": "hbmxx:weapon/bonk", "stream": false}]},
-	"weapon.hksShoot": { "sounds": ["hbmxx:weapon/hksShoot1", "hbmxx:weapon/hksShoot2", "hbmxx:weapon/hksShoot3"]},
-	"weapon.glauncher": { "sounds": ["hbmxx:weapon/glauncher1", "hbmxx:weapon/glauncher2"]},
-    "weapon.bodysplat": { "sounds": [{"name": "hbmxx:weapon/bodysplat", "stream": false}]},
-    "weapon.quadroReload": { "sounds": [{"name": "hbmxx:weapon/quadroReload", "stream": false}]},
-    "weapon.fstbmbStart": { "sounds": [{"name": "hbmxx:weapon/fstbmbStart", "stream": false}]},
-    "weapon.fstbmbPing": { "sounds": [{"name": "hbmxx:weapon/fstbmbPing", "stream": false}]},
-    "weapon.sauergun": { "sounds": ["hbmxx:weapon/sauergun1", "hbmxx:weapon/sauergun2", "hbmxx:weapon/sauergun3"]},
-    "weapon.whack": { "sounds": [{"name": "hbmxx:weapon/whack", "stream": false}]},
-    "weapon.chainsaw": { "sounds": [{"name": "hbmxx:weapon/chainsaw", "stream": false}]},
-    "weapon.rocketFlame": { "sounds": [{"name": "hbmxx:weapon/rocketFlame", "stream": false}]},
-    "weapon.ballsLaser": { "sounds": [{"name": "hbmxx:weapon/ballsLaser", "stream": false}]},
-    "weapon.dartShoot": { "sounds": [{"name": "hbmxx:weapon/dartShoot", "stream": false}]},
-    "weapon.mukeExplosion": { "sounds": [{"name": "hbmxx:weapon/mukeExplosion", "stream": false}]},
-    "weapon.cDeploy": { "sounds": [{"name": "hbmxx:weapon/cDeploy", "stream": false}]},
-    "weapon.cSwing": { "sounds": [{"name": "hbmxx:weapon/cSwing", "stream": false}]},
-    "weapon.extinguisher": { "sounds": [{"name": "hbmxx:weapon/extinguisher", "stream": false}]},
-    "weapon.robin_explosion": { "sounds": [{"name": "hbmxx:weapon/robin_explosion", "stream": false}]},
-    "weapon.shotgunPump": { "sounds": [{"name": "hbmxx:weapon/shotgunShootPump", "stream": false}]},
-    "weapon.shotgunPumpAlt": { "sounds": [{"name": "hbmxx:weapon/shotgunShootPumpAlt", "stream": false}]},
-    "weapon.explosionMedium": { "sounds": [{"name": "hbmxx:weapon/explosion_medium", "stream": false}]},
-    "weapon.hicalShot": { "sounds": [{"name": "hbmxx:weapon/hicalShot", "stream": false}]},
-    "weapon.coilgunReload": { "sounds": [{"name": "hbmxx:weapon/coilgunReload", "stream": false}]},
-    "weapon.coilgunShoot": { "sounds": [{"name": "hbmxx:weapon/coilgunShoot", "stream": false}]},
-    "weapon.glReload": { "sounds": [{"name": "hbmxx:weapon/glReload", "stream": false}]},
-    "weapon.glShoot": { "sounds": [{"name": "hbmxx:weapon/glShoot", "stream": false}]},
-    "weapon.glOpen": { "sounds": [{"name": "hbmxx:weapon/glOpen", "stream": false}]},
-    "weapon.glClose": { "sounds": [{"name": "hbmxx:weapon/glClose", "stream": false}]},
-    "weapon.44Shoot": { "sounds": [{"name": "hbmxx:weapon/44Shoot", "stream": false}]},
-    "weapon.trainImpact": { "sounds": [{"name": "hbmxx:weapon/trainImpact", "stream": false}]},
-    "weapon.nuclearExplosion": { "sounds": [{"name": "hbmxx:weapon/nuclearExplosion", "stream": true}]},
-    "weapon.explosionLargeNear": { "sounds": [{"name": "hbmxx:weapon/explosionLargeNear", "stream": false}]},
-    "weapon.explosionLargeFar": { "sounds": [{"name": "hbmxx:weapon/explosionLargeFar", "stream": false}]},
-    "weapon.explosionSmallNear": { "sounds": ["hbmxx:weapon/explosionSmallNear1", "hbmxx:weapon/explosionSmallNear2", "hbmxx:weapon/explosionSmallNear3"]},
-    "weapon.explosionSmallFar": { "sounds": ["hbmxx:weapon/explosionSmallFar1", "hbmxx:weapon/explosionSmallFar2"]},
-    
-    "weapon.dFlash": { "sounds": [{"name": "hbmxx:weapon/dFlash", "stream": false}]},
-
-    "weapon.reloadTurret": { "sounds": [{"name": "hbmxx:weapon/reloadTurret", "stream": false}]},
-    "weapon.switchmode1": { "sounds": [{"name": "hbmxx:weapon/switchmode1", "stream": false}]},
-    "weapon.switchmode2": { "sounds": [{"name": "hbmxx:weapon/switchmode2", "stream": false}]},
-    
-    "weapon.fire.blackPowder": { "sounds": [{"name": "hbmxx:weapon/fire/blackPowder", "stream": false}]},
-    "weapon.fire.flameLoop": { "sounds": [{"name": "hbmxx:weapon/fire/flameLoop", "stream": false}]},
-    "weapon.fire.lockon": { "sounds": [{"name": "hbmxx:weapon/fire/lockon", "stream": false}]},
-    "weapon.fire.shredderCycle": { "sounds": [{"name": "hbmxx:weapon/fire/shredderCycle", "stream": false}]},
-    
-    "weapon.reload.boltClose": { "sounds": ["hbmxx:weapon/reload/boltClose"]},
-    "weapon.reload.boltOpen": { "sounds": ["hbmxx:weapon/reload/boltOpen"]},
-    "weapon.reload.closeClick": { "sounds": ["hbmxx:weapon/reload/closeClick"]},
-    "weapon.reload.dryFireClick": { "sounds": ["hbmxx:weapon/reload/dryFireClick"]},
-    "weapon.reload.insertCanister": { "sounds": ["hbmxx:weapon/reload/insertCanister"]},
-    "weapon.reload.insertGrenade": { "sounds": ["hbmxx:weapon/reload/insertGrenade"]},
-    "weapon.reload.insertLarge": { "sounds": ["hbmxx:weapon/reload/insertLarge"]},
-    "weapon.reload.insertRocket": { "sounds": ["hbmxx:weapon/reload/insertRocket"]},
-    "weapon.reload.leverCock": { "sounds": ["hbmxx:weapon/reload/leverCock"]},
-    "weapon.reload.magInsert": { "sounds": ["hbmxx:weapon/reload/magInsert"]},
-    "weapon.reload.magRemove": { "sounds": ["hbmxx:weapon/reload/magRemove"]},
-    "weapon.reload.magSmallInsert": { "sounds": ["hbmxx:weapon/reload/magSmallInsert"]},
-    "weapon.reload.magSmallRemove": { "sounds": ["hbmxx:weapon/reload/magSmallRemove"]},
-    "weapon.reload.openLatch": { "sounds": ["hbmxx:weapon/reload/openLatch"]},
-    "weapon.reload.pistolCock": { "sounds": ["hbmxx:weapon/reload/pistolCock"]},
-    "weapon.reload.pressureValve": { "sounds": ["hbmxx:weapon/reload/pressureValve"]},
-    "weapon.reload.revolverClose": { "sounds": ["hbmxx:weapon/reload/revolverClose"]},
-    "weapon.reload.revolverCock": { "sounds": ["hbmxx:weapon/reload/revolverCock"]},
-    "weapon.reload.revolverSpin": { "sounds": ["hbmxx:weapon/reload/revolverSpin"]},
-    "weapon.reload.rifleCock": { "sounds": ["hbmxx:weapon/reload/rifleCock"]},
-    "weapon.reload.shotgunCock": { "sounds": ["hbmxx:weapon/reload/shotgunCock"]},
-    "weapon.reload.shotgunReload": { "sounds": ["hbmxx:weapon/reload/shotgunReload1", "hbmxx:weapon/reload/shotgunReload2", "hbmxx:weapon/reload/shotgunReload3"]},
-    "weapon.reload.tubeFwoomp": { "sounds": ["hbmxx:weapon/reload/tubeFwoomp"]},
-    "weapon.reload.impact": { "sounds": ["hbmxx:weapon/reload/impact1", "hbmxx:weapon/reload/impact2", "hbmxx:weapon/reload/impact3"]},
-    
-    "turret.chekhov_fire": { "sounds": [{"name": "hbmxx:turret/chekhov_fire", "stream": false}]},
-    "turret.jeremy_fire": { "sounds": ["hbmxx:turret/jeremy_fire1", "hbmxx:turret/jeremy_fire2", "hbmxx:turret/jeremy_fire3", "hbmxx:turret/jeremy_fire4", "hbmxx:turret/jeremy_fire5"]},
-    "turret.jeremy_reload": { "sounds": [{"name": "hbmxx:turret/jeremy_reload", "stream": false}]},
-    "turret.richard_fire": { "sounds": [{"name": "hbmxx:turret/richard_fire", "stream": false}]},
-    "turret.howard_fire": { "sounds": [{"name": "hbmxx:turret/howard_fire", "stream": false}]},
-    "turret.howard_reload": { "sounds": [{"name": "hbmxx:turret/howard_reload", "stream": false}]},
-    "turret.sentry_fire": { "sounds": [{"name": "hbmxx:turret/sentry_fire", "stream": false}]},
-    "turret.sentry_lockon": { "sounds": [{"name": "hbmxx:turret/sentry_lockon", "stream": false}]},
-    "turret.mortarWhistle": { "sounds": [{"name": "hbmxx:weapon/mortarWhistle", "stream": false}]},
-
-	"entity.chopperFlyingLoop": { "sounds": [{"name": "hbmxx:entity/chopperFlyingLoop", "stream": true}]},
-	"entity.chopperDrop": { "sounds": [{"name": "hbmxx:entity/chopperDrop", "stream": false}]},
-	"entity.chopperCharge": { "sounds": [{"name": "hbmxx:entity/chopperCharge", "stream": false}]},
-	"entity.chopperDamage": { "sounds": [{"name": "hbmxx:entity/chopperDamage", "stream": true}]},
-	"entity.chopperMineLoop": { "sounds": [{"name": "hbmxx:entity/chopperMineLoop", "stream": false}]},
-	"entity.chopperCrashingLoop": { "sounds": [{"name": "hbmxx:entity/chopperCrashingLoop", "stream": true}]},
-    "entity.oldExplosion": { "sounds": [{"name": "hbmxx:entity/oldExplosion", "stream": false}]},
-    "entity.rocketTakeoff": { "sounds": [{"name": "hbmxx:entity/rocketTakeoff", "stream": false}]},
-    "entity.soyuzTakeoff": { "sounds": [{"name": "hbmxx:entity/soyuzTakeoff", "stream": false}]},
-    "entity.bombDet": { "sounds": ["hbmxx:entity/bombDet1", "hbmxx:entity/bombDet2", "hbmxx:entity/bombDet3"]},
-    "entity.bombWhistle": { "sounds": [{"name": "hbmxx:entity/bombWhistle", "stream": false}]},
-    "entity.bomberLoop": { "sounds": [{"name": "hbmxx:entity/bomber1", "stream": false}]},
-    "entity.bomberSmallLoop": { "sounds": [{"name": "hbmxx:entity/bomber2", "stream": false}]},
-    "entity.planeCrash": { "sounds": [{"name": "hbmxx:entity/planeCrash", "stream": false}]},
-    "entity.planeShotDown": { "sounds": [{"name": "hbmxx:entity/planeShotDown", "stream": false}]},
-	"entity.cybercrab": { "sounds": ["hbmxx:entity/radio_random1", "hbmxx:entity/radio_random2", "hbmxx:entity/radio_random3", "hbmxx:entity/radio_random4", "hbmxx:entity/radio_random5", "hbmxx:entity/radio_random6", "hbmxx:entity/radio_random7", "hbmxx:entity/radio_random8", "hbmxx:entity/radio_random9", "hbmxx:entity/radio_random10", "hbmxx:entity/radio_random11", "hbmxx:entity/radio_random12", "hbmxx:entity/radio_random13", "hbmxx:entity/radio_random14", "hbmxx:entity/radio_random15"]},
-    "entity.ducc": { "sounds": ["hbmxx:entity/ducc1", "hbmxx:entity/ducc2"]},
-    "entity.slicer": { "sounds": ["hbmxx:entity/slicer1", "hbmxx:entity/slicer2", "hbmxx:entity/slicer3", "hbmxx:entity/slicer4"]},
-    "entity.megaquacc": { "sounds": [{"name": "hbmxx:entity/megaquacc", "stream": false}]},
-    "entity.ufoBeam": { "sounds": [{"name": "hbmxx:entity/ufoBeamShort", "stream": false}]},
-    "entity.ufoBlast": { "sounds": [{"name": "hbmxx:entity/ufoBlast", "stream": false}]},
-    "entity.siegeIdle": { "sounds": ["hbmxx:entity/siegeIdle1"]},
-    "entity.siegeHurt": { "sounds": ["hbmxx:entity/siegeHurt1", "hbmxx:entity/siegeHurt2"]},
-    "entity.siegeDeath": { "sounds": ["hbmxx:entity/siegeDeath1", "hbmxx:entity/siegeDeath2", "hbmxx:entity/siegeDeath3"]},
-    
-    "step.metal": { "sounds": [{"name": "hbmxx:footsteps/metal", "stream": false}]},
-    "step.iron_jump": { "sounds": [{"name": "hbmxx:footsteps/iron_jump", "stream": false}]},
-    "step.iron_land": { "sounds": [{"name": "hbmxx:footsteps/iron_land", "stream": false}]},
-    "step.iron": { "sounds": ["hbmxx:footsteps/iron1", "hbmxx:footsteps/iron2", "hbmxx:footsteps/iron3", "hbmxx:footsteps/iron4"]},
-    "step.metalBlock": { "sounds": ["hbmxx:footsteps/metalStep1", "hbmxx:footsteps/metalStep2", "hbmxx:footsteps/metalStep3", "hbmxx:footsteps/metalStep4"]},
-    "step.powered": { "sounds": ["hbmxx:footsteps/powered1", "hbmxx:footsteps/powered2", "hbmxx:footsteps/powered3"]},
-    
-    "player.vomit": { "sounds": [{"name": "hbmxx:player/vomit", "stream": false}]},
-    "player.cough": { "sounds": ["hbmxx:player/cough1", "hbmxx:player/cough2", "hbmxx:player/cough3", "hbmxx:player/cough4"]},
-    "player.gulp": { "sounds": ["hbmxx:player/gulp1", "hbmxx:player/gulp2", "hbmxx:player/gulp3", "hbmxx:player/gulp4"]},
-    "player.groan": { "sounds": ["hbmxx:player/groan1", "hbmxx:player/groan2", "hbmxx:player/groan3"]},
-    
-    "potatos.random": { "sounds": ["hbmxx:potatos/randResponse0", "hbmxx:potatos/randResponse1", "hbmxx:potatos/randResponse2", "hbmxx:potatos/randResponse3", "hbmxx:potatos/randResponse4", "hbmxx:potatos/randResponse5", "hbmxx:potatos/randResponse6", "hbmxx:potatos/randResponse7"]},
-    
-    "alarm.amsSiren": { "sounds": [{"name": "hbmxx:alarm/amsSiren", "stream": false}]},
-    "alarm.apcLoop": { "sounds": [{"name": "hbmxx:alarm/apcLoop", "stream": false}]},
-    "alarm.apcPass": { "sounds": [{"name": "hbmxx:alarm/apcPass", "stream": false}]},
-    "alarm.bankAlarm": { "sounds": [{"name": "hbmxx:alarm/bankAlarm", "stream": false}]},
-    "alarm.beepSiren": { "sounds": [{"name": "hbmxx:alarm/beepSiren", "stream": false}]},
-    "alarm.autopilot": { "sounds": [{"name": "hbmxx:alarm/boeing707AutopilotDisconnected", "stream": false}]},
-    "alarm.containerAlarm": { "sounds": [{"name": "hbmxx:alarm/containerAlarm", "stream": false}]},
-    "alarm.hatch": { "sounds": [{"name": "hbmxx:alarm/lpfhaiwg", "stream": false}]},
-    "alarm.razortrainHorn": { "sounds": [{"name": "hbmxx:alarm/razortrainHorn", "stream": false}]},
-    "alarm.sweepSiren": { "sounds": [{"name": "hbmxx:alarm/sweepSiren", "stream": false}]},
-    "alarm.trainHorn": { "sounds": [{"name": "hbmxx:alarm/trainHorn", "stream": false}]},
-    "alarm.blastDoorAlarm": { "sounds": [{"name": "hbmxx:alarm/blastDoorAlarm", "stream": false}]},
-    "alarm.klaxon": { "sounds": [{"name": "hbmxx:alarm/klaxon", "stream": false}]},
-    "alarm.striderSiren": { "sounds": [{"name": "hbmxx:alarm/striderSiren", "stream": false}]},
-    "alarm.regularSiren": { "sounds": [{"name": "hbmxx:alarm/regularSiren", "stream": false}]},
-    "alarm.foKlaxonA": { "sounds": [{"name": "hbmxx:alarm/foKlaxonA", "stream": false}]},
-    "alarm.foKlaxonB": { "sounds": [{"name": "hbmxx:alarm/foKlaxonB", "stream": false}]},
-    "alarm.nostromoSiren": { "sounds": [{"name": "hbmxx:alarm/nostromoSiren", "stream": false}]},
-    "alarm.easAlarm": { "sounds": [{"name": "hbmxx:alarm/easAlarm", "stream": false}]},
-    "alarm.airRaid": { "sounds": [{"name": "hbmxx:alarm/airRaid", "stream": true}]},
-    "alarm.classic": { "sounds": [{"name": "hbmxx:alarm/classicSiren", "stream": false}]},
-    "alarm.gambit": { "sounds": [{"name": "hbmxx:alarm/gambit", "stream": true}]},
-    "alarm.soyuzed": { "sounds": [{"name": "hbmxx:alarm/soyuzed", "stream": false}]},
-    "alarm.chime": { "sounds": [{"name": "hbmxx:alarm/chime", "stream": false}]}
+  "misc.null_chopper": {
+    "sounds": [
+      {
+        "name": "hbmxx:misc/null",
+        "stream": false
+      }
+    ]
+  },
+  "misc.null_crashing": {
+    "sounds": [
+      {
+        "name": "hbmxx:misc/null",
+        "stream": false
+      }
+    ]
+  },
+  "misc.null_mine": {
+    "sounds": [
+      {
+        "name": "hbmxx:misc/null",
+        "stream": false
+      }
+    ]
+  },
+  "block.crate_break": {
+    "sounds": [
+      "hbmxx:block/crate_break1",
+      "hbmxx:block/crate_break2",
+      "hbmxx:block/crate_break3",
+      "hbmxx:block/crate_break4",
+      "hbmxx:block/crate_break5"
+    ]
+  },
+  "block.shutdown": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/shutdown",
+        "stream": true
+      }
+    ]
+  },
+  "block.miner_operate": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/miner_operate",
+        "stream": true
+      }
+    ]
+  },
+  "block.assembler_operate": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/assembler_operate",
+        "stream": true
+      }
+    ]
+  },
+  "block.chemplant_operate": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/chemplant_operate",
+        "stream": true
+      }
+    ]
+  },
+  "block.diesel_operate": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/diesel_operate",
+        "stream": false
+      }
+    ]
+  },
+  "block.igenerator_operate": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/igenerator_operate",
+        "stream": false
+      }
+    ]
+  },
+  "block.turbofan_operate": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/turbofan_operate",
+        "stream": true
+      }
+    ]
+  },
+  "block.press_operate": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/press_operate",
+        "stream": false
+      }
+    ]
+  },
+  "block.broadcast1": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/broadcast1",
+        "stream": true
+      }
+    ]
+  },
+  "block.broadcast2": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/broadcast2",
+        "stream": true
+      }
+    ]
+  },
+  "block.broadcast3": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/broadcast3",
+        "stream": true
+      }
+    ]
+  },
+  "block.sonar_ping": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/sonar_ping",
+        "stream": false
+      }
+    ]
+  },
+  "block.reactor_start": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/reactor_start",
+        "stream": false
+      }
+    ]
+  },
+  "block.reactor_stop": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/reactor_stop",
+        "stream": false
+      }
+    ]
+  },
+  "block.vault_scrape": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/vault_scrape",
+        "stream": false
+      }
+    ]
+  },
+  "block.vault_thud": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/vault_thud",
+        "stream": false
+      }
+    ]
+  },
+  "block.vault_scrape_new": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/vault_scrape_new",
+        "stream": false
+      }
+    ]
+  },
+  "block.vault_thud_new": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/vault_thud_new",
+        "stream": false
+      }
+    ]
+  },
+  "block.lock_open": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/lock_open",
+        "stream": false
+      }
+    ]
+  },
+  "block.lock_hang": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/lock_hang",
+        "stream": false
+      }
+    ]
+  },
+  "block.debris": {
+    "sounds": [
+      "hbmxx:block/debris1",
+      "hbmxx:block/debris2",
+      "hbmxx:block/debris3"
+    ]
+  },
+  "block.centrifuge_operate": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/centrifuge_operate",
+        "stream": false
+      }
+    ]
+  },
+  "block.pipe_placed": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/pipe_placed",
+        "stream": false
+      }
+    ]
+  },
+  "block.missile_assembly": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/missile_assembly",
+        "stream": false
+      }
+    ]
+  },
+  "block.missile_assembly2": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/missile_assembly2",
+        "stream": false
+      }
+    ]
+  },
+  "block.open_door": {
+    "sounds": [
+      "hbmxx:block/door_open_1",
+      "hbmxx:block/door_open_2"
+    ]
+  },
+  "block.close_door": {
+    "sounds": [
+      "hbmxx:block/door_close_1",
+      "hbmxx:block/door_close_2"
+    ]
+  },
+  "block.soyuz_ready": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/soyuz_ready",
+        "stream": true
+      }
+    ]
+  },
+  "block.screm": {
+    "sounds": [
+      "hbmxx:screm/scream1",
+      "hbmxx:screm/scream01",
+      "hbmxx:screm/scream2",
+      "hbmxx:screm/scream02",
+      "hbmxx:screm/scream3",
+      "hbmxx:screm/scream03",
+      "hbmxx:screm/scream4",
+      "hbmxx:screm/scream04",
+      "hbmxx:screm/scream5",
+      "hbmxx:screm/scream05",
+      "hbmxx:screm/scream6",
+      "hbmxx:screm/scream06",
+      "hbmxx:screm/scream7",
+      "hbmxx:screm/scream07",
+      "hbmxx:screm/scream08",
+      "hbmxx:screm/scream09",
+      "hbmxx:screm/scream10",
+      "hbmxx:screm/scream11",
+      "hbmxx:screm/scream12",
+      "hbmxx:screm/scream13",
+      "hbmxx:screm/scream14",
+      "hbmxx:screm/scream15",
+      "hbmxx:screm/scream16",
+      "hbmxx:screm/scream17",
+      "hbmxx:screm/scream18",
+      "hbmxx:screm/scream19",
+      "hbmxx:screm/scream20",
+      "hbmxx:screm/scream21",
+      "hbmxx:screm/scream22",
+      "hbmxx:screm/scream23",
+      "hbmxx:screm/scream24",
+      "hbmxx:screm/scream25"
+    ]
+  },
+  "block.rbmk_explosion": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/rbmk_explosion",
+        "stream": false
+      }
+    ]
+  },
+  "block.rbmk_az5_cover": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/rbmk_az5_cover",
+        "stream": false
+      }
+    ]
+  },
+  "block.chungus_lever": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/chungus_lever",
+        "stream": false
+      }
+    ]
+  },
+  "block.lever_large": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/lever_large",
+        "stream": false
+      }
+    ]
+  },
+  "block.bobble": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/bobble",
+        "stream": false
+      }
+    ]
+  },
+  "block.crate_open": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/crate_open",
+        "stream": false
+      }
+    ]
+  },
+  "block.crate_close": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/crate_close",
+        "stream": false
+      }
+    ]
+  },
+  "block.storage_open": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/storage_open",
+        "stream": false
+      }
+    ]
+  },
+  "block.storage_close": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/storage_close",
+        "stream": false
+      }
+    ]
+  },
+  "block.open_c": {
+    "sounds": [
+      "hbmxx:block/open_c1",
+      "hbmxx:block/open_c2",
+      "hbmxx:block/open_c_squeaky"
+    ]
+  },
+  "block.close_c": {
+    "sounds": [
+      "hbmxx:block/close_c1",
+      "hbmxx:block/close_c2",
+      "hbmxx:block/close_c3"
+    ]
+  },
+  "block.warn_overspeed": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/warn_overspeed",
+        "stream": false
+      }
+    ]
+  },
+  "block.boiler_groan": {
+    "sounds": [
+      "hbmxx:block/boiler_groan0",
+      "hbmxx:block/boiler_groan1",
+      "hbmxx:block/boiler_groan2"
+    ]
+  },
+  "block.steam_engine_operate": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/steam_engine_operate",
+        "stream": false
+      }
+    ]
+  },
+  "block.turbinegas_startup": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/turbinegas_startup",
+        "stream": false
+      }
+    ]
+  },
+  "block.turbinegas_running": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/turbinegas_running",
+        "stream": false
+      }
+    ]
+  },
+  "block.turbinegas_shutdown": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/turbinegas_shutdown",
+        "stream": true
+      }
+    ]
+  },
+  "block.chungus_turbine_running": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/chungus_turbine",
+        "stream": false
+      }
+    ]
+  },
+  "block.large_turbine_running": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/large_turbine",
+        "stream": false
+      }
+    ]
+  },
+  "block.damage": {
+    "sounds": [
+      "hbmxx:block/dam1",
+      "hbmxx:block/dam2",
+      "hbmxx:block/dam3",
+      "hbmxx:block/dam4"
+    ]
+  },
+  "block.electric_hum": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/electric_hum",
+        "stream": false
+      }
+    ]
+  },
+  "block.boiler": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/boiler",
+        "stream": false
+      }
+    ]
+  },
+  "block.horn_near_single": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/horn_near_single",
+        "stream": false
+      }
+    ]
+  },
+  "block.horn_near_dual": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/horn_near_dual",
+        "stream": false
+      }
+    ]
+  },
+  "block.horn_far_single": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/horn_far_single",
+        "stream": false
+      }
+    ]
+  },
+  "block.horn_far_dual": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/horn_far_dual",
+        "stream": false
+      }
+    ]
+  },
+  "block.reactor_loop": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/reactor_loop",
+        "stream": false
+      }
+    ]
+  },
+  "block.fusion_reactor_running": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/fusion_reactor_spin",
+        "stream": false
+      }
+    ]
+  },
+  "block.fel": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/fel",
+        "stream": false
+      }
+    ]
+  },
+  "block.hephaestus_running": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/hephaestus_running",
+        "stream": false
+      }
+    ]
+  },
+  "block.squeaky_toy": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/squeaky_toy",
+        "stream": false
+      }
+    ]
+  },
+  "block.pyro_operate": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/pyro_operate",
+        "stream": false
+      }
+    ]
+  },
+  "door._transition_seal_open": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/door/transition_seal_open",
+        "stream": true
+      }
+    ]
+  },
+  "door.alarm6": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/door/alarm6",
+        "stream": true
+      }
+    ]
+  },
+  "door.sliding_door_shut": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/door/sliding_door_shut",
+        "stream": false
+      }
+    ]
+  },
+  "door.sliding_door_opened": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/door/sliding_door_opened",
+        "stream": false
+      }
+    ]
+  },
+  "door.sliding_door_opening": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/door/sliding_door_opening",
+        "stream": false
+      }
+    ]
+  },
+  "door.garage_move": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/door/garage_move",
+        "stream": false
+      }
+    ]
+  },
+  "door.garage_stop": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/door/garage_stop",
+        "stream": false
+      }
+    ]
+  },
+  "door.lever": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/door/lever1",
+        "stream": false
+      }
+    ]
+  },
+  "door.wgh_start": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/door/wgh_start",
+        "stream": false
+      }
+    ]
+  },
+  "door.wgh_stop": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/door/wgh_stop",
+        "stream": false
+      }
+    ]
+  },
+  "door.wgh_big_start": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/door/door_wgh_big_start",
+        "stream": false
+      }
+    ]
+  },
+  "door.wgh_big_stop": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/door/door_wgh_big_stop",
+        "stream": false
+      }
+    ]
+  },
+  "door.qe_sliding_shut": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/door/doorshut_1",
+        "stream": false
+      }
+    ]
+  },
+  "door.qe_sliding_opened": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/door/doorslide_opened1",
+        "stream": false
+      }
+    ]
+  },
+  "door.qe_sliding_opening": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/door/doorslide_opening1",
+        "stream": false
+      }
+    ]
+  },
+  "door.sliding_seal_open": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/door/doormove2",
+        "stream": false
+      }
+    ]
+  },
+  "door.sliding_seal_stop": {
+    "sounds": [
+      {
+        "name": "hbmxx:block/door/metal_stop1",
+        "stream": false
+      }
+    ]
+  },
+  "item.tech_bleep": {
+    "sounds": [
+      {
+        "name": "hbmxx:tool/tech_bleep",
+        "stream": false
+      }
+    ]
+  },
+  "item.tech_boop": {
+    "sounds": [
+      {
+        "name": "hbmxx:tool/tech_boop",
+        "stream": false
+      }
+    ]
+  },
+  "item.geiger1": {
+    "sounds": [
+      {
+        "name": "hbmxx:tool/geiger1",
+        "stream": false
+      }
+    ]
+  },
+  "item.geiger2": {
+    "sounds": [
+      {
+        "name": "hbmxx:tool/geiger2",
+        "stream": false
+      }
+    ]
+  },
+  "item.geiger3": {
+    "sounds": [
+      {
+        "name": "hbmxx:tool/geiger3",
+        "stream": false
+      }
+    ]
+  },
+  "item.geiger4": {
+    "sounds": [
+      {
+        "name": "hbmxx:tool/geiger4",
+        "stream": false
+      }
+    ]
+  },
+  "item.geiger5": {
+    "sounds": [
+      {
+        "name": "hbmxx:tool/geiger5",
+        "stream": false
+      }
+    ]
+  },
+  "item.geiger6": {
+    "sounds": [
+      {
+        "name": "hbmxx:tool/geiger6",
+        "stream": false
+      }
+    ]
+  },
+  "item.pin_unlock": {
+    "sounds": [
+      {
+        "name": "hbmxx:tool/pin_unlock",
+        "stream": false
+      }
+    ]
+  },
+  "item.pin_break": {
+    "sounds": [
+      {
+        "name": "hbmxx:tool/pin_break",
+        "stream": false
+      }
+    ]
+  },
+  "item.gasmask_screw": {
+    "sounds": [
+      {
+        "name": "hbmxx:tool/gasmask_screw",
+        "stream": false
+      }
+    ]
+  },
+  "item.jetpack_tank": {
+    "sounds": [
+      {
+        "name": "hbmxx:tool/jetpack_tank",
+        "stream": false
+      }
+    ]
+  },
+  "item.unpack": {
+    "sounds": [
+      "hbmxx:tool/extract1",
+      "hbmxx:tool/extract2"
+    ]
+  },
+  "item.syringe": {
+    "sounds": [
+      {
+        "name": "hbmxx:tool/stim",
+        "stream": false
+      }
+    ]
+  },
+  "item.radaway": {
+    "sounds": [
+      {
+        "name": "hbmxx:tool/radaway",
+        "stream": false
+      }
+    ]
+  },
+  "item.spray": {
+    "sounds": [
+      {
+        "name": "hbmxx:tool/spray",
+        "stream": false
+      }
+    ]
+  },
+  "item.repair": {
+    "sounds": [
+      "hbmxx:tool/repair1",
+      "hbmxx:tool/repair2",
+      "hbmxx:tool/repair3",
+      "hbmxx:tool/repair4",
+      "hbmxx:tool/repair5",
+      "hbmxx:tool/repair6",
+      "hbmxx:tool/repair7"
+    ]
+  },
+  "item.vice": {
+    "sounds": [
+      {
+        "name": "hbmxx:tool/vice",
+        "stream": false
+      }
+    ]
+  },
+  "item.upgrade_plug": {
+    "sounds": [
+      {
+        "name": "hbmxx:tool/upgrade_plug",
+        "stream": false
+      }
+    ]
+  },
+  "item.battery": {
+    "sounds": [
+      {
+        "name": "hbmxx:tool/battery",
+        "stream": false
+      }
+    ]
+  },
+  "item.boltgun": {
+    "sounds": [
+      {
+        "name": "hbmxx:tool/boltgun",
+        "stream": false
+      }
+    ]
+  },
+  "music.record_lambda_core": {
+    "sounds": [
+      {
+        "name": "hbmxx:music/record_lambda_core",
+        "stream": true
+      }
+    ]
+  },
+  "music.record_sector_sweep": {
+    "sounds": [
+      {
+        "name": "hbmxx:music/record_sector_sweep",
+        "stream": true
+      }
+    ]
+  },
+  "music.record_vortal_combat": {
+    "sounds": [
+      {
+        "name": "hbmxx:music/record_vortal_combat",
+        "stream": true
+      }
+    ]
+  },
+  "music.transmission": {
+    "sounds": [
+      {
+        "name": "hbmxx:music/record_glass",
+        "stream": true
+      }
+    ]
+  },
+  "weapon.tau_shoot": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/tau_shoot",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.tau_charge_loop": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/tau_charge_loop",
+        "stream": true
+      }
+    ]
+  },
+  "weapon.tau_charge_loop2": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/tau_charge_loop2",
+        "stream": true
+      }
+    ]
+  },
+  "weapon.revolver_shoot": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/revolver_shoot",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.revolver_shoot_alt": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/revolver_shoot_alt",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.heavy_shoot": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/heavy_shoot",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.shotgun_shoot": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/shotgun_shoot",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.shotty_shoot": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/shotty_shoot",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.schrabidium_shoot": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/schrabidium_shoot",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.osipr_shoot": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/osipr_shoot",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.osipr_alt_fire": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/osipr_alt_fire",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.osipr_charging": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/osipr_charging",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.osipr_reload": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/osipr_reload",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.sing_flyby": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/sing_flyby",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.rifle_shoot": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/rifle_shoot",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.rpg_shoot": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/rpg_shoot",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.fatman_shoot": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/fatman_shoot",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.fatman_reload": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/fatman_reload",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.zomg_shoot": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/zomg_shoot",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.flamethrower_ignite": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/flamethrower_ignite",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.flamethrower_shoot": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/flamethrower_shoot",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.immolator_ignite": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/immolator_ignite",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.immolator_shoot": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/immolator_shoot",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.cryolator_shoot": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/cryolator_shoot",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.missile_take_off": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/missile_take_off",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.defab_spinup": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/defab_spinup",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.defab_shoot": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/defab_shoot",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.spark_shoot": {
+    "sounds": [
+      "hbmxx:weapon/spark_shoot1",
+      "hbmxx:weapon/spark_shoot2",
+      "hbmxx:weapon/spark_shoot3"
+    ]
+  },
+  "weapon.bang": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/bang",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.slice": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/slice",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.kapeng": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/kapeng",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.lever_action_reload": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/lever_action_reload",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.b92_reload": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/b92_reload",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.stinger_lock_on": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/stinger_lock_on",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.saw_shoot": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/saw_shoot",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.spinup": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/spinup",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.spindown": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/spindown",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.ciws_firing_loop": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/ciws_firing_loop",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.ciws_spinup": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/ciws_spinup",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.ciws_spindown": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/ciws_spindown",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.laser_bang": {
+    "sounds": [
+      "hbmxx:weapon/laser_bang1",
+      "hbmxx:weapon/laser_bang2",
+      "hbmxx:weapon/laser_bang3",
+      "hbmxx:weapon/laser_bang4"
+    ]
+  },
+  "weapon.uzi_shoot": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/uzi_shoot",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.silencer_shoot": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/silencer_shoot",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.g_bounce": {
+    "sounds": [
+      "hbmxx:weapon/g_bounce1",
+      "hbmxx:weapon/g_bounce2",
+      "hbmxx:weapon/g_bounce3"
+    ]
+  },
+  "weapon.cal_shoot": {
+    "sounds": [
+      "hbmxx:weapon/cal1",
+      "hbmxx:weapon/cal2",
+      "hbmxx:weapon/cal3"
+    ]
+  },
+  "weapon.lacunae_spinup": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/lacunae_spinup",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.lacunae_spindown": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/lacunae_spindown",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.lacunae_shoot": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/lacunae_shoot",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.folly_open": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/folly_open",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.folly_close": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/folly_close",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.folly_reload": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/folly_reload",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.folly_buzzer": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/folly_buzzer",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.folly_aquired": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/folly_aquired_alt",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.folly_fire": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/folly_fire",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.ricochet": {
+    "sounds": [
+      "hbmxx:weapon/ric1",
+      "hbmxx:weapon/ric2",
+      "hbmxx:weapon/ric3",
+      "hbmxx:weapon/ric4",
+      "hbmxx:weapon/ric5"
+    ]
+  },
+  "weapon.revolver_reload": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/revolver_reload",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.shotgun_reload": {
+    "sounds": [
+      "hbmxx:weapon/shotgun_reload1",
+      "hbmxx:weapon/shotgun_reload2",
+      "hbmxx:weapon/shotgun_reload3"
+    ]
+  },
+  "weapon.mag_reload": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/mag_reload",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.mag_reload_bolt": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/mag_reload_bolt",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.rpg_reload": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/rpg_reload",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.boat": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/boat",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.hk_shoot": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/hk_shoot",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.hk_reload": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/hk_reload",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.deagle_shoot": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/deagle_shoot",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.tesla": {
+    "sounds": [
+      "hbmxx:weapon/tesla1",
+      "hbmxx:weapon/tesla2",
+      "hbmxx:weapon/tesla3",
+      "hbmxx:weapon/tesla4"
+    ]
+  },
+  "weapon.tesla_shoot": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/tesla_shoot",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.flamer_reload": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/flamer_reload",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.stop": {
+    "sounds": [
+      "hbmxx:weapon/stop1",
+      "hbmxx:weapon/stop2"
+    ]
+  },
+  "weapon.bonk": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/bonk",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.hks_shoot": {
+    "sounds": [
+      "hbmxx:weapon/hks_shoot1",
+      "hbmxx:weapon/hks_shoot2",
+      "hbmxx:weapon/hks_shoot3"
+    ]
+  },
+  "weapon.glauncher": {
+    "sounds": [
+      "hbmxx:weapon/glauncher1",
+      "hbmxx:weapon/glauncher2"
+    ]
+  },
+  "weapon.bodysplat": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/bodysplat",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.quadro_reload": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/quadro_reload",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.fstbmb_start": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/fstbmb_start",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.fstbmb_ping": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/fstbmb_ping",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.sauergun": {
+    "sounds": [
+      "hbmxx:weapon/sauergun1",
+      "hbmxx:weapon/sauergun2",
+      "hbmxx:weapon/sauergun3"
+    ]
+  },
+  "weapon.whack": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/whack",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.chainsaw": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/chainsaw",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.rocket_flame": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/rocket_flame",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.balls_laser": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/balls_laser",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.dart_shoot": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/dart_shoot",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.muke_explosion": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/muke_explosion",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.c_deploy": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/c_deploy",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.c_swing": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/c_swing",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.extinguisher": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/extinguisher",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.robin_explosion": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/robin_explosion",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.shotgun_pump": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/shotgun_shoot_pump",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.shotgun_pump_alt": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/shotgun_shoot_pump_alt",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.explosion_medium": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/explosion_medium",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.hical_shot": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/hical_shot",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.coilgun_reload": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/coilgun_reload",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.coilgun_shoot": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/coilgun_shoot",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.gl_reload": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/gl_reload",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.gl_shoot": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/gl_shoot",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.gl_open": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/gl_open",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.gl_close": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/gl_close",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.44_shoot": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/44_shoot",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.train_impact": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/train_impact",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.nuclear_explosion": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/nuclear_explosion",
+        "stream": true
+      }
+    ]
+  },
+  "weapon.explosion_large_near": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/explosion_large_near",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.explosion_large_far": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/explosion_large_far",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.explosion_small_near": {
+    "sounds": [
+      "hbmxx:weapon/explosion_small_near1",
+      "hbmxx:weapon/explosion_small_near2",
+      "hbmxx:weapon/explosion_small_near3"
+    ]
+  },
+  "weapon.explosion_small_far": {
+    "sounds": [
+      "hbmxx:weapon/explosion_small_far1",
+      "hbmxx:weapon/explosion_small_far2"
+    ]
+  },
+  "weapon.d_flash": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/d_flash",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.reload_turret": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/reload_turret",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.switchmode1": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/switchmode1",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.switchmode2": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/switchmode2",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.fire.black_powder": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/fire/black_powder",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.fire.flame_loop": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/fire/flame_loop",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.fire.lockon": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/fire/lockon",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.fire.shredder_cycle": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/fire/shredder_cycle",
+        "stream": false
+      }
+    ]
+  },
+  "weapon.reload.bolt_close": {
+    "sounds": [
+      "hbmxx:weapon/reload/bolt_close"
+    ]
+  },
+  "weapon.reload.bolt_open": {
+    "sounds": [
+      "hbmxx:weapon/reload/bolt_open"
+    ]
+  },
+  "weapon.reload.close_click": {
+    "sounds": [
+      "hbmxx:weapon/reload/close_click"
+    ]
+  },
+  "weapon.reload.dry_fire_click": {
+    "sounds": [
+      "hbmxx:weapon/reload/dry_fire_click"
+    ]
+  },
+  "weapon.reload.insert_canister": {
+    "sounds": [
+      "hbmxx:weapon/reload/insert_canister"
+    ]
+  },
+  "weapon.reload.insert_grenade": {
+    "sounds": [
+      "hbmxx:weapon/reload/insert_grenade"
+    ]
+  },
+  "weapon.reload.insert_large": {
+    "sounds": [
+      "hbmxx:weapon/reload/insert_large"
+    ]
+  },
+  "weapon.reload.insert_rocket": {
+    "sounds": [
+      "hbmxx:weapon/reload/insert_rocket"
+    ]
+  },
+  "weapon.reload.lever_cock": {
+    "sounds": [
+      "hbmxx:weapon/reload/lever_cock"
+    ]
+  },
+  "weapon.reload.mag_insert": {
+    "sounds": [
+      "hbmxx:weapon/reload/mag_insert"
+    ]
+  },
+  "weapon.reload.mag_remove": {
+    "sounds": [
+      "hbmxx:weapon/reload/mag_remove"
+    ]
+  },
+  "weapon.reload.mag_small_insert": {
+    "sounds": [
+      "hbmxx:weapon/reload/mag_small_insert"
+    ]
+  },
+  "weapon.reload.mag_small_remove": {
+    "sounds": [
+      "hbmxx:weapon/reload/mag_small_remove"
+    ]
+  },
+  "weapon.reload.open_latch": {
+    "sounds": [
+      "hbmxx:weapon/reload/open_latch"
+    ]
+  },
+  "weapon.reload.pistol_cock": {
+    "sounds": [
+      "hbmxx:weapon/reload/pistol_cock"
+    ]
+  },
+  "weapon.reload.pressure_valve": {
+    "sounds": [
+      "hbmxx:weapon/reload/pressure_valve"
+    ]
+  },
+  "weapon.reload.revolver_close": {
+    "sounds": [
+      "hbmxx:weapon/reload/revolver_close"
+    ]
+  },
+  "weapon.reload.revolver_cock": {
+    "sounds": [
+      "hbmxx:weapon/reload/revolver_cock"
+    ]
+  },
+  "weapon.reload.revolver_spin": {
+    "sounds": [
+      "hbmxx:weapon/reload/revolver_spin"
+    ]
+  },
+  "weapon.reload.rifle_cock": {
+    "sounds": [
+      "hbmxx:weapon/reload/rifle_cock"
+    ]
+  },
+  "weapon.reload.shotgun_cock": {
+    "sounds": [
+      "hbmxx:weapon/reload/shotgun_cock"
+    ]
+  },
+  "weapon.reload.shotgun_reload": {
+    "sounds": [
+      "hbmxx:weapon/reload/shotgun_reload1",
+      "hbmxx:weapon/reload/shotgun_reload2",
+      "hbmxx:weapon/reload/shotgun_reload3"
+    ]
+  },
+  "weapon.reload.tube_fwoomp": {
+    "sounds": [
+      "hbmxx:weapon/reload/tube_fwoomp"
+    ]
+  },
+  "weapon.reload.impact": {
+    "sounds": [
+      "hbmxx:weapon/reload/impact1",
+      "hbmxx:weapon/reload/impact2",
+      "hbmxx:weapon/reload/impact3"
+    ]
+  },
+  "turret.chekhov_fire": {
+    "sounds": [
+      {
+        "name": "hbmxx:turret/chekhov_fire",
+        "stream": false
+      }
+    ]
+  },
+  "turret.jeremy_fire": {
+    "sounds": [
+      "hbmxx:turret/jeremy_fire1",
+      "hbmxx:turret/jeremy_fire2",
+      "hbmxx:turret/jeremy_fire3",
+      "hbmxx:turret/jeremy_fire4",
+      "hbmxx:turret/jeremy_fire5"
+    ]
+  },
+  "turret.jeremy_reload": {
+    "sounds": [
+      {
+        "name": "hbmxx:turret/jeremy_reload",
+        "stream": false
+      }
+    ]
+  },
+  "turret.richard_fire": {
+    "sounds": [
+      {
+        "name": "hbmxx:turret/richard_fire",
+        "stream": false
+      }
+    ]
+  },
+  "turret.howard_fire": {
+    "sounds": [
+      {
+        "name": "hbmxx:turret/howard_fire",
+        "stream": false
+      }
+    ]
+  },
+  "turret.howard_reload": {
+    "sounds": [
+      {
+        "name": "hbmxx:turret/howard_reload",
+        "stream": false
+      }
+    ]
+  },
+  "turret.sentry_fire": {
+    "sounds": [
+      {
+        "name": "hbmxx:turret/sentry_fire",
+        "stream": false
+      }
+    ]
+  },
+  "turret.sentry_lockon": {
+    "sounds": [
+      {
+        "name": "hbmxx:turret/sentry_lockon",
+        "stream": false
+      }
+    ]
+  },
+  "turret.mortar_whistle": {
+    "sounds": [
+      {
+        "name": "hbmxx:weapon/mortar_whistle",
+        "stream": false
+      }
+    ]
+  },
+  "entity.chopper_flying_loop": {
+    "sounds": [
+      {
+        "name": "hbmxx:entity/chopper_flying_loop",
+        "stream": true
+      }
+    ]
+  },
+  "entity.chopper_drop": {
+    "sounds": [
+      {
+        "name": "hbmxx:entity/chopper_drop",
+        "stream": false
+      }
+    ]
+  },
+  "entity.chopper_charge": {
+    "sounds": [
+      {
+        "name": "hbmxx:entity/chopper_charge",
+        "stream": false
+      }
+    ]
+  },
+  "entity.chopper_damage": {
+    "sounds": [
+      {
+        "name": "hbmxx:entity/chopper_damage",
+        "stream": true
+      }
+    ]
+  },
+  "entity.chopper_mine_loop": {
+    "sounds": [
+      {
+        "name": "hbmxx:entity/chopper_mine_loop",
+        "stream": false
+      }
+    ]
+  },
+  "entity.chopper_crashing_loop": {
+    "sounds": [
+      {
+        "name": "hbmxx:entity/chopper_crashing_loop",
+        "stream": true
+      }
+    ]
+  },
+  "entity.old_explosion": {
+    "sounds": [
+      {
+        "name": "hbmxx:entity/old_explosion",
+        "stream": false
+      }
+    ]
+  },
+  "entity.rocket_takeoff": {
+    "sounds": [
+      {
+        "name": "hbmxx:entity/rocket_takeoff",
+        "stream": false
+      }
+    ]
+  },
+  "entity.soyuz_takeoff": {
+    "sounds": [
+      {
+        "name": "hbmxx:entity/soyuz_takeoff",
+        "stream": false
+      }
+    ]
+  },
+  "entity.bomb_det": {
+    "sounds": [
+      "hbmxx:entity/bomb_det1",
+      "hbmxx:entity/bomb_det2",
+      "hbmxx:entity/bomb_det3"
+    ]
+  },
+  "entity.bomb_whistle": {
+    "sounds": [
+      {
+        "name": "hbmxx:entity/bomb_whistle",
+        "stream": false
+      }
+    ]
+  },
+  "entity.bomber_loop": {
+    "sounds": [
+      {
+        "name": "hbmxx:entity/bomber1",
+        "stream": false
+      }
+    ]
+  },
+  "entity.bomber_small_loop": {
+    "sounds": [
+      {
+        "name": "hbmxx:entity/bomber2",
+        "stream": false
+      }
+    ]
+  },
+  "entity.plane_crash": {
+    "sounds": [
+      {
+        "name": "hbmxx:entity/plane_crash",
+        "stream": false
+      }
+    ]
+  },
+  "entity.plane_shot_down": {
+    "sounds": [
+      {
+        "name": "hbmxx:entity/plane_shot_down",
+        "stream": false
+      }
+    ]
+  },
+  "entity.cybercrab": {
+    "sounds": [
+      "hbmxx:entity/radio_random1",
+      "hbmxx:entity/radio_random2",
+      "hbmxx:entity/radio_random3",
+      "hbmxx:entity/radio_random4",
+      "hbmxx:entity/radio_random5",
+      "hbmxx:entity/radio_random6",
+      "hbmxx:entity/radio_random7",
+      "hbmxx:entity/radio_random8",
+      "hbmxx:entity/radio_random9",
+      "hbmxx:entity/radio_random10",
+      "hbmxx:entity/radio_random11",
+      "hbmxx:entity/radio_random12",
+      "hbmxx:entity/radio_random13",
+      "hbmxx:entity/radio_random14",
+      "hbmxx:entity/radio_random15"
+    ]
+  },
+  "entity.ducc": {
+    "sounds": [
+      "hbmxx:entity/ducc1",
+      "hbmxx:entity/ducc2"
+    ]
+  },
+  "entity.slicer": {
+    "sounds": [
+      "hbmxx:entity/slicer1",
+      "hbmxx:entity/slicer2",
+      "hbmxx:entity/slicer3",
+      "hbmxx:entity/slicer4"
+    ]
+  },
+  "entity.megaquacc": {
+    "sounds": [
+      {
+        "name": "hbmxx:entity/megaquacc",
+        "stream": false
+      }
+    ]
+  },
+  "entity.ufo_beam": {
+    "sounds": [
+      {
+        "name": "hbmxx:entity/ufo_beam_short",
+        "stream": false
+      }
+    ]
+  },
+  "entity.ufo_blast": {
+    "sounds": [
+      {
+        "name": "hbmxx:entity/ufo_blast",
+        "stream": false
+      }
+    ]
+  },
+  "entity.siege_idle": {
+    "sounds": [
+      "hbmxx:entity/siege_idle1"
+    ]
+  },
+  "entity.siege_hurt": {
+    "sounds": [
+      "hbmxx:entity/siege_hurt1",
+      "hbmxx:entity/siege_hurt2"
+    ]
+  },
+  "entity.siege_death": {
+    "sounds": [
+      "hbmxx:entity/siege_death1",
+      "hbmxx:entity/siege_death2",
+      "hbmxx:entity/siege_death3"
+    ]
+  },
+  "step.metal": {
+    "sounds": [
+      {
+        "name": "hbmxx:footsteps/metal",
+        "stream": false
+      }
+    ]
+  },
+  "step.iron_jump": {
+    "sounds": [
+      {
+        "name": "hbmxx:footsteps/iron_jump",
+        "stream": false
+      }
+    ]
+  },
+  "step.iron_land": {
+    "sounds": [
+      {
+        "name": "hbmxx:footsteps/iron_land",
+        "stream": false
+      }
+    ]
+  },
+  "step.iron": {
+    "sounds": [
+      "hbmxx:footsteps/iron1",
+      "hbmxx:footsteps/iron2",
+      "hbmxx:footsteps/iron3",
+      "hbmxx:footsteps/iron4"
+    ]
+  },
+  "step.metal_block": {
+    "sounds": [
+      "hbmxx:footsteps/metal_step1",
+      "hbmxx:footsteps/metal_step2",
+      "hbmxx:footsteps/metal_step3",
+      "hbmxx:footsteps/metal_step4"
+    ]
+  },
+  "step.powered": {
+    "sounds": [
+      "hbmxx:footsteps/powered1",
+      "hbmxx:footsteps/powered2",
+      "hbmxx:footsteps/powered3"
+    ]
+  },
+  "player.vomit": {
+    "sounds": [
+      {
+        "name": "hbmxx:player/vomit",
+        "stream": false
+      }
+    ]
+  },
+  "player.cough": {
+    "sounds": [
+      "hbmxx:player/cough1",
+      "hbmxx:player/cough2",
+      "hbmxx:player/cough3",
+      "hbmxx:player/cough4"
+    ]
+  },
+  "player.gulp": {
+    "sounds": [
+      "hbmxx:player/gulp1",
+      "hbmxx:player/gulp2",
+      "hbmxx:player/gulp3",
+      "hbmxx:player/gulp4"
+    ]
+  },
+  "player.groan": {
+    "sounds": [
+      "hbmxx:player/groan1",
+      "hbmxx:player/groan2",
+      "hbmxx:player/groan3"
+    ]
+  },
+  "potatos.random": {
+    "sounds": [
+      "hbmxx:potatos/rand_response0",
+      "hbmxx:potatos/rand_response1",
+      "hbmxx:potatos/rand_response2",
+      "hbmxx:potatos/rand_response3",
+      "hbmxx:potatos/rand_response4",
+      "hbmxx:potatos/rand_response5",
+      "hbmxx:potatos/rand_response6",
+      "hbmxx:potatos/rand_response7"
+    ]
+  },
+  "alarm.ams_siren": {
+    "sounds": [
+      {
+        "name": "hbmxx:alarm/ams_siren",
+        "stream": false
+      }
+    ]
+  },
+  "alarm.apc_loop": {
+    "sounds": [
+      {
+        "name": "hbmxx:alarm/apc_loop",
+        "stream": false
+      }
+    ]
+  },
+  "alarm.apc_pass": {
+    "sounds": [
+      {
+        "name": "hbmxx:alarm/apc_pass",
+        "stream": false
+      }
+    ]
+  },
+  "alarm.bank_alarm": {
+    "sounds": [
+      {
+        "name": "hbmxx:alarm/bank_alarm",
+        "stream": false
+      }
+    ]
+  },
+  "alarm.beep_siren": {
+    "sounds": [
+      {
+        "name": "hbmxx:alarm/beep_siren",
+        "stream": false
+      }
+    ]
+  },
+  "alarm.autopilot": {
+    "sounds": [
+      {
+        "name": "hbmxx:alarm/boeing707_autopilot_disconnected",
+        "stream": false
+      }
+    ]
+  },
+  "alarm.container_alarm": {
+    "sounds": [
+      {
+        "name": "hbmxx:alarm/container_alarm",
+        "stream": false
+      }
+    ]
+  },
+  "alarm.hatch": {
+    "sounds": [
+      {
+        "name": "hbmxx:alarm/lpfhaiwg",
+        "stream": false
+      }
+    ]
+  },
+  "alarm.razortrain_horn": {
+    "sounds": [
+      {
+        "name": "hbmxx:alarm/razortrain_horn",
+        "stream": false
+      }
+    ]
+  },
+  "alarm.sweep_siren": {
+    "sounds": [
+      {
+        "name": "hbmxx:alarm/sweep_siren",
+        "stream": false
+      }
+    ]
+  },
+  "alarm.train_horn": {
+    "sounds": [
+      {
+        "name": "hbmxx:alarm/train_horn",
+        "stream": false
+      }
+    ]
+  },
+  "alarm.blast_door_alarm": {
+    "sounds": [
+      {
+        "name": "hbmxx:alarm/blast_door_alarm",
+        "stream": false
+      }
+    ]
+  },
+  "alarm.klaxon": {
+    "sounds": [
+      {
+        "name": "hbmxx:alarm/klaxon",
+        "stream": false
+      }
+    ]
+  },
+  "alarm.strider_siren": {
+    "sounds": [
+      {
+        "name": "hbmxx:alarm/strider_siren",
+        "stream": false
+      }
+    ]
+  },
+  "alarm.regular_siren": {
+    "sounds": [
+      {
+        "name": "hbmxx:alarm/regular_siren",
+        "stream": false
+      }
+    ]
+  },
+  "alarm.fo_klaxon_a": {
+    "sounds": [
+      {
+        "name": "hbmxx:alarm/fo_klaxon_a",
+        "stream": false
+      }
+    ]
+  },
+  "alarm.fo_klaxon_b": {
+    "sounds": [
+      {
+        "name": "hbmxx:alarm/fo_klaxon_b",
+        "stream": false
+      }
+    ]
+  },
+  "alarm.nostromo_siren": {
+    "sounds": [
+      {
+        "name": "hbmxx:alarm/nostromo_siren",
+        "stream": false
+      }
+    ]
+  },
+  "alarm.eas_alarm": {
+    "sounds": [
+      {
+        "name": "hbmxx:alarm/eas_alarm",
+        "stream": false
+      }
+    ]
+  },
+  "alarm.air_raid": {
+    "sounds": [
+      {
+        "name": "hbmxx:alarm/air_raid",
+        "stream": true
+      }
+    ]
+  },
+  "alarm.classic": {
+    "sounds": [
+      {
+        "name": "hbmxx:alarm/classic_siren",
+        "stream": false
+      }
+    ]
+  },
+  "alarm.gambit": {
+    "sounds": [
+      {
+        "name": "hbmxx:alarm/gambit",
+        "stream": true
+      }
+    ]
+  },
+  "alarm.soyuzed": {
+    "sounds": [
+      {
+        "name": "hbmxx:alarm/soyuzed",
+        "stream": false
+      }
+    ]
+  },
+  "alarm.chime": {
+    "sounds": [
+      {
+        "name": "hbmxx:alarm/chime",
+        "stream": false
+      }
+    ]
+  }
 }
