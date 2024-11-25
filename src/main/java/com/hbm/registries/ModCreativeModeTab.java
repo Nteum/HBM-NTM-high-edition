@@ -53,6 +53,13 @@ public class ModCreativeModeTab {
             output.accept(ModBlocks.URANIUM_ORE.get());
             output.accept(ModBlocks.DEEPSLATE_URANIUM_ORE.get());
             output.accept(ModBlocks.BEDROCK_ORE.get());
+            output.accept(ModBlocks.RARE_EARTH_ORE.get());
+            output.accept(ModBlocks.DEEPSLATE_RARE_EARTH_ORE.get());
+            output.accept(ModBlocks.ASBESTOS_BLOCK.get());
+            output.accept(ModBlocks.ASBESTOS_ORE.get());
+            output.accept(ModBlocks.BASALT_ASBESTOS_ORE.get());
+            output.accept(ModBlocks.SA326_ORE.get());
+            output.accept(ModBlocks.LITHIUM_ORE.get());
         }).build());
     public static final RegistryObject<CreativeModeTab> HBM_MACHINE = CREATIVE_MODE_TABS.register("hbm_machine", () -> CreativeModeTab.builder()
         .title(Component.translatable("itemGroup.hbm_machine"))
@@ -98,7 +105,9 @@ public class ModCreativeModeTab {
      * 将模组中的物品注册到原版创造模式物品栏中
      * */
     public static void addCreative(BuildCreativeModeTabContentsEvent event){
-            if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS){}
+            if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS){
+//                    event.accept();
+            }
 
             else if (event.getTabKey() == CreativeModeTabs.COLORED_BLOCKS){}
 

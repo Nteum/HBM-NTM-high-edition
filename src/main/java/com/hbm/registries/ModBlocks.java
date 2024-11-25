@@ -73,6 +73,13 @@ public class ModBlocks {
     public static final RegistryObject<Block> BEDROCK_ORE = registerBlockWithItem("bedrock_ore",()->new BedRockOre(BlockBehaviour.Properties.copy(Blocks.BEDROCK)));
     public static final RegistryObject<Block> URANIUM_ORE = registerBlockWithItem("uranium_ore",()->new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)));
     public static final RegistryObject<Block> DEEPSLATE_URANIUM_ORE = registerBlockWithItem("deepslate_uranium_ore",()->new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_IRON_ORE)));
+    public static final RegistryObject<Block> RARE_EARTH_ORE = registerBlockWithItem("rare_earth",()->new Block(BlockBehaviour.Properties.copy(Blocks.GOLD_ORE)));
+    public static final RegistryObject<Block> DEEPSLATE_RARE_EARTH_ORE = registerBlockWithItem("deepslate_rare_ore",()->new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_GOLD_ORE)));
+    public static final RegistryObject<Block> ASBESTOS_BLOCK = registerBlockWithItem("asbestos_block",()->new Block(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL)));
+    public static final RegistryObject<Block> ASBESTOS_ORE = registerBlockWithItem("asbestos_ore",()->new Block(BlockBehaviour.Properties.copy(Blocks.STONE)));
+    public static final RegistryObject<Block> BASALT_ASBESTOS_ORE = registerBlockWithItem("basalt_asbestos_ore",()->new Block(BlockBehaviour.Properties.copy(Blocks.BASALT)));
+    public static final RegistryObject<Block> SA326_ORE = registerBlockWithItem("sa326_ore",()->new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_DIAMOND_ORE)));
+    public static final RegistryObject<Block> LITHIUM_ORE = registerBlockWithItem("lithium_ore",()->new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)));
 
     public static ToIntFunction<BlockState> litEmission(int value){
         return state -> {

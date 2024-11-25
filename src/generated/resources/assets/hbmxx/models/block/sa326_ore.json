@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "hbmxx:block/env/ore_uranium_deepslate"
+    "all": "hbmxx:block/env/ore_schrabidium"
   }
 }

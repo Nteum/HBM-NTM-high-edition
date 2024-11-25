@@ -35,12 +35,16 @@ public class ModPlacedFeatures {
      * */
 
     public static final ResourceKey<PlacedFeature> URANIUM_ORE_OVERWORLD = createKey("uranium_ore_overworld");
+    public static final ResourceKey<PlacedFeature> ORE_SPHERE_OVERWORLD = createKey("ore_sphere_overworld");
 
     public static void bootstrap(BootstapContext<PlacedFeature> context){
         HolderGetter<ConfiguredFeature<?, ?>> holdergetter = context.lookup(Registries.CONFIGURED_FEATURE);
-
+        //矿物放置
         PlacementUtils.register(context, URANIUM_ORE_OVERWORLD, holdergetter.getOrThrow(ModConfiguredFeatures.URANIUM_ORE_OVERWORLD),
                 commonOrePlacement(7, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-64),VerticalAnchor.aboveBottom(30))));
+        //洞穴放置
+        PlacementUtils.register(context, ORE_SPHERE_OVERWORLD, holdergetter.getOrThrow(ModConfiguredFeatures.ORE_SPHERE_OVERWORLD),
+                RarityFilter.onAverageOnceEvery(1), InSquarePlacement.spread(), HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(6), VerticalAnchor.absolute(30)), BiomeFilter.biome());
     }
 
     public static ResourceKey<PlacedFeature> createKey(String pKey) {

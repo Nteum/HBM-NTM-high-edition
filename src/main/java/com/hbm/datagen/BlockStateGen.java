@@ -27,15 +27,25 @@ public class BlockStateGen extends BlockStateProvider {
     @Override
     protected void registerStatesAndModels() {
         //简单方块和物品
-        simpleBlockWithItem(ModBlocks.URANIUM_ORE.get(),this.models().cubeAll("uranium_ore",HBMxx.hbm("block/env/ore_uranium")));
-        simpleBlockWithItem(ModBlocks.DEEPSLATE_URANIUM_ORE.get(),this.models().cubeAll("deepslate_uranium_ore",HBMxx.hbm("block/env/deepslate_uranium_ore")));
         simpleBlockWithItem(ModBlocks.machine_battery.get(),this.models().orientable("machine_battery", new ResourceLocation(HBMxx.MODID, "block/battery_side"), new ResourceLocation(HBMxx.MODID, "block/battery_front"), new ResourceLocation(HBMxx.MODID, "block/battery_top")));
         simpleBlockWithItem(ModBlocks.machine_lithium_battery.get(),this.models().orientable("machine_lithium_battery", new ResourceLocation(HBMxx.MODID, "block/battery_lithium_side"), new ResourceLocation(HBMxx.MODID, "block/battery_lithium_front"), new ResourceLocation(HBMxx.MODID, "block/battery_lithium_top")));
         simpleBlockWithItem(ModBlocks.machine_schrabidium_battery.get(),this.models().orientable("machine_schrabidium_battery", new ResourceLocation(HBMxx.MODID, "block/battery_schrabidium_side"), new ResourceLocation(HBMxx.MODID, "block/battery_schrabidium_front"), new ResourceLocation(HBMxx.MODID, "block/battery_schrabidium_top")));
         simpleBlockWithItem(ModBlocks.machine_dineutronium_battery.get(),this.models().orientable("machine_dineutronium_battery", new ResourceLocation(HBMxx.MODID, "block/battery_dineutronium_side"), new ResourceLocation(HBMxx.MODID, "block/battery_dineutronium_front"), new ResourceLocation(HBMxx.MODID, "block/battery_dineutronium_top")));
+
         simpleBlockWithItem(ModBlocks.WAST_EARTH.get(),this.models().cubeBottomTop("wast_earth", HBMxx.hbm("block/env/waste_earth_side"),HBMxx.hbm("block/env/waste_earth_bottom"),HBMxx.hbm("block/env/waste_earth_top")));
         simpleBlockWithItem(ModBlocks.WAST_LEAVES.get(),this.models().leaves("wast_leaves", HBMxx.hbm("block/env/waste_leaves")));
+        simpleBlockWithItem(ModBlocks.URANIUM_ORE.get(),this.models().cubeAll("uranium_ore",HBMxx.hbm("block/env/ore_uranium")));
+        simpleBlockWithItem(ModBlocks.DEEPSLATE_URANIUM_ORE.get(),this.models().cubeAll("deepslate_uranium_ore",HBMxx.hbm("block/env/ore_uranium_deepslate")));
         addEnumStateBlock(ModBlocks.BEDROCK_ORE.get(), BedRockOre.TYPE, (value)->enumModelFileFunction_BedRockOreType((BedRockOre.BedRockOreType) value));
+        simpleBlockItem(ModBlocks.BEDROCK_ORE.get(), this.models().cubeAll("bedrock_ore", new ResourceLocation("block/bedrock")));
+        simpleBlockWithItem(ModBlocks.RARE_EARTH_ORE.get(),this.models().cubeAll("rare_earth",HBMxx.hbm("block/env/ore_rare")));
+        simpleBlockWithItem(ModBlocks.DEEPSLATE_RARE_EARTH_ORE.get(),this.models().cubeAll("deepslate_rare_ore",HBMxx.hbm("block/env/ore_rare_deepslate")));
+        simpleBlockWithItem(ModBlocks.ASBESTOS_BLOCK.get(),this.models().cubeAll("asbestos_block",HBMxx.hbm("block/env/block_asbestos")));
+        simpleBlockWithItem(ModBlocks.ASBESTOS_ORE.get(),this.models().cubeAll("asbestos_ore",HBMxx.hbm("block/env/ore_asbestos")));
+        simpleBlockWithItem(ModBlocks.BASALT_ASBESTOS_ORE.get(),this.models().cubeTop("basalt_asbestos_ore",HBMxx.hbm("block/env/ore_asbestos_basalt"),HBMxx.hbm("block/env/ore_asbestos_basalt_top")));
+        simpleBlockWithItem(ModBlocks.SA326_ORE.get(),this.models().cubeAll("sa326_ore",HBMxx.hbm("block/env/ore_schrabidium")));
+        simpleBlockWithItem(ModBlocks.LITHIUM_ORE.get(),this.models().cubeAll("lithium_ore",HBMxx.hbm("block/env/ore_lithium")));
+
         ModelFile.ExistingModelFile conveyorModel = this.models().getExistingFile(new ResourceLocation(HBMxx.MODID, "block/conveyor"));
         horizontalBlock(ModBlocks.conveyor.get(),conveyorModel);
         simpleBlockItem(ModBlocks.conveyor.get(),conveyorModel);
