@@ -45,6 +45,7 @@ public class BlockStateGen extends BlockStateProvider {
         simpleBlockWithItem(ModBlocks.BASALT_ASBESTOS_ORE.get(),this.models().cubeTop("basalt_asbestos_ore",HBMxx.hbm("block/env/ore_asbestos_basalt"),HBMxx.hbm("block/env/ore_asbestos_basalt_top")));
         simpleBlockWithItem(ModBlocks.SA326_ORE.get(),this.models().cubeAll("sa326_ore",HBMxx.hbm("block/env/ore_schrabidium")));
         simpleBlockWithItem(ModBlocks.LITHIUM_ORE.get(),this.models().cubeAll("lithium_ore",HBMxx.hbm("block/env/ore_lithium")));
+        simpleBlockWithItem(ModBlocks.DEPTH_STONE.get(),this.models().cubeAll("depth_stone",HBMxx.hbm("block/env/stone_depth")));
 
         ModelFile.ExistingModelFile conveyorModel = this.models().getExistingFile(new ResourceLocation(HBMxx.MODID, "block/conveyor"));
         horizontalBlock(ModBlocks.conveyor.get(),conveyorModel);

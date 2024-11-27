@@ -16,6 +16,7 @@ import com.hbm.registries.ModItems;
 import com.hbm.recipe.ModRecipes;
 import com.hbm.registries.ModSounds;
 import com.hbm.world.feature.ModConfiguredFeatures;
+import com.hbm.world.feature.ModFeatures;
 import com.hbm.world.feature.ModPlacedFeatures;
 import com.mojang.logging.LogUtils;
 import net.minecraft.core.HolderLookup;
@@ -70,6 +71,7 @@ public class HBMxx {
         ModFluids.FLUIDS.register(modEventBus);
         ModParticleTypes.PARTICLE_TYPES.register(modEventBus);
         ModSounds.SOUNDS.register(modEventBus);
+        ModFeatures.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
 

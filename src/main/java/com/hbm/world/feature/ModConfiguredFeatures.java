@@ -18,8 +18,10 @@ import net.minecraft.world.level.levelgen.GeodeCrackSettings;
 import net.minecraft.world.level.levelgen.GeodeLayerSettings;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.IceSpikeFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.GeodeConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTest;
@@ -58,9 +60,10 @@ public class ModConfiguredFeatures {
      */
     public static final ResourceKey<ConfiguredFeature<?,?>> URANIUM_ORE_OVERWORLD = createKey("uranium_ore_overworld");
     public static final ResourceKey<ConfiguredFeature<?,?>> ORE_SPHERE_OVERWORLD = createKey("ore_sphere_overworld");
+    public static final ResourceKey<ConfiguredFeature<?,?>> BEDROCK_ORE_OVERWORLD = createKey("bedrock_ore_overworld");
     public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context){
         //替换规则
-        RuleTest stoneReplace = new TagMatchTest(BlockTags.BASE_STONE_OVERWORLD);
+        RuleTest stoneReplace = new TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES);
         RuleTest deepslateReplace = new TagMatchTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES);
         RuleTest netherReplace = new BlockMatchTest(Blocks.NETHERRACK);
         RuleTest endReplace = new BlockMatchTest(Blocks.END_STONE);
@@ -79,6 +82,8 @@ public class ModConfiguredFeatures {
                 new GeodeCrackSettings(0.95D, 2.0D, 2), 0.35D, 0.083D, true,
                 UniformInt.of(4, 6), UniformInt.of(3, 4), UniformInt.of(1, 2),
                 -16, 16, 0.05D, 1));
+        //基岩矿石生成
+        FeatureUtils.register(context, BEDROCK_ORE_OVERWORLD,ModFeatures.BEDROCK_ORE.get());
     }
 
     public static ResourceKey<ConfiguredFeature<?, ?>> createKey(String pName) {

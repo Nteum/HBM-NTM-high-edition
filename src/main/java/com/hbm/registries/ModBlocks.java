@@ -80,6 +80,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> BASALT_ASBESTOS_ORE = registerBlockWithItem("basalt_asbestos_ore",()->new Block(BlockBehaviour.Properties.copy(Blocks.BASALT)));
     public static final RegistryObject<Block> SA326_ORE = registerBlockWithItem("sa326_ore",()->new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_DIAMOND_ORE)));
     public static final RegistryObject<Block> LITHIUM_ORE = registerBlockWithItem("lithium_ore",()->new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)));
+    public static final RegistryObject<Block> DEPTH_STONE = registerBlockWithItem("depth_stone",()->new Block(BlockBehaviour.Properties.copy(Blocks.REINFORCED_DEEPSLATE)));
 
     public static ToIntFunction<BlockState> litEmission(int value){
         return state -> {

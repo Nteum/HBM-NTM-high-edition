@@ -18,6 +18,10 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.fluids.FluidStack;
 import org.jetbrains.annotations.NotNull;
 
+import java.security.interfaces.ECKey;
+import java.util.Arrays;
+import java.util.List;
+
 /** 基岩矿石 */
 public class BedRockOre extends Block {
     public static final EnumProperty<BedRockOreType> TYPE = EnumProperty.create("bedrock_ore_type", BedRockOreType.class);
@@ -54,8 +58,8 @@ public class BedRockOre extends Block {
                 //2. 更新blockstate之后需要用level重置方块
                 pLevel.setBlock(pPos,state2,2);
             } else {
-                if (!pPlayer.addItem(value.resource)) {
-                    ItemEntity itemEntity = new ItemEntity(pLevel, pPos.getX(), pPos.getY() + 1, pPos.getZ(), new ItemStack(value.resource.getItem()));
+                if (!pPlayer.addItem(value.main_product)) {
+                    ItemEntity itemEntity = new ItemEntity(pLevel, pPos.getX(), pPos.getY() + 1, pPos.getZ(), new ItemStack(value.main_product.getItem()));
                     pLevel.addFreshEntity(itemEntity);
                 }
                 return InteractionResult.SUCCESS;
@@ -66,23 +70,31 @@ public class BedRockOre extends Block {
 
 
     public enum BedRockOreType implements StringRepresentable {
-        IRON("iron",Items.RAW_IRON.getDefaultInstance(),FluidStack.EMPTY, 1,1,1),
-        COPPER("copper",Items.RAW_COPPER.getDefaultInstance(),FluidStack.EMPTY, 1,1,1),
-        DIA("diamond",Items.DIAMOND.getDefaultInstance(),FluidStack.EMPTY, 1,1,1);
+        IRON("iron",Items.RAW_IRON.getDefaultInstance(),FluidStack.EMPTY, 1),
+        COPPER("copper",Items.RAW_COPPER.getDefaultInstance(),FluidStack.EMPTY, 1),
+        DIA("diamond",Items.DIAMOND.getDefaultInstance(),FluidStack.EMPTY, 1);
 
         public String key;
-        public ItemStack resource;
-        public FluidStack acidRequirement;
+        public ItemStack main_product;
+        public List<ItemStack> by_product;
+        public List<Integer> probilities;
+        public FluidStack acid;
         public int tier;
         public int color;
-        public int shape;
-        private BedRockOreType(String key, ItemStack resource, FluidStack acidRequirement, int tier, int color, int shape){
+        public static final int DEFAULT_COLOR = 0x8F9999;
+        private BedRockOreType(String key, ItemStack main_product, Integer tier){
+            this(key, main_product,null, null, tier, DEFAULT_COLOR);
+        }
+        private BedRockOreType(String key, ItemStack main_product, FluidStack acid, Integer tier){
+            this(key, main_product,null, acid, tier, DEFAULT_COLOR);
+        }
+        private BedRockOreType(String key, ItemStack main_product, List<ItemStack> by_product,  FluidStack acid, int tier, int color){
             this.key = key;
-            this.resource = resource;
-            this.acidRequirement = acidRequirement;
+            this.main_product = main_product;
+            this.by_product = by_product;
+            this.acid = acid;
             this.color = color;
             this.tier = tier;
-            this.shape = shape;
         }
 
         @Override

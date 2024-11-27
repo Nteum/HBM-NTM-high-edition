@@ -2,7 +2,6 @@ package com.hbm.commands;
 
 import com.hbm.handler.radiation.ChunkRadiationManager;
 import com.mojang.brigadier.CommandDispatcher;
-import com.mojang.brigadier.StringReader;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
@@ -10,9 +9,6 @@ import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.biome.Biomes;
-
-import java.util.Objects;
 
 public class RadiationCommand {
     public static void register(CommandDispatcher<CommandSourceStack> pDispatcher){

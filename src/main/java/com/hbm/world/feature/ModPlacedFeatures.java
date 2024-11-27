@@ -36,6 +36,7 @@ public class ModPlacedFeatures {
 
     public static final ResourceKey<PlacedFeature> URANIUM_ORE_OVERWORLD = createKey("uranium_ore_overworld");
     public static final ResourceKey<PlacedFeature> ORE_SPHERE_OVERWORLD = createKey("ore_sphere_overworld");
+    public static final ResourceKey<PlacedFeature> BEDROCK_ORE_OVERWORLD = createKey("bedrock_ore_overworld");
 
     public static void bootstrap(BootstapContext<PlacedFeature> context){
         HolderGetter<ConfiguredFeature<?, ?>> holdergetter = context.lookup(Registries.CONFIGURED_FEATURE);
@@ -44,13 +45,14 @@ public class ModPlacedFeatures {
                 commonOrePlacement(7, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-64),VerticalAnchor.aboveBottom(30))));
         //洞穴放置
         PlacementUtils.register(context, ORE_SPHERE_OVERWORLD, holdergetter.getOrThrow(ModConfiguredFeatures.ORE_SPHERE_OVERWORLD),
-                RarityFilter.onAverageOnceEvery(1), InSquarePlacement.spread(), HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(6), VerticalAnchor.absolute(30)), BiomeFilter.biome());
+                RarityFilter.onAverageOnceEvery(24), InSquarePlacement.spread(), HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(6), VerticalAnchor.absolute(30)), BiomeFilter.biome());
+        //基岩矿石生成
+        PlacementUtils.register(context, BEDROCK_ORE_OVERWORLD, holdergetter.getOrThrow(ModConfiguredFeatures.BEDROCK_ORE_OVERWORLD),RarityFilter.onAverageOnceEvery(1));
     }
 
     public static ResourceKey<PlacedFeature> createKey(String pKey) {
         return ResourceKey.create(Registries.PLACED_FEATURE, HBMxx.hbm(pKey));
     }
-
     private static List<PlacementModifier> orePlacement(PlacementModifier p_195347_, PlacementModifier p_195348_) {
         return List.of(p_195347_, InSquarePlacement.spread(), p_195348_, BiomeFilter.biome());
     }
