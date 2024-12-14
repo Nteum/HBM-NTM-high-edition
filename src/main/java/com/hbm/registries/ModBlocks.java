@@ -8,6 +8,7 @@ import com.hbm.block.network.BlockConveyor;
 import com.hbm.block.weapon.NukeCustom;
 import com.hbm.block.weapon.NukeFat;
 import com.hbm.fluid.ModFluids;
+import com.hbm.modsetting.multiblock.DummibleBlock;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -68,19 +69,48 @@ public class ModBlocks {
     public static final RegistryObject<Block> bomb_custom = registerBlockWithItem("bomb_custom",()->new NukeCustom(BlockBehaviour.Properties.of()));
 
     //自然物
+    //ores
     public static final RegistryObject<Block> WAST_LEAVES = registerBlockWithItem("wast_leaves",()->new WasteLeaves(BlockBehaviour.Properties.copy(Blocks.ACACIA_LEAVES)));
     public static final RegistryObject<Block> WAST_EARTH = registerBlockWithItem("wast_earth",()->new WasteEarth(BlockBehaviour.Properties.copy(Blocks.DIRT)));
-    public static final RegistryObject<Block> BEDROCK_ORE = registerBlockWithItem("bedrock_ore",()->new BedRockOre(BlockBehaviour.Properties.copy(Blocks.BEDROCK)));
     public static final RegistryObject<Block> URANIUM_ORE = registerBlockWithItem("uranium_ore",()->new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)));
     public static final RegistryObject<Block> DEEPSLATE_URANIUM_ORE = registerBlockWithItem("deepslate_uranium_ore",()->new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_IRON_ORE)));
-    public static final RegistryObject<Block> RARE_EARTH_ORE = registerBlockWithItem("rare_earth",()->new Block(BlockBehaviour.Properties.copy(Blocks.GOLD_ORE)));
-    public static final RegistryObject<Block> DEEPSLATE_RARE_EARTH_ORE = registerBlockWithItem("deepslate_rare_ore",()->new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_GOLD_ORE)));
+    public static final RegistryObject<Block> SCORCHED_URANIUM_ORE = registerBlockWithItem("scorched_uranium_ore",()->new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)));
+    public static final RegistryObject<Block> TITANIUM_ORE = registerBlockWithItem("titanium_ore",()->new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)));
+    public static final RegistryObject<Block> THORIUM_ORE = registerBlockWithItem("thorium_ore",()->new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)));
+    public static final RegistryObject<Block> NITER_ORE = registerBlockWithItem("niter_ore",()->new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)));
+    public static final RegistryObject<Block> TUNGSTEN_ORE = registerBlockWithItem("tungsten_ore",()->new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)));
+    public static final RegistryObject<Block> ALUMINIUM_ORE = registerBlockWithItem("aluminium_ore",()->new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)));
+    public static final RegistryObject<Block> FLUORITE_ORE = registerBlockWithItem("fluorite_ore",()->new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)));
+    public static final RegistryObject<Block> LEAD_ORE = registerBlockWithItem("lead_ore",()->new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)));
+    public static final RegistryObject<Block> BERYLLIUM_ORE = registerBlockWithItem("beryllium_ore",()->new Block(BlockBehaviour.Properties.copy(Blocks.STONE)));
+    public static final RegistryObject<Block> SA326_ORE = registerBlockWithItem("sa326_ore",()->new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_DIAMOND_ORE)));
     public static final RegistryObject<Block> ASBESTOS_BLOCK = registerBlockWithItem("asbestos_block",()->new Block(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL)));
     public static final RegistryObject<Block> ASBESTOS_ORE = registerBlockWithItem("asbestos_ore",()->new Block(BlockBehaviour.Properties.copy(Blocks.STONE)));
     public static final RegistryObject<Block> BASALT_ASBESTOS_ORE = registerBlockWithItem("basalt_asbestos_ore",()->new Block(BlockBehaviour.Properties.copy(Blocks.BASALT)));
-    public static final RegistryObject<Block> SA326_ORE = registerBlockWithItem("sa326_ore",()->new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_DIAMOND_ORE)));
+    //oil
+    public static final RegistryObject<Block> OIL_ORE = registerBlockWithItem("oil_ore",()->new Block(BlockBehaviour.Properties.copy(Blocks.GOLD_ORE)));
+    public static final RegistryObject<Block> OIL_ORE_EMPTY = registerBlockWithItem("oil_ore_empty",()->new Block(BlockBehaviour.Properties.copy(Blocks.GOLD_ORE)));
+    public static final RegistryObject<Block> OIL_ORE_SAND = registerBlockWithItem("oil_ore_sand",()->new Block(BlockBehaviour.Properties.copy(Blocks.SAND)));
+    //rare ore
+    public static final RegistryObject<Block> RARE_EARTH_ORE = registerBlockWithItem("rare_earth",()->new Block(BlockBehaviour.Properties.copy(Blocks.GOLD_ORE)));
+    public static final RegistryObject<Block> DEEPSLATE_RARE_EARTH_ORE = registerBlockWithItem("deepslate_rare_ore",()->new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_GOLD_ORE)));
     public static final RegistryObject<Block> LITHIUM_ORE = registerBlockWithItem("lithium_ore",()->new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)));
+    public static final RegistryObject<Block> COBALT_ORE = registerBlockWithItem("cobalt_ore",()->new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)));
+    public static final RegistryObject<Block> COLTAN_ORE = registerBlockWithItem("coltan_ore",()->new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)));
+    //geniss ore
+    public static final RegistryObject<Block> GENISS_GAS_ORE = registerBlockWithItem("geniss_gas_ore",()->new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)));
+    //nether ore
+    public static final RegistryObject<Block> SMOLDER_ORE_NETHER = registerBlockWithItem("smolder_ore_nether",()->new Block(BlockBehaviour.Properties.copy(Blocks.NETHER_QUARTZ_ORE)));
+    public static final RegistryObject<Block> PLUTONIUM_ORE_NETHER = registerBlockWithItem("plutonium_ore_nether",()->new Block(BlockBehaviour.Properties.copy(Blocks.NETHER_QUARTZ_ORE)));
+    public static final RegistryObject<Block> FIRE_ORE_NETHER = registerBlockWithItem("fire_ore_nether",()->new Block(BlockBehaviour.Properties.copy(Blocks.NETHER_BRICK_WALL)));
+    //end ore
+    public static final RegistryObject<Block> TIKITE_ORE_END = registerBlockWithItem("tikite_ore_end",()->new Block(BlockBehaviour.Properties.copy(Blocks.END_STONE)));
+    //bedrock ore
+    public static final RegistryObject<Block> BEDROCK_ORE = registerBlockWithItem("bedrock_ore",()->new BedRockOre(BlockBehaviour.Properties.copy(Blocks.BEDROCK)));
     public static final RegistryObject<Block> DEPTH_STONE = registerBlockWithItem("depth_stone",()->new Block(BlockBehaviour.Properties.copy(Blocks.REINFORCED_DEEPSLATE)));
+
+    //逻辑物
+    public static final RegistryObject<Block> DUMMIBLE = registerBlockWithItem("dummible",()->new DummibleBlock(BlockBehaviour.Properties.copy(Blocks.STONE)));
 
     public static ToIntFunction<BlockState> litEmission(int value){
         return state -> {

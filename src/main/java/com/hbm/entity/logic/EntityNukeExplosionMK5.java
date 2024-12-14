@@ -1,6 +1,6 @@
 package com.hbm.entity.logic;
 
-import com.hbm.badthing.ContaminationUtil;
+import com.hbm.modsetting.badthing.ContaminationUtil;
 import com.hbm.entity.ModEntityType;
 import com.hbm.main.HBMxx;
 import com.hbm.world.level.explosion.ExplosionNukeGeneric;

@@ -45,6 +45,7 @@ public class ModCreativeModeTab {
             output.accept(ModItems.briquette_coal.get());
             output.accept(ModItems.briquette_lignite.get());
 
+            output.accept(ModItems.BEDROCK_ORE.get());
         }).build());
     public static final RegistryObject<CreativeModeTab> HBM_BLOCK = CREATIVE_MODE_TABS.register("hbm_block", () -> CreativeModeTab.builder()
         .title(Component.translatable("itemGroup.hbm_block"))
@@ -81,6 +82,7 @@ public class ModCreativeModeTab {
             output.accept(ModBlocks.anvil_bismuth.get());
             output.accept(ModBlocks.machine_cracking_tower.get());
             output.accept(ModBlocks.machine_crucible.get());
+            output.accept(ModBlocks.machine_assembler.get());
         }).build());
     public static final RegistryObject<CreativeModeTab> HBM_TOOL = CREATIVE_MODE_TABS.register("hbm_weapon", () -> CreativeModeTab.builder()
         .title(Component.translatable("itemGroup.hbm_tool"))

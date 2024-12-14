@@ -34,7 +34,7 @@ public class BedrockOreFeature extends Feature<NoneFeatureConfiguration> {
         for (int i = 0; i < num; i++) {
             BlockPos bedrock_pos = blockPos.offset(random.nextInt(2), 0, random.nextInt(2));
             BlockState blockState = ModBlocks.BEDROCK_ORE.get().defaultBlockState();
-            blockState = blockState.setValue(BedRockOre.TYPE, BedRockOre.BedRockOreType.DIA);
+            blockState = blockState.setValue(BedRockOre.TYPE, BedRockOre.BedRockOreType.IRON);
             level.setBlock(bedrock_pos,blockState,11);
         }
         //生成深层石头覆层

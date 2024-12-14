@@ -38,8 +38,8 @@ public class BlockDifurnace extends BaseMachineBlock{
      * 添加状态，不继承这个函数方块状态会被视为不存在
      * */
     @Override
-    public void createBlockStateDefinition2(StateDefinition.Builder<Block, BlockState> pBuilder) {
-        super.createBlockStateDefinition2(pBuilder);
+    public void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
+        super.createBlockStateDefinition(pBuilder);
         pBuilder.add(LIT);
     }
 

@@ -2,6 +2,10 @@ package com.hbm.main;
 
 import com.hbm.api.HBMTags;
 import com.hbm.config.GeneralConfig;
+import com.hbm.datagen.model.BlockStateGen;
+import com.hbm.datagen.model.ItemModelGen;
+import com.hbm.datagen.recipe.RecipeGen;
+import com.hbm.datagen.tag.BlockTagsGen;
 import com.hbm.registries.ModBlocks;
 import com.hbm.fluid.ModFluidTypes;
 import com.hbm.fluid.ModFluids;
@@ -15,9 +19,7 @@ import com.hbm.registries.ModCreativeModeTab;
 import com.hbm.registries.ModItems;
 import com.hbm.recipe.ModRecipes;
 import com.hbm.registries.ModSounds;
-import com.hbm.world.feature.ModConfiguredFeatures;
 import com.hbm.world.feature.ModFeatures;
-import com.hbm.world.feature.ModPlacedFeatures;
 import com.mojang.logging.LogUtils;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
@@ -27,7 +29,6 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.common.data.ForgeAdvancementProvider;
 import net.minecraftforge.data.event.GatherDataEvent;
-import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -55,11 +56,14 @@ public class HBMxx {
 //            }).build());
 
     public HBMxx() {
+        //模组事件总线
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         modEventBus.addListener(this::commonSetup);
         modEventBus.addListener(this::onGatherData);
         modEventBus.addListener(ModCreativeModeTab::addCreative);
-
+        //forge事件总线
+        MinecraftForge.EVENT_BUS.register(this);
+        //模组内容的注册
         ModItems.ITEMS.register(modEventBus);
         ModBlocks.register(modEventBus);
         ModCreativeModeTab.CREATIVE_MODE_TABS.register(modEventBus);
@@ -73,9 +77,6 @@ public class HBMxx {
         ModSounds.SOUNDS.register(modEventBus);
         ModFeatures.register(modEventBus);
 
-        MinecraftForge.EVENT_BUS.register(this);
-
-//        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, GeneralConfig.CONFIG_SPEC);
     }
 

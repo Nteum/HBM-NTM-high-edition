@@ -3,9 +3,6 @@
     "bedrock_ore_type=copper": {
       "model": "hbmxx:block/env/bedrock_ore_copper"
     },
-    "bedrock_ore_type=diamond": {
-      "model": "hbmxx:block/env/bedrock_ore_dia"
-    },
     "bedrock_ore_type=iron": {
       "model": "hbmxx:block/env/bedrock_ore_iron"
     }

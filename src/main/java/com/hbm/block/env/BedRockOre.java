@@ -54,7 +54,7 @@ public class BedRockOre extends Block {
             BedRockOreType value = pState.getValue(TYPE);
             if (pPlayer.hasPose(Pose.CROUCHING)) {
                 //1. blockstate.setvalue返回的才是新值
-                BlockState state2 = pState.setValue(TYPE, BedRockOreType.DIA);
+                BlockState state2 = pState.setValue(TYPE, BedRockOreType.COPPER);
                 //2. 更新blockstate之后需要用level重置方块
                 pLevel.setBlock(pPos,state2,2);
             } else {
@@ -72,7 +72,29 @@ public class BedRockOre extends Block {
     public enum BedRockOreType implements StringRepresentable {
         IRON("iron",Items.RAW_IRON.getDefaultInstance(),FluidStack.EMPTY, 1),
         COPPER("copper",Items.RAW_COPPER.getDefaultInstance(),FluidStack.EMPTY, 1),
-        DIA("diamond",Items.DIAMOND.getDefaultInstance(),FluidStack.EMPTY, 1);
+//        BORAX("borax",Items.RAW_COPPER.getDefaultInstance(),FluidStack.EMPTY, 1),
+//        ASBESTOS("asbestos",Items.RAW_COPPER.getDefaultInstance(),FluidStack.EMPTY, 1),
+//        NIOBIUM("niobium",Items.RAW_COPPER.getDefaultInstance(),FluidStack.EMPTY, 1),
+//        TITANIUM("titanium",Items.RAW_COPPER.getDefaultInstance(),FluidStack.EMPTY, 1),
+//        TUNGSTEN("tungsten",Items.RAW_COPPER.getDefaultInstance(),FluidStack.EMPTY, 1),
+//        GOLD("gold",Items.RAW_COPPER.getDefaultInstance(),FluidStack.EMPTY, 1),
+//        URANIUM("uranium",Items.RAW_COPPER.getDefaultInstance(),FluidStack.EMPTY, 1),
+//        THORIUM("thorium",Items.RAW_COPPER.getDefaultInstance(),FluidStack.EMPTY, 1),
+//        CHLOROCALCITE("chlorocalcite",Items.RAW_COPPER.getDefaultInstance(),FluidStack.EMPTY, 1),
+//        FLUORITE("fluorite",Items.RAW_COPPER.getDefaultInstance(),FluidStack.EMPTY, 1),
+//        HEMATITE("hematite",Items.RAW_COPPER.getDefaultInstance(),FluidStack.EMPTY, 1),
+//        MALACHITE("malachite",Items.RAW_COPPER.getDefaultInstance(),FluidStack.EMPTY, 1),
+//        NEODYMIUM("neodymium",Items.RAW_COPPER.getDefaultInstance(),FluidStack.EMPTY, 1),
+//        COAL("coal",Items.RAW_COPPER.getDefaultInstance(),FluidStack.EMPTY, 1),
+//        NITER("niter",Items.RAW_COPPER.getDefaultInstance(),FluidStack.EMPTY, 1),
+//        REDSTONE("redstone",Items.RAW_COPPER.getDefaultInstance(),FluidStack.EMPTY, 1),
+//        EMERALD("emerald",Items.RAW_COPPER.getDefaultInstance(),FluidStack.EMPTY, 1),
+//        RARE("rare",Items.RAW_COPPER.getDefaultInstance(),FluidStack.EMPTY, 1),
+//        GLOW_STONE("glow_stone",Items.RAW_COPPER.getDefaultInstance(),FluidStack.EMPTY, 1),
+//        POWER_FIRE("power_fire",Items.RAW_COPPER.getDefaultInstance(),FluidStack.EMPTY, 1),
+//        QUARTZ("quartz",Items.RAW_COPPER.getDefaultInstance(),FluidStack.EMPTY, 1),
+        ;
+
 
         public String key;
         public ItemStack main_product;
@@ -81,7 +103,7 @@ public class BedRockOre extends Block {
         public FluidStack acid;
         public int tier;
         public int color;
-        public static final int DEFAULT_COLOR = 0x8F9999;
+        private static final int DEFAULT_COLOR = 0x8F9999;
         private BedRockOreType(String key, ItemStack main_product, Integer tier){
             this(key, main_product,null, null, tier, DEFAULT_COLOR);
         }

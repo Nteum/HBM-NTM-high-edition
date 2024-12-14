@@ -19,7 +19,7 @@ public abstract class SerializableRecipe {
     public static List<SerializableRecipe> recipeHandlers = new ArrayList();
 
     public static void registerAllHandlers() {
-        recipeHandlers.add(new BlastFurnaceRecipe());
+//        recipeHandlers.add(new BlastFurnaceRecipe());
     }
 
     public static void initialize() {

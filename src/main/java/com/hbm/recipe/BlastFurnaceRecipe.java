@@ -28,9 +28,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-import static com.hbm.datagen.RecipeGen.recipeCnt;
+import static com.hbm.datagen.recipe.RecipeGen.recipeCnt;
 
-public class BlastFurnaceRecipe extends SerializableRecipe implements Recipe<Container> {
+public class BlastFurnaceRecipe implements Recipe<Container> {
     //配方种类名
     public static final String TYPE = "blastfurnace_recipe";
     //配方自身的名称
@@ -80,42 +80,6 @@ public class BlastFurnaceRecipe extends SerializableRecipe implements Recipe<Con
     public RecipeType<?> getType() {
         return Type.INSTANCE;
     }
-    /**
-     * 从serrializablerecipe实现的函数
-     * */
-//    @Override
-//    public String getFileName() {
-//        return TYPE;
-//    }
-
-//    public static List<BlastFurnaceRecipe> recipeList = new ArrayList<>();
-//    public void registerRecipe(ItemLike item1, ItemLike item2, ItemLike item3, int n){
-//        int size = recipeList.size();
-//        recipeList.add(new BlastFurnaceRecipe(new ResourceLocation(HBMxx.MODID,TYPE + "_" + size),
-//                new Tuple.Triplet<>(
-//                        new ItemStack(item1,1),
-//                        new ItemStack(item2,1),
-//                        new ItemStack(item1,n)
-//                )));
-//    }
-//    @Override
-//    public Object getRecipeObject() {
-//        registerRecipe(Items.IRON_INGOT, Items.COAL, ModItems.ingot_steel.get(),1);
-//        registerRecipe(Items.IRON_INGOT, Items.CHARCOAL, ModItems.ingot_steel.get(),1);
-//        return recipeList;
-//    }
-
-//    @Override
-//    public void writeRecipe(Object recipe, JsonWriter writer) throws IOException {
-//        BlastFurnaceRecipe blastFurnaceRecipe = (BlastFurnaceRecipe) recipe;
-//        writer.name("type").value(HBMxx.MODID + ":" + TYPE);
-//        writer.name("output");
-//        this.writeItemStack(recipeItems.getZ(),writer);
-//        writer.name("input1");
-//        this.writeItemStack(recipeItems.getX(),writer);
-//        writer.name("input2");
-//        this.writeItemStack(recipeItems.getY(),writer);
-//    }
 
     public static class Type implements RecipeType<BlastFurnaceRecipe>{
         private Type(){}
@@ -286,7 +250,5 @@ public class BlastFurnaceRecipe extends SerializableRecipe implements Recipe<Con
                 .input(input1,1).input(input2,1)
                 .save(pwriter,new ResourceLocation(HBMxx.MODID,BlastFurnaceRecipe.TYPE + "_" + recipeCnt++));
     }
-//        registerRecipe(Items.IRON_INGOT, Items.COAL, ModItems.ingot_steel.get(),1);
-//        registerRecipe(Items.IRON_INGOT, Items.CHARCOAL, ModItems.ingot_steel.get(),1);
 
 }

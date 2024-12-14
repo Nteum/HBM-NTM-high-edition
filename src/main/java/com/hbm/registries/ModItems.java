@@ -1,5 +1,6 @@
 package com.hbm.registries;
 
+import com.hbm.item.env.BedrockOreItem;
 import com.hbm.main.HBMxx;
 import com.hbm.fluid.ModFluids;
 import com.hbm.item.weapon.ItemDetonator;
@@ -59,6 +60,9 @@ public class ModItems {
     //part
     public static final RegistryObject<Item> overlay_my_fluid = ITEMS.register("overlay_my_fluid",()->new Item(new Item.Properties()));
     public static final RegistryObject<Item> crucible_template = ITEMS.register("crucible_template",()->new Item(new Item.Properties()));
+
+    //矿物
+    public static final RegistryObject<Item> BEDROCK_ORE = ITEMS.register("bedrock_ore_base",()->new BedrockOreItem(new Item.Properties()));
 
     public static final RegistryObject<Item> reacher = ITEMS.register("reacher",()->new Item(new Item.Properties()));
     public static void register(IEventBus eventBus){

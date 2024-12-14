@@ -1,2 +1,3 @@
-// 1.20.1	2024-11-24T22:19:17.9361448	Tags for minecraft:block mod id hbmxx
+// 1.20.1	2024-11-27T20:43:39.4653455	Tags for minecraft:block mod id hbmxx
+d07da68fe4b5e2563cd17936975902b56cb3bfd5 data/forge/tags/blocks/ores/uranium.json
 7b3fe392a4ef1c52dda15c2db9668693234a371b data/minecraft/tags/blocks/needs_iron_tool.json
