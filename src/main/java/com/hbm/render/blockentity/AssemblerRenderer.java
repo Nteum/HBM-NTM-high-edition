@@ -20,6 +20,7 @@ import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.client.model.obj.ObjLoader;
 
 import static com.hbm.render.blockentity.RenderUtils.renderBlockModel;
 
@@ -48,11 +49,27 @@ public class AssemblerRenderer implements BlockEntityRenderer<AssemblerEntity> {
         int rotation = 0;
         int offset = count <= 90?count:(count<=270)?180-count:count-360;
         double sway = Math.sin(offset / Math.PI / 60);
+
+        pPoseStack.pushPose();
+        /** 根据不同方向调整渲染的偏移。据说可以通过调整模型偏置解决这个问题，但我最终也没找到模型偏置怎么调，只能采用最粗暴的手段：
+         * 根据机器渲染的偏移量反向调整。注意：有向方块的方向的方向和玩家放置的时候面向的方向相反。 */
         switch (direction){
-            case NORTH -> rotation = 0;
-            case WEST -> rotation = 90;
-            case SOUTH -> rotation = 180;
-            case EAST -> rotation = 270;
+            case NORTH -> {
+                rotation = 180;
+                pPoseStack.translate(1.0D,0,1.0D);
+            }
+            case WEST -> {
+                rotation = 90;
+                pPoseStack.translate(1.0D,0,0);
+            }
+            case SOUTH -> {
+                rotation = 0;
+                pPoseStack.translate(-1.0D,0,-1.0D);
+            }
+            case EAST -> {
+                rotation = 270;
+                pPoseStack.translate(0,0,1.0D);
+            }
         }
 
         boolean running = true;
@@ -62,34 +79,34 @@ public class AssemblerRenderer implements BlockEntityRenderer<AssemblerEntity> {
 
         //边上的四个齿轮
         pPoseStack.pushPose();
-        pPoseStack.mulPose(Axis.YP.rotationDegrees(rotation));
+        pPoseStack.mulPose(Axis.YN.rotationDegrees(rotation));
         pPoseStack.translate(-0.6, 0.75, 1.0625);
         pPoseStack.mulPose(Axis.ZP.rotationDegrees(count));
         renderBlockModel(model,blockState,modelRenderer,pPoseStack,pBuffer,pPackedLight,pPackedOverlay,null);
         pPoseStack.popPose();
 
         pPoseStack.pushPose();
-        pPoseStack.mulPose(Axis.YP.rotationDegrees(rotation));
+        pPoseStack.mulPose(Axis.YN.rotationDegrees(rotation));
         pPoseStack.translate(-0.6, 0.75, -1.0625);
         pPoseStack.mulPose(Axis.ZP.rotationDegrees(-count));
         renderBlockModel(model,blockState,modelRenderer,pPoseStack,pBuffer,pPackedLight,pPackedOverlay,null);
         pPoseStack.popPose();
 
         pPoseStack.pushPose();
-        pPoseStack.mulPose(Axis.YP.rotationDegrees(rotation));
+        pPoseStack.mulPose(Axis.YN.rotationDegrees(rotation));
         pPoseStack.translate(0.6, 0.75, -1.0625);
         pPoseStack.mulPose(Axis.ZP.rotationDegrees(count));
         renderBlockModel(model,blockState,modelRenderer,pPoseStack,pBuffer,pPackedLight,pPackedOverlay,null);
         pPoseStack.popPose();
 
         pPoseStack.pushPose();
-        pPoseStack.mulPose(Axis.YP.rotationDegrees(rotation));
+        pPoseStack.mulPose(Axis.YN.rotationDegrees(rotation));
         pPoseStack.translate(0.6, 0.75, 1.0625);
         pPoseStack.mulPose(Axis.ZP.rotationDegrees(-count));
         renderBlockModel(model,blockState,modelRenderer,pPoseStack,pBuffer,pPackedLight,pPackedOverlay,null);
         pPoseStack.popPose();
         pPoseStack.pushPose();
-        pPoseStack.mulPose(Axis.YP.rotationDegrees(rotation));
+        pPoseStack.mulPose(Axis.YN.rotationDegrees(rotation));
         pPoseStack.translate(0.4 * offset/90, 0, 0);
         //格架
         renderBlockModel(model2,blockState,modelRenderer,pPoseStack,pBuffer,pPackedLight,pPackedOverlay,null);
@@ -100,7 +117,7 @@ public class AssemblerRenderer implements BlockEntityRenderer<AssemblerEntity> {
 
         //正在制作的物品
         pPoseStack.pushPose();
-        pPoseStack.mulPose(Axis.YP.rotationDegrees(rotation));
+        pPoseStack.mulPose(Axis.YN.rotationDegrees(rotation));
         //位置平移
         pPoseStack.translate(0,0.85,0);
         //旋转到在锻压机上平放（Axis.XN是绕X轴翻转）
@@ -115,10 +132,12 @@ public class AssemblerRenderer implements BlockEntityRenderer<AssemblerEntity> {
 
         //装配机身体部分
         pPoseStack.pushPose();
-        pPoseStack.mulPose(Axis.YP.rotationDegrees(rotation));
+        pPoseStack.mulPose(Axis.YN.rotationDegrees(rotation));
         renderBlockModel(model3,blockState,modelRenderer,pPoseStack,pBuffer,pPackedLight,pPackedOverlay,null);
         pPoseStack.popPose();
 
+//        pPoseStack.translate(-1.0D,0,-1.0D);
+        pPoseStack.popPose();
     }
 
 }

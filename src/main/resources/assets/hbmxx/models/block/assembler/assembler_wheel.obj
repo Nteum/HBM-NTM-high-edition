@@ -1,5 +1,6 @@
 # Blender v2.76 (sub 0) OBJ File: 'assembler_wheel.blend'
 # www.blender.org
+mtllib assembler_wheel.mtl
 o Cylinder
 v 0.000000 1.162500 -0.750000
 v 0.000000 1.537500 -0.750000
@@ -426,6 +427,7 @@ vn -0.793400 0.000000 -0.608800
 vn -0.866000 0.000000 -0.500000
 vn 0.707100 0.000000 0.707100
 vn -0.382700 0.000000 -0.923900
+usemtl assembler_wheel
 s off
 f 83/1/1 84/2/1 36/3/1
 f 4/4/2 6/5/2 5/6/2

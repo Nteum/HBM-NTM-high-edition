@@ -27,10 +27,10 @@ public class BlockStateGen extends BlockStateProvider {
     @Override
     protected void registerStatesAndModels() {
         //简单方块和物品
-        simpleBlockWithItem(ModBlocks.machine_battery.get(),this.models().orientable("machine_battery", new ResourceLocation(HBMxx.MODID, "block/battery_side"), new ResourceLocation(HBMxx.MODID, "block/battery_front"), new ResourceLocation(HBMxx.MODID, "block/battery_top")));
-        simpleBlockWithItem(ModBlocks.machine_lithium_battery.get(),this.models().orientable("machine_lithium_battery", new ResourceLocation(HBMxx.MODID, "block/battery_lithium_side"), new ResourceLocation(HBMxx.MODID, "block/battery_lithium_front"), new ResourceLocation(HBMxx.MODID, "block/battery_lithium_top")));
-        simpleBlockWithItem(ModBlocks.machine_schrabidium_battery.get(),this.models().orientable("machine_schrabidium_battery", new ResourceLocation(HBMxx.MODID, "block/battery_schrabidium_side"), new ResourceLocation(HBMxx.MODID, "block/battery_schrabidium_front"), new ResourceLocation(HBMxx.MODID, "block/battery_schrabidium_top")));
-        simpleBlockWithItem(ModBlocks.machine_dineutronium_battery.get(),this.models().orientable("machine_dineutronium_battery", new ResourceLocation(HBMxx.MODID, "block/battery_dineutronium_side"), new ResourceLocation(HBMxx.MODID, "block/battery_dineutronium_front"), new ResourceLocation(HBMxx.MODID, "block/battery_dineutronium_top")));
+        horizontalBlockWithItem(ModBlocks.machine_battery.get(),this.models().orientable("machine_battery", new ResourceLocation(HBMxx.MODID, "block/battery_side"), new ResourceLocation(HBMxx.MODID, "block/battery_front"), new ResourceLocation(HBMxx.MODID, "block/battery_top")));
+        horizontalBlockWithItem(ModBlocks.machine_lithium_battery.get(),this.models().orientable("machine_lithium_battery", new ResourceLocation(HBMxx.MODID, "block/battery_lithium_side"), new ResourceLocation(HBMxx.MODID, "block/battery_lithium_front"), new ResourceLocation(HBMxx.MODID, "block/battery_lithium_top")));
+        horizontalBlockWithItem(ModBlocks.machine_schrabidium_battery.get(),this.models().orientable("machine_schrabidium_battery", new ResourceLocation(HBMxx.MODID, "block/battery_schrabidium_side"), new ResourceLocation(HBMxx.MODID, "block/battery_schrabidium_front"), new ResourceLocation(HBMxx.MODID, "block/battery_schrabidium_top")));
+        horizontalBlockWithItem(ModBlocks.machine_dineutronium_battery.get(),this.models().orientable("machine_dineutronium_battery", new ResourceLocation(HBMxx.MODID, "block/battery_dineutronium_side"), new ResourceLocation(HBMxx.MODID, "block/battery_dineutronium_front"), new ResourceLocation(HBMxx.MODID, "block/battery_dineutronium_top")));
 
         simpleBlockWithItem(ModBlocks.WAST_EARTH.get(),this.models().cubeBottomTop("wast_earth", HBMxx.hbm("block/env/waste_earth_side"),HBMxx.hbm("block/env/waste_earth_bottom"),HBMxx.hbm("block/env/waste_earth_top")));
         simpleBlockWithItem(ModBlocks.WAST_LEAVES.get(),this.models().leaves("wast_leaves", HBMxx.hbm("block/env/waste_leaves")));
@@ -160,6 +160,10 @@ public class BlockStateGen extends BlockStateProvider {
             case COPPER -> models().getExistingFile(HBMxx.hbm("block/env/bedrock_ore_copper"));
             default -> null;
         };
+    }
+    private void horizontalBlockWithItem(Block block, ModelFile model){
+        horizontalBlock(block,model);
+        simpleBlockItem(block,model);
     }
 
     private ResourceLocation key(Block block) {

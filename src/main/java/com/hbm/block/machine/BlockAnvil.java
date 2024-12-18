@@ -23,12 +23,10 @@ import java.util.function.Function;
  * 2. 砧模型出现的位置在不在方块中央，而在交界处
  * 3. 砧上有不自然的阴影
  * */
-public class BlockAnvil extends BaseEntityBlock {
-    public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
+public class BlockAnvil extends BaseSingleBlockMachine {
     public static final VoxelShape SHAPE = Block.box(4.0D,0.0D,0.0D,12.0D,13.0D,16.0D);
     public BlockAnvil(Properties pProperties) {
         super(pProperties);
-        this.registerDefaultState(this.getStateDefinition().any().setValue(FACING, Direction.NORTH));
     }
 
     @Nullable
@@ -45,10 +43,6 @@ public class BlockAnvil extends BaseEntityBlock {
     @Override
     public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
         return SHAPE;
-    }
-    @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
-        pBuilder.add(FACING);
     }
 
     //    @Override

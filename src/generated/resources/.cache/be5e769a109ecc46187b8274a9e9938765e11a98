@@ -1,14 +1,15 @@
-// 1.20.1	2024-11-25T19:28:32.7659681	Block States: hbmxx
+// 1.20.1	2024-11-27T20:43:39.4623524	Block States: hbmxx
 8c5fc3481c2251bc6fa3f0c707cffdde8fa99d5b assets/hbmxx/blockstates/anvil_bismuth.json
 b85ef067e28c3bb827abb799b89be56c54e01946 assets/hbmxx/blockstates/anvil_desh.json
 d764e685ed5120e49c14a8e719bea1a84f3187ba assets/hbmxx/blockstates/anvil_iron.json
 5b383f18e31f1b6064e86aa58615d7eb9560d58a assets/hbmxx/blockstates/asbestos_block.json
 f78416971ea369d15d7c502f52299538ce66ae57 assets/hbmxx/blockstates/asbestos_ore.json
 5cc89d114042b315460ac16b230e27129afafa55 assets/hbmxx/blockstates/basalt_asbestos_ore.json
-bbd0ede22adb1093290d00ac6ba35ec84a8b2eca assets/hbmxx/blockstates/bedrock_ore.json
+5ab5ea47d0c30601d969b939fc5c42fb75fe3945 assets/hbmxx/blockstates/bedrock_ore.json
 e35ed3ee4469653b7c791ce6a308beb335fd4afd assets/hbmxx/blockstates/conveyor.json
 c40293e2198d15d7f05d8536c9e2a0bab97a8ad3 assets/hbmxx/blockstates/deepslate_rare_ore.json
 0b8a892e56fdf0960f3c08ac7630725ea40d6986 assets/hbmxx/blockstates/deepslate_uranium_ore.json
+4e7efe45630122a69a774d08617b242428ff3e7e assets/hbmxx/blockstates/depth_stone.json
 be5f4f1c0e0af008f939c2b6344b5f80b470f2e0 assets/hbmxx/blockstates/lithium_ore.json
 bd88a902b8042d0f4c04a9aa6dea22237b110fd9 assets/hbmxx/blockstates/machine_assembler.json
 1a0ed210aa4e234d9522fcc68c36a6b919bc092c assets/hbmxx/blockstates/machine_battery.json
@@ -35,6 +36,7 @@ a6777bc02338cbeeca0f6ddd13630ad5cc8014be assets/hbmxx/models/block/asbestos_bloc
 6fb36e99202827b44aaab9ec6bef5ad2c09e1179 assets/hbmxx/models/block/bedrock_ore.json
 21a874c766bf964abd2178ab68c4f410706936d1 assets/hbmxx/models/block/deepslate_rare_ore.json
 ac94622846efd2e8b47f789ff09129919ec89909 assets/hbmxx/models/block/deepslate_uranium_ore.json
+710706e8ac619d13f3a16847cfb185c895ca0708 assets/hbmxx/models/block/depth_stone.json
 182ff14dcecd28e10288f2beb4627848d0024370 assets/hbmxx/models/block/lithium_ore.json
 f917d706873c817c321c43121100595c06c41a9f assets/hbmxx/models/block/machine_battery.json
 a8d712d80a69f37d2e7646928eb112caccfbd15c assets/hbmxx/models/block/machine_boiler_off.json
@@ -66,6 +68,7 @@ c25d113cafd69cae025dfcfff80b0a1246ac466f assets/hbmxx/models/item/bomb_fat_man.j
 25a618c77d708d5c11dbf3d7b58aa9a47fbca969 assets/hbmxx/models/item/conveyor.json
 31e54c7b0a52500b18c08fe1da4990d39a15423f assets/hbmxx/models/item/deepslate_rare_ore.json
 e145ee71ee7c5e1502eb6c95181bcfa5c93443ad assets/hbmxx/models/item/deepslate_uranium_ore.json
+76cba22f1b397d6317d6fd8a1a167c0d5036f019 assets/hbmxx/models/item/depth_stone.json
 e31fd8434db925cd205b8d36d4c9dee3a71c2894 assets/hbmxx/models/item/lithium_ore.json
 d4e8adce8fed957591086c318412f67ad273764d assets/hbmxx/models/item/machine_assembler.json
 80733b2292c3a57ade22bf427c15e50d79f68d58 assets/hbmxx/models/item/machine_battery.json

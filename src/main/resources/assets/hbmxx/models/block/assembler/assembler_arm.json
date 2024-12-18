@@ -3,6 +3,7 @@
   "flip_v": true,
   "model": "hbmxx:models/block/assembler/assembler_arm.obj",
   "textures": {
-    "texture0": "hbmxx:block/assembler/assembler_arm"
+    "texture0": "hbmxx:block/assembler/assembler_arm",
+    "particle": "hbmxx:block/assembler/assembler_arm"
   }
 }

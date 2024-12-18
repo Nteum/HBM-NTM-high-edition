@@ -4,6 +4,7 @@ import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.blockentity.machine.DifurnaceEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Vec3i;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -22,6 +23,8 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class BlockDifurnace extends BaseMachineBlock{
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
@@ -91,5 +94,10 @@ public class BlockDifurnace extends BaseMachineBlock{
             pLevel.addParticle(ParticleTypes.LARGE_SMOKE, d0 + d5, d1 + d6, d2 + d7, 0.0D, 0.0D, 0.0D);
             pLevel.addParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE, d0 + d5, d1 + d6, d2 + d7, 0.0D, 0.0D, 0.0D);
         }
+    }
+
+    @Override
+    protected List<Vec3i> getOffsets() {
+        return List.of();
     }
 }

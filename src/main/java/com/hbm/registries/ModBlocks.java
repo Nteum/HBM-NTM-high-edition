@@ -112,6 +112,9 @@ public class ModBlocks {
     //逻辑物
     public static final RegistryObject<Block> DUMMIBLE = registerBlockWithItem("dummible",()->new DummibleBlock(BlockBehaviour.Properties.copy(Blocks.STONE)));
 
+
+
+
     public static ToIntFunction<BlockState> litEmission(int value){
         return state -> {
             return state.getValue(BlockStateProperties.LIT)?value:0;

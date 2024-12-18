@@ -31,8 +31,6 @@ import java.util.List;
  *
  * */
 public abstract class BedLikeBlock extends HorizontalDirectionalBlock {
-//    public static final BooleanProperty ISCORE = BooleanProperty.create("iscore");
-
     protected BedLikeBlock(Properties pProperties) {
         super(pProperties);
         this.registerDefaultState(this.getStateDefinition().any()
@@ -52,35 +50,37 @@ public abstract class BedLikeBlock extends HorizontalDirectionalBlock {
         return super.getStateForPlacement(pContext).setValue(FACING, pContext.getHorizontalDirection().getOpposite());
     }
 
+    @Override
+    public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pMovedByPiston) {
+        if (!pState.is(pNewState.getBlock())){
+            //核心方块被移除时联动移除填充方块
+            List<Vec3i> offsets = transOffsets(getOffsets(), pState.getValue(FACING));
+            for (Vec3i offset : offsets) {
+                BlockPos pos = pPos.offset(offset);
+                if (pLevel.getBlockState(pos).is(ModBlocks.DUMMIBLE.get())){
+                    pLevel.removeBlock(pos,false);
+                }
+            }
+            super.onRemove(pState, pLevel, pPos, pNewState, pMovedByPiston);
+        }
+    }
+
     /** 被放置后的动作 */
     @Override
     public void setPlacedBy(Level pLevel, BlockPos pPos, BlockState pState, @Nullable LivingEntity pPlacer, ItemStack pStack) {
         if (!pLevel.isClientSide){
-            Direction direction = pPlacer == null?Direction.NORTH:pPlacer.getDirection();
+            Direction direction = pState.getValue(FACING);
             //判断多方块结构是被会被阻挡
             if (!checkRequirement(pLevel,pPos,direction,getOffsets())){
                 //方块掉落
-                Containers.dropItemStack(pLevel,pPos.getCenter().x,pPos.getCenter().y,pPos.getCenter().z,pStack);
-
+                pLevel.removeBlock(pPos,false);
+                Containers.dropItemStack(pLevel,pPos.getCenter().x,pPos.getCenter().y,pPos.getCenter().z,pStack.getItem().getDefaultInstance());
                 return;
             }
             //放置方块
-//            pState = pState.setValue(ISCORE,Boolean.FALSE);
             fillSpace(pLevel, pPos, ModBlocks.DUMMIBLE.get().defaultBlockState(), direction, getOffsets());
         }
         super.setPlacedBy(pLevel, pPos, pState, pPlacer, pStack);
-    }
-    /** 将被玩家破坏的动作 */
-    @Override
-    public void playerWillDestroy(Level pLevel, BlockPos pPos, BlockState pState, Player pPlayer) {
-        if (!pLevel.isClientSide){
-            BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
-            BlockPos blockPos = blockEntity.getBlockPos();
-            Direction direction = pState.getValue(FACING);
-            clearSpace(pLevel, blockPos, direction, getOffsets());
-            pLevel.removeBlockEntity(blockPos);
-        }
-        super.playerWillDestroy(pLevel, pPos, pState, pPlayer);
     }
     /** 获取物品占用的所有位置（相对于放置点的位置） */
     protected List<Vec3i> getOffsets(){return List.of(new Vec3i(0,0,0));}
@@ -117,7 +117,6 @@ public abstract class BedLikeBlock extends HorizontalDirectionalBlock {
         List<Vec3i> result = new ArrayList<>(offsets);
         int[] trans;
         switch (dir){
-//            case NORTH -> trans = new int[]{1,0,0,1};
             case NORTH -> trans = new int[]{-1,0,0,-1};
             case EAST -> trans = new int[]{0,-1,1,0};
             case SOUTH -> trans = new int[]{1,0,0,1};
