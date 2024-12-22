@@ -83,6 +83,7 @@ public class ModCreativeModeTab {
             output.accept(ModBlocks.machine_cracking_tower.get());
             output.accept(ModBlocks.machine_crucible.get());
             output.accept(ModBlocks.machine_assembler.get());
+            output.accept(ModBlocks.RED_CABLE.get());
         }).build());
     public static final RegistryObject<CreativeModeTab> HBM_TOOL = CREATIVE_MODE_TABS.register("hbm_weapon", () -> CreativeModeTab.builder()
         .title(Component.translatable("itemGroup.hbm_tool"))

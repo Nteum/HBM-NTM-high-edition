@@ -67,7 +67,7 @@ public class HBMxx {
         ModItems.ITEMS.register(modEventBus);
         ModBlocks.register(modEventBus);
         ModCreativeModeTab.CREATIVE_MODE_TABS.register(modEventBus);
-        ModBlockEntityType.BLOCK_ENTITY_TYPES.register(modEventBus);
+        ModBlockEntityType.REGISTER.register(modEventBus);
         ModEntityType.ENTITY_TYPES.register(modEventBus);
         ModMenuType.MOD_MENU_TYPES.register(modEventBus);
         ModRecipes.SERIALIZER.register(modEventBus);

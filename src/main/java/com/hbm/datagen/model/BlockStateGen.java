@@ -4,10 +4,12 @@ import com.hbm.block.env.BedRockOre;
 import com.hbm.main.HBMxx;
 import com.hbm.registries.ModBlocks;
 import com.hbm.model.Models;
+import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.PipeBlock;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
@@ -124,6 +126,9 @@ public class BlockStateGen extends BlockStateProvider {
         ModelFile.ExistingModelFile bomb_model_fatman = this.models().getExistingFile(new ResourceLocation(HBMxx.MODID, "block/bomb/fat_man"));
 //        this.horizontalBlock(ModBlocks.bomb_fat_man.get(),bomb_model_fatman);
         this.simpleBlockItem(ModBlocks.bomb_fat_man.get(),bomb_model_fatman);
+
+        //线缆
+        cableBlockWithItem();
     }
 
     public void addObjHorizonalModel(Block block,String name){
@@ -166,7 +171,29 @@ public class BlockStateGen extends BlockStateProvider {
         simpleBlockItem(block,model);
     }
 
+    private void cableBlockWithItem(){
+        ModelFile.ExistingModelFile inventory = this.models().getExistingFile(hbm("block/pipes/cable_neo"));
+        ModelFile.ExistingModelFile core = this.models().getExistingFile(hbm("block/pipes/cable_core"));
+        ModelFile.ExistingModelFile side = this.models().getExistingFile(hbm("block/pipes/cable_side"));
+        MultiPartBlockStateBuilder builder = this.getMultipartBuilder(ModBlocks.RED_CABLE.get()).part().modelFile(core).addModel().end();
+        sixWayMultipart(builder,side);
+        simpleBlockItem(ModBlocks.RED_CABLE.get(), inventory);
+    }
+    public void sixWayMultipart(MultiPartBlockStateBuilder builder, ModelFile side) {
+        PipeBlock.PROPERTY_BY_DIRECTION.entrySet().forEach(e -> {
+            Direction dir = e.getKey();
+            if (dir.getAxis().isHorizontal()) {
+                builder.part().modelFile(side).rotationY((((int) dir.toYRot()) + 180) % 360).uvLock(true).addModel()
+                        .condition(e.getValue(), true);
+            }else {
+                builder.part().modelFile(side).rotationX(dir == Direction.UP ? -90 : 90).uvLock(true).addModel()
+                        .condition(e.getValue(), true);
+            }
+        });
+    }
+
     private ResourceLocation key(Block block) {
         return ForgeRegistries.BLOCKS.getKey(block);
     }
+    private ResourceLocation hbm(String key){ return new ResourceLocation(HBMxx.MODID,key);}
 }

@@ -30,7 +30,7 @@ import static com.hbm.main.HBMxx.MODID;
 public class ModBlocks {
     //方块注册表
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
-
+    //机械
     public static final RegistryObject<Block> machine_difurnace = registerBlockWithItem("machine_difurnace",
             ()->new BlockDifurnace(BlockBehaviour.Properties.of().lightLevel(litEmission(13))));
     public static final RegistryObject<Block> machine_electric_furnace = registerBlockWithItem("machine_electric_furnace",
@@ -55,6 +55,8 @@ public class ModBlocks {
     public static final RegistryObject<Block> machine_crucible = registerBlockWithItem("machine_crucible",()->new BlockCrucible(BlockBehaviour.Properties.of()));
     //模型部分（仅仅用于加载模型渲染，而不会在游戏单独出现，名称以part开头）
     public static final RegistryObject<Block> part_press_head = BLOCKS.register("part_press_head",()->new Block(BlockBehaviour.Properties.of()));
+    //电力
+    public static final RegistryObject<Block> RED_CABLE = registerBlockWithItem("red_cable",()->new BlockCable(BlockBehaviour.Properties.copy(Blocks.STONE_BRICK_WALL)));
     //流体
     public static final RegistryObject<LiquidBlock> irradiated_water = BLOCKS.register("irradiated_water",
             ()->new LiquidBlock(ModFluids.IRRADIATED_WATER_SOURCE_BLOCK,BlockBehaviour.Properties.copy(Blocks.WATER)));
