@@ -1,4 +1,8 @@
-// 1.20.1	2024-11-24T22:22:32.6136418	Registries
+// 1.20.1	2024-11-26T19:39:06.7024128	Registries
 555904815329a6ec9779592255f376b35a059ee4 data/hbmxx/damage_type/radiation.json
-e7c295260f7749e1f0291f5c7e99318f3cf2c676 data/hbmxx/worldgen/configured_feature/uranium_ore_overworld.json
+d79d12ded7d7966079f76595bf07298a1d460ac6 data/hbmxx/worldgen/configured_feature/bedrock_ore_overworld.json
+46f1944ce09167536c392d59d74593ba877d71e1 data/hbmxx/worldgen/configured_feature/ore_sphere_overworld.json
+87258c14d985dde148e665ff729161b7ebcb3181 data/hbmxx/worldgen/configured_feature/uranium_ore_overworld.json
+52f986a4cbe9a595f2fbd956757f1c8fbf0e2f11 data/hbmxx/worldgen/placed_feature/bedrock_ore_overworld.json
+69f0113cfddf7a18bd719b7d577026286ce1ce31 data/hbmxx/worldgen/placed_feature/ore_sphere_overworld.json
 12d20b7453669ea8312c0efdb19e498e0a42ca03 data/hbmxx/worldgen/placed_feature/uranium_ore_overworld.json

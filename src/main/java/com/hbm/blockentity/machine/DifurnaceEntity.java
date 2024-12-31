@@ -110,16 +110,6 @@ public class DifurnaceEntity extends BaseContainerBlockEntity implements Worldly
         this.progress = pTag.getInt("progress");
         this.fuel = pTag.getInt("fuel");
     }
-    /**
-     * 区块加载时客户端和服务器通信
-     * getUpdateTag
-     * handleUpdateTag
-     * */
-    /**
-     * 方块更新时传输数据
-     * getUpdatePacket 是服务端发送数据包用的方法
-     * onDataPacket 是客户端接受数据包的方法
-     * */
 
     /**
      * 时钟函数，每tick调取，由方块类中的getTicker获取。

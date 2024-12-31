@@ -26,6 +26,7 @@ public class BlockTagsGen extends BlockTagsProvider {
         //矿石
         this.tag(ModTags.Blocks.MOD_ORES.get(OreType.URANIUM)).add(ModBlocks.URANIUM_ORE.get(),ModBlocks.DEEPSLATE_URANIUM_ORE.get(),ModBlocks.SCORCHED_URANIUM_ORE.get());
 
-
+        //机器
+        this.tag(ModTags.Blocks.BATTERY).add(ModBlocks.machine_battery.get(),ModBlocks.machine_lithium_battery.get(),ModBlocks.machine_dineutronium_battery.get(),ModBlocks.machine_schrabidium_battery.get());
     }
 }

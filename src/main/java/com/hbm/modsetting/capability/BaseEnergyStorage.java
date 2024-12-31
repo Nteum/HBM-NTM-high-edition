@@ -1,4 +1,4 @@
-package com.hbm.modsetting.energy;
+package com.hbm.modsetting.capability;
 
 import net.minecraftforge.energy.EnergyStorage;
 //基础的能量类

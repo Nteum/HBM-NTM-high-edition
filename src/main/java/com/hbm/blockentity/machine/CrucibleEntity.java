@@ -3,6 +3,7 @@ package com.hbm.blockentity.machine;
 import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.registries.ModItems;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
@@ -13,6 +14,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.phys.AABB;
+import org.jetbrains.annotations.Nullable;
 
 public class CrucibleEntity extends BaseMachineBlockEntity {
     public int heat;
@@ -71,5 +73,20 @@ public class CrucibleEntity extends BaseMachineBlockEntity {
     @Override
     public void setItem(int pSlot, ItemStack pStack) {
         super.setItem(pSlot, pStack);
+    }
+
+    @Override
+    public int[] getSlotsForFace(Direction pSide) {
+        return new int[0];
+    }
+
+    @Override
+    public boolean canPlaceItemThroughFace(int pIndex, ItemStack pItemStack, @Nullable Direction pDirection) {
+        return false;
+    }
+
+    @Override
+    public boolean canTakeItemThroughFace(int pIndex, ItemStack pStack, Direction pDirection) {
+        return false;
     }
 }

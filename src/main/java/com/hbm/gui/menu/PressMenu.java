@@ -1,5 +1,6 @@
 package com.hbm.gui.menu;
 
+import com.hbm.gui.ModMenuType;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -16,7 +17,7 @@ import net.minecraft.world.item.ItemStack;
 public class PressMenu extends AbstractContainerMenu {
     private final Container container;
     private final ContainerData containerData;
-    protected PressMenu(int pContainerId, Inventory pPlayerInventory) {
+    public PressMenu(int pContainerId, Inventory pPlayerInventory) {
         this(pContainerId,pPlayerInventory,new SimpleContainer(4),new SimpleContainerData(2));
     }
 

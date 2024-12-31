@@ -28,6 +28,7 @@ public class ModTags {
                 MOD_ORES.put(type,forgeTag("ores/"+type.key));
             }
         }
+        public static final TagKey<Block> BATTERY = forgeTag("battery");
 
         //注册本模组tag，如果只限于本模组使用，请注册此tag
         private static TagKey<Block> tag(String pName) {
@@ -39,7 +40,7 @@ public class ModTags {
         }
     }
     public static class Items{
-
+        public static final TagKey<Item> BATTERY = forgeTag("battery");
         private static TagKey<Item> tag(String pName) {
             return TagKey.create(Registries.ITEM,HBMxx.hbm(pName));
         }

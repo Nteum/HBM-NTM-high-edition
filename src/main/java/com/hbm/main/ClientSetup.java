@@ -3,7 +3,8 @@ package com.hbm.main;
 import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.entity.ModEntityType;
 import com.hbm.fluid.ModFluids;
-import com.hbm.gui.menu.ModMenuType;
+import com.hbm.gui.ModMenuType;
+import com.hbm.gui.screen.BatteryGui;
 import com.hbm.gui.screen.DifurnaceGui;
 import com.hbm.gui.screen.PressGui;
 import com.hbm.model.Models;
@@ -42,6 +43,7 @@ public class ClientSetup {
         event.enqueueWork(()-> {
             MenuScreens.register(ModMenuType.DIFURNACE_MENU.get(), DifurnaceGui::new);
             MenuScreens.register(ModMenuType.PRESS_MENU.get(), PressGui::new);
+            MenuScreens.register(ModMenuType.BATTERY_MENU.get(), BatteryGui::new);
             //方块实体渲染
             BlockEntityRenderers.register(ModBlockEntityType.PRESS_ENTITY.get(), PressRenderer::new);
             BlockEntityRenderers.register(ModBlockEntityType.ASSEMBLER_ENTITY.get(), AssemblerRenderer::new);

@@ -14,7 +14,6 @@ public class DifurnaceGui extends AbstractContainerScreen<DifurnaceMenu> {
 
     public DifurnaceGui(DifurnaceMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
-
     }
 
     /**
@@ -33,7 +32,6 @@ public class DifurnaceGui extends AbstractContainerScreen<DifurnaceMenu> {
         renderBackground(pGuiGraphics);
         super.render(pGuiGraphics,pMouseX,pMouseY,pPartialTick);
         renderTooltip(pGuiGraphics,pMouseX,pMouseY);
-
     }
     /**
      * 渲染背景

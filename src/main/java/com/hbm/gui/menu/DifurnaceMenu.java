@@ -1,13 +1,12 @@
 package com.hbm.gui.menu;
 
+import com.hbm.gui.ModMenuType;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.Blocks;
-import org.jetbrains.annotations.Nullable;
 
 public class DifurnaceMenu  extends AbstractContainerMenu {
     private final Container container;

@@ -55,10 +55,10 @@ public abstract class BaseMachineBlock extends BedLikeBlock implements EntityBlo
     }
 
     //必须规定为MODEL，否则渲染不出来
-//    @Override
-//    public RenderShape getRenderShape(BlockState pState) {
-//        return RenderShape.MODEL;
-//    }
+    @Override
+    public RenderShape getRenderShape(BlockState pState) {
+        return RenderShape.MODEL;
+    }
 
 
     //工具函数，返回一个立方体的偏移

@@ -6,6 +6,7 @@ import com.hbm.datagen.model.BlockStateGen;
 import com.hbm.datagen.model.ItemModelGen;
 import com.hbm.datagen.recipe.RecipeGen;
 import com.hbm.datagen.tag.BlockTagsGen;
+import com.hbm.datagen.tag.ItemTagsGen;
 import com.hbm.registries.ModBlocks;
 import com.hbm.fluid.ModFluidTypes;
 import com.hbm.fluid.ModFluids;
@@ -14,7 +15,7 @@ import com.hbm.particle.ModParticleTypes;
 import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.datagen.*;
 import com.hbm.entity.ModEntityType;
-import com.hbm.gui.menu.ModMenuType;
+import com.hbm.gui.ModMenuType;
 import com.hbm.registries.ModCreativeModeTab;
 import com.hbm.registries.ModItems;
 import com.hbm.recipe.ModRecipes;
@@ -105,7 +106,8 @@ public class HBMxx {
         generator.addProvider(event.includeServer(),new ForgeAdvancementProvider(packOutput,lookupProvider,helper, List.of(new AdvacementGen())));
         generator.addProvider(event.includeServer(), new RecipeGen(packOutput));
         generator.addProvider(event.includeServer(), blockTagsGen);
-        generator.addProvider(event.includeServer(), new HBMTags.HBMItemTags(packOutput,lookupProvider, blockTagsGen.contentsGetter(),MODID,helper));
+        generator.addProvider(event.includeServer(), new ItemTagsGen(packOutput,lookupProvider,blockTagsGen.contentsGetter(),MODID,helper));
+//        generator.addProvider(event.includeServer(), new HBMTags.HBMItemTags(packOutput,lookupProvider, blockTagsGen.contentsGetter(),MODID,helper));
         generator.addProvider(event.includeServer(), new TagDmgTypeGen(packOutput,lookupProvider));
 //        generator.addProvider(event.includeServer(), new RegistryDataGen(packOutput,lookupProvider));
         generator.addProvider(event.includeServer(), new WorldGen(packOutput, lookupProvider));
@@ -123,6 +125,4 @@ public class HBMxx {
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
     }
-
-
 }
