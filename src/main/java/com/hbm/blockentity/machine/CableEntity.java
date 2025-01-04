@@ -44,14 +44,21 @@ public class CableEntity extends BlockEntity {
             });
             int sum = energyNeed.values().stream().mapToInt(Integer::intValue).sum();
             int avg = (sum + energyStored) / (energyNeed.size() + 1);
-            AtomicInteger resident = new AtomicInteger();
-            energyNeed.forEach((entity,energy)->{
-                entity.getCapability(ForgeCapabilities.ENERGY).ifPresent(cap -> {
-                    int receivedEnergy = cap.receiveEnergy((int) (avg - energy), false);
-                    resident.addAndGet(avg - energy - receivedEnergy);
+            for (Map.Entry<BlockEntity, Integer> entry : energyNeed.entrySet()) {
+                entry.getKey().getCapability(ForgeCapabilities.ENERGY).ifPresent(cap -> {
+                    Integer energy = entry.getValue();
+                    int receivedEnergy = cap.receiveEnergy(avg - energy, false);
+                    cableEntity.ENERGY_STORAGE.extractEnergy(receivedEnergy,false);
                 });
-            });
-            cableEntity.ENERGY_STORAGE.receiveEnergy(avg + resident.get(), false);
+            }
+//            AtomicInteger resident = new AtomicInteger();
+//            energyNeed.forEach((entity,energy)->{
+//                entity.getCapability(ForgeCapabilities.ENERGY).ifPresent(cap -> {
+//                    int receivedEnergy = cap.receiveEnergy((int) (avg - energy), false);
+//                    resident.addAndGet(avg - energy - receivedEnergy);
+//                });
+//            });
+//            cableEntity.ENERGY_STORAGE.receiveEnergy(avg + resident.get(), false);
         }
     }
 

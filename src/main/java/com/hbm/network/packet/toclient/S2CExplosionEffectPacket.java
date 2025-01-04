@@ -4,9 +4,6 @@ import com.hbm.particle.ModParticleTypes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.PacketListener;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
 import net.minecraftforge.network.NetworkEvent;
 
@@ -15,7 +12,7 @@ import java.util.function.Supplier;
  * type - 1 - smoke
  * mode - 1 - cloud
  * */
-public class C2SExplosionEffectPacket {
+public class S2CExplosionEffectPacket {
     private final double x;
     private final double y;
     private final double z;
@@ -23,7 +20,7 @@ public class C2SExplosionEffectPacket {
     public final int mode;
     public final int Effcount;
 
-    public C2SExplosionEffectPacket(double pX, double pY, double pZ,int type, int mode, int count){
+    public S2CExplosionEffectPacket(double pX, double pY, double pZ, int type, int mode, int count){
         x = pX;
         y = pY;
         z = pZ;
@@ -32,7 +29,7 @@ public class C2SExplosionEffectPacket {
         Effcount = count;
     }
     //从缓冲区读取数据初始化的阶段
-    public C2SExplosionEffectPacket(FriendlyByteBuf buf){
+    public S2CExplosionEffectPacket(FriendlyByteBuf buf){
         x = buf.readDouble();
         y = buf.readDouble();
         z = buf.readDouble();

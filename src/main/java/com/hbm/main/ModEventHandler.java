@@ -3,6 +3,7 @@ package com.hbm.main;
 import com.hbm.modsetting.badthing.ContaminationUtil;
 import com.hbm.modsetting.badthing.HbmLivingProps;
 import com.hbm.modsetting.badthing.hazard.HazardSystem;
+import com.hbm.modsetting.capability.IHBMEnergy;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -13,6 +14,7 @@ import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -21,7 +23,7 @@ import net.minecraftforge.fml.common.Mod;
 import java.lang.reflect.Field;
 import java.util.Random;
 
-@Mod.EventBusSubscriber(modid = HBMxx.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = HBMxx.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ModEventHandler {
     private static Random rand = new Random();
     /**
@@ -114,5 +116,9 @@ public class ModEventHandler {
 //            BossSpawnHandler.rollTheDice(event.world);
 //            TimedGenerator.automaton(event.world, 100);
         }
+    }
+    @SubscribeEvent
+    public void registerCaps(RegisterCapabilitiesEvent event) {
+        event.register(IHBMEnergy.class);
     }
 }

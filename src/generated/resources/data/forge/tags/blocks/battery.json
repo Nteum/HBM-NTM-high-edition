@@ -1,0 +1,8 @@
+{
+  "values": [
+    "hbmxx:machine_battery",
+    "hbmxx:machine_lithium_battery",
+    "hbmxx:machine_dineutronium_battery",
+    "hbmxx:machine_schrabidium_battery"
+  ]
+}

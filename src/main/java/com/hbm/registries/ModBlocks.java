@@ -43,10 +43,10 @@ public class ModBlocks {
             ()->new BlockElectricFurnace(BlockBehaviour.Properties.of().lightLevel(litEmission(15))));
     public static final RegistryObject<Block> machine_press = registerBlockWithItem("machine_press",
             ()->new BlockPress(BlockBehaviour.Properties.of()));
-    public static final RegistryObject<Block> machine_battery = registerBlockWithItem("machine_battery",()->new BlockBattery(BlockBehaviour.Properties.of(),10L));
-    public static final RegistryObject<Block> machine_lithium_battery = registerBlockWithItem("machine_lithium_battery",()->new BlockBattery(BlockBehaviour.Properties.of(),10L));
-    public static final RegistryObject<Block> machine_schrabidium_battery = registerBlockWithItem("machine_schrabidium_battery",()->new BlockBattery(BlockBehaviour.Properties.of(),10L));
-    public static final RegistryObject<Block> machine_dineutronium_battery = registerBlockWithItem("machine_dineutronium_battery",()->new BlockBattery(BlockBehaviour.Properties.of(),10L));
+    public static final RegistryObject<Block> machine_battery = registerBlockWithItem("machine_battery",()->new BlockBattery(BlockBehaviour.Properties.of(),1_000_000L));
+    public static final RegistryObject<Block> machine_lithium_battery = registerBlockWithItem("machine_lithium_battery",()->new BlockBattery(BlockBehaviour.Properties.of(),50_000_000L));
+    public static final RegistryObject<Block> machine_schrabidium_battery = registerBlockWithItem("machine_schrabidium_battery",()->new BlockBattery(BlockBehaviour.Properties.of(),25_000_000_000L));
+    public static final RegistryObject<Block> machine_dineutronium_battery = registerBlockWithItem("machine_dineutronium_battery",()->new BlockBattery(BlockBehaviour.Properties.of(),1_000_000_000_000L));
     public static final RegistryObject<Block> anvil_iron = registerBlockWithItem("anvil_iron",()->new BlockAnvil(BlockBehaviour.Properties.of()));
     public static final RegistryObject<Block> anvil_desh = registerBlockWithItem("anvil_desh",()->new BlockAnvil(BlockBehaviour.Properties.of()));
     public static final RegistryObject<Block> anvil_bismuth = registerBlockWithItem("anvil_bismuth",()->new BlockAnvil(BlockBehaviour.Properties.of()));

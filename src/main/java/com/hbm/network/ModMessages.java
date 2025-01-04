@@ -2,7 +2,7 @@ package com.hbm.network;
 
 import com.hbm.main.HBMxx;
 import com.hbm.network.packet.toclient.AuxParticlePacket;
-import com.hbm.network.packet.toclient.C2SExplosionEffectPacket;
+import com.hbm.network.packet.toclient.S2CExplosionEffectPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkDirection;
@@ -25,10 +25,10 @@ public class ModMessages {
                 .simpleChannel();
         INSTANCE = net;
         //C2SExplosionEffectPacket
-        net.messageBuilder(C2SExplosionEffectPacket.class,id(), NetworkDirection.PLAY_TO_CLIENT)
-                .decoder(C2SExplosionEffectPacket::new)
-                .encoder(C2SExplosionEffectPacket::toBytes)
-                .consumerMainThread(C2SExplosionEffectPacket::handle)
+        net.messageBuilder(S2CExplosionEffectPacket.class,id(), NetworkDirection.PLAY_TO_CLIENT)
+                .decoder(S2CExplosionEffectPacket::new)
+                .encoder(S2CExplosionEffectPacket::toBytes)
+                .consumerMainThread(S2CExplosionEffectPacket::handle)
                 .add();
         //AuxParticlePacket
         net.messageBuilder(AuxParticlePacket.class,id(), NetworkDirection.PLAY_TO_CLIENT)

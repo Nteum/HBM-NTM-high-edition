@@ -64,6 +64,9 @@ public class ModItems {
     //矿物
     public static final RegistryObject<Item> BEDROCK_ORE = ITEMS.register("bedrock_ore_base",()->new BedrockOreItem(new Item.Properties()));
 
+    //工业元件
+    public static final RegistryObject<Item> BATTERY_CREATIVE = ITEMS.register("battery_creative",()->new Item(new Item.Properties().stacksTo(1)));
+
     public static final RegistryObject<Item> reacher = ITEMS.register("reacher",()->new Item(new Item.Properties()));
     public static void register(IEventBus eventBus){
         ITEMS.register(eventBus);

@@ -51,6 +51,6 @@ public class BlockBattery extends BaseSingleBlockMachine {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return pBlockEntityType == ModBlockEntityType.BATTERY_ENTITY.get() ? DifurnaceEntity::tick : null;
+        return pBlockEntityType == ModBlockEntityType.BATTERY_ENTITY.get() ? BatteryEntity::tick : null;
     }
 }

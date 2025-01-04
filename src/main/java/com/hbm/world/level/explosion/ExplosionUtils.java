@@ -1,7 +1,7 @@
 package com.hbm.world.level.explosion;
 
 import com.hbm.network.ModMessages;
-import com.hbm.network.packet.toclient.C2SExplosionEffectPacket;
+import com.hbm.network.packet.toclient.S2CExplosionEffectPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.Level;
@@ -21,7 +21,7 @@ public class ExplosionUtils {
     public static void spawnParticles(Level pLevel, double x, double y, double z,int count){
         for (ServerPlayer serverPlayer : ((ServerLevel) pLevel).players()) {
             if (serverPlayer.distanceToSqr(x, y, z) < 4096.0D) {
-                ModMessages.sendToPlayer(new C2SExplosionEffectPacket(x,y,z,1,1,count),serverPlayer);
+                ModMessages.sendToPlayer(new S2CExplosionEffectPacket(x,y,z,1,1,count),serverPlayer);
             }
         }
     }

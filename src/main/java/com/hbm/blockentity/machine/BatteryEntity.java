@@ -1,8 +1,10 @@
 package com.hbm.blockentity.machine;
 
+import com.hbm.block.machine.BlockBattery;
 import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.gui.menu.BatteryMenu;
 import com.hbm.registries.ModBlocks;
+import com.hbm.registries.ModItems;
 import com.hbm.registries.ModTags;
 import net.minecraft.client.gui.screens.inventory.EnchantmentScreen;
 import net.minecraft.core.BlockPos;
@@ -13,9 +15,12 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.inventory.ContainerLevelAccess;
+import net.minecraft.world.inventory.EnchantmentMenu;
 import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.PipeBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -37,7 +42,7 @@ public class BatteryEntity extends BaseMachineBlockEntity{
     private static final int[] SLOTS_FOR_UP = new int[]{0};
     private static final int[] SLOTS_FOR_DOWN = new int[]{0,1};
     private static final int[] SLOTS_FOR_SIDES = new int[]{1};
-    protected NonNullList<ItemStack> items = NonNullList.withSize(2, ItemStack.EMPTY);
+//    protected NonNullList<ItemStack> items = NonNullList.withSize(2, ItemStack.EMPTY);
     protected final ContainerData containerData = new ContainerData() {
         @Override
         public int get(int pIndex) {
@@ -67,11 +72,14 @@ public class BatteryEntity extends BaseMachineBlockEntity{
     };
     public BatteryEntity(BlockPos pPos, BlockState pBlockState) {
         super(ModBlockEntityType.BATTERY_ENTITY.get(), pPos, pBlockState);
-        ENERGY_STORAGE = new EnergyStorage(10000);
+        BlockBattery block = (BlockBattery)pBlockState.getBlock();
+        ENERGY_STORAGE = new EnergyStorage((int) block.maxPower);
+        items = NonNullList.withSize(2, ItemStack.EMPTY);
     }
     public BatteryEntity(BlockPos pPos, BlockState pBlockState, int capacity) {
         super(ModBlockEntityType.BATTERY_ENTITY.get(), pPos, pBlockState);
         ENERGY_STORAGE = new EnergyStorage(capacity);
+        items = NonNullList.withSize(2, ItemStack.EMPTY);
     }
 
     @Override
@@ -81,17 +89,28 @@ public class BatteryEntity extends BaseMachineBlockEntity{
         }
         return super.getCapability(cap, side);
     }
-
+    private double[] powerWeight = new double[]{0.8,0.5,0.2};
     public static void tick(Level level, BlockPos pPos, BlockState pState, BlockEntity pBlockEntity) {
         if (pState.is(ModTags.Blocks.BATTERY) && pBlockEntity instanceof BatteryEntity entity){
+            //与周围电力交互
+//            for (Direction value : Direction.values()) {
+//                BlockEntity blockEntity = level.getBlockEntity(pPos.relative(value));
+//                if (blockEntity != null){
+//                    blockEntity.getCapability(ForgeCapabilities.ENERGY).ifPresent(cap->{
+//                        int energyStored = cap.getEnergyStored();
+//                        int receivedEnergy = entity.ENERGY_STORAGE.receiveEnergy(energyStored, false);
+//                        cap.extractEnergy(receivedEnergy,false);
+//                    });
+//                }
+//            }
             if (entity.connPriority == 0){          //吸电
                 for (Direction value : Direction.values()) {
                     BlockEntity blockEntity = level.getBlockEntity(pPos.relative(value));
                     if (blockEntity != null){
                         blockEntity.getCapability(ForgeCapabilities.ENERGY).ifPresent(cap->{
                             int energyStored = cap.getEnergyStored();
-                            int receivedEnergy = entity.ENERGY_STORAGE.receiveEnergy(energyStored, true);
-                            cap.extractEnergy(receivedEnergy,true);
+                            int receivedEnergy = entity.ENERGY_STORAGE.receiveEnergy(energyStored, false);
+                            cap.extractEnergy(receivedEnergy,false);
                         });
                     }
                 }
@@ -102,13 +121,20 @@ public class BatteryEntity extends BaseMachineBlockEntity{
                         if (blockEntity != null){
                             blockEntity.getCapability(ForgeCapabilities.ENERGY).ifPresent(cap->{
                                 if (cap.getEnergyStored() < cap.getMaxEnergyStored()){
-                                    int receivedEnergy = cap.receiveEnergy(entity.ENERGY_STORAGE.getEnergyStored(), true);
-                                    entity.ENERGY_STORAGE.extractEnergy(receivedEnergy,true);
+                                    int receivedEnergy = cap.receiveEnergy(entity.ENERGY_STORAGE.getEnergyStored(), false);
+                                    entity.ENERGY_STORAGE.extractEnergy(receivedEnergy,false);
                                 }
                             });
                         }
                     }
                 }
+            }
+            //对电池充放电
+            if (entity.items.get(0).is(ModItems.BATTERY_CREATIVE.get())){
+                entity.getCapability(ForgeCapabilities.ENERGY).ifPresent(cap ->
+                        cap.receiveEnergy(1000,false)
+                );
+//                entity.ENERGY_STORAGE.receiveEnergy(1000,true);
             }
         }
     }
@@ -151,7 +177,7 @@ public class BatteryEntity extends BaseMachineBlockEntity{
 
     @Override
     protected AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory) {
-        return new BatteryMenu(pContainerId,pInventory,this,containerData);
+        return new BatteryMenu(pContainerId,pInventory,this,containerData, ContainerLevelAccess.create(this.level,this.getBlockPos()));
     }
     //======================WorldlyContainer=======================
     @Override

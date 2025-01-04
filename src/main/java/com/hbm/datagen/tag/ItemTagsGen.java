@@ -21,6 +21,6 @@ public class ItemTagsGen extends ItemTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
-        this.tag(ModTags.Items.BATTERY);
+        this.tag(ModTags.Items.BATTERY).add(ModItems.BATTERY_CREATIVE.get());
     }
 }
