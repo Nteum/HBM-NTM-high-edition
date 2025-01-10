@@ -1,5 +1,6 @@
 package com.hbm.registries;
 
+import com.hbm.item.BatteryItem;
 import com.hbm.item.env.BedrockOreItem;
 import com.hbm.main.HBMxx;
 import com.hbm.fluid.ModFluids;
@@ -65,7 +66,8 @@ public class ModItems {
     public static final RegistryObject<Item> BEDROCK_ORE = ITEMS.register("bedrock_ore_base",()->new BedrockOreItem(new Item.Properties()));
 
     //工业元件
-    public static final RegistryObject<Item> BATTERY_CREATIVE = ITEMS.register("battery_creative",()->new Item(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> BATTERY_CREATIVE = ITEMS.register("battery_creative",()->new BatteryItem(-1, 1_000_000L, 0, new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> BATTERY_GENERIC = ITEMS.register("battery_generic",()->new BatteryItem(5000, 100, 100, new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> reacher = ITEMS.register("reacher",()->new Item(new Item.Properties()));
     public static void register(IEventBus eventBus){

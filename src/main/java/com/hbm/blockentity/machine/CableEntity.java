@@ -1,6 +1,9 @@
 package com.hbm.blockentity.machine;
 
 import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.modsetting.capability.Capabilities;
+import com.hbm.modsetting.capability.HBMEnergyStorage;
+import com.hbm.modsetting.capability.IHBMEnergy;
 import com.hbm.registries.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -27,28 +30,28 @@ public class CableEntity extends BlockEntity {
     }
     public static void tick(Level level, BlockPos pPos, BlockState pState, BlockEntity pBlockEntity) {
         if (pState.is(ModBlocks.RED_CABLE.get()) && pBlockEntity instanceof CableEntity cableEntity){
-            Map<BlockEntity,Integer> energyNeed = new HashMap<>();
-            int energyStored = cableEntity.ENERGY_STORAGE.getEnergyStored();
+            Map<BlockEntity,Long> energyNeed = new HashMap<>();
+            long energyStored = cableEntity.ENERGY_STORAGE.getEnergy();
             PipeBlock.PROPERTY_BY_DIRECTION.forEach((dir,prop)->{
                 if (pState.getValue(prop)) {
                     BlockEntity blockEntity = level.getBlockEntity(pPos.relative(dir));
                     if (blockEntity != null){
-                        blockEntity.getCapability(ForgeCapabilities.ENERGY).ifPresent(cap -> {
-                            int energyStored1 = cap.getEnergyStored();
-                            if (energyStored1 < energyStored && energyStored1 < cap.getMaxEnergyStored()){
+                        blockEntity.getCapability(Capabilities.ENERGY).ifPresent(cap -> {
+                            long energyStored1 = cap.getEnergy();
+                            if (energyStored1 < energyStored && energyStored1 < cap.getMaxEnergy()){
                                 energyNeed.put(blockEntity, energyStored1);
                             }
                         });
                     }
                 }
             });
-            int sum = energyNeed.values().stream().mapToInt(Integer::intValue).sum();
-            int avg = (sum + energyStored) / (energyNeed.size() + 1);
-            for (Map.Entry<BlockEntity, Integer> entry : energyNeed.entrySet()) {
-                entry.getKey().getCapability(ForgeCapabilities.ENERGY).ifPresent(cap -> {
-                    Integer energy = entry.getValue();
-                    int receivedEnergy = cap.receiveEnergy(avg - energy, false);
-                    cableEntity.ENERGY_STORAGE.extractEnergy(receivedEnergy,false);
+            long sum = energyNeed.values().stream().mapToLong(Long::longValue).sum();
+            long avg = (sum + energyStored) / (energyNeed.size() + 1);
+            for (Map.Entry<BlockEntity, Long> entry : energyNeed.entrySet()) {
+                entry.getKey().getCapability(Capabilities.ENERGY).ifPresent(cap -> {
+                    long energy = entry.getValue();
+                    long receivedEnergy = cap.receiveEnergy(avg - energy);
+                    cableEntity.ENERGY_STORAGE.extractEnergy(receivedEnergy);
                 });
             }
 //            AtomicInteger resident = new AtomicInteger();
@@ -63,11 +66,14 @@ public class CableEntity extends BlockEntity {
     }
 
     //=============以下是储能相关的信息=============================
-    private final EnergyStorage ENERGY_STORAGE = new EnergyStorage(10000);
-    private LazyOptional<IEnergyStorage> lazyEnergyHandler = LazyOptional.empty();
+    private final HBMEnergyStorage ENERGY_STORAGE = new HBMEnergyStorage(10000);
+    private LazyOptional<IHBMEnergy> lazyEnergyHandler = LazyOptional.empty();
     @Override
     public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-        if (cap == ForgeCapabilities.ENERGY){
+//        if (cap == ForgeCapabilities.ENERGY){
+//            return lazyEnergyHandler.cast();
+//        }
+        if (cap == Capabilities.ENERGY){
             return lazyEnergyHandler.cast();
         }
         return super.getCapability(cap, side);

@@ -1,5 +1,6 @@
 package com.hbm.modsetting.capability;
 
+import net.minecraft.nbt.LongTag;
 import net.minecraft.nbt.Tag;
 import net.minecraftforge.common.util.INBTSerializable;
 
@@ -46,7 +47,7 @@ public class HBMEnergyStorage implements IHBMEnergy, INBTSerializable<Tag> {
     @Override
     public long receiveEnergy(long expectedReceive) {
         if (!canReceive())return 0;
-        long received = Math.min(capacity - energy, Math.min(this.maxReceive, maxReceive));
+        long received = Math.min(capacity - energy, Math.min(this.maxReceive, expectedReceive));
         energy += received;
         return received;
     }
@@ -55,13 +56,19 @@ public class HBMEnergyStorage implements IHBMEnergy, INBTSerializable<Tag> {
     public long extractEnergy(long expectedExtract) {
         if (!canExtract())return 0;
         long extracted = Math.min(Math.min(expectedExtract,maxExtract),energy);
-        this.capacity -= extracted;
+        this.energy -= extracted;
         return extracted;
     }
 
     @Override
     public long getMaxEnergy() {
         return capacity;
+    }
+
+    @Override
+    public void setMaxEnergy(long capacity) {
+        if (capacity < 0)return;
+        this.capacity = capacity;
     }
 
     @Override
@@ -76,11 +83,13 @@ public class HBMEnergyStorage implements IHBMEnergy, INBTSerializable<Tag> {
 
     @Override
     public Tag serializeNBT() {
-        return null;
+        return LongTag.valueOf(this.getEnergy());
     }
 
     @Override
     public void deserializeNBT(Tag nbt) {
-
+        if (!(nbt instanceof LongTag longTag))
+            throw new IllegalArgumentException("Can not deserialize to an instance that isn't the default implementation");
+        this.energy = longTag.getAsLong();
     }
 }

@@ -37,19 +37,19 @@ public abstract class BaseMachineBlockEntity extends BaseContainerBlockEntity im
         this.items = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
         ContainerHelper.loadAllItems(pTag, this.items);
     }
-    //为了和客户端同步，服务端发送的数据包
-    @Nullable
-    @Override
-    public Packet<ClientGamePacketListener> getUpdatePacket() {
-        ClientboundBlockEntityDataPacket packet = ClientboundBlockEntityDataPacket.create(this);
-        return packet;
-    }
-    //客户端接收数据包（注意：服务端和客户端的实体时不一样的，比如客户端的实体地址24999，服务端可以是25068，虽然同一个类，但有两个实例）
-    //方块实体渲染器调用的就是客户端，根据需要进行客户端同步，不是所有数据都需要和客户端同步
-    @Override
-    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
-        super.onDataPacket(net, pkt);
-    }
+//    //为了和客户端同步，服务端发送的数据包
+//    @Nullable
+//    @Override
+//    public Packet<ClientGamePacketListener> getUpdatePacket() {
+//        ClientboundBlockEntityDataPacket packet = ClientboundBlockEntityDataPacket.create(this);
+//        return packet;
+//    }
+//    //客户端接收数据包（注意：服务端和客户端的实体时不一样的，比如客户端的实体地址24999，服务端可以是25068，虽然同一个类，但有两个实例）
+//    //方块实体渲染器调用的就是客户端，根据需要进行客户端同步，不是所有数据都需要和客户端同步
+//    @Override
+//    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
+//        super.onDataPacket(net, pkt);
+//    }
     //方块被载入时同步数据用
     @Override
     public CompoundTag getUpdateTag() {

@@ -2,6 +2,9 @@ package com.hbm.gui.menu;
 
 import com.hbm.blockentity.machine.BatteryEntity;
 import com.hbm.gui.ModMenuType;
+import com.hbm.modsetting.capability.Capabilities;
+import com.hbm.modsetting.capability.HBMEnergyStorage;
+import com.hbm.modsetting.capability.IHBMEnergy;
 import com.hbm.registries.ModTags;
 import net.minecraft.client.gui.screens.inventory.EnchantmentScreen;
 import net.minecraft.world.Container;
@@ -12,22 +15,21 @@ import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraftforge.common.util.LazyOptional;
 
 public class BatteryMenu extends AbstractContainerMenu {
     private final Container container;
     private final ContainerData data;
-    private final ContainerLevelAccess access;
     public BatteryMenu(int pContainerId, Inventory pPlayerInventory) {
-        this(pContainerId, pPlayerInventory, new SimpleContainer(2),new SimpleContainerData(5), ContainerLevelAccess.NULL);
+        this(pContainerId, pPlayerInventory, new SimpleContainer(2),new SimpleContainerData(7));
     }
 
-    public BatteryMenu(int pContainerId, Inventory pPlayerInventory, Container inContainer, ContainerData containerData, ContainerLevelAccess access) {
+    public BatteryMenu(int pContainerId, Inventory pPlayerInventory, Container inContainer, ContainerData containerData) {
         super(ModMenuType.BATTERY_MENU.get(), pContainerId);
         this.container = inContainer;
         this.data = containerData;
-        this.access = access;
-        this.addSlot(new Slot(container, 0, 26,17));
-        this.addSlot(new Slot(container, 1, 26,53));
+        this.addSlot(new BatterySlot(container, 0, 26,17));
+        this.addSlot(new BatterySlot(container, 1, 26,53));
         //玩家背包槽
         for(int i = 0; i < 3; ++i) {
             for(int j = 0; j < 9; ++j) {
@@ -88,35 +90,37 @@ public class BatteryMenu extends AbstractContainerMenu {
     public boolean clickMenuButton(Player pPlayer, int pId) {
         boolean flag = false;
         if (pId == 0){
-            this.data.set(2, (this.data.get(2) + 1) % 4);
+            this.data.set(0, (this.data.get(0) + 1) % 4);
             flag = true;
         }
         else if (pId == 1){
-            this.data.set(3, (this.data.get(3) + 1) % 4);
+            this.data.set(1, (this.data.get(1) + 1) % 4);
             flag = true;
         }
         else if (pId == 2){
-            this.data.set(4, (this.data.get(4) + 1) % 3);
+            this.data.set(2, (this.data.get(2) + 1) % 3);
             flag = true;
         }
         return flag || super.clickMenuButton(pPlayer, pId);
     }
 
     //===============gui所需数据====================
-    public int getPower(){
-        return this.data.get(0);
+    public long getPower(){
+        return ((long) this.data.get(3) & 0xFFFFFFFFL) | (((long) this.data.get(4) << 32) & 0xFFFFFFFF00000000L);
     }
-    public int getMaxPower(){return this.data.get(1);}
+    public long getMaxPower(){
+        return ((long) this.data.get(5) & 0xFFFFFFFFL) | (((long) this.data.get(6) << 32) & 0xFFFFFFFF00000000L);
+    }
     public long getPowerRemainingScaled(long i) {
-        return (getPower() * i) / this.data.get(1);
+        return (getPower() * i) / getMaxPower();
     }
     public int getRedLow(){
-        return this.data.get(2);
+        return this.data.get(0);
     }
     public int getRedHeight(){
-        return this.data.get(3);
+        return this.data.get(1);
     }
     public int getConnPriority(){
-        return this.data.get(4);
+        return this.data.get(2);
     }
 }

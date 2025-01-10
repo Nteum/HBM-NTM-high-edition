@@ -45,7 +45,7 @@ public class BlockBattery extends BaseSingleBlockMachine {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return pState.getBlock() instanceof BlockBattery ? new BatteryEntity(pPos, pState, (int) maxPower) : null;
+        return pState.getBlock() instanceof BlockBattery ? new BatteryEntity(pPos, pState) : null;
     }
 
     @Nullable

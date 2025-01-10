@@ -59,6 +59,7 @@ public class ItemModelGen extends ItemModelProvider {
         this.basicItem(ModItems.BEDROCK_ORE.get());
 
         this.basicItem(ModItems.BATTERY_CREATIVE.get());
+        this.basicItem(ModItems.BATTERY_GENERIC.get());
     }
 
     public void registerOrdinaryItemModel(String key){

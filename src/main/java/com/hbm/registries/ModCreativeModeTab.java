@@ -103,6 +103,9 @@ public class ModCreativeModeTab {
             output.accept(ModBlocks.conveyor.get());
             output.accept(ModBlocks.bomb_fat_man.get());
             output.accept(ModBlocks.bomb_custom.get());
+
+            output.accept(ModItems.BATTERY_CREATIVE.get());
+            output.accept(ModItems.BATTERY_GENERIC.get());
         }).build());
 
     /**

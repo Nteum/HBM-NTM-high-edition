@@ -3,7 +3,6 @@ package com.hbm.modsetting.capability;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.CapabilityToken;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
 
 public class Capabilities {
     private Capabilities(){

@@ -129,6 +129,7 @@ public class BlockStateGen extends BlockStateProvider {
 
         //线缆
         cableBlockWithItem();
+        //电池
     }
 
     public void addObjHorizonalModel(Block block,String name){

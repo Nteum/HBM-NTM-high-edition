@@ -117,8 +117,4 @@ public class ModEventHandler {
 //            TimedGenerator.automaton(event.world, 100);
         }
     }
-    @SubscribeEvent
-    public void registerCaps(RegisterCapabilitiesEvent event) {
-        event.register(IHBMEnergy.class);
-    }
 }

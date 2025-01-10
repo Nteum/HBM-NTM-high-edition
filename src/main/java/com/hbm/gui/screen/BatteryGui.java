@@ -49,7 +49,7 @@ public class BatteryGui extends AbstractContainerScreen<BatteryMenu> {
         super.render(pGuiGraphics,pMouseX,pMouseY,pPartialTick);
         renderTooltip(pGuiGraphics,pMouseX,pMouseY);
         //打印电池电量
-        pGuiGraphics.drawString(this.font,Component.literal(menu.getPower()+"J/"+menu.getMaxPower()+"J"),leftPos+this.titleLabelX,topPos+this.titleLabelY+58+this.font.lineHeight,4210752, false);
+        pGuiGraphics.drawString(this.font,Component.literal((double)menu.getPower()/1000+"kHE/"+menu.getMaxPower()/1000+"kHE"),leftPos+this.titleLabelX,topPos+this.titleLabelY+58+this.font.lineHeight,4210752, false);
     }
 
     @Override
@@ -57,7 +57,7 @@ public class BatteryGui extends AbstractContainerScreen<BatteryMenu> {
         //渲染背景图
         pGuiGraphics.blit(TEXTURE,leftPos,topPos,0,0,imageWidth,imageHeight);
         //渲染能量条
-        int power = menu.getPower();
+        long power = menu.getPower();
         if (power > 0){
             int i = (int)menu.getPowerRemainingScaled(52);
             pGuiGraphics.blit(TEXTURE,leftPos + 62, topPos + 69 - i, 176, 52 - i, 52, i);
