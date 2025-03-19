@@ -1,4 +1,4 @@
-package com.hbm.api.energy;
+package api.energy;
 
 import net.minecraft.core.Direction;
 

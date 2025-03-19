@@ -21,10 +21,13 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class CableEntity extends BlockEntity {
+    public Set<Direction> forbidDir = new HashSet<>();
     public CableEntity(BlockPos pPos, BlockState pBlockState) {
         super(ModBlockEntityType.CABLE_ENTITY.get(), pPos, pBlockState);
     }

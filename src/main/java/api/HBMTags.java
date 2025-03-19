@@ -1,4 +1,4 @@
-package com.hbm.api;
+package api;
 
 import com.hbm.main.HBMxx;
 import com.hbm.registries.ModItems;

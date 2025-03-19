@@ -7,6 +7,8 @@ import com.hbm.item.BatteryItem;
 import com.hbm.modsetting.capability.Capabilities;
 import com.hbm.modsetting.capability.HBMEnergyStorage;
 import com.hbm.modsetting.capability.IHBMEnergy;
+import com.hbm.modsetting.energy.IItemBattery;
+import com.hbm.modsetting.energy.ItemEnergyProxy;
 import com.hbm.registries.ModBlocks;
 import com.hbm.registries.ModItems;
 import com.hbm.registries.ModTags;
@@ -144,18 +146,17 @@ public class BatteryEntity extends BaseContainerBlockEntity implements WorldlyCo
             ItemStack itemStack1 = entity.items.get(1);
             if (itemStack0.is(ModTags.Items.BATTERY)){
                 entity.getCapability(Capabilities.ENERGY).ifPresent(cap -> {
-                    if (itemStack0.getItem() instanceof BatteryItem battery){
-                        long charge = BatteryItem.disCharge(itemStack0);
-                        if (charge > 0)cap.receiveEnergy(charge);
-                    }
+                    long charge = ItemEnergyProxy.disCharge(itemStack0);
+                    if (charge > 0)cap.receiveEnergy(charge);
                 });
             }
             if (itemStack1.is(ModTags.Items.BATTERY)){
                 entity.getCapability(Capabilities.ENERGY).ifPresent(cap ->{
-                    if (itemStack1.getItem() instanceof BatteryItem battery && BatteryItem.canCharge(itemStack1)){
-                        long maxReceive = battery.batteryItemData.maxReceive();
-                        BatteryItem.charge(itemStack1,cap.extractEnergy(maxReceive));
-                    }
+                    ItemEnergyProxy.charge(itemStack1, cap);
+//                    if (itemStack1.getItem() instanceof BatteryItem battery && BatteryItem.canCharge(itemStack1)){
+//                        long maxReceive = battery.batteryItemData.maxReceive();
+//                        BatteryItem.charge(itemStack1,cap.extractEnergy(maxReceive));
+//                    }
                 });
             }
             level.sendBlockUpdated(pPos,pState,pState,2);
@@ -308,4 +309,7 @@ public class BatteryEntity extends BaseContainerBlockEntity implements WorldlyCo
     public void clearContent() {
         this.items.clear();
     }
+
+    //====================================
+
 }

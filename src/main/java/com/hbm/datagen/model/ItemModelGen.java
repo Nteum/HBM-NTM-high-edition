@@ -60,6 +60,8 @@ public class ItemModelGen extends ItemModelProvider {
 
         this.basicItem(ModItems.BATTERY_CREATIVE.get());
         this.basicItem(ModItems.BATTERY_GENERIC.get());
+        /* tool */
+        this.basicItem(ModItems.SCREWDRIVER.get());
     }
 
     public void registerOrdinaryItemModel(String key){

@@ -1,2 +1,3 @@
-// 1.20.1	2025-01-04T09:02:41.2747001	Tags for minecraft:item mod id hbmxx
-38c781bcffed3091a54c4de8fc558f275f8f8727 data/forge/tags/items/battery.json
+// 1.20.1	2025-01-11T15:02:41.0367993	Tags for minecraft:item mod id hbmxx
+5cf04f6b63cd8bee8f7aacdec0a8ed079b2c0ac4 data/forge/tags/items/battery.json
+5ea557b72705703fdfc78bdcdfbfe269b66200e0 data/forge/tags/items/chargeable.json

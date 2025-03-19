@@ -1,6 +1,6 @@
 package com.hbm.modsetting.badthing;
 
-import com.hbm.api.entity.IRadiationImmune;
+import api.entity.IRadiationImmune;
 import com.hbm.handler.radiation.ChunkRadiationManager;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;

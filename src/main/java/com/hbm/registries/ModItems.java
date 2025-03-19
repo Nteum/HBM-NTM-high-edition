@@ -70,6 +70,7 @@ public class ModItems {
     public static final RegistryObject<Item> BATTERY_GENERIC = ITEMS.register("battery_generic",()->new BatteryItem(5000, 100, 100, new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> reacher = ITEMS.register("reacher",()->new Item(new Item.Properties()));
+    public static final RegistryObject<Item> SCREWDRIVER = ITEMS.register("screwdriver",()->new Item(new Item.Properties()));
     public static void register(IEventBus eventBus){
         ITEMS.register(eventBus);
     }

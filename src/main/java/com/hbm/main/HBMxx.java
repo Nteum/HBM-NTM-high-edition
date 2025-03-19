@@ -1,7 +1,8 @@
 package com.hbm.main;
 
-import com.hbm.api.HBMTags;
 import com.hbm.config.GeneralConfig;
+import com.hbm.datagen.loot.BlockLootGen;
+import com.hbm.datagen.loot.LootTableGen;
 import com.hbm.datagen.model.BlockStateGen;
 import com.hbm.datagen.model.ItemModelGen;
 import com.hbm.datagen.recipe.RecipeGen;
@@ -24,10 +25,12 @@ import com.hbm.world.feature.ModFeatures;
 import com.mojang.logging.LogUtils;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
+import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.common.data.ForgeAdvancementProvider;
 import net.minecraftforge.data.event.GatherDataEvent;
@@ -41,6 +44,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
@@ -108,10 +112,12 @@ public class HBMxx {
         generator.addProvider(event.includeServer(), new RecipeGen(packOutput));
         generator.addProvider(event.includeServer(), blockTagsGen);
         generator.addProvider(event.includeServer(), new ItemTagsGen(packOutput,lookupProvider,blockTagsGen.contentsGetter(),MODID,helper));
-//        generator.addProvider(event.includeServer(), new HBMTags.HBMItemTags(packOutput,lookupProvider, blockTagsGen.contentsGetter(),MODID,helper));
         generator.addProvider(event.includeServer(), new TagDmgTypeGen(packOutput,lookupProvider));
 //        generator.addProvider(event.includeServer(), new RegistryDataGen(packOutput,lookupProvider));
         generator.addProvider(event.includeServer(), new WorldGen(packOutput, lookupProvider));
+        generator.addProvider(event.includeServer(), (DataProvider.Factory<LootTableGen>) output->new LootTableGen(output, Collections.emptySet(),List.of(
+                new LootTableProvider.SubProviderEntry(BlockLootGen::new, LootContextParamSets.BLOCK)
+        )));
 
 //        System.out.println("id: "+ ModItems.ignot_steel.getId());
 //        System.out.println("id path: " + ModItems.ignot_steel.getId().getPath());

@@ -1,4 +1,28 @@
-// 1.20.1	2025-01-03T22:00:24.0708302	Tags for minecraft:block mod id hbmxx
+// 1.20.1	2025-03-19T12:54:53.2770093	Tags for minecraft:block mod id hbmxx
 22be8f9a444f089f9f21ca2fa162dd81ccbee2ed data/forge/tags/blocks/battery.json
+e2656ad9e0c7fd988ce21b718eff0a9fb0a39434 data/forge/tags/blocks/machine.json
+d71d4ef5da081a02c0c4522bdd2fed5b4818dedd data/forge/tags/blocks/ores.json
+1c34ef9390c021f0f7debda1509a4278d51343b5 data/forge/tags/blocks/ores/aluminium.json
+2a0e590af978e7e45ecbb802d49cc2a186680704 data/forge/tags/blocks/ores/asbestos.json
+c3ba46d4b9b2d65290c5ed1b2c162f16d73d865b data/forge/tags/blocks/ores/beryllium.json
+7fcebae3d1b4775fa5b7351012b76378fca390c1 data/forge/tags/blocks/ores/coal.json
+741e34d22b2d351259e3f2d1be3f0d392252d770 data/forge/tags/blocks/ores/cobalt.json
+a9a3c8062ab539b5609de39fa1db0f0c9f6694ec data/forge/tags/blocks/ores/coltan.json
+5655fb65a139aca5edec52bfb3f3fabc83b20988 data/forge/tags/blocks/ores/fluorite.json
+a55c0f6989402a7f5df1c18667685c183cc918a8 data/forge/tags/blocks/ores/gas.json
+0bfd97e0a4220c6e6bbea22d4c530a3c573d5519 data/forge/tags/blocks/ores/lead.json
+6608c410776470e617569eb5e569cc398fdf3a1b data/forge/tags/blocks/ores/lithium.json
+59eb81fa00661b1f18b4547b50b3682d5ef6f511 data/forge/tags/blocks/ores/niter.json
+aeb170282acc6c0767a11615be7bf243cb8a235c data/forge/tags/blocks/ores/oil.json
+6a6a5b997885191f5b31a071c6d2a27500ec2766 data/forge/tags/blocks/ores/plutonium.json
+caf0aed4205f6f3491a53561aa2fd8306bdfb6d5 data/forge/tags/blocks/ores/rare_earth.json
+d898c7510b8cc9dda06f87870dd3aed6e887efae data/forge/tags/blocks/ores/sa326.json
+d53349ab0052ca0aeae69b6e9021ac578d3779ae data/forge/tags/blocks/ores/smolder.json
+fe66e661a266ccb767ca30e441105a3d3382325a data/forge/tags/blocks/ores/thorium.json
+a8f4da1e150bba7fd95227d284b9b2dd2907458d data/forge/tags/blocks/ores/tikite.json
+43edd3fed3b4f04ac9a675a490dfc16aed05ae5b data/forge/tags/blocks/ores/titanium.json
+d128dcbbd5052cf1c5f5647604bd77754b07b78a data/forge/tags/blocks/ores/tungsten.json
 d07da68fe4b5e2563cd17936975902b56cb3bfd5 data/forge/tags/blocks/ores/uranium.json
+b8b2125f5f073dd886016960c27dbdabcc844d1a data/hbmxx/tags/blocks/anvil.json
+e3bd7057d32246aa52cf1e9faf7e45fdf7c19da6 data/minecraft/tags/blocks/mineable/pickaxe.json
 7b3fe392a4ef1c52dda15c2db9668693234a371b data/minecraft/tags/blocks/needs_iron_tool.json

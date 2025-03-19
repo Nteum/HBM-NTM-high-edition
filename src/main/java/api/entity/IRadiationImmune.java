@@ -1,3 +1,3 @@
-package com.hbm.api.entity;
+package api.entity;
 
 public interface IRadiationImmune { }

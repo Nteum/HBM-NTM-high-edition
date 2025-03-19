@@ -8,6 +8,7 @@ public enum OreType {
     TITANIUM("titanium"),
     THORIUM("thorium"),
     NITER("niter"),
+    TUNGSTNE("tungsten"),
     ALUMINIUM("aluminium"),
     FLUORITE("fluorite"),
     LEAD("lead"),
@@ -17,8 +18,12 @@ public enum OreType {
     OIL("oil"),
     RARE_EARTH("rare_earth"),
     LITHIUM("lithium"),
+    COBALT("cobalt"),
     COLTAN("coltan"),
-    PLUTONIUM("plutonium");
+    SMOLDER("smolder"),
+    GAS("gas"),
+    PLUTONIUM("plutonium"),
+    TIKITE("tikite");
 
     public static final List<OreType> NUGGETS = Arrays.asList();
     public static final List<OreType> SHARDS = Arrays.asList();

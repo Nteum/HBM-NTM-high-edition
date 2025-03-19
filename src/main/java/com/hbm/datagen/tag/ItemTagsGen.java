@@ -1,5 +1,6 @@
 package com.hbm.datagen.tag;
 
+import com.hbm.registries.ModBlocks;
 import com.hbm.registries.ModItems;
 import com.hbm.registries.ModTags;
 import net.minecraft.core.HolderLookup;
@@ -21,7 +22,8 @@ public class ItemTagsGen extends ItemTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
-        this.tag(ModTags.Items.BATTERY).add(ModItems.BATTERY_CREATIVE.get(),ModItems.BATTERY_GENERIC.get());
+        this.tag(ModTags.Items.BATTERY).add(ModItems.BATTERY_CREATIVE.get(),ModItems.BATTERY_GENERIC.get(),
+                ModBlocks.machine_battery.get().asItem(),ModBlocks.machine_lithium_battery.get().asItem(),ModBlocks.machine_schrabidium_battery.get().asItem(),ModBlocks.machine_dineutronium_battery.get().asItem());
         this.tag(ModTags.Items.CHARGEABLE).addTag(ModTags.Items.BATTERY);
     }
 }

@@ -8,6 +8,7 @@ import com.hbm.block.network.BlockConveyor;
 import com.hbm.block.weapon.NukeCustom;
 import com.hbm.block.weapon.NukeFat;
 import com.hbm.fluid.ModFluids;
+import com.hbm.item.BatteryBlockItem;
 import com.hbm.modsetting.multiblock.DummibleBlock;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -22,6 +23,8 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
+import java.util.function.BiFunction;
+import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.function.ToIntFunction;
 
@@ -31,22 +34,16 @@ public class ModBlocks {
     //方块注册表
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
     //机械
-    public static final RegistryObject<Block> machine_difurnace = registerBlockWithItem("machine_difurnace",
-            ()->new BlockDifurnace(BlockBehaviour.Properties.of().lightLevel(litEmission(13))));
-    public static final RegistryObject<Block> machine_electric_furnace = registerBlockWithItem("machine_electric_furnace",
-            ()->new BlockElectricFurnace(BlockBehaviour.Properties.of().lightLevel(litEmission(13))));
-    public static final RegistryObject<Block> machine_boiler = registerBlockWithItem("machine_boiler",
-            ()->new BlockElectricFurnace(BlockBehaviour.Properties.of().lightLevel(litEmission(13))));
-    public static final RegistryObject<Block> machine_electric_boiler = registerBlockWithItem("machine_electric_boiler",
-            ()->new BlockElectricFurnace(BlockBehaviour.Properties.of().lightLevel(litEmission(14))));
-    public static final RegistryObject<Block> machine_nuclear_boiler = registerBlockWithItem("machine_nuclear_boiler",
-            ()->new BlockElectricFurnace(BlockBehaviour.Properties.of().lightLevel(litEmission(15))));
-    public static final RegistryObject<Block> machine_press = registerBlockWithItem("machine_press",
-            ()->new BlockPress(BlockBehaviour.Properties.of()));
-    public static final RegistryObject<Block> machine_battery = registerBlockWithItem("machine_battery",()->new BlockBattery(BlockBehaviour.Properties.of(),1_000_000L));
-    public static final RegistryObject<Block> machine_lithium_battery = registerBlockWithItem("machine_lithium_battery",()->new BlockBattery(BlockBehaviour.Properties.of(),50_000_000L));
-    public static final RegistryObject<Block> machine_schrabidium_battery = registerBlockWithItem("machine_schrabidium_battery",()->new BlockBattery(BlockBehaviour.Properties.of(),25_000_000_000L));
-    public static final RegistryObject<Block> machine_dineutronium_battery = registerBlockWithItem("machine_dineutronium_battery",()->new BlockBattery(BlockBehaviour.Properties.of(),1_000_000_000_000L));
+    public static final RegistryObject<Block> machine_difurnace = registerBlockWithItem("machine_difurnace", ()->new BlockDifurnace(BlockBehaviour.Properties.of().lightLevel(litEmission(13))));
+    public static final RegistryObject<Block> machine_electric_furnace = registerBlockWithItem("machine_electric_furnace", ()->new BlockElectricFurnace(BlockBehaviour.Properties.of().lightLevel(litEmission(13))));
+    public static final RegistryObject<Block> machine_boiler = registerBlockWithItem("machine_boiler", ()->new BlockElectricFurnace(BlockBehaviour.Properties.of().lightLevel(litEmission(13))));
+    public static final RegistryObject<Block> machine_electric_boiler = registerBlockWithItem("machine_electric_boiler", ()->new BlockElectricFurnace(BlockBehaviour.Properties.of().lightLevel(litEmission(14))));
+    public static final RegistryObject<Block> machine_nuclear_boiler = registerBlockWithItem("machine_nuclear_boiler", ()->new BlockElectricFurnace(BlockBehaviour.Properties.of().lightLevel(litEmission(15))));
+    public static final RegistryObject<Block> machine_press = registerBlockWithItem("machine_press", ()->new BlockPress(BlockBehaviour.Properties.of()));
+    public static final RegistryObject<Block> machine_battery = registerBattery("machine_battery",()->new BlockBattery(BlockBehaviour.Properties.of(),1_000_000L));
+    public static final RegistryObject<Block> machine_lithium_battery = registerBattery("machine_lithium_battery",()->new BlockBattery(BlockBehaviour.Properties.of(),50_000_000L));
+    public static final RegistryObject<Block> machine_schrabidium_battery = registerBattery("machine_schrabidium_battery",()->new BlockBattery(BlockBehaviour.Properties.of(),25_000_000_000L));
+    public static final RegistryObject<Block> machine_dineutronium_battery = registerBattery("machine_dineutronium_battery",()->new BlockBattery(BlockBehaviour.Properties.of(),1_000_000_000_000L));
     public static final RegistryObject<Block> anvil_iron = registerBlockWithItem("anvil_iron",()->new BlockAnvil(BlockBehaviour.Properties.of()));
     public static final RegistryObject<Block> anvil_desh = registerBlockWithItem("anvil_desh",()->new BlockAnvil(BlockBehaviour.Properties.of()));
     public static final RegistryObject<Block> anvil_bismuth = registerBlockWithItem("anvil_bismuth",()->new BlockAnvil(BlockBehaviour.Properties.of()));
@@ -54,25 +51,23 @@ public class ModBlocks {
     public static final RegistryObject<Block> machine_assembler = registerBlockWithItem("machine_assembler",()->new BlockAssembler(BlockBehaviour.Properties.of()));
     public static final RegistryObject<Block> machine_crucible = registerBlockWithItem("machine_crucible",()->new BlockCrucible(BlockBehaviour.Properties.of()));
     //模型部分（仅仅用于加载模型渲染，而不会在游戏单独出现，名称以part开头）
-    public static final RegistryObject<Block> part_press_head = BLOCKS.register("part_press_head",()->new Block(BlockBehaviour.Properties.of()));
+    public static final RegistryObject<Block> part_press_head = BLOCKS.register("part_press_head",()->new Block(BlockBehaviour.Properties.of().noLootTable()));
     //电力
     public static final RegistryObject<Block> RED_CABLE = registerBlockWithItem("red_cable",()->new BlockCable(BlockBehaviour.Properties.copy(Blocks.STONE_BRICK_WALL)));
-    //流体
-    public static final RegistryObject<LiquidBlock> irradiated_water = BLOCKS.register("irradiated_water",
-            ()->new LiquidBlock(ModFluids.IRRADIATED_WATER_SOURCE_BLOCK,BlockBehaviour.Properties.copy(Blocks.WATER)));
-    public static final RegistryObject<LiquidBlock> irradiated_polluted = BLOCKS.register("irradiated_polluted",
-            ()->new LiquidBlock(ModFluids.IRRADIATED_POLLUTED_SOURCE_BLOCK,BlockBehaviour.Properties.copy(Blocks.WATER)));
-    public static final RegistryObject<LiquidBlock> sulfuric_acid = BLOCKS.register("sulfuric_acid",
-            ()->new LiquidBlock(ModFluids.SULFURIC_ACID_SOURCE_BLOCK,BlockBehaviour.Properties.copy(Blocks.WATER)));
     //输送带
     public static final RegistryObject<Block> conveyor = registerBlockWithItem("conveyor",()->new BlockConveyor(BlockBehaviour.Properties.of()));
     //炸弹
     public static final RegistryObject<Block> bomb_fat_man = BLOCKS.register("bomb_fat_man",()->new NukeFat(BlockBehaviour.Properties.of()));
     public static final RegistryObject<Block> bomb_custom = registerBlockWithItem("bomb_custom",()->new NukeCustom(BlockBehaviour.Properties.of()));
 
+    //流体
+    public static final RegistryObject<LiquidBlock> irradiated_water = BLOCKS.register("irradiated_water", ()->new LiquidBlock(ModFluids.IRRADIATED_WATER_SOURCE_BLOCK,BlockBehaviour.Properties.copy(Blocks.WATER).noLootTable()));
+    public static final RegistryObject<LiquidBlock> irradiated_polluted = BLOCKS.register("irradiated_polluted", ()->new LiquidBlock(ModFluids.IRRADIATED_POLLUTED_SOURCE_BLOCK,BlockBehaviour.Properties.copy(Blocks.WATER).noLootTable()));
+    public static final RegistryObject<LiquidBlock> sulfuric_acid = BLOCKS.register("sulfuric_acid", ()->new LiquidBlock(ModFluids.SULFURIC_ACID_SOURCE_BLOCK,BlockBehaviour.Properties.copy(Blocks.WATER).noLootTable()));
+
     //自然物
     //ores
-    public static final RegistryObject<Block> WAST_LEAVES = registerBlockWithItem("wast_leaves",()->new WasteLeaves(BlockBehaviour.Properties.copy(Blocks.ACACIA_LEAVES)));
+    public static final RegistryObject<Block> WAST_LEAVES = registerBlockWithItem("wast_leaves",()->new WasteLeaves(BlockBehaviour.Properties.copy(Blocks.ACACIA_LEAVES).noLootTable()));
     public static final RegistryObject<Block> WAST_EARTH = registerBlockWithItem("wast_earth",()->new WasteEarth(BlockBehaviour.Properties.copy(Blocks.DIRT)));
     public static final RegistryObject<Block> URANIUM_ORE = registerBlockWithItem("uranium_ore",()->new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)));
     public static final RegistryObject<Block> DEEPSLATE_URANIUM_ORE = registerBlockWithItem("deepslate_uranium_ore",()->new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_IRON_ORE)));
@@ -112,9 +107,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> DEPTH_STONE = registerBlockWithItem("depth_stone",()->new Block(BlockBehaviour.Properties.copy(Blocks.REINFORCED_DEEPSLATE)));
 
     //逻辑物
-    public static final RegistryObject<Block> DUMMIBLE = registerBlockWithItem("dummible",()->new DummibleBlock(BlockBehaviour.Properties.copy(Blocks.STONE)));
-
-
+    public static final RegistryObject<Block> DUMMIBLE = registerBlockWithItem("dummible",()->new DummibleBlock(BlockBehaviour.Properties.copy(Blocks.STONE).noLootTable()));
 
 
     public static ToIntFunction<BlockState> litEmission(int value){
@@ -127,10 +120,14 @@ public class ModBlocks {
         //主要用于注册一些特殊模型的物品
         ModItems.ITEMS.register("bomb_fat_man",()->new NukeFat.NukeItem(bomb_fat_man.get(),new Item.Properties()));
     }
-    public static RegistryObject<Block> registerBlockWithItem(final String name, final Supplier<? extends Block> sup){
-        RegistryObject<Block> block = BLOCKS.register(name,sup);
+    public static RegistryObject<Block> registerBattery(final String name, final Supplier<? extends Block> blocksup){
+        RegistryObject<Block> block = BLOCKS.register(name,blocksup);
+        ModItems.ITEMS.register(name,()->new BatteryBlockItem(block.get(),new Item.Properties()));
+        return block;
+    }
+    public static RegistryObject<Block> registerBlockWithItem(final String name, final Supplier<? extends Block> blocksup){
+        RegistryObject<Block> block = BLOCKS.register(name,blocksup);
         ModItems.ITEMS.register(name,()->new BlockItem(block.get(),new Item.Properties()));
-
         return block;
     }
     public static void register(IEventBus modEventBus){

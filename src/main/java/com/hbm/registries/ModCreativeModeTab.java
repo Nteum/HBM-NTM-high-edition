@@ -106,6 +106,8 @@ public class ModCreativeModeTab {
 
             output.accept(ModItems.BATTERY_CREATIVE.get());
             output.accept(ModItems.BATTERY_GENERIC.get());
+
+            output.accept(ModItems.SCREWDRIVER.get());
         }).build());
 
     /**
