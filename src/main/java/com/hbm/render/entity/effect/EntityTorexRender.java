@@ -1,34 +1,28 @@
 package com.hbm.render.entity.effect;
 
+import com.hbm.HBM;
 import com.hbm.entity.effect.EntityNukeTorex;
-import com.hbm.main.HBMxx;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
-import org.lwjgl.opengl.GL11;
 
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.Random;
 
 /** 用于渲染爆炸云 */
 public class EntityTorexRender extends EntityRenderer<EntityNukeTorex> {
-    public static final ResourceLocation TEXTURE_PARTICLE = new ResourceLocation(HBMxx.MODID,"textures/particle/hbm_smoke.png");
-    public static final ResourceLocation TEXTURE_FLARE = new ResourceLocation(HBMxx.MODID,"textures/particle/flare.png");
+    public static final ResourceLocation TEXTURE_PARTICLE = new ResourceLocation(HBM.MODID,"textures/particle/hbm_smoke.png");
+    public static final ResourceLocation TEXTURE_FLARE = new ResourceLocation(HBM.MODID,"textures/particle/flare.png");
     public EntityTorexRender(EntityRendererProvider.Context pContext) {
         super(pContext);
     }

@@ -1,21 +1,14 @@
 package com.hbm.gui.menu;
 
-import com.hbm.blockentity.machine.BatteryEntity;
 import com.hbm.gui.ModMenuType;
-import com.hbm.modsetting.capability.Capabilities;
-import com.hbm.modsetting.capability.HBMEnergyStorage;
-import com.hbm.modsetting.capability.IHBMEnergy;
+import com.hbm.gui.menu.slot.BatterySlot;
 import com.hbm.registries.ModTags;
-import net.minecraft.client.gui.screens.inventory.EnchantmentScreen;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.common.util.LazyOptional;
 
 public class BatteryMenu extends AbstractContainerMenu {
     private final Container container;

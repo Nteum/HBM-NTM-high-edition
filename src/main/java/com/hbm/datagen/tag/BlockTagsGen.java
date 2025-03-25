@@ -1,7 +1,6 @@
 package com.hbm.datagen.tag;
 
-import com.hbm.modsetting.resource.ElementUtils;
-import com.hbm.modsetting.resource.OreType;
+import com.hbm.api.resource.OreType;
 import com.hbm.registries.ModTags;
 import com.hbm.registries.ModBlocks;
 import net.minecraft.core.HolderLookup;

@@ -1,6 +1,6 @@
 package com.hbm.model;
 
-import com.hbm.main.HBMxx;
+import com.hbm.HBM;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -25,7 +25,7 @@ public class SpecialModels implements ResourceManagerReloadListener {
     public static final CompositeRenderable PRESS_BODY = registerModel(modelLoc("block/press_body"));
     public static final CompositeRenderable PRESS_HEAD = registerModel(modelLoc("block/press_head"));
 
-    public static ResourceLocation modelLoc(String s){return ResourceLocation.tryBuild(HBMxx.MODID,String.format("models/%s.obj",s));}
+    public static ResourceLocation modelLoc(String s){return ResourceLocation.tryBuild(HBM.MODID,String.format("models/%s.obj",s));}
     public static ResourceLocation getTexture(ResourceLocation id){
         String path = id.getPath();
         if (path.endsWith(".obj")){

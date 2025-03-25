@@ -1,6 +1,6 @@
 package com.hbm.gui.screen;
 
-import com.hbm.main.HBMxx;
+import com.hbm.HBM;
 import com.hbm.gui.menu.PressMenu;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -9,7 +9,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
 public class PressGui extends AbstractContainerScreen<PressMenu> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(HBMxx.MODID , "textures/gui/press_gui.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(HBM.MODID , "textures/gui/press_gui.png");
 
     public PressGui(PressMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);

@@ -2,7 +2,7 @@ package com.hbm.registries;
 
 import com.hbm.item.BatteryItem;
 import com.hbm.item.env.BedrockOreItem;
-import com.hbm.main.HBMxx;
+import com.hbm.HBM;
 import com.hbm.fluid.ModFluids;
 import com.hbm.item.weapon.ItemDetonator;
 import com.hbm.item.weapon.grenade.ItemGrenade;
@@ -16,7 +16,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class ModItems {
     //物品注册表
-    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, HBMxx.MODID);
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, HBM.MODID);
     /* weapon */
     //armor
     //grenade
@@ -71,6 +71,8 @@ public class ModItems {
 
     public static final RegistryObject<Item> reacher = ITEMS.register("reacher",()->new Item(new Item.Properties()));
     public static final RegistryObject<Item> SCREWDRIVER = ITEMS.register("screwdriver",()->new Item(new Item.Properties()));
+    //升级组件
+    public static final RegistryObject<Item> UPGRADE_BASE = ITEMS.register("upgrade_base",()->new Item(new Item.Properties()));
     public static void register(IEventBus eventBus){
         ITEMS.register(eventBus);
     }

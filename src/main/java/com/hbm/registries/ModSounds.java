@@ -1,12 +1,12 @@
 package com.hbm.registries;
 
-import com.hbm.main.HBMxx;
+import com.hbm.HBM;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-import static com.hbm.main.HBMxx.MODID;
+import static com.hbm.HBM.MODID;
 
 public class ModSounds {
     public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, MODID);
@@ -331,6 +331,6 @@ public class ModSounds {
      * 所以结论是直接传soundevent的注册名即可
      * */
     private static RegistryObject<SoundEvent> register(String name){
-        return SOUNDS.register(name,()->SoundEvent.createVariableRangeEvent(HBMxx.hbm(name)));
+        return SOUNDS.register(name,()->SoundEvent.createVariableRangeEvent(HBM.rl(name)));
     }
 }

@@ -1,6 +1,6 @@
 package com.hbm.datagen;
 
-import com.hbm.main.HBMxx;
+import com.hbm.HBM;
 import com.hbm.utils.damage.ModDamageTypes;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
@@ -15,6 +15,6 @@ public class RegistryDataGen extends DatapackBuiltinEntriesProvider {
     public static final  RegistrySetBuilder BUILDER = new RegistrySetBuilder()
             .add(Registries.DAMAGE_TYPE, ModDamageTypes::bootstrap);
     public RegistryDataGen(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
-        super(output, registries, BUILDER, Set.of(HBMxx.MODID));
+        super(output, registries, BUILDER, Set.of(HBM.MODID));
     }
 }

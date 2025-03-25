@@ -1,8 +1,8 @@
 package com.hbm.entity.logic;
 
-import com.hbm.modsetting.badthing.ContaminationUtil;
+import com.hbm.api.badthing.ContaminationUtil;
 import com.hbm.entity.ModEntityType;
-import com.hbm.main.HBMxx;
+import com.hbm.HBM;
 import com.hbm.world.level.explosion.ExplosionNukeGeneric;
 import com.hbm.world.level.explosion.ExplosionNukeRayBatched;
 import net.minecraft.core.BlockPos;
@@ -51,7 +51,7 @@ public class EntityNukeExplosionMK5 extends EntityExplosionChunkLoading{
             return;
         }
         if (!this.level().isClientSide){
-            if (tickCount % 100 == 0)HBMxx.LOGGER.info("mk5 exist tick: " + this.tickCount);
+            if (tickCount % 100 == 0) HBM.LOGGER.info("mk5 exist tick: " + this.tickCount);
             loadChunk((int) Math.floor(position().x / 16D), (int) Math.floor(position().y / 16D));
             radiate(2_500_000F / (this.tickCount * 5 + 1), this.getRadius() * 2);
             ExplosionNukeGeneric.dealDamage(level(),position(),getRadius());

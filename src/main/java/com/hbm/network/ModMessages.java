@@ -1,6 +1,6 @@
 package com.hbm.network;
 
-import com.hbm.main.HBMxx;
+import com.hbm.HBM;
 import com.hbm.network.packet.toclient.AuxParticlePacket;
 import com.hbm.network.packet.toclient.S2CExplosionEffectPacket;
 import net.minecraft.resources.ResourceLocation;
@@ -18,7 +18,7 @@ public class ModMessages {
 
     public static void register(){
         SimpleChannel net = NetworkRegistry.ChannelBuilder
-                .named(new ResourceLocation(HBMxx.MODID,"messages"))
+                .named(new ResourceLocation(HBM.MODID,"messages"))
                 .networkProtocolVersion(()->"1.0")
                 .clientAcceptedVersions(s -> true)
                 .serverAcceptedVersions(s -> true)

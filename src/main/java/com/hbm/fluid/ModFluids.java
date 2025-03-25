@@ -1,6 +1,6 @@
 package com.hbm.fluid;
 
-import com.hbm.main.HBMxx;
+import com.hbm.HBM;
 import com.hbm.registries.ModBlocks;
 import com.hbm.registries.ModItems;
 import net.minecraft.core.registries.Registries;
@@ -13,7 +13,7 @@ import net.minecraftforge.registries.RegistryObject;
 //在这个类里面注册流体
 public class ModFluids {
     //流体注册器
-    public static final DeferredRegister<Fluid> FLUIDS = DeferredRegister.create(Registries.FLUID, HBMxx.MODID);
+    public static final DeferredRegister<Fluid> FLUIDS = DeferredRegister.create(Registries.FLUID, HBM.MODID);
     //辐射水
     public static RegistryObject<FlowingFluid> IRRADIATED_WATER_SOURCE_BLOCK = FLUIDS.register("irradiated_water",()->new ForgeFlowingFluid.Source(ModFluids.IRRADIATED_WATER_PROPERTIES));
     public static RegistryObject<FlowingFluid> IRRADIATED_WATER_FLOW_BLOCK = FLUIDS.register("irradiated_water_flow",()->new ForgeFlowingFluid.Flowing(ModFluids.IRRADIATED_WATER_PROPERTIES));

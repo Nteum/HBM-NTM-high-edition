@@ -1,6 +1,6 @@
 package com.hbm.particle.type;
 
-import com.hbm.main.HBMxx;
+import com.hbm.HBM;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
 import net.minecraft.client.renderer.texture.TextureManager;
@@ -9,15 +9,11 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.Nullable;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
-
-import java.util.Random;
 
 @OnlyIn(Dist.CLIENT)
 public class ParticleRadiationFog extends TextureSheetParticle {
 
-	private static final ResourceLocation texture = new ResourceLocation(HBMxx.MODID + ":textures/particle/fog.png");
+	private static final ResourceLocation texture = new ResourceLocation(HBM.MODID + ":textures/particle/fog.png");
 	private TextureManager theRenderEngine;
 	private int maxAge;
 

@@ -1,7 +1,5 @@
 package com.hbm.registries;
 
-import com.hbm.registries.ModBlocks;
-import com.hbm.registries.ModItems;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -10,7 +8,7 @@ import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
-import static com.hbm.main.HBMxx.MODID;
+import static com.hbm.HBM.MODID;
 
 public class ModCreativeModeTab {
     //创造模式物品栏注册表
@@ -46,6 +44,8 @@ public class ModCreativeModeTab {
             output.accept(ModItems.briquette_lignite.get());
 
             output.accept(ModItems.BEDROCK_ORE.get());
+
+            output.accept(ModItems.UPGRADE_BASE.get());
         }).build());
     public static final RegistryObject<CreativeModeTab> HBM_BLOCK = CREATIVE_MODE_TABS.register("hbm_block", () -> CreativeModeTab.builder()
         .title(Component.translatable("itemGroup.hbm_block"))

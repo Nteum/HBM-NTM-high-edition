@@ -1,18 +1,14 @@
 package com.hbm.datagen.recipe;
 
-import com.hbm.main.HBMxx;
+import com.hbm.HBM;
 import com.hbm.recipe.BlastFurnaceRecipe;
 import com.hbm.registries.ModItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.TippedArrowItem;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.common.brewing.BrewingRecipe;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.LinkedList;
@@ -56,7 +52,7 @@ public class RecipeGen extends RecipeProvider {
             builder = builder.define(tuple.a,tuple.b);
         }
         builder = builder.unlockedBy(RecipeProvider.getHasName(crit), RecipeProvider.has(crit));
-        builder.save(pwriter,new ResourceLocation(HBMxx.MODID, itemName(output)+"_"+recipeCnt++));
+        builder.save(pwriter,new ResourceLocation(HBM.MODID, itemName(output)+"_"+recipeCnt++));
     }
     //添加默认的无序配方（默认加入MISC组，并使用获得物品来解锁，通过输入物品来区分）
     private static void addShapelessRecipe(ItemLike output,int outnum,ItemLike crit,Object... input){
@@ -77,7 +73,7 @@ public class RecipeGen extends RecipeProvider {
             builder = builder.requires(tuple.a,tuple.b);
         }
         builder = builder.unlockedBy(RecipeProvider.getHasName(crit), RecipeProvider.has(crit));
-        builder.save(pwriter,new ResourceLocation(HBMxx.MODID, itemName(output)+"_"+recipeCnt++));
+        builder.save(pwriter,new ResourceLocation(HBM.MODID, itemName(output)+"_"+recipeCnt++));
     }
     private static class TwoTuple<A,B>{
         A a;

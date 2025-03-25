@@ -1,6 +1,6 @@
 package com.hbm.datagen;
 
-import com.hbm.main.HBMxx;
+import com.hbm.HBM;
 import com.hbm.utils.damage.ModDamageTypes;
 import com.hbm.world.feature.ModConfiguredFeatures;
 import com.hbm.world.feature.ModPlacedFeatures;
@@ -19,6 +19,6 @@ public class WorldGen extends DatapackBuiltinEntriesProvider {
             .add(Registries.PLACED_FEATURE, ModPlacedFeatures::bootstrap)
             .add(Registries.DAMAGE_TYPE, ModDamageTypes::bootstrap);
     public WorldGen(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
-        super(output, registries, BUILDER, Set.of(HBMxx.MODID));
+        super(output, registries, BUILDER, Set.of(HBM.MODID));
     }
 }

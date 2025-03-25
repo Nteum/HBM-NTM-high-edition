@@ -1,5 +1,6 @@
 package com.hbm.block.machine;
 
+import com.hbm.block.base.BaseMachineBlock;
 import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.blockentity.machine.DifurnaceEntity;
 import net.minecraft.core.BlockPos;
@@ -14,9 +15,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.AbstractFurnaceBlock;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -30,7 +29,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class BlockDifurnace extends BaseMachineBlock{
+public class BlockDifurnace extends BaseMachineBlock {
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
     public BlockDifurnace(Properties pProperties) {
         super(pProperties);
@@ -54,19 +53,19 @@ public class BlockDifurnace extends BaseMachineBlock{
     /**
      * 右键点击，效果是打开GUI
      * */
-    @Override
-    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-        if (!pLevel.isClientSide){
-//            pPlayer.openMenu(pState.getMenuProvider(pLevel,pPos));
-            BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
-            if (blockEntity instanceof DifurnaceEntity){
-                pPlayer.openMenu((MenuProvider) blockEntity);
-            }
-            return InteractionResult.CONSUME;
-        }else {
-            return InteractionResult.SUCCESS;
-        }
-    }
+//    @Override
+//    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
+//        if (!pLevel.isClientSide){
+////            pPlayer.openMenu(pState.getMenuProvider(pLevel,pPos));
+//            BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
+//            if (blockEntity instanceof DifurnaceEntity){
+//                pPlayer.openMenu((MenuProvider) blockEntity);
+//            }
+//            return InteractionResult.CONSUME;
+//        }else {
+//            return InteractionResult.SUCCESS;
+//        }
+//    }
 
     //继承自baseblockentity
     //在这里返回block对应的blockentitiy
@@ -104,13 +103,4 @@ public class BlockDifurnace extends BaseMachineBlock{
         }
     }
 
-    @Override
-    public RenderShape getRenderShape(BlockState pState) {
-        return RenderShape.MODEL;
-    }
-
-    @Override
-    protected List<Vec3i> getOffsets() {
-        return List.of();
-    }
 }

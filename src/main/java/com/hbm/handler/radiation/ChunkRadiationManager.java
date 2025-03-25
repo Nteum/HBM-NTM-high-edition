@@ -1,18 +1,17 @@
 package com.hbm.handler.radiation;
 
+import com.hbm.HBM;
 import com.hbm.config.RadiationConfig;
-import com.hbm.main.HBMxx;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.level.ChunkDataEvent;
 import net.minecraftforge.event.level.ChunkEvent;
 import net.minecraftforge.event.level.LevelEvent;
-import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber(modid = HBMxx.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = HBM.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class ChunkRadiationManager {
 	
 	public static ChunkRadiationHandler proxy = new ChunkRadiationHandlerSimple();

@@ -1,19 +1,14 @@
 package com.hbm.registries;
 
-import com.hbm.main.HBMxx;
-import com.hbm.modsetting.resource.ElementUtils;
-import com.hbm.modsetting.resource.OreType;
-import com.hbm.registries.ModBlocks;
+import com.hbm.HBM;
+import com.hbm.api.resource.OreType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.common.Tags;
 
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -34,7 +29,7 @@ public class ModTags {
 
         //注册本模组tag，如果只限于本模组使用，请注册此tag
         private static TagKey<Block> tag(String pName) {
-            return TagKey.create(Registries.BLOCK, HBMxx.hbm(pName));
+            return TagKey.create(Registries.BLOCK, HBM.rl(pName));
         }
         //注册forge tag，如果希望兼容其他模组，请注册此tag
         private static TagKey<Block> forgeTag(String pName) {
@@ -44,8 +39,9 @@ public class ModTags {
     public static class Items{
         public static final TagKey<Item> BATTERY = forgeTag("battery");
         public static final TagKey<Item> CHARGEABLE = forgeTag("chargeable");
+        public static final TagKey<Item> UPGRADE = tag("upgrade");
         private static TagKey<Item> tag(String pName) {
-            return TagKey.create(Registries.ITEM,HBMxx.hbm(pName));
+            return TagKey.create(Registries.ITEM, HBM.rl(pName));
         }
         public static TagKey<Item> forgeTag(String pName) {
             return TagKey.create(Registries.ITEM, new ResourceLocation("forge",pName));

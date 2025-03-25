@@ -2,13 +2,12 @@ package com.hbm.item;
 
 import com.hbm.block.machine.BlockBattery;
 import com.hbm.blockentity.machine.BatteryEntity;
-import com.hbm.modsetting.capability.Capabilities;
-import com.hbm.modsetting.energy.IItemBattery;
-import com.hbm.modsetting.energy.ItemEnergyProxy;
+import com.hbm.capabilities.Capabilities;
+import com.hbm.api.energy.IItemBattery;
+import com.hbm.api.energy.ItemEnergyProxy;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -26,7 +25,7 @@ public class BatteryBlockItem extends BlockItem implements IItemBattery {
     public BatteryBlockItem(Block pBlock, Properties pProperties) {
         super(pBlock, pProperties.defaultDurability(ItemEnergyProxy.DEFAULT_DAMAGE));
         if (pBlock instanceof BlockBattery battery){
-            long capacity = battery.maxPower;
+            long capacity = battery.type.getMaxEnergy();
 //            long capacity = 10000;
             itemEnergyProxy = new ItemEnergyProxy(capacity,capacity,capacity);
         }else {

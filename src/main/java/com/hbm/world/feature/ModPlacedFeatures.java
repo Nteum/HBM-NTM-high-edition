@@ -1,20 +1,14 @@
 package com.hbm.world.feature;
 
-import com.hbm.main.HBMxx;
+import com.hbm.HBM;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
-import net.minecraft.data.worldgen.Structures;
-import net.minecraft.data.worldgen.placement.OrePlacements;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.placement.*;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.RegistryObject;
 
 import java.util.List;
 
@@ -51,7 +45,7 @@ public class ModPlacedFeatures {
     }
 
     public static ResourceKey<PlacedFeature> createKey(String pKey) {
-        return ResourceKey.create(Registries.PLACED_FEATURE, HBMxx.hbm(pKey));
+        return ResourceKey.create(Registries.PLACED_FEATURE, HBM.rl(pKey));
     }
     private static List<PlacementModifier> orePlacement(PlacementModifier p_195347_, PlacementModifier p_195348_) {
         return List.of(p_195347_, InSquarePlacement.spread(), p_195348_, BiomeFilter.biome());

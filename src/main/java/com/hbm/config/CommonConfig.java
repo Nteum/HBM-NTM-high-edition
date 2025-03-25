@@ -1,12 +1,8 @@
 package com.hbm.config;
 
-import com.hbm.main.HBMxx;
-import net.minecraftforge.common.ForgeConfig;
-import net.minecraftforge.common.ForgeConfigSpec;
-
 import java.util.Locale;
 
-import static com.hbm.main.HBMxx.LOGGER;
+import static com.hbm.HBM.LOGGER;
 
 public class CommonConfig {
 	

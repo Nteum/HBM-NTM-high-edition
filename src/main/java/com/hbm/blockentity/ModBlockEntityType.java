@@ -1,19 +1,17 @@
 package com.hbm.blockentity;
 
 import com.hbm.blockentity.machine.*;
-import com.hbm.main.HBMxx;
-import com.hbm.modsetting.multiblock.DummibleBlockEntity;
+import com.hbm.HBM;
+import com.hbm.blockentity.base.DummibleBlockEntity;
 import com.hbm.registries.ModBlocks;
 import com.hbm.blockentity.weapon.NukeBombFatEntity;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
 public class ModBlockEntityType {
-    public static final DeferredRegister<BlockEntityType<?>> REGISTER = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, HBMxx.MODID);
+    public static final DeferredRegister<BlockEntityType<?>> REGISTER = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, HBM.MODID);
 
     public static final RegistryObject<BlockEntityType<DifurnaceEntity>> DIFURNACE_ENTITY =
             REGISTER.register("difurnace_entity",()-> BlockEntityType.Builder.of(DifurnaceEntity::new, ModBlocks.machine_difurnace.get()).build(null));

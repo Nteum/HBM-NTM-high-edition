@@ -1,8 +1,7 @@
 package com.hbm.recipe;
 
 import com.google.gson.JsonObject;
-import com.hbm.main.HBMxx;
-import com.hbm.recipe.loader.SerializableRecipe;
+import com.hbm.HBM;
 import com.hbm.registries.ModItems;
 import com.hbm.utils.Tuple;
 import net.minecraft.advancements.Advancement;
@@ -88,7 +87,7 @@ public class BlastFurnaceRecipe implements Recipe<Container> {
 
     public static class Serializer implements RecipeSerializer<BlastFurnaceRecipe>{
         public static final Serializer INSTANCE = new Serializer();
-        public static final ResourceLocation ID = new ResourceLocation(HBMxx.MODID,TYPE);
+        public static final ResourceLocation ID = new ResourceLocation(HBM.MODID,TYPE);
         //从json解码出这个recipe类型
         @Override
         public BlastFurnaceRecipe fromJson(ResourceLocation pRecipeId, JsonObject pJson) {
@@ -193,7 +192,7 @@ public class BlastFurnaceRecipe implements Recipe<Container> {
             @Override
             public void serializeRecipeData(JsonObject pJson) {
                 //添加type
-                pJson.addProperty("type",HBMxx.MODID + ":" + BlastFurnaceRecipe.TYPE);
+                pJson.addProperty("type", HBM.MODID + ":" + BlastFurnaceRecipe.TYPE);
                 //添加group
                 if (!this.group.isEmpty()) {
                     pJson.addProperty("group", this.group);
@@ -248,7 +247,7 @@ public class BlastFurnaceRecipe implements Recipe<Container> {
     public static void registerRecipe(Consumer<FinishedRecipe> pwriter, ItemLike input1,ItemLike input2,ItemStack output){
         BlastFurnaceRecipe.BlastFurnaceRecipeBuilder.blast(output.getItem(),output.getCount())
                 .input(input1,1).input(input2,1)
-                .save(pwriter,new ResourceLocation(HBMxx.MODID,BlastFurnaceRecipe.TYPE + "_" + recipeCnt++));
+                .save(pwriter,new ResourceLocation(HBM.MODID,BlastFurnaceRecipe.TYPE + "_" + recipeCnt++));
     }
 
 }

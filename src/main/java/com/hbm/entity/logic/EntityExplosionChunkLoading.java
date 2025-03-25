@@ -1,6 +1,6 @@
 package com.hbm.entity.logic;
 
-import com.hbm.main.HBMxx;
+import com.hbm.HBM;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -32,13 +32,13 @@ public abstract class EntityExplosionChunkLoading extends Entity {
     public void loadChunk(int x, int z){
         if (this.chunkPos == null){
             chunkPos = new ChunkPos(x,z);
-            ForgeChunkManager.forceChunk(serverLevel, HBMxx.MODID,this,x,z,true,true);
+            ForgeChunkManager.forceChunk(serverLevel, HBM.MODID,this,x,z,true,true);
         }
     }
 
     public void clearChunkLoader(){
         if (!level().isClientSide && serverLevel != null && chunkPos != null){
-            ForgeChunkManager.forceChunk(serverLevel, HBMxx.MODID,this,chunkPos.x,chunkPos.z,false,false);
+            ForgeChunkManager.forceChunk(serverLevel, HBM.MODID,this,chunkPos.x,chunkPos.z,false,false);
         }
     }
 }

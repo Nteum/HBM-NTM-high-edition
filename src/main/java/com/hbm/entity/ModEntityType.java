@@ -1,10 +1,10 @@
 package com.hbm.entity;
 
+import com.hbm.HBM;
 import com.hbm.entity.effect.EntityBlackHole;
 import com.hbm.entity.effect.EntityNukeTorex;
 import com.hbm.entity.logic.EntityNukeExplosionMK5;
 import com.hbm.entity.weapon.grenade.*;
-import com.hbm.main.HBMxx;
 //import com.hbm.entity.logic.GrenadeGeneticEntity;
 //import com.hbm.entity.logic.NukeExplodeEntity;
 import net.minecraft.resources.ResourceLocation;
@@ -17,7 +17,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 /** 模型的实体种类 */
 public class ModEntityType {
-    public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, HBMxx.MODID);
+    public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, HBM.MODID);
     /**
      * 手榴弹实体
      * */
@@ -47,6 +47,6 @@ public class ModEntityType {
     public static final RegistryObject<EntityType<TestEntity>> TEST_ENTITY = register("test_entity",EntityType.Builder.<TestEntity>of(TestEntity::new, MobCategory.MISC));
 
     private static <T extends Entity> RegistryObject<EntityType<T>> register(String pKey, EntityType.Builder<T> pBuilder) {
-        return ENTITY_TYPES.register(pKey,()->pBuilder.build(new ResourceLocation(HBMxx.MODID,pKey).toString()));
+        return ENTITY_TYPES.register(pKey,()->pBuilder.build(new ResourceLocation(HBM.MODID,pKey).toString()));
     }
 }

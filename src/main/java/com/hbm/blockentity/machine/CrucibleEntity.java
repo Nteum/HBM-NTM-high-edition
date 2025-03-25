@@ -1,6 +1,7 @@
 package com.hbm.blockentity.machine;
 
 import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.base.BaseMachineBlockEntity;
 import com.hbm.registries.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

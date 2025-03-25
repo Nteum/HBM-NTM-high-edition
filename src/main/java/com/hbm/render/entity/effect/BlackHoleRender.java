@@ -1,11 +1,10 @@
 package com.hbm.render.entity.effect;
 
+import com.hbm.HBM;
 import com.hbm.entity.effect.EntityBlackHole;
-import com.hbm.main.HBMxx;
 import com.hbm.model.Models;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.BufferBuilder;
-import com.mojang.blaze3d.vertex.BufferUploader;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
@@ -16,9 +15,7 @@ import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.client.renderer.block.ModelBlockRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.entity.LightningBoltRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelManager;
 import net.minecraft.resources.ResourceLocation;
@@ -28,18 +25,14 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.model.data.ModelData;
 import org.joml.Matrix3f;
 import org.joml.Matrix4f;
-import org.joml.Quaternionf;
-import org.lwjgl.opengl.GL11;
-
-import javax.swing.*;
 
 @OnlyIn(Dist.CLIENT)
 public class BlackHoleRender extends EntityRenderer<EntityBlackHole> {
     public static BakedModel model_sphere;
-    public static final ResourceLocation BLACK_HOLE_TEXTURE = new ResourceLocation(HBMxx.MODID,"textures/models/black_hole.png");
-    public static final ResourceLocation SWIRL_TEXTURE = new ResourceLocation(HBMxx.MODID,"textures/entity/bhole.png");
-    public static final ResourceLocation DISC_TEXTURE = new ResourceLocation(HBMxx.MODID,"textures/entity/bhole_d.png");
-    public static final ResourceLocation DEFAULT_TEXTURE = new ResourceLocation(HBMxx.MODID,"textures/models/white_default_texture.png");
+    public static final ResourceLocation BLACK_HOLE_TEXTURE = new ResourceLocation(HBM.MODID,"textures/models/black_hole.png");
+    public static final ResourceLocation SWIRL_TEXTURE = new ResourceLocation(HBM.MODID,"textures/entity/bhole.png");
+    public static final ResourceLocation DISC_TEXTURE = new ResourceLocation(HBM.MODID,"textures/entity/bhole_d.png");
+    public static final ResourceLocation DEFAULT_TEXTURE = new ResourceLocation(HBM.MODID,"textures/models/white_default_texture.png");
     public BlackHoleRender(EntityRendererProvider.Context pContext) {
         super(pContext);
         ModelManager modelManager = Minecraft.getInstance().getModelManager();

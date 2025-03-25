@@ -1,18 +1,15 @@
 package com.hbm.gui.screen;
 
-import com.hbm.blockentity.machine.BatteryEntity;
 import com.hbm.gui.menu.BatteryMenu;
-import com.hbm.main.HBMxx;
+import com.hbm.HBM;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.components.Button;
-import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
 public class BatteryGui extends AbstractContainerScreen<BatteryMenu> {
-    private static final ResourceLocation TEXTURE = HBMxx.hbm("textures/gui/gui_battery.png");
+    private static final ResourceLocation TEXTURE = HBM.rl("textures/gui/gui_battery.png");
     public BatteryGui(BatteryMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
     }

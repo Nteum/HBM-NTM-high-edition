@@ -1,6 +1,6 @@
 //package com.hbm.handler;
 //
-//import com.hbm.block.machine.BaseMachineBlock;
+//import com.hbm.block.base.BaseMachineBlock;
 //import net.minecraft.core.BlockPos;
 //import net.minecraft.core.Direction;
 //import net.minecraft.core.Vec3i;

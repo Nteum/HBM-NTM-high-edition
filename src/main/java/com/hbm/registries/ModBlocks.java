@@ -9,7 +9,7 @@ import com.hbm.block.weapon.NukeCustom;
 import com.hbm.block.weapon.NukeFat;
 import com.hbm.fluid.ModFluids;
 import com.hbm.item.BatteryBlockItem;
-import com.hbm.modsetting.multiblock.DummibleBlock;
+import com.hbm.block.base.DummibleBlock;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -23,12 +23,10 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-import java.util.function.BiFunction;
-import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.function.ToIntFunction;
 
-import static com.hbm.main.HBMxx.MODID;
+import static com.hbm.HBM.MODID;
 
 public class ModBlocks {
     //方块注册表
@@ -40,10 +38,10 @@ public class ModBlocks {
     public static final RegistryObject<Block> machine_electric_boiler = registerBlockWithItem("machine_electric_boiler", ()->new BlockElectricFurnace(BlockBehaviour.Properties.of().lightLevel(litEmission(14))));
     public static final RegistryObject<Block> machine_nuclear_boiler = registerBlockWithItem("machine_nuclear_boiler", ()->new BlockElectricFurnace(BlockBehaviour.Properties.of().lightLevel(litEmission(15))));
     public static final RegistryObject<Block> machine_press = registerBlockWithItem("machine_press", ()->new BlockPress(BlockBehaviour.Properties.of()));
-    public static final RegistryObject<Block> machine_battery = registerBattery("machine_battery",()->new BlockBattery(BlockBehaviour.Properties.of(),1_000_000L));
-    public static final RegistryObject<Block> machine_lithium_battery = registerBattery("machine_lithium_battery",()->new BlockBattery(BlockBehaviour.Properties.of(),50_000_000L));
-    public static final RegistryObject<Block> machine_schrabidium_battery = registerBattery("machine_schrabidium_battery",()->new BlockBattery(BlockBehaviour.Properties.of(),25_000_000_000L));
-    public static final RegistryObject<Block> machine_dineutronium_battery = registerBattery("machine_dineutronium_battery",()->new BlockBattery(BlockBehaviour.Properties.of(),1_000_000_000_000L));
+    public static final RegistryObject<Block> machine_battery = registerBattery("machine_battery",()->new BlockBattery(BlockBehaviour.Properties.of(), BlockBattery.BatteryType.BASIC));
+    public static final RegistryObject<Block> machine_lithium_battery = registerBattery("machine_lithium_battery",()->new BlockBattery(BlockBehaviour.Properties.of(), BlockBattery.BatteryType.LITHIUM));
+    public static final RegistryObject<Block> machine_schrabidium_battery = registerBattery("machine_schrabidium_battery",()->new BlockBattery(BlockBehaviour.Properties.of(), BlockBattery.BatteryType.SCHRABIDIUM));
+    public static final RegistryObject<Block> machine_dineutronium_battery = registerBattery("machine_dineutronium_battery",()->new BlockBattery(BlockBehaviour.Properties.of(), BlockBattery.BatteryType.DINEUTRONIUM));
     public static final RegistryObject<Block> anvil_iron = registerBlockWithItem("anvil_iron",()->new BlockAnvil(BlockBehaviour.Properties.of()));
     public static final RegistryObject<Block> anvil_desh = registerBlockWithItem("anvil_desh",()->new BlockAnvil(BlockBehaviour.Properties.of()));
     public static final RegistryObject<Block> anvil_bismuth = registerBlockWithItem("anvil_bismuth",()->new BlockAnvil(BlockBehaviour.Properties.of()));

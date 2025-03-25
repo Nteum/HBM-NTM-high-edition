@@ -1,5 +1,5 @@
 import com.google.gson.Gson;
-import com.hbm.main.HBMxx;
+import com.hbm.HBM;
 import com.hbm.recipe.BlastFurnaceRecipe;
 import net.minecraft.resources.ResourceLocation;
 
@@ -14,7 +14,7 @@ public class test02 {
 //        ItemStack item1 = new ItemStack(Items.BAMBOO_PLANKS,1);
 //        ItemStack item2 = new ItemStack(Items.APPLE,2);
 //        ItemStack item3 = new ItemStack(Items.ENCHANTED_GOLDEN_APPLE);
-        ResourceLocation id = new ResourceLocation(HBMxx.MODID, BlastFurnaceRecipe.TYPE);
+        ResourceLocation id = new ResourceLocation(HBM.MODID, BlastFurnaceRecipe.TYPE);
 
         Map<Object,Object> map = new HashMap<>();
         map.put("type",id.toString());

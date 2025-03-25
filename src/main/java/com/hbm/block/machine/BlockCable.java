@@ -6,6 +6,7 @@ import com.hbm.registries.ModBlocks;
 import com.hbm.registries.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -27,6 +28,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.Objects;
 
 public class BlockCable extends PipeBlock implements EntityBlock{
@@ -69,11 +71,11 @@ public class BlockCable extends PipeBlock implements EntityBlock{
 //        BlockState downState = level.getBlockState(down);
         return Objects.requireNonNull(super.getStateForPlacement(pContext))
                 .setValue(EAST,this.connectsTo(clickedPos,level,Direction.WEST))
-                .setValue(WEST,this.connectsTo(west,level,Direction.EAST))
-                .setValue(NORTH,this.connectsTo(north,level,Direction.SOUTH))
-                .setValue(SOUTH,this.connectsTo(south,level,Direction.NORTH))
-                .setValue(UP,this.connectsTo(up,level,Direction.DOWN))
-                .setValue(DOWN,this.connectsTo(down,level,Direction.UP));
+                .setValue(WEST,this.connectsTo(clickedPos,level,Direction.EAST))
+                .setValue(NORTH,this.connectsTo(clickedPos,level,Direction.SOUTH))
+                .setValue(SOUTH,this.connectsTo(clickedPos,level,Direction.NORTH))
+                .setValue(UP,this.connectsTo(clickedPos,level,Direction.DOWN))
+                .setValue(DOWN,this.connectsTo(clickedPos,level,Direction.UP));
     }
     /** 针对特定方向更新状态 */
     @Override
@@ -96,8 +98,8 @@ public class BlockCable extends PipeBlock implements EntityBlock{
         BlockPos neighbourPos = clickedPos.relative(direction);
         BlockState state = pLevel.getBlockState(neighbourPos);
         return state.getBlock() instanceof BlockCable && pLevel.getBlockState(clickedPos).getBlock() instanceof BlockCable
-                && !((CableEntity) Objects.requireNonNull(pLevel.getBlockEntity(neighbourPos))).forbidDir.contains(facingDir(direction))
-                && !((CableEntity) Objects.requireNonNull(pLevel.getBlockEntity(clickedPos))).forbidDir.contains(direction)
+                && !(((CableEntity) Objects.requireNonNull(pLevel.getBlockEntity(neighbourPos))).forbidDir[facingDir(direction).get3DDataValue()]==1)
+                && !(((CableEntity) Objects.requireNonNull(pLevel.getBlockEntity(clickedPos))).forbidDir[direction.get3DDataValue()]==1)
                 || state.hasBlockEntity() && pLevel.getBlockEntity(neighbourPos).getCapability(ForgeCapabilities.ENERGY).isPresent();
     }
 
@@ -124,11 +126,11 @@ public class BlockCable extends PipeBlock implements EntityBlock{
                     BlockState neighbourState = pLevel.getBlockState(pPos.relative(hitDir));
                     boolean flag1 = neighbourState.is(ModBlocks.RED_CABLE.get());
                     boolean flag2 = false;
-                    if (cableEntity.forbidDir.contains(hitDir)){
-                        cableEntity.forbidDir.remove(hitDir);
+                    if (cableEntity.forbidDir[hitDir.get3DDataValue()]==1){
+                        cableEntity.forbidDir[hitDir.get3DDataValue()]=0;
                         flag2 = true;
                     }else {
-                        cableEntity.forbidDir.add(hitDir);
+                        cableEntity.forbidDir[hitDir.get3DDataValue()]=1;
                     }
                     if (flag1){
                         CableEntity neiEntity = (CableEntity)pLevel.getBlockEntity(pPos.relative(hitDir));
@@ -136,7 +138,7 @@ public class BlockCable extends PipeBlock implements EntityBlock{
                             pState = pState.setValue(PROPERTY_BY_DIRECTION.get(hitDir),true);
                             neighbourState = neighbourState.setValue(PROPERTY_BY_DIRECTION.get(facingDir(hitDir)),true);
                             assert neiEntity != null;
-                            neiEntity.forbidDir.remove(facingDir(hitDir));
+                            neiEntity.forbidDir[facingDir(hitDir).get3DDataValue()]=0;
                         }else {
                             pState = pState.setValue(PROPERTY_BY_DIRECTION.get(hitDir),false);
                             neighbourState = neighbourState.setValue(PROPERTY_BY_DIRECTION.get(facingDir(hitDir)),false);
@@ -145,6 +147,10 @@ public class BlockCable extends PipeBlock implements EntityBlock{
                         pLevel.setBlock(pPos.relative(hitDir),neighbourState,10);
                     }
                 }
+            }else if (pHand.equals(InteractionHand.MAIN_HAND)&&!pPlayer.getItemInHand(pHand).is(ModBlocks.RED_CABLE.get().asItem())){
+                //右键显示连接
+                List<BlockPos> connection = ((CableEntity) pLevel.getBlockEntity(pPos)).getConnection();
+                pPlayer.sendSystemMessage(Component.literal(connection.toString()));
             }
             //只有返回pass才能正常放置物品
             return InteractionResult.PASS;

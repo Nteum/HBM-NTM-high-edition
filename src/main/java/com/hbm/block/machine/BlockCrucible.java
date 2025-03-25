@@ -1,5 +1,6 @@
 package com.hbm.block.machine;
 
+import com.hbm.block.base.BaseMachineBlock;
 import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.blockentity.machine.CrucibleEntity;
 import com.hbm.blockentity.machine.DifurnaceEntity;
@@ -7,7 +8,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;

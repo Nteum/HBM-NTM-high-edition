@@ -1,16 +1,11 @@
 package com.hbm.item;
 
-import com.hbm.modsetting.capability.HBMEnergyStorage;
-import com.hbm.modsetting.energy.IItemBattery;
-import com.hbm.modsetting.energy.ItemEnergyProxy;
+import com.hbm.api.energy.IItemBattery;
+import com.hbm.api.energy.ItemEnergyProxy;
 import com.hbm.registries.ModItems;
-import com.hbm.registries.ModTags;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.LongTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.items.wrapper.InvWrapper;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;

@@ -1,6 +1,6 @@
 package api;
 
-import com.hbm.main.HBMxx;
+import com.hbm.HBM;
 import com.hbm.registries.ModItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -104,8 +104,8 @@ public class HBMTags {
 
 
         //一般物品
-        public static final TagKey<Item> COKE = net.minecraft.tags.ItemTags.create(new ResourceLocation(HBMxx.MODID,"coke"));
-        public static final TagKey<Item> BRIQUETTE = net.minecraft.tags.ItemTags.create(new ResourceLocation(HBMxx.MODID,"briquette"));
+        public static final TagKey<Item> COKE = net.minecraft.tags.ItemTags.create(new ResourceLocation(HBM.MODID,"coke"));
+        public static final TagKey<Item> BRIQUETTE = net.minecraft.tags.ItemTags.create(new ResourceLocation(HBM.MODID,"briquette"));
         public HBMItemTags(PackOutput pOutput, CompletableFuture<HolderLookup.Provider> pLookupProvider, CompletableFuture<TagLookup<Block>> pBlockTags, String modId, @Nullable ExistingFileHelper existingFileHelper) {
             super(pOutput, pLookupProvider, pBlockTags, modId, existingFileHelper);
         }
@@ -115,6 +115,6 @@ public class HBMTags {
             tag(BRIQUETTE).add(ModItems.briquette_coal.get(),ModItems.briquette_lignite.get(),ModItems.briquette_wood.get());
         }
 
-        static ResourceLocation hbm(String s){return new ResourceLocation(HBMxx.MODID,s);}
+        static ResourceLocation hbm(String s){return new ResourceLocation(HBM.MODID,s);}
     }
 }

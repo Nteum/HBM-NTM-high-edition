@@ -1,6 +1,6 @@
 package com.hbm.datagen.model;
 
-import com.hbm.main.HBMxx;
+import com.hbm.HBM;
 import com.hbm.registries.ModItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
@@ -66,6 +66,6 @@ public class ItemModelGen extends ItemModelProvider {
 
     public void registerOrdinaryItemModel(String key){
         this.singleTexture(key,new ResourceLocation("item/generated"),"layer0"
-                ,new ResourceLocation(HBMxx.MODID, "item/" + key));
+                ,new ResourceLocation(HBM.MODID, "item/" + key));
     }
 }

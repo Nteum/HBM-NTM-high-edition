@@ -5,7 +5,7 @@ package com.hbm.model.entity;
 // Paste this class into your mod and generate all required imports
 
 
-import com.hbm.main.HBMxx;
+import com.hbm.HBM;
 import com.hbm.entity.TestEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -18,7 +18,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class TestEntityModel extends EntityModel<TestEntity> {
     // This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(HBMxx.MODID, "test_entity"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(HBM.MODID, "test_entity"), "main");
     private final ModelPart bb_main;
 
     public TestEntityModel(ModelPart root) {

@@ -1,6 +1,6 @@
 package com.hbm.gui.screen;
 
-import com.hbm.main.HBMxx;
+import com.hbm.HBM;
 import com.hbm.blockentity.machine.DifurnaceEntity;
 import com.hbm.gui.menu.DifurnaceMenu;
 import net.minecraft.client.gui.GuiGraphics;
@@ -10,7 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
 public class DifurnaceGui extends AbstractContainerScreen<DifurnaceMenu> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(HBMxx.MODID , "textures/gui/difurnace_gui.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(HBM.MODID , "textures/gui/difurnace_gui.png");
 
     public DifurnaceGui(DifurnaceMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);

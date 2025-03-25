@@ -1,7 +1,6 @@
 package com.hbm.render.blockentity;
 
 
-import com.hbm.blockentity.machine.AssemblerEntity;
 import com.hbm.model.Models;
 import com.hbm.registries.ModItems;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -21,6 +20,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.client.model.obj.ObjLoader;
+import com.hbm.blockentity.machine.AssemblerEntity;
 
 import static com.hbm.render.blockentity.RenderUtils.renderBlockModel;
 

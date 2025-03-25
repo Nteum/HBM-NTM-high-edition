@@ -2,11 +2,9 @@ package com.hbm.registries;
 
 import com.hbm.commands.RadiationCommand;
 import com.hbm.commands.TestCommand;
-import com.hbm.main.HBMxx;
 import com.mojang.brigadier.CommandDispatcher;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
-import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;

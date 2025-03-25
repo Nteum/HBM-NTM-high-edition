@@ -1,6 +1,6 @@
 package com.hbm.block.weapon;
 
-import com.hbm.block.machine.BaseMachineBlock;
+import com.hbm.block.base.BaseMachineBlock;
 import com.hbm.blockentity.weapon.NukeBombEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;

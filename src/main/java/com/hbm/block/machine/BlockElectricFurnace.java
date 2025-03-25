@@ -1,7 +1,7 @@
 package com.hbm.block.machine;
 
 
-import com.hbm.main.HBMxx;
+import com.hbm.HBM;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
@@ -38,7 +38,7 @@ public class BlockElectricFurnace extends BaseEntityBlock {
         if (pLevel.isClientSide) {
             return InteractionResult.SUCCESS;
         } else {
-            HBMxx.LOGGER.info("electric furnace clicked");
+            HBM.LOGGER.info("electric furnace clicked");
             Boolean value = pState.getValue(LIT);
             pState.setValue(LIT,!value);
             pLevel.setBlockAndUpdate(pPos,pState);

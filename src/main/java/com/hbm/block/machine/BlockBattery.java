@@ -1,39 +1,29 @@
 package com.hbm.block.machine;
 
-import com.google.common.collect.Lists;
 import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.blockentity.machine.BatteryEntity;
-import com.hbm.blockentity.machine.DifurnaceEntity;
-import com.hbm.item.BatteryBlockItem;
-import com.hbm.modsetting.capability.Capabilities;
-import com.hbm.modsetting.energy.ItemEnergyProxy;
-import com.hbm.registries.ModBlocks;
+import com.hbm.capabilities.Capabilities;
+import com.hbm.api.energy.ItemEnergyProxy;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.NonNullList;
 import net.minecraft.world.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Tier;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.ChestBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
 public class BlockBattery extends BaseSingleBlockMachine {
-    public long maxPower;
-    public BlockBattery(Properties pProperties, long maxPower) {
+    public final BatteryType type;
+    public BlockBattery(Properties pProperties, BatteryType type) {
         super(pProperties);
-        this.maxPower = maxPower;
+        this.type = type;
     }
 
     @Override
@@ -81,5 +71,21 @@ public class BlockBattery extends BaseSingleBlockMachine {
     public List<ItemStack> getDrops(BlockState pState, LootParams.Builder pParams) {
 //        return super.getDrops(pState, pParams);
         return List.of();
+    }
+
+    public enum BatteryType{
+        BASIC(1_000_000L,10_000L),
+        LITHIUM(50_000_000L,500_000L),
+        SCHRABIDIUM(25_000_000_000L,2_500_000_000L),
+        DINEUTRONIUM(1_000_000_000_000L,1_000_000_000L),
+        CREATIVE(Long.MAX_VALUE,Long.MAX_VALUE);
+        private final long baseMaxEnergy;
+        private final long baseOutput;
+        BatteryType(long maxEnergy,long maxOutput){
+            baseMaxEnergy = maxEnergy;
+            baseOutput = maxOutput;
+        }
+        public long getMaxEnergy(){return baseMaxEnergy;}
+        public long getOutput(){return baseOutput;}
     }
 }
