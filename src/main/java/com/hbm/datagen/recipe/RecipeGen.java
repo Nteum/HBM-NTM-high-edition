@@ -1,6 +1,7 @@
 package com.hbm.datagen.recipe;
 
 import com.hbm.HBM;
+import com.hbm.datagen.recipe.provider.AssemblerRecipeProvider;
 import com.hbm.recipe.BlastFurnaceRecipe;
 import com.hbm.registries.ModItems;
 import net.minecraft.data.PackOutput;
@@ -9,26 +10,39 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
+import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 import java.util.function.Consumer;
 
 public class RecipeGen extends RecipeProvider {
     private static Consumer<FinishedRecipe> pwriter;
+    private final ExistingFileHelper existingFileHelper;
+    private final List<ISubRecipeProvider> compatProviders = new ArrayList<>();
     public static int recipeCnt;
-    public RecipeGen(PackOutput pOutput) {
+    public RecipeGen(PackOutput pOutput, ExistingFileHelper existingFileHelper, String modid) {
         super(pOutput);
         recipeCnt = 0;
+        this.existingFileHelper = existingFileHelper;
     }
 
     @Override
     protected void buildRecipes(Consumer<FinishedRecipe> pWriter) {
         pwriter = pWriter;
+        getSubRecipeProviders().forEach(subRecipeProvider -> subRecipeProvider.addRecipes(pwriter));
+
         BlastFurnaceRecipe.addDefaultRecipe(pWriter);
         addShapelessRecipe(ModItems.nugget_zirconium.get(),9,ModItems.ingot_zirconium.get(),ModItems.ingot_zirconium.get(),1);
         addShapelessRecipe(ModItems.ingot_zirconium.get(),1,ModItems.ingot_zirconium.get(),ModItems.nugget_zirconium.get(),9);
+    }
+    protected List<ISubRecipeProvider> getSubRecipeProviders() {
+        return List.of(
+                new AssemblerRecipeProvider()
+        );
     }
     //添加有序配方（默认加入MISC组，并使用获得物品来解锁，通过输入物品来区分）
     private static void addShapedRecipe(ItemLike output, int outnum, ItemLike crit, String pattern, Object... input){

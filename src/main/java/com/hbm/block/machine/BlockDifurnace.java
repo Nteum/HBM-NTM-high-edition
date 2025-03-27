@@ -24,6 +24,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 
@@ -31,6 +32,7 @@ import java.util.List;
 
 public class BlockDifurnace extends BaseMachineBlock {
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
+//    public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public BlockDifurnace(Properties pProperties) {
         super(pProperties);
         //设置状态的初始值

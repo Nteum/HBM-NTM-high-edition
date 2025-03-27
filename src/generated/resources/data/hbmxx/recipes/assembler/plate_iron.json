@@ -1,0 +1,19 @@
+{
+  "type": "hbmxx:assembler",
+  "ingredients": [
+    {
+      "item": "minecraft:iron_ingot"
+    },
+    {
+      "item": "minecraft:iron_ingot"
+    },
+    {
+      "item": "minecraft:iron_ingot"
+    }
+  ],
+  "power": 30,
+  "result": {
+    "count": 2,
+    "item": "hbmxx:plate_iron"
+  }
+}

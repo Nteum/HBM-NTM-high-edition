@@ -3,6 +3,7 @@ package com.hbm.block.base;
 import com.hbm.blockentity.base.BaseMachineBlockEntity;
 //import com.hbm.handler.MoltiblockHandler;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
@@ -13,14 +14,24 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
 
 /**
  * 大部分机器的父类，完成一些机器共有的工作。
  * */
-public abstract class BaseMachineBlock extends HorizontalDirectionalBlock implements EntityBlock {
+public abstract class BaseMachineBlock extends BaseEntityBlock implements EntityBlock {
+    public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     protected BaseMachineBlock(Properties pProperties) {
         super(pProperties);
+        this.registerDefaultState(this.getStateDefinition().any().setValue(FACING, Direction.SOUTH));
+    }
+
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
+        pBuilder.add(FACING);
     }
 
     /** 右键 */

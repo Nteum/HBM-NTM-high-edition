@@ -8,6 +8,7 @@ import com.hbm.datagen.model.ItemModelGen;
 import com.hbm.datagen.recipe.RecipeGen;
 import com.hbm.datagen.tag.BlockTagsGen;
 import com.hbm.datagen.tag.ItemTagsGen;
+import com.hbm.recipe.ModRecipeType;
 import com.hbm.registries.ModBlocks;
 import com.hbm.fluid.ModFluidTypes;
 import com.hbm.fluid.ModFluids;
@@ -76,6 +77,7 @@ public class HBM {
         ModBlockEntityType.REGISTER.register(modEventBus);
         ModEntityType.ENTITY_TYPES.register(modEventBus);
         ModMenuType.MOD_MENU_TYPES.register(modEventBus);
+        ModRecipeType.RECIPE_TYPE.register(modEventBus);
         ModRecipes.SERIALIZER.register(modEventBus);
         ModFluidTypes.FLUID_TYPES.register(modEventBus);
         ModFluids.FLUIDS.register(modEventBus);
@@ -109,7 +111,7 @@ public class HBM {
         /** 服务端数据生成，生成到data目录下 */
         BlockTagsGen blockTagsGen = new BlockTagsGen(packOutput, lookupProvider, MODID, helper);
         generator.addProvider(event.includeServer(),new ForgeAdvancementProvider(packOutput,lookupProvider,helper, List.of(new AdvacementGen())));
-        generator.addProvider(event.includeServer(), new RecipeGen(packOutput));
+        generator.addProvider(event.includeServer(), new RecipeGen(packOutput,helper,MODID));
         generator.addProvider(event.includeServer(), blockTagsGen);
         generator.addProvider(event.includeServer(), new ItemTagsGen(packOutput,lookupProvider,blockTagsGen.contentsGetter(),MODID,helper));
         generator.addProvider(event.includeServer(), new TagDmgTypeGen(packOutput,lookupProvider));

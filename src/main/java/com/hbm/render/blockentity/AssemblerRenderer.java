@@ -1,6 +1,7 @@
 package com.hbm.render.blockentity;
 
 
+import com.hbm.blockentity.machine.AssemblerEntity;
 import com.hbm.model.Models;
 import com.hbm.registries.ModItems;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -19,8 +20,6 @@ import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.client.model.obj.ObjLoader;
-import com.hbm.blockentity.machine.AssemblerEntity;
 
 import static com.hbm.render.blockentity.RenderUtils.renderBlockModel;
 
@@ -64,7 +63,7 @@ public class AssemblerRenderer implements BlockEntityRenderer<AssemblerEntity> {
             }
             case SOUTH -> {
                 rotation = 0;
-                pPoseStack.translate(-1.0D,0,-1.0D);
+                pPoseStack.translate(-0D,0,-0D);
             }
             case EAST -> {
                 rotation = 270;

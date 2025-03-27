@@ -5,8 +5,9 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
 public abstract class BedLikeBlockEntity extends BaseMachineBlockEntity{
-
+    public boolean flagFormed = false;
     protected BedLikeBlockEntity(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState) {
         super(pType, pPos, pBlockState);
     }
+
 }

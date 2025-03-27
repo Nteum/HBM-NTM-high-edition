@@ -102,19 +102,19 @@ public class BatteryEntity extends BaseContainerBlockEntity implements WorldlyCo
                 for (Direction value : Direction.values()) {
                     BlockEntity blockEntity = level.getBlockEntity(pPos.relative(value));
                     if (blockEntity != null){
-                        blockEntity.getCapability(Capabilities.ENERGY).ifPresent(cap->{
+                        blockEntity.getCapability(Capabilities.ENERGY,value.getOpposite()).ifPresent(cap->{
                             long energyStored = cap.getEnergy();
                             long receivedEnergy = entity.ENERGY_STORAGE.insert(energyStored);
                             cap.extract(receivedEnergy);
                         });
                     }
                 }
-            }else if (entity.connPriority == 2){    //放电
+            }else if (entity.connPriority > 0){    //放电
                 if (entity.ENERGY_STORAGE.getEnergy() > 0){
                     for (Direction value : Direction.values()) {
                         BlockEntity blockEntity = level.getBlockEntity(pPos.relative(value));
                         if (blockEntity != null){
-                            blockEntity.getCapability(Capabilities.ENERGY).ifPresent(cap->{
+                            blockEntity.getCapability(Capabilities.ENERGY,value.getOpposite()).ifPresent(cap->{
                                 if (cap.getEnergy() < cap.getMaxEnergy()){
                                     long receivedEnergy = cap.insert(entity.ENERGY_STORAGE.getEnergy());
                                     entity.ENERGY_STORAGE.extract(receivedEnergy);

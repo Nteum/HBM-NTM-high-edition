@@ -2,6 +2,8 @@ package com.hbm.block.machine;
 
 import com.hbm.block.base.BaseMachineBlock;
 import com.hbm.block.base.BedLikeBlock;
+import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.machine.AssemblerEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Vec3i;
 import net.minecraft.world.level.BlockGetter;
@@ -45,11 +47,12 @@ public class BlockAssembler extends BedLikeBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return super.getTicker(pLevel, pState, pBlockEntityType);
+        return pBlockEntityType == ModBlockEntityType.ASSEMBLER_ENTITY.get()?AssemblerEntity::tick : null;
     }
 
     @Override
     protected List<Vec3i> getOffsets() {
+        //                      U  D  N  S  W  E
         return square(new int[]{1, 0, 2 ,1 ,2 ,1});
     }
 }

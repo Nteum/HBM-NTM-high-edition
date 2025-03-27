@@ -1,13 +1,12 @@
 {
-  "type": "hbmxx:blastfurnace_recipe",
+  "type": "hbmxx:net.minecraftforge.registries.RegistryObject@224af559",
   "input1": {
-    "item": "minecraft:iron_ore"
+    "item": "minecraft:iron_ingot"
   },
   "input2": {
     "item": "minecraft:coal"
   },
   "result": {
-    "count": 2,
     "item": "hbmxx:ingot_steel"
   }
 }

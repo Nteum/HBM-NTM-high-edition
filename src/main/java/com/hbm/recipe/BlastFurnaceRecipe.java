@@ -30,8 +30,8 @@ import java.util.function.Consumer;
 import static com.hbm.datagen.recipe.RecipeGen.recipeCnt;
 
 public class BlastFurnaceRecipe implements Recipe<Container> {
-    //配方种类名
-    public static final String TYPE = "blastfurnace_recipe";
+//    //配方种类名
+//    public static final String TYPE = "blastfurnace_recipe";
     //配方自身的名称
     private final ResourceLocation id;
     //配方：（物品1，物品2，产出）
@@ -77,7 +77,7 @@ public class BlastFurnaceRecipe implements Recipe<Container> {
 
     @Override
     public RecipeType<?> getType() {
-        return Type.INSTANCE;
+        return ModRecipeType.BLAST.get();
     }
 
     public static class Type implements RecipeType<BlastFurnaceRecipe>{
@@ -87,7 +87,7 @@ public class BlastFurnaceRecipe implements Recipe<Container> {
 
     public static class Serializer implements RecipeSerializer<BlastFurnaceRecipe>{
         public static final Serializer INSTANCE = new Serializer();
-        public static final ResourceLocation ID = new ResourceLocation(HBM.MODID,TYPE);
+        public static final ResourceLocation ID = HBM.rl(ModRecipeType.BLAST.toString());
         //从json解码出这个recipe类型
         @Override
         public BlastFurnaceRecipe fromJson(ResourceLocation pRecipeId, JsonObject pJson) {
@@ -192,7 +192,7 @@ public class BlastFurnaceRecipe implements Recipe<Container> {
             @Override
             public void serializeRecipeData(JsonObject pJson) {
                 //添加type
-                pJson.addProperty("type", HBM.MODID + ":" + BlastFurnaceRecipe.TYPE);
+                pJson.addProperty("type", HBM.MODID + ":" + ModRecipeType.BLAST.toString());
                 //添加group
                 if (!this.group.isEmpty()) {
                     pJson.addProperty("group", this.group);
@@ -247,7 +247,7 @@ public class BlastFurnaceRecipe implements Recipe<Container> {
     public static void registerRecipe(Consumer<FinishedRecipe> pwriter, ItemLike input1,ItemLike input2,ItemStack output){
         BlastFurnaceRecipe.BlastFurnaceRecipeBuilder.blast(output.getItem(),output.getCount())
                 .input(input1,1).input(input2,1)
-                .save(pwriter,new ResourceLocation(HBM.MODID,BlastFurnaceRecipe.TYPE + "_" + recipeCnt++));
+                .save(pwriter,new ResourceLocation(HBM.MODID,"blast_hbm" + "_" + recipeCnt++));
     }
 
 }

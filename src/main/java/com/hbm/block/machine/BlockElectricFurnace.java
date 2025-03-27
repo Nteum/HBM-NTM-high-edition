@@ -19,8 +19,10 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 
+import static com.hbm.block.base.BaseMachineBlock.FACING;
+
 public class BlockElectricFurnace extends BaseEntityBlock {
-    public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
+
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
     public BlockElectricFurnace(Properties pProperties) {
         super(pProperties);

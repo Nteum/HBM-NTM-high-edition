@@ -1,5 +1,6 @@
 package com.hbm.block.base;
 
+import com.hbm.blockentity.base.BedLikeBlockEntity;
 import com.hbm.blockentity.base.DummibleBlockEntity;
 import com.hbm.registries.ModBlocks;
 import net.minecraft.core.BlockPos;
@@ -27,16 +28,16 @@ import java.util.List;
 public abstract class BedLikeBlock extends BaseMachineBlock {
     protected BedLikeBlock(Properties pProperties) {
         super(pProperties);
-        this.registerDefaultState(this.getStateDefinition().any()
-                .setValue(FACING,Direction.NORTH)
-        );
+//        this.registerDefaultState(this.getStateDefinition().any()
+//                .setValue(FACING,Direction.NORTH)
+//        );
     }
 
-    @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
-        super.createBlockStateDefinition(pBuilder);
-        pBuilder.add(FACING);
-    }
+//    @Override
+//    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
+//        super.createBlockStateDefinition(pBuilder);
+//        pBuilder.add(FACING);
+//    }
 
     @Nullable
     @Override
@@ -73,6 +74,7 @@ public abstract class BedLikeBlock extends BaseMachineBlock {
             }
             //放置方块
             fillSpace(pLevel, pPos, ModBlocks.DUMMIBLE.get().defaultBlockState(), direction, getOffsets());
+            if (pLevel.getBlockEntity(pPos) instanceof BedLikeBlockEntity entity)entity.flagFormed = true;
         }
         super.setPlacedBy(pLevel, pPos, pState, pPlacer, pStack);
     }
@@ -130,7 +132,10 @@ public abstract class BedLikeBlock extends BaseMachineBlock {
         return RenderShape.ENTITYBLOCK_ANIMATED;
     }
     //=====================获取offset的工具函数===================
-    /** 工具函数，用于计算立方体型空间的偏移量 */
+    /** 工具函数，用于计算立方体型空间的偏移量
+     * 输入数组的方向：U  D  N  S  W  E
+     * 别问我为什么，我也想知道bob为什么这么干
+     * */
     public static List<Vec3i> square(int[] dim){
         List<Vec3i> offsets = new ArrayList<>();
         for (int i = -dim[4]; i <= dim[5]; i++) {

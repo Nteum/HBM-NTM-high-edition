@@ -1,5 +1,5 @@
 {
-  "type": "hbmxx:blastfurnace_recipe",
+  "type": "hbmxx:net.minecraftforge.registries.RegistryObject@224af559",
   "input1": {
     "item": "hbmxx:ingot_steel"
   },

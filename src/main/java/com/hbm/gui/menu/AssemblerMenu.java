@@ -17,7 +17,7 @@ import org.jetbrains.annotations.Nullable;
 public class AssemblerMenu extends BaseMachineMenu{
     int[][] inputSlotPos = {{8, 18},{26, 18},{8, 36},{26, 36},{8, 54},{26, 54},{8, 72},{26, 72},{8, 90},{26, 90},{8, 108},{26, 108}};
     public AssemblerMenu(int pContainerId, Inventory pPlayerInventory) {
-        this(pContainerId,pPlayerInventory,new SimpleContainer(18),new SimpleContainerData(2));
+        this(pContainerId,pPlayerInventory,new SimpleContainer(17),new SimpleContainerData(3));
     }
     public AssemblerMenu(int pContainerId, Inventory pPlayerInventory, Container inContainer, ContainerData containerData1) {
         super(ModMenuType.ASSEMBLER_MENU.get(), pContainerId, inContainer, containerData1);
@@ -64,5 +64,15 @@ public class AssemblerMenu extends BaseMachineMenu{
             }
         }
         return itemStack;
+    }
+
+    public int getEnergy(){
+        return containerData.get(1);
+    }
+    public double getProgress(){
+        return (double) containerData.get(0) /100;
+    }
+    public double getEnergyRate(){
+        return (double) containerData.get(1) / containerData.get(2);
     }
 }
