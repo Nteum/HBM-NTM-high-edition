@@ -10,5 +10,7 @@ public class Models {
     public static final ResourceLocation ASSEMBLER_ARM = new ResourceLocation(HBM.MODID,"block/assembler/assembler_arm");
     public static final ResourceLocation CRUCIBLE = new ResourceLocation(HBM.MODID,"block/crucible/crucible");
     public static final ResourceLocation FAT_MAN = new ResourceLocation(HBM.MODID,"block/bomb/fat_man");
+    public static final ResourceLocation BOY = new ResourceLocation(HBM.MODID,"block/bomb/boy");
+    public static final ResourceLocation CUSTOM_NUKE = new ResourceLocation(HBM.MODID,"block/bomb/custom");
     public static final ResourceLocation BLACK_HOLE = new ResourceLocation(HBM.MODID,"block/effect/sphere");
 }

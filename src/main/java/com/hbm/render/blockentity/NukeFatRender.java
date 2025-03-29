@@ -17,6 +17,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
 import static com.hbm.render.blockentity.RenderUtils.renderBlockModel;
 
@@ -32,7 +33,7 @@ public class NukeFatRender implements BlockEntityRenderer<NukeBombEntity> {
         BlockRenderDispatcher blockDispatcher = Minecraft.getInstance().getBlockRenderer();
         ModelBlockRenderer blockRenderer = blockDispatcher.getModelRenderer();
         //根据方向确定旋转角度
-        Direction direction = blockState.getValue(HorizontalDirectionalBlock.FACING);
+        Direction direction = blockState.getValue(BlockStateProperties.HORIZONTAL_FACING);
         int rotation = 0;
         switch (direction){
             case NORTH -> rotation = 0;

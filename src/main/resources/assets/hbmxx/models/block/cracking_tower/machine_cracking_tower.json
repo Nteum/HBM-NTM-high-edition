@@ -3,26 +3,40 @@
   "flip_v": true,
   "model": "hbmxx:models/block/cracking_tower/machine_cracking_tower.obj",
   "textures": {
-    "texture0": "hbmxx:block/machine_cracking_tower"
+    "texture0": "hbmxx:block/machine_cracking_tower",
+    "particle": "hbmxx:block/machine_cracking_tower"
   },
-  "ambientocclusion": true,
+  "gui_light": "side",
   "display": {
-    "firstperson_righthand": {
-      "scale": [0.05,0.05,0.05],
-      "rotation": [0,-22.5,22.5]
+    "gui": {
+      "rotation": [ 30, 225, 0 ],
+      "translation": [ 0, -6, 0],
+      "scale": [0.06,0.06,0.06]
     },
-    "firstperson_lefthand": {
-      "scale": [0.05,0.05,0.05],
-      "rotation": [0,-22.5,-22.5]
+    "ground": {
+      "rotation": [ 0, 0, 0 ],
+      "translation": [ 0, 3, 0],
+      "scale": [0.024,0.024,0.024]
+    },
+    "fixed": {
+      "rotation": [ 0, 0, 0 ],
+      "translation": [ 0, 0, 0],
+      "scale": [0.05,0.05,0.05]
     },
     "thirdperson_righthand": {
-      "scale": [0.05,0.05,0.05],
-      "rotation": [0,-22.5,0]
+      "rotation": [ 75, 45, 0 ],
+      "translation": [ 0, 2.5, 0],
+      "scale": [0.04,0.04,0.04]
     },
-    "gui": {
-      "scale": [0.06,0.06,0.06],
-      "rotation": [0,45,0],
-      "translation": [0,-6,0]
+    "firstperson_righthand": {
+      "rotation": [ 0, 45, 0 ],
+      "translation": [ 0, 0, 0 ],
+      "scale": [0.04,0.04,0.04]
+    },
+    "firstperson_lefthand": {
+      "rotation": [ 0, 225, 0 ],
+      "translation": [ 0, 0, 0 ],
+      "scale": [0.04,0.04,0.04]
     }
   }
 }

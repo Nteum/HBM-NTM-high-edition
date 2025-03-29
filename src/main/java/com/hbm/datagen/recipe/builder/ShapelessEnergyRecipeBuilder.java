@@ -5,74 +5,79 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.hbm.HBM;
 import com.hbm.recipe.ModRecipes;
-import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.CriterionTriggerInstance;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.crafting.CraftingBookCategory;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.ItemLike;
+import net.minecraftforge.common.crafting.StrictNBTIngredient;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.function.Consumer;
-
-public class AssemblerRecipeBuilder implements RecipeBuilder {
+/**
+ * 主要用于装配机等【不需要液体】【不产生副产物】的机器的配方。
+ * 和原版的ShapelessRecipe很像，但机器需要能量，所以额外加一个能量参数。
+ * 虽然名字带energy，但这个属性可以兼用来表示 能量/热量/工作时间 等可以转换成整数的标准。
+ * */
+public class ShapelessEnergyRecipeBuilder implements RecipeBuilder {
     protected final Item result;
     protected final int count;
     /** 虽然名字是power，实际上可以用来表示 能量/热量/工作时间 等用整数表示的概念，反正它们一般都不会一起用 */
-    private long powerConsume;
+    private long number;
     private RecipeCategory category = RecipeCategory.MISC;
     private final List<Ingredient> ingredients = Lists.newArrayList();
     @Nullable
     private String group = "";
-    protected AssemblerRecipeBuilder(RecipeCategory pCategory, ItemLike result, int count) {
-//        super(RegistryUtils.getName(serializer));
+    protected ShapelessEnergyRecipeBuilder(RecipeCategory pCategory, ItemLike result, int count) {
         this.result = result.asItem();
         this.count = count;
     }
     /**
      * Creates a new builder for a shapeless recipe.
      */
-    public static AssemblerRecipeBuilder assembler(ItemLike pResult) {
-        return new AssemblerRecipeBuilder(RecipeCategory.MISC, pResult, 1);
+    public static ShapelessEnergyRecipeBuilder assembler(ItemLike pResult) {
+        return new ShapelessEnergyRecipeBuilder(RecipeCategory.MISC, pResult, 1);
     }
 
     /**
      * Creates a new builder for a shapeless recipe.
      */
-    public static AssemblerRecipeBuilder assembler(ItemLike pResult, int pCount) {
-        return new AssemblerRecipeBuilder(RecipeCategory.MISC, pResult, pCount);
+    public static ShapelessEnergyRecipeBuilder assembler(ItemLike pResult, int pCount) {
+        return new ShapelessEnergyRecipeBuilder(RecipeCategory.MISC, pResult, pCount);
     }
-    public AssemblerRecipeBuilder power(long power){
-        this.powerConsume = power;
+    public ShapelessEnergyRecipeBuilder num(long number){
+        this.number = number;
         return this;
     }
     /**
      * Adds an ingredient that can be any item in the given tag.
      */
-    public AssemblerRecipeBuilder requires(TagKey<Item> pTag) {
+    public ShapelessEnergyRecipeBuilder requires(TagKey<Item> pTag) {
         return this.requires(Ingredient.of(pTag));
     }
 
     /**
      * Adds an ingredient of the given item.
      */
-    public AssemblerRecipeBuilder requires(ItemLike pItem) {
+    public ShapelessEnergyRecipeBuilder requires(ItemLike pItem) {
         return this.requires(pItem, 1);
     }
 
     /**
      * Adds the given ingredient multiple times.
      */
-    public AssemblerRecipeBuilder requires(ItemLike pItem, int pQuantity) {
-        for(int i = 0; i < pQuantity; ++i) {
-            this.requires(Ingredient.of(pItem));
-        }
+    public ShapelessEnergyRecipeBuilder requires(ItemLike pItem, int pQuantity) {
+//        for(int i = 0; i < pQuantity; ++i) {
+//            this.requires(Ingredient.of(pItem));
+//        }
+//        this.requires(IngredientHelper.of(new ItemStack(pItem,pQuantity)));
+        this.requires(StrictNBTIngredient.of(new ItemStack(pItem,pQuantity)));
 
         return this;
     }
@@ -80,20 +85,20 @@ public class AssemblerRecipeBuilder implements RecipeBuilder {
     /**
      * Adds an ingredient.
      */
-    public AssemblerRecipeBuilder requires(Ingredient pIngredient) {
-        return this.requires(pIngredient, 1);
+    public ShapelessEnergyRecipeBuilder requires(Ingredient pIngredient) {
+        this.ingredients.add(pIngredient);
+        return this;
     }
 
     /**
      * Adds an ingredient multiple times.
      */
-    public AssemblerRecipeBuilder requires(Ingredient pIngredient, int pQuantity) {
-        for(int i = 0; i < pQuantity; ++i) {
-            this.ingredients.add(pIngredient);
-        }
-
-        return this;
-    }
+//    public ShapelessEnergyRecipeBuilder requires(Ingredient pIngredient, int pQuantity) {
+//        for(int i = 0; i < pQuantity; ++i) {
+//            this.ingredients.add(pIngredient);
+//        }
+//        return this;
+//    }
     @Override
     public RecipeBuilder unlockedBy(String pCriterionName, CriterionTriggerInstance pCriterionTrigger) {
         return this;
@@ -110,27 +115,27 @@ public class AssemblerRecipeBuilder implements RecipeBuilder {
         return result;
     }
     public void save(Consumer<FinishedRecipe> pFinishedRecipeConsumer, String path) {
-        pFinishedRecipeConsumer.accept(new Result(HBM.rl(path),result,count,group,category,ingredients,powerConsume));
+        pFinishedRecipeConsumer.accept(new Result(HBM.rl(path),result,count,group,category,ingredients,number));
     }
     @Override
     public void save(Consumer<FinishedRecipe> pFinishedRecipeConsumer, ResourceLocation pRecipeId) {
-        pFinishedRecipeConsumer.accept(new Result(pRecipeId,result,count,group,category,ingredients,powerConsume));
+        pFinishedRecipeConsumer.accept(new Result(pRecipeId,result,count,group,category,ingredients,number));
     }
     public static class Result implements FinishedRecipe {
         private final ResourceLocation id;
         private final Item result;
         private final int count;
-        private final long powerConsume;
+        private final long number;
         private final String group;
         private final List<Ingredient> ingredients;
 
-        public Result(ResourceLocation pId, Item pResult, int pCount, String pGroup, RecipeCategory pCategory, List<Ingredient> pIngredients, long power) {
+        public Result(ResourceLocation pId, Item pResult, int pCount, String pGroup, RecipeCategory pCategory, List<Ingredient> pIngredients, long number) {
             this.id = pId;
             this.result = pResult;
             this.count = pCount;
             this.group = pGroup;
             this.ingredients = pIngredients;
-            this.powerConsume = power;
+            this.number = number;
         }
 
         public void serializeRecipeData(JsonObject pJson) {
@@ -151,7 +156,7 @@ public class AssemblerRecipeBuilder implements RecipeBuilder {
             }
             pJson.add("result", jsonobject);
 
-            pJson.addProperty("power",this.powerConsume);
+            pJson.addProperty("number",this.number);
         }
 
         public RecipeSerializer<?> getType() {

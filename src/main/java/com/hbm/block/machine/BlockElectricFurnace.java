@@ -2,6 +2,7 @@ package com.hbm.block.machine;
 
 
 import com.hbm.HBM;
+import com.hbm.block.base.BaseMachineBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
@@ -21,18 +22,22 @@ import org.jetbrains.annotations.Nullable;
 
 import static com.hbm.block.base.BaseMachineBlock.FACING;
 
-public class BlockElectricFurnace extends BaseEntityBlock {
+public class BlockElectricFurnace extends BaseMachineBlock {
 
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
     public BlockElectricFurnace(Properties pProperties) {
         super(pProperties);
         //设置状态的初始值
-        this.registerDefaultState(this.getStateDefinition().any().setValue(FACING, Direction.NORTH).setValue(LIT,Boolean.FALSE));
+        this.registerDefaultState(this.getStateDefinition().any()
+//                .setValue(FACING, Direction.NORTH)
+                .setValue(LIT,Boolean.FALSE));
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
-        pBuilder.add(FACING,LIT);
+        super.createBlockStateDefinition(pBuilder);
+//        pBuilder.add(FACING,LIT);
+        pBuilder.add(LIT);
     }
 
     @Override
@@ -51,10 +56,10 @@ public class BlockElectricFurnace extends BaseEntityBlock {
     /**
      * 继承BaseEntityBlock的方法
      * */
-    @Override
-    public RenderShape getRenderShape(BlockState pState) {
-        return RenderShape.MODEL;
-    }
+//    @Override
+//    public RenderShape getRenderShape(BlockState pState) {
+//        return RenderShape.MODEL;
+//    }
 
     @Nullable
     @Override
@@ -64,9 +69,9 @@ public class BlockElectricFurnace extends BaseEntityBlock {
     /**
      * 方块放下的时候自动正面朝向玩家
      * */
-    @Nullable
-    @Override
-    public BlockState getStateForPlacement(BlockPlaceContext pContext) {
-        return (BlockState)this.defaultBlockState().setValue(FACING, pContext.getHorizontalDirection().getOpposite());
-    }
+//    @Nullable
+//    @Override
+//    public BlockState getStateForPlacement(BlockPlaceContext pContext) {
+//        return (BlockState)this.defaultBlockState().setValue(FACING, pContext.getHorizontalDirection().getOpposite());
+//    }
 }

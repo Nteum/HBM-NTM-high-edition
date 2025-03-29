@@ -1,4 +1,4 @@
-// 1.20.1	2024-12-22T14:01:24.7592736	Block States: hbmxx
+// 1.20.1	2025-03-29T18:51:37.3370272	Block States: hbmxx
 8c5fc3481c2251bc6fa3f0c707cffdde8fa99d5b assets/hbmxx/blockstates/anvil_bismuth.json
 b85ef067e28c3bb827abb799b89be56c54e01946 assets/hbmxx/blockstates/anvil_desh.json
 d764e685ed5120e49c14a8e719bea1a84f3187ba assets/hbmxx/blockstates/anvil_iron.json
@@ -65,6 +65,8 @@ a17ea3c3563afc3c047edf60c5e046abad3f4cee assets/hbmxx/models/item/anvil_iron.jso
 bf2b6ebeba0e3a0ff50eb9ef6f03e58d4dc607f6 assets/hbmxx/models/item/asbestos_ore.json
 e6b9455876bd8f1aecfe878144c8156639f475b4 assets/hbmxx/models/item/basalt_asbestos_ore.json
 b7ee9ee01b25720a0f9f5252eebe9cd23f6e832a assets/hbmxx/models/item/bedrock_ore.json
+14b68c45c15d41c2aec7c176c0d38cd0f1922d70 assets/hbmxx/models/item/bomb_boy.json
+50a281ec6be44ec970c66961980ef4e11e87da54 assets/hbmxx/models/item/bomb_custom.json
 c25d113cafd69cae025dfcfff80b0a1246ac466f assets/hbmxx/models/item/bomb_fat_man.json
 25a618c77d708d5c11dbf3d7b58aa9a47fbca969 assets/hbmxx/models/item/conveyor.json
 31e54c7b0a52500b18c08fe1da4990d39a15423f assets/hbmxx/models/item/deepslate_rare_ore.json

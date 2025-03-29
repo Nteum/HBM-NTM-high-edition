@@ -1,6 +1,7 @@
 package com.hbm.block.machine;
 
 import com.google.common.collect.ImmutableMap;
+import com.hbm.block.base.BaseMachineBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.BlockGetter;
@@ -13,6 +14,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.client.model.obj.ObjLoader;
+import net.minecraftforge.fluids.capability.IFluidHandler;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Function;
@@ -23,7 +25,7 @@ import java.util.function.Function;
  * 2. 砧模型出现的位置在不在方块中央，而在交界处
  * 3. 砧上有不自然的阴影
  * */
-public class BlockAnvil extends BaseSingleBlockMachine {
+public class BlockAnvil extends BaseMachineBlock {
     public static final VoxelShape SHAPE = Block.box(4.0D,0.0D,0.0D,12.0D,13.0D,16.0D);
     public BlockAnvil(Properties pProperties) {
         super(pProperties);

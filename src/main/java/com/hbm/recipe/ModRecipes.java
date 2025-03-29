@@ -10,10 +10,7 @@ import net.minecraftforge.registries.RegistryObject;
 public class ModRecipes {
     public static final DeferredRegister<RecipeSerializer<?>> SERIALIZER = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, HBM.MODID);
     public static final RegistryObject<RecipeSerializer<BlastFurnaceRecipe>> ALLOY_SERIALIZER =
-            SERIALIZER.register("blast_hbm",()-> BlastFurnaceRecipe.Serializer.INSTANCE);
+            SERIALIZER.register(ModRecipeType.BLAST,()-> BlastFurnaceRecipe.Serializer.INSTANCE);
     public static final RegistryObject<RecipeSerializer<AssemblerRecipe>> ASSEMBLER_SERIALIZER =
-            SERIALIZER.register("assembler",()-> AssemblerRecipe.Serializer.INSTANCE);
-
-//    public static final DeferredRegister<RecipeType> ;
-
+            SERIALIZER.register(ModRecipeType.ASSEMBLER,()-> AssemblerRecipe.Serializer.INSTANCE);
 }

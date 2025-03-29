@@ -1,0 +1,34 @@
+
+1. Vanilla fluid system:
+Fluid -
+    FlowingFluid - it not only contain flowing fluid, also still fluid
+        WaterFluid
+        LavaFluid
+        ForgeFlowingFluid
+FluidState - store some fluid attributes
+FogType - fog player can see in fluid,enum
+Fluids - register all vanilla fluid
+
+2. forge fluid system:
+IForgeFluid - from vanilla Fluid
+IForgeFluidState - from vanilla FluidState
+IFluidHandler - capacity interface
+    |---> FluidHandlerBlockEntity - extends BlockEntity can be used to fluid container
+    IFluidHandlerItem - fluid capacity can trans to Item
+        FluidHandlerItemStack - an impl of IFluidHandlerItem
+            |---> ItemFluidContainer - extends Item can be used to fluid container
+        FluidBucketWrapper - an impl on bucket
+    FluidBlockWrapper - block containing fluid
+FluidStack - fluid with custom data, such as amount and nbt, like ItemStack
+IFluidTank
+    FluidTank - a wrapper to wrap FluidStack, can be seen as a container with capacity
+IFluidBlock - fluid block can be placed in real world
+FluidType - fluid features and method to use on fluid
+
+3. how to create a fluid
+- create fluid texture
+- register fluid type
+- create fluid property
+    - register flowing fluid and still fluid
+- register fluid block (flow or still)
+- create and register fluid bucket (if needed)

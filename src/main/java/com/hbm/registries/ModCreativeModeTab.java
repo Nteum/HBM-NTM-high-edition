@@ -101,6 +101,7 @@ public class ModCreativeModeTab {
             output.accept(ModItems.bucket_irradiated_polluted.get());
             output.accept(ModItems.bucket_sulfuric_acid.get());
             output.accept(ModBlocks.conveyor.get());
+            output.accept(ModBlocks.bomb_boy.get());
             output.accept(ModBlocks.bomb_fat_man.get());
             output.accept(ModBlocks.bomb_custom.get());
 

@@ -34,3 +34,53 @@ blast furnace *
 预期：
 - 黑洞
 - 线缆卷：练习连线的渲染方式，电力输送暂可不做
+
+{
+"loader": "forge:obj",
+"flip_v": true,
+"model": "hbmxx:models/block/cracking_tower/machine_cracking_tower.obj",
+"textures": {
+"texture0": "hbmxx:block/machine_cracking_tower"
+},
+"ambientocclusion": true,
+"display": {
+"firstperson_righthand": {
+"scale": [0.05,0.05,0.05],
+"rotation": [0,-22.5,22.5]
+},
+"firstperson_lefthand": {
+"scale": [0.05,0.05,0.05],
+"rotation": [0,-22.5,-22.5]
+},
+"thirdperson_righthand": {
+"scale": [0.05,0.05,0.05],
+"rotation": [0,-22.5,0]
+},
+"gui": {
+"scale": [0.06,0.06,0.06],
+"rotation": [0,45,0],
+"translation": [0,-6,0]
+}
+}
+}
+
+"display": {
+"gui": {
+"gui_scale": [0.06,0.06,0.06]
+},
+"ground": {
+"ground_scale": [0.024,0.024,0.024]
+},
+"fixed": {
+"fixed_scale": [0.05,0.05,0.05]
+},
+"thirdperson_righthand": {
+"hand_scale": [0.04,0.04,0.04]
+},
+"firstperson_righthand": {
+"hand_scale": [0.04,0.04,0.04]
+},
+"firstperson_lefthand": {
+"hand_scale": [0.04,0.04,0.04]
+}
+}

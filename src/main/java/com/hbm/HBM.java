@@ -75,8 +75,6 @@ public class HBM {
         ModBlocks.register(modEventBus);
         ModCreativeModeTab.CREATIVE_MODE_TABS.register(modEventBus);
         ModBlockEntityType.REGISTER.register(modEventBus);
-        ModEntityType.ENTITY_TYPES.register(modEventBus);
-        ModMenuType.MOD_MENU_TYPES.register(modEventBus);
         ModRecipeType.RECIPE_TYPE.register(modEventBus);
         ModRecipes.SERIALIZER.register(modEventBus);
         ModFluidTypes.FLUID_TYPES.register(modEventBus);
@@ -84,6 +82,8 @@ public class HBM {
         ModParticleTypes.PARTICLE_TYPES.register(modEventBus);
         ModSounds.SOUNDS.register(modEventBus);
         ModFeatures.register(modEventBus);
+        ModEntityType.ENTITY_TYPES.register(modEventBus);
+        ModMenuType.MOD_MENU_TYPES.register(modEventBus);
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, GeneralConfig.CONFIG_SPEC);
     }

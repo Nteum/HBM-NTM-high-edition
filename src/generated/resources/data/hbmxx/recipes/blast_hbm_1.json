@@ -1,5 +1,5 @@
 {
-  "type": "hbmxx:net.minecraftforge.registries.RegistryObject@224af559",
+  "type": "hbmxx:blast_hbm",
   "input1": {
     "item": "minecraft:raw_iron"
   },

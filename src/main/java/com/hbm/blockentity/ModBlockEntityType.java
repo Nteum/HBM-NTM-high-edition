@@ -3,6 +3,8 @@ package com.hbm.blockentity;
 import com.hbm.blockentity.machine.*;
 import com.hbm.HBM;
 import com.hbm.blockentity.base.DummibleBlockEntity;
+import com.hbm.blockentity.weapon.NukeBombBoyEntity;
+import com.hbm.blockentity.weapon.NukeBombCustomEntity;
 import com.hbm.registries.ModBlocks;
 import com.hbm.blockentity.weapon.NukeBombFatEntity;
 import net.minecraft.core.registries.Registries;
@@ -19,6 +21,10 @@ public class ModBlockEntityType {
             REGISTER.register("press_entity",()-> BlockEntityType.Builder.of(PressEntity::new, ModBlocks.machine_press.get()).build(null));
     public static final RegistryObject<BlockEntityType<NukeBombFatEntity>> NUKE_BOMB_FAT_ENTITY =
             REGISTER.register("nuke_bomb_entity",()-> BlockEntityType.Builder.of(NukeBombFatEntity::new, ModBlocks.bomb_fat_man.get()).build(null));
+    public static final RegistryObject<BlockEntityType<NukeBombBoyEntity>> NUKE_BOMB_BOY_ENTITY =
+            REGISTER.register("nuke_bomb_boy",()-> BlockEntityType.Builder.of(NukeBombBoyEntity::new, ModBlocks.bomb_boy.get()).build(null));
+    public static final RegistryObject<BlockEntityType<NukeBombCustomEntity>> NUKE_BOMB_CUSTOM_ENTITY =
+            REGISTER.register("nuke_bomb_custom",()-> BlockEntityType.Builder.of(NukeBombCustomEntity::new, ModBlocks.bomb_custom.get()).build(null));
     public static final RegistryObject<BlockEntityType<AssemblerEntity>> ASSEMBLER_ENTITY =
             REGISTER.register("assembler_entity",()-> BlockEntityType.Builder.of(AssemblerEntity::new, ModBlocks.machine_assembler.get()).build(null));
     public static final RegistryObject<BlockEntityType<CrucibleEntity>> CRUCIBLE_ENTITY =

@@ -1,6 +1,7 @@
 package com.hbm.render;
 
 import com.mojang.blaze3d.platform.NativeImage;
+import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.texture.SpriteContents;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.metadata.animation.AnimationMetadataSection;

@@ -11,7 +11,7 @@ import net.minecraftforge.registries.RegistryObject;
 public class ModParticleTypes {
     public static final DeferredRegister<ParticleType<?>> PARTICLE_TYPES = DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, HBM.MODID);
 
-    public static final RegistryObject<SimpleParticleType> HBM_SMOKE = PARTICLE_TYPES.register("hbm_smoke",() -> new SimpleParticleType(false));
+    public static final RegistryObject<SimpleParticleType> HBM_SMOKE = PARTICLE_TYPES.register("nuke_smoke",() -> new SimpleParticleType(false));
     public static final RegistryObject<SimpleParticleType> CONTRAIL = PARTICLE_TYPES.register("contrail",() -> new SimpleParticleType(false));
-    public static final RegistryObject<SimpleParticleType> RADIATION_FOG = PARTICLE_TYPES.register("radiation_fog",() -> new SimpleParticleType(false));
+    public static final RegistryObject<SimpleParticleType> RADIATION_FOG = PARTICLE_TYPES.register("fog",() -> new SimpleParticleType(false));
 }

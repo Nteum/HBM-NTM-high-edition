@@ -1,5 +1,6 @@
 package com.hbm.block.machine;
 
+import com.hbm.block.base.BaseMachineBlock;
 import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.blockentity.machine.DifurnaceEntity;
 import com.hbm.blockentity.machine.PressEntity;
@@ -24,7 +25,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * 火力锻压机
  * */
-public class BlockPress extends BaseEntityBlock {
+public class BlockPress extends BaseMachineBlock {
     public VoxelShape SHAPE = Block.box(2,0,2,14,48,14);
     public BlockPress(Properties pProperties) {
         super(pProperties);
@@ -50,11 +51,6 @@ public class BlockPress extends BaseEntityBlock {
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
         return pBlockEntityType == ModBlockEntityType.PRESS_ENTITY.get() ? PressEntity::tick : null;
-    }
-
-    @Override
-    public RenderShape getRenderShape(BlockState pState) {
-        return RenderShape.MODEL;
     }
 
     @Override

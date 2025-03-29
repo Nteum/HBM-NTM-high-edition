@@ -4,6 +4,7 @@ import com.hbm.block.machine.BlockDifurnace;
 import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.gui.menu.DifurnaceMenu;
 import com.hbm.recipe.BlastFurnaceRecipe;
+import com.hbm.recipe.ModRecipeType;
 import com.hbm.registries.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

@@ -123,8 +123,11 @@ public class BlockStateGen extends BlockStateProvider {
         this.simpleBlockItem(ModBlocks.machine_crucible.get(),crucible_model);
 
         ModelFile.ExistingModelFile bomb_model_fatman = this.models().getExistingFile(new ResourceLocation(HBM.MODID, "block/bomb/fat_man"));
-//        this.horizontalBlock(ModBlocks.bomb_fat_man.get(),bomb_model_fatman);
         this.simpleBlockItem(ModBlocks.bomb_fat_man.get(),bomb_model_fatman);
+        ModelFile.ExistingModelFile bomb_model_boy = this.models().getExistingFile(HBM.rl("block/bomb/boy"));
+        this.simpleBlockItem(ModBlocks.bomb_boy.get(),bomb_model_boy);
+        ModelFile.ExistingModelFile bomb_model_custom = this.models().getExistingFile(HBM.rl("block/bomb/custom"));
+        this.simpleBlockItem(ModBlocks.bomb_custom.get(),bomb_model_custom);
 
         //线缆
         cableBlockWithItem();

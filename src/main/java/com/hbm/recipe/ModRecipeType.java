@@ -12,10 +12,12 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 public class ModRecipeType {
+    public static final String BLAST = "blast_hbm";
+    public static final String ASSEMBLER = "assembler";
     public static final DeferredRegister<RecipeType<?>> RECIPE_TYPE = DeferredRegister.create(ForgeRegistries.RECIPE_TYPES, HBM.MODID);
 
-    public static final RegistryObject<RecipeType<BlastFurnaceRecipe>> BLAST = RECIPE_TYPE.register("blast_hbm",()->register("blast_hbm"));
-    public static final RegistryObject<RecipeType<AssemblerRecipe>> ASSEMBLER = RECIPE_TYPE.register("assembler",()->register("assembler"));
+    public static final RegistryObject<RecipeType<BlastFurnaceRecipe>> BLAST_RECIPE = RECIPE_TYPE.register(BLAST,()->register(BLAST));
+    public static final RegistryObject<RecipeType<AssemblerRecipe>> ASSEMBLER_RECIPE = RECIPE_TYPE.register(ASSEMBLER,()->register(ASSEMBLER));
 
     static <T extends Recipe<?>> RecipeType<T> register(final String pIdentifier) {
         return new RecipeType<T>() {

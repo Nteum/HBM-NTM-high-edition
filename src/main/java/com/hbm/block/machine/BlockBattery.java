@@ -1,5 +1,6 @@
 package com.hbm.block.machine;
 
+import com.hbm.block.base.BaseMachineBlock;
 import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.blockentity.machine.BatteryEntity;
 import com.hbm.capabilities.Capabilities;
@@ -19,7 +20,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class BlockBattery extends BaseSingleBlockMachine {
+public class BlockBattery extends BaseMachineBlock {
     public final BatteryType type;
     public BlockBattery(Properties pProperties, BatteryType type) {
         super(pProperties);

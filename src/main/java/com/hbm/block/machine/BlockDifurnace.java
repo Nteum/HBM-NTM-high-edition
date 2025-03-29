@@ -32,7 +32,6 @@ import java.util.List;
 
 public class BlockDifurnace extends BaseMachineBlock {
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
-//    public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public BlockDifurnace(Properties pProperties) {
         super(pProperties);
         //设置状态的初始值
@@ -50,24 +49,6 @@ public class BlockDifurnace extends BaseMachineBlock {
         super.createBlockStateDefinition(pBuilder);
         pBuilder.add(LIT);
     }
-
-    //继承自blockbehavior
-    /**
-     * 右键点击，效果是打开GUI
-     * */
-//    @Override
-//    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-//        if (!pLevel.isClientSide){
-////            pPlayer.openMenu(pState.getMenuProvider(pLevel,pPos));
-//            BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
-//            if (blockEntity instanceof DifurnaceEntity){
-//                pPlayer.openMenu((MenuProvider) blockEntity);
-//            }
-//            return InteractionResult.CONSUME;
-//        }else {
-//            return InteractionResult.SUCCESS;
-//        }
-//    }
 
     //继承自baseblockentity
     //在这里返回block对应的blockentitiy

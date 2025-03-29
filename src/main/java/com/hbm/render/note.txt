@@ -1,0 +1,19 @@
+
+2. forge render system
+Event
+    RenderArmEvent - 渲染玩家手臂，可以用于渲染铠甲之类
+    RenderBlockScreenEffectEvent - 渲染方块覆盖玩家视野，包括fire,block,water类型
+    RenderGuiEvent - 渲染GUI事件，有Pre和Post两个阶段
+    RenderGuiOverlayEvent - 渲染GUI的覆盖
+    RenderHandEvent - 渲染手臂和放置在手上物品
+    RenderHighlightEvent - 渲染方块和实体的选中高亮
+    RenderItemInFrameEvent - 渲染物品在物品展示框里的效果
+    RenderLevelStageEvent -
+    RenderLivingEvent - 渲染生物
+    RenderNameTagEvent - 渲染命名牌
+    RenderPlayerEvent - 渲染玩家
+    RenderTooltipEvent - 渲染物品提示信息
+    ScreenEvent
+    ScreenshotEvent - 渲染截图
+    TextureStitchEvent - 在纹理被组成atlas之前运作
+    ToastAddEvent - 渲染提示信息

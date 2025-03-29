@@ -21,6 +21,8 @@ import org.jetbrains.annotations.Nullable;
 public abstract class BaseMachineBlockEntity extends BaseContainerBlockEntity implements WorldlyContainer {
     //机器内部存储的物品，需要在子类中初始化
     protected NonNullList<ItemStack> items;
+    public boolean running = false;    // 运行状态
+
     protected BaseMachineBlockEntity(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState) {
         super(pType, pPos, pBlockState);
     }

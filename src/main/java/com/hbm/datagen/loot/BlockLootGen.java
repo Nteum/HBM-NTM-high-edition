@@ -44,6 +44,7 @@ public class BlockLootGen extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.machine_crucible.get());
         this.dropSelf(ModBlocks.RED_CABLE.get());
         this.dropSelf(ModBlocks.conveyor.get());
+        this.dropSelf(ModBlocks.bomb_boy.get());
         this.dropSelf(ModBlocks.bomb_fat_man.get());
         this.dropSelf(ModBlocks.bomb_custom.get());
         this.dropSelf(ModBlocks.machine_nuclear_boiler.get());

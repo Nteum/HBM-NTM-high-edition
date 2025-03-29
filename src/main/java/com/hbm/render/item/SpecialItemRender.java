@@ -53,6 +53,5 @@ public class SpecialItemRender extends BlockEntityWithoutLevelRenderer {
             renderBlockModel(model,blockState,blockRenderer,pPoseStack,pBuffer,pPackedLight,pPackedOverlay,null);
             pPoseStack.pushPose();
         }
-
     }
 }

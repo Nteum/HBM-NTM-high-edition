@@ -1,5 +1,6 @@
 package com.hbm.block.machine;
 
+import com.hbm.block.base.BaseMachineBlock;
 import com.hbm.blockentity.machine.DifurnaceEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -16,16 +17,10 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
-public class BlockCrackingTower extends BaseEntityBlock {
+public class BlockCrackingTower extends BaseMachineBlock {
     public static final VoxelShape SHAPE = Block.box(-48.0,0.0D,-48.0D,64.0D,256.0D,48.0D);
-    public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public BlockCrackingTower(Properties pProperties) {
         super(pProperties);
-        this.registerDefaultState(this.getStateDefinition().any().setValue(FACING, Direction.NORTH));
-    }
-    @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
-        pBuilder.add(FACING);
     }
 
     @Nullable
@@ -34,10 +29,6 @@ public class BlockCrackingTower extends BaseEntityBlock {
         return null;
     }
 
-    @Override
-    public RenderShape getRenderShape(BlockState pState) {
-        return RenderShape.MODEL;
-    }
     /**
      * 这个是关键，对于那些形状较大的机器，比如底座有3*3或者7*7格子
      * 不返回一个和它们大小类似的shape就会有点渲染问题

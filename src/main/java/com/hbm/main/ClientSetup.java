@@ -14,10 +14,7 @@ import com.hbm.model.entity.TestEntityModel;
 import com.hbm.particle.ModParticleTypes;
 import com.hbm.particle.type.HBMSmokeParticle;
 import com.hbm.render.ModTextureLoader;
-import com.hbm.render.blockentity.AssemblerRenderer;
-import com.hbm.render.blockentity.CrucibleRenderer;
-import com.hbm.render.blockentity.NukeFatRender;
-import com.hbm.render.blockentity.PressRenderer;
+import com.hbm.render.blockentity.*;
 import com.hbm.render.entity.TestEntityRenderer;
 import com.hbm.render.entity.effect.BlackHoleRender;
 import com.hbm.render.entity.EntityBlankRender;
@@ -52,6 +49,8 @@ public class ClientSetup {
             BlockEntityRenderers.register(ModBlockEntityType.ASSEMBLER_ENTITY.get(), AssemblerRenderer::new);
             BlockEntityRenderers.register(ModBlockEntityType.CRUCIBLE_ENTITY.get(), CrucibleRenderer::new);
             BlockEntityRenderers.register(ModBlockEntityType.NUKE_BOMB_FAT_ENTITY.get(), NukeFatRender::new);
+            BlockEntityRenderers.register(ModBlockEntityType.NUKE_BOMB_BOY_ENTITY.get(), NukeBoyRender::new);
+            BlockEntityRenderers.register(ModBlockEntityType.NUKE_BOMB_CUSTOM_ENTITY.get(), NukeCustomRender::new);
             //实体渲染
             EntityRenderers.register(ModEntityType.TEST_ENTITY.get(), TestEntityRenderer::new);
             EntityRenderers.register(ModEntityType.ENTITY_GRENADE_GENETIC.get(), ThrownItemRenderer::new);

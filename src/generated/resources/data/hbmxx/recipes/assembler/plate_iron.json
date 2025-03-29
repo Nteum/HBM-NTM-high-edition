@@ -2,16 +2,12 @@
   "type": "hbmxx:assembler",
   "ingredients": [
     {
-      "item": "minecraft:iron_ingot"
-    },
-    {
-      "item": "minecraft:iron_ingot"
-    },
-    {
+      "type": "forge:nbt",
+      "count": 3,
       "item": "minecraft:iron_ingot"
     }
   ],
-  "power": 30,
+  "number": 30,
   "result": {
     "count": 2,
     "item": "hbmxx:plate_iron"

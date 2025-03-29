@@ -5,6 +5,7 @@ import com.hbm.blockentity.weapon.NukeBombEntity;
 import com.hbm.blockentity.weapon.NukeBombFatEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Vec3i;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.BlockItem;
@@ -22,27 +23,29 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.function.Consumer;
 
 public class NukeFat extends NukeBomb{
-    public static final VoxelShape FRONT = Block.box(-16,0,-14,0,30,16);
-    public static final VoxelShape MIDDLE = Block.box(0,0,-14,16,30,14);
-    public static final VoxelShape TAIL = Block.box(16,0,-14,32,30,14);
-    public static final VoxelShape SHAPE = Shapes.or(FRONT,MIDDLE,TAIL);
+//    public static final VoxelShape FRONT = Block.box(-16,0,-14,0,30,16);
+//    public static final VoxelShape MIDDLE = Block.box(0,0,-14,16,30,14);
+//    public static final VoxelShape TAIL = Block.box(16,0,-14,32,30,14);
+//    public static final VoxelShape SHAPE = Shapes.or(FRONT,MIDDLE,TAIL);
 //    public static final VoxelShape SHAPE = Block.box(-14,0,-16,14,28,30);
-    public NukeFat(Properties pProperties) {
-        super(pProperties);
+    public NukeFat(Properties pProperties,int range) {
+        super(pProperties,range);
     }
 
     @Override
     public @Nullable BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
         return new NukeBombFatEntity(pPos,pState);
+//        return null;
     }
 
-    @Override
-    public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return pBlockEntityType == ModBlockEntityType.NUKE_BOMB_FAT_ENTITY.get() ? NukeBombEntity::tick : null;
-    }
+//    @Override
+//    public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
+//        return pBlockEntityType == ModBlockEntityType.NUKE_BOMB_FAT_ENTITY.get() ? NukeBombEntity::tick : null;
+//    }
 
     @Override
     public void animateTick(BlockState pState, Level pLevel, BlockPos pPos, RandomSource pRandom) {
@@ -59,14 +62,18 @@ public class NukeFat extends NukeBomb{
         pLevel.addParticle(ParticleTypes.DRAGON_BREATH,d0 + d5, d1 + d6, d2 + d7, 0.1D, 0.1D, 0.1D);
     }
 
+//    @Override
+//    public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
+//        return SHAPE;
+//    }
     @Override
-    public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
-        return SHAPE;
+    protected List<Vec3i> getOffsets() {
+        return square(new int[]{1, 0, 0, 1, 1, 1});
     }
 
     @Override
     public RenderShape getRenderShape(BlockState pState) {
-        return RenderShape.ENTITYBLOCK_ANIMATED;
+        return RenderShape.INVISIBLE;
     }
 
     public static class NukeItem extends BlockItem {

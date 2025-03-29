@@ -12,10 +12,14 @@ import com.hbm.capabilities.Capabilities;
 import com.hbm.capabilities.energy.BasicEnergyContainer;
 import com.hbm.gui.menu.AssemblerMenu;
 import com.hbm.lib.DirectionUtils;
+import com.hbm.recipe.AssemblerRecipe;
+import com.hbm.recipe.BlastFurnaceRecipe;
+import com.hbm.recipe.ModRecipeType;
 import com.hbm.registries.ModBlocks;
 import com.hbm.registries.ModItems;
 import com.hbm.registries.ModTags;
 import com.hbm.utils.InventoryUtils;
+import net.minecraft.client.gui.screens.inventory.FurnaceScreen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
@@ -23,14 +27,20 @@ import net.minecraft.core.Vec3i;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Tuple;
+import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraft.world.item.crafting.ShapelessRecipe;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.CraftingTableBlock;
 import net.minecraft.world.level.block.entity.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraftforge.common.brewing.BrewingRecipe;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
@@ -40,15 +50,20 @@ import java.util.*;
 import java.util.stream.IntStream;
 
 public class AssemblerEntity extends BedLikeBlockEntity {
-
+    int progress = 0;               //进度
+    int power = 100;                //功率
+    int energyCapacity = 100_000;   //最大储能
     private final Tuple<BasicEnergyContainer,LazyOptional<BasicEnergyContainer>> energyCap;
-    public int progress;
     static final Map<Capability<?>, List<Tuple<Vec3i,Direction>>> posCaps= new HashMap<>();
     private final Map<Capability<?>, List<Tuple<BlockPos,Direction>>> factCaps= new HashMap<>();
     static final List<Tuple<Vec3i,Direction>> itemInout = List.of(new Tuple<>(new Vec3i(1,0,-1),Direction.EAST),new Tuple<>(new Vec3i(-2,0,0),Direction.WEST));
     public final List<Tuple<BlockPos,Direction>> specInout = new ArrayList<>();
+
+    public static final RecipeManager.CachedCheck<CraftingContainer, AssemblerRecipe> quickCheck = RecipeManager.createCheck(ModRecipeType.ASSEMBLER_RECIPE.get());
+
     static final int[] INPUT_SLOTS = IntStream.range(5,17).toArray();
     static final int[] OUTPUT_SLOTS = new int[]{4};
+
     protected final ContainerData containerData = new ContainerData() {
         @Override
         public int get(int pIndex) {
@@ -99,6 +114,7 @@ public class AssemblerEntity extends BedLikeBlockEntity {
         return super.getCapability(cap, side);
     }
     public static void tick(Level level, BlockPos pPos, BlockState pState, BlockEntity pBlockEntity) {
+        if (pBlockEntity instanceof AssemblerEntity entity)entity.running = entity.progress > 0;
         if (!level.isClientSide() && pState.is(ModBlocks.machine_assembler.get()) && pBlockEntity instanceof AssemblerEntity entity){
             if (entity.flagFormed){
                 entity.flagFormed = false;
@@ -106,6 +122,7 @@ public class AssemblerEntity extends BedLikeBlockEntity {
             }
             absorbBatteryItem(entity);
             transportItem(entity);
+
         }
     }
 

@@ -14,20 +14,20 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 /**
- * ref:vinilla - shapelessRecipe
+ * ref:vanilla - shapelessRecipe
  * */
 public class AssemblerRecipe implements Recipe<CraftingContainer> {
     private final ResourceLocation id;
-    final int energyNeeded;
+    final int processingTime;   //加工时间
     final ItemStack result;
     final NonNullList<Ingredient> ingredients;
     static final int MAX_SIZE = 12;
     public AssemblerRecipe(ResourceLocation id, ItemStack result, NonNullList<Ingredient> ingredients){
         this(id,100_000,result,ingredients);
     }
-    public AssemblerRecipe(ResourceLocation id,int energyNeeded, ItemStack result, NonNullList<Ingredient> ingredients) {
+    public AssemblerRecipe(ResourceLocation id,int processingTime, ItemStack result, NonNullList<Ingredient> ingredients) {
         this.id = id;
-        this.energyNeeded = energyNeeded;
+        this.processingTime = processingTime;
         this.result = result;
         this.ingredients = ingredients;
     }
@@ -52,7 +52,7 @@ public class AssemblerRecipe implements Recipe<CraftingContainer> {
 
     @Override
     public RecipeType<?> getType() {
-        return ModRecipeType.ASSEMBLER.get();
+        return ModRecipeType.ASSEMBLER_RECIPE.get();
     }
 
     @Override
@@ -77,8 +77,8 @@ public class AssemblerRecipe implements Recipe<CraftingContainer> {
                 throw new JsonParseException("Too many ingredients for assembler recipe. The maximum is " + AssemblerRecipe.MAX_SIZE);
             } else {
                 ItemStack itemstack = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(pJson, "result"));
-                int energy = GsonHelper.getAsInt(pJson,"energyNeeded");
-                return new AssemblerRecipe(pRecipeId,energy, itemstack, nonnulllist);
+                int processingTime = GsonHelper.getAsInt(pJson,"number");
+                return new AssemblerRecipe(pRecipeId,processingTime, itemstack, nonnulllist);
             }
         }
 
@@ -104,8 +104,8 @@ public class AssemblerRecipe implements Recipe<CraftingContainer> {
             }
 
             ItemStack itemstack = pBuffer.readItem();
-            int energy = pBuffer.readInt();
-            return new AssemblerRecipe(pRecipeId,energy, itemstack, nonnulllist);
+            int processingTime = pBuffer.readInt();
+            return new AssemblerRecipe(pRecipeId,processingTime, itemstack, nonnulllist);
         }
 
         public void toNetwork(FriendlyByteBuf pBuffer, AssemblerRecipe pRecipe) {
@@ -116,7 +116,7 @@ public class AssemblerRecipe implements Recipe<CraftingContainer> {
             }
 
             pBuffer.writeItem(pRecipe.result);
-            pBuffer.writeInt(pRecipe.energyNeeded);
+            pBuffer.writeInt(pRecipe.processingTime);
         }
     }
 }

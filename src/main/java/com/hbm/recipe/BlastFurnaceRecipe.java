@@ -77,7 +77,7 @@ public class BlastFurnaceRecipe implements Recipe<Container> {
 
     @Override
     public RecipeType<?> getType() {
-        return ModRecipeType.BLAST.get();
+        return ModRecipeType.BLAST_RECIPE.get();
     }
 
     public static class Type implements RecipeType<BlastFurnaceRecipe>{
@@ -192,7 +192,7 @@ public class BlastFurnaceRecipe implements Recipe<Container> {
             @Override
             public void serializeRecipeData(JsonObject pJson) {
                 //添加type
-                pJson.addProperty("type", HBM.MODID + ":" + ModRecipeType.BLAST.toString());
+                pJson.addProperty("type", HBM.MODID + ":" + ModRecipeType.BLAST);
                 //添加group
                 if (!this.group.isEmpty()) {
                     pJson.addProperty("group", this.group);
