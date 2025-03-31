@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "hbmxx:bomb_boy"
+          "name": "hbmxx:launchpad_soyuz"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "hbmxx:blocks/bomb_boy"
+  "random_sequence": "hbmxx:blocks/launchpad_soyuz"
 }

@@ -4,7 +4,9 @@ import com.hbm.item.BatteryItem;
 import com.hbm.item.env.BedrockOreItem;
 import com.hbm.HBM;
 import com.hbm.fluid.ModFluids;
+import com.hbm.item.weapon.ItemDesignator;
 import com.hbm.item.weapon.ItemDetonator;
+import com.hbm.item.weapon.ItemMissle;
 import com.hbm.item.weapon.grenade.ItemGrenade;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
@@ -75,6 +77,9 @@ public class ModItems {
     public static final RegistryObject<Item> SCREWDRIVER = ITEMS.register("screwdriver",()->new Item(new Item.Properties()));
     //升级组件
     public static final RegistryObject<Item> UPGRADE_BASE = ITEMS.register("upgrade_base",()->new Item(new Item.Properties()));
+    //导弹
+    public static final RegistryObject<Item> DESIGNATOR = ITEMS.register("designator",()->new ItemDesignator(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> MISSILE_GENERIC = ITEMS.register("missile_generic",()->new ItemMissle(new Item.Properties().stacksTo(1)));
     public static void register(IEventBus eventBus){
         ITEMS.register(eventBus);
     }

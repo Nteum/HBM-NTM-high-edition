@@ -3,6 +3,7 @@ package com.hbm.blockentity;
 import com.hbm.blockentity.machine.*;
 import com.hbm.HBM;
 import com.hbm.blockentity.base.DummibleBlockEntity;
+import com.hbm.blockentity.weapon.LaunchPadEntity;
 import com.hbm.blockentity.weapon.NukeBombBoyEntity;
 import com.hbm.blockentity.weapon.NukeBombCustomEntity;
 import com.hbm.registries.ModBlocks;
@@ -37,4 +38,6 @@ public class ModBlockEntityType {
             REGISTER.register("cable_entity",()-> BlockEntityType.Builder.of(CableEntity::new, ModBlocks.RED_CABLE.get()).build(null));
     public static final RegistryObject<BlockEntityType<BatteryEntity>> BATTERY_ENTITY =
             REGISTER.register("battery_entity",()-> BlockEntityType.Builder.of(BatteryEntity::new, ModBlocks.machine_battery.get(),ModBlocks.machine_lithium_battery.get(),ModBlocks.machine_dineutronium_battery.get(),ModBlocks.machine_schrabidium_battery.get()).build(null));
+    public static final RegistryObject<BlockEntityType<LaunchPadEntity>> LAUNCHPAD_ENTITY =
+            REGISTER.register("launchpad_entity",()-> BlockEntityType.Builder.of(LaunchPadEntity::new, ModBlocks.RED_CABLE.get()).build(null));
 }

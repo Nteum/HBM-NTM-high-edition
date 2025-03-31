@@ -26,7 +26,8 @@ import java.util.function.Function;
  * 3. 砧上有不自然的阴影
  * */
 public class BlockAnvil extends BaseMachineBlock {
-    public static final VoxelShape SHAPE = Block.box(4.0D,0.0D,0.0D,12.0D,13.0D,16.0D);
+    public static final VoxelShape SHAPE_ZAXIS = Block.box(4.0D,0.0D,0.0D,12.0D,13.0D,16.0D);
+    public static final VoxelShape SHAPE_XAXIS = Block.box(0.0D,0.0D,4.0D,16.0D,13.0D,12.0D);
     public BlockAnvil(Properties pProperties) {
         super(pProperties);
     }
@@ -44,7 +45,7 @@ public class BlockAnvil extends BaseMachineBlock {
 
     @Override
     public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
-        return SHAPE;
+        return pState.getValue(FACING).getAxis()== Direction.Axis.Z?SHAPE_ZAXIS:SHAPE_XAXIS;
     }
 
     //    @Override

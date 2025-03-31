@@ -26,5 +26,6 @@ public class ItemTagsGen extends ItemTagsProvider {
                 ModBlocks.machine_battery.get().asItem(),ModBlocks.machine_lithium_battery.get().asItem(),ModBlocks.machine_schrabidium_battery.get().asItem(),ModBlocks.machine_dineutronium_battery.get().asItem());
         this.tag(ModTags.Items.CHARGEABLE).addTag(ModTags.Items.BATTERY);
         this.tag(ModTags.Items.UPGRADE).add(ModItems.UPGRADE_BASE.get());
+        this.tag(ModTags.Items.MISSILE).add(ModItems.MISSILE_GENERIC.get());
     }
 }

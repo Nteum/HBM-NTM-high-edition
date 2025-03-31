@@ -18,15 +18,22 @@ import net.minecraftforge.client.model.generators.*;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Function;
 
 public class BlockStateGen extends BlockStateProvider {
+    private List<ICategoryStateProvider> categoryStateProviders = new ArrayList<>();
     public BlockStateGen(PackOutput output, String modid, ExistingFileHelper exFileHelper) {
         super(output, modid, exFileHelper);
+        categoryStateProviders.add(new DecorateBlockStateProvider(this));
     }
 
     @Override
     protected void registerStatesAndModels() {
+        for (ICategoryStateProvider categoryStateProvider : categoryStateProviders) {
+            categoryStateProvider.registerStatesAndModels();
+        }
         //简单方块和物品
         horizontalBlockWithItem(ModBlocks.machine_battery.get(),this.models().orientable("machine_battery", new ResourceLocation(HBM.MODID, "block/battery_side"), new ResourceLocation(HBM.MODID, "block/battery_front"), new ResourceLocation(HBM.MODID, "block/battery_top")));
         horizontalBlockWithItem(ModBlocks.machine_lithium_battery.get(),this.models().orientable("machine_lithium_battery", new ResourceLocation(HBM.MODID, "block/battery_lithium_side"), new ResourceLocation(HBM.MODID, "block/battery_lithium_front"), new ResourceLocation(HBM.MODID, "block/battery_lithium_top")));
@@ -169,7 +176,7 @@ public class BlockStateGen extends BlockStateProvider {
             default -> null;
         };
     }
-    private void horizontalBlockWithItem(Block block, ModelFile model){
+    protected void horizontalBlockWithItem(Block block, ModelFile model){
         horizontalBlock(block,model);
         simpleBlockItem(block,model);
     }

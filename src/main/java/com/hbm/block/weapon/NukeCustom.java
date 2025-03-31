@@ -30,7 +30,7 @@ public class NukeCustom extends NukeBomb implements IBomb{
     @Override
     public BombReturnCode explode(Level pLevel, BlockPos pPos) {
         if (!pLevel.isClientSide){
-            pLevel.playSound((Player) null,pPos, ModSounds.WEAPON_NUCLEAR_EXPLOSION.get(), SoundSource.RECORDS,1.0F,1.0F);
+            pLevel.playSound((Player) null,pPos, ModSounds.WEAPON_NUCLEAR_EXPLOSION.get(), SoundSource.RECORDS,5.0F,1.0F);
             pLevel.addFreshEntity(EntityNukeExplosionMK5.statFac(pLevel,range,pPos.getCenter()));
             pLevel.addFreshEntity(new EntityNukeTorex(pLevel,pPos.getCenter().add(0,4.5,0),range));
 

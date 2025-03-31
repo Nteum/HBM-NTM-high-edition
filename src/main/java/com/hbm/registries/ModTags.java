@@ -40,6 +40,7 @@ public class ModTags {
         public static final TagKey<Item> BATTERY = forgeTag("battery");
         public static final TagKey<Item> CHARGEABLE = forgeTag("chargeable");
         public static final TagKey<Item> UPGRADE = tag("upgrade");
+        public static final TagKey<Item> MISSILE = tag("missile");
         private static TagKey<Item> tag(String pName) {
             return TagKey.create(Registries.ITEM, HBM.rl(pName));
         }

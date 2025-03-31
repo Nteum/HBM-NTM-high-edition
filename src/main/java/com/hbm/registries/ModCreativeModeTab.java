@@ -62,6 +62,7 @@ public class ModCreativeModeTab {
             output.accept(ModBlocks.SA326_ORE.get());
             output.accept(ModBlocks.LITHIUM_ORE.get());
             output.accept(ModBlocks.DEPTH_STONE.get());
+            output.accept(ModBlocks.TEST12.get());
         }).build());
     public static final RegistryObject<CreativeModeTab> HBM_MACHINE = CREATIVE_MODE_TABS.register("hbm_machine", () -> CreativeModeTab.builder()
         .title(Component.translatable("itemGroup.hbm_machine"))

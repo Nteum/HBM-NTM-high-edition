@@ -1,13 +1,12 @@
 package com.hbm.registries;
 
+import com.hbm.block.decoriate.BlockTest12;
 import com.hbm.block.env.BedRockOre;
 import com.hbm.block.env.WasteEarth;
 import com.hbm.block.env.WasteLeaves;
 import com.hbm.block.machine.*;
 import com.hbm.block.network.BlockConveyor;
-import com.hbm.block.weapon.NukeBoy;
-import com.hbm.block.weapon.NukeCustom;
-import com.hbm.block.weapon.NukeFat;
+import com.hbm.block.weapon.*;
 import com.hbm.fluid.ModFluids;
 import com.hbm.item.BatteryBlockItem;
 import com.hbm.block.base.DummibleBlock;
@@ -58,7 +57,12 @@ public class ModBlocks {
     //炸弹
     public static final RegistryObject<Block> bomb_boy = registerBlockWithItem("bomb_boy",()->new NukeBoy(BlockBehaviour.Properties.of(),120));
     public static final RegistryObject<Block> bomb_fat_man = BLOCKS.register("bomb_fat_man",()->new NukeFat(BlockBehaviour.Properties.of(),200));
-    public static final RegistryObject<Block> bomb_custom = registerBlockWithItem("bomb_custom",()->new NukeCustom(BlockBehaviour.Properties.of(),100));
+    public static final RegistryObject<Block> bomb_custom = registerBlockWithItem("bomb_custom",()->new NukeCustom(BlockBehaviour.Properties.of(),350));
+    //发射台
+    public static final RegistryObject<Block> LAUNCHPAD_BASIC = registerBlockWithItem("launchpad_basic",()->new LaunchPadBasic(BlockBehaviour.Properties.of()));
+    public static final RegistryObject<Block> LAUNCHPAD_COMPACT = registerBlockWithItem("launchpad_compact",()->new LaunchPadCompact(BlockBehaviour.Properties.of()));
+    public static final RegistryObject<Block> LAUNCHPAD_LARGE = registerBlockWithItem("launchpad_large",()->new LaunchPadLarge(BlockBehaviour.Properties.of()));
+    public static final RegistryObject<Block> LAUNCHPAD_SOYUZ = registerBlockWithItem("launchpad_soyuz",()->new LaunchPadSoyuz(BlockBehaviour.Properties.of()));
 
     //流体
     public static final RegistryObject<LiquidBlock> irradiated_water = BLOCKS.register("irradiated_water", ()->new LiquidBlock(ModFluids.IRRADIATED_WATER_SOURCE_BLOCK,BlockBehaviour.Properties.copy(Blocks.WATER).noLootTable()));
@@ -108,7 +112,8 @@ public class ModBlocks {
 
     //逻辑物
     public static final RegistryObject<Block> DUMMIBLE = registerBlockWithItem("dummible",()->new DummibleBlock(BlockBehaviour.Properties.copy(Blocks.STONE).noLootTable()));
-
+    //装饰
+    public static final RegistryObject<Block> TEST12 = registerBlockWithItem("test12",()->new BlockTest12(BlockBehaviour.Properties.of()));
 
     public static ToIntFunction<BlockState> litEmission(int value){
         return state -> {

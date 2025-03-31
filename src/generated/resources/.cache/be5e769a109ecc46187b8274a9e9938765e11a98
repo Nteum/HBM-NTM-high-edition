@@ -1,4 +1,4 @@
-// 1.20.1	2025-03-29T18:51:37.3370272	Block States: hbmxx
+// 1.20.1	2025-03-31T00:15:19.7067715	Block States: hbmxx
 8c5fc3481c2251bc6fa3f0c707cffdde8fa99d5b assets/hbmxx/blockstates/anvil_bismuth.json
 b85ef067e28c3bb827abb799b89be56c54e01946 assets/hbmxx/blockstates/anvil_desh.json
 d764e685ed5120e49c14a8e719bea1a84f3187ba assets/hbmxx/blockstates/anvil_iron.json
@@ -28,6 +28,7 @@ bd1b378189e82f03fe33e4456cb8c4f5ffd7b1be assets/hbmxx/blockstates/machine_nuclea
 ff41dc8f25333eb06ad18b695c760ff3c0c55d0c assets/hbmxx/blockstates/rare_earth.json
 14c8e33bad0aabb29cefd0591738ba4f4a9aa3a9 assets/hbmxx/blockstates/red_cable.json
 88e110187fc37a936667cec24975a3b65268adf9 assets/hbmxx/blockstates/sa326_ore.json
+8c865cd44f1edf49a668c8f82781a7c0dc30786b assets/hbmxx/blockstates/test12.json
 056065dd484cb0a40239239f729f987c204931c2 assets/hbmxx/blockstates/uranium_ore.json
 7fd3951967d3ba1b511ad5b997efac16422142bd assets/hbmxx/blockstates/wast_earth.json
 44d81971344ae6937dcc5a278a89cd3fe1bdad0b assets/hbmxx/blockstates/wast_leaves.json
@@ -89,6 +90,7 @@ fbb8f0dfdc764ac1617b66244503ec0effaed195 assets/hbmxx/models/item/machine_schrab
 93428226b47e63c3e235c7ee10a2432e925b1ed1 assets/hbmxx/models/item/rare_earth.json
 5f5ff5053ec856f6a3b6d3970c849a986617cc57 assets/hbmxx/models/item/red_cable.json
 08ee878945dce809615ba4ea2c8fff771b05f760 assets/hbmxx/models/item/sa326_ore.json
+6b9704db0c30d3fa6586becdb229396fa7d6d380 assets/hbmxx/models/item/test12.json
 36ae080819266e7d5de0b9962d391a370a6511ca assets/hbmxx/models/item/uranium_ore.json
 a409c320db884651f849d875ded18a1f51756012 assets/hbmxx/models/item/wast_earth.json
 a88bd35261ebee29b1c942ecabc49dbdddb4a824 assets/hbmxx/models/item/wast_leaves.json

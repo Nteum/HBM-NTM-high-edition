@@ -7,11 +7,15 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Objects;
+
 /**
  * 空白方块，用于填充多方块结构其余的内容。
  * */
@@ -38,6 +42,17 @@ public class DummibleBlock extends Block implements EntityBlock {
             pLevel.removeBlock(blockEntity.corePos,false);
         }
         super.onRemove(pState, pLevel, pPos, pNewState, pMovedByPiston);
+    }
+
+    @Override
+    public void onNeighborChange(BlockState state, LevelReader level, BlockPos pos, BlockPos neighbor) {
+        if (!level.isClientSide()){
+            // 邻接红石信号变化则传导到中心节点
+            BlockPos corePos = ((DummibleBlockEntity) Objects.requireNonNull(level.getBlockEntity(pos))).corePos;
+            BlockState coreBlock = level.getBlockState(corePos);
+            coreBlock.onNeighborChange(level,corePos,pos);
+        }
+        super.onNeighborChange(state, level, pos, neighbor);
     }
 
     @Override

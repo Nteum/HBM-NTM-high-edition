@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "hbmxx:block/test12/test12",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "hbmxx:block/test12/test12"
+    },
+    "facing=south": {
+      "model": "hbmxx:block/test12/test12",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "hbmxx:block/test12/test12",
+      "y": 270
+    }
+  }
+}

@@ -9,7 +9,7 @@ import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.*;
-
+/** 处理核爆过程的工具类 */
 public class ExplosionNukeRayBatched {
     //所有需要处理的区块，key是区块的位置，value是区块中待删方块的列表
     public HashMap<ChunkPos, List<Vec3>> perChunk = new HashMap(); //for future: optimize blockmap further by using sub-chunks instead of chunks
