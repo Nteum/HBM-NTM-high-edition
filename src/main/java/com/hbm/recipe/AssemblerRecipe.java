@@ -3,12 +3,15 @@ package com.hbm.recipe;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
+import com.google.gson.JsonSyntaxException;
 import com.hbm.HBM;
+import com.hbm.datagen.recipe.ingredient.CountableIngredient;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
+import net.minecraft.world.Container;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
@@ -16,16 +19,16 @@ import net.minecraft.world.level.Level;
 /**
  * ref:vanilla - shapelessRecipe
  * */
-public class AssemblerRecipe implements Recipe<CraftingContainer> {
+public class AssemblerRecipe implements Recipe<Container> {
     private final ResourceLocation id;
     final int processingTime;   //加工时间
     final ItemStack result;
-    final NonNullList<Ingredient> ingredients;
+    final NonNullList<CountableIngredient> ingredients;
     static final int MAX_SIZE = 12;
-    public AssemblerRecipe(ResourceLocation id, ItemStack result, NonNullList<Ingredient> ingredients){
+    public AssemblerRecipe(ResourceLocation id, ItemStack result, NonNullList<CountableIngredient> ingredients){
         this(id,100_000,result,ingredients);
     }
-    public AssemblerRecipe(ResourceLocation id,int processingTime, ItemStack result, NonNullList<Ingredient> ingredients) {
+    public AssemblerRecipe(ResourceLocation id,int processingTime, ItemStack result, NonNullList<CountableIngredient> ingredients) {
         this.id = id;
         this.processingTime = processingTime;
         this.result = result;
@@ -56,13 +59,13 @@ public class AssemblerRecipe implements Recipe<CraftingContainer> {
     }
 
     @Override
-    public boolean matches(CraftingContainer pContainer, Level pLevel) {
+    public boolean matches(Container pContainer, Level pLevel) {
         //比较复杂，还需要根据原版的RecipeMatcher修改
         return false;
     }
 
     @Override
-    public ItemStack assemble(CraftingContainer pContainer, RegistryAccess pRegistryAccess) {
+    public ItemStack assemble(Container pContainer, RegistryAccess pRegistryAccess) {
         return this.result.copy();
     }
 
@@ -70,7 +73,7 @@ public class AssemblerRecipe implements Recipe<CraftingContainer> {
         public static final AssemblerRecipe.Serializer INSTANCE = new AssemblerRecipe.Serializer();
         private static final ResourceLocation NAME = HBM.rl("assembler_recipe");
         public AssemblerRecipe fromJson(ResourceLocation pRecipeId, JsonObject pJson) {
-            NonNullList<Ingredient> nonnulllist = itemsFromJson(GsonHelper.getAsJsonArray(pJson, "ingredients"));
+            NonNullList<CountableIngredient> nonnulllist = itemsFromJson(GsonHelper.getAsJsonArray(pJson, "ingredients"));
             if (nonnulllist.isEmpty()) {
                 throw new JsonParseException("No ingredients for assembler recipe");
             } else if (nonnulllist.size() > AssemblerRecipe.MAX_SIZE) {
@@ -82,13 +85,19 @@ public class AssemblerRecipe implements Recipe<CraftingContainer> {
             }
         }
 
-        private static NonNullList<Ingredient> itemsFromJson(JsonArray pIngredientArray) {
-            NonNullList<Ingredient> nonnulllist = NonNullList.create();
+        private static NonNullList<CountableIngredient> itemsFromJson(JsonArray pIngredientArray) {
+            NonNullList<CountableIngredient> nonnulllist = NonNullList.create();
 
             for(int i = 0; i < pIngredientArray.size(); ++i) {
-                Ingredient ingredient = Ingredient.fromJson(pIngredientArray.get(i), false);
-                if (true || !ingredient.isEmpty()) { // FORGE: Skip checking if an ingredient is empty during shapeless recipe deserialization to prevent complex ingredients from caching tags too early. Can not be done using a config value due to sync issues.
-                    nonnulllist.add(ingredient);
+                if (pIngredientArray.get(i).isJsonObject()){
+                    CountableIngredient ingredient = CountableIngredient.Serializer.INSTANCE.parse(pIngredientArray.get(i).getAsJsonObject());
+                    if (!ingredient.isEmpty()){
+                        nonnulllist.add(ingredient);
+                    }else {
+                        throw new JsonSyntaxException("Parse wrong : Ingredient is empty.");
+                    }
+                }else {
+                    throw new JsonSyntaxException("Parse wrong : CountableIngredient must be a JsonObject.");
                 }
             }
 
@@ -97,10 +106,10 @@ public class AssemblerRecipe implements Recipe<CraftingContainer> {
 
         public AssemblerRecipe fromNetwork(ResourceLocation pRecipeId, FriendlyByteBuf pBuffer) {
             int i = pBuffer.readVarInt();
-            NonNullList<Ingredient> nonnulllist = NonNullList.withSize(i, Ingredient.EMPTY);
+            NonNullList<CountableIngredient> nonnulllist = NonNullList.withSize(i, CountableIngredient.EMPTY);
 
             for(int j = 0; j < nonnulllist.size(); ++j) {
-                nonnulllist.set(j, Ingredient.fromNetwork(pBuffer));
+                nonnulllist.set(j, CountableIngredient.Serializer.INSTANCE.parse(pBuffer));
             }
 
             ItemStack itemstack = pBuffer.readItem();
@@ -111,8 +120,8 @@ public class AssemblerRecipe implements Recipe<CraftingContainer> {
         public void toNetwork(FriendlyByteBuf pBuffer, AssemblerRecipe pRecipe) {
             pBuffer.writeVarInt(pRecipe.ingredients.size());
 
-            for(Ingredient ingredient : pRecipe.ingredients) {
-                ingredient.toNetwork(pBuffer);
+            for(CountableIngredient ingredient : pRecipe.ingredients) {
+                CountableIngredient.Serializer.INSTANCE.write(pBuffer,ingredient);
             }
 
             pBuffer.writeItem(pRecipe.result);

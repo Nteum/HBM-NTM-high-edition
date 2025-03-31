@@ -1,5 +1,6 @@
 package com.hbm.registries;
 
+import com.hbm.item.HBMtools;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -45,7 +46,7 @@ public class ModCreativeModeTab {
 
             output.accept(ModItems.BEDROCK_ORE.get());
 
-            output.accept(ModItems.UPGRADE_BASE.get());
+            output.accept(HBMtools.UPGRADE_BASE.get());
         }).build());
     public static final RegistryObject<CreativeModeTab> HBM_BLOCK = CREATIVE_MODE_TABS.register("hbm_block", () -> CreativeModeTab.builder()
         .title(Component.translatable("itemGroup.hbm_block"))
@@ -110,6 +111,8 @@ public class ModCreativeModeTab {
             output.accept(ModItems.BATTERY_GENERIC.get());
 
             output.accept(ModItems.SCREWDRIVER.get());
+
+            HBMtools.creativeTab(output);
         }).build());
 
     /**

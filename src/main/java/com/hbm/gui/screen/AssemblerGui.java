@@ -5,7 +5,10 @@ import com.hbm.gui.menu.AssemblerMenu;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.gui.screens.inventory.AbstractFurnaceScreen;
 import net.minecraft.client.gui.screens.inventory.FurnaceScreen;
+import net.minecraft.client.gui.screens.recipebook.AbstractFurnaceRecipeBookComponent;
+import net.minecraft.client.gui.screens.recipebook.RecipeBookComponent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
@@ -14,8 +17,11 @@ import net.minecraft.world.inventory.FurnaceMenu;
 public class AssemblerGui extends AbstractContainerScreen<AssemblerMenu> {
     private static final ResourceLocation TEXTURE = HBM.rl("textures/gui/gui_assembler.png");
     private static final ResourceLocation TEMPLATE_BUTTON_TEXTURE = HBM.rl("textures/gui/button_machine.png");
+    public final RecipeBookComponent recipeBookComponent;
+    private boolean widthTooNarrow;
     public AssemblerGui(AssemblerMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
+        this.recipeBookComponent = new RecipeBookComponent();
     }
 
     @Override
@@ -23,7 +29,8 @@ public class AssemblerGui extends AbstractContainerScreen<AssemblerMenu> {
         super.init();
         this.imageHeight = 222;
         this.topPos -= 28;
-        this.addRenderableWidget(new ImageButton(this.leftPos + 79, this.topPos + 52, 20, 18, 0, 0, 19, TEMPLATE_BUTTON_TEXTURE, (button) -> {
+//        this.recipeBookComponent.init(this.width, this.height, this.minecraft, this.widthTooNarrow, this.menu);
+        this.addRenderableWidget(new ImageButton(this.leftPos + 79, this.topPos + 53, 20, 18, 0, 0, 19, TEMPLATE_BUTTON_TEXTURE, (button) -> {
 
         }));
     }

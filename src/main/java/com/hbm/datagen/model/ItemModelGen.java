@@ -1,6 +1,7 @@
 package com.hbm.datagen.model;
 
 import com.hbm.HBM;
+import com.hbm.item.HBMtools;
 import com.hbm.registries.ModItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
@@ -14,6 +15,7 @@ public class ItemModelGen extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
+        HBMtools.genModel(this);
         this.basicItem(ModItems.ingot_steel.get());
         this.basicItem(ModItems.ingot_red_copper.get());
         this.basicItem(ModItems.ingot_tungsten.get());

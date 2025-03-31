@@ -134,6 +134,6 @@ public class HBM {
 
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
-        RecipeTest.countableIngredientLoad(event);
+
     }
 }

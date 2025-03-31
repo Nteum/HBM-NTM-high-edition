@@ -1,6 +1,7 @@
 package com.hbm.registries;
 
 import com.hbm.item.BatteryItem;
+import com.hbm.item.HBMtools;
 import com.hbm.item.env.BedrockOreItem;
 import com.hbm.HBM;
 import com.hbm.fluid.ModFluids;
@@ -19,6 +20,9 @@ import net.minecraftforge.registries.RegistryObject;
 public class ModItems {
     //物品注册表
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, HBM.MODID);
+    static {
+        HBMtools.register(ITEMS);
+    }
     /* weapon */
     //armor
     //grenade
@@ -76,11 +80,12 @@ public class ModItems {
     public static final RegistryObject<Item> reacher = ITEMS.register("reacher",()->new Item(new Item.Properties()));
     public static final RegistryObject<Item> SCREWDRIVER = ITEMS.register("screwdriver",()->new Item(new Item.Properties()));
     //升级组件
-    public static final RegistryObject<Item> UPGRADE_BASE = ITEMS.register("upgrade_base",()->new Item(new Item.Properties()));
+//    public static final RegistryObject<Item> UPGRADE_BASE = ITEMS.register("upgrade_base",()->new Item(new Item.Properties()));
     //导弹
     public static final RegistryObject<Item> DESIGNATOR = ITEMS.register("designator",()->new ItemDesignator(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> MISSILE_GENERIC = ITEMS.register("missile_generic",()->new ItemMissle(new Item.Properties().stacksTo(1)));
     public static void register(IEventBus eventBus){
+//        HBMtools.register(ITEMS);
         ITEMS.register(eventBus);
     }
 }

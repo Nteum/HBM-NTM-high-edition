@@ -59,7 +59,7 @@ public class AssemblerEntity extends BedLikeBlockEntity {
     static final List<Tuple<Vec3i,Direction>> itemInout = List.of(new Tuple<>(new Vec3i(1,0,-1),Direction.EAST),new Tuple<>(new Vec3i(-2,0,0),Direction.WEST));
     public final List<Tuple<BlockPos,Direction>> specInout = new ArrayList<>();
 
-    public static final RecipeManager.CachedCheck<CraftingContainer, AssemblerRecipe> quickCheck = RecipeManager.createCheck(ModRecipeType.ASSEMBLER_RECIPE.get());
+    public static final RecipeManager.CachedCheck<Container, AssemblerRecipe> quickCheck = RecipeManager.createCheck(ModRecipeType.ASSEMBLER_RECIPE.get());
 
     static final int[] INPUT_SLOTS = IntStream.range(5,17).toArray();
     static final int[] OUTPUT_SLOTS = new int[]{4};

@@ -39,6 +39,7 @@ import java.util.List;
  * */
 public class CountableIngredient extends AbstractIngredient {
     private final Value value;
+    public static final CountableIngredient EMPTY = new CountableIngredient(new Value());
     public static CountableIngredient of(ItemStack itemStack){
         return new CountableIngredient(Value.item(itemStack));
     }
@@ -89,9 +90,14 @@ public class CountableIngredient extends AbstractIngredient {
         return this.value.serialize();
     }
 
+    @Override
+    public boolean isEmpty() {
+        return value.isEmpty();
+    }
+
     public static class Serializer implements IIngredientSerializer<CountableIngredient>
     {
-        public static final StrictNBTIngredient.Serializer INSTANCE = new StrictNBTIngredient.Serializer();
+        public static final Serializer INSTANCE = new Serializer();
         @Override
         public CountableIngredient parse(FriendlyByteBuf buffer) {
             Value value1 = new Value();
@@ -153,8 +159,8 @@ public class CountableIngredient extends AbstractIngredient {
 
     public static class Value implements Ingredient.Value{
         boolean flagTag = false;    //存放的是否为tag
-        ItemStack itemStack;
-        TagKey<Item> tagKey;
+        ItemStack itemStack = null;
+        TagKey<Item> tagKey = null;
         int tagItemNum = 0; //如果存放tag则所需数量
         public static Value item(ItemStack itemStack){
             Value value = new Value();
@@ -170,6 +176,9 @@ public class CountableIngredient extends AbstractIngredient {
             value.tagKey = pTag;
             value.tagItemNum = count;
             return value;
+        }
+        public boolean isEmpty(){
+            return itemStack == null &&  tagKey==null;
         }
 
         @Override
