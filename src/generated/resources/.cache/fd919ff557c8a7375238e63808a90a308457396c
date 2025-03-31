@@ -1,7 +1,7 @@
-// 1.20.1	2025-03-31T00:29:53.8051971	Tags for minecraft:block mod id hbmxx
+// 1.20.1	2025-03-31T13:00:17.7144141	Tags for minecraft:block mod id hbmxx
 22be8f9a444f089f9f21ca2fa162dd81ccbee2ed data/forge/tags/blocks/battery.json
 e2656ad9e0c7fd988ce21b718eff0a9fb0a39434 data/forge/tags/blocks/machine.json
-8d82af3733e68053eaf715f73b06ee8dbfa7b695 data/forge/tags/blocks/ores.json
+e47f44e54a7cacb76ae31211ec75e0e5494bf0b6 data/forge/tags/blocks/ores.json
 1c34ef9390c021f0f7debda1509a4278d51343b5 data/forge/tags/blocks/ores/aluminium.json
 2a0e590af978e7e45ecbb802d49cc2a186680704 data/forge/tags/blocks/ores/asbestos.json
 c3ba46d4b9b2d65290c5ed1b2c162f16d73d865b data/forge/tags/blocks/ores/beryllium.json

@@ -24,6 +24,7 @@ import com.hbm.recipe.ModRecipes;
 import com.hbm.registries.ModSounds;
 import com.hbm.world.feature.ModFeatures;
 import com.mojang.logging.LogUtils;
+import com.test.RecipeTest;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
@@ -133,5 +134,6 @@ public class HBM {
 
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
+        RecipeTest.countableIngredientLoad(event);
     }
 }

@@ -2,7 +2,6 @@
   "type": "hbmxx:assembler",
   "ingredients": [
     {
-      "type": "forge:nbt",
       "count": 3,
       "item": "minecraft:iron_ingot"
     }

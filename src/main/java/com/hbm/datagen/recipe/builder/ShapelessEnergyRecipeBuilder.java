@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.hbm.HBM;
+import com.hbm.datagen.recipe.ingredient.CountableIngredient;
 import com.hbm.recipe.ModRecipes;
 import net.minecraft.advancements.CriterionTriggerInstance;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -32,23 +33,16 @@ public class ShapelessEnergyRecipeBuilder implements RecipeBuilder {
     /** 虽然名字是power，实际上可以用来表示 能量/热量/工作时间 等用整数表示的概念，反正它们一般都不会一起用 */
     private long number;
     private RecipeCategory category = RecipeCategory.MISC;
-    private final List<Ingredient> ingredients = Lists.newArrayList();
+    private final List<CountableIngredient> ingredients = Lists.newArrayList();
     @Nullable
     private String group = "";
     protected ShapelessEnergyRecipeBuilder(RecipeCategory pCategory, ItemLike result, int count) {
         this.result = result.asItem();
         this.count = count;
     }
-    /**
-     * Creates a new builder for a shapeless recipe.
-     */
     public static ShapelessEnergyRecipeBuilder assembler(ItemLike pResult) {
         return new ShapelessEnergyRecipeBuilder(RecipeCategory.MISC, pResult, 1);
     }
-
-    /**
-     * Creates a new builder for a shapeless recipe.
-     */
     public static ShapelessEnergyRecipeBuilder assembler(ItemLike pResult, int pCount) {
         return new ShapelessEnergyRecipeBuilder(RecipeCategory.MISC, pResult, pCount);
     }
@@ -56,37 +50,23 @@ public class ShapelessEnergyRecipeBuilder implements RecipeBuilder {
         this.number = number;
         return this;
     }
-    /**
-     * Adds an ingredient that can be any item in the given tag.
-     */
     public ShapelessEnergyRecipeBuilder requires(TagKey<Item> pTag) {
-        return this.requires(Ingredient.of(pTag));
+        return this.requires(CountableIngredient.of(pTag));
     }
-
-    /**
-     * Adds an ingredient of the given item.
-     */
+    public ShapelessEnergyRecipeBuilder requires(TagKey<Item> pTag, int count) {
+        return this.requires(CountableIngredient.of(pTag,count));
+    }
     public ShapelessEnergyRecipeBuilder requires(ItemLike pItem) {
         return this.requires(pItem, 1);
     }
 
-    /**
-     * Adds the given ingredient multiple times.
-     */
     public ShapelessEnergyRecipeBuilder requires(ItemLike pItem, int pQuantity) {
-//        for(int i = 0; i < pQuantity; ++i) {
-//            this.requires(Ingredient.of(pItem));
-//        }
-//        this.requires(IngredientHelper.of(new ItemStack(pItem,pQuantity)));
-        this.requires(StrictNBTIngredient.of(new ItemStack(pItem,pQuantity)));
+        this.requires(CountableIngredient.of(pItem,pQuantity));
 
         return this;
     }
 
-    /**
-     * Adds an ingredient.
-     */
-    public ShapelessEnergyRecipeBuilder requires(Ingredient pIngredient) {
+    public ShapelessEnergyRecipeBuilder requires(CountableIngredient pIngredient) {
         this.ingredients.add(pIngredient);
         return this;
     }
@@ -128,9 +108,9 @@ public class ShapelessEnergyRecipeBuilder implements RecipeBuilder {
         private final int count;
         private final long number;
         private final String group;
-        private final List<Ingredient> ingredients;
+        private final List<CountableIngredient> ingredients;
 
-        public Result(ResourceLocation pId, Item pResult, int pCount, String pGroup, RecipeCategory pCategory, List<Ingredient> pIngredients, long number) {
+        public Result(ResourceLocation pId, Item pResult, int pCount, String pGroup, RecipeCategory pCategory, List<CountableIngredient> pIngredients, long number) {
             this.id = pId;
             this.result = pResult;
             this.count = pCount;
@@ -145,7 +125,7 @@ public class ShapelessEnergyRecipeBuilder implements RecipeBuilder {
             }
 
             JsonArray jsonarray = new JsonArray();
-            for(Ingredient ingredient : this.ingredients) {
+            for(CountableIngredient ingredient : this.ingredients) {
                 jsonarray.add(ingredient.toJson());
             }
             pJson.add("ingredients", jsonarray);

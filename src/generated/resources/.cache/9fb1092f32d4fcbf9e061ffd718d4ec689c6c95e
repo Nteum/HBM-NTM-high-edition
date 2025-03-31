@@ -1,7 +1,8 @@
-// 1.20.1	2025-03-29T01:11:27.0330522	Recipes
+// 1.20.1	2025-03-31T13:00:17.7114157	Recipes
 bedc8c8f67f48f0ed83a7b05c550f167ea1bb018 data/hbmxx/advancements/recipes/misc/ingot_zirconium_6.json
 0d4b3f74e7ef41c9e88cbd00f4723b0789d3fef8 data/hbmxx/advancements/recipes/misc/nugget_zirconium_5.json
-a73f2afe95eb58a4abe2e5f3f58f9af1dc50005b data/hbmxx/recipes/assembler/plate_iron.json
+05e6301b627e570e2f759f953c22add3a7800514 data/hbmxx/recipes/assembler/battery_creative.json
+fd19f28911290dc3301f4d88fc97ea9b4e9f68f4 data/hbmxx/recipes/assembler/plate_iron.json
 74e5daee81d499cb8a24bcda9b74fff06d31c0e7 data/hbmxx/recipes/blast_hbm_0.json
 43dde26ad4977e4f4f6aa8bf78d03833ce8ee425 data/hbmxx/recipes/blast_hbm_1.json
 d203eda1c66bac9350f010667de69b30b7cd2b69 data/hbmxx/recipes/blast_hbm_2.json

@@ -32,6 +32,10 @@ import java.util.List;
  * 创建这种ingredient主要是因为原版Ingredient序列化的时候竟然不加入数量
  * forge的StrictNBTIngredient可以记录数量，但又会记录所有的nbt，并且没有tag功能
  * 我需要可以比较数量，并具有tag功能的Ingredient类
+ * 功能描述：
+ * 1. 每个Ingredient存一个格子的东西
+ * 2. 可以记录配方所需某种物品的数量，放在单个格子里就行，不需要相同的放多个
+ * 3. 可以用符合相同key的东西做
  * */
 public class CountableIngredient extends AbstractIngredient {
     private final Value value;
@@ -144,7 +148,7 @@ public class CountableIngredient extends AbstractIngredient {
 //        stringBuilder.indexOf("]\\");
 //        String location = s.substring(s.indexOf("]/") + 1, s.length() - 1);
 
-        return TagKey.create(Registries.ITEM,new ResourceLocation(s.substring(s.indexOf("]/") + 2, s.length() - 1)));
+        return TagKey.create(Registries.ITEM,new ResourceLocation(s.substring(s.indexOf(" / ") + 3, s.length() - 1)));
     }
 
     public static class Value implements Ingredient.Value{
