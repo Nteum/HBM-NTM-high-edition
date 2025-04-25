@@ -13,4 +13,5 @@ public class Models {
     public static final ResourceLocation BOY = new ResourceLocation(HBM.MODID,"block/bomb/boy");
     public static final ResourceLocation CUSTOM_NUKE = new ResourceLocation(HBM.MODID,"block/bomb/custom");
     public static final ResourceLocation BLACK_HOLE = new ResourceLocation(HBM.MODID,"block/effect/sphere");
+    public static final ResourceLocation MP_W_15_BALEFIRE = HBM.rl("item/missile/mp_w_15");
 }

@@ -38,7 +38,7 @@ import java.util.List;
  * 3. 可以用符合相同key的东西做
  * */
 public class CountableIngredient extends AbstractIngredient {
-    private final Value value;
+    public final Value value;
     public static final CountableIngredient EMPTY = new CountableIngredient(new Value());
     public static CountableIngredient of(ItemStack itemStack){
         return new CountableIngredient(Value.item(itemStack));
@@ -63,10 +63,26 @@ public class CountableIngredient extends AbstractIngredient {
 
     @Override
     public boolean test(@Nullable ItemStack pStack) {
+//        if (pStack==null)return false;
+//        else {
+//            if (!this.value.flagTag){
+//                return this.value.itemStack.is(pStack.getItem()) && this.value.getCount() <= pStack.getCount();
+//            }else {
+//                boolean flag = false;
+//                for (ItemStack itemStack : this.value.getItems()) {
+//                    if (itemStack.is(pStack.getItem())){
+//                        flag = true;
+//                        break;
+//                    }
+//                }
+//                return flag && this.value.count <= pStack.getCount();
+//            }
+//        }
+
         if (pStack==null)return false;
         else {
             if (!this.value.flagTag){
-                return this.value.itemStack.is(pStack.getItem()) && this.value.getCount() <= pStack.getCount();
+                return this.value.itemStack.is(pStack.getItem());
             }else {
                 boolean flag = false;
                 for (ItemStack itemStack : this.value.getItems()) {
@@ -75,7 +91,7 @@ public class CountableIngredient extends AbstractIngredient {
                         break;
                     }
                 }
-                return flag && this.value.tagItemNum <= pStack.getCount();
+                return flag;
             }
         }
     }
@@ -158,13 +174,14 @@ public class CountableIngredient extends AbstractIngredient {
     }
 
     public static class Value implements Ingredient.Value{
-        boolean flagTag = false;    //存放的是否为tag
-        ItemStack itemStack = null;
-        TagKey<Item> tagKey = null;
-        int tagItemNum = 0; //如果存放tag则所需数量
+        public boolean flagTag = false;    //存放的是否为tag
+        public ItemStack itemStack = null;
+        public TagKey<Item> tagKey = null;
+        public int count = 0; //如果存放tag则所需数量
         public static Value item(ItemStack itemStack){
             Value value = new Value();
             value.itemStack = itemStack;
+            value.count = itemStack.getCount();
             return value;
         }
         public static Value tag(TagKey<Item> pTag){
@@ -174,7 +191,7 @@ public class CountableIngredient extends AbstractIngredient {
             Value value = new Value();
             value.flagTag = true;
             value.tagKey = pTag;
-            value.tagItemNum = count;
+            value.count = count;
             return value;
         }
         public boolean isEmpty(){
@@ -200,7 +217,7 @@ public class CountableIngredient extends AbstractIngredient {
         }
 
         public int getCount(){
-            return flagTag ? tagItemNum : itemStack.getCount();
+            return count;
         }
 
         @Override
@@ -208,10 +225,10 @@ public class CountableIngredient extends AbstractIngredient {
             JsonObject jsonobject = new JsonObject();
             if (!flagTag){
                 jsonobject.addProperty("item", BuiltInRegistries.ITEM.getKey(this.itemStack.getItem()).toString());
-                jsonobject.addProperty("count", this.itemStack.getCount());
+                jsonobject.addProperty("count", this.count);
             }else {
                 jsonobject.addProperty("tag", this.tagKey.location().toString());
-                jsonobject.addProperty("count", this.tagItemNum);
+                jsonobject.addProperty("count", this.count);
             }
             return jsonobject;
         }

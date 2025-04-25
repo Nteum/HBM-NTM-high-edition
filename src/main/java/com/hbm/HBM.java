@@ -90,7 +90,6 @@ public class HBM {
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
-
         ModMessages.register(); //注册所有的消息
     }
 
@@ -106,7 +105,7 @@ public class HBM {
         ExistingFileHelper helper = event.getExistingFileHelper();
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
         /** 客户端数据生成，生成到assets目录下 */
-//        generator.addProvider(event.includeClient(),new EnglishLanguageProvider(packOutput,HBMxx.MODID,"en_us"));
+        generator.addProvider(event.includeClient(),new LanguageProvider(packOutput,HBM.MODID,"en_us"));
         generator.addProvider(event.includeClient(),new ItemModelGen(packOutput, HBM.MODID,helper));
         generator.addProvider(event.includeClient(),new BlockStateGen(packOutput, HBM.MODID,helper));
         /** 服务端数据生成，生成到data目录下 */

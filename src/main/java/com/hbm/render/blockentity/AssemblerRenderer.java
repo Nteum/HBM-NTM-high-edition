@@ -71,8 +71,8 @@ public class AssemblerRenderer implements BlockEntityRenderer<AssemblerEntity> {
             }
         }
 
-        boolean running = true;
-        if (running){
+//        boolean running = true;
+        if (pBlockEntity.running){
             count = (count + 1) % 360;
         }
 

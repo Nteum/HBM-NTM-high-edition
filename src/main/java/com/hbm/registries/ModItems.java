@@ -1,6 +1,8 @@
 package com.hbm.registries;
 
 import com.hbm.item.BatteryItem;
+import com.hbm.item.HBMComponent;
+import com.hbm.item.HBMWeapon;
 import com.hbm.item.HBMtools;
 import com.hbm.item.env.BedrockOreItem;
 import com.hbm.HBM;
@@ -22,6 +24,8 @@ public class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, HBM.MODID);
     static {
         HBMtools.register(ITEMS);
+        HBMComponent.register(ITEMS);
+        HBMWeapon.register(ITEMS);
     }
     /* weapon */
     //armor
@@ -71,11 +75,7 @@ public class ModItems {
     //矿物
     public static final RegistryObject<Item> BEDROCK_ORE = ITEMS.register("bedrock_ore_base",()->new BedrockOreItem(new Item.Properties()));
 
-    //工业元件
-    public static final RegistryObject<Item> BATTERY_CREATIVE = ITEMS.register("battery_creative",()->new BatteryItem(-1, 1_000_000L, 0, new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> BATTERY_GENERIC = ITEMS.register("battery_generic",()->new BatteryItem(5_000, 100, 100, new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> BATTERY_ADVANCED = ITEMS.register("battery_advanced",()->new BatteryItem(60_000, 500, 500, new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> BATTERY_LITHIUM = ITEMS.register("battery_lithium",()->new BatteryItem(250_000, 1000, 1000, new Item.Properties().stacksTo(1)));
+
 
     public static final RegistryObject<Item> reacher = ITEMS.register("reacher",()->new Item(new Item.Properties()));
     public static final RegistryObject<Item> SCREWDRIVER = ITEMS.register("screwdriver",()->new Item(new Item.Properties()));

@@ -1,13 +1,13 @@
 package com.hbm.blockentity.base;
 
-import com.hbm.capabilities.SidedCapCache;
+import com.hbm.HBMKey;
+import com.hbm.capabilities.CapabilityCache;
+import com.hbm.lib.ItemDataUtils;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.Connection;
-import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.protocol.game.ClientGamePacketListener;
-import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.nbt.Tag;
 import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.WorldlyContainer;
@@ -16,12 +16,16 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.util.LazyOptional;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class BaseMachineBlockEntity extends BaseContainerBlockEntity implements WorldlyContainer {
     //机器内部存储的物品，需要在子类中初始化
-    protected NonNullList<ItemStack> items;
+    public NonNullList<ItemStack> items;
     public boolean running = false;    // 运行状态
+
+    protected final CapabilityCache capabilitiesCache = new CapabilityCache();
 
     protected BaseMachineBlockEntity(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState) {
         super(pType, pPos, pBlockState);
@@ -31,28 +35,20 @@ public abstract class BaseMachineBlockEntity extends BaseContainerBlockEntity im
     @Override
     protected void saveAdditional(CompoundTag pTag) {
         super.saveAdditional(pTag);
-        ContainerHelper.saveAllItems(pTag, this.items);
+        if (!pTag.contains(HBMKey.DATA, Tag.TAG_COMPOUND)) {
+            pTag.put(HBMKey.DATA,new CompoundTag());
+        }
+        CompoundTag dataMap = ItemDataUtils.getDataMap(pTag);
+        dataMap.put(HBMKey.CAPS, capabilitiesCache.serializeNBT());
     }
     //加载之前存储的数据。
     @Override
     public void load(CompoundTag pTag) {
         super.load(pTag);
-        this.items = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
-        ContainerHelper.loadAllItems(pTag, this.items);
+        CompoundTag dataMap = ItemDataUtils.getDataMapIfPresent(pTag);
+        if (dataMap!=null && dataMap.contains(HBMKey.CAPS))
+            capabilitiesCache.deserializeNBT((CompoundTag) dataMap.get(HBMKey.CAPS));
     }
-//    //为了和客户端同步，服务端发送的数据包
-//    @Nullable
-//    @Override
-//    public Packet<ClientGamePacketListener> getUpdatePacket() {
-//        ClientboundBlockEntityDataPacket packet = ClientboundBlockEntityDataPacket.create(this);
-//        return packet;
-//    }
-//    //客户端接收数据包（注意：服务端和客户端的实体时不一样的，比如客户端的实体地址24999，服务端可以是25068，虽然同一个类，但有两个实例）
-//    //方块实体渲染器调用的就是客户端，根据需要进行客户端同步，不是所有数据都需要和客户端同步
-//    @Override
-//    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
-//        super.onDataPacket(net, pkt);
-//    }
     //方块被载入时同步数据用
     @Override
     public CompoundTag getUpdateTag() {
@@ -104,5 +100,16 @@ public abstract class BaseMachineBlockEntity extends BaseContainerBlockEntity im
     @Override
     public boolean canPlaceItem(int pIndex, ItemStack pStack) {
         return true;
+    }
+    //==========================Capabilities==================================
+    @Override
+    public <T> LazyOptional<T> getCapability(Capability<T> cap, @Nullable Direction side) {
+        return capabilitiesCache.getCapability(cap,side);
+    }
+
+    @Override
+    public void invalidateCaps() {
+        super.invalidateCaps();
+        capabilitiesCache.invalidateAll();
     }
 }

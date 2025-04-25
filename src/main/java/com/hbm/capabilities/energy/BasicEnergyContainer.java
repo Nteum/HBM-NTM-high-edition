@@ -51,10 +51,10 @@ public class BasicEnergyContainer implements IEnergyContainer {
     }
 
     @Override
-    public long extract(long expectedExtract) {
+    public long extract(long expectedExtract, boolean isSim) {
         if (expectedExtract <= 0)return 0;
         long amount = Math.min(getEnergy(),Math.min(output,expectedExtract));
-        if (amount > 0){
+        if (amount > 0 && !isSim){
             energy -= amount;
         }
         return amount;
@@ -67,12 +67,12 @@ public class BasicEnergyContainer implements IEnergyContainer {
 
     @Override
     public boolean canExtract() {
-        return output == 0;
+        return output != 0;
     }
 
     @Override
     public boolean canReceive() {
-        return input == 0;
+        return input != 0;
     }
 
     @Override

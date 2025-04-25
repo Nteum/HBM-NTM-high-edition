@@ -19,32 +19,36 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Function;
 import java.util.stream.IntStream;
 
 /** 使用itemhandler抽取物品
  * ref:forge - VanillaInventoryCodeHooks
  * */
 public class InventoryUtils {
+    static Function<ItemStack,Boolean> allowAll = (itemStack -> true);
     private InventoryUtils() {
     }
     @Nullable
     public static Boolean extractItem(Level level, BaseContainerBlockEntity dest, Direction interactDir)
     {
-        return extractItem(level,dest,null,null,interactDir);
+        return extractItem(level,dest,null,null,interactDir,allowAll);
     }
     @Nullable
     public static Boolean extractItem(Level level, BaseContainerBlockEntity dest,List<Integer> extSlots, Direction interactDir)
     {
-        return extractItem(level,dest,null,extSlots, interactDir);
+        return extractItem(level,dest,null,extSlots, interactDir,allowAll);
     }
     /** 从外界拉取物品
      * 参考TileEntityHopper#captureDroppedItems，并添加能力支持
      * @param interactDir 交互方向，一般机器接口就一个，因此方向只有一个
      * @param proxyPos 代理方块的位置，一般用于多方块结构，如果非多方快结构可以不使用
+     * @param extCond 拉取规则，有些物品不会从外界向内拉取。
      * @return Null if we did nothing {no IItemHandler}, True if we moved an item, False if we moved no items
      */
     @Nullable
-    public static Boolean extractItem(Level level, BaseContainerBlockEntity dest, @Nullable BlockPos proxyPos, @Nullable List<Integer> extSlots, Direction interactDir)
+    public static Boolean extractItem(Level level, BaseContainerBlockEntity dest, @Nullable BlockPos proxyPos, @Nullable List<Integer> extSlots, Direction interactDir,
+                                      Function<ItemStack,Boolean> extCond)
     {
         BlockPos destPos = proxyPos==null?dest.getBlockPos():proxyPos;
         List<Integer> slotList = extSlots==null? IntStream.range(0,dest.getContainerSize()).boxed().toList():extSlots;
@@ -55,7 +59,7 @@ public class InventoryUtils {
                     for (int i = 0; i < handler.getSlots(); i++)
                     {
                         ItemStack extractItem = handler.extractItem(i, 1, true);
-                        if (!extractItem.isEmpty())
+                        if (!extractItem.isEmpty() && extCond.apply(extractItem))
                         {
 //                            for (int j = 0; j < dest.getContainerSize(); j++)
                             for (int j : slotList)

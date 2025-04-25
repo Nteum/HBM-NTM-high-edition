@@ -1,8 +1,12 @@
 package com.hbm.blockentity.machine;
 
 import com.hbm.api.NBTConstants;
+import com.hbm.api.energy.fe.HBMEnergyStorage;
+import com.hbm.api.energy.fe.IHBMEnergyStorage;
+import com.hbm.api.energy.fe.SidedEnergyWrapper;
 import com.hbm.block.machine.BlockBattery;
 import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.base.BaseMachineBlockEntity;
 import com.hbm.capabilities.energy.BasicEnergyContainer;
 import com.hbm.gui.menu.BatteryMenu;
 import com.hbm.capabilities.Capabilities;
@@ -25,14 +29,14 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.energy.IEnergyStorage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class BatteryEntity extends BaseContainerBlockEntity implements WorldlyContainer {
-    private final BasicEnergyContainer ENERGY_STORAGE;
+public class BatteryEntity extends BaseMachineBlockEntity implements WorldlyContainer {
     public final BlockBattery.BatteryType type;
-    private LazyOptional<IEnergyContainer> lazyEnergyHandler = LazyOptional.empty();
     public int redLow = 0;
     public int redHeight = 2;
     public int connPriority = 0;
@@ -47,10 +51,10 @@ public class BatteryEntity extends BaseContainerBlockEntity implements WorldlyCo
                 case 0 -> redLow;
                 case 1 -> redHeight;
                 case 2 -> connPriority;
-                case 3 -> (int) (ENERGY_STORAGE.getEnergy());
-                case 4 -> (int) (ENERGY_STORAGE.getEnergy() >> 32);
-                case 5 -> (int) (ENERGY_STORAGE.getMaxEnergy());
-                case 6 -> (int) (ENERGY_STORAGE.getMaxEnergy() >> 32);
+                case 3 -> (int) (getEnergy().getLongStore());
+                case 4 -> (int) (getEnergy().getLongStore() >> 32);
+                case 5 -> (int) (getEnergy().getLongCapacity());
+                case 6 -> (int) (getEnergy().getLongCapacity() >> 32);
                 default -> 0;
             };
         }
@@ -73,51 +77,37 @@ public class BatteryEntity extends BaseContainerBlockEntity implements WorldlyCo
         super(ModBlockEntityType.BATTERY_ENTITY.get(), pPos, pBlockState);
         BlockBattery block = (BlockBattery)pBlockState.getBlock();
         type = block.type;
-        ENERGY_STORAGE = new BasicEnergyContainer(type.getMaxEnergy(),type.getOutput(),type.getOutput());
-        items = NonNullList.withSize(2, ItemStack.EMPTY);
+        this.items = NonNullList.withSize(2, ItemStack.EMPTY);
+        this.capabilitiesCache.addCapabilityResolver(new SidedEnergyWrapper(new HBMEnergyStorage(type.getMaxEnergy(),type.getOutput(),type.getOutput())));
+    }
+    public IHBMEnergyStorage getEnergy(){
+        return (IHBMEnergyStorage) this.getCapability(ForgeCapabilities.ENERGY,null).orElse(null);
     }
 
-    @Override
-    public <T> LazyOptional<T> getCapability(Capability<T> cap, @Nullable Direction side) {
-        if (cap == Capabilities.ENERGY){
-            return lazyEnergyHandler.cast();
-        }
-        return super.getCapability(cap, side);
-    }
     private double[] powerWeight = new double[]{0.8,0.5,0.2};
     public static void tick(Level level, BlockPos pPos, BlockState pState, BlockEntity pBlockEntity) {
         if (!level.isClientSide() && pState.is(ModTags.Blocks.BATTERY) && pBlockEntity instanceof BatteryEntity entity){
             //与周围电力交互
-//            for (Direction value : Direction.values()) {
-//                BlockEntity blockEntity = level.getBlockEntity(pPos.relative(value));
-//                if (blockEntity != null){
-//                    blockEntity.getCapability(ForgeCapabilities.ENERGY).ifPresent(cap->{
-//                        int energyStored = cap.getEnergyStored();
-//                        int receivedEnergy = entity.ENERGY_STORAGE.receiveEnergy(energyStored, false);
-//                        cap.extractEnergy(receivedEnergy,false);
-//                    });
-//                }
-//            }
             if (entity.connPriority == 0){          //吸电
                 for (Direction value : Direction.values()) {
                     BlockEntity blockEntity = level.getBlockEntity(pPos.relative(value));
                     if (blockEntity != null){
                         blockEntity.getCapability(Capabilities.ENERGY,value.getOpposite()).ifPresent(cap->{
                             long energyStored = cap.getEnergy();
-                            long receivedEnergy = entity.ENERGY_STORAGE.insert(energyStored);
-                            cap.extract(receivedEnergy);
+                            long receivedEnergy = entity.getEnergy().receiveEnergy(energyStored,false);
+                            cap.extract(receivedEnergy,false);
                         });
                     }
                 }
             }else if (entity.connPriority > 0){    //放电
-                if (entity.ENERGY_STORAGE.getEnergy() > 0){
+                if (entity.getEnergy().getLongStore() > 0){
                     for (Direction value : Direction.values()) {
                         BlockEntity blockEntity = level.getBlockEntity(pPos.relative(value));
                         if (blockEntity != null){
                             blockEntity.getCapability(Capabilities.ENERGY,value.getOpposite()).ifPresent(cap->{
                                 if (cap.getEnergy() < cap.getMaxEnergy()){
-                                    long receivedEnergy = cap.insert(entity.ENERGY_STORAGE.getEnergy());
-                                    entity.ENERGY_STORAGE.extract(receivedEnergy);
+                                    long receivedEnergy = cap.insert(entity.getEnergy().getLongStore());
+                                    entity.getEnergy().extractEnergy(receivedEnergy,false);
                                 }
                             });
                         }
@@ -128,11 +118,17 @@ public class BatteryEntity extends BaseContainerBlockEntity implements WorldlyCo
             ItemStack itemStack0 = entity.items.get(0);
             ItemStack itemStack1 = entity.items.get(1);
             if (itemStack0.is(ModTags.Items.BATTERY)){
-                entity.getCapability(Capabilities.ENERGY).ifPresent(cap -> cap.insert(ItemEnergyProxy.disCharge(itemStack0)));
+                entity.getCapability(ForgeCapabilities.ENERGY).ifPresent(cap -> {
+                    IEnergyStorage iEnergyStorage = itemStack0.getCapability(ForgeCapabilities.ENERGY).orElse(null);
+                    ((IHBMEnergyStorage)cap).receiveEnergy(((IHBMEnergyStorage)iEnergyStorage).extractEnergy(10000,false),false);
+                });
             }
             if (itemStack1.is(ModTags.Items.BATTERY)){
-                entity.getCapability(Capabilities.ENERGY).ifPresent(cap ->{
-                    ItemEnergyProxy.charge(itemStack1, cap);
+                entity.getCapability(ForgeCapabilities.ENERGY).ifPresent(cap ->{
+                    IEnergyStorage iEnergyStorage = itemStack1.getCapability(ForgeCapabilities.ENERGY).orElse(null);
+                    long extractEnergy = ((IHBMEnergyStorage) cap).extractEnergy(10000, true);
+                    long receivedEnergy = ((IHBMEnergyStorage) iEnergyStorage).receiveEnergy(extractEnergy, false);
+                    ((IHBMEnergyStorage) cap).extractEnergy(receivedEnergy, false);
                 });
             }
             level.sendBlockUpdated(pPos,pState,pState,2);
@@ -143,9 +139,9 @@ public class BatteryEntity extends BaseContainerBlockEntity implements WorldlyCo
     @Override
     protected void saveAdditional(CompoundTag pTag) {
         super.saveAdditional(pTag);
-        ContainerHelper.saveAllItems(pTag, this.items);
-        pTag.put(NBTConstants.ENERGY,ENERGY_STORAGE.serializeNBT());
-//        pTag.put("battery.energy",ENERGY_STORAGE.serializeNBT());
+        if (this.items!=null){
+            ContainerHelper.saveAllItems(pTag, this.items);
+        }
         pTag.putInt("redLow",redLow);
         pTag.putInt("redHeight",redHeight);
         pTag.putInt("connPriority",connPriority);
@@ -154,57 +150,19 @@ public class BatteryEntity extends BaseContainerBlockEntity implements WorldlyCo
     @Override
     public void load(CompoundTag pTag) {
         super.load(pTag);
-        ENERGY_STORAGE.deserializeNBT((CompoundTag) pTag.get(NBTConstants.ENERGY));
+        if (this.items!=null){
+            this.items = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
+            ContainerHelper.loadAllItems(pTag, this.items);
+        }
         redLow = pTag.getInt("redLow");
         redHeight = pTag.getInt("redHeight");
         connPriority = pTag.getInt("connPriority");
-        this.items = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
-        ContainerHelper.loadAllItems(pTag, this.items);
     }
 
     @Override
     public @NotNull CompoundTag getUpdateTag() {
         CompoundTag updateTag = super.getUpdateTag();
         return updateTag;
-    }
-
-//    @Override
-//    public @Nullable Packet<ClientGamePacketListener> getUpdatePacket() {
-//        ClientboundBlockEntityDataPacket packet = ClientboundBlockEntityDataPacket.create(this);
-//        CompoundTag tag = packet.getTag();
-//        assert tag != null;
-//        tag.putLong("battery.energy",ENERGY_STORAGE.getEnergy());
-//        tag.putLong("battery.capacity",ENERGY_STORAGE.getMaxEnergy());
-//        return packet;
-//    }
-//
-//    @Override
-//    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
-//        super.onDataPacket(net, pkt);
-//        CompoundTag tag = pkt.getTag();
-//        assert tag != null;
-//        ENERGY_STORAGE.setEnergy(tag.getLong("battery.energy"));
-//        ENERGY_STORAGE.setMaxEnergy(tag.getLong("battery.capacity"));
-//    }
-
-    @Override
-    public void handleUpdateTag(CompoundTag tag) {
-        super.handleUpdateTag(tag);
-//        ENERGY_STORAGE.setEnergy(tag.getLong("battery.energy"));
-//        ENERGY_STORAGE.setMaxEnergy(tag.getLong("battery.capacity"));
-    }
-
-    //方块加入世界的时候会被调用。
-    @Override
-    public void onLoad() {
-        super.onLoad();
-        lazyEnergyHandler = LazyOptional.of(()->ENERGY_STORAGE);
-    }
-
-    @Override
-    public void invalidateCaps() {
-        super.invalidateCaps();
-        lazyEnergyHandler.invalidate();
     }
 
     @Override

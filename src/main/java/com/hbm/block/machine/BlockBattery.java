@@ -1,5 +1,6 @@
 package com.hbm.block.machine;
 
+import com.hbm.api.energy.fe.HBMEnergyStorage;
 import com.hbm.block.base.BaseMachineBlock;
 import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.blockentity.machine.BatteryEntity;
@@ -16,6 +17,8 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import net.minecraftforge.energy.IEnergyStorage;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -59,7 +62,9 @@ public class BlockBattery extends BaseMachineBlock {
             BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
             if (blockEntity instanceof BatteryEntity battery){
                 ItemStack itemStack = new ItemStack(pState.getBlock());
-                battery.getCapability(Capabilities.ENERGY).ifPresent(cap -> ItemEnergyProxy.setEnergy(itemStack,cap));
+                battery.getCapability(ForgeCapabilities.ENERGY).ifPresent(cap -> {
+                    itemStack.getCapability(ForgeCapabilities.ENERGY).ifPresent(iEnergyStorage->((HBMEnergyStorage)iEnergyStorage).setEnergy(cap.getEnergyStored()));
+                });
                 Containers.dropItemStack(pLevel,pPos.getX(),pPos.getY(),pPos.getZ(),itemStack);
                 Containers.dropContents(pLevel, pPos, (Container)blockEntity);
             }

@@ -29,7 +29,7 @@ public class ItemEnergyProxy {
                 && itemBattery.getEnergyProxy().capacity > 0
                 && stack.getOrCreateTag().getLong("energy") < itemBattery.getEnergyProxy().capacity){
             ItemEnergyProxy energyProxy = itemBattery.getEnergyProxy();
-            long input = cap.extract(energyProxy.maxReceive);
+            long input = cap.extract(energyProxy.maxReceive,false);
             long capacity = energyProxy.capacity;
             if (energyProxy.maxReceive == 0)return;
             if (!stack.hasTag() || !stack.getOrCreateTag().contains("energy")){

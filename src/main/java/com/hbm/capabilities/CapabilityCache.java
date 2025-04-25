@@ -1,63 +1,59 @@
 package com.hbm.capabilities;
 
 import com.hbm.HBM;
+import com.hbm.HBMKey;
+import com.hbm.api.multiblock.MultiblockData;
+import com.hbm.blockentity.base.DummibleBlockEntity;
 import com.hbm.capabilities.resolver.ICapabilityResolver;
 import it.unimi.dsi.fastutil.objects.ReferenceOpenHashSet;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.util.Tuple;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.common.util.LazyOptional;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.function.BooleanSupplier;
 
-public class CapabilitiesCache {
+public class CapabilityCache implements INBTSerializable<CompoundTag> {
+    public static String STOREKEY = "blockCapabilities";
     private final Map<Capability<?>, ICapabilityResolver> capabilityResolvers = new IdentityHashMap<>();
     private final List<ICapabilityResolver> uniqueResolvers = new ArrayList<>();
     private final Set<Capability<?>> alwaysDisabled = new ReferenceOpenHashSet<>();
     private final Map<Capability<?>, List<BooleanSupplier>> semiDisabled = new IdentityHashMap<>();
+    public final static Map<Capability<?>, String> CAPABILITY_NAME = new IdentityHashMap<>();
+    static {
+        CAPABILITY_NAME.put(ForgeCapabilities.ENERGY, HBMKey.ENERGY);
+        CAPABILITY_NAME.put(ForgeCapabilities.FLUID_HANDLER, HBMKey.FLUIDS);
+    }
     //添加能力resolver
     public void addCapabilityResolver(ICapabilityResolver resolver) {
         uniqueResolvers.add(resolver);
         List<Capability<?>> supportedCapabilities = resolver.getSupportedCapabilities();
         for (Capability<?> supportedCapability : supportedCapabilities) {
-            //Note: We add the capability regardless of if it is registered as we will just short circuit and always disable the capability
-            // if it isn't in use by the time the capability is queried. In theory, we shouldn't ever be getting created before the capabilities
-            // have been registered, but just in case we ensure it works properly
             if (capabilityResolvers.put(supportedCapability, resolver) != null) {
                 HBM.LOGGER.warn("Multiple capability resolvers registered for {}. Overriding", supportedCapability.getName(), new Exception());
             }
         }
     }
-    /**
-     * Marks all the given capabilities as always being disabled.
-     */
+    //标记一些capabilities不可用
     public void addDisabledCapabilities(Capability<?>... capabilities) {
         Collections.addAll(alwaysDisabled, capabilities);
     }
 
-    /**
-     * Marks all the given capabilities as always being disabled.
-     */
+    //添加不可用的capabilities
     public void addDisabledCapabilities(Collection<Capability<?>> capabilities) {
         alwaysDisabled.addAll(capabilities);
     }
-
-    /**
-     * Marks the given capability as having a check for sometimes being disabled.
-     *
-     * @implNote These "semi disabled" checks are stored in a list so that children can define more cases a capability should be disabled than the ones the parent already
-     * wants them to be disabled in.
-     */
     public void addSemiDisabledCapability(Capability<?> capability, BooleanSupplier checker) {
         semiDisabled.computeIfAbsent(capability, cap -> new ArrayList<>()).add(checker);
     }
-
-    /**
-     * Checks if the given capability is disabled for the specific side.
-     *
-     * @return {@code true} if the capability is disabled, {@code false} otherwise.
-     */
     public boolean isCapabilityDisabled(Capability<?> capability, @Nullable Direction side) {
         //Treat unregistered capabilities as being disabled to skip and further logic relating to them
         if (!capability.isRegistered() || alwaysDisabled.contains(capability)) {
@@ -73,27 +69,15 @@ public class CapabilitiesCache {
         }
         return false;
     }
-
-    /**
-     * Checks if the given capability can be resolved by this capability cache.
-     */
     public boolean canResolve(Capability<?> capability) {
         return capabilityResolvers.containsKey(capability);
     }
-
-    /**
-     * Gets a capability on the given side, ensuring that it can be resolved and that it is not disabled.
-     */
     public <T> LazyOptional<T> getCapability(Capability<T> capability, @Nullable Direction side) {
         if (!isCapabilityDisabled(capability, side) && canResolve(capability)) {
             return getCapabilityUnchecked(capability, side);
         }
         return LazyOptional.empty();
     }
-
-    /**
-     * Gets a capability on the given side not checking to ensure that it is not disabled.
-     */
     public <T> LazyOptional<T> getCapabilityUnchecked(Capability<T> capability, @Nullable Direction side) {
         ICapabilityResolver capabilityResolver = capabilityResolvers.get(capability);
         if (capabilityResolver == null) {
@@ -101,26 +85,12 @@ public class CapabilitiesCache {
         }
         return capabilityResolver.resolve(capability, side);
     }
-
-    /**
-     * Invalidates the given capability on the given side.
-     *
-     * @param capability Capability
-     * @param side       Side
-     */
     public void invalidate(Capability<?> capability, @Nullable Direction side) {
         ICapabilityResolver capabilityResolver = capabilityResolvers.get(capability);
         if (capabilityResolver != null) {
             capabilityResolver.invalidate(capability, side);
         }
     }
-
-    /**
-     * Invalidates the given capability on the given sides.
-     *
-     * @param capability Capability
-     * @param sides      Sides
-     */
     public void invalidateSides(Capability<?> capability, Direction... sides) {
         ICapabilityResolver capabilityResolver = capabilityResolvers.get(capability);
         if (capabilityResolver != null) {
@@ -129,11 +99,39 @@ public class CapabilitiesCache {
             }
         }
     }
-
-    /**
-     * Invalidates all cached capabilities.
-     */
     public void invalidateAll() {
         uniqueResolvers.forEach(ICapabilityResolver::invalidateAll);
+    }
+
+    @Override
+    public CompoundTag serializeNBT() {
+        CompoundTag compoundTag = new CompoundTag();
+        for (Map.Entry<Capability<?>, ICapabilityResolver> entry : capabilityResolvers.entrySet()) {
+            Object cap = entry.getValue().resolve(entry.getKey(), null).orElse(null);
+            if (cap instanceof INBTSerializable<?> serializable)
+                compoundTag.put(CAPABILITY_NAME.get(entry.getKey()),serializable.serializeNBT());
+        }
+        return compoundTag;
+    }
+
+    @Override
+    public void deserializeNBT(CompoundTag nbt) {
+        for (Map.Entry<Capability<?>, ICapabilityResolver> entry : capabilityResolvers.entrySet()) {
+            Object cap = entry.getValue().resolve(entry.getKey(), null).orElse(null);
+            if (cap instanceof INBTSerializable serializable)
+                serializable.deserializeNBT(nbt.get(CAPABILITY_NAME.get(entry.getKey())));
+        }
+    }
+
+    public void allocDummyBlockCaps(Level level, MultiblockData multiblockData){
+        for (Map.Entry<Capability<?>, List<Tuple<BlockPos, Direction>>> entry : multiblockData.afterTrans.entrySet()) {
+            Capability<?> capability = entry.getKey();
+            for (Tuple<BlockPos, Direction> tuple : entry.getValue()) {
+                BlockEntity blockEntity = level.getBlockEntity(tuple.getA());
+                if (blockEntity instanceof DummibleBlockEntity dummibleBlock){
+                    dummibleBlock.setCaps(capability, getCapabilityUnchecked(capability,null),tuple.getB());
+                }
+            }
+        }
     }
 }

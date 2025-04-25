@@ -49,7 +49,7 @@ public class CableEntity extends BlockEntity implements IEnergyConductor {
                 entry.getKey().getCapability(Capabilities.ENERGY).ifPresent(cap -> {
                     long energy = entry.getValue();
                     long receivedEnergy = cap.insert(avg - energy);
-                    cableEntity.ENERGY_STORAGE.extract(receivedEnergy);
+                    cableEntity.ENERGY_STORAGE.extract(receivedEnergy,false);
                 });
             }
 //            AtomicInteger resident = new AtomicInteger();

@@ -19,12 +19,20 @@ import com.hbm.render.entity.TestEntityRenderer;
 import com.hbm.render.entity.effect.BlackHoleRender;
 import com.hbm.render.entity.EntityBlankRender;
 import com.hbm.render.entity.effect.EntityTorexRender;
+import com.hbm.render.item.SpecialItemRender;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.model.TridentModel;
+import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
+import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
+import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.client.resources.model.UnbakedModel;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.*;
@@ -34,7 +42,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 @Mod.EventBusSubscriber(modid = HBM.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientSetup {
-
+    public static SpecialItemRender specialItemRender;
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event)
     {
@@ -93,6 +101,9 @@ public class ClientSetup {
         event.register(Models.BLACK_HOLE);
     }
 
+    @SubscribeEvent
+    public static void modifyBakingResult(ModelEvent.ModifyBakingResult event){
+    }
 
     @SubscribeEvent
     public static void registerParticleProvidersEvent(RegisterParticleProvidersEvent event){
@@ -102,8 +113,13 @@ public class ClientSetup {
 
     @SubscribeEvent
     public static void registerClientReloadListeners(RegisterClientReloadListenersEvent event){
+        BlockEntityRenderDispatcher blockEntityRenderDispatcher = Minecraft.getInstance().getBlockEntityRenderDispatcher();
+        EntityModelSet entityModels = Minecraft.getInstance().getEntityModels();
+        specialItemRender = new SpecialItemRender(blockEntityRenderDispatcher,entityModels);
         //注册模组客户端专属的资源加载器
+        event.registerReloadListener(specialItemRender);
     }
+
 
     @SubscribeEvent
     public static void registerTextures(RegisterTextureAtlasSpriteLoadersEvent event){

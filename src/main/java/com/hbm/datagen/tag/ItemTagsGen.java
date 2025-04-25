@@ -1,5 +1,6 @@
 package com.hbm.datagen.tag;
 
+import com.hbm.item.HBMComponent;
 import com.hbm.item.HBMtools;
 import com.hbm.registries.ModBlocks;
 import com.hbm.registries.ModItems;
@@ -23,7 +24,7 @@ public class ItemTagsGen extends ItemTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
-        this.tag(ModTags.Items.BATTERY).add(ModItems.BATTERY_CREATIVE.get(),ModItems.BATTERY_GENERIC.get(),
+        this.tag(ModTags.Items.BATTERY).add(HBMComponent.BATTERY_CREATIVE.get(),HBMComponent.BATTERY_GENERIC.get(),HBMComponent.BATTERY_ADVANCED.get(),HBMComponent.BATTERY_LITHIUM.get(),
                 ModBlocks.machine_battery.get().asItem(),ModBlocks.machine_lithium_battery.get().asItem(),
                 ModBlocks.machine_schrabidium_battery.get().asItem(),ModBlocks.machine_dineutronium_battery.get().asItem());
         this.tag(ModTags.Items.CHARGEABLE).addTag(ModTags.Items.BATTERY);

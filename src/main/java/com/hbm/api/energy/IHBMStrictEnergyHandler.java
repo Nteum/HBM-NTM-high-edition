@@ -92,6 +92,6 @@ public interface IHBMStrictEnergyHandler extends ISidedStrictEnergyHandler, ICon
     @Override
     default long extractEnergy(int container, long amount, @Nullable Direction side, Action action) {
         IEnergyContainer energyContainer = getEnergyContainer(container, side);
-        return energyContainer == null ? 0L : energyContainer.extract(amount);
+        return energyContainer == null ? 0L : energyContainer.extract(amount,false);
     }
 }

@@ -3,14 +3,11 @@ package com.hbm.gui.menu;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.ContainerData;
-import net.minecraft.world.inventory.MenuType;
-import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class BaseMachineMenu extends AbstractContainerMenu {
+public abstract class BaseMachineMenu extends RecipeBookMenu<Container> {
     protected final Container container;
     protected final ContainerData containerData;
     protected int slotNum = 0;
@@ -52,7 +49,7 @@ public abstract class BaseMachineMenu extends AbstractContainerMenu {
         return this.container.stillValid(pPlayer);
     }
 
-    void addSlotWithPos(int StartIdx, int[][] slotPos){
+    void addSlotWithPos(Container container, int StartIdx, int[][] slotPos){
         for (int i = 0; i < slotPos.length; i++) {
             this.addSlot(new Slot(container, StartIdx+i, slotPos[i][0], slotPos[i][1]));
         }

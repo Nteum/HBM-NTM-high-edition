@@ -17,3 +17,31 @@ Event
     ScreenshotEvent - 渲染截图
     TextureStitchEvent - 在纹理被组成atlas之前运作
     ToastAddEvent - 渲染提示信息
+
+3. mc模型的流程
+模型的原始格式是存储在assets/models文件夹里的模型文件，模型加载的流程大体是这样的：
+model file -(1)-> UnbakedModel -(2)-> BakedModel -(3)-> render in Renderer
+(1) : load model，模型文件原本都是json文件，通过GSON加载成 JsonObject，被读取出来变成对应的UnbakedModel
+    IGeometryLoader：forge这里提供了一个工具，它是用来从JsonObject读取出模型的类，可以在RegisterGeometryLoaders事件中注册你需要的Loader
+(2) : bake，这个词最直观的意义是烘焙，在计算机图形学中指将模型的几何点位和纹理图案的UV结合在一起。
+    UnbakedModel：有自己的bake函数，通过这个函数获得烘焙后的模型
+    IUnbakedGeometry：forge提供的工具，和IGeometryLoader绑定，loader读出来的就是它，它里面有bake函数可以用于获得BakedModel
+    BakedModel：烘焙后的模型，里面有渲染类型RenderType等信息，
+    ModelBakery：MC原版烘焙模型的工具
+(3) : render，就是把模型显示出来，最核心的就是render函数，可以在这里指定渲染的颜色（rgb）和亮度，控制模型的移动等。
+    原版都是有默认的模型处理方式的，比如物品就用 ItemRenderer,方块实体用BlockEntityRenderDispatcher，实体为EntityRenderDispatcher等
+思路：
+- 要注意forge在原版代码留下的接口，它们往往是你可以修改的地方，并且forge有更多的注释；
+- 不要挨个看每个renderer，要首先看注册在Minecraft类里面的核心manager
+
+渲染特殊实体模型的思路：
+- OBJLoader 加载出来的模型是 BlockModel
+- forge 在 BLockModel 中加了一个特殊属性 BlockGeometryBakingContext
+- BlockGeometryBakingContext 中可以指定 customGeometry ，它的格式是 IUnbakedGeometry<?>
+-* 这个东西应该需要在 ModifyBakingResult 事件中注册
+- IUnbakedGeometry 接口可以通过继承指定bake的过程，从而获得特殊的 BakedModel
+-* 继承BakedModel，在其中指定isCustomRenderer，返回true
+-* 创建一个IUnbakedGeometry的实现完成这些
+- 原版默认所有物品由ItemRender处理，用于处理特殊渲染的类型是 BlockEntityWithoutLevelRenderer
+-* 实现一个BlockEntityWithoutLevelRenderer继承类，在里面处理模型，需要在RegisterClientReloadListenersEvent里面注册
+-* 物品需要指定它是特殊渲染的，因此需要继承Item，并实现initializeClient，通过IClientItemExtensions的getCustomRenderer返回

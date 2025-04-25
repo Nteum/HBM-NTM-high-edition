@@ -1,22 +1,22 @@
 package com.hbm.datagen;
 
+import com.hbm.HBMLang;
+import com.hbm.item.HBMComponent;
 import com.hbm.registries.ModBlocks;
 import com.hbm.registries.ModItems;
 import net.minecraft.data.PackOutput;
-import net.minecraftforge.common.data.LanguageProvider;
 
-public class EnglishLanguageProvider extends LanguageProvider {
-    public EnglishLanguageProvider(PackOutput output, String modid, String locale) {
+public class LanguageProvider extends net.minecraftforge.common.data.LanguageProvider {
+    public LanguageProvider(PackOutput output, String modid, String locale) {
         super(output, modid, locale);
     }
 
     @Override
     protected void addTranslations() {
-        //创造模式物品栏
-        this.add("itemGroup.hbm_item","HBM Item");
-        this.add("itemGroup.hbm_block","HBM Block");
-        this.add("itemGroup.hbm_machine","HBM Machine");
-        this.add("itemGroup.hbm_tool","HBM Tool");
+        addCreativeTabs();
+        addItems();
+        addBlocks();
+        addMisc();
         //物品
         this.add(ModItems.ingot_steel.get(),"Steel Ignot");
         this.add(ModItems.plate_steel.get(),"Steel Plate");
@@ -36,5 +36,20 @@ public class EnglishLanguageProvider extends LanguageProvider {
         //方块实体
         this.add("hbmxx.container.difurnace","Blast Furnace");
         this.add("hbmxx.container.crucible","Crucible");
+    }
+    private void addCreativeTabs(){
+        this.add(HBMLang.ITEMGROUP_ITEM.getTranslationKey(), "HBM Item");
+        this.add(HBMLang.ITEMGROUP_BLOCK.getTranslationKey(), "HBM Block");
+        this.add(HBMLang.ITEMGROUP_MACHINE.getTranslationKey(), "HBM Machine");
+        this.add(HBMLang.ITEMGROUP_TOOL.getTranslationKey(), "HBM Tool");
+    }
+    private void addItems(){
+        HBMComponent.languageSupport(this);
+    }
+    private void addBlocks(){
+
+    }
+    private void addMisc(){
+        this.add(HBMLang.ENERGY.getTranslationKey(), "Energy: %1$s");
     }
 }

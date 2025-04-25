@@ -1,6 +1,8 @@
 package com.hbm.datagen.model;
 
 import com.hbm.HBM;
+import com.hbm.item.HBMComponent;
+import com.hbm.item.HBMWeapon;
 import com.hbm.item.HBMtools;
 import com.hbm.registries.ModItems;
 import net.minecraft.data.PackOutput;
@@ -16,6 +18,8 @@ public class ItemModelGen extends ItemModelProvider {
     @Override
     protected void registerModels() {
         HBMtools.genModel(this);
+        HBMComponent.genModel(this);
+        HBMWeapon.genModel(this);
         this.basicItem(ModItems.ingot_steel.get());
         this.basicItem(ModItems.ingot_red_copper.get());
         this.basicItem(ModItems.ingot_tungsten.get());
@@ -59,9 +63,6 @@ public class ItemModelGen extends ItemModelProvider {
         this.basicItem(ModItems.overlay_my_fluid.get());
 
         this.basicItem(ModItems.BEDROCK_ORE.get());
-
-        this.basicItem(ModItems.BATTERY_CREATIVE.get());
-        this.basicItem(ModItems.BATTERY_GENERIC.get());
         /* tool */
         this.basicItem(ModItems.SCREWDRIVER.get());
     }

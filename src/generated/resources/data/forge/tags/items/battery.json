@@ -2,6 +2,8 @@
   "values": [
     "hbmxx:battery_creative",
     "hbmxx:battery_generic",
+    "hbmxx:battery_advanced",
+    "hbmxx:battery_lithium",
     "hbmxx:machine_battery",
     "hbmxx:machine_lithium_battery",
     "hbmxx:machine_schrabidium_battery",

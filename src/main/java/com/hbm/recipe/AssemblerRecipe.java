@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonSyntaxException;
 import com.hbm.HBM;
+import com.hbm.blockentity.machine.AssemblerEntity;
 import com.hbm.datagen.recipe.ingredient.CountableIngredient;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
@@ -16,6 +17,11 @@ import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.common.util.RecipeMatcher;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * ref:vanilla - shapelessRecipe
  * */
@@ -57,15 +63,49 @@ public class AssemblerRecipe implements Recipe<Container> {
     public RecipeType<?> getType() {
         return ModRecipeType.ASSEMBLER_RECIPE.get();
     }
+    public int getProcessingTime(){return processingTime;}
 
     @Override
     public boolean matches(Container pContainer, Level pLevel) {
         //比较复杂，还需要根据原版的RecipeMatcher修改
+        if (pContainer instanceof AssemblerEntity entity){
+            int cnt = 0;
+            List<ItemStack> inputs = new ArrayList<>();
+            for (int i : AssemblerEntity.ASSEMBLE_SLOTS) {
+                if (!entity.items.get(i).isEmpty())inputs.add(entity.items.get(i));
+            }
+            return inputs.size() >= ingredients.size()
+                    && HBMRecipeMatcher.orderlessMatch(inputs,this.ingredients);
+//                    && RecipeMatcher.findMatches(inputs,this.ingredients)!=null;
+        }
+        return false;
+    }
+    public boolean checkItem(ItemStack itemStack){
+        for (CountableIngredient ingredient : this.ingredients) {
+            if (ingredient.test(itemStack))return true;
+        }
         return false;
     }
 
     @Override
     public ItemStack assemble(Container pContainer, RegistryAccess pRegistryAccess) {
+        if (pContainer instanceof AssemblerEntity entity){
+            for (CountableIngredient ingredient : this.ingredients) {
+                int tempCount = ingredient.value.count;
+                for (int i : AssemblerEntity.ASSEMBLE_SLOTS) {
+                    ItemStack itemStack = entity.items.get(i);
+                    if (ingredient.value.flagTag && itemStack.is(ingredient.value.tagKey)
+                            || !ingredient.value.flagTag && itemStack.is(ingredient.value.itemStack.getItem())){
+                        int subsCount = Math.min(tempCount, itemStack.getCount());
+                        itemStack.shrink(subsCount);
+                        if (itemStack.isEmpty())entity.items.set(i,ItemStack.EMPTY);
+                        else entity.items.set(i,itemStack);
+                        tempCount -= subsCount;
+                        if (tempCount == 0)break;
+                    }
+                }
+            }
+        }
         return this.result.copy();
     }
 

@@ -9,6 +9,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.event.AttachCapabilitiesEvent;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -23,7 +24,6 @@ public class DummibleBlockEntity extends BlockEntity {
     public Map<Capability<?>, Map<Direction, LazyOptional<?>>> caps = new HashMap<>();
     public DummibleBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(ModBlockEntityType.DUMMIBLEBLOCK.get(), pPos, pBlockState);
-
     }
 
     @Override
@@ -39,7 +39,7 @@ public class DummibleBlockEntity extends BlockEntity {
         corePos = new BlockPos(pos[0],pos[1],pos[2]);
     }
 
-    public <T>void setCaps(Capability<T> cap, T handler, Direction ... directions){
+    public <T,H>void setCaps(Capability<T> cap, H handler, Direction ... directions){
 //        List<Tuple<Direction, LazyOptional<?>>> list = new ArrayList<>();
         Map<Direction, LazyOptional<?>> map = new HashMap<>();
         for (Direction direction : directions) {
