@@ -1,6 +1,5 @@
 package com.hbm.entity.weapon.missile;
 
-import api.entity.IRadarDetectableNT;
 import com.hbm.HBM;
 import com.hbm.entity.ModEntityType;
 import com.hbm.entity.logic.EntityNukeExplosionMK5;
@@ -27,7 +26,7 @@ import javax.swing.plaf.basic.BasicSliderUI;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class EntityMissile extends ThrowableProjectile implements IRadarDetectableNT {
+public abstract class EntityMissile extends ThrowableProjectile {
     public BlockPos start;
     public BlockPos target;
     public double velocity; //速度
@@ -62,21 +61,21 @@ public abstract class EntityMissile extends ThrowableProjectile implements IRada
         this.setBoundingBox(AABB.ofSize(new Vec3(0.5,0.5,0.5),width,height,width));
     }
     //============from IRadarDetectableEntity=============
-    @Override
-    public boolean canBeSeenBy(Object radar) {
-        return true;
-    }
-
-    @Override
-    public boolean paramsApplicable(RadarScanParams params) {
-        if(!params.scanMissiles) return false;
-        return true;
-    }
-
-    @Override
-    public boolean suppliesRedstone(RadarScanParams params) {
-        return !params.smartMode || !(this.getDeltaMovement().y >= 0);
-    }
+//    @Override
+//    public boolean canBeSeenBy(Object radar) {
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean paramsApplicable(RadarScanParams params) {
+//        if(!params.scanMissiles) return false;
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean suppliesRedstone(RadarScanParams params) {
+//        return !params.smartMode || !(this.getDeltaMovement().y >= 0);
+//    }
     //=============from EntityMissileThrowableNT=================
     protected void entityInit() {
         if (!level().isClientSide()){

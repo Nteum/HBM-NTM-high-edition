@@ -34,6 +34,7 @@ public class CapabilityCache implements INBTSerializable<CompoundTag> {
     }
     //添加能力resolver
     public void addCapabilityResolver(ICapabilityResolver resolver) {
+        if (resolver == null)return;
         uniqueResolvers.add(resolver);
         List<Capability<?>> supportedCapabilities = resolver.getSupportedCapabilities();
         for (Capability<?> supportedCapability : supportedCapabilities) {
@@ -85,6 +86,12 @@ public class CapabilityCache implements INBTSerializable<CompoundTag> {
         }
         return capabilityResolver.resolve(capability, side);
     }
+    public void validate(Capability<?> capability, @Nullable Direction side){
+        ICapabilityResolver capabilityResolver = capabilityResolvers.get(capability);
+        if (capabilityResolver != null) {
+            capabilityResolver.validate(capability, side);
+        }
+    }
     public void invalidate(Capability<?> capability, @Nullable Direction side) {
         ICapabilityResolver capabilityResolver = capabilityResolvers.get(capability);
         if (capabilityResolver != null) {
@@ -129,7 +136,7 @@ public class CapabilityCache implements INBTSerializable<CompoundTag> {
             for (Tuple<BlockPos, Direction> tuple : entry.getValue()) {
                 BlockEntity blockEntity = level.getBlockEntity(tuple.getA());
                 if (blockEntity instanceof DummibleBlockEntity dummibleBlock){
-                    dummibleBlock.setCaps(capability, getCapabilityUnchecked(capability,null),tuple.getB());
+                    dummibleBlock.setCaps(capability, capabilityResolvers.get(capability),tuple.getB());
                 }
             }
         }

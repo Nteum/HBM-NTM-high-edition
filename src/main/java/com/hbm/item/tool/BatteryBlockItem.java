@@ -1,37 +1,26 @@
-package com.hbm.item;
+package com.hbm.item.tool;
 
 import com.hbm.HBMLang;
 import com.hbm.api.energy.fe.HBMEnergyStorage;
 import com.hbm.api.energy.fe.ItemStackEnergyHandler;
 import com.hbm.block.machine.BlockBattery;
-import com.hbm.blockentity.machine.BatteryEntity;
-import com.hbm.capabilities.Capabilities;
-import com.hbm.api.energy.IItemBattery;
-import com.hbm.api.energy.ItemEnergyProxy;
 import com.hbm.capabilities.ItemCapabilityWrapper;
-import net.minecraft.client.renderer.entity.ItemRenderer;
-import net.minecraft.core.BlockPos;
-import net.minecraft.data.tags.VanillaBlockTagsProvider;
+import com.hbm.item.BlockItemHBM;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.energy.IEnergyStorage;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class BatteryBlockItem extends BlockItemHBM implements IItemBattery {
+public class BatteryBlockItem extends BlockItemHBM {
     long capacity;
     long inout;
     boolean isEmpty;
@@ -63,12 +52,6 @@ public class BatteryBlockItem extends BlockItemHBM implements IItemBattery {
     }
 
     @Override
-    public ItemEnergyProxy getEnergyProxy() {
-        return null;
-    }
-
-
-    @Override
     public boolean isBarVisible(ItemStack pStack) {
         return true;
     }
@@ -82,22 +65,5 @@ public class BatteryBlockItem extends BlockItemHBM implements IItemBattery {
     @Override
     public InteractionResult useOn(UseOnContext pContext) {
         return super.useOn(pContext);
-    }
-
-    @Override
-    public InteractionResult place(BlockPlaceContext pContext) {
-        InteractionResult interactionResult = super.place(pContext);
-        if (!pContext.getLevel().isClientSide() && interactionResult.consumesAction()){
-            BlockPos clickedPos = pContext.getClickedPos();
-            Level level = pContext.getLevel();
-            BlockEntity blockEntity = level.getBlockEntity(clickedPos);
-            ItemStack itemInHand = pContext.getItemInHand();
-            if (blockEntity instanceof BatteryEntity battery && itemInHand.getItem() instanceof BatteryBlockItem){
-                battery.getCapability(ForgeCapabilities.ENERGY).ifPresent(cap -> {
-                    ((HBMEnergyStorage)cap).setEnergy(getEnergy(itemInHand));
-                });
-            }
-        }
-        return interactionResult;
     }
 }

@@ -1,12 +1,10 @@
-package com.hbm.item;
+package com.hbm.item.tool;
 
 import com.hbm.HBMLang;
-import com.hbm.api.energy.IItemBattery;
-import com.hbm.api.energy.ItemEnergyProxy;
 import com.hbm.api.energy.fe.HBMEnergyStorage;
 import com.hbm.api.energy.fe.ItemStackEnergyHandler;
 import com.hbm.capabilities.ItemCapabilityWrapper;
-import com.hbm.registries.ModItems;
+import com.hbm.item.CapabilityItem;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.*;
@@ -17,7 +15,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class BatteryItem extends CapabilityItem implements IItemBattery {
+public class BatteryItem extends CapabilityItem {
     long capacity;
     long inout;
     boolean isEmpty;
@@ -50,10 +48,6 @@ public class BatteryItem extends CapabilityItem implements IItemBattery {
     protected void gatherCapabilities(List<ItemCapabilityWrapper.ItemCapability> capabilities, ItemStack stack, CompoundTag nbt) {
         super.gatherCapabilities(capabilities, stack, nbt);
         capabilities.add(new ItemStackEnergyHandler(capacity,inout,this.isEmpty));
-    }
-    @Override
-    public ItemEnergyProxy getEnergyProxy() {
-        return null;
     }
 
     @Override

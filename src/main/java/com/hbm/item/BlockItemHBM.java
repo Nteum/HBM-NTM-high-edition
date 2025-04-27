@@ -1,9 +1,13 @@
 package com.hbm.item;
 
+import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.capabilities.ItemCapabilityWrapper;
+import com.hbm.lib.ItemDataUtils;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
@@ -32,5 +36,15 @@ public class BlockItemHBM extends BlockItem {
             return super.initCapabilities(stack, nbt);
         }
         return new ItemCapabilityWrapper(stack, capabilities.toArray(ItemCapabilityWrapper.ItemCapability[]::new));
+    }
+
+    @Override
+    public InteractionResult place(BlockPlaceContext pContext) {
+        ItemStack itemInHand = pContext.getItemInHand();
+        CompoundTag dataMapIfPresent = ItemDataUtils.getDataMapIfPresent(itemInHand);
+        if (dataMapIfPresent != null){
+            setBlockEntityData(itemInHand, ModBlockEntityType.BATTERY_ENTITY.get(), dataMapIfPresent);
+        }
+        return super.place(pContext);
     }
 }

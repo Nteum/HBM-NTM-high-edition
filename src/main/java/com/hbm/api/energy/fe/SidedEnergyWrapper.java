@@ -19,7 +19,7 @@ public class SidedEnergyWrapper extends SidedCapabilityWrapper<IHBMEnergyStorage
     public SidedEnergyWrapper(IHBMEnergyStorage energyStorage){
         super(energyStorage);
         cachedCapabilities.put(ForgeCapabilities.ENERGY, LazyOptional.empty());
-        Arrays.stream(Direction.values()).forEach(direction -> this.directionConn.put(direction,Boolean.FALSE));
+        Arrays.stream(Direction.values()).forEach(direction -> this.directionConn.put(direction,Boolean.TRUE));
     }
     public static SidedEnergyWrapper io(IHBMEnergyStorage energyStorage, Direction[] directions){
         SidedEnergyWrapper wrapper = new SidedEnergyWrapper(energyStorage);

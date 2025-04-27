@@ -3,12 +3,9 @@ package com.hbm.api.energy.fe;
 import com.hbm.HBMKey;
 import com.hbm.api.IContentsListener;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.IntTag;
 import net.minecraft.nbt.LongTag;
-import net.minecraft.nbt.Tag;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.util.INBTSerializable;
-import net.minecraftforge.energy.EnergyStorage;
+
 /** 用于机器内部的存储 */
 public class HBMEnergyStorage implements IHBMEnergyStorage, INBTSerializable<CompoundTag> {
     long longEnergy;
@@ -30,6 +27,12 @@ public class HBMEnergyStorage implements IHBMEnergyStorage, INBTSerializable<Com
         this.output = output;
         this.input = input;
     }
+    public static HBMEnergyStorage input(long capacity){
+        return new HBMEnergyStorage(0,capacity,0,BASIC_INOUT);
+    }
+    public static HBMEnergyStorage output(long capacity){
+        return new HBMEnergyStorage(0,capacity,BASIC_INOUT,0);
+    }
     @Override
     public void setListener(IContentsListener listener) {
         this.listener = listener;
@@ -38,6 +41,7 @@ public class HBMEnergyStorage implements IHBMEnergyStorage, INBTSerializable<Com
     @Override
     public void setEnergy(long energy) {
         this.longEnergy = energy;
+        onContentsChanged();
     }
 
     @Override
@@ -77,6 +81,14 @@ public class HBMEnergyStorage implements IHBMEnergyStorage, INBTSerializable<Com
     public int extractEnergy(int maxExtract, boolean simulate) {
         return (int) extractEnergy((long) maxExtract,simulate);
     }
+    //为什么要用这个呢？因为为了避免机器的能量向外流动，我机器都设置输出为0，然而实际操作中处理配方又需要提取能量，只能出此下策
+    public long recipeExtract(long maxExtract, boolean simulate){
+        long temp = this.output;
+        this.output = this.input;
+        long result = extractEnergy(maxExtract,simulate);
+        this.output = temp;
+        return result;
+    }
 
     @Override
     public long getLongStore() {
@@ -91,6 +103,16 @@ public class HBMEnergyStorage implements IHBMEnergyStorage, INBTSerializable<Com
     @Override
     public long getLongCapacity() {
         return this.longCapacity;
+    }
+
+    @Override
+    public long getMaxInput() {
+        return Math.min(input,getNeeded());
+    }
+
+    @Override
+    public long getMaxOutput() {
+        return Math.min(output,getLongStore());
     }
 
     @Override

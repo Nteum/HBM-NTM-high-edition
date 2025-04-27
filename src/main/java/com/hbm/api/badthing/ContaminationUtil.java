@@ -1,6 +1,5 @@
 package com.hbm.api.badthing;
 
-import api.entity.IRadiationImmune;
 import com.hbm.handler.radiation.ChunkRadiationManager;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -119,8 +118,8 @@ public class ContaminationUtil {
 		if(!(e instanceof LivingEntity entity))
 			return;
 
-		if(e instanceof IRadiationImmune)
-			return;
+//		if(e instanceof IRadiationImmune)
+//			return;
 		
 		if(e instanceof Player && ((Player)e).isCreative())
 			return;

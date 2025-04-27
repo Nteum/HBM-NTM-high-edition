@@ -1,12 +1,11 @@
 package com.hbm.blockentity.machine;
 
-import com.hbm.api.energy.ItemEnergyProxy;
 import com.hbm.api.energy.fe.HBMEnergyStorage;
 import com.hbm.api.energy.fe.SidedEnergyWrapper;
+import com.hbm.api.energy.fe.TransmitHelper;
 import com.hbm.block.machine.BlockAssembler;
 import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.blockentity.base.BedLikeBlockEntity;
-import com.hbm.capabilities.Capabilities;
 import com.hbm.gui.menu.AssemblerMenu;
 import com.hbm.recipe.AssemblerRecipe;
 import com.hbm.recipe.ModRecipeType;
@@ -42,12 +41,6 @@ public class AssemblerEntity extends BedLikeBlockEntity {
     int countdown = 0;              //工作计时
     AssemblerRecipe recipeNow;      //当前正在使用的配方
     public static final int[] ASSEMBLE_SLOTS = new int[]{5,6,7,8,9,10,11,12,13,14,15,16};
-//    private final Tuple<BasicEnergyContainer,LazyOptional<BasicEnergyContainer>> energyCap;
-//    static final Map<Capability<?>, List<Tuple<Vec3i,Direction>>> posCaps= new HashMap<>();
-//    private final Map<Capability<?>, List<Tuple<BlockPos,Direction>>> factCaps= new HashMap<>();
-    //物品输入输出口
-//    static final List<Tuple<Vec3i,Direction>> itemInout = List.of(new Tuple<>(new Vec3i(1,0,-1),Direction.EAST),new Tuple<>(new Vec3i(-2,0,0),Direction.WEST));
-//    public final List<Tuple<BlockPos,Direction>> specInout = new ArrayList<>();
 
     public static final RecipeManager.CachedCheck<Container, AssemblerRecipe> quickCheck = RecipeManager.createCheck(ModRecipeType.ASSEMBLER_RECIPE.get());
 
@@ -77,38 +70,11 @@ public class AssemblerEntity extends BedLikeBlockEntity {
     public AssemblerEntity(BlockPos pPos, BlockState pBlockState) {
         super(ModBlockEntityType.ASSEMBLER_ENTITY.get(), pPos, pBlockState);
         items = NonNullList.withSize(17,ItemStack.EMPTY);
-        capabilitiesCache.addCapabilityResolver(new SidedEnergyWrapper(new HBMEnergyStorage(100_000)));
-//        capabilitiesCache.addCapabilityResolver(new SidedInvWrapper(new InvWrapper(this)));
+        capabilitiesCache.addCapabilityResolver(new SidedEnergyWrapper(HBMEnergyStorage.input(100_000)));
         multiblockData.put(ForgeCapabilities.ENERGY, -1,0,1,Direction.SOUTH, 0,0,1,Direction.SOUTH, -1,0,-2,Direction.NORTH, 0,0,-2,Direction.NORTH)
                 .put(ForgeCapabilities.ITEM_HANDLER, 1,0,-1, Direction.EAST, -2,0,0,Direction.WEST);
         multiblockData.transDirection(pPos,pBlockState.getValue(BlockAssembler.FACING));
-//        energyCap = new Tuple<>(new BasicEnergyContainer(100_000),LazyOptional.empty());
-//        posCaps.put(Capabilities.ENERGY,List.of(new Tuple<>(new Vec3i(-1,0,1),Direction.SOUTH),
-//                new Tuple<>(new Vec3i(0,0,1),Direction.SOUTH),
-//                new Tuple<>(new Vec3i(-1,0,-2),Direction.NORTH),
-//                new Tuple<>(new Vec3i(0,0,-2),Direction.NORTH)));
-//        HashMap<Vec3i,Direction> itemMap = new HashMap<>();
-//        itemMap.put(new Vec3i(1,0,0),Direction.EAST);itemMap.put(new Vec3i(-2,0,-1),Direction.WEST);
-//        itemCaps.put(ForgeCapabilities.ITEM_HANDLER,itemMap);
-//        factCaps.put(Capabilities.ENERGY, new ArrayList<>());
-//        Direction facing = pBlockState.getValue(BlockAssembler.FACING);
-//        for (Tuple<Vec3i, Direction> tuple : posCaps.get(Capabilities.ENERGY)) {
-//            BlockPos newPos = pPos.offset(BedLikeBlock.transOffsets(List.of(tuple.getA()), facing).get(0));
-//            Direction newDir = DirectionUtils.horizRot(Direction.SOUTH, facing, tuple.getB());
-//            factCaps.get(Capabilities.ENERGY).add(new Tuple<>(newPos,newDir));
-//        }
-//        specInout.add(new Tuple<>(pPos.offset(BedLikeBlock.transOffsets(List.of(itemInout.get(0).getA()), facing).get(0)),DirectionUtils.horizRot(Direction.SOUTH, facing, itemInout.get(0).getB())));
-//        specInout.add(new Tuple<>(pPos.offset(BedLikeBlock.transOffsets(List.of(itemInout.get(1).getA()), facing).get(0)),DirectionUtils.horizRot(Direction.SOUTH, facing, itemInout.get(1).getB())));
     }
-
-//    @Override
-//    public <T> LazyOptional<T> getCapability(Capability<T> cap, @Nullable Direction side) {
-////        if (cap == Capabilities.ENERGY){
-////            return energyCap.getB().cast();
-////        }
-////        return super.getCapability(cap, side);
-//        return capabilitiesCache.getCapability(cap,side);
-//    }
     public IEnergyStorage getEnergy(){
         return getCapability(ForgeCapabilities.ENERGY,null).orElse(null);
     }
@@ -119,6 +85,7 @@ public class AssemblerEntity extends BedLikeBlockEntity {
                 entity.flagFormed = false;
                 entity.setDummyCaps();
             }
+            runDummyCaps(level,pPos,pState,pBlockEntity);
             absorbBatteryItem(entity);
             transportItem(entity);  //暂时只能不加判断地传入物品
 
@@ -131,9 +98,9 @@ public class AssemblerEntity extends BedLikeBlockEntity {
                     ItemStack itemStack = entity.recipeNow.assemble(entity, level.registryAccess());
 //                    entity.items.set(4,itemStack);
                     processOutput(entity,itemStack);
-                }else if (entity.checkRecipe() && entity.getEnergy().extractEnergy(entity.power,true)==entity.power){
+                }else if (entity.checkRecipe() && ((HBMEnergyStorage)entity.getEnergy()).recipeExtract(entity.power,true)==entity.power){
                     entity.countdown--;
-                    entity.getEnergy().extractEnergy(entity.power,false);
+                    ((HBMEnergyStorage) entity.getEnergy()).recipeExtract(entity.power,false);
                 }else stopMachine(entity);
             }else if (!flagEmpty){
                 AssemblerRecipe recipe = AssemblerEntity.quickCheck.getRecipeFor(entity, level).orElse(null);
@@ -161,15 +128,22 @@ public class AssemblerEntity extends BedLikeBlockEntity {
 
     public static void absorbBatteryItem(AssemblerEntity entity){
         ItemStack itemStack = entity.items.get(0);
-        if (!itemStack.isEmpty()){
-            entity.getCapability(Capabilities.ENERGY).ifPresent(cap->cap.insert(ItemEnergyProxy.disCharge(itemStack)));
-        }
+        TransmitHelper.dischargeItem(entity,itemStack);
     }
     public static void transportItem(AssemblerEntity entity){
         if (entity.hasLevel()){
             List<Tuple<BlockPos, Direction>> tuples = entity.multiblockData.afterTrans.get(ForgeCapabilities.ITEM_HANDLER);
-            InventoryUtils.extractItem(entity.level,entity,tuples.get(0).getA(), Arrays.stream(INPUT_SLOTS).boxed().toList(),tuples.get(0).getB(),itemStack -> entity.recipeNow.checkItem(itemStack)); //拉取物品
+            if (entity.recipeNow != null)
+                InventoryUtils.extractItem(entity.level,entity,tuples.get(0).getA(), Arrays.stream(INPUT_SLOTS).boxed().toList(),tuples.get(0).getB(),itemStack -> entity.recipeNow.checkItem(itemStack)); //拉取物品
             InventoryUtils.insertItem(entity,tuples.get(1).getA(),Arrays.stream(OUTPUT_SLOTS).boxed().toList(),tuples.get(1).getB());               //输出物品
+        }
+    }
+    public static void runDummyCaps(Level level, BlockPos pPos, BlockState pState, BlockEntity pBlockEntity){
+        AssemblerEntity assemblerEntity = (AssemblerEntity) pBlockEntity;
+        List<Tuple<BlockPos, Direction>> tupleList = assemblerEntity.multiblockData.afterTrans.get(ForgeCapabilities.ENERGY);
+        for (Tuple<BlockPos, Direction> tuple : tupleList) {
+            BlockPos dummyPos = tuple.getA();
+            TransmitHelper.machineTransmit(level,dummyPos,level.getBlockState(dummyPos),level.getBlockEntity(dummyPos));
         }
     }
     private boolean craftSlotEmpty(){
@@ -188,8 +162,9 @@ public class AssemblerEntity extends BedLikeBlockEntity {
         if (recipe == null)return false;
         ItemStack resultStack = entity.items.get(4);
         ItemStack resultItem = recipe.getResultItem(level.registryAccess());
+        int energyToUse = recipe.getProcessingTime() * entity.power;
         return  (resultStack.isEmpty() || resultStack.is(resultItem.getItem()) && resultStack.getCount()+resultItem.getCount()<resultStack.getMaxStackSize())
-                && entity.getEnergy().extractEnergy(entity.power,true)==entity.power;
+                && ((HBMEnergyStorage)entity.getEnergy()).recipeExtract(energyToUse,true)==energyToUse;
     }
 
     @Override
@@ -219,13 +194,11 @@ public class AssemblerEntity extends BedLikeBlockEntity {
     @Override
     public void onLoad() {
         super.onLoad();
-//        energyCap.setB(LazyOptional.of(energyCap::getA));
         setDummyCaps();
     }
     @Override
     public void invalidateCaps() {
         super.invalidateCaps();
-//        energyCap.getB().invalidate();
         capabilitiesCache.invalidateAll();
     }
 
@@ -235,8 +208,6 @@ public class AssemblerEntity extends BedLikeBlockEntity {
         pTag.putInt("countDown",countdown);
         if (recipeNow!=null)
             pTag.putString("recipeNow",recipeNow.getId().toString());
-//        pTag.put("energy",energyCap.getA().serializeNBT());
-//        pTag.put(CapabilitiesCache.STOREKEY, capabilitiesCache.serializeNBT());
     }
 
     @Override
@@ -247,16 +218,9 @@ public class AssemblerEntity extends BedLikeBlockEntity {
             ResourceLocation resourceLocation = new ResourceLocation(pTag.getString("recipeNow"));
             this.recipeNow = (AssemblerRecipe) this.level.getRecipeManager().byKey(resourceLocation).orElse(null);
         }
-//        energyCap.getA().deserializeNBT((CompoundTag) pTag.get("energy"));
-//        capabilitiesCache.deserializeNBT(pTag);
     }
     public void setDummyCaps(){
         if (hasLevel() && !level.isClientSide()){
-//            for (Tuple<BlockPos, Direction> tuple : factCaps.get(Capabilities.ENERGY)) {
-//                if (level.getBlockEntity(tuple.getA()) instanceof DummibleBlockEntity entity){
-//                    entity.setCaps(Capabilities.ENERGY, energyCap.getA(),tuple.getB());
-//                }
-//            }
             this.capabilitiesCache.allocDummyBlockCaps(level,this.multiblockData);
         }
     }

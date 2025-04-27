@@ -38,16 +38,25 @@ public abstract class BaseMachineBlockEntity extends BaseContainerBlockEntity im
         if (!pTag.contains(HBMKey.DATA, Tag.TAG_COMPOUND)) {
             pTag.put(HBMKey.DATA,new CompoundTag());
         }
-        CompoundTag dataMap = ItemDataUtils.getDataMap(pTag);
-        dataMap.put(HBMKey.CAPS, capabilitiesCache.serializeNBT());
+//        CompoundTag dataMap = ItemDataUtils.getDataMap(pTag);
+//        dataMap.put(HBMKey.CAPS, capabilitiesCache.serializeNBT());
+        pTag.merge(capabilitiesCache.serializeNBT());
+        if (this.items!=null){
+            ContainerHelper.saveAllItems(pTag, this.items);
+        }
     }
     //加载之前存储的数据。
     @Override
     public void load(CompoundTag pTag) {
         super.load(pTag);
         CompoundTag dataMap = ItemDataUtils.getDataMapIfPresent(pTag);
-        if (dataMap!=null && dataMap.contains(HBMKey.CAPS))
-            capabilitiesCache.deserializeNBT((CompoundTag) dataMap.get(HBMKey.CAPS));
+        capabilitiesCache.deserializeNBT(pTag);
+//        if (dataMap!=null && dataMap.contains(HBMKey.CAPS))
+//            capabilitiesCache.deserializeNBT((CompoundTag) dataMap.get(HBMKey.CAPS));
+        if (this.items!=null){
+            this.items = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
+            ContainerHelper.loadAllItems(pTag, this.items);
+        }
     }
     //方块被载入时同步数据用
     @Override

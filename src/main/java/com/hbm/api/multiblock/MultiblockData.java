@@ -39,7 +39,7 @@ public class MultiblockData {
         for (Map.Entry<Capability<?>, List<Tuple<Vec3i, Direction>>> entry : beforeTrans.entrySet()) {
             List<Tuple<BlockPos, Direction>> list = new ArrayList<>();
             for (Tuple<Vec3i, Direction> tuple : entry.getValue()) {
-                list.add(new Tuple<>(pos.offset(BedLikeBlock.transOffsets(List.of(tuple.getA()), tuple.getB()).get(0)), DirectionUtils.horizRot(Direction.SOUTH, facing, tuple.getB())));
+                list.add(new Tuple<>(pos.offset(BedLikeBlock.transOffsets(List.of(tuple.getA()), facing).get(0)), DirectionUtils.horizRot(Direction.SOUTH, facing, tuple.getB())));
             }
             afterTrans.put(entry.getKey(),list);
         }

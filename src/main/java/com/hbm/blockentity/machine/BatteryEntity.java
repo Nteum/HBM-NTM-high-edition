@@ -1,17 +1,13 @@
 package com.hbm.blockentity.machine;
 
-import com.hbm.api.NBTConstants;
 import com.hbm.api.energy.fe.HBMEnergyStorage;
 import com.hbm.api.energy.fe.IHBMEnergyStorage;
 import com.hbm.api.energy.fe.SidedEnergyWrapper;
+import com.hbm.api.energy.fe.TransmitHelper;
 import com.hbm.block.machine.BlockBattery;
 import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.blockentity.base.BaseMachineBlockEntity;
-import com.hbm.capabilities.energy.BasicEnergyContainer;
 import com.hbm.gui.menu.BatteryMenu;
-import com.hbm.capabilities.Capabilities;
-import com.hbm.api.energy.IEnergyContainer;
-import com.hbm.api.energy.ItemEnergyProxy;
 import com.hbm.registries.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -28,10 +24,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.*;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.energy.IEnergyStorage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -75,9 +68,9 @@ public class BatteryEntity extends BaseMachineBlockEntity implements WorldlyCont
     };
     public BatteryEntity(BlockPos pPos, BlockState pBlockState) {
         super(ModBlockEntityType.BATTERY_ENTITY.get(), pPos, pBlockState);
+        this.items = NonNullList.withSize(2, ItemStack.EMPTY);
         BlockBattery block = (BlockBattery)pBlockState.getBlock();
         type = block.type;
-        this.items = NonNullList.withSize(2, ItemStack.EMPTY);
         this.capabilitiesCache.addCapabilityResolver(new SidedEnergyWrapper(new HBMEnergyStorage(type.getMaxEnergy(),type.getOutput(),type.getOutput())));
     }
     public IHBMEnergyStorage getEnergy(){
@@ -87,50 +80,12 @@ public class BatteryEntity extends BaseMachineBlockEntity implements WorldlyCont
     private double[] powerWeight = new double[]{0.8,0.5,0.2};
     public static void tick(Level level, BlockPos pPos, BlockState pState, BlockEntity pBlockEntity) {
         if (!level.isClientSide() && pState.is(ModTags.Blocks.BATTERY) && pBlockEntity instanceof BatteryEntity entity){
-            //与周围电力交互
-            if (entity.connPriority == 0){          //吸电
-                for (Direction value : Direction.values()) {
-                    BlockEntity blockEntity = level.getBlockEntity(pPos.relative(value));
-                    if (blockEntity != null){
-                        blockEntity.getCapability(Capabilities.ENERGY,value.getOpposite()).ifPresent(cap->{
-                            long energyStored = cap.getEnergy();
-                            long receivedEnergy = entity.getEnergy().receiveEnergy(energyStored,false);
-                            cap.extract(receivedEnergy,false);
-                        });
-                    }
-                }
-            }else if (entity.connPriority > 0){    //放电
-                if (entity.getEnergy().getLongStore() > 0){
-                    for (Direction value : Direction.values()) {
-                        BlockEntity blockEntity = level.getBlockEntity(pPos.relative(value));
-                        if (blockEntity != null){
-                            blockEntity.getCapability(Capabilities.ENERGY,value.getOpposite()).ifPresent(cap->{
-                                if (cap.getEnergy() < cap.getMaxEnergy()){
-                                    long receivedEnergy = cap.insert(entity.getEnergy().getLongStore());
-                                    entity.getEnergy().extractEnergy(receivedEnergy,false);
-                                }
-                            });
-                        }
-                    }
-                }
-            }
+            TransmitHelper.batteryTransmit(level,pPos,pState,pBlockEntity);
             //对电池充放电
             ItemStack itemStack0 = entity.items.get(0);
             ItemStack itemStack1 = entity.items.get(1);
-            if (itemStack0.is(ModTags.Items.BATTERY)){
-                entity.getCapability(ForgeCapabilities.ENERGY).ifPresent(cap -> {
-                    IEnergyStorage iEnergyStorage = itemStack0.getCapability(ForgeCapabilities.ENERGY).orElse(null);
-                    ((IHBMEnergyStorage)cap).receiveEnergy(((IHBMEnergyStorage)iEnergyStorage).extractEnergy(10000,false),false);
-                });
-            }
-            if (itemStack1.is(ModTags.Items.BATTERY)){
-                entity.getCapability(ForgeCapabilities.ENERGY).ifPresent(cap ->{
-                    IEnergyStorage iEnergyStorage = itemStack1.getCapability(ForgeCapabilities.ENERGY).orElse(null);
-                    long extractEnergy = ((IHBMEnergyStorage) cap).extractEnergy(10000, true);
-                    long receivedEnergy = ((IHBMEnergyStorage) iEnergyStorage).receiveEnergy(extractEnergy, false);
-                    ((IHBMEnergyStorage) cap).extractEnergy(receivedEnergy, false);
-                });
-            }
+            TransmitHelper.dischargeItem(pBlockEntity,itemStack0);
+            TransmitHelper.chargeItem(pBlockEntity,itemStack1);
             level.sendBlockUpdated(pPos,pState,pState,2);
         }
     }
@@ -244,5 +199,4 @@ public class BatteryEntity extends BaseMachineBlockEntity implements WorldlyCont
     }
 
     //====================================
-
 }

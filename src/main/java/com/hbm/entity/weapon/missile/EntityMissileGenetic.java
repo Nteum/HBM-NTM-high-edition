@@ -15,15 +15,15 @@ public class EntityMissileGenetic extends EntityMissile{
         this(ModEntityType.ENTITY_MISSILE_GENETIC.get(),level);
     }
 
-    @Override
-    public String getUnlocalizedName() {
-        return null;
-    }
-
-    @Override
-    public int getBlipLevel() {
-        return 0;
-    }
+//    @Override
+//    public String getUnlocalizedName() {
+//        return null;
+//    }
+//
+//    @Override
+//    public int getBlipLevel() {
+//        return 0;
+//    }
 
     @Override
     public ItemStack getMissileItemForInfo() {

@@ -1,6 +1,8 @@
 package com.hbm.block.base;
 
+import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.blockentity.base.DummibleBlockEntity;
+import com.hbm.blockentity.machine.AssemblerEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -10,6 +12,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
@@ -70,6 +74,12 @@ public class DummibleBlock extends Block implements EntityBlock {
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
         return new DummibleBlockEntity(pPos,pState);
     }
+
+//    @Nullable
+//    @Override
+//    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
+//        return pBlockEntityType == ModBlockEntityType.DUMMIBLEBLOCK.get()? DummibleBlockEntity::tick : null;
+//    }
 
     private static boolean never(BlockState p_50806_, BlockGetter p_50807_, BlockPos p_50808_) {
         return false;

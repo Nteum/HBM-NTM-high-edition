@@ -1,10 +1,9 @@
 package com.hbm.item;
 
 import com.hbm.datagen.LanguageProvider;
+import com.hbm.item.tool.BatteryItem;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;

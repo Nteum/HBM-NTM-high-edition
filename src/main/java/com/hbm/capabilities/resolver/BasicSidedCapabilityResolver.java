@@ -71,6 +71,11 @@ public class BasicSidedCapabilityResolver<HANDLER, SIDED_HANDLER extends HANDLER
     }
 
     @Override
+    public void validate(Capability<?> capability, @Nullable Direction side) {
+
+    }
+
+    @Override
     public void invalidate(Capability<?> capability, @Nullable Direction side) {
         if (side == null) {
             invalidateReadOnly();

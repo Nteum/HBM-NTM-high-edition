@@ -44,6 +44,11 @@ public class BasicCapabilityResolver implements ICapabilityResolver {
     }
 
     @Override
+    public void validate(Capability<?> capability, @Nullable Direction side) {
+        cachedCapability = LazyOptional.of(supplier);
+    }
+
+    @Override
     public void invalidateAll() {
         if (cachedCapability != null && cachedCapability.isPresent()) {
             cachedCapability.invalidate();

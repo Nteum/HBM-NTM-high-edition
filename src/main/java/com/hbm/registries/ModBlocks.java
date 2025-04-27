@@ -8,7 +8,7 @@ import com.hbm.block.machine.*;
 import com.hbm.block.network.BlockConveyor;
 import com.hbm.block.weapon.*;
 import com.hbm.fluid.ModFluids;
-import com.hbm.item.BatteryBlockItem;
+import com.hbm.item.tool.BatteryBlockItem;
 import com.hbm.block.base.DummibleBlock;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;

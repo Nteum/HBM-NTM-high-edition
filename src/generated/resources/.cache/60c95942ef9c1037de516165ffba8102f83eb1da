@@ -1,6 +1,8 @@
-// 1.20.1	2025-03-19T12:54:53.2677715	Item Models: hbmxx
+// 1.20.1	2025-04-25T01:00:45.9334465	Item Models: hbmxx
+04c4399184e0e1822e6b7c7c1c501acfe20eb917 assets/hbmxx/models/item/battery_advanced.json
 837eb807abd5306db66f33eda39d791e78fc24d6 assets/hbmxx/models/item/battery_creative.json
 da5d9f8a3fc09cc43b87de380ad11b0ae2441254 assets/hbmxx/models/item/battery_generic.json
+06bdd18a8c2ac78adbb51110948208d735275301 assets/hbmxx/models/item/battery_lithium.json
 a4298a2a2bf0458fd7d028a2124b73d5d4ca40e8 assets/hbmxx/models/item/bedrock_ore_base.json
 0c85fb3ec1efd2f7265a0311ad3daaeeeeeb1a69 assets/hbmxx/models/item/briquette_coal.json
 523f2fd9c928056c21de56d6320a4480b535547a assets/hbmxx/models/item/briquette_lignite.json
@@ -27,6 +29,7 @@ b8e5cac0893ec18b354dfa206bf15629fdf62841 assets/hbmxx/models/item/ingot_red_copp
 06ec35dcc75f1b7a69fbfbb3d5b3f873891204de assets/hbmxx/models/item/ingot_steel.json
 4272e1197ae80774cecbdb1486d60fbf334c963d assets/hbmxx/models/item/ingot_tungsten.json
 7672f552ad3ed70dec9e5488d253b67358071eb9 assets/hbmxx/models/item/ingot_zirconium.json
+2bb9d0b411694b706a177f7423d0af0bbd3c9c24 assets/hbmxx/models/item/laser_crystal_digamma.json
 ca8b6c76f22bd66e6b6f7a6f52a99c31b029dd05 assets/hbmxx/models/item/lignite.json
 501aebe71d2e745bede3fe89d099f99b0d977fcc assets/hbmxx/models/item/nugget_zirconium.json
 524808123961c0d69ffd13525f7627dc93285048 assets/hbmxx/models/item/overlay_my_fluid.json
@@ -36,3 +39,4 @@ ca8b6c76f22bd66e6b6f7a6f52a99c31b029dd05 assets/hbmxx/models/item/lignite.json
 59f6ba95361ff4e4021eb492fae98dda2f6e4470 assets/hbmxx/models/item/powder_lignite.json
 19fef88f8e8950320aba5740682adfcebec02e04 assets/hbmxx/models/item/screwdriver.json
 86e7893b1d25f3fa5069b17c1fc421f3011f1cb3 assets/hbmxx/models/item/solid_fuel.json
+1435f4fcb89d1b3689977e9c61ecb750012301b2 assets/hbmxx/models/item/upgrade_template.json

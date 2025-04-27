@@ -1,6 +1,5 @@
 package com.hbm.registries;
 
-import com.hbm.item.BatteryItem;
 import com.hbm.item.HBMComponent;
 import com.hbm.item.HBMWeapon;
 import com.hbm.item.HBMtools;

@@ -13,5 +13,6 @@ public interface ICapabilityResolver {
     default List<Capability<?>> getSupportedCapabilities(){return List.of();}
     <T> LazyOptional<T> resolve(Capability<T> capability, @Nullable Direction side);
     void invalidate(Capability<?> capability, @Nullable Direction side);
+    void validate(Capability<?> capability, @Nullable Direction side);
     void invalidateAll();
 }

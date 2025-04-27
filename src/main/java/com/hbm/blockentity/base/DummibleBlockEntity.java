@@ -1,10 +1,14 @@
 package com.hbm.blockentity.base;
 
 import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.capabilities.CapabilityCache;
+import com.hbm.capabilities.resolver.ICapabilityResolver;
+import com.hbm.capabilities.resolver.SidedCapabilityWrapper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Tuple;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
@@ -20,8 +24,8 @@ import java.util.Map;
 
 public class DummibleBlockEntity extends BlockEntity {
     public BlockPos corePos;
-//    public Map<Capability<?>, List<Tuple<Direction, LazyOptional<?>>>> caps = new HashMap<>();
-    public Map<Capability<?>, Map<Direction, LazyOptional<?>>> caps = new HashMap<>();
+//    public Map<Capability<?>, Map<Direction, LazyOptional<?>>> caps = new HashMap<>();
+    protected final CapabilityCache capabilitiesCache = new CapabilityCache();
     public DummibleBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(ModBlockEntityType.DUMMIBLEBLOCK.get(), pPos, pBlockState);
     }
@@ -39,21 +43,31 @@ public class DummibleBlockEntity extends BlockEntity {
         corePos = new BlockPos(pos[0],pos[1],pos[2]);
     }
 
-    public <T,H>void setCaps(Capability<T> cap, H handler, Direction ... directions){
-//        List<Tuple<Direction, LazyOptional<?>>> list = new ArrayList<>();
-        Map<Direction, LazyOptional<?>> map = new HashMap<>();
-        for (Direction direction : directions) {
-//            list.add(new Tuple<>(direction, LazyOptional.of(()->handler)));
-            map.put(direction,LazyOptional.of(()->handler));
-        }
-        caps.put(cap,map);
+//    public <T>void setCaps(Capability<?> capability, LazyOptional<T> handler, Direction ... directions){
+////        Map<Direction, LazyOptional<?>> map = new HashMap<>();
+////        for (Direction direction : directions) {
+////            map.put(direction,LazyOptional.of(()->handler));
+////        }
+////        caps.put(cap,map);
+//    }
+
+    public <T>void setCaps(Capability<?> capability, ICapabilityResolver handler, Direction ... directions){
+        if (handler instanceof SidedCapabilityWrapper<?> wrapper)
+            wrapper.setAllowDirection(directions);
+        capabilitiesCache.addCapabilityResolver(handler);
     }
+
 
     @Override
     public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-        if (caps.containsKey(cap)&&caps.get(cap).containsKey(side)){
-            return caps.get(cap).get(side).cast();
-        }
-        return super.getCapability(cap, side);
+//        if (caps.containsKey(cap)&&caps.get(cap).containsKey(side)){
+//            return caps.get(cap).get(side).cast();
+//        }
+//        return super.getCapability(cap, side);
+        return this.capabilitiesCache.getCapability(cap,side);
     }
+
+//    public static void tick(Level level, BlockPos pPos, BlockState pState, BlockEntity pBlockEntity){
+//
+//    }
 }

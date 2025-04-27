@@ -9,4 +9,7 @@ public class HBMKey {
     public static final String ENERGY = "energy";
     public static final String FLUIDS = "fluids";
     public static final String STORED = "stored";
+    //cable
+    public static final String FORBID_DIR = "forbidDir";
+
 }

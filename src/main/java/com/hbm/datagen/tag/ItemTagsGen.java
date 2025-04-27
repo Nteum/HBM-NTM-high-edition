@@ -24,9 +24,11 @@ public class ItemTagsGen extends ItemTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
+        //电池
         this.tag(ModTags.Items.BATTERY).add(HBMComponent.BATTERY_CREATIVE.get(),HBMComponent.BATTERY_GENERIC.get(),HBMComponent.BATTERY_ADVANCED.get(),HBMComponent.BATTERY_LITHIUM.get(),
                 ModBlocks.machine_battery.get().asItem(),ModBlocks.machine_lithium_battery.get().asItem(),
                 ModBlocks.machine_schrabidium_battery.get().asItem(),ModBlocks.machine_dineutronium_battery.get().asItem());
+        //可以被充电的
         this.tag(ModTags.Items.CHARGEABLE).addTag(ModTags.Items.BATTERY);
         this.tag(ModTags.Items.UPGRADE).add(HBMtools.UPGRADE_BASE.get());
         this.tag(ModTags.Items.MISSILE).add(ModItems.MISSILE_GENERIC.get());
