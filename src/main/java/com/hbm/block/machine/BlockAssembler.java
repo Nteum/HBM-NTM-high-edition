@@ -44,14 +44,20 @@ public class BlockAssembler extends BedLikeBlock {
         return SHAPE;
     }
 
-    @Nullable
+//    @Nullable
+//    @Override
+//    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
+//        return pBlockEntityType == ModBlockEntityType.ASSEMBLER_ENTITY.get()?AssemblerEntity::tick : null;
+//    }
+
+
     @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return pBlockEntityType == ModBlockEntityType.ASSEMBLER_ENTITY.get()?AssemblerEntity::tick : null;
+    public int[] getOffset() {
+        return new int[]{1, 0, 2 ,1 ,2 ,1};
     }
 
     @Override
-    protected List<Vec3i> getOffsets() {
+    public List<Vec3i> getOffsets() {
         //                      U  D  N  S  W  E
         return square(new int[]{1, 0, 2 ,1 ,2 ,1});
     }

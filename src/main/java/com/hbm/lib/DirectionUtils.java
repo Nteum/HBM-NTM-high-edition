@@ -11,4 +11,5 @@ public class DirectionUtils {
         int deltaRot = horizDir.indexOf(newRefDir) - horizDir.indexOf(refDir);
         return horizDir.get((horizDir.indexOf(dir) + deltaRot + horizDir.size())%horizDir.size());
     }
+
 }

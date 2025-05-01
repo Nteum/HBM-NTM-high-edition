@@ -46,7 +46,7 @@ public class NukeCustom extends NukeBomb implements IBomb{
         return new NukeBombCustomEntity(pPos,pState);
     }
     @Override
-    protected List<Vec3i> getOffsets() {
+    public List<Vec3i> getOffsets() {
         return square(new int[]{0, 0, 1 ,0 ,0 ,2});
     }
 

@@ -27,6 +27,7 @@ public class BlockStateGen extends BlockStateProvider {
     public BlockStateGen(PackOutput output, String modid, ExistingFileHelper exFileHelper) {
         super(output, modid, exFileHelper);
         categoryStateProviders.add(new DecorateBlockStateProvider(this));
+        categoryStateProviders.add(new ObjMachineBlockStateProvider(this));
     }
 
     @Override
@@ -118,12 +119,12 @@ public class BlockStateGen extends BlockStateProvider {
 //        itemModels().getBuilder("hbmxx:item/machine_press").parent(press_body_model);
         this.simpleBlockWithItem(ModBlocks.machine_press.get(),press_body_model);
         this.simpleBlock(ModBlocks.part_press_head.get(),press_head_model);
-        var assembler_body_model = this.models().getExistingFile(new ResourceLocation(HBM.MODID, "block/assembler/assembler_body"));
-        var assembler_arm_model = this.models().getExistingFile(new ResourceLocation(HBM.MODID, "block/assembler/assembler_arm"));
-        var assembler_cog_model = this.models().getExistingFile(new ResourceLocation(HBM.MODID, "block/assembler/assembler_cog"));
-        var assembler_slider_model = this.models().getExistingFile(new ResourceLocation(HBM.MODID, "block/assembler/assembler_slider"));
-        this.horizontalBlock(ModBlocks.machine_assembler.get(),assembler_body_model);
-        this.simpleBlockItem(ModBlocks.machine_assembler.get(),assembler_body_model);
+//        var assembler_body_model = this.models().getExistingFile(new ResourceLocation(HBM.MODID, "block/assembler/assembler_body"));
+//        var assembler_arm_model = this.models().getExistingFile(new ResourceLocation(HBM.MODID, "block/assembler/assembler_arm"));
+//        var assembler_cog_model = this.models().getExistingFile(new ResourceLocation(HBM.MODID, "block/assembler/assembler_cog"));
+//        var assembler_slider_model = this.models().getExistingFile(new ResourceLocation(HBM.MODID, "block/assembler/assembler_slider"));
+//        this.horizontalBlock(ModBlocks.machine_assembler.get(),assembler_body_model);
+//        this.simpleBlockItem(ModBlocks.machine_assembler.get(),assembler_body_model);
         //坩埚模型
         var crucible_model = this.models().getExistingFile(Models.CRUCIBLE);
         this.horizontalBlock(ModBlocks.machine_crucible.get(),crucible_model);

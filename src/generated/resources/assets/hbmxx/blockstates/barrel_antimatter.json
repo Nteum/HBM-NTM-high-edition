@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "hbmxx:block/barrel/barrel_antimatter",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "hbmxx:block/barrel/barrel_antimatter"
+    },
+    "facing=south": {
+      "model": "hbmxx:block/barrel/barrel_antimatter",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "hbmxx:block/barrel/barrel_antimatter",
+      "y": 270
+    }
+  }
+}

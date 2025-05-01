@@ -24,7 +24,7 @@ public class LaunchPadBasic extends LaunchPad{
     }
 
     @Override
-    protected List<Vec3i> getOffsets() {
+    public List<Vec3i> getOffsets() {
         return square(new int[]{0,0,1,1,1,1});
     }
 }

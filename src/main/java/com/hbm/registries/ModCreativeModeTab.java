@@ -1,5 +1,6 @@
 package com.hbm.registries;
 
+import com.hbm.block.HBMMachine;
 import com.hbm.item.HBMComponent;
 import com.hbm.item.HBMWeapon;
 import com.hbm.item.HBMtools;
@@ -90,6 +91,7 @@ public class ModCreativeModeTab {
             output.accept(ModBlocks.machine_crucible.get());
             output.accept(ModBlocks.machine_assembler.get());
             output.accept(ModBlocks.RED_CABLE.get());
+            HBMMachine.creativeTab(output);
         }).build());
     public static final RegistryObject<CreativeModeTab> HBM_TOOL = CREATIVE_MODE_TABS.register("hbm_weapon", () -> CreativeModeTab.builder()
         .title(Component.translatable("itemGroup.hbm_tool"))

@@ -1,6 +1,7 @@
 package com.hbm.datagen;
 
 import com.hbm.HBMLang;
+import com.hbm.block.HBMMachine;
 import com.hbm.item.HBMComponent;
 import com.hbm.registries.ModBlocks;
 import com.hbm.registries.ModItems;
@@ -47,7 +48,7 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
         HBMComponent.languageSupport(this);
     }
     private void addBlocks(){
-
+        HBMMachine.languageSupport(this);
     }
     private void addMisc(){
         this.add(HBMLang.ENERGY.getTranslationKey(), "Energy: %1$s");

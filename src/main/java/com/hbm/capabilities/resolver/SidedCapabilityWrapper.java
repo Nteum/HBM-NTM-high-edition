@@ -9,7 +9,7 @@ import org.lwjgl.openal.AL;
 import java.util.EnumMap;
 import java.util.Map;
 
-public abstract class SidedCapabilityWrapper<T> implements ICapabilityResolver{
+public abstract class SidedCapabilityWrapper<T> implements ICapabilityResolver, Cloneable{
     public EnumMap<Direction,Boolean> directionConn = new EnumMap<>(Direction.class);
     protected LazyOptional<T> optional = LazyOptional.empty();
     protected T content = null;
@@ -62,5 +62,10 @@ public abstract class SidedCapabilityWrapper<T> implements ICapabilityResolver{
         this.optional.invalidate();
     }
 
-
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        Object clone = super.clone();
+        ((SidedCapabilityWrapper<?>)clone).directionConn = this.directionConn.clone();
+        return clone;
+    }
 }

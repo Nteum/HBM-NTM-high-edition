@@ -1,5 +1,6 @@
 package com.hbm.blockentity;
 
+import com.hbm.block.HBMMachine;
 import com.hbm.blockentity.machine.*;
 import com.hbm.HBM;
 import com.hbm.blockentity.base.DummibleBlockEntity;
@@ -40,4 +41,17 @@ public class ModBlockEntityType {
             REGISTER.register("battery_entity",()-> BlockEntityType.Builder.of(BatteryEntity::new, ModBlocks.machine_battery.get(),ModBlocks.machine_lithium_battery.get(),ModBlocks.machine_dineutronium_battery.get(),ModBlocks.machine_schrabidium_battery.get()).build(null));
     public static final RegistryObject<BlockEntityType<LaunchPadEntity>> LAUNCHPAD_ENTITY =
             REGISTER.register("launchpad_entity",()-> BlockEntityType.Builder.of(LaunchPadEntity::new, ModBlocks.RED_CABLE.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<ElectricFurnaceEntity>> ELECTRIC_FURNACE_ENTITY =
+            REGISTER.register("electric_furnace_entity",()-> BlockEntityType.Builder.of(ElectricFurnaceEntity::new, ModBlocks.machine_electric_furnace.get()).build(null));
+    public static final RegistryObject<BlockEntityType<BoilerEntity>> BOILER_ENTITY =
+            REGISTER.register("boiler_entity",()-> BlockEntityType.Builder.of(BoilerEntity::new, ModBlocks.machine_boiler.get()).build(null));
+    public static final RegistryObject<BlockEntityType<ElectricBoilerEntity>> ELECTRIC_BOILER_ENTITY =
+            REGISTER.register("electric_boiler_entity",()-> BlockEntityType.Builder.of(ElectricBoilerEntity::new, ModBlocks.machine_electric_boiler.get()).build(null));
+    public static final RegistryObject<BlockEntityType<NuclearBoilerEntity>> NUCLEAR_BOILER_ENTITY =
+            REGISTER.register("nuclear_boiler_entity",()-> BlockEntityType.Builder.of(NuclearBoilerEntity::new, ModBlocks.machine_nuclear_boiler.get()).build(null));
+    public static final RegistryObject<BlockEntityType<ChemplantEntity>> CHEMPLANT_ENTITY =
+            REGISTER.register("chemplant_entity",()-> BlockEntityType.Builder.of(ChemplantEntity::new, HBMMachine.CHEMPLANT.get()).build(null));
+    public static final RegistryObject<BlockEntityType<BarrelEntity>> BARREL_ENTITY =
+            REGISTER.register("barrel_entity",()-> BlockEntityType.Builder.of(BarrelEntity::new, HBMMachine.PLASTIC_BARREL.get(),HBMMachine.CORRODED_BARREL.get(),HBMMachine.IRON_BARREL.get(),HBMMachine.STEEL_BARREL.get(),HBMMachine.TCALLOY_BARREL.get(),HBMMachine.ANTIMATTER_BARREL.get()).build(null));
 }

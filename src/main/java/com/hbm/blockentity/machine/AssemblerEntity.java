@@ -1,6 +1,8 @@
 package com.hbm.blockentity.machine;
 
+import com.hbm.HBMKey;
 import com.hbm.api.energy.fe.HBMEnergyStorage;
+import com.hbm.api.energy.fe.IHBMEnergyStorage;
 import com.hbm.api.energy.fe.SidedEnergyWrapper;
 import com.hbm.api.energy.fe.TransmitHelper;
 import com.hbm.block.machine.BlockAssembler;
@@ -24,11 +26,13 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.energy.IEnergyStorage;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
@@ -40,6 +44,7 @@ public class AssemblerEntity extends BedLikeBlockEntity {
     int energyCapacity = 100_000;   //最大储能
     int countdown = 0;              //工作计时
     AssemblerRecipe recipeNow;      //当前正在使用的配方
+    public ItemStack showItem;      //客户端显示的物品
     public static final int[] ASSEMBLE_SLOTS = new int[]{5,6,7,8,9,10,11,12,13,14,15,16};
 
     public static final RecipeManager.CachedCheck<Container, AssemblerRecipe> quickCheck = RecipeManager.createCheck(ModRecipeType.ASSEMBLER_RECIPE.get());
@@ -78,36 +83,53 @@ public class AssemblerEntity extends BedLikeBlockEntity {
     public IEnergyStorage getEnergy(){
         return getCapability(ForgeCapabilities.ENERGY,null).orElse(null);
     }
-    public static void tick(Level level, BlockPos pPos, BlockState pState, BlockEntity pBlockEntity) {
-//        if (pBlockEntity instanceof AssemblerEntity entity)entity.running = entity.countdown > 0;
-        if (!level.isClientSide() && pState.is(ModBlocks.machine_assembler.get()) && pBlockEntity instanceof AssemblerEntity entity){
-            if (entity.flagFormed){
-                entity.flagFormed = false;
-                entity.setDummyCaps();
-            }
-            runDummyCaps(level,pPos,pState,pBlockEntity);
-            absorbBatteryItem(entity);
-            transportItem(entity);  //暂时只能不加判断地传入物品
 
-            boolean flagEmpty = entity.craftSlotEmpty();
-
-            if (entity.running){
-                if (entity.recipeNow == null)stopMachine(entity);
-                else if (entity.countdown==0){
-                    entity.running = false;
-                    ItemStack itemStack = entity.recipeNow.assemble(entity, level.registryAccess());
-//                    entity.items.set(4,itemStack);
-                    processOutput(entity,itemStack);
-                }else if (entity.checkRecipe() && ((HBMEnergyStorage)entity.getEnergy()).recipeExtract(entity.power,true)==entity.power){
-                    entity.countdown--;
-                    ((HBMEnergyStorage) entity.getEnergy()).recipeExtract(entity.power,false);
-                }else stopMachine(entity);
-            }else if (!flagEmpty){
-                AssemblerRecipe recipe = AssemblerEntity.quickCheck.getRecipeFor(entity, level).orElse(null);
-                if (entity.canProcess(recipe,entity)) startMachine(entity,recipe);
-            }
+    @Override
+    protected void onUpdateServer() {
+        super.onUpdateServer();
+        if (this.flagFormed) {
+            this.setDummyCaps();
+            this.flagFormed = false;
         }
+        runDummyCaps(level, getBlockPos(), getBlockState(), this);
+        absorbBatteryItem(this);
+        transportItem(this);  //暂时只能不加判断地传入物品
+        boolean flagEmpty = this.craftSlotEmpty();
+        if (this.running){
+            if (this.recipeNow == null)stopMachine(this);
+            else if (this.countdown==0){
+                this.running = false;
+                ItemStack resultItem = this.recipeNow.assemble(this, level.registryAccess());
+//                    entity.items.set(4,itemStack);
+                processOutput(this,resultItem);
+            }else if (this.checkRecipe() && ((HBMEnergyStorage)this.getEnergy()).recipeExtract(this.power,true)==this.power){
+                this.countdown--;
+                ((HBMEnergyStorage) this.getEnergy()).recipeExtract(this.power,false);
+            }else stopMachine(this);
+        }else if (!flagEmpty){
+            AssemblerRecipe recipe = AssemblerEntity.quickCheck.getRecipeFor(this, level).orElse(null);
+            if (this.canProcess(recipe,this)) startMachine(this,recipe);
+        }
+        sendUpdatePacket();
     }
+
+    @Override
+    public @NotNull CompoundTag getReducedUpdateTag() {
+        CompoundTag tag = new CompoundTag();
+        tag.putBoolean(HBMKey.RUNNING, this.running);
+        if (this.recipeNow != null)
+            tag.put(HBMKey.RESULT_ITEM, this.recipeNow.getResultItem(this.getLevel().registryAccess()).serializeNBT());
+        return super.getReducedUpdateTag().merge(tag);
+    }
+
+    @Override
+    public void handleUpdatePacket(@NotNull CompoundTag tag) {
+        super.handleUpdatePacket(tag);
+        this.running = tag.getBoolean(HBMKey.RUNNING);
+        if (tag.contains(HBMKey.RESULT_ITEM))
+            this.showItem = ItemStack.of((CompoundTag) tag.get(HBMKey.RESULT_ITEM));
+    }
+
     public static void startMachine(AssemblerEntity entity, AssemblerRecipe recipe){
         entity.countdown = recipe.getProcessingTime();
         entity.recipeNow = recipe;

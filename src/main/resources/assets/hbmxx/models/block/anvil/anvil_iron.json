@@ -1,6 +1,7 @@
 {
   "parent": "hbmxx:block/abstract/anvil",
   "textures": {
-    "texture": "hbmxx:block/anvil_iron"
+    "texture": "hbmxx:block/anvil_iron",
+    "particle": "hbmxx:block/anvil_iron"
   }
 }

@@ -11,5 +11,7 @@ public class HBMKey {
     public static final String STORED = "stored";
     //cable
     public static final String FORBID_DIR = "forbidDir";
-
+    // machine state
+    public static final String RUNNING = "running";
+    public static final String RESULT_ITEM = "resultItem";
 }

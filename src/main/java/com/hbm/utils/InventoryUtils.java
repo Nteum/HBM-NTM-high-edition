@@ -272,4 +272,15 @@ public class InventoryUtils {
 
         return Optional.empty();
     }
+
+    public static ItemStack shrink(int amount, ItemStack itemStack){
+        itemStack.shrink(amount);
+        return itemStack.isEmpty() ? ItemStack.EMPTY : itemStack;
+    }
+    public static ItemStack grow(int amount, ItemStack itemStack, ItemStack itemStack2){
+        if (itemStack.isEmpty())itemStack = new ItemStack(itemStack2.getItem(),amount);
+        else itemStack.grow(amount);
+        return itemStack;
+    }
+
 }

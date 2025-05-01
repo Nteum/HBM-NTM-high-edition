@@ -1,25 +1,37 @@
 package com.hbm.block.base;
 
+import com.hbm.HBMLang;
+import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.blockentity.base.BaseMachineBlockEntity;
 //import com.hbm.handler.MoltiblockHandler;
+import com.hbm.blockentity.machine.AssemblerEntity;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 /**
  * 大部分机器的父类，完成一些机器共有的工作。
@@ -36,6 +48,12 @@ public abstract class BaseMachineBlock extends BaseEntityBlock implements Entity
         pBuilder.add(FACING);
     }
 
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
+        return pLevel.isClientSide() ? BaseMachineBlockEntity::clientTicker : BaseMachineBlockEntity::serverTicker;
+    }
+
     /** 右键 */
     @Override
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
@@ -46,7 +64,7 @@ public abstract class BaseMachineBlock extends BaseEntityBlock implements Entity
             }
             return InteractionResult.CONSUME;
         }else {
-            return super.use(pState, pLevel, pPos, pPlayer, pHand, pHit);
+            return InteractionResult.SUCCESS;
         }
     }
 
@@ -76,5 +94,11 @@ public abstract class BaseMachineBlock extends BaseEntityBlock implements Entity
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext pContext) {
         return this.defaultBlockState().setValue(FACING, pContext.getHorizontalDirection().getOpposite());
+    }
+    //主要用于方块作为物品放在物品栏时指针显示的文字。
+    @Override
+    public void appendHoverText(ItemStack pStack, @Nullable BlockGetter pLevel, List<Component> pTooltip, TooltipFlag pFlag) {
+        super.appendHoverText(pStack, pLevel, pTooltip, pFlag);
+
     }
 }

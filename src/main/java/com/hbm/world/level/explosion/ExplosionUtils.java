@@ -2,9 +2,12 @@ package com.hbm.world.level.explosion;
 
 import com.hbm.network.ModMessages;
 import com.hbm.network.packet.toclient.S2CExplosionEffectPacket;
+import com.hbm.particle.ModParticleTypes;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.CampfireBlockEntity;
 
 public class ExplosionUtils {
 
@@ -21,7 +24,13 @@ public class ExplosionUtils {
     public static void spawnParticles(Level pLevel, double x, double y, double z,int count){
         for (ServerPlayer serverPlayer : ((ServerLevel) pLevel).players()) {
             if (serverPlayer.distanceToSqr(x, y, z) < 4096.0D) {
-                ModMessages.sendToPlayer(new S2CExplosionEffectPacket(x,y,z,1,1,count),serverPlayer);
+//                ModMessages.sendToPlayer(new S2CExplosionEffectPacket(x,y,z,1,1,count),serverPlayer);
+//                ((ServerLevel) pLevel).sendParticles(ModParticleTypes.HBM_SMOKE.get(), x,y,z, count, 0,0,0,1);
+                for (int i = 0; i < count; i++) {
+                    double xRand = pLevel.random.nextGaussian();
+                    double zRand = pLevel.random.nextGaussian();
+                    pLevel.addParticle(ModParticleTypes.HBM_SMOKE.get(), x,y,z, 1.0E-4D*xRand, 5.0E-4D, 1.0E-4D*zRand);
+                }
             }
         }
     }

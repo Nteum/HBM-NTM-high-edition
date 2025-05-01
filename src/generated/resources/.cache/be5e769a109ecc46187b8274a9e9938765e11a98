@@ -1,11 +1,18 @@
-// 1.20.1	2025-03-31T00:15:19.7067715	Block States: hbmxx
+// 1.20.1	2025-04-30T17:07:20.399045	Block States: hbmxx
 8c5fc3481c2251bc6fa3f0c707cffdde8fa99d5b assets/hbmxx/blockstates/anvil_bismuth.json
 b85ef067e28c3bb827abb799b89be56c54e01946 assets/hbmxx/blockstates/anvil_desh.json
 d764e685ed5120e49c14a8e719bea1a84f3187ba assets/hbmxx/blockstates/anvil_iron.json
 5b383f18e31f1b6064e86aa58615d7eb9560d58a assets/hbmxx/blockstates/asbestos_block.json
 f78416971ea369d15d7c502f52299538ce66ae57 assets/hbmxx/blockstates/asbestos_ore.json
+1a817d3754def350dd6e0a599be907cb0d9da05b assets/hbmxx/blockstates/barrel_antimatter.json
+28a68e2d62a39a1cc1a59ba0b1d5307dfe25bf5d assets/hbmxx/blockstates/barrel_corroded.json
+06029ec341f6a74cf3e4394eb683e581291ae719 assets/hbmxx/blockstates/barrel_iron.json
+f64eb64a7fcd4090eb11dbade724266e8ac1f20e assets/hbmxx/blockstates/barrel_plastic.json
+8fa60c773767c414f877ac9177d0fe35a952f16a assets/hbmxx/blockstates/barrel_steel.json
+bfef76fa8dfb5d3f4d705bc5592052e0d93f4739 assets/hbmxx/blockstates/barrel_tcalloy.json
 5cc89d114042b315460ac16b230e27129afafa55 assets/hbmxx/blockstates/basalt_asbestos_ore.json
 5ab5ea47d0c30601d969b939fc5c42fb75fe3945 assets/hbmxx/blockstates/bedrock_ore.json
+53fccfd39f306d6b2b35ab40e25e3f1ce42937ad assets/hbmxx/blockstates/chemplant.json
 e35ed3ee4469653b7c791ce6a308beb335fd4afd assets/hbmxx/blockstates/conveyor.json
 c40293e2198d15d7f05d8536c9e2a0bab97a8ad3 assets/hbmxx/blockstates/deepslate_rare_ore.json
 0b8a892e56fdf0960f3c08ac7630725ea40d6986 assets/hbmxx/blockstates/deepslate_uranium_ore.json
@@ -64,11 +71,18 @@ b5cb9a94c8c31cd5412f2d3134ff34fbce1f4cc6 assets/hbmxx/models/block/wast_leaves.j
 a17ea3c3563afc3c047edf60c5e046abad3f4cee assets/hbmxx/models/item/anvil_iron.json
 884398ba908bcf6676f67b9cdefec6a44efd6902 assets/hbmxx/models/item/asbestos_block.json
 bf2b6ebeba0e3a0ff50eb9ef6f03e58d4dc607f6 assets/hbmxx/models/item/asbestos_ore.json
+6be7c0b8c9fc393b26d3056b9cb331235456d051 assets/hbmxx/models/item/barrel_antimatter.json
+d25cb8148607ac914c7a0b5350aabcd98512e7a6 assets/hbmxx/models/item/barrel_corroded.json
+7d0aa3a0e211dc9ee6b45ea307ea0c5a1eb24ae7 assets/hbmxx/models/item/barrel_iron.json
+67ed8d42448372f056cdac5097f231bc837a4680 assets/hbmxx/models/item/barrel_plastic.json
+22f941c9ebdbb37c3e2fd997853dddf6b98cf806 assets/hbmxx/models/item/barrel_steel.json
+7dc552045e66fa25df30b5ee3d5dda877c476f04 assets/hbmxx/models/item/barrel_tcalloy.json
 e6b9455876bd8f1aecfe878144c8156639f475b4 assets/hbmxx/models/item/basalt_asbestos_ore.json
 b7ee9ee01b25720a0f9f5252eebe9cd23f6e832a assets/hbmxx/models/item/bedrock_ore.json
 14b68c45c15d41c2aec7c176c0d38cd0f1922d70 assets/hbmxx/models/item/bomb_boy.json
 50a281ec6be44ec970c66961980ef4e11e87da54 assets/hbmxx/models/item/bomb_custom.json
 c25d113cafd69cae025dfcfff80b0a1246ac466f assets/hbmxx/models/item/bomb_fat_man.json
+1c5eceb86e46db3e9c15b34ba83447fbd146341d assets/hbmxx/models/item/chemplant.json
 25a618c77d708d5c11dbf3d7b58aa9a47fbca969 assets/hbmxx/models/item/conveyor.json
 31e54c7b0a52500b18c08fe1da4990d39a15423f assets/hbmxx/models/item/deepslate_rare_ore.json
 e145ee71ee7c5e1502eb6c95181bcfa5c93443ad assets/hbmxx/models/item/deepslate_uranium_ore.json

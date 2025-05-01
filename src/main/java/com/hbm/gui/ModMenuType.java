@@ -1,9 +1,6 @@
 package com.hbm.gui;
 
-import com.hbm.gui.menu.AssemblerMenu;
-import com.hbm.gui.menu.BatteryMenu;
-import com.hbm.gui.menu.DifurnaceMenu;
-import com.hbm.gui.menu.PressMenu;
+import com.hbm.gui.menu.*;
 import com.hbm.HBM;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.flag.FeatureFlags;
@@ -21,4 +18,8 @@ public class ModMenuType {
             MOD_MENU_TYPES.register("battery_menu",()->new MenuType<>(BatteryMenu::new, FeatureFlags.VANILLA_SET));
     public static final RegistryObject<MenuType<AssemblerMenu>> ASSEMBLER_MENU =
             MOD_MENU_TYPES.register("assembler_menu",()->new MenuType<>(AssemblerMenu::new, FeatureFlags.VANILLA_SET));
+    public static final RegistryObject<MenuType<ChemplantMenu>> CHEMPLANT_MENU =
+            MOD_MENU_TYPES.register("chemplant_menu",()->new MenuType<>(ChemplantMenu::new, FeatureFlags.VANILLA_SET));
+    public static final RegistryObject<MenuType<BarrelMenu>> BARREL_MENU =
+            MOD_MENU_TYPES.register("barrel_menu",()->new MenuType<>(BarrelMenu::new, FeatureFlags.VANILLA_SET));
 }

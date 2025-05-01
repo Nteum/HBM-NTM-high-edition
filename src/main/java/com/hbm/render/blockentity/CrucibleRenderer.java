@@ -2,6 +2,7 @@ package com.hbm.render.blockentity;
 
 import com.hbm.blockentity.machine.CrucibleEntity;
 import com.hbm.model.Models;
+import com.hbm.render.utils.ModelAdjustUtils;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
@@ -31,22 +32,21 @@ public class CrucibleRenderer implements BlockEntityRenderer<CrucibleEntity> {
         ModelBlockRenderer modelRenderer = blockRenderer.getModelRenderer();
         BlockState blockState = pBlockEntity.getBlockState();
         //根据方向确定旋转角度
-        Direction direction = blockState.getValue(HorizontalDirectionalBlock.FACING);
-        int rotation = 0;
-        switch (direction){
-            case NORTH -> rotation = 0;
-            case WEST -> rotation = 90;
-            case SOUTH -> rotation = 180;
-            case EAST -> rotation = 270;
-        }
+//        Direction direction = blockState.getValue(HorizontalDirectionalBlock.FACING);
+//        int rotation = 0;
+//        switch (direction){
+//            case NORTH -> rotation = 0;
+//            case WEST -> rotation = 90;
+//            case SOUTH -> rotation = 180;
+//            case EAST -> rotation = 270;
+//        }
+        ModelAdjustUtils.generalMachineRotate(pPoseStack, blockState);
 
         //坩埚本体部分
         pPoseStack.pushPose();
-        pPoseStack.mulPose(Axis.YP.rotationDegrees(rotation));
+//        pPoseStack.mulPose(Axis.YP.rotationDegrees(rotation));
         renderBlockModel(crucible_model,blockState,modelRenderer,pPoseStack,pBuffer,pPackedLight,pPackedOverlay,null);
         pPoseStack.popPose();
-
-
 
 //        ResourceLocation overlay = new ResourceLocation(HBMxx.MODID,"fluid/irradiated_water_overlay");
 //        pPoseStack.pushPose();

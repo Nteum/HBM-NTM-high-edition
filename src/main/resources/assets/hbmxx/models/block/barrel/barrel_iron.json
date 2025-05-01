@@ -1,0 +1,11 @@
+{
+  "parent": "minecraft:block/block",
+  "loader": "forge:obj",
+  "flip_v": true,
+  "model": "hbmxx:models/block/barrel/barrel.obj",
+  "textures": {
+    "texture0": "hbmxx:block/barrel_iron",
+    "particle": "hbmxx:block/barrel_iron"
+  },
+  "ambientocclusion": false
+}

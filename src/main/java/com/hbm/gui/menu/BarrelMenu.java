@@ -1,0 +1,35 @@
+package com.hbm.gui.menu;
+
+import com.hbm.gui.ModMenuType;
+import com.hbm.gui.menu.slot.OutputSlot;
+import com.hbm.gui.menu.slot.UpgradeSlot;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.Container;
+import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.*;
+import org.jetbrains.annotations.Nullable;
+
+public class BarrelMenu extends BaseMachineMenu{
+    public BarrelMenu(int pContainerId, Inventory pPlayerInventory) {
+        this( pContainerId, pPlayerInventory, new SimpleContainer(4), new SimpleContainerData(1));
+    }
+    public BarrelMenu(int pContainerId, Inventory pPlayerInventory,Container inContainer, ContainerData containerData1) {
+        super(ModMenuType.BARREL_MENU.get(), pContainerId, inContainer, containerData1);
+        this.slotNum = 4;
+        this.addSlot(new Slot(container, 0, 53 - 18, 17));
+        this.addSlot(new OutputSlot(container, 1, 53 - 18, 53));
+        this.addSlot(new Slot(container, 2, 125, 17));
+        this.addSlot(new OutputSlot(container, 3, 125, 53));
+        addPlayerSlot(pPlayerInventory,0,0);
+        this.addDataSlots(containerData);
+    }
+
+    public int getMode(){
+        return this.containerData.get(0);
+    }
+    public void changeMode(){
+        this.containerData.set(0,(getMode()+1)%4);
+    }
+}

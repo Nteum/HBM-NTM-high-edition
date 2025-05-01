@@ -1,5 +1,6 @@
 package com.hbm.registries;
 
+import com.hbm.block.HBMMachine;
 import com.hbm.block.decoriate.BlockTest12;
 import com.hbm.block.env.BedRockOre;
 import com.hbm.block.env.WasteEarth;
@@ -34,9 +35,9 @@ public class ModBlocks {
     //机械
     public static final RegistryObject<Block> machine_difurnace = registerBlockWithItem("machine_difurnace", ()->new BlockDifurnace(BlockBehaviour.Properties.of().lightLevel(litEmission(13))));
     public static final RegistryObject<Block> machine_electric_furnace = registerBlockWithItem("machine_electric_furnace", ()->new BlockElectricFurnace(BlockBehaviour.Properties.of().lightLevel(litEmission(13))));
-    public static final RegistryObject<Block> machine_boiler = registerBlockWithItem("machine_boiler", ()->new BlockElectricFurnace(BlockBehaviour.Properties.of().lightLevel(litEmission(13))));
-    public static final RegistryObject<Block> machine_electric_boiler = registerBlockWithItem("machine_electric_boiler", ()->new BlockElectricFurnace(BlockBehaviour.Properties.of().lightLevel(litEmission(14))));
-    public static final RegistryObject<Block> machine_nuclear_boiler = registerBlockWithItem("machine_nuclear_boiler", ()->new BlockElectricFurnace(BlockBehaviour.Properties.of().lightLevel(litEmission(15))));
+    public static final RegistryObject<Block> machine_boiler = registerBlockWithItem("machine_boiler", ()->new BlockBoiler(BlockBehaviour.Properties.of().lightLevel(litEmission(13))));
+    public static final RegistryObject<Block> machine_electric_boiler = registerBlockWithItem("machine_electric_boiler", ()->new BlockElectricBoiler(BlockBehaviour.Properties.of().lightLevel(litEmission(14))));
+    public static final RegistryObject<Block> machine_nuclear_boiler = registerBlockWithItem("machine_nuclear_boiler", ()->new BlockNuclearBoiler(BlockBehaviour.Properties.of().lightLevel(litEmission(15))));
     public static final RegistryObject<Block> machine_press = registerBlockWithItem("machine_press", ()->new BlockPress(BlockBehaviour.Properties.of()));
     public static final RegistryObject<Block> machine_battery = registerBattery("machine_battery",()->new BlockBattery(BlockBehaviour.Properties.of(), BlockBattery.BatteryType.BASIC));
     public static final RegistryObject<Block> machine_lithium_battery = registerBattery("machine_lithium_battery",()->new BlockBattery(BlockBehaviour.Properties.of(), BlockBattery.BatteryType.LITHIUM));
@@ -137,6 +138,7 @@ public class ModBlocks {
     }
     public static void register(IEventBus modEventBus){
         registerItem();
+        HBMMachine.register(BLOCKS);
         BLOCKS.register(modEventBus);
     }
 }

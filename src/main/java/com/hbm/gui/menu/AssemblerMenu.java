@@ -89,51 +89,50 @@ public class AssemblerMenu extends BaseMachineMenu{
         return (double) containerData.get(1) / containerData.get(2);
     }
     //============= form RecipeBookMenu
-    @Override
-    public void fillCraftSlotsStackedContents(StackedContents pItemHelper) {
-        for (int i = 5; i < 17; i++) {
-            pItemHelper.accountSimpleStack(this.container.getItem(i));
-        }
-    }
-
-    @Override
-    public void clearCraftingContent() {
-        this.craftSlots.clearContent();
-        this.resultSlots.clearContent();
-    }
-
-    @Override
-    public boolean recipeMatches(Recipe<? super Container> pRecipe) {
-        return pRecipe.matches(this.craftSlots, this.level);
-    }
-
-    @Override
-    public int getResultSlotIndex() {
-        return 4;
-    }
-
-    @Override
-    public int getGridWidth() {
-        return this.craftSlots.getWidth();
-    }
-
-    @Override
-    public int getGridHeight() {
-        return this.craftSlots.getHeight();
-    }
-
-    @Override
-    public int getSize() {
-        return 13;
-    }
-
-    @Override
-    public RecipeBookType getRecipeBookType() {
-        return null;
-    }
-
-    @Override
-    public boolean shouldMoveToInventory(int pSlotIndex) {
-        return false;
-    }
+//    @Override
+//    public void fillCraftSlotsStackedContents(StackedContents pItemHelper) {
+//        for (int i = 5; i < 17; i++) {
+//            pItemHelper.accountSimpleStack(this.container.getItem(i));
+//        }
+//    }
+//
+//    @Override
+//    public void clearCraftingContent() {
+//        this.craftSlots.clearContent();
+//        this.resultSlots.clearContent();
+//    }
+//    @Override
+//    public boolean recipeMatches(Recipe<? super Container> pRecipe) {
+//        return pRecipe.matches(this.craftSlots, this.level);
+//    }
+//
+//    @Override
+//    public int getResultSlotIndex() {
+//        return 4;
+//    }
+//
+//    @Override
+//    public int getGridWidth() {
+//        return this.craftSlots.getWidth();
+//    }
+//
+//    @Override
+//    public int getGridHeight() {
+//        return this.craftSlots.getHeight();
+//    }
+//
+//    @Override
+//    public int getSize() {
+//        return 13;
+//    }
+//
+//    @Override
+//    public RecipeBookType getRecipeBookType() {
+//        return null;
+//    }
+//
+//    @Override
+//    public boolean shouldMoveToInventory(int pSlotIndex) {
+//        return false;
+//    }
 }

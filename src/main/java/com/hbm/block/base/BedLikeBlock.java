@@ -26,18 +26,10 @@ import java.util.List;
  *
  * */
 public abstract class BedLikeBlock extends BaseMachineBlock {
+    int[] offset;
     protected BedLikeBlock(Properties pProperties) {
         super(pProperties);
-//        this.registerDefaultState(this.getStateDefinition().any()
-//                .setValue(FACING,Direction.NORTH)
-//        );
     }
-
-//    @Override
-//    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
-//        super.createBlockStateDefinition(pBuilder);
-//        pBuilder.add(FACING);
-//    }
 
     @Nullable
     @Override
@@ -79,7 +71,8 @@ public abstract class BedLikeBlock extends BaseMachineBlock {
         super.setPlacedBy(pLevel, pPos, pState, pPlacer, pStack);
     }
     /** 获取物品占用的所有位置（相对于放置点的位置） */
-    protected List<Vec3i> getOffsets(){return List.of(new Vec3i(0,0,0));}
+    public List<Vec3i> getOffsets(){return List.of(new Vec3i(0,0,0));}
+    public int[] getOffset(){return new int[]{1,0,0,1,0,1};}
     /** 检查方块是否可以放得下 */
     protected boolean checkRequirement(Level level, BlockPos blockPos, Direction dir, List<Vec3i> offsets){
         List<Vec3i> offsets2 = transOffsets(offsets, dir);

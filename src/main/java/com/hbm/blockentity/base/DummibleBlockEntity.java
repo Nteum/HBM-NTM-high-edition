@@ -51,10 +51,17 @@ public class DummibleBlockEntity extends BlockEntity {
 ////        caps.put(cap,map);
 //    }
 
-    public <T>void setCaps(Capability<?> capability, ICapabilityResolver handler, Direction ... directions){
-        if (handler instanceof SidedCapabilityWrapper<?> wrapper)
-            wrapper.setAllowDirection(directions);
-        capabilitiesCache.addCapabilityResolver(handler);
+    public <T>void setCaps(Capability<?> capability, ICapabilityResolver handler, Direction direction) {
+        Object clone = null;
+        if (handler instanceof SidedCapabilityWrapper<?> wrapper){
+            try {
+                clone = wrapper.clone();
+                ((SidedCapabilityWrapper)clone).setAllowDirection(direction);
+            }catch (CloneNotSupportedException e){
+                e.printStackTrace();
+            }
+        }
+        capabilitiesCache.addCapabilityResolver(clone == null ? handler : (ICapabilityResolver) clone);
     }
 
 

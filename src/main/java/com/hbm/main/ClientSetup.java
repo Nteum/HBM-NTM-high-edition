@@ -5,10 +5,8 @@ import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.entity.ModEntityType;
 import com.hbm.fluid.ModFluids;
 import com.hbm.gui.ModMenuType;
-import com.hbm.gui.screen.AssemblerGui;
-import com.hbm.gui.screen.BatteryGui;
-import com.hbm.gui.screen.DifurnaceGui;
-import com.hbm.gui.screen.PressGui;
+import com.hbm.gui.screen.*;
+import com.hbm.gui.screen.RenderUtils;
 import com.hbm.model.Models;
 import com.hbm.model.entity.TestEntityModel;
 import com.hbm.particle.ModParticleTypes;
@@ -52,6 +50,8 @@ public class ClientSetup {
             MenuScreens.register(ModMenuType.PRESS_MENU.get(), PressGui::new);
             MenuScreens.register(ModMenuType.BATTERY_MENU.get(), BatteryGui::new);
             MenuScreens.register(ModMenuType.ASSEMBLER_MENU.get(), AssemblerGui::new);
+            MenuScreens.register(ModMenuType.CHEMPLANT_MENU.get(), ChemplantGui::new);
+            MenuScreens.register(ModMenuType.BARREL_MENU.get(), BarrelGui::new);
             //方块实体渲染
             BlockEntityRenderers.register(ModBlockEntityType.PRESS_ENTITY.get(), PressRenderer::new);
             BlockEntityRenderers.register(ModBlockEntityType.ASSEMBLER_ENTITY.get(), AssemblerRenderer::new);
@@ -59,6 +59,7 @@ public class ClientSetup {
             BlockEntityRenderers.register(ModBlockEntityType.NUKE_BOMB_FAT_ENTITY.get(), NukeFatRender::new);
             BlockEntityRenderers.register(ModBlockEntityType.NUKE_BOMB_BOY_ENTITY.get(), NukeBoyRender::new);
             BlockEntityRenderers.register(ModBlockEntityType.NUKE_BOMB_CUSTOM_ENTITY.get(), NukeCustomRender::new);
+            BlockEntityRenderers.register(ModBlockEntityType.CHEMPLANT_ENTITY.get(), ChemplantRenderer::new);
             //实体渲染
             EntityRenderers.register(ModEntityType.TEST_ENTITY.get(), TestEntityRenderer::new);
             EntityRenderers.register(ModEntityType.ENTITY_GRENADE_GENETIC.get(), ThrownItemRenderer::new);
@@ -79,6 +80,7 @@ public class ClientSetup {
             //尝试加载贴图
             ResourceLocation overlay1 = new ResourceLocation(HBM.MODID,"fluid/irradiated_water_overlay");
 //            Minecraft.getInstance().textureManager.register(overlay1,new SimpleTexture(overlay1));
+            RenderUtils.init();
         });
     }
 
@@ -99,6 +101,9 @@ public class ClientSetup {
         event.register(Models.CRUCIBLE);
         event.register(Models.FAT_MAN);
         event.register(Models.BLACK_HOLE);
+        event.register(Models.CHEMPLANT_BODY);
+        event.register(Models.CHEMPLANT_PISTON);
+        event.register(Models.CHEMPLANT_SPINNER);
     }
 
     @SubscribeEvent

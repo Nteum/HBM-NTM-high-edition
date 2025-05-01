@@ -4,16 +4,20 @@ import com.hbm.HBMLang;
 import com.hbm.api.energy.fe.HBMEnergyStorage;
 import com.hbm.api.energy.fe.ItemStackEnergyHandler;
 import com.hbm.block.machine.BlockBattery;
+import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.capabilities.ItemCapabilityWrapper;
 import com.hbm.item.BlockItemHBM;
+import com.hbm.lib.ItemDataUtils;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.energy.IEnergyStorage;
 import org.jetbrains.annotations.Nullable;
@@ -63,7 +67,12 @@ public class BatteryBlockItem extends BlockItemHBM {
     }
 
     @Override
-    public InteractionResult useOn(UseOnContext pContext) {
-        return super.useOn(pContext);
+    public InteractionResult place(BlockPlaceContext pContext) {
+        ItemStack itemInHand = pContext.getItemInHand();
+        CompoundTag dataMapIfPresent = ItemDataUtils.getDataMapIfPresent(itemInHand);
+        if (dataMapIfPresent != null){
+            setBlockEntityData(itemInHand, ModBlockEntityType.BATTERY_ENTITY.get(), dataMapIfPresent);
+        }
+        return super.place(pContext);
     }
 }

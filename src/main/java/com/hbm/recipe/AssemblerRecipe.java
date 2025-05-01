@@ -28,7 +28,7 @@ import java.util.List;
 public class AssemblerRecipe implements Recipe<Container> {
     private final ResourceLocation id;
     final int processingTime;   //加工时间
-    final ItemStack result;
+    public final ItemStack result;
     final NonNullList<CountableIngredient> ingredients;
     static final int MAX_SIZE = 12;
     public AssemblerRecipe(ResourceLocation id, ItemStack result, NonNullList<CountableIngredient> ingredients){

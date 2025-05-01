@@ -12,6 +12,14 @@ public enum HBMLang {
     ITEMGROUP_WEAPON("itemGroup","hbm_weapon"),
     // handoverTexts
     ENERGY("item","battery.tooltip"),
+    FLUID_CAPACITY("item","fluid_capacity"),
+    // blockentity name
+    ELECTRIC_FURNACE("container","electric_furnace"),
+    BOILER("container","boiler"),
+    ELECTRIC_BOILER("container","electric_boiler"),
+    NUCLEAR_BOILER("container","nuclear_boiler"),
+    CHEMPLANT("container", "chemplant"),
+    BARREL("container", "barrel")
     ;
     private final String key;
     HBMLang(String type, String path){

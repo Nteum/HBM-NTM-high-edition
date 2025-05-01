@@ -7,10 +7,10 @@ import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class BaseMachineMenu extends RecipeBookMenu<Container> {
-    protected final Container container;
-    protected final ContainerData containerData;
-    protected int slotNum = 0;
+public abstract class BaseMachineMenu extends AbstractContainerMenu {
+    public Container container;
+    public ContainerData containerData;
+    public int slotNum = 0;
 
     protected BaseMachineMenu(@Nullable MenuType<?> pMenuType, int pContainerId,Container inContainer, ContainerData containerData1) {
         super(pMenuType, pContainerId);

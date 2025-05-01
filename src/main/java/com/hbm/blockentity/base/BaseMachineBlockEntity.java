@@ -1,8 +1,11 @@
 package com.hbm.blockentity.base;
 
+import com.hbm.HBM;
 import com.hbm.HBMKey;
 import com.hbm.capabilities.CapabilityCache;
 import com.hbm.lib.ItemDataUtils;
+import com.hbm.network.ModMessages;
+import com.hbm.network.packet.toclient.UpdateTilePacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
@@ -13,11 +16,14 @@ import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class BaseMachineBlockEntity extends BaseContainerBlockEntity implements WorldlyContainer {
@@ -58,11 +64,17 @@ public abstract class BaseMachineBlockEntity extends BaseContainerBlockEntity im
             ContainerHelper.loadAllItems(pTag, this.items);
         }
     }
-    //方块被载入时同步数据用
-    @Override
-    public CompoundTag getUpdateTag() {
-        return super.getUpdateTag();
+    // 客户端更新
+    protected void onUpdateClient(){}
+    // 服务器更新
+    protected void onUpdateServer(){}
+    public static void clientTicker(Level level, BlockPos pPos, BlockState pState, BlockEntity pBlockEntity) {
+        ((BaseMachineBlockEntity)pBlockEntity).onUpdateClient();
     }
+    public static void serverTicker(Level level, BlockPos pPos, BlockState pState, BlockEntity pBlockEntity) {
+        ((BaseMachineBlockEntity)pBlockEntity).onUpdateServer();
+    }
+
     //=======================Container==========================
     @Override
     public int getContainerSize() {
@@ -109,6 +121,42 @@ public abstract class BaseMachineBlockEntity extends BaseContainerBlockEntity im
     @Override
     public boolean canPlaceItem(int pIndex, ItemStack pStack) {
         return true;
+    }
+    //======================update=======================
+    @NotNull
+    public CompoundTag getReducedUpdateTag() {
+        //Add the base update tag information
+        return super.getUpdateTag();
+    }
+    public void handleUpdatePacket(@NotNull CompoundTag tag) {
+        handleUpdateTag(tag);
+    }
+    @Override
+    public void handleUpdateTag(@NotNull CompoundTag tag) {
+        //We don't want to do a full read from NBT so simply call the super's read method to let Forge do whatever
+        // it wants, but don't treat this as if it was the full saved NBT data as not everything has to be synced to the client
+        super.load(tag);
+    }
+    //方块被载入时同步数据用
+    @Override
+    public CompoundTag getUpdateTag() {
+        return getReducedUpdateTag();
+    }
+    public void sendUpdatePacket() {
+        sendUpdatePacket(this);
+    }
+
+    public void sendUpdatePacket(BlockEntity tracking) {
+        if (level.isClientSide()) {
+            HBM.LOGGER.warn("Update packet call requested from client side", new IllegalStateException());
+        } else if (isRemoved()) {
+            HBM.LOGGER.warn("Update packet call requested for removed tile", new IllegalStateException());
+        } else {
+            //Note: We use our own update packet/channel to avoid chunk trashing and minecraft attempting to rerender
+            // the entire chunk when most often we are just updating a TileEntityRenderer, so the chunk itself
+            // does not need to and should not be redrawn
+            ModMessages.sendToAllTracking(new UpdateTilePacket(this), tracking);
+        }
     }
     //==========================Capabilities==================================
     @Override
