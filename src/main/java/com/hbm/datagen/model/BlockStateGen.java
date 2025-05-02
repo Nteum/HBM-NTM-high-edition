@@ -206,5 +206,4 @@ public class BlockStateGen extends BlockStateProvider {
     private ResourceLocation key(Block block) {
         return ForgeRegistries.BLOCKS.getKey(block);
     }
-    private ResourceLocation hbm(String key){ return new ResourceLocation(HBM.MODID,key);}
 }

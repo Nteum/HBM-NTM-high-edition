@@ -12,9 +12,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RenderUtils {
-    private static final ResourceLocation WATER = HBM.rl("textures/fluid/water_overlay.png");
+    public static final ResourceLocation WATER = HBM.rl("textures/fluid/water_overlay.png");
     private static final ResourceLocation WATER_OPAQUE = HBM.rl("textures/gui/fluids/water_opaque_base.png");
-    private static final Map<Fluid, Integer> fluidColor = new HashMap<>();
+    public static final Map<Fluid, Integer> fluidColor = new HashMap<>();
     public static void init() {
         fluidColor.put(Fluids.EMPTY, 0xffffff);
         fluidColor.put(Fluids.WATER, MapColor.WATER.col);

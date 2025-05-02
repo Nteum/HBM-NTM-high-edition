@@ -29,7 +29,9 @@ public class BarrelMenu extends BaseMachineMenu{
     public int getMode(){
         return this.containerData.get(0);
     }
-    public void changeMode(){
-        this.containerData.set(0,(getMode()+1)%4);
+    public int changeMode(){
+        int newMode = (getMode()+1)%4;
+        this.containerData.set(0,newMode);
+        return newMode;
     }
 }

@@ -6,5 +6,5 @@
     "texture0": "hbmxx:block/pipes/cable_neo",
     "particle": "hbmxx:block/pipes/cable_neo"
   },
-  "ambientocclusion": false
+  "ambientocclusion": true
 }

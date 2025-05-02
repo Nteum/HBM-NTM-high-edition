@@ -1,4 +1,4 @@
-package com.hbm.block.network;
+package com.hbm.block.logistic;
 
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.core.BlockPos;
