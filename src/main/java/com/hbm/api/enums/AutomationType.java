@@ -1,4 +1,4 @@
-package com.hbm.api;
+package com.hbm.api.enums;
 //ref:mek
 public enum AutomationType {
     /**

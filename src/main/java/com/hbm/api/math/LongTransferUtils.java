@@ -1,6 +1,6 @@
 package com.hbm.api.math;
 
-import com.hbm.api.Action;
+import com.hbm.api.enums.Action;
 import com.hbm.api.annotations.NothingNullByDefault;
 import it.unimi.dsi.fastutil.ints.Int2ObjectFunction;
 

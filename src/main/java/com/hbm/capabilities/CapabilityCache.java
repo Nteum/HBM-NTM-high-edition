@@ -2,7 +2,7 @@ package com.hbm.capabilities;
 
 import com.hbm.HBM;
 import com.hbm.HBMKey;
-import com.hbm.api.multiblock.MultiblockData;
+import com.hbm.api.multiblock.HBMMultiData;
 import com.hbm.blockentity.base.DummibleBlockEntity;
 import com.hbm.capabilities.resolver.ICapabilityResolver;
 import it.unimi.dsi.fastutil.objects.ReferenceOpenHashSet;
@@ -130,7 +130,7 @@ public class CapabilityCache implements INBTSerializable<CompoundTag> {
         }
     }
 
-    public void allocDummyBlockCaps(Level level, MultiblockData multiblockData){
+    public void allocDummyBlockCaps(Level level, HBMMultiData multiblockData){
         for (Map.Entry<Capability<?>, List<Tuple<BlockPos, Direction>>> entry : multiblockData.afterTrans.entrySet()) {
             Capability<?> capability = entry.getKey();
             for (Tuple<BlockPos, Direction> tuple : entry.getValue()) {

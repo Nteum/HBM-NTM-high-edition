@@ -1,13 +1,15 @@
 package com.hbm.api.fluid;
 
+import com.hbm.HBMKey;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import org.jetbrains.annotations.NotNull;
 //基础流体系统，里面包含多个FluidTank
-public class BaseFluidHandler implements IFluidHandler {
+public class BaseFluidHandler implements IFluidHandler, INBTSerializable<CompoundTag> {
     FluidTank[] tanks;
     public BaseFluidHandler(int tankNum, int capacity){
         tanks = new FluidTank[tankNum];
@@ -66,5 +68,24 @@ public class BaseFluidHandler implements IFluidHandler {
     }
     public void setTankByNbt(int tank, CompoundTag nbt){
         this.tanks[tank].readFromNBT(nbt);
+    }
+
+    @Override
+    public CompoundTag serializeNBT() {
+        CompoundTag compoundTag = new CompoundTag();
+        int length = tanks.length;
+        compoundTag.putInt(HBMKey.NUM, length);
+        for (int i = 0; i < length; i++) {
+            compoundTag.put(String.valueOf(i),tanks[i].writeToNBT(new CompoundTag()));
+        }
+        return compoundTag;
+    }
+
+    @Override
+    public void deserializeNBT(CompoundTag nbt) {
+        int length = nbt.getInt(HBMKey.NUM);
+        for (int i = 0; i < length; i++) {
+            this.tanks[i].readFromNBT(nbt.getCompound(String.valueOf(i)));
+        }
     }
 }

@@ -16,7 +16,8 @@ public class ModCommands {
         CommandDispatcher<CommandSourceStack> dispatcher = event.getDispatcher();
         CommandBuildContext buildContext = event.getBuildContext();
 
-        TestCommand.register(dispatcher);
+//        TestCommand.register(dispatcher);
+        dispatcher.register(TestCommand.register());
         RadiationCommand.register(dispatcher);
     }
 }

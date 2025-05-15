@@ -10,7 +10,7 @@ import net.minecraftforge.common.capabilities.Capability;
 
 import java.util.*;
 
-public class MultiblockData {
+public class HBMMultiData {
     //转换之前相对中心方块的位置和方向
     public Map<Capability<?>,List<Tuple<Vec3i, Direction>>> beforeTrans = new IdentityHashMap<>();
     //转换之后在世界中绝对的位置和方向
@@ -18,7 +18,7 @@ public class MultiblockData {
     public void put(Capability<?> capability, List<Tuple<Vec3i, Direction>> posDir){
         beforeTrans.put(capability,posDir);
     }
-    public MultiblockData put(Capability<?> capability, Object ...objs){
+    public HBMMultiData put(Capability<?> capability, Object ...objs){
         int[] relativePos = new int[4];
         List<Tuple<Vec3i, Direction>> list = new ArrayList<>();
         for (Object obj : objs) {

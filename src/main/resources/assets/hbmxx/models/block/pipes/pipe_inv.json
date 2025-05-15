@@ -1,0 +1,18 @@
+{
+  "parent": "minecraft:block/block",
+  "loader": "forge:obj",
+  "flip_v": true,
+  "model": "hbmxx:models/block/pipes/pipe_inv.obj",
+  "textures": {
+    "texture0": "hbmxx:block/pipes/pipe_colored_overlay",
+    "particle": "hbmxx:block/pipes/pipe_colored_overlay"
+  },
+  "ambientocclusion": true,
+  "display": {
+    "gui": {
+      "rotation": [ 30, 225, 0 ],
+      "translation": [ 0, 0, 0],
+      "scale":[ 1,1,1 ]
+    }
+  }
+}

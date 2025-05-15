@@ -1,13 +1,12 @@
 package com.hbm.capabilities.resolver.manager;
 
-
 import com.hbm.capabilities.resolver.ICapabilityResolver;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.Direction;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-//ref:mek
+
 @MethodsReturnNonnullByDefault
 public interface ICapabilityHandlerManager<CONTAINER> extends ICapabilityResolver {
 

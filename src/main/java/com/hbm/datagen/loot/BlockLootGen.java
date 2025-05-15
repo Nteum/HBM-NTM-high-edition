@@ -97,6 +97,7 @@ public class BlockLootGen extends BlockLootSubProvider {
         this.dropSelf(HBMMachine.STEEL_BARREL.get());
         this.dropSelf(HBMMachine.TCALLOY_BARREL.get());
         this.dropSelf(HBMMachine.ANTIMATTER_BARREL.get());
+        this.dropSelf(HBMMachine.FLUID_PIPE.get());
     }
     @Override
     protected Iterable<Block> getKnownBlocks() {

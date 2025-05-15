@@ -2,6 +2,7 @@ package com.hbm.network.packet.toclient;
 
 import com.hbm.HBM;
 import com.hbm.blockentity.base.BaseMachineBlockEntity;
+import com.hbm.blockentity.base.UpdateableBlockEntity;
 import com.hbm.network.IHBMPacket;
 import com.hbm.utils.WorldUtils;
 import net.minecraft.client.Minecraft;
@@ -22,6 +23,10 @@ public class UpdateTilePacket implements IHBMPacket {
     UpdateTilePacket(BlockPos blockPos, CompoundTag tag){
         this.updateTag = tag;
         this.pos = blockPos;
+    }
+
+    public UpdateTilePacket(UpdateableBlockEntity blockEntity) {
+        this(blockEntity.getBlockPos(), blockEntity.getReducedUpdateTag());
     }
 
     @Override

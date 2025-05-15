@@ -9,9 +9,25 @@ public class HBMKey {
     public static final String ENERGY = "energy";
     public static final String FLUIDS = "fluids";
     public static final String STORED = "stored";
+    public static final String NUM = "nums";
     //cable
     public static final String FORBID_DIR = "forbidDir";
     // machine state
     public static final String RUNNING = "running";
     public static final String RESULT_ITEM = "resultItem";
+    //Server to Client specific sync NBT tags
+    public static final String CURRENT_ACCEPTORS = "acceptors";
+    public static final String CURRENT_CONNECTIONS = "connections";
+    public static final String NETWORK = "network";
+    public static final String VALVE = "valve";
+    //generic
+    public static final String SIDE = "side";
+    public static final String REDSTONE = "redstone";
+    public static final String CONNECTION = "connection";
+    public static final String FLUID_STORED = "fluid";
+    public static final String POSITION = "position";
+    public static final String X = "x";
+    public static final String Y = "y";
+    public static final String Z = "z";
+    public static final String DIMENSION = "dimension";
 }

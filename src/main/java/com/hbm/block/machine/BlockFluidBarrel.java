@@ -62,6 +62,7 @@ public class BlockFluidBarrel extends BaseMachineBlock {
         public boolean highCorroResist = false;
         public boolean antimatter = false;
         public boolean leaky = false;
+        public boolean isCreative = false;
         public static BarrelProperties of(){return new BarrelProperties();}
         public BarrelProperties capacity(int cap){
             this.capacity = cap;

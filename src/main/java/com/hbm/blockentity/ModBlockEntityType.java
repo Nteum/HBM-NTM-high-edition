@@ -37,6 +37,8 @@ public class ModBlockEntityType {
             REGISTER.register("dummible_block_entity",()-> BlockEntityType.Builder.of(DummibleBlockEntity::new, ModBlocks.DUMMIBLE.get()).build(null));
     public static final RegistryObject<BlockEntityType<CableEntity>> CABLE_ENTITY =
             REGISTER.register("cable_entity",()-> BlockEntityType.Builder.of(CableEntity::new, ModBlocks.RED_CABLE.get()).build(null));
+    public static final RegistryObject<BlockEntityType<PipeEntity>> PIPE_ENTITY =
+            REGISTER.register("pipe_entity",()-> BlockEntityType.Builder.of(PipeEntity::new, HBMMachine.FLUID_PIPE.get()).build(null));
     public static final RegistryObject<BlockEntityType<BatteryEntity>> BATTERY_ENTITY =
             REGISTER.register("battery_entity",()-> BlockEntityType.Builder.of(BatteryEntity::new, ModBlocks.machine_battery.get(),ModBlocks.machine_lithium_battery.get(),ModBlocks.machine_dineutronium_battery.get(),ModBlocks.machine_schrabidium_battery.get()).build(null));
     public static final RegistryObject<BlockEntityType<LaunchPadEntity>> LAUNCHPAD_ENTITY =

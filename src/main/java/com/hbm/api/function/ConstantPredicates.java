@@ -1,6 +1,6 @@
 package com.hbm.api.function;
 
-import com.hbm.api.AutomationType;
+import com.hbm.api.enums.AutomationType;
 import net.minecraftforge.common.util.TriPredicate;
 import org.jetbrains.annotations.NotNull;
 

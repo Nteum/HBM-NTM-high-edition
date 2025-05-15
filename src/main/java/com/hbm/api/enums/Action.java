@@ -1,4 +1,4 @@
-package com.hbm.api;
+package com.hbm.api.enums;
 
 import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
 //ref:mek

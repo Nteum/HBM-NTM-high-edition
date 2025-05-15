@@ -4,6 +4,7 @@ import com.hbm.gui.screen.RenderUtils;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.narration.NarratedElementType;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
+import net.minecraft.client.gui.screens.inventory.AbstractFurnaceScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.material.Fluid;
@@ -24,15 +25,8 @@ public class FluidBar extends ProgressBar{
     public FluidBar(int pX, int pY, int pWidth, int pHeight, int pU, int pV,int pTextWidth,int pTextHeight, ResourceLocation texture, Component pMessage, boolean isVertical){
         super(pX,pY,pWidth,pHeight,pU,pV,pTextWidth,pTextHeight,texture,pMessage,isVertical);
         if (Objects.equals(pMessage, Component.empty())){
-//            this.setMessage(Component.translatable(fluid.getFluidType().getDescriptionId()+" : "+fluidAmount+" mB"));
             this.setMessage(Component.translatable("%1$s : %2$s mB",fluid.getFluidType().getDescription(),fluidAmount));
         }
-    }
-
-
-    @Override
-    protected void updateWidgetNarration(NarrationElementOutput pNarrationElementOutput) {
-//        pNarrationElementOutput.add(NarratedElementType.HINT, Component.translatable("%1$s : %2$s mB",fluid.getFluidType().getDescription(),fluidAmount));
     }
 
     public void updateFluidTank(IFluidHandler tank, int num){
@@ -42,6 +36,12 @@ public class FluidBar extends ProgressBar{
         fluidAmount = fluidStack.getAmount();
         this.progress = (double) fluidAmount / capacity;
         this.packedFGColor = RenderUtils.fluidColor.get(fluid);
-//        this.setTooltip(Tooltip.create(Component.translatable(fluid.getFluidType().getDescription()+" : "+fluidAmount+" mB")));
+//        this.createNarrationMessage().append(Component.translatable("%1$s : %2$s mB",fluid.getFluidType().getDescription(),fluidAmount));
+//        this.setTooltip(Tooltip.create(Component.translatable("%1$s : %2$s mB",fluid.getFluidType().getDescription(),fluidAmount)));
+    }
+
+    @Override
+    protected void updateWidgetNarration(NarrationElementOutput pNarrationElementOutput) {
+        pNarrationElementOutput.add(NarratedElementType.TITLE, this.getMessage());
     }
 }

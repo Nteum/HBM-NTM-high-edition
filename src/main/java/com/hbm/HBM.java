@@ -55,13 +55,8 @@ import java.util.concurrent.CompletableFuture;
 public class HBM {
     public static final String MODID = "hbmxx";
     public static final Logger LOGGER = LogUtils.getLogger();
-//    // Creates a creative tab with the id "examplemod:example_tab" for the example item, that is placed after the combat tab
-//    public static final RegistryObject<CreativeModeTab> EXAMPLE_TAB = CREATIVE_MODE_TABS.register("example_tab", () -> CreativeModeTab.builder()
-//            .withTabsBefore(CreativeModeTabs.COMBAT)
-//            .icon(() -> EXAMPLE_ITEM.get().getDefaultInstance())
-//            .displayItems((parameters, output) -> {
-//            output.accept(EXAMPLE_ITEM.get()); // Add the example item to the tab. For your own tabs, this method is preferred over the event
-//            }).build());
+    //debug模式
+    public static boolean debug = false;
 
     public HBM() {
         //模组事件总线

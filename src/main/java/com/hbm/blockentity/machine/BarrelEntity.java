@@ -7,6 +7,7 @@ import com.hbm.api.fluid.SidedFluidWrapper;
 import com.hbm.block.machine.BlockFluidBarrel;
 import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.blockentity.base.BaseMachineBlockEntity;
+import com.hbm.capabilities.fluid.mek.FluidTankFluidTank;
 import com.hbm.gui.menu.BarrelMenu;
 import com.hbm.gui.menu.IPacketUpdate;
 import net.minecraft.client.Minecraft;
@@ -38,6 +39,7 @@ import org.jetbrains.annotations.Nullable;
 public class BarrelEntity extends BaseMachineBlockEntity implements IPacketUpdate {
     BlockFluidBarrel.BarrelProperties properties;
     BarrelMode mode = BarrelMode.FORBID;
+    public FluidTankFluidTank fluidTank;
     private ContainerData containerData = new ContainerData() {
         @Override
         public int get(int pIndex) {
@@ -166,4 +168,16 @@ public class BarrelEntity extends BaseMachineBlockEntity implements IPacketUpdat
         return new BarrelMenu(pContainerId,pInventory,this,this.containerData);
     }
     public static enum BarrelMode{IN,INOUT,OUT,FORBID}
+    public int getCapacity(){
+        return properties.capacity;
+    }
+    public boolean isCreative(){
+        return properties.isCreative;
+    }
+    public int getRate(){
+        return Integer.MAX_VALUE;
+    }
+    public boolean getActive(){
+        return true;
+    }
 }

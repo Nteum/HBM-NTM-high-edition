@@ -17,6 +17,7 @@
   "block.hbmxx.machine_nuclear_boiler": "Nuclear Oil Heater",
   "block.hbmxx.machine_schrabidium_battery": "Schrabidium Energy Storage Block",
   "block.hbmxx.uranium_ore": "Uranium Ore",
+  "container.hbmxx.barrel": "",
   "hbmxx.container.crucible": "Crucible",
   "hbmxx.container.difurnace": "Blast Furnace",
   "item.hbmxx.battery.tooltip": "Energy: %1$s",

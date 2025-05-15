@@ -39,9 +39,9 @@ public class BarrelGui extends AbstractContainerScreen<BarrelMenu> {
         modBtn = new MultiStateButton(this.leftPos+151,this.topPos+34,18,18,176,0,4,menu.getMode(),TEXTURE,(button)->{
             ((MultiStateButton)button).stateNow = menu.changeMode();
         });
-        fluidBar = new FluidBar(leftPos+71,topPos + 17, 34, 52,0,0,16,16,RenderUtils.WATER,Component.empty(),true);
+//        fluidBar = new FluidBar(leftPos+71,topPos + 17, 34, 52,0,0,16,16,RenderUtils.WATER,Component.empty(),true);
         this.addRenderableWidget(modBtn);
-        this.addRenderableWidget(fluidBar);
+//        this.addRenderableWidget(fluidBar);
 
     }
 
@@ -50,18 +50,18 @@ public class BarrelGui extends AbstractContainerScreen<BarrelMenu> {
         pGuiGraphics.blit(TEXTURE,leftPos,topPos,0,0,imageWidth,imageHeight);
         if ((menu).container instanceof BarrelEntity barrelEntity){
             IFluidHandler fluidTank = barrelEntity.getFluidTank();
-            fluidBar.updateFluidTank(fluidTank, 0);
-//            if (fluidTank != null){
-//                FluidStack fluidInTank = fluidTank.getFluidInTank(0);
-//                int tankCapacity = fluidTank.getTankCapacity(0);
-//                RenderUtils.fluidTank(leftPos+71,topPos + 69, 34, 52, (float) fluidInTank.getAmount() / tankCapacity,pGuiGraphics, fluidInTank.getFluid());
-//                //显示悬浮字体
-//                if (pMouseX >= leftPos+71&&pMouseX<=leftPos+105&&pMouseY>=topPos+17&&pMouseY<=topPos+69){
-//                    List<Component> tooltip = new ArrayList<>();
-//                    tooltip.add(Component.translatable(fluidInTank.getFluid().getFluidType().getDescription()+" : "+fluidInTank.getAmount()+" mB"));
-//                    pGuiGraphics.renderTooltip(this.font,tooltip, Optional.empty(),pMouseX,pMouseY);
-//                }
-//            }
+//            fluidBar.updateFluidTank(fluidTank, 0);
+            if (fluidTank != null){
+                FluidStack fluidInTank = fluidTank.getFluidInTank(0);
+                int tankCapacity = fluidTank.getTankCapacity(0);
+                RenderUtils.fluidTank(leftPos+71,topPos + 69, 34, 52, (float) fluidInTank.getAmount() / tankCapacity,pGuiGraphics, fluidInTank.getFluid());
+                //显示悬浮字体
+                if (pMouseX >= leftPos+71&&pMouseX<=leftPos+105&&pMouseY>=topPos+17&&pMouseY<=topPos+69){
+                    List<Component> tooltip = new ArrayList<>();
+                    tooltip.add(Component.translatable(fluidInTank.getFluid().getFluidType().getDescription()+" : "+fluidInTank.getAmount()+" mB"));
+                    pGuiGraphics.renderTooltip(this.font,tooltip, Optional.empty(),pMouseX,pMouseY);
+                }
+            }
         }
 
     }
