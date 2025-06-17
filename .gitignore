@@ -11,3 +11,4 @@ gen
 /run-data/
 /.gitignore
 /run/
+/build/
