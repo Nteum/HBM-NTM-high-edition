@@ -40,7 +40,7 @@ public class ExplosionNukeRayParallelized implements IExplosionRay {
 	private final int bitsetSize;
 	private final int sectionsCount;
 
-	protected final Level level;
+	private final ServerLevel level;
 	private final double explosionX, explosionY, explosionZ;
 	private final BlockPos origin;
 	private final int strength;
@@ -63,7 +63,7 @@ public class ExplosionNukeRayParallelized implements IExplosionRay {
 	private volatile boolean consolidationFinished = false;
 	private volatile boolean destroyFinished = false;
 
-	public ExplosionNukeRayParallelized(Level level, BlockPos origin, int strength, int speed, int radius) {
+	public ExplosionNukeRayParallelized(ServerLevel level, BlockPos origin, int strength, int speed, int radius) {
 		this.level = level;
 		this.explosionX = origin.getX();
 		this.explosionY = origin.getY();
@@ -230,16 +230,11 @@ public class ExplosionNukeRayParallelized implements IExplosionRay {
 				if (!section.getBlockState(xLocal, yLocal, zLocal).isAir()) {
 					BlockPos pos = new BlockPos((cp.x << 4) | xLocal, yGlobal, (cp.z << 4) | zLocal);
 
-					if (level.getBlockEntity(pos) != null) {
-						level.removeBlockEntity(pos);
-					}
+					if (level.getBlockEntity(pos) != null) level.removeBlockEntity(pos);
 					section.setBlockState(xLocal, yLocal, zLocal, Blocks.AIR.defaultBlockState(), false);
 					chunkModified = true;
-
-					if (level instanceof ServerLevel serverLevel) {
-						serverLevel.getChunkSource().blockChanged(pos);
-						serverLevel.getLightEngine().checkBlock(pos);
-					}
+					level.getChunkSource().blockChanged(pos);
+					level.getLightEngine().checkBlock(pos);
 				}
 				bs.clear(bitIndex);
 			}
@@ -426,94 +421,98 @@ public class ExplosionNukeRayParallelized implements IExplosionRay {
 		}
 
 		void trace() {
-			if (!initialised) init();
-			if (energy <= 0) {
-				latch.countDown();
-				return;
-			}
-
-			while (energy > 0) {
-				if (y < minY || y >= (minY + worldHeight) || Thread.currentThread().isInterrupted()) break;
-				if (currentRayPosition >= radius - PROCESSING_EPSILON) break;
-
-				int cx = SectionPos.blockToSectionCoord(x);
-				int cz = SectionPos.blockToSectionCoord(z);
-				int sectionY = level.getSectionIndex(y);
-				if (cx != lastCX || cz != lastCZ || sectionY != lastSectionY) {
-					currentSubChunkKey = new SubChunkKey(cx, cz, sectionY);
-					lastCX = cx;
-					lastCZ = cz;
-					lastSectionY = sectionY;
-				}
-
-				SubChunkSnapshot snap = snapshots.get(currentSubChunkKey);
-				if (snap == null) {
-					final boolean[] amFirst = {false};
-					ConcurrentLinkedQueue<RayTask> waiters = waitingRoom.computeIfAbsent(currentSubChunkKey, k -> {
-						amFirst[0] = true;
-						return new ConcurrentLinkedQueue<>();
-					});
-					if (amFirst[0]) highPriorityReactiveQueue.add(currentSubChunkKey);
-					waiters.add(this);
+			try {
+				if (!initialised) init();
+				if (energy <= 0) {
+					latch.countDown();
 					return;
 				}
-				double t_exit_voxel = Math.min(tMaxX, Math.min(tMaxY, tMaxZ));
-				double segmentLenInVoxel = t_exit_voxel - this.currentRayPosition;
-				double segmentLenForProcessing;
-				boolean stopAfterThisSegment = false;
+				while (energy > 0) {
+					if (y < minY || y >= (minY + worldHeight) || Thread.currentThread().isInterrupted()) break;
+					if (currentRayPosition >= radius - PROCESSING_EPSILON) break;
 
-				if (this.currentRayPosition + segmentLenInVoxel > radius - PROCESSING_EPSILON) {
-					segmentLenForProcessing = Math.max(0.0, radius - this.currentRayPosition);
-					stopAfterThisSegment = true;
-				} else segmentLenForProcessing = segmentLenInVoxel;
+					int cx = SectionPos.blockToSectionCoord(x);
+					int cz = SectionPos.blockToSectionCoord(z);
+					int sectionY = level.getSectionIndex(y);
+					if (cx != lastCX || cz != lastCZ || sectionY != lastSectionY) {
+						currentSubChunkKey = new SubChunkKey(cx, cz, sectionY);
+						lastCX = cx;
+						lastCZ = cz;
+						lastSectionY = sectionY;
+					}
 
-				if (snap != SubChunkSnapshot.EMPTY && segmentLenForProcessing > PROCESSING_EPSILON) {
-					Block block = snap.getBlock(SectionPos.sectionRelative(x), SectionPos.sectionRelative(y), SectionPos.sectionRelative(z));
-					if (block != Blocks.AIR) {
-						float resistance = getNukeResistance(block);
-						if (resistance >= NUKE_RESISTANCE_CUTOFF) {
-							energy = 0;
-						} else {
-							double energyLossFactor = getEnergyLossFactor(resistance);
-							float damageDealt = (float) (energyLossFactor * segmentLenForProcessing);
-							energy -= damageDealt;
-							if (damageDealt > 0) {
-								int yNorm = y - minY;
-								int xLocal = SectionPos.sectionRelative(x);
-								int zLocal = SectionPos.sectionRelative(z);
-								int bitIndex = (yNorm << 8) | (zLocal << 4) | xLocal;
+					SubChunkSnapshot snap = snapshots.get(currentSubChunkKey);
+					if (snap == null) {
+						final boolean[] amFirst = {false};
+						ConcurrentLinkedQueue<RayTask> waiters = waitingRoom.computeIfAbsent(currentSubChunkKey, k -> {
+							amFirst[0] = true;
+							return new ConcurrentLinkedQueue<>();
+						});
+						if (amFirst[0]) highPriorityReactiveQueue.add(currentSubChunkKey);
+						waiters.add(this);
+						return;
+					}
+					double t_exit_voxel = Math.min(tMaxX, Math.min(tMaxY, tMaxZ));
+					double segmentLenInVoxel = t_exit_voxel - this.currentRayPosition;
+					double segmentLenForProcessing;
+					boolean stopAfterThisSegment = false;
 
-								ChunkPos chunkPos = currentSubChunkKey.getPos();
-								if (BombConfig.explosionAlgorithm == 2) {
-									damageMap.computeIfAbsent(chunkPos, cp -> new ConcurrentHashMap<>(256)).computeIfAbsent(bitIndex, k -> new DoubleAdder()).add(damageDealt);
-								} else if (energy > 0) {
-									destructionMap.computeIfAbsent(chunkPos, posKey -> new ConcurrentBitSet(bitsetSize)).set(bitIndex);
+					if (this.currentRayPosition + segmentLenInVoxel > radius - PROCESSING_EPSILON) {
+						segmentLenForProcessing = Math.max(0.0, radius - this.currentRayPosition);
+						stopAfterThisSegment = true;
+					} else segmentLenForProcessing = segmentLenInVoxel;
+
+					if (snap != SubChunkSnapshot.EMPTY && segmentLenForProcessing > PROCESSING_EPSILON) {
+						Block block = snap.getBlock(SectionPos.sectionRelative(x), SectionPos.sectionRelative(y), SectionPos.sectionRelative(z));
+						if (block != Blocks.AIR) {
+							float resistance = getNukeResistance(block);
+							if (resistance >= NUKE_RESISTANCE_CUTOFF) {
+								energy = 0;
+							} else {
+								double energyLossFactor = getEnergyLossFactor(resistance);
+								float damageDealt = (float) (energyLossFactor * segmentLenForProcessing);
+								energy -= damageDealt;
+								if (damageDealt > 0) {
+									int yNorm = y - minY;
+									int xLocal = SectionPos.sectionRelative(x);
+									int zLocal = SectionPos.sectionRelative(z);
+									int bitIndex = (yNorm << 8) | (zLocal << 4) | xLocal;
+
+									ChunkPos chunkPos = currentSubChunkKey.getPos();
+									if (BombConfig.explosionAlgorithm == 2) {
+										damageMap.computeIfAbsent(chunkPos, cp -> new ConcurrentHashMap<>(256)).computeIfAbsent(bitIndex, k -> new DoubleAdder()).add(damageDealt);
+									} else if (energy > 0) {
+										destructionMap.computeIfAbsent(chunkPos, posKey -> new ConcurrentBitSet(bitsetSize)).set(bitIndex);
+									}
 								}
 							}
 						}
 					}
-				}
-				this.currentRayPosition = t_exit_voxel;
-				if (energy <= 0 || stopAfterThisSegment) break;
-				if (tMaxX < tMaxY) {
-					if (tMaxX < tMaxZ) {
-						x += stepX;
-						tMaxX += tDeltaX;
+					this.currentRayPosition = t_exit_voxel;
+					if (energy <= 0 || stopAfterThisSegment) break;
+					if (tMaxX < tMaxY) {
+						if (tMaxX < tMaxZ) {
+							x += stepX;
+							tMaxX += tDeltaX;
+						} else {
+							z += stepZ;
+							tMaxZ += tDeltaZ;
+						}
 					} else {
-						z += stepZ;
-						tMaxZ += tDeltaZ;
-					}
-				} else {
-					if (tMaxY < tMaxZ) {
-						y += stepY;
-						tMaxY += tDeltaY;
-					} else {
-						z += stepZ;
-						tMaxZ += tDeltaZ;
+						if (tMaxY < tMaxZ) {
+							y += stepY;
+							tMaxY += tDeltaY;
+						} else {
+							z += stepZ;
+							tMaxZ += tDeltaZ;
+						}
 					}
 				}
+			} catch (Exception e){
+				LOGGER.error("Ray {} at distance {} finished exceptionally due to: ", dirIndex, currentRayPosition, e);
+			} finally {
+				latch.countDown();
 			}
-			latch.countDown();
 		}
 
 		private double getEnergyLossFactor(float resistance) {

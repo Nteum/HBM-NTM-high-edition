@@ -1,10 +1,11 @@
 package com.hbm.utils;
 
-import net.minecraft.world.level.Level;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.chunk.LevelChunkSection;
+import net.minecraft.world.level.chunk.ChunkStatus;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,20 +31,18 @@ public class SubChunkSnapshot {
 	/**
 	 * Creates a SubChunkSnapshot.
 	 *
-	 * @param level           The Level instance from which to retrieve the chunk.
+	 * @param level           The ServerLevel instance from which to retrieve the chunk.
 	 * @param key             The SubChunkKey identifying the section.
 	 * @param allowGeneration Whether to generate chunks. If false, attempting to retrieve a snapshot of a chunk that does not exist will return {@link SubChunkSnapshot#EMPTY}.
 	 * @return A SubChunkSnapshot containing the palette and block data for the section, or {@link SubChunkSnapshot#EMPTY} if the region contains only air.
 	 */
-	public static SubChunkSnapshot getSnapshot(Level level, SubChunkKey key, boolean allowGeneration) {
-		LevelChunk chunk = level.getChunkSource().getChunk(key.getChunkX(), key.getChunkZ(), false);
-		if (chunk == null) {
-			if (allowGeneration) {
-				chunk = level.getChunk(key.getChunkX(), key.getChunkZ());
-			} else return SubChunkSnapshot.EMPTY;
-		}
-
-		LevelChunkSection section = chunk.getSection(key.getSectionY());
+	public static SubChunkSnapshot getSnapshot(ServerLevel level, SubChunkKey key, boolean allowGeneration) {
+		ChunkStatus status = allowGeneration ? ChunkStatus.FULL : ChunkStatus.EMPTY;
+		LevelChunk chunk = (LevelChunk) level.getChunk(key.getChunkX(), key.getChunkZ(), status, allowGeneration);
+		if (chunk == null) return SubChunkSnapshot.EMPTY;
+		int lowestSectionIndex = level.getSectionIndex(level.getMinBuildHeight());
+		int arrayIndex = key.getSectionY() - lowestSectionIndex;
+		LevelChunkSection section = chunk.getSection(arrayIndex);
 		if (section.hasOnlyAir()) return SubChunkSnapshot.EMPTY;
 
 		short[] data = new short[16 * 16 * 16];
