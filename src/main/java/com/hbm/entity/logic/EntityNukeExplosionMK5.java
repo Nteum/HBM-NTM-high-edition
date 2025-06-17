@@ -3,7 +3,6 @@ package com.hbm.entity.logic;
 import com.hbm.api.badthing.ContaminationUtil;
 import com.hbm.config.BombConfig;
 import com.hbm.entity.ModEntityType;
-import com.hbm.HBM;
 import com.hbm.world.level.explosion.ExplosionNukeGeneric;
 import com.hbm.world.level.explosion.ExplosionNukeRayBatched;
 import com.hbm.world.level.explosion.ExplosionNukeRayParallelized;
@@ -13,6 +12,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
@@ -60,7 +60,7 @@ public class EntityNukeExplosionMK5 extends EntityExplosionChunkLoading{
             ExplosionNukeGeneric.dealDamage(level(),position(),getRadius());
             if(explosion == null) {
                 if (BombConfig.explosionAlgorithm == 1 || BombConfig.explosionAlgorithm == 2) {
-                    explosion = new ExplosionNukeRayParallelized(level(), blockPosition(),
+                    explosion = new ExplosionNukeRayParallelized((ServerLevel) level(), blockPosition(),
                             getStrength(), getSpeed(),getRadius());
                 } else {
                     explosion = new ExplosionNukeRayBatched(level(), blockPosition(),
