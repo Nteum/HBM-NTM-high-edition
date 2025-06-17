@@ -10,26 +10,26 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.*;
 /** 处理核爆过程的工具类 */
-public class ExplosionNukeRayBatched {
+public class ExplosionNukeRayBatched implements IExplosionRay {
     //所有需要处理的区块，key是区块的位置，value是区块中待删方块的列表
-    public HashMap<ChunkPos, List<Vec3>> perChunk = new HashMap(); //for future: optimize blockmap further by using sub-chunks instead of chunks
-    public List<ChunkPos> orderedChunks = new ArrayList();
-    private CoordComparator comparator = new CoordComparator();
-    BlockPos pos;       //爆炸中心所在的位置（实体）
-    ChunkPos chunkPos;  //爆炸中心所在的区块
+    private final HashMap<ChunkPos, List<Vec3>> perChunk = new HashMap<>(); //for future: optimize blockmap further by using sub-chunks instead of chunks
+    private final List<ChunkPos> orderedChunks = new ArrayList<>();
+    private final CoordComparator comparator = new CoordComparator();
+    private final BlockPos pos;       //爆炸中心所在的位置（实体）
+    private final ChunkPos chunkPos;  //爆炸中心所在的区块
 
-    Level level;
+    private final Level level;
 
-    int strength;
-    int radius;
-
-    int gspNumMax;
-    int gspNum;
+    private final int strength;
+    private final int radius;
+    private final int speed;
+    private final int gspNumMax;
+    private int gspNum;
     //球坐标系的方位角
-    double theta;
-    double phi;
+    private double theta;
+    private double phi;
 
-    public boolean isAusf3Complete = false;
+    private boolean isAusf3Complete = false;
 
     int collectTipCnt = 0;
     int processChunkCnt = 0;
@@ -39,7 +39,7 @@ public class ExplosionNukeRayBatched {
         this.chunkPos = new ChunkPos(pos);
         this.strength = strength;
         this.radius = radius;
-
+        this.speed = speed;
         // Total number of points
         this.gspNumMax = (int)(2.5 * Math.PI * Math.pow(this.strength,2));
         this.gspNum = 1;
@@ -176,6 +176,35 @@ public class ExplosionNukeRayBatched {
         }
         this.gspNum++;
     }
+
+    @Override
+    public void cacheChunksTick(int processTimeMs) {
+        if (!isAusf3Complete) {
+            // time ignored here since collectTip() did not implement a time limit
+            collectTip(speed*10);
+        }
+    }
+
+    @Override
+    public void destructionTick(int processTimeMs) {
+        if (!isAusf3Complete) return;
+        long start = System.currentTimeMillis();
+        while(!perChunk.isEmpty() && System.currentTimeMillis() < start + processTimeMs)
+            processChunk();
+    }
+
+    @Override
+    public void cancel() {
+        isAusf3Complete = true;
+        if (perChunk != null) perChunk.clear();
+        if (orderedChunks != null) orderedChunks.clear();
+    }
+
+    @Override
+    public boolean isComplete() {
+        return isAusf3Complete && perChunk.isEmpty();
+    }
+
     //比较器，用于根据到中心点的距离对区块排序
     public class CoordComparator implements Comparator<ChunkPos> {
         @Override
