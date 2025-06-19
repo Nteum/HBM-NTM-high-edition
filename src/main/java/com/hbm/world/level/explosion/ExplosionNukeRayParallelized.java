@@ -417,12 +417,10 @@ public class ExplosionNukeRayParallelized implements IExplosionRay {
         }
 
         void trace() {
+            boolean isPaused = false;
             try {
                 if (!initialised) init();
-                if (energy <= 0) {
-                    latch.countDown();
-                    return;
-                }
+                if (energy <= 0) return;
                 while (energy > 0) {
                     if (y < minY || y >= (minY + worldHeight) || Thread.currentThread().isInterrupted()) break;
                     if (currentRayPosition >= radius - PROCESSING_EPSILON) break;
@@ -439,6 +437,7 @@ public class ExplosionNukeRayParallelized implements IExplosionRay {
 
                     SubChunkSnapshot snap = snapshots.get(currentSubChunkKey);
                     if (snap == null) {
+                        isPaused = true;
                         final boolean[] amFirst = {false};
                         ConcurrentLinkedQueue<RayTask> waiters = waitingRoom.computeIfAbsent(currentSubChunkKey, k -> {
                             amFirst[0] = true;
@@ -507,7 +506,7 @@ public class ExplosionNukeRayParallelized implements IExplosionRay {
             } catch (Exception e) {
                 LOGGER.error("Ray {} at distance {} finished exceptionally due to: ", dirIndex, currentRayPosition, e);
             } finally {
-                latch.countDown();
+                if (!isPaused) latch.countDown();
             }
         }
 
