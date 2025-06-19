@@ -196,8 +196,8 @@ public class ExplosionNukeRayBatched implements IExplosionRay {
     @Override
     public void cancel() {
         isAusf3Complete = true;
-        if (perChunk != null) perChunk.clear();
-        if (orderedChunks != null) orderedChunks.clear();
+        perChunk.clear();
+        orderedChunks.clear();
     }
 
     @Override
