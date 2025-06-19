@@ -61,7 +61,7 @@ public class EntityNukeExplosionMK5 extends EntityExplosionChunkLoading{
             if(explosion == null) {
                 if (BombConfig.explosionAlgorithm == 1 || BombConfig.explosionAlgorithm == 2) {
                     explosion = new ExplosionNukeRayParallelized((ServerLevel) level(), blockPosition(),
-                            getStrength(), getSpeed(),getRadius());
+                            getStrength(),getRadius());
                 } else {
                     explosion = new ExplosionNukeRayBatched(level(), blockPosition(),
                             getStrength(), getSpeed(),getRadius());
@@ -128,6 +128,12 @@ public class EntityNukeExplosionMK5 extends EntityExplosionChunkLoading{
         int speed = (int)Math.ceil((double) 10_0000 / strength);
         int radius = strength / 2;
         return new EntityNukeExplosionMK5(level,location,strength,radius,speed);
+    }
+
+    @Override
+    public void remove(RemovalReason pReason){
+        if (explosion != null) explosion.cancel();
+        super.remove(pReason);
     }
 
     @Override
