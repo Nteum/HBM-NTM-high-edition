@@ -21,31 +21,39 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
 import static com.hbm.render.blockentity.RenderUtils.renderBlockModel;
 
-public class NukeFatRender implements BlockEntityRenderer<NukeBombEntity> {
+public class NukeFatRender extends MultiPartRenderer<NukeBombEntity> {
     public static BakedModel fat_man_model;
     public NukeFatRender(BlockEntityRendererProvider.Context pContext){
         ModelManager modelManager = Minecraft.getInstance().getModelManager();
         fat_man_model = modelManager.getModel(Models.FAT_MAN);
     }
+//    @Override
+//    public void render(NukeBombEntity pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, int pPackedOverlay) {
+//        BlockState blockState = pBlockEntity.getBlockState();
+//        BlockRenderDispatcher blockDispatcher = Minecraft.getInstance().getBlockRenderer();
+//        ModelBlockRenderer blockRenderer = blockDispatcher.getModelRenderer();
+//        //根据方向确定旋转角度
+//        Direction direction = blockState.getValue(BlockStateProperties.HORIZONTAL_FACING);
+//        int rotation = 0;
+//        switch (direction){
+//            case NORTH -> rotation = 0;
+//            case WEST -> rotation = 90;
+//            case SOUTH -> rotation = 180;
+//            case EAST -> rotation = 270;
+//        }
+//
+//        //渲染核弹模型
+//        pPoseStack.pushPose();
+//        pPoseStack.mulPose(Axis.YP.rotationDegrees(rotation));
+//        renderBlockModel(fat_man_model,blockState,blockRenderer,pPoseStack,pBuffer,pPackedLight,pPackedOverlay,null);
+//        pPoseStack.popPose();
+//    }
+
     @Override
-    public void render(NukeBombEntity pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, int pPackedOverlay) {
+    public void renderMultiPart(NukeBombEntity pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, int pPackedOverlay) {
         BlockState blockState = pBlockEntity.getBlockState();
         BlockRenderDispatcher blockDispatcher = Minecraft.getInstance().getBlockRenderer();
         ModelBlockRenderer blockRenderer = blockDispatcher.getModelRenderer();
-        //根据方向确定旋转角度
-        Direction direction = blockState.getValue(BlockStateProperties.HORIZONTAL_FACING);
-        int rotation = 0;
-        switch (direction){
-            case NORTH -> rotation = 0;
-            case WEST -> rotation = 90;
-            case SOUTH -> rotation = 180;
-            case EAST -> rotation = 270;
-        }
-
-        //渲染核弹模型
-        pPoseStack.pushPose();
-        pPoseStack.mulPose(Axis.YP.rotationDegrees(rotation));
         renderBlockModel(fat_man_model,blockState,blockRenderer,pPoseStack,pBuffer,pPackedLight,pPackedOverlay,null);
-        pPoseStack.popPose();
     }
 }

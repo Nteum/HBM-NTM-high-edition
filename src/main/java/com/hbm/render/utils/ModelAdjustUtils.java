@@ -1,9 +1,11 @@
 package com.hbm.render.utils;
 
 import com.hbm.block.base.BedLikeBlock;
+import com.hbm.block.base.MultiPartBlock;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.core.Direction;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
@@ -11,8 +13,15 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 public class ModelAdjustUtils {
     public static void generalMachineRotate(PoseStack poseStack, BlockState blockState){
         Direction facing = blockState.getValue(BlockStateProperties.HORIZONTAL_FACING);
-        BedLikeBlock block = (BedLikeBlock)blockState.getBlock();
-        int[] offset = block.getOffset();
+        int[] offset;
+        Block block1 = blockState.getBlock();
+        if (block1 instanceof BedLikeBlock)
+            offset = ((BedLikeBlock) block1).getOffset();
+        else if (block1 instanceof MultiPartBlock multiPartBlock)
+            offset = multiPartBlock.getOffset();
+        else offset = new int[]{0,0,0,0,0,0};
+//        BedLikeBlock block = (BedLikeBlock)blockState.getBlock();
+//        int[] offset = block.getOffset();
 
         float xSize = (float) (offset[5] - offset[4]) / 2;
         float zSize = (float) (offset[3] - offset[2]) / 2;

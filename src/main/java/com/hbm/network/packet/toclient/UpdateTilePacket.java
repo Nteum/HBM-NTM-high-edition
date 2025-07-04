@@ -1,8 +1,8 @@
 package com.hbm.network.packet.toclient;
 
 import com.hbm.HBM;
-import com.hbm.blockentity.base.BaseMachineBlockEntity;
-import com.hbm.blockentity.base.UpdateableBlockEntity;
+import com.hbm.blockentity.base2.BaseMachineBlockEntity;
+import com.hbm.blockentity.base2.UpdateableBlockEntity;
 import com.hbm.network.IHBMPacket;
 import com.hbm.utils.WorldUtils;
 import net.minecraft.client.Minecraft;

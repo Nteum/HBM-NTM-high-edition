@@ -1,11 +1,12 @@
 package com.hbm.blockentity.base;
 
-import com.hbm.api.fluid.mek.network.transmitter.Transmitter;
-import com.hbm.api.fluid.mek.network.network.TransmitterNetworkRegistry;
+import com.hbm.blockentity.base2.CapabilityBlockEntity;
+import com.hbm.capabilities.network.TransmitterNetworkRegistry;
 import com.hbm.api.providers.IBlockProvider;
 import com.hbm.block.interfaces.IHasTileEntity;
-import com.hbm.block.states.ConnType;
+import com.hbm.capabilities.network.ConnType;
 import com.hbm.block.states.TransmitterType;
+import com.hbm.capabilities.network.transmitter.Transmitter;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;

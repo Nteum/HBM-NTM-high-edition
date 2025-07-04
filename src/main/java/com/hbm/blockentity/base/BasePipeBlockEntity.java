@@ -1,7 +1,7 @@
 package com.hbm.blockentity.base;
 
 import com.hbm.HBMKey;
-import com.hbm.block.states.ConnType;
+import com.hbm.capabilities.network.ConnType;
 import com.hbm.capabilities.CapabilityCache;
 import com.hbm.lib.ItemDataUtils;
 import com.hbm.registries.ModBlocks;

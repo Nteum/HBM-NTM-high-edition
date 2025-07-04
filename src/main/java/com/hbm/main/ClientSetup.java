@@ -100,6 +100,8 @@ public class ClientSetup {
         event.register(Models.ASSEMBLER_SLIDER);
         event.register(Models.CRUCIBLE);
         event.register(Models.FAT_MAN);
+        event.register(Models.CUSTOM_NUKE);
+        event.register(Models.BOY);
         event.register(Models.BLACK_HOLE);
         event.register(Models.CHEMPLANT_BODY);
         event.register(Models.CHEMPLANT_PISTON);

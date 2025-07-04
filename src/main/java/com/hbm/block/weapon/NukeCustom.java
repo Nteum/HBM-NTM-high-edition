@@ -6,21 +6,26 @@ import com.hbm.blockentity.weapon.NukeBombFatEntity;
 import com.hbm.entity.effect.EntityNukeTorex;
 import com.hbm.entity.logic.EntityNukeExplosionMK5;
 import com.hbm.registries.ModSounds;
+import com.hbm.utils.MultipartUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Vec3i;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Random;
 
 public class NukeCustom extends NukeBomb implements IBomb{
+    public static final VoxelShape SHAPE = Block.box(-30,0,0,24,16,16);
     public static final int maxNuke = 200;
 
     public NukeCustom(Properties pProperties, int range) {
@@ -33,6 +38,7 @@ public class NukeCustom extends NukeBomb implements IBomb{
             pLevel.playSound((Player) null,pPos, ModSounds.WEAPON_NUCLEAR_EXPLOSION.get(), SoundSource.RECORDS,5.0F,1.0F);
             pLevel.addFreshEntity(EntityNukeExplosionMK5.statFac(pLevel,range,pPos.getCenter()));
             pLevel.addFreshEntity(new EntityNukeTorex(pLevel,pPos.getCenter().add(0,4.5,0),range));
+            pLevel.destroyBlock(pPos,false);
 
             return BombReturnCode.DETONATED;
         }
@@ -45,13 +51,25 @@ public class NukeCustom extends NukeBomb implements IBomb{
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
         return new NukeBombCustomEntity(pPos,pState);
     }
+
     @Override
-    public List<Vec3i> getOffsets() {
-        return square(new int[]{0, 0, 1 ,0 ,0 ,2});
+    public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
+        return isCore(pLevel,pPos) ? SHAPE : super.getShape(pState,pLevel,pPos,pContext);
     }
 
     @Override
-    public RenderShape getRenderShape(BlockState pState) {
-        return RenderShape.INVISIBLE;
+    public int[] getOffset() {
+//        return new int[]{0, 0, 1 ,0 ,0 ,2};
+        return new int[]{0, 0, 0 ,0 ,1 ,1};
     }
+
+    @Override
+    public List<Vec3i> getOffsets() {
+        return MultipartUtils.square(getOffset());
+    }
+
+//    @Override
+//    public RenderShape getRenderShape(BlockState pState) {
+//        return RenderShape.INVISIBLE;
+//    }
 }

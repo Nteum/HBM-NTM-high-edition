@@ -296,4 +296,11 @@ public class NBTUtils {
     public static void writeResourceKey(CompoundTag nbt, String key, ResourceKey<?> entry) {
         nbt.putString(key, entry.location().toString());
     }
+
+    public static int[] blockpos2intarr(BlockPos pos){
+        return new int[]{pos.getX(),pos.getY(),pos.getZ()};
+    }
+    public static BlockPos intarr2blockpos(int[] arr){
+        return new BlockPos(arr[0],arr[1],arr[2]);
+    }
 }

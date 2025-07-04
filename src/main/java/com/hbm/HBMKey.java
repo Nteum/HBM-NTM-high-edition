@@ -15,6 +15,9 @@ public class HBMKey {
     // machine state
     public static final String RUNNING = "running";
     public static final String RESULT_ITEM = "resultItem";
+    public static final String IS_CORE = "isCore";
+    public static final String IS_FORMED = "isFormed";
+    public static final String CORE_POS = "corePos";
     //Server to Client specific sync NBT tags
     public static final String CURRENT_ACCEPTORS = "acceptors";
     public static final String CURRENT_CONNECTIONS = "connections";

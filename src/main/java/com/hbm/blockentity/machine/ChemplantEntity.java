@@ -1,13 +1,12 @@
 package com.hbm.blockentity.machine;
 
 import com.hbm.HBMLang;
-import com.hbm.api.energy.fe.SidedEnergyWrapper;
 import com.hbm.api.fluid.BaseFluidHandler;
 import com.hbm.api.fluid.SidedFluidWrapper;
 import com.hbm.block.machine.BlockChemplant;
 import com.hbm.blockentity.ModBlockEntityType;
-import com.hbm.blockentity.base.BaseMachineBlockEntity;
 import com.hbm.blockentity.base.BedLikeBlockEntity;
+import com.hbm.blockentity.base2.DummyableBlockEntity;
 import com.hbm.lib.DirectionUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -18,15 +17,11 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.fluids.capability.templates.FluidTank;
 import org.jetbrains.annotations.Nullable;
 
-public class ChemplantEntity extends BedLikeBlockEntity {
+public class ChemplantEntity extends DummyableBlockEntity {
     protected final ContainerData containerData = new ContainerData() {
         @Override
         public int get(int pIndex) {

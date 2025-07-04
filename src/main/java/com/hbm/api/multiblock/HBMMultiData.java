@@ -11,6 +11,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import java.util.*;
 
 public class HBMMultiData {
+//    public List<Vec3i>
     //转换之前相对中心方块的位置和方向
     public Map<Capability<?>,List<Tuple<Vec3i, Direction>>> beforeTrans = new IdentityHashMap<>();
     //转换之后在世界中绝对的位置和方向

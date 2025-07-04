@@ -2,14 +2,13 @@ package com.hbm.blockentity.machine;
 
 import com.hbm.HBMLang;
 import com.hbm.blockentity.ModBlockEntityType;
-import com.hbm.blockentity.base.BaseMachineBlockEntity;
+import com.hbm.blockentity.base2.BaseMachineBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 

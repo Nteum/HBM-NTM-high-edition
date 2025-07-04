@@ -1,12 +1,11 @@
 package com.hbm.blockentity.machine;
 
-import com.hbm.HBMKey;
 import com.hbm.HBMLang;
 import com.hbm.api.fluid.BaseFluidHandler;
 import com.hbm.api.fluid.SidedFluidWrapper;
 import com.hbm.block.machine.BlockFluidBarrel;
 import com.hbm.blockentity.ModBlockEntityType;
-import com.hbm.blockentity.base.BaseMachineBlockEntity;
+import com.hbm.blockentity.base2.BaseMachineBlockEntity;
 import com.hbm.capabilities.fluid.mek.FluidTankFluidTank;
 import com.hbm.gui.menu.BarrelMenu;
 import com.hbm.gui.menu.IPacketUpdate;
@@ -16,8 +15,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.protocol.game.ClientboundContainerSetDataPacket;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -25,14 +22,11 @@ import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.block.Fallable;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

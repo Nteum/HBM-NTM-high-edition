@@ -8,7 +8,6 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 @NothingNullByDefault
 public interface IExtendedFluidHandler extends IFluidHandler {
 
-
     void setFluidInTank(int tank, FluidStack stack);
 
     //向tank输入对应的fluidstack

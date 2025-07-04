@@ -2,7 +2,6 @@ package com.hbm.blockentity.machine;
 
 import com.hbm.api.energy.fe.HBMEnergyStorage;
 import com.hbm.api.energy.fe.SidedEnergyWrapper;
-import com.hbm.api.fluid.mek.network.transmitter.Transmitter;
 import com.hbm.api.providers.IBlockProvider;
 import com.hbm.block.states.TransmitterType;
 import com.hbm.blockentity.ModBlockEntityType;

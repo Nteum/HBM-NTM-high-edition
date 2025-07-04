@@ -1,6 +1,6 @@
 package com.hbm.block.logistic;
 
-import com.hbm.block.states.ConnType;
+import com.hbm.capabilities.network.ConnType;
 import com.hbm.blockentity.base.BasePipeBlockEntity;
 import com.hbm.registries.ModBlocks;
 import com.hbm.registries.ModItems;

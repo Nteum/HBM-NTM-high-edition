@@ -1,11 +1,7 @@
 package com.hbm.block.base;
 
-import com.hbm.HBMLang;
-import com.hbm.blockentity.ModBlockEntityType;
-import com.hbm.blockentity.base.BaseMachineBlockEntity;
+import com.hbm.blockentity.base2.BaseMachineBlockEntity;
 //import com.hbm.handler.MoltiblockHandler;
-import com.hbm.blockentity.machine.AssemblerEntity;
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;

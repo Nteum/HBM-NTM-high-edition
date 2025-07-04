@@ -6,7 +6,7 @@ import com.hbm.api.energy.fe.SidedEnergyWrapper;
 import com.hbm.api.energy.fe.TransmitHelper;
 import com.hbm.block.machine.BlockBattery;
 import com.hbm.blockentity.ModBlockEntityType;
-import com.hbm.blockentity.base.BaseMachineBlockEntity;
+import com.hbm.blockentity.base2.BaseMachineBlockEntity;
 import com.hbm.gui.menu.BatteryMenu;
 import com.hbm.registries.ModTags;
 import net.minecraft.core.BlockPos;

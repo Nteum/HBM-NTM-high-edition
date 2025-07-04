@@ -1,5 +1,6 @@
 package com.hbm;
 
+import com.hbm.capabilities.network.TransmitterNetworkRegistry;
 import com.hbm.config.GeneralConfig;
 import com.hbm.datagen.loot.BlockLootGen;
 import com.hbm.datagen.loot.LootTableGen;
@@ -24,7 +25,6 @@ import com.hbm.recipe.ModRecipes;
 import com.hbm.registries.ModSounds;
 import com.hbm.world.feature.ModFeatures;
 import com.mojang.logging.LogUtils;
-import com.test.RecipeTest;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
@@ -37,6 +37,7 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.common.data.ForgeAdvancementProvider;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
+import net.minecraftforge.event.server.ServerStoppedEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -59,13 +60,15 @@ public class HBM {
     public static boolean debug = false;
 
     public HBM() {
+        //forge事件总线
+        MinecraftForge.EVENT_BUS.register(this);
+        MinecraftForge.EVENT_BUS.addListener(this::onServerStopped);
         //模组事件总线
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         modEventBus.addListener(this::commonSetup);
         modEventBus.addListener(this::onGatherData);
         modEventBus.addListener(ModCreativeModeTab::addCreative);
-        //forge事件总线
-        MinecraftForge.EVENT_BUS.register(this);
+
         //模组内容的注册
         ModItems.ITEMS.register(modEventBus);
         ModBlocks.register(modEventBus);
@@ -86,9 +89,17 @@ public class HBM {
 
     private void commonSetup(final FMLCommonSetupEvent event) {
         ModMessages.register(); //注册所有的消息
+        TransmitterNetworkRegistry.initiate(); //注册传输网络系统
     }
 
-    public static ResourceLocation rl(String s){return ResourceLocation.tryBuild(HBM.MODID,s);}
+    public void onServerStarting(ServerStartingEvent event) {
+
+    }
+
+    private void onServerStopped(ServerStoppedEvent event){
+        TransmitterNetworkRegistry.reset();
+    }
+
 
     /**
      * 数据生成入口，只会在runData时候被调用
@@ -126,8 +137,7 @@ public class HBM {
 //        System.out.println("tab language key: "+ModCreativeModeTab.HBM_ITEM.getId().toLanguageKey());
     }
 
-    @SubscribeEvent
-    public void onServerStarting(ServerStartingEvent event) {
 
-    }
+
+    public static ResourceLocation rl(String s){return ResourceLocation.tryBuild(HBM.MODID,s);}
 }

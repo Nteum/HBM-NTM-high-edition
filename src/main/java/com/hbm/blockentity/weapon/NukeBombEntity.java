@@ -1,23 +1,20 @@
 package com.hbm.blockentity.weapon;
 
 import com.hbm.block.weapon.NukeBomb;
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.base2.DummyableBlockEntity;
 import com.hbm.registries.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
-import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class NukeBombEntity extends BlockEntity {
+public abstract class NukeBombEntity extends DummyableBlockEntity {
     public boolean ready = false;
     public boolean explode = false;
 
@@ -33,9 +30,8 @@ public abstract class NukeBombEntity extends BlockEntity {
         }
     }
     //服务端发送数据包
-    @Nullable
     @Override
-    public Packet<ClientGamePacketListener> getUpdatePacket() {
+    public @Nullable ClientboundBlockEntityDataPacket getUpdatePacket() {
         ClientboundBlockEntityDataPacket packet = ClientboundBlockEntityDataPacket.create(this);
         return packet;
     }
@@ -56,4 +52,5 @@ public abstract class NukeBombEntity extends BlockEntity {
         return updateTag;
     }
     public boolean isReady(){return this.ready;}
+
 }

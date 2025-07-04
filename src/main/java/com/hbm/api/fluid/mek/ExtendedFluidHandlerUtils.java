@@ -8,7 +8,9 @@ import org.jetbrains.annotations.NotNull;
 import com.hbm.api.enums.Action;
 
 import java.util.function.IntSupplier;
-
+//from:mek
+//处理流体输入输出的函数，主要用于方块实体内部的交换。注意以下函数均未指定要抽取的tank，逻辑是匹配到哪个tank就向其输入或输出，这种方式实际中
+// 最好不要使用，因为一般的机器内部的流体槽的用途是确定的，不能随意更换。
 public class ExtendedFluidHandlerUtils {
 
     /**
