@@ -1,5 +1,6 @@
 package com.hbm.network.packet.toclient;
 
+import com.hbm.network.IHBMMessage;
 import com.hbm.particle.handler.AuxParticleHandler;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.FriendlyByteBuf;
@@ -7,7 +8,7 @@ import net.minecraftforge.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
-public class AuxParticlePacket {
+public class AuxParticlePacket  implements IHBMMessage {
 
 	double x;
 	double y;
@@ -27,28 +28,24 @@ public class AuxParticlePacket {
 		this.type = type;
 	}
 
-	public AuxParticlePacket(FriendlyByteBuf buf){
-		x = buf.readDouble();
-		y = buf.readDouble();
-		z = buf.readDouble();
-		type = buf.readInt();
+	public static AuxParticlePacket decode(FriendlyByteBuf buf){
+		return new AuxParticlePacket(buf.readDouble(), buf.readDouble(), buf.readDouble(), buf.readInt() );
 	}
-
-	public void toBytes(FriendlyByteBuf buf){
+	@Override
+	public void encode(FriendlyByteBuf buf){
 		buf.writeDouble(x);
 		buf.writeDouble(y);
 		buf.writeDouble(z);
 		buf.writeInt(type);
 	}
-
-	public boolean handle(Supplier<NetworkEvent.Context> supplier){
+	@Override
+	public void handle(Supplier<NetworkEvent.Context> supplier){
 		NetworkEvent.Context context = supplier.get();
 		context.enqueueWork(()->{
 			try {
 				AuxParticleHandler.particleControl(x,y,z,type);
 			} catch(Exception x) { }
 		});
-		return true;
 	}
 
 }

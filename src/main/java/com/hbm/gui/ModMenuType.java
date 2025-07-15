@@ -1,5 +1,6 @@
 package com.hbm.gui;
 
+import com.hbm.blockentity.machine.ElectricFurnaceEntity;
 import com.hbm.gui.menu.*;
 import com.hbm.HBM;
 import net.minecraft.core.registries.Registries;
@@ -22,4 +23,6 @@ public class ModMenuType {
             MOD_MENU_TYPES.register("chemplant_menu",()->new MenuType<>(ChemplantMenu::new, FeatureFlags.VANILLA_SET));
     public static final RegistryObject<MenuType<BarrelMenu>> BARREL_MENU =
             MOD_MENU_TYPES.register("barrel_menu",()->new MenuType<>(BarrelMenu::new, FeatureFlags.VANILLA_SET));
+    public static final RegistryObject<MenuType<ElectricFurnaceMenu>> ELECTRIC_FURNACE_MENU =
+            MOD_MENU_TYPES.register("electric_furnace_menu",()->new MenuType<>(ElectricFurnaceMenu::new, FeatureFlags.VANILLA_SET));
 }

@@ -2,7 +2,7 @@ package com.hbm.datagen.recipe;
 
 import com.hbm.HBM;
 import com.hbm.datagen.recipe.provider.AssemblerRecipeProvider;
-import com.hbm.recipe.BlastFurnaceRecipe;
+import com.hbm.Inventory.recipe.BlastFurnaceRecipe;
 import com.hbm.registries.ModItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;

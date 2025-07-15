@@ -33,5 +33,6 @@
   "itemGroup.hbmxx.hbm_block": "HBM Block",
   "itemGroup.hbmxx.hbm_item": "HBM Item",
   "itemGroup.hbmxx.hbm_machine": "HBM Machine",
-  "itemGroup.hbmxx.hbm_tool": "HBM Tool"
+  "itemGroup.hbmxx.hbm_tool": "HBM Tool",
+  "upgrade.radius": "Forcefield Range Upgrade\\nRadius +16 / Consumption +500\\nStacks to 16"
 }

@@ -1,12 +1,10 @@
 package com.hbm.blockentity.machine;
 
 import com.hbm.HBMLang;
-import com.hbm.api.fluid.BaseFluidHandler;
-import com.hbm.api.fluid.SidedFluidWrapper;
+import com.hbm.api.fluid.*;
 import com.hbm.block.machine.BlockFluidBarrel;
 import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.blockentity.base2.BaseMachineBlockEntity;
-import com.hbm.capabilities.fluid.mek.FluidTankFluidTank;
 import com.hbm.gui.menu.BarrelMenu;
 import com.hbm.gui.menu.IPacketUpdate;
 import net.minecraft.client.Minecraft;
@@ -15,6 +13,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -30,10 +29,13 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class BarrelEntity extends BaseMachineBlockEntity implements IPacketUpdate {
+import java.util.List;
+
+public class BarrelEntity extends BaseMachineBlockEntity implements IPacketUpdate, MenuProvider {
     BlockFluidBarrel.BarrelProperties properties;
     BarrelMode mode = BarrelMode.FORBID;
-    public FluidTankFluidTank fluidTank;
+    BasicFluidTank tank;
+//    public ISidedFluidHandler fluidHandler;
     private ContainerData containerData = new ContainerData() {
         @Override
         public int get(int pIndex) {
@@ -59,10 +61,15 @@ public class BarrelEntity extends BaseMachineBlockEntity implements IPacketUpdat
         super(ModBlockEntityType.BARREL_ENTITY.get(), pPos, pBlockState);
         this.items = NonNullList.withSize(4,ItemStack.EMPTY);
         this.properties = ((BlockFluidBarrel)pBlockState.getBlock()).barrelProperties;
-        capabilitiesCache.addCapabilityResolver(new SidedFluidWrapper(new BaseFluidHandler(1, properties.capacity)));
+        this.tank = new BasicFluidTank(properties.capacity);
+        this.capabilitiesContent.addCapability(ForgeCapabilities.FLUID_HANDLER, this);
+//        this.capabilitiesContent.addCapability(ForgeCapabilities.FLUID_HANDLER, new BaseFluidHandler(1, properties.capacity));
+//        capabilitiesCache.addCapabilityResolver(new SidedFluidWrapper(new BaseFluidHandler(1, properties.capacity)));
     }
-    public IFluidHandler getFluidTank(){
-        return capabilitiesCache.getCapability(ForgeCapabilities.FLUID_HANDLER,null).orElse(null);
+
+    @Override
+    public List<IExtendedFluidTank> getFluidTanks(@Nullable Direction side) {
+        return List.of(this.tank);
     }
 
     @Override
@@ -124,9 +131,10 @@ public class BarrelEntity extends BaseMachineBlockEntity implements IPacketUpdat
     public void handleUpdatePacket(@NotNull CompoundTag tag) {
         super.handleUpdatePacket(tag);
         this.containerId = tag.getInt("containerId");
-        this.capabilitiesCache.getCapability(ForgeCapabilities.FLUID_HANDLER,null).ifPresent(cap -> {
-            ((BaseFluidHandler)cap).setTankByNbt(0,tag);
-        });
+//        this.capabilitiesCache.getCapability(ForgeCapabilities.FLUID_HANDLER,null).ifPresent(cap -> {
+//            ((BaseFluidHandler)cap).setTankByNbt(0,tag);
+//        });
+        this.tank.readFromNBT(tag);
         //通过这种方式将内容更新的menu中，我们期望这段运行在客户端
         Minecraft minecraft = Minecraft.getInstance();
         Player player = minecraft.player;
@@ -156,11 +164,14 @@ public class BarrelEntity extends BaseMachineBlockEntity implements IPacketUpdat
         return Component.translatable(HBMLang.BARREL.getTranslationKey());
     }
     public int containerId;
+
+    @Nullable
     @Override
-    protected AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory) {
+    public AbstractContainerMenu createMenu(int pContainerId, Inventory pPlayerInventory) {
         this.containerId = pContainerId;
-        return new BarrelMenu(pContainerId,pInventory,this,this.containerData);
+        return new BarrelMenu(pContainerId,pPlayerInventory,this,this.containerData);
     }
+
     public static enum BarrelMode{IN,INOUT,OUT,FORBID}
     public int getCapacity(){
         return properties.capacity;

@@ -1,79 +1,89 @@
 package com.hbm.blockentity.base2;
 
-import com.hbm.api.fluid.mek.IExtendedFluidTank;
-import com.hbm.api.fluid.mek.IMekanismFluidHandler;
-import com.hbm.blockentity.interfaces.IRedstoneControl.RedstoneControl;
-import com.hbm.capabilities.resolver.manager.ICapabilityHandlerManager;
+
+import com.hbm.api.energy.IEnergyContainer;
+import com.hbm.api.energy.IEnergyHandler;
+import com.hbm.api.fluid.IExtendedFluidTank;
+import com.hbm.api.fluid.ISidedFluidHandler;
+import com.hbm.api.inventory.ISidedItemHandler;
+import com.hbm.api.inventory.SlotAccCtl;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.Container;
+import net.minecraft.world.ContainerHelper;
+import net.minecraft.world.Nameable;
+import net.minecraft.world.WorldlyContainer;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public abstract class HBMBlockEntity extends CapabilityBlockEntity implements IMekanismFluidHandler {
-    /**
-     * A timer used to send packets to clients.
-     */
-    public int ticker;
-    private final List<ICapabilityHandlerManager<?>> capabilityHandlerManagers = new ArrayList<>();
-
-//    protected final IBlockProvider blockProvider;
-
-    private boolean canBeUpgraded;
-    private boolean isDirectional;
-    private boolean hasSound;
-    private boolean hasGui;
-    private boolean hasChunkloader;
-    private boolean nameable;
+public abstract class HBMBlockEntity extends CapabilityBlockEntity implements ISidedItemHandler, ISidedFluidHandler, IEnergyHandler,
+        WorldlyContainer, Nameable {
 
     @Nullable
-    private Component customName;
-
-    //Methods for implementing ITileDirectional
-    @Nullable
-    private Direction cachedDirection;
-
-    protected boolean redstone = false;
-    private boolean redstoneLastTick = false;
-    private RedstoneControl controlType = RedstoneControl.DISABLED;
-    private int currentRedstoneLevel;
-
-//    //Variables for handling ITileContainer
-//    protected final ItemHandlerManager itemHandlerManager;
-//
-//    //Variables for handling IMekanismFluidHandler
-//    private final FluidHandlerManager fluidHandlerManager;
-//
-//    //Variables for handling IMekanismStrictEnergyHandler
-//    private final EnergyHandlerManager energyHandlerManager;
+    private Component name;
 
     public HBMBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
     }
-    // 客户端更新
-    protected void onUpdateClient(){}
-    // 服务器更新
-    protected void onUpdateServer(){}
-    public static void clientTicker(Level level, BlockPos pPos, BlockState pState, BlockEntity pBlockEntity) {
-        ((BaseMachineBlockEntity)pBlockEntity).onUpdateClient();
-    }
-    public static void serverTicker(Level level, BlockPos pPos, BlockState pState, BlockEntity pBlockEntity) {
-        ((BaseMachineBlockEntity)pBlockEntity).onUpdateServer();
+
+    public void setCustomName(Component pName) {
+        this.name = pName;
     }
 
+    public Component getName() {
+        return this.name != null ? this.name : this.getDefaultName();
+    }
+
+    public @NotNull Component getDisplayName() {
+        return this.getName();
+    }
+
+    @javax.annotation.Nullable
+    public Component getCustomName() {
+        return this.name;
+    }
+
+    protected abstract Component getDefaultName();
+
     @Override
-    public List<IExtendedFluidTank> getFluidTanks(@Nullable Direction side) {
+    public IEnergyContainer getEnergyContainer() {
         return null;
     }
 
     @Override
-    public void onContentsChanged() {
+    public List<IExtendedFluidTank> getFluidTanks(@Nullable Direction side) {
+        return List.of();
+    }
 
+    @Override
+    public void onContentsChanged() {
+        this.setChanged();
+    }
+
+    @Override
+    public void load(@NotNull CompoundTag nbt) {
+        super.load(nbt);
+        if (nbt.contains("CustomName", 8)) {
+            this.name = Component.Serializer.fromJson(nbt.getString("CustomName"));
+        }
+    }
+
+    @Override
+    protected void saveAdditional(CompoundTag pTag) {
+        super.saveAdditional(pTag);
+        if (this.name != null) {
+            pTag.putString("CustomName", Component.Serializer.toJson(this.name));
+        }
     }
 }

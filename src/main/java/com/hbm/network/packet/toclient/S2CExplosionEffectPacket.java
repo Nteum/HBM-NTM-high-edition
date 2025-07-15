@@ -1,5 +1,6 @@
 package com.hbm.network.packet.toclient;
 
+import com.hbm.network.IHBMMessage;
 import com.hbm.particle.ModParticleTypes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -12,7 +13,7 @@ import java.util.function.Supplier;
  * type - 1 - smoke
  * mode - 1 - cloud
  * */
-public class S2CExplosionEffectPacket {
+public class S2CExplosionEffectPacket implements IHBMMessage {
     private final double x;
     private final double y;
     private final double z;
@@ -29,16 +30,12 @@ public class S2CExplosionEffectPacket {
         Effcount = count;
     }
     //从缓冲区读取数据初始化的阶段
-    public S2CExplosionEffectPacket(FriendlyByteBuf buf){
-        x = buf.readDouble();
-        y = buf.readDouble();
-        z = buf.readDouble();
-        Efftype = buf.readInt();
-        mode = buf.readInt();
-        Effcount = buf.readInt();
+    public static S2CExplosionEffectPacket decode(FriendlyByteBuf buf){
+        return new S2CExplosionEffectPacket(buf.readDouble(),buf.readDouble(),buf.readDouble(),buf.readInt(),buf.readInt(),buf.readInt());
     }
     //将数据包写入缓冲区
-    public void toBytes(FriendlyByteBuf buf){
+    @Override
+    public void encode(FriendlyByteBuf buf){
         buf.writeDouble(x);
         buf.writeDouble(y);
         buf.writeDouble(z);
@@ -47,7 +44,8 @@ public class S2CExplosionEffectPacket {
         buf.writeInt(Effcount);
     }
     //收到数据包后执行的逻辑
-    public boolean handle(Supplier<NetworkEvent.Context> supplier){
+    @Override
+    public void handle(Supplier<NetworkEvent.Context> supplier){
         NetworkEvent.Context context = supplier.get();
         context.enqueueWork(()->{
             ClientLevel pLevel = Minecraft.getInstance().level;
@@ -64,6 +62,5 @@ public class S2CExplosionEffectPacket {
                 }
             }
         });
-        return true;
     }
 }

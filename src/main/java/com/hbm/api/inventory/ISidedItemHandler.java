@@ -1,190 +1,160 @@
 package com.hbm.api.inventory;
 
 import com.hbm.api.annotations.NothingNullByDefault;
-import com.hbm.api.enums.Action;
+import com.hbm.api.interferences.IDefaultFacing;
 import net.minecraft.core.Direction;
+import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
+import net.minecraftforge.items.ItemHandlerHelper;
 import org.jetbrains.annotations.Nullable;
 
-/**
- * A sided variant of {@link IItemHandlerModifiable}
- */
-@NothingNullByDefault
-public interface ISidedItemHandler extends IItemHandlerModifiable {
+import java.util.List;
+import java.util.Map;
 
-    /**
-     * The side this {@link ISidedItemHandler} is for. This defaults to null, which is for internal use.
-     *
-     * @return The default side to use for the normal {@link IItemHandler} methods when wrapping them into {@link ISidedItemHandler} methods.
-     */
-    @Nullable
-    default Direction getInventorySideFor() {
-        return null;
+/**
+ * 处理侧边物品交换的类
+ * 参考SidedInvWrapper
+ * */
+@NothingNullByDefault
+public interface ISidedItemHandler extends IItemHandlerModifiable, IDefaultFacing {
+    // 所有物品槽的集合
+    default List<ItemStack> getItems(){return List.of();}
+    // 获取所有面的访问控制信息
+    // 返回：一个map，key是方向，value是允许的每个槽的访问控制信息
+    // 这个默认选项不可取，实际上只是为了避免一定要继承的情况。
+    default Map<Direction, SlotAccCtl[]> getAccCtl(){
+        return Map.of(Direction.UP,new SlotAccCtl[0],Direction.DOWN,new SlotAccCtl[0]
+                ,Direction.NORTH,new SlotAccCtl[0],Direction.SOUTH,new SlotAccCtl[0]
+                ,Direction.WEST,new SlotAccCtl[0],Direction.EAST,new SlotAccCtl[0]);
+    }
+    // 某个面是否可以输入或输出
+    // 第二个参数true表示输入，false表示输出
+    default SlotAccCtl allowAcc(Direction side, boolean inOrOut){
+        for (SlotAccCtl slotAccCtl : getAccCtl().get(side)) {
+            if ((slotAccCtl.allowIn()&&inOrOut) || (slotAccCtl.allowOut()&&!inOrOut)){
+                return slotAccCtl;
+            }
+        }
+        return SlotAccCtl.SlotAccCtlBase.EMPTY;
     }
 
-    /**
-     * A sided variant of {@link IItemHandlerModifiable#setStackInSlot(int, ItemStack)}, docs copied for convenience.
-     * <p>
-     * Overrides the stack in the given slot. This method is used by the standard Forge helper methods and classes. It is not intended for general use by other mods, and
-     * the handler may throw an error if it is called unexpectedly.
-     *
-     * @param slot  Slot to modify
-     * @param stack {@link ItemStack} to set slot to (may be empty).
-     * @param side  The side we are interacting with the handler from (null for internal).
-     *
-     * @throws RuntimeException if the handler is called in a way that the handler was not expecting.
-     */
-    void setStackInSlot(int slot, ItemStack stack, @Nullable Direction side);
+    // 某个方向可用的slot个数
+    default int getSlots(@Nullable Direction side){
+        if (side == null)return getItems().size();
+        else return getAccCtl().get(side).length;
+    }
+    // 总物品槽数
+    @Override
+    default int getSlots() {return getItems().size();}
+
+    // 从某个方向获取某个slot中的内容
+    // 注意：返回的ItemStack不能修改。
+    // 我不理解为什么这个要加一个方向参数，按理说get函数又不涉及修改内容，查询难道还要限制吗？
+    default ItemStack getStackInSlot(int slot, @Nullable Direction side){
+        return slot >= 0 && slot < getSlots() ? getStackInSlot(slot) : ItemStack.EMPTY;
+    }
+    @Override
+    default ItemStack getStackInSlot(int slot) {
+        return getStackInSlot(slot, null);
+    }
+    // 直接设置某个物品槽中的物品
+    // 同样感觉加方向参数没意义，这个函数明显是直接顶替的，不会作为玩家操作的游戏逻辑
+    default ItemStack setStackInSlot(int slot, ItemStack stack, @Nullable Direction side){
+        if (slot >= 0 && slot < getSlots()){
+            ItemStack beforeStack = getItems().get(slot);
+            getItems().set(slot,stack);
+            return beforeStack;
+        }
+        return ItemStack.EMPTY;
+    }
 
     @Override
     default void setStackInSlot(int slot, ItemStack stack) {
-        setStackInSlot(slot, stack, getInventorySideFor());
+        setStackInSlot(slot, stack, null);
     }
 
-    /**
-     * A sided variant of {@link IItemHandler#getSlots()}, docs copied for convenience.
-     * <p>
-     * Returns the number of slots available
-     *
-     * @param side The side we are interacting with the handler from (null for internal).
-     *
-     * @return The number of slots available
-     */
-    int getSlots(@Nullable Direction side);
+    // 向特定物品槽输入物品，返回未输入的物品，如果全部输入则返回 ItemStack.EMPTY
+    // 说明：返回的物品可以被安全地修改
+    default ItemStack insertItem(int slot, ItemStack stack, @Nullable Direction side, boolean simulate){
+        if (side!=null && allowAcc(side, true) == SlotAccCtl.EMPTY)return stack;
+        ItemStack beforeStack = getStackInSlot(slot);
+        boolean sameType = false;
+        if (stack.isEmpty() || !(sameType = ItemHandlerHelper.canItemStacksStack(beforeStack, stack))) {
+            return stack;
+        }
+        int needed = getSlotLimit(slot) - beforeStack.getCount();
+        if (needed <= 0) {
+            //Fail if we are a full slot
+            return stack;
+        }
 
-    @Override
-    default int getSlots() {
-        return getSlots(getInventorySideFor());
+        int toAdd = Math.min(stack.getCount(), needed);
+        if (!simulate) {
+            beforeStack.grow(toAdd);
+        }
+        return stack.copyWithCount(stack.getCount() - toAdd);
     }
-
-    /**
-     * A sided variant of {@link IItemHandler#getStackInSlot(int)}, docs copied for convenience.
-     * <p>
-     * Returns the {@link ItemStack} in a given slot.
-     * <p>
-     * The result's stack size may be greater than the itemstack's max size.
-     * <p>
-     * If the result is empty, then the slot is empty.
-     *
-     * <p>
-     * <strong>IMPORTANT:</strong> This {@link ItemStack} <em>MUST NOT</em> be modified. This method is not for altering an inventory's contents. Any implementers who
-     * are able to detect modification through this method should throw an exception.
-     * </p>
-     * <p>
-     * <strong><em>SERIOUSLY: DO NOT MODIFY THE RETURNED ITEMSTACK</em></strong>
-     * </p>
-     *
-     * @param slot Slot to query
-     * @param side The side we are interacting with the handler from (null for internal).
-     *
-     * @return {@link ItemStack} in given slot. Empty {@link ItemStack} if the slot is empty.
-     *
-     * @apiNote <strong>IMPORTANT:</strong> Do not modify this {@link ItemStack}.
-     */
-    ItemStack getStackInSlot(int slot, @Nullable Direction side);
-
-    @Override
-    default ItemStack getStackInSlot(int slot) {
-        return getStackInSlot(slot, getInventorySideFor());
-    }
-
-    /**
-     * A sided variant of {@link IItemHandler#insertItem(int, ItemStack, boolean)}, docs copied for convenience.
-     *
-     * <p>
-     * Inserts an {@link ItemStack} into the given slot and return the remainder. The {@link ItemStack} <em>should not</em> be modified in this function!
-     * </p>
-     * Note: This behaviour is subtly different from
-     * {@link net.minecraftforge.fluids.capability.IFluidHandler#fill(net.minecraftforge.fluids.FluidStack,
-     * net.minecraftforge.fluids.capability.IFluidHandler.FluidAction)}
-     *
-     * @param slot   Slot to insert into.
-     * @param stack  {@link ItemStack} to insert. This must not be modified by the item handler.
-     * @param side   The side we are interacting with the handler from (null for internal).
-     * @param action The action to perform, either {@link Action#EXECUTE} or {@link Action#SIMULATE}
-     *
-     * @return The remaining {@link ItemStack} that was not inserted (if the entire stack is accepted, then return an empty {@link ItemStack}). May be the same as the
-     * input {@link ItemStack} if unchanged, otherwise a new {@link ItemStack}. The returned ItemStack can be safely modified after
-     *
-     * @implNote The {@link ItemStack} <em>should not</em> be modified in this function!
-     */
-    ItemStack insertItem(int slot, ItemStack stack, @Nullable Direction side, Action action);
 
     @Override
     default ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
-        return insertItem(slot, stack, getInventorySideFor(), Action.get(!simulate));
+        return insertItem(slot, stack, null, simulate);
     }
 
-    /**
-     * A sided variant of {@link IItemHandler#extractItem(int, int, boolean)}, docs copied for convenience.
-     * <p>
-     * Extracts an {@link ItemStack} from the given slot.
-     * <p>
-     * The returned value must be empty if nothing is extracted, otherwise its stack size must be less than or equal to {@code amount} and
-     * {@link ItemStack#getMaxStackSize()}.
-     * </p>
-     *
-     * @param slot   Slot to extract from.
-     * @param amount Amount to extract (may be greater than the current stack's max limit)
-     * @param side   The side we are interacting with the handler from (null for internal).
-     * @param action The action to perform, either {@link Action#EXECUTE} or {@link Action#SIMULATE}
-     *
-     * @return {@link ItemStack} extracted from the slot, must be empty if nothing can be extracted. The returned {@link ItemStack} can be safely modified after, so item
-     * handlers should return a new or copied stack.
-     *
-     * @implNote The returned {@link ItemStack} can be safely modified after, so a new or copied stack should be returned.
-     */
-    ItemStack extractItem(int slot, int amount, @Nullable Direction side, Action action);
+    // 从特定物品槽抽取特定数量的物品，返回成功抽取的物品
+    // 说明：返回的ItemStack可以被修改。
+    default ItemStack extractItem(int slot, int amount, @Nullable Direction side, boolean simulate){
+        SlotAccCtl accCtl = null;
+        if (side != null && (accCtl = allowAcc(side, false)) == SlotAccCtl.EMPTY || amount <= 0) return ItemStack.EMPTY;
+        ItemStack originStack = getStackInSlot(slot);
+        if (originStack.isEmpty())return ItemStack.EMPTY;
+        assert accCtl != null;
+        int extAmount = Math.min(accCtl.out(),Math.min(amount, originStack.getCount()));
+        if (!simulate){
+            originStack.shrink(extAmount);
+            if (originStack.isEmpty()){
+                setStackInSlot(slot, ItemStack.EMPTY);
+            }else
+                setStackInSlot(slot, originStack);
+        }
+        return originStack.copyWithCount(extAmount);
+    }
 
     @Override
     default ItemStack extractItem(int slot, int amount, boolean simulate) {
-        return extractItem(slot, amount, getInventorySideFor(), Action.get(!simulate));
+        return extractItem(slot, amount, null, simulate);
     }
 
-    /**
-     * A sided variant of {@link IItemHandler#getSlotLimit(int)}, docs copied for convenience.
-     * <p>
-     * Retrieves the maximum stack size allowed to exist in the given slot.
-     *
-     * @param slot Slot to query.
-     * @param side The side we are interacting with the handler from (null for internal).
-     *
-     * @return The maximum stack size allowed in the slot.
-     */
-    int getSlotLimit(int slot, @Nullable Direction side);
+    // 获取某个物品槽地最大容量
+    // 同上，get函数似乎不需要参数
+    default int getSlotLimit(int slot, @Nullable Direction side){
+        if (slot < 0 || slot >= getSlots())return 0;
+        // 默认最大堆叠，和物品本身最大堆叠的最小值
+        return Math.min(Container.LARGE_MAX_STACK_SIZE, getStackInSlot(slot).getMaxStackSize());
+    }
 
     @Override
     default int getSlotLimit(int slot) {
-        return getSlotLimit(slot, getInventorySideFor());
+        return getSlotLimit(slot, null);
     }
 
-    /**
-     * A sided variant of {@link IItemHandler#isItemValid(int, ItemStack)}, docs copied for convenience.
-     *
-     * <p>
-     * This function re-implements the vanilla function {@link net.minecraft.world.Container#canPlaceItem(int, ItemStack)}. It should be used instead of simulated
-     * insertions in cases where the contents and state of the inventory are irrelevant, mainly for the purpose of automation and logic (for instance, testing if a
-     * minecart can wait to deposit its items into a full inventory, or if the items in the minecart can never be placed into the inventory and should move on).
-     * </p>
-     * <ul>
-     * <li>isItemValid is false when insertion of the item is never valid.</li>
-     * <li>When isItemValid is true, no assumptions can be made and insertion must be simulated case-by-case.</li>
-     * <li>The actual items in the inventory, its fullness, or any other state are <strong>not</strong> considered by isItemValid.</li>
-     * </ul>
-     *
-     * @param slot  Slot to query for validity
-     * @param stack Stack to test with for validity
-     * @param side  The side we are interacting with the handler from (null for internal).
-     *
-     * @return true if the slot can accept the {@link ItemStack}, not considering the current state of the inventory. false if the slot can never insert the
-     * {@link ItemStack} in any situation.
-     */
-    boolean isItemValid(int slot, ItemStack stack, @Nullable Direction side);
+    // 判断是否可以接收特定类型的物品
+    // 说明：只能判断物品类型是否合法，但不能判断插入一定数量物品是否成功，万一这个物品槽已经满了呢。
+    default boolean isItemValid(int slot, ItemStack stack, @Nullable Direction side){
+        if (side != null && allowAcc(side, true) == SlotAccCtl.EMPTY)return false;
+        if (slot < 0 || slot >= getSlots())return false;
+        return getStackInSlot(slot).is(stack.getItem());
+    }
 
     @Override
     default boolean isItemValid(int slot, ItemStack stack) {
-        return isItemValid(slot, stack, getInventorySideFor());
+        return isItemValid(slot, stack, null);
+    }
+    default boolean inventoryEmpty(){
+        for (ItemStack itemStack : getItems()) {
+            if (!itemStack.isEmpty())
+                return false;
+        }
+        return true;
     }
 }

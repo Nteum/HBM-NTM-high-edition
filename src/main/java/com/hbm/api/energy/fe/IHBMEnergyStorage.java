@@ -2,7 +2,9 @@ package com.hbm.api.energy.fe;
 
 import com.hbm.api.IContentsListener;
 import net.minecraftforge.energy.IEnergyStorage;
-
+/**
+ * 1. 我在考虑要不要单纯用
+ * */
 public interface IHBMEnergyStorage extends IEnergyStorage , IContentsListener {
     void setEnergy(long energy);
     long receiveEnergy(long maxReceive, boolean simulate);

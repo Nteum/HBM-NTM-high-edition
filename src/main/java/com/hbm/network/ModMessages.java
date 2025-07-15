@@ -3,19 +3,26 @@ package com.hbm.network;
 import com.hbm.HBM;
 import com.hbm.network.packet.toclient.AuxParticlePacket;
 import com.hbm.network.packet.toclient.S2CExplosionEffectPacket;
-import com.hbm.network.packet.toclient.UpdateMenuPacket;
-import com.hbm.network.packet.toclient.UpdateTilePacket;
+import com.hbm.network.packet.toclient.UpdateTileMessage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.SectionPos;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.network.NetworkDirection;
+import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
+
+import java.util.Optional;
+import java.util.function.BiConsumer;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 public class ModMessages {
     //接受和发送自定义数据包的类
@@ -23,22 +30,23 @@ public class ModMessages {
     public static final SimpleChannel netHandler =  NetworkRegistry.ChannelBuilder.named(HBM.rl("message")).networkProtocolVersion(()->version)
             .clientAcceptedVersions(version::equals).serverAcceptedVersions(version::equals).simpleChannel();
     private static int packetId = 0;
-    private static int id(){return packetId++;}
 
     public static void register(){
-        //C2SExplosionEffectPacket
-        netHandler.messageBuilder(S2CExplosionEffectPacket.class, packetId++, NetworkDirection.PLAY_TO_CLIENT).decoder(S2CExplosionEffectPacket::new).encoder(S2CExplosionEffectPacket::toBytes)
-                .consumerMainThread(S2CExplosionEffectPacket::handle).add();
-        //AuxParticlePacket
-        netHandler.messageBuilder(AuxParticlePacket.class, packetId++ , NetworkDirection.PLAY_TO_CLIENT).decoder(AuxParticlePacket::new).encoder(AuxParticlePacket::toBytes)
-                .consumerMainThread(AuxParticlePacket::handle).add();
-        //
-        netHandler.messageBuilder(UpdateTilePacket.class, packetId++ , NetworkDirection.PLAY_TO_CLIENT).decoder(UpdateTilePacket::decode).encoder(UpdateTilePacket::encode)
-                .consumerMainThread(UpdateTilePacket::handle).add();
-//        netHandler.messageBuilder(UpdateMenuPacket.class, packetId++ , NetworkDirection.PLAY_TO_CLIENT).decoder(UpdateMenuPacket::decode).encoder(UpdateMenuPacket::encode)
-//                .consumerMainThread(UpdateMenuPacket::handle).add();
+        registerServerToClient(S2CExplosionEffectPacket.class, S2CExplosionEffectPacket::decode, S2CExplosionEffectPacket::encode, S2CExplosionEffectPacket::handle);
+        registerServerToClient(AuxParticlePacket.class, AuxParticlePacket::decode, AuxParticlePacket::encode, AuxParticlePacket::handle);
+        registerServerToClient(UpdateTileMessage.class, UpdateTileMessage::decode, UpdateTileMessage::encode, UpdateTileMessage::handle);
     }
 
+    public static <MSG>void registerClientToServer(Class<MSG> type, Function<FriendlyByteBuf, MSG> decoder , BiConsumer<MSG, FriendlyByteBuf> encoder, BiConsumer<MSG, Supplier<NetworkEvent.Context>> consumer){
+        registerMessage(type, decoder, encoder, consumer, NetworkDirection.PLAY_TO_SERVER);
+    }
+    public static <MSG>void registerServerToClient(Class<MSG> type, Function<FriendlyByteBuf, MSG> decoder , BiConsumer<MSG, FriendlyByteBuf> encoder, BiConsumer<MSG, Supplier<NetworkEvent.Context>> consumer){
+        registerMessage(type, decoder, encoder, consumer, NetworkDirection.PLAY_TO_CLIENT);
+    }
+    //这里参考的是mek中的注册，它之间用的simplechannel自带的注册方式，但似乎和channelBuilder的方式有所区别。
+    public static <MSG>void registerMessage(Class<MSG> type, Function<FriendlyByteBuf, MSG> decoder , BiConsumer<MSG, FriendlyByteBuf> encoder, BiConsumer<MSG, Supplier<NetworkEvent.Context>> consumer, NetworkDirection direction){
+        netHandler.registerMessage(packetId++, type, encoder, decoder, consumer, Optional.of(direction));
+    }
 
     public static <MSG> void sendToServer(MSG message){
         netHandler.sendToServer(message);
@@ -46,6 +54,15 @@ public class ModMessages {
 
     public static <MSG> void sendToPlayer(MSG message, ServerPlayer player){
         netHandler.send(PacketDistributor.PLAYER.with(()-> player),message);
+    }
+    public static <MSG> void sendToDimension(MSG message, ResourceKey<Level> dimensionId){
+        netHandler.send(PacketDistributor.DIMENSION.with(()->dimensionId),message);
+    }
+    public static <MSG> void sendToAllAround(MSG message, PacketDistributor.TargetPoint point) {
+        netHandler.send(PacketDistributor.NEAR.with(()->point),message);
+    }
+    public static <MSG> void sendToAll(MSG message){
+        netHandler.send(PacketDistributor.ALL.noArg(), message);
     }
     public static <MSG> void sendToAllTracking(MSG message, BlockEntity tile) {
         sendToAllTracking(message, tile.getLevel(), tile.getBlockPos());
