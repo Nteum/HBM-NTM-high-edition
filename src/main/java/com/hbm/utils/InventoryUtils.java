@@ -1,5 +1,6 @@
 package com.hbm.utils;
 
+import com.hbm.blockentity.base2.BaseMachineBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
@@ -30,12 +31,12 @@ public class InventoryUtils {
     private InventoryUtils() {
     }
     @Nullable
-    public static Boolean extractItem(Level level, BaseContainerBlockEntity dest, Direction interactDir)
+    public static Boolean extractItem(Level level, BaseMachineBlockEntity dest, Direction interactDir)
     {
         return extractItem(level,dest,null,null,interactDir,allowAll);
     }
     @Nullable
-    public static Boolean extractItem(Level level, BaseContainerBlockEntity dest,List<Integer> extSlots, Direction interactDir)
+    public static Boolean extractItem(Level level, BaseMachineBlockEntity dest,List<Integer> extSlots, Direction interactDir)
     {
         return extractItem(level,dest,null,extSlots, interactDir,allowAll);
     }
@@ -47,7 +48,7 @@ public class InventoryUtils {
      * @return Null if we did nothing {no IItemHandler}, True if we moved an item, False if we moved no items
      */
     @Nullable
-    public static Boolean extractItem(Level level, BaseContainerBlockEntity dest, @Nullable BlockPos proxyPos, @Nullable List<Integer> extSlots, Direction interactDir,
+    public static Boolean extractItem(Level level, BaseMachineBlockEntity dest, @Nullable BlockPos proxyPos, @Nullable List<Integer> extSlots, Direction interactDir,
                                       Function<ItemStack,Boolean> extCond)
     {
         BlockPos destPos = proxyPos==null?dest.getBlockPos():proxyPos;
@@ -116,18 +117,18 @@ public class InventoryUtils {
                 })
                 .orElse(true);
     }
-    public static boolean insertItem(BaseContainerBlockEntity src, Direction interactDir)
+    public static boolean insertItem(BaseMachineBlockEntity src, Direction interactDir)
     {
         return insertItem(src,null,null,interactDir);
     }
-    public static boolean insertItem(BaseContainerBlockEntity src,List<Integer> intSlots, Direction interactDir)
+    public static boolean insertItem(BaseMachineBlockEntity src,List<Integer> intSlots, Direction interactDir)
     {
         return insertItem(src,null,intSlots,interactDir);
     }
     /** 向外界实体输出物品
      * Copied from TileEntityHopper#transferItemsOut and added capability support
      */
-    public static boolean insertItem(BaseContainerBlockEntity src,@Nullable BlockPos proxyPos,@Nullable List<Integer> intSlots, Direction interactDir)
+    public static boolean insertItem(BaseMachineBlockEntity src,@Nullable BlockPos proxyPos,@Nullable List<Integer> intSlots, Direction interactDir)
     {
         List<Integer> slotList = intSlots==null? IntStream.range(0,src.getContainerSize()).boxed().toList():intSlots;
         BlockPos srcPos = proxyPos==null?src.getBlockPos():proxyPos;
@@ -272,13 +273,28 @@ public class InventoryUtils {
 
         return Optional.empty();
     }
-
+    // 减少大小，最多减到0，输出变化后的itemstack
+    // 使用这个函数不在乎amount是否被减完
     public static ItemStack shrink(int amount, ItemStack itemStack){
         itemStack.shrink(amount);
         return itemStack.isEmpty() ? ItemStack.EMPTY : itemStack;
     }
-    public static ItemStack grow(int amount, ItemStack itemStack, ItemStack itemStack2){
-        if (itemStack.isEmpty())itemStack = new ItemStack(itemStack2.getItem(),amount);
+    // 增加大小，最多增加到预设的最大堆叠数
+    public static ItemStack grow(int amount, ItemStack itemStack){
+        itemStack.grow(amount);
+        if (itemStack.getCount() > itemStack.getMaxStackSize())
+            itemStack.setCount(itemStack.getMaxStackSize());
+        return itemStack;
+    }
+    // 判断两个itemstack是否可以不损失地加在一起
+    // 用于判断机器输出口是否可以加工。
+    public static boolean canAddItemEntirely(ItemStack originStack, ItemStack toPut){
+        return originStack.isEmpty() || ItemHandlerHelper.canItemStacksStack(originStack,toPut) && originStack.getCount()+toPut.getCount() <= originStack.getMaxStackSize();
+    }
+    // 在一个itemstack的基础上增长物品
+    // 使用这个函数已经暗示itemstack和itemstack2是同类物品了，或者第一个itemstack是空的
+    public static ItemStack growNoCheck(int amount, ItemStack itemStack, ItemStack itemStack2){
+        if (itemStack.isEmpty())itemStack = itemStack2.copy();
         else itemStack.grow(amount);
         return itemStack;
     }

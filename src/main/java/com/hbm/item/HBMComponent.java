@@ -19,9 +19,9 @@ public class HBMComponent {
     public static void register(DeferredRegister<Item> ITEMS){
         LASER_CRYSTAL_DIGAMMA = ITEMS.register("laser_crystal_digamma",()->new Item(new Item.Properties()));
         BATTERY_CREATIVE = ITEMS.register("battery_creative",()->new BatteryItem(-1, 1_000_000L, new Item.Properties().stacksTo(1)));
-        BATTERY_GENERIC = ITEMS.register("battery_generic",()->new BatteryItem(true,5_000, 100, new Item.Properties()));
-        BATTERY_ADVANCED = ITEMS.register("battery_advanced",()->new BatteryItem(60_000, 500, new Item.Properties()));
-        BATTERY_LITHIUM = ITEMS.register("battery_lithium",()->new BatteryItem(250_000, 1000, new Item.Properties()));
+        BATTERY_GENERIC = ITEMS.register("battery_generic",()->new BatteryItem(false,5_000, 100, new Item.Properties()));
+        BATTERY_ADVANCED = ITEMS.register("battery_advanced",()->new BatteryItem(false,60_000, 500, new Item.Properties()));
+        BATTERY_LITHIUM = ITEMS.register("battery_lithium",()->new BatteryItem(false,250_000, 1000, new Item.Properties()));
     }
     public static void creativeTab(CreativeModeTab.Output pOutput){
         pOutput.accept(LASER_CRYSTAL_DIGAMMA.get());

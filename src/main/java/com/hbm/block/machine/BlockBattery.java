@@ -48,11 +48,11 @@ public class BlockBattery extends BaseMachineBlock {
         return pState.getBlock() instanceof BlockBattery ? new BatteryEntity(pPos, pState) : null;
     }
 
-    @Nullable
-    @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return pBlockEntityType == ModBlockEntityType.BATTERY_ENTITY.get() ? BatteryEntity::tick : null;
-    }
+//    @Nullable
+//    @Override
+//    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
+//        return pBlockEntityType == ModBlockEntityType.BATTERY_ENTITY.get() ? BatteryEntity::tick : null;
+//    }
 
     @Override
     public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pMovedByPiston) {

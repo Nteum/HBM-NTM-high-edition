@@ -1,12 +1,16 @@
 package com.hbm.blockentity.machine;
 
 import com.hbm.HBMKey;
+import com.hbm.api.energy.BasicEnergyContainer;
+import com.hbm.api.energy.IEnergyContainer;
+import com.hbm.api.energy.ProxyEnergyHandler;
 import com.hbm.api.energy.fe.HBMEnergyStorage;
 import com.hbm.api.energy.fe.SidedEnergyWrapper;
 import com.hbm.api.energy.fe.TransmitHelper;
 import com.hbm.block.machine.BlockAssembler;
 import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.blockentity.base.BedLikeBlockEntity;
+import com.hbm.capabilities.Capabilities;
 import com.hbm.gui.menu.AssemblerMenu;
 import com.hbm.Inventory.recipe.AssemblerRecipe;
 import com.hbm.Inventory.recipe.ModRecipeType;
@@ -48,6 +52,7 @@ public class AssemblerEntity extends BedLikeBlockEntity {
 
     static final int[] INPUT_SLOTS = IntStream.range(5,17).toArray();
     static final int[] OUTPUT_SLOTS = new int[]{4};
+    public final BasicEnergyContainer energyContainer = new BasicEnergyContainer(energyCapacity, energyCapacity, 0);
 
     protected final ContainerData containerData = new ContainerData() {
         @Override
@@ -72,7 +77,8 @@ public class AssemblerEntity extends BedLikeBlockEntity {
     public AssemblerEntity(BlockPos pPos, BlockState pBlockState) {
         super(ModBlockEntityType.ASSEMBLER_ENTITY.get(), pPos, pBlockState);
         items = NonNullList.withSize(17,ItemStack.EMPTY);
-        capabilitiesCache.addCapabilityResolver(new SidedEnergyWrapper(HBMEnergyStorage.input(100_000)));
+//        capabilitiesCache.addCapabilityResolver(new SidedEnergyWrapper(HBMEnergyStorage.input(100_000)));
+        this.capabilitiesContent.addCapability(Capabilities.LONG_ENERGY, new ProxyEnergyHandler(energyContainer));
         multiblockData.put(ForgeCapabilities.ENERGY, -1,0,1,Direction.SOUTH, 0,0,1,Direction.SOUTH, -1,0,-2,Direction.NORTH, 0,0,-2,Direction.NORTH)
                 .put(ForgeCapabilities.ITEM_HANDLER, 1,0,-1, Direction.EAST, -2,0,0,Direction.WEST);
         multiblockData.transDirection(pPos,pBlockState.getValue(BlockAssembler.FACING));
@@ -218,7 +224,8 @@ public class AssemblerEntity extends BedLikeBlockEntity {
     @Override
     public void invalidateCaps() {
         super.invalidateCaps();
-        capabilitiesCache.invalidateAll();
+//        capabilitiesCache.invalidateAll();
+        this.capabilitiesContent.invalidateAll();
     }
 
     @Override
@@ -240,7 +247,7 @@ public class AssemblerEntity extends BedLikeBlockEntity {
     }
     public void setDummyCaps(){
         if (hasLevel() && !level.isClientSide()){
-            this.capabilitiesCache.allocDummyBlockCaps(level,this.multiblockData);
+//            this.capabilitiesCache.allocDummyBlockCaps(level,this.multiblockData);
         }
     }
 }

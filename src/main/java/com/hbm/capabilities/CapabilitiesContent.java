@@ -23,17 +23,19 @@ public class CapabilitiesContent {
     private final Map<Capability<?>, Object> handlerMap = new IdentityHashMap<>();
     private final Map<Capability<?>, LazyOptional<?>> lazyOptionalMap = new IdentityHashMap<>();
     // 能力通过方块面访问的情况，注意：这里的方向仅仅是能否访问能力，而不代表哪个面可以访问能力内部的特殊容器
+    // 方向信息需要序列化
     private final Map<Capability<?>, List<Direction>> sideMap = new IdentityHashMap<>();
     // 添加能力
     // 方向要么所有面都可以，要么不可从外界访问
-    public <T>void addCapability(Capability<T> capability, T handler, boolean external){
+    public <T>void addCapability(Capability<T> capability, T handler){
         if (!lazyOptionalMap.containsKey(capability)){
             handlerMap.put(capability, handler);
             lazyOptionalMap.put(capability, LazyOptional.of(() -> handler));
-            if (external)
-                sideMap.put(capability, List.of(Direction.values()));
-            else
-                sideMap.put(capability, List.of());
+            sideMap.put(capability, List.of(Direction.values()));
+//            if (external)
+//                sideMap.put(capability, List.of(Direction.values()));
+//            else
+//                sideMap.put(capability, List.of());
         }
     }
     // 添加能力，但可以指明方向

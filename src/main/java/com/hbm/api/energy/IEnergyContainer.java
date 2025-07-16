@@ -48,7 +48,7 @@ public interface IEnergyContainer extends IContentsListener, INBTSerializable<Co
         }
         return amount;
     }
-    default long getNeeded(){return getEnergy()-getCapacity();}
+    default long getNeeded(){return getCapacity()-getEnergy();}
     default double getPercent(){
         return (double) getEnergy() / getCapacity();
     }

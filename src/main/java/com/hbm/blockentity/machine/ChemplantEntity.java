@@ -2,6 +2,8 @@ package com.hbm.blockentity.machine;
 
 import com.hbm.HBMLang;
 import com.hbm.api.fluid.BaseFluidHandler;
+import com.hbm.api.fluid.BasicFluidTank;
+import com.hbm.api.fluid.IExtendedFluidTank;
 import com.hbm.api.fluid.SidedFluidWrapper;
 import com.hbm.block.machine.BlockChemplant;
 import com.hbm.blockentity.ModBlockEntityType;
@@ -21,7 +23,11 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
+
 public class ChemplantEntity extends DummyableBlockEntity {
+    private static final int maxFluid = 24_000;
+    private List<IExtendedFluidTank> tanks = List.of();
     protected final ContainerData containerData = new ContainerData() {
         @Override
         public int get(int pIndex) {
@@ -44,7 +50,11 @@ public class ChemplantEntity extends DummyableBlockEntity {
     public ChemplantEntity(BlockPos pPos, BlockState pBlockState) {
         super(ModBlockEntityType.CHEMPLANT_ENTITY.get(), pPos, pBlockState);
         this.items = NonNullList.withSize(21, ItemStack.EMPTY);
-        this.capabilitiesCache.addCapabilityResolver(new SidedFluidWrapper(new BaseFluidHandler(4,24_000)));
+        for (int i = 0; i < 4; i++) {
+            this.tanks.add(new BasicFluidTank(maxFluid));
+        }
+        this.capabilitiesContent.addCapability(ForgeCapabilities.FLUID_HANDLER, this);
+//        this.capabilitiesCache.addCapabilityResolver(new SidedFluidWrapper(new BaseFluidHandler(4,24_000)));
     }
 
 
@@ -63,6 +73,11 @@ public class ChemplantEntity extends DummyableBlockEntity {
         double y = getBlockPos().getY() + 3;
         double z = getBlockPos().getZ() + 0.5 + facing.getStepZ() * 1.125 + rot.getStepZ() * 0.125;
         level.addParticle(ParticleTypes.SMOKE, x, y, z, 0.0, 0.1, 0.0);
+    }
+
+    @Override
+    public List<IExtendedFluidTank> getFluidTanks(@Nullable Direction side) {
+        return this.tanks;
     }
 
     protected int getProgress(){return 0;}

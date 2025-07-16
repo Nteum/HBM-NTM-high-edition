@@ -16,6 +16,7 @@ import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
@@ -49,11 +50,12 @@ public class BarrelGui extends AbstractContainerScreen<BarrelMenu> {
     protected void renderBg(GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY) {
         pGuiGraphics.blit(TEXTURE,leftPos,topPos,0,0,imageWidth,imageHeight);
         if ((menu).container instanceof BarrelEntity barrelEntity){
-            IFluidHandler fluidTank = barrelEntity.getFluidTank();
+//            IFluidHandler fluidTank = barrelEntity.getFluidTank(0,null);
+            IFluidHandler fluidHandler = barrelEntity.getCapability(ForgeCapabilities.FLUID_HANDLER).orElse(null);
 //            fluidBar.updateFluidTank(fluidTank, 0);
-            if (fluidTank != null){
-                FluidStack fluidInTank = fluidTank.getFluidInTank(0);
-                int tankCapacity = fluidTank.getTankCapacity(0);
+            if (fluidHandler != null){
+                FluidStack fluidInTank = fluidHandler.getFluidInTank(0);
+                int tankCapacity = fluidHandler.getTankCapacity(0);
                 RenderUtils.fluidTank(leftPos+71,topPos + 69, 34, 52, (float) fluidInTank.getAmount() / tankCapacity,pGuiGraphics, fluidInTank.getFluid());
                 //显示悬浮字体
                 if (pMouseX >= leftPos+71&&pMouseX<=leftPos+105&&pMouseY>=topPos+17&&pMouseY<=topPos+69){

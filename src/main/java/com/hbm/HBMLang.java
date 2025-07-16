@@ -16,12 +16,15 @@ public enum HBMLang implements ILangEntry {
     ENERGY("item","battery.tooltip"),
     FLUID_CAPACITY("item","fluid_capacity"),
     // blockentity name
+    DIFURNACE("container","difurnace"),
+    CRUCIBLE("container","crucible"),
     ELECTRIC_FURNACE("container","electric_furnace"),
     BOILER("container","boiler"),
     ELECTRIC_BOILER("container","electric_boiler"),
     NUCLEAR_BOILER("container","nuclear_boiler"),
     CHEMPLANT("container", "chemplant"),
     BARREL("container", "barrel"),
+    BATTERY("container", "battery"),
     // command
     COMMAND_DEBUG("command","debug"),
     //Redstone Control

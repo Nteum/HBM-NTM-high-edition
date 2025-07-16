@@ -19,6 +19,9 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.stream.IntStream;
+
 /**
  * 大部分机器的父类，大量功能直接来自BaseContainerBlockEntity
  * */
@@ -93,33 +96,35 @@ public abstract class BaseMachineBlockEntity extends HBMBlockEntity implements W
         return items;
     }
 
-
     //==================WorldlyContainer===================
     // 实际上我不太喜欢实现这个接口，但原版的漏斗就认这个接口
     @Override
     public int @NotNull [] getSlotsForFace(Direction pSide) {
-        return new int[0];
+        // 默认所有口都可以访问
+        return IntStream.range(0, this.items.size()-1).toArray();
     }
 
     @Override
     public boolean canPlaceItemThroughFace(int pIndex, ItemStack pItemStack, @Nullable Direction pDirection) {
-        if (pDirection == null) return true;
-        SlotAccCtl[] slotAccCtls = getAccCtl().get(pDirection);
-        for (SlotAccCtl accCtl : slotAccCtls) {
-            if (accCtl.getSlot() == pIndex && accCtl.allowIn())
-                return true;
-        }
-        return false;
+//        if (pDirection == null) return true;
+//        SlotAccCtl[] slotAccCtls = getAccCtl().get(pDirection);
+//        for (SlotAccCtl accCtl : slotAccCtls) {
+//            if (accCtl.getSlot() == pIndex && accCtl.allowIn())
+//                return true;
+//        }
+//        return false;
+        return allowInput(pIndex, pDirection) && isItemValid(pIndex, pItemStack, pDirection);
     }
 
     @Override
     public boolean canTakeItemThroughFace(int pIndex, ItemStack pStack, Direction pDirection) {
-        SlotAccCtl[] slotAccCtls = getAccCtl().get(pDirection);
-        for (SlotAccCtl accCtl : slotAccCtls) {
-            if (accCtl.getSlot() == pIndex && accCtl.allowOut())
-                return true;
-        }
-        return false;
+//        SlotAccCtl[] slotAccCtls = getAccCtl().get(pDirection);
+//        for (SlotAccCtl accCtl : slotAccCtls) {
+//            if (accCtl.getSlot() == pIndex && accCtl.allowOut())
+//                return true;
+//        }
+//        return false;
+        return allowOutput(pIndex, pDirection);
     }
 
     @Override
@@ -139,12 +144,14 @@ public abstract class BaseMachineBlockEntity extends HBMBlockEntity implements W
 
     @Override
     public ItemStack removeItem(int pSlot, int pAmount) {
-        return extractItem(pSlot, pAmount, false);
+//        return extractItem(pSlot, pAmount, false);
+        return ContainerHelper.removeItem(this.items, pSlot, pAmount);
     }
 
     @Override
     public ItemStack removeItemNoUpdate(int pSlot) {
-        return setStackInSlot(pSlot, ItemStack.EMPTY, null);
+//        return setStackInSlot(pSlot, ItemStack.EMPTY, null);
+        return ContainerHelper.takeItem(this.items, pSlot);
     }
 
     @Override

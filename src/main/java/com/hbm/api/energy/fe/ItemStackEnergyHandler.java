@@ -22,7 +22,7 @@ public class ItemStackEnergyHandler extends ItemCapabilityWrapper.ItemCapability
     public ItemStackEnergyHandler(long capacity, long inout, boolean isEmpty){
         this(new BasicEnergyContainer(capacity,inout));
         if (!isEmpty)
-            this.energyStorage.setCapacity(capacity);
+            this.energyStorage.setEnergy(capacity);
     }
     public ItemStackEnergyHandler(BasicEnergyContainer energyStorage){
         this.energyStorage = energyStorage;

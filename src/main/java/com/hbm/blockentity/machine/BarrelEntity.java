@@ -173,9 +173,9 @@ public class BarrelEntity extends BaseMachineBlockEntity implements IPacketUpdat
     }
 
     public static enum BarrelMode{IN,INOUT,OUT,FORBID}
-    public int getCapacity(){
-        return properties.capacity;
-    }
+//    public int getCapacity(){
+//        return properties.capacity;
+//    }
     public boolean isCreative(){
         return properties.isCreative;
     }

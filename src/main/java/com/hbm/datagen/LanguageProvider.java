@@ -21,6 +21,7 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
         addBlocks();
         addMisc();
         addTooltip();
+        addContainer();
         //物品
         this.add(ModItems.ingot_steel.get(),"Steel Ignot");
         this.add(ModItems.plate_steel.get(),"Steel Plate");
@@ -37,9 +38,9 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
         this.add(ModBlocks.machine_schrabidium_battery.get(),"Schrabidium Energy Storage Block");
         this.add(ModBlocks.machine_dineutronium_battery.get(),"Spark Energy Storage Block");
         this.add(ModBlocks.anvil_iron.get(),"Tier 1 anvil");
-        //方块实体
-        this.add("hbmxx.container.difurnace","Blast Furnace");
-        this.add("hbmxx.container.crucible","Crucible");
+//        //方块实体
+//        this.add("hbmxx.container.difurnace","Blast Furnace");
+//        this.add("hbmxx.container.crucible","Crucible");
     }
     private void addCreativeTabs(){
         this.add(HBMLang.ITEMGROUP_ITEM.getTranslationKey(), "HBM Item");
@@ -76,6 +77,16 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
         this.add(HBMLang.UPGRADE_SCREAM, "Mining Laser Upgrade\nIt's like in Super Mario where all blocks are\nactually Toads, but here it's Half-Life scientists\nand they scream. A lot.");
         this.add(HBMLang.UPGRADE_NULLIFIER, "Mining Laser Upgrade\n50% chance to override worthless items with /dev/zero\n50% chance to move worthless items to /dev/null");
         this.add(HBMLang.UPGRADE_GC_SPEED, "Gas Centrifuge Upgrade\nAllows for total isotopic separation of HEUF6\nalso your centrifuge goes sicko mode");
+    }
+    private void addContainer(){
+        this.add(HBMLang.DIFURNACE, "Blast Furnace");
+        this.add(HBMLang.CRUCIBLE, "Crucible");
+        this.add(HBMLang.ELECTRIC_FURNACE, "Electric Furnace");
+        this.add(HBMLang.BOILER, "Boiler");
+        this.add(HBMLang.ELECTRIC_BOILER, "Electric Boiler");
+        this.add(HBMLang.NUCLEAR_BOILER, "Nuclear Boiler");
+        this.add(HBMLang.CHEMPLANT, "Chemplant");
+//        this.add(HBMLang.BARREL, "HBM Barrel");
     }
 
     private void add(ILangEntry entry,String value){

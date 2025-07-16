@@ -52,6 +52,7 @@ public class ClientSetup {
             MenuScreens.register(ModMenuType.ASSEMBLER_MENU.get(), AssemblerGui::new);
             MenuScreens.register(ModMenuType.CHEMPLANT_MENU.get(), ChemplantGui::new);
             MenuScreens.register(ModMenuType.BARREL_MENU.get(), BarrelGui::new);
+            MenuScreens.register(ModMenuType.ELECTRIC_FURNACE_MENU.get(), ElectricFurnaceGui::new);
             //方块实体渲染
             BlockEntityRenderers.register(ModBlockEntityType.PRESS_ENTITY.get(), PressRenderer::new);
             BlockEntityRenderers.register(ModBlockEntityType.ASSEMBLER_ENTITY.get(), AssemblerRenderer::new);

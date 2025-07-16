@@ -38,10 +38,11 @@ public abstract class BlockLitSingleBlockMachine extends BaseMachineBlock {
         if (pLevel.isClientSide) {
             return InteractionResult.SUCCESS;
         } else {
-            HBM.LOGGER.info("electric furnace clicked");
-            Boolean value = pState.getValue(LIT);
-            pState.setValue(LIT,!value);
-            pLevel.setBlockAndUpdate(pPos,pState);
+//            HBM.LOGGER.info("electric furnace clicked");
+//            Boolean value = pState.getValue(LIT);
+//            pState.setValue(LIT,!value);
+//            pLevel.setBlockAndUpdate(pPos,pState);
+            super.use(pState, pLevel, pPos, pPlayer, pHand, pHit);
             return InteractionResult.CONSUME;
         }
     }

@@ -9,6 +9,9 @@ public interface IEnergyHandler extends IContentsListener {
     default long getStored(){
         return getEnergyContainer().getEnergy();
     }
+    default long getCapacity(){
+        return getEnergyContainer().getCapacity();
+    }
     default boolean canReceive(){
         return getEnergyContainer().canReceive();
     }
@@ -20,5 +23,8 @@ public interface IEnergyHandler extends IContentsListener {
     }
     default long extract(long amount, boolean simulate){
         return getEnergyContainer().extract(amount, simulate);
+    }
+    default void setEnergy(long amount){
+        getEnergyContainer().setEnergy(amount);
     }
 }

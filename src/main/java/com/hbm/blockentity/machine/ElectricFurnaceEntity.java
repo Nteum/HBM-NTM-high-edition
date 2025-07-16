@@ -4,7 +4,9 @@ import com.hbm.HBMKey;
 import com.hbm.HBMLang;
 import com.hbm.Inventory.UpgradeManagerNT;
 import com.hbm.api.energy.BasicEnergyContainer;
+import com.hbm.api.energy.ProxyEnergyHandler;
 import com.hbm.api.energy.TransmitUtils;
+import com.hbm.api.math.MathUtils;
 import com.hbm.block.machine.BlockElectricFurnace;
 import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.blockentity.base2.BaseMachineBlockEntity;
@@ -15,8 +17,10 @@ import com.hbm.item.machine.ItemMachineUpgrade;
 import com.hbm.item.machine.ItemMachineUpgrade.UpgradeType;
 import com.hbm.registries.ModBlocks;
 import com.hbm.registries.ModTags;
+import com.hbm.utils.InventoryUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -25,6 +29,7 @@ import net.minecraft.world.Container;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.AbstractCookingRecipe;
 import net.minecraft.world.item.crafting.RecipeManager;
@@ -32,6 +37,7 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import net.minecraftforge.items.ItemHandlerHelper;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
@@ -48,21 +54,46 @@ public class ElectricFurnaceEntity extends BaseMachineBlockEntity implements Men
     public UpgradeManagerNT upgradeManager = new UpgradeManagerNT();
     private final BasicEnergyContainer energyContainer = new BasicEnergyContainer(maxPower);
     private final RecipeManager.CachedCheck<Container, ? extends AbstractCookingRecipe> quickCheck;
+    protected final ContainerData containerData = new ContainerData() {
+        @Override
+        public int get(int pIndex) {
+            return switch (pIndex){
+                case 0 -> progress;
+                case 1 -> maxProgress;
+                case 2 -> MathUtils.clampToInt(energyContainer.getEnergy());
+                case 3 -> MathUtils.clampToInt(energyContainer.getCapacity());
+                default -> 0;
+            };
+        }
+        @Override
+        public void set(int pIndex, int pValue) {
+
+        }
+        @Override
+        public int getCount() {
+            return 4;
+        }
+    };
 
     public ElectricFurnaceEntity(BlockPos pPos, BlockState pBlockState) {
         super(ModBlockEntityType.ELECTRIC_FURNACE_ENTITY.get(), pPos, pBlockState);
         this.quickCheck = RecipeManager.createCheck(RecipeType.SMELTING);
-        // 0:Battery slot , 1:raw material slot,
+        // 0:raw material slot, 1:Battery slot ,原本电池是0号槽，但由于熔炉配方只检查0号槽，所以把0号槽改成输入材料槽了。
         items = NonNullList.withSize(4, ItemStack.EMPTY);
-        capabilitiesContent.addCapability(ForgeCapabilities.ITEM_HANDLER, this, true);
-        capabilitiesContent.addCapability(Capabilities.LONG_ENERGY, this, true);
+        capabilitiesContent.addCapability(ForgeCapabilities.ITEM_HANDLER, this);
+        capabilitiesContent.addCapability(Capabilities.LONG_ENERGY, new ProxyEnergyHandler(this.energyContainer));
     }
 
     @Override
     public boolean canPlaceItem(int pIndex, ItemStack pStack) {
-        if (pIndex == 0 && pStack.is(ModTags.Items.BATTERY)) return true;
-        if (pIndex == 1)return this.quickCheck.getRecipeFor(this,level).isEmpty();
+        if (pIndex == 1 && pStack.is(ModTags.Items.BATTERY)) return true;
+        if (pIndex == 0)return this.quickCheck.getRecipeFor(this,level).isEmpty();
         return false;
+    }
+
+    @Override
+    public boolean allowOutput(int slot, Direction side) {
+        return slot == 1 || slot == 2;
     }
 
     @Override
@@ -81,7 +112,7 @@ public class ElectricFurnaceEntity extends BaseMachineBlockEntity implements Men
             this.consumption = 50 + speedLevel * 50 - powerLevel * 15;
             this.maxProgress = 100 - speedLevel * 25 + powerLevel * 10;
 
-            TransmitUtils.dischargeItem(this, items.get(0));
+            TransmitUtils.dischargeItem(this, items.get(1));
             // 给升级组件添加tooltip
             addUpgradeTooltips(items.get(3));
 
@@ -138,8 +169,7 @@ public class ElectricFurnaceEntity extends BaseMachineBlockEntity implements Men
         ItemStack resultItem = recipe.getResultItem(this.level.registryAccess());
         if (resultItem.isEmpty())return false;
         ItemStack slotItem = this.items.get(2);
-        if (!slotItem.is(resultItem.getItem()) || slotItem.getCount() + resultItem.getCount() >= slotItem.getMaxStackSize())return false;
-        return true;
+        return InventoryUtils.canAddItemEntirely(slotItem, resultItem);
     }
 
     private void processItem() {
@@ -152,13 +182,11 @@ public class ElectricFurnaceEntity extends BaseMachineBlockEntity implements Men
         ItemStack resultItem = recipe.getResultItem(this.level.registryAccess());
         if (resultItem.isEmpty())return;
         ItemStack slotItem = this.items.get(2);
-        if (!slotItem.is(resultItem.getItem()) || slotItem.getCount() + resultItem.getCount() >= slotItem.getMaxStackSize())return;
+        if (!InventoryUtils.canAddItemEntirely(slotItem, resultItem))return;
         // 修改物品内容
         ItemStack inItem = recipe.getIngredients().get(0).getItems()[0];
-        inItem.shrink(1);
-        inItem = inItem.isEmpty() ? ItemStack.EMPTY : inItem;
-        this.items.set(1, inItem);
-        this.items.set(2, resultItem);
+        this.items.set(0, InventoryUtils.shrink(inItem.getCount(), this.items.get(0)));
+        this.items.set(2, InventoryUtils.growNoCheck(1, slotItem, resultItem));
     }
 
     private boolean hasPower(){
@@ -168,7 +196,7 @@ public class ElectricFurnaceEntity extends BaseMachineBlockEntity implements Men
     @Override
     public void load(CompoundTag pTag) {
         super.load(pTag);
-        this.energyContainer.deserializeNBT(pTag);
+        this.energyContainer.deserializeNBT(pTag.getCompound(HBMKey.ENERGY));
         this.progress = pTag.getInt(HBMKey.PROGRESS);
     }
 
@@ -187,7 +215,7 @@ public class ElectricFurnaceEntity extends BaseMachineBlockEntity implements Men
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory) {
-        return new ElectricFurnaceMenu(pContainerId, pInventory);
+        return new ElectricFurnaceMenu(pContainerId, pInventory, this, this.containerData);
     }
     // 给升级组件添加tooltip
     // 通过Component.Searlizer来转换成json然后记录在itemstack的tag里

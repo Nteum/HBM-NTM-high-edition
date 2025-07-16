@@ -1,8 +1,10 @@
 package com.hbm.item.tool;
 
 import com.hbm.HBMLang;
+import com.hbm.api.energy.IEnergyHandler;
 import com.hbm.api.energy.fe.HBMEnergyStorage;
 import com.hbm.api.energy.fe.ItemStackEnergyHandler;
+import com.hbm.capabilities.Capabilities;
 import com.hbm.capabilities.ItemCapabilityWrapper;
 import com.hbm.item.CapabilityItem;
 import net.minecraft.nbt.CompoundTag;
@@ -39,9 +41,13 @@ public class BatteryItem extends CapabilityItem {
     }
     public static long getEnergy(ItemStack pStack){
         long result = 0;
-        IEnergyStorage iEnergyStorage = pStack.getCapability(ForgeCapabilities.ENERGY).orElse(null);
-        if (iEnergyStorage instanceof HBMEnergyStorage energyStorage)
-            result = energyStorage.getEnergyStored();
+//        IEnergyStorage iEnergyStorage = pStack.getCapability(ForgeCapabilities.ENERGY).orElse(null);
+//        if (iEnergyStorage instanceof HBMEnergyStorage energyStorage)
+//            result = energyStorage.getEnergyStored();
+        IEnergyHandler energyHandler = pStack.getCapability(Capabilities.LONG_ENERGY).orElse(null);
+        if (energyHandler != null){
+            result = energyHandler.getStored();
+        }
         return result;
     }
     @Override
