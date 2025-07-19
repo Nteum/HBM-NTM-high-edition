@@ -9,10 +9,9 @@ import com.hbm.datagen.model.ItemModelGen;
 import com.hbm.datagen.recipe.RecipeGen;
 import com.hbm.datagen.tag.BlockTagsGen;
 import com.hbm.datagen.tag.ItemTagsGen;
-import com.hbm.Inventory.recipe.ModRecipeType;
 import com.hbm.registries.ModBlocks;
-import com.hbm.fluid.ModFluidTypes;
-import com.hbm.fluid.ModFluids;
+import com.hbm.Inventory.fluid.ModFluidTypes;
+import com.hbm.Inventory.fluid.ModFluids;
 import com.hbm.network.ModMessages;
 import com.hbm.particle.ModParticleTypes;
 import com.hbm.blockentity.ModBlockEntityType;
@@ -73,9 +72,10 @@ public class HBM {
         ModBlocks.register(modEventBus);
         ModCreativeModeTab.CREATIVE_MODE_TABS.register(modEventBus);
         ModBlockEntityType.REGISTER.register(modEventBus);
-        ModRecipeType.RECIPE_TYPE.register(modEventBus);
+        ModRecipes.RECIPE_TYPE.register(modEventBus);
         ModRecipes.SERIALIZER.register(modEventBus);
-        ModFluidTypes.FLUID_TYPES.register(modEventBus);
+//        ModFluidTypes.FLUID_TYPES.register(modEventBus);
+        ModFluids.FLUID_TYPES.register(modEventBus);
         ModFluids.FLUIDS.register(modEventBus);
         ModParticleTypes.PARTICLE_TYPES.register(modEventBus);
         ModSounds.SOUNDS.register(modEventBus);
@@ -119,7 +119,9 @@ public class HBM {
         generator.addProvider(event.includeServer(), new RecipeGen(packOutput,helper,MODID));
         generator.addProvider(event.includeServer(), blockTagsGen);
         generator.addProvider(event.includeServer(), new ItemTagsGen(packOutput,lookupProvider,blockTagsGen.contentsGetter(),MODID,helper));
-        generator.addProvider(event.includeServer(), new TagDmgTypeGen(packOutput,lookupProvider));
+        generator.addProvider(event.includeServer(), new DamageTypeJsonProvider(packOutput, MODID));
+        generator.addProvider(event.includeServer(), new DmgTagProvider(packOutput, lookupProvider, MODID, helper));
+//        generator.addProvider(event.includeServer(), new TagDmgTypeGen(packOutput,lookupProvider));
 //        generator.addProvider(event.includeServer(), new RegistryDataGen(packOutput,lookupProvider));
         generator.addProvider(event.includeServer(), new WorldGen(packOutput, lookupProvider));
         generator.addProvider(event.includeServer(), (DataProvider.Factory<LootTableGen>) output->new LootTableGen(output, Collections.emptySet(),List.of(

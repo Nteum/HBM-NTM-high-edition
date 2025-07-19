@@ -1,7 +1,7 @@
 {
-  "type": "hbmxx:blast_hbm",
+  "type": "hbmxx:blast",
   "input1": {
-    "item": "minecraft:iron_ingot"
+    "item": "minecraft:raw_iron"
   },
   "input2": {
     "item": "minecraft:coal"

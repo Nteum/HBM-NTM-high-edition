@@ -52,7 +52,7 @@ public class CountableIngredient extends AbstractIngredient {
     public static CountableIngredient of(TagKey<Item> key, int count){
         return new CountableIngredient(Value.tag(key,count));
     }
-    private CountableIngredient(Value value){
+    public CountableIngredient(Value value){
         this.value = value;
     }
     //=========================================

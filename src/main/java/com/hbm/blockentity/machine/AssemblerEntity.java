@@ -1,11 +1,10 @@
 package com.hbm.blockentity.machine;
 
 import com.hbm.HBMKey;
+import com.hbm.Inventory.recipe.ModRecipes;
 import com.hbm.api.energy.BasicEnergyContainer;
-import com.hbm.api.energy.IEnergyContainer;
 import com.hbm.api.energy.ProxyEnergyHandler;
 import com.hbm.api.energy.fe.HBMEnergyStorage;
-import com.hbm.api.energy.fe.SidedEnergyWrapper;
 import com.hbm.api.energy.fe.TransmitHelper;
 import com.hbm.block.machine.BlockAssembler;
 import com.hbm.blockentity.ModBlockEntityType;
@@ -13,7 +12,6 @@ import com.hbm.blockentity.base.BedLikeBlockEntity;
 import com.hbm.capabilities.Capabilities;
 import com.hbm.gui.menu.AssemblerMenu;
 import com.hbm.Inventory.recipe.AssemblerRecipe;
-import com.hbm.Inventory.recipe.ModRecipeType;
 import com.hbm.utils.InventoryUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -48,7 +46,7 @@ public class AssemblerEntity extends BedLikeBlockEntity {
     public ItemStack showItem;      //客户端显示的物品
     public static final int[] ASSEMBLE_SLOTS = new int[]{5,6,7,8,9,10,11,12,13,14,15,16};
 
-    public static final RecipeManager.CachedCheck<Container, AssemblerRecipe> quickCheck = RecipeManager.createCheck(ModRecipeType.ASSEMBLER_RECIPE.get());
+    public static final RecipeManager.CachedCheck<Container, AssemblerRecipe> quickCheck = RecipeManager.createCheck(ModRecipes.ASSEMBLER.type().get());
 
     static final int[] INPUT_SLOTS = IntStream.range(5,17).toArray();
     static final int[] OUTPUT_SLOTS = new int[]{4};

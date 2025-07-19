@@ -20,6 +20,6 @@ public class TagDmgTypeGen extends TagsProvider<DamageType> {
 
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
-//        this.tag(DamageTypeTags.BYPASSES_ARMOR).add(ModDamageTypes.RADIATION);
+        this.tag(DamageTypeTags.BYPASSES_ARMOR).add(ModDamageTypes.RADIATION);
     }
 }

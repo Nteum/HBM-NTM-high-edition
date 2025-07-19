@@ -61,7 +61,9 @@ public class ChemplantEntity extends DummyableBlockEntity {
     @Override
     protected void onUpdateServer() {
         super.onUpdateServer();
+        if (this.isCore){
 
+        }
     }
 
     @Override

@@ -14,6 +14,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.ItemLike;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -23,7 +24,7 @@ import java.util.function.Consumer;
  * 和原版的ShapelessRecipe很像，但机器需要能量，所以额外加一个能量参数。
  * 虽然名字带energy，但这个属性可以兼用来表示 能量/热量/工作时间 等可以转换成整数的标准。
  * */
-public class ShapelessEnergyRecipeBuilder implements RecipeBuilder {
+public class ShapelessItemRecipeBuilder implements RecipeBuilder {
     protected final Item result;
     protected final int count;
     /** 虽然名字是power，实际上可以用来表示 能量/热量/工作时间 等用整数表示的概念，反正它们一般都不会一起用 */
@@ -32,37 +33,37 @@ public class ShapelessEnergyRecipeBuilder implements RecipeBuilder {
     private final List<CountableIngredient> ingredients = Lists.newArrayList();
     @Nullable
     private String group = "";
-    protected ShapelessEnergyRecipeBuilder(RecipeCategory pCategory, ItemLike result, int count) {
+    protected ShapelessItemRecipeBuilder(RecipeCategory pCategory, ItemLike result, int count) {
         this.result = result.asItem();
         this.count = count;
     }
-    public static ShapelessEnergyRecipeBuilder assembler(ItemLike pResult) {
-        return new ShapelessEnergyRecipeBuilder(RecipeCategory.MISC, pResult, 1);
+    public static ShapelessItemRecipeBuilder assembler(ItemLike pResult) {
+        return new ShapelessItemRecipeBuilder(RecipeCategory.MISC, pResult, 1);
     }
-    public static ShapelessEnergyRecipeBuilder assembler(ItemLike pResult, int pCount) {
-        return new ShapelessEnergyRecipeBuilder(RecipeCategory.MISC, pResult, pCount);
+    public static ShapelessItemRecipeBuilder assembler(ItemLike pResult, int pCount) {
+        return new ShapelessItemRecipeBuilder(RecipeCategory.MISC, pResult, pCount);
     }
-    public ShapelessEnergyRecipeBuilder num(long number){
+    public ShapelessItemRecipeBuilder num(long number){
         this.number = number;
         return this;
     }
-    public ShapelessEnergyRecipeBuilder requires(TagKey<Item> pTag) {
+    public ShapelessItemRecipeBuilder requires(TagKey<Item> pTag) {
         return this.requires(CountableIngredient.of(pTag));
     }
-    public ShapelessEnergyRecipeBuilder requires(TagKey<Item> pTag, int count) {
+    public ShapelessItemRecipeBuilder requires(TagKey<Item> pTag, int count) {
         return this.requires(CountableIngredient.of(pTag,count));
     }
-    public ShapelessEnergyRecipeBuilder requires(ItemLike pItem) {
+    public ShapelessItemRecipeBuilder requires(ItemLike pItem) {
         return this.requires(pItem, 1);
     }
 
-    public ShapelessEnergyRecipeBuilder requires(ItemLike pItem, int pQuantity) {
+    public ShapelessItemRecipeBuilder requires(ItemLike pItem, int pQuantity) {
         this.requires(CountableIngredient.of(pItem,pQuantity));
 
         return this;
     }
 
-    public ShapelessEnergyRecipeBuilder requires(CountableIngredient pIngredient) {
+    public ShapelessItemRecipeBuilder requires(CountableIngredient pIngredient) {
         this.ingredients.add(pIngredient);
         return this;
     }
@@ -88,7 +89,7 @@ public class ShapelessEnergyRecipeBuilder implements RecipeBuilder {
     }
 
     @Override
-    public Item getResult() {
+    public @NotNull Item getResult() {
         return result;
     }
     public void save(Consumer<FinishedRecipe> pFinishedRecipeConsumer, String path) {
@@ -137,7 +138,7 @@ public class ShapelessEnergyRecipeBuilder implements RecipeBuilder {
         }
 
         public RecipeSerializer<?> getType() {
-            return ModRecipes.ASSEMBLER_SERIALIZER.get();
+            return ModRecipes.ASSEMBLER.serializer().get();
         }
 
         /**

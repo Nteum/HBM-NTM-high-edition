@@ -26,16 +26,12 @@ public class CapabilitiesContent {
     // 方向信息需要序列化
     private final Map<Capability<?>, List<Direction>> sideMap = new IdentityHashMap<>();
     // 添加能力
-    // 方向要么所有面都可以，要么不可从外界访问
+    // 默认全部方向都可以
     public <T>void addCapability(Capability<T> capability, T handler){
         if (!lazyOptionalMap.containsKey(capability)){
             handlerMap.put(capability, handler);
             lazyOptionalMap.put(capability, LazyOptional.of(() -> handler));
             sideMap.put(capability, List.of(Direction.values()));
-//            if (external)
-//                sideMap.put(capability, List.of(Direction.values()));
-//            else
-//                sideMap.put(capability, List.of());
         }
     }
     // 添加能力，但可以指明方向

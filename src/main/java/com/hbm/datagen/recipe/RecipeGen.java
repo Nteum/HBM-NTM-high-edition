@@ -3,6 +3,7 @@ package com.hbm.datagen.recipe;
 import com.hbm.HBM;
 import com.hbm.datagen.recipe.provider.AssemblerRecipeProvider;
 import com.hbm.Inventory.recipe.BlastFurnaceRecipe;
+import com.hbm.datagen.recipe.provider.ChemplantRecipeProvider;
 import com.hbm.registries.ModItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
@@ -41,7 +42,8 @@ public class RecipeGen extends RecipeProvider {
     }
     protected List<ISubRecipeProvider> getSubRecipeProviders() {
         return List.of(
-                new AssemblerRecipeProvider()
+                new AssemblerRecipeProvider(),
+                new ChemplantRecipeProvider()
         );
     }
     //添加有序配方（默认加入MISC组，并使用获得物品来解锁，通过输入物品来区分）

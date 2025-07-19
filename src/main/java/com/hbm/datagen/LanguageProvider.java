@@ -88,6 +88,35 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
         this.add(HBMLang.CHEMPLANT, "Chemplant");
 //        this.add(HBMLang.BARREL, "HBM Barrel");
     }
+    private void addFluidTrait(){
+        this.add(HBMLang.FT_GASEOUS, "[Gaseous]");
+        this.add(HBMLang.FT_GASEOUS_ART, "[Gaseous at Room Temperature]");
+        this.add(HBMLang.FT_LIQUID, "[Liquid]");
+        this.add(HBMLang.FT_VISCOUS, "[Viscous]");
+        this.add(HBMLang.FT_AMAT, "[Antimatter]");
+        this.add(HBMLang.FT_LEAD_CONTAINER, "[Requires hazardous material tank to hold]");
+        this.add(HBMLang.FT_DELICIOUS, "[Delicious]");
+        this.add(HBMLang.FT_UNSIPHONABLE, "[Ignored by siphon]");
+        this.add(HBMLang.FT_COMBUSTIBLE1, "[Combustible]");
+        this.add(HBMLang.FT_COMBUSTIBLE2, "Provides %s HE per bucket");
+        this.add(HBMLang.FT_COMBUSTIBLE3, "Fuel grade: %s");
+        this.add(HBMLang.FT_THERMAL_CAPACITY, "Thermal capacity: %s TU per %s mB");
+        this.add(HBMLang.FT_EFFICIENCY, "[ %s ] Efficiency: %s %");
+        this.add(HBMLang.FT_CORROSIVE1, "[Strongly Corrosive]");
+        this.add(HBMLang.FT_CORROSIVE2, "[Corrosive]");
+        this.add(HBMLang.FT_FLAMMABLE1, "[Flammable]");
+        this.add(HBMLang.FT_FLAMMABLE2, "Provides %s TU per bucket");
+        this.add(HBMLang.FT_PHEROMONE1, "[Glyphid Pheromones]");
+        this.add(HBMLang.FT_PHEROMONE2, "[Modified Pheromones]");
+        this.add(HBMLang.FT_POISON, "[Toxic Fumes]");
+        this.add(HBMLang.FT_PER_MB, " - %s %s per mB");
+        this.add(HBMLang.FT_POLLUTION1, "[Polluting]");
+        this.add(HBMLang.FT_POLLUTION2, "When spilled:");
+        this.add(HBMLang.FT_POLLUTION3, "When burned:");
+        this.add(HBMLang.FT_PWRMODERATOR, "[PWR Flux Multiplier]");
+        this.add(HBMLang.FT_CORE_FLUX, "Core flux + %s %");
+        this.add(HBMLang.FT_RADIOACTIVE, "[Radioactive]");
+    }
 
     private void add(ILangEntry entry,String value){
         this.add(entry.getTranslationKey(), value);

@@ -57,9 +57,9 @@ public class ItemModelGen extends ItemModelProvider {
         this.basicItem(ModItems.grenade_frag.get());
         this.basicItem(ModItems.grenade_black_hole.get());
 
-        this.basicItem(ModItems.bucket_irradiated_water.get());
-        this.basicItem(ModItems.bucket_irradiated_polluted.get());
-        this.basicItem(ModItems.bucket_sulfuric_acid.get());
+//        this.basicItem(ModItems.bucket_irradiated_water.get());
+//        this.basicItem(ModItems.bucket_irradiated_polluted.get());
+//        this.basicItem(ModItems.bucket_sulfuric_acid.get());
         this.basicItem(ModItems.overlay_my_fluid.get());
 
         this.basicItem(ModItems.BEDROCK_ORE.get());

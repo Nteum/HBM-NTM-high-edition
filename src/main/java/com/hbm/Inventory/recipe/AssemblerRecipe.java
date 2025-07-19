@@ -59,7 +59,7 @@ public class AssemblerRecipe implements Recipe<Container> {
 
     @Override
     public RecipeType<?> getType() {
-        return ModRecipeType.ASSEMBLER_RECIPE.get();
+        return ModRecipes.ASSEMBLER.type().get();
     }
     public int getProcessingTime(){return processingTime;}
 
@@ -111,7 +111,7 @@ public class AssemblerRecipe implements Recipe<Container> {
         public static final AssemblerRecipe.Serializer INSTANCE = new AssemblerRecipe.Serializer();
         private static final ResourceLocation NAME = HBM.rl("assembler_recipe");
         public AssemblerRecipe fromJson(ResourceLocation pRecipeId, JsonObject pJson) {
-            NonNullList<CountableIngredient> nonnulllist = itemsFromJson(GsonHelper.getAsJsonArray(pJson, "ingredients"));
+            NonNullList<CountableIngredient> nonnulllist = RecipeHelper.itemsFromJson(GsonHelper.getAsJsonArray(pJson, "ingredients"));
             if (nonnulllist.isEmpty()) {
                 throw new JsonParseException("No ingredients for assembler recipe");
             } else if (nonnulllist.size() > AssemblerRecipe.MAX_SIZE) {
@@ -121,25 +121,6 @@ public class AssemblerRecipe implements Recipe<Container> {
                 int processingTime = GsonHelper.getAsInt(pJson,"number");
                 return new AssemblerRecipe(pRecipeId,processingTime, itemstack, nonnulllist);
             }
-        }
-
-        private static NonNullList<CountableIngredient> itemsFromJson(JsonArray pIngredientArray) {
-            NonNullList<CountableIngredient> nonnulllist = NonNullList.create();
-
-            for(int i = 0; i < pIngredientArray.size(); ++i) {
-                if (pIngredientArray.get(i).isJsonObject()){
-                    CountableIngredient ingredient = CountableIngredient.Serializer.INSTANCE.parse(pIngredientArray.get(i).getAsJsonObject());
-                    if (!ingredient.isEmpty()){
-                        nonnulllist.add(ingredient);
-                    }else {
-                        throw new JsonSyntaxException("Parse wrong : Ingredient is empty.");
-                    }
-                }else {
-                    throw new JsonSyntaxException("Parse wrong : CountableIngredient must be a JsonObject.");
-                }
-            }
-
-            return nonnulllist;
         }
 
         public AssemblerRecipe fromNetwork(ResourceLocation pRecipeId, FriendlyByteBuf pBuffer) {

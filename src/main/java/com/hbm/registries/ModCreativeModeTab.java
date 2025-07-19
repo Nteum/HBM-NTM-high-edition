@@ -105,9 +105,9 @@ public class ModCreativeModeTab {
             output.accept(ModItems.grenade_frag.get());
             output.accept(ModItems.grenade_black_hole.get());
 
-            output.accept(ModItems.bucket_irradiated_water.get());
-            output.accept(ModItems.bucket_irradiated_polluted.get());
-            output.accept(ModItems.bucket_sulfuric_acid.get());
+//            output.accept(ModItems.bucket_irradiated_water.get());
+//            output.accept(ModItems.bucket_irradiated_polluted.get());
+//            output.accept(ModItems.bucket_sulfuric_acid.get());
             output.accept(ModBlocks.conveyor.get());
             output.accept(ModBlocks.bomb_boy.get());
             output.accept(ModBlocks.bomb_fat_man.get());

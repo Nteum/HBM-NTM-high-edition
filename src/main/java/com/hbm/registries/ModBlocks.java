@@ -9,7 +9,7 @@ import com.hbm.block.logistic.BlockCable;
 import com.hbm.block.machine.*;
 import com.hbm.block.logistic.BlockConveyor;
 import com.hbm.block.weapon.*;
-import com.hbm.fluid.ModFluids;
+import com.hbm.Inventory.fluid.ModFluids;
 import com.hbm.item.tool.BatteryBlockItem;
 import com.hbm.block.base.DummibleBlock;
 import net.minecraft.world.item.BlockItem;
@@ -67,9 +67,9 @@ public class ModBlocks {
     public static final RegistryObject<Block> LAUNCHPAD_SOYUZ = registerBlockWithItem("launchpad_soyuz",()->new LaunchPadSoyuz(BlockBehaviour.Properties.of()));
 
     //流体
-    public static final RegistryObject<LiquidBlock> irradiated_water = BLOCKS.register("irradiated_water", ()->new LiquidBlock(ModFluids.IRRADIATED_WATER_SOURCE_BLOCK,BlockBehaviour.Properties.copy(Blocks.WATER).noLootTable()));
-    public static final RegistryObject<LiquidBlock> irradiated_polluted = BLOCKS.register("irradiated_polluted", ()->new LiquidBlock(ModFluids.IRRADIATED_POLLUTED_SOURCE_BLOCK,BlockBehaviour.Properties.copy(Blocks.WATER).noLootTable()));
-    public static final RegistryObject<LiquidBlock> sulfuric_acid = BLOCKS.register("sulfuric_acid", ()->new LiquidBlock(ModFluids.SULFURIC_ACID_SOURCE_BLOCK,BlockBehaviour.Properties.copy(Blocks.WATER).noLootTable()));
+//    public static final RegistryObject<LiquidBlock> irradiated_water = BLOCKS.register("irradiated_water", ()->new LiquidBlock(ModFluids.IRRADIATED_WATER_SOURCE_BLOCK,BlockBehaviour.Properties.copy(Blocks.WATER).noLootTable()));
+//    public static final RegistryObject<LiquidBlock> irradiated_polluted = BLOCKS.register("irradiated_polluted", ()->new LiquidBlock(ModFluids.IRRADIATED_POLLUTED_SOURCE_BLOCK,BlockBehaviour.Properties.copy(Blocks.WATER).noLootTable()));
+//    public static final RegistryObject<LiquidBlock> sulfuric_acid = BLOCKS.register("sulfuric_acid", ()->new LiquidBlock(ModFluids.SULFURIC_ACID_SOURCE_BLOCK,BlockBehaviour.Properties.copy(Blocks.WATER).noLootTable()));
 
     //自然物
     //ores

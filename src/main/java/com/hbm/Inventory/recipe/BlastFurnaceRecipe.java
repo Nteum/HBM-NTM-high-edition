@@ -2,6 +2,7 @@ package com.hbm.Inventory.recipe;
 
 import com.google.gson.JsonObject;
 import com.hbm.HBM;
+import com.hbm.HBMKey;
 import com.hbm.registries.ModItems;
 import com.hbm.utils.Tuple;
 import net.minecraft.advancements.Advancement;
@@ -77,7 +78,7 @@ public class BlastFurnaceRecipe implements Recipe<Container> {
 
     @Override
     public RecipeType<?> getType() {
-        return ModRecipeType.BLAST_RECIPE.get();
+        return ModRecipes.BLAST.type().get();
     }
 
     public static class Type implements RecipeType<BlastFurnaceRecipe>{
@@ -87,7 +88,7 @@ public class BlastFurnaceRecipe implements Recipe<Container> {
 
     public static class Serializer implements RecipeSerializer<BlastFurnaceRecipe>{
         public static final Serializer INSTANCE = new Serializer();
-        public static final ResourceLocation ID = HBM.rl(ModRecipeType.BLAST.toString());
+//        public static final ResourceLocation ID = HBM.rl(ModRecipes.BLAST.toString());
         //从json解码出这个recipe类型
         @Override
         public BlastFurnaceRecipe fromJson(ResourceLocation pRecipeId, JsonObject pJson) {
@@ -192,7 +193,7 @@ public class BlastFurnaceRecipe implements Recipe<Container> {
             @Override
             public void serializeRecipeData(JsonObject pJson) {
                 //添加type
-                pJson.addProperty("type", HBM.MODID + ":" + ModRecipeType.BLAST);
+                pJson.addProperty("type", HBM.MODID + ":" + HBMKey.BLAST);
                 //添加group
                 if (!this.group.isEmpty()) {
                     pJson.addProperty("group", this.group);
@@ -247,7 +248,7 @@ public class BlastFurnaceRecipe implements Recipe<Container> {
     public static void registerRecipe(Consumer<FinishedRecipe> pwriter, ItemLike input1,ItemLike input2,ItemStack output){
         BlastFurnaceRecipe.BlastFurnaceRecipeBuilder.blast(output.getItem(),output.getCount())
                 .input(input1,1).input(input2,1)
-                .save(pwriter,new ResourceLocation(HBM.MODID,"blast_hbm" + "_" + recipeCnt++));
+                .save(pwriter,new ResourceLocation(HBM.MODID,HBMKey.BLAST + "_" + recipeCnt++));
     }
 
 }

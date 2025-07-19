@@ -46,7 +46,6 @@ import java.util.Optional;
 
 public class ElectricFurnaceEntity extends BaseMachineBlockEntity implements MenuProvider, IUpgradeInfoProvider {
     public int progress;
-    public long power;
     public static final long maxPower = 100000;
     public int maxProgress = 100;
     public int consumption = 50;

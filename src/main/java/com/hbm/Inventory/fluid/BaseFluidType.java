@@ -1,4 +1,4 @@
-package com.hbm.fluid;
+package com.hbm.Inventory.fluid;
 
 import com.mojang.blaze3d.shaders.FogShape;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -76,7 +76,7 @@ public class BaseFluidType extends FluidType {
 
             @Override
             public int getTintColor() {
-                return IClientFluidTypeExtensions.super.getTintColor();
+                return tintColor;
             }
             //修改流体中看见雾的颜色
             @Override

@@ -1,5 +1,5 @@
 {
-  "type": "hbmxx:blast_hbm",
+  "type": "hbmxx:blast",
   "input1": {
     "item": "hbmxx:ingot_steel"
   },
