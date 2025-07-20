@@ -1,6 +1,0 @@
-{
-  "type": "forge:add_features",
-  "biomes": "#minecraft:is_overworld",
-  "features": "hbmxx:bedrock_ore_overworld",
-  "step": "local_modifications"
-}

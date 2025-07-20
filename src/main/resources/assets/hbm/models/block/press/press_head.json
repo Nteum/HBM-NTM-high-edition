@@ -1,0 +1,24 @@
+{
+  "loader": "forge:obj",
+  "flip_v": true,
+  "model": "hbm:models/block/press/press_head.obj",
+  "textures": {
+    "texture0": "hbm:block/press/press_head",
+    "particle": "hbm:block/press/press_head"
+  },
+  "ambientocclusion": false,
+  "display": {
+    "firstperson_righthand": {
+      "scale": [0.5,0.5,0.5],
+      "rotation": [0,90,22.5]
+    },
+    "thirdperson_righthand": {
+      "scale": [0.5,0.5,0.5],
+      "rotation": [0,90,22.5]
+    },
+    "gui": {
+      "scale": [0.7,0.7,0.7],
+      "rotation": [0,90,0]
+    }
+  }
+}

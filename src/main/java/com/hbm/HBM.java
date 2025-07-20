@@ -53,7 +53,7 @@ import java.util.concurrent.CompletableFuture;
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(HBM.MODID)
 public class HBM {
-    public static final String MODID = "hbmxx";
+    public static final String MODID = "hbm";
     public static final Logger LOGGER = LogUtils.getLogger();
     //debug模式
     public static boolean debug = false;

@@ -1,9 +1,0 @@
-{
-  "feature": "hbmxx:bedrock_ore_overworld",
-  "placement": [
-    {
-      "type": "minecraft:rarity_filter",
-      "chance": 1
-    }
-  ]
-}

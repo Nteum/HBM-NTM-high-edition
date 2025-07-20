@@ -1,8 +1,0 @@
-{
-  "loader": "forge:obj",
-  "flip_v": true,
-  "model": "hbmxx:models/block/assembler/assembler_slider.obj",
-  "textures": {
-    "texture0": "hbmxx:block/assembler/assembler_slider"
-  }
-}

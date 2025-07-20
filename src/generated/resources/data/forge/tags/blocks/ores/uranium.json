@@ -1,7 +1,7 @@
 {
   "values": [
-    "hbmxx:uranium_ore",
-    "hbmxx:deepslate_uranium_ore",
-    "hbmxx:scorched_uranium_ore"
+    "hbm:uranium_ore",
+    "hbm:deepslate_uranium_ore",
+    "hbm:scorched_uranium_ore"
   ]
 }

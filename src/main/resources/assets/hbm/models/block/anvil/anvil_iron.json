@@ -1,0 +1,7 @@
+{
+  "parent": "hbm:block/abstract/anvil",
+  "textures": {
+    "texture": "hbm:block/anvil_iron",
+    "particle": "hbm:block/anvil_iron"
+  }
+}

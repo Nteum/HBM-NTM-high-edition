@@ -1,0 +1,6 @@
+{
+  "parent": "hbm:block/abstract/anvil",
+  "textures": {
+    "texture": "hbm:block/anvil_bismuth"
+  }
+}

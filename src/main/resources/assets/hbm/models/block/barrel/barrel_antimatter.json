@@ -1,0 +1,18 @@
+{
+  "parent": "minecraft:block/block",
+  "loader": "forge:obj",
+  "flip_v": true,
+  "model": "hbm:models/block/barrel/barrel.obj",
+  "textures": {
+    "texture0": "hbm:block/barrel_antimatter",
+    "particle": "hbm:block/barrel_antimatter"
+  },
+  "ambientocclusion": false,
+  "display": {
+    "gui": {
+      "rotation": [ 30, 225, 0 ],
+      "translation": [ 0, -3, 0],
+      "scale": [0.25,0.25,0.25]
+    }
+  }
+}

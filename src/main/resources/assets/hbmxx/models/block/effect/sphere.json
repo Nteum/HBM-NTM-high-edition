@@ -1,9 +1,0 @@
-{
-  "loader": "forge:obj",
-  "flip_v": true,
-  "model": "hbmxx:models/block/effect/sphere.obj",
-  "textures": {
-    "texture0": "hbmxx:models/black_hole",
-    "particle": "hbmxx:models/black_hole"
-  }
-}

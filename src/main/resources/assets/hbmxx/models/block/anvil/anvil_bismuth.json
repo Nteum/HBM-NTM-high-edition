@@ -1,6 +1,0 @@
-{
-  "parent": "hbmxx:block/abstract/anvil",
-  "textures": {
-    "texture": "hbmxx:block/anvil_bismuth"
-  }
-}

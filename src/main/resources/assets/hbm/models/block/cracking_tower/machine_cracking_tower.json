@@ -1,0 +1,42 @@
+{
+  "loader": "forge:obj",
+  "flip_v": true,
+  "model": "hbm:models/block/cracking_tower/machine_cracking_tower.obj",
+  "textures": {
+    "texture0": "hbm:block/machine_cracking_tower",
+    "particle": "hbm:block/machine_cracking_tower"
+  },
+  "gui_light": "side",
+  "display": {
+    "gui": {
+      "rotation": [ 30, 225, 0 ],
+      "translation": [ 0, -6, 0],
+      "scale": [0.06,0.06,0.06]
+    },
+    "ground": {
+      "rotation": [ 0, 0, 0 ],
+      "translation": [ 0, 3, 0],
+      "scale": [0.024,0.024,0.024]
+    },
+    "fixed": {
+      "rotation": [ 0, 0, 0 ],
+      "translation": [ 0, 0, 0],
+      "scale": [0.05,0.05,0.05]
+    },
+    "thirdperson_righthand": {
+      "rotation": [ 75, 45, 0 ],
+      "translation": [ 0, 2.5, 0],
+      "scale": [0.04,0.04,0.04]
+    },
+    "firstperson_righthand": {
+      "rotation": [ 0, 45, 0 ],
+      "translation": [ 0, 0, 0 ],
+      "scale": [0.04,0.04,0.04]
+    },
+    "firstperson_lefthand": {
+      "rotation": [ 0, 225, 0 ],
+      "translation": [ 0, 0, 0 ],
+      "scale": [0.04,0.04,0.04]
+    }
+  }
+}

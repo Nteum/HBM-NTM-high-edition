@@ -1,0 +1,9 @@
+{
+  "loader": "forge:obj",
+  "flip_v": true,
+  "model": "hbm:models/block/assembler/assembler_arm.obj",
+  "textures": {
+    "texture0": "hbm:block/assembler/assembler_arm",
+    "particle": "hbm:block/assembler/assembler_arm"
+  }
+}

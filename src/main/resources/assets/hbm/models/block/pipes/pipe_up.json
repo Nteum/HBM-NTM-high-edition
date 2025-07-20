@@ -1,0 +1,10 @@
+{
+  "loader": "forge:obj",
+  "flip_v": true,
+  "model": "hbm:models/block/pipes/pipe_up.obj",
+  "textures": {
+    "texture0": "hbm:block/pipes/pipe_colored_overlay",
+    "particle": "hbm:block/pipes/pipe_colored_overlay"
+  },
+  "ambientocclusion": true
+}

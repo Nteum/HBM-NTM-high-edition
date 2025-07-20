@@ -1,0 +1,12 @@
+{
+  "loader": "forge:obj",
+  "flip_v": true,
+  "model": "hbm:models/block/pipes/cable_side.obj",
+  "textures": {
+    "texture0": "hbm:block/pipes/cable_neo",
+    "particle": "hbm:block/pipes/cable_neo"
+  },
+  "ambientocclusion": true,
+  "display": {
+  }
+}
