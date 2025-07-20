@@ -1,0 +1,24 @@
+{
+  "type": "hbmxx:chemplant",
+  "inputFluids": [
+    {
+      "fluids": "minecraft:water",
+      "volume": 8000
+    }
+  ],
+  "inputItems": [
+    {
+      "count": 1,
+      "item": "minecraft:coal"
+    }
+  ],
+  "number": 400,
+  "number2": 20,
+  "resultFluids": [
+    {
+      "amount": 500,
+      "fluids": "hbmxx:hydrogen"
+    }
+  ],
+  "resultItems": []
+}

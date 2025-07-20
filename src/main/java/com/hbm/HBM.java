@@ -2,6 +2,8 @@ package com.hbm;
 
 import com.hbm.capabilities.network.TransmitterNetworkRegistry;
 import com.hbm.config.GeneralConfig;
+import com.hbm.datagen.damageSource.DamageTypeJsonProvider;
+import com.hbm.datagen.damageSource.DmgTagProvider;
 import com.hbm.datagen.loot.BlockLootGen;
 import com.hbm.datagen.loot.LootTableGen;
 import com.hbm.datagen.model.BlockStateGen;
@@ -10,7 +12,6 @@ import com.hbm.datagen.recipe.RecipeGen;
 import com.hbm.datagen.tag.BlockTagsGen;
 import com.hbm.datagen.tag.ItemTagsGen;
 import com.hbm.registries.ModBlocks;
-import com.hbm.Inventory.fluid.ModFluidTypes;
 import com.hbm.Inventory.fluid.ModFluids;
 import com.hbm.network.ModMessages;
 import com.hbm.particle.ModParticleTypes;
@@ -74,9 +75,7 @@ public class HBM {
         ModBlockEntityType.REGISTER.register(modEventBus);
         ModRecipes.RECIPE_TYPE.register(modEventBus);
         ModRecipes.SERIALIZER.register(modEventBus);
-//        ModFluidTypes.FLUID_TYPES.register(modEventBus);
-        ModFluids.FLUID_TYPES.register(modEventBus);
-        ModFluids.FLUIDS.register(modEventBus);
+        ModFluids.register(modEventBus);
         ModParticleTypes.PARTICLE_TYPES.register(modEventBus);
         ModSounds.SOUNDS.register(modEventBus);
         ModFeatures.register(modEventBus);

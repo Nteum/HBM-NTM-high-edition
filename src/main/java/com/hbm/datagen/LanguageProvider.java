@@ -22,6 +22,7 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
         addMisc();
         addTooltip();
         addContainer();
+        addFluidTrait();
         //物品
         this.add(ModItems.ingot_steel.get(),"Steel Ignot");
         this.add(ModItems.plate_steel.get(),"Steel Plate");

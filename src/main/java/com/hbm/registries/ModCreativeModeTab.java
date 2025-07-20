@@ -1,13 +1,17 @@
 package com.hbm.registries;
 
+import com.hbm.HBMLang;
+import com.hbm.Inventory.fluid.ModFluids;
 import com.hbm.block.HBMMachine;
 import com.hbm.item.HBMComponent;
 import com.hbm.item.HBMWeapon;
 import com.hbm.item.HBMtools;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
@@ -18,7 +22,7 @@ public class ModCreativeModeTab {
     //创造模式物品栏注册表
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
     public static final RegistryObject<CreativeModeTab> HBM_ITEM = CREATIVE_MODE_TABS.register("hbm_item", () -> CreativeModeTab.builder()
-        .title(Component.translatable("itemGroup.hbm_item"))
+        .title(Component.translatable(HBMLang.ITEMGROUP_ITEM.getTranslationKey()))
         .icon(() -> ModItems.ingot_steel.get().getDefaultInstance())
         .displayItems((parameters, output) -> {
             output.accept(ModItems.ingot_steel.get());
@@ -54,7 +58,7 @@ public class ModCreativeModeTab {
             HBMComponent.creativeTab(output);
         }).build());
     public static final RegistryObject<CreativeModeTab> HBM_BLOCK = CREATIVE_MODE_TABS.register("hbm_block", () -> CreativeModeTab.builder()
-        .title(Component.translatable("itemGroup.hbm_block"))
+        .title(Component.translatable(HBMLang.ITEMGROUP_BLOCK.getTranslationKey()))
         .icon(()->ModBlocks.URANIUM_ORE.get().asItem().getDefaultInstance())
         .displayItems((parameters, output) -> {
             output.accept(ModBlocks.URANIUM_ORE.get());
@@ -71,7 +75,7 @@ public class ModCreativeModeTab {
             output.accept(ModBlocks.TEST12.get());
         }).build());
     public static final RegistryObject<CreativeModeTab> HBM_MACHINE = CREATIVE_MODE_TABS.register("hbm_machine", () -> CreativeModeTab.builder()
-        .title(Component.translatable("itemGroup.hbm_machine"))
+        .title(Component.translatable(HBMLang.ITEMGROUP_MACHINE.getTranslationKey()))
         .icon(()->ModBlocks.machine_electric_furnace.get().asItem().getDefaultInstance())
         .displayItems((parameters, output) -> {
             output.accept(ModBlocks.machine_difurnace.get());
@@ -94,7 +98,7 @@ public class ModCreativeModeTab {
             HBMMachine.creativeTab(output);
         }).build());
     public static final RegistryObject<CreativeModeTab> HBM_TOOL = CREATIVE_MODE_TABS.register("hbm_weapon", () -> CreativeModeTab.builder()
-        .title(Component.translatable("itemGroup.hbm_tool"))
+        .title(Component.translatable(HBMLang.ITEMGROUP_TOOL.getTranslationKey()))
             .icon(()->ModItems.detonator.get().asItem().getDefaultInstance())
         .displayItems((parameters, output) -> {
             output.accept(ModItems.detonator.get());
@@ -117,6 +121,9 @@ public class ModCreativeModeTab {
 
             HBMtools.creativeTab(output);
             HBMWeapon.creativeTab(output);
+        for (ModFluids.FluidRegistryHolder registryHolder : ModFluids.fluidList) {
+                output.accept((BucketItem)registryHolder.bucket().get());
+        }
         }).build());
 
     /**

@@ -1,4 +1,4 @@
-package com.hbm.datagen;
+package com.hbm.datagen.damageSource;
 
 import com.google.gson.JsonObject;
 import com.hbm.registries.ModDmgSrc;

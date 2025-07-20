@@ -17,6 +17,8 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.fluids.FluidStack;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class RecipeHelper {
@@ -55,7 +57,7 @@ public class RecipeHelper {
         return nonnulllist;
     }
     public static List<ItemStack> itemListFromJson(JsonArray pIngredientArray) {
-        List<ItemStack> result = List.of();
+        List<ItemStack> result = new ArrayList<>();
         for(int i = 0; i < pIngredientArray.size(); ++i) {
             if (pIngredientArray.get(i).isJsonObject()){
                 JsonObject jsonObject = pIngredientArray.get(i).getAsJsonObject();
@@ -77,7 +79,7 @@ public class RecipeHelper {
         return result;
     }
     public static List<FluidStack> fluidListFromJson(JsonArray pIngredientArray) {
-        List<FluidStack> result = List.of();
+        List<FluidStack> result = new ArrayList<>();
         for(int i = 0; i < pIngredientArray.size(); ++i) {
             if (pIngredientArray.get(i).isJsonObject()){
                 JsonObject jsonObject = pIngredientArray.get(i).getAsJsonObject();
