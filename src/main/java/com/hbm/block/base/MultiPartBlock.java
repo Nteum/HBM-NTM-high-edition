@@ -28,13 +28,15 @@ public abstract class MultiPartBlock extends BaseMachineBlock{
 
     protected boolean isCore(BlockGetter level, BlockPos pos){
         DummyableBlockEntity blockEntity = WorldUtils.getTileEntity(DummyableBlockEntity.class, level, pos);
-        if (blockEntity!=null)return blockEntity.isCore;
-        else return false;
+//        if (blockEntity!=null)return blockEntity.isCore;
+//        else return false;
+        return false;
     }
     protected BlockPos getCore(BlockGetter level, BlockPos pos){
-        DummyableBlockEntity blockEntity = WorldUtils.getTileEntity(DummyableBlockEntity.class, level, pos);
-        if (blockEntity!=null)return blockEntity.corePos;
-        else return null;
+//        DummyableBlockEntity blockEntity = WorldUtils.getTileEntity(DummyableBlockEntity.class, level, pos);
+//        if (blockEntity!=null)return blockEntity.corePos;
+//        else return null;
+        return new BlockPos(0,0,0);
     }
     @Nullable
     @Override

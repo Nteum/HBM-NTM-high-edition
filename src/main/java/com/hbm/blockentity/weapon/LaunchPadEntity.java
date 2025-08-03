@@ -99,12 +99,12 @@ public class LaunchPadEntity extends BedLikeBlockEntity {
     }
 
     @Override
-    protected Component getDefaultName() {
+    public Component getDefaultName() {
         return Component.translatable("container.launchpad");
     }
 
     @Override
-    protected AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory) {
+    public AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory) {
         return null;
     }
 

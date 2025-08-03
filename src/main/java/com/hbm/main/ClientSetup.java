@@ -67,16 +67,7 @@ public class ClientSetup {
             EntityRenderers.register(ModEntityType.ENTITY_BLACK_HOLE.get(), BlackHoleRender::new);
             EntityRenderers.register(ModEntityType.ENTITY_NUKE_EXPLOSION_MK5.get(), EntityBlankRender::new);
             EntityRenderers.register(ModEntityType.ENTITY_NUKE_TOREX.get(), EntityTorexRender::new);
-            //设置液体的渲染（因为液体是半透明的，所以需要设置一下）
-//            ItemBlockRenderTypes.setRenderLayer(ModFluids.IRRADIATED_WATER_SOURCE_BLOCK.get(), RenderType.translucent());
-//            ItemBlockRenderTypes.setRenderLayer(ModFluids.IRRADIATED_WATER_FLOW_BLOCK.get(), RenderType.translucent());
-//            ItemBlockRenderTypes.setRenderLayer(ModFluids.IRRADIATED_POLLUTED_SOURCE_BLOCK.get(), RenderType.translucent());
-//            ItemBlockRenderTypes.setRenderLayer(ModFluids.IRRADIATED_POLLUTED_FLOW_BLOCK.get(), RenderType.translucent());
-//            ItemBlockRenderTypes.setRenderLayer(ModFluids.SULFURIC_ACID_SOURCE_BLOCK.get(), RenderType.translucent());
-//            ItemBlockRenderTypes.setRenderLayer(ModFluids.SULFURIC_ACID_FLOW_BLOCK.get(), RenderType.translucent());
-            //尝试加载贴图
-            ResourceLocation overlay1 = new ResourceLocation(HBM.MODID,"fluid/irradiated_water_overlay");
-//            Minecraft.getInstance().textureManager.register(overlay1,new SimpleTexture(overlay1));
+
             RenderUtils.init();
         });
     }

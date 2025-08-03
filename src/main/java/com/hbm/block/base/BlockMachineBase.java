@@ -7,6 +7,7 @@ import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.RenderShape;
@@ -31,7 +32,7 @@ public abstract class BlockMachineBase extends BlockContainerBase{
     /** 右键 */
     @Override
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-        if (!pLevel.isClientSide()){
+        if (!pLevel.isClientSide()&& pPlayer.getPose().equals(Pose.CROUCHING)){
             BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
             if (blockEntity instanceof MenuProvider){   //如果有界面则打开界面
                 pPlayer.openMenu((MenuProvider) blockEntity);

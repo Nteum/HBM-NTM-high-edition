@@ -4,23 +4,24 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 //mod使用的key，仅用于mod内使用，不用于翻译
 public class HBMKey {
-    public static final String MODID = "hbmxx";
-    // key relate to machine
+    public static final String MODID = "hbm";
+    // block state
+    public static final String IS_CORE = "is_core";
+    // key relate to capability
     public static final String DATA = "hbmdata";
     public static final String CAPS = "capability";
     public static final String ENERGY = "energy";
     public static final String FLUIDS = "fluids";
     public static final String STORED = "stored";
-    //cable
-    public static final String FORBID_DIR = "forbidDir";
     // machine process
     public static final String RUNNING = "running";
     public static final String RESULT_ITEM = "resultItem";
-    public static final String IS_CORE = "isCore";
     public static final String IS_FORMED = "isFormed";
     public static final String CORE_POS = "corePos";
-    public static final String RECIPE_NOW = "recipeNow";
+    public static final String RECIPE_NOW = "recipe_now";
     public static final String PROGRESS = "progress";
+    //cable
+    public static final String FORBID_DIR = "forbidDir";
     //Server to Client specific sync NBT tags
     public static final String CURRENT_ACCEPTORS = "acceptors";
     public static final String CURRENT_CONNECTIONS = "connections";

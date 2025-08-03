@@ -38,10 +38,6 @@ public abstract class BaseMachineBlockEntity extends HBMBlockEntity implements W
     @Override
     protected void saveAdditional(CompoundTag pTag) {
         super.saveAdditional(pTag);
-//        if (!pTag.contains(HBMKey.DATA, Tag.TAG_COMPOUND)) {
-//            pTag.put(HBMKey.DATA,new CompoundTag());
-//        }
-//        pTag.merge(capabilitiesCache.serializeNBT());
         this.lockKey.addToTag(pTag);
         if (this.items!=null){
             ContainerHelper.saveAllItems(pTag, this.items);
@@ -89,7 +85,7 @@ public abstract class BaseMachineBlockEntity extends HBMBlockEntity implements W
         return this.canOpen(pPlayer) ? this.createMenu(pContainerId, pPlayerInventory) : null;
     }
 
-    protected abstract AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory);
+    public abstract AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory);
     @NotNull
     @Override
     public NonNullList<ItemStack> getItems() {
@@ -106,24 +102,11 @@ public abstract class BaseMachineBlockEntity extends HBMBlockEntity implements W
 
     @Override
     public boolean canPlaceItemThroughFace(int pIndex, ItemStack pItemStack, @Nullable Direction pDirection) {
-//        if (pDirection == null) return true;
-//        SlotAccCtl[] slotAccCtls = getAccCtl().get(pDirection);
-//        for (SlotAccCtl accCtl : slotAccCtls) {
-//            if (accCtl.getSlot() == pIndex && accCtl.allowIn())
-//                return true;
-//        }
-//        return false;
         return allowInput(pIndex, pDirection) && isItemValid(pIndex, pItemStack, pDirection);
     }
 
     @Override
     public boolean canTakeItemThroughFace(int pIndex, ItemStack pStack, Direction pDirection) {
-//        SlotAccCtl[] slotAccCtls = getAccCtl().get(pDirection);
-//        for (SlotAccCtl accCtl : slotAccCtls) {
-//            if (accCtl.getSlot() == pIndex && accCtl.allowOut())
-//                return true;
-//        }
-//        return false;
         return allowOutput(pIndex, pDirection);
     }
 

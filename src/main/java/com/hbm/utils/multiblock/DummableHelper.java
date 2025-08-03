@@ -1,6 +1,8 @@
 package com.hbm.utils.multiblock;
 
+import com.hbm.block.HBMBlockProperties;
 import com.hbm.blockentity.base2.DummyableBlockEntity;
+import com.hbm.blockentity.base2.TileProxyBase;
 import com.hbm.utils.MultipartUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -25,27 +27,29 @@ public class DummableHelper {
     /** 填充实体的方块 */
     public static void fillSpace(Level level, BlockPos blockPos, BlockState blockState, Direction dir, List<Vec3i> offsets){
         List<Vec3i> offsets2 = MultiblockData.transOffsets(offsets, dir);
+        BlockState newSate = blockState.setValue(HBMBlockProperties.IS_CORE, Boolean.FALSE);
         for (Vec3i offset : offsets2) {
             if (offset.getX()==0&&offset.getY()==0&&offset.getZ()==0)continue;
-            level.setBlock(blockPos.offset(offset),blockState,3);
+            level.setBlock(blockPos.offset(offset),newSate,3);
             BlockEntity blockEntity = level.getBlockEntity(blockPos.offset(offset));
-            if (blockEntity instanceof DummyableBlockEntity dummyableBlockEntity){
-                //填充方块实体记录中心点位
-                dummyableBlockEntity.isCore = false;
-                dummyableBlockEntity.corePos = new BlockPos(blockPos);
+            if (blockEntity instanceof TileProxyBase tileProxyBase){
+                tileProxyBase.cachedPos = new BlockPos(blockPos);
             }
         }
         //中心方块实体设为core
         if (level.getBlockEntity(blockPos) instanceof DummyableBlockEntity entity){
-            entity.isCore = true;
             entity.isFormed = true;
-            entity.corePos = new BlockPos(blockPos);
         }
     }
     public static void clearSpace(Level level, BlockPos blockPos, BlockState blockState, Direction direction){
         BlockEntity blockEntity = level.getBlockEntity(blockPos);
-        if (blockEntity instanceof DummyableBlockEntity dummyableBlockEntity){
-            BlockPos corePos = dummyableBlockEntity.corePos;
+        BlockPos corePos;
+        if (blockEntity instanceof TileProxyBase tileProxyBase){
+            corePos = tileProxyBase.cachedPos;
+        }else corePos = blockPos;
+        BlockEntity coreEntity = level.getBlockEntity(corePos);
+        if (coreEntity != null && coreEntity instanceof DummyableBlockEntity){
+            // 移除填充方块
             List<Vec3i> offsets2 = MultipartUtils.transOffsets(MultiblockData.mapping.get(blockState.getBlock()).offsets, direction);
             for (Vec3i offset : offsets2) {
                 BlockPos pos = corePos.offset(offset);
@@ -53,6 +57,8 @@ public class DummableHelper {
                     level.removeBlock(pos,false);
                 }
             }
+            // 移除核心方块
+            level.removeBlock(corePos, false);
         }
     }
 }

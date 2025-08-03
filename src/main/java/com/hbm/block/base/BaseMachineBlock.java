@@ -95,6 +95,5 @@ public abstract class BaseMachineBlock extends BaseEntityBlock implements Entity
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable BlockGetter pLevel, List<Component> pTooltip, TooltipFlag pFlag) {
         super.appendHoverText(pStack, pLevel, pTooltip, pFlag);
-
     }
 }

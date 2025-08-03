@@ -191,12 +191,12 @@ public class AssemblerEntity extends BedLikeBlockEntity {
     }
 
     @Override
-    protected Component getDefaultName() {
+    public Component getDefaultName() {
         return Component.translatable("hbm.machine.assembler");
     }
 
     @Override
-    protected AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory) {
+    public AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory) {
         return new AssemblerMenu(pContainerId,pInventory,this,containerData);
     }
     @Override

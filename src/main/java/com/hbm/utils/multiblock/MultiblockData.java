@@ -15,7 +15,7 @@ public class MultiblockData {
     public static final Map<Block, MultiblockData> mapping = new HashMap<>();
     static {
         mapping.put(ModBlocks.machine_assembler.get(), new MultiblockData(1, 0, 2 ,1 ,2 ,1));
-        mapping.put(HBMMachine.CHEMPLANT.get(), new MultiblockData(1, 0, 2 ,1 ,2 ,1));
+        mapping.put(HBMMachine.CHEMPLANT.get(), new MultiblockData(2, 0, 2 ,1 ,2 ,1));
     }
 
     MultiblockData(List<Vec3i> offsets, int[] dirOffsets){
@@ -26,7 +26,9 @@ public class MultiblockData {
         this.dirOffsets = dirOffsets;
         this.offsets = square(dirOffsets);
     }
-
+    /**
+     * 注意：offset不包括核心方块，它记录的是所有填充方块的位置。
+     * */
     public List<Vec3i> offsets;
     public int[] dirOffsets;
 
@@ -39,8 +41,8 @@ public class MultiblockData {
         for (int i = -dim[4]; i <= dim[5]; i++) {
             for (int j = -dim[1]; j <= dim[0]; j++) {
                 for (int k = -dim[2]; k <= dim[3]; k++) {
-//                    if (!(i==0&&j==0&&k==0))
-                    offsets.add(new Vec3i(i,j,k));
+                    if (!(i==0&&j==0&&k==0))
+                        offsets.add(new Vec3i(i,j,k));
                 }
             }
         }

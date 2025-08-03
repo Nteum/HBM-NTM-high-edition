@@ -22,7 +22,7 @@ import javax.annotation.Nullable;
 //模组中所有带有方块实体的类
 //内容主要直接抄的BaseEntityBlock
 public abstract class BlockContainerBase extends BlockBase implements EntityBlock {
-    public static final DirectionProperty FACING = BlockStateProperties.FACING;
+    public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public BlockContainerBase(Properties pProperties) {
         super(pProperties);
         this.registerDefaultState(this.getStateDefinition().any().setValue(FACING, Direction.SOUTH));

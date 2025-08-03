@@ -1,28 +1,65 @@
 package com.hbm.block.base;
 
+import com.hbm.HBMKey;
+import com.hbm.block.HBMBlockProperties;
+import com.hbm.block.HBMMachine;
 import com.hbm.block.interfaces.ICustomBlockHighlight;
+import com.hbm.blockentity.base2.DummyableBlockEntity;
+import com.hbm.blockentity.base2.TileProxyBase;
 import com.hbm.interfaces.ICopiable;
+import com.hbm.registries.ModBlocks;
 import com.hbm.utils.multiblock.DummableHelper;
 import com.hbm.utils.multiblock.MultiblockData;
 import com.hbm.world.gen.INBTTransformable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.Containers;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Pose;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.event.RenderHighlightEvent;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 //所有多方块结构的父类
 //主要处理可以协同破坏和恢复的多方块机器
-public abstract class BlockDummyable extends BlockMachineBase implements ICustomBlockHighlight, ICopiable, INBTTransformable {
+public abstract class BlockDummyable extends BlockMachineBase implements ICustomBlockHighlight, INBTTransformable {
+    // 某个方块是否为核心，如果是核心，建立功能性方块实体，否则只是代理方块实体。
+    public static final BooleanProperty IS_CORE = HBMBlockProperties.IS_CORE;
     public BlockDummyable(Properties pProperties) {
-        super(pProperties);
+        super(pProperties.noOcclusion().isViewBlocking(BlockDummyable::never));
+        this.registerDefaultState(this.getStateDefinition().any().setValue(IS_CORE, Boolean.TRUE));
     }
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
+        super.createBlockStateDefinition(pBuilder);
+        pBuilder.add(IS_CORE);
+    }
+
     @Override
     public void setPlacedBy(Level pLevel, BlockPos pPos, BlockState pState, @Nullable LivingEntity pPlacer, ItemStack pStack) {
         if (!pLevel.isClientSide){
@@ -35,6 +72,7 @@ public abstract class BlockDummyable extends BlockMachineBase implements ICustom
                 Containers.dropItemStack(pLevel,pPos.getCenter().x,pPos.getCenter().y,pPos.getCenter().z,pStack.getItem().getDefaultInstance());
                 return;
             }
+//            pState.setValue(IS_CORE, Boolean.TRUE);     // 设为中心方块
             //放置方块
             DummableHelper.fillSpace(pLevel, pPos, pState, direction, offsets);
         }
@@ -47,5 +85,63 @@ public abstract class BlockDummyable extends BlockMachineBase implements ICustom
             DummableHelper.clearSpace(pLevel,pPos,pState,pState.getValue(FACING));
             super.onRemove(pState, pLevel, pPos, pNewState, pMovedByPiston);
         }
+    }
+
+    @Override
+    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
+        if (!pLevel.isClientSide && pPlayer.getPose().equals(Pose.CROUCHING)){
+            BlockPos core = pPos;
+            BlockState coreState = pState;
+            // 先找到核心点位
+            if (!pState.getValue(IS_CORE)){
+                BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
+                if (blockEntity instanceof TileProxyBase tileProxy){
+                    core = tileProxy.cachedPos;
+                }
+            }
+            // 右键相当于直接对核心点位右键
+            if (pLevel.getBlockEntity(core) instanceof DummyableBlockEntity entity){
+                entity.onLeftClick(pState, pLevel, pPos, pPlayer, pHand, pHit);
+                coreState = pLevel.getBlockState(core);
+                // 但我还是觉得保留原本的触发位置可能是有必要的，因此在DummyableBlockEntity留了一个对应接口
+                entity.onLeftClick(pState, pLevel, pPos, pPlayer, pHand, pHit);
+                super.use(coreState,pLevel,core,pPlayer,pHand,pHit);
+            }else {
+                return coreState.getBlock().use(coreState,pLevel,core,pPlayer,pHand,pHit);
+            }
+        }else {
+            return super.use(pState, pLevel, pPos, pPlayer, pHand, pHit);
+        }
+        return InteractionResult.SUCCESS;
+    }
+//    public static Block[] multiBlockList = new Block[]{ModBlocks.machine_crucible.get(), ModBlocks.machine_assembler.get(), ModBlocks.machine_cracking_tower.get(), HBMMachine.CHEMPLANT.get()};
+    @Override
+    public RenderShape getRenderShape(BlockState pState) {
+        return RenderShape.INVISIBLE;
+    }
+
+    public int[] getDimensions(){
+        return MultiblockData.mapping.get(this).dirOffsets;
+    }
+
+    @Override
+    public VoxelShape getCollisionShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
+        return super.getCollisionShape(pState, pLevel, pPos, pContext);
+    }
+
+    @Override
+    @OnlyIn(Dist.CLIENT)
+    public boolean shouldDrawHighlight(Level world, BlockPos pPos) {
+        return false;
+    }
+
+    @Override
+    @OnlyIn(Dist.CLIENT)
+    public void drawHighlight(RenderHighlightEvent event, Level world, BlockPos pPos) {
+
+    }
+
+    private static boolean never(BlockState p_50806_, BlockGetter p_50807_, BlockPos p_50808_) {
+        return false;
     }
 }

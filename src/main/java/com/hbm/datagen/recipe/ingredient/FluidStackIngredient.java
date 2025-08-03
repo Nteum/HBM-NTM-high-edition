@@ -20,6 +20,7 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -66,6 +67,20 @@ public class FluidStackIngredient {
 
     public int getVolume(){
         return this.volume;
+    }
+    public boolean test(FluidStack pStack){
+        if (pStack==null)return false;
+        else {
+            if (!this.flagTag){
+                return this.fluidStack.isFluidEqual(pStack);
+            }else {
+                for (Holder<Fluid> fluidHolder : BuiltInRegistries.FLUID.getTagOrEmpty(this.tagKey)) {
+                    if (fluidHolder.value().isSame(pStack.getFluid()))
+                        return true;
+                }
+            }
+            return false;
+        }
     }
 
     public JsonObject toJson() {

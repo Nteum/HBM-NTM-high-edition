@@ -62,7 +62,7 @@ public class HBMMachine {
         provider.add(TCALLOY_BARREL.get(), "Technetium Steel Barrel");
         provider.add(ANTIMATTER_BARREL.get(), "Magnetic Antimatter Container");
         provider.add(HBMLang.FLUID_CAPACITY.getTranslationKey(), "Capacity: %1$s mB");
-        provider.add(HBMLang.BARREL.getTranslationKey(), "");
+        provider.add(HBMLang.BARREL.getTranslationKey(), "HBM Barrel");
     }
 
 }

@@ -6,13 +6,15 @@
 package com.hbm.Inventory.recipe;
 
 import com.hbm.datagen.recipe.ingredient.CountableIngredient;
+import com.hbm.datagen.recipe.ingredient.FluidStackIngredient;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.IFluidTank;
 
-import java.util.BitSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 import java.util.function.Predicate;
 
 public class HBMRecipeMatcher
@@ -41,6 +43,41 @@ public class HBMRecipeMatcher
         }
         return true;
     }
+    /** 采用另一种方式匹配 */
+    public static <T extends ItemStack> boolean orderlessItemMatch(List<T> inputs, List<? extends CountableIngredient> tests){
+        HashMap<ItemLike, Integer> countAll = new HashMap<>();
+        for (T input : inputs) {
+            countAll.compute(input.getItem(), (k,v) -> (v==null) ? input.getCount() : input.getCount() + v);
+        }
+        for (CountableIngredient ingredient : tests) {
+            if (!ingredient.value.flagTag){
+                if (!countAll.containsKey(ingredient.value.itemStack.getItem()) || ingredient.value.count > countAll.get(ingredient.value.itemStack.getItem()))
+                    return false;
+            }else {
+                // 在使用tag的情况下统计数量
+                Integer cnt = countAll.keySet().stream().reduce(0, (sum, item) -> ingredient.test(new ItemStack(item)) ? sum + countAll.get(item) : sum, Integer::sum);
+                if (cnt < ingredient.value.count) return false;
+            }
+        }
+        return true;
+    }
 
-
+    public static <T extends IFluidTank> boolean orderlessFluidMatch(List<T> inputs, List<? extends FluidStackIngredient> tests){
+        HashMap<Fluid, Integer> countAll = new HashMap<>();
+        for (T input : inputs) {
+            FluidStack fluid = input.getFluid();
+            countAll.compute(fluid.getFluid(), (k, v) -> (v==null) ? fluid.getAmount() : fluid.getAmount() + v);
+        }
+        for (FluidStackIngredient ingredient : tests) {
+            if (!ingredient.flagTag){
+                if (!countAll.containsKey(ingredient.fluidStack.getFluid()) || ingredient.volume > countAll.get(ingredient.fluidStack.getFluid()))
+                    return false;
+            }else {
+                // 在使用tag的情况下统计数量
+                Integer cnt = countAll.keySet().stream().reduce(0, (sum, fluid) -> ingredient.test(new FluidStack(fluid,1)) ? sum + countAll.get(fluid) : sum, Integer::sum);
+                if (cnt < ingredient.volume) return false;
+            }
+        }
+        return true;
+    }
 }

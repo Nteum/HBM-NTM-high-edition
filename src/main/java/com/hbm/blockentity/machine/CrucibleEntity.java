@@ -37,12 +37,12 @@ public class CrucibleEntity extends BaseMachineBlockEntity {
 
     //GUI上显示的名字
     @Override
-    protected Component getDefaultName() {
+    public Component getDefaultName() {
         return Component.translatable("hbmxx.container.crucible");
     }
     //创建对应的菜单类
     @Override
-    protected AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory) {
+    public AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory) {
         return null;
     }
 

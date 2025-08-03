@@ -1,6 +1,7 @@
 package com.hbm.datagen.tag;
 
 import com.hbm.api.resource.OreType;
+import com.hbm.block.HBMMachine;
 import com.hbm.registries.ModTags;
 import com.hbm.registries.ModBlocks;
 import net.minecraft.core.HolderLookup;
@@ -50,9 +51,10 @@ public class BlockTagsGen extends BlockTagsProvider {
         //机器
         this.tag(ModTags.Blocks.BATTERY).add(ModBlocks.machine_battery.get(),ModBlocks.machine_lithium_battery.get(),ModBlocks.machine_dineutronium_battery.get(),ModBlocks.machine_schrabidium_battery.get());
         this.tag(ModTags.Blocks.ANVIL).add(ModBlocks.anvil_iron.get(),ModBlocks.anvil_desh.get(),ModBlocks.anvil_bismuth.get());
-        this.tag(ModTags.Blocks.MACHINE).addTags(ModTags.Blocks.BATTERY,ModTags.Blocks.ANVIL).add(ModBlocks.machine_assembler.get(),ModBlocks.RED_CABLE.get());
+        this.tag(ModTags.Blocks.MACHINE).add(ModBlocks.machine_assembler.get(),ModBlocks.RED_CABLE.get(),HBMMachine.CHEMPLANT.get());
+//                .addTag(ModTags.Blocks.BATTERY);
 
         /** 原版tag */
-        this.tag(BlockTags.MINEABLE_WITH_PICKAXE).addTags(ModTags.Blocks.MACHINE,Tags.Blocks.ORES).add(ModBlocks.DUMMIBLE.get());
+        this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.DUMMIBLE.get()).addTag(ModTags.Blocks.MACHINE).addTag(Tags.Blocks.ORES);
     }
 }

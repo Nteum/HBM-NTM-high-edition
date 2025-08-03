@@ -1,6 +1,7 @@
 package com.hbm.block.interfaces;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -9,8 +10,8 @@ import net.minecraftforge.event.TickEvent;
 import org.lwjgl.opengl.GL11;
 
 public interface ICustomBlockHighlight {
-    @OnlyIn(Dist.CLIENT) public boolean shouldDrawHighlight(Level world, int x, int y, int z);
-    @OnlyIn(Dist.CLIENT) public void drawHighlight(RenderHighlightEvent event, Level world, int x, int y, int z);
+    @OnlyIn(Dist.CLIENT) public boolean shouldDrawHighlight(Level world, BlockPos pPos);
+    @OnlyIn(Dist.CLIENT) public void drawHighlight(RenderHighlightEvent event, Level world, BlockPos pPos);
 
     @OnlyIn(Dist.CLIENT)
     public static void setup() {

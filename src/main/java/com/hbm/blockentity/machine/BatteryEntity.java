@@ -146,12 +146,12 @@ public class BatteryEntity extends BaseMachineBlockEntity {
     }
 
     @Override
-    protected Component getDefaultName() {
+    public Component getDefaultName() {
         return Component.translatable(HBMLang.BARREL.getTranslationKey());
     }
 
     @Override
-    protected AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory) {
+    public AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory) {
         return new BatteryMenu(pContainerId,pInventory,this,containerData);
     }
     //======================WorldlyContainer=======================

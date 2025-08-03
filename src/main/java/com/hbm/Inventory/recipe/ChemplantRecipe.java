@@ -1,6 +1,7 @@
 package com.hbm.Inventory.recipe;
 
 import com.google.gson.JsonObject;
+import com.hbm.blockentity.machine.ChemplantEntity;
 import com.hbm.datagen.recipe.ingredient.CountableIngredient;
 import com.hbm.datagen.recipe.ingredient.FluidStackIngredient;
 import net.minecraft.core.NonNullList;
@@ -42,11 +43,18 @@ public class ChemplantRecipe implements Recipe<Container> {
 
     @Override
     public boolean matches(Container pContainer, Level pLevel) {
+        if (pContainer instanceof ChemplantEntity chemplantEntity){
+            return HBMRecipeMatcher.orderlessItemMatch(chemplantEntity.items.subList(13,17), inputItems)
+                    && HBMRecipeMatcher.orderlessFluidMatch(chemplantEntity.getFluidTanks(null).subList(0,2), inputFluids);
+        }
         return false;
     }
     /** 处理化工厂处理结果 */
     public void assemble(Container pContainer) {
+        if (pContainer instanceof ChemplantEntity chemplantEntity){
 
+
+        }
     }
     // 无用，因为化工厂还会生成流体
     @Override
@@ -78,6 +86,9 @@ public class ChemplantRecipe implements Recipe<Container> {
     public RecipeType<?> getType() {
         return ModRecipes.CHEMPLANT.type().get();
     }
+
+    public int getDuration(){return duration;}
+    public long getPower(){return power;}
 
     public static class Serializer implements RecipeSerializer<ChemplantRecipe>{
         @Override

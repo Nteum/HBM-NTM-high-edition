@@ -40,6 +40,7 @@ import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.ItemHandlerHelper;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -207,7 +208,7 @@ public class ElectricFurnaceEntity extends BaseMachineBlockEntity implements Men
     }
 
     @Override
-    protected Component getDefaultName() {
+    public Component getDefaultName() {
         return Component.translatable(HBMLang.ELECTRIC_FURNACE.getTranslationKey());
     }
 
@@ -220,7 +221,7 @@ public class ElectricFurnaceEntity extends BaseMachineBlockEntity implements Men
     // 通过Component.Searlizer来转换成json然后记录在itemstack的tag里
     // 有点麻烦，处理json串暂时不知道怎么做。
     public void addUpgradeTooltips(ItemStack stack){
-        List<Component> tooltips = List.of();
+        List<Component> tooltips = new ArrayList<>();
         if (!(stack.getItem() instanceof ItemMachineUpgrade))return;
         ItemMachineUpgrade machineUpgrade = (ItemMachineUpgrade) stack.getItem();
         if (!canProvideInfo(machineUpgrade.type, machineUpgrade.tier, true))return;

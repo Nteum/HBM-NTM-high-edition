@@ -1,6 +1,8 @@
 package com.hbm.blockentity;
 
 import com.hbm.block.HBMMachine;
+import com.hbm.block.base.BlockDummyable;
+import com.hbm.blockentity.base2.TileProxyCombo;
 import com.hbm.blockentity.machine.*;
 import com.hbm.HBM;
 import com.hbm.blockentity.base.DummibleBlockEntity;
@@ -9,10 +11,18 @@ import com.hbm.blockentity.weapon.NukeBombBoyEntity;
 import com.hbm.blockentity.weapon.NukeBombCustomEntity;
 import com.hbm.registries.ModBlocks;
 import com.hbm.blockentity.weapon.NukeBombFatEntity;
+import com.hbm.registries.ModTags;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.data.registries.VanillaRegistries;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+
+import java.util.stream.Collectors;
 
 public class ModBlockEntityType {
     public static final DeferredRegister<BlockEntityType<?>> REGISTER = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, HBM.MODID);
@@ -56,4 +66,10 @@ public class ModBlockEntityType {
             REGISTER.register("chemplant_entity",()-> BlockEntityType.Builder.of(ChemplantEntity::new, HBMMachine.CHEMPLANT.get()).build(null));
     public static final RegistryObject<BlockEntityType<BarrelEntity>> BARREL_ENTITY =
             REGISTER.register("barrel_entity",()-> BlockEntityType.Builder.of(BarrelEntity::new, HBMMachine.PLASTIC_BARREL.get(),HBMMachine.CORRODED_BARREL.get(),HBMMachine.IRON_BARREL.get(),HBMMachine.STEEL_BARREL.get(),HBMMachine.TCALLOY_BARREL.get(),HBMMachine.ANTIMATTER_BARREL.get()).build(null));
+    public static final RegistryObject<BlockEntityType<TileProxyCombo>> PROXY_ENTITY =
+            REGISTER.register("proxy_entity",()-> BlockEntityType.Builder.of(TileProxyCombo::new,
+                    ModBlocks.machine_crucible.get(), ModBlocks.machine_assembler.get(), ModBlocks.machine_cracking_tower.get(), HBMMachine.CHEMPLANT.get()
+//                    ForgeRegistries.BLOCKS.getValues().toArray(Block[]::new)
+//                    BuiltInRegistries.BLOCK.stream().filter(block -> block.builtInRegistryHolder().is(ModTags.Blocks.MACHINE)).toArray(Block[]::new)
+            ).build(null));
 }

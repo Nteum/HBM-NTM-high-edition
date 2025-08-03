@@ -1,8 +1,9 @@
-package com.hbm.blockentity.base2;
+package com.hbm.blockentity.base;
 
 import com.hbm.HBMKey;
 import com.hbm.api.energy.IEnergyContainer;
 import com.hbm.api.fluid.IExtendedFluidTank;
+import com.hbm.blockentity.base2.BaseMachineBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
@@ -13,10 +14,11 @@ import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
+import java.util.ArrayList;
 import java.util.List;
 
 // 抽象了处理配方的主要逻辑
-public abstract class RecipeProcessBlockEntity<R extends Recipe<Container>> extends BaseMachineBlockEntity{
+public abstract class RecipeProcessBlockEntity<R extends Recipe<Container>> extends BaseMachineBlockEntity {
     protected static int maxProgress;
     protected static long maxPower;
     public int progress = 0;
@@ -24,7 +26,7 @@ public abstract class RecipeProcessBlockEntity<R extends Recipe<Container>> exte
     protected R recipeNow = null;
     // 能量和流体槽按需初始化
     protected IEnergyContainer energyContainer = null;
-    protected List<IExtendedFluidTank> tanks = List.of();
+    protected List<IExtendedFluidTank> tanks = new ArrayList<>();
     protected RecipeManager.CachedCheck<Container, R> quickCheck;
     protected RecipeProcessBlockEntity(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState) {
         super(pType, pPos, pBlockState);

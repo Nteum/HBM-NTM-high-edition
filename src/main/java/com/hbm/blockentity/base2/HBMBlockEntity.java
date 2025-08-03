@@ -54,7 +54,7 @@ public abstract class HBMBlockEntity extends CapabilityBlockEntity implements IS
         return this.name;
     }
 
-    protected abstract Component getDefaultName();
+    public abstract Component getDefaultName();
 
     @Override
     public IEnergyContainer getEnergyContainer() {

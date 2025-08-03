@@ -34,12 +34,12 @@ public class NukeBombFatEntity extends NukeBombEntity{
     }
 
     @Override
-    protected Component getDefaultName() {
+    public Component getDefaultName() {
         return null;
     }
 
     @Override
-    protected AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory) {
+    public AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory) {
         return null;
     }
 

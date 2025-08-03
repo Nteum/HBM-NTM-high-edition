@@ -33,12 +33,12 @@ public class BoilerEntity extends BaseMachineBlockEntity {
     }
 
     @Override
-    protected Component getDefaultName() {
+    public Component getDefaultName() {
         return Component.translatable(HBMLang.BOILER.getTranslationKey());
     }
 
     @Override
-    protected AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory) {
+    public AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory) {
         return null;
     }
 }

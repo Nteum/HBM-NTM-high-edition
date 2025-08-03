@@ -109,8 +109,8 @@ public final class MultipartUtils {
             BlockEntity blockEntity = level.getBlockEntity(blockPos.offset(offset));
             if (blockEntity instanceof DummyableBlockEntity multiPartBlockEntity){
                 //填充方块实体记录中心点位
-                multiPartBlockEntity.isCore = false;
-                multiPartBlockEntity.corePos = new BlockPos(blockPos);
+//                multiPartBlockEntity.isCore = false;
+//                multiPartBlockEntity.corePos = new BlockPos(blockPos);
             }
         }
     }
