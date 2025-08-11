@@ -4,7 +4,6 @@ import com.hbm.HBM;
 import com.hbm.blockentity.machine.BarrelEntity;
 import com.hbm.gui.menu.BarrelMenu;
 import com.hbm.gui.menu.BatteryMenu;
-import com.hbm.gui.screen.component.FluidBar;
 import com.hbm.gui.screen.component.MultiStateButton;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
@@ -29,7 +28,7 @@ import java.util.Optional;
 public class BarrelGui extends AbstractContainerScreen<BarrelMenu> {
     private ResourceLocation TEXTURE = HBM.rl("textures/gui/gui_barrel.png");
     private MultiStateButton modBtn;
-    private FluidBar fluidBar;
+//    private FluidBar fluidBar;
     public BarrelGui(BarrelMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
     }
@@ -65,6 +64,5 @@ public class BarrelGui extends AbstractContainerScreen<BarrelMenu> {
                 }
             }
         }
-
     }
 }

@@ -1,4 +1,4 @@
-package com.hbm.lib;
+package com.hbm.utils;
 
 import com.hbm.api.annotations.NothingNullByDefault;
 import net.minecraft.nbt.CompoundTag;

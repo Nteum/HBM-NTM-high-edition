@@ -1,6 +1,7 @@
 package com.hbm.datagen;
 
 import com.hbm.HBMLang;
+import com.hbm.Inventory.fluid.ModFluids;
 import com.hbm.api.text.ILangEntry;
 import com.hbm.block.HBMMachine;
 import com.hbm.blockentity.interfaces.IUpgradeInfoProvider;
@@ -23,6 +24,7 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
         addTooltip();
         addContainer();
         addFluidTrait();
+        ModFluids.localName(this);
         //物品
         this.add(ModItems.ingot_steel.get(),"Steel Ignot");
         this.add(ModItems.plate_steel.get(),"Steel Plate");
@@ -78,6 +80,10 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
         this.add(HBMLang.UPGRADE_SCREAM, "Mining Laser Upgrade\nIt's like in Super Mario where all blocks are\nactually Toads, but here it's Half-Life scientists\nand they scream. A lot.");
         this.add(HBMLang.UPGRADE_NULLIFIER, "Mining Laser Upgrade\n50% chance to override worthless items with /dev/zero\n50% chance to move worthless items to /dev/null");
         this.add(HBMLang.UPGRADE_GC_SPEED, "Gas Centrifuge Upgrade\nAllows for total isotopic separation of HEUF6\nalso your centrifuge goes sicko mode");
+
+        this.add(HBMLang.TOOLTIP_LEFT_TIME, "Please wait %s s");
+        this.add(HBMLang.TOOLTIP_TANK_VOLUME, "%s : %s mB");
+        this.add(HBMLang.TOOLTIP_ENERGY, "Energy: %s HE");
     }
     private void addContainer(){
         this.add(HBMLang.DIFURNACE, "Blast Furnace");
@@ -86,7 +92,7 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
         this.add(HBMLang.BOILER, "Boiler");
         this.add(HBMLang.ELECTRIC_BOILER, "Electric Boiler");
         this.add(HBMLang.NUCLEAR_BOILER, "Nuclear Boiler");
-        this.add(HBMLang.CHEMPLANT, "Chemplant");
+        this.add(HBMLang.CHEMPLANT, "Chemical Plant");
 //        this.add(HBMLang.BARREL, "HBM Barrel");
     }
     private void addFluidTrait(){

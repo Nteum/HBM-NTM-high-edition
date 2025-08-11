@@ -20,6 +20,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.IntStream;
 
@@ -299,7 +300,14 @@ public class InventoryUtils {
         return itemStack;
     }
 
-    public static void handleItems(){
-
+    public static void handleItems(BlockEntity be, Function<ItemStack, ItemStack> processFunction, int slot1, int slot2){
+        IItemHandler itemHandler = be.getCapability(ForgeCapabilities.ITEM_HANDLER).orElse(null);
+        if (itemHandler == null)return;
+        ItemStack itemStack = itemHandler.extractItem(slot1, 1, true);
+        ItemStack output = processFunction.apply(itemStack);
+        if (!output.equals(itemStack,true) && itemHandler.insertItem(slot2, output, true) == ItemStack.EMPTY){
+            itemHandler.extractItem(slot1, 1, false);
+            itemHandler.insertItem(slot2, output, false);
+        }
     }
 }

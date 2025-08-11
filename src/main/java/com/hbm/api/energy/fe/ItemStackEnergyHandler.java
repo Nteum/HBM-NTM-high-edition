@@ -3,17 +3,12 @@ package com.hbm.api.energy.fe;
 import com.hbm.HBMKey;
 import com.hbm.api.IContentsListener;
 import com.hbm.api.energy.BasicEnergyContainer;
-import com.hbm.api.energy.IEnergyHandler;
 import com.hbm.api.energy.ProxyEnergyHandler;
 import com.hbm.capabilities.Capabilities;
 import com.hbm.capabilities.ItemCapabilityWrapper;
 import com.hbm.capabilities.resolver.BasicCapabilityResolver;
 import com.hbm.capabilities.resolver.ICapabilityResolver;
-import com.hbm.lib.ItemDataUtils;
-import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraftforge.common.CreativeModeTabRegistry;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import org.jetbrains.annotations.NotNull;
+import com.hbm.utils.ItemDataUtils;
 
 import java.util.function.Consumer;
 

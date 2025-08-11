@@ -18,7 +18,7 @@ import java.util.List;
  * 对于有tank编号的接口，tank编号代表着绝对的编号，即使有些位置的tank编号不被允许操作。
  * 2. 关于方向direction：指明direction，则表明从外界的表面交互，如果方向为null，则是在内交互。
  * */
-public interface ISidedFluidHandler extends IFluidHandler, IDefaultFacing {
+public interface ISidedFluidHandler<T extends IExtendedFluidTank> extends IFluidHandler, IDefaultFacing {
 
     default boolean canHandleFluid() {
         return true;
@@ -29,7 +29,7 @@ public interface ISidedFluidHandler extends IFluidHandler, IDefaultFacing {
      * 2. 后面其他函数也需要参数slot查询和修改对应的FluidTank，因此slot不应该是个相对于某个面的相对值，因此返回的列表长度应该始终都是总tank数量
      * 因此在某个面不能提供服务的tank，它不是不放入列表，而是对应的位置设为null
      * */
-    List<IExtendedFluidTank> getFluidTanks(@Nullable Direction side);
+    List<T> getFluidTanks(@Nullable Direction side);
 
     @Override
     default int getTanks() {
@@ -37,12 +37,12 @@ public interface ISidedFluidHandler extends IFluidHandler, IDefaultFacing {
     }
     @Nullable
     default IExtendedFluidTank getFluidTank(int tank, @Nullable Direction side){
-        List<IExtendedFluidTank> tanks = getFluidTanks(side);
+        List<T> tanks = getFluidTanks(side);
         return tank >= 0 && tank < tanks.size() ? tanks.get(tank) : null;
     }
 
     default @NotNull FluidStack getFluidInTank(int tank, @Nullable Direction side){
-        List<IExtendedFluidTank> tanks = getFluidTanks(side);
+        List<T> tanks = getFluidTanks(side);
         return tank >= 0 && tank < tanks.size() ? tanks.get(tank).getFluid() : FluidStack.EMPTY;
     }
 
@@ -93,7 +93,7 @@ public interface ISidedFluidHandler extends IFluidHandler, IDefaultFacing {
     @Override
     default int fill(FluidStack resource, FluidAction action){
         int amount = resource.getAmount();
-        List<IExtendedFluidTank> tanks = getFluidTanks(null);
+        List<T> tanks = getFluidTanks(null);
         IntList typeMatchTanks = new IntArrayList();
         IntList emptyTanks = new IntArrayList();
         for (int i = 0; i < tanks.size(); i++) {
@@ -129,7 +129,7 @@ public interface ISidedFluidHandler extends IFluidHandler, IDefaultFacing {
     @Override
     default @NotNull FluidStack drain(int maxDrain, FluidAction action){
         FluidStack resultStack = FluidStack.EMPTY;
-        List<IExtendedFluidTank> tanks = getFluidTanks(null);
+        List<T> tanks = getFluidTanks(null);
         for (IExtendedFluidTank tank : tanks) {
             if (tank != null && !tank.getFluid().isEmpty() && (resultStack.isEmpty() || tank.isFluidValid(resultStack))){
                 FluidStack drainStack = tank.drain(maxDrain, action);
@@ -148,7 +148,7 @@ public interface ISidedFluidHandler extends IFluidHandler, IDefaultFacing {
     default @NotNull FluidStack drain(FluidStack resource, FluidAction action){
         if (resource.isEmpty())return FluidStack.EMPTY;
         int drainAmount = 0;
-        List<IExtendedFluidTank> tanks = getFluidTanks(null);
+        List<T> tanks = getFluidTanks(null);
         for (IExtendedFluidTank tank : tanks) {
             if (tank != null && tank.isFluidValid(resource)){
                 drainAmount += tank.drain(resource.getAmount() - drainAmount,action).getAmount();

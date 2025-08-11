@@ -1,6 +1,7 @@
 package com.hbm.blockentity.base2;
 
 import com.hbm.HBM;
+import com.hbm.HBMKey;
 import com.hbm.api.Chunk3D;
 import com.hbm.api.Coord4D;
 import com.hbm.api.interferences.ITileWrapper;
@@ -36,6 +37,8 @@ public abstract class UpdateableBlockEntity extends BlockEntity implements ITile
     private Coord4D cachedCoord;
     private boolean cacheCoord;
     private long lastSave;
+    // 代表机器是否倍东西挡住，挡住的话声音传不过来，似乎是用在这个上的
+    public boolean muffled;
 
     public UpdateableBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
@@ -88,7 +91,8 @@ public abstract class UpdateableBlockEntity extends BlockEntity implements ITile
             //Note: We use our own update packet/channel to avoid chunk trashing and minecraft attempting to rerender
             // the entire chunk when most often we are just updating a TileEntityRenderer, so the chunk itself
             // does not need to and should not be redrawn
-            ModMessages.sendToAllTracking(new UpdateTileMessage(this), tracking);
+//            ModMessages.sendToAllTracking(new UpdateTileMessage(this), tracking);
+            ModMessages.sendToAll(new UpdateTileMessage(this));
         }
     }
     // 1.7.10版本HBM更新机制，我在这里复现了它
@@ -166,6 +170,14 @@ public abstract class UpdateableBlockEntity extends BlockEntity implements ITile
     public void load(@NotNull CompoundTag nbt) {
         super.load(nbt);
         updateCoord();
+        this.muffled = nbt.contains(HBMKey.MUFFLED);
+    }
+
+    @Override
+    protected void saveAdditional(CompoundTag pTag) {
+        super.saveAdditional(pTag);
+        if (this.muffled)
+            pTag.putByte(HBMKey.MUFFLED, (byte) 0);
     }
 
     @Override
@@ -198,5 +210,9 @@ public abstract class UpdateableBlockEntity extends BlockEntity implements ITile
         }
         BlockPos pos = getTilePos();
         return new Chunk3D(getTileWorld().dimension(), SectionPos.blockToSectionCoord(pos.getX()), SectionPos.blockToSectionCoord(pos.getZ()));
+    }
+
+    public float getVolume(float baseVolume) {
+        return muffled ? baseVolume * 0.1F : baseVolume;
     }
 }

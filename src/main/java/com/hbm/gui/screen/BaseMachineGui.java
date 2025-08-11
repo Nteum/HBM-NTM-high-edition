@@ -7,6 +7,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 
+import java.util.List;
+
 public class BaseMachineGui<T extends AbstractContainerMenu> extends AbstractContainerScreen<T> {
     public BaseMachineGui(T pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
@@ -16,6 +18,7 @@ public class BaseMachineGui<T extends AbstractContainerMenu> extends AbstractCon
     protected void init() {
         super.init();
         titleLabelX = (imageWidth - font.width(title)) / 2;  //标题居中
+        inventoryLabelY += imageHeight - 166;   // 修改“物品栏”三字位置
     }
 
     @Override
@@ -32,5 +35,11 @@ public class BaseMachineGui<T extends AbstractContainerMenu> extends AbstractCon
 
     protected void showBgTexture(GuiGraphics pGuiGraphics, ResourceLocation texture){
         pGuiGraphics.blit(texture,leftPos,topPos,0,0,imageWidth,imageHeight);
+    }
+    /** 在鼠标指针位置显示tooltip */
+    public void drawCustomInfoStat(GuiGraphics pGuiGraphics, int mouseX, int mouseY, int x, int y, int width, int height, List<Component> tooltips) {
+        if(x <= mouseX && x + width > mouseX && y < mouseY && y + height >= mouseY)
+            pGuiGraphics.renderComponentTooltip(this.font, tooltips, mouseX, mouseY);
+//            this.func_146283_a(text, tPosX, tPosY);
     }
 }

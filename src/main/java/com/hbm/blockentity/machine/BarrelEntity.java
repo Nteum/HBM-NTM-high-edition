@@ -1,6 +1,7 @@
 package com.hbm.blockentity.machine;
 
 import com.hbm.HBMLang;
+import com.hbm.api.Mode;
 import com.hbm.api.fluid.*;
 import com.hbm.block.machine.BlockFluidBarrel;
 import com.hbm.blockentity.ModBlockEntityType;
@@ -35,6 +36,7 @@ public class BarrelEntity extends BaseMachineBlockEntity implements IPacketUpdat
     BlockFluidBarrel.BarrelProperties properties;
     BarrelMode mode = BarrelMode.FORBID;
     BasicFluidTank tank;
+    private SingleFluidHandler fluidHandler;
 //    public ISidedFluidHandler fluidHandler;
     private ContainerData containerData = new ContainerData() {
         @Override
@@ -61,16 +63,17 @@ public class BarrelEntity extends BaseMachineBlockEntity implements IPacketUpdat
         super(ModBlockEntityType.BARREL_ENTITY.get(), pPos, pBlockState);
         this.items = NonNullList.withSize(4,ItemStack.EMPTY);
         this.properties = ((BlockFluidBarrel)pBlockState.getBlock()).barrelProperties;
-        this.tank = new BasicFluidTank(properties.capacity);
-        this.capabilitiesContent.addCapability(ForgeCapabilities.FLUID_HANDLER, this);
+//        this.tank = new BasicFluidTank(properties.capacity);
+        this.fluidHandler = new SingleFluidHandler(properties.capacity, Mode.OUTPUT);
+        this.capabilitiesContent.addCapability(ForgeCapabilities.FLUID_HANDLER, this.fluidHandler);
 //        this.capabilitiesContent.addCapability(ForgeCapabilities.FLUID_HANDLER, new BaseFluidHandler(1, properties.capacity));
 //        capabilitiesCache.addCapabilityResolver(new SidedFluidWrapper(new BaseFluidHandler(1, properties.capacity)));
     }
 
-    @Override
-    public List<IExtendedFluidTank> getFluidTanks(@Nullable Direction side) {
-        return List.of(this.tank);
-    }
+//    @Override
+//    public List<IExtendedFluidTank> getFluidTanks(@Nullable Direction side) {
+//        return List.of(this.tank);
+//    }
 
     @Override
     protected void onUpdateServer() {

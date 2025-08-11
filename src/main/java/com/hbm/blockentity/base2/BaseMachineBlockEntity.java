@@ -1,5 +1,6 @@
 package com.hbm.blockentity.base2;
 
+import com.hbm.api.inventory.BasicItemHandler;
 import com.hbm.api.inventory.SlotAccCtl;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -17,6 +18,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -29,10 +31,13 @@ public abstract class BaseMachineBlockEntity extends HBMBlockEntity implements W
     //机器内部存储的物品，需要在子类中初始化
     private LockCode lockKey = LockCode.NO_LOCK;
     public NonNullList<ItemStack> items;
+    public BasicItemHandler itemHandler;
+
     public boolean running = false;    // 运行状态
 
     protected BaseMachineBlockEntity(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState) {
         super(pType, pPos, pBlockState);
+        this.capabilitiesContent.addCapability(ForgeCapabilities.ITEM_HANDLER, this);
     }
     //存储数据。会将机器中的物品保存
     @Override
@@ -102,12 +107,14 @@ public abstract class BaseMachineBlockEntity extends HBMBlockEntity implements W
 
     @Override
     public boolean canPlaceItemThroughFace(int pIndex, ItemStack pItemStack, @Nullable Direction pDirection) {
-        return allowInput(pIndex, pDirection) && isItemValid(pIndex, pItemStack, pDirection);
+        return slotIOCtl(pIndex, pItemStack, true);
+//        return allowInput(pIndex, pDirection) && isItemValid(pIndex, pItemStack, pDirection);
     }
 
     @Override
     public boolean canTakeItemThroughFace(int pIndex, ItemStack pStack, Direction pDirection) {
-        return allowOutput(pIndex, pDirection);
+        return slotIOCtl(pIndex, pStack, false);
+//        return allowOutput(pIndex, pDirection);
     }
 
     @Override
@@ -150,4 +157,6 @@ public abstract class BaseMachineBlockEntity extends HBMBlockEntity implements W
     public void clearContent() {
         getItems().clear();
     }
+    //================其他功能函数（也不一定放在这个类里）==================
+
 }

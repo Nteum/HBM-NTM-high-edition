@@ -27,7 +27,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public abstract class HBMBlockEntity extends CapabilityBlockEntity implements ISidedItemHandler, ISidedFluidHandler, IEnergyHandler,
+public abstract class HBMBlockEntity extends CapabilityBlockEntity implements ISidedItemHandler , IEnergyHandler,
         WorldlyContainer, Nameable {
 
     @Nullable
@@ -61,10 +61,10 @@ public abstract class HBMBlockEntity extends CapabilityBlockEntity implements IS
         return null;
     }
 
-    @Override
-    public List<IExtendedFluidTank> getFluidTanks(@Nullable Direction side) {
-        return List.of();
-    }
+//    @Override
+//    public List<IExtendedFluidTank> getFluidTanks(@Nullable Direction side) {
+//        return List.of();
+//    }
 
     @Override
     public void onContentsChanged() {

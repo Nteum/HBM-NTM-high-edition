@@ -322,8 +322,6 @@ public class ModSounds {
     public static RegistryObject<SoundEvent> ALARM_SOYUZED = register("alarm.soyuzed");
     public static RegistryObject<SoundEvent> ALARM_CHIME = register("alarm.chime");
 
-//    public static RegistryObject<SoundEvent> NUCLEAR_EXPLOSION = register("weapon.nuclear_explosion");
-
     /**
      * 注册函数
      * 说明：在sounds.register()里面，第一个是内部名称，没有实际意义，只要不重复即可，一般就保持和soundevent注册名一样。

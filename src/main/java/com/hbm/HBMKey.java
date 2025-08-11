@@ -13,7 +13,9 @@ public class HBMKey {
     public static final String ENERGY = "energy";
     public static final String FLUIDS = "fluids";
     public static final String STORED = "stored";
+    public static final String MODE = "mode";
     // machine process
+    public static final String MUFFLED = "muffled";
     public static final String RUNNING = "running";
     public static final String RESULT_ITEM = "resultItem";
     public static final String IS_FORMED = "isFormed";

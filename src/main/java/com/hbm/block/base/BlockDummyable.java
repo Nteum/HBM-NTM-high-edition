@@ -89,7 +89,7 @@ public abstract class BlockDummyable extends BlockMachineBase implements ICustom
 
     @Override
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-        if (!pLevel.isClientSide && pPlayer.getPose().equals(Pose.CROUCHING)){
+        if (!pLevel.isClientSide && !pPlayer.getPose().equals(Pose.CROUCHING)){
             BlockPos core = pPos;
             BlockState coreState = pState;
             // 先找到核心点位
@@ -101,7 +101,7 @@ public abstract class BlockDummyable extends BlockMachineBase implements ICustom
             }
             // 右键相当于直接对核心点位右键
             if (pLevel.getBlockEntity(core) instanceof DummyableBlockEntity entity){
-                entity.onLeftClick(pState, pLevel, pPos, pPlayer, pHand, pHit);
+//                entity.onLeftClick(pState, pLevel, pPos, pPlayer, pHand, pHit);
                 coreState = pLevel.getBlockState(core);
                 // 但我还是觉得保留原本的触发位置可能是有必要的，因此在DummyableBlockEntity留了一个对应接口
                 entity.onLeftClick(pState, pLevel, pPos, pPlayer, pHand, pHit);

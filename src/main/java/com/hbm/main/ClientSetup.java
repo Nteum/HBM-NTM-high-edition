@@ -7,6 +7,7 @@ import com.hbm.Inventory.fluid.ModFluids;
 import com.hbm.gui.ModMenuType;
 import com.hbm.gui.screen.*;
 import com.hbm.gui.screen.RenderUtils;
+import com.hbm.item.tool.FluidBucketItem;
 import com.hbm.model.Models;
 import com.hbm.model.entity.TestEntityModel;
 import com.hbm.particle.ModParticleTypes;
@@ -28,11 +29,14 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.BucketItem;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.*;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+
+import java.lang.annotation.Retention;
 
 @Mod.EventBusSubscriber(modid = HBM.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientSetup {
@@ -123,10 +127,10 @@ public class ClientSetup {
     }
 
     @SubscribeEvent
-    public static void registerColorHandler(RegisterColorHandlersEvent.Block event){
-//            event.register((state, level, pos, tintIndex) -> {
-//                return 0x00000000;
-//            }, ModBlocks.irradiated_water.get());
+    public static void registerColorHandlerItem(RegisterColorHandlersEvent.Item event){
+        // 流体桶的染色
+        FluidBucketItem[] fluidBucketItems = ModFluids.fluidList.stream().map(holder -> holder.bucket().get()).filter(bucket -> bucket instanceof FluidBucketItem).toArray(FluidBucketItem[]::new);
+        event.register(FluidBucketItem::getColor, fluidBucketItems);
     }
 
 //    @SubscribeEvent

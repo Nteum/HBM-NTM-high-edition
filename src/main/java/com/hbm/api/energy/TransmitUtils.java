@@ -1,18 +1,12 @@
 package com.hbm.api.energy;
 
-import com.hbm.api.energy.fe.IHBMEnergyStorage;
 import com.hbm.capabilities.Capabilities;
 import com.hbm.item.HBMComponent;
-import com.hbm.item.HBMtools;
-import com.hbm.lib.MthHelper;
-import com.hbm.registries.ModItems;
-import com.hbm.registries.ModTags;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.energy.IEnergyStorage;
-import net.minecraftforge.event.TickEvent;
 
 // 处理LONG_ENERGY能量
 public class TransmitUtils {

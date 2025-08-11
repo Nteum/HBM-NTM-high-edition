@@ -1,4 +1,4 @@
-package com.hbm.lib;
+package com.hbm.utils;
 
 import com.hbm.HBMKey;
 import net.minecraft.nbt.CompoundTag;

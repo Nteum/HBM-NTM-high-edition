@@ -2,11 +2,10 @@ package com.hbm.block.base;
 
 import com.hbm.blockentity.base2.BaseMachineBlockEntity;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.Containers;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.MenuProvider;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.*;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -16,6 +15,7 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 
 //单方块机器
@@ -32,10 +32,11 @@ public abstract class BlockMachineBase extends BlockContainerBase{
     /** 右键 */
     @Override
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-        if (!pLevel.isClientSide()&& pPlayer.getPose().equals(Pose.CROUCHING)){
+        if (!pLevel.isClientSide() && !pPlayer.getPose().equals(Pose.CROUCHING)){
             BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
             if (blockEntity instanceof MenuProvider){   //如果有界面则打开界面
-                pPlayer.openMenu((MenuProvider) blockEntity);
+//                pPlayer.openMenu((MenuProvider) blockEntity);
+                NetworkHooks.openScreen((ServerPlayer) pPlayer, (MenuProvider) blockEntity, buf -> buf.writeBlockPos(pPos));
             }
             return InteractionResult.CONSUME;
         }else {

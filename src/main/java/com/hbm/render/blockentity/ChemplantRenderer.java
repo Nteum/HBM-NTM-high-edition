@@ -39,11 +39,10 @@ public class ChemplantRenderer implements BlockEntityRenderer<ChemplantEntity> {
     }
     @Override
     public void render(ChemplantEntity pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, int pPackedOverlay) {
-        BlockPos blockPos = pBlockEntity.getBlockPos();
         BlockState blockState = pBlockEntity.getBlockState();
         BlockRenderDispatcher blockRenderer = Minecraft.getInstance().getBlockRenderer();
-        ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
         ModelBlockRenderer modelRenderer = blockRenderer.getModelRenderer();
+        running = pBlockEntity.progress > 0;
 
         pPoseStack.pushPose();
         ModelAdjustUtils.generalMachineRotate(pPoseStack, blockState);

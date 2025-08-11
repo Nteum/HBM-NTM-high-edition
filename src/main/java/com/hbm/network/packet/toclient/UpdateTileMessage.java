@@ -42,6 +42,7 @@ public class UpdateTileMessage implements IHBMMessage {
                 tile.handleUpdatePacket(updateTag);
             }
         }
+        ctx.get().setPacketHandled(true);
     }
 
     @Override

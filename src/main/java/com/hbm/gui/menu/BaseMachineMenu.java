@@ -17,7 +17,9 @@ public abstract class BaseMachineMenu extends AbstractContainerMenu {
         container = inContainer;
         containerData = containerData1;
     }
-
+    /**
+     * index排序：额外加入的物品槽...玩家物品槽...
+     * */
     @Override
     public ItemStack quickMoveStack(Player pPlayer, int pIndex) {
         ItemStack itemStack = ItemStack.EMPTY;
@@ -26,13 +28,17 @@ public abstract class BaseMachineMenu extends AbstractContainerMenu {
             ItemStack itemStack1 = slot.getItem();
             itemStack = itemStack1.copy();
             if (pIndex < slotNum){
+                // 从机器物品槽向玩家物品槽移动
                 if (!this.moveItemStackTo(itemStack1, slotNum, slotNum+36, true)){
                     return ItemStack.EMPTY;
                 }
             }else {
-                if (!this.moveItemStackTo(itemStack1, 0, slotNum, false)){
+                // 从玩家物品槽向机器物品槽移动，默认正序
+//                if (!this.moveItemStackTo(itemStack1, 0, slotNum, false)){
+//                    return ItemStack.EMPTY;
+//                }
+                if (!innerMovePlayer2Container(pIndex, itemStack1))
                     return ItemStack.EMPTY;
-                }
             }
             if (itemStack1.isEmpty()) {
                 slot.setByPlayer(ItemStack.EMPTY);
@@ -40,8 +46,11 @@ public abstract class BaseMachineMenu extends AbstractContainerMenu {
                 slot.setChanged();
             }
         }
-
         return itemStack;
+    }
+
+    public boolean innerMovePlayer2Container(int pIndex, ItemStack itemStack){
+        return this.moveItemStackTo(itemStack, 0, slotNum, false);
     }
 
     @Override

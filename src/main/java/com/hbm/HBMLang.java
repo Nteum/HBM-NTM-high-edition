@@ -2,6 +2,7 @@ package com.hbm;
 
 import com.hbm.api.text.ILangEntry;
 import net.minecraft.Util;
+import net.minecraft.client.gui.screens.inventory.FurnaceScreen;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import org.jetbrains.annotations.NotNull;
@@ -74,6 +75,10 @@ public enum HBMLang implements ILangEntry {
     FT_PWRMODERATOR("fluid","pwr_moderator.tooltip"),
     FT_CORE_FLUX("fluid","core_flux.tooltip"),
     FT_RADIOACTIVE("fluid","radioactive.tooltip"),
+    // GUI
+    TOOLTIP_LEFT_TIME("gui","left_time.tooltip"),
+    TOOLTIP_TANK_VOLUME("gui","volume.tooltip"),
+    TOOLTIP_ENERGY("gui","stored_energy.tooltip"),
     ;
 
     private final String key;

@@ -24,17 +24,17 @@ import java.util.stream.Collectors;
 public class ChemplantRecipe implements Recipe<Container> {
     private final ResourceLocation id;
     final int duration;   //加工时间
-    final long power;
+//    final long power;
     public final List<ItemStack> resultItems;
     public final List<FluidStack> resultFLuids;
     final NonNullList<CountableIngredient> inputItems;
     final NonNullList<FluidStackIngredient> inputFluids;
     static final int MAX_SIZE = 4;
     static final Serializer SERIALIZER = new Serializer();
-    public ChemplantRecipe(ResourceLocation id, int duration, long power, List<ItemStack> resultItems, List<FluidStack> resultFLuids, NonNullList<CountableIngredient> inputItems, NonNullList<FluidStackIngredient> inputFluids) {
+    public ChemplantRecipe(ResourceLocation id, int duration, List<ItemStack> resultItems, List<FluidStack> resultFLuids, NonNullList<CountableIngredient> inputItems, NonNullList<FluidStackIngredient> inputFluids) {
         this.id = id;
         this.duration = duration;
-        this.power = power;
+//        this.power = power;
         this.resultItems = resultItems;
         this.resultFLuids = resultFLuids;
         this.inputItems = inputItems;
@@ -49,11 +49,13 @@ public class ChemplantRecipe implements Recipe<Container> {
         }
         return false;
     }
-    /** 处理化工厂处理结果 */
+    /** 处理配方结果 */
     public void assemble(Container pContainer) {
         if (pContainer instanceof ChemplantEntity chemplantEntity){
-
-
+            HBMRecipeMatcher.deductItems(chemplantEntity.items.subList(13,17), inputItems);
+            HBMRecipeMatcher.deductFluids(chemplantEntity.getFluidTanks(null).subList(0,2), inputFluids);
+            HBMRecipeMatcher.putResultItems(chemplantEntity.items.subList(5,9), resultItems);
+            HBMRecipeMatcher.putResultFluids(chemplantEntity.getFluidTanks(null).subList(2,4), resultFLuids);
         }
     }
     // 无用，因为化工厂还会生成流体
@@ -88,7 +90,7 @@ public class ChemplantRecipe implements Recipe<Container> {
     }
 
     public int getDuration(){return duration;}
-    public long getPower(){return power;}
+//    public long getPower(){return power;}
 
     public static class Serializer implements RecipeSerializer<ChemplantRecipe>{
         @Override
@@ -97,9 +99,9 @@ public class ChemplantRecipe implements Recipe<Container> {
             NonNullList<FluidStackIngredient> inputFluids = RecipeHelper.fluidsFromJson(GsonHelper.getAsJsonArray(pSerializedRecipe, "inputFluids"));
             List<ItemStack> resultItems = RecipeHelper.itemListFromJson(GsonHelper.getAsJsonArray(pSerializedRecipe, "resultItems"));
             List<FluidStack> resultFluids = RecipeHelper.fluidListFromJson(GsonHelper.getAsJsonArray(pSerializedRecipe, "resultFluids"));
-            long power = GsonHelper.getAsLong(pSerializedRecipe, "number");
+//            long power = GsonHelper.getAsLong(pSerializedRecipe, "number");
             int duration = GsonHelper.getAsInt(pSerializedRecipe, "number2");
-            return new ChemplantRecipe(pRecipeId, duration, power, resultItems, resultFluids, inputItems, inputFluids);
+            return new ChemplantRecipe(pRecipeId, duration, resultItems, resultFluids, inputItems, inputFluids);
         }
 
         @Override
@@ -131,13 +133,13 @@ public class ChemplantRecipe implements Recipe<Container> {
                 resultFLuids.add(pBuffer.readFluidStack());
             }
 
-            return new ChemplantRecipe(pRecipeId, duration, power, resultItems, resultFLuids, inputItems, inputFluids);
+            return new ChemplantRecipe(pRecipeId, duration, resultItems, resultFLuids, inputItems, inputFluids);
         }
 
         @Override
         public void toNetwork(FriendlyByteBuf pBuffer, ChemplantRecipe pRecipe) {
             pBuffer.writeInt(pRecipe.duration);
-            pBuffer.writeLong(pRecipe.power);
+//            pBuffer.writeLong(pRecipe.power);
             pBuffer.writeInt(pRecipe.inputItems.size());
             for (CountableIngredient countableIngredient : pRecipe.inputItems) {
                 CountableIngredient.Serializer.INSTANCE.write(pBuffer, countableIngredient);

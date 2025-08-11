@@ -3,7 +3,7 @@ package com.hbm.blockentity.base;
 import com.hbm.HBMKey;
 import com.hbm.capabilities.network.ConnType;
 import com.hbm.capabilities.CapabilityCache;
-import com.hbm.lib.ItemDataUtils;
+import com.hbm.utils.ItemDataUtils;
 import com.hbm.registries.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

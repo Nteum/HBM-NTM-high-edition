@@ -1,4 +1,4 @@
-package com.hbm.lib;
+package com.hbm.utils;
 
 import net.minecraft.core.Direction;
 

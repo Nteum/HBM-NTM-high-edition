@@ -1,6 +1,7 @@
 package com.hbm.datagen.model;
 
 import com.hbm.HBM;
+import com.hbm.Inventory.fluid.ModFluids;
 import com.hbm.item.HBMComponent;
 import com.hbm.item.HBMWeapon;
 import com.hbm.item.HBMtools;
@@ -20,6 +21,7 @@ public class ItemModelGen extends ItemModelProvider {
         HBMtools.genModel(this);
         HBMComponent.genModel(this);
         HBMWeapon.genModel(this);
+        ModFluids.bucketModel(this);
         this.basicItem(ModItems.ingot_steel.get());
         this.basicItem(ModItems.ingot_red_copper.get());
         this.basicItem(ModItems.ingot_tungsten.get());
