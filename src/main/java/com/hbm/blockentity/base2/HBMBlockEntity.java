@@ -5,6 +5,7 @@ import com.hbm.api.energy.IEnergyContainer;
 import com.hbm.api.energy.IEnergyHandler;
 import com.hbm.api.fluid.IExtendedFluidTank;
 import com.hbm.api.fluid.ISidedFluidHandler;
+import com.hbm.api.inventory.IExtendedItemHandler;
 import com.hbm.api.inventory.ISidedItemHandler;
 import com.hbm.api.inventory.SlotAccCtl;
 import net.minecraft.core.BlockPos;
@@ -27,7 +28,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public abstract class HBMBlockEntity extends CapabilityBlockEntity implements ISidedItemHandler , IEnergyHandler,
+public abstract class HBMBlockEntity extends CapabilityBlockEntity implements IExtendedItemHandler, IEnergyHandler,
         WorldlyContainer, Nameable {
 
     @Nullable

@@ -305,7 +305,7 @@ public class InventoryUtils {
         if (itemHandler == null)return;
         ItemStack itemStack = itemHandler.extractItem(slot1, 1, true);
         ItemStack output = processFunction.apply(itemStack);
-        if (!output.equals(itemStack,true) && itemHandler.insertItem(slot2, output, true) == ItemStack.EMPTY){
+        if (!ItemStack.isSameItemSameTags(itemStack,output) && itemHandler.insertItem(slot2, output, true) == ItemStack.EMPTY){
             itemHandler.extractItem(slot1, 1, false);
             itemHandler.insertItem(slot2, output, false);
         }

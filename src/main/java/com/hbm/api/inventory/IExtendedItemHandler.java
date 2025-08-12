@@ -37,13 +37,20 @@ public interface IExtendedItemHandler extends IItemHandlerModifiable {
     }
 
     @Override
+    default void setStackInSlot(int slot, @NotNull ItemStack stack){
+        if (slot >= 0 && slot < getSlots()){
+            getItems().set(slot, stack);
+        }
+    }
+
+    @Override
     default int getSlotLimit(int slot){
         return getStackInSlot(slot).getMaxStackSize();
     }
 
     @Override
     default boolean isItemValid(int slot, @NotNull ItemStack stack){
-        if (allowInput(slot)) return false;
+//        if (allowInput(slot)) return false;
         ItemStack itemStack = getItems().get(slot);
         return itemStack.isEmpty() || ItemStack.isSameItemSameTags(itemStack, stack) && itemStack.getCount() < getSlotLimit(slot);
     }
@@ -52,27 +59,41 @@ public interface IExtendedItemHandler extends IItemHandlerModifiable {
      * */
     @Override
     default @NotNull ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate){
-        if (!isItemValid(slot, stack)) return stack;
-        ItemStack beforeStack = getStackInSlot(slot);
-
-        int toAdd = Math.min(stack.getCount(), getSlotLimit(slot) - beforeStack.getCount());
-        if (!simulate) {
-            beforeStack.grow(toAdd);
-        }
-        return stack.copyWithCount(stack.getCount() - toAdd);
+//        if (!isItemValid(slot, stack)) return stack;
+        return insertNoCheck(slot,stack,simulate);
     }
     /**
      * 注意：返回的是成功拉取的物品，如果拉取失败应返回empty
      * */
     @Override
     default @NotNull ItemStack extractItem(int slot, int amount, boolean simulate){
-        if (!allowOutput(slot) || getStackInSlot(slot).isEmpty()) return ItemStack.EMPTY;
+//        if (!allowOutput(slot)) return ItemStack.EMPTY;
+        return extractNoCheck(slot, amount, simulate);
+    }
+
+    default @NotNull ItemStack insertNoCheck(int slot, @NotNull ItemStack stack, boolean simulate){
+        if (!isItemValid(slot, stack)) return stack;
+        ItemStack beforeStack = getStackInSlot(slot);
+
+        int toAdd = Math.min(stack.getCount(), getSlotLimit(slot) - beforeStack.getCount());
+        if (!simulate) {
+            if (beforeStack.isEmpty())
+                beforeStack = stack;
+            else
+                beforeStack.grow(toAdd);
+            setStackInSlot(slot, beforeStack);
+        }
+        return stack.getCount() - toAdd == 0 ? ItemStack.EMPTY : stack.copyWithCount(stack.getCount() - toAdd);
+    }
+
+    default @NotNull ItemStack extractNoCheck(int slot, int amount, boolean simulate){
+        if (getStackInSlot(slot).isEmpty()) return ItemStack.EMPTY;
         ItemStack beforeStack = getStackInSlot(slot);
 
         int toSubtract = Math.min(amount, beforeStack.getCount());
         if (!simulate){
             beforeStack.shrink(toSubtract);
         }
-        return beforeStack.copyWithCount(toSubtract);
+        return toSubtract == 0 ? ItemStack.EMPTY : beforeStack.copyWithCount(toSubtract);
     }
 }

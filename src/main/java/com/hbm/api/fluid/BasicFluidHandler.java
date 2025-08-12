@@ -93,12 +93,12 @@ public class BasicFluidHandler implements IExtendedFluidHandler, INBTSerializabl
         else if (itemStack.getItem() instanceof BucketItem bucketItem){
             int bucketVolume = 1000;
             FluidStack fluidStack = new FluidStack(bucketItem.getFluid(), bucketVolume);
-            if (isFluidValid(0,fluidStack) && this.tanks.get(tank).fill(fluidStack, FluidAction.SIMULATE) == bucketVolume){
+            if (isFluidValid(tank,fluidStack) && this.tanks.get(tank).fill(fluidStack, FluidAction.SIMULATE) == bucketVolume){
                 this.tanks.get(tank).fill(fluidStack, FluidAction.EXECUTE);
                 return Items.BUCKET.getDefaultInstance();
-            }else return ItemStack.EMPTY;
+            }else return itemStack;
         }
-        return ItemStack.EMPTY;
+        return itemStack;
     }
     /**
      * 向流体容器中注入流体

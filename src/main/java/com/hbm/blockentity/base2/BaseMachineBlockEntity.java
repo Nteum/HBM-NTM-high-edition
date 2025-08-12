@@ -1,7 +1,6 @@
 package com.hbm.blockentity.base2;
 
-import com.hbm.api.inventory.BasicItemHandler;
-import com.hbm.api.inventory.SlotAccCtl;
+import com.hbm.api.Mode;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
@@ -22,6 +21,7 @@ import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.stream.IntStream;
 
 /**
@@ -31,7 +31,7 @@ public abstract class BaseMachineBlockEntity extends HBMBlockEntity implements W
     //机器内部存储的物品，需要在子类中初始化
     private LockCode lockKey = LockCode.NO_LOCK;
     public NonNullList<ItemStack> items;
-    public BasicItemHandler itemHandler;
+    public List<Mode> slotModes;
 
     public boolean running = false;    // 运行状态
 
@@ -52,8 +52,6 @@ public abstract class BaseMachineBlockEntity extends HBMBlockEntity implements W
     @Override
     public void load(CompoundTag pTag) {
         super.load(pTag);
-//        CompoundTag dataMap = ItemDataUtils.getDataMapIfPresent(pTag);
-//        capabilitiesCache.deserializeNBT(pTag);
         this.lockKey = LockCode.fromTag(pTag);
         if (this.items!=null){
             this.items = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
@@ -91,10 +89,16 @@ public abstract class BaseMachineBlockEntity extends HBMBlockEntity implements W
     }
 
     public abstract AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory);
+    //================itemhandler====================
     @NotNull
     @Override
     public NonNullList<ItemStack> getItems() {
         return items;
+    }
+
+    @Override
+    public Mode getMode(int tank) {
+        return tank > 0 && tank < getSlots() ? slotModes.get(tank) : Mode.NONE;
     }
 
     //==================WorldlyContainer===================
@@ -107,14 +111,14 @@ public abstract class BaseMachineBlockEntity extends HBMBlockEntity implements W
 
     @Override
     public boolean canPlaceItemThroughFace(int pIndex, ItemStack pItemStack, @Nullable Direction pDirection) {
-        return slotIOCtl(pIndex, pItemStack, true);
-//        return allowInput(pIndex, pDirection) && isItemValid(pIndex, pItemStack, pDirection);
+        // 默认实现判断这个slot是否可以输入，以及该方向是否允许物品能力。
+        return allowInput(pIndex) && isItemValid(pIndex, pItemStack) && getCapability(ForgeCapabilities.ITEM_HANDLER, pDirection).isPresent();
     }
 
     @Override
     public boolean canTakeItemThroughFace(int pIndex, ItemStack pStack, Direction pDirection) {
-        return slotIOCtl(pIndex, pStack, false);
-//        return allowOutput(pIndex, pDirection);
+        // 默认实现判断这个slot是否可以输出，以及该方向是否允许物品能力。
+        return allowOutput(pIndex) && getCapability(ForgeCapabilities.ITEM_HANDLER, pDirection).isPresent();
     }
 
     @Override
@@ -124,7 +128,7 @@ public abstract class BaseMachineBlockEntity extends HBMBlockEntity implements W
 
     @Override
     public boolean isEmpty() {
-        return inventoryEmpty();
+        return isEmpty();
     }
 
     @Override
@@ -134,19 +138,18 @@ public abstract class BaseMachineBlockEntity extends HBMBlockEntity implements W
 
     @Override
     public ItemStack removeItem(int pSlot, int pAmount) {
-//        return extractItem(pSlot, pAmount, false);
         return ContainerHelper.removeItem(this.items, pSlot, pAmount);
     }
 
     @Override
     public ItemStack removeItemNoUpdate(int pSlot) {
-//        return setStackInSlot(pSlot, ItemStack.EMPTY, null);
         return ContainerHelper.takeItem(this.items, pSlot);
     }
 
     @Override
     public void setItem(int pSlot, ItemStack pStack) {
         setStackInSlot(pSlot, pStack);
+        this.setChanged();
     }
 
     @Override
@@ -155,8 +158,6 @@ public abstract class BaseMachineBlockEntity extends HBMBlockEntity implements W
     }
     @Override
     public void clearContent() {
-        getItems().clear();
+        this.items.clear();
     }
-    //================其他功能函数（也不一定放在这个类里）==================
-
 }

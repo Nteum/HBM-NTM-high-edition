@@ -63,13 +63,13 @@ public class ExtendedFluidType extends FluidType {
     public static final ResourceLocation WATER_OVERLAY = new ResourceLocation("block/water_still");
 
     // 流体GUI
-    public static final ResourceLocation GUI_WATER = HBM.rl("gui/fluids/water");
-    public static final ResourceLocation GUI_LAVA = HBM.rl("gui/fluids/lava");
-    public static final ResourceLocation GUI_MILK = HBM.rl("gui/fluids/milk");  // 如果不是原版也找不到颜色，就设为牛奶色，作为缺省颜色。
-    public static final ResourceLocation GUI_CUSTOM_WATER = new ResourceLocation("gui/fluids/custom_water");
-    public static final ResourceLocation GUI_CUSTOM_OIL = new ResourceLocation("gui/fluids/custom_oil");
-    public static final ResourceLocation GUI_CUSTOM_TOXIN = new ResourceLocation("gui/fluids/custom_toxin");
-    public static final ResourceLocation GUI_CUSTOM_LAVA = new ResourceLocation("gui/fluids/custom_lava");
+    public static final ResourceLocation GUI_WATER = HBM.rl("textures/gui/fluids/water.png");
+    public static final ResourceLocation GUI_LAVA = HBM.rl("textures/gui/fluids/lava.png");
+    public static final ResourceLocation GUI_MILK = HBM.rl("textures/gui/fluids/milk.png");  // 如果不是原版也找不到颜色，就设为牛奶色，作为缺省颜色。
+    public static final ResourceLocation GUI_CUSTOM_WATER = HBM.rl("textures/gui/fluids/custom_water.png");
+    public static final ResourceLocation GUI_CUSTOM_OIL = HBM.rl("textures/gui/fluids/custom_oil.png");
+    public static final ResourceLocation GUI_CUSTOM_TOXIN = HBM.rl("textures/gui/fluids/custom_toxin.png");
+    public static final ResourceLocation GUI_CUSTOM_LAVA = HBM.rl("textures/gui/fluids/custom_lava.png");
 
     public static final FluidType.Properties prop_air = FluidType.Properties.create().motionScale(1D).canPushEntity(false).canSwim(false).canDrown(false).fallDistanceModifier(1F).pathType(null).adjacentPathType(null).density(0).temperature(0).viscosity(0);
     public static final FluidType.Properties prop_lava = FluidType.Properties.create().canSwim(false).canDrown(false).pathType(BlockPathTypes.LAVA).adjacentPathType(null).sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL_LAVA).sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY_LAVA).lightLevel(15).density(3000).viscosity(6000).temperature(1300);

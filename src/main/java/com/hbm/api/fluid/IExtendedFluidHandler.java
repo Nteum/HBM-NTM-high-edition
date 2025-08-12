@@ -65,7 +65,7 @@ public interface IExtendedFluidHandler extends IFluidHandler {
      * */
     @Override
     default boolean isFluidValid(int tank, @NotNull FluidStack stack){
-        if (allowInput(tank)) return false;
+        if (!allowInput(tank)) return false;
         FluidTank fluidTank = getFluidTanks().get(tank);
         return fluidTank.isFluidValid(stack) && (fluidTank.isEmpty() || fluidTank.getFluid().isFluidEqual(stack)) && fluidTank.getSpace() != 0;
     }

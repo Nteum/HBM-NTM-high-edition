@@ -9,7 +9,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 
 import java.util.List;
 
-public class BaseMachineGui<T extends AbstractContainerMenu> extends AbstractContainerScreen<T> {
+public abstract class BaseMachineGui<T extends AbstractContainerMenu> extends AbstractContainerScreen<T> {
     public BaseMachineGui(T pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
     }

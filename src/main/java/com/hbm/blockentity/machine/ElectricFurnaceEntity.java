@@ -91,15 +91,9 @@ public class ElectricFurnaceEntity extends BaseMachineBlockEntity implements Men
         return false;
     }
 
-//    @Override
-//    public boolean allowOutput(int slot, Direction side) {
-//        return slot == 1 || slot == 2;
-//    }
-
     @Override
-    public boolean slotIOCtl(int slot, @Nullable ItemStack pStack, boolean isInput) {
-        if (isInput) return slot == 1 || slot == 2;
-        else return super.slotIOCtl(slot, pStack, isInput);
+    public boolean canPlaceItemThroughFace(int pIndex, ItemStack pItemStack, @Nullable Direction pDirection) {
+        return super.canPlaceItemThroughFace(pIndex, pItemStack, pDirection) && (pIndex == 1 || pIndex == 2);
     }
 
     @Override

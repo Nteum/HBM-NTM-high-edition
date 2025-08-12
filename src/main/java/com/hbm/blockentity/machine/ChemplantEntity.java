@@ -6,6 +6,7 @@ import com.hbm.Inventory.UpgradeManagerNT;
 import com.hbm.Inventory.recipe.ChemplantRecipe;
 import com.hbm.Inventory.recipe.HBMRecipeMatcher;
 import com.hbm.Inventory.recipe.ModRecipes;
+import com.hbm.api.Mode;
 import com.hbm.api.energy.BasicEnergyContainer;
 import com.hbm.api.energy.ProxyEnergyHandler;
 import com.hbm.api.energy.TransmitUtils;
@@ -14,6 +15,7 @@ import com.hbm.api.fluid.BasicFluidTank;
 import com.hbm.api.fluid.FluidUtils;
 import com.hbm.api.fluid.IExtendedFluidHandler;
 import com.hbm.api.fluid.IExtendedFluidHandler.*;
+import com.hbm.api.inventory.ModeBuilder;
 import com.hbm.api.math.MathUtils;
 import com.hbm.block.machine.BlockChemplant;
 import com.hbm.blockentity.ModBlockEntityType;
@@ -44,6 +46,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
@@ -60,7 +63,6 @@ public class ChemplantEntity extends DummyableBlockEntity {
     int consumption = 100;
     int speed = 100;
     public UpgradeManagerNT upgradeManager = new UpgradeManagerNT();
-//    private List<BasicFluidTank> tanks = new ArrayList<>();
     private BasicEnergyContainer energyContainer = new BasicEnergyContainer(100_100);
     private BasicFluidHandler fluidHandler;
     private final RecipeManager.CachedCheck<Container, ChemplantRecipe> recipeChecker = RecipeManager.createCheck(ModRecipes.CHEMPLANT.type().get());
@@ -90,7 +92,8 @@ public class ChemplantEntity extends DummyableBlockEntity {
     };
     public ChemplantEntity(BlockPos pPos, BlockState pBlockState) {
         super(ModBlockEntityType.CHEMPLANT_ENTITY.get(), pPos, pBlockState);
-        this.items = NonNullList.withSize(21, ItemStack.EMPTY);
+        this.items = NonNullList.withSize(20, ItemStack.EMPTY);
+        this.slotModes = new ModeBuilder().addModes(4,Mode.BOTH,4,Mode.OUTPUT,2,Mode.INPUT,2,Mode.OUTPUT,6,Mode.INPUT,2,Mode.OUTPUT).get();
         this.fluidHandler = new BasicFluidHandler().addTanks(2, maxFluid, Mode.INPUT).addTanks(2, maxFluid, Mode.OUTPUT);
         this.capabilitiesContent.addCapability(ForgeCapabilities.FLUID_HANDLER, this.fluidHandler);
 //        for (int i = 0; i < 4; i++) {
@@ -187,11 +190,11 @@ public class ChemplantEntity extends DummyableBlockEntity {
         ChemplantRecipe recipe = recipeChecker.getRecipeFor(this, level).orElse(null);
         if(recipe == null) return false;
         // 检查输出物品槽与输出流体槽
-        if (!HBMRecipeMatcher.checkOutputSlots(this.items.subList(5,9), recipe.resultItems)
+        if (!HBMRecipeMatcher.checkOutputSlots(this.items.subList(4,8), recipe.resultItems)
                 || !HBMRecipeMatcher.checkOutputTanks(this.fluidHandler.getFluidTanks().subList(2,4), recipe.resultFLuids))
             return false;
 
-        if (!this.recipeNow.equals(recipe)){
+        if (this.recipeNow == null || !this.recipeNow.equals(recipe)){
             this.recipeNow = recipe;
             this.progress = 0;
         }

@@ -3,6 +3,7 @@ package com.hbm.gui.screen;
 import com.hbm.HBM;
 import com.hbm.blockentity.machine.ChemplantEntity;
 import com.hbm.gui.menu.ChemplantMenu;
+import com.hbm.gui.menu.ITileAccess;
 import com.hbm.gui.screen.component.BarEnergy;
 import com.hbm.gui.screen.component.BarFluid;
 import com.hbm.gui.screen.component.BarProgress;
@@ -10,6 +11,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.fluids.IFluidTank;
 
@@ -31,10 +33,10 @@ public class ChemplantGui extends BaseMachineGui<ChemplantMenu> {
         super.init();
         barProgress = new BarProgress(leftPos + 43, topPos + 89, 90, 18, 0, 222, 256, 256, TEXTURE, Component.empty(),false);
         barEnergy = new BarEnergy(leftPos + 44, topPos + 18, 16, 52, 176, 0, TEXTURE, Component.empty());
-        barFluids.add(new BarFluid(leftPos + 8, topPos + 18, 16, 34, Fluids.EMPTY));
-        barFluids.add(new BarFluid(leftPos + 26, topPos + 18, 16, 34, Fluids.EMPTY));
-        barFluids.add(new BarFluid(leftPos + 134, topPos + 18, 16, 34, Fluids.EMPTY));
-        barFluids.add(new BarFluid(leftPos + 152, topPos + 18, 16, 34, Fluids.EMPTY));
+        barFluids.add(new BarFluid(() -> leftPos + 8, () -> topPos + 18, 16, 34, Fluids.EMPTY));
+        barFluids.add(new BarFluid(() -> leftPos + 26, () -> topPos + 18, 16, 34, Fluids.EMPTY));
+        barFluids.add(new BarFluid(() -> leftPos + 134, () -> topPos + 18, 16, 34, Fluids.EMPTY));
+        barFluids.add(new BarFluid(() -> leftPos + 152, () -> topPos + 18, 16, 34, Fluids.EMPTY));
         this.addRenderableWidget(barProgress);
         this.addRenderableWidget(barEnergy);
         barFluids.forEach(this::addRenderableWidget);
@@ -50,7 +52,7 @@ public class ChemplantGui extends BaseMachineGui<ChemplantMenu> {
         this.barEnergy.progress = this.menu.containerData.get(2);
         this.barEnergy.maxProgress = this.menu.containerData.get(3);
         this.barEnergy.updateData();
-        if (this.menu.container instanceof ChemplantEntity entity){
+        if (this.menu.be instanceof ChemplantEntity entity){
             List fluidTanks = entity.getFluidTanks(null);
             for (int i = 0; i < fluidTanks.size(); i++) {
                 barFluids.get(i).fluid = ((IFluidTank)fluidTanks.get(i)).getFluid().getFluid();

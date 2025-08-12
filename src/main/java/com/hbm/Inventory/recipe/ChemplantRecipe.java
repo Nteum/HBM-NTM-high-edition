@@ -44,7 +44,7 @@ public class ChemplantRecipe implements Recipe<Container> {
     @Override
     public boolean matches(Container pContainer, Level pLevel) {
         if (pContainer instanceof ChemplantEntity chemplantEntity){
-            return HBMRecipeMatcher.orderlessItemMatch(chemplantEntity.items.subList(13,17), inputItems)
+            return HBMRecipeMatcher.orderlessItemMatch(chemplantEntity.items.subList(12,16), inputItems)
                     && HBMRecipeMatcher.orderlessFluidMatch(chemplantEntity.getFluidTanks(null).subList(0,2), inputFluids);
         }
         return false;
@@ -52,9 +52,9 @@ public class ChemplantRecipe implements Recipe<Container> {
     /** 处理配方结果 */
     public void assemble(Container pContainer) {
         if (pContainer instanceof ChemplantEntity chemplantEntity){
-            HBMRecipeMatcher.deductItems(chemplantEntity.items.subList(13,17), inputItems);
+            HBMRecipeMatcher.deductItems(chemplantEntity.items.subList(12,16), inputItems);
             HBMRecipeMatcher.deductFluids(chemplantEntity.getFluidTanks(null).subList(0,2), inputFluids);
-            HBMRecipeMatcher.putResultItems(chemplantEntity.items.subList(5,9), resultItems);
+            HBMRecipeMatcher.putResultItems(chemplantEntity.items.subList(4,8), resultItems);
             HBMRecipeMatcher.putResultFluids(chemplantEntity.getFluidTanks(null).subList(2,4), resultFLuids);
         }
     }

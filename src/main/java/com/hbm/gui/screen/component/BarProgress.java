@@ -49,7 +49,6 @@ public class BarProgress extends AbstractWidget {
 
     @Override
     protected void renderWidget(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
-//        if (pPartialTick == 0.0F) updateData();  //每一帧的开头更新数据
         if (progress == 0.0)return;
         int barLen;
 

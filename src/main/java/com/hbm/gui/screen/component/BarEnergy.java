@@ -16,7 +16,6 @@ public class BarEnergy extends BarProgress {
         super(pX, pY, pWidth, pHeight, pU, pV, pTextWidth, pTextHeight, texture, pMessage, isVertical);
         if (pMessage.equals(Component.empty())){
             this.setTooltip(Tooltip.create(Component.translatable(HBMLang.TOOLTIP_ENERGY.getTranslationKey(), BobMathUtil.getShortNumber((long) progress))));
-//            this.setMessage(Component.translatable(HBMLang.TOOLTIP_ENERGY.getTranslationKey(), BobMathUtil.getShortNumber(energy)));
         }
     }
 

@@ -19,19 +19,17 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.Tags;
 import org.jetbrains.annotations.Nullable;
 
-public class ChemplantMenu extends BaseMachineMenu{
-//    public ChemplantMenu(int pContainerId, Inventory pPlayerInventory) {
-//        this(pContainerId, pPlayerInventory, new SimpleContainer(20), new SimpleContainerData(4));
-//    }
-    public ChemplantMenu(int pContainerId, Inventory pPlayerInventory, BlockEntity block) {
-        this(pContainerId, pPlayerInventory, (Container) block, new SimpleContainerData(4));
+public class ChemplantMenu extends BaseMachineMenu implements ITileAccess{
+    public BlockEntity be;
+    public ChemplantMenu(int pContainerId, Inventory pPlayerInventory) {
+        this(pContainerId, pPlayerInventory, new SimpleContainer(20), new SimpleContainerData(4));
     }
 
     public ChemplantMenu(int pContainerId, Inventory pInventory, Container inContainer, ContainerData containerData) {
         super(ModMenuType.CHEMPLANT_MENU.get(), pContainerId, inContainer, containerData);
         slotNum = 20;
         Player player = pInventory.player;
-        TransientCraftingContainer craftingContainer = new TransientCraftingContainer(this, 2, 2, NonNullList.of(container.getItem(13), container.getItem(14), container.getItem(15), container.getItem(16)));
+//        TransientCraftingContainer craftingContainer = new TransientCraftingContainer(this, 2, 2, NonNullList.of(container.getItem(13), container.getItem(14), container.getItem(15), container.getItem(16)));
         // battery
         this.addSlot(new BatterySlot(container, 0, 80, 18));
         // upgrades
@@ -41,10 +39,10 @@ public class ChemplantMenu extends BaseMachineMenu{
 //         Schematic
 //        this.addSlot(new Slot(container, 4, 80, 54));
         // Outputs
-        this.addSlot(new ResultSlot(player, craftingContainer, container, 4, 134, 90));
-        this.addSlot(new ResultSlot(player, craftingContainer, container, 5, 152, 90));
-        this.addSlot(new ResultSlot(player, craftingContainer, container, 6, 134, 108));
-        this.addSlot(new ResultSlot(player, craftingContainer, container, 7, 152, 108));
+        this.addSlot(new OutputSlot(container, 4, 134, 90));
+        this.addSlot(new OutputSlot(container, 5, 152, 90));
+        this.addSlot(new OutputSlot(container, 6, 134, 108));
+        this.addSlot(new OutputSlot(container, 7, 152, 108));
         // Fluid Output In
         this.addSlot(new Slot(container, 8, 134, 54));
         this.addSlot(new Slot(container, 9, 152, 54));
@@ -79,5 +77,10 @@ public class ChemplantMenu extends BaseMachineMenu{
         else if (itemStack.getItem() instanceof BucketItem)
             temp = new int[]{16,18};
         return this.moveItemStackTo(itemStack, temp[0], temp[1], false) || this.moveItemStackTo(itemStack, 12, 16, false);
+    }
+
+    @Override
+    public void setTile(BlockEntity blockEntity) {
+        this.be = blockEntity;
     }
 }
