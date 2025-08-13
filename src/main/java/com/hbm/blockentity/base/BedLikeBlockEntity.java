@@ -1,6 +1,6 @@
 package com.hbm.blockentity.base;
 
-import com.hbm.api.multiblock.HBMMultiData;
+import com.hbm.utils.multiblock.HBMMultiData;
 import com.hbm.blockentity.base2.BaseMachineBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntityType;

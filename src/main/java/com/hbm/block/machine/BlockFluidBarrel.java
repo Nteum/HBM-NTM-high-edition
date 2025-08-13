@@ -2,6 +2,7 @@ package com.hbm.block.machine;
 
 import com.hbm.HBMLang;
 import com.hbm.block.base.BaseMachineBlock;
+import com.hbm.block.base.BlockMachineBase;
 import com.hbm.blockentity.machine.BarrelEntity;
 import com.hbm.utils.InventoryUtils;
 import net.minecraft.ChatFormatting;
@@ -31,7 +32,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class BlockFluidBarrel extends BaseMachineBlock {
+public class BlockFluidBarrel extends BlockMachineBase {
     public static final VoxelShape SHAPE = Block.box(2,0.0D,2,14,16,14);
     public BarrelProperties barrelProperties;
     public BlockFluidBarrel(Properties pProperties, BarrelProperties barrelProperties) {

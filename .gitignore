@@ -6,8 +6,10 @@
 *.iml
 out
 gen
-/logs/
 /.gradle/
+/build/
+/logs/
+/run/
 /run-data/
 /.gitignore
-/run/
+/src/generated/resources/.cache/

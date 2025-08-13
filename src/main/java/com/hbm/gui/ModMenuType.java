@@ -27,10 +27,10 @@ public class ModMenuType {
             MOD_MENU_TYPES.register("battery_menu",()->new MenuType<>(BatteryMenu::new, FeatureFlags.VANILLA_SET));
     public static final RegistryObject<MenuType<AssemblerMenu>> ASSEMBLER_MENU =
             MOD_MENU_TYPES.register("assembler_menu",()->new MenuType<>(AssemblerMenu::new, FeatureFlags.VANILLA_SET));
-public static final RegistryObject<MenuType<ChemplantMenu>> CHEMPLANT_MENU =
-        MOD_MENU_TYPES.register("chemplant_menu", ()->IForgeMenuType.create((windowId, inv, data) -> (ChemplantMenu) ITileAccess.getInstance(windowId,inv,data, ChemplantMenu.class)));
+    public static final RegistryObject<MenuType<ChemplantMenu>> CHEMPLANT_MENU =
+            MOD_MENU_TYPES.register("chemplant_menu", ()->IForgeMenuType.create((windowId, inv, data) -> (ChemplantMenu) ITileAccess.getInstance(windowId,inv,data, ChemplantMenu.class)));
     public static final RegistryObject<MenuType<BarrelMenu>> BARREL_MENU =
-            MOD_MENU_TYPES.register("barrel_menu",()->new MenuType<>(BarrelMenu::new, FeatureFlags.VANILLA_SET));
+            MOD_MENU_TYPES.register("barrel_menu",()->IForgeMenuType.create((windowId, inv, data) -> (BarrelMenu) ITileAccess.getInstance(windowId,inv,data, BarrelMenu.class)));
     public static final RegistryObject<MenuType<ElectricFurnaceMenu>> ELECTRIC_FURNACE_MENU =
             MOD_MENU_TYPES.register("electric_furnace_menu",()->new MenuType<>(ElectricFurnaceMenu::new, FeatureFlags.VANILLA_SET));
 }

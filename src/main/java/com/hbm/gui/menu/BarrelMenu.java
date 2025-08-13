@@ -9,9 +9,11 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import org.jetbrains.annotations.Nullable;
 
-public class BarrelMenu extends BaseMachineMenu{
+public class BarrelMenu extends BaseMachineMenu implements ITileAccess{
+    public BlockEntity be;
     public BarrelMenu(int pContainerId, Inventory pPlayerInventory) {
         this( pContainerId, pPlayerInventory, new SimpleContainer(4), new SimpleContainerData(1));
     }
@@ -33,5 +35,10 @@ public class BarrelMenu extends BaseMachineMenu{
         int newMode = (getMode()+1)%4;
         this.containerData.set(0,newMode);
         return newMode;
+    }
+
+    @Override
+    public void setTile(BlockEntity blockEntity) {
+        this.be = blockEntity;
     }
 }

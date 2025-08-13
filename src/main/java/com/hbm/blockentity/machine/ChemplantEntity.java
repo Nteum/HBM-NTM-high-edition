@@ -17,6 +17,7 @@ import com.hbm.api.fluid.IExtendedFluidHandler;
 import com.hbm.api.fluid.IExtendedFluidHandler.*;
 import com.hbm.api.inventory.ModeBuilder;
 import com.hbm.api.math.MathUtils;
+import com.hbm.block.HBMMachine;
 import com.hbm.block.machine.BlockChemplant;
 import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.blockentity.base2.DummyableBlockEntity;
@@ -26,6 +27,7 @@ import com.hbm.item.machine.ItemMachineUpgrade.UpgradeType;
 import com.hbm.registries.ModSounds;
 import com.hbm.utils.DirectionUtils;
 import com.hbm.utils.InventoryUtils;
+import com.hbm.utils.multiblock.MultiblockData;
 import com.hbm.utils.sound.AudioUtils;
 import com.hbm.utils.sound.AudioWrapper;
 import net.minecraft.client.Minecraft;
@@ -50,6 +52,7 @@ import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import net.minecraftforge.fluids.capability.templates.FluidTank;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -69,7 +72,6 @@ public class ChemplantEntity extends DummyableBlockEntity {
     private ChemplantRecipe recipeNow = null;
     private static AudioWrapper audioWrapper;
 
-    private boolean debugFlag = true;
     protected final ContainerData containerData = new ContainerData() {
         @Override
         public int get(int pIndex) {
@@ -96,12 +98,8 @@ public class ChemplantEntity extends DummyableBlockEntity {
         this.slotModes = new ModeBuilder().addModes(4,Mode.BOTH,4,Mode.OUTPUT,2,Mode.INPUT,2,Mode.OUTPUT,6,Mode.INPUT,2,Mode.OUTPUT).get();
         this.fluidHandler = new BasicFluidHandler().addTanks(2, maxFluid, Mode.INPUT).addTanks(2, maxFluid, Mode.OUTPUT);
         this.capabilitiesContent.addCapability(ForgeCapabilities.FLUID_HANDLER, this.fluidHandler);
-//        for (int i = 0; i < 4; i++) {
-//            this.tanks.add(new BasicFluidTank(maxFluid));
-//        }
-//        this.capabilitiesContent.addCapability(ForgeCapabilities.FLUID_HANDLER, this);
         this.capabilitiesContent.addCapability(Capabilities.LONG_ENERGY, new ProxyEnergyHandler(this.energyContainer));
-//        this.capabilitiesCache.addCapabilityResolver(new SidedFluidWrapper(new BaseFluidHandler(4,24_000)));
+        this.multiblockData = MultiblockData.mapping.get(HBMMachine.CHEMPLANT.get());
     }
 
     @Override
@@ -114,10 +112,6 @@ public class ChemplantEntity extends DummyableBlockEntity {
         InventoryUtils.handleItems(this, itemStack -> this.fluidHandler.drainItem(1,itemStack), 17, 19);
         InventoryUtils.handleItems(this, itemStack -> this.fluidHandler.fillItem(2,itemStack), 8, 10);
         InventoryUtils.handleItems(this, itemStack -> this.fluidHandler.fillItem(3,itemStack), 9, 11);
-//        this.setItem(18, FluidUtils.absorbFromItem(this, 0, getItem(16)));
-//        this.setItem(19, FluidUtils.absorbFromItem(this, 1, getItem(17)));
-//        this.setItem(10, FluidUtils.absorbFromItem(this, 2, getItem(8)));
-//        this.setItem(11, FluidUtils.absorbFromItem(this, 3, getItem(9)));
         // 检查升级
         upgradeManager.checkSlots(this, items, 3, 3);
         int speedLevel = upgradeManager.getLevel(UpgradeType.SPEED);
@@ -204,11 +198,6 @@ public class ChemplantEntity extends DummyableBlockEntity {
     @Override
     public @NotNull CompoundTag getReducedUpdateTag() {
         CompoundTag tag = new CompoundTag();
-//        for (int i = 0; i < this.tanks.size(); i++) {
-//            CompoundTag tempTag = new CompoundTag();
-//            this.tanks.get(i).writeToNBT(tempTag);
-//            tag.put(HBMKey.FLUIDS + "_" + i, tempTag);
-//        }
         tag.put(HBMKey.FLUIDS, this.fluidHandler.serializeNBT());
         tag.putInt(HBMKey.PROGRESS, progress);
         return tag;
@@ -217,9 +206,6 @@ public class ChemplantEntity extends DummyableBlockEntity {
     @Override
     public void handleUpdatePacket(@NotNull CompoundTag tag) {
         super.handleUpdatePacket(tag);
-//        for (int i = 0; i < this.tanks.size(); i++) {
-//            this.tanks.get(i).readFromNBT(tag.getCompound(HBMKey.FLUIDS + "_" + i));
-//        }
         this.fluidHandler.deserializeNBT(tag.getCompound(HBMKey.FLUIDS));
         this.progress = tag.getInt(HBMKey.PROGRESS);
     }
@@ -232,9 +218,6 @@ public class ChemplantEntity extends DummyableBlockEntity {
             this.recipeNow = (ChemplantRecipe) this.level.getRecipeManager().byKey(resourceLocation).orElse(null);
         }
         this.energyContainer.deserializeNBT(nbt.getCompound(HBMKey.ENERGY));
-//        for (int i = 0; i < this.tanks.size(); i++) {
-//            this.tanks.get(i).readFromNBT(nbt.getCompound(HBMKey.FLUIDS + "_" + i));
-//        }
         this.fluidHandler.deserializeNBT(nbt.getCompound(HBMKey.FLUIDS));
     }
 
@@ -244,21 +227,10 @@ public class ChemplantEntity extends DummyableBlockEntity {
         if (recipeNow!=null)
             pTag.putString(HBMKey.RECIPE_NOW,recipeNow.getId().toString());
         pTag.put(HBMKey.ENERGY, this.energyContainer.serializeNBT());
-//        for (int i = 0; i < this.tanks.size(); i++) {
-//            CompoundTag tempTag = new CompoundTag();
-//            this.tanks.get(i).writeToNBT(tempTag);
-//            pTag.put(HBMKey.FLUIDS + "_" + i, tempTag);
-//        }
         pTag.put(HBMKey.FLUIDS, this.fluidHandler.serializeNBT());
     }
 
-//    @Override
-//    public List<? extends IExtendedFluidTank> getFluidTanks(@Nullable Direction side) {
-//        return this.tanks;
-//    }
-
-//    @Override
-    public List getFluidTanks(@Nullable Direction side) {
+    public List<FluidTank> getFluidTanks(@Nullable Direction side) {
         return this.fluidHandler.getFluidTanks();
     }
 
@@ -269,21 +241,6 @@ public class ChemplantEntity extends DummyableBlockEntity {
 
     protected int getProgress(){return Math.max(0, progress);}
 
-    //===================wroldly container
-    @Override
-    public int[] getSlotsForFace(Direction pSide) {
-        return new int[0];
-    }
-
-    @Override
-    public boolean canPlaceItemThroughFace(int pIndex, ItemStack pItemStack, @Nullable Direction pDirection) {
-        return false;
-    }
-
-    @Override
-    public boolean canTakeItemThroughFace(int pIndex, ItemStack pStack, Direction pDirection) {
-        return false;
-    }
     //===============
     @Override
     public Component getDefaultName() {

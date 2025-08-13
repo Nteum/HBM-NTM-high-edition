@@ -1,21 +1,39 @@
 package com.hbm.utils.multiblock;
 
+import com.hbm.api.energy.IEnergyHandler;
 import com.hbm.block.HBMMachine;
+import com.hbm.blockentity.base2.TileProxyBase;
+import com.hbm.capabilities.Capabilities;
+import com.hbm.capabilities.CapabilitiesContent;
 import com.hbm.registries.ModBlocks;
+import com.hbm.utils.DirectionUtils;
+import com.hbm.utils.EnumUtils;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
+import net.minecraft.util.Tuple;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.fluids.capability.IFluidHandler;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
+
+import static net.minecraft.core.Direction.*;
 
 public class MultiblockData {
     public static final Map<Block, MultiblockData> mapping = new HashMap<>();
     static {
-        mapping.put(ModBlocks.machine_assembler.get(), new MultiblockData(1, 0, 2 ,1 ,2 ,1));
-        mapping.put(HBMMachine.CHEMPLANT.get(), new MultiblockData(2, 0, 2 ,1 ,2 ,1));
+        mapping.put(ModBlocks.machine_assembler.get(), new MultiblockData(1, 0, 2 ,1 ,2 ,1)
+                .addCaps(Capabilities.LONG_ENERGY, -1,0,1, SOUTH, 0,0,1, SOUTH, -1,0,-2,Direction.NORTH, 0,0,-2,Direction.NORTH)
+                .addCaps(ForgeCapabilities.ITEM_HANDLER, 1,0,-1, Direction.EAST, -2,0,0,Direction.WEST));
+        mapping.put(HBMMachine.CHEMPLANT.get(), new MultiblockData(2, 0, 2 ,1 ,2 ,1)
+                .addCaps(Capabilities.LONG_ENERGY,ForgeCapabilities.FLUID_HANDLER, -1,0,1, SOUTH, 0,0,1, SOUTH, -1,0,-2,Direction.NORTH, 0,0,-2,Direction.NORTH)
+                .addCaps(ForgeCapabilities.ITEM_HANDLER, 1,0,-1, Direction.EAST, -2,0,0,Direction.WEST));
     }
 
     MultiblockData(List<Vec3i> offsets, int[] dirOffsets){
@@ -31,6 +49,43 @@ public class MultiblockData {
      * */
     public List<Vec3i> offsets;
     public int[] dirOffsets;
+//    public Map<Capability<?>,List<Tuple<Vec3i, Direction>>> beforeTrans = new IdentityHashMap<>();
+    public Map<Vec3i, Tuple<Capability<?>, Set<Direction>>> capsMap = new HashMap<>();
+
+    public MultiblockData addCap(Vec3i offset, Capability<?> cap, @Nullable Direction ... directions){
+        capsMap.computeIfAbsent(offset, pos -> new Tuple<>(cap, new HashSet<>()));
+        capsMap.get(offset).getB().addAll(List.of(directions));
+        if (capsMap.get(offset).getB().contains(null) && directions.length > 1)
+            capsMap.get(offset).getB().remove(null);
+        return this;
+    }
+    public MultiblockData addCap(Vec3i offset, Capability<?> cap){
+        return addCap(offset, cap, new Direction[]{null});
+    }
+    public MultiblockData addCaps(Vec3i offset, Capability<?> ... caps){
+        for (Capability<?> cap : caps) {
+            addCap(offset, cap);
+        }
+        return this;
+    }
+    public MultiblockData addCaps(Object ...objs){
+        int[] relativePos = new int[4];
+        Set<Capability<?>> caps = new HashSet<>();
+        for (Object obj : objs) {
+            if (obj instanceof Capability<?> cap){
+                caps.add(cap);
+            }else if (obj instanceof Integer integer){
+                relativePos[relativePos[3]] = integer;
+                relativePos[3] = (relativePos[3] + 1) % 3;
+            }
+            else if (obj instanceof Direction direction){
+                for (Capability<?> cap : caps) {
+                    addCap(new Vec3i(relativePos[0],relativePos[1],relativePos[2]), cap, direction);
+                }
+            }
+        }
+        return this;
+    }
 
     /** 工具函数，用于计算立方体型空间的偏移量
      * 输入数组的方向：U  D  N  S  W  E
@@ -52,6 +107,22 @@ public class MultiblockData {
     public static Vec3i square(int n){
         return new Vec3i(n,n,n);
     }
+    /**
+     * 为需要的方块实体添加能力，能力是从核心实体复制过去的，从而保证对核心实体的交互。
+     * */
+    public void distributeCaps(BlockEntity be){
+        Direction facing = be.getBlockState().getValue(BlockStateProperties.HORIZONTAL_FACING);
+        for (Map.Entry<Vec3i, Tuple<Capability<?>, Set<Direction>>> entry : capsMap.entrySet()) {
+            Vec3i offset1 = DirectionUtils.offsetRot(entry.getKey(), SOUTH, facing);
+            Capability<?> cap = entry.getValue().getA();
+            Set<Direction> directions = entry.getValue().getB().stream().map(direction -> DirectionUtils.horizRot(SOUTH, facing, direction)).collect(Collectors.toSet());
+            BlockEntity blockEntity2 = Objects.requireNonNull(be.getLevel()).getBlockEntity(be.getBlockPos().offset(offset1));
+            if (blockEntity2 instanceof TileProxyBase proxyBase && proxyBase.getBlockEntity().equals(be)){
+                be.getCapability(cap).ifPresent(handler -> proxyBase.capabilitiesContent.addCapability(cap, handler, directions));
+            }
+        }
+    }
+
     /** 将offset根据方向进行旋转。
      * 默认方向是南方，其他方向按照南方进行旋转（因为南方两个坐标都是正的）
      * （本以为会有现成方法的，但好像确实没有）
@@ -73,4 +144,5 @@ public class MultiblockData {
         }
         return result;
     }
+
 }

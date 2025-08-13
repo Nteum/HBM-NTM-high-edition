@@ -1,4 +1,4 @@
-package com.hbm.api.multiblock;
+package com.hbm.utils.multiblock;
 
 import com.hbm.block.base.BedLikeBlock;
 import com.hbm.utils.DirectionUtils;

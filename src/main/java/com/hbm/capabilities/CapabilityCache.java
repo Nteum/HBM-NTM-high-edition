@@ -2,7 +2,7 @@ package com.hbm.capabilities;
 
 import com.hbm.HBM;
 import com.hbm.HBMKey;
-import com.hbm.api.multiblock.HBMMultiData;
+import com.hbm.utils.multiblock.HBMMultiData;
 import com.hbm.blockentity.base.DummibleBlockEntity;
 import com.hbm.capabilities.resolver.ICapabilityResolver;
 import it.unimi.dsi.fastutil.objects.ReferenceOpenHashSet;

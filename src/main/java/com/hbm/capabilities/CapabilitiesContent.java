@@ -1,11 +1,14 @@
 package com.hbm.capabilities;
 
+import com.hbm.api.energy.IEnergyHandler;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.items.IItemHandler;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
@@ -39,9 +42,28 @@ public class CapabilitiesContent {
         if (!lazyOptionalMap.containsKey(capability)){
             handlerMap.put(capability, handler);
             lazyOptionalMap.put(capability, LazyOptional.of(() -> handler));
-            sideMap.put(capability, List.of(sides));
+            sideMap.put(capability, Arrays.stream(sides).toList());
         }
     }
+    /** 不固定泛型添加能力，用于给TileProxy添加能力 */
+    public void addCapability(Capability<?> capability, Object handler, Set<Direction> directions){
+        Direction[] directionsArray = directions.toArray(new Direction[0]);
+        if (directions.contains(null)) directionsArray = new Direction[]{null};
+        if (capability == Capabilities.LONG_ENERGY && handler instanceof IEnergyHandler
+                || capability == ForgeCapabilities.FLUID_HANDLER && handler instanceof IFluidHandler
+                || capability == ForgeCapabilities.ITEM_HANDLER && handler instanceof IItemHandler){
+            plusCapability(capability, handler, directionsArray);
+        }
+    }
+    /** 沟槽的java泛型，我加个无泛型的addCapability竟然显示冲突，因此只能把命名稍作调整。 */
+    private void plusCapability(Capability<?> capability, Object handler, Direction[] directionsArray) {
+        if (!lazyOptionalMap.containsKey(capability)){
+            handlerMap.put(capability, handler);
+            lazyOptionalMap.put(capability, LazyOptional.of(() -> handler));
+            sideMap.put(capability, Arrays.stream(directionsArray).toList());
+        }
+    }
+
     public <T> LazyOptional<T> getCapability(Capability<T> capability, @Nullable Direction side){
         if (lazyOptionalMap.containsKey(capability) && (side == null || sideMap.get(capability).contains(side))){
             Object object;
@@ -66,6 +88,8 @@ public class CapabilitiesContent {
     public void invalidateAll(){
         lazyOptionalMap.forEach((capability,optional) -> optional.invalidate());
     }
+
+
 //    @Override
 //    public CompoundTag serializeNBT() {
 //        return null;
