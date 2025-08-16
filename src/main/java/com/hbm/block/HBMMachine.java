@@ -1,7 +1,7 @@
 package com.hbm.block;
 
 import com.hbm.HBMLang;
-import com.hbm.block.states.BlockFluidPipe;
+import com.hbm.block.logistic.BlockFluidPipe;
 import com.hbm.block.machine.BlockChemplant;
 import com.hbm.block.machine.BlockFluidBarrel;
 import com.hbm.datagen.LanguageProvider;

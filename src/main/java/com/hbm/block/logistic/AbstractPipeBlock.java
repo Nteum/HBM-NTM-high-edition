@@ -31,6 +31,7 @@ import java.util.List;
 import java.util.Objects;
 
 public abstract class AbstractPipeBlock extends PipeBlock implements EntityBlock {
+    // 管道半径
     public float apothem;
     public AbstractPipeBlock(Properties pProperties, float apothem) {
         super(apothem,pProperties);

@@ -35,4 +35,6 @@ public abstract class CapabilityBlockEntity extends UpdateableBlockEntity {
         super.invalidateCaps();
         this.capabilitiesContent.invalidateAll();
     }
+
+
 }

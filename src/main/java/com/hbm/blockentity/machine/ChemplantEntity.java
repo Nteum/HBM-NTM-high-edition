@@ -216,35 +216,56 @@ public class ChemplantEntity extends DummyableBlockEntity {
     }
 
     @Override
-    public void distributeCapabilities() {
-        Direction facing = this.getBlockState().getValue(BlockStateProperties.HORIZONTAL_FACING);
-        for (Map.Entry<Vec3i, Tuple<Capability<?>, Set<Direction>>> entry : multiblockData.capsMap.entrySet()) {
-            Vec3i key = entry.getKey();
-            Vec3i offset1 = DirectionUtils.offsetRot(key, SOUTH, facing);
-            Capability<?> cap = entry.getValue().getA();
-            Set<Direction> directions = entry.getValue().getB().stream().map(direction -> DirectionUtils.horizRot(SOUTH, facing, direction)).collect(Collectors.toSet());
-            BlockEntity blockEntity2 = Objects.requireNonNull(this.getLevel()).getBlockEntity(this.getBlockPos().offset(offset1));
-            if (blockEntity2 instanceof TileProxyBase proxyBase && proxyBase.getBlockEntity().equals(this)){
-                if (key.equals(new Vec3i(-1,0,1)) || key.equals(new Vec3i(-1,0,-2))){
-                    if (cap == ForgeCapabilities.FLUID_HANDLER){
-                        proxyBase.capabilitiesContent.addCapability(cap, new VisitRestrictWrapper(this.fluidHandler,2), directions);
-                        proxyBase.lookTooltip = Component.translatable(HBMLang.LOOKTOOLTIP_CHEMPLANT.getTranslationKey(), 2);
-                        proxyBase.sendUpdatePacket();
-                    }else if (cap == Capabilities.LONG_ENERGY)
-                        proxyBase.capabilitiesContent.addCapability(cap, this.energyContainer, directions);
-                }else if (key.equals(new Vec3i(0,0,1)) || key.equals(new Vec3i(0,0,-2))){
-                    if (cap == ForgeCapabilities.FLUID_HANDLER){
-                        proxyBase.capabilitiesContent.addCapability(cap, new VisitRestrictWrapper(this.fluidHandler,3), directions);
-                        proxyBase.lookTooltip = Component.translatable(HBMLang.LOOKTOOLTIP_CHEMPLANT.getTranslationKey(), 2);
-                        proxyBase.sendUpdatePacket();
-                    }else if (cap == Capabilities.LONG_ENERGY)
-                        proxyBase.capabilitiesContent.addCapability(cap, this.energyContainer, directions);
-                }else {
-                    this.getCapability(cap).ifPresent(handler -> proxyBase.capabilitiesContent.addCapability(cap, handler, directions));
-                }
-            }
+    public void giveProxyCapabilities(Vec3i offset, TileProxyBase proxy, Capability<?> cap, Set<Direction> directions) {
+        if (offset.equals(new Vec3i(-1,0,1)) || offset.equals(new Vec3i(-1,0,-2))){
+            if (cap == ForgeCapabilities.FLUID_HANDLER){
+                proxy.capabilitiesContent.addCapability(cap, new VisitRestrictWrapper(this.fluidHandler,2), directions);
+                proxy.lookTooltip = Component.translatable(HBMLang.LOOKTOOLTIP_CHEMPLANT.getTranslationKey(), 2);
+                proxy.sendUpdatePacket();
+            }else if (cap == Capabilities.LONG_ENERGY)
+                proxy.capabilitiesContent.addCapability(cap, this.energyContainer, directions);
+        }else if (offset.equals(new Vec3i(0,0,1)) || offset.equals(new Vec3i(0,0,-2))){
+            if (cap == ForgeCapabilities.FLUID_HANDLER){
+                proxy.capabilitiesContent.addCapability(cap, new VisitRestrictWrapper(this.fluidHandler,3), directions);
+                proxy.lookTooltip = Component.translatable(HBMLang.LOOKTOOLTIP_CHEMPLANT.getTranslationKey(), 2);
+                proxy.sendUpdatePacket();
+            }else if (cap == Capabilities.LONG_ENERGY)
+                proxy.capabilitiesContent.addCapability(cap, this.energyContainer, directions);
+        }else {
+            this.getCapability(cap).ifPresent(handler -> proxy.capabilitiesContent.addCapability(cap, handler, directions));
         }
     }
+
+//    @Override
+//    public void distributeCapabilities() {
+//        Direction facing = this.getBlockState().getValue(BlockStateProperties.HORIZONTAL_FACING);
+//        for (Map.Entry<Vec3i, Tuple<Capability<?>, Set<Direction>>> entry : multiblockData.capsMap.entrySet()) {
+//            Vec3i key = entry.getKey();
+//            Vec3i offset1 = DirectionUtils.offsetRot(key, SOUTH, facing);
+//            Capability<?> cap = entry.getValue().getA();
+//            Set<Direction> directions = entry.getValue().getB().stream().map(direction -> DirectionUtils.horizRot(SOUTH, facing, direction)).collect(Collectors.toSet());
+//            BlockEntity blockEntity2 = Objects.requireNonNull(this.getLevel()).getBlockEntity(this.getBlockPos().offset(offset1));
+//            if (blockEntity2 instanceof TileProxyBase proxyBase && proxyBase.getBlockEntity().equals(this)){
+//                if (key.equals(new Vec3i(-1,0,1)) || key.equals(new Vec3i(-1,0,-2))){
+//                    if (cap == ForgeCapabilities.FLUID_HANDLER){
+//                        proxyBase.capabilitiesContent.addCapability(cap, new VisitRestrictWrapper(this.fluidHandler,2), directions);
+//                        proxyBase.lookTooltip = Component.translatable(HBMLang.LOOKTOOLTIP_CHEMPLANT.getTranslationKey(), 2);
+//                        proxyBase.sendUpdatePacket();
+//                    }else if (cap == Capabilities.LONG_ENERGY)
+//                        proxyBase.capabilitiesContent.addCapability(cap, this.energyContainer, directions);
+//                }else if (key.equals(new Vec3i(0,0,1)) || key.equals(new Vec3i(0,0,-2))){
+//                    if (cap == ForgeCapabilities.FLUID_HANDLER){
+//                        proxyBase.capabilitiesContent.addCapability(cap, new VisitRestrictWrapper(this.fluidHandler,3), directions);
+//                        proxyBase.lookTooltip = Component.translatable(HBMLang.LOOKTOOLTIP_CHEMPLANT.getTranslationKey(), 2);
+//                        proxyBase.sendUpdatePacket();
+//                    }else if (cap == Capabilities.LONG_ENERGY)
+//                        proxyBase.capabilitiesContent.addCapability(cap, this.energyContainer, directions);
+//                }else {
+//                    this.getCapability(cap).ifPresent(handler -> proxyBase.capabilitiesContent.addCapability(cap, handler, directions));
+//                }
+//            }
+//        }
+//    }
 
     @Override
     public void load(@NotNull CompoundTag nbt) {

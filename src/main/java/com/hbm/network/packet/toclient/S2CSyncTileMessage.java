@@ -33,8 +33,8 @@ public class S2CSyncTileMessage implements IHBMMessage {
         ClientLevel world = Minecraft.getInstance().level;
         //Only handle the update packet if the block is currently loaded
         if (WorldUtils.isBlockLoaded(world, pos)) {
-            UpdateableBlockEntity tile = (UpdateableBlockEntity) world.getBlockEntity(pos);
-//            UpdateableBlockEntity tile = WorldUtils.getTileEntity(UpdateableBlockEntity.class, world, pos, true);
+//            UpdateableBlockEntity tile = (UpdateableBlockEntity) world.getBlockEntity(pos);
+            UpdateableBlockEntity tile = WorldUtils.getTileEntity(UpdateableBlockEntity.class, world, pos, true);
             if (tile == null) {
                 HBM.LOGGER.warn("Update tile packet received for position: {} in world: {}, but no valid tile was found.", pos,
                         world.dimension().location());

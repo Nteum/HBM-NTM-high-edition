@@ -2,15 +2,18 @@ package com.hbm.utils.multiblock;
 
 import com.hbm.api.energy.IEnergyHandler;
 import com.hbm.block.HBMMachine;
+import com.hbm.blockentity.base2.DummyableBlockEntity;
 import com.hbm.blockentity.base2.TileProxyBase;
 import com.hbm.capabilities.Capabilities;
 import com.hbm.capabilities.CapabilitiesContent;
 import com.hbm.registries.ModBlocks;
 import com.hbm.utils.DirectionUtils;
 import com.hbm.utils.EnumUtils;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
 import net.minecraft.util.Tuple;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -53,13 +56,13 @@ public class MultiblockData {
     public List<Vec3i> offsets;
     public int[] dirOffsets;
 //    public Map<Capability<?>,List<Tuple<Vec3i, Direction>>> beforeTrans = new IdentityHashMap<>();
-    public Map<Vec3i, Tuple<Capability<?>, Set<Direction>>> capsMap = new HashMap<>();
+    public Map<Vec3i, Map<Capability<?>, Set<Direction>>> capsMap = new HashMap<>();
 
     public MultiblockData addCap(Vec3i offset, Capability<?> cap, @Nullable Direction ... directions){
-        capsMap.computeIfAbsent(offset, pos -> new Tuple<>(cap, new HashSet<>()));
-        capsMap.get(offset).getB().addAll(List.of(directions));
-        if (capsMap.get(offset).getB().contains(null) && directions.length > 1)
-            capsMap.get(offset).getB().remove(null);
+        capsMap.computeIfAbsent(offset, pos -> new HashMap<>()).computeIfAbsent(cap, capability -> new HashSet<>());
+        capsMap.get(offset).get(cap).addAll(List.of(directions));
+        if (capsMap.get(offset).get(cap).contains(null) && directions.length > 1)
+            capsMap.get(offset).get(cap).remove(null);
         return this;
     }
     public MultiblockData addCap(Vec3i offset, Capability<?> cap){
@@ -114,14 +117,20 @@ public class MultiblockData {
      * 为需要的方块实体添加能力，能力是从核心实体复制过去的，从而保证对核心实体的交互。
      * */
     public void distributeCaps(BlockEntity be){
+        if (!(be instanceof DummyableBlockEntity) || !be.hasLevel()) return;
+        BlockPos bePos = be.getBlockPos();
+        Level level = be.getLevel();
         Direction facing = be.getBlockState().getValue(BlockStateProperties.HORIZONTAL_FACING);
-        for (Map.Entry<Vec3i, Tuple<Capability<?>, Set<Direction>>> entry : capsMap.entrySet()) {
-            Vec3i offset1 = DirectionUtils.offsetRot(entry.getKey(), SOUTH, facing);
-            Capability<?> cap = entry.getValue().getA();
-            Set<Direction> directions = entry.getValue().getB().stream().map(direction -> DirectionUtils.horizRot(SOUTH, facing, direction)).collect(Collectors.toSet());
-            BlockEntity blockEntity2 = Objects.requireNonNull(be.getLevel()).getBlockEntity(be.getBlockPos().offset(offset1));
-            if (blockEntity2 instanceof TileProxyBase proxyBase && proxyBase.getBlockEntity().equals(be)){
-                be.getCapability(cap).ifPresent(handler -> proxyBase.capabilitiesContent.addCapability(cap, handler, directions));
+        for (Map.Entry<Vec3i, Map<Capability<?>, Set<Direction>>> entry : capsMap.entrySet()) {
+            Vec3i offset = entry.getKey();
+            BlockPos proxyPos = bePos.offset(DirectionUtils.offsetRot(offset, SOUTH, facing));
+            for (Map.Entry<Capability<?>, Set<Direction>> setEntry : entry.getValue().entrySet()) {
+                Capability<?> proxyCap = setEntry.getKey();
+                Set<Direction> proxyDir = setEntry.getValue().stream().map(direction -> DirectionUtils.horizRot(SOUTH, facing, direction)).collect(Collectors.toSet());
+                if (level.getBlockEntity(proxyPos) instanceof TileProxyBase proxy && proxy.getBlockEntity().equals(be)){
+                    ((DummyableBlockEntity)be).giveProxyCapabilities(offset, proxy, proxyCap, proxyDir);
+//                    be.getCapability(proxyCap).ifPresent(handler -> proxy.capabilitiesContent.addCapability(proxyCap, handler, proxyDir));
+                }
             }
         }
     }

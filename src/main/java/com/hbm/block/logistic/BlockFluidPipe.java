@@ -1,4 +1,4 @@
-package com.hbm.block.states;
+package com.hbm.block.logistic;
 
 import com.hbm.block.logistic.AbstractPipeBlock;
 import com.hbm.blockentity.machine.PipeEntity;

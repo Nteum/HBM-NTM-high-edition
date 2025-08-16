@@ -39,7 +39,7 @@ public class BlockLookTooltipRenderer {
             if (blockEntity != null && blockEntity instanceof ICustomLookTooltip be && (tooltip = be.getLookTooltip()) != null){
                 // 获取渲染位置（方块上方）
                 double x = pos.getX() + 0.5;
-                double y = pos.getY() + 1.5;
+                double y = pos.getY() + 0.5;
                 double z = pos.getZ() + 0.5;
 
                 Vec3 cameraPos = event.getCamera().getPosition();
