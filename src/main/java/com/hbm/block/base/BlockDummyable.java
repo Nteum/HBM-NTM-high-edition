@@ -6,8 +6,11 @@ import com.hbm.block.HBMMachine;
 import com.hbm.block.interfaces.ICustomBlockHighlight;
 import com.hbm.blockentity.base2.DummyableBlockEntity;
 import com.hbm.blockentity.base2.TileProxyBase;
+import com.hbm.blockentity.base2.TileProxyCombo;
+import com.hbm.blockentity.machine.ChemplantEntity;
 import com.hbm.interfaces.ICopiable;
 import com.hbm.registries.ModBlocks;
+import com.hbm.utils.DirectionUtils;
 import com.hbm.utils.multiblock.DummableHelper;
 import com.hbm.utils.multiblock.MultiblockData;
 import com.hbm.world.gen.INBTTransformable;
@@ -35,6 +38,7 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -48,6 +52,8 @@ import java.util.List;
 //所有多方块结构的父类
 //主要处理可以协同破坏和恢复的多方块机器
 public abstract class BlockDummyable extends BlockMachineBase implements ICustomBlockHighlight, INBTTransformable {
+    public static boolean doShapeRot = false;
+    public static VoxelShape SHAPE;
     // 某个方块是否为核心，如果是核心，建立功能性方块实体，否则只是代理方块实体。
     public static final BooleanProperty IS_CORE = HBMBlockProperties.IS_CORE;
     public BlockDummyable(Properties pProperties) {
@@ -123,10 +129,17 @@ public abstract class BlockDummyable extends BlockMachineBase implements ICustom
     public int[] getDimensions(){
         return MultiblockData.mapping.get(this).dirOffsets;
     }
+    @Nullable
+    @Override
+    public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
+        return pState.getValue(IS_CORE) ? mainBlockEntity(pPos,pState) : new TileProxyCombo(pPos, pState);
+    }
+    /** 获得核心方块的方块实体 */
+    protected BlockEntity mainBlockEntity(BlockPos pPos, BlockState pState){return null;};
 
     @Override
-    public VoxelShape getCollisionShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
-        return super.getCollisionShape(pState, pLevel, pPos, pContext);
+    public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
+        return pState.getValue(IS_CORE) ? (doShapeRot ? DirectionUtils.voxelShapeRot(SHAPE, pState.getValue(FACING)) : SHAPE) : Shapes.block();
     }
 
     @Override

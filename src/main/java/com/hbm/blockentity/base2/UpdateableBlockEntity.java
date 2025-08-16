@@ -6,16 +6,13 @@ import com.hbm.api.Chunk3D;
 import com.hbm.api.Coord4D;
 import com.hbm.api.interferences.ITileWrapper;
 import com.hbm.network.ModMessages;
-import com.hbm.network.packet.toclient.UpdateTileMessage;
+import com.hbm.network.packet.toclient.S2CSyncTileMessage;
 import com.hbm.utils.WorldUtils;
-import io.netty.buffer.ByteBuf;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.SectionPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
-import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.PacketFlow;
-import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -77,6 +74,11 @@ public abstract class UpdateableBlockEntity extends BlockEntity implements ITile
     public void handleUpdatePacket(@NotNull CompoundTag tag) {
         handleUpdateTag(tag);
     }
+    public CompoundTag getClientSyncTag(){
+        return new CompoundTag();
+    }
+    public void handleClientPacket(@NotNull CompoundTag tag) {
+    }
     // 发送更新方块实体数据包
     public void sendUpdatePacket() {
         sendUpdatePacket(this);
@@ -92,17 +94,17 @@ public abstract class UpdateableBlockEntity extends BlockEntity implements ITile
             // the entire chunk when most often we are just updating a TileEntityRenderer, so the chunk itself
             // does not need to and should not be redrawn
 //            ModMessages.sendToAllTracking(new UpdateTileMessage(this), tracking);
-            ModMessages.sendToAll(new UpdateTileMessage(this));
+            ModMessages.sendToAll(new S2CSyncTileMessage(this));
         }
     }
     // 1.7.10版本HBM更新机制，我在这里复现了它
     // 但我认为新版本的更新是能完成客户端服务器同步的任务的
     // 希望不要用到它
-    UpdateTileMessage lastUpdateMsg;
+    S2CSyncTileMessage lastUpdateMsg;
     public void networkPackNT(int range) {
         if(level.isClientSide) return;
 
-        UpdateTileMessage updateMsg = new UpdateTileMessage(this);
+        S2CSyncTileMessage updateMsg = new S2CSyncTileMessage(this);
 
         if(!updateMsg.equals(lastUpdateMsg) || this.level.getGameTime() % 20 != 0) return;
 

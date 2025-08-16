@@ -20,8 +20,6 @@ public class ModelAdjustUtils {
         else if (block1 instanceof MultiPartBlock multiPartBlock)
             offset = multiPartBlock.getOffset();
         else offset = new int[]{0,0,0,0,0,0};
-//        BedLikeBlock block = (BedLikeBlock)blockState.getBlock();
-//        int[] offset = block.getOffset();
 
         float xSize = (float) (offset[5] - offset[4]) / 2;
         float zSize = (float) (offset[3] - offset[2]) / 2;

@@ -40,13 +40,10 @@ import java.util.List;
 
 public class BarrelEntity extends BaseMachineBlockEntity implements IPacketUpdate, MenuProvider {
     BlockFluidBarrel.BarrelProperties properties;
-//    BarrelMode mode = BarrelMode.FORBID;
-    BasicFluidTank tank;
-    private SingleFluidHandler fluidHandler;
-//    public ISidedFluidHandler fluidHandler;
+    private final SingleFluidHandler fluidHandler;
     public int[] slotIn = new int[]{0,2};
     public int[] slotOut = new int[]{1,3};
-    private ContainerData containerData = new ContainerData() {
+    private final ContainerData containerData = new ContainerData() {
         @Override
         public int get(int pIndex) {
             return switch (pIndex){
@@ -54,13 +51,8 @@ public class BarrelEntity extends BaseMachineBlockEntity implements IPacketUpdat
                 default -> 0;
             };
         }
-
         @Override
-        public void set(int pIndex, int pValue) {
-            switch (pIndex){
-                case 0 -> fluidHandler.setMode(Mode.values()[pValue]);
-            }
-        }
+        public void set(int pIndex, int pValue) {}
 
         @Override
         public int getCount() {
@@ -79,37 +71,8 @@ public class BarrelEntity extends BaseMachineBlockEntity implements IPacketUpdat
     protected void onUpdateServer() {
         super.onUpdateServer();
         // 1. 处理界面内的流体物品
-        InventoryUtils.handleItems(this, itemStack -> this.fluidHandler.drainItem(itemStack), 0, 1);
-        InventoryUtils.handleItems(this, itemStack -> this.fluidHandler.fillItem(itemStack), 2, 3);
-//        IFluidHandler fluidHandler = this.getCapability(ForgeCapabilities.FLUID_HANDLER).orElse(null);
-//        ItemStack itemStack0 = this.items.get(0);
-//        ItemStack itemStack1 = this.items.get(1);
-//        if (allowContainerTrans(itemStack0,itemStack1)){
-//            if (itemStack0.getItem() instanceof BucketItem bucketItem){
-//                int filled = fluidHandler.fill(new FluidStack(bucketItem.getFluid(), FluidType.BUCKET_VOLUME), IFluidHandler.FluidAction.SIMULATE);
-//                if (filled == FluidType.BUCKET_VOLUME){
-//                    fluidHandler.fill(new FluidStack(bucketItem.getFluid(), FluidType.BUCKET_VOLUME), IFluidHandler.FluidAction.EXECUTE);
-//                    itemStack0.shrink(1);
-//                    items.set(0,itemStack0.isEmpty() ? ItemStack.EMPTY : itemStack0);
-//                    if (itemStack1.isEmpty())itemStack1 = new ItemStack(Items.BUCKET);
-//                    else itemStack1.grow(1);
-//                    items.set(1,itemStack1);
-//                }
-//            }
-//        }
-//        ItemStack itemStack2 = this.items.get(2);
-//        ItemStack itemStack3 = this.items.get(3);
-//        if (allowContainerTrans(itemStack2,itemStack3)){
-//            if (itemStack2.getItem() instanceof BucketItem && itemStack3.isEmpty()){
-//                FluidStack fluidStack = fluidHandler.drain(FluidType.BUCKET_VOLUME, IFluidHandler.FluidAction.SIMULATE);
-//                if (fluidStack.getAmount() == FluidType.BUCKET_VOLUME){
-//                    fluidHandler.drain(FluidType.BUCKET_VOLUME, IFluidHandler.FluidAction.EXECUTE);
-//                    itemStack2.shrink(1);
-//                    items.set(2,itemStack2.isEmpty() ? ItemStack.EMPTY : itemStack2);
-//                    items.set(3,new ItemStack(fluidStack.getFluid().getBucket()));
-//                }
-//            }
-//        }
+        InventoryUtils.handleItems(this, this.fluidHandler::drainItem, 0, 1);
+        InventoryUtils.handleItems(this, this.fluidHandler::fillItem, 2, 3);
         // 2. 处理界面上的流体，临界物品如果可以接收液体则接收液体
         BlockEntity neighbour;
         if (this.fluidHandler.allowOutput(0)){
@@ -119,7 +82,7 @@ public class BarrelEntity extends BaseMachineBlockEntity implements IPacketUpdat
                         int maxDrain = this.fluidHandler.getFluidInTank(0).getAmount() / 10;
                         FluidStack fluidStack = this.fluidHandler.drain(maxDrain, IFluidHandler.FluidAction.SIMULATE);
                         int filled = handler.fill(fluidStack, IFluidHandler.FluidAction.EXECUTE);
-                        this.fluidHandler.drain(fluidStack.getAmount() - filled, IFluidHandler.FluidAction.EXECUTE);
+                        this.fluidHandler.drain(filled, IFluidHandler.FluidAction.EXECUTE);
                     });
                 }
             }
@@ -151,8 +114,21 @@ public class BarrelEntity extends BaseMachineBlockEntity implements IPacketUpdat
         this.fluidHandler.deserializeNBT(tag.getCompound(HBMKey.FLUIDS));
     }
 
+    @Override
+    public void handleClientPacket(@NotNull CompoundTag tag) {
+        super.handleClientPacket(tag);
+        this.fluidHandler.setMode(Mode.values()[tag.getInt(HBMKey.MODE)]);
+    }
+
     public List<FluidTank> getFluidTanks(){
         return this.fluidHandler.getFluidTanks();
+    }
+
+    public Mode getMode(){
+        return this.fluidHandler.getMode();
+    }
+    public void setMode(Mode mode){
+        this.fluidHandler.setMode(mode);
     }
     //=============
     @Override

@@ -1,6 +1,8 @@
 package com.hbm.block.weapon;
 
 import com.hbm.block.base.BedLikeBlock;
+import com.hbm.blockentity.base2.TileProxyCombo;
+import com.hbm.blockentity.machine.ChemplantEntity;
 import com.hbm.blockentity.weapon.NukeBombCustomEntity;
 import com.hbm.blockentity.weapon.NukeBombFatEntity;
 import com.hbm.entity.effect.EntityNukeTorex;
@@ -18,6 +20,7 @@ import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
@@ -25,11 +28,12 @@ import java.util.List;
 import java.util.Random;
 
 public class NukeCustom extends NukeBomb implements IBomb{
-    public static final VoxelShape SHAPE = Block.box(-30,0,0,24,16,16);
+//    public static final VoxelShape SHAPE = Block.box(-30,0,0,24,16,16);
     public static final int maxNuke = 200;
 
     public NukeCustom(Properties pProperties, int range) {
         super(pProperties,range);
+        SHAPE = Block.box(-30,0,0,24,16,16);
     }
 
     @Override
@@ -46,30 +50,8 @@ public class NukeCustom extends NukeBomb implements IBomb{
         return BombReturnCode.UNDEFINED;
     }
 
-    @Nullable
     @Override
-    public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
+    protected BlockEntity mainBlockEntity(BlockPos pPos, BlockState pState) {
         return new NukeBombCustomEntity(pPos,pState);
     }
-
-    @Override
-    public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
-        return isCore(pLevel,pPos) ? SHAPE : super.getShape(pState,pLevel,pPos,pContext);
-    }
-
-    @Override
-    public int[] getOffset() {
-//        return new int[]{0, 0, 1 ,0 ,0 ,2};
-        return new int[]{0, 0, 0 ,0 ,1 ,1};
-    }
-
-    @Override
-    public List<Vec3i> getOffsets() {
-        return MultipartUtils.square(getOffset());
-    }
-
-//    @Override
-//    public RenderShape getRenderShape(BlockState pState) {
-//        return RenderShape.INVISIBLE;
-//    }
 }

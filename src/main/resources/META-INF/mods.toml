@@ -38,6 +38,12 @@ authors="${mod_authors}" #optional
 # IMPORTANT NOTE: this is NOT an instruction as to which environments (CLIENT or DEDICATED SERVER) your mod loads on. Your mod should load (and maybe do nothing!) whereever it finds itself.
 #displayTest="MATCH_VERSION" # MATCH_VERSION is the default if nothing is specified (#optional)
 
+#[[mods]]
+#modId="hbm_space"
+#version="${mod_version}"
+#displayName="HBM-NTM Space Heigh Edition"
+#description="1.7.10 HBM-NTM Space mod's 1.20.1 rebuild"
+
 # The description text for the mod (multi line!) (#mandatory)
 description='''${mod_description}'''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.

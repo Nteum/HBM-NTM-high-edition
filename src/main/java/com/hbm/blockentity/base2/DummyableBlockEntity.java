@@ -27,12 +27,24 @@ public abstract class DummyableBlockEntity extends BaseMachineBlockEntity {
     }
 
     @Override
-    public void onLoad() {
-        super.onLoad();
-        if (!distributed){
-            multiblockData.distributeCaps(this);
+    protected void onUpdateServer() {
+        super.onUpdateServer();
+        // 为填充方块分配能力，我本来想在onLoad里调用，然而onLoad调用时填充方块尚未被填充，因此只能放在这里。
+        if (isFormed && !distributed){
+            distributeCapabilities();
+            distributed = true;
         }
     }
+    //    @Override
+//    public void onLoad() {
+//        super.onLoad();
+//        if (isFormed && !distributed){
+//            distributeCapabilities();
+//            distributed = true;
+//        }
+//    }
+
+    public void distributeCapabilities(){}
 
     // 被Block的onRemove调用
     // blockEntity会在这之后被销毁

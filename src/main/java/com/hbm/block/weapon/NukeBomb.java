@@ -2,6 +2,7 @@ package com.hbm.block.weapon;
 
 import com.hbm.block.base.BaseMachineBlock;
 import com.hbm.block.base.BedLikeBlock;
+import com.hbm.block.base.BlockDummyable;
 import com.hbm.block.base.MultiPartBlock;
 import com.hbm.blockentity.weapon.NukeBombEntity;
 import com.hbm.entity.effect.EntityNukeTorex;
@@ -18,13 +19,13 @@ import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 
-public abstract class NukeBomb extends MultiPartBlock implements IBomb {
-    private boolean ready = false;
+public abstract class NukeBomb extends BlockDummyable implements IBomb {
     public boolean explode = true;
     public int range = 0;
     public NukeBomb(Properties pProperties, int range) {
         super(pProperties);
         this.range = range;
+        doShapeRot = true;
     }
 
     /** 继承Ibomb，核弹引爆函数 */
@@ -35,10 +36,8 @@ public abstract class NukeBomb extends MultiPartBlock implements IBomb {
             pLevel.addFreshEntity(EntityNukeExplosionMK5.statFac(pLevel,range,pPos.getCenter()));
             pLevel.addFreshEntity(new EntityNukeTorex(pLevel,pPos.getCenter().add(0,4.5,0),range));
             pLevel.destroyBlock(pPos,false);
-
             return BombReturnCode.DETONATED;
         }
-
         return BombReturnCode.UNDEFINED;
     }
 }

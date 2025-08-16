@@ -1,8 +1,13 @@
 package com.hbm.gui.menu;
 
+import com.hbm.HBMKey;
+import com.hbm.api.Mode;
+import com.hbm.blockentity.machine.BarrelEntity;
 import com.hbm.gui.ModMenuType;
 import com.hbm.gui.menu.slot.OutputSlot;
 import com.hbm.gui.menu.slot.UpgradeSlot;
+import com.hbm.network.ModMessages;
+import com.hbm.network.packet.toserver.C2SSyncTileMessage;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
@@ -40,5 +45,10 @@ public class BarrelMenu extends BaseMachineMenu implements ITileAccess{
     @Override
     public void setTile(BlockEntity blockEntity) {
         this.be = blockEntity;
+    }
+    public void syncTile(){
+        CompoundTag tag = new CompoundTag();
+        tag.putInt(HBMKey.MODE, getMode());
+        ModMessages.sendToServer(new C2SSyncTileMessage(be.getBlockPos(), tag));
     }
 }

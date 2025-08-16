@@ -1,7 +1,17 @@
 package com.hbm.utils;
 
+import com.hbm.block.base.BedLikeBlock;
+import com.hbm.block.base.BlockDummyable;
+import com.hbm.block.base.MultiPartBlock;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,5 +79,57 @@ public class DirectionUtils {
             }
         }
         return result;
+    }
+    /** 模型旋转的逻辑 */
+    public static void generalMachineRotate(PoseStack poseStack, BlockState blockState){
+        Direction facing = blockState.getValue(BlockStateProperties.HORIZONTAL_FACING);
+        int[] offset;
+        Block block1 = blockState.getBlock();
+        if (block1 instanceof BlockDummyable dummyable)
+            offset = dummyable.getDimensions();
+        else return;
+
+        float xSize = (float) (offset[5] - offset[4]) / 2;
+        float zSize = (float) (offset[3] - offset[2]) / 2;
+        // YP是顺时针，mc是左手定则
+        switch (facing){
+            case SOUTH -> {
+                poseStack.mulPose(Axis.YP.rotationDegrees(0));
+            }
+            case EAST -> {
+                poseStack.translate(zSize-xSize,0,-xSize-zSize);
+                poseStack.mulPose(Axis.YP.rotationDegrees(90));
+            }
+            case NORTH -> {
+                poseStack.translate(-2*xSize,0,-2*zSize);
+                poseStack.mulPose(Axis.YP.rotationDegrees(180));
+            }
+            case WEST -> {
+                poseStack.translate(-zSize-xSize,0,xSize-zSize);
+                poseStack.mulPose(Axis.YP.rotationDegrees(270));
+            }
+        }
+    }
+    public static VoxelShape voxelShapeRot(VoxelShape shape, Direction facing) {
+        return voxelShapeRot(shape, Direction.SOUTH, facing);
+    }
+    /**
+     * 根据方向对voxelshape进行旋转
+     * AI生成的，还没验证正确性
+     * */
+    public static VoxelShape voxelShapeRot(VoxelShape shape, Direction defaultFace, Direction facing) {
+        VoxelShape[] buffer = new VoxelShape[]{shape, Shapes.empty()};
+
+        int times = (facing.get2DDataValue() - defaultFace.get2DDataValue() + 4) % 4;
+        for (int i = 0; i < times; i++) {
+            buffer[0].forAllBoxes((minX, minY, minZ, maxX, maxY, maxZ) -> {
+                // 以 (0.5, y, 0.5) 为中心旋转90°，实际上只对 XZ 平面做变换
+                buffer[1] = Shapes.or(buffer[1], Shapes.box(1 - maxZ, minY, minX, 1 - minZ, maxY, maxX));
+            });
+            buffer[0] = buffer[1];
+            buffer[1] = Shapes.empty();
+        }
+
+        return buffer[0];
     }
 }

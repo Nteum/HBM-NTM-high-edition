@@ -4,6 +4,8 @@ import com.hbm.HBM;
 import com.hbm.blockentity.base2.BaseMachineBlockEntity;
 import com.hbm.blockentity.base2.UpdateableBlockEntity;
 import com.hbm.network.IHBMMessage;
+import com.hbm.network.ModMessages;
+import com.hbm.network.packet.toserver.S2CSyncFailMessage;
 import com.hbm.utils.WorldUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -14,18 +16,15 @@ import net.minecraftforge.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
-public class UpdateTileMessage implements IHBMMessage {
+public class S2CSyncTileMessage implements IHBMMessage {
     private final CompoundTag updateTag;
     private final BlockPos pos;
-    public UpdateTileMessage(BaseMachineBlockEntity blockEntity){
-        this(blockEntity.getBlockPos(), blockEntity.getReducedUpdateTag());
-    }
-    UpdateTileMessage(BlockPos blockPos, CompoundTag tag){
+    S2CSyncTileMessage(BlockPos blockPos, CompoundTag tag){
         this.updateTag = tag;
         this.pos = blockPos;
     }
 
-    public UpdateTileMessage(UpdateableBlockEntity blockEntity) {
+    public S2CSyncTileMessage(UpdateableBlockEntity blockEntity) {
         this(blockEntity.getBlockPos(), blockEntity.getReducedUpdateTag());
     }
 
@@ -34,10 +33,12 @@ public class UpdateTileMessage implements IHBMMessage {
         ClientLevel world = Minecraft.getInstance().level;
         //Only handle the update packet if the block is currently loaded
         if (WorldUtils.isBlockLoaded(world, pos)) {
-            BaseMachineBlockEntity tile = WorldUtils.getTileEntity(BaseMachineBlockEntity.class, world, pos, true);
+            UpdateableBlockEntity tile = (UpdateableBlockEntity) world.getBlockEntity(pos);
+//            UpdateableBlockEntity tile = WorldUtils.getTileEntity(UpdateableBlockEntity.class, world, pos, true);
             if (tile == null) {
                 HBM.LOGGER.warn("Update tile packet received for position: {} in world: {}, but no valid tile was found.", pos,
                         world.dimension().location());
+                ModMessages.sendToServer(new S2CSyncFailMessage(pos));
             } else {
                 tile.handleUpdatePacket(updateTag);
             }
@@ -51,23 +52,23 @@ public class UpdateTileMessage implements IHBMMessage {
         buffer.writeNbt(this.updateTag);
     }
 
-    public static UpdateTileMessage decode(FriendlyByteBuf buf){
+    public static S2CSyncTileMessage decode(FriendlyByteBuf buf){
         //记清：decode的顺序要和encode一致
-        return new UpdateTileMessage(buf.readBlockPos(),buf.readNbt());
+        return new S2CSyncTileMessage(buf.readBlockPos(),buf.readNbt());
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof UpdateTileMessage))
+        if (!(obj instanceof S2CSyncTileMessage))
             return false;
-        UpdateTileMessage msg = (UpdateTileMessage) obj;
+        S2CSyncTileMessage msg = (S2CSyncTileMessage) obj;
         if (msg.pos != null && msg.pos.equals(this.pos) && msg.updateTag != null && msg.updateTag.equals(this.updateTag))
             return true;
         else
             return false;
     }
 
-    public UpdateTileMessage copy(){
-        return new UpdateTileMessage(new BlockPos(pos.getX(),pos.getY(),pos.getZ()), updateTag.copy());
+    public S2CSyncTileMessage copy(){
+        return new S2CSyncTileMessage(new BlockPos(pos.getX(),pos.getY(),pos.getZ()), updateTag.copy());
     }
 }

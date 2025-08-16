@@ -25,6 +25,7 @@ public class TileProxyCombo extends TileProxyBase implements ISidedItemHandler, 
     public BlockEntity tile;
     private TileProxyCombo(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState) {
         super(pType, pPos, pBlockState);
+//        this.lookTooltip = Component.literal("proxy block");
     }
 
     public TileProxyCombo(BlockPos pos, BlockState blockState) {

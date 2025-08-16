@@ -18,18 +18,21 @@ public class MultiStateButton extends ImageButton {
         this.defaultState = defaultState;
         this.stateNow = defaultState;
     }
+    public void updateData(int mode){
+        this.stateNow = mode;
+    }
 
     @Override
     public void renderWidget(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
-        int i = yTexStart;
-        if (!this.isActive()) {
-            i = yTexStart + yDiffTex * stateNow;
-        } else if (this.isHoveredOrFocused()) {
-            i = yTexStart + yDiffTex * (stateNow+1==stateNum ? 0 : stateNow + 1);
-        }
+        int i = yTexStart + yDiffTex * stateNow;
+//        if (!this.isActive()) {
+//            i = yTexStart + yDiffTex * stateNow;
+//        } else
+//        if (this.isHovered()) {
+//            i = yTexStart + yDiffTex * (stateNow+1==stateNum ? 0 : stateNow + 1);
+//        }
 
         RenderSystem.enableDepthTest();
         pGuiGraphics.blit(resourceLocation, getX(), getY(), (float)xTexStart, (float)i, width, height, textureWidth, textureHeight);
     }
-
 }

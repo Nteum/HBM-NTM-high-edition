@@ -79,6 +79,8 @@ public enum HBMLang implements ILangEntry {
     TOOLTIP_LEFT_TIME("gui","left_time.tooltip"),
     TOOLTIP_TANK_VOLUME("gui","volume.tooltip"),
     TOOLTIP_ENERGY("gui","stored_energy.tooltip"),
+    // 大世界tooltip
+    LOOKTOOLTIP_CHEMPLANT("block","chemplant.looktooltip"),
     ;
 
     private final String key;

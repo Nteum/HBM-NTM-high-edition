@@ -43,6 +43,7 @@ public class HBMKey {
     public static final String Y = "y";
     public static final String Z = "z";
     public static final String DIMENSION = "dimension";
+    public static final String TOOLTIP = "tooltip";
     // machine name
     public static final String BLAST = "blast";
     public static final String ASSEMBLER = "assembler";

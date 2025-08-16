@@ -3,6 +3,7 @@ package com.hbm.utils.multiblock;
 import com.hbm.block.HBMBlockProperties;
 import com.hbm.blockentity.base2.DummyableBlockEntity;
 import com.hbm.blockentity.base2.TileProxyBase;
+import com.hbm.utils.DirectionUtils;
 import com.hbm.utils.MultipartUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -18,7 +19,8 @@ public class DummableHelper {
 
     /** 检查方块是否可以放得下 */
     public static boolean checkRequirement(Level level, BlockPos blockPos, Direction dir, List<Vec3i> offsets){
-        List<Vec3i> offsets2 = MultiblockData.transOffsets(offsets, dir);
+//        List<Vec3i> offsets2 = MultiblockData.transOffsets(offsets, dir);
+        List<Vec3i> offsets2 = DirectionUtils.offsetRot(offsets, Direction.SOUTH, dir);
         for (Vec3i offset : offsets2) {
             if (!level.getBlockState(blockPos.offset(offset)).canBeReplaced())return false;
         }
@@ -26,7 +28,8 @@ public class DummableHelper {
     }
     /** 填充实体的方块 */
     public static void fillSpace(Level level, BlockPos blockPos, BlockState blockState, Direction dir, List<Vec3i> offsets){
-        List<Vec3i> offsets2 = MultiblockData.transOffsets(offsets, dir);
+//        List<Vec3i> offsets2 = MultiblockData.transOffsets(offsets, dir);
+        List<Vec3i> offsets2 = DirectionUtils.offsetRot(offsets, Direction.SOUTH, dir);
         BlockState newSate = blockState.setValue(HBMBlockProperties.IS_CORE, Boolean.FALSE);
         for (Vec3i offset : offsets2) {
             if (offset.getX()==0&&offset.getY()==0&&offset.getZ()==0)continue;
@@ -50,7 +53,8 @@ public class DummableHelper {
         BlockEntity coreEntity = level.getBlockEntity(corePos);
         if (coreEntity != null && coreEntity instanceof DummyableBlockEntity){
             // 移除填充方块
-            List<Vec3i> offsets2 = MultipartUtils.transOffsets(MultiblockData.mapping.get(blockState.getBlock()).offsets, direction);
+//            List<Vec3i> offsets2 = MultipartUtils.transOffsets(MultiblockData.mapping.get(blockState.getBlock()).offsets, direction);
+            List<Vec3i> offsets2 = DirectionUtils.offsetRot(MultiblockData.mapping.get(blockState.getBlock()).offsets, Direction.SOUTH, direction);
             for (Vec3i offset : offsets2) {
                 BlockPos pos = corePos.offset(offset);
                 if (level.getBlockState(pos).is(blockState.getBlock())){

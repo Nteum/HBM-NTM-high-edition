@@ -2,6 +2,7 @@ package com.hbm.render.blockentity;
 
 import com.hbm.blockentity.base2.DummyableBlockEntity;
 import com.hbm.render.utils.ModelAdjustUtils;
+import com.hbm.utils.DirectionUtils;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
@@ -14,7 +15,8 @@ public abstract class MultiPartRenderer<T extends DummyableBlockEntity> implemen
         BlockState blockState = pBlockEntity.getBlockState();
 
         pPoseStack.pushPose();
-        ModelAdjustUtils.generalMachineRotate(pPoseStack, blockState);
+        DirectionUtils.generalMachineRotate(pPoseStack, blockState);
+//        ModelAdjustUtils.generalMachineRotate(pPoseStack, blockState);
 
         renderMultiPart(pBlockEntity,pPartialTick,pPoseStack,pBuffer,pPackedLight,pPackedOverlay);
 

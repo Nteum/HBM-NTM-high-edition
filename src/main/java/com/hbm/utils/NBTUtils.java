@@ -1,5 +1,6 @@
 package com.hbm.utils;
 
+import com.hbm.HBM;
 import com.hbm.api.Coord4D;
 import com.hbm.api.annotations.ParametersAreNotNullByDefault;
 import it.unimi.dsi.fastutil.booleans.BooleanConsumer;
@@ -301,6 +302,10 @@ public class NBTUtils {
         return new int[]{pos.getX(),pos.getY(),pos.getZ()};
     }
     public static BlockPos intarr2blockpos(int[] arr){
+        if (arr.length < 3) {
+            HBM.LOGGER.warn("load block pos failed");
+            return BlockPos.ZERO;
+        }
         return new BlockPos(arr[0],arr[1],arr[2]);
     }
 }

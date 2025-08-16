@@ -1,6 +1,8 @@
 package com.hbm.block.weapon;
 
 import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.base2.TileProxyCombo;
+import com.hbm.blockentity.weapon.NukeBombCustomEntity;
 import com.hbm.blockentity.weapon.NukeBombEntity;
 import com.hbm.blockentity.weapon.NukeBombFatEntity;
 import com.hbm.utils.MultipartUtils;
@@ -28,59 +30,19 @@ import java.util.List;
 import java.util.function.Consumer;
 
 public class NukeFat extends NukeBomb{
-//    public static final VoxelShape FRONT = Block.box(-16,0,-14,0,30,16);
-//    public static final VoxelShape MIDDLE = Block.box(0,0,-14,16,30,14);
-//    public static final VoxelShape TAIL = Block.box(16,0,-14,32,30,14);
-//    public static final VoxelShape SHAPE = Shapes.or(FRONT,MIDDLE,TAIL);
-    public static final VoxelShape SHAPE = Block.box(-14,0,-16,14,24,30);
+//    public static final VoxelShape SHAPE = Block.box(-14,0,-16,14,24,30);
     public NukeFat(Properties pProperties,int range) {
         super(pProperties,range);
+        SHAPE = Block.box(-14,0,-16,14,24,30);
     }
 
     @Override
-    public @Nullable BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
+    protected BlockEntity mainBlockEntity(BlockPos pPos, BlockState pState) {
         return new NukeBombFatEntity(pPos,pState);
     }
-
+//
 //    @Override
-//    public void animateTick(BlockState pState, Level pLevel, BlockPos pPos, RandomSource pRandom) {
-//        double d0 = (double)pPos.getX() + 0.5D;
-//        double d1 = (double)pPos.getY();
-//        double d2 = (double)pPos.getZ() + 0.5D;
-//        Direction direction = pState.getValue(FACING);
-//        Direction.Axis direction$axis = direction.getAxis();
-//        double d3 = 0.52D;
-//        double d4 = pRandom.nextDouble() * 0.6D - 0.3D;
-//        double d5 = direction$axis == Direction.Axis.X ? (double)direction.getStepX() * 0.52D : d4;
-//        double d6 = pRandom.nextDouble() * 6.0D / 16.0D;
-//        double d7 = direction$axis == Direction.Axis.Z ? (double)direction.getStepZ() * 0.52D : d4;
-//        pLevel.addParticle(ParticleTypes.DRAGON_BREATH,d0 + d5, d1 + d6, d2 + d7, 0.1D, 0.1D, 0.1D);
+//    public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
+//        return pState.getValue(IS_CORE) ? SHAPE : Shapes.block();
 //    }
-
-    @Override
-    public int[] getOffset() {
-//        return new int[]{1, 0, 0, 1, 1, 1};
-        return new int[]{1, 0, 1, 0, 1, 1};
-    }
-
-    @Override
-    public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
-        return isCore(pLevel,pPos) ? SHAPE : super.getShape(pState,pLevel,pPos,pContext);
-    }
-
-    @Override
-    public List<Vec3i> getOffsets() {
-        return MultipartUtils.square(getOffset());
-    }
-
-    public static class NukeItem extends BlockItem {
-
-        public NukeItem(Block pBlock, Properties pProperties) {
-            super(pBlock, pProperties);
-        }
-
-        @Override
-        public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-        }
-    }
 }

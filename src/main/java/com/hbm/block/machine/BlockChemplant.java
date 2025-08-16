@@ -31,38 +31,19 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class BlockChemplant extends BlockDummyable {
-    public static final VoxelShape SHAPE = Block.box(-32.0,0.0D,-32.0D,32.0D,48.0D,32.0D);
+//    public static final VoxelShape SHAPE = Block.box(-32.0,0.0D,-32.0D,32.0D,48.0D,32.0D);
     public BlockChemplant(Properties pProperties) {
         super(pProperties);
+        SHAPE = Block.box(-32.0,0.0D,-32.0D,32.0D,48.0D,32.0D);
     }
 
-    @Nullable
     @Override
-    public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-//        return new ChemplantEntity(pPos,pState);
-        return pState.getValue(IS_CORE) ? new ChemplantEntity(pPos,pState) : new TileProxyCombo(pPos, pState);
+    protected BlockEntity mainBlockEntity(BlockPos pPos, BlockState pState) {
+        return new ChemplantEntity(pPos,pState);
     }
-
+//
 //    @Override
-//    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-//        if (!pLevel.isClientSide() && !pPlayer.getPose().equals(Pose.CROUCHING)){
-//            BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
-//            if (blockEntity instanceof MenuProvider){   //如果有界面则打开界面
-//                NetworkHooks.openScreen((ServerPlayer) pPlayer, (MenuProvider) blockEntity, buf -> buf.writeBlockPos(pPos));
-//            }
-//            return InteractionResult.CONSUME;
-//        }else {
-//            return InteractionResult.SUCCESS;
-//        }
+//    public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
+//        return pState.getValue(IS_CORE) ? SHAPE : Shapes.block();
 //    }
-
-    @Override
-    public RenderShape getRenderShape(BlockState pState) {
-        return RenderShape.INVISIBLE;
-    }
-
-    @Override
-    public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
-        return pState.getValue(IS_CORE) ? SHAPE : Shapes.block();
-    }
 }

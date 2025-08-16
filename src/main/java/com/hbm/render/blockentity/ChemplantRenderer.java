@@ -4,6 +4,7 @@ import com.hbm.block.base.BedLikeBlock;
 import com.hbm.blockentity.machine.ChemplantEntity;
 import com.hbm.model.Models;
 import com.hbm.render.utils.ModelAdjustUtils;
+import com.hbm.utils.DirectionUtils;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
@@ -45,7 +46,7 @@ public class ChemplantRenderer implements BlockEntityRenderer<ChemplantEntity> {
         running = pBlockEntity.progress > 0;
 
         pPoseStack.pushPose();
-        ModelAdjustUtils.generalMachineRotate(pPoseStack, blockState);
+        DirectionUtils.generalMachineRotate(pPoseStack, blockState);
         //化工厂主体
         RenderUtils.renderBlockModel(body_model,blockState,modelRenderer,pPoseStack,pBuffer,pPackedLight,pPackedOverlay,null);
         //旋转刷

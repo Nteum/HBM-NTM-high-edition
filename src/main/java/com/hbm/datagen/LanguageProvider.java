@@ -24,6 +24,7 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
         addTooltip();
         addContainer();
         addFluidTrait();
+        addLookTooltip();
         ModFluids.localName(this);
         //物品
         this.add(ModItems.ingot_steel.get(),"Steel Ignot");
@@ -124,7 +125,9 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
         this.add(HBMLang.FT_CORE_FLUX, "Core flux + %s %");
         this.add(HBMLang.FT_RADIOACTIVE, "[Radioactive]");
     }
-
+    private void addLookTooltip(){
+        this.add(HBMLang.LOOKTOOLTIP_CHEMPLANT, "<- tank %s");
+    }
     private void add(ILangEntry entry,String value){
         this.add(entry.getTranslationKey(), value);
     }

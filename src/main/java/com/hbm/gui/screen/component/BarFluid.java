@@ -8,6 +8,7 @@ import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
@@ -38,7 +39,9 @@ public class BarFluid extends BarProgress{
         super(pX, pY, pWidth, pHeight, 0, 0,16,16, getFluidTexture(fluid), pMessage,true);
         this.fluid = fluid;
         if (Objects.equals(pMessage, Component.empty())){
-            this.setTooltip(Tooltip.create(Component.translatable(this.fluid.getFluidType().getDescriptionId()).append(Component.translatable(HBMLang.TOOLTIP_TANK_VOLUME.getTranslationKey(), progress))));
+            MutableComponent fluidName = Component.translatable(this.fluid.getFluidType().getDescriptionId());
+            this.setTooltip(Tooltip.create(Component.translatable(HBMLang.TOOLTIP_TANK_VOLUME.getTranslationKey(), fluidName, progress)));
+//            this.setTooltip(Tooltip.create(Component.translatable(this.fluid.getFluidType().getDescriptionId()).append(Component.translatable(HBMLang.TOOLTIP_TANK_VOLUME.getTranslationKey(), progress))));
         }
     }
 
@@ -46,7 +49,9 @@ public class BarFluid extends BarProgress{
     public void updateData() {
         this.texture = getFluidTexture(this.fluid);
         if (Objects.equals(this.getMessage(), Component.empty())){
-            this.setTooltip(Tooltip.create(Component.translatable(HBMLang.TOOLTIP_TANK_VOLUME.getTranslationKey(),this.fluid.getFluidType().getDescriptionId(), progress)));
+            MutableComponent fluidName = Component.translatable(this.fluid.getFluidType().getDescriptionId());
+            this.setTooltip(Tooltip.create(Component.translatable(HBMLang.TOOLTIP_TANK_VOLUME.getTranslationKey(), fluidName, progress)));
+//            this.setTooltip(Tooltip.create(Component.translatable(HBMLang.TOOLTIP_TANK_VOLUME.getTranslationKey(),this.fluid.getFluidType().getDescriptionId(), progress)));
         }
     }
 

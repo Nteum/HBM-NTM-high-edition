@@ -3,7 +3,9 @@ package com.hbm.network;
 import com.hbm.HBM;
 import com.hbm.network.packet.toclient.AuxParticlePacket;
 import com.hbm.network.packet.toclient.S2CExplosionEffectPacket;
-import com.hbm.network.packet.toclient.UpdateTileMessage;
+import com.hbm.network.packet.toclient.S2CSyncTileMessage;
+import com.hbm.network.packet.toserver.C2SSyncTileMessage;
+import com.hbm.network.packet.toserver.S2CSyncFailMessage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.SectionPos;
 import net.minecraft.network.FriendlyByteBuf;
@@ -34,7 +36,9 @@ public class ModMessages {
     public static void register(){
         registerServerToClient(S2CExplosionEffectPacket.class, S2CExplosionEffectPacket::decode, S2CExplosionEffectPacket::encode, S2CExplosionEffectPacket::handle);
         registerServerToClient(AuxParticlePacket.class, AuxParticlePacket::decode, AuxParticlePacket::encode, AuxParticlePacket::handle);
-        registerServerToClient(UpdateTileMessage.class, UpdateTileMessage::decode, UpdateTileMessage::encode, UpdateTileMessage::handle);
+        registerServerToClient(S2CSyncTileMessage.class, S2CSyncTileMessage::decode, S2CSyncTileMessage::encode, S2CSyncTileMessage::handle);
+        registerClientToServer(C2SSyncTileMessage.class, C2SSyncTileMessage::decode, C2SSyncTileMessage::encode, C2SSyncTileMessage::handle);
+        registerClientToServer(S2CSyncFailMessage.class, S2CSyncFailMessage::decode, S2CSyncFailMessage::encode, S2CSyncFailMessage::handle);
     }
 
     public static <MSG>void registerClientToServer(Class<MSG> type, Function<FriendlyByteBuf, MSG> decoder , BiConsumer<MSG, FriendlyByteBuf> encoder, BiConsumer<MSG, Supplier<NetworkEvent.Context>> consumer){

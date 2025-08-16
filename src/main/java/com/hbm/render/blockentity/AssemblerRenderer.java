@@ -5,6 +5,7 @@ import com.hbm.blockentity.machine.AssemblerEntity;
 import com.hbm.model.Models;
 import com.hbm.registries.ModItems;
 import com.hbm.render.utils.ModelAdjustUtils;
+import com.hbm.utils.DirectionUtils;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
@@ -51,7 +52,8 @@ public class AssemblerRenderer implements BlockEntityRenderer<AssemblerEntity> {
         double sway = Math.sin(offset / Math.PI / 60);
 
         pPoseStack.pushPose();
-        ModelAdjustUtils.generalMachineRotate(pPoseStack, pBlockEntity.getBlockState());
+        DirectionUtils.generalMachineRotate(pPoseStack, pBlockEntity.getBlockState());
+//        ModelAdjustUtils.generalMachineRotate(pPoseStack, pBlockEntity.getBlockState());
 
         if (pBlockEntity.running){
             count = (count + 1) % 360;
@@ -81,6 +83,7 @@ public class AssemblerRenderer implements BlockEntityRenderer<AssemblerEntity> {
         pPoseStack.mulPose(Axis.ZP.rotationDegrees(-count));
         renderBlockModel(model,blockState,modelRenderer,pPoseStack,pBuffer,pPackedLight,pPackedOverlay,null);
         pPoseStack.popPose();
+
         pPoseStack.pushPose();
         pPoseStack.translate(0.4 * offset/90, 0, 0);
         //格架

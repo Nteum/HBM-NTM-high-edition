@@ -10,10 +10,7 @@ import com.hbm.api.Mode;
 import com.hbm.api.energy.BasicEnergyContainer;
 import com.hbm.api.energy.ProxyEnergyHandler;
 import com.hbm.api.energy.TransmitUtils;
-import com.hbm.api.fluid.BasicFluidHandler;
-import com.hbm.api.fluid.BasicFluidTank;
-import com.hbm.api.fluid.FluidUtils;
-import com.hbm.api.fluid.IExtendedFluidHandler;
+import com.hbm.api.fluid.*;
 import com.hbm.api.fluid.IExtendedFluidHandler.*;
 import com.hbm.api.inventory.ModeBuilder;
 import com.hbm.api.math.MathUtils;
@@ -21,6 +18,7 @@ import com.hbm.block.HBMMachine;
 import com.hbm.block.machine.BlockChemplant;
 import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.blockentity.base2.DummyableBlockEntity;
+import com.hbm.blockentity.base2.TileProxyBase;
 import com.hbm.capabilities.Capabilities;
 import com.hbm.gui.menu.ChemplantMenu;
 import com.hbm.item.machine.ItemMachineUpgrade.UpgradeType;
@@ -36,12 +34,14 @@ import net.minecraft.client.resources.sounds.Sound;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.Vec3i;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Tuple;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -49,15 +49,20 @@ import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
+
+import static net.minecraft.core.Direction.SOUTH;
 
 public class ChemplantEntity extends DummyableBlockEntity {
     private static final int maxFluid = 24_000;
@@ -208,6 +213,37 @@ public class ChemplantEntity extends DummyableBlockEntity {
         super.handleUpdatePacket(tag);
         this.fluidHandler.deserializeNBT(tag.getCompound(HBMKey.FLUIDS));
         this.progress = tag.getInt(HBMKey.PROGRESS);
+    }
+
+    @Override
+    public void distributeCapabilities() {
+        Direction facing = this.getBlockState().getValue(BlockStateProperties.HORIZONTAL_FACING);
+        for (Map.Entry<Vec3i, Tuple<Capability<?>, Set<Direction>>> entry : multiblockData.capsMap.entrySet()) {
+            Vec3i key = entry.getKey();
+            Vec3i offset1 = DirectionUtils.offsetRot(key, SOUTH, facing);
+            Capability<?> cap = entry.getValue().getA();
+            Set<Direction> directions = entry.getValue().getB().stream().map(direction -> DirectionUtils.horizRot(SOUTH, facing, direction)).collect(Collectors.toSet());
+            BlockEntity blockEntity2 = Objects.requireNonNull(this.getLevel()).getBlockEntity(this.getBlockPos().offset(offset1));
+            if (blockEntity2 instanceof TileProxyBase proxyBase && proxyBase.getBlockEntity().equals(this)){
+                if (key.equals(new Vec3i(-1,0,1)) || key.equals(new Vec3i(-1,0,-2))){
+                    if (cap == ForgeCapabilities.FLUID_HANDLER){
+                        proxyBase.capabilitiesContent.addCapability(cap, new VisitRestrictWrapper(this.fluidHandler,2), directions);
+                        proxyBase.lookTooltip = Component.translatable(HBMLang.LOOKTOOLTIP_CHEMPLANT.getTranslationKey(), 2);
+                        proxyBase.sendUpdatePacket();
+                    }else if (cap == Capabilities.LONG_ENERGY)
+                        proxyBase.capabilitiesContent.addCapability(cap, this.energyContainer, directions);
+                }else if (key.equals(new Vec3i(0,0,1)) || key.equals(new Vec3i(0,0,-2))){
+                    if (cap == ForgeCapabilities.FLUID_HANDLER){
+                        proxyBase.capabilitiesContent.addCapability(cap, new VisitRestrictWrapper(this.fluidHandler,3), directions);
+                        proxyBase.lookTooltip = Component.translatable(HBMLang.LOOKTOOLTIP_CHEMPLANT.getTranslationKey(), 2);
+                        proxyBase.sendUpdatePacket();
+                    }else if (cap == Capabilities.LONG_ENERGY)
+                        proxyBase.capabilitiesContent.addCapability(cap, this.energyContainer, directions);
+                }else {
+                    this.getCapability(cap).ifPresent(handler -> proxyBase.capabilitiesContent.addCapability(cap, handler, directions));
+                }
+            }
+        }
     }
 
     @Override
