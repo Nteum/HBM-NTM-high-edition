@@ -32,7 +32,7 @@ public class FT_Poison extends FluidTrait {
 	
 	@Override
 	public void addInfoHidden(List<Component> info) {
-		info.add(Component.translatable(HBMLang.FT_POISON.getTranslationKey()).withStyle(ChatFormatting.GREEN));
+		info.add(Component.translatable(HBMLang.FT_POISON.key()).withStyle(ChatFormatting.GREEN));
 	}
 	
 	@Override public void serializeJSON(JsonWriter writer) throws IOException {

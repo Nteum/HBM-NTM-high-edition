@@ -15,7 +15,7 @@ public interface ILangEntry extends IHasTranslationKey {
      * Translates this {@link ILangEntry} using a "smart" replacement scheme to allow for automatic replacements, and coloring to take place.
      */
     default MutableComponent translate(Object... args) {
-        return TextComponentUtil.smartTranslate(getTranslationKey(), args);
+        return TextComponentUtil.smartTranslate(key(), args);
     }
 
     /**

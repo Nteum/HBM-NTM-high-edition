@@ -34,7 +34,7 @@ public class ElectricBoilerEntity extends BaseMachineBlockEntity {
 
     @Override
     public Component getDefaultName() {
-        return Component.translatable(HBMLang.ELECTRIC_BOILER.getTranslationKey());
+        return Component.translatable(HBMLang.ELECTRIC_BOILER.key());
     }
 
     @Override

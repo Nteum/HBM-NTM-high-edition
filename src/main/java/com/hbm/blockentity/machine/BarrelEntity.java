@@ -150,7 +150,7 @@ public class BarrelEntity extends BaseMachineBlockEntity implements IPacketUpdat
     //================
     @Override
     public Component getDefaultName() {
-        return Component.translatable(HBMLang.BARREL.getTranslationKey());
+        return Component.translatable(HBMLang.BARREL.key());
     }
 
     @Nullable

@@ -22,7 +22,7 @@ public class ModCreativeModeTab {
     //创造模式物品栏注册表
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
     public static final RegistryObject<CreativeModeTab> HBM_ITEM = CREATIVE_MODE_TABS.register("hbm_item", () -> CreativeModeTab.builder()
-        .title(Component.translatable(HBMLang.ITEMGROUP_ITEM.getTranslationKey()))
+        .title(Component.translatable(HBMLang.ITEMGROUP_ITEM.key()))
         .icon(() -> ModItems.ingot_steel.get().getDefaultInstance())
         .displayItems((parameters, output) -> {
             output.accept(ModItems.ingot_steel.get());
@@ -58,7 +58,7 @@ public class ModCreativeModeTab {
             HBMComponent.creativeTab(output);
         }).build());
     public static final RegistryObject<CreativeModeTab> HBM_BLOCK = CREATIVE_MODE_TABS.register("hbm_block", () -> CreativeModeTab.builder()
-        .title(Component.translatable(HBMLang.ITEMGROUP_BLOCK.getTranslationKey()))
+        .title(Component.translatable(HBMLang.ITEMGROUP_BLOCK.key()))
         .icon(()->ModBlocks.URANIUM_ORE.get().asItem().getDefaultInstance())
         .displayItems((parameters, output) -> {
             output.accept(ModBlocks.URANIUM_ORE.get());
@@ -75,7 +75,7 @@ public class ModCreativeModeTab {
             output.accept(ModBlocks.TEST12.get());
         }).build());
     public static final RegistryObject<CreativeModeTab> HBM_MACHINE = CREATIVE_MODE_TABS.register("hbm_machine", () -> CreativeModeTab.builder()
-        .title(Component.translatable(HBMLang.ITEMGROUP_MACHINE.getTranslationKey()))
+        .title(Component.translatable(HBMLang.ITEMGROUP_MACHINE.key()))
         .icon(()->ModBlocks.machine_electric_furnace.get().asItem().getDefaultInstance())
         .displayItems((parameters, output) -> {
             output.accept(ModBlocks.machine_difurnace.get());
@@ -98,7 +98,7 @@ public class ModCreativeModeTab {
             HBMMachine.creativeTab(output);
         }).build());
     public static final RegistryObject<CreativeModeTab> HBM_TOOL = CREATIVE_MODE_TABS.register("hbm_weapon", () -> CreativeModeTab.builder()
-        .title(Component.translatable(HBMLang.ITEMGROUP_TOOL.getTranslationKey()))
+        .title(Component.translatable(HBMLang.ITEMGROUP_TOOL.key()))
             .icon(()->ModItems.detonator.get().asItem().getDefaultInstance())
         .displayItems((parameters, output) -> {
             output.accept(ModItems.detonator.get());

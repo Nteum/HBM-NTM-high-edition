@@ -127,7 +127,7 @@ public class MultiblockData {
             for (Map.Entry<Capability<?>, Set<Direction>> setEntry : entry.getValue().entrySet()) {
                 Capability<?> proxyCap = setEntry.getKey();
                 Set<Direction> proxyDir = setEntry.getValue().stream().map(direction -> DirectionUtils.horizRot(SOUTH, facing, direction)).collect(Collectors.toSet());
-                if (level.getBlockEntity(proxyPos) instanceof TileProxyBase proxy && proxy.getBlockEntity().equals(be)){
+                if (level.getBlockEntity(proxyPos) instanceof TileProxyBase proxy && proxy.getBlockEntity()!= null && proxy.getBlockEntity().equals(be)){
                     ((DummyableBlockEntity)be).giveProxyCapabilities(offset, proxy, proxyCap, proxyDir);
 //                    be.getCapability(proxyCap).ifPresent(handler -> proxy.capabilitiesContent.addCapability(proxyCap, handler, proxyDir));
                 }

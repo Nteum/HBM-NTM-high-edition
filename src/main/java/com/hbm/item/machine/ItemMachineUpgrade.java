@@ -58,15 +58,15 @@ public class ItemMachineUpgrade extends Item {
 
         Component toAdd;
         switch (this.type){
-            case RADIUS -> toAdd = Component.translatable(HBMLang.UPGRADE_RADIUS.getTranslationKey()).withStyle(ChatFormatting.RED);
-            case HEALTH -> toAdd = Component.translatable(HBMLang.UPGRADE_HEALTH.getTranslationKey()).withStyle(ChatFormatting.RED);
-            case LM_SMELTER -> toAdd = Component.translatable(HBMLang.UPGRADE_SMELTER.getTranslationKey()).withStyle(ChatFormatting.RED);
-            case LM_SHREDDER -> toAdd = Component.translatable(HBMLang.UPGRADE_SHREDDER.getTranslationKey()).withStyle(ChatFormatting.RED);
-            case LM_CENTRIFUGE -> toAdd = Component.translatable(HBMLang.UPGRADE_CENTRIFUGE.getTranslationKey()).withStyle(ChatFormatting.RED);
-            case LM_CRYSTALLIZER -> toAdd = Component.translatable(HBMLang.UPGRADE_CRYSTALLIZER.getTranslationKey()).withStyle(ChatFormatting.RED);
-            case LM_SCREM -> toAdd = Component.translatable(HBMLang.UPGRADE_SCREAM.getTranslationKey()).withStyle(ChatFormatting.RED);
-            case NULLIFIER -> toAdd = Component.translatable(HBMLang.UPGRADE_NULLIFIER.getTranslationKey()).withStyle(ChatFormatting.RED);
-            case GC_SPEED -> toAdd = Component.translatable(HBMLang.UPGRADE_GC_SPEED.getTranslationKey()).withStyle(ChatFormatting.RED);
+            case RADIUS -> toAdd = Component.translatable(HBMLang.UPGRADE_RADIUS.key()).withStyle(ChatFormatting.RED);
+            case HEALTH -> toAdd = Component.translatable(HBMLang.UPGRADE_HEALTH.key()).withStyle(ChatFormatting.RED);
+            case LM_SMELTER -> toAdd = Component.translatable(HBMLang.UPGRADE_SMELTER.key()).withStyle(ChatFormatting.RED);
+            case LM_SHREDDER -> toAdd = Component.translatable(HBMLang.UPGRADE_SHREDDER.key()).withStyle(ChatFormatting.RED);
+            case LM_CENTRIFUGE -> toAdd = Component.translatable(HBMLang.UPGRADE_CENTRIFUGE.key()).withStyle(ChatFormatting.RED);
+            case LM_CRYSTALLIZER -> toAdd = Component.translatable(HBMLang.UPGRADE_CRYSTALLIZER.key()).withStyle(ChatFormatting.RED);
+            case LM_SCREM -> toAdd = Component.translatable(HBMLang.UPGRADE_SCREAM.key()).withStyle(ChatFormatting.RED);
+            case NULLIFIER -> toAdd = Component.translatable(HBMLang.UPGRADE_NULLIFIER.key()).withStyle(ChatFormatting.RED);
+            case GC_SPEED -> toAdd = Component.translatable(HBMLang.UPGRADE_GC_SPEED.key()).withStyle(ChatFormatting.RED);
             default -> toAdd = Component.empty();
         }
         pTooltipComponents.add(toAdd);

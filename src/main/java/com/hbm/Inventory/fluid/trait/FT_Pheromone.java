@@ -26,9 +26,9 @@ public class FT_Pheromone extends  FluidTrait{
 	public void addInfo(List<Component> info) {
 
 		if(type == 1) {
-			info.add(Component.translatable(HBMLang.FT_PHEROMONE1.getTranslationKey()).withStyle(ChatFormatting.AQUA));
+			info.add(Component.translatable(HBMLang.FT_PHEROMONE1.key()).withStyle(ChatFormatting.AQUA));
 		} else {
-			info.add(Component.translatable(HBMLang.FT_PHEROMONE2.getTranslationKey()).withStyle(ChatFormatting.AQUA));
+			info.add(Component.translatable(HBMLang.FT_PHEROMONE2.key()).withStyle(ChatFormatting.AQUA));
 		}
 	}
 

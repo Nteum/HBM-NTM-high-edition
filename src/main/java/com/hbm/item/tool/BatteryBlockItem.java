@@ -37,7 +37,7 @@ public class BatteryBlockItem extends BlockItemHBM {
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltip, TooltipFlag pFlag) {
         super.appendHoverText(pStack, pLevel, pTooltip, pFlag);
-        pTooltip.add(Component.translatable(HBMLang.ENERGY.getTranslationKey(),getEnergy(pStack)));
+        pTooltip.add(Component.translatable(HBMLang.ENERGY.key(),getEnergy(pStack)));
     }
 
     @Override

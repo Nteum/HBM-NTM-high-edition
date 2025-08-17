@@ -1,5 +1,6 @@
 package com.hbm.block.logistic;
 
+import com.hbm.api.Mode;
 import com.hbm.capabilities.network.ConnType;
 import com.hbm.blockentity.base.BasePipeBlockEntity;
 import com.hbm.registries.ModBlocks;
@@ -81,13 +82,17 @@ public abstract class AbstractPipeBlock extends PipeBlock implements EntityBlock
         BlockPos neighbourPos = clickedPos.relative(direction);
         BlockState state = pLevel.getBlockState(neighbourPos);
         return pLevel.getBlockState(clickedPos).getBlock() instanceof AbstractPipeBlock ?
-                ((BasePipeBlockEntity) Objects.requireNonNull(pLevel.getBlockEntity(clickedPos))).dirType[direction.get3DDataValue()]== ConnType.NORMAL
-                        && (state.getBlock() instanceof AbstractPipeBlock && (((BasePipeBlockEntity) Objects.requireNonNull(pLevel.getBlockEntity(neighbourPos))).dirType[direction.getOpposite().get3DDataValue()]== ConnType.NORMAL)
+                ((BasePipeBlockEntity) Objects.requireNonNull(pLevel.getBlockEntity(clickedPos))).connLimit[direction.ordinal()]== Mode.BOTH
+                        && (state.getBlock() instanceof AbstractPipeBlock && (((BasePipeBlockEntity) Objects.requireNonNull(pLevel.getBlockEntity(neighbourPos))).connLimit[direction.ordinal()]== Mode.BOTH)
                         || connBlockEntityCond(pLevel,state,clickedPos,neighbourPos))
                 : connBlockEntityCond(pLevel,state,clickedPos,neighbourPos);
     }
+    /** 子类自定义的管道连接限制 */
     protected boolean connBlockEntityCond(LevelAccessor pLevel, BlockState state, BlockPos blockPos, BlockPos neighbourPos){return true;}
 
+//    public List<Direction> getConnection(){
+//
+//    }
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
@@ -106,39 +111,35 @@ public abstract class AbstractPipeBlock extends PipeBlock implements EntityBlock
                     BlockEntity neighbourEntity = pLevel.getBlockEntity(pPos.relative(hitDir));
                     //更新本方块状态
                     boolean flag2 = false;
-                    if (pipeEntity.dirType[hitDir.get3DDataValue()]== ConnType.NORMAL){
-                        pipeEntity.dirType[hitDir.get3DDataValue()]= ConnType.FORBID;
-                        if (neighbourEntity!=null && neighbourEntity.getCapability(ForgeCapabilities.ENERGY,hitDir.getOpposite()).isPresent()) {
-                            pState = pState.setValue(PROPERTY_BY_DIRECTION.get(hitDir),false);
-                        }
+                    if (pipeEntity.connLimit[hitDir.ordinal()] == Mode.BOTH){
+                        pipeEntity.connLimit[hitDir.ordinal()] = Mode.NONE;
+                        pState = pState.setValue(PROPERTY_BY_DIRECTION.get(hitDir),false);
                         flag2 = true;
                     }else {
-                        pipeEntity.dirType[hitDir.get3DDataValue()]= ConnType.NORMAL;
-                        if (neighbourEntity!=null && neighbourEntity.getCapability(ForgeCapabilities.ENERGY,hitDir.getOpposite()).isPresent()) {
-                            pState = pState.setValue(PROPERTY_BY_DIRECTION.get(hitDir),true);
-                        }
+                        pipeEntity.connLimit[hitDir.ordinal()] = Mode.BOTH;
+                        pState = pState.setValue(PROPERTY_BY_DIRECTION.get(hitDir),true);
                     }
                     pLevel.setBlock(pPos, pState, 10);
-                    BasePipeBlockEntity.updateConnCaps(pipeEntity);
+//                    BasePipeBlockEntity.updateConnCaps(pipeEntity);
                     //如果临近方块是线缆，则同时更新线缆状态
-                    boolean flag1 = neighbourState.is(ModBlocks.RED_CABLE.get());
+                    boolean flag1 = neighbourState.getBlock() instanceof AbstractPipeBlock;
                     if (flag1 && neighbourEntity instanceof BasePipeBlockEntity neighbourPipeEntity){
                         if (flag2){
                             neighbourState = neighbourState.setValue(PROPERTY_BY_DIRECTION.get(hitDir.getOpposite()),false);
-                            neighbourPipeEntity.dirType[hitDir.getOpposite().get3DDataValue()]= ConnType.FORBID;
+                            neighbourPipeEntity.connLimit[hitDir.ordinal()] = Mode.NONE;
                         }else {
                             neighbourState = neighbourState.setValue(PROPERTY_BY_DIRECTION.get(hitDir.getOpposite()),true);
-                            neighbourPipeEntity.dirType[hitDir.getOpposite().get3DDataValue()]= ConnType.NORMAL;
+                            neighbourPipeEntity.connLimit[hitDir.ordinal()] = Mode.BOTH;
                         }
                         pLevel.setBlock(pPos.relative(hitDir),neighbourState,10);
-                        BasePipeBlockEntity.updateConnCaps(neighbourPipeEntity);
                     }
                 }
-            }else if (pHand.equals(InteractionHand.MAIN_HAND)&&!pPlayer.getItemInHand(pHand).is(ModBlocks.RED_CABLE.get().asItem())){
-                //右键显示连接
-                List<BlockPos> connection = ((BasePipeBlockEntity) pLevel.getBlockEntity(pPos)).getConnection();
-                pPlayer.sendSystemMessage(Component.literal(connection.toString()));
             }
+//            else if (pHand.equals(InteractionHand.MAIN_HAND)&&!pPlayer.getItemInHand(pHand).is(ModBlocks.RED_CABLE.get().asItem())){
+//                //右键显示连接
+//                List<BlockPos> connection = ((BasePipeBlockEntity) pLevel.getBlockEntity(pPos)).getConnection();
+//                pPlayer.sendSystemMessage(Component.literal(connection.toString()));
+//            }
             //只有返回pass才能正常放置物品
             return InteractionResult.PASS;
         }

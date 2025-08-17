@@ -43,11 +43,11 @@ public class FT_Heatable extends FluidTrait {
 
 	@Override
 	public void addInfoHidden(List<Component> info) {
-		info.add(Component.translatable(HBMLang.FT_THERMAL_CAPACITY.getTranslationKey(), this.getFirstStep().heatReq, this.getFirstStep().amountReq).withStyle(ChatFormatting.RED));
+		info.add(Component.translatable(HBMLang.FT_THERMAL_CAPACITY.key(), this.getFirstStep().heatReq, this.getFirstStep().amountReq).withStyle(ChatFormatting.RED));
 		for(HeatingType type : HeatingType.values()) {
 			double eff = getEfficiency(type);
 			if(eff > 0) {
-				info.add(Component.translatable(HBMLang.FT_EFFICIENCY.getTranslationKey(), type.name, ((int) (eff * 100D))).withStyle(ChatFormatting.YELLOW));
+				info.add(Component.translatable(HBMLang.FT_EFFICIENCY.key(), type.name, ((int) (eff * 100D))).withStyle(ChatFormatting.YELLOW));
 			}
 		}
 	}

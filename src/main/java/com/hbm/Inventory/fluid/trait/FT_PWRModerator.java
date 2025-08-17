@@ -23,13 +23,13 @@ public class FT_PWRModerator extends FluidTrait {
 
 	@Override
 	public void addInfo(List<Component> info) {
-		info.add(Component.translatable(HBMLang.FT_PWRMODERATOR.getTranslationKey()).withStyle(ChatFormatting.BLUE));
+		info.add(Component.translatable(HBMLang.FT_PWRMODERATOR.key()).withStyle(ChatFormatting.BLUE));
 	}
 
 	@Override
 	public void addInfoHidden(List<Component> info) {
 		int mult = (int) (multiplier * 100 - 100);
-		info.add(Component.translatable(HBMLang.FT_CORE_FLUX.getTranslationKey(), mult).withStyle(ChatFormatting.BLUE));
+		info.add(Component.translatable(HBMLang.FT_CORE_FLUX.key(), mult).withStyle(ChatFormatting.BLUE));
 	}
 
 	@Override

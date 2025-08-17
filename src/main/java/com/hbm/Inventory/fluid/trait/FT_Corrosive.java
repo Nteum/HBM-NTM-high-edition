@@ -31,9 +31,9 @@ public class FT_Corrosive extends FluidTrait {
 	@Override
 	public void addInfo(List<Component> info) {
 		if(isHighlyCorrosive())
-			info.add(Component.translatable(HBMLang.FT_CORROSIVE1.getTranslationKey()).withStyle(ChatFormatting.GOLD));
+			info.add(Component.translatable(HBMLang.FT_CORROSIVE1.key()).withStyle(ChatFormatting.GOLD));
 		else
-			info.add(Component.translatable(HBMLang.FT_CORROSIVE2.getTranslationKey()).withStyle(ChatFormatting.YELLOW));
+			info.add(Component.translatable(HBMLang.FT_CORROSIVE2.key()).withStyle(ChatFormatting.YELLOW));
 	}
 
 	@Override

@@ -15,14 +15,14 @@ public class BarEnergy extends BarProgress {
     public BarEnergy(int pX, int pY, int pWidth, int pHeight, int pU, int pV, int pTextWidth, int pTextHeight, ResourceLocation texture, Component pMessage, boolean isVertical) {
         super(pX, pY, pWidth, pHeight, pU, pV, pTextWidth, pTextHeight, texture, pMessage, isVertical);
         if (pMessage.equals(Component.empty())){
-            this.setTooltip(Tooltip.create(Component.translatable(HBMLang.TOOLTIP_ENERGY.getTranslationKey(), BobMathUtil.getShortNumber((long) progress))));
+            this.setTooltip(Tooltip.create(Component.translatable(HBMLang.TOOLTIP_ENERGY.key(), BobMathUtil.getShortNumber((long) progress))));
         }
     }
 
     @Override
     public void updateData() {
         if (this.getMessage().equals(Component.empty())){
-            this.setTooltip(Tooltip.create(Component.translatable(HBMLang.TOOLTIP_ENERGY.getTranslationKey(), BobMathUtil.getShortNumber((long) progress))));
+            this.setTooltip(Tooltip.create(Component.translatable(HBMLang.TOOLTIP_ENERGY.key(), BobMathUtil.getShortNumber((long) progress))));
         }
     }
 }

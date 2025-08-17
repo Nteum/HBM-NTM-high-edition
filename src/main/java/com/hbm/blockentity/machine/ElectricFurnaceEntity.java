@@ -209,7 +209,7 @@ public class ElectricFurnaceEntity extends BaseMachineBlockEntity implements Men
 
     @Override
     public Component getDefaultName() {
-        return Component.translatable(HBMLang.ELECTRIC_FURNACE.getTranslationKey());
+        return Component.translatable(HBMLang.ELECTRIC_FURNACE.key());
     }
 
     @Nullable

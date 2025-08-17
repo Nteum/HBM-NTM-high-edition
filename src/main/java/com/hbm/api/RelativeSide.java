@@ -34,8 +34,8 @@ public enum RelativeSide implements IHasTranslationKey {
     }
 
     @Override
-    public String getTranslationKey() {
-        return langEntry.getTranslationKey();
+    public String key() {
+        return langEntry.key();
     }
 
     /**

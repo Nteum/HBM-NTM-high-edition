@@ -31,7 +31,7 @@ public interface IItemProvider extends IBaseProvider, ItemLike {
     }
 
     @Override
-    default String getTranslationKey() {
+    default String key() {
         return asItem().getDescriptionId();
     }
 }

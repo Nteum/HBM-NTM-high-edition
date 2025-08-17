@@ -81,6 +81,12 @@ public enum HBMLang implements ILangEntry {
     TOOLTIP_ENERGY("gui","stored_energy.tooltip"),
     // 大世界tooltip
     LOOKTOOLTIP_CHEMPLANT("block","chemplant.looktooltip"),
+    // debug
+    CACHED_DATA("general","cached"),
+    POS_DATA("general","data.pos"),
+    CHUNK_DATA("general", "data.chunk"),
+    BLOCK_STATE_LOSE("debug","debugwand.msg.block_lost"),
+    BLOCK_STATE_INFO("debug","debugwand.msg.block_info"),
     ;
 
     private final String key;
@@ -90,7 +96,7 @@ public enum HBMLang implements ILangEntry {
     HBMLang(String key){
         this.key = key;
     }
-    public @NotNull String getTranslationKey(){
+    public @NotNull String key(){
         return key;
     }
 

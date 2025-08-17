@@ -35,20 +35,20 @@ public class FT_Polluting extends FluidTrait {
 
 	@Override
 	public void addInfo(List<Component> info) {
-		info.add(Component.translatable(HBMLang.FT_POLLUTION1.getTranslationKey()).withStyle(ChatFormatting.GOLD));
+		info.add(Component.translatable(HBMLang.FT_POLLUTION1.key()).withStyle(ChatFormatting.GOLD));
 	}
 
 	@Override
 	public void addInfoHidden(List<Component> info) {
 		if(!this.releaseMap.isEmpty()) {
-			info.add(Component.translatable(HBMLang.FT_POLLUTION2.getTranslationKey()).withStyle(ChatFormatting.GREEN));
+			info.add(Component.translatable(HBMLang.FT_POLLUTION2.key()).withStyle(ChatFormatting.GREEN));
 			for(Entry<PollutionType, Float> entry : releaseMap.entrySet())
-				info.add(Component.translatable(HBMLang.FT_PER_MB.getTranslationKey(),entry.getValue(),entry.getKey()).withStyle(ChatFormatting.GREEN));
+				info.add(Component.translatable(HBMLang.FT_PER_MB.key(),entry.getValue(),entry.getKey()).withStyle(ChatFormatting.GREEN));
 		}
 		if(!this.burnMap.isEmpty()) {
-			info.add(Component.translatable(HBMLang.FT_POLLUTION3.getTranslationKey()).withStyle(ChatFormatting.RED));
+			info.add(Component.translatable(HBMLang.FT_POLLUTION3.key()).withStyle(ChatFormatting.RED));
 			for(Entry<PollutionType, Float> entry : burnMap.entrySet())
-				info.add(Component.translatable(HBMLang.FT_PER_MB.getTranslationKey(),entry.getValue(),entry.getKey()).withStyle(ChatFormatting.RED));
+				info.add(Component.translatable(HBMLang.FT_PER_MB.key(),entry.getValue(),entry.getKey()).withStyle(ChatFormatting.RED));
 		}
 	}
 

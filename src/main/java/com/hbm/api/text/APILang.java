@@ -87,7 +87,7 @@ public enum APILang implements ILangEntry {
     }
 
     @Override
-    public String getTranslationKey() {
+    public String key() {
         return key;
     }
 }

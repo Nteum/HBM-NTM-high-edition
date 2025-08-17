@@ -26,6 +26,6 @@ public interface IBaseProvider extends IHasTextComponent, IHasTranslationKey {
 
     @Override
     default Component getTextComponent() {
-        return TextComponentUtil.translate(getTranslationKey());
+        return TextComponentUtil.translate(key());
     }
 }

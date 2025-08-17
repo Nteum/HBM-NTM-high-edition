@@ -37,13 +37,13 @@ public class BarProgress extends AbstractWidget {
         this.texture = texture;
         this.isVertical = isVertical;
         if (Objects.equals(pMessage, Component.empty())){
-            this.setTooltip(Tooltip.create(Component.translatable(HBMLang.TOOLTIP_LEFT_TIME.getTranslationKey(), (int)(maxProgress - progress / 20))));
+            this.setTooltip(Tooltip.create(Component.translatable(HBMLang.TOOLTIP_LEFT_TIME.key(), (int)(maxProgress - progress / 20))));
         }
     }
     public void updateData(){
         // 更新tooltip
         if (Objects.equals(this.getMessage(), Component.empty())){
-            this.setTooltip(Tooltip.create(Component.translatable(HBMLang.TOOLTIP_LEFT_TIME.getTranslationKey(), ((maxProgress - progress) / 20))));
+            this.setTooltip(Tooltip.create(Component.translatable(HBMLang.TOOLTIP_LEFT_TIME.key(), ((maxProgress - progress) / 20))));
         }
     }
 

@@ -7,6 +7,7 @@ import com.hbm.utils.NBTUtils;
 import com.hbm.utils.WorldUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.ComponentUtils;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -35,7 +36,7 @@ public class TileProxyBase extends CapabilityBlockEntity implements ICustomLookT
     @Override
     public void load(@NotNull CompoundTag nbt) {
         super.load(nbt);
-        cachedPos = NBTUtils.intarr2blockpos(nbt.getIntArray(HBMKey.CORE_POS));
+        cachedPos = NbtUtils.readBlockPos(nbt);
     }
 
     @Override
@@ -44,7 +45,7 @@ public class TileProxyBase extends CapabilityBlockEntity implements ICustomLookT
         if (cachedPos == null){
             HBM.LOGGER.info("Proxy entity core pos is null, in pos {}",this.worldPosition);
         }
-        pTag.putIntArray(HBMKey.CORE_POS, NBTUtils.blockpos2intarr(cachedPos));
+        pTag.put(HBMKey.CORE_POS, NbtUtils.writeBlockPos(cachedPos));
     }
 
     @Override

@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.state.BlockState;
 public class CableEntity extends BasePipeBlockEntity {
     public CableEntity(BlockPos pPos, BlockState pBlockState) {
         super(ModBlockEntityType.CABLE_ENTITY.get(), pPos, pBlockState);
-        capabilitiesCache.addCapabilityResolver(new SidedEnergyWrapper(new HBMEnergyStorage(10_000)));
+//        capabilitiesCache.addCapabilityResolver(new SidedEnergyWrapper(new HBMEnergyStorage(10_000)));
     }
 
     @Override
@@ -39,6 +39,6 @@ public class CableEntity extends BasePipeBlockEntity {
     @Override
     public void invalidateCaps() {
         super.invalidateCaps();
-        capabilitiesCache.invalidateAll();
+//        capabilitiesCache.invalidateAll();
     }
 }

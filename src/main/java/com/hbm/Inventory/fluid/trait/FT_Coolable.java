@@ -48,11 +48,11 @@ public class FT_Coolable extends FluidTrait {
 	
 	@Override
 	public void addInfoHidden(List<Component> info) {
-		info.add(Component.translatable(HBMLang.FT_THERMAL_CAPACITY.getTranslationKey(), heatEnergy, amountReq).withStyle(ChatFormatting.RED));
+		info.add(Component.translatable(HBMLang.FT_THERMAL_CAPACITY.key(), heatEnergy, amountReq).withStyle(ChatFormatting.RED));
 		for(CoolingType type : CoolingType.values()) {
 			double eff = getEfficiency(type);
 			if(eff > 0) {
-				info.add(Component.translatable(HBMLang.FT_EFFICIENCY.getTranslationKey(), type.name, ((int) (eff * 100D))).withStyle(ChatFormatting.YELLOW));
+				info.add(Component.translatable(HBMLang.FT_EFFICIENCY.key(), type.name, ((int) (eff * 100D))).withStyle(ChatFormatting.YELLOW));
 			}
 		}
 	}

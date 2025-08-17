@@ -40,8 +40,8 @@ public class BarFluid extends BarProgress{
         this.fluid = fluid;
         if (Objects.equals(pMessage, Component.empty())){
             MutableComponent fluidName = Component.translatable(this.fluid.getFluidType().getDescriptionId());
-            this.setTooltip(Tooltip.create(Component.translatable(HBMLang.TOOLTIP_TANK_VOLUME.getTranslationKey(), fluidName, progress)));
-//            this.setTooltip(Tooltip.create(Component.translatable(this.fluid.getFluidType().getDescriptionId()).append(Component.translatable(HBMLang.TOOLTIP_TANK_VOLUME.getTranslationKey(), progress))));
+            this.setTooltip(Tooltip.create(Component.translatable(HBMLang.TOOLTIP_TANK_VOLUME.key(), fluidName, progress)));
+//            this.setTooltip(Tooltip.create(Component.translatable(this.fluid.getFluidType().getDescriptionId()).append(Component.translatable(HBMLang.TOOLTIP_TANK_VOLUME.key(), progress))));
         }
     }
 
@@ -50,8 +50,8 @@ public class BarFluid extends BarProgress{
         this.texture = getFluidTexture(this.fluid);
         if (Objects.equals(this.getMessage(), Component.empty())){
             MutableComponent fluidName = Component.translatable(this.fluid.getFluidType().getDescriptionId());
-            this.setTooltip(Tooltip.create(Component.translatable(HBMLang.TOOLTIP_TANK_VOLUME.getTranslationKey(), fluidName, progress)));
-//            this.setTooltip(Tooltip.create(Component.translatable(HBMLang.TOOLTIP_TANK_VOLUME.getTranslationKey(),this.fluid.getFluidType().getDescriptionId(), progress)));
+            this.setTooltip(Tooltip.create(Component.translatable(HBMLang.TOOLTIP_TANK_VOLUME.key(), fluidName, progress)));
+//            this.setTooltip(Tooltip.create(Component.translatable(HBMLang.TOOLTIP_TANK_VOLUME.key(),this.fluid.getFluidType().getDescriptionId(), progress)));
         }
     }
 

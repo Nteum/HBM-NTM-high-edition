@@ -54,7 +54,7 @@ public class BlockFluidBarrel extends BlockMachineBase {
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable BlockGetter pLevel, List<Component> pTooltip, TooltipFlag pFlag) {
         super.appendHoverText(pStack, pLevel, pTooltip, pFlag);
-        pTooltip.add(Component.translatable(HBMLang.FLUID_CAPACITY.getTranslationKey(),this.barrelProperties.capacity).withStyle(ChatFormatting.AQUA));
+        pTooltip.add(Component.translatable(HBMLang.FLUID_CAPACITY.key(),this.barrelProperties.capacity).withStyle(ChatFormatting.AQUA));
     }
     public static class BarrelProperties{
         public int capacity;

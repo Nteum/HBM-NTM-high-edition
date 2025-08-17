@@ -53,7 +53,7 @@ public class TextComponentUtil {
             if (component instanceof IHasTextComponent hasTextComponent) {
                 current = hasTextComponent.getTextComponent().copy();
             } else if (component instanceof IHasTranslationKey hasTranslationKey) {
-                current = translate(hasTranslationKey.getTranslationKey());
+                current = translate(hasTranslationKey.key());
             } else if (component instanceof EnumColor color) {
                 cachedStyle = cachedStyle.withColor(color.getColor());
             } else if (component instanceof TextColor color) {
@@ -185,7 +185,7 @@ public class TextComponentUtil {
             if (component instanceof IHasTextComponent hasTextComponent) {
                 current = hasTextComponent.getTextComponent().copy();
             } else if (component instanceof IHasTranslationKey hasTranslationKey) {
-                current = translate(hasTranslationKey.getTranslationKey());
+                current = translate(hasTranslationKey.key());
             } else if (component instanceof Block block) {
                 current = translate(block.getDescriptionId());
             } else if (component instanceof Item item) {

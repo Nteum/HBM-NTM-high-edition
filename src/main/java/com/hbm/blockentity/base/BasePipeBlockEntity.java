@@ -1,6 +1,8 @@
 package com.hbm.blockentity.base;
 
 import com.hbm.HBMKey;
+import com.hbm.api.Mode;
+import com.hbm.blockentity.base2.UpdateableBlockEntity;
 import com.hbm.capabilities.network.ConnType;
 import com.hbm.capabilities.CapabilityCache;
 import com.hbm.utils.ItemDataUtils;
@@ -22,74 +24,32 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-public abstract class BasePipeBlockEntity extends BlockEntity {
-    protected final CapabilityCache capabilitiesCache = new CapabilityCache();
-    public ConnType[] dirType = new ConnType[]{ConnType.NORMAL, ConnType.NORMAL, ConnType.NORMAL, ConnType.NORMAL, ConnType.NORMAL, ConnType.NORMAL};
+/**
+ * 基础的管道类，仅需存储管道的连接和模式
+ * 暂时不需要考虑能力
+ * */
+public abstract class BasePipeBlockEntity extends UpdateableBlockEntity {
+    // 流体连接状态，借用Mode类，但只用BOTH和NONE，被禁止连接就是NONE
+    // 它只表示是否限制方向，不表示实际上是否连接
+    public Mode[] connLimit = new Mode[]{Mode.BOTH,Mode.BOTH,Mode.BOTH,Mode.BOTH,Mode.BOTH,Mode.BOTH};
     public BasePipeBlockEntity(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState) {
         super(pType, pPos, pBlockState);
     }
-    // === capabilities
-    @Override
-    public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-        return capabilitiesCache.getCapability(cap,side);
-    }
-    public static void updateConnCaps(BasePipeBlockEntity pipeEntity){
-        for (Direction direction : Direction.values()) {
-            if (pipeEntity.dirType[direction.get3DDataValue()] == ConnType.FORBID)
-                pipeEntity.capabilitiesCache.invalidate(ForgeCapabilities.ENERGY, direction);
-            else if (pipeEntity.dirType[direction.get3DDataValue()] == ConnType.NORMAL)
-                pipeEntity.capabilitiesCache.validate(ForgeCapabilities.ENERGY, direction);
-        }
-    }
-    //=== conn type
-    public ConnType getConnType(Direction direction){
-        return dirType[direction.get3DDataValue()];
-    }
-    public static int[] dirTypeToInt(ConnType[] dirType){
-        return Arrays.stream(dirType).mapToInt(ConnType::ordinal).toArray();
-    }
-    public static ConnType[] stringToDirType(int[] intDirs){
-        ConnType[] connTypes = new ConnType[6];
-        for (int i = 0; i < intDirs.length; i++) {
-            connTypes[i] = ConnType.values()[intDirs[i]];
-        }
-        return connTypes;
-        //我尝试用stream转换，但老是报错。
-//        return (ConnType[]) Arrays.stream(intDirs).mapToObj(value -> ConnType.values()[value]).map(obj -> (ConnType)obj).toArray();
-    }
 
-    public List<BlockPos> getConnection() {
-        List<BlockPos> conn = new ArrayList<>();
-        BlockPos blockPos = getBlockPos();
-        BlockState blockState = getBlockState();
-        if (blockState.is(ModBlocks.RED_CABLE.get())){
-            PipeBlock.PROPERTY_BY_DIRECTION.forEach((direction, booleanProperty) -> {
-                if (!(dirType[direction.get3DDataValue()]== ConnType.FORBID)&&blockState.getValue(booleanProperty)==Boolean.TRUE){
-                    conn.add(blockPos.relative(direction));
-                }
-            });
-        }
-        return conn;
-    }
     //=== data load unload
     @Override
     protected void saveAdditional(CompoundTag pTag) {
         super.saveAdditional(pTag);
-        pTag.putIntArray(HBMKey.FORBID_DIR,dirTypeToInt(dirType));
-        CompoundTag dataMap = ItemDataUtils.getDataMap(pTag);
-        dataMap.put(HBMKey.CAPS, capabilitiesCache.serializeNBT());
+        pTag.putIntArray(HBMKey.CONN_LIMIT, Arrays.stream(connLimit).mapToInt(Mode::ordinal).toArray());
     }
 
     @Override
     public void load(CompoundTag pTag) {
         super.load(pTag);
-        dirType = stringToDirType(pTag.getIntArray(HBMKey.FORBID_DIR));
-        CompoundTag dataMap = ItemDataUtils.getDataMapIfPresent(pTag);
-        if (dataMap!=null && dataMap.contains(HBMKey.CAPS))
-            capabilitiesCache.deserializeNBT((CompoundTag) dataMap.get(HBMKey.CAPS));
+        int[] intArray = pTag.getIntArray(HBMKey.CONN_LIMIT);
+        if (intArray.length == 6) connLimit = Arrays.stream(intArray).mapToObj(i -> Mode.values()[i]).toArray(Mode[]::new);
     }
-    //=== ticker
+    //=== ticker，暂时用不上
     protected void onUpdateClient(){}
     // 服务器更新
     protected void onUpdateServer(){}

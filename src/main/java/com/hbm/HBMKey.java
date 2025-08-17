@@ -24,6 +24,7 @@ public class HBMKey {
     public static final String PROGRESS = "progress";
     //cable
     public static final String FORBID_DIR = "forbidDir";
+    public static final String CONN_LIMIT = "conn_limit";
     //Server to Client specific sync NBT tags
     public static final String CURRENT_ACCEPTORS = "acceptors";
     public static final String CURRENT_CONNECTIONS = "connections";

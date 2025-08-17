@@ -147,7 +147,7 @@ public class BatteryEntity extends BaseMachineBlockEntity {
 
     @Override
     public Component getDefaultName() {
-        return Component.translatable(HBMLang.BARREL.getTranslationKey());
+        return Component.translatable(HBMLang.BARREL.key());
     }
 
     @Override

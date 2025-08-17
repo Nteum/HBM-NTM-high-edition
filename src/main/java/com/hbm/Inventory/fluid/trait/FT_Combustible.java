@@ -25,9 +25,9 @@ public class FT_Combustible extends FluidTrait {
 	@Override
 	public void addInfo(List<Component> info) {
 		super.addInfo(info);
-		info.add(Component.translatable(HBMLang.FT_COMBUSTIBLE1.getTranslationKey()).withStyle(ChatFormatting.GOLD));
-		info.add(Component.translatable(HBMLang.FT_COMBUSTIBLE2.getTranslationKey(), BobMathUtil.getShortNumber(combustionEnergy)).withStyle(ChatFormatting.GOLD));
-		info.add(Component.translatable(HBMLang.FT_COMBUSTIBLE3.getTranslationKey(), fuelGrade.getGrade()).withStyle(ChatFormatting.GOLD));
+		info.add(Component.translatable(HBMLang.FT_COMBUSTIBLE1.key()).withStyle(ChatFormatting.GOLD));
+		info.add(Component.translatable(HBMLang.FT_COMBUSTIBLE2.key(), BobMathUtil.getShortNumber(combustionEnergy)).withStyle(ChatFormatting.GOLD));
+		info.add(Component.translatable(HBMLang.FT_COMBUSTIBLE3.key(), fuelGrade.getGrade()).withStyle(ChatFormatting.GOLD));
 	}
 	
 	public long getCombustionEnergy() {

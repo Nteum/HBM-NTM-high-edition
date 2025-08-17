@@ -25,6 +25,7 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
         addContainer();
         addFluidTrait();
         addLookTooltip();
+        addDebug();
         ModFluids.localName(this);
         //物品
         this.add(ModItems.ingot_steel.get(),"Steel Ignot");
@@ -47,10 +48,10 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
 //        this.add("hbmxx.container.crucible","Crucible");
     }
     private void addCreativeTabs(){
-        this.add(HBMLang.ITEMGROUP_ITEM.getTranslationKey(), "HBM Item");
-        this.add(HBMLang.ITEMGROUP_BLOCK.getTranslationKey(), "HBM Block");
-        this.add(HBMLang.ITEMGROUP_MACHINE.getTranslationKey(), "HBM Machine");
-        this.add(HBMLang.ITEMGROUP_TOOL.getTranslationKey(), "HBM Tool");
+        this.add(HBMLang.ITEMGROUP_ITEM.key(), "HBM Item");
+        this.add(HBMLang.ITEMGROUP_BLOCK.key(), "HBM Block");
+        this.add(HBMLang.ITEMGROUP_MACHINE.key(), "HBM Machine");
+        this.add(HBMLang.ITEMGROUP_TOOL.key(), "HBM Tool");
     }
     private void addItems(){
         HBMComponent.languageSupport(this);
@@ -59,7 +60,7 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
         HBMMachine.languageSupport(this);
     }
     private void addMisc(){
-        this.add(HBMLang.ENERGY.getTranslationKey(), "Energy: %1$s");
+        this.add(HBMLang.ENERGY.key(), "Energy: %1$s");
     }
     private void addTooltip(){
         this.add(IUpgradeInfoProvider.KEY_ACID,"Acid required %s");
@@ -125,10 +126,17 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
         this.add(HBMLang.FT_CORE_FLUX, "Core flux + %s %");
         this.add(HBMLang.FT_RADIOACTIVE, "[Radioactive]");
     }
+    private void addDebug(){
+        this.add(HBMLang.CACHED_DATA, "Cached data: ");
+        this.add(HBMLang.POS_DATA, "Block pos [%s]");
+        this.add(HBMLang.CHUNK_DATA, "Chunk pos %s");
+        this.add(HBMLang.BLOCK_STATE_LOSE, "Block in [%s] can't found !");
+        this.add(HBMLang.BLOCK_STATE_INFO, "Block in [%s] is %s.");
+    }
     private void addLookTooltip(){
         this.add(HBMLang.LOOKTOOLTIP_CHEMPLANT, "<- tank %s");
     }
     private void add(ILangEntry entry,String value){
-        this.add(entry.getTranslationKey(), value);
+        this.add(entry.key(), value);
     }
 }

@@ -17,7 +17,7 @@ public interface IBlockProvider extends IItemProvider {
     }
 
     @Override
-    default String getTranslationKey() {
+    default String key() {
         return getBlock().getDescriptionId();
     }
 }

@@ -21,7 +21,7 @@ public class TestCommand {
     public static LiteralArgumentBuilder<CommandSourceStack> register(){
         return Commands.literal("hbmtest").executes(ctx -> {
             HBM.debug = !HBM.debug;
-            ctx.getSource().sendSuccess(() -> Component.translatable(HBMLang.COMMAND_DEBUG.getTranslationKey(),HBM.debug), true);
+            ctx.getSource().sendSuccess(() -> Component.translatable(HBMLang.COMMAND_DEBUG.key(),HBM.debug), true);
             return 0;
         });
     }

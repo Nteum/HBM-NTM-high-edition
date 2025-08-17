@@ -35,7 +35,7 @@ public class FT_VentRadiation extends FluidTrait {
 	
 	@Override
 	public void addInfo(List<Component> info) {
-		info.add(Component.translatable(HBMLang.FT_RADIOACTIVE.getTranslationKey()).withStyle(ChatFormatting.YELLOW));
+		info.add(Component.translatable(HBMLang.FT_RADIOACTIVE.key()).withStyle(ChatFormatting.YELLOW));
 	}
 
 	@Override
