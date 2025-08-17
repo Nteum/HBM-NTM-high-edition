@@ -1,10 +1,9 @@
 package com.hbm.item;
 
-import com.hbm.utils.Debug.ItemDebugWand;
+import com.hbm.utils.debug.ItemDebugWand;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
-import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 

@@ -1,22 +1,20 @@
-package com.hbm.utils.Debug;
+package com.hbm.utils.debug;
 
 import com.hbm.HBM;
 import com.hbm.HBMKey;
 import com.hbm.HBMLang;
-import com.hbm.block.weapon.IBomb;
-import com.hbm.item.HBMtools;
 import com.hbm.utils.WorldUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.SectionPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.IntArrayTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.TicketType;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -25,17 +23,13 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.chunk.ChunkStatus;
 import net.minecraftforge.common.world.ForgeChunkManager;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Set;
 
 public class ItemDebugWand extends Item {
 
@@ -59,6 +53,9 @@ public class ItemDebugWand extends Item {
             BlockPos clickedPos = pContext.getClickedPos();
             ItemStack itemInHand = pContext.getItemInHand();
             itemInHand.addTagElement(HBMKey.POSITION, NbtUtils.writeBlockPos(clickedPos));
+            ChunkPos chunkPos = new ChunkPos(clickedPos);
+            ((ServerLevel) pContext.getLevel()).getChunkSource().addRegionTicket(TicketType.FORCED, chunkPos, 0, chunkPos, true);
+//            ForgeChunkManager.forceChunk((ServerLevel) pContext.getLevel(), HBM.MODID, clickedPos, SectionPos.blockToSectionCoord(clickedPos.getX()), SectionPos.blockToSectionCoord(clickedPos.getY()),true,true);
             player.sendSystemMessage(Component.literal("Mark pos on [" + clickedPos.getX() + "," + clickedPos.getY() + "," + clickedPos.getZ() + "]"));
         }
         return super.useOn(pContext);
@@ -77,10 +74,13 @@ public class ItemDebugWand extends Item {
                 BlockState markedBlock = WorldUtils.getBlockState(pLevel, storedPos).orElse(Blocks.AIR.defaultBlockState());
                 if (markedBlock.is(Blocks.AIR) || markedBlock.is(Blocks.VOID_AIR)){
                     pPlayer.sendSystemMessage(Component.translatable(HBMLang.BLOCK_STATE_LOSE.key(), storedPos.toShortString()));
-                    itemInHand.removeTagKey(HBMKey.POSITION);
                 }else {
+//                    ChunkPos chunkPos = new ChunkPos(storedPos);
+//                    ((ServerLevel) pLevel).getChunkSource().addRegionTicket(TicketType.FORCED, chunkPos, 0, chunkPos, true);
+//                    ForgeChunkManager.forceChunk((ServerLevel) pLevel, HBM.MODID, storedPos, SectionPos.blockToSectionCoord(storedPos.getX()), SectionPos.blockToSectionCoord(storedPos.getY()),false,false);
                     pPlayer.sendSystemMessage(Component.translatable(HBMLang.BLOCK_STATE_INFO.key(), storedPos.toShortString(), markedBlock.getBlock().getDescriptionId()));
                 }
+                itemInHand.removeTagKey(HBMKey.POSITION);
             }
         }
         return super.use(pLevel, pPlayer, pUsedHand);

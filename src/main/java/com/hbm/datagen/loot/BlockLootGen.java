@@ -26,7 +26,8 @@ public class BlockLootGen extends BlockLootSubProvider {
 
     @Override
     protected void generate() {
-        generateMachineLoot();
+//        generateMachineLoot();
+        HBMMachine.lootable(this);
         //机器
         this.dropSelf(ModBlocks.machine_difurnace.get());
         this.dropSelf(ModBlocks.machine_electric_furnace.get());
@@ -89,16 +90,22 @@ public class BlockLootGen extends BlockLootSubProvider {
         //饰品
         this.dropSelf(ModBlocks.TEST12.get());
     }
-    public void generateMachineLoot(){
-        this.dropSelf(HBMMachine.CHEMPLANT.get());
-        this.dropSelf(HBMMachine.PLASTIC_BARREL.get());
-        this.dropSelf(HBMMachine.CORRODED_BARREL.get());
-        this.dropSelf(HBMMachine.IRON_BARREL.get());
-        this.dropSelf(HBMMachine.STEEL_BARREL.get());
-        this.dropSelf(HBMMachine.TCALLOY_BARREL.get());
-        this.dropSelf(HBMMachine.ANTIMATTER_BARREL.get());
-        this.dropSelf(HBMMachine.FLUID_PIPE.get());
+//    public void generateMachineLoot(){
+//        this.dropSelf(HBMMachine.CHEMPLANT.get());
+//        this.dropSelf(HBMMachine.PLASTIC_BARREL.get());
+//        this.dropSelf(HBMMachine.CORRODED_BARREL.get());
+//        this.dropSelf(HBMMachine.IRON_BARREL.get());
+//        this.dropSelf(HBMMachine.STEEL_BARREL.get());
+//        this.dropSelf(HBMMachine.TCALLOY_BARREL.get());
+//        this.dropSelf(HBMMachine.ANTIMATTER_BARREL.get());
+//        this.dropSelf(HBMMachine.FLUID_PIPE.get());
+//    }
+
+    @Override
+    public void dropSelf(Block pBlock) {
+        super.dropSelf(pBlock);
     }
+
     @Override
     protected Iterable<Block> getKnownBlocks() {
         // 模组自定义的方块战利品表必须覆盖此方法，以绕过对原版方块战利品表的检查（此处返回该模组的所有方块）
