@@ -1,15 +1,18 @@
 package com.hbm.entity.logic;
 
 import com.hbm.api.badthing.ContaminationUtil;
+import com.hbm.config.BombConfig;
 import com.hbm.entity.ModEntityType;
-import com.hbm.HBM;
 import com.hbm.world.level.explosion.ExplosionNukeGeneric;
 import com.hbm.world.level.explosion.ExplosionNukeRayBatched;
+import com.hbm.world.level.explosion.ExplosionNukeRayParallelized;
+import com.hbm.world.level.explosion.IExplosionRay;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
@@ -27,7 +30,7 @@ public class EntityNukeExplosionMK5 extends EntityExplosionChunkLoading{
     //辐射蔓延速度
     public static final EntityDataAccessor<Integer> RADIATION_SPEED = SynchedEntityData.defineId(EntityNukeExplosionMK5.class, EntityDataSerializers.INT);
     //负责爆炸的主要类
-    ExplosionNukeRayBatched explosion;
+    IExplosionRay explosion;
     public EntityNukeExplosionMK5(EntityType<?> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
@@ -55,12 +58,18 @@ public class EntityNukeExplosionMK5 extends EntityExplosionChunkLoading{
             loadChunk((int) Math.floor(position().x / 16D), (int) Math.floor(position().y / 16D));
             radiate(2_500_000F / (this.tickCount * 5 + 1), this.getRadius() * 2);
             ExplosionNukeGeneric.dealDamage(level(),position(),getRadius());
-            if (explosion == null)explosion = new ExplosionNukeRayBatched(level(),blockPosition(),getStrength(),getSpeed(),getRadius());
-            if(!explosion.isAusf3Complete) {
-                explosion.collectTip(getSpeed() * 10);
-            } else if(!explosion.perChunk.isEmpty()) {
-                long start = System.currentTimeMillis();
-                while(!explosion.perChunk.isEmpty() && System.currentTimeMillis() < start + 50) explosion.processChunk();
+            if(explosion == null) {
+                if (BombConfig.explosionAlgorithm == 1 || BombConfig.explosionAlgorithm == 2) {
+                    explosion = new ExplosionNukeRayParallelized((ServerLevel) level(), blockPosition(),
+                            getStrength(),getRadius());
+                } else {
+                    explosion = new ExplosionNukeRayBatched(level(), blockPosition(),
+                            getStrength(), getSpeed(),getRadius());
+                }
+            }
+            if(!explosion.isComplete()) {
+                explosion.cacheChunksTick(BombConfig.mk5);
+                explosion.destructionTick(BombConfig.mk5);
             }
 //            else if(fallout) {
 //
@@ -114,11 +123,17 @@ public class EntityNukeExplosionMK5 extends EntityExplosionChunkLoading{
     }
 
     public static EntityNukeExplosionMK5 statFac(Level level, int r, Vec3 location) {
-        r = r==0?25:2*r;
+        r = r == 0 ? 25 : 2 * r;
         int strength = r;
         int speed = (int)Math.ceil((double) 10_0000 / strength);
         int radius = strength / 2;
         return new EntityNukeExplosionMK5(level,location,strength,radius,speed);
+    }
+
+    @Override
+    public void remove(RemovalReason pReason){
+        if (explosion != null) explosion.cancel();
+        super.remove(pReason);
     }
 
     @Override
