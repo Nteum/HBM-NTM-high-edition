@@ -4,7 +4,7 @@ import com.hbm.HBMKey;
 import com.hbm.api.IContentsListener;
 import com.hbm.api.energy.BasicEnergyContainer;
 import com.hbm.api.energy.ProxyEnergyHandler;
-import com.hbm.capabilities.Capabilities;
+import com.hbm.capabilities.HBMCaps;
 import com.hbm.capabilities.ItemCapabilityWrapper;
 import com.hbm.capabilities.resolver.BasicCapabilityResolver;
 import com.hbm.capabilities.resolver.ICapabilityResolver;
@@ -25,7 +25,7 @@ public class ItemStackEnergyHandler extends ItemCapabilityWrapper.ItemCapability
     }
     @Override
     protected void gatherCapabilityResolvers(Consumer<ICapabilityResolver> consumer) {
-        consumer.accept(new BasicCapabilityResolver(()->new ProxyEnergyHandler(this.energyStorage), Capabilities.LONG_ENERGY));
+        consumer.accept(new BasicCapabilityResolver(()->new ProxyEnergyHandler(this.energyStorage), HBMCaps.LONG_ENERGY));
     }
 
     @Override

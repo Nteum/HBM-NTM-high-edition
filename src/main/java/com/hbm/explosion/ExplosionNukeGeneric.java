@@ -1,4 +1,4 @@
-package com.hbm.world.level.explosion;
+package com.hbm.explosion;
 
 import net.minecraft.world.damagesource.DamageSources;
 import net.minecraft.world.entity.Entity;

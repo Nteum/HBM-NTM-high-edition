@@ -69,10 +69,10 @@ public class ModFluids {
     public static final ExtendedFluidType hydrogen = new ExtendedFluidType("hydrogen",0x4286f4, solution.descriptionId("Hydrogen"),ExtendedProperties.of().pfr(3,4,0));
 
     // 流体注册
-    public static final FluidRegistryHolder<ExtendedFluidType, ForgeFlowingFluid.Source, ForgeFlowingFluid.Flowing,LiquidBlock, BucketItem> HYDROGEN = register(hydrogen);
-    public static final FluidRegistryHolder<ExtendedFluidType, ForgeFlowingFluid.Source, ForgeFlowingFluid.Flowing,LiquidBlock, BucketItem> IRRADIATED_WATER = register(irradiated_water);
-    public static final FluidRegistryHolder<ExtendedFluidType, ForgeFlowingFluid.Source, ForgeFlowingFluid.Flowing,LiquidBlock, BucketItem> IRRADIATED_POLLUTED = register(irradiated_polluted);
-    public static final FluidRegistryHolder<ExtendedFluidType, ForgeFlowingFluid.Source, ForgeFlowingFluid.Flowing,LiquidBlock, BucketItem> SULFURIC_ACID = register(sulfuric_acid);
+    public static FluidRegistryHolder<ExtendedFluidType, ForgeFlowingFluid.Source, ForgeFlowingFluid.Flowing,LiquidBlock, BucketItem> HYDROGEN = register(hydrogen);
+    public static FluidRegistryHolder<ExtendedFluidType, ForgeFlowingFluid.Source, ForgeFlowingFluid.Flowing,LiquidBlock, BucketItem> IRRADIATED_WATER = register(irradiated_water);
+    public static FluidRegistryHolder<ExtendedFluidType, ForgeFlowingFluid.Source, ForgeFlowingFluid.Flowing,LiquidBlock, BucketItem> IRRADIATED_POLLUTED = register(irradiated_polluted);
+    public static FluidRegistryHolder<ExtendedFluidType, ForgeFlowingFluid.Source, ForgeFlowingFluid.Flowing,LiquidBlock, BucketItem> SULFURIC_ACID = register(sulfuric_acid);
 
 
     public static FluidRegistryHolder register(ExtendedFluidType fluidType){
@@ -91,6 +91,11 @@ public class ModFluids {
     }
 
     public static void register(IEventBus modEventBus){
+//        HYDROGEN = register(hydrogen);
+//        IRRADIATED_WATER = register(irradiated_water);
+//        IRRADIATED_POLLUTED = register(irradiated_polluted);
+//        SULFURIC_ACID = register(sulfuric_acid);
+
         FLUIDS.register(modEventBus);
         FLUID_TYPES.register(modEventBus);
         FLUID_BLOCKS.register(modEventBus);

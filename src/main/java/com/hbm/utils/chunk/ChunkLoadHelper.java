@@ -46,13 +46,41 @@ public class ChunkLoadHelper {
     }
 
     public static void register(Entity entity){
-        entitiesWithChunkLoad.computeIfAbsent(entity, e -> new LongOpenHashSet());
+        if (entityInServer(entity)){
+            entitiesWithChunkLoad.computeIfAbsent(entity, e -> new LongOpenHashSet());
+            // 如果实体登录的时候不处在加载区块，就先给它加载一下
+            if (!entity.level().isLoaded(entity.blockPosition())){
+                ChunkPos chunkPos = new ChunkPos(entity.blockPosition());
+                ChunkLoadHelper.forceChunk((ServerLevel) entity.level(), chunkPos, true);
+                entitiesWithChunkLoad.get(entity).add(chunkPos.toLong());
+            }
+        }
+    }
+    public static void unRegister(Entity entity){
+        if (entityInServer(entity) && entitiesWithChunkLoad.containsKey(entity)){
+            for (Long chunkPos : entitiesWithChunkLoad.get(entity)) {
+                forceChunk((ServerLevel) entity.level(), new ChunkPos(chunkPos), false);
+            }
+        }
+    }
+    protected static boolean entityInServer(Entity entity){
+        return !entity.level().isClientSide();
     }
     @SubscribeEvent
     public static void onEntityEnterSection(EntityEvent.EnteringSection event){
         Entity entity = event.getEntity();
-        if (!entity.level().isClientSide && entitiesWithChunkLoad.containsKey(entity)){
-
+        if (event.didChunkChange() && entitiesWithChunkLoad.containsKey(entity) && !entity.level().isClientSide){
+            ChunkPos newChunk = event.getNewPos().chunk();
+            ChunkPos oldChunk = event.getOldPos().chunk();
+            LongSet chunks = entitiesWithChunkLoad.get(entity);
+            if (chunks.contains(oldChunk.toLong())) {
+                forceChunk((ServerLevel) entity.level(), oldChunk, false);
+                chunks.remove(oldChunk.toLong());
+            }
+            if (!entity.level().isLoaded(entity.getOnPos())){
+                forceChunk((ServerLevel) entity.level(), newChunk, true);
+                chunks.add(newChunk.toLong());
+            }
         }
     }
 }

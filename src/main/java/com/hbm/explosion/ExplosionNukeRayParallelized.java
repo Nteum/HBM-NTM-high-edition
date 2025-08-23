@@ -1,6 +1,6 @@
-package com.hbm.world.level.explosion;
+package com.hbm.explosion;
 
-import com.hbm.config.BombConfig;
+import com.hbm.config.ConfigBomb;
 import com.hbm.utils.ConcurrentBitSet;
 import com.hbm.utils.SubChunkKey;
 import com.hbm.utils.SubChunkSnapshot;
@@ -106,7 +106,7 @@ public class ExplosionNukeRayParallelized implements IExplosionRay {
                 Thread.currentThread().interrupt();
             } finally {
                 collectFinished = true;
-                if (BombConfig.explosionAlgorithm == 2) pool.submit(this::runConsolidation);
+                if (ConfigBomb.explosionAlgorithm == 2) pool.submit(this::runConsolidation);
                 else consolidationFinished = true;
             }
         }, "ExplosionNuke-LatchWatcher-" + System.nanoTime());
@@ -180,7 +180,7 @@ public class ExplosionNukeRayParallelized implements IExplosionRay {
 
     private void processCacheKey(SubChunkKey ck) {
         if (snapshots.containsKey(ck)) return;
-        snapshots.put(ck, SubChunkSnapshot.getSnapshot(level, ck, BombConfig.chunkloading));
+        snapshots.put(ck, SubChunkSnapshot.getSnapshot(level, ck, ConfigBomb.chunkloading));
         ConcurrentLinkedQueue<RayTask> waiters = waitingRoom.remove(ck);
         if (waiters != null) rayQueue.addAll(waiters);
     }
@@ -474,7 +474,7 @@ public class ExplosionNukeRayParallelized implements IExplosionRay {
                                     int bitIndex = (yNorm << 8) | (zLocal << 4) | xLocal;
 
                                     ChunkPos chunkPos = currentSubChunkKey.getPos();
-                                    if (BombConfig.explosionAlgorithm == 2) {
+                                    if (ConfigBomb.explosionAlgorithm == 2) {
                                         damageMap.computeIfAbsent(chunkPos, cp -> new ConcurrentHashMap<>(256)).computeIfAbsent(bitIndex, k -> new DoubleAdder()).add(damageDealt);
                                     } else if (energy > 0) {
                                         destructionMap.computeIfAbsent(chunkPos, posKey -> new ConcurrentBitSet(bitsetSize)).set(bitIndex);

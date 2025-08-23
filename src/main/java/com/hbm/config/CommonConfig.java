@@ -1,9 +1,15 @@
 package com.hbm.config;
 
+import com.hbm.HBM;
+import net.minecraftforge.common.ForgeConfigSpec;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.config.ModConfigEvent;
+
+import java.util.List;
 import java.util.Locale;
 
-import static com.hbm.HBM.LOGGER;
-
+@Mod.EventBusSubscriber(modid = HBM.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class CommonConfig {
 	
 	public static final String CATEGORY_GENERAL = "01_general";
@@ -28,62 +34,38 @@ public class CommonConfig {
 	public static final String CATEGORY_528 = "528";
 	public static final String CATEGORY_LBSM = "LESS BULLSHIT MODE";
 
-	public static int setDefZero(int value, int def) {
+	public static final ForgeConfigSpec CONFIG_SPEC;
 
-		if(value < 0) {
-			LOGGER.error("Fatal error config: Randomizer value has been below zero, despite bound having to be positive integer!");
-			LOGGER.error(String.format(Locale.US, "Errored value will default back to %d, PLEASE REVIEW CONFIGURATION DESCRIPTION BEFORE MEDDLING WITH VALUES!", def));
-			return def;
-		}
+	static {
+		ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
+		ConfigGeneral.addConfig(builder);
 
-		return value;
+		Config528.addConfig(builder);
+		ConfigLBSM.addConfig(builder);
+
+		CONFIG_SPEC = builder.build();
 	}
 
-	public static int setDef(int value, int def) {
+	@SubscribeEvent
+	public static void onLoad(final ModConfigEvent event){
+		ConfigGeneral.loadConfig(event);
 
-		if(value <= 0) {
-			LOGGER.error("Fatal error config: Randomizer value has been set to zero, despite bound having to be positive integer!");
-			LOGGER.error(String.format(Locale.US, "Errored value will default back to %d, PLEASE REVIEW CONFIGURATION DESCRIPTION BEFORE MEDDLING WITH VALUES!", def));
-			return def;
-		}
-
-		return value;
+		Config528.loadConfig(event);
+		ConfigLBSM.loadConfig(CATEGORY_LBSM, event);
 	}
 
-//	public static int createConfigInt(ForgeConfigSpec config, String category, String name, String comment, int def) {
-//		Property prop = config.get(category, name, def);
-//		prop.comment = comment;
-//		return prop.getInt();
-//	}
-//
-//	public static double createConfigDouble(Configuration config, String category, String name, String comment, double def) {
-//		Property prop = config.get(category, name, def);
-//		prop.comment = comment;
-//		return prop.getDouble();
-//	}
-//
-//	public static boolean createConfigBool(Configuration config, String category, String name, String comment, boolean def) {
-//		Property prop = config.get(category, name, def);
-//		prop.comment = comment;
-//		return prop.getBoolean();
-//	}
-//
-//	public static String createConfigString(Configuration config, String category, String name, String comment, String def) {
-//		Property prop = config.get(category, name, def);
-//		prop.comment = comment;
-//		return prop.getString();
-//	}
-//    public static int[] createConfigIntList(Configuration config, String category, String name, String comment, int[] def){
-//		Property prop = config.get(category, name, def);
-//		prop.comment = comment;
-//		return prop.getIntList();
-//	}
-//	public static String[] createConfigStringList(Configuration config, String category, String name, String comment) {
-//		Property prop = config.get(category, name, new String[] { "PLACEHOLDER" });
-//		prop.comment = comment;
-//		return prop.getStringList();
-//	}
-	public enum StructureFlag{ON,OFF,UNDEFINE}
+	public static void addBoolean(ForgeConfigSpec.Builder builder, String name, boolean defaultValue, String comment){
+		builder.comment(comment).define(name, defaultValue);
+	}
+	public static void addInt(ForgeConfigSpec.Builder builder, String name, int defaultValue, String comment){
+		addInt(builder, name, defaultValue, Integer.MIN_VALUE, Integer.MAX_VALUE, comment);
+	}
+	public static void addInt(ForgeConfigSpec.Builder builder, String name, int defaultValue, int min, int max, String comment){
+		builder.comment(comment).defineInRange(name, defaultValue, min, max);
+	}
+	public static void addStringList(ForgeConfigSpec.Builder builder, String name, List<String> defaultValue, String comment){
+		builder.comment(comment).defineList(name, defaultValue, s -> s instanceof String);
+	}
 
 	public static int parseStructureFlag(String flag) {
 		if(flag == null) flag = "";

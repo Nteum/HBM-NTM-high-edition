@@ -1,7 +1,8 @@
 package com.hbm.api.badthing.hazard.type;
 
 import com.hbm.api.badthing.hazard.modifier.HazardModifier;
-import com.hbm.config.GeneralConfig;
+import com.hbm.config.Config528;
+import com.hbm.config.ConfigGeneral;
 import com.hbm.config.RadiationConfig;
 import com.hbm.registries.ModItems;
 import net.minecraft.ChatFormatting;
@@ -23,7 +24,7 @@ public class HazardTypeHot extends HazardTypeBase {
 		
 		boolean reacher = false;
 		
-		if(target instanceof Player && !GeneralConfig.enable528)
+		if(target instanceof Player && !Config528.enable528)
 			reacher = ((Player) target).getInventory().countItem(ModItems.reacher.get()) > 0;
 		
 		if(!reacher && !target.isInFluidType() && level > 0)

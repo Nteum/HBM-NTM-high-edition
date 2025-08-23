@@ -9,7 +9,7 @@ import com.hbm.api.energy.fe.TransmitHelper;
 import com.hbm.block.machine.BlockAssembler;
 import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.blockentity.base.BedLikeBlockEntity;
-import com.hbm.capabilities.Capabilities;
+import com.hbm.capabilities.HBMCaps;
 import com.hbm.gui.menu.AssemblerMenu;
 import com.hbm.Inventory.recipe.AssemblerRecipe;
 import com.hbm.utils.InventoryUtils;
@@ -76,7 +76,7 @@ public class AssemblerEntity extends BedLikeBlockEntity {
         super(ModBlockEntityType.ASSEMBLER_ENTITY.get(), pPos, pBlockState);
         items = NonNullList.withSize(17,ItemStack.EMPTY);
 //        capabilitiesCache.addCapabilityResolver(new SidedEnergyWrapper(HBMEnergyStorage.input(100_000)));
-        this.capabilitiesContent.addCapability(Capabilities.LONG_ENERGY, new ProxyEnergyHandler(energyContainer));
+        this.capabilitiesContent.addCapability(HBMCaps.LONG_ENERGY, new ProxyEnergyHandler(energyContainer));
         multiblockData.put(ForgeCapabilities.ENERGY, -1,0,1,Direction.SOUTH, 0,0,1,Direction.SOUTH, -1,0,-2,Direction.NORTH, 0,0,-2,Direction.NORTH)
                 .put(ForgeCapabilities.ITEM_HANDLER, 1,0,-1, Direction.EAST, -2,0,0,Direction.WEST);
         multiblockData.transDirection(pPos,pBlockState.getValue(BlockAssembler.FACING));

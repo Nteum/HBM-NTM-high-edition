@@ -2,10 +2,8 @@ package com.hbm.capabilities;
 
 import com.hbm.api.energy.IEnergyHandler;
 import net.minecraft.core.Direction;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.IItemHandler;
@@ -49,7 +47,7 @@ public class CapabilitiesContent {
     public void addCapability(Capability<?> capability, Object handler, Set<Direction> directions){
         Direction[] directionsArray = directions.toArray(new Direction[0]);
         if (directions.contains(null)) directionsArray = new Direction[]{null};
-        if (capability == Capabilities.LONG_ENERGY && handler instanceof IEnergyHandler
+        if (capability == HBMCaps.LONG_ENERGY && handler instanceof IEnergyHandler
                 || capability == ForgeCapabilities.FLUID_HANDLER && handler instanceof IFluidHandler
                 || capability == ForgeCapabilities.ITEM_HANDLER && handler instanceof IItemHandler){
             plusCapability(capability, handler, directionsArray);

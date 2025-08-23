@@ -33,6 +33,9 @@ import static com.hbm.HBM.MODID;
 public class ModBlocks {
     //方块注册表
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
+    static {
+        HBMMachine.register(BLOCKS);
+    }
     //机械
     public static final RegistryObject<Block> machine_difurnace = registerBlockWithItem("machine_difurnace", ()->new BlockDifurnace(BlockBehaviour.Properties.of().lightLevel(litEmission(13))));
     public static final RegistryObject<Block> machine_electric_furnace = registerBlockWithItem("machine_electric_furnace", ()->new BlockElectricFurnace(BlockBehaviour.Properties.of().lightLevel(litEmission(13))));
@@ -138,8 +141,6 @@ public class ModBlocks {
         return block;
     }
     public static void register(IEventBus modEventBus){
-//        registerItem();
-        HBMMachine.register(BLOCKS);
         BLOCKS.register(modEventBus);
     }
 }

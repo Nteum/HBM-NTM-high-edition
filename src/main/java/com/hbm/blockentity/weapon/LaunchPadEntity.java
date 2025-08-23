@@ -1,11 +1,10 @@
 package com.hbm.blockentity.weapon;
 
-import com.hbm.block.weapon.NukeCustom;
 import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.blockentity.base.BedLikeBlockEntity;
 import com.hbm.entity.weapon.missile.EntityMissile;
 import com.hbm.item.weapon.ItemDesignator;
-import com.hbm.item.weapon.ItemMissle;
+import com.hbm.item.weapon.ItemMissile;
 import com.hbm.registries.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -15,14 +14,9 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.RedstoneLampBlock;
-import net.minecraft.world.level.block.RedstoneTorchBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
@@ -72,7 +66,7 @@ public class LaunchPadEntity extends BedLikeBlockEntity {
             if (itemStack.hasTag() && itemStack.getTag().contains("pos")){
                 int[] pos = itemStack.getTag().getIntArray("pos");
                 if (pos.length == 3){
-                    EntityMissile entityMissile = ((ItemMissle) items.get(0).getItem()).createEntity(level, worldPosition, new BlockPos(pos[0], pos[1], pos[2]));
+                    EntityMissile entityMissile = ((ItemMissile) items.get(0).getItem()).createEntity(level, worldPosition, new BlockPos(pos[0], pos[1], pos[2]));
                     assert level != null;
                     level.addFreshEntity(entityMissile);
                     this.level.playLocalSound(worldPosition.getX(),worldPosition.getY(),worldPosition.getZ(),

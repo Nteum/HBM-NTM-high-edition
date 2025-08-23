@@ -1,4 +1,4 @@
-package com.hbm.world.level.explosion;
+package com.hbm.explosion;
 
 /**
  * Interface for procedural explosions.

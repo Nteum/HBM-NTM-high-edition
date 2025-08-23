@@ -5,14 +5,10 @@ import com.hbm.HBMLang;
 import com.hbm.api.energy.BasicEnergyContainer;
 import com.hbm.api.energy.ProxyEnergyHandler;
 import com.hbm.api.energy.TransmitUtils;
-import com.hbm.api.energy.fe.HBMEnergyStorage;
-import com.hbm.api.energy.fe.IHBMEnergyStorage;
-import com.hbm.api.energy.fe.SidedEnergyWrapper;
-import com.hbm.api.energy.fe.TransmitHelper;
 import com.hbm.block.machine.BlockBattery;
 import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.blockentity.base2.BaseMachineBlockEntity;
-import com.hbm.capabilities.Capabilities;
+import com.hbm.capabilities.HBMCaps;
 import com.hbm.gui.menu.BatteryMenu;
 import com.hbm.registries.ModTags;
 import net.minecraft.core.BlockPos;
@@ -20,17 +16,11 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
-import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.*;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -79,7 +69,7 @@ public class BatteryEntity extends BaseMachineBlockEntity {
         BlockBattery block = (BlockBattery)pBlockState.getBlock();
         type = block.type;
         energyContainer = new BasicEnergyContainer(type.getMaxEnergy(), type.getOutput());
-        this.capabilitiesContent.addCapability(Capabilities.LONG_ENERGY, new ProxyEnergyHandler(this.energyContainer));
+        this.capabilitiesContent.addCapability(HBMCaps.LONG_ENERGY, new ProxyEnergyHandler(this.energyContainer));
 //        this.capabilitiesCache.addCapabilityResolver(new SidedEnergyWrapper(new HBMEnergyStorage(type.getMaxEnergy(),type.getOutput(),type.getOutput())));
     }
 

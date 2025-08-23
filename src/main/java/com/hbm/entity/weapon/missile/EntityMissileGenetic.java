@@ -6,6 +6,9 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.projectile.ThrowableProjectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.HitResult;
+
+import java.util.List;
 
 public class EntityMissileGenetic extends EntityMissile{
     public EntityMissileGenetic(EntityType<EntityMissileGenetic> entityType, Level pLevel) {
@@ -27,6 +30,21 @@ public class EntityMissileGenetic extends EntityMissile{
 
     @Override
     public ItemStack getMissileItemForInfo() {
+        return null;
+    }
+
+    @Override
+    public void onMissileImpact(HitResult pResult) {
+
+    }
+
+    @Override
+    public List<ItemStack> getDebris() {
+        return null;
+    }
+
+    @Override
+    public ItemStack getDebrisRareDrop() {
         return null;
     }
 }

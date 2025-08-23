@@ -17,7 +17,7 @@ public class DecorateBlockStateProvider implements ICategoryStateProvider{
     @Override
     public void registerStatesAndModels(){
         horizontalBlockWithItem(ModBlocks.TEST12.get(),"block/test12/test12");
-        stateProvider.cubeAll(HBMMachine.DEBUG_BLOCK.get());
+        stateProvider.simpleBlockWithItem(HBMMachine.DEBUG_BLOCK.get(),stateProvider.cubeAll(HBMMachine.DEBUG_BLOCK.get()));
     }
     protected void horizontalBlockWithItem(Block block, ModelFile model){
         stateProvider.horizontalBlock(block,model);

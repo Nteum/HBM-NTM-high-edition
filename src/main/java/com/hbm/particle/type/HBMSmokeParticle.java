@@ -5,6 +5,7 @@ import net.minecraft.client.particle.*;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.model.obj.ObjLoader;
 import org.jetbrains.annotations.Nullable;
 
 /** 爆炸产生的烟雾的粒子

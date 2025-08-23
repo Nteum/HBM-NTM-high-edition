@@ -1,26 +1,20 @@
 package com.hbm.utils.multiblock;
 
-import com.hbm.api.energy.IEnergyHandler;
 import com.hbm.block.HBMMachine;
 import com.hbm.blockentity.base2.DummyableBlockEntity;
 import com.hbm.blockentity.base2.TileProxyBase;
-import com.hbm.capabilities.Capabilities;
-import com.hbm.capabilities.CapabilitiesContent;
+import com.hbm.capabilities.HBMCaps;
 import com.hbm.registries.ModBlocks;
 import com.hbm.utils.DirectionUtils;
-import com.hbm.utils.EnumUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
-import net.minecraft.util.Tuple;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.fluids.capability.IFluidHandler;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
@@ -32,10 +26,10 @@ public class MultiblockData {
     public static final Map<Block, MultiblockData> mapping = new HashMap<>();
     static {
         mapping.put(ModBlocks.machine_assembler.get(), new MultiblockData(1, 0, 2 ,1 ,2 ,1)
-                .addCaps(Capabilities.LONG_ENERGY, -1,0,1, SOUTH, 0,0,1, SOUTH, -1,0,-2,Direction.NORTH, 0,0,-2,Direction.NORTH)
+                .addCaps(HBMCaps.LONG_ENERGY, -1,0,1, SOUTH, 0,0,1, SOUTH, -1,0,-2,Direction.NORTH, 0,0,-2,Direction.NORTH)
                 .addCaps(ForgeCapabilities.ITEM_HANDLER, 1,0,-1, Direction.EAST, -2,0,0,Direction.WEST));
         mapping.put(HBMMachine.CHEMPLANT.get(), new MultiblockData(2, 0, 2 ,1 ,2 ,1)
-                .addCaps(Capabilities.LONG_ENERGY,ForgeCapabilities.FLUID_HANDLER, -1,0,1, SOUTH, 0,0,1, SOUTH, -1,0,-2,Direction.NORTH, 0,0,-2,Direction.NORTH)
+                .addCaps(HBMCaps.LONG_ENERGY,ForgeCapabilities.FLUID_HANDLER, -1,0,1, SOUTH, 0,0,1, SOUTH, -1,0,-2,Direction.NORTH, 0,0,-2,Direction.NORTH)
                 .addCaps(ForgeCapabilities.ITEM_HANDLER, 1,0,-1, Direction.EAST, -2,0,0,Direction.WEST));
         mapping.put(ModBlocks.bomb_boy.get(), new MultiblockData(0,0,0,0,2,1));
         mapping.put(ModBlocks.bomb_custom.get(), mapping.get(ModBlocks.bomb_boy.get()));

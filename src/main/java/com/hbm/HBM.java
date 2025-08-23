@@ -1,11 +1,14 @@
 package com.hbm;
 
 import com.hbm.capabilities.network.TransmitterNetworkRegistry;
-import com.hbm.config.GeneralConfig;
+import com.hbm.config.ClientConfig;
+import com.hbm.config.CommonConfig;
+import com.hbm.config.ServerConfig;
 import com.hbm.datagen.damageSource.DamageTypeJsonProvider;
 import com.hbm.datagen.damageSource.DmgTagProvider;
 import com.hbm.datagen.loot.BlockLootGen;
-import com.hbm.datagen.loot.LootTableGen;
+import com.hbm.datagen.loot.ChestLootGen;
+import com.hbm.datagen.loot.FishLootGen;
 import com.hbm.datagen.model.BlockStateGen;
 import com.hbm.datagen.model.ItemModelGen;
 import com.hbm.datagen.recipe.RecipeGen;
@@ -36,27 +39,35 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.common.data.ForgeAdvancementProvider;
 import net.minecraftforge.data.event.GatherDataEvent;
-import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.event.server.ServerStoppedEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.loading.FMLPaths;
 import org.slf4j.Logger;
 
+import java.nio.file.Path;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
-// The value here should match an entry in the META-INF/mods.toml file
+/**
+ * 模组主类，主要处理mod初始化的东西，并提供一些关于mod整体的信息，不要什么都往里面加。
+ * */
 @Mod(HBM.MODID)
 public class HBM {
     public static final String MODID = "hbm";
     public static final Logger LOGGER = LogUtils.getLogger();
     //debug模式
-    public static boolean debug = false;
+    public static       boolean debug       = false;
+    public static final Path    CONFIG_PATH = FMLPaths.CONFIGDIR.get().resolve(MODID + "Configs");
+    public static final Path    RECIPE_PATH = FMLPaths.CONFIGDIR.get().resolve(MODID + "Recipes");
 
     public HBM() {
         //forge事件总线
@@ -65,6 +76,8 @@ public class HBM {
         //模组事件总线
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         modEventBus.addListener(this::commonSetup);
+        modEventBus.addListener(this::onServerSetup);
+        modEventBus.addListener(this::onPostLoad);
         modEventBus.addListener(this::onGatherData);
         modEventBus.addListener(ModCreativeModeTab::addCreative);
 
@@ -82,22 +95,27 @@ public class HBM {
         ModEntityType.ENTITY_TYPES.register(modEventBus);
         ModMenuType.MOD_MENU_TYPES.register(modEventBus);
 
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, GeneralConfig.CONFIG_SPEC);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CommonConfig.CONFIG_SPEC, "hbm-common.toml");
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
+        if (!CONFIG_PATH.toFile().exists()) CONFIG_PATH.toFile().mkdir();
         ModMessages.register(); //注册所有的消息
         TransmitterNetworkRegistry.initiate(); //注册传输网络系统
     }
 
-    public void onServerStarting(ServerStartingEvent event) {
+    public void onServerSetup(FMLDedicatedServerSetupEvent event) {
 
+    }
+
+    public void onPostLoad(FMLLoadCompleteEvent event){
+        ClientConfig.initConfig();
+        ServerConfig.initConfig();
     }
 
     private void onServerStopped(ServerStoppedEvent event){
         TransmitterNetworkRegistry.reset();
     }
-
 
     /**
      * 数据生成入口，只会在runData时候被调用
@@ -123,8 +141,10 @@ public class HBM {
 //        generator.addProvider(event.includeServer(), new TagDmgTypeGen(packOutput,lookupProvider));
 //        generator.addProvider(event.includeServer(), new RegistryDataGen(packOutput,lookupProvider));
         generator.addProvider(event.includeServer(), new WorldGen(packOutput, lookupProvider));
-        generator.addProvider(event.includeServer(), (DataProvider.Factory<LootTableGen>) output->new LootTableGen(output, Collections.emptySet(),List.of(
-                new LootTableProvider.SubProviderEntry(BlockLootGen::new, LootContextParamSets.BLOCK)
+        generator.addProvider(event.includeServer(), (DataProvider.Factory<LootTableProvider>) output->new LootTableProvider(output, Collections.emptySet(),List.of(
+                new LootTableProvider.SubProviderEntry(BlockLootGen::new, LootContextParamSets.BLOCK),
+                new LootTableProvider.SubProviderEntry(ChestLootGen::new, LootContextParamSets.CHEST),
+                new LootTableProvider.SubProviderEntry(FishLootGen::new, LootContextParamSets.FISHING)
         )));
 
 //        System.out.println("id: "+ ModItems.ignot_steel.getId());
@@ -137,7 +157,8 @@ public class HBM {
 //        System.out.println("tab language key: "+ModCreativeModeTab.HBM_ITEM.getId().toLanguageKey());
     }
 
-
-
+    public static boolean isLoad(String modID){
+        return ModList.get().isLoaded(modID);
+    }
     public static ResourceLocation rl(String s){return ResourceLocation.tryBuild(HBM.MODID,s);}
 }

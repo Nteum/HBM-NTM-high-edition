@@ -69,10 +69,33 @@ public abstract class EntityThrowableNT extends ThrowableProjectile {
         }
     }
 
-    @Override
-    public void tick() {
-        super.tick();
+    public boolean doesImpactEntities() {
+        return true;
+    }
 
+    public boolean doesPenetrate() {
+        return false;
+    }
 
+    public boolean isSpectral() {
+        return false;
+    }
+
+    public int selfDamageDelay() {
+        return 5;
+    }
+
+    /* ================================== Additional Getters =====================================*/
+
+    protected float getAirDrag() {
+        return 0.99F;
+    }
+
+    protected float getWaterDrag() {
+        return 0.8F;
+    }
+
+    protected int groundDespawn() {
+        return 1200;
     }
 }

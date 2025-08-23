@@ -11,7 +11,7 @@ import com.hbm.block.machine.BlockElectricFurnace;
 import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.blockentity.base2.BaseMachineBlockEntity;
 import com.hbm.blockentity.interfaces.IUpgradeInfoProvider;
-import com.hbm.capabilities.Capabilities;
+import com.hbm.capabilities.HBMCaps;
 import com.hbm.gui.menu.ElectricFurnaceMenu;
 import com.hbm.item.machine.ItemMachineUpgrade;
 import com.hbm.item.machine.ItemMachineUpgrade.UpgradeType;
@@ -24,7 +24,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.Container;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
@@ -34,10 +33,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.AbstractCookingRecipe;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.items.ItemHandlerHelper;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -81,7 +78,7 @@ public class ElectricFurnaceEntity extends BaseMachineBlockEntity implements Men
         // 0:raw material slot, 1:Battery slot ,原本电池是0号槽，但由于熔炉配方只检查0号槽，所以把0号槽改成输入材料槽了。
         items = NonNullList.withSize(4, ItemStack.EMPTY);
         capabilitiesContent.addCapability(ForgeCapabilities.ITEM_HANDLER, this);
-        capabilitiesContent.addCapability(Capabilities.LONG_ENERGY, new ProxyEnergyHandler(this.energyContainer));
+        capabilitiesContent.addCapability(HBMCaps.LONG_ENERGY, new ProxyEnergyHandler(this.energyContainer));
     }
 
     @Override

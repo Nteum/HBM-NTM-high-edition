@@ -11,7 +11,6 @@ import com.hbm.api.energy.BasicEnergyContainer;
 import com.hbm.api.energy.ProxyEnergyHandler;
 import com.hbm.api.energy.TransmitUtils;
 import com.hbm.api.fluid.*;
-import com.hbm.api.fluid.IExtendedFluidHandler.*;
 import com.hbm.api.inventory.ModeBuilder;
 import com.hbm.api.math.MathUtils;
 import com.hbm.block.HBMMachine;
@@ -19,18 +18,16 @@ import com.hbm.block.machine.BlockChemplant;
 import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.blockentity.base2.DummyableBlockEntity;
 import com.hbm.blockentity.base2.TileProxyBase;
-import com.hbm.capabilities.Capabilities;
+import com.hbm.capabilities.HBMCaps;
 import com.hbm.gui.menu.ChemplantMenu;
 import com.hbm.item.machine.ItemMachineUpgrade.UpgradeType;
 import com.hbm.registries.ModSounds;
 import com.hbm.utils.DirectionUtils;
 import com.hbm.utils.InventoryUtils;
 import com.hbm.utils.multiblock.MultiblockData;
-import com.hbm.utils.sound.AudioUtils;
 import com.hbm.utils.sound.AudioWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.client.resources.sounds.Sound;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
@@ -39,20 +36,14 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.Tuple;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeManager;
-import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
@@ -60,9 +51,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
-import java.util.stream.Collectors;
-
-import static net.minecraft.core.Direction.SOUTH;
 
 public class ChemplantEntity extends DummyableBlockEntity {
     private static final int maxFluid = 24_000;
@@ -83,8 +71,8 @@ public class ChemplantEntity extends DummyableBlockEntity {
             return switch (pIndex){
                 case 0 -> getProgress();
                 case 1 -> maxProgress;
-                case 2 -> MathUtils.clampToInt(getCapability(Capabilities.LONG_ENERGY).orElse(null).getStored());
-                case 3 -> MathUtils.clampToInt(getCapability(Capabilities.LONG_ENERGY).orElse(null).getCapacity());
+                case 2 -> MathUtils.clampToInt(getCapability(HBMCaps.LONG_ENERGY).orElse(null).getStored());
+                case 3 -> MathUtils.clampToInt(getCapability(HBMCaps.LONG_ENERGY).orElse(null).getCapacity());
                 default -> 0;
             };
         }
@@ -103,7 +91,7 @@ public class ChemplantEntity extends DummyableBlockEntity {
         this.slotModes = new ModeBuilder().addModes(4,Mode.BOTH,4,Mode.OUTPUT,2,Mode.INPUT,2,Mode.OUTPUT,6,Mode.INPUT,2,Mode.OUTPUT).get();
         this.fluidHandler = new BasicFluidHandler().addTanks(2, maxFluid, Mode.INPUT).addTanks(2, maxFluid, Mode.OUTPUT);
         this.capabilitiesContent.addCapability(ForgeCapabilities.FLUID_HANDLER, this.fluidHandler);
-        this.capabilitiesContent.addCapability(Capabilities.LONG_ENERGY, new ProxyEnergyHandler(this.energyContainer));
+        this.capabilitiesContent.addCapability(HBMCaps.LONG_ENERGY, new ProxyEnergyHandler(this.energyContainer));
         this.multiblockData = MultiblockData.mapping.get(HBMMachine.CHEMPLANT.get());
     }
 
@@ -222,14 +210,14 @@ public class ChemplantEntity extends DummyableBlockEntity {
                 proxy.capabilitiesContent.addCapability(cap, new VisitRestrictWrapper(this.fluidHandler,2), directions);
                 proxy.lookTooltip = Component.translatable(HBMLang.LOOKTOOLTIP_CHEMPLANT.key(), 2);
                 proxy.sendUpdatePacket();
-            }else if (cap == Capabilities.LONG_ENERGY)
+            }else if (cap == HBMCaps.LONG_ENERGY)
                 proxy.capabilitiesContent.addCapability(cap, this.energyContainer, directions);
         }else if (offset.equals(new Vec3i(0,0,1)) || offset.equals(new Vec3i(0,0,-2))){
             if (cap == ForgeCapabilities.FLUID_HANDLER){
                 proxy.capabilitiesContent.addCapability(cap, new VisitRestrictWrapper(this.fluidHandler,3), directions);
                 proxy.lookTooltip = Component.translatable(HBMLang.LOOKTOOLTIP_CHEMPLANT.key(), 2);
                 proxy.sendUpdatePacket();
-            }else if (cap == Capabilities.LONG_ENERGY)
+            }else if (cap == HBMCaps.LONG_ENERGY)
                 proxy.capabilitiesContent.addCapability(cap, this.energyContainer, directions);
         }else {
             this.getCapability(cap).ifPresent(handler -> proxy.capabilitiesContent.addCapability(cap, handler, directions));

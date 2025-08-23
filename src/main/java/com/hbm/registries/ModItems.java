@@ -5,14 +5,11 @@ import com.hbm.item.HBMWeapon;
 import com.hbm.item.HBMtools;
 import com.hbm.item.env.BedrockOreItem;
 import com.hbm.HBM;
-import com.hbm.Inventory.fluid.ModFluids;
 import com.hbm.item.weapon.ItemDesignator;
 import com.hbm.item.weapon.ItemDetonator;
-import com.hbm.item.weapon.ItemMissle;
+import com.hbm.item.weapon.ItemMissile;
 import com.hbm.item.weapon.grenade.ItemGrenade;
-import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -82,9 +79,8 @@ public class ModItems {
 //    public static final RegistryObject<Item> UPGRADE_BASE = ITEMS.register("upgrade_base",()->new Item(new Item.Properties()));
     //导弹
     public static final RegistryObject<Item> DESIGNATOR = ITEMS.register("designator",()->new ItemDesignator(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> MISSILE_GENERIC = ITEMS.register("missile_generic",()->new ItemMissle(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> MISSILE_GENERIC = ITEMS.register("missile_generic",()->new ItemMissile(new Item.Properties().stacksTo(1), ItemMissile.MissileTier.TIER1));
     public static void register(IEventBus eventBus){
-//        HBMtools.register(ITEMS);
         ITEMS.register(eventBus);
     }
 }

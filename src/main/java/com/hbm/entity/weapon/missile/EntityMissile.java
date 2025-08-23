@@ -1,49 +1,58 @@
 package com.hbm.entity.weapon.missile;
 
 import com.hbm.HBM;
-import com.hbm.entity.ModEntityType;
-import com.hbm.entity.logic.EntityNukeExplosionMK5;
+import com.hbm.entity.IRadarDetectableNT;
+import com.hbm.entity.projectile.EntityThrowableNT;
 import com.hbm.entity.weapon.grenade.ThrownGrenade;
+import com.hbm.explosion.vanillant.ExplosionVNT;
+import com.hbm.explosion.vanillant.standard.BlockAllocatorStandard;
+import com.hbm.explosion.vanillant.standard.BlockProcessorStandard;
+import com.hbm.explosion.vanillant.standard.PlayerProcessorStandard;
+import com.hbm.item.weapon.ItemMissile;
+import com.hbm.utils.chunk.ChunkLoadHelper;
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.Entity;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.projectile.AbstractHurtingProjectile;
-import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ThrowableProjectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.world.ForgeChunkManager;
 
-import javax.swing.plaf.basic.BasicSliderUI;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class EntityMissile extends ThrowableProjectile {
+public abstract class EntityMissile extends EntityThrowableNT implements IRadarDetectableNT {
     public BlockPos start;
     public BlockPos target;
     public double velocity; //速度
     public double decelY;
     public double accelXZ;  //水平方向加速度
     public boolean isCluster = false;
-    private static final EntityDataAccessor<Integer> DATA_FUSE_ID = SynchedEntityData.defineId(ThrownGrenade.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> DATA_FUSE_ID = SynchedEntityData.defineId(EntityMissile.class, EntityDataSerializers.INT);
+    public int health = 50;
 
     public EntityMissile(EntityType<? extends ThrowableProjectile> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
         start = target = blockPosition();
+        if (!this.level().isClientSide){
+            ChunkLoadHelper.register(this);
+        }
     }
     public EntityMissile(EntityType<? extends ThrowableProjectile> pEntityType, Level level, double x, double y,double z, BlockPos target){
         this(pEntityType,level);
         entityInit();   //低版本是forge加的内置方法，后面变成event了，这里暂时用函数实现
         this.setPos(x,y,z);
-        this.setRot(0,0);
         this.start = new BlockPos((int) x, (int) y, (int) z);
         this.target = target;
         this.setDeltaMovement(this.getDeltaMovement().x,2,this.getDeltaMovement().z);
@@ -52,43 +61,42 @@ public abstract class EntityMissile extends ThrowableProjectile {
         accelXZ = decelY = 1 / vector.length();
         decelY *= 2;
         velocity = 0;
+        this.setYRot((float) (Mth.atan2(target.getX()-start.getX(), target.getZ()-start.getZ()) * 180.0D / Math.PI));
         this.setSize(1.5F, 1.5F);
     }
+    // 设定无论是否在视线内始终渲染
+    @Override
+    public boolean shouldRender(double pX, double pY, double pZ) {
+        return true;
+    }
+
     /** Auto-generates radar blip level and all that from the item */
     public abstract ItemStack getMissileItemForInfo();
 
-    private void setSize(double width, double height){
-        this.setBoundingBox(AABB.ofSize(new Vec3(0.5,0.5,0.5),width,height,width));
+    @Override
+    public boolean canBeSeenBy(Object radar) {
+        return true;
     }
-    //============from IRadarDetectableEntity=============
-//    @Override
-//    public boolean canBeSeenBy(Object radar) {
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean paramsApplicable(RadarScanParams params) {
-//        if(!params.scanMissiles) return false;
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean suppliesRedstone(RadarScanParams params) {
-//        return !params.smartMode || !(this.getDeltaMovement().y >= 0);
-//    }
-    //=============from EntityMissileThrowableNT=================
-    protected void entityInit() {
-        if (!level().isClientSide()){
-            ForgeChunkManager.forceChunk((ServerLevel) level(), HBM.MODID,blockPosition(),chunkPosition().x, chunkPosition().z, true,true);
-        }
+
+    @Override
+    public boolean paramsApplicable(RadarScanParams params) {
+        return params.scanMissiles;
     }
+
+    @Override
+    public boolean suppliesRedstone(RadarScanParams params) {
+        return params.smartMode && this.getDeltaMovement().y >= 0;
+    }
+
+    @Override
     protected double motionMult() {
         return velocity;
     }
+
+    @Override
     public boolean doesImpactEntities() {
         return false;
     }
-    //==========================================
 
     @Override
     public void tick() {
@@ -123,7 +131,7 @@ public abstract class EntityMissile extends ThrowableProjectile {
                 this.setDead();
                 return;
             }
-
+            this.setDeltaMovement(target.getX()- position().x, getDeltaMovement().y, target.getZ() - position().z);
             updateRotation();
             //这里更新tracker，新版没有找到对应代码
 
@@ -131,6 +139,11 @@ public abstract class EntityMissile extends ThrowableProjectile {
         } else {
             this.spawnContrail();
         }
+        updateRotation();
+    }
+
+    public boolean hasPropulsion() {
+        return true;
     }
 
     protected void spawnContrail() {
@@ -138,31 +151,149 @@ public abstract class EntityMissile extends ThrowableProjectile {
     }
 
     protected void spawnContraolWithOffset(double offsetX, double offsetY, double offsetZ) {
-//        Vec3 vec = new Vec3(this.lastTickPosX - this.posX, this.lastTickPosY - this.posY, this.lastTickPosZ - this.posZ);
-//        double len = vec.lengthVector();
-//        vec = vec.normalize();
-//        Vec3 thrust = Vec3.createVectorHelper(0, 1, 0);
-//        thrust.rotateAroundZ(this.rotationPitch * (float) Math.PI / 180F);
-//        thrust.rotateAroundY((this.rotationYaw + 90) * (float) Math.PI / 180F);
-//
-//        for(int i = 0; i < Math.max(Math.min(len, 10), 1); i++) {
-//            double j = i - len;
-//            NBTTagCompound data = new NBTTagCompound();
-//            data.setDouble("posX", posX - vec.xCoord * j + offsetX);
-//            data.setDouble("posY", posY - vec.yCoord * j + offsetY);
-//            data.setDouble("posZ", posZ - vec.zCoord * j + offsetZ);
-//            data.setString("type", "missileContrail");
-//            data.setFloat("scale", this.getContrailScale());
-//            data.setDouble("moX", -thrust.xCoord);
-//            data.setDouble("moY", -thrust.yCoord);
-//            data.setDouble("moZ", -thrust.zCoord);
-//            data.setInteger("maxAge", 60 + rand.nextInt(20));
+        Vec3 vec = this.position().subtract(xOld, yOld, zOld);
+        double len = vec.length();
+        vec = vec.normalize();
+        Vec3 thrust = new Vec3(0, 1, 0);
+        thrust.xRot(this.getXRot() * (float) Math.PI / 180F);
+        thrust.yRot((this.getYRot() + 90) * (float) Math.PI / 180F);
+
+        for(int i = 0; i < Math.max(Math.min(len, 10), 1); i++) {
+            double j = i - len;
+            CompoundTag data = new CompoundTag();
+            data.putDouble("posX", position().x - vec.x * j + offsetX);
+            data.putDouble("posY", position().y - vec.y * j + offsetY);
+            data.putDouble("posZ", position().z - vec.z * j + offsetZ);
+            data.putString("type", "missileContrail");
+            data.putFloat("scale", this.getContrailScale());
+            data.putDouble("moX", -thrust.x);
+            data.putDouble("moY", -thrust.y);
+            data.putDouble("moZ", -thrust.z);
+            data.putInt("maxAge", 60 + level().getRandom().nextInt(20));
 //            MainRegistry.proxy.effectNT(data);
-//            level().addParticle();
-//        }
+        }
+    }
+
+    @Override
+    protected void readAdditionalSaveData(CompoundTag nbt) {
+        super.readAdditionalSaveData(nbt);
+        decelY = nbt.getDouble("decel");
+        accelXZ = nbt.getDouble("accel");
+        // 没有用到y轴高度，不用存，加载的时候直接设成0即可
+        this.target = new BlockPos(nbt.getInt("tX"), 0, nbt.getInt("tZ"));
+        this.start = new BlockPos(nbt.getInt("sX"), 0, nbt.getInt("sZ"));
+        velocity = nbt.getDouble("veloc");
+    }
+
+    @Override
+    protected void addAdditionalSaveData(CompoundTag nbt) {
+        super.addAdditionalSaveData(nbt);
+        nbt.putDouble("decel", decelY);
+        nbt.putDouble("accel", accelXZ);
+        nbt.putInt("tX", target.getX());
+        nbt.putInt("tZ", target.getZ());
+        nbt.putInt("sX", start.getX());
+        nbt.putInt("sZ", start.getZ());
+        nbt.putDouble("veloc", velocity);
+    }
+
+    protected float getContrailScale() {
+        return 1F;
+    }
+
+    @Override
+    public boolean canBeCollidedWith() {
+        return true;
+    }
+
+    @Override
+    public boolean hurt(DamageSource pSource, float pAmount) {
+        if (this.isInvulnerable()) return false;
+        else {
+            if (this.health > 0 && !this.level().isClientSide){
+                health -= (int) pAmount;
+                if (this.health <= 0) this.killMissile();
+            }
+            return true;
+        }
+    }
+
+    protected void killMissile() {
+        if(!this.isAlive()) {
+            this.setDead();
+//            ExplosionLarge.explode(worldObj, posX, posY, posZ, 5, true, false, true);
+//            ExplosionLarge.spawnShrapnelShower(worldObj, posX, posY, posZ, motionX, motionY, motionZ, 15, 0.075);
+//            ExplosionLarge.spawnMissileDebris(worldObj, posX, posY, posZ, motionX, motionY, motionZ, 0.25, getDebris(), getDebrisRareDrop());
+        }
+    }
+
+    @Override
+    public boolean shouldRenderAtSqrDistance(double pDistance) {
+        return true;
+    }
+
+    @Override
+    protected void onHit(HitResult pResult) {
+        if (pResult.getType() == HitResult.Type.BLOCK){
+            onMissileImpact(pResult);
+            this.setDead();
+        }
+    }
+
+    public abstract void onMissileImpact(HitResult pResult);
+    public abstract List<ItemStack> getDebris();
+    public abstract ItemStack getDebrisRareDrop();
+    public void cluster() { }
+
+    @Override
+    protected float getGravity() {
+        return 0.0F;
+    }
+
+    @Override
+    protected float getAirDrag() {
+        return 1F;
+    }
+
+    @Override
+    protected float getWaterDrag() {
+        return 1F;
+    }
+
+    public void setDead(){
+        this.remove(RemovalReason.DISCARDED);
+        if (!this.level().isClientSide())
+            ChunkLoadHelper.unRegister(this);
+    }
+
+    /** 当实体被移除的时候，也一并移除它强制加载的区块。 */
+    @Override
+    public void onRemovedFromWorld() {
+        if (!this.level().isClientSide())
+            ChunkLoadHelper.unRegister(this);
+        super.onRemovedFromWorld();
+    }
+
+    private void setSize(double width, double height){
+        this.setBoundingBox(AABB.ofSize(new Vec3(0.5,0.5,0.5),width,height,width));
+    }
+
+    protected void entityInit() {
+        if (!level().isClientSide()){
+            ForgeChunkManager.forceChunk((ServerLevel) level(), HBM.MODID,blockPosition(),chunkPosition().x, chunkPosition().z, true,true);
+        }
     }
 
     List<ChunkPos> loadedChunks = new ArrayList<ChunkPos>();
+
+    public void explodeStandard(float strength, int resolution, boolean fire) {
+        ExplosionVNT xnt = new ExplosionVNT(level(), position().x, position().y, position().z, strength);
+        xnt.setBlockAllocator(new BlockAllocatorStandard(resolution));
+//        xnt.setBlockProcessor(new BlockProcessorStandard().setNoDrop().withBlockEffect(fire ? new BlockMutatorFire() : null));
+//        xnt.setEntityProcessor(new EntityProcessorCross(7.5D).withRangeMod(2));
+        xnt.setPlayerProcessor(new PlayerProcessorStandard());
+        xnt.explode();
+    }
 
     public void loadNeighboringChunks(int newChunkX, int newChunkZ){
         if(!level().isClientSide()) {
@@ -178,10 +309,7 @@ public abstract class EntityMissile extends ThrowableProjectile {
         }
     }
     // 本来是1.7.10Entity内置方法，现在似乎没法继承，只能暂时如此
-    public void setDead() {
-        super.discard();
-        this.clearChunkLoader();
-    }
+
 
     public void clearChunkLoader() {
         if(!level().isClientSide()) {
@@ -191,15 +319,43 @@ public abstract class EntityMissile extends ThrowableProjectile {
         }
     }
 
-    public boolean hasPropulsion() {
-        return true;
-    }
     @Override
     protected void defineSynchedData() {
 
     }
 
-    public void cluster(){
+    @Override
+    public String getUnlocalizedName() {
+        ItemStack item = this.getMissileItemForInfo();
+        if(item != null && item.getItem() instanceof ItemMissile) {
+            ItemMissile missile = (ItemMissile) item.getItem();
+            switch(missile.tier) {
+                case TIER0: return "radar.target.tier0";
+                case TIER1: return "radar.target.tier1";
+                case TIER2: return "radar.target.tier2";
+                case TIER3: return "radar.target.tier3";
+                case TIER4: return "radar.target.tier4";
+                default: return "Unknown";
+            }
+        }
 
+        return "Unknown";
+    }
+    @Override
+    public int getBlipLevel() {
+        ItemStack item = this.getMissileItemForInfo();
+        if(item != null && item.getItem() instanceof ItemMissile) {
+            ItemMissile missile = (ItemMissile) item.getItem();
+            switch(missile.tier) {
+                case TIER0: return IRadarDetectableNT.TIER0;
+                case TIER1: return IRadarDetectableNT.TIER1;
+                case TIER2: return IRadarDetectableNT.TIER2;
+                case TIER3: return IRadarDetectableNT.TIER3;
+                case TIER4: return IRadarDetectableNT.TIER4;
+                default: return IRadarDetectableNT.SPECIAL;
+            }
+        }
+
+        return IRadarDetectableNT.SPECIAL;
     }
 }

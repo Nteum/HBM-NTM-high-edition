@@ -2,6 +2,7 @@ package com.hbm.network;
 
 import com.hbm.HBM;
 import com.hbm.network.packet.toclient.AuxParticlePacket;
+import com.hbm.network.packet.toclient.S2CEntitySyncPacket;
 import com.hbm.network.packet.toclient.S2CExplosionEffectPacket;
 import com.hbm.network.packet.toclient.S2CSyncTileMessage;
 import com.hbm.network.packet.toserver.C2SSyncTileMessage;
@@ -12,6 +13,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -37,6 +39,7 @@ public class ModMessages {
         registerServerToClient(S2CExplosionEffectPacket.class, S2CExplosionEffectPacket::decode, S2CExplosionEffectPacket::encode, S2CExplosionEffectPacket::handle);
         registerServerToClient(AuxParticlePacket.class, AuxParticlePacket::decode, AuxParticlePacket::encode, AuxParticlePacket::handle);
         registerServerToClient(S2CSyncTileMessage.class, S2CSyncTileMessage::decode, S2CSyncTileMessage::encode, S2CSyncTileMessage::handle);
+        registerServerToClient(S2CEntitySyncPacket.class, S2CEntitySyncPacket::decode, S2CEntitySyncPacket::encode, S2CEntitySyncPacket::handle);
         registerClientToServer(C2SSyncTileMessage.class, C2SSyncTileMessage::decode, C2SSyncTileMessage::encode, C2SSyncTileMessage::handle);
         registerClientToServer(S2CSyncFailMessage.class, S2CSyncFailMessage::decode, S2CSyncFailMessage::encode, S2CSyncFailMessage::handle);
     }
@@ -58,6 +61,9 @@ public class ModMessages {
 
     public static <MSG> void sendToPlayer(MSG message, ServerPlayer player){
         netHandler.send(PacketDistributor.PLAYER.with(()-> player),message);
+    }
+    public static <MSG> void sendToEntity(MSG message, Entity entity){
+        netHandler.send(PacketDistributor.TRACKING_ENTITY.with(() -> entity),message);
     }
     public static <MSG> void sendToDimension(MSG message, ResourceKey<Level> dimensionId){
         netHandler.send(PacketDistributor.DIMENSION.with(()->dimensionId),message);

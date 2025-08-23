@@ -1,4 +1,4 @@
-package com.hbm.world.level.explosion;
+package com.hbm.explosion;
 
 import com.hbm.network.ModMessages;
 import com.hbm.network.packet.toclient.S2CExplosionEffectPacket;

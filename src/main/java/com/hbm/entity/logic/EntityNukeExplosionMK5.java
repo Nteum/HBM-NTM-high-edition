@@ -1,12 +1,12 @@
 package com.hbm.entity.logic;
 
 import com.hbm.api.badthing.ContaminationUtil;
-import com.hbm.config.BombConfig;
+import com.hbm.config.ConfigBomb;
 import com.hbm.entity.ModEntityType;
-import com.hbm.world.level.explosion.ExplosionNukeGeneric;
-import com.hbm.world.level.explosion.ExplosionNukeRayBatched;
-import com.hbm.world.level.explosion.ExplosionNukeRayParallelized;
-import com.hbm.world.level.explosion.IExplosionRay;
+import com.hbm.explosion.ExplosionNukeGeneric;
+import com.hbm.explosion.ExplosionNukeRayBatched;
+import com.hbm.explosion.ExplosionNukeRayParallelized;
+import com.hbm.explosion.IExplosionRay;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -59,7 +59,7 @@ public class EntityNukeExplosionMK5 extends EntityExplosionChunkLoading{
             radiate(2_500_000F / (this.tickCount * 5 + 1), this.getRadius() * 2);
             ExplosionNukeGeneric.dealDamage(level(),position(),getRadius());
             if(explosion == null) {
-                if (BombConfig.explosionAlgorithm == 1 || BombConfig.explosionAlgorithm == 2) {
+                if (ConfigBomb.explosionAlgorithm == 1 || ConfigBomb.explosionAlgorithm == 2) {
                     explosion = new ExplosionNukeRayParallelized((ServerLevel) level(), blockPosition(),
                             getStrength(),getRadius());
                 } else {
@@ -68,8 +68,8 @@ public class EntityNukeExplosionMK5 extends EntityExplosionChunkLoading{
                 }
             }
             if(!explosion.isComplete()) {
-                explosion.cacheChunksTick(BombConfig.mk5);
-                explosion.destructionTick(BombConfig.mk5);
+                explosion.cacheChunksTick(ConfigBomb.mk5);
+                explosion.destructionTick(ConfigBomb.mk5);
             }
 //            else if(fallout) {
 //

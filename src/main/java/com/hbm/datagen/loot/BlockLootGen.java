@@ -20,6 +20,7 @@ import java.util.Set;
  * */
 public class BlockLootGen extends BlockLootSubProvider {
 
+
     public BlockLootGen() {
         super(Collections.emptySet(), FeatureFlags.REGISTRY.allFlags());
     }

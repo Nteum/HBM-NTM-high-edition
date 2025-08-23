@@ -122,7 +122,7 @@ public class CountableIngredient extends AbstractIngredient {
             value1.flagTag = flag;
             if (flag){
                 int byteslen = buffer.readInt();
-                String string = buffer.readBytes(byteslen).toString();
+                String string = buffer.readBytes(byteslen).toString;
                 TagKey<Item> tagKey = parseTagKey(string);
                 value1.tagKey = tagKey;
             }else {

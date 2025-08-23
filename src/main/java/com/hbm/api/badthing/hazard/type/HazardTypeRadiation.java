@@ -2,7 +2,8 @@ package com.hbm.api.badthing.hazard.type;
 
 import com.hbm.api.badthing.ContaminationUtil;
 import com.hbm.api.badthing.hazard.modifier.HazardModifier;
-import com.hbm.config.GeneralConfig;
+import com.hbm.config.Config528;
+import com.hbm.config.ConfigGeneral;
 import com.hbm.registries.ModItems;
 import com.hbm.utils.BobMathUtil;
 import net.minecraft.ChatFormatting;
@@ -31,7 +32,7 @@ public class HazardTypeRadiation extends HazardTypeBase {
 		if(level > 0) {
 			float rad = level / 20F;
 			
-			if(GeneralConfig.enable528 && reacher) {
+			if(Config528.enable528 && reacher) {
 				rad = (float) (rad / 49F);	//More realistic function for 528: x / distance^2
 			} else if(reacher) {
 				rad = (float) BobMathUtil.squirt(rad); //Reworked radiation function: sqrt(x+1/(x+2)^2)-1/(x+2)

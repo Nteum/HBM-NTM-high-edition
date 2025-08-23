@@ -1,7 +1,7 @@
 package com.hbm.entity.weapon.grenade;
 
 import com.hbm.entity.ModEntityType;
-import com.hbm.world.level.explosion.ExplosionChaos;
+import com.hbm.explosion.ExplosionChaos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.EntityType;
