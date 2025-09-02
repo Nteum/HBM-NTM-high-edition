@@ -22,6 +22,13 @@ public class HBMKey {
     public static final String CORE_POS = "corePos";
     public static final String RECIPE_NOW = "recipe_now";
     public static final String PROGRESS = "progress";
+    public static final String DURATION = "duration";
+    public static final String TICK_POWER = "tick_power";
+    public static final String POLLUTION_TYPE = "pollution_type";
+    public static final String POLLUTION = "pollution";
+    public static final String RADIATION = "radiation";
+    public static final String FLUX = "flux";
+    public static final String HEAT = "heat";
     //cable
     public static final String FORBID_DIR = "forbidDir";
     public static final String CONN_LIMIT = "conn_limit";

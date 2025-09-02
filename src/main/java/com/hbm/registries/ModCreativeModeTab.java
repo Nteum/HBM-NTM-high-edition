@@ -2,6 +2,7 @@ package com.hbm.registries;
 
 import com.hbm.HBMLang;
 import com.hbm.Inventory.fluid.ModFluids;
+import com.hbm.block.HBMBlockComponent;
 import com.hbm.block.HBMMachine;
 import com.hbm.item.HBMComponent;
 import com.hbm.item.HBMWeapon;
@@ -15,6 +16,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
+import org.ietf.jgss.Oid;
 
 import static com.hbm.HBM.MODID;
 
@@ -23,9 +25,8 @@ public class ModCreativeModeTab {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
     public static final RegistryObject<CreativeModeTab> HBM_ITEM = CREATIVE_MODE_TABS.register("hbm_item", () -> CreativeModeTab.builder()
         .title(Component.translatable(HBMLang.ITEMGROUP_ITEM.key()))
-        .icon(() -> ModItems.ingot_steel.get().getDefaultInstance())
+        .icon(() -> HBMtools.UPGRADE_BASE.get().getDefaultInstance())
         .displayItems((parameters, output) -> {
-            output.accept(ModItems.ingot_steel.get());
             output.accept(ModItems.ingot_red_copper.get());
             output.accept(ModItems.ingot_tungsten.get());
             output.accept(ModItems.ingot_aluminium.get());
@@ -34,7 +35,6 @@ public class ModCreativeModeTab {
             output.accept(ModItems.ingot_magnetized_tungsten.get());
             output.accept(ModItems.ingot_solinium.get());
             output.accept(ModItems.ingot_advanced_alloy.get());
-            output.accept(ModItems.plate_steel.get());
             output.accept(ModItems.plate_iron.get());
             output.accept(ModItems.plate_advanced_alloy.get());
             output.accept(ModItems.fluorite.get());
@@ -73,6 +73,8 @@ public class ModCreativeModeTab {
             output.accept(ModBlocks.LITHIUM_ORE.get());
             output.accept(ModBlocks.DEPTH_STONE.get());
             output.accept(ModBlocks.TEST12.get());
+
+            HBMBlockComponent.creativeTab(output);
         }).build());
     public static final RegistryObject<CreativeModeTab> HBM_MACHINE = CREATIVE_MODE_TABS.register("hbm_machine", () -> CreativeModeTab.builder()
         .title(Component.translatable(HBMLang.ITEMGROUP_MACHINE.key()))

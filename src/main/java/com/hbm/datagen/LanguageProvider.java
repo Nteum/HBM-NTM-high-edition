@@ -3,6 +3,7 @@ package com.hbm.datagen;
 import com.hbm.HBMLang;
 import com.hbm.Inventory.fluid.ModFluids;
 import com.hbm.api.text.ILangEntry;
+import com.hbm.block.HBMBlockComponent;
 import com.hbm.block.HBMMachine;
 import com.hbm.blockentity.interfaces.IUpgradeInfoProvider;
 import com.hbm.item.HBMComponent;
@@ -27,9 +28,8 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
         addLookTooltip();
         addDebug();
         ModFluids.localName(this);
+
         //物品
-        this.add(ModItems.ingot_steel.get(),"Steel Ignot");
-        this.add(ModItems.plate_steel.get(),"Steel Plate");
         this.add(ModItems.coke_coal.get(),"Coal Coke");
         //方块
         this.add(ModBlocks.URANIUM_ORE.get(),"Uranium Ore");
@@ -58,6 +58,7 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
     }
     private void addBlocks(){
         HBMMachine.languageSupport(this);
+        HBMBlockComponent.languageSupport(this);
     }
     private void addMisc(){
         this.add(HBMLang.ENERGY.key(), "Energy: %1$s");

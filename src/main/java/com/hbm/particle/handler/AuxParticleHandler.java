@@ -29,7 +29,7 @@ public class AuxParticleHandler {
                 break;
 
             case 2:
-                level.addParticle(ModParticleTypes.CONTRAIL.get(), false,x, y, z,0.0,0.0,0);
+                level.addParticle(ModParticleTypes.ROCKET_FLAME.get(), false,x, y, z,0.0,0.0,0);
                 break;
 
             case 3:

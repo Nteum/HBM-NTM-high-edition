@@ -1,6 +1,7 @@
 package com.hbm.datagen.loot;
 
 import com.google.common.collect.Iterables;
+import com.hbm.block.HBMBlockComponent;
 import com.hbm.block.HBMMachine;
 import com.hbm.registries.ModBlocks;
 import net.minecraft.data.loot.BlockLootSubProvider;
@@ -29,6 +30,7 @@ public class BlockLootGen extends BlockLootSubProvider {
     protected void generate() {
 //        generateMachineLoot();
         HBMMachine.lootable(this);
+        HBMBlockComponent.lootable(this);
         //机器
         this.dropSelf(ModBlocks.machine_difurnace.get());
         this.dropSelf(ModBlocks.machine_electric_furnace.get());

@@ -5,9 +5,11 @@ import com.hbm.item.HBMtools;
 import com.hbm.registries.ModBlocks;
 import com.hbm.registries.ModItems;
 import com.hbm.registries.ModTags;
+import com.hbm.registries.OreDictManager;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -17,13 +19,13 @@ import java.util.concurrent.CompletableFuture;
 
 public class ItemTagsGen extends ItemTagsProvider {
 
-
     public ItemTagsGen(PackOutput pOutput, CompletableFuture<HolderLookup.Provider> pLookupProvider, CompletableFuture<TagLookup<Block>> pBlockTags, String modId, @Nullable ExistingFileHelper existingFileHelper) {
         super(pOutput, pLookupProvider, pBlockTags, modId, existingFileHelper);
     }
 
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
+        OreDictManager.addItemTags(this);
         //电池
         this.tag(ModTags.Items.BATTERY).add(HBMComponent.BATTERY_CREATIVE.get(),HBMComponent.BATTERY_GENERIC.get(),HBMComponent.BATTERY_ADVANCED.get(),HBMComponent.BATTERY_LITHIUM.get(),
                 ModBlocks.machine_battery.get().asItem(),ModBlocks.machine_lithium_battery.get().asItem(),
@@ -32,5 +34,10 @@ public class ItemTagsGen extends ItemTagsProvider {
         this.tag(ModTags.Items.CHARGEABLE).addTag(ModTags.Items.BATTERY);
         this.tag(ModTags.Items.UPGRADE).add(HBMtools.UPGRADE_BASE.get());
         this.tag(ModTags.Items.MISSILE).add(ModItems.MISSILE_GENERIC.get());
+    }
+
+    @Override
+    public IntrinsicTagAppender<Item> tag(TagKey<Item> pTag) {
+        return super.tag(pTag);
     }
 }

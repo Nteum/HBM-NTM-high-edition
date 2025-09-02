@@ -26,6 +26,7 @@ import com.hbm.registries.ModCreativeModeTab;
 import com.hbm.registries.ModItems;
 import com.hbm.Inventory.recipe.ModRecipes;
 import com.hbm.registries.ModSounds;
+import com.hbm.render.model.Models;
 import com.hbm.world.feature.ModFeatures;
 import com.mojang.logging.LogUtils;
 import net.minecraft.core.HolderLookup;
@@ -45,6 +46,7 @@ import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
@@ -77,6 +79,7 @@ public class HBM {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         modEventBus.addListener(this::commonSetup);
         modEventBus.addListener(this::onServerSetup);
+        modEventBus.addListener(this::onClientSetup);
         modEventBus.addListener(this::onPostLoad);
         modEventBus.addListener(this::onGatherData);
         modEventBus.addListener(ModCreativeModeTab::addCreative);
@@ -99,6 +102,7 @@ public class HBM {
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
+
         if (!CONFIG_PATH.toFile().exists()) CONFIG_PATH.toFile().mkdir();
         ModMessages.register(); //注册所有的消息
         TransmitterNetworkRegistry.initiate(); //注册传输网络系统
@@ -106,6 +110,10 @@ public class HBM {
 
     public void onServerSetup(FMLDedicatedServerSetupEvent event) {
 
+    }
+
+    public void onClientSetup(FMLClientSetupEvent event){
+        Models.loadEntityModel(event);
     }
 
     public void onPostLoad(FMLLoadCompleteEvent event){
@@ -161,4 +169,5 @@ public class HBM {
         return ModList.get().isLoaded(modID);
     }
     public static ResourceLocation rl(String s){return ResourceLocation.tryBuild(HBM.MODID,s);}
+    public static ResourceLocation modelRl(String s){return rl("models/" + s);}
 }

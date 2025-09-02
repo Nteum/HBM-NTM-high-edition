@@ -1,5 +1,6 @@
 package com.hbm.registries;
 
+import com.hbm.block.HBMBlockComponent;
 import com.hbm.block.HBMMachine;
 import com.hbm.block.decoriate.BlockTest12;
 import com.hbm.block.env.BedRockOre;
@@ -35,6 +36,7 @@ public class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
     static {
         HBMMachine.register(BLOCKS);
+        HBMBlockComponent.register(BLOCKS);
     }
     //机械
     public static final RegistryObject<Block> machine_difurnace = registerBlockWithItem("machine_difurnace", ()->new BlockDifurnace(BlockBehaviour.Properties.of().lightLevel(litEmission(13))));

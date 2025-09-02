@@ -5,6 +5,7 @@ import com.hbm.item.HBMWeapon;
 import com.hbm.item.HBMtools;
 import com.hbm.item.env.BedrockOreItem;
 import com.hbm.HBM;
+import com.hbm.item.misc.ItemCircuit;
 import com.hbm.item.weapon.ItemDesignator;
 import com.hbm.item.weapon.ItemDetonator;
 import com.hbm.item.weapon.ItemMissile;
@@ -32,7 +33,6 @@ public class ModItems {
     public static final RegistryObject<Item> grenade_frag = ITEMS.register("grenade_frag",()->new ItemGrenade(new Item.Properties(), ItemGrenade.Type.FRAG));
     public static final RegistryObject<Item> grenade_black_hole = ITEMS.register("grenade_black_hole",()->new ItemGrenade(new Item.Properties(), ItemGrenade.Type.BLACK_HOLE));
     /* material */
-    public static final RegistryObject<Item> ingot_steel = ITEMS.register("ingot_steel",()->new Item(new Item.Properties()));
     public static final RegistryObject<Item> ingot_red_copper = ITEMS.register("ingot_red_copper",()->new Item(new Item.Properties()));
     public static final RegistryObject<Item> ingot_tungsten = ITEMS.register("ingot_tungsten",()->new Item(new Item.Properties()));
     public static final RegistryObject<Item> ingot_aluminium = ITEMS.register("ingot_aluminium",()->new Item(new Item.Properties()));
@@ -41,7 +41,6 @@ public class ModItems {
     public static final RegistryObject<Item> ingot_magnetized_tungsten = ITEMS.register("ingot_magnetized_tungsten",()->new Item(new Item.Properties()));
     public static final RegistryObject<Item> ingot_solinium = ITEMS.register("ingot_solinium",()->new Item(new Item.Properties()));
     public static final RegistryObject<Item> ingot_advanced_alloy = ITEMS.register("ingot_advanced_alloy",()->new Item(new Item.Properties()));
-    public static final RegistryObject<Item> plate_steel = ITEMS.register("plate_steel",()->new Item(new Item.Properties()));
     public static final RegistryObject<Item> plate_iron = ITEMS.register("plate_iron",()->new Item(new Item.Properties()));
     public static final RegistryObject<Item> plate_advanced_alloy = ITEMS.register("plate_advanced_alloy",()->new Item(new Item.Properties()));
     public static final RegistryObject<Item> fluorite = ITEMS.register("fluorite",()->new Item(new Item.Properties()));

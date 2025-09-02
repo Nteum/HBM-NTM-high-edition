@@ -8,6 +8,9 @@ import com.google.gson.stream.JsonWriter;
 import com.hbm.HBM;
 import com.hbm.config.CustomMachineConfigJSON.MachineConfiguration.ComponentDefinition;
 import com.hbm.datagen.recipe.ingredient.CountableIngredient;
+import com.hbm.registries.OreDictManager;
+import com.hbm.item.HBMComponent;
+import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.level.block.Block;
 
 import java.io.File;
@@ -68,14 +71,13 @@ public class CustomMachineConfigJSON {
 
 			writer.name("recipeParts").beginArray().setIndent("");
 			writer.value("I");
-
-			SerializableRecipe.writeAStack(new OreDictStack(OreDictManager.STEEL.ingot()), writer);
+			CountableIngredient.writeConfigJson(CountableIngredient.of(OreDictManager.STEEL.ingot()), writer);
 			writer.setIndent("");
 			writer.value("P");
-			SerializableRecipe.writeAStack(new OreDictStack(OreDictManager.STEEL.plate()), writer);
+			CountableIngredient.writeConfigJson(CountableIngredient.of(OreDictManager.STEEL.plate()), writer);
 			writer.setIndent("");
 			writer.value("C");
-			SerializableRecipe.writeAStack(new ComparableStack(ModItems.circuit, 1, EnumCircuitType.BASIC), writer);
+			CountableIngredient.writeConfigJson(CountableIngredient.of(HBMComponent.CIRCUIT_BASIC.get(), 1), writer);
 			writer.endArray().setIndent("  ");
 
 			writer.name("components").beginArray();
@@ -179,24 +181,24 @@ public class CustomMachineConfigJSON {
 							if(j % 2 == 0) {
 								o = recipeParts.get(j).getAsString().charAt(0); //god is dead and we killed him
 							} else {
-								AStack a = SerializableRecipe.readAStack(recipeParts.get(j).getAsJsonArray());
-
-								if(a instanceof ComparableStack) o = ((ComparableStack) a).toStack();
-								if(a instanceof OreDictStack) o = ((OreDictStack) a).name;
+								CountableIngredient.readConfigJson(recipeParts.get(j).getAsJsonArray());
+//								if(a instanceof ComparableStack) o = ((ComparableStack) a).toStack();
+//								if(a instanceof OreDictStack) o = ((OreDictStack) a).name;
 							}
 
 							parts[j + recipeShape.size()] = o;
 						}
 
-						ItemStack stack = new ItemStack(ModBlocks.custom_machine, 1, i + 100);
-						stack.stackTagCompound = new NBTTagCompound();
-						stack.stackTagCompound.setString("machineType", configuration.unlocalizedName);
 
-						CraftingManager.addRecipeAuto(stack, parts);
+//						ItemStack stack = new ItemStack(ModBlocks.custom_machine, 1, i + 100);
+//						stack.stackTagCompound = new NBTTagCompound();
+//						stack.stackTagCompound.setString("machineType", configuration.unlocalizedName);
+//
+//						CraftingManager.addRecipeAuto(stack, parts);
 					} catch(Exception ex) {
-						MainRegistry.logger.error("Caught exception trying to parse core recipe for custom machine " + configuration.unlocalizedName);
-						MainRegistry.logger.error("recipeShape was" + machineObject.get("recipeShape").toString());
-						MainRegistry.logger.error("recipeParts was" + machineObject.get("recipeParts").toString());
+						HBM.LOGGER.error("Caught exception trying to parse core recipe for custom machine " + configuration.unlocalizedName);
+						HBM.LOGGER.error("recipeShape was" + machineObject.get("recipeShape").toString());
+						HBM.LOGGER.error("recipeParts was" + machineObject.get("recipeParts").toString());
 					}
 				}
 
@@ -206,7 +208,7 @@ public class CustomMachineConfigJSON {
 				for(int j = 0; j < components.size(); j++) {
 					JsonObject compObject = components.get(j).getAsJsonObject();
 					ComponentDefinition compDef = new ComponentDefinition();
-					compDef.block = (Block) Block.blockRegistry.getObject(compObject.get("block").getAsString());
+//					compDef.block = (Block) Block.blockRegistry.getObject(compObject.get("block").getAsString());
 					compDef.x = compObject.get("x").getAsInt();
 					compDef.y = compObject.get("y").getAsInt();
 					compDef.z = compObject.get("z").getAsInt();

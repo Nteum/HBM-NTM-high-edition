@@ -22,7 +22,6 @@ public class ItemModelGen extends ItemModelProvider {
         HBMComponent.genModel(this);
         HBMWeapon.genModel(this);
         ModFluids.bucketModel(this);
-        this.basicItem(ModItems.ingot_steel.get());
         this.basicItem(ModItems.ingot_red_copper.get());
         this.basicItem(ModItems.ingot_tungsten.get());
         this.basicItem(ModItems.ingot_aluminium.get());
@@ -31,7 +30,6 @@ public class ItemModelGen extends ItemModelProvider {
         this.basicItem(ModItems.ingot_magnetized_tungsten.get());
         this.basicItem(ModItems.ingot_solinium.get());
 
-        this.basicItem(ModItems.plate_steel.get());
         this.basicItem(ModItems.plate_iron.get());
 
         this.basicItem(ModItems.fluorite.get());

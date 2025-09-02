@@ -7,7 +7,7 @@
     "texture0": "hbm:block/chemplant/chemplant_base_new",
     "particle": "hbm:block/chemplant/chemplant_base_new"
   },
-  "ambientocclusion": false,
+  "automatic_culling": false,
   "display": {
     "gui": {
       "rotation": [ 30, 225, 0 ],

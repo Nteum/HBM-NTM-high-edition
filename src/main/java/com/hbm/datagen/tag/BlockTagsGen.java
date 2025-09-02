@@ -4,9 +4,12 @@ import com.hbm.api.resource.OreType;
 import com.hbm.block.HBMMachine;
 import com.hbm.registries.ModTags;
 import com.hbm.registries.ModBlocks;
+import com.hbm.registries.OreDictManager;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -21,6 +24,7 @@ public class BlockTagsGen extends BlockTagsProvider {
     }
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
+        OreDictManager.addBlockTags(this);
         //工具
         this.tag(BlockTags.NEEDS_IRON_TOOL).add(ModBlocks.URANIUM_ORE.get());
 
@@ -56,5 +60,10 @@ public class BlockTagsGen extends BlockTagsProvider {
 
         /** 原版tag */
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.DUMMIBLE.get()).addTag(ModTags.Blocks.MACHINE).addTag(Tags.Blocks.ORES);
+    }
+
+    @Override
+    public IntrinsicTagAppender<Block> tag(TagKey<Block> pTag) {
+        return super.tag(pTag);
     }
 }

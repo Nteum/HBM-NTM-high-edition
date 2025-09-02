@@ -1,7 +1,6 @@
 package com.hbm.item.weapon;
 
 import com.hbm.entity.weapon.missile.EntityMissile;
-import com.hbm.entity.weapon.missile.EntityMissileGenetic;
 import com.hbm.main.ClientSetup;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.core.BlockPos;
@@ -22,7 +21,8 @@ public class ItemMissile extends Item{
     public EntityMissile createEntity(Level level, BlockPos pos, BlockPos target){
 //        return null;
         Vec3 center = pos.getCenter();
-        return new EntityMissileGenetic(level,center.x,center.y,center.z,target);
+//        return new EntityMissileGenetic(level,center.x,center.y,center.z,target);
+        return null;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.hbm.Inventory.recipe;
 
 import com.google.gson.JsonObject;
+import com.hbm.HBMKey;
 import com.hbm.blockentity.machine.ChemplantEntity;
 import com.hbm.datagen.recipe.ingredient.CountableIngredient;
 import com.hbm.datagen.recipe.ingredient.FluidStackIngredient;
@@ -99,8 +100,7 @@ public class ChemplantRecipe implements Recipe<Container> {
             NonNullList<FluidStackIngredient> inputFluids = RecipeHelper.fluidsFromJson(GsonHelper.getAsJsonArray(pSerializedRecipe, "inputFluids"));
             List<ItemStack> resultItems = RecipeHelper.itemListFromJson(GsonHelper.getAsJsonArray(pSerializedRecipe, "resultItems"));
             List<FluidStack> resultFluids = RecipeHelper.fluidListFromJson(GsonHelper.getAsJsonArray(pSerializedRecipe, "resultFluids"));
-//            long power = GsonHelper.getAsLong(pSerializedRecipe, "number");
-            int duration = GsonHelper.getAsInt(pSerializedRecipe, "number2");
+            int duration = GsonHelper.getAsInt(pSerializedRecipe, HBMKey.DURATION);
             return new ChemplantRecipe(pRecipeId, duration, resultItems, resultFluids, inputItems, inputFluids);
         }
 

@@ -1,9 +1,12 @@
 package com.hbm.datagen.recipe.ingredient;
 
 import com.google.common.collect.Lists;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
+import com.google.gson.stream.JsonWriter;
+import com.hbm.HBM;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -24,6 +27,7 @@ import net.minecraftforge.common.crafting.IIngredientSerializer;
 import net.minecraftforge.common.crafting.StrictNBTIngredient;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -63,22 +67,6 @@ public class CountableIngredient extends AbstractIngredient {
 
     @Override
     public boolean test(@Nullable ItemStack pStack) {
-//        if (pStack==null)return false;
-//        else {
-//            if (!this.value.flagTag){
-//                return this.value.itemStack.is(pStack.getItem()) && this.value.getCount() <= pStack.getCount();
-//            }else {
-//                boolean flag = false;
-//                for (ItemStack itemStack : this.value.getItems()) {
-//                    if (itemStack.is(pStack.getItem())){
-//                        flag = true;
-//                        break;
-//                    }
-//                }
-//                return flag && this.value.count <= pStack.getCount();
-//            }
-//        }
-
         if (pStack==null)return false;
         else {
             if (!this.value.flagTag){
@@ -122,7 +110,7 @@ public class CountableIngredient extends AbstractIngredient {
             value1.flagTag = flag;
             if (flag){
                 int byteslen = buffer.readInt();
-                String string = buffer.readBytes(byteslen).toString;
+                String string = buffer.readBytes(byteslen).toString();
                 TagKey<Item> tagKey = parseTagKey(string);
                 value1.tagKey = tagKey;
             }else {
@@ -166,10 +154,6 @@ public class CountableIngredient extends AbstractIngredient {
         }
     }
     static TagKey<Item> parseTagKey(String s){
-//        StringBuilder stringBuilder = new StringBuilder(s);
-//        stringBuilder.indexOf("]\\");
-//        String location = s.substring(s.indexOf("]/") + 1, s.length() - 1);
-
         return TagKey.create(Registries.ITEM,new ResourceLocation(s.substring(s.indexOf(" / ") + 3, s.length() - 1)));
     }
 
@@ -232,5 +216,42 @@ public class CountableIngredient extends AbstractIngredient {
             }
             return jsonobject;
         }
+    }
+
+    public static void writeConfigJson(CountableIngredient ingredient, JsonWriter writer) throws IOException {
+        writer.beginArray();
+        writer.setIndent("");
+        Value value = ingredient.value;
+        if(!value.flagTag) {
+            writer.value("item");														//ITEM  identifier
+            writer.value(BuiltInRegistries.ITEM.getKey(value.itemStack.getItem()).toString());	//item name
+            if (value.itemStack.isDamageableItem()) writer.value(value.itemStack.getDamageValue());
+        }else{
+            writer.value("tag");
+            writer.value(value.tagKey.location().toString());
+        }
+        if (value.count != 1) writer.value(value.count);
+        writer.endArray();
+        writer.setIndent("  ");
+    }
+
+    public static CountableIngredient readConfigJson(JsonArray array){
+        try {
+            String type = array.get(0).getAsString();
+            int stacksize = array.size() > 2 ? array.get(2).getAsInt() : 1;
+            if("item".equals(type)) {
+                Item item = ShapedRecipe.itemFromJson(array.get(1).getAsJsonObject());
+                int meta = array.size() > 3 ? array.get(3).getAsInt() : 0;
+                ItemStack itemStack = new ItemStack(item, stacksize);
+                itemStack.setDamageValue(meta);
+                return CountableIngredient.of(itemStack);
+            }else if("tag".equals(type)) {
+                ResourceLocation resourcelocation = new ResourceLocation(array.get(1).getAsString());
+                TagKey<Item> tagkey = TagKey.create(Registries.ITEM, resourcelocation);
+                return CountableIngredient.of(tagkey, stacksize);
+            }
+        } catch(Exception ex) { }
+        HBM.LOGGER.error("Error reading stack array " + array.toString());
+        return CountableIngredient.of(ItemStack.EMPTY);
     }
 }

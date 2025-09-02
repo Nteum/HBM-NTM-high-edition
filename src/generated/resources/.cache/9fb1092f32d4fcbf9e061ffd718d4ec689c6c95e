@@ -1,4 +1,4 @@
-// 1.20.1	2025-07-21T00:05:45.2617069	Recipes
+// 1.20.1	2025-08-29T20:54:08.9022865	Recipes
 7c723dac5449c91aa28d1e16ee126fb99eca187f data/hbm/advancements/recipes/misc/ingot_zirconium_6.json
 fba89d099e49106184c324264ce6594bde0682f5 data/hbm/advancements/recipes/misc/nugget_zirconium_5.json
 481728a97159df53b95a39b4b89c136f401dd859 data/hbm/recipes/assembler/battery_creative.json
@@ -8,6 +8,6 @@ f3d45161cc6e053886408a38c6bf335080697406 data/hbm/recipes/blast_0.json
 21b6b41df945eadb6f2d234cb84d2f48b848fe22 data/hbm/recipes/blast_2.json
 ef837915b0a4a84a2d21b2243d7de1f17d915706 data/hbm/recipes/blast_3.json
 22f44642291b21bd7e552af05c5c09c42c939312 data/hbm/recipes/blast_4.json
-72d5167fbdaa3c74bcad907ff60eef2c2c438e8c data/hbm/recipes/chemplant/hydrogen.json
+c996ad67053c4c131affee10e319b584461336f5 data/hbm/recipes/chemplant/hydrogen.json
 12b81fac58053f71d70970c123ad61ecef374c55 data/hbm/recipes/ingot_zirconium_6.json
 8bf9f8bf37bbe4b38feb47da76e51cae96287cf8 data/hbm/recipes/nugget_zirconium_5.json

@@ -4,7 +4,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonWriter;
 import com.hbm.HBMLang;
 import com.hbm.Inventory.fluid.ExtendedFluidType;
-import com.hbm.handler.pollution.PollutionHandler.PollutionType;
+import com.hbm.handler.pollution.PollutionType;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;

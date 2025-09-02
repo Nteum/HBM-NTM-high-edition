@@ -1,6 +1,7 @@
 package com.hbm.datagen.model;
 
 import com.hbm.HBM;
+import com.hbm.block.HBMBlockComponent;
 import com.hbm.block.HBMMachine;
 import com.hbm.registries.ModBlocks;
 import net.minecraft.resources.ResourceLocation;
@@ -18,6 +19,8 @@ public class DecorateBlockStateProvider implements ICategoryStateProvider{
     public void registerStatesAndModels(){
         horizontalBlockWithItem(ModBlocks.TEST12.get(),"block/test12/test12");
         stateProvider.simpleBlockWithItem(HBMMachine.DEBUG_BLOCK.get(),stateProvider.cubeAll(HBMMachine.DEBUG_BLOCK.get()));
+
+        HBMBlockComponent.genModel(stateProvider);
     }
     protected void horizontalBlockWithItem(Block block, ModelFile model){
         stateProvider.horizontalBlock(block,model);

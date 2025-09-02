@@ -9,7 +9,9 @@ import com.hbm.explosion.vanillant.standard.BlockAllocatorStandard;
 import com.hbm.explosion.vanillant.standard.BlockProcessorStandard;
 import com.hbm.explosion.vanillant.standard.PlayerProcessorStandard;
 import com.hbm.item.weapon.ItemMissile;
+import com.hbm.particle.ParticleSystem;
 import com.hbm.utils.chunk.ChunkLoadHelper;
+import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
@@ -36,10 +38,11 @@ public abstract class EntityMissile extends EntityThrowableNT implements IRadarD
     public BlockPos start;
     public BlockPos target;
     public double velocity; //速度
-    public double decelY;
+    public double decelY;   //Y方向空气阻力
     public double accelXZ;  //水平方向加速度
     public boolean isCluster = false;
-    private static final EntityDataAccessor<Integer> DATA_FUSE_ID = SynchedEntityData.defineId(EntityMissile.class, EntityDataSerializers.INT);
+    // 我也不知道这个是什么，反正办过来就行了
+    public static final EntityDataAccessor<Byte> DATA_MISSILE_1 = SynchedEntityData.defineId(EntityMissile.class, EntityDataSerializers.BYTE);
     public int health = 50;
 
     public EntityMissile(EntityType<? extends ThrowableProjectile> pEntityType, Level pLevel) {
@@ -49,13 +52,13 @@ public abstract class EntityMissile extends EntityThrowableNT implements IRadarD
             ChunkLoadHelper.register(this);
         }
     }
-    public EntityMissile(EntityType<? extends ThrowableProjectile> pEntityType, Level level, double x, double y,double z, BlockPos target){
+    public EntityMissile(EntityType<? extends ThrowableProjectile> pEntityType, Level level, float x, float y,float z, BlockPos target){
         this(pEntityType,level);
         entityInit();   //低版本是forge加的内置方法，后面变成event了，这里暂时用函数实现
         this.setPos(x,y,z);
         this.start = new BlockPos((int) x, (int) y, (int) z);
         this.target = target;
-        this.setDeltaMovement(this.getDeltaMovement().x,2,this.getDeltaMovement().z);
+        this.setDeltaMovement(getDeltaMovement().x,2,getDeltaMovement().z);
 
         Vec3 vector = new Vec3(target.getX()-start.getX(),0,target.getZ()-start.getZ());
         accelXZ = decelY = 1 / vector.length();
@@ -63,6 +66,8 @@ public abstract class EntityMissile extends EntityThrowableNT implements IRadarD
         velocity = 0;
         this.setYRot((float) (Mth.atan2(target.getX()-start.getX(), target.getZ()-start.getZ()) * 180.0D / Math.PI));
         this.setSize(1.5F, 1.5F);
+//        vector = vector.normalize();
+//        this.setDeltaMovement(0.5 * vector.x,0.5,0.5 * vector.z);
     }
     // 设定无论是否在视线内始终渲染
     @Override
@@ -100,30 +105,28 @@ public abstract class EntityMissile extends EntityThrowableNT implements IRadarD
 
     @Override
     public void tick() {
-        setOldPosAndRot();
         super.tick();
+
         if (velocity < 4)velocity += Mth.clamp(tickCount / 60D * 0.05d,0,0.05);
-        if(!level().isClientSide()) {
+//        if(!level().isClientSide()) {
             double motionX = this.getDeltaMovement().x;
             double motionY = this.getDeltaMovement().y;
             double motionZ = this.getDeltaMovement().z;
-            if(hasPropulsion()) {
+            if (hasPropulsion()){
                 motionY -= decelY * velocity;
-
                 Vec3 vector = new Vec3(target.getX() - start.getX(), 0, target.getZ() - start.getZ());
                 vector = vector.normalize();
                 double f = accelXZ * velocity;
                 if (motionY < 0)f = -f;
                 vector = vector.scale(f);
-                motionX += vector.x;
-                motionZ += vector.z;
-
-            } else {
-                motionX *= 0.99;
-                motionZ *= 0.99;
-
-                if(motionY > -1.5)
-                    motionY -= 0.05;
+                if(motionX * (motionX + vector.x) >= 0) motionX += vector.x;
+                if(motionZ * (motionZ + vector.z) >= 0) motionZ += vector.z;
+            }else {
+                if (motionY > -1.5) motionY -= 0.2;
+            }
+            // 如果已经到目标点上空水平方向就直接停
+            if (position().distanceTo(target.getCenter()) < decelY * velocity){
+                motionX = motionZ = 0;
             }
 
             if(motionY < -velocity && this.isCluster) {
@@ -131,15 +134,13 @@ public abstract class EntityMissile extends EntityThrowableNT implements IRadarD
                 this.setDead();
                 return;
             }
-            this.setDeltaMovement(target.getX()- position().x, getDeltaMovement().y, target.getZ() - position().z);
-            updateRotation();
-            //这里更新tracker，新版没有找到对应代码
-
-            loadNeighboringChunks((int) Math.floor(getX() / 16), (int) Math.floor(getZ() / 16));
-        } else {
+            this.setDeltaMovement(motionX, motionY, motionZ);
+//        }else
+        if (level().isClientSide){
             this.spawnContrail();
         }
-        updateRotation();
+
+        loadNeighboringChunks((int) Math.floor(getX() / 16), (int) Math.floor(getZ() / 16));
     }
 
     public boolean hasPropulsion() {
@@ -151,27 +152,17 @@ public abstract class EntityMissile extends EntityThrowableNT implements IRadarD
     }
 
     protected void spawnContraolWithOffset(double offsetX, double offsetY, double offsetZ) {
-        Vec3 vec = this.position().subtract(xOld, yOld, zOld);
-        double len = vec.length();
-        vec = vec.normalize();
-        Vec3 thrust = new Vec3(0, 1, 0);
-        thrust.xRot(this.getXRot() * (float) Math.PI / 180F);
-        thrust.yRot((this.getYRot() + 90) * (float) Math.PI / 180F);
-
-        for(int i = 0; i < Math.max(Math.min(len, 10), 1); i++) {
-            double j = i - len;
-            CompoundTag data = new CompoundTag();
-            data.putDouble("posX", position().x - vec.x * j + offsetX);
-            data.putDouble("posY", position().y - vec.y * j + offsetY);
-            data.putDouble("posZ", position().z - vec.z * j + offsetZ);
-            data.putString("type", "missileContrail");
-            data.putFloat("scale", this.getContrailScale());
-            data.putDouble("moX", -thrust.x);
-            data.putDouble("moY", -thrust.y);
-            data.putDouble("moZ", -thrust.z);
-            data.putInt("maxAge", 60 + level().getRandom().nextInt(20));
-//            MainRegistry.proxy.effectNT(data);
-        }
+//        Vec3 vec = this.position().subtract(xOld, yOld, zOld);
+//        double len = vec.length();
+//        vec = vec.normalize();
+//        Vec3 thrust = new Vec3(0, 1, 0);
+//        thrust.xRot(this.getXRot() * (float) Math.PI / 180F);
+//        thrust.yRot((this.getYRot() + 90) * (float) Math.PI / 180F);
+//
+//        for(int i = 0; i < Math.max(Math.min(len, 10), 1); i++) {
+//            double j = i - len;
+//            ParticleSystem.addRocketFlame(position().x - vec.x * j + offsetX, position().y - vec.y * j + offsetY, position().z - vec.z * j + offsetZ, -thrust.x, -thrust.y, -thrust.z, getContrailScale(), 600 + level().getRandom().nextInt(20));
+//        }
     }
 
     @Override
@@ -241,6 +232,9 @@ public abstract class EntityMissile extends EntityThrowableNT implements IRadarD
     }
 
     public abstract void onMissileImpact(HitResult pResult);
+    /**
+     * 火箭残骸
+     * */
     public abstract List<ItemStack> getDebris();
     public abstract ItemStack getDebrisRareDrop();
     public void cluster() { }
@@ -277,6 +271,7 @@ public abstract class EntityMissile extends EntityThrowableNT implements IRadarD
     private void setSize(double width, double height){
         this.setBoundingBox(AABB.ofSize(new Vec3(0.5,0.5,0.5),width,height,width));
     }
+
 
     protected void entityInit() {
         if (!level().isClientSide()){
@@ -321,7 +316,7 @@ public abstract class EntityMissile extends EntityThrowableNT implements IRadarD
 
     @Override
     protected void defineSynchedData() {
-
+        this.entityData.define(DATA_MISSILE_1, Byte.valueOf("5"));
     }
 
     @Override

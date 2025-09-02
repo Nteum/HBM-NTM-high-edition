@@ -1,6 +1,8 @@
 package com.hbm.utils.debug;
 
 import com.hbm.item.HBMtools;
+import com.hbm.particle.ModParticleTypes;
+import com.hbm.particle.ParticleSystem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -11,10 +13,12 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.RedstoneLampBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
 
 public class BlockDebug extends Block {
     public static final BooleanProperty ACTIVE = BooleanProperty.create("debug_active");
@@ -32,22 +36,21 @@ public class BlockDebug extends Block {
     @Override
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
         if (!pLevel.isClientSide && pPlayer.getItemInHand(pHand).is(HBMtools.DEBUG_WAND.get())){
-            if (pState.getValue(ACTIVE)){
-                pState.setValue(ACTIVE, false);
-                pPlayer.sendSystemMessage(Component.literal("Debug block switch to inactive."));
-            }else {
-                pState.setValue(ACTIVE, true);
-                pPlayer.sendSystemMessage(Component.literal("Debug block switch to active."));
-            }
+            BlockState newState = pState.cycle(ACTIVE);
+            pLevel.setBlock(pPos, newState,2);
+            pPlayer.sendSystemMessage(Component.literal("Debug block switch to " + (newState.getValue(ACTIVE) ? "active" : "inactive")));
         }
         return super.use(pState, pLevel, pPos, pPlayer, pHand, pHit);
     }
 
     @Override
-    public void tick(BlockState pState, ServerLevel pLevel, BlockPos pPos, RandomSource pRandom) {
-        super.tick(pState, pLevel, pPos, pRandom);
-        if (pLevel.getGameTime() % 20 == 0){
-            pLevel.players().get(0).sendSystemMessage(Component.literal("Debug block alive, now is " + pLevel.getGameTime()));
+    public void animateTick(BlockState pState, Level pLevel, BlockPos pPos, RandomSource pRandom) {
+        super.animateTick(pState, pLevel, pPos, pRandom);
+        if (pState.getValue(ACTIVE)){
+            if (pLevel.getRandom().nextFloat() > 0){
+                Vec3 center = pPos.getCenter().add(0, 0.5, 0);
+                ParticleSystem.addRocketFlame(center.x, center.y, center.z, 0, 0.1, 0, null, 60 + pRandom.nextInt(20));
+            }
         }
     }
 }

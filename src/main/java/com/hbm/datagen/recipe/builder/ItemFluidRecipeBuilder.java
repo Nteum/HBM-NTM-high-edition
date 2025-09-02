@@ -3,22 +3,20 @@ package com.hbm.datagen.recipe.builder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.hbm.HBM;
+import com.hbm.HBMKey;
 import com.hbm.Inventory.recipe.ModRecipes;
 import com.hbm.datagen.recipe.ingredient.CountableIngredient;
 import com.hbm.datagen.recipe.ingredient.FluidStackIngredient;
-import net.minecraft.advancements.CriterionTriggerInstance;
+import com.hbm.handler.pollution.PollutionType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.FinishedRecipe;
-import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraftforge.common.Tags;
 import net.minecraftforge.fluids.FluidStack;
 import org.jetbrains.annotations.Nullable;
 
@@ -43,8 +41,15 @@ public class ItemFluidRecipeBuilder implements FinishedRecipe {
     protected List<CountableIngredient> rawItems = new ArrayList<>();
     protected List<FluidStackIngredient> rawFluids = new ArrayList<>();
     // 怎么说呢，沟槽的bob，他设置的化工厂配方需要两个数：（时间，功率）
-    long number = 0;
-    int number2 = 0;
+
+    public int duration = -1;
+    public int consumptionPerTick = -1;
+    public PollutionType pollutionType = PollutionType.NONE;
+    public float pollutionAmount = -1;
+    public float radiationAmount = -1;
+    public int flux = -1;
+    public int heat = -1;
+
     private RecipeCategory category = RecipeCategory.MISC;
     private String group = "";
     private static int counter = 0;
@@ -83,12 +88,29 @@ public class ItemFluidRecipeBuilder implements FinishedRecipe {
         this.rawFluids.add(FluidStackIngredient.of(tag, amount));
         return this;
     }
-    public ItemFluidRecipeBuilder num(long number){
-        this.number = number;
+    public ItemFluidRecipeBuilder duration(int duration){
+        this.duration = duration;
         return this;
     }
-    public ItemFluidRecipeBuilder num2(int number){
-        this.number2 = number;
+    public ItemFluidRecipeBuilder tickPower(int tickPower){
+        this.consumptionPerTick = tickPower;
+        return this;
+    }
+    public ItemFluidRecipeBuilder pollution(PollutionType type, float pollutionAmount){
+        this.pollutionType = type;
+        this.pollutionAmount = pollutionAmount;
+        return this;
+    }
+    public ItemFluidRecipeBuilder rad(float radiationAmount){
+        this.radiationAmount = radiationAmount;
+        return this;
+    }
+    public ItemFluidRecipeBuilder flux(int flux){
+        this.flux = flux;
+        return this;
+    }
+    public ItemFluidRecipeBuilder heat(int heat){
+        this.heat = heat;
         return this;
     }
     public ItemFluidRecipeBuilder group(String group){
@@ -139,9 +161,18 @@ public class ItemFluidRecipeBuilder implements FinishedRecipe {
         }
         pJson.add("resultFluids", jsonArray2);
 
-        pJson.addProperty("number",this.number);
-        pJson.addProperty("number2",this.number2);
+        if (duration >= 0) pJson.addProperty(HBMKey.DURATION, this.duration);
+        if (consumptionPerTick >= 0) pJson.addProperty(HBMKey.TICK_POWER, this.consumptionPerTick);
+        if (!pollutionType.equals(PollutionType.NONE) && pollutionAmount >= 0) {
+            pJson.addProperty(HBMKey.POLLUTION_TYPE, this.pollutionType.ordinal());
+            pJson.addProperty(HBMKey.POLLUTION, this.pollutionAmount);
+        }
+        if (radiationAmount >= 0) pJson.addProperty(HBMKey.RADIATION, this.radiationAmount);
+        if (flux >= 0) pJson.addProperty(HBMKey.FLUX, this.flux);
+        if (heat >= 0) pJson.addProperty(HBMKey.HEAT, this.heat);
     }
+
+
 
     @Override
     public ResourceLocation getId() {

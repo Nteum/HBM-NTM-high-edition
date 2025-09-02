@@ -8,10 +8,10 @@ import com.hbm.gui.ModMenuType;
 import com.hbm.gui.screen.*;
 import com.hbm.gui.screen.RenderUtils;
 import com.hbm.item.tool.FluidBucketItem;
-import com.hbm.model.Models;
-import com.hbm.model.entity.TestEntityModel;
+import com.hbm.render.entity.missile.MissileTaintRenderer;
+import com.hbm.render.model.Models;
+import com.hbm.render.model.entity.TestEntityModel;
 import com.hbm.particle.ModParticleTypes;
-import com.hbm.particle.type.HBMSmokeParticle;
 import com.hbm.render.blockentity.*;
 import com.hbm.render.entity.TestEntityRenderer;
 import com.hbm.render.entity.effect.BlackHoleRender;
@@ -64,6 +64,7 @@ public class ClientSetup {
             EntityRenderers.register(ModEntityType.ENTITY_BLACK_HOLE.get(), BlackHoleRender::new);
             EntityRenderers.register(ModEntityType.ENTITY_NUKE_EXPLOSION_MK5.get(), EntityBlankRender::new);
             EntityRenderers.register(ModEntityType.ENTITY_NUKE_TOREX.get(), EntityTorexRender::new);
+            EntityRenderers.register(ModEntityType.ENTITY_MISSILE_TEST.get(), MissileTaintRenderer::new);
 
             RenderUtils.init();
         });
@@ -79,18 +80,7 @@ public class ClientSetup {
     @SubscribeEvent
     public static void registerAdditional(ModelEvent.RegisterAdditional event){
         //注册自定义加载模型
-        event.register(Models.ASSEMBLER_BODY);
-        event.register(Models.ASSEMBLER_COG);
-        event.register(Models.ASSEMBLER_ARM);
-        event.register(Models.ASSEMBLER_SLIDER);
-        event.register(Models.CRUCIBLE);
-        event.register(Models.FAT_MAN);
-        event.register(Models.CUSTOM_NUKE);
-        event.register(Models.BOY);
-        event.register(Models.BLACK_HOLE);
-        event.register(Models.CHEMPLANT_BODY);
-        event.register(Models.CHEMPLANT_PISTON);
-        event.register(Models.CHEMPLANT_SPINNER);
+        Models.registerModels(event);
     }
 
     @SubscribeEvent
@@ -100,7 +90,7 @@ public class ClientSetup {
     @SubscribeEvent
     public static void registerParticleProvidersEvent(RegisterParticleProvidersEvent event){
         //注册模组专属粒子效果
-        event.registerSpriteSet(ModParticleTypes.HBM_SMOKE.get(), HBMSmokeParticle.Provider::new);
+        ModParticleTypes.register(event);
     }
 
     @SubscribeEvent

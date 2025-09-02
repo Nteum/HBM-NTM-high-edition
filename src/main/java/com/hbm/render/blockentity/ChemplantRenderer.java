@@ -1,9 +1,8 @@
 package com.hbm.render.blockentity;
 
-import com.hbm.block.base.BedLikeBlock;
 import com.hbm.blockentity.machine.ChemplantEntity;
-import com.hbm.model.Models;
-import com.hbm.render.utils.ModelAdjustUtils;
+import com.hbm.render.RenderUtils;
+import com.hbm.render.model.Models;
 import com.hbm.utils.DirectionUtils;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
@@ -13,19 +12,10 @@ import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.client.renderer.block.ModelBlockRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelManager;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.Vec3i;
-import net.minecraft.util.Mth;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-
-import java.util.List;
 
 public class ChemplantRenderer implements BlockEntityRenderer<ChemplantEntity> {
     boolean running = true;

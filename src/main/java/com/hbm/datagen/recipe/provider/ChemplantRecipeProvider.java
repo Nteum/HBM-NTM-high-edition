@@ -17,7 +17,7 @@ public class ChemplantRecipeProvider implements ISubRecipeProvider {
     public static final String ROOT = HBMKey.CHEMPLANT + "/";
     @Override
     public void addRecipes(Consumer<FinishedRecipe> consumer) {
-        ItemFluidRecipeBuilder.of(HBM.rl(ROOT+"hydrogen")).num(400).num2(20).requireItems(new ItemStack(Items.COAL,1)).requireFluids(new FluidStack(Fluids.WATER, 8000))
+        ItemFluidRecipeBuilder.of(HBM.rl(ROOT+"hydrogen")).duration(20).requireItems(new ItemStack(Items.COAL,1)).requireFluids(new FluidStack(Fluids.WATER, 8000))
                 .resultFluids(new FluidStack(ModFluids.HYDROGEN.source().get(), 500)).save(consumer);
     }
 }

@@ -2,9 +2,7 @@ package com.hbm.render.blockentity;
 
 
 import com.hbm.blockentity.machine.AssemblerEntity;
-import com.hbm.model.Models;
-import com.hbm.registries.ModItems;
-import com.hbm.render.utils.ModelAdjustUtils;
+import com.hbm.render.model.Models;
 import com.hbm.utils.DirectionUtils;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
@@ -19,11 +17,10 @@ import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelManager;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemDisplayContext;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
-import static com.hbm.render.blockentity.RenderUtils.renderBlockModel;
+import static com.hbm.render.RenderUtils.renderBlockModel;
 
 public class AssemblerRenderer implements BlockEntityRenderer<AssemblerEntity> {
     public static BakedModel model;

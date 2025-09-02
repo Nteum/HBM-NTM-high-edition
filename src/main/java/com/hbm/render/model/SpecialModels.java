@@ -1,4 +1,4 @@
-package com.hbm.model;
+package com.hbm.render.model;
 
 import com.hbm.HBM;
 import net.minecraft.client.resources.model.BakedModel;

@@ -3,6 +3,7 @@ package com.hbm.utils.debug;
 import com.hbm.HBM;
 import com.hbm.HBMKey;
 import com.hbm.HBMLang;
+import com.hbm.entity.weapon.missile.EntityMissileTier0.*;
 import com.hbm.utils.WorldUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.SectionPos;
@@ -24,6 +25,7 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.CampfireBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.world.ForgeChunkManager;
 import org.jetbrains.annotations.Nullable;
@@ -75,10 +77,7 @@ public class ItemDebugWand extends Item {
                 if (markedBlock.is(Blocks.AIR) || markedBlock.is(Blocks.VOID_AIR)){
                     pPlayer.sendSystemMessage(Component.translatable(HBMLang.BLOCK_STATE_LOSE.key(), storedPos.toShortString()));
                 }else {
-//                    ChunkPos chunkPos = new ChunkPos(storedPos);
-//                    ((ServerLevel) pLevel).getChunkSource().addRegionTicket(TicketType.FORCED, chunkPos, 0, chunkPos, true);
-//                    ForgeChunkManager.forceChunk((ServerLevel) pLevel, HBM.MODID, storedPos, SectionPos.blockToSectionCoord(storedPos.getX()), SectionPos.blockToSectionCoord(storedPos.getY()),false,false);
-                    pPlayer.sendSystemMessage(Component.translatable(HBMLang.BLOCK_STATE_INFO.key(), storedPos.toShortString(), markedBlock.getBlock().getDescriptionId()));
+                    createMissle(pLevel, pPlayer, pUsedHand, storedPos);
                 }
                 itemInHand.removeTagKey(HBMKey.POSITION);
             }
@@ -97,5 +96,19 @@ public class ItemDebugWand extends Item {
 //                pEntity.sendSystemMessage(Component.translatable(HBMLang.CHUNK_DATA.key(), new ChunkPos(blockPos).toString()).append(" is " + (doChunkLoad ? "load" : "unload")));
 //            }
 //        }
+    }
+
+    /**
+     * 这些函数均在use函数里调用，用于调试各种不同的效果
+     * */
+    public static void forceChunk(Level pLevel, Player pPlayer, BlockPos storedPos, BlockState markedBlock){
+        ForgeChunkManager.forceChunk((ServerLevel) pLevel, HBM.MODID, storedPos, SectionPos.blockToSectionCoord(storedPos.getX()), SectionPos.blockToSectionCoord(storedPos.getY()),false,false);
+        pPlayer.sendSystemMessage(Component.translatable(HBMLang.BLOCK_STATE_INFO.key(), storedPos.toShortString(), markedBlock.getBlock().getDescriptionId()));
+    }
+    public static void createMissle(Level pLevel, Player pPlayer, InteractionHand pUsedHand, BlockPos storedPos){
+        EntityMissileTest missileTest = new EntityMissileTest(pLevel, (float) pPlayer.getX(), (float) (pPlayer.getY()+2), (float) pPlayer.getZ(), storedPos);
+        pLevel.addFreshEntity(missileTest);
+        pPlayer.sendSystemMessage(Component.literal("New missile create, aim at: " + storedPos.toShortString()));
+
     }
 }

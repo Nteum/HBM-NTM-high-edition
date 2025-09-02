@@ -1,4 +1,4 @@
-package com.hbm.model.entity;
+package com.hbm.render.model.entity;
 
 // Made with Blockbench 4.9.3
 // Exported for Minecraft version 1.17 or later with Mojang mappings

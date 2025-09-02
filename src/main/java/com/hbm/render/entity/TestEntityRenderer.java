@@ -2,7 +2,7 @@ package com.hbm.render.entity;
 
 import com.hbm.HBM;
 import com.hbm.entity.TestEntity;
-import com.hbm.model.entity.TestEntityModel;
+import com.hbm.render.model.entity.TestEntityModel;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;

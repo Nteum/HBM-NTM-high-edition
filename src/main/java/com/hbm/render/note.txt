@@ -17,6 +17,7 @@ Event
     ScreenshotEvent - 渲染截图
     TextureStitchEvent - 在纹理被组成atlas之前运作
     ToastAddEvent - 渲染提示信息
+    ModelEvent.ModifyBakingResult -
 
 3. mc模型的流程
 模型的原始格式是存储在assets/models文件夹里的模型文件，模型加载的流程大体是这样的：

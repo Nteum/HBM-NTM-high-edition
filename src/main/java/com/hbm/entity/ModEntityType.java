@@ -7,8 +7,7 @@ import com.hbm.entity.logic.EntityNukeExplosionMK5;
 import com.hbm.entity.weapon.grenade.*;
 //import com.hbm.entity.logic.GrenadeGeneticEntity;
 //import com.hbm.entity.logic.NukeExplodeEntity;
-import com.hbm.entity.weapon.missile.EntityMissile;
-import com.hbm.entity.weapon.missile.EntityMissileGenetic;
+import com.hbm.entity.weapon.missile.EntityMissileTier0.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -34,8 +33,8 @@ public class ModEntityType {
     public static final RegistryObject<EntityType<EntityGrenadeBlackHole>> ENTITY_GRENADE_BLACK_HOLE
             = register("grenade_black_hole",EntityType.Builder.<EntityGrenadeBlackHole>of(EntityGrenadeBlackHole::new, MobCategory.MISC));
     /** 导弹 */
-    public static final RegistryObject<EntityType<EntityMissileGenetic>> ENTITY_MISSILE_GENETIC
-            = register("missile_genetic",EntityType.Builder.<EntityMissileGenetic>of(EntityMissileGenetic::new, MobCategory.MISC));
+    public static final RegistryObject<EntityType<EntityMissileTest>> ENTITY_MISSILE_TEST
+            = register("missile_test",EntityType.Builder.<EntityMissileTest>of(EntityMissileTest::new, MobCategory.MISC));
 
     /**
      * 用于效果的实体

@@ -2,7 +2,7 @@ package com.hbm.render.entity.effect;
 
 import com.hbm.HBM;
 import com.hbm.entity.effect.EntityBlackHole;
-import com.hbm.model.Models;
+import com.hbm.render.model.Models;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.BufferBuilder;
 import com.mojang.blaze3d.vertex.PoseStack;
