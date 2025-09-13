@@ -52,8 +52,9 @@ public class SpecialItemRender extends BlockEntityWithoutLevelRenderer {
 //        }
         if (pStack.is(HBMWeapon.MP_WARHEAD_15_BALEFIRE.get())){
             pPoseStack.pushPose();
-            VertexConsumer vertexconsumer1 = ItemRenderer.getFoilBufferDirect(pBuffer, this.missileHeadModel.renderType(MissileHeadModel.TEXTURE), false, pStack.hasFoil());
-            this.missileHeadModel.renderToBuffer(pPoseStack,vertexconsumer1,pPackedLight,pPackedOverlay,1.0F,1.0F,1.0F,1.0F);
+
+//            VertexConsumer vertexconsumer1 = ItemRenderer.getFoilBufferDirect(pBuffer, this.missileHeadModel.renderType(MissileHeadModel.TEXTURE), false, pStack.hasFoil());
+//            this.missileHeadModel.renderToBuffer(pPoseStack,vertexconsumer1,pPackedLight,pPackedOverlay,1.0F,1.0F,1.0F,1.0F);
             pPoseStack.popPose();
         }
     }

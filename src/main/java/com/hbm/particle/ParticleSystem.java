@@ -4,6 +4,7 @@ import com.hbm.particle.type.ParticleRocketFlame;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.Nullable;
@@ -15,9 +16,8 @@ import org.jetbrains.annotations.Nullable;
 public class ParticleSystem {
     @OnlyIn(Dist.CLIENT)
     public static void addRocketFlame(double pX, double pY, double pZ, double movX, double movY, double movZ, @Nullable Float scale, @Nullable Integer lifetime){
-        if (Minecraft.getInstance().player.distanceToSqr(pX,pY, pZ) > 350) return;
+        if (Minecraft.getInstance().player.position().distanceTo(new Vec3(pX,pY,pZ)) > 350) return;
         ParticleRocketFlame particle = (ParticleRocketFlame)Minecraft.getInstance().particleEngine.makeParticle(ModParticleTypes.ROCKET_FLAME.get(), pX, pY, pZ, movX, movY, movZ);
-//        ParticleRocketFlame particle = new ParticleRocketFlame(Minecraft.getInstance().level, pX, pY, pZ);
         if (particle == null) return;
         if (scale != null) particle.scale(scale);
         if (lifetime != null) particle.setLifetime(lifetime);

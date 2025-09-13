@@ -107,6 +107,7 @@ public class ItemDebugWand extends Item {
     }
     public static void createMissle(Level pLevel, Player pPlayer, InteractionHand pUsedHand, BlockPos storedPos){
         EntityMissileTest missileTest = new EntityMissileTest(pLevel, (float) pPlayer.getX(), (float) (pPlayer.getY()+2), (float) pPlayer.getZ(), storedPos);
+        missileTest.setOwner(pPlayer);
         pLevel.addFreshEntity(missileTest);
         pPlayer.sendSystemMessage(Component.literal("New missile create, aim at: " + storedPos.toShortString()));
 

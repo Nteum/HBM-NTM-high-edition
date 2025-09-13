@@ -1,5 +1,8 @@
 package com.hbm.render.model;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonObject;
 import com.hbm.HBM;
 import com.hbm.render.model.entity.ObjEntityModelSingle;
 import net.minecraft.client.Minecraft;
@@ -7,6 +10,8 @@ import net.minecraft.client.model.Model;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelManager;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.Resource;
+import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ModelEvent;
 import net.minecraftforge.client.model.obj.ObjLoader;
@@ -14,10 +19,8 @@ import net.minecraftforge.client.model.obj.ObjModel;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.io.InputStreamReader;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -40,6 +43,7 @@ public class Models {
     public static final ResourceLocation CHEMPLANT_PISTON = add(HBM.rl("block/chemplant/chemplant_new_piston"));
     public static final ResourceLocation CHEMPLANT_SPINNER = add(HBM.rl("block/chemplant/chemplant_new_spinner"));
 
+//    public static final ResourceLocation MISSILE_TEST = addEntity(HBM.modelRl("entity/missile/missile_test"));
     public static final ResourceLocation MISSILE_MICRO = addEntity(HBM.modelRl("entity/missile/missile_micro.obj"));
 
     public static ResourceLocation add(ResourceLocation rl){
@@ -55,13 +59,24 @@ public class Models {
     }
     public static void loadEntityModel(FMLClientSetupEvent event){
         event.enqueueWork(() -> {
+//            Gson gson = new Gson();
+//            ResourceManager resourceManager = Minecraft.getInstance().getResourceManager();
             try {
                 entityModels.forEach((rl, model) -> {
-                    if (model != null) return;
-                    ObjModel objModel = ObjLoader.INSTANCE.loadModel(new ObjModel.ModelSettings(rl, false, true, true, true, null));
+//                    Optional<Resource> resource = resourceManager.getResource(MISSILE_TEST.withSuffix(".json"));
+                    if (model != null
+//                            && resource.isEmpty()
+                    ) return;
+//                    try (InputStreamReader reader = new InputStreamReader(resource.get().open())) {
+//                        JsonObject jsonData = gson.fromJson(reader, JsonObject.class);
+                        // 处理你的 jsonData
+//                        System.out.println("Loaded JSON: " + jsonData.toString());
+                        ObjModel objModel = ObjLoader.INSTANCE.loadModel(new ObjModel.ModelSettings(rl, false, true, true, true, null));
+//                        ObjModel objModel = ObjLoader.INSTANCE.read(jsonData, null);
 //                    ObjEntityModelSingle entityModelSingle = new ObjEntityModelSingle(objModel);
-                    // 将ObjModel转换成实体Model
-                    entityModels.put(rl, new ObjEntityModelSingle(objModel));
+                        // 将ObjModel转换成实体Model
+                        entityModels.put(rl, new ObjEntityModelSingle(objModel));
+//                    }catch (Exception e){}
                 });
             } catch (Exception e) {
                 e.printStackTrace();
