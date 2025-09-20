@@ -14,6 +14,7 @@ import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelManager;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.client.resources.model.SimpleBakedModel;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.Resource;
@@ -92,7 +93,7 @@ public class Models {
         itemModels.forEach((rl, item) -> {
             BakedModel bakedModel = event.getModels().get(rl);
             if (bakedModel instanceof SimpleBakedModel) {
-                event.getModels().put(item.getId(), new SimpleBakedModelWrapper((SimpleBakedModel) bakedModel));
+                event.getModels().put(new ModelResourceLocation(item.getId(), "inventory"), new SimpleBakedModelWrapper((SimpleBakedModel) bakedModel));
             }
         });
     }

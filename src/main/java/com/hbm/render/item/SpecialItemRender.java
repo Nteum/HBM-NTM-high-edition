@@ -13,6 +13,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
 import net.minecraft.client.resources.model.ModelManager;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
@@ -41,9 +42,17 @@ public class SpecialItemRender extends BlockEntityWithoutLevelRenderer {
     public void renderByItem(ItemStack pStack, ItemDisplayContext pDisplayContext, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, int pPackedOverlay) {
         super.renderByItem(pStack, pDisplayContext, pPoseStack, pBuffer, pPackedLight, pPackedOverlay);
         if (pStack.is(HBMWeapon.MP_WARHEAD_15_BALEFIRE.get())){
+            if (missileHeadModel == null) missileHeadModel = (SimpleBakedModelWrapper) Minecraft.getInstance().getModelManager().getModel(new ModelResourceLocation(HBMWeapon.MP_WARHEAD_15_BALEFIRE.getId(), "inventory"));
             pPoseStack.pushPose();
-            pPoseStack.scale(0.25f, 0.25f, 0.25f);
-            pPoseStack.mulPose(Axis.ZP.rotationDegrees(45));
+
+            pPoseStack.scale(0.35f, 0.35f, 0.35f);
+            pPoseStack.translate(0.5,0.7,0);
+            if (pDisplayContext.firstPerson()) pPoseStack.translate(0.5,0,0.5);
+            pPoseStack.mulPose(Axis.ZN.rotationDegrees(45));
+            if (Minecraft.getInstance().level != null)
+                pPoseStack.mulPose(Axis.YP.rotationDegrees(Minecraft.getInstance().level.getGameTime() % 360));
+
+
             RenderUtils.renderModel(missileHeadModel, pPoseStack, pBuffer, pPackedLight, pPackedOverlay, RenderType.cutout());
             pPoseStack.popPose();
         }
