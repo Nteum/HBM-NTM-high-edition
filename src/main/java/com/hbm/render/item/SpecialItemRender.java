@@ -1,16 +1,23 @@
 package com.hbm.render.item;
 
 import com.hbm.item.HBMWeapon;
+import com.hbm.render.RenderUtils;
 import com.hbm.render.model.Models;
 import com.hbm.render.model.MissileHeadModel;
+import com.hbm.render.model.entity.ObjEntityModelSingle;
+import com.hbm.render.model.item.SimpleBakedModelWrapper;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
 import net.minecraft.client.renderer.entity.ItemRenderer;
+import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelManager;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.ItemDisplayContext;
@@ -20,17 +27,20 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class SpecialItemRender extends BlockEntityWithoutLevelRenderer {
-    private MissileHeadModel missileHeadModel;
+    private SimpleBakedModelWrapper missileHeadModel;
+    // 空加载函数，主要用于懒加载。
+    public SpecialItemRender(){
+        super(null, null);
+    }
     public SpecialItemRender(BlockEntityRenderDispatcher pBlockEntityRenderDispatcher, EntityModelSet pEntityModelSet) {
         super(pBlockEntityRenderDispatcher, pEntityModelSet);
-
     }
 
     @Override
     public void onResourceManagerReload(ResourceManager pResourceManager) {
         super.onResourceManagerReload(pResourceManager);
         ModelManager modelManager = Minecraft.getInstance().getModelManager();
-        this.missileHeadModel = new MissileHeadModel(modelManager.getModel(Models.MP_W_15_BALEFIRE));
+        missileHeadModel = (SimpleBakedModelWrapper) Models.get(Models.MP_W_15_BALEFIRE);
     }
 
     @Override
@@ -52,9 +62,11 @@ public class SpecialItemRender extends BlockEntityWithoutLevelRenderer {
 //        }
         if (pStack.is(HBMWeapon.MP_WARHEAD_15_BALEFIRE.get())){
             pPoseStack.pushPose();
-
-//            VertexConsumer vertexconsumer1 = ItemRenderer.getFoilBufferDirect(pBuffer, this.missileHeadModel.renderType(MissileHeadModel.TEXTURE), false, pStack.hasFoil());
-//            this.missileHeadModel.renderToBuffer(pPoseStack,vertexconsumer1,pPackedLight,pPackedOverlay,1.0F,1.0F,1.0F,1.0F);
+            pPoseStack.scale(0.25f, 0.25f, 0.25f);
+            pPoseStack.mulPose(Axis.ZP.rotationDegrees(45));
+//            ObjEntityModelSingle entityModel = (ObjEntityModelSingle) Models.getEntityModel(Models.MISSILE_TEST);
+//            entityModel.renderModel(pPoseStack, pBuffer, pPackedLight, pPackedOverlay);
+            RenderUtils.renderModel(missileHeadModel, pPoseStack, pBuffer, pPackedLight, pPackedOverlay, RenderType.cutout());
             pPoseStack.popPose();
         }
     }

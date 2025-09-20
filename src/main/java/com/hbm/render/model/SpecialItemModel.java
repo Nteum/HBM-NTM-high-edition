@@ -7,6 +7,7 @@ import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.SimpleBakedModel;
 import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
 import net.minecraftforge.client.RenderTypeGroup;
 
 import java.util.List;
@@ -25,6 +26,8 @@ public class SpecialItemModel extends SimpleBakedModel {
     public SpecialItemModel(List<BakedQuad> pUnculledFaces, Map<Direction, List<BakedQuad>> pCulledFaces, boolean pHasAmbientOcclusion, boolean pUsesBlockLight, boolean pIsGui3d, TextureAtlasSprite pParticleIcon, ItemTransforms pTransforms, ItemOverrides pOverrides, RenderTypeGroup renderTypes) {
         super(pUnculledFaces, pCulledFaces, pHasAmbientOcclusion, pUsesBlockLight, pIsGui3d, pParticleIcon, pTransforms, pOverrides, renderTypes);
     }
+//    public SpecialItemModel(SimpleBakedModel simpleBakedModel){
+//    }
 
     @Override
     public boolean isCustomRenderer() {

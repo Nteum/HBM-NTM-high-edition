@@ -7,7 +7,9 @@ import com.hbm.Inventory.fluid.ModFluids;
 import com.hbm.gui.ModMenuType;
 import com.hbm.gui.screen.*;
 import com.hbm.gui.screen.RenderUtils;
+import com.hbm.item.HBMWeapon;
 import com.hbm.item.tool.FluidBucketItem;
+import com.hbm.registries.ModItems;
 import com.hbm.render.entity.missile.MissileTaintRenderer;
 import com.hbm.render.model.Models;
 import com.hbm.render.model.entity.TestEntityModel;
@@ -21,15 +23,18 @@ import com.hbm.render.item.SpecialItemRender;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.model.geom.EntityModelSet;
+import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
+import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.*;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 
 @Mod.EventBusSubscriber(modid = HBM.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientSetup {
@@ -67,6 +72,7 @@ public class ClientSetup {
             EntityRenderers.register(ModEntityType.ENTITY_MISSILE_TEST.get(), MissileTaintRenderer::new);
 
             RenderUtils.init();
+            specialItemRender = new SpecialItemRender(Minecraft.getInstance().getBlockEntityRenderDispatcher(),Minecraft.getInstance().getEntityModels());
         });
     }
 
@@ -85,6 +91,8 @@ public class ClientSetup {
 
     @SubscribeEvent
     public static void modifyBakingResult(ModelEvent.ModifyBakingResult event){
+        // 修改模型烘焙结果
+        Models.modifyBakingResult(event);
     }
 
     @SubscribeEvent
@@ -95,11 +103,22 @@ public class ClientSetup {
 
     @SubscribeEvent
     public static void registerClientReloadListeners(RegisterClientReloadListenersEvent event){
-        BlockEntityRenderDispatcher blockEntityRenderDispatcher = Minecraft.getInstance().getBlockEntityRenderDispatcher();
-        EntityModelSet entityModels = Minecraft.getInstance().getEntityModels();
-        specialItemRender = new SpecialItemRender(blockEntityRenderDispatcher,entityModels);
-        //注册模组客户端专属的资源加载器
-        event.registerReloadListener(specialItemRender);
+//        BlockEntityRenderDispatcher blockEntityRenderDispatcher = Minecraft.getInstance().getBlockEntityRenderDispatcher();
+//        EntityModelSet entityModels = Minecraft.getInstance().getEntityModels();
+//        specialItemRender = new SpecialItemRender(blockEntityRenderDispatcher,entityModels);
+//        //注册模组客户端专属的资源加载器
+//        event.registerReloadListener(specialItemRender);
+    }
+    public static BlockEntityWithoutLevelRenderer getLazyItemRender(){
+        if (specialItemRender == null){
+            return new SpecialItemRender();
+        }
+        return specialItemRender;
+    }
+
+    @SubscribeEvent
+    public static void onClientSetupFinished(FMLLoadCompleteEvent event){
+//        Models.onLoadComplete(event);
     }
 
     @SubscribeEvent

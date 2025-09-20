@@ -113,7 +113,7 @@ public class HBM {
     }
 
     public void onClientSetup(FMLClientSetupEvent event){
-        Models.loadEntityModel(event);
+        Models.onClientSetup(event);
     }
 
     public void onPostLoad(FMLLoadCompleteEvent event){

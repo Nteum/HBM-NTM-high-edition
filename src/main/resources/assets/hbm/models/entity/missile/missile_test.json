@@ -3,8 +3,5 @@
   "flip_v": true,
   "model": "hbm:models/entity/missile/missile_micro.obj",
   "mtl_override": "hbm:models/entity/missile/missile_micro.mtl",
-  "textures": {
-    "texture0": "hbm:models/missile/missile_test",
-    "particle": "hbm:models/missile/missile_test"
-  }
+  "texture0": "hbm:models/missile/missile_test"
 }

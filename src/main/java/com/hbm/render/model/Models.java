@@ -4,20 +4,29 @@ import com.google.gson.Gson;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import com.hbm.HBM;
+import com.hbm.item.HBMWeapon;
 import com.hbm.render.model.entity.ObjEntityModelSingle;
+import com.hbm.render.model.item.SimpleBakedModelWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.Model;
+import net.minecraft.client.renderer.ItemModelShaper;
+import net.minecraft.client.renderer.entity.ItemRenderer;
+import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelManager;
+import net.minecraft.client.resources.model.SimpleBakedModel;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.world.item.Item;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ModelEvent;
 import net.minecraftforge.client.model.obj.ObjLoader;
 import net.minecraftforge.client.model.obj.ObjModel;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
+import net.minecraftforge.registries.RegistryObject;
 
 import java.io.InputStreamReader;
 import java.util.*;
@@ -27,6 +36,7 @@ import java.util.concurrent.ConcurrentMap;
 @Mod.EventBusSubscriber(modid = HBM.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class Models {
     private static final Set<ResourceLocation> models = new HashSet<>();
+    private static final Map<ResourceLocation, RegistryObject<Item>> itemModels = new HashMap<>();
     private static final Map<ResourceLocation, Model> entityModels = new HashMap<>();
     
     public static final ResourceLocation ASSEMBLER_BODY = add(HBM.rl("block/assembler/assembler_body"));
@@ -38,51 +48,70 @@ public class Models {
     public static final ResourceLocation BOY = add(HBM.rl("block/bomb/boy"));
     public static final ResourceLocation CUSTOM_NUKE = add(HBM.rl("block/bomb/custom"));
     public static final ResourceLocation BLACK_HOLE = add(HBM.rl("block/effect/sphere"));
-    public static final ResourceLocation MP_W_15_BALEFIRE = add(HBM.rl("item/missile/mp_w_15"));
     public static final ResourceLocation CHEMPLANT_BODY = add(HBM.rl("block/chemplant/chemplant_new_body"));
     public static final ResourceLocation CHEMPLANT_PISTON = add(HBM.rl("block/chemplant/chemplant_new_piston"));
     public static final ResourceLocation CHEMPLANT_SPINNER = add(HBM.rl("block/chemplant/chemplant_new_spinner"));
 
-//    public static final ResourceLocation MISSILE_TEST = addEntity(HBM.modelRl("entity/missile/missile_test"));
-    public static final ResourceLocation MISSILE_MICRO = addEntity(HBM.modelRl("entity/missile/missile_micro.obj"));
+    public static final ResourceLocation MP_W_15_BALEFIRE = addItem(HBM.rl("item/missile/mp_w_15"), HBMWeapon.MP_WARHEAD_15_BALEFIRE);
+
+    public static final ResourceLocation MISSILE_TEST = addEntity(HBM.modelRl("entity/missile/missile_test"), new ObjEntityModelSingle());
+//    public static final ResourceLocation MP_W_15_BALEFIRE = addEntity(HBM.modelRl("entity/missile/missile_test"), new ObjEntityModelSingle());
 
     public static ResourceLocation add(ResourceLocation rl){
         models.add(rl);
         return rl;
     }
-    public static ResourceLocation addEntity(ResourceLocation rl){
-        entityModels.put(rl, null);
+    public static ResourceLocation addItem(ResourceLocation rl, RegistryObject<Item> itemRegistryObject){
+        models.add(rl);
+        itemModels.put(rl, itemRegistryObject);
+        return rl;
+    }
+    public static ResourceLocation addEntity(ResourceLocation rl, Model model){
+        entityModels.put(rl, model);
         return rl;
     }
     public static void registerModels(ModelEvent.RegisterAdditional event){
         models.forEach(event::register);
     }
-    public static void loadEntityModel(FMLClientSetupEvent event){
+    public static void onClientSetup(FMLClientSetupEvent event){
         event.enqueueWork(() -> {
-//            Gson gson = new Gson();
-//            ResourceManager resourceManager = Minecraft.getInstance().getResourceManager();
+            // 加载实体模型
             try {
                 entityModels.forEach((rl, model) -> {
-//                    Optional<Resource> resource = resourceManager.getResource(MISSILE_TEST.withSuffix(".json"));
-                    if (model != null
-//                            && resource.isEmpty()
-                    ) return;
-//                    try (InputStreamReader reader = new InputStreamReader(resource.get().open())) {
-//                        JsonObject jsonData = gson.fromJson(reader, JsonObject.class);
-                        // 处理你的 jsonData
-//                        System.out.println("Loaded JSON: " + jsonData.toString());
-                        ObjModel objModel = ObjLoader.INSTANCE.loadModel(new ObjModel.ModelSettings(rl, false, true, true, true, null));
-//                        ObjModel objModel = ObjLoader.INSTANCE.read(jsonData, null);
-//                    ObjEntityModelSingle entityModelSingle = new ObjEntityModelSingle(objModel);
-                        // 将ObjModel转换成实体Model
-                        entityModels.put(rl, new ObjEntityModelSingle(objModel));
-//                    }catch (Exception e){}
+                    if (model instanceof ObjEntityModelSingle objEntityModel){
+                        if (objEntityModel.renderable != null) return;
+                        objEntityModel.parseJson(rl);
+                    }
+//                    if (model != null) return;
+//                    entityModels.put(rl, new ObjEntityModelSingle(rl));
                 });
             } catch (Exception e) {
                 e.printStackTrace();
             }
+//             为物品添加属性
+//            customModelItems.forEach(itemRegistryObject -> ItemProperties.register(itemRegistryObject.get(), CUSTOM_MODEL, (itemStack, clientWorld, livingEntity, seed) -> 1.0F));
         });
     }
+
+    public static void modifyBakingResult(ModelEvent.ModifyBakingResult event){
+        itemModels.forEach((rl, item) -> {
+            BakedModel bakedModel = event.getModels().get(rl);
+            if (bakedModel instanceof SimpleBakedModel) {
+                event.getModels().put(item.getId(), new SimpleBakedModelWrapper((SimpleBakedModel) bakedModel));
+//                event.getModels().put(rl, new SimpleBakedModelWrapper((SimpleBakedModel) bakedModel));
+            }
+        });
+    }
+
+//    public static void onLoadComplete(FMLLoadCompleteEvent event){
+//        // 修改物品模组内容
+//        event.enqueueWork(() -> {
+//            ItemModelShaper itemModelShaper = Minecraft.getInstance().getItemRenderer().getItemModelShaper();
+//            for (RegistryObject<Item> item : customModelItems) {
+//
+//            }
+//        });
+//    }
     public static BakedModel get(ResourceLocation rl){
         ModelManager modelManager = Minecraft.getInstance().getModelManager();
         return modelManager.getModel(rl);

@@ -18,7 +18,7 @@ public class MissileTaintRenderer extends EntityRenderer<EntityMissile> {
     public static ObjEntityModelSingle rocket_model;
     public MissileTaintRenderer(EntityRendererProvider.Context pContext) {
         super(pContext);
-        rocket_model = (ObjEntityModelSingle) Models.getEntityModel(Models.MISSILE_MICRO);
+        rocket_model = (ObjEntityModelSingle) Models.getEntityModel(Models.MISSILE_TEST);
     }
 
     @Override

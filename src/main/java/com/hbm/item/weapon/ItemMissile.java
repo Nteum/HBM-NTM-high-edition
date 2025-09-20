@@ -7,7 +7,10 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
+import net.minecraftforge.client.model.obj.ObjModel;
 
 import java.util.function.Consumer;
 
@@ -25,12 +28,15 @@ public class ItemMissile extends Item{
         return null;
     }
 
+    @OnlyIn(Dist.CLIENT)
     @Override
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+        super.initializeClient(consumer);
         consumer.accept(new IClientItemExtensions() {
             @Override
             public BlockEntityWithoutLevelRenderer getCustomRenderer() {
-                return ClientSetup.specialItemRender;
+//                return ClientSetup.specialItemRender;
+                return ClientSetup.getLazyItemRender();
             }
         });
     }
