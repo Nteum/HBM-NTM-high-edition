@@ -1,43 +1,43 @@
 {
-  "parent": "minecraft:block/block",
+  "parent": "builtin/entity",
+  "gui_light": "front",
   "loader": "forge:obj",
   "flip_v": true,
-  "model": "hbm:models/item/missile/chemplant_new_body.obj",
+  "model": "hbm:models/item/missile/mp_w_15_balefire.obj",
   "textures": {
-    "texture0": "hbm:models/warheads/mp_w_15_balefire",
-    "particle": "hbm:models/warheads/mp_w_15_balefire"
+    "particle": "hbm:item/missile_parts/warheads/mp_w_15_balefire"
   },
   "automatic_culling": false,
   "display": {
     "gui": {
-      "rotation": [ 30, 225, 0 ],
-      "translation": [ 0, -3, 0],
-      "scale": [0.2,0.2,0.2]
+      "rotation": [ 35, 225, 45 ],
+      "translation": [ -4, -2, 0],
+      "scale": [0.33,0.33,0.33]
     },
     "ground": {
       "rotation": [ 0, 0, 0 ],
       "translation": [ 0, 3, 0],
-      "scale": [0.08,0.08,0.08]
+      "scale": [0.25,0.25,0.25]
     },
     "fixed": {
       "rotation": [ 0, 0, 0 ],
       "translation": [ 0, 0, 0],
-      "scale": [0.16,0.16,0.16]
+      "scale": [0.25,0.25,0.25]
     },
     "thirdperson_righthand": {
       "rotation": [ 75, 45, 0 ],
       "translation": [ 0, 2.5, 0],
-      "scale": [0.13,0.13,0.13]
+      "scale": [0.25,0.25,0.25]
     },
     "firstperson_righthand": {
       "rotation": [ 0, 45, 0 ],
       "translation": [ 0, 0, 0 ],
-      "scale": [0.13,0.13,0.13]
+      "scale": [0.25,0.25,0.25]
     },
     "firstperson_lefthand": {
       "rotation": [ 0, 225, 0 ],
       "translation": [ 0, 0, 0 ],
-      "scale": [0.13,0.13,0.13]
+      "scale": [0.25,0.25,0.25]
     }
   }
 }

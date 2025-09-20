@@ -52,10 +52,9 @@ public class Models {
     public static final ResourceLocation CHEMPLANT_PISTON = add(HBM.rl("block/chemplant/chemplant_new_piston"));
     public static final ResourceLocation CHEMPLANT_SPINNER = add(HBM.rl("block/chemplant/chemplant_new_spinner"));
 
-    public static final ResourceLocation MP_W_15_BALEFIRE = addItem(HBM.rl("item/missile/mp_w_15"), HBMWeapon.MP_WARHEAD_15_BALEFIRE);
+    public static final ResourceLocation MP_W_15_BALEFIRE = addItem(HBM.rl("item/mp_warhead_15_balefire"), HBMWeapon.MP_WARHEAD_15_BALEFIRE);
 
     public static final ResourceLocation MISSILE_TEST = addEntity(HBM.modelRl("entity/missile/missile_test"), new ObjEntityModelSingle());
-//    public static final ResourceLocation MP_W_15_BALEFIRE = addEntity(HBM.modelRl("entity/missile/missile_test"), new ObjEntityModelSingle());
 
     public static ResourceLocation add(ResourceLocation rl){
         models.add(rl);
@@ -82,14 +81,10 @@ public class Models {
                         if (objEntityModel.renderable != null) return;
                         objEntityModel.parseJson(rl);
                     }
-//                    if (model != null) return;
-//                    entityModels.put(rl, new ObjEntityModelSingle(rl));
                 });
             } catch (Exception e) {
                 e.printStackTrace();
             }
-//             为物品添加属性
-//            customModelItems.forEach(itemRegistryObject -> ItemProperties.register(itemRegistryObject.get(), CUSTOM_MODEL, (itemStack, clientWorld, livingEntity, seed) -> 1.0F));
         });
     }
 
@@ -98,20 +93,10 @@ public class Models {
             BakedModel bakedModel = event.getModels().get(rl);
             if (bakedModel instanceof SimpleBakedModel) {
                 event.getModels().put(item.getId(), new SimpleBakedModelWrapper((SimpleBakedModel) bakedModel));
-//                event.getModels().put(rl, new SimpleBakedModelWrapper((SimpleBakedModel) bakedModel));
             }
         });
     }
 
-//    public static void onLoadComplete(FMLLoadCompleteEvent event){
-//        // 修改物品模组内容
-//        event.enqueueWork(() -> {
-//            ItemModelShaper itemModelShaper = Minecraft.getInstance().getItemRenderer().getItemModelShaper();
-//            for (RegistryObject<Item> item : customModelItems) {
-//
-//            }
-//        });
-//    }
     public static BakedModel get(ResourceLocation rl){
         ModelManager modelManager = Minecraft.getInstance().getModelManager();
         return modelManager.getModel(rl);

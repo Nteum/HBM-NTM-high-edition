@@ -72,7 +72,7 @@ public class ClientSetup {
             EntityRenderers.register(ModEntityType.ENTITY_MISSILE_TEST.get(), MissileTaintRenderer::new);
 
             RenderUtils.init();
-            specialItemRender = new SpecialItemRender(Minecraft.getInstance().getBlockEntityRenderDispatcher(),Minecraft.getInstance().getEntityModels());
+//            specialItemRender = new SpecialItemRender(Minecraft.getInstance().getBlockEntityRenderDispatcher(),Minecraft.getInstance().getEntityModels());
         });
     }
 
@@ -111,7 +111,7 @@ public class ClientSetup {
     }
     public static BlockEntityWithoutLevelRenderer getLazyItemRender(){
         if (specialItemRender == null){
-            return new SpecialItemRender();
+            specialItemRender = new SpecialItemRender();
         }
         return specialItemRender;
     }

@@ -31,11 +31,9 @@ public class ItemMissile extends Item{
     @OnlyIn(Dist.CLIENT)
     @Override
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-        super.initializeClient(consumer);
         consumer.accept(new IClientItemExtensions() {
             @Override
             public BlockEntityWithoutLevelRenderer getCustomRenderer() {
-//                return ClientSetup.specialItemRender;
                 return ClientSetup.getLazyItemRender();
             }
         });

@@ -3,21 +3,15 @@ package com.hbm.render.item;
 import com.hbm.item.HBMWeapon;
 import com.hbm.render.RenderUtils;
 import com.hbm.render.model.Models;
-import com.hbm.render.model.MissileHeadModel;
-import com.hbm.render.model.entity.ObjEntityModelSingle;
 import com.hbm.render.model.item.SimpleBakedModelWrapper;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
-import net.minecraft.client.renderer.entity.ItemRenderer;
-import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelManager;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.ItemDisplayContext;
@@ -30,7 +24,7 @@ public class SpecialItemRender extends BlockEntityWithoutLevelRenderer {
     private SimpleBakedModelWrapper missileHeadModel;
     // 空加载函数，主要用于懒加载。
     public SpecialItemRender(){
-        super(null, null);
+        super(Minecraft.getInstance().getBlockEntityRenderDispatcher(), Minecraft.getInstance().getEntityModels());
     }
     public SpecialItemRender(BlockEntityRenderDispatcher pBlockEntityRenderDispatcher, EntityModelSet pEntityModelSet) {
         super(pBlockEntityRenderDispatcher, pEntityModelSet);
@@ -46,26 +40,10 @@ public class SpecialItemRender extends BlockEntityWithoutLevelRenderer {
     @Override
     public void renderByItem(ItemStack pStack, ItemDisplayContext pDisplayContext, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, int pPackedOverlay) {
         super.renderByItem(pStack, pDisplayContext, pPoseStack, pBuffer, pPackedLight, pPackedOverlay);
-//        ModelManager modelManager = Minecraft.getInstance().getModelManager();
-//        BlockRenderDispatcher blockDispatcher = Minecraft.getInstance().getBlockRenderer();
-//        ModelBlockRenderer blockRenderer = blockDispatcher.getModelRenderer();
-//        BakedModel model;
-//        if (item instanceof NukeFat.NukeItem){
-//            Block block = ((BlockItem) item).getBlock();
-//            BlockState blockState = block.defaultBlockState();
-//            model = modelManager.getModel(Models.FAT_MAN);
-//
-//            pPoseStack.popPose();
-//            pPoseStack.mulPose(Axis.YP.rotationDegrees(45));
-//            renderBlockModel(model,blockState,blockRenderer,pPoseStack,pBuffer,pPackedLight,pPackedOverlay,null);
-//            pPoseStack.pushPose();
-//        }
         if (pStack.is(HBMWeapon.MP_WARHEAD_15_BALEFIRE.get())){
             pPoseStack.pushPose();
             pPoseStack.scale(0.25f, 0.25f, 0.25f);
             pPoseStack.mulPose(Axis.ZP.rotationDegrees(45));
-//            ObjEntityModelSingle entityModel = (ObjEntityModelSingle) Models.getEntityModel(Models.MISSILE_TEST);
-//            entityModel.renderModel(pPoseStack, pBuffer, pPackedLight, pPackedOverlay);
             RenderUtils.renderModel(missileHeadModel, pPoseStack, pBuffer, pPackedLight, pPackedOverlay, RenderType.cutout());
             pPoseStack.popPose();
         }
