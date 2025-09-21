@@ -99,6 +99,11 @@ public class CountableIngredient extends AbstractIngredient {
         return value.isEmpty();
     }
 
+    @Override
+    public ItemStack[] getItems() {
+        return this.value.getItems().toArray(new ItemStack[0]);
+    }
+
     public static class Serializer implements IIngredientSerializer<CountableIngredient>
     {
         public static final Serializer INSTANCE = new Serializer();

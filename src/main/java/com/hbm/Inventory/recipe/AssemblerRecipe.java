@@ -27,7 +27,7 @@ public class AssemblerRecipe implements Recipe<Container> {
     private final ResourceLocation id;
     final int processingTime;   //加工时间
     public final ItemStack result;
-    final NonNullList<CountableIngredient> ingredients;
+    public final NonNullList<CountableIngredient> ingredients;
     static final int MAX_SIZE = 12;
     public AssemblerRecipe(ResourceLocation id, ItemStack result, NonNullList<CountableIngredient> ingredients){
         this(id,100_000,result,ingredients);
@@ -38,6 +38,7 @@ public class AssemblerRecipe implements Recipe<Container> {
         this.result = result;
         this.ingredients = ingredients;
     }
+
     @Override
     public ItemStack getResultItem(RegistryAccess pRegistryAccess) {
         return this.result;

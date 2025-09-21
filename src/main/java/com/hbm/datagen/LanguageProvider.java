@@ -27,6 +27,7 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
         addFluidTrait();
         addLookTooltip();
         addDebug();
+        addGeneral();
         ModFluids.localName(this);
 
         //物品
@@ -95,6 +96,7 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
         this.add(HBMLang.BOILER, "Boiler");
         this.add(HBMLang.ELECTRIC_BOILER, "Electric Boiler");
         this.add(HBMLang.NUCLEAR_BOILER, "Nuclear Boiler");
+        this.add(HBMLang.ASSEMBLER, "Assembler");
         this.add(HBMLang.CHEMPLANT, "Chemical Plant");
 //        this.add(HBMLang.BARREL, "HBM Barrel");
     }
@@ -133,6 +135,9 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
         this.add(HBMLang.CHUNK_DATA, "Chunk pos %s");
         this.add(HBMLang.BLOCK_STATE_LOSE, "Block in [%s] can't found !");
         this.add(HBMLang.BLOCK_STATE_INFO, "Block in [%s] is %s.");
+    }
+    private void addGeneral(){
+        this.add(HBMLang.RECIPE, "recipe");
     }
     private void addLookTooltip(){
         this.add(HBMLang.LOOKTOOLTIP_CHEMPLANT, "<- tank %s");

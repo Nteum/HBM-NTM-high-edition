@@ -22,7 +22,8 @@ public enum HBMLang implements ILangEntry {
     ELECTRIC_FURNACE("container","electric_furnace"),
     BOILER("container","boiler"),
     ELECTRIC_BOILER("container","electric_boiler"),
-    NUCLEAR_BOILER("container","nuclear_boiler"),
+    NUCLEAR_BOILER("container","assembler"),
+    ASSEMBLER("container","nuclear_boiler"),
     CHEMPLANT("container", "chemplant"),
     BARREL("container", "barrel"),
     BATTERY("container", "battery"),
@@ -87,6 +88,8 @@ public enum HBMLang implements ILangEntry {
     CHUNK_DATA("general", "data.chunk"),
     BLOCK_STATE_LOSE("debug","debugwand.msg.block_lost"),
     BLOCK_STATE_INFO("debug","debugwand.msg.block_info"),
+    // general （不用于特殊用途，仅仅作为文字）
+    RECIPE("general","recipe")
     ;
 
     private final String key;
