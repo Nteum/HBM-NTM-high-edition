@@ -5,6 +5,7 @@ import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import com.hbm.HBM;
 import com.hbm.item.HBMWeapon;
+import com.hbm.render.model.armor.ModelArmorT51;
 import com.hbm.render.model.entity.ObjEntityModelSingle;
 import com.hbm.render.model.item.SimpleBakedModelWrapper;
 import net.minecraft.client.Minecraft;
@@ -56,6 +57,7 @@ public class Models {
     public static final ResourceLocation MP_W_15_BALEFIRE = addItem(HBM.rl("item/mp_warhead_15_balefire"), HBMWeapon.MP_WARHEAD_15_BALEFIRE);
 
     public static final ResourceLocation MISSILE_TEST = addEntity(HBM.modelRl("entity/missile/missile_test"), new ObjEntityModelSingle());
+    public static final ResourceLocation T51 = addEntity(HBM.modelRl("item/armor_t51"), new ModelArmorT51());
 
     public static ResourceLocation add(ResourceLocation rl){
         models.add(rl);
@@ -78,8 +80,8 @@ public class Models {
             // 加载实体模型
             try {
                 entityModels.forEach((rl, model) -> {
-                    if (model instanceof ObjEntityModelSingle objEntityModel){
-                        if (objEntityModel.renderable != null) return;
+                    if (model instanceof IObjModel objEntityModel){
+                        if (objEntityModel.getRenderable() != null) return;
                         objEntityModel.parseJson(rl);
                     }
                 });

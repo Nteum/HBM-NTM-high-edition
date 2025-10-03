@@ -1,5 +1,6 @@
 package com.hbm.registries;
 
+import com.hbm.item.HBMCombat;
 import com.hbm.item.HBMComponent;
 import com.hbm.item.HBMWeapon;
 import com.hbm.item.HBMtools;
@@ -23,6 +24,7 @@ public class ModItems {
         HBMtools.register(ITEMS);
         HBMComponent.register(ITEMS);
         HBMWeapon.register(ITEMS);
+        HBMCombat.register(ITEMS);
     }
     /* weapon */
     //armor

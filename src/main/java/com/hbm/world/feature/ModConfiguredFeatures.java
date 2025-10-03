@@ -1,6 +1,7 @@
 package com.hbm.world.feature;
 
 import com.hbm.HBM;
+import com.hbm.block.HBMBlockComponent;
 import com.hbm.registries.ModBlocks;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
@@ -59,14 +60,14 @@ public class ModConfiguredFeatures {
         RuleTest endReplace = new BlockMatchTest(Blocks.END_STONE);
         //注册矿石生成
         FeatureUtils.register(context,URANIUM_ORE_OVERWORLD, Feature.ORE, new OreConfiguration(List.of(
-                OreConfiguration.target(stoneReplace, ModBlocks.URANIUM_ORE.get().defaultBlockState()),
-                OreConfiguration.target(deepslateReplace, ModBlocks.DEEPSLATE_URANIUM_ORE.get().defaultBlockState())
+                OreConfiguration.target(stoneReplace, HBMBlockComponent.URANIUM_ORE.get().defaultBlockState()),
+                OreConfiguration.target(deepslateReplace, HBMBlockComponent.DEEPSLATE_URANIUM_ORE.get().defaultBlockState())
         ),16));
         //洞穴生成
         FeatureUtils.register(context, ORE_SPHERE_OVERWORLD, Feature.GEODE, new GeodeConfiguration(
-                new GeodeBlockSettings(BlockStateProvider.simple(ModBlocks.RARE_EARTH_ORE.get()), BlockStateProvider.simple(ModBlocks.URANIUM_ORE.get()),
-                        BlockStateProvider.simple(ModBlocks.LITHIUM_ORE.get()), BlockStateProvider.simple(ModBlocks.ASBESTOS_ORE.get()), BlockStateProvider.simple(ModBlocks.BASALT_ASBESTOS_ORE.get()),
-                        List.of(ModBlocks.SA326_ORE.get().defaultBlockState()),
+                new GeodeBlockSettings(BlockStateProvider.simple(HBMBlockComponent.RARE_EARTH_ORE.get()), BlockStateProvider.simple(HBMBlockComponent.URANIUM_ORE.get()),
+                        BlockStateProvider.simple(HBMBlockComponent.LITHIUM_ORE.get()), BlockStateProvider.simple(HBMBlockComponent.ASBESTOS_ORE.get()), BlockStateProvider.simple(HBMBlockComponent.BASALT_ASBESTOS_ORE.get()),
+                        List.of(HBMBlockComponent.SA326_ORE.get().defaultBlockState()),
                         BlockTags.FEATURES_CANNOT_REPLACE, BlockTags.GEODE_INVALID_BLOCKS),
                 new GeodeLayerSettings(1.7D, 2.2D, 3.2D, 4.2D),
                 new GeodeCrackSettings(0.95D, 2.0D, 2), 0.35D, 0.083D, true,

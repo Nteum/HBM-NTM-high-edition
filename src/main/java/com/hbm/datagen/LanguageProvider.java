@@ -6,6 +6,7 @@ import com.hbm.api.text.ILangEntry;
 import com.hbm.block.HBMBlockComponent;
 import com.hbm.block.HBMMachine;
 import com.hbm.blockentity.interfaces.IUpgradeInfoProvider;
+import com.hbm.item.HBMCombat;
 import com.hbm.item.HBMComponent;
 import com.hbm.registries.ModBlocks;
 import com.hbm.registries.ModItems;
@@ -29,11 +30,11 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
         addDebug();
         addGeneral();
         ModFluids.localName(this);
-
+        addEffect();
+        autoAdd();
         //物品
         this.add(ModItems.coke_coal.get(),"Coal Coke");
         //方块
-        this.add(ModBlocks.URANIUM_ORE.get(),"Uranium Ore");
         this.add(ModBlocks.machine_difurnace.get(),"Blast Furnace");
         this.add(ModBlocks.machine_electric_furnace.get(),"Electric Furnace");
         this.add(ModBlocks.machine_boiler.get(),"Oil Heater");
@@ -56,6 +57,7 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
     }
     private void addItems(){
         HBMComponent.languageSupport(this);
+        HBMCombat.languageSupport(this);
     }
     private void addBlocks(){
         HBMMachine.languageSupport(this);
@@ -88,6 +90,12 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
         this.add(HBMLang.TOOLTIP_LEFT_TIME, "Please wait %s s");
         this.add(HBMLang.TOOLTIP_TANK_VOLUME, "%s : %s mB");
         this.add(HBMLang.TOOLTIP_ENERGY, "Energy: %s HE");
+
+        this.add(HBMLang.TOOLTIP_GEIGER0);
+        this.add(HBMLang.TOOLTIP_GEIGER1);
+        this.add(HBMLang.TOOLTIP_GEIGER2);
+        this.add(HBMLang.TOOLTIP_GEIGER3);
+        this.add(HBMLang.TOOLTIP_GEIGER4);
     }
     private void addContainer(){
         this.add(HBMLang.DIFURNACE, "Blast Furnace");
@@ -136,6 +144,14 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
         this.add(HBMLang.BLOCK_STATE_LOSE, "Block in [%s] can't found !");
         this.add(HBMLang.BLOCK_STATE_INFO, "Block in [%s] is %s.");
     }
+    private void autoAdd(){
+        for (HBMLang value : HBMLang.values()) {
+            if (value.autoAdd) this.add(value);
+        }
+    }
+    private void addEffect(){
+        this.add(HBMLang.EFFECT_RADIATION, "Radiation");
+    }
     private void addGeneral(){
         this.add(HBMLang.RECIPE, "recipe");
     }
@@ -144,5 +160,8 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
     }
     private void add(ILangEntry entry,String value){
         this.add(entry.key(), value);
+    }
+    private void add(HBMLang entry){
+        this.add(entry.key(), entry.content());
     }
 }

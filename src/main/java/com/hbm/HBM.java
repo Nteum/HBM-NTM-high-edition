@@ -14,6 +14,7 @@ import com.hbm.datagen.model.ItemModelGen;
 import com.hbm.datagen.recipe.RecipeGen;
 import com.hbm.datagen.tag.BlockTagsGen;
 import com.hbm.datagen.tag.ItemTagsGen;
+import com.hbm.effect.ModEffects;
 import com.hbm.registries.ModBlocks;
 import com.hbm.Inventory.fluid.ModFluids;
 import com.hbm.network.ModMessages;
@@ -97,6 +98,7 @@ public class HBM {
         ModFeatures.register(modEventBus);
         ModEntityType.ENTITY_TYPES.register(modEventBus);
         ModMenuType.MOD_MENU_TYPES.register(modEventBus);
+        ModEffects.register(modEventBus);
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CommonConfig.CONFIG_SPEC, "hbm-common.toml");
     }

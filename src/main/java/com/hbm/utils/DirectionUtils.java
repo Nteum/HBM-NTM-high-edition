@@ -117,6 +117,21 @@ public class DirectionUtils {
      * 根据方向对voxelshape进行旋转
      * AI生成的，还没验证正确性
      * */
+//    public static VoxelShape voxelShapeRot(VoxelShape shape, Direction defaultFace, Direction facing) {
+//        VoxelShape[] buffer = new VoxelShape[]{shape, Shapes.empty()};
+//
+//        int times = (facing.get2DDataValue() - defaultFace.get2DDataValue() + 4) % 4;
+//        for (int i = 0; i < times; i++) {
+//            buffer[0].forAllBoxes((minX, minY, minZ, maxX, maxY, maxZ) -> {
+//                // 以 (0.5, y, 0.5) 为中心旋转90°，实际上只对 XZ 平面做变换
+//                buffer[1] = Shapes.or(buffer[1], Shapes.box(1 - maxZ, minY, minX, 1 - minZ, maxY, maxX));
+//            });
+//            buffer[0] = buffer[1];
+//            buffer[1] = Shapes.empty();
+//        }
+//
+//        return buffer[0];
+//    }
     public static VoxelShape voxelShapeRot(VoxelShape shape, Direction defaultFace, Direction facing) {
         VoxelShape[] buffer = new VoxelShape[]{shape, Shapes.empty()};
 
@@ -124,7 +139,7 @@ public class DirectionUtils {
         for (int i = 0; i < times; i++) {
             buffer[0].forAllBoxes((minX, minY, minZ, maxX, maxY, maxZ) -> {
                 // 以 (0.5, y, 0.5) 为中心旋转90°，实际上只对 XZ 平面做变换
-                buffer[1] = Shapes.or(buffer[1], Shapes.box(1 - maxZ, minY, minX, 1 - minZ, maxY, maxX));
+                buffer[1] = Shapes.or(buffer[1], Shapes.box(1-maxZ, minY, minX, 1-minZ, maxY, maxX));
             });
             buffer[0] = buffer[1];
             buffer[1] = Shapes.empty();

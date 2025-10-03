@@ -1,0 +1,309 @@
+package com.hbm.item.armor;
+
+import com.google.gson.internal.reflect.ReflectionHelper;
+import com.hbm.HBMLang;
+import com.hbm.block.HBMBlockComponent;
+import com.hbm.block.HBMMachine;
+import com.hbm.block.tools.GeigerCounter;
+import com.hbm.blockentity.tools.TileEntityGeiger;
+import com.hbm.item.HBMCombat;
+import com.hbm.item.HBMtools;
+import com.hbm.item.tool.ItemGeigerCounter;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import org.jetbrains.annotations.Nullable;
+
+import java.lang.reflect.Field;
+import java.util.*;
+import java.util.function.Supplier;
+
+//Armor with full set bonus
+// 全套盔甲会有加成
+// 盔甲模型的主要接口在HumanoidArmorLayer中
+public class ItemArmorFSB extends ArmorItem implements IArmorDisableModel {
+    private String texture = "";
+    private ResourceLocation overlay = null;
+    public List<MobEffectInstance> effects = new ArrayList<>();
+    public boolean noHelmet = false;
+    public boolean vats = false;
+    public boolean thermal = false;
+    public boolean geigerSound = false;
+    public boolean customGeiger = false;
+    public boolean hardLanding = false;
+    public int dashCount = 0;
+    public int stepSize = 0;
+    public String step;
+    public String jump;
+    public String fall;
+    public Supplier<HBMCombat.Suit> suit;
+
+    public ItemArmorFSB(ArmorMaterial pMaterial, Type pType, Properties pProperties, Supplier<HBMCombat.Suit> suit) {
+        super(pMaterial, pType, pProperties);
+        this.suit = suit;
+    }
+    public ItemArmorFSB(ArmorMaterial pMaterial, Type pType, Properties pProperties) {
+        this(pMaterial, pType, pProperties, ()->new HBMCombat.Suit(null, null, null, null));
+    }
+    public ItemArmorFSB addEffect(MobEffectInstance ... effect) {
+        effects.addAll(List.of(effect));
+        return this;
+    }
+    public ItemArmorFSB enableVATS(boolean vats) {
+        this.vats = vats;
+        return this;
+    }
+
+    public ItemArmorFSB enableThermalSight(boolean thermal) {
+        this.thermal = thermal;
+        return this;
+    }
+
+    public ItemArmorFSB setHasGeigerSound(boolean geiger) {
+        this.geigerSound = geiger;
+        return this;
+    }
+
+    public ItemArmorFSB setHasCustomGeiger(boolean geiger) {
+        this.customGeiger = geiger;
+        return this;
+    }
+
+    public ItemArmorFSB setHasHardLanding(boolean hardLanding) {
+        this.hardLanding = hardLanding;
+        return this;
+    }
+
+    public ItemArmorFSB setDashCount(int dashCount) {
+        this.dashCount = dashCount;
+        return this;
+    }
+
+    public ItemArmorFSB setStepSize(int stepSize) {
+        this.stepSize = stepSize;
+        return this;
+    }
+
+    public ItemArmorFSB setStep(String step) {
+        this.step = step;
+        return this;
+    }
+
+    public ItemArmorFSB setJump(String jump) {
+        this.jump = jump;
+        return this;
+    }
+
+    public ItemArmorFSB setFall(String fall) {
+        this.fall = fall;
+        return this;
+    }
+
+    public ItemArmorFSB setOverlay(String path) {
+        this.overlay = new ResourceLocation(path);
+        return this;
+    }
+
+    public ItemArmorFSB cloneStats(ItemArmorFSB original) {
+
+        //lists aren't being modified after instantiation, so there's no need to dereference
+        this.effects = original.effects;
+        this.noHelmet = original.noHelmet;
+        this.vats = original.vats;
+        this.thermal = original.thermal;
+        this.geigerSound = original.geigerSound;
+        this.customGeiger = original.customGeiger;
+        this.hardLanding = original.hardLanding;
+        this.dashCount = original.dashCount;
+        this.stepSize = original.stepSize;
+        this.step = original.step;
+        this.jump = original.jump;
+        this.fall = original.fall;
+        //overlay doesn't need to be copied because it's helmet exclusive
+        return this;
+    }
+
+    public String getTexture() {
+        return texture;
+    }
+
+    @Override
+    public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> list, TooltipFlag pIsAdvanced) {
+        super.appendHoverText(pStack, pLevel, list, pIsAdvanced);
+        List<Component> toAdd = new ArrayList<>();
+        if(!effects.isEmpty()) {
+            MutableComponent tipeffect = Component.empty();
+            for (int i = 0; i < effects.size(); i++) {
+                tipeffect.append(effects.get(i).getEffect().getDisplayName());
+                if (i < effects.size()-1) tipeffect.append(", ");
+            }
+            toAdd.add(tipeffect.withStyle(ChatFormatting.AQUA));
+        }
+
+        if(geigerSound) toAdd.add(Component.translatable(HBMLang.ARMOR_GEIGERSOUND.key()).withStyle(ChatFormatting.GOLD));
+        if(customGeiger) toAdd.add(Component.translatable(HBMLang.ARMOR_GEIGERHUD.key()).withStyle(ChatFormatting.GOLD));
+        if(vats) toAdd.add(Component.translatable(HBMLang.ARMOR_VATS.key()).withStyle(ChatFormatting.RED));
+        if(thermal) toAdd.add(Component.translatable(HBMLang.ARMOR_THERMAL.key()).withStyle(ChatFormatting.RED));
+        if(hardLanding) toAdd.add(Component.translatable(HBMLang.ARMOR_HARDLANDING.key()).withStyle(ChatFormatting.RED));
+        if(stepSize != 0) toAdd.add(Component.translatable(HBMLang.ARMOR_STEPSIZE.key()).withStyle(ChatFormatting.BLUE));
+        if(dashCount > 0) toAdd.add(Component.translatable(HBMLang.ARMOR_DASH.key()).withStyle(ChatFormatting.AQUA));
+
+        if(!toAdd.isEmpty()) {
+            list.add(Component.translatable(HBMLang.ARMOR_FSB.key()).withStyle(ChatFormatting.GOLD));
+            list.addAll(toAdd);
+        }
+    }
+
+    public static boolean hasFSBArmor(Player player) {
+        ItemStack plateSlot = player.getInventory().armor.get(1);
+        if (plateSlot.getItem() instanceof ItemArmorFSB armorFSB){
+            HBMCombat.Suit suit = armorFSB.suit.get();
+            if (suit.HELMET() != null && !player.getInventory().getArmor(0).is(suit.HELMET().get())) return false;
+            if (suit.LEGS() != null && !player.getInventory().getArmor(2).is(suit.LEGS().get())) return false;
+            if (suit.BOOT() != null && !player.getInventory().getArmor(3).is(suit.BOOT().get())) return false;
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void onInventoryTick(ItemStack stack, Level level, Player player, int slotIndex, int selectedIndex) {
+        super.onInventoryTick(stack, level, player, slotIndex, selectedIndex);
+        boolean step = true;
+        // 未知代码，暂时不用
+//        if(player.getUniqueID().equals(ShadyUtil.the_NCR) || player.getUniqueID().equals(ShadyUtil.Barnaby99_x)) {
+//            step = false;
+//
+//            if(player.worldObj.isRemote && player.onGround) {
+//                steppy(player, "hbm:step.powered");
+//            }
+//        }
+
+        if(hasFSBArmor(player)) {
+            ItemArmorFSB chestplate = (ItemArmorFSB) player.getInventory().getArmor(1).getItem();
+            if (!level.isClientSide()){
+                for (MobEffectInstance effect : chestplate.effects) {
+                    player.addEffect(effect);
+                }
+                if (chestplate.geigerSound && !player.getInventory().hasAnyOf(Set.of(HBMtools.GEIGER_COUNTER.get(), HBMMachine.GEIGER_COUNTER.get().asItem()))){
+                    TileEntityGeiger.show(level, null, player, player.tickCount, TileEntityGeiger.check(level, player.getOnPos()));
+                }
+            } else if (step && chestplate.step != null && player.onGround()){
+                steppy(player, chestplate.step);
+            }
+        }
+    }
+    public static void steppy(Player player, String sound) {
+        try {
+
+//            Field nextStepDistance = ReflectionHelper.findField(Entity.class, "nextStepDistance", "field_70150_b");
+//            Field distanceWalkedOnStepModified = ReflectionHelper.findField(Entity.class, "distanceWalkedOnStepModified", "field_82151_R");
+//
+//            if(player.getEntityData().getFloat("hfr_nextStepDistance") == 0) {
+//                player.getEntityData().setFloat("hfr_nextStepDistance", nextStepDistance.getFloat(player));
+//            }
+//
+//            int px = MathHelper.floor_double(player.posX);
+//            int py = MathHelper.floor_double(player.posY - 0.2D - (double) player.yOffset);
+//            int pz = MathHelper.floor_double(player.posZ);
+//            Block block = player.worldObj.getBlock(px, py, pz);
+//
+//            if(block.getMaterial() != Material.air && player.getEntityData().getFloat("hfr_nextStepDistance") <= distanceWalkedOnStepModified.getFloat(player))
+//                player.playSound(sound, 1.0F, 1.0F);
+//
+//            player.getEntityData().setFloat("hfr_nextStepDistance", nextStepDistance.getFloat(player));
+
+        } catch(Exception x) {
+        }
+    }
+
+    public boolean isArmorEnabled(ItemStack stack) { return true; }
+
+    private HashSet<EnumPlayerPart> hidden = new HashSet<EnumPlayerPart>();
+    private boolean needsFullSet = false;
+
+    public ItemArmorFSB hides(EnumPlayerPart... parts) {
+        Collections.addAll(hidden, parts);
+        return this;
+    }
+
+    public ItemArmorFSB setFullSetForHide() {
+        needsFullSet = true;
+        return this;
+    }
+
+    @Override
+    public boolean disablesPart(Player player, ItemStack stack, EnumPlayerPart part) {
+        return false;
+    }
+    // 获取盔甲纹理
+    @Override
+    public @Nullable String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
+        return super.getArmorTexture(stack, entity, slot, type);
+    }
+
+    public void handleJump(Player player) {
+
+//        if(ArmorFSB.hasFSBArmor(player)) {
+//
+//            ArmorFSB chestplate = (ArmorFSB) player.inventory.armorInventory[2].getItem();
+//
+//            if(chestplate.jump != null)
+//                player.playSound(chestplate.jump, 1.0F, 1.0F);
+//        }
+    }
+
+    public void handleFall(Player player) {
+
+//        if(ArmorFSB.hasFSBArmor(player)) {
+//
+//            ArmorFSB chestplate = (ArmorFSB) player.inventory.armorInventory[2].getItem();
+//
+//            if(chestplate.hardLanding && player.fallDistance > 10) {
+//
+//                // player.playSound(Block.soundTypeAnvil.func_150496_b(), 2.0F,
+//                // 0.5F);
+//
+//                List<Entity> entities = player.worldObj.getEntitiesWithinAABBExcludingEntity(player, player.boundingBox.expand(3, 0, 3));
+//
+//                for(Entity e : entities) {
+//
+//                    if(e instanceof EntityItem)
+//                        continue;
+//
+//                    Vec3 vec = Vec3.createVectorHelper(player.posX - e.posX, 0, player.posZ - e.posZ);
+//
+//                    if(vec.lengthVector() < 3) {
+//
+//                        double intensity = 3 - vec.lengthVector();
+//                        e.motionX += vec.xCoord * intensity * -2;
+//                        e.motionY += 0.1D * intensity;
+//                        e.motionZ += vec.zCoord * intensity * -2;
+//
+//                        e.attackEntityFrom(DamageSource.causePlayerDamage(player).setDamageBypassesArmor(), (float) (intensity * 10));
+//                    }
+//                }
+//                // return;
+//            }
+//
+//            if(chestplate.fall != null)
+//                player.playSound(chestplate.fall, 1.0F, 1.0F);
+//        }
+    }
+
+    public void handleAttack(LivingAttackEvent event) { }
+    public void handleHurt(LivingHurtEvent event) { }
+}

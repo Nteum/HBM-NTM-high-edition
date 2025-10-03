@@ -23,6 +23,11 @@ public class ItemStackEnergyHandler extends ItemCapabilityWrapper.ItemCapability
         this.energyStorage = energyStorage;
         this.energyStorage.setListener(this);   // 调用本类的onContentsChanged
     }
+    public ItemStackEnergyHandler(long capacity, long input, long output, boolean isEmpty){
+        this(new BasicEnergyContainer(capacity, input, output));
+        if (!isEmpty)
+            this.energyStorage.setEnergy(capacity);
+    }
     @Override
     protected void gatherCapabilityResolvers(Consumer<ICapabilityResolver> consumer) {
         consumer.accept(new BasicCapabilityResolver(()->new ProxyEnergyHandler(this.energyStorage), HBMCaps.LONG_ENERGY));

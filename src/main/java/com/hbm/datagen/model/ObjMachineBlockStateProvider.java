@@ -12,19 +12,20 @@ import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.client.model.generators.MultiPartBlockStateBuilder;
 
 public class ObjMachineBlockStateProvider extends DecorateBlockStateProvider{
-    public ObjMachineBlockStateProvider(BlockStateProvider stateProvider){
+    public ObjMachineBlockStateProvider(BlockStateGen stateProvider){
         super(stateProvider);
     }
     @Override
     public void registerStatesAndModels() {
-        horizontalBlockWithItem(ModBlocks.machine_assembler.get(), "block/assembler/assembler_body");
-        horizontalBlockWithItem(HBMMachine.CHEMPLANT.get(), "block/chemplant/chemplant_new_body");
-        horizontalBlockWithItem(HBMMachine.PLASTIC_BARREL.get(), "block/barrel/barrel_plastic");
-        horizontalBlockWithItem(HBMMachine.CORRODED_BARREL.get(), "block/barrel/barrel_corroded");
-        horizontalBlockWithItem(HBMMachine.IRON_BARREL.get(), "block/barrel/barrel_iron");
-        horizontalBlockWithItem(HBMMachine.STEEL_BARREL.get(), "block/barrel/barrel_steel");
-        horizontalBlockWithItem(HBMMachine.TCALLOY_BARREL.get(), "block/barrel/barrel_tcalloy");
-        horizontalBlockWithItem(HBMMachine.ANTIMATTER_BARREL.get(), "block/barrel/barrel_antimatter");
+        HBMMachine.model(stateProvider);
+        stateProvider.horizontalBlockWithItem(ModBlocks.machine_assembler.get(), "block/assembler/assembler_body");
+        stateProvider.horizontalBlockWithItem(HBMMachine.CHEMPLANT.get(), "block/chemplant/chemplant_new_body");
+        stateProvider.horizontalBlockWithItem(HBMMachine.PLASTIC_BARREL.get(), "block/barrel/barrel_plastic");
+        stateProvider.horizontalBlockWithItem(HBMMachine.CORRODED_BARREL.get(), "block/barrel/barrel_corroded");
+        stateProvider.horizontalBlockWithItem(HBMMachine.IRON_BARREL.get(), "block/barrel/barrel_iron");
+        stateProvider.horizontalBlockWithItem(HBMMachine.STEEL_BARREL.get(), "block/barrel/barrel_steel");
+        stateProvider.horizontalBlockWithItem(HBMMachine.TCALLOY_BARREL.get(), "block/barrel/barrel_tcalloy");
+        stateProvider.horizontalBlockWithItem(HBMMachine.ANTIMATTER_BARREL.get(), "block/barrel/barrel_antimatter");
         //流体管道
         pipeBlockWithItem(HBMMachine.FLUID_PIPE.get());
     }

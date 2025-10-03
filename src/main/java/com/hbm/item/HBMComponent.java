@@ -115,10 +115,10 @@ public class HBMComponent {
                 .parent(new ModelFile.UncheckedModelFile("item/generated"))
                 .texture("layer0", new ResourceLocation(itemRL.getNamespace(), "item/" + textureName));
     }
-    private static String generateOrderlyName(String itemId){
+    protected static String generateOrderlyName(String itemId){
         return Arrays.stream(itemId.split("_")).map(s -> s.substring(0,1).toUpperCase() + s.substring(1)).reduce("",(r,id) -> r + " " + id);
     }
-    private static String generateReversedName(String itemId){
+    protected static String generateReversedName(String itemId){
         List<String> strings = Arrays.stream(itemId.split("_")).map(s -> s.substring(0, 1).toUpperCase() + s.substring(1)).toList();
         return strings.subList(0, strings.size() - 1).stream().reduce(strings.get(strings.size() - 1), (s, s1) -> s + " " + s1);
     }

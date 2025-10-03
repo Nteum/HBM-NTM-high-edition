@@ -6,6 +6,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.energy.IEnergyStorage;
 
 // 处理LONG_ENERGY能量
@@ -76,5 +77,10 @@ public class TransmitUtils {
                 energyHandler.extract(neighborHandler.receive(energyHandler.getStored(),false),false);
             }
         }
+    }
+    public static void dischargeOnly(ICapabilityProvider provider, long amount){
+        provider.getCapability(HBMCaps.LONG_ENERGY).ifPresent(iEnergyHandler -> {
+            iEnergyHandler.extract(amount, false);
+        });
     }
 }

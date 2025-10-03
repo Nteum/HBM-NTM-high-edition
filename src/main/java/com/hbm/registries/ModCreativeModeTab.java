@@ -4,6 +4,7 @@ import com.hbm.HBMLang;
 import com.hbm.Inventory.fluid.ModFluids;
 import com.hbm.block.HBMBlockComponent;
 import com.hbm.block.HBMMachine;
+import com.hbm.item.HBMCombat;
 import com.hbm.item.HBMComponent;
 import com.hbm.item.HBMWeapon;
 import com.hbm.item.HBMtools;
@@ -59,19 +60,8 @@ public class ModCreativeModeTab {
         }).build());
     public static final RegistryObject<CreativeModeTab> HBM_BLOCK = CREATIVE_MODE_TABS.register("hbm_block", () -> CreativeModeTab.builder()
         .title(Component.translatable(HBMLang.ITEMGROUP_BLOCK.key()))
-        .icon(()->ModBlocks.URANIUM_ORE.get().asItem().getDefaultInstance())
+        .icon(()->HBMBlockComponent.URANIUM_ORE.get().asItem().getDefaultInstance())
         .displayItems((parameters, output) -> {
-            output.accept(ModBlocks.URANIUM_ORE.get());
-            output.accept(ModBlocks.DEEPSLATE_URANIUM_ORE.get());
-            output.accept(ModBlocks.BEDROCK_ORE.get());
-            output.accept(ModBlocks.RARE_EARTH_ORE.get());
-            output.accept(ModBlocks.DEEPSLATE_RARE_EARTH_ORE.get());
-            output.accept(ModBlocks.ASBESTOS_BLOCK.get());
-            output.accept(ModBlocks.ASBESTOS_ORE.get());
-            output.accept(ModBlocks.BASALT_ASBESTOS_ORE.get());
-            output.accept(ModBlocks.SA326_ORE.get());
-            output.accept(ModBlocks.LITHIUM_ORE.get());
-            output.accept(ModBlocks.DEPTH_STONE.get());
             output.accept(ModBlocks.TEST12.get());
 
             HBMBlockComponent.creativeTab(output);
@@ -132,9 +122,7 @@ public class ModCreativeModeTab {
      * 将模组中的物品注册到原版创造模式物品栏中
      * */
     public static void addCreative(BuildCreativeModeTabContentsEvent event){
-            if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS){
-//                    event.accept();
-            }
+            if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS){}
 
             else if (event.getTabKey() == CreativeModeTabs.COLORED_BLOCKS){}
 
@@ -146,7 +134,9 @@ public class ModCreativeModeTab {
 
             else if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES){}
 
-            else if (event.getTabKey() == CreativeModeTabs.COMBAT){}
+            else if (event.getTabKey() == CreativeModeTabs.COMBAT){
+                    HBMCombat.creativeTab(event.getEntries());
+            }
 
             else if (event.getTabKey() == CreativeModeTabs.FOOD_AND_DRINKS){}
 

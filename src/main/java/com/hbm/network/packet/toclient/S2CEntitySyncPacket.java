@@ -1,7 +1,7 @@
 package com.hbm.network.packet.toclient;
 
 import com.hbm.network.IHBMMessage;
-import com.hbm.utils.creatures_data.AdditionalDataManager;
+import com.hbm.addational_data.AdditionalDataManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
@@ -17,7 +17,7 @@ public class S2CEntitySyncPacket implements IHBMMessage {
     private final int entityId;
     private final CompoundTag tag;
     public S2CEntitySyncPacket(Entity entity){
-        this(entity.getId(), AdditionalDataManager.getEntityData(entity).isPresent() ? AdditionalDataManager.getEntityData(entity).get().syncToClient() : new CompoundTag());
+        this(entity.getId(), AdditionalDataManager.getAdditionalData(entity).isPresent() ? AdditionalDataManager.getAdditionalData(entity).get().syncToClient() : new CompoundTag());
     }
     S2CEntitySyncPacket(int entityId, CompoundTag tag){
         this.entityId = entityId;
@@ -39,7 +39,7 @@ public class S2CEntitySyncPacket implements IHBMMessage {
             assert Minecraft.getInstance().level != null;
             Entity entity = Minecraft.getInstance().level.getEntity(entityId);
             assert entity != null;
-            AdditionalDataManager.getEntityData(entity).ifPresent(entityData -> entity.deserializeNBT(tag));
+            AdditionalDataManager.getAdditionalData(entity).ifPresent(entityData -> entity.deserializeNBT(tag));
         });
         ctx.get().setPacketHandled(true);
     }

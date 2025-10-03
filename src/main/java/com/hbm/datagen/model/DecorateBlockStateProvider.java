@@ -11,29 +11,16 @@ import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class DecorateBlockStateProvider implements ICategoryStateProvider{
-    BlockStateProvider stateProvider;
-    public DecorateBlockStateProvider(BlockStateProvider stateProvider){
+    BlockStateGen stateProvider;
+    public DecorateBlockStateProvider(BlockStateGen stateProvider){
         this.stateProvider = stateProvider;
     }
     @Override
     public void registerStatesAndModels(){
-        horizontalBlockWithItem(ModBlocks.TEST12.get(),"block/test12/test12");
+        stateProvider.horizontalBlockWithItem(ModBlocks.TEST12.get(),"block/test12/test12");
         stateProvider.simpleBlockWithItem(HBMMachine.DEBUG_BLOCK.get(),stateProvider.cubeAll(HBMMachine.DEBUG_BLOCK.get()));
 
         HBMBlockComponent.genModel(stateProvider);
-    }
-    protected void horizontalBlockWithItem(Block block, ModelFile model){
-        stateProvider.horizontalBlock(block,model);
-        stateProvider.simpleBlockItem(block,model);
-    }
-    protected void horizontalBlockWithItem(Block block, String path){
-        ModelFile.ExistingModelFile model = stateProvider.models().getExistingFile(HBM.rl(path));
-        stateProvider.horizontalBlock(block,model);
-        stateProvider.simpleBlockItem(block,model);
-    }
-    protected void simpleBlockWithItem(Block block, String path){
-        ModelFile.ExistingModelFile model = stateProvider.models().getExistingFile(HBM.rl(path));
-        stateProvider.simpleBlockWithItem(block,model);
     }
     private ResourceLocation key(Block block) {
         return ForgeRegistries.BLOCKS.getKey(block);

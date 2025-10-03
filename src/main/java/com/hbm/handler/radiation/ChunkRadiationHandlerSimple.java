@@ -1,5 +1,6 @@
 package com.hbm.handler.radiation;
 
+import com.hbm.block.HBMBlockComponent;
 import com.hbm.config.RadiationConfig;
 import com.hbm.network.ModMessages;
 import com.hbm.network.packet.toclient.AuxParticlePacket;
@@ -261,12 +262,12 @@ public class ChunkRadiationHandlerSimple extends ChunkRadiationHandler {
 								BlockState blockState = level.getBlockState(new BlockPos(x, y, z));
 								if (blockState.isAir())continue;
 								else if(blockState.is(Blocks.GRASS_BLOCK)) {
-									level.setBlock(new BlockPos(x,y,z), ModBlocks.WAST_EARTH.get().defaultBlockState(),3);
+									level.setBlock(new BlockPos(x,y,z), HBMBlockComponent.WAST_EARTH.get().defaultBlockState(),3);
 								} else if(blockState.is(Blocks.TALL_GRASS)) {
 									level.setBlock(new BlockPos(x,y,z), Blocks.AIR.defaultBlockState(),11);
-								} else if(blockState.is(BlockTags.LEAVES) && !(blockState.is(ModBlocks.WAST_LEAVES.get()))) {
+								} else if(blockState.is(BlockTags.LEAVES) && !(blockState.is(HBMBlockComponent.WAST_LEAVES.get()))) {
 									if(level.random.nextInt(7) <= 5) {
-										level.setBlock(new BlockPos(x,y,z), ModBlocks.WAST_LEAVES.get().defaultBlockState(),3);
+										level.setBlock(new BlockPos(x,y,z), HBMBlockComponent.WAST_LEAVES.get().defaultBlockState(),3);
 									} else {
 										level.setBlock(new BlockPos(x,y,z), Blocks.AIR.defaultBlockState(),11);
 									}

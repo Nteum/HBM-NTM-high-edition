@@ -40,21 +40,6 @@ public class BlockStateGen extends BlockStateProvider {
         horizontalBlockWithItem(ModBlocks.machine_schrabidium_battery.get(),this.models().orientable("machine_schrabidium_battery", new ResourceLocation(HBM.MODID, "block/battery_schrabidium_side"), new ResourceLocation(HBM.MODID, "block/battery_schrabidium_front"), new ResourceLocation(HBM.MODID, "block/battery_schrabidium_top")));
         horizontalBlockWithItem(ModBlocks.machine_dineutronium_battery.get(),this.models().orientable("machine_dineutronium_battery", new ResourceLocation(HBM.MODID, "block/battery_dineutronium_side"), new ResourceLocation(HBM.MODID, "block/battery_dineutronium_front"), new ResourceLocation(HBM.MODID, "block/battery_dineutronium_top")));
 
-        simpleBlockWithItem(ModBlocks.WAST_EARTH.get(),this.models().cubeBottomTop("wast_earth", HBM.rl("block/env/waste_earth_side"), HBM.rl("block/env/waste_earth_bottom"), HBM.rl("block/env/waste_earth_top")));
-        simpleBlockWithItem(ModBlocks.WAST_LEAVES.get(),this.models().leaves("wast_leaves", HBM.rl("block/env/waste_leaves")));
-        simpleBlockWithItem(ModBlocks.URANIUM_ORE.get(),this.models().cubeAll("uranium_ore", HBM.rl("block/env/ore_uranium")));
-        simpleBlockWithItem(ModBlocks.DEEPSLATE_URANIUM_ORE.get(),this.models().cubeAll("deepslate_uranium_ore", HBM.rl("block/env/ore_uranium_deepslate")));
-        addEnumStateBlock(ModBlocks.BEDROCK_ORE.get(), BedRockOre.TYPE, (value)->enumModelFileFunction_BedRockOreType((BedRockOre.BedRockOreType) value));
-        simpleBlockItem(ModBlocks.BEDROCK_ORE.get(), this.models().cubeAll("bedrock_ore", new ResourceLocation("block/bedrock")));
-        simpleBlockWithItem(ModBlocks.RARE_EARTH_ORE.get(),this.models().cubeAll("rare_earth", HBM.rl("block/env/ore_rare")));
-        simpleBlockWithItem(ModBlocks.DEEPSLATE_RARE_EARTH_ORE.get(),this.models().cubeAll("deepslate_rare_ore", HBM.rl("block/env/ore_rare_deepslate")));
-        simpleBlockWithItem(ModBlocks.ASBESTOS_BLOCK.get(),this.models().cubeAll("asbestos_block", HBM.rl("block/env/block_asbestos")));
-        simpleBlockWithItem(ModBlocks.ASBESTOS_ORE.get(),this.models().cubeAll("asbestos_ore", HBM.rl("block/env/ore_asbestos")));
-        simpleBlockWithItem(ModBlocks.BASALT_ASBESTOS_ORE.get(),this.models().cubeTop("basalt_asbestos_ore", HBM.rl("block/env/ore_asbestos_basalt"), HBM.rl("block/env/ore_asbestos_basalt_top")));
-        simpleBlockWithItem(ModBlocks.SA326_ORE.get(),this.models().cubeAll("sa326_ore", HBM.rl("block/env/ore_schrabidium")));
-        simpleBlockWithItem(ModBlocks.LITHIUM_ORE.get(),this.models().cubeAll("lithium_ore", HBM.rl("block/env/ore_lithium")));
-        simpleBlockWithItem(ModBlocks.DEPTH_STONE.get(),this.models().cubeAll("depth_stone", HBM.rl("block/env/stone_depth")));
-
         ModelFile.ExistingModelFile conveyorModel = this.models().getExistingFile(new ResourceLocation(HBM.MODID, "block/conveyor"));
         horizontalBlock(ModBlocks.conveyor.get(),conveyorModel);
         simpleBlockItem(ModBlocks.conveyor.get(),conveyorModel);
@@ -141,6 +126,22 @@ public class BlockStateGen extends BlockStateProvider {
         //电池
     }
 
+    public void simpleBlockWithItem(Block block, String path){
+        ModelFile.ExistingModelFile model = models().getExistingFile(HBM.rl(path));
+        simpleBlockWithItem(block,model);
+    }
+    public void horizontalBlockWithItem(Block block){
+        horizontalBlockWithItem(block, key(block).getPath());
+    }
+    public void horizontalBlockWithItem(Block block, String path){
+        ModelFile.ExistingModelFile model = models().getExistingFile(HBM.rl(path));
+        horizontalBlockWithItem(block, model);
+    }
+    public void horizontalBlockWithItem(Block block, ModelFile model){
+        horizontalBlock(block,model);
+        simpleBlockItem(block,model);
+    }
+
     public void addObjHorizonalModel(Block block,String name){
         ModelFile.ExistingModelFile existingFile = this.models().getExistingFile(new ResourceLocation(HBM.MODID, name));
         this.horizontalBlock(block,existingFile);
@@ -159,7 +160,7 @@ public class BlockStateGen extends BlockStateProvider {
         this.simpleBlockItem(block,model1);
     }
 
-    private <E extends Enum<E> & StringRepresentable> void addEnumStateBlock(Block block, EnumProperty<E> enumProperty, Function<Enum<E>, ModelFile> enumModelFileFunction){
+    public  <E extends Enum<E> & StringRepresentable> void addEnumStateBlock(Block block, EnumProperty<E> enumProperty, Function<Enum<E>, ModelFile> enumModelFileFunction){
         this.getVariantBuilder(block)
                 .forAllStates(state -> {
                     E value = state.getValue(enumProperty);
@@ -175,10 +176,6 @@ public class BlockStateGen extends BlockStateProvider {
             case COPPER -> models().getExistingFile(HBM.rl("block/env/bedrock_ore_copper"));
             default -> null;
         };
-    }
-    protected void horizontalBlockWithItem(Block block, ModelFile model){
-        horizontalBlock(block,model);
-        simpleBlockItem(block,model);
     }
 
     private void cableBlockWithItem(){
@@ -201,8 +198,10 @@ public class BlockStateGen extends BlockStateProvider {
             }
         });
     }
-
-    private ResourceLocation key(Block block) {
+    public String path(Block block){
+        return key(block).getPath();
+    }
+    public ResourceLocation key(Block block) {
         return ForgeRegistries.BLOCKS.getKey(block);
     }
 }

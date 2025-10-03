@@ -1,0 +1,16 @@
+{
+  "parent": "minecraft:item/generated",
+  "overrides": [
+    {
+      "loader": "forge:obj",
+      "flip_v": true,
+      "model": "hbm:models/item/armor/ajr.obj",
+      "mtl_override": "hbm:models/general2.mtl",
+      "texture0": "hbm:models/missile/missile_test",
+      "texture1": "hbm:models/missile/missile_test"
+    }
+  ],
+  "textures": {
+    "layer0": "minecraft:item/iron_chestplate"
+  }
+}

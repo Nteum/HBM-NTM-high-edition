@@ -1,10 +1,16 @@
 package com.hbm.utils.debug;
 
+import com.google.errorprone.annotations.Var;
 import com.hbm.HBM;
 import com.hbm.HBMKey;
 import com.hbm.HBMLang;
+import com.hbm.addational_data.AdditionalDataManager;
+import com.hbm.addational_data.DataEntry;
+import com.hbm.effect.ModEffects;
 import com.hbm.entity.weapon.missile.EntityMissileTier0.*;
+import com.hbm.utils.NBTUtils;
 import com.hbm.utils.WorldUtils;
+import com.sun.jna.platform.win32.Pdh;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.SectionPos;
 import net.minecraft.nbt.CompoundTag;
@@ -15,6 +21,7 @@ import net.minecraft.server.level.TicketType;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.player.Player;
@@ -27,9 +34,13 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CampfireBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.chunk.ChunkAccess;
+import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraftforge.common.world.ForgeChunkManager;
+import org.antlr.v4.misc.Utils;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -66,36 +77,31 @@ public class ItemDebugWand extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
         if (!pLevel.isClientSide && !pPlayer.hasPose(Pose.CROUCHING)){
-            ItemStack itemInHand = pPlayer.getItemInHand(pUsedHand);
-            CompoundTag posElement = itemInHand.getTagElement(HBMKey.POSITION);
-            if (!itemInHand.hasTag() || posElement == null){
-                pPlayer.sendSystemMessage(Component.literal("No pos has been set."));
-            }else {
-                BlockPos storedPos = NbtUtils.readBlockPos(posElement);
-                // 注意，getBlockState是会加载区块的，因此这里用了一个安全加载的函数
-                BlockState markedBlock = WorldUtils.getBlockState(pLevel, storedPos).orElse(Blocks.AIR.defaultBlockState());
-                if (markedBlock.is(Blocks.AIR) || markedBlock.is(Blocks.VOID_AIR)){
-                    pPlayer.sendSystemMessage(Component.translatable(HBMLang.BLOCK_STATE_LOSE.key(), storedPos.toShortString()));
-                }else {
-                    createMissle(pLevel, pPlayer, pUsedHand, storedPos);
-                }
-                itemInHand.removeTagKey(HBMKey.POSITION);
-            }
+//            ItemStack itemInHand = pPlayer.getItemInHand(pUsedHand);
+//            CompoundTag posElement = itemInHand.getTagElement(HBMKey.POSITION);
+//            if (!itemInHand.hasTag() || posElement == null){
+//                pPlayer.sendSystemMessage(Component.literal("No pos has been set."));
+//            }else {
+//                BlockPos storedPos = NbtUtils.readBlockPos(posElement);
+//                // 注意，getBlockState是会加载区块的，因此这里用了一个安全加载的函数
+//                BlockState markedBlock = WorldUtils.getBlockState(pLevel, storedPos).orElse(Blocks.AIR.defaultBlockState());
+//                if (markedBlock.is(Blocks.AIR) || markedBlock.is(Blocks.VOID_AIR)){
+//                    pPlayer.sendSystemMessage(Component.translatable(HBMLang.BLOCK_STATE_LOSE.key(), storedPos.toShortString()));
+//                }else {
+////                    createMissle(pLevel, pPlayer, pUsedHand, storedPos);
+////                    addEffects(pLevel, pPlayer, storedPos);
+//                }
+//                itemInHand.removeTagKey(HBMKey.POSITION);
+//            }
+            showRadData(pLevel, pPlayer);
         }
         return super.use(pLevel, pPlayer, pUsedHand);
     }
 
     @Override
     public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
-//        super.inventoryTick(pStack, pLevel, pEntity, pSlotId, pIsSelected);
-//        if (!pLevel.isClientSide && pLevel.getGameTime()%5==0 && pStack.is(HBMtools.DEBUG_WAND.get()) && pStack.hasTag()){
-//            CompoundTag posTag = pStack.getTagElement(HBMKey.POSITION);
-//            if (posTag != null){
-//                BlockPos blockPos = NbtUtils.readBlockPos(posTag);
-//                boolean doChunkLoad = pLevel.hasChunk(SectionPos.blockToSectionCoord(blockPos.getX()), SectionPos.blockToSectionCoord(blockPos.getY()));
-//                pEntity.sendSystemMessage(Component.translatable(HBMLang.CHUNK_DATA.key(), new ChunkPos(blockPos).toString()).append(" is " + (doChunkLoad ? "load" : "unload")));
-//            }
-//        }
+        if (pLevel.isClientSide()) return;
+//        showRadData(pStack, pLevel, pEntity);
     }
 
     /**
@@ -110,6 +116,35 @@ public class ItemDebugWand extends Item {
         missileTest.setOwner(pPlayer);
         pLevel.addFreshEntity(missileTest);
         pPlayer.sendSystemMessage(Component.literal("New missile create, aim at: " + storedPos.toShortString()));
+    }
+    public static void addEffects(Level pLevel, Player pPlayer, BlockPos storedPos){
+//        AdditionalDataManager.setEntityData(pPlayer, DataEntry.RADIATION, 900F);
 
+        if (!pLevel.hasChunk(storedPos.getX() >> 4, storedPos.getZ() >> 4)) return;
+        ChunkAccess chunk = pLevel.getChunk(storedPos);
+        if (chunk instanceof LevelChunk levelChunk){
+            AdditionalDataManager.setChunkData(levelChunk, DataEntry.RADIATION, 1000);
+            pPlayer.sendSystemMessage(Component.literal("Radiation set at: " + storedPos.toShortString()));
+        }
+    }
+    public static void showRadData(Level pLevel, Entity pEntity){
+        Float entityRad = AdditionalDataManager.getEntityData(pEntity, DataEntry.RADIATION).map(o -> (float) o).orElse(0f);
+        Float chunkRad = AdditionalDataManager.getChunkData(pLevel.getChunkAt(pEntity.getOnPos()), DataEntry.RADIATION).map(o -> (float) o).orElse(0f);
+        pEntity.sendSystemMessage(Component.literal("Entity Rad: " + entityRad + ";\t Chunk Rad: " + chunkRad));
+    }
+    // 打印区块相关的辐射
+    public static void showChunkRadData(ItemStack pStack, Level pLevel, Entity pEntity){
+        if (pStack.getTagElement(HBMKey.POSITION) != null || pLevel.getGameTime() % 40 != 0) return;
+        BlockPos blockPos;
+        List<Float> radList = new ArrayList<>();
+        blockPos = pEntity.getOnPos();
+        ChunkPos chunkPos = new ChunkPos(blockPos);
+        for (int i = -1; i < 2; i++) {
+            for (int j = -1; j < 2; j++) {
+                LevelChunk chunk = pLevel.getChunk(chunkPos.x + i, chunkPos.z + j);
+                radList.add(AdditionalDataManager.getChunkData(chunk, DataEntry.RADIATION).map(o -> (float) o).orElse(0f));
+            }
+        }
+        pEntity.sendSystemMessage(Component.literal("Radiation now: " + radList));
     }
 }

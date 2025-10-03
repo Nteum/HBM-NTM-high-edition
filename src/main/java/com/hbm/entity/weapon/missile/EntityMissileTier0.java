@@ -49,7 +49,10 @@ public abstract class EntityMissileTier0 extends EntityMissile{
             super(ModEntityType.ENTITY_MISSILE_TEST.get(), world, x, y, z, target);
         }
         @Override public ItemStack getDebrisRareDrop() { return null; }
-        @Override public ItemStack getMissileItemForInfo() { return new ItemStack(HBMWeapon.MISSILE_TEST.get()); }
+        @Override public ItemStack getMissileItemForInfo() {
+            return ItemStack.EMPTY;
+//            return new ItemStack(HBMWeapon.MISSILE_TEST.get());
+        }
 
         @Override public void onMissileImpact(HitResult mop) {
             Vec3 loc = mop.getLocation();

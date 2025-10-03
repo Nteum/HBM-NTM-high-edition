@@ -18,7 +18,7 @@ public class BatteryItem extends CapabilityItem {
     long capacity;
     long inout;
     boolean isEmpty;
-    static int DEFAULT_DAMAGE = 1000;
+    public static int DEFAULT_DAMAGE = 1000;
     public BatteryItem(long capacity, long inout, Properties pProperties) {
         super(pProperties.defaultDurability(DEFAULT_DAMAGE));
         this.capacity = capacity;

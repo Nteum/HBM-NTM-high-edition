@@ -32,6 +32,7 @@ import java.util.List;
 /**
  * 大部分机器的父类，完成一些机器共有的工作。
  * */
+@Deprecated
 public abstract class BaseMachineBlock extends BaseEntityBlock implements EntityBlock {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     protected BaseMachineBlock(Properties pProperties) {

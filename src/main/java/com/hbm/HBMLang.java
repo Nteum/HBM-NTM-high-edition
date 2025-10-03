@@ -1,11 +1,17 @@
 package com.hbm;
 
 import com.hbm.api.text.ILangEntry;
+import com.hbm.datagen.LanguageProvider;
+import joptsimple.internal.Strings;
 import net.minecraft.Util;
 import net.minecraft.client.gui.screens.inventory.FurnaceScreen;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.level.block.SlabBlock;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public enum HBMLang implements ILangEntry {
     ITEMGROUP_ITEM("itemGroup","hbm_item"),
@@ -82,6 +88,11 @@ public enum HBMLang implements ILangEntry {
     TOOLTIP_ENERGY("gui","stored_energy.tooltip"),
     // 大世界tooltip
     LOOKTOOLTIP_CHEMPLANT("block","chemplant.looktooltip"),
+    TOOLTIP_GEIGER0("geiger","title", "GEIGER COUNTER"),
+    TOOLTIP_GEIGER1("geiger","chunk_rad", "Current chunk radiation:"),
+    TOOLTIP_GEIGER2("geiger","envrad", "Total environmental radiation:"),
+    TOOLTIP_GEIGER3("geiger","playerrad", "Player contamination:"),
+    TOOLTIP_GEIGER4("geiger","playerres", "Player resistance:"),
     // debug
     CACHED_DATA("general","cached"),
     POS_DATA("general","data.pos"),
@@ -89,18 +100,47 @@ public enum HBMLang implements ILangEntry {
     BLOCK_STATE_LOSE("debug","debugwand.msg.block_lost"),
     BLOCK_STATE_INFO("debug","debugwand.msg.block_info"),
     // general （不用于特殊用途，仅仅作为文字）
-    RECIPE("general","recipe")
+    RECIPE("general","recipe"),
+    // effect
+    EFFECT_RADIATION("effect","radiation"),
+    // armor tooltip
+    ARMOR_GEIGERSOUND("Auditory Geiger Counter"),
+    ARMOR_GEIGERHUD("Built-In Geiger Counter HUD"),
+    ARMOR_GLIDER("Sneak to glide"),
+    ARMOR_VATS("Enemy HUD"),
+    ARMOR_THERMAL("Thermal Sight"),
+    ARMOR_HARDLANDING("Hard Landing"),
+    ARMOR_STEPSIZE("Stepsize: %s"),
+    ARMOR_DASH("Grants %s dashes"),
+    ARMOR_FSB("Full Set Bonus:"),
+    TOOLTIP_CHARGERATE("Charge: %s / %s"),
     ;
 
     private final String key;
-    HBMLang(String type, String path){
-        this(Util.makeDescriptionId(type,HBM.rl(path)));
+    private String content = "";
+    public boolean autoAdd = false;
+    // 直接根据列表名称
+    HBMLang(String content){
+        this(content,true);
     }
-    HBMLang(String key){
-        this.key = key;
+    HBMLang(String content, boolean autoAdd){
+        String[] split = this.name().toLowerCase().split("_");
+        split[0] = split[0] + "." + HBM.MODID;
+        this.key = Strings.join(split, ".");
+        this.content = content;
+        this.autoAdd = autoAdd;
+    }
+    HBMLang(String type, String path){
+        this(type, path, "");
+    }
+    HBMLang(String type, String path, String content){
+        this.key = Util.makeDescriptionId(type,HBM.rl(path));
+        this.content = content;
     }
     public @NotNull String key(){
         return key;
     }
-
+    public String content(){
+        return content;
+    }
 }

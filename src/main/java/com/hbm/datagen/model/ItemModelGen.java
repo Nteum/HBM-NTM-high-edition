@@ -2,6 +2,7 @@ package com.hbm.datagen.model;
 
 import com.hbm.HBM;
 import com.hbm.Inventory.fluid.ModFluids;
+import com.hbm.item.HBMCombat;
 import com.hbm.item.HBMComponent;
 import com.hbm.item.HBMWeapon;
 import com.hbm.item.HBMtools;
@@ -21,6 +22,7 @@ public class ItemModelGen extends ItemModelProvider {
         HBMtools.genModel(this);
         HBMComponent.genModel(this);
         HBMWeapon.genModel(this);
+        HBMCombat.genModel(this);
         ModFluids.bucketModel(this);
         this.basicItem(ModItems.ingot_red_copper.get());
         this.basicItem(ModItems.ingot_tungsten.get());
@@ -29,15 +31,10 @@ public class ItemModelGen extends ItemModelProvider {
         this.basicItem(ModItems.ingot_zirconium.get());
         this.basicItem(ModItems.ingot_magnetized_tungsten.get());
         this.basicItem(ModItems.ingot_solinium.get());
-
         this.basicItem(ModItems.plate_iron.get());
-
         this.basicItem(ModItems.fluorite.get());
-
         this.basicItem(ModItems.nugget_zirconium.get());
 
-//        this.singleTexture("coke",new ResourceLocation("minecraft:item/generated"),"layer0",
-//                new ResourceLocation(HBMxx.MODID,"item/coke.coal"));
         this.basicItem(ModItems.ingot_advanced_alloy.get());
         this.basicItem(ModItems.solid_fuel.get());
         this.basicItem(ModItems.lignite.get());
@@ -56,12 +53,7 @@ public class ItemModelGen extends ItemModelProvider {
         this.basicItem(ModItems.grenade_fire.get());
         this.basicItem(ModItems.grenade_frag.get());
         this.basicItem(ModItems.grenade_black_hole.get());
-
-//        this.basicItem(ModItems.bucket_irradiated_water.get());
-//        this.basicItem(ModItems.bucket_irradiated_polluted.get());
-//        this.basicItem(ModItems.bucket_sulfuric_acid.get());
         this.basicItem(ModItems.overlay_my_fluid.get());
-
         this.basicItem(ModItems.BEDROCK_ORE.get());
         /* tool */
         this.basicItem(ModItems.SCREWDRIVER.get());

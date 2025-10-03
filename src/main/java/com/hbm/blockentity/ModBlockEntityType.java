@@ -6,6 +6,7 @@ import com.hbm.blockentity.base2.TileProxyCombo;
 import com.hbm.blockentity.machine.*;
 import com.hbm.HBM;
 import com.hbm.blockentity.base.DummibleBlockEntity;
+import com.hbm.blockentity.tools.TileEntityGeiger;
 import com.hbm.blockentity.weapon.LaunchPadEntity;
 import com.hbm.blockentity.weapon.NukeBombBoyEntity;
 import com.hbm.blockentity.weapon.NukeBombCustomEntity;
@@ -72,4 +73,6 @@ public class ModBlockEntityType {
 //                    ForgeRegistries.BLOCKS.getValues().toArray(Block[]::new)
 //                    BuiltInRegistries.BLOCK.stream().filter(block -> block.builtInRegistryHolder().is(ModTags.Blocks.MACHINE)).toArray(Block[]::new)
             ).build(null));
+    public static final RegistryObject<BlockEntityType<TileEntityGeiger>> GEIGER_COUNTER =
+            REGISTER.register("geiger_counter",()-> BlockEntityType.Builder.of(TileEntityGeiger::new, HBMMachine.GEIGER_COUNTER.get()).build(null));
 }

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "bedrock_ore_type=copper": {
+      "model": "hbm:block/env/bedrock_ore_copper"
+    },
+    "bedrock_ore_type=iron": {
+      "model": "hbm:block/env/bedrock_ore_iron"
+    }
+  }
+}

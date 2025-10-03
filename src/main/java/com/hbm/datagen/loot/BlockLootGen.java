@@ -9,6 +9,7 @@ import net.minecraft.data.loot.packs.VanillaBlockLoot;
 import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.registries.RegistryObject;
@@ -58,38 +59,7 @@ public class BlockLootGen extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.LAUNCHPAD_LARGE.get());
         this.dropSelf(ModBlocks.LAUNCHPAD_COMPACT.get());
         this.dropSelf(ModBlocks.LAUNCHPAD_SOYUZ.get());
-        //矿石
-        this.dropOther(ModBlocks.WAST_EARTH.get(), Blocks.DIRT);
-        this.dropSelf(ModBlocks.URANIUM_ORE.get());
-        this.dropSelf(ModBlocks.DEEPSLATE_URANIUM_ORE.get());
-        this.dropSelf(ModBlocks.SCORCHED_URANIUM_ORE.get());
-        this.dropSelf(ModBlocks.TITANIUM_ORE.get());
-        this.dropSelf(ModBlocks.THORIUM_ORE.get());
-        this.dropSelf(ModBlocks.NITER_ORE.get());
-        this.dropSelf(ModBlocks.TUNGSTEN_ORE.get());
-        this.dropSelf(ModBlocks.ALUMINIUM_ORE.get());
-        this.dropSelf(ModBlocks.FLUORITE_ORE.get());
-        this.dropSelf(ModBlocks.LEAD_ORE.get());
-        this.dropSelf(ModBlocks.BERYLLIUM_ORE.get());
-        this.dropSelf(ModBlocks.SA326_ORE.get());
-        this.dropSelf(ModBlocks.ASBESTOS_BLOCK.get());
-        this.dropSelf(ModBlocks.ASBESTOS_ORE.get());
-        this.dropSelf(ModBlocks.BASALT_ASBESTOS_ORE.get());
-        this.dropSelf(ModBlocks.OIL_ORE.get());
-        this.dropSelf(ModBlocks.OIL_ORE_EMPTY.get());
-        this.dropSelf(ModBlocks.OIL_ORE_SAND.get());
-        this.dropSelf(ModBlocks.RARE_EARTH_ORE.get());
-        this.dropSelf(ModBlocks.DEEPSLATE_RARE_EARTH_ORE.get());
-        this.dropSelf(ModBlocks.LITHIUM_ORE.get());
-        this.dropSelf(ModBlocks.COBALT_ORE.get());
-        this.dropSelf(ModBlocks.COLTAN_ORE.get());
-        this.dropSelf(ModBlocks.GENISS_GAS_ORE.get());
-        this.dropSelf(ModBlocks.SMOLDER_ORE_NETHER.get());
-        this.dropSelf(ModBlocks.PLUTONIUM_ORE_NETHER.get());
-        this.dropSelf(ModBlocks.FIRE_ORE_NETHER.get());
-        this.dropSelf(ModBlocks.TIKITE_ORE_END.get());
-        this.dropSelf(ModBlocks.BEDROCK_ORE.get());
-        this.dropSelf(ModBlocks.DEPTH_STONE.get());
+
         //饰品
         this.dropSelf(ModBlocks.TEST12.get());
     }
@@ -107,6 +77,11 @@ public class BlockLootGen extends BlockLootSubProvider {
     @Override
     public void dropSelf(Block pBlock) {
         super.dropSelf(pBlock);
+    }
+
+    @Override
+    public void dropOther(Block pBlock, ItemLike pItem) {
+        super.dropOther(pBlock, pItem);
     }
 
     @Override

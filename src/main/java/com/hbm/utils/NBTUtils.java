@@ -1,10 +1,9 @@
 package com.hbm.utils;
 
-import com.google.gson.internal.reflect.ReflectionHelper;
 import com.hbm.HBM;
 import com.hbm.api.Coord4D;
 import com.hbm.api.annotations.ParametersAreNotNullByDefault;
-import com.hbm.utils.creatures_data.DataEntry;
+import com.hbm.addational_data.DataEntry;
 import it.unimi.dsi.fastutil.booleans.BooleanConsumer;
 import it.unimi.dsi.fastutil.bytes.ByteConsumer;
 import it.unimi.dsi.fastutil.floats.FloatConsumer;
@@ -23,7 +22,6 @@ import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.IForgeRegistry;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.UUID;
 import java.util.function.Consumer;
 import java.util.function.DoubleConsumer;
@@ -37,6 +35,7 @@ public class NBTUtils {
     }
 
     public static void serializeDataEntry(CompoundTag nbt, DataEntry entry, Object value){
+        if (value == null) return;
         String entryNum = String.valueOf(entry.ordinal());
         if (entry.type == null){
             nbt.putString(entryNum, "");
