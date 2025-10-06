@@ -9,8 +9,12 @@ import com.hbm.item.HBMtools;
 import com.hbm.registries.ModItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.ForgeRegistries;
+
+import java.util.Objects;
 
 public class ItemModelGen extends ItemModelProvider {
     public ItemModelGen(PackOutput output, String modid, ExistingFileHelper existingFileHelper) {
@@ -62,5 +66,12 @@ public class ItemModelGen extends ItemModelProvider {
     public void registerOrdinaryItemModel(String key){
         this.singleTexture(key,new ResourceLocation("item/generated"),"layer0"
                 ,new ResourceLocation(HBM.MODID, "item/" + key));
+    }
+    /**
+     * 产生默认的实体模型，在游戏内自主渲染。
+     * */
+    public void builtinModel(Item item){
+        ResourceLocation resourceLocation = Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(item));
+        this.withExistingParent(resourceLocation.toString(), "builtin/entity");
     }
 }

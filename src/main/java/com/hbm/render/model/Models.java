@@ -5,6 +5,7 @@ import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import com.hbm.HBM;
 import com.hbm.item.HBMWeapon;
+import com.hbm.render.model.armor.ModelArmorBismuth;
 import com.hbm.render.model.armor.ModelArmorT51;
 import com.hbm.render.model.entity.ObjEntityModelSingle;
 import com.hbm.render.model.item.SimpleBakedModelWrapper;
@@ -58,6 +59,7 @@ public class Models {
 
     public static final ResourceLocation MISSILE_TEST = addEntity(HBM.modelRl("entity/missile/missile_test"), new ObjEntityModelSingle());
     public static final ResourceLocation T51 = addEntity(HBM.modelRl("item/armor_t51"), new ModelArmorT51());
+    public static final ResourceLocation BISMUTH = addEntity(HBM.modelRl("item/armor_bismuth"), new ModelArmorBismuth());
 
     public static ResourceLocation add(ResourceLocation rl){
         models.add(rl);
@@ -81,8 +83,7 @@ public class Models {
             try {
                 entityModels.forEach((rl, model) -> {
                     if (model instanceof IObjModel objEntityModel){
-                        if (objEntityModel.getRenderable() != null) return;
-                        objEntityModel.parseJson(rl);
+                        if (objEntityModel.getRenderable() == null) objEntityModel.parseJson(rl);
                     }
                 });
             } catch (Exception e) {

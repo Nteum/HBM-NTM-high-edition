@@ -2,6 +2,9 @@ package com.hbm.render.model;
 
 import com.google.common.collect.ImmutableMap;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.resources.ResourceLocation;
@@ -10,18 +13,22 @@ import net.minecraftforge.client.model.renderable.IRenderable;
 import net.minecraftforge.client.model.renderable.ITextureRenderTypeLookup;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Matrix4f;
+import org.joml.Quaternionf;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 /**
  * 基于forge的CompositeRenderable修改，逻辑没有改变，只是把内部类变成public的
  * 通过反射解决此问题，除此之外似乎别无他法。
  * */
-public class AccessableRenderable implements IRenderable<CompositeRenderable.Transforms> {
-    public List<AccessableRenderable.Component> components = new ArrayList<>();
-
+public class AccessableRenderable implements IRenderable<AccessableRenderable.ModelPartTransform> {
+    public Map<String, Component> components = new HashMap<>();
+    public PartPose pose = PartPose.ZERO;
     private AccessableRenderable() { }
 
     public AccessableRenderable(CompositeRenderable renderable){
@@ -52,7 +59,9 @@ public class AccessableRenderable implements IRenderable<CompositeRenderable.Tra
                 field_quads.setAccessible(true);
                 List<?> list1 = (List<?>) field_components.get(renderable);
                 for (Object o : list1) {
-                    components.add(parseComponent(o, new Component(), classComponent, classMesh, field_name, field_chlidren, field_meshes, field_texture, field_quads));
+                    if (classComponent.isInstance(o) && field_name.get(o) instanceof String name){
+                        components.put(name, parseComponent(o, new Component(), classComponent, classMesh, field_name, field_chlidren, field_meshes, field_texture, field_quads));
+                    }
                 }
             }
         }catch (Exception e){
@@ -77,7 +86,9 @@ public class AccessableRenderable implements IRenderable<CompositeRenderable.Tra
                     return component;
                 } else {
                     for (Object child : children) {
-                        component.children.add(parseComponent(child, new Component(), classComponent, classMesh, field_name, field_chlidren, field_meshes, field_texture,field_quads));
+                        if (classComponent.isInstance(child) && field_name.get(child) instanceof String nameInner){
+                            component.children.put(nameInner, parseComponent(child, new Component(), classComponent, classMesh, field_name, field_chlidren, field_meshes, field_texture,field_quads));
+                        }
                     }
                 }
             }
@@ -86,15 +97,29 @@ public class AccessableRenderable implements IRenderable<CompositeRenderable.Tra
     }
     
     @Override
-    public void render(PoseStack poseStack, MultiBufferSource bufferSource, ITextureRenderTypeLookup textureRenderTypeLookup, int lightmap, int overlay, float partialTick, CompositeRenderable.Transforms context) {
-        for (var component : components)
-            component.render(poseStack, bufferSource, textureRenderTypeLookup, lightmap, overlay, context);
+    public void render(PoseStack poseStack, MultiBufferSource bufferSource, ITextureRenderTypeLookup textureRenderTypeLookup, int lightmap, int overlay, float partialTick, ModelPartTransform context) {
+        for (var component : components.values())
+            component.render(poseStack, bufferSource.getBuffer(textureRenderTypeLookup.get(null)), lightmap, overlay);
     }
     public static class Component
     {
         public String name;
-        public List<AccessableRenderable.Component> children = new ArrayList<>();
-        public List<AccessableRenderable.Mesh> meshes = new ArrayList<>();
+        public Map<String, Component> children = new HashMap();
+        public List<Mesh> meshes = new ArrayList<>();
+//        public ModelPartTransform trans = ModelPartTransform.DEFAULT;
+        public float x = 0;
+        public float y = 0;
+        public float z = 0;
+        public float xRot = 0;
+        public float yRot = 0;
+        public float zRot = 0;
+        public float xScale = 1.0f;
+        public float yScale = 1.0f;
+        public float zScale = 1.0f;
+        public boolean visible = true;
+        public float xRotPoint = 0;
+        public float yRotPoint = 0;
+        public float zRotPoint = 0;
 
         public Component(){ }
         public Component(String name)
@@ -102,23 +127,73 @@ public class AccessableRenderable implements IRenderable<CompositeRenderable.Tra
             this.name = name;
         }
 
-        public void render(PoseStack poseStack, MultiBufferSource bufferSource, ITextureRenderTypeLookup textureRenderTypeLookup, int lightmap, int overlay, CompositeRenderable.Transforms context)
-        {
-            Matrix4f matrix = context.getTransform(name);
-            if (matrix != null)
-            {
-                poseStack.pushPose();
-                poseStack.mulPoseMatrix(matrix);
-            }
+        public Component copyPose(ModelPart modelPart){
+            this.x = modelPart.x;
+            this.y = modelPart.y;
+            this.z = modelPart.z;
+            this.xRot = modelPart.xRot;
+            this.yRot = modelPart.yRot;
+            this.zRot = modelPart.zRot;
+            this.xScale = modelPart.xScale;
+            this.yScale = modelPart.yScale;
+            this.zScale = modelPart.zScale;
+            this.visible = modelPart.visible;
+            return this;
+        }
+        public Component setRotPoint(float x, float y, float z){
+            xRotPoint = x;
+            yRotPoint = y;
+            zRotPoint = z;
+            return this;
+        }
+        public Component resetX(){
+            this.x = 0;
+            return this;
+        }
+        public Component resetY(){
+            this.y = 0;
+            return this;
+        }
+        public Component resetZ(){
+            this.z = 0;
+            return this;
+        }
 
-            for (var part : children)
-                part.render(poseStack, bufferSource, textureRenderTypeLookup, lightmap, overlay, context);
+        public void render(PoseStack poseStack, VertexConsumer consumer, int lightmap, int overlay)
+        {
+            if (visible){
+                poseStack.pushPose();
+
+                poseStack.translate(x / 16.0F, y / 16.0F, z / 16.0F);
+                if (xRot != 0.0F || yRot != 0.0F || zRot != 0.0F) {
+                    poseStack.translate(xRotPoint/ 16, yRotPoint/ 16, zRotPoint/ 16);
+                    poseStack.mulPose((new Quaternionf()).rotationZYX(zRot, yRot, xRot));
+                    poseStack.translate(-xRotPoint/ 16, -yRotPoint/ 16, -zRotPoint/ 16);
+                }
+
+                poseStack.scale(xScale / 16.0f, yScale / 16.0f, zScale / 16.0f);
+
+                for (var part : children.values())
+                    part.render(poseStack, consumer, lightmap, overlay);
+
+                for (var mesh : meshes)
+                    mesh.render(poseStack, consumer, lightmap, overlay);
+
+                poseStack.popPose();
+            }
+        }
+
+        public void renderGUI(PoseStack poseStack, VertexConsumer consumer, int lightmap, int overlay)
+        {
+            poseStack.pushPose();
+
+            for (var part : children.values())
+                part.render(poseStack, consumer, lightmap, overlay);
 
             for (var mesh : meshes)
-                mesh.render(poseStack, bufferSource, textureRenderTypeLookup, lightmap, overlay);
+                mesh.render(poseStack, consumer, lightmap, overlay);
 
-            if (matrix != null)
-                poseStack.popPose();
+            poseStack.popPose();
         }
     }
 
@@ -136,13 +211,16 @@ public class AccessableRenderable implements IRenderable<CompositeRenderable.Tra
             this.quads.addAll(quads);
         }
 
-        public void render(PoseStack poseStack, MultiBufferSource bufferSource, ITextureRenderTypeLookup textureRenderTypeLookup, int lightmap, int overlay)
+        public void render(PoseStack poseStack, VertexConsumer consumer, int lightmap, int overlay)
         {
-            var consumer = bufferSource.getBuffer(textureRenderTypeLookup.get(texture));
             for (var quad : quads)
             {
                 consumer.putBulkData(poseStack.last(), quad, 1, 1, 1, 1, lightmap, overlay, true);
             }
         }
+    }
+
+    public static class ModelPartTransform{
+        public ModelPartTransform(){}
     }
 }

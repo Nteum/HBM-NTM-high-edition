@@ -1,6 +1,7 @@
 package com.hbm.item.armor;
 
 import com.google.gson.internal.reflect.ReflectionHelper;
+import com.hbm.HBM;
 import com.hbm.HBMLang;
 import com.hbm.block.HBMBlockComponent;
 import com.hbm.block.HBMMachine;
@@ -9,7 +10,15 @@ import com.hbm.blockentity.tools.TileEntityGeiger;
 import com.hbm.item.HBMCombat;
 import com.hbm.item.HBMtools;
 import com.hbm.item.tool.ItemGeigerCounter;
+import com.hbm.render.model.armor.ModelArmorBase;
+import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.math.Axis;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
@@ -18,14 +27,14 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.ArmorMaterial;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import org.jetbrains.annotations.Nullable;
+import org.lwjgl.opengl.GL11;
 
 import java.lang.reflect.Field;
 import java.util.*;
@@ -306,4 +315,70 @@ public class ItemArmorFSB extends ArmorItem implements IArmorDisableModel {
 
     public void handleAttack(LivingAttackEvent event) { }
     public void handleHurt(LivingHurtEvent event) { }
+
+    public enum FSBTex{helmet, chest, arm, leg;}
+
+    @OnlyIn(Dist.CLIENT)
+    public void renderObjItem(ItemDisplayContext pDisplayContext, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, int pPackedOverlay){}
+
+    @OnlyIn(Dist.CLIENT)
+    public static void renderStandard(ItemArmorFSB armorFSB, ModelArmorBase model, String helmet, String chest, String arm, String leg,
+                               ItemDisplayContext pDisplayContext, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, int pPackedOverlay){
+        float scale = 0.08f;
+        float xRot = -45;
+        float yRot = 225;
+        float xOffset = 0;
+        float yOffset = 0;
+        float zOffSet = 0;
+        if (pDisplayContext == ItemDisplayContext.FIRST_PERSON_RIGHT_HAND){
+            xRot = 0; yRot = 225; scale = 0.04f;
+            xOffset = -8; yOffset = -20; zOffSet = 0;
+        }else if (pDisplayContext == ItemDisplayContext.THIRD_PERSON_LEFT_HAND){
+            xRot = 0; yRot = 0; scale = 0.04f;
+//            pPoseStack.translate(0.5, -1, -0.5);
+        }else if (pDisplayContext == ItemDisplayContext.FIRST_PERSON_LEFT_HAND){
+            xRot = 0; yRot = 45; scale = 0.04f;
+            xOffset = -8; yOffset = -20; zOffSet = 0;
+        }else if (pDisplayContext == ItemDisplayContext.THIRD_PERSON_RIGHT_HAND){
+            xRot = 0; yRot = 0; scale = 0.04f;
+//            pPoseStack.translate(0.5, -1, -0.5);
+        }else if (pDisplayContext == ItemDisplayContext.FIXED || pDisplayContext == ItemDisplayContext.GROUND){
+            xRot = 0; yRot = 0; scale = 0.04f;
+//            pPoseStack.translate(0.5, -0.5, 0);
+        }
+        pPoseStack.mulPose(Axis.XN.rotationDegrees(xRot));
+        pPoseStack.mulPose(Axis.YN.rotationDegrees(yRot));
+        pPoseStack.translate(-0.7,1.4, 0);
+        ResourceLocation texture = HBM.rl("textures/models/armor/");
+        if (armorFSB.getType() == ArmorItem.Type.HELMET){
+            pPoseStack.scale(scale*0.8f, scale*0.8f, scale*0.8f);
+            pPoseStack.translate(0, 1, 0);
+            if (pDisplayContext != ItemDisplayContext.GUI) pPoseStack.translate(xOffset + 4, yOffset, zOffSet);
+            VertexConsumer buffer = pBuffer.getBuffer(RenderType.entityCutoutNoCull(texture.withSuffix(helmet + ".png")));
+            model.chead.renderGUI(pPoseStack, buffer, pPackedLight, pPackedOverlay);
+        }else if (armorFSB.getType() == ArmorItem.Type.CHESTPLATE){
+            pPoseStack.scale(scale*0.6f,scale*0.6f,scale*0.6f);
+            pPoseStack.translate(0, -10, 0);
+            if (pDisplayContext != ItemDisplayContext.GUI) pPoseStack.translate(xOffset, yOffset-4, zOffSet);
+            VertexConsumer buffer = pBuffer.getBuffer(RenderType.entityCutoutNoCull(texture.withSuffix(chest + ".png")));
+            model.cbody.renderGUI(pPoseStack, buffer, pPackedLight, pPackedOverlay);
+            VertexConsumer buffer1 = pBuffer.getBuffer(RenderType.entityTranslucentCull(texture.withSuffix(arm + ".png")));
+            model.cleftArm.renderGUI(pPoseStack, buffer1, pPackedLight, pPackedOverlay);
+            model.crightArm.renderGUI(pPoseStack, buffer1, pPackedLight, pPackedOverlay);
+        }else if (armorFSB.getType() == ArmorItem.Type.LEGGINGS){
+            pPoseStack.scale(scale, scale, scale);
+            pPoseStack.translate(0, -18, 0);
+            if (pDisplayContext != ItemDisplayContext.GUI) pPoseStack.translate(xOffset + 4, yOffset + 4, zOffSet);
+            VertexConsumer buffer = pBuffer.getBuffer(RenderType.entityCutoutNoCull(texture.withSuffix(leg + ".png")));
+            model.cleftLeg.renderGUI(pPoseStack, buffer, pPackedLight, pPackedOverlay);
+            model.crightLeg.renderGUI(pPoseStack, buffer, pPackedLight, pPackedOverlay);
+        }else if (armorFSB.getType() == ArmorItem.Type.BOOTS){
+            pPoseStack.scale(scale, scale, scale);
+            pPoseStack.translate(0, -24, 0);
+            if (pDisplayContext != ItemDisplayContext.GUI) pPoseStack.translate(xOffset + 4, yOffset + 4, zOffSet);
+            VertexConsumer buffer = pBuffer.getBuffer(RenderType.entityCutoutNoCull(texture.withSuffix(leg + ".png")));
+            model.cleftFoot.renderGUI(pPoseStack, buffer, pPackedLight, pPackedOverlay);
+            model.crightFoot.renderGUI(pPoseStack, buffer, pPackedLight, pPackedOverlay);
+        }
+    }
 }

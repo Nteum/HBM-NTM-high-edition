@@ -81,6 +81,8 @@ public class ModItems {
     //导弹
     public static final RegistryObject<Item> DESIGNATOR = ITEMS.register("designator",()->new ItemDesignator(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> MISSILE_GENERIC = ITEMS.register("missile_generic",()->new ItemMissile(new Item.Properties().stacksTo(1), ItemMissile.MissileTier.TIER1));
+    // 填充物品，游戏内无法获得，用于避免物品被匹配上
+    public static final RegistryObject<Item> DUMMY_ITEM = ITEMS.register("dummy_item", ()->new Item(new Item.Properties()));
     public static void register(IEventBus eventBus){
         ITEMS.register(eventBus);
     }

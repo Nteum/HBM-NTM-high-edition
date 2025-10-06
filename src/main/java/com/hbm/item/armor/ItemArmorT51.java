@@ -1,10 +1,18 @@
 package com.hbm.item.armor;
 
+import com.hbm.HBM;
+import com.hbm.main.ClientSetup;
+import com.hbm.render.model.Models;
+import com.hbm.render.model.armor.ModelArmorT51;
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -26,14 +34,36 @@ public class ItemArmorT51 extends ItemArmorFSBPowered{
         consumer.accept(new IClientItemExtensions() {
             @Override
             public @NotNull HumanoidModel<?> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original) {
+                return ((ModelArmorT51) Models.getEntityModel(Models.T51)).adjustWithOrigin(original);
+            }
 
-                return IClientItemExtensions.super.getHumanoidArmorModel(livingEntity, itemStack, equipmentSlot, original);
+            @Override
+            public BlockEntityWithoutLevelRenderer getCustomRenderer() {
+                return ClientSetup.getLazyItemRender();
             }
         });
     }
 
     @Override
     public @Nullable String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
-        return super.getArmorTexture(stack, entity, slot, type);
+        if (stack.getItem() instanceof ItemArmorT51 armorT51){
+            switch (armorT51.type){
+                case HELMET -> {
+                    return "hbm:textures/models/armor/t51_helmet.png";
+                }
+                case CHESTPLATE -> {
+                    return "hbm:textures/models/armor/t51_chest.png";
+                }
+                case BOOTS, LEGGINGS -> {
+                    return "hbm:textures/models/armor/t51_leg.png";
+                }
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public void renderObjItem(ItemDisplayContext pDisplayContext, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, int pPackedOverlay) {
+        renderStandard(this, (ModelArmorT51)Models.getEntityModel(Models.T51), "t51_helmet", "t51_chest", "t51_arm", "t51_leg",pDisplayContext, pPoseStack, pBuffer, pPackedLight, pPackedOverlay);
     }
 }
