@@ -41,6 +41,8 @@ public enum HBMArmorMats implements StringRepresentable, ArmorMaterial {
     DNT("dnt", 3, new int[] { 1, 1, 1, 1 }, 0, SoundEvents.ARMOR_EQUIP_IRON, 0.0F, 0.0F, ()->Ingredient.of(HBMComponent.INGOT_DINEUTRONIUM.get())),
     ZIRCONIUM("zirconium", 1000, new int[] { 2, 5, 3, 1 }, 100, SoundEvents.ARMOR_EQUIP_IRON, 0.0F, 0.0F, ()->Ingredient.of(HBMComponent.INGOT_ZIRCONIUM.get())),
     T45("t45", 150, new int[] { 3, 8, 6, 3 }, 0, SoundEvents.ARMOR_EQUIP_IRON, 0.0F, 0.0F, ()->Ingredient.of(ModItems.DUMMY_ITEM.get())),
+    DESH("steam", 150, new int[] { 3, 8, 6, 3 }, 0, SoundEvents.ARMOR_EQUIP_IRON, 0.0F, -0.025F, ()->Ingredient.of(HBMComponent.INGOT_DESH.get())),
+    DIESEL("diesel", 150, new int[] { 3, 8, 6, 3 }, 0, SoundEvents.ARMOR_EQUIP_IRON, 0.0F, 0.25F, ()->Ingredient.of(HBMComponent.PLATE_COPPER.get())),
     ;
 
     private static final EnumMap<ArmorItem.Type, Integer> HEALTH_FUNCTION_FOR_TYPE = Util.make(new EnumMap<>(ArmorItem.Type.class), (p_266653_) -> {

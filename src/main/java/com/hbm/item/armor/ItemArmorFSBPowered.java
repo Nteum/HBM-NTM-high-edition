@@ -3,7 +3,7 @@ package com.hbm.item.armor;
 import com.hbm.HBMLang;
 import com.hbm.api.energy.IEnergyHandler;
 import com.hbm.api.energy.TransmitUtils;
-import com.hbm.api.energy.fe.ItemStackEnergyHandler;
+import com.hbm.api.energy.ItemStackEnergyHandler;
 import com.hbm.capabilities.HBMCaps;
 import com.hbm.capabilities.ItemCapabilityWrapper;
 import com.hbm.item.tool.BatteryItem;

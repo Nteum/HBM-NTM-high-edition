@@ -41,7 +41,7 @@ public class ItemArmorBismuth extends ItemArmorFSB {
 		consumer.accept(new IClientItemExtensions() {
 			@Override
 			public @NotNull HumanoidModel<?> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original) {
-				return ((ModelArmorBismuth) Models.getEntityModel(Models.BISMUTH)).adjustWithOrigin(original);
+				return ((ModelArmorBismuth) Models.getEntityModel(Models.BISMUTH)).adjustWithOrigin(original, equipmentSlot);
 			}
 
 			@Override

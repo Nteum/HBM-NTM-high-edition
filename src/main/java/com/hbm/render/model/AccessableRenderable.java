@@ -158,6 +158,12 @@ public class AccessableRenderable implements IRenderable<AccessableRenderable.Mo
             this.z = 0;
             return this;
         }
+        public Component adjXYZ(float xDelta, float yDelta, float zDelta){
+            this.x += xDelta;
+            this.y += yDelta;
+            this.z += zDelta;
+            return this;
+        }
 
         public void render(PoseStack poseStack, VertexConsumer consumer, int lightmap, int overlay)
         {

@@ -22,6 +22,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
@@ -55,9 +56,9 @@ public class ItemArmorFSB extends ArmorItem implements IArmorDisableModel {
     public boolean hardLanding = false;
     public int dashCount = 0;
     public int stepSize = 0;
-    public String step;
-    public String jump;
-    public String fall;
+    public SoundEvent step;
+    public SoundEvent jump;
+    public SoundEvent fall;
     public Supplier<HBMCombat.Suit> suit;
 
     public ItemArmorFSB(ArmorMaterial pMaterial, Type pType, Properties pProperties, Supplier<HBMCombat.Suit> suit) {
@@ -106,17 +107,17 @@ public class ItemArmorFSB extends ArmorItem implements IArmorDisableModel {
         return this;
     }
 
-    public ItemArmorFSB setStep(String step) {
+    public ItemArmorFSB setStep(SoundEvent step) {
         this.step = step;
         return this;
     }
 
-    public ItemArmorFSB setJump(String jump) {
+    public ItemArmorFSB setJump(SoundEvent jump) {
         this.jump = jump;
         return this;
     }
 
-    public ItemArmorFSB setFall(String fall) {
+    public ItemArmorFSB setFall(SoundEvent fall) {
         this.fall = fall;
         return this;
     }
@@ -177,7 +178,7 @@ public class ItemArmorFSB extends ArmorItem implements IArmorDisableModel {
     }
 
     public static boolean hasFSBArmor(Player player) {
-        ItemStack plateSlot = player.getInventory().armor.get(1);
+        ItemStack plateSlot = player.getInventory().armor.get(2);
         if (plateSlot.getItem() instanceof ItemArmorFSB armorFSB){
             HBMCombat.Suit suit = armorFSB.suit.get();
             if (suit.HELMET() != null && !player.getInventory().getArmor(0).is(suit.HELMET().get())) return false;
@@ -202,7 +203,7 @@ public class ItemArmorFSB extends ArmorItem implements IArmorDisableModel {
 //        }
 
         if(hasFSBArmor(player)) {
-            ItemArmorFSB chestplate = (ItemArmorFSB) player.getInventory().getArmor(1).getItem();
+            ItemArmorFSB chestplate = (ItemArmorFSB) player.getInventory().getArmor(2).getItem();
             if (!level.isClientSide()){
                 for (MobEffectInstance effect : chestplate.effects) {
                     player.addEffect(effect);
@@ -215,7 +216,7 @@ public class ItemArmorFSB extends ArmorItem implements IArmorDisableModel {
             }
         }
     }
-    public static void steppy(Player player, String sound) {
+    public static void steppy(Player player, SoundEvent sound) {
         try {
 
 //            Field nextStepDistance = ReflectionHelper.findField(Entity.class, "nextStepDistance", "field_70150_b");
@@ -327,55 +328,54 @@ public class ItemArmorFSB extends ArmorItem implements IArmorDisableModel {
         float scale = 0.08f;
         float xRot = -45;
         float yRot = 225;
-        float xOffset = 0;
-        float yOffset = 0;
-        float zOffSet = 0;
-        if (pDisplayContext == ItemDisplayContext.FIRST_PERSON_RIGHT_HAND){
-            xRot = 0; yRot = 225; scale = 0.04f;
-            xOffset = -8; yOffset = -20; zOffSet = 0;
-        }else if (pDisplayContext == ItemDisplayContext.THIRD_PERSON_LEFT_HAND){
-            xRot = 0; yRot = 0; scale = 0.04f;
-//            pPoseStack.translate(0.5, -1, -0.5);
-        }else if (pDisplayContext == ItemDisplayContext.FIRST_PERSON_LEFT_HAND){
-            xRot = 0; yRot = 45; scale = 0.04f;
-            xOffset = -8; yOffset = -20; zOffSet = 0;
-        }else if (pDisplayContext == ItemDisplayContext.THIRD_PERSON_RIGHT_HAND){
-            xRot = 0; yRot = 0; scale = 0.04f;
-//            pPoseStack.translate(0.5, -1, -0.5);
-        }else if (pDisplayContext == ItemDisplayContext.FIXED || pDisplayContext == ItemDisplayContext.GROUND){
-            xRot = 0; yRot = 0; scale = 0.04f;
-//            pPoseStack.translate(0.5, -0.5, 0);
+        float xOffset = 0.5f;
+        float yOffset = 0.35f;
+        float zOffSet = 0.5f;
+        if (pDisplayContext != ItemDisplayContext.GUI){
+            xRot = 0; scale = 0.04f;
+            yOffset = 0.5f;
+            if (pDisplayContext == ItemDisplayContext.FIRST_PERSON_LEFT_HAND){
+                yRot = 135;
+            }else if (pDisplayContext == ItemDisplayContext.THIRD_PERSON_RIGHT_HAND){
+                yRot = 45;
+            }else if (pDisplayContext == ItemDisplayContext.THIRD_PERSON_LEFT_HAND){
+                yRot = -45;
+            }
         }
-        pPoseStack.mulPose(Axis.XN.rotationDegrees(xRot));
-        pPoseStack.mulPose(Axis.YN.rotationDegrees(yRot));
-        pPoseStack.translate(-0.7,1.4, 0);
+
         ResourceLocation texture = HBM.rl("textures/models/armor/");
         if (armorFSB.getType() == ArmorItem.Type.HELMET){
+            pPoseStack.translate(xOffset, yOffset+0.35, zOffSet);
+            pPoseStack.mulPose(Axis.XN.rotationDegrees(xRot));
+            pPoseStack.mulPose(Axis.YN.rotationDegrees(yRot));
             pPoseStack.scale(scale*0.8f, scale*0.8f, scale*0.8f);
-            pPoseStack.translate(0, 1, 0);
-            if (pDisplayContext != ItemDisplayContext.GUI) pPoseStack.translate(xOffset + 4, yOffset, zOffSet);
             VertexConsumer buffer = pBuffer.getBuffer(RenderType.entityCutoutNoCull(texture.withSuffix(helmet + ".png")));
             model.chead.renderGUI(pPoseStack, buffer, pPackedLight, pPackedOverlay);
         }else if (armorFSB.getType() == ArmorItem.Type.CHESTPLATE){
+            pPoseStack.translate(xOffset, yOffset, zOffSet);
+            pPoseStack.mulPose(Axis.XN.rotationDegrees(xRot));
+            pPoseStack.mulPose(Axis.YN.rotationDegrees(yRot));
             pPoseStack.scale(scale*0.6f,scale*0.6f,scale*0.6f);
-            pPoseStack.translate(0, -10, 0);
-            if (pDisplayContext != ItemDisplayContext.GUI) pPoseStack.translate(xOffset, yOffset-4, zOffSet);
             VertexConsumer buffer = pBuffer.getBuffer(RenderType.entityCutoutNoCull(texture.withSuffix(chest + ".png")));
             model.cbody.renderGUI(pPoseStack, buffer, pPackedLight, pPackedOverlay);
             VertexConsumer buffer1 = pBuffer.getBuffer(RenderType.entityTranslucentCull(texture.withSuffix(arm + ".png")));
             model.cleftArm.renderGUI(pPoseStack, buffer1, pPackedLight, pPackedOverlay);
             model.crightArm.renderGUI(pPoseStack, buffer1, pPackedLight, pPackedOverlay);
         }else if (armorFSB.getType() == ArmorItem.Type.LEGGINGS){
+            if (pDisplayContext != ItemDisplayContext.GUI) yOffset += 0.2f;
+            pPoseStack.translate(xOffset, yOffset-0.65, zOffSet);
+            pPoseStack.mulPose(Axis.XN.rotationDegrees(xRot));
+            pPoseStack.mulPose(Axis.YN.rotationDegrees(yRot));
             pPoseStack.scale(scale, scale, scale);
-            pPoseStack.translate(0, -18, 0);
-            if (pDisplayContext != ItemDisplayContext.GUI) pPoseStack.translate(xOffset + 4, yOffset + 4, zOffSet);
             VertexConsumer buffer = pBuffer.getBuffer(RenderType.entityCutoutNoCull(texture.withSuffix(leg + ".png")));
             model.cleftLeg.renderGUI(pPoseStack, buffer, pPackedLight, pPackedOverlay);
             model.crightLeg.renderGUI(pPoseStack, buffer, pPackedLight, pPackedOverlay);
         }else if (armorFSB.getType() == ArmorItem.Type.BOOTS){
+            if (pDisplayContext != ItemDisplayContext.GUI) yOffset += 0.2f;
+            pPoseStack.translate(xOffset, yOffset-1, zOffSet);
+            pPoseStack.mulPose(Axis.XN.rotationDegrees(xRot));
+            pPoseStack.mulPose(Axis.YN.rotationDegrees(yRot));
             pPoseStack.scale(scale, scale, scale);
-            pPoseStack.translate(0, -24, 0);
-            if (pDisplayContext != ItemDisplayContext.GUI) pPoseStack.translate(xOffset + 4, yOffset + 4, zOffSet);
             VertexConsumer buffer = pBuffer.getBuffer(RenderType.entityCutoutNoCull(texture.withSuffix(leg + ".png")));
             model.cleftFoot.renderGUI(pPoseStack, buffer, pPackedLight, pPackedOverlay);
             model.crightFoot.renderGUI(pPoseStack, buffer, pPackedLight, pPackedOverlay);

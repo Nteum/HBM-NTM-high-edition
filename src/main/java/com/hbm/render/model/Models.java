@@ -6,6 +6,8 @@ import com.google.gson.JsonObject;
 import com.hbm.HBM;
 import com.hbm.item.HBMWeapon;
 import com.hbm.render.model.armor.ModelArmorBismuth;
+import com.hbm.render.model.armor.ModelArmorDesh;
+import com.hbm.render.model.armor.ModelArmorDiesel;
 import com.hbm.render.model.armor.ModelArmorT51;
 import com.hbm.render.model.entity.ObjEntityModelSingle;
 import com.hbm.render.model.item.SimpleBakedModelWrapper;
@@ -60,6 +62,8 @@ public class Models {
     public static final ResourceLocation MISSILE_TEST = addEntity(HBM.modelRl("entity/missile/missile_test"), new ObjEntityModelSingle());
     public static final ResourceLocation T51 = addEntity(HBM.modelRl("item/armor_t51"), new ModelArmorT51());
     public static final ResourceLocation BISMUTH = addEntity(HBM.modelRl("item/armor_bismuth"), new ModelArmorBismuth());
+    public static final ResourceLocation DESH = addEntity(HBM.modelRl("item/armor_desh"), new ModelArmorDesh());
+    public static final ResourceLocation DIESEL = addEntity(HBM.modelRl("item/armor_diesel"), new ModelArmorDiesel());
 
     public static ResourceLocation add(ResourceLocation rl){
         models.add(rl);

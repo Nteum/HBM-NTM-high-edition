@@ -34,7 +34,7 @@ public class ItemArmorT51 extends ItemArmorFSBPowered{
         consumer.accept(new IClientItemExtensions() {
             @Override
             public @NotNull HumanoidModel<?> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original) {
-                return ((ModelArmorT51) Models.getEntityModel(Models.T51)).adjustWithOrigin(original);
+                return ((ModelArmorT51) Models.getEntityModel(Models.T51)).adjustWithOrigin(original, equipmentSlot);
             }
 
             @Override

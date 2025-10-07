@@ -1349,7 +1349,7 @@ public class HBMComponent {
                 .texture("layer0", new ResourceLocation(itemRL.getNamespace(), "item/" + textureName));
     }
     protected static String generateOrderlyName(String itemId){
-        return Arrays.stream(itemId.split("_")).map(s -> s.substring(0,1).toUpperCase() + s.substring(1)).reduce("",(r,id) -> r + " " + id);
+        return Arrays.stream(itemId.split("_")).map(s -> s.substring(0,1).toUpperCase() + s.substring(1)).reduce("",(r,id) -> r + (r.isEmpty() ? "": " ") + id);
     }
     protected static String generateReversedName(String itemId){
         List<String> strings = Arrays.stream(itemId.split("_")).map(s -> s.substring(0, 1).toUpperCase() + s.substring(1)).toList();

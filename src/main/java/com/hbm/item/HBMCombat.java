@@ -1,9 +1,11 @@
 package com.hbm.item;
 
+import com.hbm.Inventory.fluid.ModFluids;
 import com.hbm.datagen.LanguageProvider;
 import com.hbm.datagen.model.ItemModelGen;
 import com.hbm.effect.ModEffects;
 import com.hbm.item.armor.*;
+import com.hbm.registries.ModSounds;
 import net.minecraft.client.model.ArmorStandModel;
 import net.minecraft.client.model.HumanoidArmorModel;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -41,8 +43,9 @@ public class HBMCombat extends HBMComponent{
 
     public static Suit T45;
     public static Suit T51;
-    
     public static Suit BISMUTH;
+    public static Suit STEAMSUIT;
+    public static Suit DIESEL;
 
     public static void register(DeferredRegister<Item> ITEMS){
         // 一般盔甲
@@ -61,7 +64,10 @@ public class HBMCombat extends HBMComponent{
                 register(itemList, "alloy_plate", () -> new ItemArmorFSB(HBMArmorMats.ALLOY, ArmorItem.Type.CHESTPLATE, new Item.Properties(), ()->ALLOY).cloneStats((ItemArmorFSB) ALLOY.HELMET.get())),
                 register(itemList, "alloy_legs", () -> new ItemArmorFSB(HBMArmorMats.ALLOY, ArmorItem.Type.LEGGINGS, new Item.Properties()).cloneStats((ItemArmorFSB) ALLOY.HELMET.get())),
                 register(itemList, "alloy_boots", () -> new ItemArmorFSB(HBMArmorMats.ALLOY, ArmorItem.Type.BOOTS, new Item.Properties()).cloneStats((ItemArmorFSB) ALLOY.HELMET.get())));
-        CMB = new Suit(register(itemList, "cmb_helmet", () -> new ItemArmorFSB(HBMArmorMats.CMB, ArmorItem.Type.HELMET, new Item.Properties())),
+        CMB = new Suit(register(itemList, "cmb_helmet", () -> new ItemArmorFSB(HBMArmorMats.CMB, ArmorItem.Type.HELMET, new Item.Properties())
+                    .addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 20, 2))
+                    .addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 20, 2))
+                    .addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 20, 4))),
                 register(itemList, "cmb_plate", () -> new ItemArmorFSB(HBMArmorMats.CMB, ArmorItem.Type.CHESTPLATE, new Item.Properties(), ()->CMB).cloneStats((ItemArmorFSB) CMB.HELMET.get())),
                 register(itemList, "cmb_legs", () -> new ItemArmorFSB(HBMArmorMats.CMB, ArmorItem.Type.LEGGINGS, new Item.Properties()).cloneStats((ItemArmorFSB) CMB.HELMET.get())),
                 register(itemList, "cmb_boots", () -> new ItemArmorFSB(HBMArmorMats.CMB, ArmorItem.Type.BOOTS, new Item.Properties()).cloneStats((ItemArmorFSB) CMB.HELMET.get())));
@@ -105,7 +111,13 @@ public class HBMCombat extends HBMComponent{
                 register(itemList, "schrabidium_legs", () -> new ItemArmorFSB(HBMArmorMats.SCHRABIDIUM, ArmorItem.Type.LEGGINGS, new Item.Properties()).cloneStats((ItemArmorFSB) SCHRABIDIUM.HELMET.get())),
                 register(itemList, "schrabidium_boots", () -> new ItemArmorFSB(HBMArmorMats.SCHRABIDIUM, ArmorItem.Type.BOOTS, new Item.Properties()).cloneStats((ItemArmorFSB) SCHRABIDIUM.HELMET.get())));
         // 特殊盔甲
-        T51 = new Suit(register(standaloneModels, "t51_helmet", () -> new ItemArmorT51(HBMArmorMats.T45, ArmorItem.Type.HELMET, new Item.Properties(),1000000, 10000, 1000, 5)),
+        T51 = new Suit(register(standaloneModels, "t51_helmet", () -> new ItemArmorT51(HBMArmorMats.T45, ArmorItem.Type.HELMET, new Item.Properties(),1000000, 10000, 1000, 5)
+                    .enableVATS(true)
+                    .setHasGeigerSound(true)
+                    .setHasHardLanding(true)
+                    .addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 20, 0))
+                    .setStep(ModSounds.STEP_METAL.get()).setJump(ModSounds.STEP_IRON_JUMP.get()).setFall(ModSounds.STEP_IRON_LAND.get())
+                    .hides(IArmorDisableModel.EnumPlayerPart.HAT)),
                 register(standaloneModels, "t51_plate", () -> new ItemArmorT51(HBMArmorMats.T45, ArmorItem.Type.CHESTPLATE, new Item.Properties(), 1000000, 10000, 1000, 5).cloneStats((ItemArmorFSB) T51.HELMET.get())),
                 register(standaloneModels, "t51_legs", () -> new ItemArmorT51(HBMArmorMats.T45, ArmorItem.Type.LEGGINGS, new Item.Properties(), 1000000, 10000, 1000, 5).cloneStats((ItemArmorFSB) T51.HELMET.get())),
                 register(standaloneModels, "t51_boots", () -> new ItemArmorT51(HBMArmorMats.T45, ArmorItem.Type.BOOTS, new Item.Properties(), 1000000, 10000, 1000, 5).cloneStats((ItemArmorFSB) T51.HELMET.get())));
@@ -118,6 +130,20 @@ public class HBMCombat extends HBMComponent{
                 register(standaloneModels, "bismuth_plate", () -> new ItemArmorBismuth(HBMArmorMats.BISMUTH, ArmorItem.Type.CHESTPLATE, new Item.Properties(), ()->BISMUTH).cloneStats((ItemArmorFSB) BISMUTH.HELMET.get())),
                 register(standaloneModels, "bismuth_legs", () -> new ItemArmorBismuth(HBMArmorMats.BISMUTH, ArmorItem.Type.LEGGINGS, new Item.Properties()).cloneStats((ItemArmorFSB) BISMUTH.HELMET.get())),
                 register(standaloneModels, "bismuth_boots", () -> new ItemArmorBismuth(HBMArmorMats.BISMUTH, ArmorItem.Type.BOOTS, new Item.Properties()).cloneStats((ItemArmorFSB) BISMUTH.HELMET.get())));
+        STEAMSUIT = new Suit(register(itemList, "steamsuit_helmet", () -> new ItemArmorDesh(HBMArmorMats.DESH, ArmorItem.Type.HELMET, new Item.Properties(), ModFluids.STEAM.source().get(), 64_000, 500, 50, 1)
+                    .setHasHardLanding(true)
+                    .addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 20, 4))
+                    .hides(IArmorDisableModel.EnumPlayerPart.HAT)),
+                register(itemList, "steamsuit_plate", () -> new ItemArmorDesh(HBMArmorMats.DESH, ArmorItem.Type.CHESTPLATE, new Item.Properties(),ModFluids.STEAM.source().get(), 64_000, 500, 50, 1, ()->STEAMSUIT).cloneStats((ItemArmorFSB) STEAMSUIT.HELMET.get())),
+                register(itemList, "steamsuit_legs", () -> new ItemArmorDesh(HBMArmorMats.DESH, ArmorItem.Type.LEGGINGS, new Item.Properties(),ModFluids.STEAM.source().get(), 64_000, 500, 50, 1).cloneStats((ItemArmorFSB) STEAMSUIT.HELMET.get())),
+                register(itemList, "steamsuit_boots", () -> new ItemArmorDesh(HBMArmorMats.DESH, ArmorItem.Type.BOOTS, new Item.Properties(),ModFluids.STEAM.source().get(), 64_000, 500, 50, 1).cloneStats((ItemArmorFSB) STEAMSUIT.HELMET.get())));
+        DIESEL = new Suit(register(itemList, "dieselsuit_helmet", () -> new ItemArmorDiesel(HBMArmorMats.DIESEL, ArmorItem.Type.HELMET, new Item.Properties(), ModFluids.DIESEL.source().get(), 64_000, 500, 50, 1)
+                    .setHasHardLanding(true)
+                    .addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 20, 4))
+                    .hides(IArmorDisableModel.EnumPlayerPart.HAT)),
+                register(itemList, "dieselsuit_plate", () -> new ItemArmorDiesel(HBMArmorMats.DIESEL, ArmorItem.Type.CHESTPLATE, new Item.Properties(), ModFluids.DIESEL.source().get(), 64_000, 500, 50, 1, ()->DIESEL).cloneStats((ItemArmorFSB) DIESEL.HELMET.get())),
+                register(itemList, "dieselsuit_legs", () -> new ItemArmorDiesel(HBMArmorMats.DIESEL, ArmorItem.Type.LEGGINGS, new Item.Properties(), ModFluids.DIESEL.source().get(), 64_000, 500, 50, 1).cloneStats((ItemArmorFSB) DIESEL.HELMET.get())),
+                register(itemList, "dieselsuit_boots", () -> new ItemArmorDiesel(HBMArmorMats.DIESEL, ArmorItem.Type.BOOTS, new Item.Properties(), ModFluids.DIESEL.source().get(), 64_000, 500, 50, 1).cloneStats((ItemArmorFSB) DIESEL.HELMET.get())));
     }
     public static void creativeTab(MutableHashedLinkedMap<ItemStack, CreativeModeTab.TabVisibility> entries){
         itemList.forEach(itemRegistryObject -> entries.put(new ItemStack(itemRegistryObject.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS));
@@ -125,7 +151,7 @@ public class HBMCombat extends HBMComponent{
     }
     public static void genModel(ItemModelGen provider){
         itemList.forEach(itemRegistryObject -> provider.basicItem(itemRegistryObject.get()));
-        standaloneModels.forEach(itemRegistryObject -> provider.builtinModel(itemRegistryObject.get()));
+//        standaloneModels.forEach(itemRegistryObject -> provider.builtinModel(itemRegistryObject.get()));
     }
     public static void languageSupport(LanguageProvider provider){
         itemList.forEach(itemRegistryObject -> provider.add(itemRegistryObject.get(), generateOrderlyName(itemRegistryObject.getId().getPath())));

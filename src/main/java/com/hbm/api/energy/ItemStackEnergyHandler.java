@@ -1,4 +1,4 @@
-package com.hbm.api.energy.fe;
+package com.hbm.api.energy;
 
 import com.hbm.HBMKey;
 import com.hbm.api.IContentsListener;

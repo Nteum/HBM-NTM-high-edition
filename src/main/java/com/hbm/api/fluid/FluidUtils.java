@@ -6,6 +6,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 
@@ -59,5 +60,28 @@ public class FluidUtils {
         }
         // 无法注入则直接返回
         return itemStack;
+    }
+    public static int getAmount(ICapabilityProvider provider){
+        return getFluid(provider).getAmount();
+    }
+    public static FluidStack getFluid(ICapabilityProvider provider){
+        IFluidHandler fluidHandler = provider.getCapability(ForgeCapabilities.FLUID_HANDLER).orElse(null);
+        if (fluidHandler != null){
+            return fluidHandler.getFluidInTank(0);
+        }
+        return FluidStack.EMPTY;
+    }
+    public static FluidStack absorbOnly(ICapabilityProvider provider, int amount){
+        return absorbOnly(provider, amount, true);
+    }
+    public static FluidStack absorbOnly(ICapabilityProvider provider, int amount, boolean allowPartial){
+        IFluidHandler fluidHandler = provider.getCapability(ForgeCapabilities.FLUID_HANDLER).orElse(null);
+        if (fluidHandler != null){
+            if (allowPartial)
+                return fluidHandler.drain(amount, IFluidHandler.FluidAction.EXECUTE);
+            else if (!allowPartial && fluidHandler.drain(amount, IFluidHandler.FluidAction.SIMULATE).getAmount() == amount)
+                return fluidHandler.drain(amount, IFluidHandler.FluidAction.EXECUTE);
+        }
+        return FluidStack.EMPTY;
     }
 }

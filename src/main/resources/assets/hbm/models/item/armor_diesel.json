@@ -1,7 +1,7 @@
 {
   "loader": "forge:obj",
   "flip_v": true,
-  "model": "hbm:models/item/armor/t51.obj",
+  "model": "hbm:models/item/armor/bnuuy.obj",
   "textures": {
     "texture0": "hbm:models/blank"
   }

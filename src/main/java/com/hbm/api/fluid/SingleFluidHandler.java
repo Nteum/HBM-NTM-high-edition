@@ -6,6 +6,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
@@ -19,7 +20,10 @@ public class SingleFluidHandler implements IExtendedFluidHandler, INBTSerializab
         this(capacity, Mode.BOTH);
     }
     public SingleFluidHandler(int capacity, Mode mode){
-        this.tank = new FluidTank(capacity);
+        this(new BasicFluidTank(capacity), mode);
+    }
+    public SingleFluidHandler(FluidTank tank, Mode mode){
+        this.tank = tank;
         this.mode = mode;
     }
     @Override

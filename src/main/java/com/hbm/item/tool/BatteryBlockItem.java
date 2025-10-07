@@ -2,7 +2,7 @@ package com.hbm.item.tool;
 
 import com.hbm.HBMLang;
 import com.hbm.api.energy.fe.HBMEnergyStorage;
-import com.hbm.api.energy.fe.ItemStackEnergyHandler;
+import com.hbm.api.energy.ItemStackEnergyHandler;
 import com.hbm.block.machine.BlockBattery;
 import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.capabilities.ItemCapabilityWrapper;
