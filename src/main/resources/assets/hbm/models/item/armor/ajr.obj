@@ -1,6 +1,6 @@
 # Blender v2.79 (sub 0) OBJ File: 'AJR_scaled.blend'
 # www.blender.org
-mtllib ../../general2.mtl
+mtllib ../../general.mtl
 o LeftBoot
 v -0.499999 24.497999 -2.500000
 v -0.499999 24.497999 2.500000

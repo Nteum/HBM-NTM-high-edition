@@ -5,10 +5,7 @@ import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import com.hbm.HBM;
 import com.hbm.item.HBMWeapon;
-import com.hbm.render.model.armor.ModelArmorBismuth;
-import com.hbm.render.model.armor.ModelArmorDesh;
-import com.hbm.render.model.armor.ModelArmorDiesel;
-import com.hbm.render.model.armor.ModelArmorT51;
+import com.hbm.render.model.armor.*;
 import com.hbm.render.model.entity.ObjEntityModelSingle;
 import com.hbm.render.model.item.SimpleBakedModelWrapper;
 import net.minecraft.client.Minecraft;
@@ -64,6 +61,8 @@ public class Models {
     public static final ResourceLocation BISMUTH = addEntity(HBM.modelRl("item/armor_bismuth"), new ModelArmorBismuth());
     public static final ResourceLocation DESH = addEntity(HBM.modelRl("item/armor_desh"), new ModelArmorDesh());
     public static final ResourceLocation DIESEL = addEntity(HBM.modelRl("item/armor_diesel"), new ModelArmorDiesel());
+    public static final ResourceLocation AJR = addEntity(HBM.modelRl("item/armor_ajr"), new ModelArmorAJR());
+    public static final ResourceLocation RPA = addEntity(HBM.modelRl("item/armor_rpa"), new ModelArmorRPA());
 
     public static ResourceLocation add(ResourceLocation rl){
         models.add(rl);

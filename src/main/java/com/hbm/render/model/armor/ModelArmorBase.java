@@ -3,9 +3,13 @@ package com.hbm.render.model.armor;
 import com.hbm.render.model.AccessableRenderable;
 import com.hbm.render.model.IObjModel;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.Tesselator;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidArmorModel;
 import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.layers.HumanoidArmorLayer;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.resources.ResourceLocation;
@@ -35,7 +39,8 @@ public class ModelArmorBase<T extends LivingEntity> extends HumanoidArmorModel<T
     public AccessableRenderable.Component cleftFoot;
     public AccessableRenderable.Component crightFoot;
     // flags
-    protected boolean armTexExtra = false;
+//    protected boolean armTexExtra = false;
+    protected ResourceLocation armTexExtra = null;
 
     public ModelArmorBase(String ... strings) {
         // 初始构造先用一个空的model撑一下，后面直接复制已有的model
@@ -67,8 +72,8 @@ public class ModelArmorBase<T extends LivingEntity> extends HumanoidArmorModel<T
     public void initializeParts(){
         this.chead = this.accRenderable.components.get(names.get(0));
         this.cbody = this.accRenderable.components.get(names.get(1));
-        this.cleftArm = this.accRenderable.components.get(names.get(2)).setRotPoint(0, 1.9f, 2.5f);
-        this.crightArm = this.accRenderable.components.get(names.get(3)).setRotPoint(0, 1.9f, 2.5f);
+        this.cleftArm = this.accRenderable.components.get(names.get(2)).setRotPoint(0, 2.2f, 2.5f);
+        this.crightArm = this.accRenderable.components.get(names.get(3)).setRotPoint(0, 2.0f, 2.0f);
         this.cleftLeg = this.accRenderable.components.get(names.get(4)).setRotPoint(0, 12, 0);
         this.crightLeg = this.accRenderable.components.get(names.get(5)).setRotPoint(0, 12, 0);
         if (names.size() >= 7) this.cleftFoot = this.accRenderable.components.get(names.get(6)).setRotPoint(0, 12, 0);
@@ -79,8 +84,8 @@ public class ModelArmorBase<T extends LivingEntity> extends HumanoidArmorModel<T
         this.chead.copyPose(origin.hat);
         this.cbody.copyPose(origin.body);
         // 对双臂位置进行微调
-        this.cleftArm.copyPose(origin.leftArm).adjXYZ(-5.2f, -2.1f, 0);
-        this.crightArm.copyPose(origin.rightArm).adjXYZ(5.2f, -2f, 0);
+        this.cleftArm.copyPose(origin.leftArm).adjXYZ(-5.2f, -2.2f, 0);
+        this.crightArm.copyPose(origin.rightArm).adjXYZ(5.2f, -1.8f, 0);
         // 对双腿位置进行微调
         this.cleftLeg.copyPose(origin.leftLeg).resetX().resetY();
         this.crightLeg.copyPose(origin.rightLeg).resetX().resetY();
@@ -117,9 +122,21 @@ public class ModelArmorBase<T extends LivingEntity> extends HumanoidArmorModel<T
         this.crightLeg.render(pPoseStack, pBuffer, pPackedLight, pPackedOverlay);
         this.cbody.render(pPoseStack, pBuffer, pPackedLight, pPackedOverlay);
         this.chead.render(pPoseStack, pBuffer, pPackedLight, pPackedOverlay);
-        if (!this.armTexExtra){
-            this.cleftArm.render(pPoseStack, pBuffer, pPackedLight, pPackedOverlay);
-            this.crightArm.render(pPoseStack, pBuffer, pPackedLight, pPackedOverlay);
+        if (this.cbody.visible) {
+            if (this.armTexExtra != null){
+                // 通过局部BufferSource渲染
+                MultiBufferSource.BufferSource bufferSource = MultiBufferSource.immediate(Tesselator.getInstance().getBuilder());
+                try {
+                    VertexConsumer buffer = bufferSource.getBuffer(RenderType.armorCutoutNoCull(this.armTexExtra));
+                    this.cleftArm.render(pPoseStack, buffer, pPackedLight, pPackedOverlay);
+                    this.crightArm.render(pPoseStack, buffer, pPackedLight, pPackedOverlay);
+                } finally {
+                    bufferSource.endBatch();
+                }
+            } else {
+                this.cleftArm.render(pPoseStack, pBuffer, pPackedLight, pPackedOverlay);
+                this.crightArm.render(pPoseStack, pBuffer, pPackedLight, pPackedOverlay);
+            }
         }
     }
     

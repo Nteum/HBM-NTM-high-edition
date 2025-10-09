@@ -46,6 +46,9 @@ public class HBMCombat extends HBMComponent{
     public static Suit BISMUTH;
     public static Suit STEAMSUIT;
     public static Suit DIESEL;
+    public static Suit AJR;
+    public static Suit AJRO;
+    public static Suit RPA;
 
     public static void register(DeferredRegister<Item> ITEMS){
         // 一般盔甲
@@ -144,6 +147,38 @@ public class HBMCombat extends HBMComponent{
                 register(itemList, "dieselsuit_plate", () -> new ItemArmorDiesel(HBMArmorMats.DIESEL, ArmorItem.Type.CHESTPLATE, new Item.Properties(), ModFluids.DIESEL.source().get(), 64_000, 500, 50, 1, ()->DIESEL).cloneStats((ItemArmorFSB) DIESEL.HELMET.get())),
                 register(itemList, "dieselsuit_legs", () -> new ItemArmorDiesel(HBMArmorMats.DIESEL, ArmorItem.Type.LEGGINGS, new Item.Properties(), ModFluids.DIESEL.source().get(), 64_000, 500, 50, 1).cloneStats((ItemArmorFSB) DIESEL.HELMET.get())),
                 register(itemList, "dieselsuit_boots", () -> new ItemArmorDiesel(HBMArmorMats.DIESEL, ArmorItem.Type.BOOTS, new Item.Properties(), ModFluids.DIESEL.source().get(), 64_000, 500, 50, 1).cloneStats((ItemArmorFSB) DIESEL.HELMET.get())));
+        AJR = new Suit(register(standaloneModels, "ajr_helmet", () -> new ItemArmorAJR(HBMArmorMats.AJR, ArmorItem.Type.HELMET, new Item.Properties(),2500000, 10000, 2000, 25)
+                    .enableVATS(true)
+                    .setHasGeigerSound(true)
+                    .setHasHardLanding(true)
+                    .addEffect(new MobEffectInstance(MobEffects.JUMP, 20, 0))
+                    .addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 20, 0))
+                    .setStep(ModSounds.STEP_METAL.get()).setJump(ModSounds.STEP_IRON_JUMP.get()).setFall(ModSounds.STEP_IRON_LAND.get())
+                    .hides(IArmorDisableModel.EnumPlayerPart.HAT)),
+                register(standaloneModels, "ajr_plate", () -> new ItemArmorAJR(HBMArmorMats.AJR, ArmorItem.Type.CHESTPLATE, new Item.Properties(), 2500000, 10000, 2000, 25).suit(()->AJR).cloneStats((ItemArmorFSB) AJR.HELMET.get())),
+                register(standaloneModels, "ajr_legs", () -> new ItemArmorAJR(HBMArmorMats.AJR, ArmorItem.Type.LEGGINGS, new Item.Properties(), 2500000, 10000, 2000, 25).cloneStats((ItemArmorFSB) AJR.HELMET.get())),
+                register(standaloneModels, "ajr_boots", () -> new ItemArmorAJR(HBMArmorMats.AJR, ArmorItem.Type.BOOTS, new Item.Properties(), 2500000, 10000, 2000, 25).cloneStats((ItemArmorFSB) AJR.HELMET.get())));
+        AJRO = new Suit(register(standaloneModels, "ajro_helmet", () -> new ItemArmorAJR(HBMArmorMats.AJR, ArmorItem.Type.HELMET, new Item.Properties(),2500000, 10000, 2000, 25).setName("ajro")
+                    .enableVATS(true)
+                    .setHasGeigerSound(true)
+                    .setHasHardLanding(true)
+                    .addEffect(new MobEffectInstance(MobEffects.JUMP, 20, 0))
+                    .addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 20, 0))
+                    .setStep(ModSounds.STEP_METAL.get()).setJump(ModSounds.STEP_IRON_JUMP.get()).setFall(ModSounds.STEP_IRON_LAND.get())
+                    .hides(IArmorDisableModel.EnumPlayerPart.HAT)),
+                register(standaloneModels, "ajro_plate", () -> new ItemArmorAJR(HBMArmorMats.AJR, ArmorItem.Type.CHESTPLATE, new Item.Properties(), 2500000, 10000, 2000, 25).setName("ajro").suit(()->AJRO).cloneStats((ItemArmorFSB) AJRO.HELMET.get())),
+                register(standaloneModels, "ajro_legs", () -> new ItemArmorAJR(HBMArmorMats.AJR, ArmorItem.Type.LEGGINGS, new Item.Properties(), 2500000, 10000, 2000, 25).setName("ajro").cloneStats((ItemArmorFSB) AJRO.HELMET.get())),
+                register(standaloneModels, "ajro_boots", () -> new ItemArmorAJR(HBMArmorMats.AJR, ArmorItem.Type.BOOTS, new Item.Properties(), 2500000, 10000, 2000, 25).setName("ajro").cloneStats((ItemArmorFSB) AJRO.HELMET.get())));
+        RPA = new Suit(register(standaloneModels, "rpa_helmet", () -> new ItemArmorRPA(HBMArmorMats.AJR, ArmorItem.Type.HELMET, new Item.Properties(),2500000, 10000, 2000, 25)
+                    .enableVATS(true)
+                    .setHasGeigerSound(true)
+                    .setHasHardLanding(true)
+                    .addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 20, 3))
+                    .setStep(ModSounds.STEP_POWERED.get()).setJump(ModSounds.STEP_POWERED.get()).setFall(ModSounds.STEP_POWERED.get())
+                    .hides(IArmorDisableModel.EnumPlayerPart.HAT)),
+                register(standaloneModels, "rpa_plate", () -> new ItemArmorRPA(HBMArmorMats.AJR, ArmorItem.Type.CHESTPLATE, new Item.Properties(), 2500000, 10000, 2000, 25).suit(()->RPA).cloneStats((ItemArmorFSB) RPA.HELMET.get())),
+                register(standaloneModels, "rpa_legs", () -> new ItemArmorRPA(HBMArmorMats.AJR, ArmorItem.Type.LEGGINGS, new Item.Properties(), 2500000, 10000, 2000, 25).cloneStats((ItemArmorFSB) RPA.HELMET.get())),
+                register(standaloneModels, "rpa_boots", () -> new ItemArmorRPA(HBMArmorMats.AJR, ArmorItem.Type.BOOTS, new Item.Properties(), 2500000, 10000, 2000, 25).cloneStats((ItemArmorFSB) RPA.HELMET.get())));
     }
     public static void creativeTab(MutableHashedLinkedMap<ItemStack, CreativeModeTab.TabVisibility> entries){
         itemList.forEach(itemRegistryObject -> entries.put(new ItemStack(itemRegistryObject.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS));

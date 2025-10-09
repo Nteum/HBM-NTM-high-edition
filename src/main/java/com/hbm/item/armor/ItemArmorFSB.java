@@ -127,6 +127,11 @@ public class ItemArmorFSB extends ArmorItem implements IArmorDisableModel {
         return this;
     }
 
+    public ItemArmorFSB suit(Supplier<HBMCombat.Suit> suit){
+        this.suit = suit;
+        return this;
+    }
+
     public ItemArmorFSB cloneStats(ItemArmorFSB original) {
 
         //lists aren't being modified after instantiation, so there's no need to dereference
