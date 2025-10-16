@@ -13,6 +13,8 @@ public enum DataEntry {
     CONTAMINATION_EFFECTS(ContaminationEffectLists.class),
     DIGMMA(Float.class),
     POLLUTION(Float.class),
+    JETPACK_ENABLE(null),
+
     RIGHT_CLICK_COUNT(RightClickCount.class)
     ;
     // 数据的类型

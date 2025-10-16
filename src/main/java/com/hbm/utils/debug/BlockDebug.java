@@ -3,8 +3,10 @@ package com.hbm.utils.debug;
 import com.hbm.item.HBMtools;
 import com.hbm.particle.ModParticleTypes;
 import com.hbm.particle.ParticleSystem;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
@@ -36,9 +38,13 @@ public class BlockDebug extends Block {
     @Override
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
         if (!pLevel.isClientSide && pPlayer.getItemInHand(pHand).is(HBMtools.DEBUG_WAND.get())){
-            BlockState newState = pState.cycle(ACTIVE);
-            pLevel.setBlock(pPos, newState,2);
-            pPlayer.sendSystemMessage(Component.literal("Debug block switch to " + (newState.getValue(ACTIVE) ? "active" : "inactive")));
+//            BlockState newState = pState.cycle(ACTIVE);
+//            pLevel.setBlock(pPos, newState,2);
+//            pPlayer.sendSystemMessage(Component.literal("Debug block switch to " + (newState.getValue(ACTIVE) ? "active" : "inactive")));
+            dropParticle(ModParticleTypes.DEAD_LEAF.get(), pLevel, pPos, pPlayer);
+        }
+        if (pLevel.isClientSide){
+
         }
         return super.use(pState, pLevel, pPos, pPlayer, pHand, pHit);
     }
@@ -46,11 +52,31 @@ public class BlockDebug extends Block {
     @Override
     public void animateTick(BlockState pState, Level pLevel, BlockPos pPos, RandomSource pRandom) {
         super.animateTick(pState, pLevel, pPos, pRandom);
-        if (pState.getValue(ACTIVE)){
-            if (pLevel.getRandom().nextFloat() > 0){
-                Vec3 center = pPos.getCenter().add(0, 0.5, 0);
-                ParticleSystem.addRocketFlame(center.x, center.y, center.z, 0, 0.1, 0, null, 60 + pRandom.nextInt(20));
-            }
+//        if (pLevel.getBlockState(pPos.below()).isAir()){
+//            addParticle(ModParticleTypes.DEAD_LEAF.get(), pLevel, pPos, Minecraft.getInstance().player);
+//        }
+//        if (pState.getValue(ACTIVE)){
+//            if (pLevel.getRandom().nextFloat() > 0){
+//                Vec3 center = pPos.getCenter().add(0, 0.5, 0);
+//                ParticleSystem.addRocketFlame(center.x, center.y, center.z, 0, 0.1, 0, null, 60 + pRandom.nextInt(20));
+//            }
+//        }
+    }
+
+    public void dropParticle(ParticleOptions type, Level pLevel, BlockPos pPos, Player pPlayer){
+        if (pLevel instanceof ServerLevel serverLevel){
+            serverLevel.sendParticles(type,pPos.getX() + pLevel.random.nextFloat(), pPos.getY(), pPos.getZ() + pLevel.random.nextFloat(), 1, 0, 0, 0, 0);
+        }else {
+            pLevel.addParticle(type, pPos.getX() + pLevel.random.nextFloat(), pPos.getY(), pPos.getZ() + pLevel.random.nextFloat(), 0, 0, 0);
+        }
+    }
+    public void addParticle(ParticleOptions type, Level pLevel, BlockPos pPos, Player pPlayer){
+        Vec3 center = pPos.above().getCenter();
+        pPlayer.sendSystemMessage(Component.literal("Particle: " + type.getType().toString()));
+        if (pLevel instanceof ServerLevel serverLevel){
+            serverLevel.sendParticles(type, center.x, center.y, center.z, 1, 0, 0, 0, 0);
+        }else {
+            pLevel.addParticle(type, center.x, center.y, center.z, 0, 0, 0);
         }
     }
 }

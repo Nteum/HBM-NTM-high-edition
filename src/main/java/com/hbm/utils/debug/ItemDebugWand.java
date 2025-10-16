@@ -77,22 +77,22 @@ public class ItemDebugWand extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
         if (!pLevel.isClientSide && !pPlayer.hasPose(Pose.CROUCHING)){
-//            ItemStack itemInHand = pPlayer.getItemInHand(pUsedHand);
-//            CompoundTag posElement = itemInHand.getTagElement(HBMKey.POSITION);
-//            if (!itemInHand.hasTag() || posElement == null){
-//                pPlayer.sendSystemMessage(Component.literal("No pos has been set."));
-//            }else {
-//                BlockPos storedPos = NbtUtils.readBlockPos(posElement);
-//                // 注意，getBlockState是会加载区块的，因此这里用了一个安全加载的函数
-//                BlockState markedBlock = WorldUtils.getBlockState(pLevel, storedPos).orElse(Blocks.AIR.defaultBlockState());
-//                if (markedBlock.is(Blocks.AIR) || markedBlock.is(Blocks.VOID_AIR)){
-//                    pPlayer.sendSystemMessage(Component.translatable(HBMLang.BLOCK_STATE_LOSE.key(), storedPos.toShortString()));
-//                }else {
-////                    createMissle(pLevel, pPlayer, pUsedHand, storedPos);
-////                    addEffects(pLevel, pPlayer, storedPos);
-//                }
-//                itemInHand.removeTagKey(HBMKey.POSITION);
-//            }
+            ItemStack itemInHand = pPlayer.getItemInHand(pUsedHand);
+            CompoundTag posElement = itemInHand.getTagElement(HBMKey.POSITION);
+            if (!itemInHand.hasTag() || posElement == null){
+                pPlayer.sendSystemMessage(Component.literal("No pos has been set."));
+            }else {
+                BlockPos storedPos = NbtUtils.readBlockPos(posElement);
+                // 注意，getBlockState是会加载区块的，因此这里用了一个安全加载的函数
+                BlockState markedBlock = WorldUtils.getBlockState(pLevel, storedPos).orElse(Blocks.AIR.defaultBlockState());
+                if (markedBlock.is(Blocks.AIR) || markedBlock.is(Blocks.VOID_AIR)){
+                    pPlayer.sendSystemMessage(Component.translatable(HBMLang.BLOCK_STATE_LOSE.key(), storedPos.toShortString()));
+                }else {
+                    createMissle(pLevel, pPlayer, pUsedHand, storedPos);
+//                    addEffects(pLevel, pPlayer, storedPos);
+                }
+                itemInHand.removeTagKey(HBMKey.POSITION);
+            }
             showRadData(pLevel, pPlayer);
         }
         return super.use(pLevel, pPlayer, pUsedHand);

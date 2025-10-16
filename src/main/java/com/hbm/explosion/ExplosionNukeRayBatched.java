@@ -1,12 +1,17 @@
 package com.hbm.explosion;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.GrassBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.common.Tags;
 
 import java.util.*;
 /** 处理核爆过程的工具类 */
@@ -73,6 +78,8 @@ public class ExplosionNukeRayBatched implements IExplosionRay {
                 fac *= 0.07D;
 
                 //爆炸抗性这里先使用block的默认抗性
+                // 我也搞不明白怎么回事，只能用一种简单粗暴的方式删除所有草方块之类的东西。
+                if (blockState.canBeReplaced()) level.setBlock(pos, Blocks.AIR.defaultBlockState(), 2,0);
                 if (!blockState.liquid())res -= (float) Math.pow(blockState.getBlock().getExplosionResistance(), 7.5D - fac);
 
                 if(res > 0 && !blockState.isAir()) {
@@ -148,6 +155,9 @@ public class ExplosionNukeRayBatched implements IExplosionRay {
                 level.setBlock(pos, Blocks.AIR.defaultBlockState(), 2,0);
             }
         }
+
+//        List<T> nearbyEntities = level.getNearbyEntities(LivingEntity.class, TargetingConditions.forCombat().range(20.0D), this, new AABB(new BlockPos(coord.x << 4, pos.getY() - 30, coord.z << 4), new BlockPos(coord.x << 4 + 15, pos.getY() + 30, coord.z << 4 + 15)));
+
 
         perChunk.remove(coord);
         orderedChunks.remove(0);

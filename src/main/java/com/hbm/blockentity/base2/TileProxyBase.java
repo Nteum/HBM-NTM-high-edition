@@ -36,7 +36,7 @@ public class TileProxyBase extends CapabilityBlockEntity implements ICustomLookT
     @Override
     public void load(@NotNull CompoundTag nbt) {
         super.load(nbt);
-        cachedPos = NbtUtils.readBlockPos(nbt);
+        cachedPos = NbtUtils.readBlockPos(nbt.getCompound(HBMKey.CORE_POS));
     }
 
     @Override

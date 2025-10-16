@@ -53,6 +53,7 @@ public class Models {
     public static final ResourceLocation CHEMPLANT_BODY = add(HBM.rl("block/chemplant/chemplant_new_body"));
     public static final ResourceLocation CHEMPLANT_PISTON = add(HBM.rl("block/chemplant/chemplant_new_piston"));
     public static final ResourceLocation CHEMPLANT_SPINNER = add(HBM.rl("block/chemplant/chemplant_new_spinner"));
+    public static final ResourceLocation LAUNCH_PAD = add(HBM.rl("block/launch_pad"));
 
     public static final ResourceLocation MP_W_15_BALEFIRE = addItem(HBM.rl("item/mp_warhead_15_balefire"), HBMWeapon.MP_WARHEAD_15_BALEFIRE);
 
@@ -61,8 +62,9 @@ public class Models {
     public static final ResourceLocation BISMUTH = addEntity(HBM.modelRl("item/armor_bismuth"), new ModelArmorBismuth());
     public static final ResourceLocation DESH = addEntity(HBM.modelRl("item/armor_desh"), new ModelArmorDesh());
     public static final ResourceLocation DIESEL = addEntity(HBM.modelRl("item/armor_diesel"), new ModelArmorDiesel());
-    public static final ResourceLocation AJR = addEntity(HBM.modelRl("item/armor_ajr"), new ModelArmorAJR());
     public static final ResourceLocation RPA = addEntity(HBM.modelRl("item/armor_rpa"), new ModelArmorRPA());
+    public static final ResourceLocation AJR = addEntity(HBM.modelRl("item/armor_ajr"), new ModelArmorAJR());
+    public static final ResourceLocation BJ = addEntity(HBM.modelRl("item/armor_bj"), new ModelArmorBJ());
 
     public static ResourceLocation add(ResourceLocation rl){
         models.add(rl);
@@ -85,6 +87,7 @@ public class Models {
             // 加载实体模型
             try {
                 entityModels.forEach((rl, model) -> {
+                    HBM.LOGGER.info("Entity obj model: " + rl.toString());
                     if (model instanceof IObjModel objEntityModel){
                         if (objEntityModel.getRenderable() == null) objEntityModel.parseJson(rl);
                     }

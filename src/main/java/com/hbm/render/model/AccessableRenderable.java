@@ -3,6 +3,7 @@ package com.hbm.render.model;
 import com.google.common.collect.ImmutableMap;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -28,7 +29,6 @@ import java.util.Map;
  * */
 public class AccessableRenderable implements IRenderable<AccessableRenderable.ModelPartTransform> {
     public Map<String, Component> components = new HashMap<>();
-    public PartPose pose = PartPose.ZERO;
     private AccessableRenderable() { }
 
     public AccessableRenderable(CompositeRenderable renderable){
@@ -121,7 +121,7 @@ public class AccessableRenderable implements IRenderable<AccessableRenderable.Mo
         public float yRotPoint = 0;
         public float zRotPoint = 0;
 
-        public Component(){ }
+        public Component(){}
         public Component(String name)
         {
             this.name = name;

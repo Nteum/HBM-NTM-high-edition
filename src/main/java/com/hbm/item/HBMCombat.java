@@ -49,6 +49,8 @@ public class HBMCombat extends HBMComponent{
     public static Suit AJR;
     public static Suit AJRO;
     public static Suit RPA;
+    public static Suit BJ;
+    public static RegistryObject<Item> BJ_JETPACK;
 
     public static void register(DeferredRegister<Item> ITEMS){
         // 一般盔甲
@@ -179,6 +181,21 @@ public class HBMCombat extends HBMComponent{
                 register(standaloneModels, "rpa_plate", () -> new ItemArmorRPA(HBMArmorMats.AJR, ArmorItem.Type.CHESTPLATE, new Item.Properties(), 2500000, 10000, 2000, 25).suit(()->RPA).cloneStats((ItemArmorFSB) RPA.HELMET.get())),
                 register(standaloneModels, "rpa_legs", () -> new ItemArmorRPA(HBMArmorMats.AJR, ArmorItem.Type.LEGGINGS, new Item.Properties(), 2500000, 10000, 2000, 25).cloneStats((ItemArmorFSB) RPA.HELMET.get())),
                 register(standaloneModels, "rpa_boots", () -> new ItemArmorRPA(HBMArmorMats.AJR, ArmorItem.Type.BOOTS, new Item.Properties(), 2500000, 10000, 2000, 25).cloneStats((ItemArmorFSB) RPA.HELMET.get())));
+        BJ_JETPACK = register(standaloneModels, "bj_jetpack", ()-> new ItemArmorBJJetpack(HBMArmorMats.BJ, ArmorItem.Type.CHESTPLATE, new Item.Properties(), 10000000, 10000, 1000, 100).suit(()->BJ));
+        BJ = new Suit(register(standaloneModels, "bj_helmet", () -> new ItemArmorBJ(HBMArmorMats.BJ, ArmorItem.Type.HELMET, new Item.Properties(),10000000, 10000, 1000, 100).enableVATS(true)
+                        .enableThermalSight(true)
+                        .setHasGeigerSound(true)
+                        .setHasHardLanding(true)
+                        .addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 20, 1))
+                        .addEffect(new MobEffectInstance(MobEffects.JUMP, 20, 0))
+                        .addEffect(new MobEffectInstance(MobEffects.SATURATION, 20, 0))
+//                        .addEffect(new MobEffectInstance(HbmPotion.radx.id, 20, 0))
+                        .setStep(ModSounds.STEP_METAL.get())
+                        .setJump(ModSounds.STEP_IRON_JUMP.get())
+                        .setFall(ModSounds.STEP_IRON_LAND.get())),
+                register(standaloneModels, "bj_plate", () -> new ItemArmorBJ(HBMArmorMats.BJ, ArmorItem.Type.CHESTPLATE, new Item.Properties(), 10000000, 10000, 1000, 100).cloneStats((ItemArmorFSB) BJ.HELMET.get())),
+                register(standaloneModels, "bj_legs", () -> new ItemArmorBJ(HBMArmorMats.BJ, ArmorItem.Type.LEGGINGS, new Item.Properties(), 10000000, 10000, 1000, 100).cloneStats((ItemArmorFSB) BJ.HELMET.get())),
+                register(standaloneModels, "bj_boots", () -> new ItemArmorBJ(HBMArmorMats.BJ, ArmorItem.Type.BOOTS, new Item.Properties(), 10000000, 10000, 1000, 100).cloneStats((ItemArmorFSB) BJ.HELMET.get())));
     }
     public static void creativeTab(MutableHashedLinkedMap<ItemStack, CreativeModeTab.TabVisibility> entries){
         itemList.forEach(itemRegistryObject -> entries.put(new ItemStack(itemRegistryObject.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS));

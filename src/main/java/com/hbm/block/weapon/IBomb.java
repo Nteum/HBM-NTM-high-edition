@@ -7,11 +7,11 @@ public interface IBomb {
     /**
      * Triggers the bomb and generates a return code. Since most bombs have a serverside inventory, the return code
      * should only be processed serverside, what's returned on the client should be ignored.
-     * Ofen invoked by onNeighborBlockChanged, so in any case make sure to check for world-remoteness.
+     * Often invoked by onNeighborBlockChanged, so in any case make sure to check for world-remoteness.
      */
-    public BombReturnCode explode(Level pLevel, BlockPos pPos);
+    BombReturnCode explode(Level pLevel, BlockPos pPos);
 
-    public static enum BombReturnCode {
+    enum BombReturnCode {
         UNDEFINED(false, ""),										//non-null type for passing to clients that don't process the return code
         DETONATED(true, "bomb.detonated"),							//success for blowing up bombs
         TRIGGERED(true, "bomb.triggered"),							//success for triggering other things
@@ -23,7 +23,7 @@ public interface IBomb {
         private String unloc;
         private boolean success;
 
-        private BombReturnCode(boolean success, String unloc) {
+        BombReturnCode(boolean success, String unloc) {
             this.unloc = unloc;
             this.success = success;
         }

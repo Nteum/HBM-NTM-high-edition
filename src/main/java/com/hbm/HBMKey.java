@@ -29,6 +29,7 @@ public class HBMKey {
     public static final String RADIATION = "radiation";
     public static final String FLUX = "flux";
     public static final String HEAT = "heat";
+    public static final String DELAY = "delay";
     //cable
     public static final String FORBID_DIR = "forbidDir";
     public static final String CONN_LIMIT = "conn_limit";
@@ -57,4 +58,12 @@ public class HBMKey {
     public static final String BLAST = "blast";
     public static final String ASSEMBLER = "assembler";
     public static final String CHEMPLANT = "chemplant";
+    //
+    public static final String BASIC_MODEL = "basic_model";
+    public static final String ENTITY_MODEL = "entity_model";
+    public static final String LITERALLY = "literally";
+    public static final String ORDERLY_GEN = "orderly_gen";
+    public static final String REVERSE_GEN = "reverse_gen";
+    public static final String ORDERLY_GEN_EXCEPT_FIRST = "orderly_gen_except_first";
+
 }

@@ -3,19 +3,14 @@ package com.hbm.entity.weapon.missile;
 import com.hbm.HBM;
 import com.hbm.entity.IRadarDetectableNT;
 import com.hbm.entity.projectile.EntityThrowableNT;
-import com.hbm.entity.weapon.grenade.ThrownGrenade;
 import com.hbm.explosion.vanillant.ExplosionVNT;
 import com.hbm.explosion.vanillant.standard.BlockAllocatorStandard;
-import com.hbm.explosion.vanillant.standard.BlockProcessorStandard;
 import com.hbm.explosion.vanillant.standard.PlayerProcessorStandard;
-import com.hbm.item.weapon.ItemMissile;
+import com.hbm.item.weapon.ItemMissilePart;
 import com.hbm.particle.ParticleSystem;
 import com.hbm.utils.chunk.ChunkLoadHelper;
-import com.mojang.blaze3d.systems.RenderSystem;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -23,7 +18,6 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.projectile.ThrowableProjectile;
 import net.minecraft.world.item.ItemStack;
@@ -70,7 +64,7 @@ public abstract class EntityMissile extends EntityThrowableNT implements IRadarD
         Vec3 vector = new Vec3(target.getX()-start.getX(),0,target.getZ()-start.getZ());
         accelXZ = decelY = 1 / vector.length();
         velocity = 0;
-        this.setYRot((float) (Mth.atan2(target.getX()-start.getX(), target.getZ()-start.getZ()) * 180.0D / Math.PI));
+//        this.setYRot((float) (Mth.atan2(target.getX()-start.getX(), target.getZ()-start.getZ()) * 180.0D / Math.PI));
         this.setSize(1.5F, 1.5F);
     }
     // 设定无论是否在视线内始终渲染
@@ -334,8 +328,8 @@ public abstract class EntityMissile extends EntityThrowableNT implements IRadarD
     @Override
     public String getUnlocalizedName() {
         ItemStack item = this.getMissileItemForInfo();
-        if(item != null && item.getItem() instanceof ItemMissile) {
-            ItemMissile missile = (ItemMissile) item.getItem();
+        if(item != null && item.getItem() instanceof ItemMissilePart) {
+            ItemMissilePart missile = (ItemMissilePart) item.getItem();
             switch(missile.tier) {
                 case TIER0: return "radar.target.tier0";
                 case TIER1: return "radar.target.tier1";
@@ -351,8 +345,8 @@ public abstract class EntityMissile extends EntityThrowableNT implements IRadarD
     @Override
     public int getBlipLevel() {
         ItemStack item = this.getMissileItemForInfo();
-        if(item != null && item.getItem() instanceof ItemMissile) {
-            ItemMissile missile = (ItemMissile) item.getItem();
+        if(item != null && item.getItem() instanceof ItemMissilePart) {
+            ItemMissilePart missile = (ItemMissilePart) item.getItem();
             switch(missile.tier) {
                 case TIER0: return IRadarDetectableNT.TIER0;
                 case TIER1: return IRadarDetectableNT.TIER1;
@@ -364,5 +358,10 @@ public abstract class EntityMissile extends EntityThrowableNT implements IRadarD
         }
 
         return IRadarDetectableNT.SPECIAL;
+    }
+
+    @FunctionalInterface
+    public interface MissileCreator<T extends EntityMissile>{
+        T create(Level level, float x, float y, float z, BlockPos target);
     }
 }

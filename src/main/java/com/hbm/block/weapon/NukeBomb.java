@@ -1,23 +1,20 @@
 package com.hbm.block.weapon;
 
-import com.hbm.block.base.BaseMachineBlock;
-import com.hbm.block.base.BedLikeBlock;
 import com.hbm.block.base.BlockDummyable;
-import com.hbm.block.base.MultiPartBlock;
-import com.hbm.blockentity.weapon.NukeBombEntity;
 import com.hbm.entity.effect.EntityNukeTorex;
 import com.hbm.entity.logic.EntityNukeExplosionMK5;
 import com.hbm.registries.ModSounds;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.RandomSource;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.RedstoneLampBlock;
+import net.minecraft.world.level.block.TntBlock;
+import net.minecraft.world.level.block.piston.PistonBaseBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.BlockHitResult;
 
 public abstract class NukeBomb extends BlockDummyable implements IBomb {
     public boolean explode = true;
@@ -39,5 +36,20 @@ public abstract class NukeBomb extends BlockDummyable implements IBomb {
             return BombReturnCode.DETONATED;
         }
         return BombReturnCode.UNDEFINED;
+    }
+
+    @Override
+    public void neighborChanged(BlockState pState, Level pLevel, BlockPos pPos, Block pNeighborBlock, BlockPos pNeighborPos, boolean pMovedByPiston) {
+        if (!pLevel.isClientSide){
+            // 先判断core状态的行为，再判断不是core状态的行为，否则程序会陷入死循环。
+            if (pState.getValue(IS_CORE)){
+                if (pLevel.hasNeighborSignal(pPos)){
+                    pLevel.removeBlock(pPos, false);
+                    explode(pLevel, pPos);
+                }
+            }else {
+                super.neighborChanged(pState, pLevel, pPos, pNeighborBlock, pNeighborPos, pMovedByPiston);
+            }
+        }
     }
 }

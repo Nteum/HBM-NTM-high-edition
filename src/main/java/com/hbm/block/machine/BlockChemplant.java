@@ -31,7 +31,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class BlockChemplant extends BlockDummyable {
-//    public static final VoxelShape SHAPE = Block.box(-32.0,0.0D,-32.0D,32.0D,48.0D,32.0D);
     public BlockChemplant(Properties pProperties) {
         super(pProperties);
         SHAPE = Block.box(-32.0,0.0D,-32.0D,32.0D,48.0D,32.0D);
@@ -41,9 +40,4 @@ public class BlockChemplant extends BlockDummyable {
     protected BlockEntity mainBlockEntity(BlockPos pPos, BlockState pState) {
         return new ChemplantEntity(pPos,pState);
     }
-//
-//    @Override
-//    public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
-//        return pState.getValue(IS_CORE) ? SHAPE : Shapes.block();
-//    }
 }

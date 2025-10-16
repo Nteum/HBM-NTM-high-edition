@@ -4,13 +4,11 @@ import com.hbm.render.model.AccessableRenderable;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.Tesselator;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
-import org.lwjgl.opengl.GL11;
 
 public class ModelArmorRPA extends ModelArmorBase{
     public static ResourceLocation chestplateTex = new ResourceLocation("hbm:textures/models/armor/rpa_chest.png");
@@ -51,17 +49,6 @@ public class ModelArmorRPA extends ModelArmorBase{
             } finally {
                 bufferSource.endBatch();
             }
-
-//            float lastX = OpenGlHelper.lastBrightnessX;
-//            float lastY = OpenGlHelper.lastBrightnessY;
-//            GL11.glPushAttrib(GL11.GL_LIGHTING_BIT);
-//            OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 240F, 240F);
-//            GL11.glDisable(GL11.GL_LIGHTING);
-//            this.glow.render(scaleFactor);
-//            GL11.glEnable(GL11.GL_LIGHTING);
-//            GL11.glPopAttrib();
-//            OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, lastX, lastY);
-
             /// END GLOW ///
 
             /// START FAN ///

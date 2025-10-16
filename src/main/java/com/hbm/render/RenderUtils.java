@@ -1,7 +1,9 @@
 package com.hbm.render;
 
+import com.hbm.render.model.AccessableRenderable;
 import com.hbm.utils.EnumUtils;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.Tesselator;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.color.block.BlockColors;
@@ -20,6 +22,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.client.event.RegisterShadersEvent;
 import net.minecraftforge.client.model.data.ModelData;
+import net.minecraftforge.client.model.renderable.ITextureRenderTypeLookup;
 
 import java.util.List;
 
@@ -70,6 +73,17 @@ public class RenderUtils {
 
             pConsumer.putBulkData(pPose, bakedquad, f, f1, f2, pPackedLight, pPackedOverlay);
         }
-
+    }
+    /**
+     * 独立建立局部multisource进行渲染，适用于只有VertexConsumer传进来，但需要单独的texture或rendertype渲染的情况
+     * */
+    public static void renderStandalone(PoseStack poseStack, RenderType renderType, AccessableRenderable.Component component, int lightmap, int overlay){
+        MultiBufferSource.BufferSource bufferSource = MultiBufferSource.immediate(Tesselator.getInstance().getBuilder());
+        try {
+            VertexConsumer buffer = bufferSource.getBuffer(renderType);
+            component.render(poseStack, buffer, lightmap, overlay);
+        } finally {
+            bufferSource.endBatch();
+        }
     }
 }

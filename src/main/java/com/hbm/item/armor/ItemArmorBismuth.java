@@ -2,7 +2,7 @@ package com.hbm.item.armor;
 
 import com.hbm.HBM;
 import com.hbm.item.HBMCombat;
-import com.hbm.main.ClientSetup;
+import com.hbm.main.ClientEventHanler;
 import com.hbm.render.model.Models;
 import com.hbm.render.model.armor.ModelArmorBismuth;
 import com.hbm.render.model.armor.ModelArmorT51;
@@ -46,7 +46,7 @@ public class ItemArmorBismuth extends ItemArmorFSB {
 
 			@Override
 			public BlockEntityWithoutLevelRenderer getCustomRenderer() {
-				return ClientSetup.getLazyItemRender();
+				return ClientEventHanler.getLazyItemRender();
 			}
 		});
 	}

@@ -101,6 +101,11 @@ public abstract class BaseMachineBlockEntity extends HBMBlockEntity implements W
         return tank > 0 && tank < getSlots() ? slotModes.get(tank) : Mode.NONE;
     }
 
+    @Override
+    public long getStored() {
+        return super.getStored();
+    }
+
     //==================WorldlyContainer===================
     // 实际上我不太喜欢实现这个接口，但原版的漏斗就认这个接口
     @Override

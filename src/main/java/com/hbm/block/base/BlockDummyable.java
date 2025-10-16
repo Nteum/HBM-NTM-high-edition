@@ -1,5 +1,6 @@
 package com.hbm.block.base;
 
+import com.hbm.HBM;
 import com.hbm.HBMKey;
 import com.hbm.block.HBMBlockProperties;
 import com.hbm.block.HBMMachine;
@@ -27,6 +28,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.RenderShape;
@@ -92,19 +94,30 @@ public abstract class BlockDummyable extends BlockMachineBase implements ICustom
             super.onRemove(pState, pLevel, pPos, pNewState, pMovedByPiston);
         }
     }
+    // 搜寻机器中心
+    public BlockPos getCore(BlockState pState, LevelReader pLevel, BlockPos pPos){
+        if (!pState.getValue(IS_CORE)){
+            BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
+            if (blockEntity instanceof TileProxyBase tileProxy){
+                return tileProxy.cachedPos;
+            }
+        }
+        return pPos;
+    }
 
     @Override
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
         if (!pLevel.isClientSide && !pPlayer.getPose().equals(Pose.CROUCHING)){
-            BlockPos core = pPos;
             BlockState coreState = pState;
-            // 先找到核心点位
-            if (!pState.getValue(IS_CORE)){
-                BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
-                if (blockEntity instanceof TileProxyBase tileProxy){
-                    core = tileProxy.cachedPos;
-                }
-            }
+            BlockPos core = getCore(pState, pLevel, pPos);
+            
+//            // 先找到核心点位
+//            if (!pState.getValue(IS_CORE)){
+//                BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
+//                if (blockEntity instanceof TileProxyBase tileProxy){
+//                    core = tileProxy.cachedPos;
+//                }
+//            }
             // 右键相当于直接对核心点位右键
             if (pLevel.getBlockEntity(core) instanceof DummyableBlockEntity entity){
 //                entity.onLeftClick(pState, pLevel, pPos, pPlayer, pHand, pHit);
@@ -113,14 +126,45 @@ public abstract class BlockDummyable extends BlockMachineBase implements ICustom
                 entity.onLeftClick(pState, pLevel, pPos, pPlayer, pHand, pHit);
                 super.use(coreState,pLevel,core,pPlayer,pHand,pHit);
             }else {
-                return coreState.getBlock().use(coreState,pLevel,core,pPlayer,pHand,pHit);
+                if (coreState.getValue(IS_CORE))
+                    return coreState.getBlock().use(coreState,pLevel,core,pPlayer,pHand,pHit);
+                else {
+                    HBM.LOGGER.warn("Dummy block's core lost, at " + pPos.toShortString());
+                    return InteractionResult.CONSUME;
+                }
             }
         }else {
             return super.use(pState, pLevel, pPos, pPlayer, pHand, pHit);
         }
         return InteractionResult.SUCCESS;
     }
-//    public static Block[] multiBlockList = new Block[]{ModBlocks.machine_crucible.get(), ModBlocks.machine_assembler.get(), ModBlocks.machine_cracking_tower.get(), HBMMachine.CHEMPLANT.get()};
+    /**
+     * 对红石信号作出反应还得是neighborChanged，onNeighborChange函数不行
+     * */
+    @Override
+    public void neighborChanged(BlockState pState, Level pLevel, BlockPos pPos, Block pNeighborBlock, BlockPos pNeighborPos, boolean pMovedByPiston) {
+        if (!pLevel.isClientSide){
+
+            if (pState.getValue(IS_CORE)){
+                super.neighborChanged(pState, pLevel, pPos, pNeighborBlock, pNeighborPos, pMovedByPiston);
+            } else {
+                BlockState coreState = pLevel.getBlockState(getCore(pState, pLevel, pPos));
+                coreState.neighborChanged(pLevel, pPos, pNeighborBlock, pNeighborPos, pMovedByPiston);
+            }
+
+//            if (pLevel.getBlockEntity(core) instanceof DummyableBlockEntity entity){
+//                coreState = pLevel.getBlockState(core);
+//            }
+//
+//            if (coreState.getValue(IS_CORE))
+//                coreState.neighborChanged(pLevel, pPos, pNeighborBlock, pNeighborPos, pMovedByPiston);
+//            else {
+//                HBM.LOGGER.warn("Dummy block's core lost, at " + pPos.toShortString());
+//            }
+        }
+    }
+
+    //    public static Block[] multiBlockList = new Block[]{ModBlocks.machine_crucible.get(), ModBlocks.machine_assembler.get(), ModBlocks.machine_cracking_tower.get(), HBMMachine.CHEMPLANT.get()};
     @Override
     public RenderShape getRenderShape(BlockState pState) {
         return RenderShape.INVISIBLE;

@@ -5,6 +5,7 @@ import com.hbm.block.logistic.BlockFluidPipe;
 import com.hbm.block.machine.BlockChemplant;
 import com.hbm.block.machine.BlockFluidBarrel;
 import com.hbm.block.tools.GeigerCounter;
+import com.hbm.block.weapon.LaunchPad;
 import com.hbm.datagen.LanguageProvider;
 import com.hbm.datagen.loot.BlockLootGen;
 import com.hbm.datagen.model.BlockStateGen;
@@ -35,6 +36,7 @@ public class HBMMachine {
     public static RegistryObject<Block> FLUID_PIPE;
     public static RegistryObject<Block> DEBUG_BLOCK;
     public static RegistryObject<Block> GEIGER_COUNTER;
+    public static RegistryObject<Block> LAUNCH_PAD;
     public static void register(DeferredRegister<Block> BLOCKS){
         CHEMPLANT = registerBlockWithItem(BLOCKS, "chemplant", ()->new BlockChemplant(BlockBehaviour.Properties.of().strength(5.0F).explosionResistance(30.0F)));
         PLASTIC_BARREL = registerBlockWithItem(BLOCKS, "barrel_plastic", ()->new BlockFluidBarrel(BlockBehaviour.Properties.of().strength(2.0F).explosionResistance(5.0F).requiresCorrectToolForDrops().sound(SoundType.STONE), BlockFluidBarrel.BarrelProperties.of().capacity(12000)));
@@ -45,6 +47,7 @@ public class HBMMachine {
         ANTIMATTER_BARREL = registerBlockWithItem(BLOCKS, "barrel_antimatter", ()->new BlockFluidBarrel(BlockBehaviour.Properties.of().strength(2.0F).explosionResistance(5.0F).requiresCorrectToolForDrops().sound(SoundType.METAL),BlockFluidBarrel.BarrelProperties.of().capacity(16000).hotResist().highCorroResist().antimatter()));
         FLUID_PIPE = registerBlockWithItem(BLOCKS, "fluid_pipe", ()->new BlockFluidPipe(BlockBehaviour.Properties.of().strength(5.0F).explosionResistance(10.0F)));
         GEIGER_COUNTER = registerBlockWithItem(BLOCKS, "geiger", ()->new GeigerCounter(BlockBehaviour.Properties.of().strength(5.0F).explosionResistance(10.0F)));
+        LAUNCH_PAD = registerBlockWithItem(BLOCKS, "launch_pad", ()->new LaunchPad(BlockBehaviour.Properties.of().strength(5.0F).explosionResistance(10.0F)));
 
         DEBUG_BLOCK = registerBlockWithItem(BLOCKS, "debug_block", ()->new BlockDebug(BlockBehaviour.Properties.copy(Blocks.STONE)));
     }
@@ -65,6 +68,7 @@ public class HBMMachine {
         pOutput.accept(FLUID_PIPE.get());
         pOutput.accept(GEIGER_COUNTER.get());
 
+
         pOutput.accept(DEBUG_BLOCK.get());
     }
 
@@ -79,6 +83,7 @@ public class HBMMachine {
         provider.add(HBMLang.FLUID_CAPACITY.key(), "Capacity: %1$s mB");
         provider.add(HBMLang.BARREL.key(), "HBM Barrel");
         provider.add(GEIGER_COUNTER.get(), "Geiger Counter");
+        provider.add(LAUNCH_PAD.get(), "Launch Pad");
 
         provider.add(DEBUG_BLOCK.get(), "Debug Block");
     }
@@ -93,11 +98,13 @@ public class HBMMachine {
         provider.dropSelf(HBMMachine.ANTIMATTER_BARREL.get());
         provider.dropSelf(HBMMachine.FLUID_PIPE.get());
         provider.dropSelf(HBMMachine.GEIGER_COUNTER.get());
+        provider.dropSelf(HBMMachine.LAUNCH_PAD.get());
 
         provider.dropSelf(DEBUG_BLOCK.get());
     }
 
     public static void model(BlockStateGen provider){
         provider.horizontalBlockWithItem(HBMMachine.GEIGER_COUNTER.get());
+        provider.horizontalBlockWithItem(HBMMachine.LAUNCH_PAD.get());
     }
 }

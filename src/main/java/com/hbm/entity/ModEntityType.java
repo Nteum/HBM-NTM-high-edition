@@ -7,6 +7,7 @@ import com.hbm.entity.logic.EntityNukeExplosionMK5;
 import com.hbm.entity.weapon.grenade.*;
 //import com.hbm.entity.logic.GrenadeGeneticEntity;
 //import com.hbm.entity.logic.NukeExplodeEntity;
+import com.hbm.entity.weapon.missile.EntityMissileAntiBallistic;
 import com.hbm.entity.weapon.missile.EntityMissileTier0.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
@@ -35,6 +36,8 @@ public class ModEntityType {
     /** 导弹 */
     public static final RegistryObject<EntityType<EntityMissileTest>> ENTITY_MISSILE_TEST
             = register("missile_test",EntityType.Builder.<EntityMissileTest>of(EntityMissileTest::new, MobCategory.MISC));
+    public static final RegistryObject<EntityType<EntityMissileAntiBallistic>> ENTITY_MISSILE_ANTI_BALLISTIC
+            = register("entity_missile_anti_ballistic",EntityType.Builder.<EntityMissileAntiBallistic>of(EntityMissileAntiBallistic::new, MobCategory.MISC));
 
     /**
      * 用于效果的实体

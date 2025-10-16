@@ -15,6 +15,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class DirectionUtils {
     //==============旋转的内容，1710版本的hbm主要参考早期forge direction的方式确定旋转，似乎可以照搬
@@ -81,31 +82,60 @@ public class DirectionUtils {
         return result;
     }
     /** 模型旋转的逻辑 */
+//    public static void generalMachineRotate(PoseStack poseStack, BlockState blockState){
+//        Direction facing = blockState.getValue(BlockStateProperties.HORIZONTAL_FACING);
+//        int[] offset;
+//        Block block1 = blockState.getBlock();
+//        if (block1 instanceof BlockDummyable dummyable)
+//            offset = dummyable.getDimensions();
+//        else return;
+//
+//        float xSize = (float) (offset[5] - offset[4]) / 2;
+//        float zSize = (float) (offset[3] - offset[2]) / 2;
+//        // YP是顺时针，mc是左手定则
+//        switch (facing){
+//            case SOUTH -> {
+//                poseStack.mulPose(Axis.YP.rotationDegrees(0));
+//            }
+//            case EAST -> {
+//                poseStack.translate(zSize-xSize,0,-xSize-zSize);
+//                poseStack.mulPose(Axis.YP.rotationDegrees(90));
+//            }
+//            case NORTH -> {
+//                poseStack.translate(-2*xSize,0,-2*zSize);
+//                poseStack.mulPose(Axis.YP.rotationDegrees(180));
+//            }
+//            case WEST -> {
+//                poseStack.translate(-zSize-xSize,0,xSize-zSize);
+//                poseStack.mulPose(Axis.YP.rotationDegrees(270));
+//            }
+//        }
+//    }
     public static void generalMachineRotate(PoseStack poseStack, BlockState blockState){
         Direction facing = blockState.getValue(BlockStateProperties.HORIZONTAL_FACING);
-        int[] offset;
-        Block block1 = blockState.getBlock();
-        if (block1 instanceof BlockDummyable dummyable)
-            offset = dummyable.getDimensions();
-        else return;
-
-        float xSize = (float) (offset[5] - offset[4]) / 2;
-        float zSize = (float) (offset[3] - offset[2]) / 2;
+        generalMachineRotate(poseStack, facing, 0.5f, 0.5f);
+    }
+    /**
+     * 这里默认模型中心位于(0,0)
+     * @param centerX 相对于模型中心，放置方块的旋转中心的x位置（一般是0.5）;
+     * @param centerZ 相对模型中心，放置方块的旋转中心z的位置（一般是0.5）
+     * */
+    public static void generalMachineRotate(PoseStack poseStack, Direction facing, float centerX, float centerZ){
         // YP是顺时针，mc是左手定则
         switch (facing){
             case SOUTH -> {
                 poseStack.mulPose(Axis.YP.rotationDegrees(0));
             }
             case EAST -> {
-                poseStack.translate(zSize-xSize,0,-xSize-zSize);
+                poseStack.translate(centerX - centerZ,0,centerX + centerZ);
                 poseStack.mulPose(Axis.YP.rotationDegrees(90));
             }
             case NORTH -> {
-                poseStack.translate(-2*xSize,0,-2*zSize);
+                poseStack.translate(2 * centerX,0,2 * centerZ);
                 poseStack.mulPose(Axis.YP.rotationDegrees(180));
             }
             case WEST -> {
-                poseStack.translate(-zSize-xSize,0,xSize-zSize);
+                poseStack.translate(centerX + centerZ,0,-centerX + centerZ);
                 poseStack.mulPose(Axis.YP.rotationDegrees(270));
             }
         }

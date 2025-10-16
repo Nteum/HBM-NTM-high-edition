@@ -31,9 +31,10 @@ public class MultiblockData {
         mapping.put(HBMMachine.CHEMPLANT.get(), new MultiblockData(2, 0, 2 ,1 ,2 ,1)
                 .addCaps(HBMCaps.LONG_ENERGY,ForgeCapabilities.FLUID_HANDLER, -1,0,1, SOUTH, 0,0,1, SOUTH, -1,0,-2,Direction.NORTH, 0,0,-2,Direction.NORTH)
                 .addCaps(ForgeCapabilities.ITEM_HANDLER, 1,0,-1, Direction.EAST, -2,0,0,Direction.WEST));
-        mapping.put(ModBlocks.bomb_boy.get(), new MultiblockData(0,0,0,0,2,1));
+        mapping.put(ModBlocks.bomb_boy.get(), new MultiblockData(0,0,0,0,1,1));
         mapping.put(ModBlocks.bomb_custom.get(), mapping.get(ModBlocks.bomb_boy.get()));
         mapping.put(ModBlocks.bomb_fat_man.get(), new MultiblockData(1,0,0,1,1,1));
+        mapping.put(HBMMachine.LAUNCH_PAD.get(), new MultiblockData(0, 0, 1, 1, 1, 1));
     }
 
     MultiblockData(List<Vec3i> offsets, int[] dirOffsets){

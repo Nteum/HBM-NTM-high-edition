@@ -1,10 +1,8 @@
 package com.hbm.item.armor;
 
-import com.hbm.item.HBMCombat;
-import com.hbm.main.ClientSetup;
+import com.hbm.main.ClientEventHanler;
 import com.hbm.render.model.Models;
 import com.hbm.render.model.armor.ModelArmorAJR;
-import com.hbm.render.model.armor.ModelArmorT51;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
@@ -38,12 +36,13 @@ public class ItemArmorAJR extends ItemArmorFSBPowered{
         consumer.accept(new IClientItemExtensions() {
             @Override
             public @NotNull HumanoidModel<?> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original) {
-                return ((ModelArmorAJR) Models.getEntityModel(Models.AJR)).name(nameStr).adjustWithOrigin(original, equipmentSlot);
+                return ((ModelArmorAJR) Models.getEntityModel(Models.AJR)).adjustWithOrigin(original, equipmentSlot);
+//                return null;
             }
 
             @Override
             public BlockEntityWithoutLevelRenderer getCustomRenderer() {
-                return ClientSetup.getLazyItemRender();
+                return ClientEventHanler.getLazyItemRender();
             }
         });
     }
@@ -53,13 +52,13 @@ public class ItemArmorAJR extends ItemArmorFSBPowered{
         if (stack.getItem() instanceof ItemArmorAJR armorAJR){
             switch (armorAJR.getType()){
                 case HELMET -> {
-                    return "hbm:textures/models/armor/" + nameStr + "_helmet.png";
+                    return "hbm:textures/models/armor/ajr_helmet.png";
                 }
                 case CHESTPLATE -> {
-                    return "hbm:textures/models/armor/" + nameStr + "_chest.png";
+                    return "hbm:textures/models/armor/ajr_chest.png";
                 }
                 case BOOTS, LEGGINGS -> {
-                    return "hbm:textures/models/armor/" + nameStr + "_leg.png";
+                    return "hbm:textures/models/armor/ajr_leg.png";
                 }
             }
         }
@@ -68,6 +67,6 @@ public class ItemArmorAJR extends ItemArmorFSBPowered{
 
     @Override
     public void renderObjItem(ItemDisplayContext pDisplayContext, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, int pPackedOverlay) {
-        renderStandard(this, (ModelArmorT51)Models.getEntityModel(Models.T51), nameStr + "_helmet", nameStr + "_chest", nameStr + "_arm", nameStr + "_leg",pDisplayContext, pPoseStack, pBuffer, pPackedLight, pPackedOverlay);
+        renderStandard(this, (ModelArmorAJR)Models.getEntityModel(Models.AJR), "ajr_helmet", "ajr_chest", "ajr_arm", "ajr_leg",pDisplayContext, pPoseStack, pBuffer, pPackedLight, pPackedOverlay);
     }
 }

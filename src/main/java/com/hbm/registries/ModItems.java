@@ -1,25 +1,43 @@
 package com.hbm.registries;
 
+import com.hbm.HBMKey;
+import com.hbm.datagen.LanguageProvider;
+import com.hbm.datagen.model.ItemModelGen;
 import com.hbm.item.HBMCombat;
 import com.hbm.item.HBMComponent;
 import com.hbm.item.HBMWeapon;
 import com.hbm.item.HBMtools;
 import com.hbm.item.env.BedrockOreItem;
 import com.hbm.HBM;
-import com.hbm.item.misc.ItemCircuit;
 import com.hbm.item.weapon.ItemDesignator;
 import com.hbm.item.weapon.ItemDetonator;
-import com.hbm.item.weapon.ItemMissile;
+import com.hbm.item.weapon.ItemMissilePart;
 import com.hbm.item.weapon.grenade.ItemGrenade;
+import net.minecraft.client.resources.model.UnbakedModel;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.common.util.MutableHashedLinkedMap;
+import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.function.Supplier;
 
 public class ModItems {
     //物品注册表
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, HBM.MODID);
+
+    public static final List<WrappedItemRegistry> itemList = new ArrayList<>();
     static {
         HBMtools.register(ITEMS);
         HBMComponent.register(ITEMS);
@@ -59,7 +77,8 @@ public class ModItems {
     public static final RegistryObject<Item> briquette_lignite = ITEMS.register("briquette_lignite",()->new Item(new Item.Properties()));
     public static final RegistryObject<Item> briquette_wood = ITEMS.register("briquette_wood",()->new Item(new Item.Properties()));
 
-    public static final RegistryObject<Item> detonator = ITEMS.register("detonator",()->new ItemDetonator(new Item.Properties()));
+//    public static final RegistryObject<Item> detonator = ITEMS.register("detonator",()->new ItemDetonator(new Item.Properties()));
+    public static final WrappedItemRegistry DETONATOR = add("billet_schrabidium_fuel", ()->new Item(new Item.Properties()), ModCreativeModeTab.HBM_TOOL.getKey(), HBMKey.BASIC_MODEL, HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
 
     //流体桶
 //    public static final RegistryObject<Item> bucket_irradiated_water = ITEMS.register("bucket_irradiated_water",()->new BucketItem(ModFluids.IRRADIATED_WATER_SOURCE_BLOCK,new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
@@ -79,11 +98,89 @@ public class ModItems {
     //升级组件
 //    public static final RegistryObject<Item> UPGRADE_BASE = ITEMS.register("upgrade_base",()->new Item(new Item.Properties()));
     //导弹
-    public static final RegistryObject<Item> DESIGNATOR = ITEMS.register("designator",()->new ItemDesignator(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> MISSILE_GENERIC = ITEMS.register("missile_generic",()->new ItemMissile(new Item.Properties().stacksTo(1), ItemMissile.MissileTier.TIER1));
+//    public static final RegistryObject<Item> DESIGNATOR = ITEMS.register("designator",()->new ItemDesignator(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> MISSILE_GENERIC = ITEMS.register("missile_generic",()->new ItemMissilePart(new Item.Properties().stacksTo(1), ItemMissilePart.MissileTier.TIER1));
     // 填充物品，游戏内无法获得，用于避免物品被匹配上
     public static final RegistryObject<Item> DUMMY_ITEM = ITEMS.register("dummy_item", ()->new Item(new Item.Properties()));
     public static void register(IEventBus eventBus){
         ITEMS.register(eventBus);
+    }
+
+    public static void creativeTab(BuildCreativeModeTabContentsEvent event){
+        for (WrappedItemRegistry itemRegistry : itemList) {
+            itemRegistry.creativeTabSupport(event);
+        }
+    }
+
+    public static void genModel(ItemModelGen provider){
+        for (WrappedItemRegistry itemRegistry : itemList) {
+            itemRegistry.modelSupport(provider);
+        }
+    }
+    public static void languageSupport(LanguageProvider provider){
+        for (WrappedItemRegistry itemRegistry : itemList) {
+            itemRegistry.languageSupport(provider);
+        }
+    }
+
+    public static WrappedItemRegistry add(final String name, final Supplier<? extends Item> sup, ResourceKey<CreativeModeTab> tabKey, String genNameWay){
+        return add(name, sup, tabKey, HBMKey.BASIC_MODEL, genNameWay, null);
+    }
+    public static WrappedItemRegistry add(final String name, final Supplier<? extends Item> sup, ResourceKey<CreativeModeTab> tabKey, String genModelWay, String genNameWay){
+        return add(name, sup, tabKey, genModelWay, genNameWay, null);
+    }
+    public static WrappedItemRegistry add(final String name, final Supplier<? extends Item> sup, ResourceKey<CreativeModeTab> tabKey, String genModelWay, String genNameWay, String localizedName){
+        WrappedItemRegistry itemRegistry = new WrappedItemRegistry();
+        itemRegistry.registryObject = ITEMS.register(name, sup);
+        itemRegistry.creativeKey = tabKey;
+        itemRegistry.genModelWay = genModelWay;
+        itemRegistry.genNameWay = genNameWay;
+        if (itemRegistry.genNameWay!= null && itemRegistry.genNameWay.equals(HBMKey.LITERALLY) && localizedName!=null)
+            itemRegistry.localizedName = localizedName;
+        itemList.add(itemRegistry);
+        return itemRegistry;
+    }
+
+    public static class WrappedItemRegistry{
+        RegistryObject<Item> registryObject;
+        String localizedName;
+        String genNameWay = HBMKey.ORDERLY_GEN;
+        ResourceKey<CreativeModeTab> creativeKey;
+        String genModelWay = HBMKey.BASIC_MODEL;
+
+        public Item get(){
+            return registryObject.get();
+        }
+        public ResourceLocation getId()
+        {
+            return registryObject.getId();
+        }
+        @Nullable
+        public ResourceKey<Item> getKey()
+        {
+            return registryObject.getKey();
+        }
+
+        public void languageSupport(LanguageProvider provider){
+            switch (genNameWay){
+                case HBMKey.LITERALLY -> provider.add(get(), localizedName);
+                case HBMKey.ORDERLY_GEN -> provider.add(get(), RegistryHelper.generateOrderlyName(getId().getPath()));
+                case HBMKey.REVERSE_GEN -> provider.add(get(), RegistryHelper.generateReversedName(getId().getPath()));
+                case HBMKey.ORDERLY_GEN_EXCEPT_FIRST -> provider.add(get(), RegistryHelper.generateOrderlyExceptFirstName(getId().getPath()));
+                default -> provider.add(get(), getId().toLanguageKey());
+            }
+        }
+
+        public void creativeTabSupport(BuildCreativeModeTabContentsEvent event){
+            if (event.getTabKey() == this.creativeKey){
+                event.getEntries().put(new ItemStack(get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            }
+        }
+
+        public void modelSupport(ItemModelGen provider){
+            if (genModelWay.equals(HBMKey.BASIC_MODEL)){
+                provider.basicItem(get());
+            }
+        }
     }
 }

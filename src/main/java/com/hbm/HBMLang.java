@@ -33,6 +33,7 @@ public enum HBMLang implements ILangEntry {
     CHEMPLANT("container", "chemplant"),
     BARREL("container", "barrel"),
     BATTERY("container", "battery"),
+    CONTAINER_LAUNCHPAD("Launch Pad"),
     // command
     COMMAND_DEBUG("command","debug"),
     //Redstone Control
@@ -93,6 +94,8 @@ public enum HBMLang implements ILangEntry {
     TOOLTIP_GEIGER2("geiger","envrad", "Total environmental radiation:"),
     TOOLTIP_GEIGER3("geiger","playerrad", "Player contamination:"),
     TOOLTIP_GEIGER4("geiger","playerres", "Player resistance:"),
+    ITEM_MISSILE_TIER("Tier %s"),
+    ITEM_MISSILE_DESC_NOTLAUNCHABLE("Not launchable!"),
     // debug
     CACHED_DATA("general","cached"),
     POS_DATA("general","data.pos"),
@@ -101,6 +104,8 @@ public enum HBMLang implements ILangEntry {
     BLOCK_STATE_INFO("debug","debugwand.msg.block_info"),
     // general （不用于特殊用途，仅仅作为文字）
     RECIPE("general","recipe"),
+    FUEL("Fuel"),
+    FUEL_CAPACITY("Fuel Capacity: %s mB"),
     // effect
     EFFECT_RADIATION("effect","radiation"),
     // armor tooltip

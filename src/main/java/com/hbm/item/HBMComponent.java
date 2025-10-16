@@ -862,7 +862,7 @@ public class HBMComponent {
         BILLET_MOX_FUEL = register(matherialList, "billet_mox_fuel", ()->new Item(new Item.Properties()));
         BILLET_AMERICIUM_FUEL = register(matherialList, "billet_americium_fuel", ()->new Item(new Item.Properties()));
         BILLET_LES = register(matherialList, "billet_les", ()->new Item(new Item.Properties()));
-        BILLET_SCHRABIDIUM_FUEL = register(matherialList, "billet_schrabidium_fuel", ()->new Item(new Item.Properties()));
+//        BILLET_SCHRABIDIUM_FUEL = register(matherialList, "billet_schrabidium_fuel", ()->new Item(new Item.Properties()));
         BILLET_HES = register(matherialList, "billet_hes", ()->new Item(new Item.Properties()));
         BILLET_PO210BE = register(matherialList, "billet_po210be", ()->new Item(new Item.Properties()));
         BILLET_RA226BE = register(matherialList, "billet_ra226be", ()->new Item(new Item.Properties()));

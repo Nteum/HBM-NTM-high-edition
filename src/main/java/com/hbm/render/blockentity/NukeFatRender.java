@@ -1,6 +1,6 @@
 package com.hbm.render.blockentity;
 
-import com.hbm.blockentity.weapon.NukeBombEntity;
+import com.hbm.blockentity.weapon.EntityNukeBomb;
 import com.hbm.render.model.Models;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
@@ -14,7 +14,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import static com.hbm.render.RenderUtils.renderBlockModel;
 
-public class NukeFatRender extends MultiPartRenderer<NukeBombEntity> {
+public class NukeFatRender extends MultiPartRenderer<EntityNukeBomb> {
     public static BakedModel fat_man_model;
     public NukeFatRender(BlockEntityRendererProvider.Context pContext){
         ModelManager modelManager = Minecraft.getInstance().getModelManager();
@@ -43,7 +43,7 @@ public class NukeFatRender extends MultiPartRenderer<NukeBombEntity> {
 //    }
 
     @Override
-    public void renderMultiPart(NukeBombEntity pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, int pPackedOverlay) {
+    public void renderMultiPart(EntityNukeBomb pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, int pPackedOverlay) {
         BlockState blockState = pBlockEntity.getBlockState();
         BlockRenderDispatcher blockDispatcher = Minecraft.getInstance().getBlockRenderer();
         ModelBlockRenderer blockRenderer = blockDispatcher.getModelRenderer();

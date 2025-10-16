@@ -183,12 +183,12 @@ public class ItemArmorFSB extends ArmorItem implements IArmorDisableModel {
     }
 
     public static boolean hasFSBArmor(Player player) {
-        ItemStack plateSlot = player.getInventory().armor.get(2);
+        ItemStack plateSlot = player.getInventory().armor.get(2);       // 根据胸甲判定
         if (plateSlot.getItem() instanceof ItemArmorFSB armorFSB){
             HBMCombat.Suit suit = armorFSB.suit.get();
-            if (suit.HELMET() != null && !player.getInventory().getArmor(0).is(suit.HELMET().get())) return false;
-            if (suit.LEGS() != null && !player.getInventory().getArmor(2).is(suit.LEGS().get())) return false;
-            if (suit.BOOT() != null && !player.getInventory().getArmor(3).is(suit.BOOT().get())) return false;
+            if (suit.HELMET() != null && !player.getInventory().getArmor(3).is(suit.HELMET().get())) return false;
+            if (suit.LEGS() != null && !player.getInventory().getArmor(1).is(suit.LEGS().get())) return false;
+            if (suit.BOOT() != null && !player.getInventory().getArmor(0).is(suit.BOOT().get())) return false;
             return true;
         }
         return false;

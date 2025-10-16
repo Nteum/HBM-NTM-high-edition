@@ -66,10 +66,6 @@ public class ModBlocks {
     public static final RegistryObject<Block> bomb_fat_man = registerBlockWithItem("bomb_fat_man",()->new NukeFat(BlockBehaviour.Properties.of(),200));
     public static final RegistryObject<Block> bomb_custom = registerBlockWithItem("bomb_custom",()->new NukeCustom(BlockBehaviour.Properties.of(),350));
     //发射台
-    public static final RegistryObject<Block> LAUNCHPAD_BASIC = registerBlockWithItem("launchpad_basic",()->new LaunchPadBasic(BlockBehaviour.Properties.of()));
-    public static final RegistryObject<Block> LAUNCHPAD_COMPACT = registerBlockWithItem("launchpad_compact",()->new LaunchPadCompact(BlockBehaviour.Properties.of()));
-    public static final RegistryObject<Block> LAUNCHPAD_LARGE = registerBlockWithItem("launchpad_large",()->new LaunchPadLarge(BlockBehaviour.Properties.of()));
-    public static final RegistryObject<Block> LAUNCHPAD_SOYUZ = registerBlockWithItem("launchpad_soyuz",()->new LaunchPadSoyuz(BlockBehaviour.Properties.of()));
 
     //流体
 //    public static final RegistryObject<LiquidBlock> irradiated_water = BLOCKS.register("irradiated_water", ()->new LiquidBlock(ModFluids.IRRADIATED_WATER_SOURCE_BLOCK,BlockBehaviour.Properties.copy(Blocks.WATER).noLootTable()));

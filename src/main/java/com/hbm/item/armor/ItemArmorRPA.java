@@ -1,9 +1,8 @@
 package com.hbm.item.armor;
 
-import com.hbm.main.ClientSetup;
+import com.hbm.main.ClientEventHanler;
 import com.hbm.render.model.Models;
 import com.hbm.render.model.armor.ModelArmorRPA;
-import com.hbm.render.model.armor.ModelArmorT51;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
@@ -37,7 +36,7 @@ public class ItemArmorRPA extends ItemArmorFSBPowered{
 
             @Override
             public BlockEntityWithoutLevelRenderer getCustomRenderer() {
-                return ClientSetup.getLazyItemRender();
+                return ClientEventHanler.getLazyItemRender();
             }
         });
     }

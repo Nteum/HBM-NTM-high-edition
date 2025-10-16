@@ -14,17 +14,17 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class NukeBombEntity extends DummyableBlockEntity {
+public abstract class EntityNukeBomb extends DummyableBlockEntity {
     public boolean ready = false;
     public boolean explode = false;
 
-    public NukeBombEntity(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState) {
+    public EntityNukeBomb(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState) {
         super(pType, pPos, pBlockState);
     }
 
     public static void tick(Level level, BlockPos pPos, BlockState pState, BlockEntity pBlockEntity) {
-        if (pBlockEntity instanceof NukeBombEntity && pState.is(ModBlocks.bomb_fat_man.get())){
-            NukeBombEntity entity = (NukeBombEntity) pBlockEntity;
+        if (pBlockEntity instanceof EntityNukeBomb && pState.is(ModBlocks.bomb_fat_man.get())){
+            EntityNukeBomb entity = (EntityNukeBomb) pBlockEntity;
             NukeBomb block = (NukeBomb) pState.getBlock();
             entity.explode = block.explode;
         }
@@ -52,5 +52,4 @@ public abstract class NukeBombEntity extends DummyableBlockEntity {
         return updateTag;
     }
     public boolean isReady(){return this.ready;}
-
 }

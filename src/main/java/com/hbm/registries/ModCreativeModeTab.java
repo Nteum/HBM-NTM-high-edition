@@ -91,9 +91,9 @@ public class ModCreativeModeTab {
         }).build());
     public static final RegistryObject<CreativeModeTab> HBM_TOOL = CREATIVE_MODE_TABS.register("hbm_weapon", () -> CreativeModeTab.builder()
         .title(Component.translatable(HBMLang.ITEMGROUP_TOOL.key()))
-            .icon(()->ModItems.detonator.get().asItem().getDefaultInstance())
+            .icon(()->ModItems.DETONATOR.get().getDefaultInstance())
         .displayItems((parameters, output) -> {
-            output.accept(ModItems.detonator.get());
+//            output.accept(ModItems.detonator.get());
 
             output.accept(ModItems.grenade_generic.get());
             output.accept(ModItems.grenade_strong.get());
@@ -117,11 +117,18 @@ public class ModCreativeModeTab {
                 output.accept((BucketItem)registryHolder.bucket().get());
         }
         }).build());
-
+    public static final RegistryObject<CreativeModeTab> HBM_MISSILE = CREATIVE_MODE_TABS.register("hbm_missile", () -> CreativeModeTab.builder()
+        .title(Component.translatable(HBMLang.ITEMGROUP_BLOCK.key()))
+        .icon(()->HBMWeapon.MP_WARHEAD_15_BALEFIRE.get().asItem().getDefaultInstance())
+//        .displayItems((parameters, output) -> {
+//                output.accept(HBMWeapon.MP_WARHEAD_15_BALEFIRE.get());
+//        })
+            .build());
     /**
      * 将模组中的物品注册到原版创造模式物品栏中
      * */
     public static void addCreative(BuildCreativeModeTabContentsEvent event){
+            ModItems.creativeTab(event);
             if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS){}
 
             else if (event.getTabKey() == CreativeModeTabs.COLORED_BLOCKS){}
@@ -143,5 +150,11 @@ public class ModCreativeModeTab {
             else if (event.getTabKey() == CreativeModeTabs.INGREDIENTS){}
 
             else if (event.getTabKey() == CreativeModeTabs.SPAWN_EGGS){}
+
+            else if (event.getTabKey() == HBM_MISSILE.getKey()){
+                    event.getEntries().put(new ItemStack(HBMWeapon.MP_WARHEAD_15_BALEFIRE.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+                    event.getEntries().put(new ItemStack(HBMMachine.LAUNCH_PAD.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+                    event.getEntries().put(new ItemStack(HBMtools.DESIGNATOR.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            }
     }
 }

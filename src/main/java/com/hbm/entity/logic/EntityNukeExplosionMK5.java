@@ -59,7 +59,7 @@ public class EntityNukeExplosionMK5 extends EntityExplosionChunkLoading{
             radiate(2_500_000F / (this.tickCount * 5 + 1), this.getRadius() * 2);
             ExplosionNukeGeneric.dealDamage(level(),position(),getRadius());
             if(explosion == null) {
-                if (ConfigBomb.explosionAlgorithm == 1 || ConfigBomb.explosionAlgorithm == 2) {
+                if (ConfigBomb.explosionAlgorithm == 1) {
                     explosion = new ExplosionNukeRayParallelized((ServerLevel) level(), blockPosition(),
                             getStrength(),getRadius());
                 } else {

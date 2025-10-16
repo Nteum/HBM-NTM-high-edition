@@ -33,4 +33,6 @@ public class ModMenuType {
             MOD_MENU_TYPES.register("barrel_menu",()->IForgeMenuType.create((windowId, inv, data) -> (BarrelMenu) ITileAccess.getInstance(windowId,inv,data, BarrelMenu.class)));
     public static final RegistryObject<MenuType<ElectricFurnaceMenu>> ELECTRIC_FURNACE_MENU =
             MOD_MENU_TYPES.register("electric_furnace_menu",()->new MenuType<>(ElectricFurnaceMenu::new, FeatureFlags.VANILLA_SET));
+    public static final RegistryObject<MenuType<LaunchPadMenu>> LAUNCH_PAD_MENU =
+            MOD_MENU_TYPES.register("launch_pad_menu",()->new MenuType<>(LaunchPadMenu::new, FeatureFlags.VANILLA_SET));
 }

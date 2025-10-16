@@ -18,11 +18,13 @@ import net.minecraftforge.client.model.renderable.CompositeRenderable;
 import net.minecraftforge.client.model.renderable.IRenderable;
 
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public interface IObjModel {
+    List<String> textureTags = new ArrayList<>(List.of("texture0", "#texture0", "#layer0"));
     ModelPart EMPTY = new ModelPart(List.of(), Map.of());
     ModelPart DUMMY_HUMANOID = new ModelPart(List.of(), Map.of("head",EMPTY, "hat",EMPTY, "body", EMPTY, "right_arm",EMPTY, "left_arm",EMPTY, "right_leg", EMPTY, "left_leg", EMPTY));
     IRenderable getRenderable();
@@ -36,8 +38,11 @@ public interface IObjModel {
                 JsonObject jsonObject = gson.fromJson(reader, JsonObject.class);
                 ObjModel objModel = ObjLoader.INSTANCE.read(jsonObject, null);
                 Map<String, ResourceLocation> textureMap = new HashMap<>();
-                if (jsonObject.has("#texture0")) textureMap.put("#texture0", new ResourceLocation(jsonObject.get("texture0").getAsString()));
+                if (jsonObject.has("texture0")) textureMap.put("#texture0", new ResourceLocation(jsonObject.get("texture0").getAsString()));
                 if (jsonObject.has("#layer0")) textureMap.put("#layer0", new ResourceLocation(jsonObject.get("layer0").getAsString()));
+//                for (String string : textureTags) {
+//                    textureMap.put(string, new ResourceLocation(jsonObject.get(string).getAsString()));
+//                }
                 setRenderable(objModel.bakeRenderable(StandaloneGeometryBakingContext.create(textureMap)));
             }
         }catch (Exception e){

@@ -1,6 +1,10 @@
 package com.hbm.item.weapon;
 
+import com.hbm.HBMKey;
+import com.hbm.api.item.IDesignatorItem;
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.NbtUtils;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
@@ -10,10 +14,15 @@ import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.NameTagItem;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.Nullable;
 
-public class ItemDesignator extends Item {
+import java.util.List;
+
+public class ItemDesignator extends Item implements IDesignatorItem {
     public ItemDesignator(Properties pProperties) {
         super(pProperties);
     }
@@ -26,10 +35,26 @@ public class ItemDesignator extends Item {
             ItemStack itemInHand = pContext.getItemInHand();
             if (player.hasPose(Pose.CROUCHING) && itemInHand.getItem() instanceof ItemDesignator){
                 BlockPos clickedPos = pContext.getClickedPos();
-                itemInHand.getOrCreateTag().putIntArray("pos",new int[]{clickedPos.getX(),clickedPos.getY(),clickedPos.getZ()});
+                itemInHand.getOrCreateTag().put(HBMKey.POSITION, NbtUtils.writeBlockPos(clickedPos));
             }
         }
         return super.useOn(pContext);
     }
 
+    @Override
+    public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
+        super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
+        if (isReady(pLevel, pStack, new BlockPos(0,0,0)))
+            pTooltipComponents.add(Component.literal(NbtUtils.readBlockPos(pStack.getTagElement(HBMKey.POSITION)).toShortString()));
+    }
+
+    @Override
+    public boolean isReady(Level world, ItemStack stack, BlockPos pos) {
+        return stack.hasTag() && !stack.getTagElement(HBMKey.POSITION).isEmpty();
+    }
+
+    @Override
+    public Vec3 getCoords(Level world, ItemStack stack, BlockPos pos) {
+        return NbtUtils.readBlockPos(stack.getTagElement(HBMKey.POSITION)).getCenter();
+    }
 }

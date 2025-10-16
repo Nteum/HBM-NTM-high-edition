@@ -23,6 +23,7 @@ public class ItemModelGen extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
+        ModItems.genModel(this);
         HBMtools.genModel(this);
         HBMComponent.genModel(this);
         HBMWeapon.genModel(this);
@@ -51,7 +52,7 @@ public class ItemModelGen extends ItemModelProvider {
         this.basicItem(ModItems.briquette_lignite.get());
         this.basicItem(ModItems.briquette_coal.get());
 
-        this.basicItem(ModItems.detonator.get());
+//        this.basicItem(ModItems.detonator.get());
         this.basicItem(ModItems.grenade_generic.get());
         this.basicItem(ModItems.grenade_strong.get());
         this.basicItem(ModItems.grenade_fire.get());

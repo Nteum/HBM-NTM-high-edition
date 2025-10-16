@@ -8,6 +8,7 @@ import com.hbm.block.HBMMachine;
 import com.hbm.blockentity.interfaces.IUpgradeInfoProvider;
 import com.hbm.item.HBMCombat;
 import com.hbm.item.HBMComponent;
+import com.hbm.registries.ModKeyMapping;
 import com.hbm.registries.ModBlocks;
 import com.hbm.registries.ModItems;
 import net.minecraft.data.PackOutput;
@@ -19,6 +20,7 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
 
     @Override
     protected void addTranslations() {
+        ModItems.languageSupport(this);
         addCreativeTabs();
         addItems();
         addBlocks();
@@ -32,6 +34,7 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
         ModFluids.localName(this);
         addEffect();
         autoAdd();
+        ModKeyMapping.localName(this);
         //物品
         this.add(ModItems.coke_coal.get(),"Coal Coke");
         //方块

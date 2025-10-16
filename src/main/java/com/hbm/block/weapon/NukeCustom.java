@@ -33,7 +33,7 @@ public class NukeCustom extends NukeBomb implements IBomb{
 
     public NukeCustom(Properties pProperties, int range) {
         super(pProperties,range);
-        SHAPE = Block.box(-30,0,0,24,16,16);
+        SHAPE = Block.box(-8,0,0,48,16,16);
     }
 
     @Override

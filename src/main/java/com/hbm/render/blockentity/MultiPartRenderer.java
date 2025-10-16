@@ -11,12 +11,10 @@ import net.minecraft.world.level.block.state.BlockState;
 public abstract class MultiPartRenderer<T extends DummyableBlockEntity> implements BlockEntityRenderer<T> {
     @Override
     public void render(T pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, int pPackedOverlay) {
-//        if (!pBlockEntity.isCore)return;
         BlockState blockState = pBlockEntity.getBlockState();
 
         pPoseStack.pushPose();
         DirectionUtils.generalMachineRotate(pPoseStack, blockState);
-//        ModelAdjustUtils.generalMachineRotate(pPoseStack, blockState);
 
         renderMultiPart(pBlockEntity,pPartialTick,pPoseStack,pBuffer,pPackedLight,pPackedOverlay);
 

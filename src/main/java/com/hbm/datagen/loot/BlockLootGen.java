@@ -55,10 +55,6 @@ public class BlockLootGen extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.bomb_fat_man.get());
         this.dropSelf(ModBlocks.bomb_custom.get());
         this.dropSelf(ModBlocks.machine_nuclear_boiler.get());
-        this.dropSelf(ModBlocks.LAUNCHPAD_BASIC.get());
-        this.dropSelf(ModBlocks.LAUNCHPAD_LARGE.get());
-        this.dropSelf(ModBlocks.LAUNCHPAD_COMPACT.get());
-        this.dropSelf(ModBlocks.LAUNCHPAD_SOYUZ.get());
 
         //饰品
         this.dropSelf(ModBlocks.TEST12.get());

@@ -1,7 +1,6 @@
 package com.hbm.item.armor;
 
-import com.hbm.HBM;
-import com.hbm.main.ClientSetup;
+import com.hbm.main.ClientEventHanler;
 import com.hbm.render.model.Models;
 import com.hbm.render.model.armor.ModelArmorT51;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -17,7 +16,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
-import net.minecraftforge.client.model.obj.ObjModel;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -39,7 +37,7 @@ public class ItemArmorT51 extends ItemArmorFSBPowered{
 
             @Override
             public BlockEntityWithoutLevelRenderer getCustomRenderer() {
-                return ClientSetup.getLazyItemRender();
+                return ClientEventHanler.getLazyItemRender();
             }
         });
     }

@@ -15,7 +15,9 @@ import com.hbm.datagen.recipe.RecipeGen;
 import com.hbm.datagen.tag.BlockTagsGen;
 import com.hbm.datagen.tag.ItemTagsGen;
 import com.hbm.effect.ModEffects;
-import com.hbm.registries.ModBlocks;
+import com.hbm.main.ClientEventHanler;
+import com.hbm.main.ServerEventHandler;
+import com.hbm.registries.*;
 import com.hbm.Inventory.fluid.ModFluids;
 import com.hbm.network.ModMessages;
 import com.hbm.particle.ModParticleTypes;
@@ -23,10 +25,7 @@ import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.datagen.*;
 import com.hbm.entity.ModEntityType;
 import com.hbm.gui.ModMenuType;
-import com.hbm.registries.ModCreativeModeTab;
-import com.hbm.registries.ModItems;
 import com.hbm.Inventory.recipe.ModRecipes;
-import com.hbm.registries.ModSounds;
 import com.hbm.render.model.Models;
 import com.hbm.world.feature.ModFeatures;
 import com.mojang.logging.LogUtils;
@@ -84,6 +83,9 @@ public class HBM {
         modEventBus.addListener(this::onPostLoad);
         modEventBus.addListener(this::onGatherData);
         modEventBus.addListener(ModCreativeModeTab::addCreative);
+        modEventBus.addListener(ModKeyMapping::register);
+        ClientEventHanler.registerEvents(MinecraftForge.EVENT_BUS, modEventBus);
+        ServerEventHandler.registerEvents(MinecraftForge.EVENT_BUS, modEventBus);
 
         //模组内容的注册
         ModItems.ITEMS.register(modEventBus);
@@ -140,6 +142,7 @@ public class HBM {
         generator.addProvider(event.includeClient(),new LanguageProvider(packOutput,HBM.MODID,"en_us"));
         generator.addProvider(event.includeClient(),new ItemModelGen(packOutput, HBM.MODID,helper));
         generator.addProvider(event.includeClient(),new BlockStateGen(packOutput, HBM.MODID,helper));
+        generator.addProvider(event.includeClient(),new HBMJsonProvider(packOutput, MODID, helper));
         /** 服务端数据生成，生成到data目录下 */
         BlockTagsGen blockTagsGen = new BlockTagsGen(packOutput, lookupProvider, MODID, helper);
         generator.addProvider(event.includeServer(),new ForgeAdvancementProvider(packOutput,lookupProvider,helper, List.of(new AdvacementGen())));

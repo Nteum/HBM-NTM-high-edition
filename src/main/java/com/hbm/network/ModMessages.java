@@ -5,6 +5,7 @@ import com.hbm.network.packet.toclient.AuxParticlePacket;
 import com.hbm.network.packet.toclient.S2CEntitySyncPacket;
 import com.hbm.network.packet.toclient.S2CExplosionEffectPacket;
 import com.hbm.network.packet.toclient.S2CSyncTileMessage;
+import com.hbm.network.packet.toserver.C2SKeyMessage;
 import com.hbm.network.packet.toserver.C2SSyncTileMessage;
 import com.hbm.network.packet.toserver.S2CSyncFailMessage;
 import net.minecraft.core.BlockPos;
@@ -40,8 +41,10 @@ public class ModMessages {
         registerServerToClient(AuxParticlePacket.class, AuxParticlePacket::decode, AuxParticlePacket::encode, AuxParticlePacket::handle);
         registerServerToClient(S2CSyncTileMessage.class, S2CSyncTileMessage::decode, S2CSyncTileMessage::encode, S2CSyncTileMessage::handle);
         registerServerToClient(S2CEntitySyncPacket.class, S2CEntitySyncPacket::decode, S2CEntitySyncPacket::encode, S2CEntitySyncPacket::handle);
+
         registerClientToServer(C2SSyncTileMessage.class, C2SSyncTileMessage::decode, C2SSyncTileMessage::encode, C2SSyncTileMessage::handle);
         registerClientToServer(S2CSyncFailMessage.class, S2CSyncFailMessage::decode, S2CSyncFailMessage::encode, S2CSyncFailMessage::handle);
+        registerClientToServer(C2SKeyMessage.class, C2SKeyMessage::new, C2SKeyMessage::encode, C2SKeyMessage::handle);
     }
 
     public static <MSG>void registerClientToServer(Class<MSG> type, Function<FriendlyByteBuf, MSG> decoder , BiConsumer<MSG, FriendlyByteBuf> encoder, BiConsumer<MSG, Supplier<NetworkEvent.Context>> consumer){
@@ -67,6 +70,9 @@ public class ModMessages {
     }
     public static <MSG> void sendToDimension(MSG message, ResourceKey<Level> dimensionId){
         netHandler.send(PacketDistributor.DIMENSION.with(()->dimensionId),message);
+    }
+    public static <MSG> void sendToAllAround(MSG message, Entity entity, double radius) {
+        sendToAllAround(message, new PacketDistributor.TargetPoint(entity.getX(), entity.getY(), entity.getZ(), radius, entity.level().dimension()));
     }
     public static <MSG> void sendToAllAround(MSG message, PacketDistributor.TargetPoint point) {
         netHandler.send(PacketDistributor.NEAR.with(()->point),message);
