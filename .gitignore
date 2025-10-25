@@ -12,4 +12,6 @@ gen
 /run/
 /run-data/
 /.gitignore
+.gitignore
 /src/generated/resources/.cache/
+.vscode

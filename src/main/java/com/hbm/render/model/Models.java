@@ -36,12 +36,16 @@ import java.io.InputStreamReader;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import java.lang.ref.WeakReference;
 
 @Mod.EventBusSubscriber(modid = HBM.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class Models {
     private static final Set<ResourceLocation> models = new HashSet<>();
-    private static final Map<ResourceLocation, RegistryObject<Item>> itemModels = new HashMap<>();
-    private static final Map<ResourceLocation, Model> entityModels = new HashMap<>();
+    // 为避免静态强引用导致跨世界/资源重载的内存泄漏，改为并发Map + 弱引用/轻量键值
+    // 物品：只缓存 资源模型RL -> 物品ID(ResourceLocation) 的映射，避免强持有 RegistryObject
+    private static final ConcurrentMap<ResourceLocation, ResourceLocation> ITEM_MODEL_KEYS = new ConcurrentHashMap<>();
+    // 实体：缓存 RL -> 实体模型 的弱引用，便于GC在资源重载/内存紧张时回收
+    private static final ConcurrentMap<ResourceLocation, WeakReference<Model>> ENTITY_MODELS = new ConcurrentHashMap<>();
     
     public static final ResourceLocation ASSEMBLER_BODY = add(HBM.rl("block/assembler/assembler_body"));
     public static final ResourceLocation ASSEMBLER_COG = add(HBM.rl("block/assembler/assembler_cog"));
@@ -75,11 +79,12 @@ public class Models {
     }
     public static ResourceLocation addItem(ResourceLocation rl, RegistryObject<Item> itemRegistryObject){
         models.add(rl);
-        itemModels.put(rl, itemRegistryObject);
+        // 只记录物品的ID，避免强引用整个 RegistryObject 链
+        ITEM_MODEL_KEYS.put(rl, itemRegistryObject.getId());
         return rl;
     }
     public static ResourceLocation addEntity(ResourceLocation rl, Model model){
-        entityModels.put(rl, model);
+        ENTITY_MODELS.put(rl, new WeakReference<>(model));
         return rl;
     }
     public static void registerModels(ModelEvent.RegisterAdditional event){
@@ -89,7 +94,9 @@ public class Models {
         event.enqueueWork(() -> {
             // 加载实体模型
             try {
-                entityModels.forEach((rl, model) -> {
+                ENTITY_MODELS.forEach((rl, ref) -> {
+                    Model model = ref.get();
+                    if (model == null) return; // 弱引用已被回收则跳过
                     HBM.LOGGER.info("Entity obj model: " + rl.toString());
                     if (model instanceof IObjModel objEntityModel){
                         if (objEntityModel.getRootModel() == null) objEntityModel.parseJson(rl);
@@ -102,10 +109,10 @@ public class Models {
     }
 
     public static void modifyBakingResult(ModelEvent.ModifyBakingResult event){
-        itemModels.forEach((rl, item) -> {
+        ITEM_MODEL_KEYS.forEach((rl, itemId) -> {
             BakedModel bakedModel = event.getModels().get(rl);
             if (bakedModel instanceof SimpleBakedModel) {
-                event.getModels().put(new ModelResourceLocation(item.getId(), "inventory"), new SimpleBakedModelWrapper((SimpleBakedModel) bakedModel));
+                event.getModels().put(new ModelResourceLocation(itemId, "inventory"), new SimpleBakedModelWrapper((SimpleBakedModel) bakedModel));
             }
         });
     }
@@ -115,6 +122,33 @@ public class Models {
         return modelManager.getModel(rl);
     }
     public static Model getEntityModel(ResourceLocation rl){
-        return entityModels.get(rl);
+        WeakReference<Model> ref = ENTITY_MODELS.get(rl);
+        return ref != null ? ref.get() : null;
+    }
+
+    // ================= 生命周期清理与事件钩子 =================
+    private static void clearCaches(String reason) {
+        ITEM_MODEL_KEYS.clear();
+        ENTITY_MODELS.clear();
+        HBM.LOGGER.debug("[Models] caches cleared due to {}", reason);
+    }
+
+    // 模型烘焙完成（资源重载）后，清空缓存，避免旧模型残留；该事件在 MOD 总线
+    @net.minecraftforge.eventbus.api.SubscribeEvent
+    public static void onBakingCompleted(ModelEvent.BakingCompleted e) {
+        clearCaches("BakingCompleted");
+    }
+
+    // 客户端断线/切世界：FORGE 总线事件
+    @Mod.EventBusSubscriber(modid = HBM.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
+    public static class ForgeSideHooks {
+        @net.minecraftforge.eventbus.api.SubscribeEvent
+        public static void onClientDisconnect(net.minecraftforge.client.event.ClientPlayerNetworkEvent.LoggingOut e) {
+            clearCaches("ClientDisconnect");
+        }
+        @net.minecraftforge.eventbus.api.SubscribeEvent
+        public static void onRegisterReload(net.minecraftforge.client.event.RegisterClientReloadListenersEvent e) {
+            e.registerReloadListener(resourceManager -> clearCaches("ReloadListener"));
+        }
     }
 }
