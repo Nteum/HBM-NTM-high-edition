@@ -69,7 +69,7 @@ public class ItemArmorBJ extends ItemArmorFSBPowered{
         ModelArmorBJ model = (ModelArmorBJ) Models.getEntityModel(Models.BJ);
         if (this == HBMCombat.BJ_JETPACK.get()){
             pPoseStack.scale(0.6875f, 0.6875f, 0.6875f);
-            model.jetpack.renderGUI(pPoseStack, pBuffer.getBuffer(RenderType.armorCutoutNoCull(ModelArmorBJ.jetpackTex)), pPackedLight, pPackedOverlay);
+            model.jetpack.renderStatic(pPoseStack, pBuffer.getBuffer(RenderType.armorCutoutNoCull(ModelArmorBJ.jetpackTex)), pPackedLight, pPackedOverlay);
         } else {
             pPoseStack.scale(0.875f, 0.875f, 0.875f);
             renderStandard(this, model, "bj_eyepatch", "bj_chest", "bj_arm", "bj_leg",pDisplayContext, pPoseStack, pBuffer, pPackedLight, pPackedOverlay);

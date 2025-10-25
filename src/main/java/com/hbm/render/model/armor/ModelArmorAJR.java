@@ -1,10 +1,11 @@
 package com.hbm.render.model.armor;
 
 import com.hbm.render.model.AccessableRenderable;
+import com.hbm.render.model.BaseObjModel;
 import net.minecraft.resources.ResourceLocation;
 
 public class ModelArmorAJR extends ModelArmorBase{
-    public AccessableRenderable.Component rocket_box;
+    public BaseObjModel rocket_box;
     public ModelArmorAJR() {
         super("Head","Body","LeftArm","RightArm","LeftLeg","RightLeg","LeftBoot","RightBoot"
 //                ,"RocketBox"
@@ -15,6 +16,6 @@ public class ModelArmorAJR extends ModelArmorBase{
     @Override
     public void initializeParts() {
         super.initializeParts();
-        if (names.size() >= 9) this.rocket_box = this.accRenderable.components.get(names.get(9));
+        if (names.size() >= 9) this.rocket_box = getComponent((String) names.get(9));
     }
 }

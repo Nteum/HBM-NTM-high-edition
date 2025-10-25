@@ -355,17 +355,17 @@ public class ItemArmorFSB extends ArmorItem implements IArmorDisableModel {
             pPoseStack.mulPose(Axis.YN.rotationDegrees(yRot));
             pPoseStack.scale(scale*0.8f, scale*0.8f, scale*0.8f);
             VertexConsumer buffer = pBuffer.getBuffer(RenderType.entityCutoutNoCull(texture.withSuffix(helmet + ".png")));
-            model.chead.renderGUI(pPoseStack, buffer, pPackedLight, pPackedOverlay);
+            model.chead.renderStatic(pPoseStack, buffer, pPackedLight, pPackedOverlay);
         }else if (armorFSB.getType() == ArmorItem.Type.CHESTPLATE){
             pPoseStack.translate(xOffset, yOffset, zOffSet);
             pPoseStack.mulPose(Axis.XN.rotationDegrees(xRot));
             pPoseStack.mulPose(Axis.YN.rotationDegrees(yRot));
             pPoseStack.scale(scale*0.6f,scale*0.6f,scale*0.6f);
             VertexConsumer buffer = pBuffer.getBuffer(RenderType.entityCutoutNoCull(texture.withSuffix(chest + ".png")));
-            model.cbody.renderGUI(pPoseStack, buffer, pPackedLight, pPackedOverlay);
+            model.cbody.renderStatic(pPoseStack, buffer, pPackedLight, pPackedOverlay);
             VertexConsumer buffer1 = pBuffer.getBuffer(RenderType.entityTranslucentCull(texture.withSuffix(arm + ".png")));
-            model.cleftArm.renderGUI(pPoseStack, buffer1, pPackedLight, pPackedOverlay);
-            model.crightArm.renderGUI(pPoseStack, buffer1, pPackedLight, pPackedOverlay);
+            model.cleftArm.renderStatic(pPoseStack, buffer1, pPackedLight, pPackedOverlay);
+            model.crightArm.renderStatic(pPoseStack, buffer1, pPackedLight, pPackedOverlay);
         }else if (armorFSB.getType() == ArmorItem.Type.LEGGINGS){
             if (pDisplayContext != ItemDisplayContext.GUI) yOffset += 0.2f;
             pPoseStack.translate(xOffset, yOffset-0.65, zOffSet);
@@ -373,8 +373,8 @@ public class ItemArmorFSB extends ArmorItem implements IArmorDisableModel {
             pPoseStack.mulPose(Axis.YN.rotationDegrees(yRot));
             pPoseStack.scale(scale, scale, scale);
             VertexConsumer buffer = pBuffer.getBuffer(RenderType.entityCutoutNoCull(texture.withSuffix(leg + ".png")));
-            model.cleftLeg.renderGUI(pPoseStack, buffer, pPackedLight, pPackedOverlay);
-            model.crightLeg.renderGUI(pPoseStack, buffer, pPackedLight, pPackedOverlay);
+            model.cleftLeg.renderStatic(pPoseStack, buffer, pPackedLight, pPackedOverlay);
+            model.crightLeg.renderStatic(pPoseStack, buffer, pPackedLight, pPackedOverlay);
         }else if (armorFSB.getType() == ArmorItem.Type.BOOTS){
             if (pDisplayContext != ItemDisplayContext.GUI) yOffset += 0.2f;
             pPoseStack.translate(xOffset, yOffset-1, zOffSet);
@@ -382,8 +382,8 @@ public class ItemArmorFSB extends ArmorItem implements IArmorDisableModel {
             pPoseStack.mulPose(Axis.YN.rotationDegrees(yRot));
             pPoseStack.scale(scale, scale, scale);
             VertexConsumer buffer = pBuffer.getBuffer(RenderType.entityCutoutNoCull(texture.withSuffix(leg + ".png")));
-            model.cleftFoot.renderGUI(pPoseStack, buffer, pPackedLight, pPackedOverlay);
-            model.crightFoot.renderGUI(pPoseStack, buffer, pPackedLight, pPackedOverlay);
+            model.cleftFoot.renderStatic(pPoseStack, buffer, pPackedLight, pPackedOverlay);
+            model.crightFoot.renderStatic(pPoseStack, buffer, pPackedLight, pPackedOverlay);
         }
     }
 }

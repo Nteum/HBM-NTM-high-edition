@@ -7,7 +7,9 @@ import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.model.BakedQuad;
+import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.model.renderable.CompositeRenderable;
 import net.minecraftforge.client.model.renderable.IRenderable;
@@ -22,16 +24,21 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 
 /**
  * 基于forge的CompositeRenderable修改，逻辑没有改变，只是把内部类变成public的
  * 通过反射解决此问题，除此之外似乎别无他法。
  * */
-public class AccessableRenderable implements IRenderable<AccessableRenderable.ModelPartTransform> {
+public class AccessableRenderable {
+    public Function<ResourceLocation, RenderType> renderType;
     public Map<String, Component> components = new HashMap<>();
-    private AccessableRenderable() { }
+    public AccessableRenderable(CompositeRenderable renderable) {
+        this(renderable, RenderType::entityCutoutNoCull);
+    }
 
-    public AccessableRenderable(CompositeRenderable renderable){
+    public AccessableRenderable(CompositeRenderable renderable, Function<ResourceLocation, RenderType> renderType){
+        this.renderType = renderType;
         try {
             Class<CompositeRenderable> classRenderable = CompositeRenderable.class;
             Field field_components = classRenderable.getDeclaredField("components");
@@ -60,7 +67,7 @@ public class AccessableRenderable implements IRenderable<AccessableRenderable.Mo
                 List<?> list1 = (List<?>) field_components.get(renderable);
                 for (Object o : list1) {
                     if (classComponent.isInstance(o) && field_name.get(o) instanceof String name){
-                        components.put(name, parseComponent(o, new Component(), classComponent, classMesh, field_name, field_chlidren, field_meshes, field_texture, field_quads));
+                        components.put(name, parseComponent(o, new Component(this.renderType), classComponent, classMesh, field_name, field_chlidren, field_meshes, field_texture, field_quads));
                     }
                 }
             }
@@ -69,7 +76,7 @@ public class AccessableRenderable implements IRenderable<AccessableRenderable.Mo
         }
     }
 
-    public Component parseComponent(Object o, Component component, Class<?> classComponent, Class<?> classMesh, Field field_name,
+    public static Component parseComponent(Object o, Component component, Class<?> classComponent, Class<?> classMesh, Field field_name,
                                     Field field_chlidren, Field field_meshes, Field field_texture, Field field_quads) throws IllegalAccessException {
         if (classComponent.isInstance(o) && field_name.get(o) instanceof String name){
             component.name = name;
@@ -87,7 +94,7 @@ public class AccessableRenderable implements IRenderable<AccessableRenderable.Mo
                 } else {
                     for (Object child : children) {
                         if (classComponent.isInstance(child) && field_name.get(child) instanceof String nameInner){
-                            component.children.put(nameInner, parseComponent(child, new Component(), classComponent, classMesh, field_name, field_chlidren, field_meshes, field_texture,field_quads));
+                            component.children.put(nameInner, parseComponent(child, new Component(component.getRenderType()), classComponent, classMesh, field_name, field_chlidren, field_meshes, field_texture,field_quads));
                         }
                     }
                 }
@@ -95,13 +102,15 @@ public class AccessableRenderable implements IRenderable<AccessableRenderable.Mo
         } else return component;
         return component;
     }
-    
-    @Override
-    public void render(PoseStack poseStack, MultiBufferSource bufferSource, ITextureRenderTypeLookup textureRenderTypeLookup, int lightmap, int overlay, float partialTick, ModelPartTransform context) {
+
+    public void render(PoseStack poseStack, MultiBufferSource bufferSource, ResourceLocation rl, int lightmap, int overlay, float partialTick) {
+        render(poseStack, bufferSource, (ResourceLocation) this.renderType, lightmap, overlay, partialTick);
+    }
+    public void render(PoseStack poseStack, MultiBufferSource bufferSource, ITextureRenderTypeLookup textureRenderTypeLookup, int lightmap, int overlay, float partialTick) {
         for (var component : components.values())
             component.render(poseStack, bufferSource.getBuffer(textureRenderTypeLookup.get(null)), lightmap, overlay);
     }
-    public static class Component
+    public static class Component extends Model
     {
         public String name;
         public Map<String, Component> children = new HashMap();
@@ -121,11 +130,13 @@ public class AccessableRenderable implements IRenderable<AccessableRenderable.Mo
         public float yRotPoint = 0;
         public float zRotPoint = 0;
 
-        public Component(){}
-        public Component(String name)
-        {
-            this.name = name;
+        public Component(Function<ResourceLocation, RenderType> renderType){
+            super(renderType);
         }
+//        public Component(String name)
+//        {
+//            this.name = name;
+//        }
 
         public Component copyPose(ModelPart modelPart){
             this.x = modelPart.x;
@@ -165,6 +176,10 @@ public class AccessableRenderable implements IRenderable<AccessableRenderable.Mo
             return this;
         }
 
+        public Function<ResourceLocation, RenderType> getRenderType(){
+            return this.renderType;
+        }
+
         public void render(PoseStack poseStack, VertexConsumer consumer, int lightmap, int overlay)
         {
             if (visible){
@@ -201,6 +216,11 @@ public class AccessableRenderable implements IRenderable<AccessableRenderable.Mo
 
             poseStack.popPose();
         }
+
+        @Override
+        public void renderToBuffer(PoseStack pPoseStack, VertexConsumer pBuffer, int pPackedLight, int pPackedOverlay, float pRed, float pGreen, float pBlue, float pAlpha) {
+
+        }
     }
 
     public static class Mesh
@@ -224,9 +244,5 @@ public class AccessableRenderable implements IRenderable<AccessableRenderable.Mo
                 consumer.putBulkData(poseStack.last(), quad, 1, 1, 1, 1, lightmap, overlay, true);
             }
         }
-    }
-
-    public static class ModelPartTransform{
-        public ModelPartTransform(){}
     }
 }

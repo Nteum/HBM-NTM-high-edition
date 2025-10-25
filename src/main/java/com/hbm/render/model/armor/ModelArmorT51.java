@@ -16,10 +16,5 @@ public class ModelArmorT51 extends ModelArmorBase{
     @Override
     public void renderToBuffer(PoseStack pPoseStack, VertexConsumer pBuffer, int pPackedLight, int pPackedOverlay, float pRed, float pGreen, float pBlue, float pAlpha) {
         super.renderToBuffer(pPoseStack, pBuffer, pPackedLight, pPackedOverlay, pRed, pGreen, pBlue, pAlpha);
-//        if (this.cbody.visible){
-//            VertexConsumer buffer = Minecraft.getInstance().renderBuffers().bufferSource().getBuffer(RenderType.armorCutoutNoCull(new ResourceLocation("hbm:textures/models/armor/t51_arm.png")));
-//            this.cleftArm.render(pPoseStack, buffer, pPackedLight, pPackedOverlay);
-//            this.crightArm.render(pPoseStack, buffer, pPackedLight, pPackedOverlay);
-//        }
     }
 }

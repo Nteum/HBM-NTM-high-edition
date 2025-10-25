@@ -8,6 +8,7 @@ import com.hbm.block.HBMMachine;
 import com.hbm.blockentity.interfaces.IUpgradeInfoProvider;
 import com.hbm.item.HBMCombat;
 import com.hbm.item.HBMComponent;
+import com.hbm.registries.HBMDamage;
 import com.hbm.registries.ModKeyMapping;
 import com.hbm.registries.ModBlocks;
 import com.hbm.registries.ModItems;
@@ -21,6 +22,7 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
     @Override
     protected void addTranslations() {
         ModItems.languageSupport(this);
+        HBMDamage.languageSupport(this);
         addCreativeTabs();
         addItems();
         addBlocks();

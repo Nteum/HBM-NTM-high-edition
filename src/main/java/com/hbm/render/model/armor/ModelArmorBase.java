@@ -1,6 +1,7 @@
 package com.hbm.render.model.armor;
 
 import com.hbm.render.model.AccessableRenderable;
+import com.hbm.render.model.BaseObjModel;
 import com.hbm.render.model.IObjModel;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.Tesselator;
@@ -8,6 +9,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidArmorModel;
 import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.layers.HumanoidArmorLayer;
@@ -21,25 +23,27 @@ import net.minecraftforge.client.model.renderable.IRenderable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 /**
  * HBM自定义obj盔甲的渲染方式
  * */
-public class ModelArmorBase<T extends LivingEntity> extends HumanoidArmorModel<T> implements IObjModel {
-    public CompositeRenderable renderable;
-    public AccessableRenderable accRenderable;
+public class ModelArmorBase<T extends LivingEntity> extends HumanoidArmorModel<T> implements IObjModel
+{
+    static ModelPart EMPTY = new ModelPart(List.of(), Map.of());
+    static ModelPart DUMMY_HUMANOID = new ModelPart(List.of(), Map.of("head",EMPTY, "hat",EMPTY, "body", EMPTY, "right_arm",EMPTY, "left_arm",EMPTY, "right_leg", EMPTY, "left_leg", EMPTY));
+    public BaseObjModel rootModel;
     // 身体部分
     public List<String> names;
-    public AccessableRenderable.Component chead;
-    public AccessableRenderable.Component cbody;
-    public AccessableRenderable.Component cleftArm;
-    public AccessableRenderable.Component crightArm;
-    public AccessableRenderable.Component cleftLeg;
-    public AccessableRenderable.Component crightLeg;
-    public AccessableRenderable.Component cleftFoot;
-    public AccessableRenderable.Component crightFoot;
-    // flags
-//    protected boolean armTexExtra = false;
+    public BaseObjModel chead;
+    public BaseObjModel cbody;
+    public BaseObjModel cleftArm;
+    public BaseObjModel crightArm;
+    public BaseObjModel cleftLeg;
+    public BaseObjModel crightLeg;
+    public BaseObjModel cleftFoot;
+    public BaseObjModel crightFoot;
+
     protected ResourceLocation armTexExtra = null;
 
     public ModelArmorBase(String ... strings) {
@@ -50,34 +54,27 @@ public class ModelArmorBase<T extends LivingEntity> extends HumanoidArmorModel<T
     }
 
     @Override
-    public IRenderable getRenderable() {
-        return renderable;
+    public BaseObjModel getRootModel() {
+        return rootModel;
     }
 
-    @Override
-    public void setRenderable(IRenderable renderable) {
-        this.renderable = (CompositeRenderable) renderable;
-    }
-    
-    public AccessableRenderable.Component getComponent(String name){
-        return this.accRenderable.components.get(name);
+    public BaseObjModel getComponent(String name){
+        return this.rootModel.children.get(name);
     }
 
-    @Override
     public void parseJson(ResourceLocation jsonPath) {
-        IObjModel.super.parseJson(jsonPath);
-        this.accRenderable = new AccessableRenderable(renderable);
+        this.rootModel = BaseObjModel.create(jsonPath, RenderType::armorCutoutNoCull);
         initializeParts();
     }
     public void initializeParts(){
-        this.chead = this.accRenderable.components.get(names.get(0));
-        this.cbody = this.accRenderable.components.get(names.get(1));
-        this.cleftArm = this.accRenderable.components.get(names.get(2)).setRotPoint(0, 2.2f, 2.5f);
-        this.crightArm = this.accRenderable.components.get(names.get(3)).setRotPoint(0, 2.0f, 2.0f);
-        this.cleftLeg = this.accRenderable.components.get(names.get(4)).setRotPoint(0, 12, 0);
-        this.crightLeg = this.accRenderable.components.get(names.get(5)).setRotPoint(0, 12, 0);
-        if (names.size() >= 7) this.cleftFoot = this.accRenderable.components.get(names.get(6)).setRotPoint(0, 12, 0);
-        if (names.size() >= 8) this.crightFoot = this.accRenderable.components.get(names.get(7)).setRotPoint(0, 12, 0);
+        this.chead = getComponent(names.get(0));
+        this.cbody = getComponent(names.get(1));
+        this.cleftArm = getComponent(names.get(2)).setRotPoint(0, 2.2f, 2.5f);
+        this.crightArm = getComponent(names.get(3)).setRotPoint(0, 2.0f, 2.0f);
+        this.cleftLeg = getComponent(names.get(4)).setRotPoint(0, 12, 0);
+        this.crightLeg = getComponent(names.get(5)).setRotPoint(0, 12, 0);
+        if (names.size() >= 7) this.cleftFoot = getComponent(names.get(6)).setRotPoint(0, 12, 0);
+        if (names.size() >= 8) this.crightFoot = getComponent(names.get(7)).setRotPoint(0, 12, 0);
     }
 
     public ModelArmorBase<?> adjustWithOrigin(HumanoidModel<?> origin, EquipmentSlot equipmentSlot){
@@ -115,32 +112,40 @@ public class ModelArmorBase<T extends LivingEntity> extends HumanoidArmorModel<T
 
     @Override
     public void renderToBuffer(PoseStack pPoseStack, VertexConsumer pBuffer, int pPackedLight, int pPackedOverlay, float pRed, float pGreen, float pBlue, float pAlpha) {
-//        super.renderToBuffer(pPoseStack, pBuffer, pPackedLight, pPackedOverlay, pRed, pGreen, pBlue, pAlpha);
-        this.cleftFoot.render(pPoseStack, pBuffer, pPackedLight, pPackedOverlay);
-        this.crightFoot.render(pPoseStack, pBuffer, pPackedLight, pPackedOverlay);
-        this.cleftLeg.render(pPoseStack, pBuffer, pPackedLight, pPackedOverlay);
-        this.crightLeg.render(pPoseStack, pBuffer, pPackedLight, pPackedOverlay);
-        this.cbody.render(pPoseStack, pBuffer, pPackedLight, pPackedOverlay);
-        this.chead.render(pPoseStack, pBuffer, pPackedLight, pPackedOverlay);
-        if (this.cbody.visible) {
-            if (this.armTexExtra != null){
-                // 通过局部BufferSource渲染
-                MultiBufferSource.BufferSource bufferSource = MultiBufferSource.immediate(Tesselator.getInstance().getBuilder());
-                try {
-                    VertexConsumer buffer = bufferSource.getBuffer(RenderType.armorCutoutNoCull(this.armTexExtra));
-                    this.cleftArm.render(pPoseStack, buffer, pPackedLight, pPackedOverlay);
-                    this.crightArm.render(pPoseStack, buffer, pPackedLight, pPackedOverlay);
-                } finally {
-                    bufferSource.endBatch();
-                }
-            } else {
-                this.cleftArm.render(pPoseStack, pBuffer, pPackedLight, pPackedOverlay);
-                this.crightArm.render(pPoseStack, pBuffer, pPackedLight, pPackedOverlay);
-            }
+        if (this.armTexExtra != null){
+            this.cleftArm.bindTexture(this.armTexExtra);
+            this.crightArm.bindTexture(this.armTexExtra);
         }
+//        this.rootModel.renderToBuffer(pPoseStack, pBuffer, pPackedLight, pPackedOverlay, pRed, pGreen, pBlue, pAlpha);
+//        super.renderToBuffer(pPoseStack, pBuffer, pPackedLight, pPackedOverlay, pRed, pGreen, pBlue, pAlpha);
+        this.cleftFoot.renderToBuffer(pPoseStack, pBuffer, pPackedLight, pPackedOverlay);
+        this.crightFoot.renderToBuffer(pPoseStack, pBuffer, pPackedLight, pPackedOverlay);
+        this.cleftLeg.renderToBuffer(pPoseStack, pBuffer, pPackedLight, pPackedOverlay);
+        this.crightLeg.renderToBuffer(pPoseStack, pBuffer, pPackedLight, pPackedOverlay);
+        this.cbody.renderToBuffer(pPoseStack, pBuffer, pPackedLight, pPackedOverlay);
+        this.chead.renderToBuffer(pPoseStack, pBuffer, pPackedLight, pPackedOverlay);
+        this.cleftArm.renderToBuffer(pPoseStack, pBuffer, pPackedLight, pPackedOverlay);
+        this.crightArm.renderToBuffer(pPoseStack, pBuffer, pPackedLight, pPackedOverlay);
+//        if (this.cbody.visible) {
+//            if (this.armTexExtra != null){
+//                // 通过局部BufferSource渲染
+//                MultiBufferSource.BufferSource bufferSource = MultiBufferSource.immediate(Tesselator.getInstance().getBuilder());
+//                try {
+//                    VertexConsumer buffer = bufferSource.getBuffer(RenderType.armorCutoutNoCull(this.armTexExtra));
+//                    this.cleftArm.render(pPoseStack, buffer, pPackedLight, pPackedOverlay);
+//                    this.crightArm.render(pPoseStack, buffer, pPackedLight, pPackedOverlay);
+//                } finally {
+//                    bufferSource.endBatch();
+//                }
+//            } else {
+//                this.cleftArm.render(pPoseStack, pBuffer, pPackedLight, pPackedOverlay);
+//                this.crightArm.render(pPoseStack, pBuffer, pPackedLight, pPackedOverlay);
+//            }
+//        }
     }
     
     public void setObjVisible(boolean visible){
-        this.accRenderable.components.forEach((s, component) -> component.visible = visible);
+//        this.accRenderable.components.forEach((s, component) -> component.visible = visible);
+        this.rootModel.children.forEach((s, component) -> component.visible = visible);
     }
 }

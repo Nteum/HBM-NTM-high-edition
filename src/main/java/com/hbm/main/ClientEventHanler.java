@@ -10,6 +10,7 @@ import com.hbm.item.tool.FluidBucketItem;
 import com.hbm.registries.ModKeyMapping;
 import com.hbm.registries.ModItems;
 import com.hbm.render.entity.missile.MissileTaintRenderer;
+import com.hbm.render.entity.mob.GlyphidRender;
 import com.hbm.render.model.Models;
 import com.hbm.render.model.entity.TestEntityModel;
 import com.hbm.particle.ModParticleTypes;
@@ -85,6 +86,7 @@ public class ClientEventHanler {
             EntityRenderers.register(ModEntityType.ENTITY_NUKE_EXPLOSION_MK5.get(), EntityBlankRender::new);
             EntityRenderers.register(ModEntityType.ENTITY_NUKE_TOREX.get(), EntityTorexRender::new);
             EntityRenderers.register(ModEntityType.ENTITY_MISSILE_TEST.get(), MissileTaintRenderer::new);
+            EntityRenderers.register(ModEntityType.GLYPHID.get(), GlyphidRender::new);
 
             RenderUtils.init();
 //            specialItemRender = new SpecialItemRender(Minecraft.getInstance().getBlockEntityRenderDispatcher(),Minecraft.getInstance().getEntityModels());

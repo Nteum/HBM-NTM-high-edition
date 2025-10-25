@@ -44,6 +44,7 @@ public class LaunchPadRender implements BlockEntityRenderer<LaunchPadTileEntity>
             if (missile.model.get() instanceof ObjEntityModelSingle objEntityModelSingle){
                 pPoseStack.translate(0,pBlockEntity.getLaunchOffset(),0);
                 objEntityModelSingle.renderModel(pPoseStack, pBuffer, pPackedLight, pPackedOverlay);
+
             }
         }
 

@@ -3,6 +3,7 @@ package com.hbm.render.model.entity;
 import com.google.common.collect.Maps;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.hbm.render.model.BaseObjModel;
 import com.hbm.render.model.IObjModel;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -29,26 +30,30 @@ import java.util.Map;
 import java.util.Optional;
 
 public class ObjEntityModelSingle extends Model implements IObjModel {
-    public CompositeRenderable renderable;
+    public BaseObjModel rootModel;
     public ObjEntityModelSingle(ObjModel objModel) {
         super(RenderType::entityCutoutNoCull);
-        renderable = objModel.bakeRenderable(StandaloneGeometryBakingContext.INSTANCE);
     }
     public ObjEntityModelSingle(){
         super(RenderType::entityCutoutNoCull);
     }
 
     @Override
+    public BaseObjModel getRootModel() {
+        return rootModel;
+    }
+
+    @Override
+    public void parseJson(ResourceLocation jsonPath) {
+        this.rootModel = BaseObjModel.create(jsonPath, RenderType::entityCutoutNoCull);
+    }
+
+    @Override
     public void renderToBuffer(PoseStack pPoseStack, VertexConsumer pBuffer, int pPackedLight, int pPackedOverlay, float pRed, float pGreen, float pBlue, float pAlpha) {
+        rootModel.renderToBuffer(pPoseStack, pBuffer, pPackedLight, pPackedOverlay, pRed, pGreen, pBlue, pAlpha);
     }
 
-    @Override
-    public IRenderable<CompositeRenderable.Transforms> getRenderable() {
-        return renderable;
-    }
-
-    @Override
-    public void setRenderable(IRenderable renderable) {
-        this.renderable = (CompositeRenderable) renderable;
+    public void renderModel(PoseStack poseStack, MultiBufferSource bufferSource, int lightmap, float partialTick){
+        rootModel.render(poseStack, bufferSource, RenderType::entityCutoutNoCull, lightmap, OverlayTexture.NO_OVERLAY, partialTick, CompositeRenderable.Transforms.EMPTY);
     }
 }

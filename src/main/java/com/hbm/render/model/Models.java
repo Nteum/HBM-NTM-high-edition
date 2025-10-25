@@ -6,11 +6,13 @@ import com.google.gson.JsonObject;
 import com.hbm.HBM;
 import com.hbm.item.HBMWeapon;
 import com.hbm.render.model.armor.*;
+import com.hbm.render.model.entity.ModelGlyphid;
 import com.hbm.render.model.entity.ObjEntityModelSingle;
 import com.hbm.render.model.item.SimpleBakedModelWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.renderer.ItemModelShaper;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.client.resources.model.BakedModel;
@@ -65,6 +67,7 @@ public class Models {
     public static final ResourceLocation RPA = addEntity(HBM.modelRl("item/armor_rpa"), new ModelArmorRPA());
     public static final ResourceLocation AJR = addEntity(HBM.modelRl("item/armor_ajr"), new ModelArmorAJR());
     public static final ResourceLocation BJ = addEntity(HBM.modelRl("item/armor_bj"), new ModelArmorBJ());
+    public static final ResourceLocation GLYPHID = addEntity(HBM.modelRl("entity/glyphid"), new ModelGlyphid());
 
     public static ResourceLocation add(ResourceLocation rl){
         models.add(rl);
@@ -89,7 +92,7 @@ public class Models {
                 entityModels.forEach((rl, model) -> {
                     HBM.LOGGER.info("Entity obj model: " + rl.toString());
                     if (model instanceof IObjModel objEntityModel){
-                        if (objEntityModel.getRenderable() == null) objEntityModel.parseJson(rl);
+                        if (objEntityModel.getRootModel() == null) objEntityModel.parseJson(rl);
                     }
                 });
             } catch (Exception e) {

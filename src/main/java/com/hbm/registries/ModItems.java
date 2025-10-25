@@ -3,23 +3,26 @@ package com.hbm.registries;
 import com.hbm.HBMKey;
 import com.hbm.datagen.LanguageProvider;
 import com.hbm.datagen.model.ItemModelGen;
+import com.hbm.entity.ModEntityType;
 import com.hbm.item.HBMCombat;
 import com.hbm.item.HBMComponent;
 import com.hbm.item.HBMWeapon;
 import com.hbm.item.HBMtools;
 import com.hbm.item.env.BedrockOreItem;
 import com.hbm.HBM;
+import com.hbm.item.misc.ItemLemon;
 import com.hbm.item.weapon.ItemDesignator;
 import com.hbm.item.weapon.ItemDetonator;
 import com.hbm.item.weapon.ItemMissilePart;
 import com.hbm.item.weapon.grenade.ItemGrenade;
+import com.hbm.utils.debug.GunSuicide;
 import net.minecraft.client.resources.model.UnbakedModel;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.food.Foods;
+import net.minecraft.world.item.*;
 import net.minecraftforge.common.util.MutableHashedLinkedMap;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -79,7 +82,10 @@ public class ModItems {
 
 //    public static final RegistryObject<Item> detonator = ITEMS.register("detonator",()->new ItemDetonator(new Item.Properties()));
     public static final WrappedItemRegistry DETONATOR = add("billet_schrabidium_fuel", ()->new Item(new Item.Properties()), ModCreativeModeTab.HBM_TOOL.getKey(), HBMKey.BASIC_MODEL, HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-
+    public static final WrappedItemRegistry GUN_SUICIDE = add("gun_suicide", ()->new GunSuicide(new Item.Properties()), ModCreativeModeTab.HBM_TOOL.getKey(), HBMKey.BASIC_MODEL, HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final WrappedItemRegistry GLYPHID_MEAT_GRILLED = add("glyphid_meat_grilled", ()->new ItemLemon(new Item.Properties().food(Foods.ROTTEN_FLESH)), CreativeModeTabs.FOOD_AND_DRINKS, HBMKey.BASIC_MODEL, HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final WrappedItemRegistry GLYPHID_MEAT = add("glyphid_meat", ()->new ItemLemon(new Item.Properties().food(Foods.MUTTON)), CreativeModeTabs.FOOD_AND_DRINKS, HBMKey.BASIC_MODEL, HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+//    public static WrappedItemRegistry GLYPHID_SPAWN_EGG;
     //流体桶
 //    public static final RegistryObject<Item> bucket_irradiated_water = ITEMS.register("bucket_irradiated_water",()->new BucketItem(ModFluids.IRRADIATED_WATER_SOURCE_BLOCK,new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
 //    public static final RegistryObject<Item> bucket_irradiated_polluted = ITEMS.register("bucket_irradiated_polluted",()->new BucketItem(ModFluids.IRRADIATED_POLLUTED_SOURCE_BLOCK,new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
@@ -90,8 +96,6 @@ public class ModItems {
 
     //矿物
     public static final RegistryObject<Item> BEDROCK_ORE = ITEMS.register("bedrock_ore_base",()->new BedrockOreItem(new Item.Properties()));
-
-
 
     public static final RegistryObject<Item> reacher = ITEMS.register("reacher",()->new Item(new Item.Properties()));
     public static final RegistryObject<Item> SCREWDRIVER = ITEMS.register("screwdriver",()->new Item(new Item.Properties()));
@@ -180,6 +184,8 @@ public class ModItems {
         public void modelSupport(ItemModelGen provider){
             if (genModelWay.equals(HBMKey.BASIC_MODEL)){
                 provider.basicItem(get());
+            }else if (genModelWay.equals(HBMKey.SPAWN_EGG_MODEL)){
+                provider.withExistingParent(localizedName, "minecraft:item/template_spawn_egg");
             }
         }
     }

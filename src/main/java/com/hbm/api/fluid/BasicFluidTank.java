@@ -50,6 +50,6 @@ public class BasicFluidTank extends FluidTank implements IExtendedFluidTank, INB
 
     @Override
     protected void onContentsChanged() {
-        this.listener.onContentsChanged();
+        if (listener != null) this.listener.onContentsChanged();
     }
 }

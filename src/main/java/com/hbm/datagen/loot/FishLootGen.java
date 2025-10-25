@@ -8,7 +8,8 @@ import java.util.function.BiConsumer;
 
 public class FishLootGen extends VanillaFishingLoot {
     @Override
-    public void generate(BiConsumer<ResourceLocation, LootTable.Builder> p_249559_) {
-
+    public void generate(BiConsumer<ResourceLocation, LootTable.Builder> builder) {
+        // 这里super的不能取消，否则就会出错
+        super.generate(builder);
     }
 }

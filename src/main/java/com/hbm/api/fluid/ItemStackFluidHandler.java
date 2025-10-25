@@ -30,7 +30,7 @@ public class ItemStackFluidHandler extends ItemCapabilityWrapper.ItemCapability 
     }
     public ItemStackFluidHandler(BasicFluidTank fluidTank){
         this.fluidTank = fluidTank;
-//        this.fluidTank.setListener(this);   // 调用本类的onContentsChanged
+        this.fluidTank.setListener(this);   // 调用本类的onContentsChanged
     }
 
     @Override

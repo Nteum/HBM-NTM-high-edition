@@ -4,10 +4,10 @@ import com.hbm.capabilities.network.TransmitterNetworkRegistry;
 import com.hbm.config.ClientConfig;
 import com.hbm.config.CommonConfig;
 import com.hbm.config.ServerConfig;
-import com.hbm.datagen.damageSource.DamageTypeJsonProvider;
-import com.hbm.datagen.damageSource.DmgTagProvider;
+import com.hbm.datagen.damageSource.HBMDamageTagProvider;
 import com.hbm.datagen.loot.BlockLootGen;
 import com.hbm.datagen.loot.ChestLootGen;
+import com.hbm.datagen.loot.EntityLootGen;
 import com.hbm.datagen.loot.FishLootGen;
 import com.hbm.datagen.model.BlockStateGen;
 import com.hbm.datagen.model.ItemModelGen;
@@ -48,7 +48,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLPaths;
@@ -78,7 +77,7 @@ public class HBM {
         //模组事件总线
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         modEventBus.addListener(this::commonSetup);
-        modEventBus.addListener(this::onServerSetup);
+//        modEventBus.addListener(this::onServerSetup);
         modEventBus.addListener(this::onClientSetup);
         modEventBus.addListener(this::onPostLoad);
         modEventBus.addListener(this::onGatherData);
@@ -88,6 +87,7 @@ public class HBM {
         ServerEventHandler.registerEvents(MinecraftForge.EVENT_BUS, modEventBus);
 
         //模组内容的注册
+        ModEntityType.ENTITY_TYPES.register(modEventBus);
         ModItems.ITEMS.register(modEventBus);
         ModBlocks.register(modEventBus);
         ModCreativeModeTab.CREATIVE_MODE_TABS.register(modEventBus);
@@ -98,7 +98,6 @@ public class HBM {
         ModParticleTypes.PARTICLE_TYPES.register(modEventBus);
         ModSounds.SOUNDS.register(modEventBus);
         ModFeatures.register(modEventBus);
-        ModEntityType.ENTITY_TYPES.register(modEventBus);
         ModMenuType.MOD_MENU_TYPES.register(modEventBus);
         ModEffects.register(modEventBus);
 
@@ -110,10 +109,6 @@ public class HBM {
         if (!CONFIG_PATH.toFile().exists()) CONFIG_PATH.toFile().mkdir();
         ModMessages.register(); //注册所有的消息
         TransmitterNetworkRegistry.initiate(); //注册传输网络系统
-    }
-
-    public void onServerSetup(FMLDedicatedServerSetupEvent event) {
-
     }
 
     public void onClientSetup(FMLClientSetupEvent event){
@@ -133,41 +128,30 @@ public class HBM {
      * 数据生成入口，只会在runData时候被调用
      * */
     private void onGatherData(GatherDataEvent event){
-//        SerializableRecipe.initialize();
         DataGenerator generator = event.getGenerator();
         PackOutput packOutput = generator.getPackOutput();
         ExistingFileHelper helper = event.getExistingFileHelper();
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
-        /** 客户端数据生成，生成到assets目录下 */
-        generator.addProvider(event.includeClient(),new LanguageProvider(packOutput,HBM.MODID,"en_us"));
-        generator.addProvider(event.includeClient(),new ItemModelGen(packOutput, HBM.MODID,helper));
-        generator.addProvider(event.includeClient(),new BlockStateGen(packOutput, HBM.MODID,helper));
-        generator.addProvider(event.includeClient(),new HBMJsonProvider(packOutput, MODID, helper));
         /** 服务端数据生成，生成到data目录下 */
+        generator.addProvider(event.includeServer(),new HBMJsonProvider(packOutput, MODID, helper, false));
+        generator.addProvider(event.includeServer(), new HBMDamageTagProvider(packOutput, lookupProvider, MODID, helper));
         BlockTagsGen blockTagsGen = new BlockTagsGen(packOutput, lookupProvider, MODID, helper);
         generator.addProvider(event.includeServer(),new ForgeAdvancementProvider(packOutput,lookupProvider,helper, List.of(new AdvacementGen())));
         generator.addProvider(event.includeServer(), new RecipeGen(packOutput,helper,MODID));
         generator.addProvider(event.includeServer(), blockTagsGen);
         generator.addProvider(event.includeServer(), new ItemTagsGen(packOutput,lookupProvider,blockTagsGen.contentsGetter(),MODID,helper));
-        generator.addProvider(event.includeServer(), new DamageTypeJsonProvider(packOutput, MODID));
-        generator.addProvider(event.includeServer(), new DmgTagProvider(packOutput, lookupProvider, MODID, helper));
-//        generator.addProvider(event.includeServer(), new TagDmgTypeGen(packOutput,lookupProvider));
-//        generator.addProvider(event.includeServer(), new RegistryDataGen(packOutput,lookupProvider));
         generator.addProvider(event.includeServer(), new WorldGen(packOutput, lookupProvider));
         generator.addProvider(event.includeServer(), (DataProvider.Factory<LootTableProvider>) output->new LootTableProvider(output, Collections.emptySet(),List.of(
                 new LootTableProvider.SubProviderEntry(BlockLootGen::new, LootContextParamSets.BLOCK),
                 new LootTableProvider.SubProviderEntry(ChestLootGen::new, LootContextParamSets.CHEST),
-                new LootTableProvider.SubProviderEntry(FishLootGen::new, LootContextParamSets.FISHING)
+                new LootTableProvider.SubProviderEntry(FishLootGen::new, LootContextParamSets.FISHING),
+                new LootTableProvider.SubProviderEntry(EntityLootGen::new, LootContextParamSets.ENTITY)
         )));
-
-//        System.out.println("id: "+ ModItems.ignot_steel.getId());
-//        System.out.println("id path: " + ModItems.ignot_steel.getId().getPath());
-//        System.out.println("id namespace: " + ModItems.ignot_steel.getId().getNamespace());
-//        System.out.println("key: "+ ModItems.ignot_steel.getKey());
-//        System.out.println("key location: "+ ModItems.ignot_steel.getKey().location());
-//        System.out.println("description id: "+ModItems.ignot_steel.get().getDescriptionId());
-//        System.out.println("tab id: "+ModCreativeModeTab.HBM_ITEM.getId() + " | tab path: " + ModCreativeModeTab.HBM_ITEM.getId().getPath());
-//        System.out.println("tab language key: "+ModCreativeModeTab.HBM_ITEM.getId().toLanguageKey());
+        /** 客户端数据生成，生成到assets目录下 */
+        generator.addProvider(event.includeClient(),new HBMJsonProvider(packOutput, MODID, helper, true));
+        generator.addProvider(event.includeClient(),new LanguageProvider(packOutput,HBM.MODID,"en_us"));
+        generator.addProvider(event.includeClient(),new ItemModelGen(packOutput, HBM.MODID, helper));
+        generator.addProvider(event.includeClient(),new BlockStateGen(packOutput, HBM.MODID,helper));
     }
 
     public static boolean isLoad(String modID){
