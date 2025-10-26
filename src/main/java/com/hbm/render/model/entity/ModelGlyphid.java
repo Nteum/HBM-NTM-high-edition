@@ -4,11 +4,16 @@ import com.hbm.entity.mob.EntityGlyphid;
 import com.hbm.main.ResourceManager;
 import com.hbm.render.model.BaseObjModel;
 import com.hbm.render.model.IObjModel;
+import com.hbm.utils.BobMth;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.math.Axis;
 import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.model.HorseModel;
+import net.minecraft.client.model.SpiderModel;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import org.lwjgl.opengl.GL11;
 
@@ -17,114 +22,149 @@ import java.util.List;
 public class ModelGlyphid<T extends Entity> extends EntityModel<T> implements IObjModel {
     public BaseObjModel rootModel;
     // 身体部分
-    public BaseObjModel body;
-    public BaseObjModel jawLeft;
-    public BaseObjModel jawRight;
-    public BaseObjModel jawTop;
-    public BaseObjModel armRightUpper;
-    public BaseObjModel armRightMid;
-    public BaseObjModel armRightLower;
-    public BaseObjModel armLeftUpper;
-    public BaseObjModel armLeftMid;
-    public BaseObjModel armLeftLower;
-    public BaseObjModel legRightUpper;
-    public BaseObjModel legRightLower;
-    public BaseObjModel legLeftUpper;
-    public BaseObjModel legLeftLower;
-    public BaseObjModel armorRight;
-    public BaseObjModel armorLeft;
-    public BaseObjModel armorFront;
-    public BaseObjModel armRightArmor;
-    public BaseObjModel armLeftArmor;
+    public String body = "Body";
+    public String jawLeft = "JawLeft";
+    public String jawRight = "JawRight";
+    public String jawTop = "JawTop";
+    public String armRightUpper = "ArmRightUpper";
+    public String armRightMid = "ArmRightMid";
+    public String armRightLower = "ArmRightLower";
+    public String armLeftUpper = "ArmLeftUpper";
+    public String armLeftMid = "ArmLeftMid";
+    public String armLeftLower = "ArmLeftLower";
+    public String legRightUpper = "LegRightUpper";
+    public String legRightLower = "LegRightLower";
+    public String legLeftUpper = "LegLeftUpper";
+    public String legLeftLower = "LegLeftLower";
+    public String armorRight = "ArmorRight";
+    public String armorLeft = "ArmorLeft";
+    public String armorFront = "ArmorFront";
+    public String armRightArmor = "ArmRightArmor";
+    public String armLeftArmor = "ArmLeftArmor";
+    // 实体相关参数
+    public float scale;
+    public float[] cy = new float[2];
     
     @Override
     public void parseJson(ResourceLocation jsonPath) {
         this.rootModel = BaseObjModel.create(jsonPath, RenderType::entityCutoutNoCull);
-        this.body = rootModel.getChild("Body");
-        jawLeft = rootModel.getChild("JawLeft").setRotPoint(0, 0.5f, 0.25f);
-        jawRight = rootModel.getChild("JawRight").setRotPoint(0, 0.5f, 0.25f);
-        jawTop = rootModel.getChild("JawTop").setRotPoint(0, 0.5f, 0.25f);
-        armRightUpper = rootModel.getChild("ArmRightUpper").setRotPoint(-0.25f, 0.625f, 0.0625f);
-        armRightMid = rootModel.getChild("ArmRightMid").setRotPoint(-0.25f, 0.625f, 0.0625f);
-        armRightLower = rootModel.getChild("ArmRightLower").setRotPoint(-0.25f, 0.625f, 0.0625f);
-        armLeftUpper = rootModel.getChild("ArmLeftUpper").setRotPoint(0.25f, 0.625f, 0.0625f);
-        armLeftMid = rootModel.getChild("ArmLeftMid").setRotPoint(0.25f, 0.625f, 0.0625f);
-        armLeftLower = rootModel.getChild("ArmLeftLower").setRotPoint(0.25f, 0.625f, 0.0625f);
-        legRightUpper = rootModel.getChild("LegRightUpper").setRotPoint(0, 0.25f, 0);
-        legRightLower = rootModel.getChild("LegRightLower").setRotPoint(-0.5625f, 0.25f, 0);
-        legLeftUpper = rootModel.getChild("LegLeftUpper").setRotPoint(0, 0.25f, 0);
-        legLeftLower = rootModel.getChild("LegLeftLower").setRotPoint(0.5625f, 0.25f, 0);
-        armorRight = rootModel.getChild("ArmorRight");
-        armorLeft = rootModel.getChild("ArmorLeft");
-        armorFront = rootModel.getChild("ArmorFront");
-        armRightArmor = rootModel.getChild("ArmRightArmor");
-        armLeftArmor = rootModel.getChild("ArmLeftArmor");
+        // 由于腿部是单独渲染，因此需要单独调它的偏移量
+        this.rootModel.adjXYZ(0, -1.5f * getRootModel().size, 0, legLeftLower, legLeftUpper, legRightLower, legRightUpper);
+//        this.rootModel.children.forEach((name, child) -> child.scale(16, 16, 16));
+        rootModel.getChild(body);
+        rootModel.getChild(jawLeft).setRotPoint(0, 0.5f, 0.25f);
+        rootModel.getChild(jawRight).setRotPoint(0, 0.5f, 0.25f);
+        rootModel.getChild(jawTop).setRotPoint(0, 0.5f, 0.25f);
+        rootModel.getChild(armRightUpper).setRotPoint(-0.25f, 0.625f, 0.0625f);
+        rootModel.getChild(armRightMid).setRotPoint(-0.25f, 0.625f, 0.4375f);
+        rootModel.getChild(armRightLower).setRotPoint(-0.25f, 0.625f, 0.9375f);
+        rootModel.getChild(armLeftUpper).setRotPoint(0.25f, 0.625f, 0.0625f);
+        rootModel.getChild(armLeftMid).setRotPoint(0.25f, 0.625f, 0.4375f);
+        rootModel.getChild(armLeftLower).setRotPoint(0.25f, 0.625f, 0.9375f);
+        rootModel.getChild(legRightUpper).visible(false);
+//                .adjXYZ(-3, 4, 0)
+//                .setRotPoint(0, 0.25f, 0);
+        rootModel.getChild(legRightLower).visible(false);
+//                .adjXYZ(-3, 12, 0)
+//                .setRotPoint(-0.5625f, 0.25f, 0);
+        rootModel.getChild(legLeftUpper).visible(false);
+//                .adjXYZ(3, 4, 0)
+//                .setRotPoint(0, 0.25f, 0);
+        rootModel.getChild(legLeftLower).visible(false);
+//                .adjXYZ(3, 12, 0)
+//                .setRotPoint(0.5625f, 0.25f, 0);
+        rootModel.getChild(armorRight);
+        rootModel.getChild(armorLeft);
+        rootModel.getChild(armorFront);
+        rootModel.getChild(armRightArmor).setRotPoint(-0.25f, 0.625f, 0.9375f);
+        rootModel.getChild(armLeftArmor).setRotPoint(0.25f, 0.625f, 0.9375f);
     }
     @Override
     public void setupAnim(T pEntity, float pLimbSwing, float pLimbSwingAmount, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
-        Byte armor = pEntity.getEntityData().get(EntityGlyphid.DATA_ARMOR);
-        float bite = 0;
-        float headTilt = (float) (Math.sin(pLimbSwing * Math.PI) * 30);
-        if((armor & (1 << 0)) > 0) armorFront.visible = true;
-        if((armor & (1 << 1)) > 0) armorLeft.visible = true;
-        if((armor & (1 << 2)) > 0) armorRight.visible = true;
-        float walkCycle = pLimbSwing;
-        float cy0 = (float) Math.sin(walkCycle % (Math.PI * 2));
-        float cy1 = (float) Math.sin(walkCycle % (Math.PI * 2) - Math.PI * 0.5);
-        float cy2 = (float) Math.sin(walkCycle % (Math.PI * 2) - Math.PI);
-        float cy3 = (float) Math.sin(walkCycle % (Math.PI * 2) - Math.PI * 0.75);
-        /// LEFT ARM ///
-        armLeftUpper.setRot((float) (35 + cy1 * 20), 10, 0);
-        armLeftMid.setRot((float) (-75 - cy1 * 20 + cy0 * 20), 0, 0);
-        armLeftLower.setRot((float) (90 - cy0 * 45), 0, 0);
-        if((armor & (1 << 3)) > 0) armLeftArmor.visible = true;
-        /// RIGHT ARM ///
-        armRightUpper.setRot((float) (35 + cy2 * 20), -10, 0);
-        armRightMid.setRot((float) (-75 - cy2 * 20 + cy3 * 20), 0, 0);
-        armRightLower.setRot((float) (90 - cy3 * 45), 10, 0);
-        if((armor & (1 << 4)) > 0) armRightArmor.visible = true;
-        /// JAW ///
-        jawTop.setRot(-bite, 0, headTilt);
-        jawLeft.setRot(bite, bite, headTilt);
-        jawRight.setRot(bite, bite, headTilt);
-        /// LEG ///
-        float steppy = 15;
-        float bend = 60;
-        legLeftUpper.setRot((float) 0, (float) (- 15 + cy0 * 7.5), steppy + cy1 * steppy);
-        legLeftLower.setRot((float) 0, (float) (- 15 + cy0 * 7.5), steppy + cy1 * steppy -bend - cy1 * steppy);
-        legRightUpper.setRot((float) 0, (float) (- 45 + cy0 * 7.5), -steppy + cy1 * steppy);
-        legRightLower.setRot((float) 0, (float) (- 45 + cy0 * 7.5), -steppy + cy1 * steppy + bend - cy1 * steppy);
+        this.scale = ((EntityGlyphid) pEntity).getScale() * 16;
+        this.rootModel.scale(scale);
+        float cy0 = (float) Math.sin(pLimbSwing % (Math.PI * 2));
+        float cy1 = (float) Math.sin(pLimbSwing % (Math.PI * 2) - Math.PI * 0.5);
+        float cy2 = (float) Math.sin(pLimbSwing % (Math.PI * 2) - Math.PI);
+        float cy3 = (float) Math.sin(pLimbSwing % (Math.PI * 2) - Math.PI * 0.75);
+//        // armor
+//        byte armor = pEntity.getEntityData().get(EntityGlyphid.DATA_ARMOR);
+//        rootModel.getChild(armorFront).visible = (armor & (1)) > 0;
+//        rootModel.getChild(armorLeft).visible = (armor & (1 << 1)) > 0;
+//        rootModel.getChild(armorRight).visible = (armor & (1 << 2)) > 0;
+//        rootModel.getChild(armLeftArmor).visible = (armor & (1 << 3)) > 0;
+//        rootModel.getChild(armRightArmor).visible = (armor & (1 << 4)) > 0;
+//        // head
+//        float headYRot = pNetHeadYaw * ((float) Math.PI / 180F);
+//        float headXRot = pHeadPitch * ((float) Math.PI / 180F);
+//        rootModel.getChild(jawTop).setRot(-headXRot + pLimbSwingAmount, headYRot, 0);
+//        rootModel.getChild(jawLeft).setRot(-headXRot + pLimbSwingAmount, headYRot + pLimbSwingAmount, 0);
+//        rootModel.getChild(jawRight).setRot(-headXRot + pLimbSwingAmount, headYRot - pLimbSwingAmount, 0);
+//        // left arm
+//        rootModel.getChild(armLeftUpper).setRot(35 + cy1 * 20, 10, 0);
+//        rootModel.getChild(armLeftMid).setRot(-75 - cy1 * 20 + cy0 * 20, 0, 0);
+//        rootModel.getChild(armLeftLower).setRot(90 - cy0 * 45, 0, 0);
+//        // right arm
+//        rootModel.getChild(armRightUpper).setRot(35 + cy2 * 20, -10, 0);
+//        rootModel.getChild(armRightMid).setRot(-75 - cy2 * 20 + cy3 * 20, 0, 0);
+//        rootModel.getChild(armRightLower).setRot(90 - cy3 * 45, 10, 0);
+        // leg
+        cy[0] = cy0;
+        cy[1] = cy1;
     }
 
     @Override
     public void renderToBuffer(PoseStack pPoseStack, VertexConsumer pBuffer, int pPackedLight, int pPackedOverlay, float pRed, float pGreen, float pBlue, float pAlpha) {
-        this.body.renderToBuffer(pPoseStack, pBuffer, pPackedLight, pPackedOverlay, pRed, pGreen, pBlue, pAlpha);
-        this.jawTop.renderToBuffer(pPoseStack, pBuffer, pPackedLight, pPackedOverlay, pRed, pGreen, pBlue, pAlpha);
-        this.jawLeft.renderToBuffer(pPoseStack, pBuffer, pPackedLight, pPackedOverlay, pRed, pGreen, pBlue, pAlpha);
-        this.jawRight.renderToBuffer(pPoseStack, pBuffer, pPackedLight, pPackedOverlay, pRed, pGreen, pBlue, pAlpha);
-        this.armLeftUpper.renderToBuffer(pPoseStack, pBuffer, pPackedLight, pPackedOverlay, pRed, pGreen, pBlue, pAlpha);
-        this.armLeftMid.renderToBuffer(pPoseStack, pBuffer, pPackedLight, pPackedOverlay, pRed, pGreen, pBlue, pAlpha);
-        this.armLeftLower.renderToBuffer(pPoseStack, pBuffer, pPackedLight, pPackedOverlay, pRed, pGreen, pBlue, pAlpha);
-        this.armRightUpper.renderToBuffer(pPoseStack, pBuffer, pPackedLight, pPackedOverlay, pRed, pGreen, pBlue, pAlpha);
-        this.armRightMid.renderToBuffer(pPoseStack, pBuffer, pPackedLight, pPackedOverlay, pRed, pGreen, pBlue, pAlpha);
-        this.armRightLower.renderToBuffer(pPoseStack, pBuffer, pPackedLight, pPackedOverlay, pRed, pGreen, pBlue, pAlpha);
+        pPoseStack.pushPose();
+        pPoseStack.mulPose(Axis.XN.rotationDegrees(180));
+        this.rootModel.visible(false, legLeftLower, legLeftUpper, legRightLower, legRightUpper);
+        this.rootModel.renderToBuffer(pPoseStack, pBuffer, pPackedLight, pPackedOverlay, pRed, pGreen, pBlue, pAlpha);
 
+        /**
+         * 渲染异虫的六条腿，我也希望能仅仅通过通用模型解决这一问题，然而并没有成功，只能硬套bob原版的逻辑。
+         * */
+        this.rootModel.visible(true, legLeftLower, legLeftUpper, legRightLower, legRightUpper);
+        pPoseStack.translate(0, -1.5, 0);
         float steppy = 15;
         float bend = 60;
-        float cy0 = (float) ((legLeftUpper.yRot + 15) / 7.5);
-        float cy1 = (float) ((legLeftUpper.zRot - steppy) / steppy);
         for (int i = 0; i < 3; i++) {
-            float c0 = cy0 * (i == 1 ? -1 : 1);
-            float c1 = cy1 * (i == 1 ? -1 : 1);
-            legLeftUpper.setRot((float) 0, (float) (i * 30 - 15 + c0 * 7.5), steppy + c1 * steppy);
-            this.legLeftUpper.renderToBuffer(pPoseStack, pBuffer, pPackedLight, pPackedOverlay, pRed, pGreen, pBlue, pAlpha);
-            legLeftLower.setRot((float) 0, (float) (i * 30 - 15 + c0 * 7.5), steppy + c1 * steppy - bend - c1 * steppy);
-            this.legLeftLower.renderToBuffer(pPoseStack, pBuffer, pPackedLight, pPackedOverlay, pRed, pGreen, pBlue, pAlpha);
-            legLeftUpper.setRot((float) 0, (float) (i * 30 - 45 + c0 * 7.5), -steppy + c1 * steppy);
-            this.legRightUpper.renderToBuffer(pPoseStack, pBuffer, pPackedLight, pPackedOverlay, pRed, pGreen, pBlue, pAlpha);
-            legLeftUpper.setRot((float) 0, (float) (i * 30 - 45 + c0 * 7.5), -steppy + c1 * steppy + bend - c1 * steppy);
-            this.legRightLower.renderToBuffer(pPoseStack, pBuffer, pPackedLight, pPackedOverlay, pRed, pGreen, pBlue, pAlpha);
+            float c0 = cy[0] * (i == 1 ? -1 : 1);
+            float c1 = cy[1] * (i == 1 ? -1 : 1);
+            pPoseStack.pushPose();
+            pPoseStack.translate(0, 0.25f, 0);
+            pPoseStack.mulPose(Axis.YP.rotationDegrees(i * 30 - 15 + c0 * 7.5f));
+            pPoseStack.mulPose(Axis.ZP.rotationDegrees(steppy + c1 * steppy));
+            pPoseStack.translate(0, -0.25f, 0);
+//            rootModel.getChild(legLeftUpper).setRot( 0, BobMth.degree2Radians(i * 30 - 15 + c0 * 7.5f), BobMth.degree2Radians(steppy + c1 * steppy));
+//            this.rootModel.getChild(legLeftUpper).renderToBuffer(pPoseStack, pBuffer, pPackedLight, pPackedOverlay, pRed, pGreen, pBlue, pAlpha);
+            this.rootModel.getChild(legLeftUpper).renderStatic(pPoseStack, pBuffer, pPackedLight, pPackedOverlay);
+            pPoseStack.translate(0.5625, 0.25, 0);
+            pPoseStack.mulPose(Axis.ZP.rotationDegrees(-bend - c1 * steppy));
+            pPoseStack.translate(-0.5625, -0.25, 0);
+//            rootModel.getChild(legLeftLower).setRot( 0, BobMth.degree2Radians(i * 30 - 15 + c0 * 7.5f), BobMth.degree2Radians(-bend - c1 * steppy));
+//            this.rootModel.getChild(legLeftLower).renderToBuffer(pPoseStack, pBuffer, pPackedLight, pPackedOverlay, pRed, pGreen, pBlue, pAlpha);
+            this.rootModel.getChild(legLeftLower).renderStatic(pPoseStack, pBuffer, pPackedLight, pPackedOverlay);
+            pPoseStack.popPose();
+
+            pPoseStack.pushPose();
+            pPoseStack.translate(0, 0.25f, 0);
+            pPoseStack.mulPose(Axis.YP.rotationDegrees(i * 30 - 45 + c0 * 7.5f));
+            pPoseStack.mulPose(Axis.ZP.rotationDegrees(-steppy + c1 * steppy));
+            pPoseStack.translate(0, -0.25f, 0);
+//            rootModel.getChild(legRightUpper).setRot(0, BobMth.degree2Radians(i * 30 - 45 + c0 * 7.5f), BobMth.degree2Radians(-steppy + c1 * steppy));
+//            this.rootModel.getChild(legRightUpper).renderToBuffer(pPoseStack, pBuffer, pPackedLight, pPackedOverlay, pRed, pGreen, pBlue, pAlpha);
+            this.rootModel.getChild(legRightUpper).renderStatic(pPoseStack, pBuffer, pPackedLight, pPackedOverlay);
+            pPoseStack.translate(-0.5625, 0.25, 0);
+            pPoseStack.mulPose(Axis.ZP.rotationDegrees(bend - c1 * steppy));
+            pPoseStack.translate(0.5625, -0.25, 0);
+//            rootModel.getChild(legRightLower).setRot(0, BobMth.degree2Radians(i * 30 - 45 + c0 * 7.5f), BobMth.degree2Radians(bend - c1 * steppy));
+//            this.rootModel.getChild(legRightLower).renderToBuffer(pPoseStack, pBuffer, pPackedLight, pPackedOverlay, pRed, pGreen, pBlue, pAlpha);
+            this.rootModel.getChild(legRightLower).renderStatic(pPoseStack, pBuffer, pPackedLight, pPackedOverlay);
+            pPoseStack.popPose();
         }
+        this.rootModel.visible(false, legLeftLower, legLeftUpper, legRightLower, legRightUpper);
+
+        pPoseStack.popPose();
     }
 
     @Override

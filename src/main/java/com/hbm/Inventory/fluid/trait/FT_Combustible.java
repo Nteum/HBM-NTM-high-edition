@@ -3,7 +3,7 @@ package com.hbm.Inventory.fluid.trait;
 import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonWriter;
 import com.hbm.HBMLang;
-import com.hbm.utils.BobMathUtil;
+import com.hbm.utils.BobMth;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 
@@ -26,7 +26,7 @@ public class FT_Combustible extends FluidTrait {
 	public void addInfo(List<Component> info) {
 		super.addInfo(info);
 		info.add(Component.translatable(HBMLang.FT_COMBUSTIBLE1.key()).withStyle(ChatFormatting.GOLD));
-		info.add(Component.translatable(HBMLang.FT_COMBUSTIBLE2.key(), BobMathUtil.getShortNumber(combustionEnergy)).withStyle(ChatFormatting.GOLD));
+		info.add(Component.translatable(HBMLang.FT_COMBUSTIBLE2.key(), BobMth.getShortNumber(combustionEnergy)).withStyle(ChatFormatting.GOLD));
 		info.add(Component.translatable(HBMLang.FT_COMBUSTIBLE3.key(), fuelGrade.getGrade()).withStyle(ChatFormatting.GOLD));
 	}
 	

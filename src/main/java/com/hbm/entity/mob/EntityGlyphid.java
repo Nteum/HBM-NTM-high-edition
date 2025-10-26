@@ -120,22 +120,22 @@ public class EntityGlyphid extends Monster implements IResistanceProvider {
 	@Override
 	protected void registerGoals() {
 		super.registerGoals();
-		// 流体中漂浮
-		this.goalSelector.addGoal(1, new FloatGoal(this));
-		// 向目标跳跃
-		this.goalSelector.addGoal(3, new LeapAtTargetGoal(this, 0.4F));
-		// 追踪并攻击玩家
-		this.goalSelector.addGoal(4, new MeleeAttackGoal(this, 1.5f, false));
-		// 随机移动并避免踏入水中
-		this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 0.8D));
-		// 看向玩家
-		this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 8.0F));
-		// 随意地向四处看
-		this.goalSelector.addGoal(6, new RandomLookAroundGoal(this));
-		// 受到目标生物伤害
-		this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
-		// 寻找最近可攻击的玩家
-		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
+//		// 流体中漂浮
+//		this.goalSelector.addGoal(1, new FloatGoal(this));
+//		// 向目标跳跃
+//		this.goalSelector.addGoal(3, new LeapAtTargetGoal(this, 0.4F));
+//		// 追踪并攻击玩家
+//		this.goalSelector.addGoal(4, new MeleeAttackGoal(this, 1.5f, false));
+//		// 随机移动并避免踏入水中
+//		this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 0.8D));
+//		// 看向玩家
+//		this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 8.0F));
+//		// 随意地向四处看
+//		this.goalSelector.addGoal(6, new RandomLookAroundGoal(this));
+//		// 受到目标生物伤害
+//		this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
+//		// 寻找最近可攻击的玩家
+//		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
 	}
 
 	public ResourceLocation getSkin() {

@@ -151,16 +151,6 @@ public abstract class BlockDummyable extends BlockMachineBase implements ICustom
                 BlockState coreState = pLevel.getBlockState(getCore(pState, pLevel, pPos));
                 coreState.neighborChanged(pLevel, pPos, pNeighborBlock, pNeighborPos, pMovedByPiston);
             }
-
-//            if (pLevel.getBlockEntity(core) instanceof DummyableBlockEntity entity){
-//                coreState = pLevel.getBlockState(core);
-//            }
-//
-//            if (coreState.getValue(IS_CORE))
-//                coreState.neighborChanged(pLevel, pPos, pNeighborBlock, pNeighborPos, pMovedByPiston);
-//            else {
-//                HBM.LOGGER.warn("Dummy block's core lost, at " + pPos.toShortString());
-//            }
         }
     }
 

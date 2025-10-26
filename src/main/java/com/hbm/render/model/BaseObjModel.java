@@ -54,6 +54,8 @@ public class BaseObjModel extends Model {
     public float xRotPoint = 0;
     public float yRotPoint = 0;
     public float zRotPoint = 0;
+    // 用于对模型原本的尺度进行一定的缩放，hbm有的模型需要缩放16，有的不需要
+    public float size = 16.0f;
     public BaseObjModel(Function<ResourceLocation, RenderType> pRenderType) {
         this(pRenderType, "");
     }
@@ -159,6 +161,7 @@ public class BaseObjModel extends Model {
         this.x = modelPart.x;
         this.y = modelPart.y;
         this.z = modelPart.z;
+        // 三维旋转用的是弧度
         this.xRot = modelPart.xRot;
         this.yRot = modelPart.yRot;
         this.zRot = modelPart.zRot;
@@ -186,10 +189,13 @@ public class BaseObjModel extends Model {
         this.z = 0;
         return this;
     }
-    public BaseObjModel adjXYZ(float xDelta, float yDelta, float zDelta){
+    public BaseObjModel adjXYZ(float xDelta, float yDelta, float zDelta, String ... names){
         this.x += xDelta;
         this.y += yDelta;
         this.z += zDelta;
+        for (String name : names) {
+            this.children.get(name).adjXYZ(xDelta, yDelta, zDelta);
+        }
         return this;
     }
 
@@ -200,6 +206,35 @@ public class BaseObjModel extends Model {
         return this;
     }
 
+    public BaseObjModel scale(float xScale, float yScale, float zScale){
+        this.xScale = xScale;
+        this.yScale = yScale;
+        this.zScale = zScale;
+        return this;
+    }
+    public BaseObjModel scale(float scale){
+        xScale = yScale = zScale = scale;
+        this.children.forEach((n, child) -> child.scale(scale));
+        return this;
+    }
+    public BaseObjModel visible(boolean visible, String ... names)
+    {
+        for (String name : names) {
+            this.children.get(name).visible(visible);
+        }
+        return this;
+    }
+    public BaseObjModel size(float size, String... names){
+        this.size = size;
+        if (names.length == 0){
+            this.children.values().forEach(child -> child.size(size));
+        }else {
+            for (String name : names) {
+                this.children.get(name).size(size);
+            }
+        }
+        return this;
+    }
     public BaseObjModel bindTexture(ResourceLocation texture){
         return bindRenderType(this.renderType(texture));
     }
@@ -254,14 +289,16 @@ public class BaseObjModel extends Model {
         if (visible){
             poseStack.pushPose();
 
-            poseStack.translate(x / 16.0F, y / 16.0F, z / 16.0F);
+            poseStack.translate(x / size, y / size, z / size);
             if (xRot != 0.0F || yRot != 0.0F || zRot != 0.0F) {
-                poseStack.translate(xRotPoint/ 16, yRotPoint/ 16, zRotPoint/ 16);
+//                poseStack.translate(xRotPoint / size, yRotPoint/ size, zRotPoint/ size);
+                poseStack.translate(xRotPoint, yRotPoint, zRotPoint);
                 poseStack.mulPose((new Quaternionf()).rotationZYX(zRot, yRot, xRot));
-                poseStack.translate(-xRotPoint/ 16, -yRotPoint/ 16, -zRotPoint/ 16);
+//                poseStack.translate(-xRotPoint / size, -yRotPoint / size, -zRotPoint / size);
+                poseStack.translate(-xRotPoint, -yRotPoint, -zRotPoint);
             }
 
-            poseStack.scale(xScale / 16.0f, yScale / 16.0f, zScale / 16.0f);
+            poseStack.scale(xScale / size, yScale / size, zScale / size);
 
             if (this.tempRenderType == null){
                 for (var part : children.values())

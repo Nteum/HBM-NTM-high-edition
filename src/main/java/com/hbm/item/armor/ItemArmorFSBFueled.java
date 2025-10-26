@@ -5,7 +5,7 @@ import com.hbm.api.fluid.ItemStackFluidHandler;
 import com.hbm.capabilities.ItemCapabilityWrapper;
 import com.hbm.item.HBMCombat;
 import com.hbm.item.tool.BatteryItem;
-import com.hbm.utils.BobMathUtil;
+import com.hbm.utils.BobMth;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -17,7 +17,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.ForgeFlowingFluid;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -67,7 +66,7 @@ public class ItemArmorFSBFueled extends ItemArmorFSB{
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> list, TooltipFlag pIsAdvanced) {
         FluidStack fluid1 = FluidUtils.getFluid(pStack);
-        list.add(((MutableComponent)fluid1.getDisplayName()).append(": " + BobMathUtil.getShortNumber(fluid1.getAmount()) + " / " + BobMathUtil.getShortNumber(this.maxFuel)));
+        list.add(((MutableComponent)fluid1.getDisplayName()).append(": " + BobMth.getShortNumber(fluid1.getAmount()) + " / " + BobMth.getShortNumber(this.maxFuel)));
 
         super.appendHoverText(pStack, pLevel, list, pIsAdvanced);
     }

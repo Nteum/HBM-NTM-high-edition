@@ -3,7 +3,7 @@ package com.hbm.entity.effect;
 import com.hbm.entity.ModEntityType;
 import com.hbm.particle.type.HBMSmokeParticle;
 import com.hbm.particle.ModParticleTypes;
-import com.hbm.utils.BobMathUtil;
+import com.hbm.utils.BobMth;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.ParticleEngine;
 import net.minecraft.nbt.CompoundTag;
@@ -48,7 +48,7 @@ public class EntityNukeTorex extends Entity {
     public EntityNukeTorex(Level pLevel, Vec3 pos, float scale) {
         this(pLevel);
         this.setPos(pos);
-        this.setScale(Mth.clamp((float) BobMathUtil.squirt(scale * 0.01) * 1.5F, 0.5F, 5F));
+        this.setScale(Mth.clamp((float) BobMth.squirt(scale * 0.01) * 1.5F, 0.5F, 5F));
         //以下部分有待研究
 //        torex.forceSpawn = true;
 //        world.spawnEntityInWorld(torex);
