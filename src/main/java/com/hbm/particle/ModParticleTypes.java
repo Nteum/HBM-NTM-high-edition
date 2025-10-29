@@ -4,6 +4,7 @@ import com.hbm.HBM;
 import com.hbm.datagen.HBMJsonProvider;
 import com.hbm.particle.type.DeadLeafParticle;
 import com.hbm.particle.type.HBMSmokeParticle;
+import com.hbm.particle.type.ParticleCherenkov;
 import com.hbm.particle.type.ParticleRocketFlame;
 import com.hbm.particle.type.ShockWaveParticle;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -39,6 +40,7 @@ public class ModParticleTypes {
     public static final RegistryObject<SimpleParticleType> SHOCKWAVE = addSimple("shockwave", ShockWaveParticle::new);
     public static final RegistryObject<SimpleParticleType> DEAD_LEAF = addSimple("dead_leaf", DeadLeafParticle::new);
     public static final RegistryObject<SimpleParticleType> LAUNCH_SMOKE = addSimple("launch_smoke", DeadLeafParticle::new);
+    public static final RegistryObject<SimpleParticleType> CHERENKOV_GLOW = addSimple("cherenkov_glow", ParticleCherenkov::new);
 
     public static RegistryObject<SimpleParticleType> addSimple(String name, SimpleParticleConstructor<? extends Particle> constructor){
         RegistryObject<SimpleParticleType> object = PARTICLE_TYPES.register(name, () -> new SimpleParticleType(false));

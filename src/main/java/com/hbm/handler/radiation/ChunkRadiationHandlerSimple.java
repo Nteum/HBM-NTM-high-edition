@@ -6,9 +6,11 @@ import com.hbm.network.ModMessages;
 import com.hbm.network.packet.toclient.AuxParticlePacket;
 import com.hbm.registries.ModBlocks;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
@@ -119,6 +121,43 @@ public class ChunkRadiationHandlerSimple extends ChunkRadiationHandler {
 							if (level instanceof ServerLevel serverLevel) {
 								Packet<?> packet = ModMessages.netHandler.toVanillaPacket(new AuxParticlePacket(x, y, z, 3), NetworkDirection.PLAY_TO_CLIENT);
 								serverLevel.getServer().getPlayerList().broadcast(null,x,y,z,100,serverLevel.dimension(),packet);
+							}
+						}
+
+						if (rad > RadiationConfig.fogRad * 4F && level instanceof ServerLevel serverLevel && level.hasChunk(coord.x, coord.z)) {
+							int chance = Math.max(1, RadiationConfig.fogCh * 2);
+							if (level.random.nextInt(chance) == 0) {
+								int x = coord.x * 16 + level.random.nextInt(16);
+								int z = coord.z * 16 + level.random.nextInt(16);
+								int surfaceY = level.getHeight(Heightmap.Types.WORLD_SURFACE, x, z);
+								MutableBlockPos mutable = new MutableBlockPos();
+								mutable.set(x, surfaceY, z);
+								int waterTop = -1;
+
+								for (int down = 0; down < 8 && surfaceY - down > level.getMinBuildHeight(); down++) {
+									int checkY = surfaceY - down;
+									mutable.set(x, checkY, z);
+									if (level.getFluidState(mutable).is(FluidTags.WATER)) {
+										waterTop = checkY;
+										while (waterTop + 1 < level.getMaxBuildHeight()) {
+											mutable.set(x, waterTop + 1, z);
+											if (!level.getFluidState(mutable).is(FluidTags.WATER)) {
+												break;
+											}
+											waterTop++;
+										}
+										break;
+									}
+								}
+
+								if (waterTop >= 0) {
+									double px = x + 0.5D + (level.random.nextDouble() - 0.5D) * 0.6D;
+									double pz = z + 0.5D + (level.random.nextDouble() - 0.5D) * 0.6D;
+									double py = waterTop + 0.25D + level.random.nextDouble() * 0.2D;
+
+									Packet<?> packet = ModMessages.netHandler.toVanillaPacket(new AuxParticlePacket(px, py, pz, 4), NetworkDirection.PLAY_TO_CLIENT);
+									serverLevel.getServer().getPlayerList().broadcast(null, px, py, pz, 96, serverLevel.dimension(), packet);
+								}
 							}
 						}
 					}
