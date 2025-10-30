@@ -156,6 +156,13 @@ public class BaseObjModel extends Model {
     public BaseObjModel getChild(String name){
         return this.children.get(name);
     }
+    public BaseObjModel addChild(String name, BaseObjModel child){
+        this.children.put(name, child);
+        return this;
+    }
+    public BaseObjModel popChild(String name){
+        return this.children.remove(name);
+    }
 
     public BaseObjModel copyPose(ModelPart modelPart){
         this.x = modelPart.x;
@@ -219,8 +226,13 @@ public class BaseObjModel extends Model {
     }
     public BaseObjModel visible(boolean visible, String ... names)
     {
-        for (String name : names) {
-            this.children.get(name).visible(visible);
+        if (names.length == 0){
+            this.visible = visible;
+        }else {
+            for (String name : names) {
+                if (children.containsKey(name))
+                    this.children.get(name).visible(visible, names);
+            }
         }
         return this;
     }

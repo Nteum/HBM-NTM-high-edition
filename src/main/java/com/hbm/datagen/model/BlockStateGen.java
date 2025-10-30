@@ -13,9 +13,11 @@ import net.minecraft.world.level.block.PipeBlock;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraftforge.client.model.generators.*;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +36,7 @@ public class BlockStateGen extends BlockStateProvider {
         for (ICategoryStateProvider categoryStateProvider : categoryStateProviders) {
             categoryStateProvider.registerStatesAndModels();
         }
+        ModBlocks.genModel(this);
         //简单方块和物品
         horizontalBlockWithItem(ModBlocks.machine_battery.get(),this.models().orientable("machine_battery", new ResourceLocation(HBM.MODID, "block/battery_side"), new ResourceLocation(HBM.MODID, "block/battery_front"), new ResourceLocation(HBM.MODID, "block/battery_top")));
         horizontalBlockWithItem(ModBlocks.machine_lithium_battery.get(),this.models().orientable("machine_lithium_battery", new ResourceLocation(HBM.MODID, "block/battery_lithium_side"), new ResourceLocation(HBM.MODID, "block/battery_lithium_front"), new ResourceLocation(HBM.MODID, "block/battery_lithium_top")));
@@ -170,6 +173,15 @@ public class BlockStateGen extends BlockStateProvider {
                 });
     }
 
+    public void addIntStateCubeAllBlock(Block block, IntegerProperty integerProperty){
+        ResourceLocation blockTexture = blockTexture(block);
+        VariantBlockStateBuilder variantBuilder = this.getVariantBuilder(block);
+        VariantBlockStateBuilder.PartialBlockstate partialState = variantBuilder.partialState();
+        for (Integer value : integerProperty.getPossibleValues()) {
+            partialState.with(integerProperty, value).addModels(ConfiguredModel.builder().modelFile(models().cubeAll(name(block) + "_" + value, blockTexture.withSuffix("_" + value))).buildLast());
+        }
+    }
+
     public ModelFile enumModelFileFunction_BedRockOreType(BedRockOre.BedRockOreType value) {
         return switch (value){
             case IRON -> models().getExistingFile(HBM.rl("block/env/bedrock_ore_iron"));
@@ -203,5 +215,8 @@ public class BlockStateGen extends BlockStateProvider {
     }
     public ResourceLocation key(Block block) {
         return ForgeRegistries.BLOCKS.getKey(block);
+    }
+    public String name(Block block) {
+        return key(block).getPath();
     }
 }

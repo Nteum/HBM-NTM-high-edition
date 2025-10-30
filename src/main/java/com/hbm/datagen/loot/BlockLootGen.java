@@ -12,6 +12,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.Collections;
@@ -30,6 +31,7 @@ public class BlockLootGen extends BlockLootSubProvider {
     @Override
     protected void generate() {
 //        generateMachineLoot();
+        ModBlocks.lootSupport(this);
         HBMMachine.lootable(this);
         HBMBlockComponent.lootable(this);
         //机器
@@ -78,6 +80,11 @@ public class BlockLootGen extends BlockLootSubProvider {
     @Override
     public void dropOther(Block pBlock, ItemLike pItem) {
         super.dropOther(pBlock, pItem);
+    }
+
+    @Override
+    public void add(Block pBlock, LootTable.Builder pBuilder){
+        super.add(pBlock, pBuilder);
     }
 
     @Override

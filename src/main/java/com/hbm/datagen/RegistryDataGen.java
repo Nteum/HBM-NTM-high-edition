@@ -7,6 +7,7 @@ import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.data.DatapackBuiltinEntriesProvider;
+import net.minecraftforge.common.world.ForgeBiomeModifiers;
 
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;

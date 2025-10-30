@@ -9,6 +9,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -39,6 +40,8 @@ public class RecipeGen extends RecipeProvider {
         BlastFurnaceRecipe.addDefaultRecipe(pWriter);
         addShapelessRecipe(ModItems.nugget_zirconium.get(),9,ModItems.ingot_zirconium.get(),ModItems.ingot_zirconium.get(),1);
         addShapelessRecipe(ModItems.ingot_zirconium.get(),1,ModItems.ingot_zirconium.get(),ModItems.nugget_zirconium.get(),9);
+
+        simpleCookingRecipe(pWriter, "smoking", RecipeSerializer.SMOKING_RECIPE, 100, ModItems.GLYPHID_MEAT.get(), ModItems.GLYPHID_MEAT_GRILLED.get(), 0.35f);
     }
     protected List<ISubRecipeProvider> getSubRecipeProviders() {
         return List.of(

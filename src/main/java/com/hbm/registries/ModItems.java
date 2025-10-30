@@ -1,39 +1,32 @@
 package com.hbm.registries;
 
+import com.hbm.HBM;
 import com.hbm.HBMKey;
 import com.hbm.datagen.LanguageProvider;
 import com.hbm.datagen.model.ItemModelGen;
-import com.hbm.entity.ModEntityType;
 import com.hbm.item.HBMCombat;
 import com.hbm.item.HBMComponent;
 import com.hbm.item.HBMWeapon;
 import com.hbm.item.HBMtools;
 import com.hbm.item.env.BedrockOreItem;
-import com.hbm.HBM;
 import com.hbm.item.misc.ItemLemon;
-import com.hbm.item.weapon.ItemDesignator;
-import com.hbm.item.weapon.ItemDetonator;
 import com.hbm.item.weapon.ItemMissilePart;
 import com.hbm.item.weapon.grenade.ItemGrenade;
+import com.hbm.registries.WrapperRegistry.WrappedItemRegistry;
 import com.hbm.utils.debug.GunSuicide;
-import net.minecraft.client.resources.model.UnbakedModel;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.food.Foods;
-import net.minecraft.world.item.*;
-import net.minecraftforge.common.util.MutableHashedLinkedMap;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.Item;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.function.Supplier;
 
 public class ModItems {
@@ -145,48 +138,48 @@ public class ModItems {
         return itemRegistry;
     }
 
-    public static class WrappedItemRegistry{
-        RegistryObject<Item> registryObject;
-        String localizedName;
-        String genNameWay = HBMKey.ORDERLY_GEN;
-        ResourceKey<CreativeModeTab> creativeKey;
-        String genModelWay = HBMKey.BASIC_MODEL;
-
-        public Item get(){
-            return registryObject.get();
-        }
-        public ResourceLocation getId()
-        {
-            return registryObject.getId();
-        }
-        @Nullable
-        public ResourceKey<Item> getKey()
-        {
-            return registryObject.getKey();
-        }
-
-        public void languageSupport(LanguageProvider provider){
-            switch (genNameWay){
-                case HBMKey.LITERALLY -> provider.add(get(), localizedName);
-                case HBMKey.ORDERLY_GEN -> provider.add(get(), RegistryHelper.generateOrderlyName(getId().getPath()));
-                case HBMKey.REVERSE_GEN -> provider.add(get(), RegistryHelper.generateReversedName(getId().getPath()));
-                case HBMKey.ORDERLY_GEN_EXCEPT_FIRST -> provider.add(get(), RegistryHelper.generateOrderlyExceptFirstName(getId().getPath()));
-                default -> provider.add(get(), getId().toLanguageKey());
-            }
-        }
-
-        public void creativeTabSupport(BuildCreativeModeTabContentsEvent event){
-            if (event.getTabKey() == this.creativeKey){
-                event.getEntries().put(new ItemStack(get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-            }
-        }
-
-        public void modelSupport(ItemModelGen provider){
-            if (genModelWay.equals(HBMKey.BASIC_MODEL)){
-                provider.basicItem(get());
-            }else if (genModelWay.equals(HBMKey.SPAWN_EGG_MODEL)){
-                provider.withExistingParent(localizedName, "minecraft:item/template_spawn_egg");
-            }
-        }
-    }
+//    public static class WrappedItemRegistry{
+//        RegistryObject<Item> registryObject;
+//        String localizedName;
+//        String genNameWay = HBMKey.ORDERLY_GEN;
+//        ResourceKey<CreativeModeTab> creativeKey;
+//        String genModelWay = HBMKey.BASIC_MODEL;
+//
+//        public Item get(){
+//            return registryObject.get();
+//        }
+//        public ResourceLocation getId()
+//        {
+//            return registryObject.getId();
+//        }
+//        @Nullable
+//        public ResourceKey<Item> getKey()
+//        {
+//            return registryObject.getKey();
+//        }
+//
+//        public void languageSupport(LanguageProvider provider){
+//            switch (genNameWay){
+//                case HBMKey.LITERALLY -> provider.add(get(), localizedName);
+//                case HBMKey.ORDERLY_GEN -> provider.add(get(), RegistryHelper.generateOrderlyName(getId().getPath()));
+//                case HBMKey.REVERSE_GEN -> provider.add(get(), RegistryHelper.generateReversedName(getId().getPath()));
+//                case HBMKey.ORDERLY_GEN_EXCEPT_FIRST -> provider.add(get(), RegistryHelper.generateOrderlyExceptFirstName(getId().getPath()));
+//                default -> provider.add(get(), getId().toLanguageKey());
+//            }
+//        }
+//
+//        public void creativeTabSupport(BuildCreativeModeTabContentsEvent event){
+//            if (event.getTabKey() == this.creativeKey){
+//                event.getEntries().put(new ItemStack(get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+//            }
+//        }
+//
+//        public void modelSupport(ItemModelGen provider){
+//            if (genModelWay.equals(HBMKey.BASIC_MODEL)){
+//                provider.basicItem(get());
+//            }else if (genModelWay.equals(HBMKey.SPAWN_EGG_MODEL)){
+//                provider.withExistingParent(localizedName, "minecraft:item/template_spawn_egg");
+//            }
+//        }
+//    }
 }
