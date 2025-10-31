@@ -1,0 +1,8 @@
+{
+    "java.configuration.updateBuildConfiguration": "interactive",
+    "workbench.colorCustomizations": {
+        "terminal.background": "#00000000",
+        "minimap.background": "#272334FF",
+        "scrollbar.shadow": "#272334FF"
+    }
+}

@@ -53,6 +53,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLPaths;
 import org.slf4j.Logger;
+import software.bernie.geckolib.GeckoLib;
 
 import java.nio.file.Path;
 import java.util.Collections;
@@ -72,6 +73,7 @@ public class HBM {
     public static final Path    RECIPE_PATH = FMLPaths.CONFIGDIR.get().resolve(MODID + "Recipes");
 
     public HBM() {
+        GeckoLib.initialize();
         //forge事件总线
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.addListener(this::onServerStopped);

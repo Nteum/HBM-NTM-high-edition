@@ -36,7 +36,7 @@ import java.io.InputStreamReader;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
-import java.lang.ref.WeakReference;
+import java.lang.ref.SoftReference;
 
 @Mod.EventBusSubscriber(modid = HBM.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class Models {
@@ -45,7 +45,7 @@ public class Models {
     // 物品：只缓存 资源模型RL -> 物品ID(ResourceLocation) 的映射，避免强持有 RegistryObject
     private static final ConcurrentMap<ResourceLocation, ResourceLocation> ITEM_MODEL_KEYS = new ConcurrentHashMap<>();
     // 实体：缓存 RL -> 实体模型 的弱引用，便于GC在资源重载/内存紧张时回收
-    private static final ConcurrentMap<ResourceLocation, WeakReference<Model>> ENTITY_MODELS = new ConcurrentHashMap<>();
+    private static final ConcurrentMap<ResourceLocation, SoftReference<Model>> ENTITY_MODELS = new ConcurrentHashMap<>();
     
     public static final ResourceLocation ASSEMBLER_BODY = add(HBM.rl("block/assembler/assembler_body"));
     public static final ResourceLocation ASSEMBLER_COG = add(HBM.rl("block/assembler/assembler_cog"));
@@ -84,7 +84,7 @@ public class Models {
         return rl;
     }
     public static ResourceLocation addEntity(ResourceLocation rl, Model model){
-        ENTITY_MODELS.put(rl, new WeakReference<>(model));
+        ENTITY_MODELS.put(rl, new SoftReference<>(model));
         return rl;
     }
     public static void registerModels(ModelEvent.RegisterAdditional event){
@@ -122,8 +122,19 @@ public class Models {
         return modelManager.getModel(rl);
     }
     public static Model getEntityModel(ResourceLocation rl){
-        WeakReference<Model> ref = ENTITY_MODELS.get(rl);
-        return ref != null ? ref.get() : null;
+        SoftReference<Model> ref = ENTITY_MODELS.get(rl);
+        Model model = ref != null ? ref.get() : null;
+        if (model == null) {
+            // 模型被GC清理或未加载，尝试重新加载
+            HBM.LOGGER.debug("[Models] Reloading entity model: {}", rl);
+            try {
+                model = new ObjEntityModelSingle(); // 或根据类型自行加载
+                ENTITY_MODELS.put(rl, new SoftReference<>(model));
+            } catch (Exception e) {
+                HBM.LOGGER.error("Failed to reload model {}", rl, e);
+            }
+        }
+        return model;
     }
 
     // ================= 生命周期清理与事件钩子 =================

@@ -6,6 +6,8 @@
 *.iml
 out
 gen
+.idea/
+.DS_Store
 /.gradle/
 /build/
 /logs/
@@ -14,4 +16,4 @@ gen
 /.gitignore
 .gitignore
 /src/generated/resources/.cache/
-.vscode
+.vscode!/gradle.properties

@@ -16,8 +16,9 @@ import com.hbm.render.model.entity.TestEntityModel;
 import com.hbm.particle.ModParticleTypes;
 import com.hbm.render.blockentity.*;
 import com.hbm.render.entity.TestEntityRenderer;
-import com.hbm.render.entity.effect.BlackHoleRender;
 import com.hbm.render.entity.EntityBlankRender;
+import com.hbm.render.entity.effect.BlackHoleRender;
+import com.hbm.render.entity.effect.CoreExplosionRenderer;
 import com.hbm.render.entity.effect.EntityTorexRender;
 import com.hbm.render.item.SpecialItemRender;
 import net.minecraft.client.gui.screens.MenuScreens;
@@ -83,6 +84,7 @@ public class ClientEventHanler {
             EntityRenderers.register(ModEntityType.ENTITY_GRENADE_FRAG.get(), ThrownItemRenderer::new);
             EntityRenderers.register(ModEntityType.ENTITY_GRENADE_BLACK_HOLE.get(), ThrownItemRenderer::new);
             EntityRenderers.register(ModEntityType.ENTITY_BLACK_HOLE.get(), BlackHoleRender::new);
+            EntityRenderers.register(ModEntityType.ENTITY_CORE_EXPLOSION.get(), CoreExplosionRenderer::new);
             EntityRenderers.register(ModEntityType.ENTITY_NUKE_EXPLOSION_MK5.get(), EntityBlankRender::new);
             EntityRenderers.register(ModEntityType.ENTITY_NUKE_TOREX.get(), EntityTorexRender::new);
             EntityRenderers.register(ModEntityType.ENTITY_MISSILE_TEST.get(), MissileTaintRenderer::new);

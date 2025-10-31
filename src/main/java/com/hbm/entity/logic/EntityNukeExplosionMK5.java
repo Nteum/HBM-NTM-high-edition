@@ -3,6 +3,7 @@ package com.hbm.entity.logic;
 import com.hbm.api.badthing.ContaminationUtil;
 import com.hbm.config.ConfigBomb;
 import com.hbm.entity.ModEntityType;
+import com.hbm.entity.effect.EntityCoreExplosion;
 import com.hbm.explosion.ExplosionNukeGeneric;
 import com.hbm.explosion.ExplosionNukeRayBatched;
 import com.hbm.explosion.ExplosionNukeRayParallelized;
@@ -23,6 +24,7 @@ import java.util.List;
 
 public class EntityNukeExplosionMK5 extends EntityExplosionChunkLoading{
     private static final int default_explode_strength = 100;
+    private static final int LARGE_VISUAL_RADIUS_THRESHOLD = 80;
     //爆炸的强度
     public static final EntityDataAccessor<Integer> EXPLODE_STRENGTH = SynchedEntityData.defineId(EntityNukeExplosionMK5.class, EntityDataSerializers.INT);
     //爆炸半径
@@ -31,6 +33,8 @@ public class EntityNukeExplosionMK5 extends EntityExplosionChunkLoading{
     public static final EntityDataAccessor<Integer> RADIATION_SPEED = SynchedEntityData.defineId(EntityNukeExplosionMK5.class, EntityDataSerializers.INT);
     //负责爆炸的主要类
     IExplosionRay explosion;
+    private boolean spawnedVisual;
+
     public EntityNukeExplosionMK5(EntityType<?> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
@@ -48,6 +52,15 @@ public class EntityNukeExplosionMK5 extends EntityExplosionChunkLoading{
     @Override
     public void tick() {
         super.tick();
+        if (!level().isClientSide && !spawnedVisual) {
+            EntityCoreExplosion.Variant variant = getRadius() >= LARGE_VISUAL_RADIUS_THRESHOLD
+                    ? EntityCoreExplosion.Variant.LARGE : EntityCoreExplosion.Variant.SMALL;
+            EntityCoreExplosion visual = EntityCoreExplosion.spawn(level(), position(), variant);
+            if (visual != null) {
+                level().addFreshEntity(visual);
+            }
+            spawnedVisual = true;
+        }
         if (getStrength() == 0){
             this.clearChunkLoader();
             this.discard();
@@ -148,6 +161,7 @@ public class EntityNukeExplosionMK5 extends EntityExplosionChunkLoading{
         pCompound.putInt("strength",getStrength());
         pCompound.putInt("radius",getRadius());
         pCompound.putInt("speed",getSpeed());
+        pCompound.putBoolean("spawnedVisual", spawnedVisual);
     }
 
     @Override
@@ -155,6 +169,7 @@ public class EntityNukeExplosionMK5 extends EntityExplosionChunkLoading{
         this.setStrength(pCompound.getInt("strength"));
         this.setRadius(pCompound.getInt("radius"));
         this.setSpeed(pCompound.getInt("speed"));
+        this.spawnedVisual = pCompound.getBoolean("spawnedVisual");
     }
 
     protected int getStrength(){

@@ -1,0 +1,115 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"AtomicBombExplosion.model.new": {
+			"loop": true,
+			"animation_length": 21,
+			"bones": {
+				"AtomicExplosion": {
+					"scale": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.5": {
+							"vector": [1, 1, 1],
+							"easing": "easeOutQuad"
+						},
+						"5.0": {
+							"vector": [1.5, 1.5, 1.5],
+							"easing": "easeOutSine"
+						},
+						"20.0": {
+							"vector": [1.7, 1.7, 1.7],
+							"easing": "easeInSine"
+						},
+						"21.0": {
+							"vector": [0, 0, 0],
+							"easing": "easeInSine"
+						}
+					}
+				},
+				"Ring": {
+					"position": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"1.0": {
+							"vector": [0, 3.03, 0]
+						},
+						"3.0": {
+							"vector": [0, 5.41, 0]
+						},
+						"10.0": {
+							"vector": [0, 0.25, 0]
+						},
+						"20.0": {
+							"vector": [0, 0, 0]
+						}
+					},
+					"scale": {
+						"0.0": {
+							"vector": [0.8, 0.8, 0.8]
+						},
+						"2.0": {
+							"vector": [0.6, 0.6, 0.6]
+						},
+						"5.5": {
+							"vector": [0.8, 0.8, 0.8]
+						},
+						"20.0": {
+							"vector": [1.2, 1.2, 1.2]
+						}
+					}
+				},
+				"Head": {
+					"position": {
+						"0.0417": {
+							"vector": [0, -65.29, 0]
+						},
+						"1.0": {
+							"vector": [0, -59, 0]
+						},
+						"5.0": {
+							"vector": [0, -41, 0]
+						},
+						"20.0": {
+							"vector": [0, 30, 0]
+						}
+					},
+					"scale": {
+						"0.0": {
+							"vector": [0.5, 0.5, 0.5]
+						},
+						"1.0": {
+							"vector": [0.75, 0.75, 0.75],
+							"easing": "easeInSine"
+						},
+						"3.4167": {
+							"vector": [1, 1, 1],
+							"easing": "easeOutSine"
+						},
+						"20.0": {
+							"vector": [1.4, 1.4, 1.4],
+							"easing": "easeInSine"
+						},
+						"21.0": {
+							"vector": [1, 1, 1],
+							"easing": "easeInSine"
+						}
+					}
+				},
+				"FireTube": {
+					"scale": {
+						"0.0": {
+							"vector": [0.5, 1, 0.5]
+						},
+						"1.0": {
+							"vector": [1, 1, 1]
+						}
+					}
+				}
+			}
+		}
+	},
+	"geckolib_format_version": 2
+}

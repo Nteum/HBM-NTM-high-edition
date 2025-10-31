@@ -4,6 +4,7 @@ import com.hbm.HBM;
 import com.hbm.HBMKey;
 import com.hbm.entity.effect.EntityBlackHole;
 import com.hbm.entity.effect.EntityNukeTorex;
+import com.hbm.entity.effect.EntityCoreExplosion;
 import com.hbm.entity.logic.EntityNukeExplosionMK5;
 //import com.hbm.entity.mob.EntityGlyphid;
 import com.hbm.entity.mob.EntityGlyphid;
@@ -54,6 +55,13 @@ public class ModEntityType {
             = register("black_hole",EntityType.Builder.<EntityBlackHole>of(EntityBlackHole::new, MobCategory.MISC));
     public static final RegistryObject<EntityType<EntityNukeTorex>> ENTITY_NUKE_TOREX
             = register("torex",EntityType.Builder.<EntityNukeTorex>of(EntityNukeTorex::new, MobCategory.MISC));
+    public static final RegistryObject<EntityType<EntityCoreExplosion>> ENTITY_CORE_EXPLOSION
+            = register("core_explosion", EntityType.Builder
+            .<EntityCoreExplosion>of(EntityCoreExplosion::new, MobCategory.MISC)
+            .sized(1.0F, 1.0F)
+            .clientTrackingRange(256)
+            .updateInterval(1)
+            .fireImmune());
     /**
      * 炸弹实体
      * */

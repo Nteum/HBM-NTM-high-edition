@@ -1,0 +1,55 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.unknown",
+				"texture_width": 2048,
+				"texture_height": 2048,
+				"visible_bounds_width": 41,
+				"visible_bounds_height": 45.5,
+				"visible_bounds_offset": [0, 22.25, 0]
+			},
+			"bones": [
+				{
+					"name": "AtomicExplosion",
+					"pivot": [0, 0, 0]
+				},
+				{
+					"name": "Ring",
+					"parent": "AtomicExplosion",
+					"pivot": [0, 248.5, 0],
+					"cubes": [
+						{"origin": [-108, 242, -108], "size": [216, 57, 216], "uv": [1065, 1051]}
+					]
+				},
+				{
+					"name": "Bottom",
+					"parent": "AtomicExplosion",
+					"pivot": [0, 248.5, 0],
+					"cubes": [
+						{"origin": [-246, 0, -246], "size": [492, 38, 492], "uv": [0, 0]},
+						{"origin": [-64, 13, -64], "size": [128, 65, 128], "uv": [1321, 749]}
+					]
+				},
+				{
+					"name": "Head",
+					"parent": "AtomicExplosion",
+					"pivot": [0, 525.25, 0],
+					"cubes": [
+						{"origin": [-165, 384, -165], "size": [330, 189, 330], "uv": [0, 531]},
+						{"origin": [-133, 546, -133], "size": [266, 52, 266], "uv": [0, 1051]}
+					]
+				},
+				{
+					"name": "FireTube",
+					"parent": "AtomicExplosion",
+					"pivot": [0, 0, 0],
+					"cubes": [
+						{"origin": [-32, 13, -32], "size": [64, 456, 64], "uv": [1065, 1325]}
+					]
+				}
+			]
+		}
+	]
+}
