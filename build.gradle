@@ -5,7 +5,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
+        classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT' //这里因机器而异，若跑不动请换下
     }
 }
 
@@ -151,7 +151,7 @@ repositories {
         url = "https://modmaven.dev"
     }
     maven {
-        name = "GeckoLib"
+        name = "GeckoLib"//加入GeckoLib
         url = "https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/"
     }
 }
