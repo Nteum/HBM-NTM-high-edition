@@ -1,31 +1,46 @@
 package com.hbm.registries;
 
+import com.hbm.HBMKey;
 import com.hbm.block.HBMBlockComponent;
+import com.hbm.block.HBMBlockProperties;
 import com.hbm.block.HBMMachine;
 import com.hbm.block.decoriate.BlockTest12;
-import com.hbm.block.env.BedRockOre;
-import com.hbm.block.env.WasteEarth;
-import com.hbm.block.env.WasteLeaves;
+import com.hbm.block.env.*;
 import com.hbm.block.logistic.BlockCable;
 import com.hbm.block.machine.*;
 import com.hbm.block.logistic.BlockConveyor;
 import com.hbm.block.weapon.*;
 import com.hbm.Inventory.fluid.ModFluids;
+import com.hbm.datagen.LanguageProvider;
+import com.hbm.datagen.loot.BlockLootGen;
+import com.hbm.datagen.model.BlockStateGen;
+import com.hbm.datagen.model.ItemModelGen;
 import com.hbm.item.tool.BatteryBlockItem;
 import com.hbm.block.base.DummibleBlock;
+import com.hbm.registries.WrapperRegistry.*;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockBehaviour.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.material.PushReaction;
+import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Supplier;
 import java.util.function.ToIntFunction;
 
@@ -34,48 +49,52 @@ import static com.hbm.HBM.MODID;
 public class ModBlocks {
     //方块注册表
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
+    public static final List<WrappedBlockRegistry> blockList = new ArrayList<>();
     static {
         HBMMachine.register(BLOCKS);
         HBMBlockComponent.register(BLOCKS);
     }
     //机械
-    public static final RegistryObject<Block> machine_difurnace = registerBlockWithItem("machine_difurnace", ()->new BlockDifurnace(BlockBehaviour.Properties.of().lightLevel(litEmission(13))));
-    public static final RegistryObject<Block> machine_electric_furnace = registerBlockWithItem("machine_electric_furnace", ()->new BlockElectricFurnace(BlockBehaviour.Properties.of().lightLevel(litEmission(13))));
-    public static final RegistryObject<Block> machine_boiler = registerBlockWithItem("machine_boiler", ()->new BlockBoiler(BlockBehaviour.Properties.of().lightLevel(litEmission(13))));
-    public static final RegistryObject<Block> machine_electric_boiler = registerBlockWithItem("machine_electric_boiler", ()->new BlockElectricBoiler(BlockBehaviour.Properties.of().lightLevel(litEmission(14))));
-    public static final RegistryObject<Block> machine_nuclear_boiler = registerBlockWithItem("machine_nuclear_boiler", ()->new BlockNuclearBoiler(BlockBehaviour.Properties.of().lightLevel(litEmission(15))));
-    public static final RegistryObject<Block> machine_press = registerBlockWithItem("machine_press", ()->new BlockPress(BlockBehaviour.Properties.of()));
-    public static final RegistryObject<Block> machine_battery = registerBattery("machine_battery",()->new BlockBattery(BlockBehaviour.Properties.of(), BlockBattery.BatteryType.BASIC));
-    public static final RegistryObject<Block> machine_lithium_battery = registerBattery("machine_lithium_battery",()->new BlockBattery(BlockBehaviour.Properties.of(), BlockBattery.BatteryType.LITHIUM));
-    public static final RegistryObject<Block> machine_schrabidium_battery = registerBattery("machine_schrabidium_battery",()->new BlockBattery(BlockBehaviour.Properties.of(), BlockBattery.BatteryType.SCHRABIDIUM));
-    public static final RegistryObject<Block> machine_dineutronium_battery = registerBattery("machine_dineutronium_battery",()->new BlockBattery(BlockBehaviour.Properties.of(), BlockBattery.BatteryType.DINEUTRONIUM));
-    public static final RegistryObject<Block> anvil_iron = registerBlockWithItem("anvil_iron",()->new BlockAnvil(BlockBehaviour.Properties.of()));
-    public static final RegistryObject<Block> anvil_desh = registerBlockWithItem("anvil_desh",()->new BlockAnvil(BlockBehaviour.Properties.of()));
-    public static final RegistryObject<Block> anvil_bismuth = registerBlockWithItem("anvil_bismuth",()->new BlockAnvil(BlockBehaviour.Properties.of()));
-    public static final RegistryObject<Block> machine_cracking_tower = registerBlockWithItem("machine_cracking_tower",()->new BlockCrackingTower(BlockBehaviour.Properties.of()));
-    public static final RegistryObject<Block> machine_assembler = registerBlockWithItem("machine_assembler",()->new BlockAssembler(BlockBehaviour.Properties.of()));
-    public static final RegistryObject<Block> machine_crucible = registerBlockWithItem("machine_crucible",()->new BlockCrucible(BlockBehaviour.Properties.of()));
+    public static final RegistryObject<Block> machine_difurnace = registerBlockWithItem("machine_difurnace", ()->new BlockDifurnace(Properties.of().lightLevel(litEmission(13))));
+    public static final RegistryObject<Block> machine_electric_furnace = registerBlockWithItem("machine_electric_furnace", ()->new BlockElectricFurnace(Properties.of().lightLevel(litEmission(13))));
+    public static final RegistryObject<Block> machine_boiler = registerBlockWithItem("machine_boiler", ()->new BlockBoiler(Properties.of().lightLevel(litEmission(13))));
+    public static final RegistryObject<Block> machine_electric_boiler = registerBlockWithItem("machine_electric_boiler", ()->new BlockElectricBoiler(Properties.of().lightLevel(litEmission(14))));
+    public static final RegistryObject<Block> machine_nuclear_boiler = registerBlockWithItem("machine_nuclear_boiler", ()->new BlockNuclearBoiler(Properties.of().lightLevel(litEmission(15))));
+    public static final RegistryObject<Block> machine_press = registerBlockWithItem("machine_press", ()->new BlockPress(Properties.of()));
+    public static final RegistryObject<Block> machine_battery = registerBattery("machine_battery",()->new BlockBattery(Properties.of(), BlockBattery.BatteryType.BASIC));
+    public static final RegistryObject<Block> machine_lithium_battery = registerBattery("machine_lithium_battery",()->new BlockBattery(Properties.of(), BlockBattery.BatteryType.LITHIUM));
+    public static final RegistryObject<Block> machine_schrabidium_battery = registerBattery("machine_schrabidium_battery",()->new BlockBattery(Properties.of(), BlockBattery.BatteryType.SCHRABIDIUM));
+    public static final RegistryObject<Block> machine_dineutronium_battery = registerBattery("machine_dineutronium_battery",()->new BlockBattery(Properties.of(), BlockBattery.BatteryType.DINEUTRONIUM));
+    public static final RegistryObject<Block> anvil_iron = registerBlockWithItem("anvil_iron",()->new BlockAnvil(Properties.of()));
+    public static final RegistryObject<Block> anvil_desh = registerBlockWithItem("anvil_desh",()->new BlockAnvil(Properties.of()));
+    public static final RegistryObject<Block> anvil_bismuth = registerBlockWithItem("anvil_bismuth",()->new BlockAnvil(Properties.of()));
+    public static final RegistryObject<Block> machine_cracking_tower = registerBlockWithItem("machine_cracking_tower",()->new BlockCrackingTower(Properties.of()));
+    public static final RegistryObject<Block> machine_assembler = registerBlockWithItem("machine_assembler",()->new BlockAssembler(Properties.of()));
+    public static final RegistryObject<Block> machine_crucible = registerBlockWithItem("machine_crucible",()->new BlockCrucible(Properties.of()));
     //模型部分（仅仅用于加载模型渲染，而不会在游戏单独出现，名称以part开头）
-    public static final RegistryObject<Block> part_press_head = BLOCKS.register("part_press_head",()->new Block(BlockBehaviour.Properties.of().noLootTable()));
+    public static final RegistryObject<Block> part_press_head = BLOCKS.register("part_press_head",()->new Block(Properties.of().noLootTable()));
     //电力
-    public static final RegistryObject<Block> RED_CABLE = registerBlockWithItem("red_cable",()->new BlockCable(BlockBehaviour.Properties.copy(Blocks.STONE_BRICK_WALL)));
+    public static final RegistryObject<Block> RED_CABLE = registerBlockWithItem("red_cable",()->new BlockCable(Properties.copy(Blocks.STONE_BRICK_WALL)));
     //输送带
-    public static final RegistryObject<Block> conveyor = registerBlockWithItem("conveyor",()->new BlockConveyor(BlockBehaviour.Properties.of()));
+    public static final RegistryObject<Block> conveyor = registerBlockWithItem("conveyor",()->new BlockConveyor(Properties.of()));
     //炸弹
-    public static final RegistryObject<Block> bomb_boy = registerBlockWithItem("bomb_boy",()->new NukeBoy(BlockBehaviour.Properties.of(),120));
-    public static final RegistryObject<Block> bomb_fat_man = registerBlockWithItem("bomb_fat_man",()->new NukeFat(BlockBehaviour.Properties.of(),200));
-    public static final RegistryObject<Block> bomb_custom = registerBlockWithItem("bomb_custom",()->new NukeCustom(BlockBehaviour.Properties.of(),350));
+    public static final RegistryObject<Block> bomb_boy = registerBlockWithItem("bomb_boy",()->new NukeBoy(Properties.of(),120));
+    public static final RegistryObject<Block> bomb_fat_man = registerBlockWithItem("bomb_fat_man",()->new NukeFat(Properties.of(),200));
+    public static final RegistryObject<Block> bomb_custom = registerBlockWithItem("bomb_custom",()->new NukeCustom(Properties.of(),350));
     //发射台
 
     //流体
-//    public static final RegistryObject<LiquidBlock> irradiated_water = BLOCKS.register("irradiated_water", ()->new LiquidBlock(ModFluids.IRRADIATED_WATER_SOURCE_BLOCK,BlockBehaviour.Properties.copy(Blocks.WATER).noLootTable()));
-//    public static final RegistryObject<LiquidBlock> irradiated_polluted = BLOCKS.register("irradiated_polluted", ()->new LiquidBlock(ModFluids.IRRADIATED_POLLUTED_SOURCE_BLOCK,BlockBehaviour.Properties.copy(Blocks.WATER).noLootTable()));
-//    public static final RegistryObject<LiquidBlock> sulfuric_acid = BLOCKS.register("sulfuric_acid", ()->new LiquidBlock(ModFluids.SULFURIC_ACID_SOURCE_BLOCK,BlockBehaviour.Properties.copy(Blocks.WATER).noLootTable()));
+//    public static final RegistryObject<LiquidBlock> irradiated_water = BLOCKS.register("irradiated_water", ()->new LiquidBlock(ModFluids.IRRADIATED_WATER_SOURCE_BLOCK,Properties.copy(Blocks.WATER).noLootTable()));
+//    public static final RegistryObject<LiquidBlock> irradiated_polluted = BLOCKS.register("irradiated_polluted", ()->new LiquidBlock(ModFluids.IRRADIATED_POLLUTED_SOURCE_BLOCK,Properties.copy(Blocks.WATER).noLootTable()));
+//    public static final RegistryObject<LiquidBlock> sulfuric_acid = BLOCKS.register("sulfuric_acid", ()->new LiquidBlock(ModFluids.SULFURIC_ACID_SOURCE_BLOCK,Properties.copy(Blocks.WATER).noLootTable()));
 
     //逻辑物
-    public static final RegistryObject<Block> DUMMIBLE = registerBlockWithItem("dummible",()->new DummibleBlock(BlockBehaviour.Properties.copy(Blocks.STONE).noLootTable()));
+    public static final RegistryObject<Block> DUMMIBLE = registerBlockWithItem("dummible",()->new DummibleBlock(Properties.copy(Blocks.STONE).noLootTable()));
     //装饰
-    public static final RegistryObject<Block> TEST12 = registerBlockWithItem("test12",()->new BlockTest12(BlockBehaviour.Properties.of()));
+    public static final RegistryObject<Block> TEST12 = registerBlockWithItem("test12",()->new BlockTest12(Properties.of()));
+    // glyphid
+    public static final WrappedBlockRegistry GLYPHID_BLOCK = add("glyphid_block", ()->new GlyphidBlock(Properties.copy(Blocks.STONE).pushReaction(PushReaction.IGNORE).explosionResistance(0.5f)), ModCreativeModeTab.HBM_BLOCK.getKey(), HBMKey.STANDALONE_MODEL, HBMKey.ORDERLY_GEN, HBMKey.DROP_NONE);
+    public static final WrappedBlockRegistry GLYPHID_SPAWNER = add("glyphid_spawner", ()->new GlyphidSpawner(Properties.copy(Blocks.STONE).pushReaction(PushReaction.IGNORE).explosionResistance(0.5f)), ModCreativeModeTab.HBM_BLOCK.getKey(), HBMKey.STANDALONE_MODEL, HBMKey.ORDERLY_GEN, HBMKey.DROP_NONE);
 
     public static ToIntFunction<BlockState> litEmission(int value){
         return state -> {
@@ -99,5 +118,53 @@ public class ModBlocks {
     }
     public static void register(IEventBus modEventBus){
         BLOCKS.register(modEventBus);
+    }
+
+    public static void creativeTab(BuildCreativeModeTabContentsEvent event){
+        for (WrappedBlockRegistry blockRegistry : blockList) {
+            blockRegistry.creativeTabSupport(event);
+        }
+    }
+
+    public static void genModel(BlockStateGen provider){
+        for (WrappedBlockRegistry blockRegistry : blockList) {
+            blockRegistry.modelSupport(provider);
+        }
+        provider.addIntStateCubeAllBlock(ModBlocks.GLYPHID_BLOCK.get(), HBMBlockProperties.VARIANT3);
+        provider.addIntStateCubeAllBlock(ModBlocks.GLYPHID_SPAWNER.get(), HBMBlockProperties.VARIANT3);
+    }
+    public static void languageSupport(LanguageProvider provider){
+        for (WrappedBlockRegistry blockRegistry : blockList) {
+            blockRegistry.languageSupport(provider);
+        }
+    }
+
+    public static void lootSupport(BlockLootGen provider){
+        for (WrappedBlockRegistry blockRegistry : blockList) {
+            blockRegistry.lootSupport(provider);
+        }
+    }
+
+    public static WrappedBlockRegistry natural(final String name, final Supplier<? extends Block> sup, String genNameWay){
+        return add(name, sup, CreativeModeTabs.NATURAL_BLOCKS, HBMKey.BASIC_MODEL, HBMKey.DROP_SELF, genNameWay, null);
+    }
+
+    public static WrappedBlockRegistry add(final String name, final Supplier<? extends Block> sup, ResourceKey<CreativeModeTab> tabKey, String genNameWay){
+        return add(name, sup, tabKey, HBMKey.BASIC_MODEL, genNameWay, HBMKey.DROP_SELF, null);
+    }
+    public static WrappedBlockRegistry add(final String name, final Supplier<? extends Block> sup, ResourceKey<CreativeModeTab> tabKey, String genModelWay, String genNameWay, String lootWay){
+        return add(name, sup, tabKey, genModelWay, genNameWay, lootWay, null);
+    }
+    public static WrappedBlockRegistry add(final String name, final Supplier<? extends Block> sup, ResourceKey<CreativeModeTab> tabKey, String genModelWay, String genNameWay, String lootWay, String localizedName){
+        WrappedBlockRegistry blockRegistry = new WrappedBlockRegistry();
+        blockRegistry.registryObject = registerBlockWithItem(name, sup);
+        blockRegistry.creativeKey = tabKey;
+        blockRegistry.genModelWay = genModelWay;
+        blockRegistry.genNameWay = genNameWay;
+        blockRegistry.lootWay = lootWay;
+        if (blockRegistry.genNameWay!= null && blockRegistry.genNameWay.equals(HBMKey.LITERALLY) && localizedName!=null)
+            blockRegistry.localizedName = localizedName;
+        blockList.add(blockRegistry);
+        return blockRegistry;
     }
 }

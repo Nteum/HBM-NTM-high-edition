@@ -2,6 +2,7 @@ package com.hbm.blockentity;
 
 import com.hbm.block.HBMMachine;
 import com.hbm.block.base.BlockDummyable;
+import com.hbm.block.env.GlyphidSpawner;
 import com.hbm.blockentity.base2.TileProxyCombo;
 import com.hbm.blockentity.machine.*;
 import com.hbm.HBM;
@@ -72,4 +73,6 @@ public class ModBlockEntityType {
             ).build(null));
     public static final RegistryObject<BlockEntityType<TileEntityGeiger>> GEIGER_COUNTER =
             REGISTER.register("geiger_counter",()-> BlockEntityType.Builder.of(TileEntityGeiger::new, HBMMachine.GEIGER_COUNTER.get()).build(null));
+    public static final RegistryObject<BlockEntityType<GlyphidSpawner.GlyphidSpawnerEntity>> GLYPHID_SPAWNER =
+            REGISTER.register("glyphid_spawner",()-> BlockEntityType.Builder.of(GlyphidSpawner.GlyphidSpawnerEntity::new, ModBlocks.GLYPHID_SPAWNER.get()).build(null));
 }

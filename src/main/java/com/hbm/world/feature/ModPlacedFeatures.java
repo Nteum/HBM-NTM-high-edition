@@ -6,9 +6,11 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.placement.*;
+import net.minecraftforge.common.Tags;
 
 import java.util.List;
 
@@ -31,6 +33,7 @@ public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> URANIUM_ORE_OVERWORLD = createKey("uranium_ore_overworld");
     public static final ResourceKey<PlacedFeature> ORE_SPHERE_OVERWORLD = createKey("ore_sphere_overworld");
     public static final ResourceKey<PlacedFeature> BEDROCK_ORE_OVERWORLD = createKey("bedrock_ore_overworld");
+    public static final ResourceKey<PlacedFeature> GLYPHID_HIVE = createKey("glyphid_hive");
 
     public static void bootstrap(BootstapContext<PlacedFeature> context){
         HolderGetter<ConfiguredFeature<?, ?>> holdergetter = context.lookup(Registries.CONFIGURED_FEATURE);
@@ -42,6 +45,8 @@ public class ModPlacedFeatures {
                 RarityFilter.onAverageOnceEvery(24), InSquarePlacement.spread(), HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(6), VerticalAnchor.absolute(30)), BiomeFilter.biome());
         //基岩矿石生成
         PlacementUtils.register(context, BEDROCK_ORE_OVERWORLD, holdergetter.getOrThrow(ModConfiguredFeatures.BEDROCK_ORE_OVERWORLD),RarityFilter.onAverageOnceEvery(1));
+        // 异虫巢
+        PlacementUtils.register(context, GLYPHID_HIVE, holdergetter.getOrThrow(ModConfiguredFeatures.GLYPHID_HIVE) ,RarityFilter.onAverageOnceEvery(20), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_TOP_SOLID, BiomeFilter.biome());
     }
 
     public static ResourceKey<PlacedFeature> createKey(String pKey) {

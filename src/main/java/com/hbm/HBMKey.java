@@ -7,6 +7,7 @@ public class HBMKey {
     public static final String MODID = "hbm";
     // block state
     public static final String IS_CORE = "is_core";
+    public static final String VARIANT = "variant";
     // key relate to capability
     public static final String DATA = "hbmdata";
     public static final String CAPS = "capability";
@@ -62,9 +63,13 @@ public class HBMKey {
     public static final String BASIC_MODEL = "basic_model";
     public static final String SPAWN_EGG_MODEL = "spawn_egg_model";
     public static final String ENTITY_MODEL = "entity_model";
+    public static final String CUBE_ALL_MODEL = "cube_all_model";
+    public static final String STANDALONE_MODEL = "standalone_model";
     public static final String LITERALLY = "literally";
     public static final String ORDERLY_GEN = "orderly_gen";
     public static final String REVERSE_GEN = "reverse_gen";
     public static final String ORDERLY_GEN_EXCEPT_FIRST = "orderly_gen_except_first";
-
+    public static final String DROP_SELF = "drop_self";
+    public static final String DROP_NONE = "drop_none";
+    public static final String DROP_STANDALONE = "drop_standalone";
 }

@@ -1,6 +1,8 @@
 package com.hbm.block.weapon;
 
 import com.hbm.block.base.BlockDummyable;
+import com.hbm.blockentity.weapon.EntityNukeBomb;
+import com.hbm.blockentity.weapon.LaunchPadTileEntity;
 import com.hbm.entity.effect.EntityNukeTorex;
 import com.hbm.entity.logic.EntityNukeExplosionMK5;
 import com.hbm.registries.ModSounds;
@@ -43,7 +45,7 @@ public abstract class NukeBomb extends BlockDummyable implements IBomb {
         if (!pLevel.isClientSide){
             // 先判断core状态的行为，再判断不是core状态的行为，否则程序会陷入死循环。
             if (pState.getValue(IS_CORE)){
-                if (pLevel.hasNeighborSignal(pPos)){
+                if (pLevel.getBlockEntity(pPos) instanceof EntityNukeBomb bomb && pLevel.hasNeighborSignal(pPos)){
                     pLevel.removeBlock(pPos, false);
                     explode(pLevel, pPos);
                 }

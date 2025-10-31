@@ -129,6 +129,7 @@ public class ModCreativeModeTab {
      * */
     public static void addCreative(BuildCreativeModeTabContentsEvent event){
             ModItems.creativeTab(event);
+            ModBlocks.creativeTab(event);
             if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS){}
 
             else if (event.getTabKey() == CreativeModeTabs.COLORED_BLOCKS){}

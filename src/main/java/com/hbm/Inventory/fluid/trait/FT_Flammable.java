@@ -3,7 +3,7 @@ package com.hbm.Inventory.fluid.trait;
 import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonWriter;
 import com.hbm.HBMLang;
-import com.hbm.utils.BobMathUtil;
+import com.hbm.utils.BobMth;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 
@@ -30,7 +30,7 @@ public class FT_Flammable extends FluidTrait {
 		super.addInfo(info);
 		info.add(Component.translatable(HBMLang.FT_FLAMMABLE1.key()).withStyle(ChatFormatting.YELLOW));
 		if(energy > 0)
-			info.add(Component.translatable(HBMLang.FT_FLAMMABLE2.key(), BobMathUtil.getShortNumber(energy)).withStyle(ChatFormatting.YELLOW));
+			info.add(Component.translatable(HBMLang.FT_FLAMMABLE2.key(), BobMth.getShortNumber(energy)).withStyle(ChatFormatting.YELLOW));
 	}
 
 	@Override

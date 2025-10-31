@@ -7,7 +7,7 @@ import com.hbm.api.energy.ItemStackEnergyHandler;
 import com.hbm.capabilities.HBMCaps;
 import com.hbm.capabilities.ItemCapabilityWrapper;
 import com.hbm.item.tool.BatteryItem;
-import com.hbm.utils.BobMathUtil;
+import com.hbm.utils.BobMth;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
@@ -46,7 +46,7 @@ public class ItemArmorFSBPowered extends ItemArmorFSB{
 
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> list, TooltipFlag pIsAdvanced) {
-        list.add(Component.translatable(HBMLang.TOOLTIP_CHARGERATE.key(), BobMathUtil.getShortNumber(getCharge(pStack)), BobMathUtil.getShortNumber(getCapacity(pStack))));
+        list.add(Component.translatable(HBMLang.TOOLTIP_CHARGERATE.key(), BobMth.getShortNumber(getCharge(pStack)), BobMth.getShortNumber(getCapacity(pStack))));
         super.appendHoverText(pStack, pLevel, list, pIsAdvanced);
     }
 

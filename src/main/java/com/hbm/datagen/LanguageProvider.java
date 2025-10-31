@@ -22,6 +22,7 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
     @Override
     protected void addTranslations() {
         ModItems.languageSupport(this);
+        ModBlocks.languageSupport(this);
         HBMDamage.languageSupport(this);
         addCreativeTabs();
         addItems();

@@ -12,7 +12,7 @@ import java.text.NumberFormat;
 import java.util.*;
 import java.util.function.ToIntFunction;
 
-public class BobMathUtil {
+public class BobMth {
 	
 	public static double safeClamp(double val, double min, double max) {
 
@@ -230,5 +230,12 @@ public class BobMathUtil {
 	public static double sws(double x, double squarination) {
 		double s = Math.sin(x);
 		return Math.pow(Math.abs(s), 2 - squarination) / s;
+	}
+
+	/**
+	 * 新添加
+	 * */
+	public static float degree2Radians(float degree){
+		return Mth.wrapDegrees(degree) * Mth.PI / 180;
 	}
 }
