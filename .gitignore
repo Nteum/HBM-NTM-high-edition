@@ -1,6 +1,6 @@
 ### Example user template template
 ### Example user template
-
+# gitignore我草拟大坝
 # IntelliJ project files
 .idea
 *.iml
