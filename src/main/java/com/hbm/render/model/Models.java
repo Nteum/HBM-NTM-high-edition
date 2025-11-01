@@ -179,7 +179,7 @@ public class Models {
     public static class ForgeSideHooks {
         @net.minecraftforge.eventbus.api.SubscribeEvent
         public static void onClientDisconnect(net.minecraftforge.client.event.ClientPlayerNetworkEvent.LoggingOut e) {
-            clearCaches("ClientDisconnect");
+//            clearCaches("ClientDisconnect");
         }
         @net.minecraftforge.eventbus.api.SubscribeEvent
         public static void onRegisterReload(net.minecraftforge.client.event.RegisterClientReloadListenersEvent e) {

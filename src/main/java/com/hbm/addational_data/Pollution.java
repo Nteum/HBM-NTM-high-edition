@@ -28,7 +28,6 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent;
 import net.minecraftforge.event.entity.living.MobSpawnEvent;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -208,10 +207,10 @@ public class Pollution implements INBTSerializable<CompoundTag> {
 
         if(MobConfig.rampantNaturalScoutSpawn) {
 
-//            event.register(ModEntityType.GLYPHID_SCOUT.get(), (pEntityType, pServerLevel, pSpawnType, pPos, pRandom) -> {
-//                Pollution pollution = getPollution(pServerLevel.getLevel(), pPos);
-//                return pollution != null && pollution.pollution[Type.SOOT.ordinal()] > MobConfig.rampantScoutSpawnThresh;
-//            });
+            event.register(ModEntityType.GLYPHID_SCOUT.get(), (pEntityType, pServerLevel, pSpawnType, pPos, pRandom) -> {
+                Pollution pollution = getPollution(pServerLevel.getLevel(), pPos);
+                return pollution != null && pollution.pollution[Type.SOOT.ordinal()] > MobConfig.rampantScoutSpawnThresh;
+            });
 
 //            if (event.rand.nextInt(MobConfig.rampantScoutSpawnChance) == 0) {
 //
@@ -247,17 +246,18 @@ public class Pollution implements INBTSerializable<CompoundTag> {
     }
 
     public static void showPollution(Level level, Player player){
-        Pollution pollution1 = getPollution(level, player.getOnPos());
         if (player == null) return;
+        Pollution pollution1 = getPollution(level, player.getOnPos());
         player.sendSystemMessage(Component.literal("Position: " + player.getOnPos().toShortString() +
                 "\tSOOT: " + pollution1.pollution[Type.SOOT.ordinal()] + "\tPOISON: " + pollution1.pollution[Type.POISON.ordinal()] +
                 "\tHEAVYMETAL: " + pollution1.pollution[Type.HEAVYMETAL.ordinal()] + "\tFALLOUT: " + pollution1.pollution[Type.FALLOUT.ordinal()]));
     }
 
     public static void clearPollution(Level level, Player player){
+        if (player == null) return;
         setPollution(level, player.getOnPos(), new Pollution());
     }
-    
+
     public static Fluid getPollutingFluid(Type type){
         return switch (type){
             case SOOT -> ModFluids.SMOKE.source().get();
@@ -266,7 +266,7 @@ public class Pollution implements INBTSerializable<CompoundTag> {
             default -> null;
         };
     }
-    
+
     public enum Type{
         NONE(0),
         SOOT(1 / 25f),

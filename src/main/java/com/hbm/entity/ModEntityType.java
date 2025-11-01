@@ -6,6 +6,7 @@ import com.hbm.entity.effect.EntityMeteor;
 import com.hbm.entity.effect.EntityNukeTorex;
 import com.hbm.entity.logic.EntityNukeExplosionMK5;
 import com.hbm.entity.mob.EntityGlyphid;
+import com.hbm.entity.mob.EntityGlyphidScout;
 import com.hbm.entity.projectile.EntityRubble;
 import com.hbm.entity.weapon.projectile.EntityGunBullet;
 import com.hbm.entity.weapon.grenade.*;
@@ -75,9 +76,9 @@ public class ModEntityType {
     public static final RegistryObject<EntityType<EntityGlyphid>> GLYPHID
             = register("glyphid",EntityType.Builder.<EntityGlyphid>of(EntityGlyphid::new, MobCategory.MONSTER)
             .sized(1.75F, 1F));
-//    public static final RegistryObject<EntityType<EntityGlyphidScout>> GLYPHID_SCOUT
-//            = register("glyphid_scout",EntityType.Builder.<EntityGlyphidScout>of(EntityGlyphidScout::new, MobCategory.MONSTER)
-//            .sized(1.75F, 1F));
+    public static final RegistryObject<EntityType<EntityGlyphidScout>> GLYPHID_SCOUT
+            = register("glyphid_scout",EntityType.Builder.<EntityGlyphidScout>of(EntityGlyphidScout::new, MobCategory.MONSTER)
+            .sized(1.75F, 1F));
 
     private static <T extends Entity> RegistryObject<EntityType<T>> register(String pKey, EntityType.Builder<T> pBuilder) {
         return ENTITY_TYPES.register(pKey,()->pBuilder.build(new ResourceLocation(HBM.MODID,pKey).toString()));

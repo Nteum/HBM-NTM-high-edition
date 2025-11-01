@@ -68,18 +68,19 @@ public class AdditionalDataManager {
     public static void onLevelUpdate(TickEvent.LevelTickEvent event){
         if (event.side == LogicalSide.SERVER){
             ServerLevel level = (ServerLevel) event.level;
-            // 随机更新已加载区块
-            if (level.random.nextFloat() < chunkAccessProb){
-                level.getChunkSource().chunkMap.getChunks().forEach(chunkHolder -> {
-                    LevelChunk fullChunk = chunkHolder.getFullChunk();
-                    if (fullChunk != null){
-                        getChunkData(fullChunk).ifPresent(chunkData -> {
-                            // 更新chunk数据
-                            RadiationManager.updateRadiation(level, fullChunk, chunkData);
-                        });
-                    }
-                });
-            }
+            // 更新已加载区块
+            level.getChunkSource().chunkMap.getChunks().forEach(chunkHolder -> {
+                LevelChunk fullChunk = chunkHolder.getFullChunk();
+                if (fullChunk != null){
+                    getChunkData(fullChunk).ifPresent(chunkData -> {
+                        // 更新chunk数据
+                        RadiationManager.updateRadiation(level, fullChunk, chunkData);
+//                        Pollution.update(level, fullChunk, chunkData);
+                    });
+                }
+            });
+            //
+            Pollution.tick(level);
         }
     }
 

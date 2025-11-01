@@ -1,6 +1,6 @@
 package com.hbm.main;
 
-import com.hbm.HBM;
+import com.hbm.addational_data.Pollution;
 import com.hbm.config.ClientConfig;
 import com.hbm.config.ServerConfig;
 import com.hbm.dev.AssetConsistencyChecker;
@@ -14,22 +14,23 @@ import com.hbm.registries.ModItems;
 import com.hbm.item.env.ItemEggGlyphid;
 import com.hbm.network.ServerMsgHandler;
 import com.hbm.registries.HBMDamage;
+import com.hbm.registries.ModCommands;
 import com.hbm.utils.transport_net.EnergyNetworkSystem;
 import com.hbm.utils.transport_net.FluidNetworkSystem;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.event.ItemStackedOnOtherEvent;
+import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.TagsUpdatedEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
-import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
-import net.minecraftforge.event.entity.EntityLeaveLevelEvent;
+import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent;
 import net.minecraftforge.event.entity.item.ItemTossEvent;
+import net.minecraftforge.event.entity.living.MobSpawnEvent;
 import net.minecraftforge.event.level.LevelEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -42,13 +43,16 @@ public class ServerEventHandler {
         modBus.addListener(ServerEventHandler::onServerSetup);
         modBus.addListener(ServerEventHandler::onLoadComplete);
         modBus.addListener(ServerEventHandler::createEntityAttribute);
+        modBus.addListener(ServerEventHandler::onSpawnPlacementRegisterEvent);
         forgeBus.addListener(ServerEventHandler::onTagsUpdated);
         forgeBus.addListener(ServerEventHandler::levelTick);
         forgeBus.addListener(ServerEventHandler::levelUnload);
+        forgeBus.addListener(ServerEventHandler::registerCommands);
         forgeBus.addListener(ServerEventHandler::serverTick);
         forgeBus.addListener(ServerEventHandler::onPlayerClickInventory);
         forgeBus.addListener(ServerEventHandler::onPlayerTossItem);
         forgeBus.addListener(ServerEventHandler::onEntityJoin);
+        forgeBus.addListener(ServerEventHandler::onFinialSpawn);
     }
 
 
@@ -92,8 +96,14 @@ public class ServerEventHandler {
     }
 
     @SubscribeEvent
+    public static void registerCommands(RegisterCommandsEvent event){
+        ModCommands.registerServerCommands(event);
+    }
+
+    @SubscribeEvent
     public static void createEntityAttribute(EntityAttributeCreationEvent event){
         event.put(ModEntityType.GLYPHID.get(), EntityGlyphid.createMobAttributes().build());
+        event.put(ModEntityType.GLYPHID_SCOUT.get(), EntityGlyphid.createMobAttributes().build());
     }
 
     @SubscribeEvent
@@ -142,5 +152,15 @@ public class ServerEventHandler {
         }else {
             entity.setNoGravity(isNoGravity);
         }
+    }
+
+    @SubscribeEvent
+    public static void onSpawnPlacementRegisterEvent(SpawnPlacementRegisterEvent event){
+        Pollution.rampantScoutPopulator(event);
+    }
+
+    @SubscribeEvent
+    public static void onFinialSpawn(MobSpawnEvent.FinalizeSpawn event){
+        Pollution.enforceMob(event);
     }
 }
