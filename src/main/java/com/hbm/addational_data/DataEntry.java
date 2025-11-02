@@ -12,7 +12,8 @@ public enum DataEntry {
     RADIATION_IMMUNE,
     CONTAMINATION_EFFECTS(ContaminationEffectLists.class),
     DIGMMA(Float.class),
-    POLLUTION(Float.class),
+    POLLUTION(Pollution.class),
+//    POLLUTION(Float.class),
     JETPACK_ENABLE(null),
 
     RIGHT_CLICK_COUNT(RightClickCount.class)

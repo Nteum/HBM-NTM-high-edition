@@ -60,6 +60,16 @@ public class HBMJsonProvider implements DataProvider {
         this.dataToGenerate.put(rl, root);
     }
 
+    public void simpleParticle2Name(String name, String tex){
+        ResourceLocation rl = particleRl.withSuffix(name);
+        JsonObject root = new JsonObject();
+        JsonArray texture = new JsonArray();
+        texture.add(HBM.rl(tex).toString());
+        root.add("textures", texture);
+
+        this.dataToGenerate.put(rl, root);
+    }
+
     private void damageType(){
         HBMDamage.damageTypeJson(this);
     }

@@ -66,7 +66,7 @@ public class MobConfig {
 	public static boolean rampantDig = false;
 	public static boolean rampantGlyphidGuidance = false;
 	public static double rampantSmokeStackOverride = 0.4;
-	public static double pollutionMult = 3;
+	public static float pollutionMult = 3;
 	
 	public static void addConfig(ForgeConfigSpec.Builder builder) {
 		builder.push(CommonConfig.CATEGORY_MOBS);

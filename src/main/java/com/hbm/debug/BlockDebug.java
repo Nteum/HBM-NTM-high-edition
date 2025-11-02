@@ -1,5 +1,6 @@
-package com.hbm.utils.debug;
+package com.hbm.debug;
 
+import com.hbm.explosion.temp.ExplosionOneOff;
 import com.hbm.item.HBMtools;
 import com.hbm.particle.ModParticleTypes;
 import com.hbm.particle.ParticleSystem;
@@ -9,18 +10,31 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.item.PrimedTnt;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.RedstoneLampBlock;
+import net.minecraft.world.level.block.TntBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.common.world.BiomeModifier;
+import net.minecraftforge.common.world.ForgeBiomeModifiers;
+
+import java.util.List;
 
 public class BlockDebug extends Block {
     public static final BooleanProperty ACTIVE = BooleanProperty.create("debug_active");
@@ -37,13 +51,14 @@ public class BlockDebug extends Block {
 
     @Override
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-        if (!pLevel.isClientSide && pPlayer.getItemInHand(pHand).is(HBMtools.DEBUG_WAND.get())){
-//            BlockState newState = pState.cycle(ACTIVE);
-//            pLevel.setBlock(pPos, newState,2);
-//            pPlayer.sendSystemMessage(Component.literal("Debug block switch to " + (newState.getValue(ACTIVE) ? "active" : "inactive")));
-            dropParticle(ModParticleTypes.DEAD_LEAF.get(), pLevel, pPos, pPlayer);
-        }
-        if (pLevel.isClientSide){
+        ItemStack itemInHand = pPlayer.getItemInHand(pHand);
+        if (!pLevel.isClientSide()){
+            if (itemInHand.is(HBMtools.DEBUG_WAND.get())){
+
+            } else if (itemInHand.is(Items.FLINT_AND_STEEL)){
+                return explode(pState, pLevel, pPos, pPlayer);
+            }
+        }else {
 
         }
         return super.use(pState, pLevel, pPos, pPlayer, pHand, pHit);
@@ -78,5 +93,17 @@ public class BlockDebug extends Block {
         }else {
             pLevel.addParticle(type, center.x, center.y, center.z, 0, 0, 0);
         }
+    }
+    public InteractionResult explode(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer){
+        if (!pLevel.isClientSide) {
+            pLevel.removeBlock(pPos, false);
+            ExplosionOneOff explode = ExplosionOneOff.explode(pLevel, pPlayer, null, null, pPos.getCenter().x, pPos.getCenter().y, pPos.getCenter().z, 32, false, Level.ExplosionInteraction.TNT, true);
+//            explode.setResolution(32);
+            explode.setBlockAllocator(new ExplosionOneOff.BlockAllocateBulkie(60));
+            explode.setEntityProcessor(new ExplosionOneOff.EntityProcessorVanilla());
+            explode.setBlockProcessor(new ExplosionOneOff.BlockProcessorStandard().setMutator(new ExplosionOneOff.BlockMutatorBulkie(Blocks.GOLD_ORE.defaultBlockState())).setNoDrop());
+            explode.explode();
+        }
+        return InteractionResult.CONSUME;
     }
 }

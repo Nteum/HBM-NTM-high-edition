@@ -1,26 +1,18 @@
 package com.hbm.entity;
 
 import com.hbm.HBM;
-import com.hbm.HBMKey;
 import com.hbm.entity.effect.EntityBlackHole;
 import com.hbm.entity.effect.EntityNukeTorex;
 import com.hbm.entity.logic.EntityNukeExplosionMK5;
-//import com.hbm.entity.mob.EntityGlyphid;
 import com.hbm.entity.mob.EntityGlyphid;
+import com.hbm.entity.mob.EntityGlyphidScout;
 import com.hbm.entity.weapon.grenade.*;
-//import com.hbm.entity.logic.GrenadeGeneticEntity;
-//import com.hbm.entity.logic.NukeExplodeEntity;
 import com.hbm.entity.weapon.missile.EntityMissileAntiBallistic;
-import com.hbm.entity.weapon.missile.EntityMissileTier0.*;
-import com.hbm.registries.ModItems;
+import com.hbm.entity.weapon.missile.EntityMissileTier0.EntityMissileTest;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobCategory;
-import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.SpawnEggItem;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -67,6 +59,9 @@ public class ModEntityType {
      * */
     public static final RegistryObject<EntityType<EntityGlyphid>> GLYPHID
             = register("glyphid",EntityType.Builder.<EntityGlyphid>of(EntityGlyphid::new, MobCategory.MONSTER)
+            .sized(1.75F, 1F));
+    public static final RegistryObject<EntityType<EntityGlyphidScout>> GLYPHID_SCOUT
+            = register("glyphid_scout",EntityType.Builder.<EntityGlyphidScout>of(EntityGlyphidScout::new, MobCategory.MONSTER)
             .sized(1.75F, 1F));
 
     private static <T extends Entity> RegistryObject<EntityType<T>> register(String pKey, EntityType.Builder<T> pBuilder) {

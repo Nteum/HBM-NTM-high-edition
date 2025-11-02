@@ -2,7 +2,7 @@ package com.hbm.item;
 
 import com.hbm.item.tool.ItemGeigerCounter;
 import com.hbm.item.weapon.ItemDesignator;
-import com.hbm.utils.debug.ItemDebugWand;
+import com.hbm.debug.ItemDebugWand;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.client.model.generators.ItemModelProvider;

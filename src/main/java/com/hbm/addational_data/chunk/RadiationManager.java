@@ -41,6 +41,7 @@ public class RadiationManager {
         incrementRadiation(level, blockPos, -radToSubtract);
     }
     public static void updateRadiation(ServerLevel level, LevelChunk chunk, IChunkAdditionalData chunkData){
+        if (level.random.nextInt(20) != 0) return;
         ChunkPos pos = chunk.getPos();
         float rad_add = 0f;
         for (int i = -1; i <= 1; i++) {
