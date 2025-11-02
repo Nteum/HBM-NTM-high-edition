@@ -23,7 +23,7 @@ public class ParticleRocketFlame extends TextureSheetParticle {
 
     public ParticleRocketFlame(ClientLevel pLevel, double pX, double pY, double pZ, double pXSpeed, double pYSpeed, double pZSpeed, SpriteSet sprites) {
         super(pLevel, pX, pY, pZ, pXSpeed, pYSpeed, pZSpeed);
-        this.gravity = -0.2f;
+//        this.gravity = -0.2f;
         this.friction = 0.91f;
         this.lifetime = 300 + pLevel.random.nextInt(50);
 //        this.setSpriteFromAge(sprite);
@@ -36,8 +36,6 @@ public class ParticleRocketFlame extends TextureSheetParticle {
             gaussianRands[i] = pLevel.getRandom().nextGaussian();
         }
         setSprite(sprites.get(pLevel.random));
-        // 测试静止陨石
-        this.yd = 1;
     }
 
     @Override

@@ -1,16 +1,12 @@
-package com.hbm.utils.debug;
+package com.hbm.debug;
 
-import com.google.errorprone.annotations.Var;
 import com.hbm.HBM;
 import com.hbm.HBMKey;
 import com.hbm.HBMLang;
 import com.hbm.addational_data.AdditionalDataManager;
 import com.hbm.addational_data.DataEntry;
-import com.hbm.effect.ModEffects;
 import com.hbm.entity.weapon.missile.EntityMissileTier0.*;
-import com.hbm.utils.NBTUtils;
 import com.hbm.utils.WorldUtils;
-import com.sun.jna.platform.win32.Pdh;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.SectionPos;
 import net.minecraft.nbt.CompoundTag;
@@ -21,7 +17,6 @@ import net.minecraft.server.level.TicketType;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.player.Player;
@@ -32,17 +27,14 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.CampfireBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraftforge.common.world.ForgeChunkManager;
-import org.antlr.v4.misc.Utils;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class ItemDebugWand extends Item {
 

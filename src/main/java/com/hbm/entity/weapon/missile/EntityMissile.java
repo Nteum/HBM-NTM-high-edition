@@ -3,9 +3,6 @@ package com.hbm.entity.weapon.missile;
 import com.hbm.HBM;
 import com.hbm.entity.IRadarDetectableNT;
 import com.hbm.entity.projectile.EntityThrowableNT;
-import com.hbm.explosion.vanillant.ExplosionVNT;
-import com.hbm.explosion.vanillant.standard.BlockAllocatorStandard;
-import com.hbm.explosion.vanillant.standard.PlayerProcessorStandard;
 import com.hbm.item.weapon.ItemMissilePart;
 import com.hbm.particle.ParticleSystem;
 import com.hbm.utils.chunk.ChunkLoadHelper;
@@ -347,12 +344,12 @@ public abstract class EntityMissile extends EntityThrowableNT implements IRadarD
     List<ChunkPos> loadedChunks = new ArrayList<ChunkPos>();
 
     public void explodeStandard(float strength, int resolution, boolean fire) {
-        ExplosionVNT xnt = new ExplosionVNT(level(), position().x, position().y, position().z, strength);
-        xnt.setBlockAllocator(new BlockAllocatorStandard(resolution));
-//        xnt.setBlockProcessor(new BlockProcessorStandard().setNoDrop().withBlockEffect(fire ? new BlockMutatorFire() : null));
-//        xnt.setEntityProcessor(new EntityProcessorCross(7.5D).withRangeMod(2));
-        xnt.setPlayerProcessor(new PlayerProcessorStandard());
-        xnt.explode();
+//        ExplosionVNT xnt = new ExplosionVNT(level(), position().x, position().y, position().z, strength);
+//        xnt.setBlockAllocator(new BlockAllocatorStandard(resolution));
+////        xnt.setBlockProcessor(new BlockProcessorStandard().setNoDrop().withBlockEffect(fire ? new BlockMutatorFire() : null));
+////        xnt.setEntityProcessor(new EntityProcessorCross(7.5D).withRangeMod(2));
+//        xnt.setPlayerProcessor(new PlayerProcessorStandard());
+//        xnt.explode();
     }
 
     public void loadNeighboringChunks(int newChunkX, int newChunkZ){

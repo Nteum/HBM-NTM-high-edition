@@ -1,12 +1,7 @@
 package com.hbm.network;
 
 import com.hbm.HBM;
-import com.hbm.network.packet.toclient.AuxParticlePacket;
-import com.hbm.network.packet.toclient.S2CAtomicFlashPacket;
-//import com.hbm.network.packet.toclient.S2CBatchedRenderUpdatePacket;
-import com.hbm.network.packet.toclient.S2CEntitySyncPacket;
-import com.hbm.network.packet.toclient.S2CExplosionEffectPacket;
-import com.hbm.network.packet.toclient.S2CSyncTileMessage;
+import com.hbm.network.packet.toclient.*;
 import com.hbm.network.packet.toserver.C2SKeyMessage;
 import com.hbm.network.packet.toserver.C2SSyncTileMessage;
 import com.hbm.network.packet.toserver.S2CSyncFailMessage;
@@ -39,12 +34,12 @@ public class ModMessages {
     private static int packetId = 0;
 
     public static void register(){
-        registerServerToClient(S2CExplosionEffectPacket.class, S2CExplosionEffectPacket::decode, S2CExplosionEffectPacket::encode, S2CExplosionEffectPacket::handle);
         registerServerToClient(AuxParticlePacket.class, AuxParticlePacket::decode, AuxParticlePacket::encode, AuxParticlePacket::handle);
 //        registerServerToClient(S2CBatchedRenderUpdatePacket.class, S2CBatchedRenderUpdatePacket::decode, S2CBatchedRenderUpdatePacket::encode, S2CBatchedRenderUpdatePacket::handle);
         registerServerToClient(S2CSyncTileMessage.class, S2CSyncTileMessage::decode, S2CSyncTileMessage::encode, S2CSyncTileMessage::handle);
         registerServerToClient(S2CEntitySyncPacket.class, S2CEntitySyncPacket::decode, S2CEntitySyncPacket::encode, S2CEntitySyncPacket::handle);
         registerServerToClient(S2CAtomicFlashPacket.class, S2CAtomicFlashPacket::decode, S2CAtomicFlashPacket::encode, S2CAtomicFlashPacket::handle);
+        registerServerToClient(S2CExplosionPacket.class, S2CExplosionPacket::new, S2CExplosionPacket::encode, S2CExplosionPacket::handle);
 
         registerClientToServer(C2SSyncTileMessage.class, C2SSyncTileMessage::decode, C2SSyncTileMessage::encode, C2SSyncTileMessage::handle);
         registerClientToServer(S2CSyncFailMessage.class, S2CSyncFailMessage::decode, S2CSyncFailMessage::encode, S2CSyncFailMessage::handle);

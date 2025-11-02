@@ -1,6 +1,7 @@
-package com.hbm.utils.debug;
+package com.hbm.debug;
 
 import com.hbm.entity.effect.EntityMeteor;
+import com.hbm.explosion.temp.ExplosionOneOff;
 import com.hbm.registries.ModItems;
 import com.hbm.particle.ModParticleTypes;
 import net.minecraft.core.BlockPos;
@@ -11,8 +12,11 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
@@ -34,15 +38,15 @@ public class BlockDebug extends Block {
 
     @Override
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-        if (!pLevel.isClientSide){
-            if (pPlayer.getItemInHand(pHand).is(ModItems.DEBUG_WAND.get()))
+        ItemStack itemInHand = pPlayer.getItemInHand(pHand);
+        if (!pLevel.isClientSide()){
+            if (itemInHand.is(ModItems.DEBUG_WAND.get())) {
                 dropParticle(ModParticleTypes.DEAD_LEAF.get(), pLevel, pPos, pPlayer);
-            else if (pPlayer.getItemInHand(pHand).is(ModItems.METEOR_REMOTE.get())){
+            } else if (itemInHand.is(ModItems.METEOR_REMOTE.get())) {
                 testMeteorite(pState, pLevel, pPos, pPlayer);
+            } else if (itemInHand.is(Items.FLINT_AND_STEEL)){
+                return explode(pState, pLevel, pPos, pPlayer);
             }
-        }
-        if (pLevel.isClientSide){
-
         }
         return super.use(pState, pLevel, pPos, pPlayer, pHand, pHit);
     }
@@ -77,12 +81,24 @@ public class BlockDebug extends Block {
             pLevel.addParticle(type, center.x, center.y, center.z, 0, 0, 0);
         }
     }
-
     // 测试陨石实体
     public void testMeteorite(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer){
         if (pState.getValue(ACTIVE)) return;
         EntityMeteor meteor = new EntityMeteor(pLevel);
         meteor.setPos(pPos.getCenter().x, pPos.getCenter().y + 2, pPos.getCenter().z);
         pLevel.addFreshEntity(meteor);
+    }
+
+    public InteractionResult explode(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer){
+        if (!pLevel.isClientSide) {
+            pLevel.removeBlock(pPos, false);
+            ExplosionOneOff explode = ExplosionOneOff.explode(pLevel, pPlayer, null, null, pPos.getCenter().x, pPos.getCenter().y, pPos.getCenter().z, 32, false, Level.ExplosionInteraction.TNT, true);
+//            explode.setResolution(32);
+            explode.setBlockAllocator(new ExplosionOneOff.BlockAllocateBulkie(60));
+            explode.setEntityProcessor(new ExplosionOneOff.EntityProcessorVanilla());
+            explode.setBlockProcessor(new ExplosionOneOff.BlockProcessorStandard().setMutator(new ExplosionOneOff.BlockMutatorBulkie(Blocks.GOLD_ORE.defaultBlockState())).setNoDrop());
+            explode.explode();
+        }
+        return InteractionResult.CONSUME;
     }
 }
