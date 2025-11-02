@@ -13,7 +13,7 @@ import com.hbm.api.interferences.ITileWrapper;
 import com.hbm.capabilities.network.ConnType;
 import com.hbm.capabilities.network.validator.CompatibleTransmitterValidator;
 import com.hbm.utils.EnumUtils;
-import com.hbm.utils.NBTUtils;
+import com.hbm.utils.NBTSupplement;
 import com.hbm.utils.WorldUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -322,7 +322,7 @@ public abstract class Transmitter<ACCEPTOR, NETWORK extends DynamicNetwork<ACCEP
         updateTag.putByte(HBMKey.CURRENT_CONNECTIONS, currentTransmitterConnections);
         updateTag.putByte(HBMKey.CURRENT_ACCEPTORS, acceptorCache.currentAcceptorConnections);
         for (Direction direction : EnumUtils.DIRECTIONS) {
-            NBTUtils.writeEnum(updateTag, HBMKey.SIDE + direction.ordinal(), getConnTypeRaw(direction));
+            NBTSupplement.writeEnum(updateTag, HBMKey.SIDE + direction.ordinal(), getConnTypeRaw(direction));
         }
         //Transmitter
         if (hasTransmitterNetwork()) {
@@ -332,13 +332,13 @@ public abstract class Transmitter<ACCEPTOR, NETWORK extends DynamicNetwork<ACCEP
     }
 
     public void handleUpdateTag(@NotNull CompoundTag tag) {
-        NBTUtils.setByteIfPresent(tag, HBMKey.CURRENT_CONNECTIONS, connections -> currentTransmitterConnections = connections);
-        NBTUtils.setByteIfPresent(tag, HBMKey.CURRENT_ACCEPTORS, acceptors -> acceptorCache.currentAcceptorConnections = acceptors);
+        NBTSupplement.setByteIfPresent(tag, HBMKey.CURRENT_CONNECTIONS, connections -> currentTransmitterConnections = connections);
+        NBTSupplement.setByteIfPresent(tag, HBMKey.CURRENT_ACCEPTORS, acceptors -> acceptorCache.currentAcceptorConnections = acceptors);
         for (Direction direction : EnumUtils.DIRECTIONS) {
-            NBTUtils.setEnumIfPresent(tag, HBMKey.SIDE + direction.ordinal(), ConnType::byIndexStatic, type -> setConnectionTypeRaw(direction, type));
+            NBTSupplement.setEnumIfPresent(tag, HBMKey.SIDE + direction.ordinal(), ConnType::byIndexStatic, type -> setConnectionTypeRaw(direction, type));
         }
         //Transmitter
-        NBTUtils.setUUIDIfPresentElse(tag, HBMKey.NETWORK, networkID -> {
+        NBTSupplement.setUUIDIfPresentElse(tag, HBMKey.NETWORK, networkID -> {
             if (hasTransmitterNetwork() && getTransmitterNetwork().getUUID().equals(networkID)) {
                 //Nothing needs to be done
                 return;
@@ -366,14 +366,14 @@ public abstract class Transmitter<ACCEPTOR, NETWORK extends DynamicNetwork<ACCEP
 
     public void read(@NotNull CompoundTag nbtTags) {
         for (Direction direction : EnumUtils.DIRECTIONS) {
-            NBTUtils.setEnumIfPresent(nbtTags, HBMKey.CONNECTION + direction.ordinal(), ConnType::byIndexStatic, type -> setConnectionTypeRaw(direction, type));
+            NBTSupplement.setEnumIfPresent(nbtTags, HBMKey.CONNECTION + direction.ordinal(), ConnType::byIndexStatic, type -> setConnectionTypeRaw(direction, type));
         }
     }
 
     @NotNull
     public CompoundTag write(@NotNull CompoundTag nbtTags) {
         for (Direction direction : EnumUtils.DIRECTIONS) {
-            NBTUtils.writeEnum(nbtTags, HBMKey.CONNECTION + direction.ordinal(), getConnTypeRaw(direction));
+            NBTSupplement.writeEnum(nbtTags, HBMKey.CONNECTION + direction.ordinal(), getConnTypeRaw(direction));
         }
         return nbtTags;
     }

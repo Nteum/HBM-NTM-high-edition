@@ -28,10 +28,11 @@ import java.util.function.DoubleConsumer;
 import java.util.function.IntConsumer;
 import java.util.function.LongConsumer;
 
+// 原版NBTUitls的基础上补充的一些内容
 @ParametersAreNotNullByDefault
-public class NBTUtils {
+public class NBTSupplement {
 
-    private NBTUtils() {
+    private NBTSupplement() {
     }
 
     public static void serializeDataEntry(CompoundTag nbt, DataEntry entry, Object value){
@@ -91,6 +92,7 @@ public class NBTUtils {
         }
         return null;
     }
+
     public static void setByteIfPresent(CompoundTag nbt, String key, ByteConsumer setter) {
         if (nbt.contains(key, Tag.TAG_BYTE)) {
             setter.accept(nbt.getByte(key));

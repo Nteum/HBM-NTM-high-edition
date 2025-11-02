@@ -6,6 +6,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
@@ -46,7 +47,7 @@ public class ModPlacedFeatures {
         //基岩矿石生成
         PlacementUtils.register(context, BEDROCK_ORE_OVERWORLD, holdergetter.getOrThrow(ModConfiguredFeatures.BEDROCK_ORE_OVERWORLD),RarityFilter.onAverageOnceEvery(1));
         // 异虫巢
-        PlacementUtils.register(context, GLYPHID_HIVE, holdergetter.getOrThrow(ModConfiguredFeatures.GLYPHID_HIVE) ,RarityFilter.onAverageOnceEvery(20), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_TOP_SOLID, BiomeFilter.biome());
+        PlacementUtils.register(context, GLYPHID_HIVE, holdergetter.getOrThrow(ModConfiguredFeatures.GLYPHID_HIVE) ,RarityFilter.onAverageOnceEvery(1), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_TOP_SOLID, BiomeFilter.biome());
     }
 
     public static ResourceKey<PlacedFeature> createKey(String pKey) {

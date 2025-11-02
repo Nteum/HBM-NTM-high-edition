@@ -13,7 +13,7 @@ import com.hbm.item.misc.ItemLemon;
 import com.hbm.item.weapon.ItemMissilePart;
 import com.hbm.item.weapon.grenade.ItemGrenade;
 import com.hbm.registries.WrapperRegistry.WrappedItemRegistry;
-import com.hbm.utils.debug.GunSuicide;
+import com.hbm.debug.GunSuicide;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.food.Foods;
 import net.minecraft.world.item.CreativeModeTab;

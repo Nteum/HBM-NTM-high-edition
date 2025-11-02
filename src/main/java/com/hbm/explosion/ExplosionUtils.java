@@ -1,13 +1,9 @@
 package com.hbm.explosion;
 
-import com.hbm.network.ModMessages;
-import com.hbm.network.packet.toclient.S2CExplosionEffectPacket;
 import com.hbm.particle.ModParticleTypes;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.CampfireBlockEntity;
 
 public class ExplosionUtils {
 

@@ -1,4 +1,4 @@
-package com.hbm.utils.debug;
+package com.hbm.debug;
 
 import com.hbm.registries.HBMDamage;
 import net.minecraft.network.chat.Component;

@@ -10,8 +10,7 @@ import com.hbm.datagen.LanguageProvider;
 import com.hbm.datagen.loot.BlockLootGen;
 import com.hbm.datagen.model.BlockStateGen;
 import com.hbm.registries.ModItems;
-import com.hbm.utils.debug.BlockDebug;
-import net.minecraft.data.loot.BlockLootSubProvider;
+import com.hbm.debug.BlockDebug;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -22,7 +21,6 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
-import java.awt.desktop.OpenURIEvent;
 import java.util.function.Supplier;
 
 public class HBMMachine {

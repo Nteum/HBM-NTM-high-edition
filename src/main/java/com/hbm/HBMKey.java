@@ -26,6 +26,7 @@ public class HBMKey {
     public static final String DURATION = "duration";
     public static final String TICK_POWER = "tick_power";
     public static final String POLLUTION_TYPE = "pollution_type";
+    public static final String TYPE = "type";
     public static final String POLLUTION = "pollution";
     public static final String RADIATION = "radiation";
     public static final String FLUX = "flux";

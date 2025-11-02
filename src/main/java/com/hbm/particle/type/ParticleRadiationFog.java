@@ -17,8 +17,9 @@ public class ParticleRadiationFog extends TextureSheetParticle {
 	private TextureManager theRenderEngine;
 	private int maxAge;
 
-	protected ParticleRadiationFog(ClientLevel pLevel, double pX, double pY, double pZ) {
-		super(pLevel, pX, pY, pZ);
+	public ParticleRadiationFog(ClientLevel pLevel, double pX, double pY, double pZ, double pXSpeed, double pYSpeed, double pZSpeed, SpriteSet sprites) {
+		super(pLevel, pX, pY, pZ, pXSpeed, pYSpeed, pZSpeed);
+		this.setSprite(sprites.get(pLevel.random));
 	}
 
 	@Override
@@ -26,17 +27,17 @@ public class ParticleRadiationFog extends TextureSheetParticle {
 		return ParticleRenderType.PARTICLE_SHEET_LIT;
 	}
 
-	@OnlyIn(Dist.CLIENT)
-	public static class Provider implements ParticleProvider<SimpleParticleType> {
-		private final SpriteSet sprites;
-		public Provider(SpriteSet pSprites) {
-			this.sprites = pSprites;
-		}
-
-		@Nullable
-		@Override
-		public Particle createParticle(SimpleParticleType pType, ClientLevel pLevel, double pX, double pY, double pZ, double pXSpeed, double pYSpeed, double pZSpeed) {
-			return new ParticleRadiationFog(pLevel, pX, pY, pZ);
-		}
-	}
+//	@OnlyIn(Dist.CLIENT)
+//	public static class Provider implements ParticleProvider<SimpleParticleType> {
+//		private final SpriteSet sprites;
+//		public Provider(SpriteSet pSprites) {
+//			this.sprites = pSprites;
+//		}
+//
+//		@Nullable
+//		@Override
+//		public Particle createParticle(SimpleParticleType pType, ClientLevel pLevel, double pX, double pY, double pZ, double pXSpeed, double pYSpeed, double pZSpeed) {
+//			return new ParticleRadiationFog(pLevel, pX, pY, pZ);
+//		}
+//	}
 }

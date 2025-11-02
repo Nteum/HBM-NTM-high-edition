@@ -34,7 +34,7 @@ public class ServerEventHandler {
         forgeBus.addListener(ServerEventHandler::serverTick);
         forgeBus.addListener(ServerEventHandler::onPlayerClickInventory);
         forgeBus.addListener(ServerEventHandler::onPlayerTossItem);
-        forgeBus.addListener(ServerEventHandler::onFinialSpawn);
+//        forgeBus.addListener(ServerEventHandler::onFinialSpawn);
     }
     @SubscribeEvent
     public static void onServerSetup(FMLDedicatedServerSetupEvent event) {
@@ -86,8 +86,8 @@ public class ServerEventHandler {
         Pollution.rampantScoutPopulator(event);
     }
 
-    @SubscribeEvent
-    public static void onFinialSpawn(MobSpawnEvent.FinalizeSpawn event){
-        Pollution.enforceMob(event);
-    }
+//    @SubscribeEvent
+//    public static void onFinialSpawn(MobSpawnEvent.FinalizeSpawn event){
+//        Pollution.enforceMob(event);
+//    }
 }
