@@ -49,7 +49,7 @@ public class ItemDetonator extends Item {
             ItemStack itemInHand = pContext.getItemInHand();
             itemInHand.addTagElement("pos", new IntArrayTag(new int[]{clickedPos.getX(), clickedPos.getY(), clickedPos.getZ()}));
             if(!pContext.getLevel().isClientSide) {
-                player.sendSystemMessage(Component.literal("nuclear in [" + clickedPos.getX() + "," + clickedPos.getY() + "," + clickedPos.getZ() + "]"));
+                player.sendSystemMessage(Component.translatable("msg.hbm.nuclear_in", clickedPos.getX(), clickedPos.getY(), clickedPos.getZ()));
             }
         }
         return super.useOn(pContext);
@@ -61,7 +61,7 @@ public class ItemDetonator extends Item {
             ItemStack itemInHand = pPlayer.getItemInHand(pUsedHand);
             if (!itemInHand.hasTag() || itemInHand.getTag().getIntArray("pos") == null){
                 if (!pLevel.isClientSide){
-                    pPlayer.sendSystemMessage(Component.literal("No pos has been set."));
+                    pPlayer.sendSystemMessage(Component.translatable("msg.hbm.no_pos"));
                 }
             }else {
                 int[] pos = itemInHand.getTag().getIntArray("pos");
@@ -71,11 +71,11 @@ public class ItemDetonator extends Item {
                         IBomb.BombReturnCode bombReturnCode = ((IBomb) block).explode(pLevel, BlockPos.containing(pos[0], pos[1], pos[2]));
                         itemInHand.removeTagKey("pos");
                         if (bombReturnCode.wasSuccessful())
-                            pPlayer.sendSystemMessage(Component.literal("nuclear bomb in [" + pos[0] + "," + pos[1] + "," + pos[2] + "] exploded!"));
+                            pPlayer.sendSystemMessage(Component.translatable("msg.hbm.nuclear_exploded", pos[0], pos[1], pos[2]));
                     }
                 }else {
                     if (!pLevel.isClientSide && itemInHand.hasTag()){
-                        pPlayer.displayClientMessage(Component.literal("bomb disappeared why?"),true);
+                        pPlayer.displayClientMessage(Component.translatable("msg.hbm.bomb_disappeared"),true);
                     }
                 }
                 itemInHand.removeTagKey("pos");
@@ -85,4 +85,3 @@ public class ItemDetonator extends Item {
     }
 
 }
-

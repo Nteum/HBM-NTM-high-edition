@@ -72,7 +72,7 @@ public class BlockDebug extends Block {
     }
     public void addParticle(ParticleOptions type, Level pLevel, BlockPos pPos, Player pPlayer){
         Vec3 center = pPos.above().getCenter();
-        pPlayer.sendSystemMessage(Component.literal("Particle: " + type.getType().toString()));
+        pPlayer.sendSystemMessage(Component.translatable("msg.hbm.particle", type.getType().toString()));
         if (pLevel instanceof ServerLevel serverLevel){
             serverLevel.sendParticles(type, center.x, center.y, center.z, 1, 0, 0, 0, 0);
         }else {

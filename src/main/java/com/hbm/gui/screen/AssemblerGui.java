@@ -53,7 +53,7 @@ public class AssemblerGui extends AbstractContainerScreen<AssemblerMenu> {
 //        super.render(pGuiGraphics,pMouseX,pMouseY,pPartialTick);
 
         if (isMouseOver(pMouseX,pMouseY)){
-            pGuiGraphics.drawString(font,Component.literal("Energy: "+menu.getEnergy()),pMouseX,pMouseY,4210752);
+            pGuiGraphics.drawString(font, Component.translatable(com.hbm.HBMLang.TOOLTIP_ENERGY.key(), menu.getEnergy()), pMouseX, pMouseY, 4210752);
         }
         renderTooltip(pGuiGraphics,pMouseX,pMouseY);
 //        this.recipeBookComponent.renderTooltip(pGuiGraphics, this.leftPos, this.topPos, pMouseX, pMouseY);

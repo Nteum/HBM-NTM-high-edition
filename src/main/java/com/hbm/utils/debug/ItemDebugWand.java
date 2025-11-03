@@ -69,7 +69,7 @@ public class ItemDebugWand extends Item {
             ChunkPos chunkPos = new ChunkPos(clickedPos);
             ((ServerLevel) pContext.getLevel()).getChunkSource().addRegionTicket(TicketType.FORCED, chunkPos, 0, chunkPos, true);
 //            ForgeChunkManager.forceChunk((ServerLevel) pContext.getLevel(), HBM.MODID, clickedPos, SectionPos.blockToSectionCoord(clickedPos.getX()), SectionPos.blockToSectionCoord(clickedPos.getY()),true,true);
-            player.sendSystemMessage(Component.literal("Mark pos on [" + clickedPos.getX() + "," + clickedPos.getY() + "," + clickedPos.getZ() + "]"));
+            player.sendSystemMessage(Component.translatable("msg.hbm.mark_pos", clickedPos.getX(), clickedPos.getY(), clickedPos.getZ()));
         }
         return super.useOn(pContext);
     }
@@ -80,7 +80,7 @@ public class ItemDebugWand extends Item {
             ItemStack itemInHand = pPlayer.getItemInHand(pUsedHand);
             CompoundTag posElement = itemInHand.getTagElement(HBMKey.POSITION);
             if (!itemInHand.hasTag() || posElement == null){
-                pPlayer.sendSystemMessage(Component.literal("No pos has been set."));
+                pPlayer.sendSystemMessage(Component.translatable("msg.hbm.no_pos"));
             }else {
                 BlockPos storedPos = NbtUtils.readBlockPos(posElement);
                 // 注意，getBlockState是会加载区块的，因此这里用了一个安全加载的函数
@@ -115,7 +115,7 @@ public class ItemDebugWand extends Item {
         EntityMissileTest missileTest = new EntityMissileTest(pLevel, (float) pPlayer.getX(), (float) (pPlayer.getY()+2), (float) pPlayer.getZ(), storedPos);
         missileTest.setOwner(pPlayer);
         pLevel.addFreshEntity(missileTest);
-        pPlayer.sendSystemMessage(Component.literal("New missile create, aim at: " + storedPos.toShortString()));
+        pPlayer.sendSystemMessage(Component.translatable("msg.hbm.new_missile_create", storedPos.toShortString()));
     }
     public static void addEffects(Level pLevel, Player pPlayer, BlockPos storedPos){
 //        AdditionalDataManager.setEntityData(pPlayer, DataEntry.RADIATION, 900F);
@@ -124,13 +124,13 @@ public class ItemDebugWand extends Item {
         ChunkAccess chunk = pLevel.getChunk(storedPos);
         if (chunk instanceof LevelChunk levelChunk){
             AdditionalDataManager.setChunkData(levelChunk, DataEntry.RADIATION, 1000);
-            pPlayer.sendSystemMessage(Component.literal("Radiation set at: " + storedPos.toShortString()));
+            pPlayer.sendSystemMessage(Component.translatable("msg.hbm.radiation_set_at", storedPos.toShortString()));
         }
     }
     public static void showRadData(Level pLevel, Entity pEntity){
         Float entityRad = AdditionalDataManager.getEntityData(pEntity, DataEntry.RADIATION).map(o -> (float) o).orElse(0f);
         Float chunkRad = AdditionalDataManager.getChunkData(pLevel.getChunkAt(pEntity.getOnPos()), DataEntry.RADIATION).map(o -> (float) o).orElse(0f);
-        pEntity.sendSystemMessage(Component.literal("Entity Rad: " + entityRad + ";\t Chunk Rad: " + chunkRad));
+        pEntity.sendSystemMessage(Component.translatable("msg.hbm.entity_chunk_rad", entityRad, chunkRad));
     }
     // 打印区块相关的辐射
     public static void showChunkRadData(ItemStack pStack, Level pLevel, Entity pEntity){
@@ -145,6 +145,6 @@ public class ItemDebugWand extends Item {
                 radList.add(AdditionalDataManager.getChunkData(chunk, DataEntry.RADIATION).map(o -> (float) o).orElse(0f));
             }
         }
-        pEntity.sendSystemMessage(Component.literal("Radiation now: " + radList));
+        pEntity.sendSystemMessage(Component.translatable("msg.hbm.radiation_now", radList.toString()));
     }
 }

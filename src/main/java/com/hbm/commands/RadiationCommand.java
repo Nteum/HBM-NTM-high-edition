@@ -22,10 +22,10 @@ public class RadiationCommand {
     private static int setRadiate(Level level, Player player, int eRads){
         if (eRads == 0){
             ChunkRadiationManager.proxy.clearSystem(level);
-            player.displayClientMessage(Component.literal("Cleared radiation data!!").withStyle(ChatFormatting.GREEN),true);
+        player.displayClientMessage(Component.translatable("msg.hbm.radiation_cleared").withStyle(ChatFormatting.GREEN),true);
         }else {
             ChunkRadiationManager.proxy.setRadiation(level,player.getOnPos(),eRads);
-            player.displayClientMessage(Component.literal("Radiation set!!").withStyle(ChatFormatting.RED),true);
+        player.displayClientMessage(Component.translatable("msg.hbm.radiation_set").withStyle(ChatFormatting.RED),true);
         }
         return 0;
     }
