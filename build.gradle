@@ -2,6 +2,7 @@ buildscript {
     repositories {
         // These repositories are only for Gradle plugins, put any other repositories in the repository block further below
         maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
+        maven { url = 'https://maven.blamejared.com' }
         mavenCentral()
     }
     dependencies {
@@ -11,7 +12,7 @@ buildscript {
 
 plugins {
     id 'idea'
-    id 'net.minecraftforge.gradle' version '[6.0.16,6.2)'
+    id 'net.minecraftforge.gradle' version '6.0.25'
     id 'org.parchmentmc.librarian.forgegradle' version '1.+'
 }
 
@@ -73,6 +74,7 @@ minecraft {
         // applies to all the run configs below
         configureEach {
             workingDirectory project.file('run')
+            jvmArgs "-Djava.io.tmpdir=${projectDir}/run/tmp_secure"
 
             // Recommended logging data for a userdev environment
             // The markers can be added/remove as needed separated by commas.
@@ -136,6 +138,7 @@ repositories {
      flatDir {
          dir 'libs'
      }
+    maven { url = 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
     maven {
         // location of the maven that hosts JEI files before January 2023
         name = "Progwml6's maven"
@@ -150,6 +153,7 @@ repositories {
         name = "ModMaven"
         url = "https://modmaven.dev"
     }
+    mavenCentral()
 }
 
 dependencies {
@@ -165,6 +169,19 @@ dependencies {
      compileOnly fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}")
      compileOnly fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${jei_version}")
      runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}")
+    implementation fg.deobf("software.bernie.geckolib:geckolib-forge-1.20.1:4.4")
+
+    // ===== 安全修复：对齐到修复后的 Guava 版本，修复 CVE-2023-2976（仅编译期，不会打进最终JAR） =====
+    compileOnly("com.google.guava:guava:33.4.8-jre")
+
+    constraints {
+        implementation("com.google.guava:guava:33.4.8-jre") {
+            because("Fix CVE-2023-2976 in Guava (use >=32.0.1).")
+        }
+        runtimeOnly("com.google.guava:guava:33.4.8-jre") {
+            because("对开发运行时的传递依赖进行版本对齐；发布的mod不会包含Guava。")
+        }
+    }
 
     // Example mod dependency using a mod jar from ./libs with a flat dir repository
     // This maps to ./libs/coolmod-${mc_version}-${coolmod_version}.jar
@@ -218,4 +235,9 @@ tasks.named('jar', Jar).configure {
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
+}
+
+// 确保受控临时目录存在，避免回退到共享 tmp 目录
+tasks.withType(JavaExec).configureEach {
+    doFirst { file("${projectDir}/run/tmp_secure").mkdirs() }
 }

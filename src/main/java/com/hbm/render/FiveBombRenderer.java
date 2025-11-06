@@ -1,35 +1,11 @@
 package net.mcreator.nuclearcraft.client.renderer;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.hbm.render.pipeline.PipelineEntityRenderer;
 import net.mcreator.nuclearcraft.entity.FiveBombEntity;
-import net.mcreator.nuclearcraft.entity.model.FiveBombModel;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.resources.ResourceLocation;
-import software.bernie.geckolib.cache.object.BakedGeoModel;
-import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
-/* loaded from: explosives_beta.jar:net/mcreator/nuclearcraft/client/renderer/FiveBombRenderer.class */
-public class FiveBombRenderer extends GeoEntityRenderer<FiveBombEntity> {
-    public FiveBombRenderer(EntityRendererProvider.Context renderManager) {
-        super(renderManager, new FiveBombModel());
-        this.f_114477_ = 0.5f;
-    }
-
-    public RenderType getRenderType(FiveBombEntity animatable, ResourceLocation texture, MultiBufferSource bufferSource, float partialTick) {
-        return RenderType.m_110473_(m_5478_(animatable));
-    }
-
-    public void preRender(PoseStack poseStack, FiveBombEntity entity, BakedGeoModel model, MultiBufferSource bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-        this.scaleHeight = 1.0f;
-        this.scaleWidth = 1.0f;
-        super.preRender(poseStack, entity, model, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);
-    }
-
-    /* JADX INFO: Access modifiers changed from: protected */
-    public float getDeathMaxRotation(FiveBombEntity entityLivingBaseIn) {
-        return 0.0f;
+public class FiveBombRenderer extends PipelineEntityRenderer<FiveBombEntity> {
+    public FiveBombRenderer(EntityRendererProvider.Context context) {
+        super(context);
     }
 }

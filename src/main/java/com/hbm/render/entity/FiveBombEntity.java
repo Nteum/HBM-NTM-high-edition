@@ -1,5 +1,7 @@
 package net.mcreator.nuclearcraft.entity;
 
+import com.hbm.render.pipeline.GeoRenderKeys;
+import com.hbm.render.pipeline.PipelineKeyProvider;
 import java.io.IOException;
 import net.mcreator.nuclearcraft.init.BigExplosivesModEntities;
 import net.mcreator.nuclearcraft.procedures.FiveBombEntityDiesProcedure;
@@ -11,6 +13,7 @@ import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityDimensions;
@@ -25,16 +28,16 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.network.NetworkHooks;
 import net.minecraftforge.network.PlayMessages;
 import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.core.animation.AnimationController;
 import software.bernie.geckolib.core.animation.AnimationState;
 import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 
 /* loaded from: explosives_beta.jar:net/mcreator/nuclearcraft/entity/FiveBombEntity.class */
-public class FiveBombEntity extends PathfinderMob implements GeoEntity {
+public class FiveBombEntity extends PathfinderMob implements GeoEntity, PipelineKeyProvider {
     public static final EntityDataAccessor<Boolean> SHOOT = SynchedEntityData.m_135353_(FiveBombEntity.class, EntityDataSerializers.f_135035_);
     public static final EntityDataAccessor<String> ANIMATION = SynchedEntityData.m_135353_(FiveBombEntity.class, EntityDataSerializers.f_135030_);
     public static final EntityDataAccessor<String> TEXTURE = SynchedEntityData.m_135353_(FiveBombEntity.class, EntityDataSerializers.f_135030_);
@@ -126,6 +129,16 @@ public class FiveBombEntity extends PathfinderMob implements GeoEntity {
     public void m_8107_() {
         super.m_8107_();
         m_21203_();
+    }
+
+    @Override
+    public ResourceLocation getPipelineKey() {
+        return GeoRenderKeys.FIVE_BOMB;
+    }
+
+    @Override
+    public String getPipelineTextureKey() {
+        return getTexture();
     }
 
     public static void init() {

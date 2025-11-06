@@ -12,6 +12,7 @@ import com.hbm.registries.ModItems;
 import com.hbm.render.entity.missile.MissileTaintRenderer;
 import com.hbm.render.entity.mob.GlyphidRender;
 import com.hbm.render.model.Models;
+import com.hbm.render.pipeline.GeoRenderPipeline;
 import com.hbm.render.model.entity.TestEntityModel;
 import com.hbm.particle.ModParticleTypes;
 import com.hbm.render.blockentity.*;
@@ -145,6 +146,7 @@ public class ClientEventHanler {
 //        specialItemRender = new SpecialItemRender(blockEntityRenderDispatcher,entityModels);
 //        //注册模组客户端专属的资源加载器
 //        event.registerReloadListener(specialItemRender);
+        event.registerReloadListener(GeoRenderPipeline.INSTANCE);
     }
     public static BlockEntityWithoutLevelRenderer getLazyItemRender(){
         if (specialItemRender == null){

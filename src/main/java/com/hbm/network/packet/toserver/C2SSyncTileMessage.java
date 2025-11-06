@@ -36,7 +36,10 @@ public class C2SSyncTileMessage implements IHBMMessage {
     }
 
     @Override
-    public void handle(Supplier<NetworkEvent.Context> ctx) {
+    public void handle(Supplier<NetworkEvent.Context> ctx) { /* 此处有客户端任意伪造Packet漏洞：
+        导致服务端无鉴权直接调用UpdateableBlockEntity.handleClientPacket
+        后果：任意客户端可修改他人机器状态或注入恶意数据。*/
+        UpdateableBlockEntity.handleClientPacket
         ctx.get().enqueueWork(() -> {
             ServerLevel level = ctx.get().getSender().serverLevel();
             if (WorldUtils.isBlockLoaded(level, pos)) {

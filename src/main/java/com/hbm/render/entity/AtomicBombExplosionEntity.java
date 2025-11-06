@@ -1,5 +1,7 @@
 package net.mcreator.nuclearcraft.entity;
 
+import com.hbm.render.pipeline.GeoRenderKeys;
+import com.hbm.render.pipeline.PipelineKeyProvider;
 import javax.annotation.Nullable;
 import net.mcreator.nuclearcraft.init.BigExplosivesModEntities;
 import net.mcreator.nuclearcraft.procedures.AtomicBombExplosionOnEntityTickUpdateProcedure;
@@ -10,6 +12,7 @@ import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
@@ -46,7 +49,7 @@ import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 /* loaded from: explosives_beta.jar:net/mcreator/nuclearcraft/entity/AtomicBombExplosionEntity.class */
-public class AtomicBombExplosionEntity extends PathfinderMob implements GeoEntity {
+public class AtomicBombExplosionEntity extends PathfinderMob implements GeoEntity, PipelineKeyProvider {
     public static final EntityDataAccessor<Boolean> SHOOT = SynchedEntityData.m_135353_(AtomicBombExplosionEntity.class, EntityDataSerializers.f_135035_);
     public static final EntityDataAccessor<String> ANIMATION = SynchedEntityData.m_135353_(AtomicBombExplosionEntity.class, EntityDataSerializers.f_135030_);
     public static final EntityDataAccessor<String> TEXTURE = SynchedEntityData.m_135353_(AtomicBombExplosionEntity.class, EntityDataSerializers.f_135030_);
@@ -226,5 +229,15 @@ public class AtomicBombExplosionEntity extends PathfinderMob implements GeoEntit
 
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return this.cache;
+    }
+
+    @Override
+    public ResourceLocation getPipelineKey() {
+        return GeoRenderKeys.ATOMIC_BOMB_EXPLOSION;
+    }
+
+    @Override
+    public String getPipelineTextureKey() {
+        return getTexture();
     }
 }

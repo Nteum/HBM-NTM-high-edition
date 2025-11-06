@@ -1,5 +1,7 @@
 package net.mcreator.nuclearcraft.entity;
 
+import com.hbm.render.pipeline.GeoRenderKeys;
+import com.hbm.render.pipeline.PipelineKeyProvider;
 import javax.annotation.Nullable;
 import net.mcreator.nuclearcraft.init.BigExplosivesModEntities;
 import net.mcreator.nuclearcraft.procedures.FiveHundredKgExplosionOnEntityTickUpdateProcedure;
@@ -50,7 +52,7 @@ import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 /* loaded from: explosives_beta.jar:net/mcreator/nuclearcraft/entity/FiveHundredKgExplosionEntity.class */
-public class FiveHundredKgExplosionEntity extends PathfinderMob implements GeoEntity {
+public class FiveHundredKgExplosionEntity extends PathfinderMob implements GeoEntity, PipelineKeyProvider {
     public static final EntityDataAccessor<Boolean> SHOOT = SynchedEntityData.m_135353_(FiveHundredKgExplosionEntity.class, EntityDataSerializers.f_135035_);
     public static final EntityDataAccessor<String> ANIMATION = SynchedEntityData.m_135353_(FiveHundredKgExplosionEntity.class, EntityDataSerializers.f_135030_);
     public static final EntityDataAccessor<String> TEXTURE = SynchedEntityData.m_135353_(FiveHundredKgExplosionEntity.class, EntityDataSerializers.f_135030_);
@@ -233,5 +235,15 @@ public class FiveHundredKgExplosionEntity extends PathfinderMob implements GeoEn
 
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return this.cache;
+    }
+
+    @Override
+    public ResourceLocation getPipelineKey() {
+        return GeoRenderKeys.FIVE_HUNDRED_KG_EXPLOSION;
+    }
+
+    @Override
+    public String getPipelineTextureKey() {
+        return getTexture();
     }
 }
