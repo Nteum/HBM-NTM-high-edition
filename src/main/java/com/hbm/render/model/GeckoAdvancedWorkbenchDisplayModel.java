@@ -1,11 +1,11 @@
-package net.mcreator.nuclearcraft.block.model;
+package com.hbm.render.model;
 
-import net.mcreator.nuclearcraft.BigExplosivesMod;
-import net.mcreator.nuclearcraft.block.display.GeckoAdvancedWorkbenchDisplayItem;
+import com.hbm.compat.bigexplosives.BigExplosivesMod;
+import com.hbm.item.gecko.GeckoAdvancedWorkbenchDisplayItem;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.model.GeoModel;
 
-/* loaded from: explosives_beta.jar:net/mcreator/nuclearcraft/block/model/GeckoAdvancedWorkbenchDisplayModel.class */
+
 public class GeckoAdvancedWorkbenchDisplayModel extends GeoModel<GeckoAdvancedWorkbenchDisplayItem> {
     public ResourceLocation getAnimationResource(GeckoAdvancedWorkbenchDisplayItem animatable) {
         return new ResourceLocation(BigExplosivesMod.MODID, "animations/advancedworkbench_1.animation.json");

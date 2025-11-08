@@ -1,7 +1,7 @@
-package net.mcreator.nuclearcraft.client.renderer;
+package com.hbm.render;
 
 import com.hbm.render.pipeline.PipelineEntityRenderer;
-import net.mcreator.nuclearcraft.entity.FiveHundredKgExplosionEntity;
+import com.hbm.render.entity.FiveHundredKgExplosionEntity;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 
 public class FiveHundredKgExplosionRenderer extends PipelineEntityRenderer<FiveHundredKgExplosionEntity> {

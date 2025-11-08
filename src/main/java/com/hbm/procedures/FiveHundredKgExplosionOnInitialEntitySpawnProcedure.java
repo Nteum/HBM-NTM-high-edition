@@ -1,18 +1,26 @@
-package net.mcreator.nuclearcraft.procedures;
+package com.hbm.procedures;
 
-import net.mcreator.nuclearcraft.BigExplosivesMod;
+import com.hbm.compat.bigexplosives.BigExplosivesMod;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.LevelAccessor;
 
-/* loaded from: explosives_beta.jar:net/mcreator/nuclearcraft/procedures/FiveHundredKgExplosionOnInitialEntitySpawnProcedure.class */
-public class FiveHundredKgExplosionOnInitialEntitySpawnProcedure {
+/**
+ * Ensures the lingering explosion despawns after its animation completes.
+ */
+public final class FiveHundredKgExplosionOnInitialEntitySpawnProcedure {
+
+    private static final int DESPAWN_DELAY_TICKS = 90;
+
+    private FiveHundredKgExplosionOnInitialEntitySpawnProcedure() {
+    }
+
     public static void execute(LevelAccessor world, Entity entity) {
-        if (entity == null) {
+        if (world == null || entity == null) {
             return;
         }
-        BigExplosivesMod.queueServerWork(90, () -> {
-            if (entity.m_6084_() && !entity.m_9236_().m_5776_()) {
-                entity.m_146870_();
+        BigExplosivesMod.queueServerWork(DESPAWN_DELAY_TICKS, () -> {
+            if (entity.isAlive() && !entity.level().isClientSide()) {
+                entity.discard();
             }
         });
     }

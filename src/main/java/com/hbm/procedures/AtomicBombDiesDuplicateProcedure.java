@@ -1,4 +1,4 @@
-package net.mcreator.nuclearcraft.procedures;
+package com.hbm.procedures;
 
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.LevelAccessor;

@@ -1,6 +1,6 @@
-package net.mcreator.nuclearcraft.init;
+package com.hbm.init;
 
-import net.mcreator.nuclearcraft.BigExplosivesMod;
+import com.hbm.compat.bigexplosives.BigExplosivesMod;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;

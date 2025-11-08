@@ -1,10 +1,10 @@
-package net.mcreator.nuclearcraft.init;
+package com.hbm.init;
 
-import net.mcreator.nuclearcraft.BigExplosivesMod;
-import net.mcreator.nuclearcraft.entity.AtomicBombEntity;
-import net.mcreator.nuclearcraft.entity.AtomicBombExplosionEntity;
-import net.mcreator.nuclearcraft.entity.FiveBombEntity;
-import net.mcreator.nuclearcraft.entity.FiveHundredKgExplosionEntity;
+import com.hbm.compat.bigexplosives.BigExplosivesMod;
+import com.hbm.render.entity.AtomicBombEntity;
+import com.hbm.render.entity.AtomicBombExplosionEntity;
+import com.hbm.render.entity.FiveBombEntity;
+import com.hbm.render.entity.FiveHundredKgExplosionEntity;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;

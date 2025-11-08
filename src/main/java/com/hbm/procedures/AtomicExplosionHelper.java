@@ -1,11 +1,11 @@
-package net.mcreator.nuclearcraft.procedures;
+package com.hbm.procedures;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import net.mcreator.nuclearcraft.BigExplosivesMod;
-import net.mcreator.nuclearcraft.entity.AtomicBombExplosionEntity;
-import net.mcreator.nuclearcraft.init.BigExplosivesModEntities;
-import net.mcreator.nuclearcraft.init.BigExplosivesModSounds;
+import com.hbm.compat.bigexplosives.BigExplosivesMod;
+import com.hbm.init.BigExplosivesModEntities;
+import com.hbm.init.BigExplosivesModSounds;
+import com.hbm.render.entity.AtomicBombExplosionEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;

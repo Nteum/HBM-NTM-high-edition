@@ -1,4 +1,4 @@
-package net.mcreator.nuclearcraft.init;
+package com.hbm.init;
 
 import com.hbm.particle.type.HBMSmokeParticle;
 import net.minecraftforge.api.distmarker.Dist;

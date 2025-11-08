@@ -1,23 +1,26 @@
-package net.mcreator.nuclearcraft.procedures;
+package com.hbm.procedures;
 
-import net.mcreator.nuclearcraft.init.BigExplosivesModParticleTypes;
+import com.hbm.init.BigExplosivesModParticleTypes;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.LevelAccessor;
 
-/* loaded from: explosives_beta.jar:net/mcreator/nuclearcraft/procedures/FiveHundredKgExplosionOnEntityTickUpdateProcedure.class */
-public class FiveHundredKgExplosionOnEntityTickUpdateProcedure {
+/**
+ * Emits smoke and explosion particles while the lingering explosion entity is
+ * alive.
+ */
+public final class FiveHundredKgExplosionOnEntityTickUpdateProcedure {
+
+    private FiveHundredKgExplosionOnEntityTickUpdateProcedure() {
+    }
+
     public static void execute(LevelAccessor world, double x, double y, double z) {
-        for (int index0 = 0; index0 < 3; index0++) {
-            if (world instanceof ServerLevel) {
-                ServerLevel _level = (ServerLevel) world;
-                _level.m_8767_((SimpleParticleType) BigExplosivesModParticleTypes.SMOKE.get(), x, y, z, 50, 4.0d, 4.0d, 4.0d, 0.3d);
-            }
-            if (world instanceof ServerLevel) {
-                ServerLevel _level2 = (ServerLevel) world;
-                _level2.m_8767_(ParticleTypes.f_123778_, x, y, z, 50, 4.0d, 4.0d, 4.0d, 0.3d);
-            }
+        if (!(world instanceof ServerLevel serverLevel)) {
+            return;
+        }
+        for (int i = 0; i < 3; i++) {
+            serverLevel.sendParticles(BigExplosivesModParticleTypes.SMOKE.get(), x, y, z, 50, 4.0D, 4.0D, 4.0D, 0.3D);
+            serverLevel.sendParticles(ParticleTypes.EXPLOSION, x, y, z, 50, 4.0D, 4.0D, 4.0D, 0.3D);
         }
     }
 }

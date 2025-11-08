@@ -1,7 +1,7 @@
 package com.hbm.render.pipeline;
 
 import net.minecraft.resources.ResourceLocation;
-import software.bernie.geckolib.animatable.GeoAnimatable;
+import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.model.GeoModel;
 
 /**

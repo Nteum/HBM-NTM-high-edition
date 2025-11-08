@@ -1,8 +1,8 @@
-package net.mcreator.nuclearcraft.init;
+package com.hbm.init;
 
-import net.mcreator.nuclearcraft.BigExplosivesMod;
-import net.mcreator.nuclearcraft.item.AtomBombItem;
-import net.mcreator.nuclearcraft.item.FiveHundredKilogramBombItem;
+import com.hbm.compat.bigexplosives.BigExplosivesMod;
+import com.hbm.item.bigexplosives.AtomBombItem;
+import com.hbm.item.bigexplosives.FiveHundredKilogramBombItem;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;

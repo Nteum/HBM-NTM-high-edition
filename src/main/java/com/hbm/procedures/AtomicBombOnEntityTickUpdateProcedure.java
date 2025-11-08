@@ -1,25 +1,33 @@
-package net.mcreator.nuclearcraft.procedures;
+package com.hbm.procedures;
 
-import net.minecraft.core.registries.Registries;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.LevelAccessor;
 
-/* loaded from: explosives_beta.jar:net/mcreator/nuclearcraft/procedures/AtomicBombOnEntityTickUpdateProcedure.class */
-public class AtomicBombOnEntityTickUpdateProcedure {
+/**
+ * Kills the entity if it ever touches liquids or other materials that would
+ * normally neutralise the bomb. The original generated code referenced
+ * obfuscated helpers; this uses the stable Mojang-named API.
+ */
+public final class AtomicBombOnEntityTickUpdateProcedure {
+
+    private static final float DAMAGE = 100.0F;
+
+    private AtomicBombOnEntityTickUpdateProcedure() {
+    }
+
     public static void execute(LevelAccessor world, Entity entity) {
-        if (entity == null) {
+        if (world == null || entity == null) {
             return;
         }
-        if (entity.m_20072_()) {
-            entity.m_6469_(new DamageSource(world.m_9598_().m_175515_(Registries.f_268580_).m_246971_(DamageTypes.f_268433_)), 100.0f);
+
+        if (entity.isInWaterRainOrBubble()) {
+            entity.hurt(entity.damageSources().drown(), DAMAGE);
         }
-        if (entity.m_20069_()) {
-            entity.m_6469_(new DamageSource(world.m_9598_().m_175515_(Registries.f_268580_).m_246971_(DamageTypes.f_268433_)), 100.0f);
+        if (entity.isInLava()) {
+            entity.hurt(entity.damageSources().lava(), DAMAGE);
         }
-        if (entity.m_5842_()) {
-            entity.m_6469_(new DamageSource(world.m_9598_().m_175515_(Registries.f_268580_).m_246971_(DamageTypes.f_268433_)), 100.0f);
+        if (entity.isInWaterOrRain()) {
+            entity.hurt(entity.damageSources().generic(), DAMAGE);
         }
     }
 }

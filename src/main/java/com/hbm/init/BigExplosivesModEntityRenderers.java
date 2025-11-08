@@ -1,9 +1,9 @@
-package net.mcreator.nuclearcraft.init;
+package com.hbm.init;
 
-import net.mcreator.nuclearcraft.client.renderer.AtomicBombExplosionRenderer;
-import net.mcreator.nuclearcraft.client.renderer.AtomicBombRenderer;
-import net.mcreator.nuclearcraft.client.renderer.FiveBombRenderer;
-import net.mcreator.nuclearcraft.client.renderer.FiveHundredKgExplosionRenderer;
+import com.hbm.render.AtomicBombExplosionRenderer;
+import com.hbm.render.AtomicBombRenderer;
+import com.hbm.render.FiveBombRenderer;
+import com.hbm.render.FiveHundredKgExplosionRenderer;
 import net.minecraft.world.entity.EntityType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;

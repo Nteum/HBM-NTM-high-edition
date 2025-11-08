@@ -1,6 +1,6 @@
-package net.mcreator.nuclearcraft.init;
+package com.hbm.init;
 
-import net.mcreator.nuclearcraft.BigExplosivesMod;
+import com.hbm.compat.bigexplosives.BigExplosivesMod;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraftforge.registries.DeferredRegister;

@@ -156,6 +156,11 @@ repositories {
     mavenCentral()
 }
 
+def commonsIoSafeVersion = '2.16.1'
+def commonsCompressSafeVersion = '1.26.0'
+def commonsLangSafeVersion = '3.14.0'
+def nettySafeVersion = '4.1.108.Final'
+
 dependencies {
     // Specify the version of Minecraft to use.
     // Any artifact can be supplied so long as it has a "userdev" classifier artifact and is a compatible patcher artifact.
@@ -181,6 +186,36 @@ dependencies {
         runtimeOnly("com.google.guava:guava:33.4.8-jre") {
             because("对开发运行时的传递依赖进行版本对齐；发布的mod不会包含Guava。")
         }
+        implementation("commons-io:commons-io:${commonsIoSafeVersion}") {
+            because("Fix CVE-2024-47554 (resource exhaustion) flagged in Mend scan.")
+        }
+        runtimeOnly("commons-io:commons-io:${commonsIoSafeVersion}") {
+            because("确保运行时传递依赖也使用修复后的 commons-io 版本。")
+        }
+        implementation("org.apache.commons:commons-compress:${commonsCompressSafeVersion}") {
+            because("Fix CVE-2024-25710 / CVE-2024-26308 in commons-compress.")
+        }
+        runtimeOnly("org.apache.commons:commons-compress:${commonsCompressSafeVersion}") {
+            because("确保运行时传递依赖也使用修复后的 commons-compress 版本。")
+        }
+        implementation("org.apache.commons:commons-lang3:${commonsLangSafeVersion}") {
+            because("Fix CVE-2025-48924 in commons-lang3.")
+        }
+        runtimeOnly("org.apache.commons:commons-lang3:${commonsLangSafeVersion}") {
+            because("确保运行时传递依赖也使用修复后的 commons-lang3 版本。")
+        }
+        implementation("io.netty:netty-common:${nettySafeVersion}") {
+            because("Fix CVE-2024-47535 / CVE-2025-25193 in Netty core modules.")
+        }
+        runtimeOnly("io.netty:netty-common:${nettySafeVersion}") {
+            because("确保运行时传递依赖也使用修复后的 Netty core 版本。")
+        }
+        implementation("io.netty:netty-handler:${nettySafeVersion}") {
+            because("Fix CVE-2023-34462 in Netty handler.")
+        }
+        runtimeOnly("io.netty:netty-handler:${nettySafeVersion}") {
+            because("确保运行时传递依赖也使用修复后的 Netty handler 版本。")
+        }
     }
 
     // Example mod dependency using a mod jar from ./libs with a flat dir repository
@@ -194,6 +229,24 @@ dependencies {
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
     implementation 'junit:junit:4.13.2'
+}
+
+configurations.configureEach {
+    resolutionStrategy.eachDependency { details ->
+        if (details.requested.group == 'io.netty' && details.requested.version != nettySafeVersion) {
+            details.useVersion(nettySafeVersion)
+            details.because('Align all Netty modules with CVE-fixed version.')
+        } else if (details.requested.group == 'commons-io' && details.requested.name == 'commons-io' && details.requested.version != commonsIoSafeVersion) {
+            details.useVersion(commonsIoSafeVersion)
+            details.because('Force Mend-recommended commons-io version to fix CVE-2024-47554.')
+        } else if (details.requested.group == 'org.apache.commons' && details.requested.name == 'commons-compress' && details.requested.version != commonsCompressSafeVersion) {
+            details.useVersion(commonsCompressSafeVersion)
+            details.because('Force patched commons-compress for CVE-2024-25710 / CVE-2024-26308.')
+        } else if (details.requested.group == 'org.apache.commons' && details.requested.name == 'commons-lang3' && details.requested.version != commonsLangSafeVersion) {
+            details.useVersion(commonsLangSafeVersion)
+            details.because('Force patched commons-lang3 for CVE-2025-48924.')
+        }
+    }
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.
