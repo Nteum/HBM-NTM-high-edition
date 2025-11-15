@@ -25,7 +25,7 @@ public abstract class EntityNukeBomb extends DummyableBlockEntity {
     }
 
     public static void tick(Level level, BlockPos pPos, BlockState pState, BlockEntity pBlockEntity) {
-        if (pBlockEntity instanceof EntityNukeBomb && pState.is(ModBlocks.bomb_fat_man.get())){
+        if (pBlockEntity instanceof EntityNukeBomb && pState.is(ModBlocks.Nuke.BOMB_FAT_MAN.get())){
             EntityNukeBomb entity = (EntityNukeBomb) pBlockEntity;
             NukeBomb block = (NukeBomb) pState.getBlock();
             entity.explode = block.explode;

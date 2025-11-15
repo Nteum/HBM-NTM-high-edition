@@ -2,6 +2,7 @@ package com.hbm.block.base;
 
 import com.hbm.blockentity.base2.BaseMachineBlockEntity;
 //import com.hbm.handler.MoltiblockHandler;
+import com.hbm.blockentity.machine.PressEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -73,7 +74,13 @@ public abstract class BaseMachineBlock extends BaseEntityBlock implements Entity
             if (blockEntity instanceof BaseMachineBlockEntity){
                 if (pLevel instanceof ServerLevel){
                     /** 掉落方块中的物品 */
-                    Containers.dropContents(pLevel,pPos,(BaseMachineBlockEntity) blockEntity);
+                    if (blockEntity instanceof PressEntity press){
+                        for (int i = 0; i < press.getItemHandler().getSlots(); i++) {
+                            Containers.dropItemStack(pLevel, pPos.getX(), pPos.getY(), pPos.getZ(), press.getItemHandler().getStackInSlot(i));
+                        }
+                    }else {
+                        Containers.dropContents(pLevel,pPos,(BaseMachineBlockEntity) blockEntity);
+                    }
                 }
                 pLevel.updateNeighbourForOutputSignal(pPos,this);
             }

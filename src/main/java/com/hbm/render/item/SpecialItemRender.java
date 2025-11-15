@@ -3,8 +3,10 @@ package com.hbm.render.item;
 import com.hbm.HBM;
 import com.hbm.item.HBMCombat;
 import com.hbm.item.HBMWeapon;
+import com.hbm.item.ItemBlockCustomModel;
 import com.hbm.item.armor.ItemArmorFSB;
 import com.hbm.item.armor.ItemArmorT51;
+import com.hbm.item.weapon.ItemGun;
 import com.hbm.render.RenderUtils;
 import com.hbm.render.model.Models;
 import com.hbm.render.model.armor.ModelArmorT51;
@@ -65,6 +67,10 @@ public class SpecialItemRender extends BlockEntityWithoutLevelRenderer {
         }
         else if (pStack.getItem() instanceof  ItemArmorFSB armorFSB){
             armorFSB.renderObjItem(pDisplayContext, pPoseStack, pBuffer, pPackedLight, pPackedOverlay);
+        }else if (pStack.getItem() instanceof ItemGun itemGun){
+            itemGun.renderGun(pStack, pDisplayContext, pPoseStack, pBuffer, pPackedLight, pPackedOverlay);
+        }else if (pStack.getItem() instanceof ItemBlockCustomModel itemBlockCustomModel){
+            itemBlockCustomModel.renderItemModel(pDisplayContext, pPoseStack, pBuffer, pPackedLight, pPackedOverlay);
         }
 
         pPoseStack.popPose();

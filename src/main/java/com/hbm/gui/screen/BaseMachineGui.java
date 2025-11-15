@@ -62,4 +62,8 @@ public abstract class BaseMachineGui<T extends AbstractContainerMenu> extends Ab
             }
         }
     }
+
+    protected boolean isMouseInside(int mouseX, int mouseY, int x, int y, int w, int h) {
+        return mouseX >= x && mouseX < x + w && mouseY >= y && mouseY < y + h;
+    }
 }

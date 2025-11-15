@@ -3,6 +3,6 @@
   "parent": "hbm:block/abstract/cube_all_2_layer",
   "textures": {
     "all": "minecraft:block/bedrock",
-    "all1": "hbm:block/env/ore_random_1"
+    "all1": "hbm:block/ore_random_1"
   }
 }

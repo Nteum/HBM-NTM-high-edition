@@ -301,6 +301,10 @@ public class InventoryUtils {
         return itemStack;
     }
 
+    /**
+     * 物品处理需要解决的问题：
+     * 1.
+     * */
     public static void handleItems(BlockEntity be, Function<ItemStack, ItemStack> processFunction, int slot1, int slot2){
         IItemHandler itemHandler = be.getCapability(ForgeCapabilities.ITEM_HANDLER).orElse(null);
         if (itemHandler == null)return;
