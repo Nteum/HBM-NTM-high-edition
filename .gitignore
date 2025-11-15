@@ -15,3 +15,22 @@ gen
 .gitignore
 /src/generated/resources/.cache/
 .vscode
+HBM-NTM-high-edition.code-workspace!/HBM-NTM-high-edition.code-workspace
+/gradle.properties
+/gradle/wrapper/gradle-wrapper.jar
+/gradle/wrapper/gradle-wrapper.properties
+/gradle/
+# ===== AI Agent导向 =====
+AGENTS.md
+# ===== 通用 OS 垃圾文件 =====
+.DS_Store
+Thumbs.db
+# ===== IntelliJ IDEA / Gradle =====
+/.idea/                  # IDE 项目配置
+*.iml                    # IDEA 模块文件
+/.gradle/                # Gradle 本地缓存
+/build/                  # 项目构建输出
+/out/                    # 其他构建输出
+# ===== Java 产物 =====
+*.log
+*.tmp

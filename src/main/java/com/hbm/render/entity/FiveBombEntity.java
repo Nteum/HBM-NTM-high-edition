@@ -1,16 +1,18 @@
-package net.mcreator.nuclearcraft.entity;
+package com.hbm.render.entity;
 
-import java.io.IOException;
-import net.mcreator.nuclearcraft.init.BigExplosivesModEntities;
-import net.mcreator.nuclearcraft.procedures.FiveBombEntityDiesProcedure;
-import net.mcreator.nuclearcraft.procedures.FiveBombWaterExplodeProcedure;
-import net.mcreator.nuclearcraft.procedures.FiveHundredKgBombEntityDiesProcedure;
+import com.hbm.init.BigExplosivesModEntities;
+import com.hbm.procedures.FiveBombEntityDiesProcedure;
+import com.hbm.procedures.FiveBombWaterExplodeProcedure;
+import com.hbm.procedures.FiveHundredKgBombEntityDiesProcedure;
+import com.hbm.render.pipeline.GeoRenderKeys;
+import com.hbm.render.pipeline.PipelineKeyProvider;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityDimensions;
@@ -25,19 +27,18 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.network.NetworkHooks;
 import net.minecraftforge.network.PlayMessages;
 import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.core.animation.AnimationController;
 import software.bernie.geckolib.core.animation.AnimationState;
 import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 
-/* loaded from: explosives_beta.jar:net/mcreator/nuclearcraft/entity/FiveBombEntity.class */
-public class FiveBombEntity extends PathfinderMob implements GeoEntity {
-    public static final EntityDataAccessor<Boolean> SHOOT = SynchedEntityData.m_135353_(FiveBombEntity.class, EntityDataSerializers.f_135035_);
-    public static final EntityDataAccessor<String> ANIMATION = SynchedEntityData.m_135353_(FiveBombEntity.class, EntityDataSerializers.f_135030_);
-    public static final EntityDataAccessor<String> TEXTURE = SynchedEntityData.m_135353_(FiveBombEntity.class, EntityDataSerializers.f_135030_);
+public class FiveBombEntity extends PathfinderMob implements GeoEntity, PipelineKeyProvider {
+    public static final EntityDataAccessor<Boolean> SHOOT = SynchedEntityData.defineId(FiveBombEntity.class, EntityDataSerializers.BOOLEAN);
+    public static final EntityDataAccessor<String> ANIMATION = SynchedEntityData.defineId(FiveBombEntity.class, EntityDataSerializers.STRING);
+    public static final EntityDataAccessor<String> TEXTURE = SynchedEntityData.defineId(FiveBombEntity.class, EntityDataSerializers.STRING);
     private final AnimatableInstanceCache cache;
     private boolean swinging;
     private boolean lastloop;
@@ -54,86 +55,96 @@ public class FiveBombEntity extends PathfinderMob implements GeoEntity {
         this.cache = GeckoLibUtil.createInstanceCache(this);
         this.animationprocedure = "empty";
         this.prevAnim = "empty";
-        this.f_21364_ = 0;
-        m_21557_(false);
-        m_274367_(0.6f);
-        m_21530_();
+        this.xpReward = 0;
+        setNoAi(false);
+        setMaxUpStep(0.6f);
+        setPersistenceRequired();
     }
 
-    protected void m_8097_() {
-        super.m_8097_();
-        this.f_19804_.m_135372_(SHOOT, false);
-        this.f_19804_.m_135372_(ANIMATION, "undefined");
-        this.f_19804_.m_135372_(TEXTURE, "500kg");
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(SHOOT, false);
+        this.entityData.define(ANIMATION, "undefined");
+        this.entityData.define(TEXTURE, "500kg");
     }
 
     public void setTexture(String texture) {
-        this.f_19804_.m_135381_(TEXTURE, texture);
+        this.entityData.set(TEXTURE, texture);
     }
 
     public String getTexture() {
-        return (String) this.f_19804_.m_135370_(TEXTURE);
+        return (String) this.entityData.get(TEXTURE);
     }
 
-    public Packet<ClientGamePacketListener> m_5654_() {
+    public Packet<ClientGamePacketListener> getAddEntityPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
     }
 
-    protected void m_8099_() {
-        super.m_8099_();
+    protected void registerGoals() {
+        super.registerGoals();
     }
 
-    public MobType m_6336_() {
-        return MobType.f_21640_;
+    public MobType getMobType() {
+        return MobType.UNDEFINED;
     }
 
-    public boolean m_6785_(double distanceToClosestPlayer) {
+    public boolean removeWhenFarAway(double distanceToClosestPlayer) {
         return false;
     }
 
-    public boolean m_142535_(float l, float d, DamageSource source) throws IOException {
-        FiveHundredKgBombEntityDiesProcedure.execute(m_9236_(), m_20185_(), m_20186_(), m_20189_());
-        return super.m_142535_(l, d, source);
+    public boolean causeFallDamage(float l, float d, DamageSource source) {
+        FiveHundredKgBombEntityDiesProcedure.execute(level(), getX(), getY(), getZ());
+        return super.causeFallDamage(l, d, source);
     }
 
-    public void m_6667_(DamageSource source) {
-        super.m_6667_(source);
-        FiveBombEntityDiesProcedure.execute(m_9236_(), m_20185_(), m_20186_(), m_20189_());
+    public void die(DamageSource source) {
+        super.die(source);
+        FiveBombEntityDiesProcedure.execute(level(), getX(), getY(), getZ());
     }
 
-    public void m_7380_(CompoundTag compound) {
-        super.m_7380_(compound);
-        compound.m_128359_("Texture", getTexture());
+    public void addAdditionalSaveData(CompoundTag compound) {
+        super.addAdditionalSaveData(compound);
+        compound.putString("Texture", getTexture());
     }
 
-    public void m_7378_(CompoundTag compound) {
-        super.m_7378_(compound);
-        if (compound.m_128441_("Texture")) {
-            setTexture(compound.m_128461_("Texture"));
+    public void readAdditionalSaveData(CompoundTag compound) {
+        super.readAdditionalSaveData(compound);
+        if (compound.contains("Texture")) {
+            setTexture(compound.getString("Texture"));
         }
     }
 
-    public void m_6075_() {
-        super.m_6075_();
-        FiveBombWaterExplodeProcedure.execute(m_9236_(), m_20185_(), m_20186_(), m_20189_(), this);
-        m_6210_();
+    public void baseTick() {
+        super.baseTick();
+        FiveBombWaterExplodeProcedure.execute(level(), getX(), getY(), getZ(), this);
+        refreshDimensions();
     }
 
-    public EntityDimensions m_6972_(Pose p_33597_) {
-        return super.m_6972_(p_33597_).m_20388_(1.0f);
+    public EntityDimensions getDimensions(Pose p_33597_) {
+        return super.getDimensions(p_33597_).scale(1.0f);
     }
 
-    public void m_8107_() {
-        super.m_8107_();
-        m_21203_();
+    public void aiStep() {
+        super.aiStep();
+        updateSwingTime();
+    }
+
+    @Override
+    public ResourceLocation getPipelineKey() {
+        return GeoRenderKeys.FIVE_BOMB;
+    }
+
+    @Override
+    public String getPipelineTextureKey() {
+        return getTexture();
     }
 
     public static void init() {
     }
 
     public static AttributeSupplier.Builder createAttributes() {
-        AttributeSupplier.Builder builder = Mob.m_21552_();
-        return builder.m_22268_(Attributes.f_22279_, 0.0d).m_22268_(Attributes.f_22276_, 10.0d).m_22268_(Attributes.f_22284_, 0.0d).m_22268_(Attributes.f_22281_, 3.0d).m_22268_(Attributes.f_22277_, 16.0d);
+        AttributeSupplier.Builder builder = Mob.createMobAttributes();
+        return builder.add(Attributes.MOVEMENT_SPEED, 0.0d).add(Attributes.MAX_HEALTH, 10.0d).add(Attributes.ARMOR, 0.0d).add(Attributes.ATTACK_DAMAGE, 3.0d).add(Attributes.FOLLOW_RANGE, 16.0d);
     }
 
     private PlayState movementPredicate(AnimationState event) {
@@ -161,20 +172,20 @@ public class FiveBombEntity extends PathfinderMob implements GeoEntity {
         return PlayState.CONTINUE;
     }
 
-    protected void m_6153_() {
-        this.f_20919_++;
-        if (this.f_20919_ == 1) {
-            m_142687_(Entity.RemovalReason.KILLED);
-            m_21226_();
+    protected void tickDeath() {
+        this.deathTime++;
+        if (this.deathTime == 1) {
+            remove(Entity.RemovalReason.KILLED);
+            dropExperience();
         }
     }
 
     public String getSyncedAnimation() {
-        return (String) this.f_19804_.m_135370_(ANIMATION);
+        return (String) this.entityData.get(ANIMATION);
     }
 
     public void setAnimation(String animation) {
-        this.f_19804_.m_135381_(ANIMATION, animation);
+        this.entityData.set(ANIMATION, animation);
     }
 
     public void registerControllers(AnimatableManager.ControllerRegistrar data) {

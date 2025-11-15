@@ -1,0 +1,52 @@
+{
+  "entries": [
+    {
+      "id": "big_explosives:five_bomb",
+      "model": "hbm:geo/pipeline_placeholder.geo.json",
+      "animation": "hbm:animations/pipeline_generic.animation.json",
+      "render_type": "cutout",
+      "shadow_radius": 0.5,
+      "scale": 1.0,
+      "textures": {
+        "default": "hbm:textures/entity/duck.png",
+        "500kg": "hbm:textures/entity/duck.png"
+      }
+    },
+    {
+      "id": "big_explosives:five_hundred_kg_explosion",
+      "model": "hbm:geo/pipeline_placeholder.geo.json",
+      "animation": "hbm:animations/pipeline_generic.animation.json",
+      "render_type": "translucent",
+      "shadow_radius": 6.0,
+      "scale": 4.0,
+      "textures": {
+        "default": "hbm:textures/entity/duck.png",
+        "500kgtexture": "hbm:textures/entity/duck.png"
+      }
+    },
+    {
+      "id": "big_explosives:atomic_bomb",
+      "model": "hbm:geo/pipeline_placeholder.geo.json",
+      "animation": "hbm:animations/pipeline_generic.animation.json",
+      "render_type": "cutout",
+      "shadow_radius": 0.5,
+      "scale": 1.2,
+      "textures": {
+        "default": "hbm:textures/entity/duck.png",
+        "atomicbomb": "hbm:textures/entity/duck.png"
+      }
+    },
+    {
+      "id": "big_explosives:atomic_bomb_explosion",
+      "model": "hbm:geo/pipeline_placeholder.geo.json",
+      "animation": "hbm:animations/pipeline_generic.animation.json",
+      "render_type": "translucent",
+      "shadow_radius": 8.0,
+      "scale": 5.0,
+      "textures": {
+        "default": "hbm:textures/entity/duck.png",
+        "atomicbombtexture": "hbm:textures/entity/duck.png"
+      }
+    }
+  ]
+}

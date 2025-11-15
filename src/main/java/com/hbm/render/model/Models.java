@@ -22,6 +22,8 @@ import net.minecraft.client.resources.model.SimpleBakedModel;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.server.packs.resources.SimplePreparableReloadListener;
+import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ModelEvent;
@@ -148,7 +150,17 @@ public class Models {
         }
         @net.minecraftforge.eventbus.api.SubscribeEvent
         public static void onRegisterReload(net.minecraftforge.client.event.RegisterClientReloadListenersEvent e) {
-            e.registerReloadListener(resourceManager -> clearCaches("ReloadListener"));
+            e.registerReloadListener(new SimplePreparableReloadListener<Void>() {
+                @Override
+                protected Void prepare(ResourceManager resourceManager, ProfilerFiller profiler) {
+                    return null;
+                }
+
+                @Override
+                protected void apply(Void data, ResourceManager resourceManager, ProfilerFiller profiler) {
+                    clearCaches("ReloadListener");
+                }
+            });
         }
     }
 }

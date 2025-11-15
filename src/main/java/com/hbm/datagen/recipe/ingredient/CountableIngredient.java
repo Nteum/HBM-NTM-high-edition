@@ -199,7 +199,7 @@ public class CountableIngredient extends AbstractIngredient {
                 }
 
                 if (list.isEmpty()) {
-                    list.add(new ItemStack(net.minecraft.world.level.block.Blocks.BARRIER).setHoverName(net.minecraft.network.chat.Component.literal("Empty Tag: " + this.tagKey.location())));
+                    list.add(new ItemStack(net.minecraft.world.level.block.Blocks.BARRIER).setHoverName(net.minecraft.network.chat.Component.translatable("msg.hbm.empty_tag", this.tagKey.location().toString())));
                 }
                 return list;
             }

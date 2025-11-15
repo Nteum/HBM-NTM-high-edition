@@ -230,7 +230,7 @@ public abstract class EntityMissile extends EntityThrowableNT implements IRadarD
     @Override
     protected void onHit(HitResult pResult) {
         // 打印击中位置
-        if (getOwner() != null)  this.getOwner().sendSystemMessage(Component.literal("Hit on " + pResult.getLocation()));
+        if (getOwner() != null)  this.getOwner().sendSystemMessage(Component.translatable("msg.hbm.hit_on", pResult.getLocation().toString()));
         if (pResult.getType() == HitResult.Type.BLOCK){
             onMissileImpact(pResult);
             this.setDead();

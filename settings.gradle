@@ -1,9 +1,14 @@
 pluginManagement {
     repositories {
+        mavenCentral()
         gradlePluginPortal()
         maven {
             name = 'MinecraftForge'
             url = 'https://maven.minecraftforge.net/'
+        }
+        maven {
+            name = 'GradleEnterprise'
+            url = 'https://repo.gradle.com/gradle/enterprise-gradle-plugin'
         }
         maven { url = 'https://maven.parchmentmc.org' }
         maven { url = 'https://bmclapi2.bangbang93.com/maven'}

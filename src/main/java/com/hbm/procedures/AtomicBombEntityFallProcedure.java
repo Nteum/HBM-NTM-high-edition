@@ -1,17 +1,24 @@
-package net.mcreator.nuclearcraft.procedures;
+package com.hbm.procedures;
 
-import net.minecraft.core.registries.Registries;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.LevelAccessor;
 
-/* loaded from: explosives_beta.jar:net/mcreator/nuclearcraft/procedures/AtomicBombEntityFallProcedure.class */
-public class AtomicBombEntityFallProcedure {
+/**
+ * Applies a flat burst of damage whenever the atomic bomb entity experiences a
+ * fall tick. The original generated code used obfuscated helper calls; this
+ * keeps the behaviour but expresses it using stable Mojang names.
+ */
+public final class AtomicBombEntityFallProcedure {
+
+    private static final float DAMAGE = 30.0F;
+
+    private AtomicBombEntityFallProcedure() {
+    }
+
     public static void execute(LevelAccessor world, Entity entity) {
-        if (entity == null) {
+        if (world == null || entity == null) {
             return;
         }
-        entity.m_6469_(new DamageSource(world.m_9598_().m_175515_(Registries.f_268580_).m_246971_(DamageTypes.f_268433_)), 30.0f);
+        entity.hurt(entity.damageSources().generic(), DAMAGE);
     }
 }

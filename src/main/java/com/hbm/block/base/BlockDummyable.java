@@ -14,7 +14,6 @@ import com.hbm.registries.ModBlocks;
 import com.hbm.utils.DirectionUtils;
 import com.hbm.utils.multiblock.DummableHelper;
 import com.hbm.utils.multiblock.MultiblockData;
-import com.hbm.world.gen.INBTTransformable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
@@ -53,7 +52,7 @@ import java.util.List;
 
 //所有多方块结构的父类
 //主要处理可以协同破坏和恢复的多方块机器
-public abstract class BlockDummyable extends BlockMachineBase implements ICustomBlockHighlight, INBTTransformable {
+public abstract class BlockDummyable extends BlockMachineBase implements ICustomBlockHighlight {
     public static boolean doShapeRot = false;
     public static VoxelShape SHAPE;
     // 某个方块是否为核心，如果是核心，建立功能性方块实体，否则只是代理方块实体。

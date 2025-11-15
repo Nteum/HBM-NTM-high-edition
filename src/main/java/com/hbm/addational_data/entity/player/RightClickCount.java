@@ -22,7 +22,7 @@ public class RightClickCount implements INBTSerializable<CompoundTag> {
 
     public Component getMessage(){
         count++;
-        return Component.literal("Right click time: " + count);
+        return Component.translatable("msg.hbm.right_click_time", count);
     }
 //    @SubscribeEvent
 //    public static void onPlayerBorn(PlayerEvent.PlayerLoggedInEvent event){

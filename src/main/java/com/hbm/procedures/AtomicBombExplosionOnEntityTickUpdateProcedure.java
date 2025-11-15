@@ -1,34 +1,41 @@
-package net.mcreator.nuclearcraft.procedures;
+package com.hbm.procedures;
 
-import net.mcreator.nuclearcraft.BigExplosivesMod;
+import com.hbm.compat.bigexplosives.BigExplosivesMod;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.LevelAccessor;
 
-/* loaded from: explosives_beta.jar:net/mcreator/nuclearcraft/procedures/AtomicBombExplosionOnEntityTickUpdateProcedure.class */
-public class AtomicBombExplosionOnEntityTickUpdateProcedure {
+/**
+ * Keeps the lingering explosion entity around long enough for its animation to
+ * play, then discards it on the server. While alive we continually purge any
+ * potion effects so shader mods cannot tint the flash.
+ */
+public final class AtomicBombExplosionOnEntityTickUpdateProcedure {
+
+    private static final int LIFETIME_TICKS = 380;
+
+    private AtomicBombExplosionOnEntityTickUpdateProcedure() {
+    }
+
     public static void execute(LevelAccessor world, Entity entity) {
-        if (entity == null) {
+        if (world == null || entity == null) {
             return;
         }
-        if (entity instanceof LivingEntity) {
-            LivingEntity _entity = (LivingEntity) entity;
-            _entity.m_21219_();
+
+        if (entity instanceof LivingEntity living) {
+            living.removeAllEffects();
         }
-        BigExplosivesMod.queueServerWork(380, () -> {
-            if (entity.m_6084_()) {
-                if (!entity.m_9236_().m_5776_()) {
-                    entity.m_146870_();
-                }
-                if (entity instanceof LivingEntity) {
-                    LivingEntity _entity2 = (LivingEntity) entity;
-                    _entity2.m_21219_();
-                }
+
+        BigExplosivesMod.queueServerWork(LIFETIME_TICKS, () -> {
+            if (!entity.isAlive()) {
+                return;
+            }
+            if (!entity.level().isClientSide()) {
+                entity.discard();
+            }
+            if (entity instanceof LivingEntity living) {
+                living.removeAllEffects();
             }
         });
-        if (entity instanceof LivingEntity) {
-            LivingEntity _entity2 = (LivingEntity) entity;
-            _entity2.m_21219_();
-        }
     }
 }
