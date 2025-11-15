@@ -86,7 +86,7 @@ public class HBMComponent {
     public static RegistryObject<Item>     INGOT_MUD;
     public static RegistryObject<Item>     INGOT_CFT;
     public static RegistryObject<Item>     INGOT_TH232;
-    public static RegistryObject<Item>     INGOT_URANIUM;
+//    public static RegistryObject<Item>     INGOT_URANIUM;
     public static RegistryObject<Item>     INGOT_U233;
     public static RegistryObject<Item>     INGOT_U235;
     public static RegistryObject<Item>     INGOT_U238;
@@ -731,8 +731,8 @@ public class HBMComponent {
         POWDER_BISMUTH = register(matherialList, "powder_bismuth", ()->new Item(new Item.Properties()));
         INGOT_MUD = register(matherialList, "ingot_mud", ()->new Item(new Item.Properties()));
         INGOT_CFT = register(matherialList, "ingot_cft", ()->new Item(new Item.Properties()));
-        INGOT_TH232 = register(matherialList, "ingot_th232", ()->new Item(new Item.Properties()));
-        INGOT_URANIUM = register(matherialList, "ingot_uranium", ()->new Item(new Item.Properties()));
+//        INGOT_TH232 = register(matherialList, "ingot_th232", ()->new Item(new Item.Properties()));
+//        INGOT_URANIUM = register(matherialList, "ingot_uranium", ()->new Item(new Item.Properties()));
         INGOT_U233 = register(matherialList, "ingot_u233", ()->new Item(new Item.Properties()));
         INGOT_U235 = register(matherialList, "ingot_u235", ()->new Item(new Item.Properties()));
         INGOT_U238 = register(matherialList, "ingot_u238", ()->new Item(new Item.Properties()));

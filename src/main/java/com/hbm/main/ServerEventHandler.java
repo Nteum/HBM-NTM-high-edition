@@ -8,6 +8,7 @@ import com.hbm.item.env.ItemEggGlyphid;
 import com.hbm.network.ServerMsgHandler;
 import com.hbm.registries.HBMDamage;
 import com.hbm.registries.ModCommands;
+import com.hbm.registries.ModItems;
 import com.hbm.utils.transport_net.FluidNetworkSystem;
 import net.minecraft.commands.Commands;
 import net.minecraft.world.item.ItemStack;
@@ -75,7 +76,7 @@ public class ServerEventHandler {
     @SubscribeEvent
     public static void onPlayerTossItem(ItemTossEvent event){
         ItemStack itemStack = event.getEntity().getItem();
-        if (itemStack.is(HBMComponent.EGG_GLYPHID.get()) || itemStack.is(HBMComponent.EGG_GLYPHID_TO_BIRTH.get())){
+        if (itemStack.is(ModItems.EGG_GLYPHID.get()) || itemStack.is(ModItems.EGG_GLYPHID_TO_BIRTH.get())){
             event.getPlayer().addItem(itemStack);
             event.setCanceled(true);
         }

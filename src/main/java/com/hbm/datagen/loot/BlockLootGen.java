@@ -35,28 +35,27 @@ public class BlockLootGen extends BlockLootSubProvider {
         HBMMachine.lootable(this);
         HBMBlockComponent.lootable(this);
         //机器
-        this.dropSelf(ModBlocks.machine_difurnace.get());
-        this.dropSelf(ModBlocks.machine_electric_furnace.get());
-        this.dropSelf(ModBlocks.machine_boiler.get());
-        this.dropSelf(ModBlocks.machine_electric_boiler.get());
-        this.dropSelf(ModBlocks.machine_nuclear_boiler.get());
-        this.dropSelf(ModBlocks.machine_press.get());
+//        this.dropSelf(ModBlocks.machine_difurnace.get());
+//        this.dropSelf(ModBlocks.machine_electric_furnace.get());
+//        this.dropSelf(ModBlocks.machine_boiler.get());
+//        this.dropSelf(ModBlocks.machine_electric_boiler.get());
+//        this.dropSelf(ModBlocks.machine_nuclear_boiler.get());
+//        this.dropSelf(ModBlocks.machine_press.get());
         this.dropSelf(ModBlocks.machine_battery.get());
         this.dropSelf(ModBlocks.machine_lithium_battery.get());
         this.dropSelf(ModBlocks.machine_schrabidium_battery.get());
         this.dropSelf(ModBlocks.machine_dineutronium_battery.get());
-        this.dropSelf(ModBlocks.anvil_iron.get());
-        this.dropSelf(ModBlocks.anvil_desh.get());
-        this.dropSelf(ModBlocks.anvil_bismuth.get());
-        this.dropSelf(ModBlocks.machine_cracking_tower.get());
+//        this.dropSelf(ModBlocks.anvil_iron.get());
+//        this.dropSelf(ModBlocks.anvil_desh.get());
+//        this.dropSelf(ModBlocks.anvil_bismuth.get());
+//        this.dropSelf(ModBlocks.machine_cracking_tower.get());
         this.dropSelf(ModBlocks.machine_assembler.get());
         this.dropSelf(ModBlocks.machine_crucible.get());
         this.dropSelf(ModBlocks.RED_CABLE.get());
         this.dropSelf(ModBlocks.conveyor.get());
         this.dropSelf(ModBlocks.bomb_boy.get());
-        this.dropSelf(ModBlocks.bomb_fat_man.get());
         this.dropSelf(ModBlocks.bomb_custom.get());
-        this.dropSelf(ModBlocks.machine_nuclear_boiler.get());
+//        this.dropSelf(ModBlocks.machine_nuclear_boiler.get());
 
         //饰品
         this.dropSelf(ModBlocks.TEST12.get());

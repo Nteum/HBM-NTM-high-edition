@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "hbm:block/env/ore_lithium"
+    "all": "hbm:block/ore_lithium"
   }
 }

@@ -1,28 +1,31 @@
 package com.hbm;
 
 import com.hbm.api.text.ILangEntry;
-import com.hbm.datagen.LanguageProvider;
+import com.hbm.registries.ModItems;
 import joptsimple.internal.Strings;
 import net.minecraft.Util;
-import net.minecraft.client.gui.screens.inventory.FurnaceScreen;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.level.block.SlabBlock;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.world.item.Item;
+import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 
 public enum HBMLang implements ILangEntry {
-    ITEMGROUP_ITEM("itemGroup","hbm_item"),
-    ITEMGROUP_BLOCK("itemGroup","hbm_block"),
-    ITEMGROUP_MACHINE("itemGroup","hbm_machine"),
-    ITEMGROUP_TOOL("itemGroup","hbm_tool"),
-    ITEMGROUP_WEAPON("itemGroup","hbm_weapon"),
-    // handoverTexts
-    ENERGY("item","battery.tooltip"),
-    FLUID_CAPACITY("item","fluid_capacity"),
-    // blockentity name
+    // 创造模式物品栏
+    HBM_PARTS("itemGroup","hbm_parts", "NTM Resources and Parts"),
+    HBM_CONTROL("itemGroup","hbm_control", "NTM Machine Items and Fuel"),
+    HBM_TEMPLATE("itemGroup","hbm_template", "NTM Templates"),
+    HBM_BLOCKS("itemGroup","hbm_blocks", "NTM Ores and Blocks"),
+    HBM_MACHINE("itemGroup","hbm_machine", "NTM Machines"),
+    HBM_NUKE("itemGroup","hbm_nuke", "NTM Bombs"),
+    HBM_MISSILE("itemGroup","hbm_missile", "NTM Missiles and Satellites"),
+    HBM_WEAPON("itemGroup","hbm_weapon", "NTM Weapons and Turrets"),
+    HBM_CONSUMABLE("itemGroup","hbm_consumable", "NTM Consumables and Gear"),
+    // 机器
+    CONTAINER_PRESS("Burner Press"),
     DIFURNACE("container","difurnace"),
     CRUCIBLE("container","crucible"),
     ELECTRIC_FURNACE("container","electric_furnace"),
@@ -34,6 +37,22 @@ public enum HBMLang implements ILangEntry {
     BARREL("container", "barrel"),
     BATTERY("container", "battery"),
     CONTAINER_LAUNCHPAD("Launch Pad"),
+    // GUI
+    TOOLTIP_LEFT_TIME("gui","left_time.tooltip"),
+    TOOLTIP_TANK_VOLUME("gui","volume.tooltip"),
+    TOOLTIP_ENERGY("gui","stored_energy.tooltip"),
+    GUI_TOOLTIP_PROGRESS("Progress: %s%"),
+    GUI_TOOLTIP_LEFTTIME("Left time: %s s"),
+    // Item
+    ITEM_INGOT_NEPTUNIUM_DESC("That one's my favourite!"),
+    ITEM_INGOT_SCHRARANIUM_NAME_ALTER("Nikonium Ingot"),
+    ITEM_BILLETGH336_DESC("Seaborgium's colleague."),
+    ITEM_BILLETFLASHLEAD_DESC("The lattice decays, causing antimatter-matter$annihilation reactions, causing the release of$pions, decaying into muons, catalyzing fusion of$the nuclei, creating the new element.$Please try to keep up."),
+    ITEM_INGOTASBESTOS_DESC("§o\"Filled with life, self-doubt and asbestos. That comes with the air.\"§r"),
+    ITEM_INGOTCOMBINE_STEEL_DESC("*insert Civil Protection reference here*"),
+    // handoverTexts
+    ENERGY("item","battery.tooltip"),
+    FLUID_CAPACITY("item","fluid_capacity"),
     // command
     COMMAND_DEBUG("command","debug"),
     //Redstone Control
@@ -83,10 +102,6 @@ public enum HBMLang implements ILangEntry {
     FT_PWRMODERATOR("fluid","pwr_moderator.tooltip"),
     FT_CORE_FLUX("fluid","core_flux.tooltip"),
     FT_RADIOACTIVE("fluid","radioactive.tooltip"),
-    // GUI
-    TOOLTIP_LEFT_TIME("gui","left_time.tooltip"),
-    TOOLTIP_TANK_VOLUME("gui","volume.tooltip"),
-    TOOLTIP_ENERGY("gui","stored_energy.tooltip"),
     // 大世界tooltip
     LOOKTOOLTIP_CHEMPLANT("block","chemplant.looktooltip"),
     TOOLTIP_GEIGER0("geiger","title", "GEIGER COUNTER"),
@@ -147,5 +162,15 @@ public enum HBMLang implements ILangEntry {
     }
     public String content(){
         return content;
+    }
+
+    public MutableComponent getTranslateable(){
+        return Component.translatable(key());
+    }
+
+    protected static RegistryObject<Item> register(List<RegistryObject<Item>> list, final String name, final Supplier<? extends Item> sup){
+        RegistryObject<Item> registryObject = ModItems.ITEMS.register(name, sup);
+        list.add(registryObject);
+        return registryObject;
     }
 }

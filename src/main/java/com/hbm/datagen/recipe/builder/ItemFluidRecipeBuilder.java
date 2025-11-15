@@ -172,8 +172,6 @@ public class ItemFluidRecipeBuilder implements FinishedRecipe {
         if (heat >= 0) pJson.addProperty(HBMKey.HEAT, this.heat);
     }
 
-
-
     @Override
     public ResourceLocation getId() {
         return this.id;

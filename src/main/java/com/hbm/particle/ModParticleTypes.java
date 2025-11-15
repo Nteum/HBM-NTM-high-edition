@@ -30,11 +30,16 @@ public class ModParticleTypes {
 
     public static final RegistryObject<SimpleParticleType> HBM_SMOKE = addSimple("nuke_smoke",HBMSmokeParticle::new);
     public static final RegistryObject<SimpleParticleType> ROCKET_FLAME = addSimple("rocket_flame", "contrail", ParticleRocketFlame::new);
-    public static final RegistryObject<SimpleParticleType> RADIATION_FOG = addSimple("fog", ParticleRadiationFog::new);
+    public static final RegistryObject<SimpleParticleType> RADIATION_FOG = addSimple("radiation_fog", "fog", ParticleRadiationFog::new);
     public static final RegistryObject<SimpleParticleType> SHOCKWAVE = addSimple("shockwave", ShockWaveParticle::new);
     public static final RegistryObject<SimpleParticleType> DEAD_LEAF = addSimple("dead_leaf", DeadLeafParticle::new);
     public static final RegistryObject<SimpleParticleType> LAUNCH_SMOKE = addSimple("launch_smoke", "contrail", ParticleSmokePlume::new);
     public static final RegistryObject<SimpleParticleType> CONTRAIL = addSimple("contrail", "contrail", ParticleContrail::new);
+    public static final RegistryObject<SimpleParticleType> EX_SMOKE = addSimple("ex_smoke", "particle_base", ParticleExSmoke::new);
+    public static final RegistryObject<SimpleParticleType> DIGAMMA_SMOKE = addSimple("digamma_smoke", "particle_base", ParticleDigammaSmoke::new);
+    public static final RegistryObject<SimpleParticleType> FOAM = addSimple("foam", "particle_base", ParticleFoam::new);
+    public static final RegistryObject<SimpleParticleType> LETTER = addSimple("letter", "particle_base", ParticleLetter::new);
+    public static final RegistryObject<SimpleParticleType> MUKEWAVE = addSimple("mukewave", "shockwave", ParticleMukeWave::new);
 
     public static RegistryObject<SimpleParticleType> addSimple(String name, SimpleParticleConstructor<? extends Particle> constructor){
         return addSimple(name, name, constructor);
@@ -60,7 +65,7 @@ public class ModParticleTypes {
 //        simpleParticles.forEach((k,v) -> provider.simpleParticle(k.getId().getPath()));
         // 由于hbm中多种粒子复用同一个贴图，因此这里直接把名称分为两部分
         simpleParticles.forEach((k,v) -> provider.simpleParticle2Name(k.getId().getPath(), texMap.get(k.getId().getPath())));
-        texMap = null;
+//        texMap = null;
     }
 
     @FunctionalInterface

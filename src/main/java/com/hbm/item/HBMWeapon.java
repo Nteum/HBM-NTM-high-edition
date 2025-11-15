@@ -13,7 +13,7 @@ import net.minecraftforge.registries.RegistryObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HBMWeapon extends HBMComponent{
+public class HBMWeapon{
     protected static final List<RegistryObject<Item>> weaponList = new ArrayList<>();
     public static RegistryObject<Item> MP_WARHEAD_15_BALEFIRE;
     public static RegistryObject<Item> MISSILE_ANTI_BALLISTIC;

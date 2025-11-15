@@ -60,12 +60,18 @@ public class HBMKey {
     public static final String BLAST = "blast";
     public static final String ASSEMBLER = "assembler";
     public static final String CHEMPLANT = "chemplant";
-    //
+    // 物品和方块定义
     public static final String BASIC_MODEL = "basic_model";
     public static final String SPAWN_EGG_MODEL = "spawn_egg_model";
     public static final String ENTITY_MODEL = "entity_model";
-    public static final String CUBE_ALL_MODEL = "cube_all_model";
-    public static final String STANDALONE_MODEL = "standalone_model";
+    public static final String MODEL_DYNAMIC = "model_dynamic";
+    public static final String MODEL_CUBE_ALL = "model_cube_all";
+    public static final String MODEL_FRONT_SIDE = "model_front_side";
+    public static final String MODEL_FRONT_SIDE_TOP = "model_front_side_top";
+    public static final String MODEL_EXISTING_FILE = "model_existing_file";
+    public static final String MODEL_STANDALONE = "model_standalone";
+    public static final String MODEL_DIFURNACE = "model_difurnace";
+
     public static final String LITERALLY = "literally";
     public static final String ORDERLY_GEN = "orderly_gen";
     public static final String REVERSE_GEN = "reverse_gen";

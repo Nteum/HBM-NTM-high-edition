@@ -14,7 +14,7 @@ public class AssemblerRecipeProvider implements ISubRecipeProvider {
     @Override
     public void addRecipes(Consumer<FinishedRecipe> consumer) {
         String basePath = "assembler/";
-        ShapelessItemRecipeBuilder.assembler(ModItems.plate_iron.get(),2).requires(Items.IRON_INGOT,3).num(30).save(consumer,basePath+"plate_iron");
-        ShapelessItemRecipeBuilder.assembler(HBMComponent.BATTERY_CREATIVE.get(),1).requires(ModTags.Items.BATTERY,3).num(30).save(consumer,basePath+"battery_creative");
+        ShapelessItemRecipeBuilder.assembler(ModItems.PLATE_IRON.get(),2).requires(Items.IRON_INGOT,3).num(30).save(consumer,basePath+"plate_iron");
+        ShapelessItemRecipeBuilder.assembler(ModItems.BATTERY_CREATIVE.get(),1).requires(ModTags.Items.BATTERY,3).num(30).save(consumer,basePath+"battery_creative");
     }
 }

@@ -11,6 +11,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
+import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -25,32 +26,32 @@ public class ItemModelGen extends ItemModelProvider {
     protected void registerModels() {
         ModItems.genModel(this);
         HBMtools.genModel(this);
-        HBMComponent.genModel(this);
+//        HBMComponent.genModel(this);
         HBMWeapon.genModel(this);
         HBMCombat.genModel(this);
         ModFluids.bucketModel(this);
-        this.basicItem(ModItems.ingot_red_copper.get());
-        this.basicItem(ModItems.ingot_tungsten.get());
-        this.basicItem(ModItems.ingot_aluminium.get());
-        this.basicItem(ModItems.ingot_lead.get());
-        this.basicItem(ModItems.ingot_zirconium.get());
-        this.basicItem(ModItems.ingot_magnetized_tungsten.get());
-        this.basicItem(ModItems.ingot_solinium.get());
-        this.basicItem(ModItems.plate_iron.get());
-        this.basicItem(ModItems.fluorite.get());
-        this.basicItem(ModItems.nugget_zirconium.get());
-
-        this.basicItem(ModItems.ingot_advanced_alloy.get());
-        this.basicItem(ModItems.solid_fuel.get());
-        this.basicItem(ModItems.lignite.get());
-        this.basicItem(ModItems.powder_lignite.get());
-        this.basicItem(ModItems.powder_coal.get());
-        this.basicItem(ModItems.coke_coal.get());
-        this.basicItem(ModItems.coke_lignite.get());
-        this.basicItem(ModItems.coke_petroleum.get());
-        this.basicItem(ModItems.briquette_wood.get());
-        this.basicItem(ModItems.briquette_lignite.get());
-        this.basicItem(ModItems.briquette_coal.get());
+//        this.basicItem(ModItems.ingot_red_copper.get());
+//        this.basicItem(ModItems.ingot_tungsten.get());
+//        this.basicItem(ModItems.ingot_aluminium.get());
+//        this.basicItem(ModItems.ingot_lead.get());
+//        this.basicItem(ModItems.ingot_zirconium.get());
+//        this.basicItem(ModItems.ingot_magnetized_tungsten.get());
+//        this.basicItem(ModItems.ingot_solinium.get());
+//        this.basicItem(ModItems.plate_iron.get());
+//        this.basicItem(ModItems.fluorite.get());
+//        this.basicItem(ModItems.nugget_zirconium.get());
+//
+//        this.basicItem(ModItems.ingot_advanced_alloy.get());
+//        this.basicItem(ModItems.solid_fuel.get());
+//        this.basicItem(ModItems.lignite.get());
+//        this.basicItem(ModItems.powder_lignite.get());
+//        this.basicItem(ModItems.powder_coal.get());
+//        this.basicItem(ModItems.coke_coal.get());
+//        this.basicItem(ModItems.coke_lignite.get());
+//        this.basicItem(ModItems.coke_petroleum.get());
+//        this.basicItem(ModItems.briquette_wood.get());
+//        this.basicItem(ModItems.briquette_lignite.get());
+//        this.basicItem(ModItems.briquette_coal.get());
 
 //        this.basicItem(ModItems.detonator.get());
         this.basicItem(ModItems.grenade_generic.get());
@@ -74,5 +75,12 @@ public class ItemModelGen extends ItemModelProvider {
     public void builtinModel(Item item){
         ResourceLocation resourceLocation = Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(item));
         this.withExistingParent(resourceLocation.toString(), "builtin/entity");
+    }
+    // 产生可变化的实体
+    public void dynamicModel(Item item){
+        ResourceLocation rl = Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(item));
+        this.getBuilder(rl.toString()).parent(new ModelFile.UncheckedModelFile("item/generated"))
+                .texture("layer0", new ResourceLocation(rl.getNamespace(), "item/" + rl.getPath()))
+                .override().model(this.basicItem(HBM.rl("item/ingot_nikonium"))).end();
     }
 }

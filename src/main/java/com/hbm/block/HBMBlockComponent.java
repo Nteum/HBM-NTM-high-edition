@@ -79,7 +79,7 @@ public class HBMBlockComponent {
         //ores
         WAST_LEAVES = registerWithItem("wast_leaves",()->new WasteLeaves(BlockBehaviour.Properties.copy(Blocks.ACACIA_LEAVES).noLootTable()), true);
         WAST_EARTH = registerWithItem("wast_earth",()->new WasteEarth(BlockBehaviour.Properties.copy(Blocks.DIRT)), true);
-        URANIUM_ORE = registerWithItem("ore_uranium",()->new BlockOre(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)), true);
+//        URANIUM_ORE = registerWithItem("ore_uranium",()->new BlockOre(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)), true);
         DEEPSLATE_URANIUM_ORE = registerWithItem("ore_deepslate_uranium",()->new BlockOre(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_IRON_ORE)), true);
         SCORCHED_URANIUM_ORE = registerWithItem("ore_scorched_uranium",()->new BlockOre(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)), true);
         TITANIUM_ORE = registerWithItem("ore_titanium",()->new BlockOre(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)), true);
@@ -136,20 +136,20 @@ public class HBMBlockComponent {
             if (!modelSpecialSet.contains(blockRegistryObject))
                 provider.simpleBlock(blockRegistryObject.get());
         });
-        provider.simpleBlockWithItem(WAST_EARTH.get(),provider.models().cubeBottomTop(provider.path(WAST_EARTH.get()), HBM.rl("block/env/waste_earth_side"), HBM.rl("block/env/waste_earth_bottom"), HBM.rl("block/env/waste_earth_top")));
-        provider.simpleBlockWithItem(WAST_LEAVES.get(),provider.models().leaves(provider.path(WAST_LEAVES.get()), HBM.rl("block/env/waste_leaves")));
-        provider.simpleBlockWithItem(URANIUM_ORE.get(),provider.models().cubeAll(provider.path(URANIUM_ORE.get()), HBM.rl("block/env/ore_uranium")));
-        provider.simpleBlockWithItem(DEEPSLATE_URANIUM_ORE.get(),provider.models().cubeAll(provider.path(DEEPSLATE_URANIUM_ORE.get()), HBM.rl("block/env/ore_uranium_deepslate")));
+        provider.simpleBlockWithItem(WAST_EARTH.get(),provider.models().cubeBottomTop(provider.path(WAST_EARTH.get()), HBM.rl("block/waste_earth_side"), HBM.rl("block/waste_earth_bottom"), HBM.rl("block/waste_earth_top")));
+        provider.simpleBlockWithItem(WAST_LEAVES.get(),provider.models().leaves(provider.path(WAST_LEAVES.get()), HBM.rl("block/waste_leaves")));
+//        provider.simpleBlockWithItem(URANIUM_ORE.get(),provider.models().cubeAll(provider.path(URANIUM_ORE.get()), HBM.rl("block/ore_uranium")));
+        provider.simpleBlockWithItem(DEEPSLATE_URANIUM_ORE.get(),provider.models().cubeAll(provider.path(DEEPSLATE_URANIUM_ORE.get()), HBM.rl("block/ore_uranium_deepslate")));
         provider.addEnumStateBlock(BEDROCK_ORE.get(), BedRockOre.TYPE, (value)->provider.enumModelFileFunction_BedRockOreType((BedRockOre.BedRockOreType) value));
         provider.simpleBlockItem(BEDROCK_ORE.get(), provider.models().cubeAll(provider.path(BEDROCK_ORE.get()), new ResourceLocation("block/bedrock")));
-        provider.simpleBlockWithItem(RARE_EARTH_ORE.get(),provider.models().cubeAll(provider.path(RARE_EARTH_ORE.get()), HBM.rl("block/env/ore_rare")));
-        provider.simpleBlockWithItem(DEEPSLATE_RARE_EARTH_ORE.get(),provider.models().cubeAll(provider.path(DEEPSLATE_RARE_EARTH_ORE.get()), HBM.rl("block/env/ore_rare_deepslate")));
-        provider.simpleBlockWithItem(ASBESTOS_BLOCK.get(),provider.models().cubeAll(provider.path(ASBESTOS_BLOCK.get()), HBM.rl("block/env/block_asbestos")));
-        provider.simpleBlockWithItem(ASBESTOS_ORE.get(),provider.models().cubeAll(provider.path(ASBESTOS_ORE.get()), HBM.rl("block/env/ore_asbestos")));
-        provider.simpleBlockWithItem(BASALT_ASBESTOS_ORE.get(),provider.models().cubeTop(provider.path(BASALT_ASBESTOS_ORE.get()), HBM.rl("block/env/ore_asbestos_basalt"), HBM.rl("block/env/ore_asbestos_basalt_top")));
-        provider.simpleBlockWithItem(SA326_ORE.get(),provider.models().cubeAll(provider.path(SA326_ORE.get()), HBM.rl("block/env/ore_schrabidium")));
-        provider.simpleBlockWithItem(LITHIUM_ORE.get(),provider.models().cubeAll(provider.path(LITHIUM_ORE.get()), HBM.rl("block/env/ore_lithium")));
-        provider.simpleBlockWithItem(DEPTH_STONE.get(),provider.models().cubeAll(provider.path(DEPTH_STONE.get()), HBM.rl("block/env/stone_depth")));
+        provider.simpleBlockWithItem(RARE_EARTH_ORE.get(),provider.models().cubeAll(provider.path(RARE_EARTH_ORE.get()), HBM.rl("block/ore_rare")));
+        provider.simpleBlockWithItem(DEEPSLATE_RARE_EARTH_ORE.get(),provider.models().cubeAll(provider.path(DEEPSLATE_RARE_EARTH_ORE.get()), HBM.rl("block/ore_rare_deepslate")));
+        provider.simpleBlockWithItem(ASBESTOS_BLOCK.get(),provider.models().cubeAll(provider.path(ASBESTOS_BLOCK.get()), HBM.rl("block/block_asbestos")));
+        provider.simpleBlockWithItem(ASBESTOS_ORE.get(),provider.models().cubeAll(provider.path(ASBESTOS_ORE.get()), HBM.rl("block/ore_asbestos")));
+        provider.simpleBlockWithItem(BASALT_ASBESTOS_ORE.get(),provider.models().cubeTop(provider.path(BASALT_ASBESTOS_ORE.get()), HBM.rl("block/ore_asbestos_basalt"), HBM.rl("block/ore_asbestos_basalt_top")));
+        provider.simpleBlockWithItem(SA326_ORE.get(),provider.models().cubeAll(provider.path(SA326_ORE.get()), HBM.rl("block/ore_schrabidium")));
+        provider.simpleBlockWithItem(LITHIUM_ORE.get(),provider.models().cubeAll(provider.path(LITHIUM_ORE.get()), HBM.rl("block/ore_lithium")));
+        provider.simpleBlockWithItem(DEPTH_STONE.get(),provider.models().cubeAll(provider.path(DEPTH_STONE.get()), HBM.rl("block/stone_depth")));
     }
 
     public static void languageSupport(LanguageProvider provider){
@@ -161,7 +161,7 @@ public class HBMBlockComponent {
 
         //矿石
         provider.dropOther(HBMBlockComponent.WAST_EARTH.get(), Blocks.DIRT);
-        provider.dropSelf(HBMBlockComponent.URANIUM_ORE.get());
+//        provider.dropSelf(HBMBlockComponent.URANIUM_ORE.get());
         provider.dropSelf(HBMBlockComponent.DEEPSLATE_URANIUM_ORE.get());
         provider.dropSelf(HBMBlockComponent.SCORCHED_URANIUM_ORE.get());
         provider.dropSelf(HBMBlockComponent.TITANIUM_ORE.get());

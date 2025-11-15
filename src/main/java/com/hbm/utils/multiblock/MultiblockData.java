@@ -33,7 +33,7 @@ public class MultiblockData {
                 .addCaps(ForgeCapabilities.ITEM_HANDLER, 1,0,-1, Direction.EAST, -2,0,0,Direction.WEST));
         mapping.put(ModBlocks.bomb_boy.get(), new MultiblockData(0,0,0,0,1,1));
         mapping.put(ModBlocks.bomb_custom.get(), mapping.get(ModBlocks.bomb_boy.get()));
-        mapping.put(ModBlocks.bomb_fat_man.get(), new MultiblockData(1,0,0,1,1,1));
+        mapping.put(ModBlocks.Nuke.BOMB_FAT_MAN.get(), new MultiblockData(1,0,0,1,1,1));
         mapping.put(HBMMachine.LAUNCH_PAD.get(), new MultiblockData(0, 0, 1, 1, 1, 1));
     }
 

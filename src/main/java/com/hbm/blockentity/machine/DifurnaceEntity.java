@@ -53,13 +53,13 @@ public class DifurnaceEntity extends BaseContainerBlockEntity implements Worldly
         fuelPower.put(Items.LAVA_BUCKET,12800);
         fuelPower.put(Items.BLAZE_ROD,1000);    //烈焰棒
         fuelPower.put(Items.BLAZE_POWDER,300);  //烈焰粉
-        fuelPower.put(ModItems.lignite.get(),150);
-        fuelPower.put(ModItems.powder_lignite.get(),150);
-        fuelPower.put(ModItems.powder_coal.get(),200);
+        fuelPower.put(ModItems.LIGNITE.get(),150);
+        fuelPower.put(ModItems.POWDER_LIGNITE.get(),150);
+        fuelPower.put(ModItems.POWDER_COAL.get(),200);
         fuelPower.put(ModItems.coke_coal.get(),400);        //煤焦炭
         fuelPower.put(ModItems.coke_lignite.get(),400);
         fuelPower.put(ModItems.coke_petroleum.get(),400);
-        fuelPower.put(ModItems.solid_fuel.get(),400);
+        fuelPower.put(ModItems.SOLID_FUEL.get(),400);
         fuelPower.put(ModItems.briquette_coal.get(),200);   //煤球
         fuelPower.put(ModItems.briquette_lignite.get(),200);
         fuelPower.put(ModItems.briquette_wood.get(),200);
@@ -142,9 +142,11 @@ public class DifurnaceEntity extends BaseContainerBlockEntity implements Worldly
             if (!entity.items.get(1).isEmpty() && !entity.items.get(2).isEmpty() && entity.fuel > 0
                     && stack3.getCount() < stack3.getMaxStackSize()){
                 recipe = quickCheck.getRecipeFor(entity, level).orElse(null);
-                output = recipe.recipeItems.getZ();
-                if (output.is(stack3.getItem()) || output.getCount() + stack3.getCount() <= stack3.getMaxStackSize()) {
-                    canProcess = true;
+                if (recipe != null){
+                    output = recipe.recipeItems.getZ();
+                    if (output.is(stack3.getItem()) || output.getCount() + stack3.getCount() <= stack3.getMaxStackSize()) {
+                        canProcess = true;
+                    }
                 }
             }
             if (canProcess){

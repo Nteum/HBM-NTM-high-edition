@@ -27,7 +27,7 @@ public class ItemTagsGen extends ItemTagsProvider {
     protected void addTags(HolderLookup.Provider pProvider) {
         OreDictManager.addItemTags(this);
         //电池
-        this.tag(ModTags.Items.BATTERY).add(HBMComponent.BATTERY_CREATIVE.get(),HBMComponent.BATTERY_GENERIC.get(),HBMComponent.BATTERY_ADVANCED.get(),HBMComponent.BATTERY_LITHIUM.get(),
+        this.tag(ModTags.Items.BATTERY).add(ModItems.BATTERY_CREATIVE.get(),ModItems.BATTERY_GENERIC.get(),ModItems.BATTERY_ADVANCED.get(),ModItems.BATTERY_LITHIUM.get(),
                 ModBlocks.machine_battery.get().asItem(),ModBlocks.machine_lithium_battery.get().asItem(),
                 ModBlocks.machine_schrabidium_battery.get().asItem(),ModBlocks.machine_dineutronium_battery.get().asItem());
         //可以被充电的

@@ -27,6 +27,9 @@ public class EntityLootGen extends VanillaEntityLoot {
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(2.0f)).add(LootItem.lootTableItem(ModItems.GLYPHID_MEAT.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F))).apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F))))
                         .apply(SmeltItemFunction.smelted().when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, ENTITY_ON_FIRE))))
         );
-
+        this.add(ModEntityType.GLYPHID_SCOUT.get(), LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(2.0f)).add(LootItem.lootTableItem(ModItems.GLYPHID_MEAT.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F))).apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F))))
+                        .apply(SmeltItemFunction.smelted().when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, ENTITY_ON_FIRE))))
+        );
     }
 }

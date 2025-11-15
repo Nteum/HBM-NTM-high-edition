@@ -6,6 +6,7 @@ import com.hbm.Inventory.fluid.ModFluids;
 import com.hbm.gui.ModMenuType;
 import com.hbm.gui.screen.*;
 import com.hbm.gui.screen.RenderUtils;
+import com.hbm.item.HBMItemProperties;
 import com.hbm.item.tool.FluidBucketItem;
 import com.hbm.registries.ModKeyMapping;
 import com.hbm.registries.ModItems;
@@ -89,7 +90,7 @@ public class ClientEventHanler {
             EntityRenderers.register(ModEntityType.GLYPHID.get(), GlyphidRender::new);
 
             RenderUtils.init();
-//            specialItemRender = new SpecialItemRender(Minecraft.getInstance().getBlockEntityRenderDispatcher(),Minecraft.getInstance().getEntityModels());
+            HBMItemProperties.registerAll();
         });
     }
 

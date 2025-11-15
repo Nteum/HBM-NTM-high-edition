@@ -42,4 +42,8 @@ public abstract class BaseMachineGui<T extends AbstractContainerMenu> extends Ab
             pGuiGraphics.renderComponentTooltip(this.font, tooltips, mouseX, mouseY);
 //            this.func_146283_a(text, tPosX, tPosY);
     }
+
+    protected boolean isMouseInside(int mouseX, int mouseY, int x, int y, int w, int h) {
+        return mouseX >= x && mouseX < x + w && mouseY >= y && mouseY < y + h;
+    }
 }

@@ -41,28 +41,28 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
         //物品
         this.add(ModItems.coke_coal.get(),"Coal Coke");
         //方块
-        this.add(ModBlocks.machine_difurnace.get(),"Blast Furnace");
-        this.add(ModBlocks.machine_electric_furnace.get(),"Electric Furnace");
-        this.add(ModBlocks.machine_boiler.get(),"Oil Heater");
-        this.add(ModBlocks.machine_electric_boiler.get(),"Electric Oil Heater");
-        this.add(ModBlocks.machine_nuclear_boiler.get(),"Nuclear Oil Heater");
+//        this.add(ModBlocks.machine_difurnace.get(),"Blast Furnace");
+//        this.add(ModBlocks.machine_electric_furnace.get(),"Electric Furnace");
+//        this.add(ModBlocks.machine_boiler.get(),"Oil Heater");
+//        this.add(ModBlocks.machine_electric_boiler.get(),"Electric Oil Heater");
+//        this.add(ModBlocks.machine_nuclear_boiler.get(),"Nuclear Oil Heater");
         this.add(ModBlocks.machine_battery.get(),"Energy Storage Block");
         this.add(ModBlocks.machine_lithium_battery.get(),"Li-Ion Energy Storage Block");
         this.add(ModBlocks.machine_schrabidium_battery.get(),"Schrabidium Energy Storage Block");
         this.add(ModBlocks.machine_dineutronium_battery.get(),"Spark Energy Storage Block");
-        this.add(ModBlocks.anvil_iron.get(),"Tier 1 anvil");
+//        this.add(ModBlocks.anvil_iron.get(),"Tier 1 anvil");
 //        //方块实体
 //        this.add("hbmxx.container.difurnace","Blast Furnace");
 //        this.add("hbmxx.container.crucible","Crucible");
     }
     private void addCreativeTabs(){
-        this.add(HBMLang.ITEMGROUP_ITEM.key(), "HBM Item");
-        this.add(HBMLang.ITEMGROUP_BLOCK.key(), "HBM Block");
-        this.add(HBMLang.ITEMGROUP_MACHINE.key(), "HBM Machine");
-        this.add(HBMLang.ITEMGROUP_TOOL.key(), "HBM Tool");
+//        this.add(HBMLang.ITEMGROUP_ITEM.key(), "HBM Item");
+//        this.add(HBMLang.ITEMGROUP_BLOCK.key(), "HBM Block");
+//        this.add(HBMLang.ITEMGROUP_MACHINE.key(), "HBM Machine");
+//        this.add(HBMLang.ITEMGROUP_TOOL.key(), "HBM Tool");
     }
     private void addItems(){
-        HBMComponent.languageSupport(this);
+//        HBMComponent.languageSupport(this);
         HBMCombat.languageSupport(this);
     }
     private void addBlocks(){

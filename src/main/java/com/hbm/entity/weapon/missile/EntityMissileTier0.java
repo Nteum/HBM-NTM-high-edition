@@ -4,6 +4,7 @@ import com.hbm.block.HBMBlockComponent;
 import com.hbm.entity.ModEntityType;
 import com.hbm.item.HBMComponent;
 import com.hbm.item.HBMWeapon;
+import com.hbm.registries.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;
@@ -30,10 +31,10 @@ public abstract class EntityMissileTier0 extends EntityMissile{
     @Override
     public List<ItemStack> getDebris() {
         List<ItemStack> list = new ArrayList<ItemStack>();
-        list.add(new ItemStack(HBMComponent.WIRE_FINE_ALUMINIUM.get(), 4));
-        list.add(new ItemStack(HBMComponent.PLATE_TITANIUM.get(), 4));
-        list.add(new ItemStack(HBMComponent.SHELL.get(), 2));
-        list.add(new ItemStack(HBMComponent.DUCT_TAPE.get(), 1));
+        list.add(new ItemStack(ModItems.WIRE_FINE_ALUMINIUM.get(), 4));
+        list.add(new ItemStack(ModItems.PLATE_TITANIUM.get(), 4));
+        list.add(new ItemStack(ModItems.SHELL.get(), 2));
+        list.add(new ItemStack(ModItems.DUCT_TAPE.get(), 1));
         return list;
     }
 

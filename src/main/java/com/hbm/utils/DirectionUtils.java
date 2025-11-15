@@ -5,8 +5,10 @@ import com.hbm.block.base.BlockDummyable;
 import com.hbm.block.base.MultiPartBlock;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -145,23 +147,7 @@ public class DirectionUtils {
     }
     /**
      * 根据方向对voxelshape进行旋转
-     * AI生成的，还没验证正确性
      * */
-//    public static VoxelShape voxelShapeRot(VoxelShape shape, Direction defaultFace, Direction facing) {
-//        VoxelShape[] buffer = new VoxelShape[]{shape, Shapes.empty()};
-//
-//        int times = (facing.get2DDataValue() - defaultFace.get2DDataValue() + 4) % 4;
-//        for (int i = 0; i < times; i++) {
-//            buffer[0].forAllBoxes((minX, minY, minZ, maxX, maxY, maxZ) -> {
-//                // 以 (0.5, y, 0.5) 为中心旋转90°，实际上只对 XZ 平面做变换
-//                buffer[1] = Shapes.or(buffer[1], Shapes.box(1 - maxZ, minY, minX, 1 - minZ, maxY, maxX));
-//            });
-//            buffer[0] = buffer[1];
-//            buffer[1] = Shapes.empty();
-//        }
-//
-//        return buffer[0];
-//    }
     public static VoxelShape voxelShapeRot(VoxelShape shape, Direction defaultFace, Direction facing) {
         VoxelShape[] buffer = new VoxelShape[]{shape, Shapes.empty()};
 
@@ -176,5 +162,18 @@ public class DirectionUtils {
         }
 
         return buffer[0];
+    }
+
+    public static float deltaYRot(Direction ... facings){
+        if (facings.length == 0) return 0;
+        Direction defaultFacing = facings.length < 2 ? Direction.NORTH : facings[1];
+        return facings[0].toYRot() - defaultFacing.toYRot();
+    }
+
+    public static boolean searchAround(Level level, BlockPos pos, Block targetBlock){
+        for (Direction direction : EnumUtils.DIRECTIONS) {
+            if (level.getBlockState(pos.relative(direction)).is(targetBlock)) return true;
+        }
+        return false;
     }
 }

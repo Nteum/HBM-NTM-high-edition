@@ -15,6 +15,7 @@ public class ModRecipes {
     public static final DeferredRegister<RecipeType<?>> RECIPE_TYPE = DeferredRegister.create(ForgeRegistries.RECIPE_TYPES, HBM.MODID);
     public static final DeferredRegister<RecipeSerializer<?>> SERIALIZER = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, HBM.MODID);
 
+    public static final RecipeHolder<RecipePress> PRESS = register("press", RecipePress.Serializer.INSTANCE);
     public static final RecipeHolder<BlastFurnaceRecipe> BLAST = register(HBMKey.BLAST, BlastFurnaceRecipe.Serializer.INSTANCE);
     public static final RecipeHolder<AssemblerRecipe> ASSEMBLER = register(HBMKey.ASSEMBLER, AssemblerRecipe.Serializer.INSTANCE);
     public static final RecipeHolder<ChemplantRecipe> CHEMPLANT = register(HBMKey.CHEMPLANT, ChemplantRecipe.SERIALIZER);

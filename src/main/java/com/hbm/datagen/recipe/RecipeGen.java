@@ -4,6 +4,7 @@ import com.hbm.HBM;
 import com.hbm.datagen.recipe.provider.AssemblerRecipeProvider;
 import com.hbm.Inventory.recipe.BlastFurnaceRecipe;
 import com.hbm.datagen.recipe.provider.ChemplantRecipeProvider;
+import com.hbm.datagen.recipe.provider.PressRecipeProvider;
 import com.hbm.registries.ModItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
@@ -38,15 +39,16 @@ public class RecipeGen extends RecipeProvider {
         getSubRecipeProviders().forEach(subRecipeProvider -> subRecipeProvider.addRecipes(pwriter));
 
         BlastFurnaceRecipe.addDefaultRecipe(pWriter);
-        addShapelessRecipe(ModItems.nugget_zirconium.get(),9,ModItems.ingot_zirconium.get(),ModItems.ingot_zirconium.get(),1);
-        addShapelessRecipe(ModItems.ingot_zirconium.get(),1,ModItems.ingot_zirconium.get(),ModItems.nugget_zirconium.get(),9);
+        addShapelessRecipe(ModItems.NUGGET_ZIRCONIUM.get(),9,ModItems.INGOT_ZIRCONIUM.get(),ModItems.INGOT_ZIRCONIUM.get(),1);
+        addShapelessRecipe(ModItems.INGOT_ZIRCONIUM.get(),1,ModItems.INGOT_ZIRCONIUM.get(),ModItems.NUGGET_ZIRCONIUM.get(),9);
 
         simpleCookingRecipe(pWriter, "smoking", RecipeSerializer.SMOKING_RECIPE, 100, ModItems.GLYPHID_MEAT.get(), ModItems.GLYPHID_MEAT_GRILLED.get(), 0.35f);
     }
     protected List<ISubRecipeProvider> getSubRecipeProviders() {
         return List.of(
                 new AssemblerRecipeProvider(),
-                new ChemplantRecipeProvider()
+                new ChemplantRecipeProvider(),
+                new PressRecipeProvider()
         );
     }
     //添加有序配方（默认加入MISC组，并使用获得物品来解锁，通过输入物品来区分）

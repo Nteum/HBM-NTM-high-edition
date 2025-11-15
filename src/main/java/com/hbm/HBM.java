@@ -44,7 +44,6 @@ import net.minecraftforge.event.server.ServerStoppedEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.fml.VersionChecker;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -82,7 +81,7 @@ public class HBM {
         modEventBus.addListener(this::onClientSetup);
         modEventBus.addListener(this::onPostLoad);
         modEventBus.addListener(this::onGatherData);
-        modEventBus.addListener(ModCreativeModeTab::addCreative);
+        modEventBus.addListener(ModTabs::addCreative);
         modEventBus.addListener(ModKeyMapping::register);
         ClientEventHanler.registerEvents(MinecraftForge.EVENT_BUS, modEventBus);
         ServerEventHandler.registerEvents(MinecraftForge.EVENT_BUS, modEventBus);
@@ -91,7 +90,7 @@ public class HBM {
         ModEntityType.ENTITY_TYPES.register(modEventBus);
         ModItems.ITEMS.register(modEventBus);
         ModBlocks.register(modEventBus);
-        ModCreativeModeTab.CREATIVE_MODE_TABS.register(modEventBus);
+        ModTabs.CREATIVE_MODE_TABS.register(modEventBus);
         ModBlockEntityType.REGISTER.register(modEventBus);
         ModRecipes.RECIPE_TYPE.register(modEventBus);
         ModRecipes.SERIALIZER.register(modEventBus);
@@ -106,7 +105,6 @@ public class HBM {
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
-
         if (!CONFIG_PATH.toFile().exists()) CONFIG_PATH.toFile().mkdir();
         ModMessages.register(); //注册所有的消息
         TransmitterNetworkRegistry.initiate(); //注册传输网络系统

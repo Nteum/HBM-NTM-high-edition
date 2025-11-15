@@ -22,7 +22,7 @@ public class ModMenuType {
     public static final RegistryObject<MenuType<DifurnaceMenu>> DIFURNACE_MENU =
             MOD_MENU_TYPES.register("difurnace_menu",()->new MenuType<>(DifurnaceMenu::new, FeatureFlags.VANILLA_SET));
     public static final RegistryObject<MenuType<PressMenu>> PRESS_MENU =
-            MOD_MENU_TYPES.register("press_menu",()->new MenuType<>(PressMenu::new, FeatureFlags.VANILLA_SET));
+            MOD_MENU_TYPES.register("press_menu",()->IForgeMenuType.create(PressMenu::new));
     public static final RegistryObject<MenuType<BatteryMenu>> BATTERY_MENU =
             MOD_MENU_TYPES.register("battery_menu",()->new MenuType<>(BatteryMenu::new, FeatureFlags.VANILLA_SET));
     public static final RegistryObject<MenuType<AssemblerMenu>> ASSEMBLER_MENU =

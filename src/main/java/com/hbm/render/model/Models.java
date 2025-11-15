@@ -1,7 +1,9 @@
 package com.hbm.render.model;
 
 import com.hbm.HBM;
+import com.hbm.datagen.model.BlockStateGen;
 import com.hbm.item.HBMWeapon;
+import com.hbm.registries.ModItems;
 import com.hbm.render.model.armor.*;
 import com.hbm.render.model.entity.ModelGlyphid;
 import com.hbm.render.model.entity.ObjEntityModelSingle;
@@ -34,7 +36,9 @@ public class Models {
     // 实体：缓存 RL -> 实体模型 的弱引用，便于GC在资源重载/内存紧张时回收
 //    private static final ConcurrentMap<ResourceLocation, SoftReference<Model>> ENTITY_MODELS = new ConcurrentHashMap<>();
     private static final ConcurrentMap<ResourceLocation, Model> ENTITY_MODELS = new ConcurrentHashMap<>();
-    
+
+    public static final ResourceLocation PRESS_BODY = add(HBM.rl("block/press/press_body"));
+    public static final ResourceLocation PRESS_HEAD = add(HBM.rl("block/press/press_head"));
     public static final ResourceLocation ASSEMBLER_BODY = add(HBM.rl("block/assembler/assembler_body"));
     public static final ResourceLocation ASSEMBLER_COG = add(HBM.rl("block/assembler/assembler_cog"));
     public static final ResourceLocation ASSEMBLER_SLIDER = add(HBM.rl("block/assembler/assembler_slider"));
@@ -49,9 +53,11 @@ public class Models {
     public static final ResourceLocation CHEMPLANT_SPINNER = add(HBM.rl("block/chemplant/chemplant_new_spinner"));
     public static final ResourceLocation LAUNCH_PAD = add(HBM.rl("block/launch_pad"));
 
-    public static final ResourceLocation MP_W_15_BALEFIRE = addItem(HBM.rl("item/mp_warhead_15_balefire"), HBMWeapon.MP_WARHEAD_15_BALEFIRE);
+    public static final ResourceLocation MP_W_15_BALEFIRE = addItem(HBM.rl("item/mp_warhead_15_balefire"), HBMWeapon.MP_WARHEAD_15_BALEFIRE.getId());
+    public static final ResourceLocation GUN_RIFLE = addItem(HBM.rl("item/gun_marseleg"), ModItems.GUN_RIFLE.getId());
 
     public static final ResourceLocation MISSILE_TEST = addEntity(HBM.modelRl("entity/missile/missile_test"), new ObjEntityModelSingle());
+    public static final ResourceLocation MISSILE_NUKE = addEntity(HBM.rl("entity/missile_nuclear"), new ObjEntityModelSingle());
     public static final ResourceLocation T51 = addEntity(HBM.modelRl("item/armor_t51"), new ModelArmorT51());
     public static final ResourceLocation BISMUTH = addEntity(HBM.modelRl("item/armor_bismuth"), new ModelArmorBismuth());
     public static final ResourceLocation DESH = addEntity(HBM.modelRl("item/armor_desh"), new ModelArmorDesh());
@@ -65,10 +71,10 @@ public class Models {
         models.add(rl);
         return rl;
     }
-    public static ResourceLocation addItem(ResourceLocation rl, RegistryObject<Item> itemRegistryObject){
+    public static ResourceLocation addItem(ResourceLocation rl, ResourceLocation resourceLocation){
         models.add(rl);
         // 只记录物品的ID，避免强引用整个 RegistryObject 链
-        ITEM_MODEL_KEYS.put(rl, itemRegistryObject.getId());
+        ITEM_MODEL_KEYS.put(rl, resourceLocation);
         return rl;
     }
     public static ResourceLocation addEntity(ResourceLocation rl, Model model){
