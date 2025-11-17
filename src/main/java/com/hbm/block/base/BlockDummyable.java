@@ -185,7 +185,7 @@ public abstract class BlockDummyable extends BlockMachineBase implements ICustom
     //    public static Block[] multiBlockList = new Block[]{ModBlocks.machine_crucible.get(), ModBlocks.machine_assembler.get(), ModBlocks.machine_cracking_tower.get(), HBMMachine.CHEMPLANT.get()};
     @Override
     public RenderShape getRenderShape(BlockState pState) {
-        return RenderShape.INVISIBLE;
+        return RenderShape.ENTITYBLOCK_ANIMATED;
     }
 
     @Override

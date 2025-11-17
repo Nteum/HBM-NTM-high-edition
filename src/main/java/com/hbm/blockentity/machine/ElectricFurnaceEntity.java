@@ -238,7 +238,7 @@ public class ElectricFurnaceEntity extends BaseMachineBlockEntity implements Men
 
     @Override
     public void provideInfo(UpgradeType type, int level, List<Component> tooltips, boolean extendedInfo) {
-        tooltips.add(IUpgradeInfoProvider.getStandardLabel(ModBlocks.Machine.FURNACE_ELECTRIC.get()));
+        tooltips.add(IUpgradeInfoProvider.getStandardLabel(ModBlocks.FURNACE_ELECTRIC.get()));
         if(type == UpgradeType.SPEED) {
             tooltips.add(Component.translatable(this.KEY_DELAY, "-" + (level * 25) + "%").withStyle(ChatFormatting.GREEN));
             tooltips.add(Component.translatable(this.KEY_CONSUMPTION, "-" + (level * 100) + "%").withStyle(ChatFormatting.RED));

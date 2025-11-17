@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "front": "hbm:block/battery_schrabidium_front",
+    "side": "hbm:block/battery_schrabidium_side",
+    "top": "hbm:block/battery_schrabidium_top"
+  }
+}

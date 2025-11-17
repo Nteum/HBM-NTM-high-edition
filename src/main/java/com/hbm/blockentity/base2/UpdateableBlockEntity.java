@@ -57,12 +57,12 @@ public abstract class UpdateableBlockEntity extends BlockEntity implements ITile
             }
         }
     }
-    // 主要提供更新内容的函数
-    @NotNull
-    @Override
-    public CompoundTag getUpdateTag() {
-        return getReducedUpdateTag();
-    }
+//    // 主要提供更新内容的函数
+//    @NotNull
+//    @Override
+//    public CompoundTag getUpdateTag() {
+//        return getReducedUpdateTag();
+//    }
 
     // 自定义更新内容的函数，内容是需要更新到客户端的数据，不是全部数据
     // 尽管把getUpdateTag内容也定义成它了，但getUpdateTag走的是原版流程，而模组更新是靠自己发送数据更新的。
