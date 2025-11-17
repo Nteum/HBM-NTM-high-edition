@@ -52,6 +52,7 @@ import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 public class FiveHundredKgExplosionEntity extends PathfinderMob implements GeoEntity, PipelineKeyProvider {
+    public static final int LIFETIME_TICKS = 90;
     public static final EntityDataAccessor<Boolean> SHOOT = SynchedEntityData.defineId(FiveHundredKgExplosionEntity.class, EntityDataSerializers.BOOLEAN);
     public static final EntityDataAccessor<String> ANIMATION = SynchedEntityData.defineId(FiveHundredKgExplosionEntity.class, EntityDataSerializers.STRING);
     public static final EntityDataAccessor<String> TEXTURE = SynchedEntityData.defineId(FiveHundredKgExplosionEntity.class, EntityDataSerializers.STRING);

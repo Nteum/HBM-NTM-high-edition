@@ -1,0 +1,12 @@
+{
+  "type": "hbm:blast",
+  "input1": {
+    "item": "minecraft:iron_ingot"
+  },
+  "input2": {
+    "item": "minecraft:coal"
+  },
+  "result": {
+    "item": "hbm:ingot_steel"
+  }
+}

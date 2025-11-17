@@ -1,0 +1,7 @@
+{
+  "values": [
+    "hbm:dummible",
+    "#forge:machine",
+    "#forge:ores"
+  ]
+}

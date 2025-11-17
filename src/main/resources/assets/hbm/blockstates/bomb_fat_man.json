@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=north,is_core=false": {
+      "model": "hbm:block/bomb_fat_man"
+    },
+    "facing=north,is_core=true": {
+      "model": "hbm:block/bomb_fat_man"
+    },
+    "facing=east,is_core=false": {
+      "model": "hbm:block/bomb_fat_man",
+      "y": 90
+    },
+    "facing=east,is_core=true": {
+      "model": "hbm:block/bomb_fat_man",
+      "y": 90
+    },
+    "facing=south,is_core=false": {
+      "model": "hbm:block/bomb_fat_man",
+      "y": 180
+    },
+    "facing=south,is_core=true": {
+      "model": "hbm:block/bomb_fat_man",
+      "y": 180
+    },
+    "facing=west,is_core=false": {
+      "model": "hbm:block/bomb_fat_man",
+      "y": 270
+    },
+    "facing=west,is_core=true": {
+      "model": "hbm:block/bomb_fat_man",
+      "y": 270
+    }
+  }
+}

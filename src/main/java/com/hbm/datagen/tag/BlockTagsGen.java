@@ -56,7 +56,7 @@ public class BlockTagsGen extends BlockTagsProvider {
         //机器
         this.tag(ModTags.Blocks.BATTERY).add(ModBlocks.machine_battery.get(),ModBlocks.machine_lithium_battery.get(),ModBlocks.machine_dineutronium_battery.get(),ModBlocks.machine_schrabidium_battery.get());
         this.tag(ModTags.Blocks.ANVIL).add(ModBlocks.anvil_iron.get(),ModBlocks.anvil_desh.get(),ModBlocks.anvil_bismuth.get());
-        this.tag(ModTags.Blocks.MACHINE).add(ModBlocks.machine_assembler.get(),ModBlocks.RED_CABLE.get(),HBMMachine.CHEMPLANT.get());
+        this.tag(ModTags.Blocks.MACHINE).add(ModBlocks.machine_assembler.get(),ModBlocks.RED_CABLE.get(),HBMMachine.CHEMPLANT.get(), ModBlocks.machine_shredder.get());
 //                .addTag(ModTags.Blocks.BATTERY);
 
         /** 原版tag */

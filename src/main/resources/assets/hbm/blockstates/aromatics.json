@@ -1,0 +1,52 @@
+{
+  "variants": {
+    "level=0": {
+      "model": "hbm:block/aromatics"
+    },
+    "level=1": {
+      "model": "hbm:block/aromatics"
+    },
+    "level=2": {
+      "model": "hbm:block/aromatics"
+    },
+    "level=3": {
+      "model": "hbm:block/aromatics"
+    },
+    "level=4": {
+      "model": "hbm:block/aromatics"
+    },
+    "level=5": {
+      "model": "hbm:block/aromatics"
+    },
+    "level=6": {
+      "model": "hbm:block/aromatics"
+    },
+    "level=7": {
+      "model": "hbm:block/aromatics"
+    },
+    "level=8": {
+      "model": "hbm:block/aromatics"
+    },
+    "level=9": {
+      "model": "hbm:block/aromatics"
+    },
+    "level=10": {
+      "model": "hbm:block/aromatics"
+    },
+    "level=11": {
+      "model": "hbm:block/aromatics"
+    },
+    "level=12": {
+      "model": "hbm:block/aromatics"
+    },
+    "level=13": {
+      "model": "hbm:block/aromatics"
+    },
+    "level=14": {
+      "model": "hbm:block/aromatics"
+    },
+    "level=15": {
+      "model": "hbm:block/aromatics"
+    }
+  }
+}

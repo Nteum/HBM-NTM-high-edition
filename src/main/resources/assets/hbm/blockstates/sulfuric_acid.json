@@ -1,0 +1,52 @@
+{
+  "variants": {
+    "level=0": {
+      "model": "hbm:block/sulfuric_acid"
+    },
+    "level=1": {
+      "model": "hbm:block/sulfuric_acid"
+    },
+    "level=2": {
+      "model": "hbm:block/sulfuric_acid"
+    },
+    "level=3": {
+      "model": "hbm:block/sulfuric_acid"
+    },
+    "level=4": {
+      "model": "hbm:block/sulfuric_acid"
+    },
+    "level=5": {
+      "model": "hbm:block/sulfuric_acid"
+    },
+    "level=6": {
+      "model": "hbm:block/sulfuric_acid"
+    },
+    "level=7": {
+      "model": "hbm:block/sulfuric_acid"
+    },
+    "level=8": {
+      "model": "hbm:block/sulfuric_acid"
+    },
+    "level=9": {
+      "model": "hbm:block/sulfuric_acid"
+    },
+    "level=10": {
+      "model": "hbm:block/sulfuric_acid"
+    },
+    "level=11": {
+      "model": "hbm:block/sulfuric_acid"
+    },
+    "level=12": {
+      "model": "hbm:block/sulfuric_acid"
+    },
+    "level=13": {
+      "model": "hbm:block/sulfuric_acid"
+    },
+    "level=14": {
+      "model": "hbm:block/sulfuric_acid"
+    },
+    "level=15": {
+      "model": "hbm:block/sulfuric_acid"
+    }
+  }
+}

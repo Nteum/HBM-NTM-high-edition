@@ -1,0 +1,11 @@
+{
+  "type": "hbm:shredder",
+  "duration": 60,
+  "ingredient": {
+    "count": 1,
+    "tag": "forge:ingots/copper"
+  },
+  "result": {
+    "item": "hbm:powder_copper"
+  }
+}

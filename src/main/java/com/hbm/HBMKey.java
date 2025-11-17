@@ -59,6 +59,7 @@ public class HBMKey {
     public static final String BLAST = "blast";
     public static final String ASSEMBLER = "assembler";
     public static final String CHEMPLANT = "chemplant";
+    public static final String SHREDDER = "shredder";
     //
     public static final String BASIC_MODEL = "basic_model";
     public static final String SPAWN_EGG_MODEL = "spawn_egg_model";

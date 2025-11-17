@@ -1,0 +1,8 @@
+{
+  "parent": "block/orientable",
+  "textures": {
+    "front": "hbm:block/battery_dineutronium_front",
+    "side": "hbm:block/battery_dineutronium_side",
+    "top": "hbm:block/battery_dineutronium_top"
+  }
+}

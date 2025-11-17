@@ -1,0 +1,52 @@
+{
+  "variants": {
+    "level=0": {
+      "model": "hbm:block/biogas"
+    },
+    "level=1": {
+      "model": "hbm:block/biogas"
+    },
+    "level=2": {
+      "model": "hbm:block/biogas"
+    },
+    "level=3": {
+      "model": "hbm:block/biogas"
+    },
+    "level=4": {
+      "model": "hbm:block/biogas"
+    },
+    "level=5": {
+      "model": "hbm:block/biogas"
+    },
+    "level=6": {
+      "model": "hbm:block/biogas"
+    },
+    "level=7": {
+      "model": "hbm:block/biogas"
+    },
+    "level=8": {
+      "model": "hbm:block/biogas"
+    },
+    "level=9": {
+      "model": "hbm:block/biogas"
+    },
+    "level=10": {
+      "model": "hbm:block/biogas"
+    },
+    "level=11": {
+      "model": "hbm:block/biogas"
+    },
+    "level=12": {
+      "model": "hbm:block/biogas"
+    },
+    "level=13": {
+      "model": "hbm:block/biogas"
+    },
+    "level=14": {
+      "model": "hbm:block/biogas"
+    },
+    "level=15": {
+      "model": "hbm:block/biogas"
+    }
+  }
+}

@@ -1,6 +1,7 @@
 package com.hbm.init;
 
 import com.hbm.compat.bigexplosives.BigExplosivesMod;
+import com.hbm.registries.ModBlocks;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -21,6 +22,10 @@ public final class BigExplosivesModTabs {
                     .displayItems((params, output) -> {
                         output.accept(BigExplosivesModItems.ATOM_BOMB.get());
                         output.accept(BigExplosivesModItems.FIVE_HUNDRED_KILOGRAM_BOMB.get());
+                        // Also surface HBM’s placeable bomb blocks here (moved from weapons/tools)
+                        output.accept(ModBlocks.bomb_boy.get());
+                        output.accept(ModBlocks.bomb_fat_man.get());
+                        output.accept(ModBlocks.bomb_custom.get());
                     })
                     .build());
 

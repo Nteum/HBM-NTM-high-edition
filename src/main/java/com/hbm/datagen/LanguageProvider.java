@@ -51,15 +51,17 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
         this.add(ModBlocks.machine_schrabidium_battery.get(),"Schrabidium Energy Storage Block");
         this.add(ModBlocks.machine_dineutronium_battery.get(),"Spark Energy Storage Block");
         this.add(ModBlocks.anvil_iron.get(),"Tier 1 anvil");
+        this.add(ModBlocks.machine_shredder.get(),"Shredder");
 //        //方块实体
 //        this.add("hbmxx.container.difurnace","Blast Furnace");
 //        this.add("hbmxx.container.crucible","Crucible");
     }
     private void addCreativeTabs(){
-        this.add(HBMLang.ITEMGROUP_ITEM.key(), "HBM Item");
-        this.add(HBMLang.ITEMGROUP_BLOCK.key(), "HBM Block");
-        this.add(HBMLang.ITEMGROUP_MACHINE.key(), "HBM Machine");
-        this.add(HBMLang.ITEMGROUP_TOOL.key(), "HBM Tool");
+        this.add(HBMLang.ITEMGROUP_ITEM);
+        this.add(HBMLang.ITEMGROUP_BLOCK);
+        this.add(HBMLang.ITEMGROUP_MACHINE);
+        this.add(HBMLang.ITEMGROUP_TOOL);
+        this.add(HBMLang.ITEMGROUP_WEAPON);
     }
     private void addItems(){
         HBMComponent.languageSupport(this);
@@ -70,7 +72,7 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
         HBMBlockComponent.languageSupport(this);
     }
     private void addMisc(){
-        this.add(HBMLang.ENERGY.key(), "Energy: %1$s");
+        this.add(HBMLang.ENERGY);
     }
     private void addTooltip(){
         this.add(IUpgradeInfoProvider.KEY_ACID,"Acid required %s");
@@ -83,19 +85,20 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
         this.add(IUpgradeInfoProvider.KEY_PRODUCTIVITY,"Productivity %s");
         this.add(IUpgradeInfoProvider.KEY_FORTUNE,"Fortune %s");
         this.add(IUpgradeInfoProvider.KEY_RANGE,"Range %s");
-        this.add(HBMLang.UPGRADE_RADIUS, "Forcefield Range Upgrade\nRadius +16 / Consumption +500\nStacks to 16");
-        this.add(HBMLang.UPGRADE_HEALTH, "Forcefield Health Upgrade\nMax. Health +50 / Consumption +250\nStacks to 16");
-        this.add(HBMLang.UPGRADE_SMELTER, "Mining Laser Upgrade\nSmelts blocks. Easy enough.");
-        this.add(HBMLang.UPGRADE_SHREDDER, "Mining Laser Upgrade\nCrunches ores");
-        this.add(HBMLang.UPGRADE_CENTRIFUGE, "Mining Laser Upgrade\nHopefully self-explanatory");
-        this.add(HBMLang.UPGRADE_CRYSTALLIZER, "Mining Laser Upgrade\nYour new best friend");
-        this.add(HBMLang.UPGRADE_SCREAM, "Mining Laser Upgrade\nIt's like in Super Mario where all blocks are\nactually Toads, but here it's Half-Life scientists\nand they scream. A lot.");
-        this.add(HBMLang.UPGRADE_NULLIFIER, "Mining Laser Upgrade\n50% chance to override worthless items with /dev/zero\n50% chance to move worthless items to /dev/null");
-        this.add(HBMLang.UPGRADE_GC_SPEED, "Gas Centrifuge Upgrade\nAllows for total isotopic separation of HEUF6\nalso your centrifuge goes sicko mode");
+        this.add(HBMLang.UPGRADE_RADIUS);
+        this.add(HBMLang.UPGRADE_HEALTH);
+        this.add(HBMLang.UPGRADE_SMELTER);
+        this.add(HBMLang.UPGRADE_SHREDDER);
+        this.add(HBMLang.UPGRADE_CENTRIFUGE);
+        this.add(HBMLang.UPGRADE_CRYSTALLIZER);
+        this.add(HBMLang.UPGRADE_SCREAM);
+        this.add(HBMLang.UPGRADE_NULLIFIER);
+        this.add(HBMLang.UPGRADE_GC_SPEED);
 
-        this.add(HBMLang.TOOLTIP_LEFT_TIME, "Please wait %s s");
-        this.add(HBMLang.TOOLTIP_TANK_VOLUME, "%s : %s mB");
-        this.add(HBMLang.TOOLTIP_ENERGY, "Energy: %s HE");
+        this.add(HBMLang.TOOLTIP_LEFT_TIME);
+        this.add(HBMLang.TOOLTIP_TANK_VOLUME);
+        this.add(HBMLang.TOOLTIP_ENERGY);
+        this.add("gui.hbm.shredder.no_blade", "Error: Shredder blades are broken or missing!");
 
         this.add(HBMLang.TOOLTIP_GEIGER0);
         this.add(HBMLang.TOOLTIP_GEIGER1);
@@ -104,51 +107,57 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
         this.add(HBMLang.TOOLTIP_GEIGER4);
     }
     private void addContainer(){
-        this.add(HBMLang.DIFURNACE, "Blast Furnace");
-        this.add(HBMLang.CRUCIBLE, "Crucible");
-        this.add(HBMLang.ELECTRIC_FURNACE, "Electric Furnace");
-        this.add(HBMLang.BOILER, "Boiler");
-        this.add(HBMLang.ELECTRIC_BOILER, "Electric Boiler");
-        this.add(HBMLang.NUCLEAR_BOILER, "Nuclear Boiler");
-        this.add(HBMLang.ASSEMBLER, "Assembler");
-        this.add(HBMLang.CHEMPLANT, "Chemical Plant");
-//        this.add(HBMLang.BARREL, "HBM Barrel");
+        this.add(HBMLang.DIFURNACE);
+        this.add(HBMLang.CRUCIBLE);
+        this.add(HBMLang.ELECTRIC_FURNACE);
+        this.add(HBMLang.BOILER);
+        this.add(HBMLang.ELECTRIC_BOILER);
+        this.add(HBMLang.NUCLEAR_BOILER);
+        this.add(HBMLang.ASSEMBLER);
+        this.add(HBMLang.CHEMPLANT);
+        this.add(HBMLang.SHREDDER);
+        this.add(HBMLang.BARREL);
+        this.add(HBMLang.BATTERY);
     }
     private void addFluidTrait(){
-        this.add(HBMLang.FT_GASEOUS, "[Gaseous]");
-        this.add(HBMLang.FT_GASEOUS_ART, "[Gaseous at Room Temperature]");
-        this.add(HBMLang.FT_LIQUID, "[Liquid]");
-        this.add(HBMLang.FT_VISCOUS, "[Viscous]");
-        this.add(HBMLang.FT_AMAT, "[Antimatter]");
-        this.add(HBMLang.FT_LEAD_CONTAINER, "[Requires hazardous material tank to hold]");
-        this.add(HBMLang.FT_DELICIOUS, "[Delicious]");
-        this.add(HBMLang.FT_UNSIPHONABLE, "[Ignored by siphon]");
-        this.add(HBMLang.FT_COMBUSTIBLE1, "[Combustible]");
-        this.add(HBMLang.FT_COMBUSTIBLE2, "Provides %s HE per bucket");
-        this.add(HBMLang.FT_COMBUSTIBLE3, "Fuel grade: %s");
-        this.add(HBMLang.FT_THERMAL_CAPACITY, "Thermal capacity: %s TU per %s mB");
-        this.add(HBMLang.FT_EFFICIENCY, "[ %s ] Efficiency: %s %");
-        this.add(HBMLang.FT_CORROSIVE1, "[Strongly Corrosive]");
-        this.add(HBMLang.FT_CORROSIVE2, "[Corrosive]");
-        this.add(HBMLang.FT_FLAMMABLE1, "[Flammable]");
-        this.add(HBMLang.FT_FLAMMABLE2, "Provides %s TU per bucket");
-        this.add(HBMLang.FT_PHEROMONE1, "[Glyphid Pheromones]");
-        this.add(HBMLang.FT_PHEROMONE2, "[Modified Pheromones]");
-        this.add(HBMLang.FT_POISON, "[Toxic Fumes]");
-        this.add(HBMLang.FT_PER_MB, " - %s %s per mB");
-        this.add(HBMLang.FT_POLLUTION1, "[Polluting]");
-        this.add(HBMLang.FT_POLLUTION2, "When spilled:");
-        this.add(HBMLang.FT_POLLUTION3, "When burned:");
-        this.add(HBMLang.FT_PWRMODERATOR, "[PWR Flux Multiplier]");
-        this.add(HBMLang.FT_CORE_FLUX, "Core flux + %s %");
-        this.add(HBMLang.FT_RADIOACTIVE, "[Radioactive]");
+        this.add(HBMLang.FT_GASEOUS);
+        this.add(HBMLang.FT_GASEOUS_ART);
+        this.add(HBMLang.FT_LIQUID);
+        this.add(HBMLang.FT_VISCOUS);
+        this.add(HBMLang.FT_PLASMA);
+        this.add(HBMLang.FT_AMAT);
+        this.add(HBMLang.FT_LEAD_CONTAINER);
+        this.add(HBMLang.FT_DELICIOUS);
+        this.add(HBMLang.FT_UNSIPHONABLE);
+        this.add(HBMLang.FT_FLAME);
+        this.add(HBMLang.FT_VENT_RADIATION);
+        this.add(HBMLang.FT_COMBUSTIBLE1);
+        this.add(HBMLang.FT_COMBUSTIBLE2);
+        this.add(HBMLang.FT_COMBUSTIBLE3);
+        this.add(HBMLang.FT_THERMAL_CAPACITY);
+        this.add(HBMLang.FT_EFFICIENCY);
+        this.add(HBMLang.FT_CORROSIVE1);
+        this.add(HBMLang.FT_CORROSIVE2);
+        this.add(HBMLang.FT_FLAMMABLE1);
+        this.add(HBMLang.FT_FLAMMABLE2);
+        this.add(HBMLang.FT_HEATABLE1);
+        this.add(HBMLang.FT_PHEROMONE1);
+        this.add(HBMLang.FT_PHEROMONE2);
+        this.add(HBMLang.FT_POISON);
+        this.add(HBMLang.FT_PER_MB);
+        this.add(HBMLang.FT_POLLUTION1);
+        this.add(HBMLang.FT_POLLUTION2);
+        this.add(HBMLang.FT_POLLUTION3);
+        this.add(HBMLang.FT_PWRMODERATOR);
+        this.add(HBMLang.FT_CORE_FLUX);
+        this.add(HBMLang.FT_RADIOACTIVE);
     }
     private void addDebug(){
-        this.add(HBMLang.CACHED_DATA, "Cached data: ");
-        this.add(HBMLang.POS_DATA, "Block pos [%s]");
-        this.add(HBMLang.CHUNK_DATA, "Chunk pos %s");
-        this.add(HBMLang.BLOCK_STATE_LOSE, "Block in [%s] can't found !");
-        this.add(HBMLang.BLOCK_STATE_INFO, "Block in [%s] is %s.");
+        this.add(HBMLang.CACHED_DATA);
+        this.add(HBMLang.POS_DATA);
+        this.add(HBMLang.CHUNK_DATA);
+        this.add(HBMLang.BLOCK_STATE_LOSE);
+        this.add(HBMLang.BLOCK_STATE_INFO);
     }
     private void autoAdd(){
         for (HBMLang value : HBMLang.values()) {
@@ -156,13 +165,13 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
         }
     }
     private void addEffect(){
-        this.add(HBMLang.EFFECT_RADIATION, "Radiation");
+        this.add(HBMLang.EFFECT_RADIATION);
     }
     private void addGeneral(){
-        this.add(HBMLang.RECIPE, "recipe");
+        this.add(HBMLang.RECIPE);
     }
     private void addLookTooltip(){
-        this.add(HBMLang.LOOKTOOLTIP_CHEMPLANT, "<- tank %s");
+        this.add(HBMLang.LOOKTOOLTIP_CHEMPLANT);
     }
     private void add(ILangEntry entry,String value){
         this.add(entry.key(), value);

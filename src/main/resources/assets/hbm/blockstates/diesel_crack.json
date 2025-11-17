@@ -1,0 +1,52 @@
+{
+  "variants": {
+    "level=0": {
+      "model": "hbm:block/diesel_crack"
+    },
+    "level=1": {
+      "model": "hbm:block/diesel_crack"
+    },
+    "level=2": {
+      "model": "hbm:block/diesel_crack"
+    },
+    "level=3": {
+      "model": "hbm:block/diesel_crack"
+    },
+    "level=4": {
+      "model": "hbm:block/diesel_crack"
+    },
+    "level=5": {
+      "model": "hbm:block/diesel_crack"
+    },
+    "level=6": {
+      "model": "hbm:block/diesel_crack"
+    },
+    "level=7": {
+      "model": "hbm:block/diesel_crack"
+    },
+    "level=8": {
+      "model": "hbm:block/diesel_crack"
+    },
+    "level=9": {
+      "model": "hbm:block/diesel_crack"
+    },
+    "level=10": {
+      "model": "hbm:block/diesel_crack"
+    },
+    "level=11": {
+      "model": "hbm:block/diesel_crack"
+    },
+    "level=12": {
+      "model": "hbm:block/diesel_crack"
+    },
+    "level=13": {
+      "model": "hbm:block/diesel_crack"
+    },
+    "level=14": {
+      "model": "hbm:block/diesel_crack"
+    },
+    "level=15": {
+      "model": "hbm:block/diesel_crack"
+    }
+  }
+}

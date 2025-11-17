@@ -1,9 +1,9 @@
-// 1.20.1	2025-10-28T00:02:03.8048873	Registries
+// 1.20.1	2025-11-12T11:07:04.070482	Registries
 29c09620d64ee5750fef75a24d8e54fbddde251d data/hbm/worldgen/configured_feature/bedrock_ore_overworld.json
 a2eef93d501821cd34205f1071e3f359aeb36cdf data/hbm/worldgen/configured_feature/glyphid_hive.json
 b1777f055db4fabe9d8e3b7a609d9b865a31ba2f data/hbm/worldgen/configured_feature/ore_sphere_overworld.json
 d9a7ebcdc958676305c918928c5ec4ad3e628217 data/hbm/worldgen/configured_feature/uranium_ore_overworld.json
 07b29671c2cc6afcddb1176c0966b3413fae5706 data/hbm/worldgen/placed_feature/bedrock_ore_overworld.json
-9a8813d89a9065528d9177b02a7871b1e10bf5cb data/hbm/worldgen/placed_feature/glyphid_hive.json
+33571e1a629611b8a8c10e65c889e1caaf17e82b data/hbm/worldgen/placed_feature/glyphid_hive.json
 09bbce6dce7e68d643b1084c13c6b02623b18e53 data/hbm/worldgen/placed_feature/ore_sphere_overworld.json
 1ed81999b8f47de5b0a42fea7121fbcd09c75908 data/hbm/worldgen/placed_feature/uranium_ore_overworld.json

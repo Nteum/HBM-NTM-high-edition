@@ -35,4 +35,6 @@ public class ModMenuType {
             MOD_MENU_TYPES.register("electric_furnace_menu",()->new MenuType<>(ElectricFurnaceMenu::new, FeatureFlags.VANILLA_SET));
     public static final RegistryObject<MenuType<LaunchPadMenu>> LAUNCH_PAD_MENU =
             MOD_MENU_TYPES.register("launch_pad_menu",()->new MenuType<>(LaunchPadMenu::new, FeatureFlags.VANILLA_SET));
+    public static final RegistryObject<MenuType<ShredderMenu>> SHREDDER_MENU =
+            MOD_MENU_TYPES.register("shredder_menu",()->new MenuType<>(ShredderMenu::new, FeatureFlags.VANILLA_SET));
 }

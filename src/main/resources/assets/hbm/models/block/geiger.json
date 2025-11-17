@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:block/block",
+  "parent": "block/block",
   "loader": "forge:obj",
   "flip_v": true,
   "model": "hbm:models/block/geiger_counter.obj",
@@ -10,34 +10,106 @@
   "automatic_culling": false,
   "display": {
     "gui": {
-      "rotation": [ 30, 45, 0 ],
-      "translation": [ 0, 2, 0],
-      "scale": [1,1,1]
+      "rotation": [
+        30,
+        45,
+        0
+      ],
+      "translation": [
+        0,
+        2,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
     },
     "ground": {
-      "rotation": [ 30, 45, 0 ],
-      "translation": [ 0, 0, 0],
-      "scale": [1,1,1]
+      "rotation": [
+        30,
+        45,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
     },
     "fixed": {
-      "rotation": [ 0, 45, 0 ],
-      "translation": [ 0, 0, 0],
-      "scale": [1,1,1]
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
     },
     "thirdperson_righthand": {
-      "rotation": [ 0, 225, 0 ],
-      "translation": [ 0, 2.5, 0],
-      "scale": [0.5, 0.5, 0.5]
+      "rotation": [
+        0,
+        225,
+        0
+      ],
+      "translation": [
+        0,
+        2.5,
+        0
+      ],
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ]
     },
     "firstperson_righthand": {
-      "rotation": [ 0, 45, 0 ],
-      "translation": [ 0, 0, 0 ],
-      "scale": [0.5, 0.5, 0.5]
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ]
     },
     "firstperson_lefthand": {
-      "rotation": [ 0, -45, 0 ],
-      "translation": [ 0, 0, 0 ],
-      "scale": [0.5, 0.5, 0.5]
+      "rotation": [
+        0,
+        -45,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ]
     }
   }
 }

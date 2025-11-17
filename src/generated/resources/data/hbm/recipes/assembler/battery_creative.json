@@ -1,0 +1,13 @@
+{
+  "type": "hbm:assembler",
+  "ingredients": [
+    {
+      "count": 3,
+      "tag": "forge:battery"
+    }
+  ],
+  "number": 30,
+  "result": {
+    "item": "hbm:battery_creative"
+  }
+}

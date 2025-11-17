@@ -1,0 +1,52 @@
+{
+  "variants": {
+    "level=0": {
+      "model": "hbm:block/crack_oil"
+    },
+    "level=1": {
+      "model": "hbm:block/crack_oil"
+    },
+    "level=2": {
+      "model": "hbm:block/crack_oil"
+    },
+    "level=3": {
+      "model": "hbm:block/crack_oil"
+    },
+    "level=4": {
+      "model": "hbm:block/crack_oil"
+    },
+    "level=5": {
+      "model": "hbm:block/crack_oil"
+    },
+    "level=6": {
+      "model": "hbm:block/crack_oil"
+    },
+    "level=7": {
+      "model": "hbm:block/crack_oil"
+    },
+    "level=8": {
+      "model": "hbm:block/crack_oil"
+    },
+    "level=9": {
+      "model": "hbm:block/crack_oil"
+    },
+    "level=10": {
+      "model": "hbm:block/crack_oil"
+    },
+    "level=11": {
+      "model": "hbm:block/crack_oil"
+    },
+    "level=12": {
+      "model": "hbm:block/crack_oil"
+    },
+    "level=13": {
+      "model": "hbm:block/crack_oil"
+    },
+    "level=14": {
+      "model": "hbm:block/crack_oil"
+    },
+    "level=15": {
+      "model": "hbm:block/crack_oil"
+    }
+  }
+}

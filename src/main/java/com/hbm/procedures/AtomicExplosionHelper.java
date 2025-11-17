@@ -5,10 +5,13 @@ import com.google.gson.JsonParser;
 import com.hbm.compat.bigexplosives.BigExplosivesMod;
 import com.hbm.init.BigExplosivesModEntities;
 import com.hbm.init.BigExplosivesModSounds;
+import com.hbm.network.ModMessages;
+import com.hbm.network.packet.toclient.S2CAtomicFlashPacket;
 import com.hbm.render.entity.AtomicBombExplosionEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
@@ -19,6 +22,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.Level.ExplosionInteraction;
+import net.minecraft.util.Mth;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.fml.loading.FMLPaths;
@@ -29,7 +33,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
-final class AtomicExplosionHelper {
+public final class AtomicExplosionHelper {
 
     private static final double DEFAULT_DAMAGE = 2000.0D;
     private static final double EFFECT_RADIUS = 140.0D;
@@ -46,6 +50,27 @@ final class AtomicExplosionHelper {
         Vec3 center = new Vec3(x, y, z);
 
         level.explode(source, x, y, z, 60.0F, ExplosionInteraction.TNT);
+        triggerEffects(level, center, baseDamage);
+    }
+
+    /**
+     * Plays the lingering atomic flash visuals and applies screen-darkening
+     * potion effects without spawning another explosion. Use this when a
+     * machine performs its own damage logic but should reuse the shared
+     * nuclear shockwave presentation.
+     */
+    public static void triggerEffects(Level level, Vec3 center) {
+        if (level == null || level.isClientSide) {
+            return;
+        }
+        double baseDamage = readConfiguredDamage();
+        triggerEffects(level, center, baseDamage);
+    }
+
+    private static void triggerEffects(Level level, Vec3 center, double baseDamage) {
+        if (level == null || level.isClientSide) {
+            return;
+        }
         playBlastSounds(level, center);
         spawnExplosionEntity(level, center);
         applyEffects(level, center, baseDamage);
@@ -90,13 +115,21 @@ final class AtomicExplosionHelper {
                 target.hurt(source, damage);
             }
 
-            int blindnessDuration = (int) (200 + 200 * factor);
-            int nauseaDuration = (int) (200 + 180 * factor);
+            int nauseaDuration = (int) Mth.clamp(60 + 140 * factor, 40, 200);
             int witherDuration = (int) (6000 * factor);
 
-            target.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, blindnessDuration, 0, false, false));
-            target.addEffect(new MobEffectInstance(MobEffects.CONFUSION, nauseaDuration, 0, false, false));
-            target.addEffect(new MobEffectInstance(MobEffects.WITHER, Math.max(200, witherDuration), 0, false, true));
+            if (nauseaDuration > 0) {
+                target.addEffect(new MobEffectInstance(MobEffects.CONFUSION, nauseaDuration, 0, false, false));
+            }
+            if (witherDuration > 0) {
+                target.addEffect(new MobEffectInstance(MobEffects.WITHER, Math.max(200, witherDuration), 0, false, true));
+            }
+
+            if (target instanceof ServerPlayer serverPlayer) {
+                float alpha = Mth.clamp(0.35F + 0.65F * (float) factor, 0.2F, 1.0F);
+                int flashDuration = (int) Mth.clamp(60 + (200 * factor), 60, 260);
+                ModMessages.sendToPlayer(new S2CAtomicFlashPacket(alpha, flashDuration), serverPlayer);
+            }
         }
     }
 

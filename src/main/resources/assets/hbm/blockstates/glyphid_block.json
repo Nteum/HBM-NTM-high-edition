@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "variant3=0": {
+      "model": "hbm:block/glyphid_block_0"
+    },
+    "variant3=1": {
+      "model": "hbm:block/glyphid_block_1"
+    },
+    "variant3=2": {
+      "model": "hbm:block/glyphid_block_2"
+    }
+  }
+}

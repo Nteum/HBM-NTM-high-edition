@@ -43,6 +43,7 @@ public class NukeCustom extends NukeBomb implements IBomb{
             pLevel.addFreshEntity(EntityNukeExplosionMK5.statFac(pLevel,range,pPos.getCenter()));
             pLevel.addFreshEntity(new EntityNukeTorex(pLevel,pPos.getCenter().add(0,4.5,0),range));
             pLevel.destroyBlock(pPos,false);
+            triggerExplosionVisual(pLevel, pPos);
 
             return BombReturnCode.DETONATED;
         }

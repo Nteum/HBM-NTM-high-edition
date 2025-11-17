@@ -4,7 +4,10 @@ import com.hbm.capabilities.network.TransmitterNetworkRegistry;
 import com.hbm.config.ClientConfig;
 import com.hbm.config.CommonConfig;
 import com.hbm.config.ServerConfig;
+import com.hbm.compat.bigexplosives.BigExplosivesMod;
 import com.hbm.datagen.damageSource.HBMDamageTagProvider;
+import com.hbm.dev.AssetConsistencyChecker;
+import com.hbm.dev.ModelValidator;
 import com.hbm.datagen.loot.BlockLootGen;
 import com.hbm.datagen.loot.ChestLootGen;
 import com.hbm.datagen.loot.EntityLootGen;
@@ -25,7 +28,9 @@ import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.datagen.*;
 import com.hbm.entity.ModEntityType;
 import com.hbm.gui.ModMenuType;
+import com.hbm.Inventory.recipe.CrackingRecipes;
 import com.hbm.Inventory.recipe.ModRecipes;
+import com.hbm.reactor.rbmk.RBMKManager;
 import com.hbm.render.model.Models;
 import com.hbm.world.feature.ModFeatures;
 import com.mojang.logging.LogUtils;
@@ -101,6 +106,7 @@ public class HBM {
         ModFeatures.register(modEventBus);
         ModMenuType.MOD_MENU_TYPES.register(modEventBus);
         ModEffects.register(modEventBus);
+        BigExplosivesMod.register(modEventBus);
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CommonConfig.CONFIG_SPEC, "hbm-common.toml");
     }
@@ -110,6 +116,8 @@ public class HBM {
         if (!CONFIG_PATH.toFile().exists()) CONFIG_PATH.toFile().mkdir();
         ModMessages.register(); //注册所有的消息
         TransmitterNetworkRegistry.initiate(); //注册传输网络系统
+        RBMKManager.init();
+        CrackingRecipes.registerDefaults();
     }
 
     public void onClientSetup(FMLClientSetupEvent event){
@@ -119,6 +127,10 @@ public class HBM {
     public void onPostLoad(FMLLoadCompleteEvent event){
         ClientConfig.initConfig();
         ServerConfig.initConfig();
+        event.enqueueWork(() -> {
+            AssetConsistencyChecker.runIfRequested();
+            ModelValidator.runIfRequested();
+        });
     }
 
     private void onServerStopped(ServerStoppedEvent event){
@@ -149,10 +161,17 @@ public class HBM {
                 new LootTableProvider.SubProviderEntry(EntityLootGen::new, LootContextParamSets.ENTITY)
         )));
         /** 客户端数据生成，生成到assets目录下 */
-        generator.addProvider(event.includeClient(),new HBMJsonProvider(packOutput, MODID, helper, true));
-        generator.addProvider(event.includeClient(),new LanguageProvider(packOutput,HBM.MODID,"en_us"));
-        generator.addProvider(event.includeClient(),new ItemModelGen(packOutput, HBM.MODID, helper));
-        generator.addProvider(event.includeClient(),new BlockStateGen(packOutput, HBM.MODID,helper));
+        boolean includeClient = event.includeClient();
+        LOGGER.info("GatherData flags -> includeServer: {}, includeClient: {}", event.includeServer(), includeClient);
+        if (!includeClient) {
+            LOGGER.warn("runData invoked without --client flag; forcing client-side datagen to keep assets in sync.");
+        }
+        DataGenerator.PackGenerator resourcePack = generator.getVanillaPack(true);
+        resourcePack.addProvider(output -> new HBMJsonProvider(output, MODID, helper, true));
+        resourcePack.addProvider(output -> new LanguageProvider(output,HBM.MODID,"en_us"));
+        resourcePack.addProvider(output -> new ItemModelGen(output, HBM.MODID, helper));
+        resourcePack.addProvider(output -> new BlockStateGen(output, HBM.MODID,helper));
+        LOGGER.info("Datagen providers registered: {}", generator.getProvidersView().keySet());
     }
 
     public static boolean isLoad(String modID){

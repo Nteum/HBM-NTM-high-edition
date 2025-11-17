@@ -1,0 +1,52 @@
+{
+  "variants": {
+    "level=0": {
+      "model": "hbm:block/naphtha"
+    },
+    "level=1": {
+      "model": "hbm:block/naphtha"
+    },
+    "level=2": {
+      "model": "hbm:block/naphtha"
+    },
+    "level=3": {
+      "model": "hbm:block/naphtha"
+    },
+    "level=4": {
+      "model": "hbm:block/naphtha"
+    },
+    "level=5": {
+      "model": "hbm:block/naphtha"
+    },
+    "level=6": {
+      "model": "hbm:block/naphtha"
+    },
+    "level=7": {
+      "model": "hbm:block/naphtha"
+    },
+    "level=8": {
+      "model": "hbm:block/naphtha"
+    },
+    "level=9": {
+      "model": "hbm:block/naphtha"
+    },
+    "level=10": {
+      "model": "hbm:block/naphtha"
+    },
+    "level=11": {
+      "model": "hbm:block/naphtha"
+    },
+    "level=12": {
+      "model": "hbm:block/naphtha"
+    },
+    "level=13": {
+      "model": "hbm:block/naphtha"
+    },
+    "level=14": {
+      "model": "hbm:block/naphtha"
+    },
+    "level=15": {
+      "model": "hbm:block/naphtha"
+    }
+  }
+}

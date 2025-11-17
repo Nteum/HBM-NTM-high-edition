@@ -12,6 +12,7 @@ import com.hbm.registries.ModItems;
 import com.hbm.render.entity.missile.MissileTaintRenderer;
 import com.hbm.render.entity.mob.GlyphidRender;
 import com.hbm.render.model.Models;
+import com.hbm.render.overlay.AtomicFlashOverlay;
 import com.hbm.render.pipeline.GeoRenderPipeline;
 import com.hbm.render.model.entity.TestEntityModel;
 import com.hbm.particle.ModParticleTypes;
@@ -52,6 +53,8 @@ public class ClientEventHanler {
         modBus.addListener(ClientEventHanler::registerColorHandlerItem);
         // forge总线事件
         forgeBus.addListener(ClientEventHanler::onKeyPressed);
+        forgeBus.addListener(AtomicFlashOverlay::onClientTick);
+        forgeBus.addListener(AtomicFlashOverlay::onGuiRender);
     }
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event)
@@ -67,6 +70,7 @@ public class ClientEventHanler {
             MenuScreens.register(ModMenuType.BARREL_MENU.get(), BarrelGui::new);
             MenuScreens.register(ModMenuType.ELECTRIC_FURNACE_MENU.get(), ElectricFurnaceGui::new);
             MenuScreens.register(ModMenuType.LAUNCH_PAD_MENU.get(), LaunchPadGui::new);
+            MenuScreens.register(ModMenuType.SHREDDER_MENU.get(), ShredderGui::new);
             //方块实体渲染
             BlockEntityRenderers.register(ModBlockEntityType.PRESS_ENTITY.get(), PressRenderer::new);
             BlockEntityRenderers.register(ModBlockEntityType.ASSEMBLER_ENTITY.get(), AssemblerRenderer::new);

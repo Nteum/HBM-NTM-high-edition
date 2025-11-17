@@ -1,0 +1,52 @@
+{
+  "variants": {
+    "level=0": {
+      "model": "hbm:block/heating_oil_vacuum"
+    },
+    "level=1": {
+      "model": "hbm:block/heating_oil_vacuum"
+    },
+    "level=2": {
+      "model": "hbm:block/heating_oil_vacuum"
+    },
+    "level=3": {
+      "model": "hbm:block/heating_oil_vacuum"
+    },
+    "level=4": {
+      "model": "hbm:block/heating_oil_vacuum"
+    },
+    "level=5": {
+      "model": "hbm:block/heating_oil_vacuum"
+    },
+    "level=6": {
+      "model": "hbm:block/heating_oil_vacuum"
+    },
+    "level=7": {
+      "model": "hbm:block/heating_oil_vacuum"
+    },
+    "level=8": {
+      "model": "hbm:block/heating_oil_vacuum"
+    },
+    "level=9": {
+      "model": "hbm:block/heating_oil_vacuum"
+    },
+    "level=10": {
+      "model": "hbm:block/heating_oil_vacuum"
+    },
+    "level=11": {
+      "model": "hbm:block/heating_oil_vacuum"
+    },
+    "level=12": {
+      "model": "hbm:block/heating_oil_vacuum"
+    },
+    "level=13": {
+      "model": "hbm:block/heating_oil_vacuum"
+    },
+    "level=14": {
+      "model": "hbm:block/heating_oil_vacuum"
+    },
+    "level=15": {
+      "model": "hbm:block/heating_oil_vacuum"
+    }
+  }
+}

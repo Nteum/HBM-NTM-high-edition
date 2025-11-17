@@ -21,6 +21,8 @@ import net.minecraftforge.client.model.obj.ObjLoader;
 import net.minecraftforge.client.model.obj.ObjModel;
 import net.minecraftforge.client.model.renderable.CompositeRenderable;
 import net.minecraftforge.client.model.renderable.ITextureRenderTypeLookup;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Matrix4f;
 import org.joml.Quaternionf;
@@ -35,7 +37,9 @@ import java.util.Map;
 import java.util.function.Function;
 
 public class BaseObjModel extends Model {
+    private static final Logger LOGGER = LogManager.getLogger("HBM-ObjModel");
     public String name;
+    private String modelIdentifier = "unknown";
 //    public BaseObjModel root;
     public Map<String, BaseObjModel> children = new HashMap();
     public List<Mesh> meshes = new ArrayList<>();
@@ -61,6 +65,7 @@ public class BaseObjModel extends Model {
     }
     public BaseObjModel(BaseObjModel root, String name) {
         this(root.renderType, name);
+        this.modelIdentifier = root.modelIdentifier;
     }
     public BaseObjModel(Function<ResourceLocation, RenderType> pRenderType, String name) {
         super(pRenderType);
@@ -79,16 +84,21 @@ public class BaseObjModel extends Model {
                 if (jsonObject.has("texture0")) textureMap.put("#texture0", new ResourceLocation(jsonObject.get("texture0").getAsString()));
                 if (jsonObject.has("#layer0")) textureMap.put("#layer0", new ResourceLocation(jsonObject.get("layer0").getAsString()));
                 CompositeRenderable renderable = objModel.bakeRenderable(StandaloneGeometryBakingContext.create(textureMap));
-                return create(renderable, renderType);
+                BaseObjModel model = create(renderable, renderType);
+                model.setModelIdentifier(jsonPath.toString());
+                return model;
             }
         }catch (Exception e){
             e.printStackTrace();
         }
-        return new BaseObjModel(renderType);
+        BaseObjModel fallback = new BaseObjModel(renderType);
+        fallback.setModelIdentifier(jsonPath.toString());
+        return fallback;
     }
 
     public static BaseObjModel create(CompositeRenderable renderable, Function<ResourceLocation, RenderType> renderType){
         BaseObjModel model = new BaseObjModel(renderType);
+        model.setModelIdentifier(renderable.toString());
         try {
             Class<CompositeRenderable> classRenderable = CompositeRenderable.class;
             Field field_components = classRenderable.getDeclaredField("components");
@@ -154,14 +164,29 @@ public class BaseObjModel extends Model {
         return component;
     }
     public BaseObjModel getChild(String name){
-        return this.children.get(name);
+        if (name == null) {
+            LOGGER.warn("OBJ model '{}' attempted to lookup null child.", this.modelIdentifier);
+            return createPlaceholderChild("null-child");
+        }
+        BaseObjModel child = this.children.get(name);
+        if (child == null) {
+            LOGGER.warn("OBJ model '{}' missing child '{}', creating empty placeholder.", this.modelIdentifier, name);
+            child = createPlaceholderChild(name);
+            this.children.put(name, child);
+        }
+        return child;
     }
     public BaseObjModel addChild(String name, BaseObjModel child){
         this.children.put(name, child);
         return this;
     }
     public BaseObjModel popChild(String name){
-        return this.children.remove(name);
+        BaseObjModel child = this.children.remove(name);
+        if (child == null) {
+            LOGGER.warn("OBJ model '{}' failed to pop missing child '{}'; returning placeholder.", this.modelIdentifier, name);
+            return createPlaceholderChild(name == null ? "null-child" : name);
+        }
+        return child;
     }
 
     public BaseObjModel copyPose(ModelPart modelPart){
@@ -200,8 +225,20 @@ public class BaseObjModel extends Model {
         this.x += xDelta;
         this.y += yDelta;
         this.z += zDelta;
+        // 中文注释：对不存在的 OBJ 组名进行保护，避免崩溃
+        if (names == null || names.length == 0) {
+            return this;
+        }
         for (String name : names) {
-            this.children.get(name).adjXYZ(xDelta, yDelta, zDelta);
+            if (name == null || name.isEmpty()) {
+                continue;
+            }
+            BaseObjModel child = this.children.get(name);
+            if (child == null) {
+                LOGGER.warn("BaseObjModel.adjXYZ: group '{}' not found in model '{}', skipping.", name, this.modelIdentifier);
+                continue;
+            }
+            child.adjXYZ(xDelta, yDelta, zDelta);
         }
         return this;
     }
@@ -230,8 +267,10 @@ public class BaseObjModel extends Model {
             this.visible = visible;
         }else {
             for (String name : names) {
-                if (children.containsKey(name))
-                    this.children.get(name).visible(visible, names);
+                BaseObjModel child = getChildSafe(name, "visible");
+                if (child != null) {
+                    child.visible(visible, names);
+                }
             }
         }
         return this;
@@ -242,7 +281,10 @@ public class BaseObjModel extends Model {
             this.children.values().forEach(child -> child.size(size));
         }else {
             for (String name : names) {
-                this.children.get(name).size(size);
+                BaseObjModel child = getChildSafe(name, "size");
+                if (child != null) {
+                    child.size(size);
+                }
             }
         }
         return this;
@@ -254,6 +296,28 @@ public class BaseObjModel extends Model {
     public BaseObjModel bindRenderType(RenderType renderType){
         this.tempRenderType = renderType;
         return this;
+    }
+
+    private BaseObjModel getChildSafe(String childName, String action){
+        BaseObjModel child = this.children.get(childName);
+        if (child == null) {
+            LOGGER.warn("OBJ model '{}' missing child '{}', skipping {}.", this.modelIdentifier, childName, action);
+        }
+        return child;
+    }
+
+    public void setModelIdentifier(String identifier) {
+        this.modelIdentifier = identifier;
+    }
+
+    public String getModelIdentifier() {
+        return modelIdentifier;
+    }
+
+    private BaseObjModel createPlaceholderChild(String name) {
+        BaseObjModel placeholder = new BaseObjModel(this, name == null ? "missing" : name);
+        placeholder.setModelIdentifier(this.modelIdentifier + "::missing::" + name);
+        return placeholder;
     }
 
     public void render(PoseStack poseStack, MultiBufferSource bufferSource, ITextureRenderTypeLookup textureRenderTypeLookup, int lightmap, int overlay, float partialTick, CompositeRenderable.Transforms context){

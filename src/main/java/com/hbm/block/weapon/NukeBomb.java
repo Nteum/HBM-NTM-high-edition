@@ -2,21 +2,18 @@ package com.hbm.block.weapon;
 
 import com.hbm.block.base.BlockDummyable;
 import com.hbm.blockentity.weapon.EntityNukeBomb;
-import com.hbm.blockentity.weapon.LaunchPadTileEntity;
 import com.hbm.entity.effect.EntityNukeTorex;
 import com.hbm.entity.logic.EntityNukeExplosionMK5;
+import com.hbm.procedures.AtomicExplosionHelper;
+import com.hbm.procedures.ThermobaricExplosionHelper;
 import com.hbm.registries.ModSounds;
 import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.RedstoneLampBlock;
-import net.minecraft.world.level.block.TntBlock;
-import net.minecraft.world.level.block.piston.PistonBaseBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
 
 public abstract class NukeBomb extends BlockDummyable implements IBomb {
     public boolean explode = true;
@@ -35,6 +32,7 @@ public abstract class NukeBomb extends BlockDummyable implements IBomb {
             pLevel.addFreshEntity(EntityNukeExplosionMK5.statFac(pLevel,range,pPos.getCenter()));
             pLevel.addFreshEntity(new EntityNukeTorex(pLevel,pPos.getCenter().add(0,4.5,0),range));
             pLevel.destroyBlock(pPos,false);
+            triggerExplosionVisual(pLevel, pPos);
             return BombReturnCode.DETONATED;
         }
         return BombReturnCode.UNDEFINED;
@@ -53,5 +51,27 @@ public abstract class NukeBomb extends BlockDummyable implements IBomb {
                 super.neighborChanged(pState, pLevel, pPos, pNeighborBlock, pNeighborPos, pMovedByPiston);
             }
         }
+    }
+
+    protected ExplosionVisual getExplosionVisual() {
+        return ExplosionVisual.ATOMIC;
+    }
+
+    protected void triggerExplosionVisual(Level level, BlockPos pos) {
+        if (level.isClientSide()) {
+            return;
+        }
+        Vec3 center = pos.getCenter();
+        switch (getExplosionVisual()) {
+            case ATOMIC -> AtomicExplosionHelper.triggerEffects(level, center);
+            case THERMOBARIC -> ThermobaricExplosionHelper.triggerEffects(level, center);
+            case NONE -> { }
+        }
+    }
+
+    protected enum ExplosionVisual {
+        ATOMIC,
+        THERMOBARIC,
+        NONE
     }
 }

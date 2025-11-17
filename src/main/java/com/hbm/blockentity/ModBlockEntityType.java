@@ -8,6 +8,8 @@ import com.hbm.blockentity.machine.*;
 import com.hbm.HBM;
 import com.hbm.blockentity.base.DummibleBlockEntity;
 import com.hbm.blockentity.tools.TileEntityGeiger;
+import com.hbm.blockentity.machine.rbmk.RBMKBaseEntity;
+import com.hbm.blockentity.machine.rbmk.RBMKHeaterEntity;
 import com.hbm.blockentity.weapon.*;
 import com.hbm.registries.ModBlocks;
 import com.hbm.registries.ModTags;
@@ -65,6 +67,10 @@ public class ModBlockEntityType {
             REGISTER.register("chemplant_entity",()-> BlockEntityType.Builder.of(ChemplantEntity::new, HBMMachine.CHEMPLANT.get()).build(null));
     public static final RegistryObject<BlockEntityType<BarrelEntity>> BARREL_ENTITY =
             REGISTER.register("barrel_entity",()-> BlockEntityType.Builder.of(BarrelEntity::new, HBMMachine.PLASTIC_BARREL.get(),HBMMachine.CORRODED_BARREL.get(),HBMMachine.IRON_BARREL.get(),HBMMachine.STEEL_BARREL.get(),HBMMachine.TCALLOY_BARREL.get(),HBMMachine.ANTIMATTER_BARREL.get()).build(null));
+    public static final RegistryObject<BlockEntityType<ShredderEntity>> SHREDDER_ENTITY =
+            REGISTER.register("shredder_entity",()-> BlockEntityType.Builder.of(ShredderEntity::new, ModBlocks.machine_shredder.get()).build(null));
+    public static final RegistryObject<BlockEntityType<CrackingTowerEntity>> CRACKING_TOWER_ENTITY =
+            REGISTER.register("cracking_tower_entity", () -> BlockEntityType.Builder.of(CrackingTowerEntity::new, ModBlocks.machine_cracking_tower.get()).build(null));
     public static final RegistryObject<BlockEntityType<TileProxyCombo>> PROXY_ENTITY =
             REGISTER.register("proxy_entity",()-> BlockEntityType.Builder.of(TileProxyCombo::new,
                     ModBlocks.machine_crucible.get(), ModBlocks.machine_assembler.get(), ModBlocks.machine_cracking_tower.get(), HBMMachine.CHEMPLANT.get(), HBMMachine.LAUNCH_PAD.get(), ModBlocks.bomb_boy.get(), ModBlocks.bomb_custom.get(), ModBlocks.bomb_fat_man.get()
@@ -75,4 +81,8 @@ public class ModBlockEntityType {
             REGISTER.register("geiger_counter",()-> BlockEntityType.Builder.of(TileEntityGeiger::new, HBMMachine.GEIGER_COUNTER.get()).build(null));
     public static final RegistryObject<BlockEntityType<GlyphidSpawner.GlyphidSpawnerEntity>> GLYPHID_SPAWNER =
             REGISTER.register("glyphid_spawner",()-> BlockEntityType.Builder.of(GlyphidSpawner.GlyphidSpawnerEntity::new, ModBlocks.GLYPHID_SPAWNER.get()).build(null));
+    public static final RegistryObject<BlockEntityType<RBMKBaseEntity>> RBMK_BASE_ENTITY =
+            REGISTER.register("rbmk_base_entity", () -> BlockEntityType.Builder.of(RBMKBaseEntity::new, ModBlocks.machine_rbmk_base.get()).build(null));
+    public static final RegistryObject<BlockEntityType<RBMKHeaterEntity>> RBMK_HEATER_ENTITY =
+            REGISTER.register("rbmk_heater_entity", () -> BlockEntityType.Builder.of(RBMKHeaterEntity::new, ModBlocks.machine_rbmk_heater.get()).build(null));
 }
