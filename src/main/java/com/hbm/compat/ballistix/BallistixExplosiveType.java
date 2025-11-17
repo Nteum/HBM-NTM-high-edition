@@ -13,16 +13,36 @@ import net.minecraft.world.phys.shapes.VoxelShape;
  */
 public enum BallistixExplosiveType {
 
+    // Tier 0/1
     OBSIDIAN("obsidian", 120, 10.0F, fullCube(), false),
-    CONDENSIVE("condensive", 30, 3.5F, fullCube(), false),
-    ATTRACTIVE("attractive", 30, 0.0F, fullCube(), false),
-    REPULSIVE("repulsive", 30, 0.0F, fullCube(), false),
-    INCENDIARY("incendiary", 80, 4.5F, fullCube(), false),
-    SHRAPNEL("shrapnel", 40, 0.0F, fullCube(), false),
-    CHEMICAL("chemical", 100, 0.0F, fullCube(), false),
-    ANVIL("anvil", 100, 0.0F, fullCube(), false),
-    INFESTIVE("infestive", 40, 0.0F, fullCube(), false),
-    DEBILITATION("debilitation", 80, 0.0F, fullCube(), false),
+    CONDENSIVE("condensive", 30, 2.5F, fullCube(), false),
+    ATTRACTIVE("attractive", 30, 6.0F, fullCube(), false),
+    REPULSIVE("repulsive", 30, 6.0F, fullCube(), false),
+    INCENDIARY("incendiary", 80, 7.0F, fullCube(), false),
+    SHRAPNEL("shrapnel", 40, 4.0F, fullCube(), false),
+    CHEMICAL("chemical", 100, 7.0F, fullCube(), false),
+    ANVIL("anvil", 100, 6.0F, fullCube(), false),
+    INFESTIVE("infestive", 40, 7.0F, fullCube(), false),
+    DEBILITATION("debilitation", 80, 7.0F, fullCube(), false),
+    // Tier 2
+    FRAGMENTATION("fragmentation", 100, 8.0F, fullCube(), false),
+    CONTAGIOUS("contagious", 100, 7.0F, fullCube(), false),
+    BREACHING("breaching", 5, 5.0F, fullCube(), false),
+    THERMOBARIC("thermobaric", 100, 30.0F, fullCube(), false),
+    SONIC("sonic", 80, 20.0F, fullCube(), false),
+    // Tier 3
+    ANTIGRAVITY("antigravity", 100, 12.0F, fullCube(), false),
+    EMP("emp", 80, 45.0F, fullCube(), false),
+    NUCLEAR("nuclear", 200, 45.0F, fullCube(), false),
+    ENDOTHERMIC("endothermic", 80, 30.0F, fullCube(), false),
+    EXOTHERMIC("exothermic", 80, 40.0F, fullCube(), false),
+    ENDER("ender", 100, 9.0F, fullCube(), false),
+    HYPERSONIC("hypersonic", 150, 30.0F, fullCube(), false),
+    REJUVINATION("rejuvination", 400, 12.0F, fullCube(), false),
+    ANTIMATTER("antimatter", 400, 45.0F, fullCube(), false),
+    LARGE_ANTIMATTER("largeantimatter", 600, 100.0F, fullCube(), false),
+    DARKMATTER("darkmatter", 400, 50.0F, fullCube(), false),
+    // Other
     LANDMINE("landmine", 5, 2.5F, landmineShape(), true);
 
     private static final VoxelShape FULL_CUBE = fullCube();

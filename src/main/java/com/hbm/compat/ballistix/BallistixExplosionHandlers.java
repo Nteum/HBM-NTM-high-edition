@@ -35,6 +35,22 @@ final class BallistixExplosionHandlers {
             case ANVIL -> dropAnvils(level, pos, 10);
             case INFESTIVE -> spawnInfestation(level, pos, 8);
             case DEBILITATION -> debilitate(level, pos, 7.0F);
+            case FRAGMENTATION -> shrapnel(level, pos, 50, owner);
+            case CONTAGIOUS -> contagious(level, pos, type.baseRadius());
+            case BREACHING -> breaching(level, pos, type.baseRadius());
+            case THERMOBARIC -> thermobaric(level, pos, type.baseRadius());
+            case SONIC -> sonic(level, pos, type.baseRadius());
+            case ANTIGRAVITY -> antigravity(level, pos, type.baseRadius());
+            case EMP -> emp(level, pos, type.baseRadius());
+            case NUCLEAR -> nuclear(level, pos, type.baseRadius());
+            case ENDOTHERMIC -> endothermic(level, pos, type.baseRadius());
+            case EXOTHERMIC -> exothermic(level, pos, type.baseRadius());
+            case ENDER -> ender(level, pos, type.baseRadius());
+            case HYPERSONIC -> hypersonic(level, pos, type.baseRadius());
+            case REJUVINATION -> rejuvenate(level, pos, type.baseRadius());
+            case ANTIMATTER -> antimatter(level, pos, type.baseRadius());
+            case LARGE_ANTIMATTER -> antimatter(level, pos, type.baseRadius());
+            case DARKMATTER -> darkmatter(level, pos, type.baseRadius());
             case LANDMINE -> blast(level, pos, type.baseRadius(), false);
             default -> blast(level, pos, 4.0F, false);
         }
@@ -154,6 +170,161 @@ final class BallistixExplosionHandlers {
             living.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 200, 0));
             living.addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 400, 1));
             living.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 200, 2));
+        }
+    }
+
+    private static void contagious(Level level, Vec3 pos, float radius) {
+        if (level.isClientSide) return;
+        List<LivingEntity> victims = level.getEntitiesOfClass(LivingEntity.class,
+                new AABB(pos, pos).inflate(radius),
+                LivingEntity::isAlive);
+        for (LivingEntity living : victims) {
+            living.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 300, 0));
+            living.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 300, 1));
+            living.addEffect(new MobEffectInstance(MobEffects.HUNGER, 300, 1));
+            living.addEffect(new MobEffectInstance(MobEffects.POISON, 140, 0));
+        }
+    }
+
+    private static void breaching(Level level, Vec3 pos, float radius) {
+        level.explode(null, pos.x, pos.y, pos.z, radius, false, ExplosionInteraction.BLOCK);
+    }
+
+    private static void thermobaric(Level level, Vec3 pos, float radius) {
+        blast(level, pos, radius, true);
+        blast(level, pos, radius / 2.0F, true);
+    }
+
+    private static void sonic(Level level, Vec3 pos, float radius) {
+        applyForce(level, pos, radius, 2.5D, true);
+        if (!level.isClientSide) {
+            AABB area = new AABB(pos, pos).inflate(radius);
+            for (BlockPos bp : BlockPos.betweenClosed(BlockPos.containing(area.minX, area.minY, area.minZ),
+                    BlockPos.containing(area.maxX, area.maxY, area.maxZ))) {
+                if (pos.distanceTo(bp.getCenter()) > radius) continue;
+                if (level.getBlockState(bp).isAir()) continue;
+                if (level.random.nextFloat() < 0.05F) {
+                    level.destroyBlock(bp, false);
+                }
+            }
+        }
+    }
+
+    private static void antigravity(Level level, Vec3 pos, float radius) {
+        if (level.isClientSide) return;
+        List<LivingEntity> victims = level.getEntitiesOfClass(LivingEntity.class,
+                new AABB(pos, pos).inflate(radius),
+                LivingEntity::isAlive);
+        for (LivingEntity living : victims) {
+            living.addEffect(new MobEffectInstance(MobEffects.LEVITATION, 200, 1));
+        }
+    }
+
+    private static void emp(Level level, Vec3 pos, float radius) {
+        if (level.isClientSide) return;
+        List<LivingEntity> victims = level.getEntitiesOfClass(LivingEntity.class,
+                new AABB(pos, pos).inflate(radius),
+                LivingEntity::isAlive);
+        for (LivingEntity living : victims) {
+            living.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 200, 2));
+            living.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 1));
+        }
+    }
+
+    private static void nuclear(Level level, Vec3 pos, float radius) {
+        blast(level, pos, radius, true);
+        if (!level.isClientSide) {
+            List<LivingEntity> victims = level.getEntitiesOfClass(LivingEntity.class,
+                    new AABB(pos, pos).inflate(radius + 10),
+                    LivingEntity::isAlive);
+            for (LivingEntity living : victims) {
+                living.addEffect(new MobEffectInstance(MobEffects.POISON, 600, 2));
+                living.addEffect(new MobEffectInstance(MobEffects.WITHER, 200, 1));
+            }
+        }
+    }
+
+    private static void endothermic(Level level, Vec3 pos, float radius) {
+        blast(level, pos, radius / 2.0F, false);
+        if (!level.isClientSide) {
+            BlockPos center = BlockPos.containing(pos);
+            for (BlockPos bp : BlockPos.betweenClosed(center.offset(-(int) radius, -1, -(int) radius),
+                    center.offset((int) radius, 1, (int) radius))) {
+                if (center.distSqr(bp) > radius * radius) continue;
+                if (level.random.nextFloat() > 0.2F) continue;
+                if (level.getBlockState(bp).isAir()) {
+                    level.setBlock(bp, Blocks.SNOW.defaultBlockState(), 11);
+                }
+            }
+        }
+    }
+
+    private static void exothermic(Level level, Vec3 pos, float radius) {
+        blast(level, pos, radius / 2.0F, true);
+        if (!level.isClientSide) {
+            BlockPos center = BlockPos.containing(pos);
+            for (BlockPos bp : BlockPos.betweenClosed(center.offset(-(int) radius, -1, -(int) radius),
+                    center.offset((int) radius, 1, (int) radius))) {
+                if (center.distSqr(bp) > radius * radius) continue;
+                if (level.random.nextFloat() > 0.15F) continue;
+                if (level.getBlockState(bp).isAir() && level.getBlockState(bp.below()).isSolid()) {
+                    level.setBlock(bp, Blocks.FIRE.defaultBlockState(), 11);
+                } else if (level.random.nextFloat() < 0.05F) {
+                    level.setBlock(bp, Blocks.LAVA.defaultBlockState(), 11);
+                }
+            }
+        }
+    }
+
+    private static void ender(Level level, Vec3 pos, float radius) {
+        if (level.isClientSide) return;
+        List<LivingEntity> victims = level.getEntitiesOfClass(LivingEntity.class,
+                new AABB(pos, pos).inflate(radius),
+                LivingEntity::isAlive);
+        for (LivingEntity living : victims) {
+            double dx = pos.x + level.random.nextDouble() * radius * 2 - radius;
+            double dz = pos.z + level.random.nextDouble() * radius * 2 - radius;
+            double dy = pos.y + level.random.nextInt(6) - 3;
+            living.teleportTo(dx, dy, dz);
+        }
+    }
+
+    private static void hypersonic(Level level, Vec3 pos, float radius) {
+        applyForce(level, pos, radius, 3.5D, true);
+        if (!level.isClientSide) {
+            List<LivingEntity> victims = level.getEntitiesOfClass(LivingEntity.class,
+                    new AABB(pos, pos).inflate(radius),
+                    LivingEntity::isAlive);
+            for (LivingEntity living : victims) {
+                living.hurt(level.damageSources().explosion(null), 8.0F);
+            }
+        }
+    }
+
+    private static void rejuvenate(Level level, Vec3 pos, float radius) {
+        if (level.isClientSide) return;
+        List<LivingEntity> victims = level.getEntitiesOfClass(LivingEntity.class,
+                new AABB(pos, pos).inflate(radius),
+                LivingEntity::isAlive);
+        for (LivingEntity living : victims) {
+            living.heal(8.0F);
+            living.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 200, 1));
+        }
+    }
+
+    private static void antimatter(Level level, Vec3 pos, float radius) {
+        blast(level, pos, radius, true);
+    }
+
+    private static void darkmatter(Level level, Vec3 pos, float radius) {
+        applyForce(level, pos, radius, 2.0D, false);
+        if (!level.isClientSide) {
+            List<LivingEntity> victims = level.getEntitiesOfClass(LivingEntity.class,
+                    new AABB(pos, pos).inflate(radius),
+                    LivingEntity::isAlive);
+            for (LivingEntity living : victims) {
+                living.hurt(level.damageSources().generic(), 6.0F);
+            }
         }
     }
 }
