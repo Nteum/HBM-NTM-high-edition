@@ -9,14 +9,23 @@ import com.hbm.item.HBMtools;
 import com.hbm.registries.ModItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.PackType;
 import net.minecraft.world.item.Item;
+import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 public class ItemModelGen extends ItemModelProvider {
+    private final Set<ResourceLocation> generatedModels = new HashSet<>();
+
     public ItemModelGen(PackOutput output, String modid, ExistingFileHelper existingFileHelper) {
         super(output, modid, existingFileHelper);
     }
@@ -62,6 +71,8 @@ public class ItemModelGen extends ItemModelProvider {
         this.basicItem(ModItems.BEDROCK_ORE.get());
         /* tool */
         this.basicItem(ModItems.SCREWDRIVER.get());
+
+        generateMissingSimpleItemModels();
     }
 
     public void registerOrdinaryItemModel(String key){
@@ -74,5 +85,60 @@ public class ItemModelGen extends ItemModelProvider {
     public void builtinModel(Item item){
         ResourceLocation resourceLocation = Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(item));
         this.withExistingParent(resourceLocation.toString(), "builtin/entity");
+    }
+
+    @Override
+    public ItemModelBuilder basicItem(Item item) {
+        ItemModelBuilder builder = super.basicItem(item);
+        markGenerated(ForgeRegistries.ITEMS.getKey(item));
+        return builder;
+    }
+
+    @Override
+    public ItemModelBuilder withExistingParent(String name, ResourceLocation parent) {
+        ItemModelBuilder builder = super.withExistingParent(name, parent);
+        markGenerated(resolveName(name));
+        return builder;
+    }
+
+    @Override
+    public ItemModelBuilder getBuilder(String name) {
+        ItemModelBuilder builder = super.getBuilder(name);
+        markGenerated(resolveName(name));
+        return builder;
+    }
+
+    private void markGenerated(ResourceLocation id){
+        if (id != null && HBM.MODID.equals(id.getNamespace())){
+            generatedModels.add(id);
+        }
+    }
+
+    private ResourceLocation resolveName(String name){
+        return name.contains(":") ? new ResourceLocation(name) : new ResourceLocation(HBM.MODID, name);
+    }
+
+    private void generateMissingSimpleItemModels(){
+        Path manualModelDir = Paths.get("src", "main", "resources", "assets", HBM.MODID, "models", "item");
+        ForgeRegistries.ITEMS.getValues().forEach(item -> {
+            if (item == null) {
+                return;
+            }
+            ResourceLocation id = ForgeRegistries.ITEMS.getKey(item);
+            if (id == null || !HBM.MODID.equals(id.getNamespace())) {
+                return;
+            }
+            if (generatedModels.contains(id)) {
+                return;
+            }
+            if (Files.exists(manualModelDir.resolve(id.getPath() + ".json"))) {
+                return;
+            }
+            ResourceLocation manualModel = new ResourceLocation(id.getNamespace(), "models/item/" + id.getPath() + ".json");
+            if (existingFileHelper != null && existingFileHelper.exists(manualModel, PackType.CLIENT_RESOURCES)) {
+                return;
+            }
+            this.basicItem(item);
+        });
     }
 }

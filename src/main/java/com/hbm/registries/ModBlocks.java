@@ -8,6 +8,8 @@ import com.hbm.block.decoriate.BlockTest12;
 import com.hbm.block.env.*;
 import com.hbm.block.logistic.BlockCable;
 import com.hbm.block.machine.*;
+import com.hbm.block.machine.rbmk.BlockRBMKBase;
+import com.hbm.block.machine.rbmk.BlockRBMKHeater;
 import com.hbm.block.logistic.BlockConveyor;
 import com.hbm.block.weapon.*;
 import com.hbm.Inventory.fluid.ModFluids;
@@ -61,6 +63,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> machine_electric_boiler = registerBlockWithItem("machine_electric_boiler", ()->new BlockElectricBoiler(Properties.of().lightLevel(litEmission(14))));
     public static final RegistryObject<Block> machine_nuclear_boiler = registerBlockWithItem("machine_nuclear_boiler", ()->new BlockNuclearBoiler(Properties.of().lightLevel(litEmission(15))));
     public static final RegistryObject<Block> machine_press = registerBlockWithItem("machine_press", ()->new BlockPress(Properties.of()));
+    public static final RegistryObject<Block> machine_shredder = registerBlockWithItem("machine_shredder", ()->new BlockShredder(Properties.of()));
     public static final RegistryObject<Block> machine_battery = registerBattery("machine_battery",()->new BlockBattery(Properties.of(), BlockBattery.BatteryType.BASIC));
     public static final RegistryObject<Block> machine_lithium_battery = registerBattery("machine_lithium_battery",()->new BlockBattery(Properties.of(), BlockBattery.BatteryType.LITHIUM));
     public static final RegistryObject<Block> machine_schrabidium_battery = registerBattery("machine_schrabidium_battery",()->new BlockBattery(Properties.of(), BlockBattery.BatteryType.SCHRABIDIUM));
@@ -71,6 +74,8 @@ public class ModBlocks {
     public static final RegistryObject<Block> machine_cracking_tower = registerBlockWithItem("machine_cracking_tower",()->new BlockCrackingTower(Properties.of()));
     public static final RegistryObject<Block> machine_assembler = registerBlockWithItem("machine_assembler",()->new BlockAssembler(Properties.of()));
     public static final RegistryObject<Block> machine_crucible = registerBlockWithItem("machine_crucible",()->new BlockCrucible(Properties.of()));
+    public static final RegistryObject<Block> machine_rbmk_base = registerBlockWithItem("machine_rbmk_base", () -> new BlockRBMKBase(Properties.of().strength(6.0F).explosionResistance(30.0F)));
+    public static final RegistryObject<Block> machine_rbmk_heater = registerBlockWithItem("machine_rbmk_heater", () -> new BlockRBMKHeater(Properties.of().strength(4.0F).explosionResistance(12.0F).lightLevel(state -> state.getValue(BlockRBMKHeater.LIT) ? 8 : 0)));
     //模型部分（仅仅用于加载模型渲染，而不会在游戏单独出现，名称以part开头）
     public static final RegistryObject<Block> part_press_head = BLOCKS.register("part_press_head",()->new Block(Properties.of().noLootTable()));
     //电力

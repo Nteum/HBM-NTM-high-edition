@@ -39,6 +39,7 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.lang.ref.WeakReference;
+import java.util.function.Supplier;
 
 @Mod.EventBusSubscriber(modid = HBM.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class Models {
@@ -48,6 +49,8 @@ public class Models {
     private static final ConcurrentMap<ResourceLocation, ResourceLocation> ITEM_MODEL_KEYS = new ConcurrentHashMap<>();
     // 实体：缓存 RL -> 实体模型 的弱引用，便于GC在资源重载/内存紧张时回收
     private static final ConcurrentMap<ResourceLocation, WeakReference<Model>> ENTITY_MODELS = new ConcurrentHashMap<>();
+    // 为了在缓存清理或GC后能够重新构造模型，额外保留工厂引用
+    private static final ConcurrentMap<ResourceLocation, Supplier<Model>> ENTITY_MODEL_FACTORIES = new ConcurrentHashMap<>();
     
     public static final ResourceLocation ASSEMBLER_BODY = add(HBM.rl("block/assembler/assembler_body"));
     public static final ResourceLocation ASSEMBLER_COG = add(HBM.rl("block/assembler/assembler_cog"));
@@ -65,15 +68,15 @@ public class Models {
 
     public static final ResourceLocation MP_W_15_BALEFIRE = addItem(HBM.rl("item/mp_warhead_15_balefire"), HBMWeapon.MP_WARHEAD_15_BALEFIRE);
 
-    public static final ResourceLocation MISSILE_TEST = addEntity(HBM.modelRl("entity/missile/missile_test"), new ObjEntityModelSingle());
-    public static final ResourceLocation T51 = addEntity(HBM.modelRl("item/armor_t51"), new ModelArmorT51());
-    public static final ResourceLocation BISMUTH = addEntity(HBM.modelRl("item/armor_bismuth"), new ModelArmorBismuth());
-    public static final ResourceLocation DESH = addEntity(HBM.modelRl("item/armor_desh"), new ModelArmorDesh());
-    public static final ResourceLocation DIESEL = addEntity(HBM.modelRl("item/armor_diesel"), new ModelArmorDiesel());
-    public static final ResourceLocation RPA = addEntity(HBM.modelRl("item/armor_rpa"), new ModelArmorRPA());
-    public static final ResourceLocation AJR = addEntity(HBM.modelRl("item/armor_ajr"), new ModelArmorAJR());
-    public static final ResourceLocation BJ = addEntity(HBM.modelRl("item/armor_bj"), new ModelArmorBJ());
-    public static final ResourceLocation GLYPHID = addEntity(HBM.modelRl("entity/glyphid"), new ModelGlyphid());
+    public static final ResourceLocation MISSILE_TEST = addEntity(HBM.modelRl("entity/missile/missile_test"), ObjEntityModelSingle::new);
+    public static final ResourceLocation T51 = addEntity(HBM.modelRl("item/armor_t51"), ModelArmorT51::new);
+    public static final ResourceLocation BISMUTH = addEntity(HBM.modelRl("item/armor_bismuth"), ModelArmorBismuth::new);
+    public static final ResourceLocation DESH = addEntity(HBM.modelRl("item/armor_desh"), ModelArmorDesh::new);
+    public static final ResourceLocation DIESEL = addEntity(HBM.modelRl("item/armor_diesel"), ModelArmorDiesel::new);
+    public static final ResourceLocation RPA = addEntity(HBM.modelRl("item/armor_rpa"), ModelArmorRPA::new);
+    public static final ResourceLocation AJR = addEntity(HBM.modelRl("item/armor_ajr"), ModelArmorAJR::new);
+    public static final ResourceLocation BJ = addEntity(HBM.modelRl("item/armor_bj"), ModelArmorBJ::new);
+    public static final ResourceLocation GLYPHID = addEntity(HBM.modelRl("entity/glyphid"), ModelGlyphid::new);
 
     public static ResourceLocation add(ResourceLocation rl){
         models.add(rl);
@@ -85,8 +88,12 @@ public class Models {
         ITEM_MODEL_KEYS.put(rl, itemRegistryObject.getId());
         return rl;
     }
-    public static ResourceLocation addEntity(ResourceLocation rl, Model model){
-        ENTITY_MODELS.put(rl, new WeakReference<>(model));
+    public static ResourceLocation addEntity(ResourceLocation rl, Supplier<Model> modelFactory){
+        ENTITY_MODEL_FACTORIES.put(rl, modelFactory);
+        Model model = buildEntityModel(rl, modelFactory);
+        if (model != null) {
+            ENTITY_MODELS.put(rl, new WeakReference<>(model));
+        }
         return rl;
     }
     public static void registerModels(ModelEvent.RegisterAdditional event){
@@ -94,18 +101,10 @@ public class Models {
     }
     public static void onClientSetup(FMLClientSetupEvent event){
         event.enqueueWork(() -> {
-            // 加载实体模型
             try {
-                ENTITY_MODELS.forEach((rl, ref) -> {
-                    Model model = ref.get();
-                    if (model == null) return; // 弱引用已被回收则跳过
-                    HBM.LOGGER.info("Entity obj model: " + rl.toString());
-                    if (model instanceof IObjModel objEntityModel){
-                        if (objEntityModel.getRootModel() == null) objEntityModel.parseJson(rl);
-                    }
-                });
+                reloadEntityModels();
             } catch (Exception e) {
-                e.printStackTrace();
+                HBM.LOGGER.error("Failed to preload entity models", e);
             }
         });
     }
@@ -125,7 +124,13 @@ public class Models {
     }
     public static Model getEntityModel(ResourceLocation rl){
         WeakReference<Model> ref = ENTITY_MODELS.get(rl);
-        return ref != null ? ref.get() : null;
+        Model model = ref != null ? ref.get() : null;
+        if (model == null) {
+            model = rebuildEntityModel(rl);
+        } else {
+            prepareModel(rl, model);
+        }
+        return model;
     }
 
     // ================= 生命周期清理与事件钩子 =================
@@ -139,6 +144,7 @@ public class Models {
     @net.minecraftforge.eventbus.api.SubscribeEvent
     public static void onBakingCompleted(ModelEvent.BakingCompleted e) {
         clearCaches("BakingCompleted");
+        reloadEntityModels();
     }
 
     // 客户端断线/切世界：FORGE 总线事件
@@ -159,8 +165,63 @@ public class Models {
                 @Override
                 protected void apply(Void data, ResourceManager resourceManager, ProfilerFiller profiler) {
                     clearCaches("ReloadListener");
+                    reloadEntityModels();
                 }
             });
+        }
+    }
+
+    private static Model buildEntityModel(ResourceLocation rl, Supplier<Model> modelFactory) {
+        Model model = modelFactory.get();
+        prepareModel(rl, model);
+        return model;
+    }
+
+    private static Model rebuildEntityModel(ResourceLocation rl) {
+        Supplier<Model> factory = ENTITY_MODEL_FACTORIES.get(rl);
+        if (factory == null) {
+            return null;
+        }
+        Model model = buildEntityModel(rl, factory);
+        if (model != null) {
+            ENTITY_MODELS.put(rl, new WeakReference<>(model));
+        }
+        return model;
+    }
+
+    private static void reloadEntityModels() {
+        ENTITY_MODELS.clear();
+        ENTITY_MODEL_FACTORIES.keySet().forEach(Models::rebuildEntityModel);
+    }
+
+    private static void prepareModel(ResourceLocation rl, Model model) {
+        if (!(model instanceof IObjModel objModel)) {
+            return;
+        }
+        if (objModel.getRootModel() != null) {
+            return;
+        }
+        Minecraft minecraft = safeGetMinecraft();
+        if (minecraft == null) {
+            return;
+        }
+        ResourceManager resourceManager = minecraft.getResourceManager();
+        if (resourceManager == null) {
+            return;
+        }
+        ResourceLocation jsonPath = rl.withSuffix(".json");
+        if (resourceManager.getResource(jsonPath).isEmpty()) {
+            HBM.LOGGER.debug("[Models] Resource {} not ready; postpone parsing", jsonPath);
+            return;
+        }
+        objModel.parseJson(rl);
+    }
+
+    private static Minecraft safeGetMinecraft() {
+        try {
+            return Minecraft.getInstance();
+        } catch (Throwable t) {
+            return null;
         }
     }
 }

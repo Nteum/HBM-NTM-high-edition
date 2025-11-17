@@ -49,6 +49,7 @@ import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 public class AtomicBombExplosionEntity extends PathfinderMob implements GeoEntity, PipelineKeyProvider {
+    public static final int LIFETIME_TICKS = 380;
     public static final EntityDataAccessor<Boolean> SHOOT = SynchedEntityData.defineId(AtomicBombExplosionEntity.class, EntityDataSerializers.BOOLEAN);
     public static final EntityDataAccessor<String> ANIMATION = SynchedEntityData.defineId(AtomicBombExplosionEntity.class, EntityDataSerializers.STRING);
     public static final EntityDataAccessor<String> TEXTURE = SynchedEntityData.defineId(AtomicBombExplosionEntity.class, EntityDataSerializers.STRING);

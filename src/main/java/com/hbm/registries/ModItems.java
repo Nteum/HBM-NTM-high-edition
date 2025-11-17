@@ -10,10 +10,12 @@ import com.hbm.item.HBMWeapon;
 import com.hbm.item.HBMtools;
 import com.hbm.item.env.BedrockOreItem;
 import com.hbm.item.misc.ItemLemon;
+import com.hbm.item.rbmk.ItemRBMKLid;
 import com.hbm.item.weapon.ItemMissilePart;
 import com.hbm.item.weapon.grenade.ItemGrenade;
 import com.hbm.registries.WrapperRegistry.WrappedItemRegistry;
 import com.hbm.utils.debug.GunSuicide;
+import com.hbm.reactor.rbmk.RBMKLidType;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.food.Foods;
 import net.minecraft.world.item.CreativeModeTab;
@@ -72,6 +74,8 @@ public class ModItems {
     public static final RegistryObject<Item> briquette_coal = ITEMS.register("briquette_coal",()->new Item(new Item.Properties()));
     public static final RegistryObject<Item> briquette_lignite = ITEMS.register("briquette_lignite",()->new Item(new Item.Properties()));
     public static final RegistryObject<Item> briquette_wood = ITEMS.register("briquette_wood",()->new Item(new Item.Properties()));
+    public static final RegistryObject<Item> rbmk_lid = ITEMS.register("rbmk_lid", () -> new ItemRBMKLid(new Item.Properties(), RBMKLidType.SOLID));
+    public static final RegistryObject<Item> rbmk_lid_glass = ITEMS.register("rbmk_lid_glass", () -> new ItemRBMKLid(new Item.Properties(), RBMKLidType.GLASS));
 
 //    public static final RegistryObject<Item> detonator = ITEMS.register("detonator",()->new ItemDetonator(new Item.Properties()));
     public static final WrappedItemRegistry DETONATOR = add("billet_schrabidium_fuel", ()->new Item(new Item.Properties()), ModCreativeModeTab.HBM_TOOL.getKey(), HBMKey.BASIC_MODEL, HBMKey.ORDERLY_GEN_EXCEPT_FIRST);

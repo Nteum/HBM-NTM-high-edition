@@ -86,6 +86,11 @@ public class ModCreativeModeTab {
             output.accept(ModBlocks.machine_cracking_tower.get());
             output.accept(ModBlocks.machine_crucible.get());
             output.accept(ModBlocks.machine_assembler.get());
+            output.accept(ModBlocks.machine_shredder.get());
+            output.accept(ModBlocks.machine_rbmk_base.get());
+            output.accept(ModBlocks.machine_rbmk_heater.get());
+            output.accept(ModItems.rbmk_lid.get());
+            output.accept(ModItems.rbmk_lid_glass.get());
             output.accept(ModBlocks.RED_CABLE.get());
             HBMMachine.creativeTab(output);
         }).build());
@@ -105,9 +110,6 @@ public class ModCreativeModeTab {
 //            output.accept(ModItems.bucket_irradiated_polluted.get());
 //            output.accept(ModItems.bucket_sulfuric_acid.get());
             output.accept(ModBlocks.conveyor.get());
-            output.accept(ModBlocks.bomb_boy.get());
-            output.accept(ModBlocks.bomb_fat_man.get());
-            output.accept(ModBlocks.bomb_custom.get());
 
             output.accept(ModItems.SCREWDRIVER.get());
 

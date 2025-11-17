@@ -34,6 +34,12 @@ public class ItemTagsGen extends ItemTagsProvider {
         this.tag(ModTags.Items.CHARGEABLE).addTag(ModTags.Items.BATTERY);
         this.tag(ModTags.Items.UPGRADE).add(HBMtools.UPGRADE_BASE.get());
         this.tag(ModTags.Items.MISSILE).add(ModItems.MISSILE_GENERIC.get());
+        this.tag(ModTags.Items.SHREDDER_BLADES).add(
+                HBMComponent.BLADE_METEORITE.get(),
+                HBMComponent.BLADE_TITANIUM.get(),
+                HBMComponent.BLADE_TUNGSTEN.get(),
+                HBMComponent.SAWBLADE.get()
+        );
     }
 
     @Override

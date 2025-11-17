@@ -1,0 +1,12 @@
+{
+  "type": "hbm:shredder",
+  "duration": 40,
+  "ingredient": {
+    "count": 1,
+    "item": "minecraft:coal"
+  },
+  "result": {
+    "count": 2,
+    "item": "hbm:powder_coal"
+  }
+}

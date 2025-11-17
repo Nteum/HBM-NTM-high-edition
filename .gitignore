@@ -34,3 +34,9 @@ Thumbs.db
 # ===== Java 产物 =====
 *.log
 *.tmp
+manim_latest_commit.py
+.venv-manim
+bin
+media
+/manim_datagen_overview.py
+/crash-2025-11-11_02.04.22-client.txt

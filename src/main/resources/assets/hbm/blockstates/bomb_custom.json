@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=north,is_core=false": {
+      "model": "hbm:block/bomb_custom"
+    },
+    "facing=north,is_core=true": {
+      "model": "hbm:block/bomb_custom"
+    },
+    "facing=east,is_core=false": {
+      "model": "hbm:block/bomb_custom",
+      "y": 90
+    },
+    "facing=east,is_core=true": {
+      "model": "hbm:block/bomb_custom",
+      "y": 90
+    },
+    "facing=south,is_core=false": {
+      "model": "hbm:block/bomb_custom",
+      "y": 180
+    },
+    "facing=south,is_core=true": {
+      "model": "hbm:block/bomb_custom",
+      "y": 180
+    },
+    "facing=west,is_core=false": {
+      "model": "hbm:block/bomb_custom",
+      "y": 270
+    },
+    "facing=west,is_core=true": {
+      "model": "hbm:block/bomb_custom",
+      "y": 270
+    }
+  }
+}

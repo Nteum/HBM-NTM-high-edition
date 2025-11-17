@@ -1,0 +1,52 @@
+{
+  "variants": {
+    "level=0": {
+      "model": "hbm:block/kerosene"
+    },
+    "level=1": {
+      "model": "hbm:block/kerosene"
+    },
+    "level=2": {
+      "model": "hbm:block/kerosene"
+    },
+    "level=3": {
+      "model": "hbm:block/kerosene"
+    },
+    "level=4": {
+      "model": "hbm:block/kerosene"
+    },
+    "level=5": {
+      "model": "hbm:block/kerosene"
+    },
+    "level=6": {
+      "model": "hbm:block/kerosene"
+    },
+    "level=7": {
+      "model": "hbm:block/kerosene"
+    },
+    "level=8": {
+      "model": "hbm:block/kerosene"
+    },
+    "level=9": {
+      "model": "hbm:block/kerosene"
+    },
+    "level=10": {
+      "model": "hbm:block/kerosene"
+    },
+    "level=11": {
+      "model": "hbm:block/kerosene"
+    },
+    "level=12": {
+      "model": "hbm:block/kerosene"
+    },
+    "level=13": {
+      "model": "hbm:block/kerosene"
+    },
+    "level=14": {
+      "model": "hbm:block/kerosene"
+    },
+    "level=15": {
+      "model": "hbm:block/kerosene"
+    }
+  }
+}

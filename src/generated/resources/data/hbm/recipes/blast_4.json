@@ -1,0 +1,13 @@
+{
+  "type": "hbm:blast",
+  "input1": {
+    "item": "hbm:ingot_steel"
+  },
+  "input2": {
+    "item": "hbm:ingot_red_copper"
+  },
+  "result": {
+    "count": 2,
+    "item": "hbm:ingot_advanced_alloy"
+  }
+}

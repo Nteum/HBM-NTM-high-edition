@@ -1,0 +1,8 @@
+{
+  "values": [
+    "hbm:blade_meteorite",
+    "hbm:blade_titanium",
+    "hbm:blade_tungsten",
+    "hbm:sawblade"
+  ]
+}

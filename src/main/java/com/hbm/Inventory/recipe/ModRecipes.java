@@ -18,6 +18,7 @@ public class ModRecipes {
     public static final RecipeHolder<BlastFurnaceRecipe> BLAST = register(HBMKey.BLAST, BlastFurnaceRecipe.Serializer.INSTANCE);
     public static final RecipeHolder<AssemblerRecipe> ASSEMBLER = register(HBMKey.ASSEMBLER, AssemblerRecipe.Serializer.INSTANCE);
     public static final RecipeHolder<ChemplantRecipe> CHEMPLANT = register(HBMKey.CHEMPLANT, ChemplantRecipe.SERIALIZER);
+    public static final RecipeHolder<ShredderRecipe> SHREDDER = register(HBMKey.SHREDDER, ShredderRecipe.Serializer.INSTANCE);
 //    public static final RegistryObject<RecipeSerializer<BlastFurnaceRecipe>> ALLOY_SERIALIZER =
 //            SERIALIZER.register(HBMKey.BLAST,()-> BlastFurnaceRecipe.Serializer.INSTANCE);
 //    public static final RegistryObject<RecipeSerializer<AssemblerRecipe>> ASSEMBLER_SERIALIZER =

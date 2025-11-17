@@ -33,6 +33,7 @@ public class BlockStateGen extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
+        HBM.LOGGER.info("HBM BlockStateGen: generating block and item models");
         for (ICategoryStateProvider categoryStateProvider : categoryStateProviders) {
             categoryStateProvider.registerStatesAndModels();
         }
@@ -42,6 +43,12 @@ public class BlockStateGen extends BlockStateProvider {
         horizontalBlockWithItem(ModBlocks.machine_lithium_battery.get(),this.models().orientable("machine_lithium_battery", new ResourceLocation(HBM.MODID, "block/battery_lithium_side"), new ResourceLocation(HBM.MODID, "block/battery_lithium_front"), new ResourceLocation(HBM.MODID, "block/battery_lithium_top")));
         horizontalBlockWithItem(ModBlocks.machine_schrabidium_battery.get(),this.models().orientable("machine_schrabidium_battery", new ResourceLocation(HBM.MODID, "block/battery_schrabidium_side"), new ResourceLocation(HBM.MODID, "block/battery_schrabidium_front"), new ResourceLocation(HBM.MODID, "block/battery_schrabidium_top")));
         horizontalBlockWithItem(ModBlocks.machine_dineutronium_battery.get(),this.models().orientable("machine_dineutronium_battery", new ResourceLocation(HBM.MODID, "block/battery_dineutronium_side"), new ResourceLocation(HBM.MODID, "block/battery_dineutronium_front"), new ResourceLocation(HBM.MODID, "block/battery_dineutronium_top")));
+        horizontalBlockWithItem(ModBlocks.machine_shredder.get(),
+            this.models().orientableWithBottom("machine_shredder",
+                new ResourceLocation(HBM.MODID, "block/machine_shredder_side"),
+                new ResourceLocation(HBM.MODID, "block/machine_shredder_front"),
+                new ResourceLocation(HBM.MODID, "block/machine_shredder_bottom"),
+                new ResourceLocation(HBM.MODID, "block/machine_shredder_top")));
 
         ModelFile.ExistingModelFile conveyorModel = this.models().getExistingFile(new ResourceLocation(HBM.MODID, "block/conveyor"));
         horizontalBlock(ModBlocks.conveyor.get(),conveyorModel);

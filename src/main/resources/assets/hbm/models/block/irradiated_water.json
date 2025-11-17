@@ -1,0 +1,6 @@
+{
+  "loader": "forge:fluid",
+  "custom": {
+    "fluid": "hbm:irradiated_water"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=north,is_core=false": {
+      "model": "hbm:block/bomb_boy"
+    },
+    "facing=north,is_core=true": {
+      "model": "hbm:block/bomb_boy"
+    },
+    "facing=east,is_core=false": {
+      "model": "hbm:block/bomb_boy",
+      "y": 90
+    },
+    "facing=east,is_core=true": {
+      "model": "hbm:block/bomb_boy",
+      "y": 90
+    },
+    "facing=south,is_core=false": {
+      "model": "hbm:block/bomb_boy",
+      "y": 180
+    },
+    "facing=south,is_core=true": {
+      "model": "hbm:block/bomb_boy",
+      "y": 180
+    },
+    "facing=west,is_core=false": {
+      "model": "hbm:block/bomb_boy",
+      "y": 270
+    },
+    "facing=west,is_core=true": {
+      "model": "hbm:block/bomb_boy",
+      "y": 270
+    }
+  }
+}

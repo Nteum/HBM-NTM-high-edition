@@ -8,8 +8,8 @@
       "shadow_radius": 0.5,
       "scale": 1.0,
       "textures": {
-        "default": "hbm:textures/entity/duck.png",
-        "500kg": "hbm:textures/entity/duck.png"
+        "default": "hbm:textures/entity/five_bomb.png",
+        "500kg": "hbm:textures/entity/five_bomb.png"
       }
     },
     {
@@ -20,8 +20,8 @@
       "shadow_radius": 6.0,
       "scale": 4.0,
       "textures": {
-        "default": "hbm:textures/entity/duck.png",
-        "500kgtexture": "hbm:textures/entity/duck.png"
+        "default": "hbm:textures/entity/five_bomb_flash.png",
+        "500kgtexture": "hbm:textures/entity/five_bomb_flash.png"
       }
     },
     {
@@ -32,8 +32,8 @@
       "shadow_radius": 0.5,
       "scale": 1.2,
       "textures": {
-        "default": "hbm:textures/entity/duck.png",
-        "atomicbomb": "hbm:textures/entity/duck.png"
+        "default": "hbm:textures/entity/atomic_bomb.png",
+        "atomicbomb": "hbm:textures/entity/atomic_bomb.png"
       }
     },
     {
@@ -44,8 +44,8 @@
       "shadow_radius": 8.0,
       "scale": 5.0,
       "textures": {
-        "default": "hbm:textures/entity/duck.png",
-        "atomicbombtexture": "hbm:textures/entity/duck.png"
+        "default": "hbm:textures/entity/atomic_bomb_flash.png",
+        "atomicbombtexture": "hbm:textures/entity/atomic_bomb_flash.png"
       }
     }
   ]

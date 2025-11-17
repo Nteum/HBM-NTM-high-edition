@@ -1,0 +1,11 @@
+{
+  "type": "hbm:shredder",
+  "duration": 60,
+  "ingredient": {
+    "count": 1,
+    "tag": "forge:ingots/iron"
+  },
+  "result": {
+    "item": "hbm:powder_iron"
+  }
+}

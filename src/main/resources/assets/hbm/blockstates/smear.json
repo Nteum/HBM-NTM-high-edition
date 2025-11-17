@@ -1,0 +1,52 @@
+{
+  "variants": {
+    "level=0": {
+      "model": "hbm:block/smear"
+    },
+    "level=1": {
+      "model": "hbm:block/smear"
+    },
+    "level=2": {
+      "model": "hbm:block/smear"
+    },
+    "level=3": {
+      "model": "hbm:block/smear"
+    },
+    "level=4": {
+      "model": "hbm:block/smear"
+    },
+    "level=5": {
+      "model": "hbm:block/smear"
+    },
+    "level=6": {
+      "model": "hbm:block/smear"
+    },
+    "level=7": {
+      "model": "hbm:block/smear"
+    },
+    "level=8": {
+      "model": "hbm:block/smear"
+    },
+    "level=9": {
+      "model": "hbm:block/smear"
+    },
+    "level=10": {
+      "model": "hbm:block/smear"
+    },
+    "level=11": {
+      "model": "hbm:block/smear"
+    },
+    "level=12": {
+      "model": "hbm:block/smear"
+    },
+    "level=13": {
+      "model": "hbm:block/smear"
+    },
+    "level=14": {
+      "model": "hbm:block/smear"
+    },
+    "level=15": {
+      "model": "hbm:block/smear"
+    }
+  }
+}

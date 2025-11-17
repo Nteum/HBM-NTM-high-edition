@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "lit=false": { "model": "hbm:block/machine_rbmk_heater" },
+    "lit=true": { "model": "hbm:block/machine_rbmk_heater_lit" }
+  }
+}

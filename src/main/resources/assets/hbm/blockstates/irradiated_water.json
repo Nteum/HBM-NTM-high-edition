@@ -1,0 +1,52 @@
+{
+  "variants": {
+    "level=0": {
+      "model": "hbm:block/irradiated_water"
+    },
+    "level=1": {
+      "model": "hbm:block/irradiated_water"
+    },
+    "level=2": {
+      "model": "hbm:block/irradiated_water"
+    },
+    "level=3": {
+      "model": "hbm:block/irradiated_water"
+    },
+    "level=4": {
+      "model": "hbm:block/irradiated_water"
+    },
+    "level=5": {
+      "model": "hbm:block/irradiated_water"
+    },
+    "level=6": {
+      "model": "hbm:block/irradiated_water"
+    },
+    "level=7": {
+      "model": "hbm:block/irradiated_water"
+    },
+    "level=8": {
+      "model": "hbm:block/irradiated_water"
+    },
+    "level=9": {
+      "model": "hbm:block/irradiated_water"
+    },
+    "level=10": {
+      "model": "hbm:block/irradiated_water"
+    },
+    "level=11": {
+      "model": "hbm:block/irradiated_water"
+    },
+    "level=12": {
+      "model": "hbm:block/irradiated_water"
+    },
+    "level=13": {
+      "model": "hbm:block/irradiated_water"
+    },
+    "level=14": {
+      "model": "hbm:block/irradiated_water"
+    },
+    "level=15": {
+      "model": "hbm:block/irradiated_water"
+    }
+  }
+}

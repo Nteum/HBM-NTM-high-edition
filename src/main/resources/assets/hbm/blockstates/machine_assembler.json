@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=east,is_core=false": {
+      "model": "hbm:block/assembler/assembler_body",
+      "y": 90
+    },
+    "facing=east,is_core=true": {
+      "model": "hbm:block/assembler/assembler_body",
+      "y": 90
+    },
+    "facing=north,is_core=false": {
+      "model": "hbm:block/assembler/assembler_body"
+    },
+    "facing=north,is_core=true": {
+      "model": "hbm:block/assembler/assembler_body"
+    },
+    "facing=south,is_core=false": {
+      "model": "hbm:block/assembler/assembler_body",
+      "y": 180
+    },
+    "facing=south,is_core=true": {
+      "model": "hbm:block/assembler/assembler_body",
+      "y": 180
+    },
+    "facing=west,is_core=false": {
+      "model": "hbm:block/assembler/assembler_body",
+      "y": 270
+    },
+    "facing=west,is_core=true": {
+      "model": "hbm:block/assembler/assembler_body",
+      "y": 270
+    }
+  }
+}

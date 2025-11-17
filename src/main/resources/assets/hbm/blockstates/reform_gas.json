@@ -1,0 +1,52 @@
+{
+  "variants": {
+    "level=0": {
+      "model": "hbm:block/reform_gas"
+    },
+    "level=1": {
+      "model": "hbm:block/reform_gas"
+    },
+    "level=2": {
+      "model": "hbm:block/reform_gas"
+    },
+    "level=3": {
+      "model": "hbm:block/reform_gas"
+    },
+    "level=4": {
+      "model": "hbm:block/reform_gas"
+    },
+    "level=5": {
+      "model": "hbm:block/reform_gas"
+    },
+    "level=6": {
+      "model": "hbm:block/reform_gas"
+    },
+    "level=7": {
+      "model": "hbm:block/reform_gas"
+    },
+    "level=8": {
+      "model": "hbm:block/reform_gas"
+    },
+    "level=9": {
+      "model": "hbm:block/reform_gas"
+    },
+    "level=10": {
+      "model": "hbm:block/reform_gas"
+    },
+    "level=11": {
+      "model": "hbm:block/reform_gas"
+    },
+    "level=12": {
+      "model": "hbm:block/reform_gas"
+    },
+    "level=13": {
+      "model": "hbm:block/reform_gas"
+    },
+    "level=14": {
+      "model": "hbm:block/reform_gas"
+    },
+    "level=15": {
+      "model": "hbm:block/reform_gas"
+    }
+  }
+}

@@ -19,6 +19,8 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.client.model.renderable.CompositeRenderable;
 import net.minecraftforge.client.model.renderable.IRenderable;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,6 +32,7 @@ import java.util.Map;
  * */
 public class ModelArmorBase<T extends LivingEntity> extends HumanoidArmorModel<T> implements IObjModel
 {
+    private static final Logger LOGGER = LogManager.getLogger("HBM-ModelArmor");
     static ModelPart EMPTY = new ModelPart(List.of(), Map.of());
     static ModelPart DUMMY_HUMANOID = new ModelPart(List.of(), Map.of("head",EMPTY, "hat",EMPTY, "body", EMPTY, "right_arm",EMPTY, "left_arm",EMPTY, "right_leg", EMPTY, "left_leg", EMPTY));
     public BaseObjModel rootModel;
@@ -59,7 +62,13 @@ public class ModelArmorBase<T extends LivingEntity> extends HumanoidArmorModel<T
     }
 
     public BaseObjModel getComponent(String name){
-        return this.rootModel.children.get(name);
+        if (this.rootModel == null) {
+            LOGGER.error("ModelArmorBase attempted to access component '{}' before model initialization.", name);
+            BaseObjModel placeholder = new BaseObjModel(RenderType::armorCutoutNoCull, name);
+            placeholder.setModelIdentifier("armor::placeholder::" + name);
+            return placeholder;
+        }
+        return this.rootModel.getChild(name);
     }
 
     public void parseJson(ResourceLocation jsonPath) {

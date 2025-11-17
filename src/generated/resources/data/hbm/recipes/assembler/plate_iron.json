@@ -1,0 +1,14 @@
+{
+  "type": "hbm:assembler",
+  "ingredients": [
+    {
+      "count": 3,
+      "item": "minecraft:iron_ingot"
+    }
+  ],
+  "number": 30,
+  "result": {
+    "count": 2,
+    "item": "hbm:plate_iron"
+  }
+}

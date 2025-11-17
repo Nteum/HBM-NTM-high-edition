@@ -1,6 +1,7 @@
 package com.hbm.procedures;
 
 import com.hbm.compat.bigexplosives.BigExplosivesMod;
+import com.hbm.render.entity.AtomicBombExplosionEntity;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.LevelAccessor;
@@ -11,8 +12,6 @@ import net.minecraft.world.level.LevelAccessor;
  * potion effects so shader mods cannot tint the flash.
  */
 public final class AtomicBombExplosionOnEntityTickUpdateProcedure {
-
-    private static final int LIFETIME_TICKS = 380;
 
     private AtomicBombExplosionOnEntityTickUpdateProcedure() {
     }
@@ -26,7 +25,7 @@ public final class AtomicBombExplosionOnEntityTickUpdateProcedure {
             living.removeAllEffects();
         }
 
-        BigExplosivesMod.queueServerWork(LIFETIME_TICKS, () -> {
+        BigExplosivesMod.queueServerWork(AtomicBombExplosionEntity.LIFETIME_TICKS, () -> {
             if (!entity.isAlive()) {
                 return;
             }

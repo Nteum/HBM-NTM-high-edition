@@ -1,0 +1,52 @@
+{
+  "variants": {
+    "level=0": {
+      "model": "hbm:block/spent_steam"
+    },
+    "level=1": {
+      "model": "hbm:block/spent_steam"
+    },
+    "level=2": {
+      "model": "hbm:block/spent_steam"
+    },
+    "level=3": {
+      "model": "hbm:block/spent_steam"
+    },
+    "level=4": {
+      "model": "hbm:block/spent_steam"
+    },
+    "level=5": {
+      "model": "hbm:block/spent_steam"
+    },
+    "level=6": {
+      "model": "hbm:block/spent_steam"
+    },
+    "level=7": {
+      "model": "hbm:block/spent_steam"
+    },
+    "level=8": {
+      "model": "hbm:block/spent_steam"
+    },
+    "level=9": {
+      "model": "hbm:block/spent_steam"
+    },
+    "level=10": {
+      "model": "hbm:block/spent_steam"
+    },
+    "level=11": {
+      "model": "hbm:block/spent_steam"
+    },
+    "level=12": {
+      "model": "hbm:block/spent_steam"
+    },
+    "level=13": {
+      "model": "hbm:block/spent_steam"
+    },
+    "level=14": {
+      "model": "hbm:block/spent_steam"
+    },
+    "level=15": {
+      "model": "hbm:block/spent_steam"
+    }
+  }
+}

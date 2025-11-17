@@ -4,9 +4,7 @@
   "itemGroup.hbm.hbm_machine": "HBM 机器",
   "itemGroup.hbm.hbm_tool": "HBM 工具",
   "itemGroup.hbm.hbm_weapon": "HBM 武器",
-
   "item.hbm.battery.tooltip": "能量：%1$s",
-
   "upgrade.acid": "需要酸液 %s",
   "upgrade.burn": "燃烧 %s mB/t 获得 %s HE",
   "upgrade.consumption": "消耗 %s",
@@ -17,7 +15,6 @@
   "upgrade.productivity": "产能 %s",
   "upgrade.fortune": "时运 %s",
   "upgrade.range": "范围 %s",
-
   "upgrade.hbm.radius.tooltip": "力场范围升级\n半径 +16 / 消耗 +500\n可叠加至 16",
   "upgrade.hbm.health.tooltip": "力场耐久升级\n最大生命 +50 / 消耗 +250\n可叠加至 16",
   "upgrade.hbm.smelter.tooltip": "采矿激光升级\n熔炼方块，简单明了。",
@@ -27,11 +24,9 @@
   "upgrade.hbm.scream.tooltip": "采矿激光升级\n就像超级马里奥里所有方块其实都是奇诺比奥，\n不过这里是半条命的科学家，\n而且他们会叫。很大声。",
   "upgrade.hbm.nullifier.tooltip": "采矿激光升级\n50% 概率用 /dev/zero 覆写无价值物品\n50% 概率把无价值物品移至 /dev/null",
   "upgrade.hbm.gc_speed.tooltip": "气体离心机升级\n允许对 HEUF6 完全同位素分离，\n同时让你的离心机疯狂运转",
-
   "gui.hbm.left_time.tooltip": "请等待 %s s",
   "gui.hbm.volume.tooltip": "%s : %s mB",
   "gui.hbm.stored_energy.tooltip": "能量：%s HE",
-
   "geiger.hbm.title": "盖格计数器",
   "geiger.hbm.chunk_rad": "当前区块辐射：",
   "geiger.hbm.envrad": "环境总辐射：",
@@ -41,7 +36,6 @@
   "geiger.envRad": "环境总辐射:",
   "geiger.playerRad": "玩家污染:",
   "geiger.playerRes": "玩家抗性:",
-
   "container.hbm.difurnace": "高炉",
   "container.hbm.crucible": "坩埚",
   "container.hbm.electric_furnace": "电炉",
@@ -53,7 +47,6 @@
   "container.hbm.barrel": "桶",
   "container.hbm.battery": "电池",
   "container.hbm.launchpad": "发射台",
-
   "fluid.hbm.gaseous.tooltip": "[气体]",
   "fluid.hbm.gaseous_art.tooltip": "[常温为气体]",
   "fluid.hbm.liquid.tooltip": "[液体]",
@@ -84,20 +77,16 @@
   "fluid.hbm.pwr_moderator.tooltip": "[压水堆通量倍增]",
   "fluid.hbm.core_flux.tooltip": "反应堆通量 + %s %",
   "fluid.hbm.radioactive.tooltip": "[放射性]",
-
   "command.hbm.debug": "调试",
   "redstone_control.hbm.disabled": "禁用",
   "redstone_control.hbm.high": "高电平",
   "redstone_control.hbm.low": "低电平",
   "redstone_control.hbm.pulse": "脉冲",
-
   "item.hbm.fluid_capacity": "容量：%s mB",
   "fuel.hbm": "燃料",
   "fuel.hbm.capacity": "燃料容量：%s mB",
-
   "item.hbm.item_missile_tier": "等级 %s",
   "item.hbm.item_missile_desc_notlaunchable": "无法发射！",
-
   "armor.hbm.geigersound": "音频盖格计数器",
   "armor.hbm.geigerhud": "内置盖格计数器HUD",
   "armor.hbm.glider": "按潜行滑翔",
@@ -108,7 +97,6 @@
   "armor.hbm.dash": "获得%s次冲刺",
   "armor.hbm.fsb": "套装加成：",
   "tooltip.hbm.chargerate": "充能：%s / %s",
-
   "item.hbm.coke_coal": "焦煤",
   "block.hbm.machine_difurnace": "高炉",
   "block.hbm.machine_electric_furnace": "电炉",
@@ -119,8 +107,11 @@
   "block.hbm.machine_lithium_battery": "锂离子能量存储块",
   "block.hbm.machine_schrabidium_battery": "施拉比迪姆能量存储块",
   "block.hbm.machine_dineutronium_battery": "火花能量存储块",
+  "block.hbm.machine_rbmk_base": "RBMK反应堆柱体",
+  "block.hbm.machine_rbmk_heater": "RBMK加热器",
   "block.hbm.anvil_iron": "一级铁砧",
-
+  "item.hbm.rbmk_lid": "RBMK盖板",
+  "item.hbm.rbmk_lid_glass": "RBMK玻璃盖板",
   "key.category.hbm": "NTM 热键",
   "key.hbm.calculator": "计算器",
   "key.hbm.toggle_back": "切换喷气背包",
@@ -142,7 +133,6 @@
   "key.hbm.crane_move_left": "起重机左移",
   "key.hbm.crane_move_right": "起重机右移",
   "key.hbm.craneload": "起重机装载/卸载",
-
   "death.attack.nuclear_blast": "%s 死于核爆炸",
   "death.attack.nuclear_blast.entity": "%1$s 死于 %2$s 的核爆炸",
   "death.attack.nuclear_blast.item": "%1$s 被 %2$s 使用 %3$s 杀死（核爆炸）",
@@ -272,22 +262,17 @@
   "death.attack.subautomic": "%s 死于次原子现象",
   "death.attack.subautomic.entity": "%1$s 死于 %2$s 造成的次原子现象",
   "death.attack.subautomic.item": "%1$s 被 %2$s 使用 %3$s 杀死（次原子）",
-
   "general.hbm.cached": "缓存数据：",
   "general.hbm.data.pos": "方块坐标 [%s]",
   "general.hbm.data.chunk": "区块坐标 %s",
   "debug.hbm.debugwand.msg.block_lost": "坐标 [%s] 未找到方块！",
   "debug.hbm.debugwand.msg.block_info": "坐标 [%s] 的方块为 %s。",
-
   "effect.hbm.radiation": "辐射",
   "general.hbm.recipe": "配方",
-  "block.hbm.chemplant.looktooltip": "<- 储罐 %s"
-  ,
+  "block.hbm.chemplant.looktooltip": "<- 储罐 %s",
   "item_group.big_explosives.explosives": "爆炸物",
-
   "geiger.title": "盖格计数器",
   "geiger.title.dosimeter": "剂量计",
-
   "trait.digamma": "二伽马",
   "trait.asbestos": "石棉",
   "trait.blinding": "致盲",
@@ -296,24 +281,20 @@
   "trait.hydro": "遇水反应",
   "trait.coal": "煤尘",
   "trait.radioactive": "放射性",
-
   "hbmxx.container.difurnace": "高炉",
   "hbmxx.container.crucible": "坩埚",
   "hbmxx.container.press": "压制机",
   "hbm.machine.assembler": "装配机",
-
   "item.hbmxx.detonator.tooltip1": "蹲下右击方块以保存坐标",
   "item.hbmxx.detonator.tooltip2": "普通右击在保存坐标引爆",
   "item.hbmxx.detonator.tooltip3": "未设置坐标",
   "item.hbmxx.detonator.tooltip4": "已设置坐标：%s, %s, %s",
-
   "item.big_explosives.atom_bomb": "原子弹",
   "item.big_explosives.five_hundred_kilogram_bomb": "500千克炸弹",
   "entity.big_explosives.five_bomb": "500千克炸弹",
   "entity.big_explosives.five_hundred_kg_explosion": "500千克爆炸",
   "entity.big_explosives.atomic_bomb": "原子弹",
   "entity.big_explosives.atomic_bomb_explosion": "原子弹爆炸",
-
   "msg.hbm.right_click_time": "右键次数：%s",
   "msg.hbm.mark_pos": "已标记坐标 [%s, %s, %s]",
   "msg.hbm.no_pos": "未设置坐标。",
@@ -328,5 +309,8 @@
   "msg.hbm.hit_on": "命中位置：%s",
   "msg.hbm.radiation_cleared": "辐射数据已清除！",
   "msg.hbm.radiation_set": "辐射已设置！",
-  "msg.hbm.empty_tag": "空标签：%s"
+  "msg.hbm.empty_tag": "空标签：%s",
+  "block.hbm.machine_shredder": "粉碎机",
+  "hbm.container.shredder": "粉碎机",
+  "gui.hbm.shredder.no_blade": "错误：粉碎机刀片缺失或已损坏！"
 }

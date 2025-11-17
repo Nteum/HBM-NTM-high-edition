@@ -21,6 +21,9 @@ import java.util.Map;
 public class TransmitHelper {
     //单纯耗电的机器
     public static void machineTransmit(Level level, BlockPos pPos, BlockState pState, BlockEntity pBlockEntity){
+        if (pBlockEntity == null || pBlockEntity.isRemoved()) {
+            return;
+        }
         pBlockEntity.getCapability(ForgeCapabilities.ENERGY).ifPresent(cap -> {
             IHBMEnergyStorage energyStorage = (IHBMEnergyStorage) cap;
             long amountNeed = energyStorage.getMaxInput();
@@ -60,6 +63,9 @@ public class TransmitHelper {
     }
     //发电机，单纯发电
     public static void generatorTransmit(Level level, BlockPos pPos, BlockState pState, BlockEntity pBlockEntity){
+        if (pBlockEntity == null || pBlockEntity.isRemoved()) {
+            return;
+        }
         pBlockEntity.getCapability(ForgeCapabilities.ENERGY).ifPresent(cap -> {
             IHBMEnergyStorage energyStorage = (IHBMEnergyStorage) cap;
             long amountToOutput = energyStorage.getMaxOutput();
@@ -145,6 +151,9 @@ public class TransmitHelper {
     }
     //电池，储电/输电/保证储电量稳定
     public static void batteryTransmit(Level level, BlockPos pPos, BlockState pState, BlockEntity pBlockEntity){
+        if (pBlockEntity == null || pBlockEntity.isRemoved()) {
+            return;
+        }
         double priorityRatio = 1.0;     //这个值比较高则更倾向于吸能，比较低则倾向于放出能量
         double stableRatio = 0.4;       //电池尽可能保证其能量
         pBlockEntity.getCapability(ForgeCapabilities.ENERGY).ifPresent(cap -> {

@@ -15,11 +15,15 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.lwjgl.opengl.GL11;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class ModelGlyphid<T extends Entity> extends EntityModel<T> implements IObjModel {
+    private static final Logger LOGGER = LogManager.getLogger("HBM-ModelGlyphid");
     public BaseObjModel rootModel;
     // 身体部分
     public String body = "Body";
@@ -50,7 +54,12 @@ public class ModelGlyphid<T extends Entity> extends EntityModel<T> implements IO
     public void parseJson(ResourceLocation jsonPath) {
         this.rootModel = BaseObjModel.create(jsonPath, RenderType::entityCutoutNoCull);
         // 由于腿部是单独渲染，因此需要单独调它的偏移量
-        this.rootModel.adjXYZ(0, -1.5f * getRootModel().size, 0, legLeftUpper, legRightUpper);
+        try {
+            LOGGER.debug("Glyphid model '{}' adjusting leg groups {}", rootModel.getModelIdentifier(), List.of(legLeftUpper, legRightUpper));
+            this.rootModel.adjXYZ(0, -1.5f * getRootModel().size, 0, legLeftUpper, legRightUpper);
+        } catch (Exception ex) {
+            LOGGER.error("Failed to adjust glyphid model '{}' groups {}", rootModel.getModelIdentifier(), List.of(legLeftUpper, legRightUpper), ex);
+        }
         rootModel.getChild(body);
         // 异虫的颚，用一个整体组件控制颚的转动
         rootModel.addChild(jaw, new BaseObjModel(rootModel, jaw).setRotPoint(0, 0.5f, 0.25f)
@@ -142,5 +151,30 @@ public class ModelGlyphid<T extends Entity> extends EntityModel<T> implements IO
     @Override
     public BaseObjModel getRootModel() {
         return rootModel;
+    }
+
+    public List<String> trackedGroups() {
+        return Arrays.asList(
+            body,
+            jawLeft,
+            jawRight,
+            jawTop,
+            armRightUpper,
+            armRightMid,
+            armRightLower,
+            armLeftUpper,
+            armLeftMid,
+            armLeftLower,
+            legRightUpper,
+            legRightLower,
+            legLeftUpper,
+            legLeftLower,
+            armorRight,
+            armorLeft,
+            armorFront,
+            armRightArmor,
+            armLeftArmor,
+            jaw
+        );
     }
 }

@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:block/block",
+  "parent": "block/block",
   "loader": "forge:obj",
   "flip_v": true,
   "model": "hbm:models/block/pipes/cable_neo.obj",
@@ -10,9 +10,21 @@
   "ambientocclusion": true,
   "display": {
     "gui": {
-      "rotation": [ 30, 225, 0 ],
-      "translation": [ 0, 0, 0],
-      "scale":[ 1,1,1 ]
+      "rotation": [
+        30,
+        225,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
     }
   }
 }

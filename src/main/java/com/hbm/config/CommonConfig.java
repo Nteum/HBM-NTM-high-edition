@@ -30,6 +30,7 @@ public class CommonConfig {
 	public static final String CATEGORY_POLLUTION = "16_pollution";
 	public static final String CATEGORY_BIOMES = "17_biomes";
 	public static final String CATEGORY_WEAPONS = "18_weapons";
+	public static final String CATEGORY_RBMK = "19_rbmk";
 
 	public static final String CATEGORY_528 = "528";
 	public static final String CATEGORY_LBSM = "LESS BULLSHIT MODE";
@@ -39,6 +40,7 @@ public class CommonConfig {
 	static {
 		ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
 		ConfigGeneral.addConfig(builder);
+		ConfigRBMK.addConfig(builder);
 
 		Config528.addConfig(builder);
 		ConfigLBSM.addConfig(builder);
@@ -49,6 +51,7 @@ public class CommonConfig {
 	@SubscribeEvent
 	public static void onLoad(final ModConfigEvent event){
 		ConfigGeneral.loadConfig(event);
+		ConfigRBMK.loadConfig(event);
 
 		Config528.loadConfig(event);
 		ConfigLBSM.loadConfig(CATEGORY_LBSM, event);

@@ -63,6 +63,24 @@ public class ModFluids {
 //    public static final ExtendedFluidType COOLANT = new ExtendedFluidType(0xd8fcff, solution, ExtendedProperties.of().pfr(1).traits(LIQUID));
     public static final ExtendedFluidType hydrogen = new ExtendedFluidType("hydrogen",0x4286f4, solution.descriptionId("Hydrogen"),ExtendedProperties.of().pfr(3,4,0));
     public static final ExtendedFluidType diesel = new ExtendedFluidType("diesel", 0xf2eed5, solution.descriptionId("Diesel"), ExtendedProperties.of().pfr(1, 2, 0));
+    public static final ExtendedFluidType oil = new ExtendedFluidType("oil", 0x1d150d, solution.descriptionId("Crude Oil"), ExtendedProperties.of().pfr(1, 2, 0).traits(LIQUID, VISCOUS));
+    public static final ExtendedFluidType crack_oil = new ExtendedFluidType("crack_oil", 0x2b1a10, solution.descriptionId("Cracked Oil"), ExtendedProperties.of().pfr(1, 3, 0).traits(LIQUID, VISCOUS));
+    public static final ExtendedFluidType bitumen = new ExtendedFluidType("bitumen", 0x150f0b, solution.descriptionId("Bitumen"), ExtendedProperties.of().pfr(1, 3, 0).traits(LIQUID, VISCOUS));
+    public static final ExtendedFluidType smear = new ExtendedFluidType("smear", 0x402213, solution.descriptionId("Heavy Residue"), ExtendedProperties.of().pfr(1, 2, 0).traits(LIQUID, VISCOUS));
+    public static final ExtendedFluidType naphtha = new ExtendedFluidType("naphtha", 0xfff1b5, solution.descriptionId("Naphtha"), ExtendedProperties.of().pfr(1, 1, 0));
+    public static final ExtendedFluidType petroleum = new ExtendedFluidType("petroleum", 0x2e2e2e, solution.descriptionId("Petroleum"), ExtendedProperties.of().pfr(1, 3, 0));
+    public static final ExtendedFluidType aromatics = new ExtendedFluidType("aromatics", 0xb04b8e, solution.descriptionId("Aromatics"), ExtendedProperties.of().pfr(2, 2, 1));
+    public static final ExtendedFluidType unsaturateds = new ExtendedFluidType("unsaturateds", 0xffb347, solution.descriptionId("Unsaturateds"), ExtendedProperties.of().pfr(2, 1, 1));
+    public static final ExtendedFluidType refinery_gas = new ExtendedFluidType("refinery_gas", 0xffd966, solution.descriptionId("Refinery Gas"), ExtendedProperties.of().pfr(1, 2, 0).traits(GASEOUS));
+    public static final ExtendedFluidType diesel_crack = new ExtendedFluidType("diesel_crack", 0xe5d4ab, solution.descriptionId("Cracked Diesel"), ExtendedProperties.of().pfr(1, 2, 0));
+    public static final ExtendedFluidType kerosene = new ExtendedFluidType("kerosene", 0xf6f2d9, solution.descriptionId("Kerosene"), ExtendedProperties.of().pfr(1, 1, 0));
+    public static final ExtendedFluidType wood_oil = new ExtendedFluidType("wood_oil", 0x2f2519, solution.descriptionId("Wood Oil"), ExtendedProperties.of().pfr(1, 1, 0).traits(LIQUID, VISCOUS));
+    public static final ExtendedFluidType heating_oil = new ExtendedFluidType("heating_oil", 0x8c6b2b, solution.descriptionId("Heating Oil"), ExtendedProperties.of().pfr(1, 2, 0));
+    public static final ExtendedFluidType heating_oil_vacuum = new ExtendedFluidType("heating_oil_vacuum", 0xa37932, solution.descriptionId("Vacuum Heating Oil"), ExtendedProperties.of().pfr(1, 2, 0));
+    public static final ExtendedFluidType reform_gas = new ExtendedFluidType("reform_gas", 0xfceea1, solution.descriptionId("Reform Gas"), ExtendedProperties.of().pfr(1, 1, 1).traits(GASEOUS));
+    public static final ExtendedFluidType reformate = new ExtendedFluidType("reformate", 0xe0d342, solution.descriptionId("Reformate"), ExtendedProperties.of().pfr(1, 1, 0));
+    public static final ExtendedFluidType biogas = new ExtendedFluidType("biogas", 0x7ed691, solution.descriptionId("Biogas"), ExtendedProperties.of().pfr(1, 1, 0).traits(GASEOUS));
+    public static final ExtendedFluidType spent_steam = new ExtendedFluidType("spent_steam", 0xc9c9c9, solution.descriptionId("Spent Steam"), ExtendedProperties.of().pfr(0,0,0).traits(GASEOUS, UNSIPHONABLE));
 
     // 流体注册
     public static FluidRegistryHolder<ExtendedFluidType, ForgeFlowingFluid.Source, ForgeFlowingFluid.Flowing,LiquidBlock, BucketItem> HYDROGEN = register(hydrogen);
@@ -71,6 +89,24 @@ public class ModFluids {
     public static FluidRegistryHolder<ExtendedFluidType, ForgeFlowingFluid.Source, ForgeFlowingFluid.Flowing,LiquidBlock, BucketItem> SULFURIC_ACID = register(sulfuric_acid);
     public static FluidRegistryHolder<ExtendedFluidType, ForgeFlowingFluid.Source, ForgeFlowingFluid.Flowing,LiquidBlock, BucketItem> STEAM = register(steam);
     public static FluidRegistryHolder<ExtendedFluidType, ForgeFlowingFluid.Source, ForgeFlowingFluid.Flowing,LiquidBlock, BucketItem> DIESEL = register(diesel);
+    public static FluidRegistryHolder<ExtendedFluidType, ForgeFlowingFluid.Source, ForgeFlowingFluid.Flowing,LiquidBlock, BucketItem> OIL = register(oil);
+    public static FluidRegistryHolder<ExtendedFluidType, ForgeFlowingFluid.Source, ForgeFlowingFluid.Flowing,LiquidBlock, BucketItem> CRACK_OIL = register(crack_oil);
+    public static FluidRegistryHolder<ExtendedFluidType, ForgeFlowingFluid.Source, ForgeFlowingFluid.Flowing,LiquidBlock, BucketItem> BITUMEN = register(bitumen);
+    public static FluidRegistryHolder<ExtendedFluidType, ForgeFlowingFluid.Source, ForgeFlowingFluid.Flowing,LiquidBlock, BucketItem> SMEAR = register(smear);
+    public static FluidRegistryHolder<ExtendedFluidType, ForgeFlowingFluid.Source, ForgeFlowingFluid.Flowing,LiquidBlock, BucketItem> NAPHTHA = register(naphtha);
+    public static FluidRegistryHolder<ExtendedFluidType, ForgeFlowingFluid.Source, ForgeFlowingFluid.Flowing,LiquidBlock, BucketItem> PETROLEUM = register(petroleum);
+    public static FluidRegistryHolder<ExtendedFluidType, ForgeFlowingFluid.Source, ForgeFlowingFluid.Flowing,LiquidBlock, BucketItem> AROMATICS = register(aromatics);
+    public static FluidRegistryHolder<ExtendedFluidType, ForgeFlowingFluid.Source, ForgeFlowingFluid.Flowing,LiquidBlock, BucketItem> UNSATURATEDS = register(unsaturateds);
+    public static FluidRegistryHolder<ExtendedFluidType, ForgeFlowingFluid.Source, ForgeFlowingFluid.Flowing,LiquidBlock, BucketItem> REFINERY_GAS = register(refinery_gas);
+    public static FluidRegistryHolder<ExtendedFluidType, ForgeFlowingFluid.Source, ForgeFlowingFluid.Flowing,LiquidBlock, BucketItem> DIESEL_CRACK = register(diesel_crack);
+    public static FluidRegistryHolder<ExtendedFluidType, ForgeFlowingFluid.Source, ForgeFlowingFluid.Flowing,LiquidBlock, BucketItem> KEROSENE = register(kerosene);
+    public static FluidRegistryHolder<ExtendedFluidType, ForgeFlowingFluid.Source, ForgeFlowingFluid.Flowing,LiquidBlock, BucketItem> WOOD_OIL = register(wood_oil);
+    public static FluidRegistryHolder<ExtendedFluidType, ForgeFlowingFluid.Source, ForgeFlowingFluid.Flowing,LiquidBlock, BucketItem> HEATING_OIL = register(heating_oil);
+    public static FluidRegistryHolder<ExtendedFluidType, ForgeFlowingFluid.Source, ForgeFlowingFluid.Flowing,LiquidBlock, BucketItem> HEATING_OIL_VACUUM = register(heating_oil_vacuum);
+    public static FluidRegistryHolder<ExtendedFluidType, ForgeFlowingFluid.Source, ForgeFlowingFluid.Flowing,LiquidBlock, BucketItem> REFORM_GAS = register(reform_gas);
+    public static FluidRegistryHolder<ExtendedFluidType, ForgeFlowingFluid.Source, ForgeFlowingFluid.Flowing,LiquidBlock, BucketItem> REFORMATE = register(reformate);
+    public static FluidRegistryHolder<ExtendedFluidType, ForgeFlowingFluid.Source, ForgeFlowingFluid.Flowing,LiquidBlock, BucketItem> BIOGAS = register(biogas);
+    public static FluidRegistryHolder<ExtendedFluidType, ForgeFlowingFluid.Source, ForgeFlowingFluid.Flowing,LiquidBlock, BucketItem> SPENT_STEAM = register(spent_steam);
 
     public static FluidRegistryHolder register(ExtendedFluidType fluidType){
         String name = fluidType.name;

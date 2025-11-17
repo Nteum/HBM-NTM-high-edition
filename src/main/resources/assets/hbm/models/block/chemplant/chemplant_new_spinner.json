@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:block/block",
+  "parent": "block/block",
   "loader": "forge:obj",
   "flip_v": true,
   "model": "hbm:models/block/chemplant/chemplant_new_spinner.obj",

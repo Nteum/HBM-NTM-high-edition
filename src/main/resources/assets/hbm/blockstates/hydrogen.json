@@ -1,0 +1,52 @@
+{
+  "variants": {
+    "level=0": {
+      "model": "hbm:block/hydrogen"
+    },
+    "level=1": {
+      "model": "hbm:block/hydrogen"
+    },
+    "level=2": {
+      "model": "hbm:block/hydrogen"
+    },
+    "level=3": {
+      "model": "hbm:block/hydrogen"
+    },
+    "level=4": {
+      "model": "hbm:block/hydrogen"
+    },
+    "level=5": {
+      "model": "hbm:block/hydrogen"
+    },
+    "level=6": {
+      "model": "hbm:block/hydrogen"
+    },
+    "level=7": {
+      "model": "hbm:block/hydrogen"
+    },
+    "level=8": {
+      "model": "hbm:block/hydrogen"
+    },
+    "level=9": {
+      "model": "hbm:block/hydrogen"
+    },
+    "level=10": {
+      "model": "hbm:block/hydrogen"
+    },
+    "level=11": {
+      "model": "hbm:block/hydrogen"
+    },
+    "level=12": {
+      "model": "hbm:block/hydrogen"
+    },
+    "level=13": {
+      "model": "hbm:block/hydrogen"
+    },
+    "level=14": {
+      "model": "hbm:block/hydrogen"
+    },
+    "level=15": {
+      "model": "hbm:block/hydrogen"
+    }
+  }
+}

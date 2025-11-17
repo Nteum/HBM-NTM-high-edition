@@ -1,0 +1,8 @@
+{
+  "multipart": [
+    { "when": { "facing": "north" }, "apply": { "model": "hbm:block/machine_rbmk_base" } },
+    { "when": { "facing": "south" }, "apply": { "model": "hbm:block/machine_rbmk_base", "y": 180 } },
+    { "when": { "facing": "east" }, "apply": { "model": "hbm:block/machine_rbmk_base", "y": 90 } },
+    { "when": { "facing": "west" }, "apply": { "model": "hbm:block/machine_rbmk_base", "y": 270 } }
+  ]
+}
