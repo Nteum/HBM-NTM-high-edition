@@ -61,12 +61,12 @@ public class ModConfiguredFeatures {
         RuleTest endReplace = new BlockMatchTest(Blocks.END_STONE);
         //注册矿石生成
         FeatureUtils.register(context,URANIUM_ORE_OVERWORLD, Feature.ORE, new OreConfiguration(List.of(
-                OreConfiguration.target(stoneReplace, ModBlocks.Ores.ORE_URANIUM.get().defaultBlockState()),
+                OreConfiguration.target(stoneReplace, ModBlocks.ORE_URANIUM.get().defaultBlockState()),
                 OreConfiguration.target(deepslateReplace, HBMBlockComponent.DEEPSLATE_URANIUM_ORE.get().defaultBlockState())
         ),16));
         //洞穴生成
         FeatureUtils.register(context, ORE_SPHERE_OVERWORLD, Feature.GEODE, new GeodeConfiguration(
-                new GeodeBlockSettings(BlockStateProvider.simple(HBMBlockComponent.RARE_EARTH_ORE.get()), BlockStateProvider.simple(ModBlocks.Ores.ORE_URANIUM.get()),
+                new GeodeBlockSettings(BlockStateProvider.simple(HBMBlockComponent.RARE_EARTH_ORE.get()), BlockStateProvider.simple(ModBlocks.ORE_URANIUM.get()),
                         BlockStateProvider.simple(HBMBlockComponent.LITHIUM_ORE.get()), BlockStateProvider.simple(HBMBlockComponent.ASBESTOS_ORE.get()), BlockStateProvider.simple(HBMBlockComponent.BASALT_ASBESTOS_ORE.get()),
                         List.of(HBMBlockComponent.SA326_ORE.get().defaultBlockState()),
                         BlockTags.FEATURES_CANNOT_REPLACE, BlockTags.GEODE_INVALID_BLOCKS),

@@ -32,7 +32,13 @@ public class PressGui extends BaseMachineGui<PressMenu> {
         renderBackground(pGuiGraphics);
         super.render(pGuiGraphics,pMouseX,pMouseY,pPartialTick);
         renderTooltip(pGuiGraphics,pMouseX,pMouseY);
-        renderGauge(pGuiGraphics, GAUGE, this.leftPos + 34, topPos + 25, 18, 18, (menu.getSpeed() * 100) / PressEntity.MAX_SPEED);
+    }
+
+    @Override
+    protected void renderBg(GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY) {
+        showBgTexture(pGuiGraphics, TEXTURE);
+
+        renderGauge(pGuiGraphics, GAUGE, this.leftPos + 25, topPos + 16, 18, 18, (menu.getSpeed()) / PressEntity.MAX_SPEED);
 
         int k = (int) (menu.pressEntity.renderPress * 16 / PressEntity.MAX_PRESS);
         pGuiGraphics.blit(TEXTURE, leftPos + 79, topPos + 35, 194, 0, 18, k);
@@ -40,11 +46,6 @@ public class PressGui extends BaseMachineGui<PressMenu> {
         if (menu.getBurnTime() >= 20){
             pGuiGraphics.blit(TEXTURE, leftPos + 27, topPos + 36, 176, 0, 14, 14);
         }
-    }
-
-    @Override
-    protected void renderBg(GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY) {
-        showBgTexture(pGuiGraphics, TEXTURE);
     }
 
     @Override
@@ -68,6 +69,6 @@ public class PressGui extends BaseMachineGui<PressMenu> {
         int numStage = 13;
         float lenInterval = (float) 1 / (numStage - 1);
         int stage = (int) (value / lenInterval);
-        pGuiGraphics.blit(TEXTURE, minX, minY, 0, stage * height, width, height);
+        pGuiGraphics.blit(TEXTURE, minX, minY, 0, 0, stage * height, width, height, 18, 234);
     }
 }

@@ -114,4 +114,5 @@ public class AssemblerRenderer implements BlockEntityRenderer<AssemblerEntity> {
         pPoseStack.popPose();
     }
 
+
 }

@@ -46,10 +46,10 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
 //        this.add(ModBlocks.machine_boiler.get(),"Oil Heater");
 //        this.add(ModBlocks.machine_electric_boiler.get(),"Electric Oil Heater");
 //        this.add(ModBlocks.machine_nuclear_boiler.get(),"Nuclear Oil Heater");
-        this.add(ModBlocks.machine_battery.get(),"Energy Storage Block");
-        this.add(ModBlocks.machine_lithium_battery.get(),"Li-Ion Energy Storage Block");
-        this.add(ModBlocks.machine_schrabidium_battery.get(),"Schrabidium Energy Storage Block");
-        this.add(ModBlocks.machine_dineutronium_battery.get(),"Spark Energy Storage Block");
+//        this.add(ModBlocks.machine_battery.get(),"Energy Storage Block");
+//        this.add(ModBlocks.machine_lithium_battery.get(),"Li-Ion Energy Storage Block");
+//        this.add(ModBlocks.machine_schrabidium_battery.get(),"Schrabidium Energy Storage Block");
+//        this.add(ModBlocks.machine_dineutronium_battery.get(),"Spark Energy Storage Block");
 //        this.add(ModBlocks.anvil_iron.get(),"Tier 1 anvil");
 //        //方块实体
 //        this.add("hbmxx.container.difurnace","Blast Furnace");

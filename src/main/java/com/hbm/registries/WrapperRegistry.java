@@ -23,6 +23,7 @@ import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -90,7 +91,7 @@ public class WrapperRegistry<T> implements Supplier<T>{
             this.name = name;
             this.sup = sup;
         }
-        public abstract WrapperRegistry<T> build();
+        public abstract RegistryObject<T> build();
     }
 
     public static class ItemBuilder extends Builder<Item>{
@@ -141,7 +142,7 @@ public class WrapperRegistry<T> implements Supplier<T>{
         }
 
         @Override
-        public WrappedItemRegistry build() {
+        public RegistryObject<Item> build() {
             WrappedItemRegistry itemRegistry = new WrappedItemRegistry();
             itemRegistry.registryObject = ModItems.ITEMS.register(name, sup);
             itemRegistry.creativeKey = creativeKey;
@@ -163,7 +164,7 @@ public class WrapperRegistry<T> implements Supplier<T>{
                 HBMItemProperties.add(itemRegistry, propertyName, condition);
             }
             ModItems.itemList.add(itemRegistry);
-            return itemRegistry;
+            return itemRegistry.registryObject;
         }
     }
 
@@ -171,7 +172,7 @@ public class WrapperRegistry<T> implements Supplier<T>{
         ResourceKey<CreativeModeTab> creativeKey;
         String genModelWay = HBMKey.BASIC_MODEL;
         String lootWay = HBMKey.DROP_SELF;
-        Consumer<ItemModelGen> modelFactory;
+        BiConsumer<Block, BlockStateGen> modelFactory;
         public void languageSupport(LanguageProvider provider){
             switch (genNameWay){
                 case HBMKey.LITERALLY -> provider.add(get(), localizedName);
@@ -192,7 +193,12 @@ public class WrapperRegistry<T> implements Supplier<T>{
             switch (genModelWay) {
                 case HBMKey.MODEL_CUBE_ALL -> provider.simpleBlockWithItem(get());
                 case HBMKey.MODEL_FRONT_SIDE -> provider.frontSideBlockWithItem(get());
+                case HBMKey.MODEL_FRONT_SIDE_TOP -> provider.frontSideTopBlockWithItem(get());
                 case HBMKey.MODEL_DIFURNACE -> provider.difuranceBlockWithItem(get());
+                case HBMKey.MODEL_HORIZONTAL_WITH_FILE -> provider.addObjHorizonalModel(get());
+                default -> {
+                    if (modelFactory instanceof BiConsumer<Block, BlockStateGen>) modelFactory.accept(get(), provider);
+                }
             }
         }
 
@@ -209,7 +215,7 @@ public class WrapperRegistry<T> implements Supplier<T>{
         String genModelWay = HBMKey.BASIC_MODEL;
         String lootWay = HBMKey.DROP_SELF;
         ResourceKey<CreativeModeTab> creativeKey;
-        Consumer<ItemModelGen> modelGen;
+        BiConsumer<Block, BlockStateGen> modelGen;
         Function<Block, BlockItem> blockItem;
         public BlockBuilder(String name, Supplier<? extends Block> sup) {
             super(name, sup);
@@ -220,7 +226,7 @@ public class WrapperRegistry<T> implements Supplier<T>{
             return this;
         }
 
-        public BlockBuilder model(Consumer<ItemModelGen> modelGen){
+        public BlockBuilder model(BiConsumer<Block, BlockStateGen> modelGen){
             this.genModelWay = HBMKey.MODEL_STANDALONE;
             this.modelGen = modelGen;
             return this;
@@ -250,7 +256,7 @@ public class WrapperRegistry<T> implements Supplier<T>{
         }
 
         @Override
-        public WrappedBlockRegistry build() {
+        public RegistryObject<Block> build() {
             WrappedBlockRegistry blockRegistry = new WrappedBlockRegistry();
             blockRegistry.registryObject = ModBlocks.BLOCKS.register(name, sup);
             ModItems.ITEMS.register(name, blockItem != null ? () -> blockItem.apply(blockRegistry.get()) : ()->new BlockItem(blockRegistry.get(),new Item.Properties()));
@@ -262,7 +268,7 @@ public class WrapperRegistry<T> implements Supplier<T>{
             if (blockRegistry.genNameWay!= null && blockRegistry.genNameWay.equals(HBMKey.LITERALLY) && localizedName!=null)
                 blockRegistry.localizedName = localizedName;
             ModBlocks.blockList.add(blockRegistry);
-            return blockRegistry;
+            return blockRegistry.registryObject;
         }
     }
 }

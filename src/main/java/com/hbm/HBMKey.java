@@ -71,6 +71,7 @@ public class HBMKey {
     public static final String MODEL_EXISTING_FILE = "model_existing_file";
     public static final String MODEL_STANDALONE = "model_standalone";
     public static final String MODEL_DIFURNACE = "model_difurnace";
+    public static final String MODEL_HORIZONTAL_WITH_FILE = "model_horizontal_with_file";
 
     public static final String LITERALLY = "literally";
     public static final String ORDERLY_GEN = "orderly_gen";

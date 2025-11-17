@@ -51,6 +51,6 @@ public class JEIHBMPlugin implements IModPlugin {
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
         // 将你的机器方块物品添加为配方催化剂
-        registration.addRecipeCatalyst(new ItemStack(ModBlocks.machine_assembler.get()), JEIAssemblerCategory.TYPE);
+        registration.addRecipeCatalyst(new ItemStack(ModBlocks.ASSEMBLER.get()), JEIAssemblerCategory.TYPE);
     }
 }

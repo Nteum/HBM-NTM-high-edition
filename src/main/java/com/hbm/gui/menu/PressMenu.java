@@ -24,15 +24,10 @@ import net.minecraftforge.items.SlotItemHandler;
  * 火力锻压机GUI
  * */
 public class PressMenu extends AbstractContainerMenu {
-//    private final Container container;
-//    private final ContainerData containerData;
-//    public PressMenu(int pContainerId, Inventory pPlayerInventory) {
-//        this(pContainerId,pPlayerInventory,new SimpleContainer(4),new SimpleContainerData(2));
-//    }
     public PressEntity pressEntity;
     public ContainerData containerData;
     Level level;
-    public PressMenu(int pContainerId, Inventory pPlayerInventory, PressEntity press){
+    public PressMenu(int pContainerId, Inventory pPlayerInventory, PressEntity press, ContainerData containerData){
         super(ModMenuType.PRESS_MENU.get(), pContainerId);
 
         this.pressEntity = press;
@@ -50,13 +45,6 @@ public class PressMenu extends AbstractContainerMenu {
             }
         });
 
-//        container = inContainer;
-//        containerData = containerData1;
-//        this.addSlot(new Slot(container,0,26,53));
-//        this.addSlot(new Slot(container,1,80,17));
-//        this.addSlot(new Slot(container,2,80,53));
-//        this.addSlot(new Slot(container,3,140,35));
-
         for(int i = 0; i < 3; ++i) {
             for(int j = 0; j < 9; ++j) {
                 this.addSlot(new Slot(pPlayerInventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
@@ -66,13 +54,13 @@ public class PressMenu extends AbstractContainerMenu {
         for(int k = 0; k < 9; ++k) {
             this.addSlot(new Slot(pPlayerInventory, k, 8 + k * 18, 142));
         }
-        this.addDataSlots(press.containerData);
-        this.containerData = press.containerData;
+        this.addDataSlots(containerData);
+        this.containerData = containerData;
     }
 
     // 客户端构造器：Forge 会在客户端使用 (int, Inventory, FriendlyByteBuf) 的构造器
     public PressMenu(int id, Inventory playerInventory, FriendlyByteBuf buf) {
-        this(id, playerInventory, getClientBlockEntity(playerInventory, buf));
+        this(id, playerInventory, getClientBlockEntity(playerInventory, buf), new SimpleContainerData(3));
     }
 
     private static PressEntity getClientBlockEntity(Inventory inv, FriendlyByteBuf buf) {

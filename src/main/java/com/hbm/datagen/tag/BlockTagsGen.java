@@ -27,10 +27,10 @@ public class BlockTagsGen extends BlockTagsProvider {
     protected void addTags(HolderLookup.Provider pProvider) {
         OreDictManager.addBlockTags(this);
         //工具
-        this.tag(BlockTags.NEEDS_IRON_TOOL).add(ModBlocks.Ores.ORE_URANIUM.get());
+        this.tag(BlockTags.NEEDS_IRON_TOOL).add(ModBlocks.ORE_URANIUM.get());
 
         //矿石
-        this.tag(ModTags.Blocks.MOD_ORES.get(OreType.URANIUM)).add(ModBlocks.Ores.ORE_URANIUM.get(),HBMBlockComponent.DEEPSLATE_URANIUM_ORE.get(),HBMBlockComponent.SCORCHED_URANIUM_ORE.get());
+        this.tag(ModTags.Blocks.MOD_ORES.get(OreType.URANIUM)).add(ModBlocks.ORE_URANIUM.get(),HBMBlockComponent.DEEPSLATE_URANIUM_ORE.get(),HBMBlockComponent.SCORCHED_URANIUM_ORE.get());
         this.tag(ModTags.Blocks.MOD_ORES.get(OreType.TITANIUM)).add(HBMBlockComponent.TITANIUM_ORE.get());
         this.tag(ModTags.Blocks.MOD_ORES.get(OreType.THORIUM)).add(HBMBlockComponent.THORIUM_ORE.get());
         this.tag(ModTags.Blocks.MOD_ORES.get(OreType.NITER)).add(HBMBlockComponent.NITER_ORE.get());
@@ -54,9 +54,9 @@ public class BlockTagsGen extends BlockTagsProvider {
         ModTags.Blocks.MOD_ORES.values().forEach(oretag-> this.tag(Tags.Blocks.ORES).addTag(oretag));
 
         //机器
-        this.tag(ModTags.Blocks.BATTERY).add(ModBlocks.machine_battery.get(),ModBlocks.machine_lithium_battery.get(),ModBlocks.machine_dineutronium_battery.get(),ModBlocks.machine_schrabidium_battery.get());
-        this.tag(ModTags.Blocks.ANVIL).add(ModBlocks.Machine.ANVIL_IRON.get(),ModBlocks.Machine.ANVIL_DESH.get(),ModBlocks.Machine.ANVIL_BISMUTH.get());
-        this.tag(ModTags.Blocks.MACHINE).add(ModBlocks.machine_assembler.get(),ModBlocks.RED_CABLE.get(),HBMMachine.CHEMPLANT.get());
+        this.tag(ModTags.Blocks.BATTERY).add(ModBlocks.BATTERY.get(),ModBlocks.BATTERY_LITHIUM.get(),ModBlocks.BATTERY_DINEUTRONIUM.get(),ModBlocks.BATTERY_DINEUTRONIUM.get());
+        this.tag(ModTags.Blocks.ANVIL).add(ModBlocks.ANVIL_IRON.get(),ModBlocks.ANVIL_DESH.get(),ModBlocks.ANVIL_BISMUTH.get());
+        this.tag(ModTags.Blocks.MACHINE).add(ModBlocks.ASSEMBLER.get(),ModBlocks.RED_CABLE.get(),HBMMachine.CHEMPLANT.get());
 //                .addTag(ModTags.Blocks.BATTERY);
 
         /** 原版tag */

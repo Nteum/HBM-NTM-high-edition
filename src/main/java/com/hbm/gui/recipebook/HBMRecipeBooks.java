@@ -6,7 +6,7 @@ import net.minecraft.world.item.ItemStack;
 
 public class HBMRecipeBooks {
     public static void addReferenceEnum(){
-        RecipeBookCategories.create("ASSEMBLER",new ItemStack(ModBlocks.machine_assembler.get()));
+        RecipeBookCategories.create("ASSEMBLER",new ItemStack(ModBlocks.ASSEMBLER.get()));
 
     }
 }

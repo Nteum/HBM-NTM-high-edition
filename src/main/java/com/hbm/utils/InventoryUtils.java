@@ -1,10 +1,12 @@
 package com.hbm.utils;
 
 import com.hbm.blockentity.base2.BaseMachineBlockEntity;
+import com.hbm.blockentity.machine.PressEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
 import net.minecraft.world.Container;
+import net.minecraft.world.Containers;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.DropperBlock;
@@ -313,6 +315,14 @@ public class InventoryUtils {
         if (!ItemStack.isSameItemSameTags(itemStack,output) && itemHandler.insertItem(slot2, output, true) == ItemStack.EMPTY){
             itemHandler.extractItem(slot1, 1, false);
             itemHandler.insertItem(slot2, output, false);
+        }
+    }
+
+    public static void dropItems(BlockEntity blockEntity, Level pLevel, BlockPos pPos){
+        if (blockEntity instanceof PressEntity press){
+            for (int i = 0; i < press.getItemHandler().getSlots(); i++) {
+                Containers.dropItemStack(pLevel, pPos.getX(), pPos.getY(), pPos.getZ(), press.getItemHandler().getStackInSlot(i));
+            }
         }
     }
 }

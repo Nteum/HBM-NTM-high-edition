@@ -1,5 +1,6 @@
 package com.hbm.blockentity.machine;
 
+import com.hbm.HBM;
 import com.hbm.HBMLang;
 import com.hbm.Inventory.recipe.ModRecipes;
 import com.hbm.Inventory.recipe.RecipePress;
@@ -34,9 +35,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.FurnaceBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
@@ -56,9 +59,9 @@ public class PressEntity extends BaseMachineBlockEntity {
     public static final int progressAtMax = 25; // max progress speed when hot
     public final static int MAX_PRESS = 200; // max tick count per operation assuming speed is 1
 
-    public int speed = 0; // speed ticks up once (or four times if preheated) when operating
-    public int burnTime = 0; // burn ticks of the loaded fuel, 200 ticks equal one operation
-    public int press; // extension of the press, operation is completed if maxPress is reached
+    public int speed = 0;       // speed ticks up once (or four times if preheated) when operating
+    public int burnTime = 0;    // burn ticks of the loaded fuel, 200 ticks equal one operation
+    public int press;           // extension of the press, operation is completed if maxPress is reached
     public double renderPress; // client-side version of the press var, a double for smoother rendering
     public double lastPress; // for interp
     private int syncPress; // for interp
@@ -80,9 +83,8 @@ public class PressEntity extends BaseMachineBlockEntity {
         @Override
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
             return switch (slot){
-                case 0 -> true;
+                case 0, 2, 3 -> true;
                 case 1 -> stack.getItem() instanceof ItemStamp;
-                case 2 -> true;
                 default -> false;
             };
         }
@@ -119,7 +121,7 @@ public class PressEntity extends BaseMachineBlockEntity {
 
     @Override
     public AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory) {
-        return new PressMenu(pContainerId,pInventory,this);
+        return new PressMenu(pContainerId,pInventory,this, containerData);
     }
 
     @Override
@@ -137,10 +139,7 @@ public class PressEntity extends BaseMachineBlockEntity {
             this.speed += preheated ? 4 : 1;
             this.speed = Math.min(this.speed, MAX_SPEED);
         } else {
-            this.speed -= 1;
-            if(this.speed < 0) {
-                this.speed = 0;
-            }
+            this.speed = Math.max(speed - 1, 0);
         }
 
         if(delay <= 0) {
@@ -152,6 +151,7 @@ public class PressEntity extends BaseMachineBlockEntity {
                 if(this.press <= 0) {
                     this.isRetracting = false;
                     this.delay = 5;
+                    this.press = 0;
                 }
             } else if(canProcess) {
                 this.press += stampSpeed;
@@ -159,7 +159,8 @@ public class PressEntity extends BaseMachineBlockEntity {
                 if(this.press >= MAX_PRESS) {
                     Vec3 center = this.getTilePos().getCenter();
                     this.level.playSound(null, center.x, center.y, center.z, ModSounds.BLOCK_PRESS_OPERATE.get(), SoundSource.BLOCKS, getVolume(1.5F), 1.0F);
-                    this.items.insertItem(SLOT_OUTPUT, recipe.get().getResultItem(level.registryAccess()), false);
+                    this.items.insertItem(SLOT_OUTPUT, recipe.get().assemble(wrapper, level.registryAccess()), false);
+                    this.items.extractItem(SLOT_INPUT, recipe.get().input.getItems()[0].getCount(), false);
                     ItemStack stampStack = this.items.getStackInSlot(SLOT_STAMP);
                     if (stampStack.hurt(1, level.random, null)){
                         stampStack.shrink(1);
@@ -182,7 +183,7 @@ public class PressEntity extends BaseMachineBlockEntity {
         // 处理燃料
         ItemStack fuelStack = this.items.getStackInSlot(SLOT_FUEL);
         int fuelTime = 0;
-        if (!fuelStack.isEmpty() && burnTime < 200 && (fuelTime = fuelStack.getBurnTime(ModRecipes.PRESS.type().get())) > 0){
+        if (!fuelStack.isEmpty() && burnTime < 200 && (fuelTime = ForgeHooks.getBurnTime(fuelStack, ModRecipes.PRESS.type().get())) > 0){
             burnTime += fuelTime;
             if (fuelStack.getCount() == 1 && fuelStack.getItem() instanceof BucketItem){
                 items.setStackInSlot(SLOT_FUEL, Items.BUCKET.getDefaultInstance());
@@ -241,7 +242,11 @@ public class PressEntity extends BaseMachineBlockEntity {
         burnTime = pTag.getInt("burnTime");
         speed = pTag.getInt("speed");
         isRetracting = pTag.getBoolean("ret");
-        this.items.deserializeNBT((CompoundTag) pTag.get("items"));
+        try {
+            this.items.deserializeNBT((CompoundTag) pTag.get("items"));
+        }catch (Exception e){
+            HBM.LOGGER.warn("Press's Items data lost.");
+        }
     }
 
     @Override

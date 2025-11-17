@@ -15,7 +15,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class RecipePress implements Recipe<Container> {
     private final ResourceLocation id;
-    Ingredient input;
+    public Ingredient input;
     ItemStamp.StampType stamp;
     ItemStack result;
     public RecipePress(ResourceLocation id, ItemStack result, Ingredient input, ItemStamp.StampType stamp){
@@ -26,12 +26,14 @@ public class RecipePress implements Recipe<Container> {
     }
     @Override
     public boolean matches(Container pContainer, Level pLevel) {
-        if (pContainer instanceof PressEntity press){
-            ItemStack stampItem = press.getItem(1);
-            ItemStack inputItem = press.getItem(2);
-            return input.test(inputItem) && stampItem.getItem() instanceof ItemStamp && ((ItemStamp) stampItem.getItem()).getType() == stamp;
-        }
-        return false;
+//        if (pContainer instanceof PressEntity press){
+//            ItemStack stampItem = press.getItemHandler().getStackInSlot(1);
+//            ItemStack inputItem = press.getItemHandler().getStackInSlot(2);
+//            return input.test(inputItem) && stampItem.getItem() instanceof ItemStamp && ((ItemStamp) stampItem.getItem()).getType() == stamp;
+//        }
+        ItemStack stampItem = pContainer.getItem(1);
+        ItemStack inputItem = pContainer.getItem(2);
+        return input.test(inputItem) && stampItem.getItem() instanceof ItemStamp && ((ItemStamp) stampItem.getItem()).getType() == stamp;
     }
 
     @Override

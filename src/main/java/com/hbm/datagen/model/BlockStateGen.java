@@ -45,10 +45,10 @@ public class BlockStateGen extends BlockStateProvider {
         }
         ModBlocks.genModel(this);
         //简单方块和物品
-        horizontalBlockWithItem(ModBlocks.machine_battery.get(),this.models().orientable("machine_battery", new ResourceLocation(HBM.MODID, "block/battery_side"), new ResourceLocation(HBM.MODID, "block/battery_front"), new ResourceLocation(HBM.MODID, "block/battery_top")));
-        horizontalBlockWithItem(ModBlocks.machine_lithium_battery.get(),this.models().orientable("machine_lithium_battery", new ResourceLocation(HBM.MODID, "block/battery_lithium_side"), new ResourceLocation(HBM.MODID, "block/battery_lithium_front"), new ResourceLocation(HBM.MODID, "block/battery_lithium_top")));
-        horizontalBlockWithItem(ModBlocks.machine_schrabidium_battery.get(),this.models().orientable("machine_schrabidium_battery", new ResourceLocation(HBM.MODID, "block/battery_schrabidium_side"), new ResourceLocation(HBM.MODID, "block/battery_schrabidium_front"), new ResourceLocation(HBM.MODID, "block/battery_schrabidium_top")));
-        horizontalBlockWithItem(ModBlocks.machine_dineutronium_battery.get(),this.models().orientable("machine_dineutronium_battery", new ResourceLocation(HBM.MODID, "block/battery_dineutronium_side"), new ResourceLocation(HBM.MODID, "block/battery_dineutronium_front"), new ResourceLocation(HBM.MODID, "block/battery_dineutronium_top")));
+//        horizontalBlockWithItem(ModBlocks.machine_battery.get(),this.models().orientable("machine_battery", new ResourceLocation(HBM.MODID, "block/battery_side"), new ResourceLocation(HBM.MODID, "block/battery_front"), new ResourceLocation(HBM.MODID, "block/battery_top")));
+//        horizontalBlockWithItem(ModBlocks.machine_lithium_battery.get(),this.models().orientable("machine_lithium_battery", new ResourceLocation(HBM.MODID, "block/battery_lithium_side"), new ResourceLocation(HBM.MODID, "block/battery_lithium_front"), new ResourceLocation(HBM.MODID, "block/battery_lithium_top")));
+//        horizontalBlockWithItem(ModBlocks.machine_schrabidium_battery.get(),this.models().orientable("machine_schrabidium_battery", new ResourceLocation(HBM.MODID, "block/battery_schrabidium_side"), new ResourceLocation(HBM.MODID, "block/battery_schrabidium_front"), new ResourceLocation(HBM.MODID, "block/battery_schrabidium_top")));
+//        horizontalBlockWithItem(ModBlocks.machine_dineutronium_battery.get(),this.models().orientable("machine_dineutronium_battery", new ResourceLocation(HBM.MODID, "block/battery_dineutronium_side"), new ResourceLocation(HBM.MODID, "block/battery_dineutronium_front"), new ResourceLocation(HBM.MODID, "block/battery_dineutronium_top")));
 
         ModelFile.ExistingModelFile conveyorModel = this.models().getExistingFile(new ResourceLocation(HBM.MODID, "block/conveyor"));
         horizontalBlock(ModBlocks.conveyor.get(),conveyorModel);
@@ -72,43 +72,26 @@ public class BlockStateGen extends BlockStateProvider {
 //        this.horizontalBlock(ModBlocks.machine_assembler.get(),assembler_body_model);
 //        this.simpleBlockItem(ModBlocks.machine_assembler.get(),assembler_body_model);
         //坩埚模型
-        var crucible_model = this.models().getExistingFile(Models.CRUCIBLE);
-        this.horizontalBlock(ModBlocks.machine_crucible.get(),crucible_model);
-        this.simpleBlockItem(ModBlocks.machine_crucible.get(),crucible_model);
+//        var crucible_model = this.models().getExistingFile(Models.CRUCIBLE);
+//        this.horizontalBlock(ModBlocks.machine_crucible.get(),crucible_model);
+//        this.simpleBlockItem(ModBlocks.machine_crucible.get(),crucible_model);
 
 //        ModelFile.ExistingModelFile bomb_model_fatman = this.models().getExistingFile(new ResourceLocation(HBM.MODID, "block/bomb/fat_man"));
 //        this.simpleBlockItem(ModBlocks.bomb_fat_man.get(),bomb_model_fatman);
-        ModelFile.ExistingModelFile bomb_model_boy = this.models().getExistingFile(HBM.rl("block/bomb/boy"));
-        this.simpleBlockItem(ModBlocks.bomb_boy.get(),bomb_model_boy);
-        ModelFile.ExistingModelFile bomb_model_custom = this.models().getExistingFile(HBM.rl("block/bomb/custom"));
-        this.simpleBlockItem(ModBlocks.bomb_custom.get(),bomb_model_custom);
+//        ModelFile.ExistingModelFile bomb_model_boy = this.models().getExistingFile(HBM.rl("block/bomb/boy"));
+//        this.simpleBlockItem(ModBlocks.bomb_boy.get(),bomb_model_boy);
+//        ModelFile.ExistingModelFile bomb_model_custom = this.models().getExistingFile(HBM.rl("block/bomb/custom"));
+//        this.simpleBlockItem(ModBlocks.bomb_custom.get(),bomb_model_custom);
 
         //线缆
         cableBlockWithItem();
         //电池
 
         // 默认贴图
-        this.horizontalBlock(ModBlocks.PRESS.get(), blockState -> BLANK_MODEL);
-        this.builtInBlockItem(ModBlocks.PRESS.get());
+//        this.horizontalBlock(ModBlocks.PRESS.get(), blockState -> BLANK_MODEL);
+//        this.builtInBlockItem(ModBlocks.PRESS.get());
     }
 
-    public void horizontalBlockWithItem(Block block){
-        horizontalBlockWithItem(block, key(block).getPath());
-    }
-    public void horizontalBlockWithItem(Block block, String path){
-        ModelFile.ExistingModelFile model = models().getExistingFile(HBM.rl(path));
-        horizontalBlockWithItem(block, model);
-    }
-    public void horizontalBlockWithItem(Block block, ModelFile model){
-        horizontalBlock(block,model);
-        simpleBlockItem(block,model);
-    }
-
-    public void addObjHorizonalModel(Block block,String name){
-        ModelFile.ExistingModelFile existingFile = this.models().getExistingFile(new ResourceLocation(HBM.MODID, name));
-        this.horizontalBlock(block,existingFile);
-        this.simpleBlockItem(block,existingFile);
-    }
     /** 添加有两个状态，并带有水平方向的方块（HBM的方块机器大部分属于此列） */
     private void addBooleanStateWithFace(Block block, BooleanProperty booleanProperty, ModelFile model1, ModelFile model2){
         this.getVariantBuilder(block)
@@ -183,6 +166,30 @@ public class BlockStateGen extends BlockStateProvider {
     }
     public void builtInBlockItem(Block block){
         itemModels().getBuilder(key(block).getPath()).parent(new ModelFile.UncheckedModelFile("builtin/entity"));
+    }
+    // 根据物品名找到已有模型文件并生成（需要已经手动创建模型文件，否则用horizontalBlock）
+    public void horizontalBlockWithItem(Block block){
+        horizontalBlockWithItem(block, key(block).getPath());
+    }
+    public void horizontalBlockWithItem(Block block, String path){
+        ModelFile.ExistingModelFile model = models().getExistingFile(HBM.rl(path));
+        horizontalBlockWithItem(block, model);
+    }
+    public void horizontalBlockWithItem(Block block, ModelFile model){
+        horizontalBlock(block,model);
+        simpleBlockItem(block,model);
+    }
+    /*
+    * 添加带方向的obj机器，hbm的机器大多属于此类。
+    * 注册一个空白模型，然后独立渲染
+    * 物品也独立渲染，一般用于有多个模型文件而无法作为模型单独渲染的情况
+    * */
+    public void addObjHorizonalModel(Block block){
+//        ModelFile.ExistingModelFile existingFile = this.models().getExistingFile(new ResourceLocation(HBM.MODID, name));
+//        this.horizontalBlock(block,existingFile);
+//        this.simpleBlockItem(block,existingFile);
+        this.horizontalBlock(block, blockState -> BLANK_MODEL);
+        this.builtInBlockItem(block);
     }
     // 只有前面和侧面两个贴图的方块
     public void frontSideBlockWithItem(Block block){

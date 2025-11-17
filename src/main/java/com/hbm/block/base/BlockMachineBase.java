@@ -1,6 +1,7 @@
 package com.hbm.block.base;
 
 import com.hbm.blockentity.base2.BaseMachineBlockEntity;
+import com.hbm.utils.InventoryUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -51,8 +52,9 @@ public abstract class BlockMachineBase extends BlockContainerBase{
             BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
             if (blockEntity instanceof BaseMachineBlockEntity){
                 if (pLevel instanceof ServerLevel){
+                    InventoryUtils.dropItems(blockEntity, pLevel, pPos);
                     /** 掉落方块中的物品 */
-                    Containers.dropContents(pLevel,pPos,(BaseMachineBlockEntity) blockEntity);
+//                    Containers.dropContents(pLevel,pPos,(BaseMachineBlockEntity) blockEntity);
                 }
                 pLevel.updateNeighbourForOutputSignal(pPos,this);
             }

@@ -25,15 +25,15 @@ import static net.minecraft.core.Direction.*;
 public class MultiblockData {
     public static final Map<Block, MultiblockData> mapping = new HashMap<>();
     static {
-        mapping.put(ModBlocks.machine_assembler.get(), new MultiblockData(1, 0, 2 ,1 ,2 ,1)
+        mapping.put(ModBlocks.ASSEMBLER.get(), new MultiblockData(1, 0, 2 ,1 ,2 ,1)
                 .addCaps(HBMCaps.LONG_ENERGY, -1,0,1, SOUTH, 0,0,1, SOUTH, -1,0,-2,Direction.NORTH, 0,0,-2,Direction.NORTH)
                 .addCaps(ForgeCapabilities.ITEM_HANDLER, 1,0,-1, Direction.EAST, -2,0,0,Direction.WEST));
         mapping.put(HBMMachine.CHEMPLANT.get(), new MultiblockData(2, 0, 2 ,1 ,2 ,1)
                 .addCaps(HBMCaps.LONG_ENERGY,ForgeCapabilities.FLUID_HANDLER, -1,0,1, SOUTH, 0,0,1, SOUTH, -1,0,-2,Direction.NORTH, 0,0,-2,Direction.NORTH)
                 .addCaps(ForgeCapabilities.ITEM_HANDLER, 1,0,-1, Direction.EAST, -2,0,0,Direction.WEST));
-        mapping.put(ModBlocks.bomb_boy.get(), new MultiblockData(0,0,0,0,1,1));
-        mapping.put(ModBlocks.bomb_custom.get(), mapping.get(ModBlocks.bomb_boy.get()));
-        mapping.put(ModBlocks.Nuke.BOMB_FAT_MAN.get(), new MultiblockData(1,0,0,1,1,1));
+        mapping.put(ModBlocks.BOMB_BOY.get(), new MultiblockData(0,0,0,0,1,1));
+        mapping.put(ModBlocks.BOMB_CUSTOM.get(), mapping.get(ModBlocks.BOMB_BOY.get()));
+        mapping.put(ModBlocks.BOMB_FAT_MAN.get(), new MultiblockData(1,0,0,1,1,1));
         mapping.put(HBMMachine.LAUNCH_PAD.get(), new MultiblockData(0, 0, 1, 1, 1, 1));
     }
 
