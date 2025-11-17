@@ -1,0 +1,14 @@
+{
+  "block.ballistix.obsidian": "Obsidian TNT",
+  "block.ballistix.condensive": "Condensive Explosive",
+  "block.ballistix.attractive": "Attractive Explosive",
+  "block.ballistix.repulsive": "Repulsive Explosive",
+  "block.ballistix.incendiary": "Incendiary Explosive",
+  "block.ballistix.shrapnel": "Shrapnel Explosive",
+  "block.ballistix.chemical": "Chemical Explosive",
+  "block.ballistix.anvil": "Anvil Explosive",
+  "block.ballistix.infestive": "Infestive Explosive",
+  "block.ballistix.debilitation": "Debilitation Explosive",
+  "block.ballistix.landmine": "Landmine",
+  "item_group.ballistix.explosives": "Ballistix - Explosives"
+}
