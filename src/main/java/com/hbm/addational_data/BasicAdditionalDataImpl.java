@@ -1,7 +1,7 @@
 package com.hbm.addational_data;
 
 import com.hbm.HBM;
-import com.hbm.utils.NBTSupplement;
+import com.hbm.utils.NBTHelper;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraftforge.common.util.INBTSerializable;
 import org.jetbrains.annotations.Nullable;
@@ -98,7 +98,7 @@ public class BasicAdditionalDataImpl implements IAdditionalData{
     public CompoundTag syncToClient(){
         CompoundTag tag = new CompoundTag();
         for (DataEntry entry : changed) {
-            NBTSupplement.serializeDataEntry(tag, entry, dataEntries.get(entry));
+            NBTHelper.serializeDataEntry(tag, entry, dataEntries.get(entry));
         }
         changed.clear();
         return tag;
@@ -109,7 +109,7 @@ public class BasicAdditionalDataImpl implements IAdditionalData{
         // 序列化需要持久化的数据
         CompoundTag tag = new CompoundTag();
         dataEntries.forEach((key, val) -> {
-            if (key.isPersistent) NBTSupplement.serializeDataEntry(tag, key, val);
+            if (key.isPersistent) NBTHelper.serializeDataEntry(tag, key, val);
         });
         return tag;
     }
@@ -123,7 +123,7 @@ public class BasicAdditionalDataImpl implements IAdditionalData{
                 this.dataEntries.put(entry, null);
                 this.tagData.put(entry, (CompoundTag) nbt.get(entry.ordinal()+""));
             }else{
-                this.dataEntries.put(entry, NBTSupplement.deserializeDataEntry(nbt, entry));
+                this.dataEntries.put(entry, NBTHelper.deserializeDataEntry(nbt, entry));
             }
         }
     }
