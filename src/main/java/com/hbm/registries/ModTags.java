@@ -73,6 +73,13 @@ public class ModTags {
         public static final TagKey<Item> CHARGEABLE = forgeTag("chargeable");
         public static final TagKey<Item> UPGRADE = tag("upgrade");
         public static final TagKey<Item> MISSILE = tag("missile");
+
+        public static final TagKey<Item> COKE = forgeTag("coke");
+        public static final TagKey<Item> LIGNITE = forgeTag("lighnite");
+        public static final TagKey<Item> WOOD = forgeTag("wood");
+        public static final TagKey<Item> SAPLING = forgeTag("sapling");
+
+
         public static TagKey<Item> tag(String pName) {
             return TagKey.create(Registries.ITEM, HBM.rl(pName));
         }

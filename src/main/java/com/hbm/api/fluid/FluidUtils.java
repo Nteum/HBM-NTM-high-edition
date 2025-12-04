@@ -9,6 +9,8 @@ import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandler.*;
+import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 
 public class FluidUtils {
     /** 从物品中吸收流体 */
@@ -41,19 +43,31 @@ public class FluidUtils {
         }
         return ItemStack.EMPTY;
     }
+    public static ItemStack absorbFromItem(IFluidHandler fluidHandler, ItemStack itemStack){
+        if (itemStack.isEmpty())return itemStack;
+        IFluidHandlerItem itemFluidHandler = itemStack.getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM).orElse(null);
+        if (itemFluidHandler != null){
+            int filled = fluidHandler.fill(itemFluidHandler.drain(Integer.MAX_VALUE, FluidAction.SIMULATE), FluidAction.SIMULATE);
+            if (filled > 0){
+                fluidHandler.fill(itemFluidHandler.drain(Integer.MAX_VALUE, FluidAction.EXECUTE), FluidAction.EXECUTE);
+            }
+            return itemFluidHandler.getContainer();
+        }
+        return ItemStack.EMPTY;
+    }
     /** 向物品容器中注入流体 */
     public static ItemStack pourToItem(BlockEntity pBlockEntity, int tank, ItemStack itemStack){
         if (itemStack.isEmpty())return itemStack;
         IFluidHandler fluidHandler = pBlockEntity.getCapability(ForgeCapabilities.FLUID_HANDLER).orElse(null);
         if (fluidHandler != null){
             if (fluidHandler instanceof ISidedFluidHandler<?> sidedFluidHandler){
-                if (itemStack.is(Items.BUCKET) && sidedFluidHandler.drain(tank, 1000, IFluidHandler.FluidAction.SIMULATE).getAmount() == 1000){
-                    FluidStack fluidStack = sidedFluidHandler.drain(tank, 1000, IFluidHandler.FluidAction.EXECUTE);
+                if (itemStack.is(Items.BUCKET) && sidedFluidHandler.drain(tank, 1000, FluidAction.SIMULATE).getAmount() == 1000){
+                    FluidStack fluidStack = sidedFluidHandler.drain(tank, 1000, FluidAction.EXECUTE);
                     return fluidStack.getFluid().getBucket().getDefaultInstance();
                 }
             }else {
-                if (itemStack.is(Items.BUCKET) && fluidHandler.drain(1000, IFluidHandler.FluidAction.SIMULATE).getAmount() == 1000){
-                    FluidStack fluidStack = fluidHandler.drain(1000, IFluidHandler.FluidAction.EXECUTE);
+                if (itemStack.is(Items.BUCKET) && fluidHandler.drain(1000, FluidAction.SIMULATE).getAmount() == 1000){
+                    FluidStack fluidStack = fluidHandler.drain(1000, FluidAction.EXECUTE);
                     return fluidStack.getFluid().getBucket().getDefaultInstance();
                 }
             }

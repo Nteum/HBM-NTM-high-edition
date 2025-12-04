@@ -85,7 +85,7 @@ public class BatteryEntity extends BaseMachineBlockEntity {
         ItemStack itemStack0 = getStackInSlot(0);
         ItemStack itemStack1 = getStackInSlot(1);
         TransmitUtils.dischargeItem(this, itemStack0);
-        TransmitUtils.chargeItem(this, itemStack1);
+//        TransmitUtils.chargeItem(this, itemStack1);
         level.sendBlockUpdated(this.worldPosition,blockState,blockState,2);
     }
 

@@ -371,7 +371,12 @@ public class ModItems {
     public static final RegistryObject<Item> COAL_INFERNAL = parts("coal_infernal", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     public static final RegistryObject<Item> CINNEBAR = parts("cinnebar", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
 
-//    powder_ash = new ItemEnumMulti(EnumAshType.class, true, true).setUnlocalizedName("powder_ash").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":powder_ash");
+    public static final RegistryObject<Item> POWDER_ASH_COAL = parts("powder_ash_coal", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> POWDER_ASH_FLY = parts("powder_ash_fly", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> POWDER_ASH_FULLERENE = parts("powder_ash_fullerene", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> POWDER_ASH_MISC = parts("powder_ash_misc", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> POWDER_ASH_SOOT = parts("powder_ash_soot", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> POWDER_ASH_WOOD = parts("powder_ash_wood", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
 //    powder_limestone = new Item().setUnlocalizedName("powder_limestone").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":powder_limestone");
 //    powder_cement = new ItemLemon(2, 0.5F, false).setUnlocalizedName("powder_cement").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":powder_cement");
 //

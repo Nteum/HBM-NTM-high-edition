@@ -58,7 +58,7 @@ public class PressGui extends BaseMachineGui<PressMenu> {
         if (isMouseInside(pX, pY, x + 25, y + 16, 18, 18)){
             tooltips.add(HBMLang.GUI_TOOLTIP_PROGRESS.translate(String.format("%.2f", menu.getSpeed() * 100 / PressEntity.MAX_SPEED)));
         }else if (isMouseInside(pX, pY, x + 25, y + 34, 18, 18)){
-            tooltips.add(HBMLang.GUI_TOOLTIP_LEFTTIME.translate(String.format("%.2f", menu.getBurnTime() / 200)));
+            tooltips.add(HBMLang.GUI_TOOLTIP_LEFT_TIME.translate(String.format("%.2f", menu.getBurnTime() / 200)));
         }
 
         if (!tooltips.isEmpty()) pGuiGraphics.renderComponentTooltip(font, tooltips, pX, pY);

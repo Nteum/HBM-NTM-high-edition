@@ -35,6 +35,7 @@ public class MultiblockData {
         mapping.put(ModBlocks.BOMB_CUSTOM.get(), mapping.get(ModBlocks.BOMB_BOY.get()));
         mapping.put(ModBlocks.BOMB_FAT_MAN.get(), new MultiblockData(1,0,0,1,1,1));
         mapping.put(HBMMachine.LAUNCH_PAD.get(), new MultiblockData(0, 0, 1, 1, 1, 1));
+        mapping.put(ModBlocks.WOOD_BURNER.get(), new MultiblockData(1, 0, 1, 0, 1, 0));
     }
 
     MultiblockData(List<Vec3i> offsets, int[] dirOffsets){

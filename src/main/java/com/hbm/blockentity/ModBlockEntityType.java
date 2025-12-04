@@ -4,6 +4,7 @@ import com.hbm.block.HBMMachine;
 import com.hbm.block.base.BlockDummyable;
 import com.hbm.block.env.GlyphidSpawner;
 import com.hbm.blockentity.base2.TileProxyCombo;
+import com.hbm.blockentity.generator.TileWoodBurner;
 import com.hbm.blockentity.machine.*;
 import com.hbm.HBM;
 import com.hbm.blockentity.base.DummibleBlockEntity;
@@ -76,4 +77,6 @@ public class ModBlockEntityType {
             REGISTER.register("geiger_counter",()-> BlockEntityType.Builder.of(TileEntityGeiger::new, HBMMachine.GEIGER_COUNTER.get()).build(null));
     public static final RegistryObject<BlockEntityType<GlyphidSpawner.GlyphidSpawnerEntity>> GLYPHID_SPAWNER =
             REGISTER.register("glyphid_spawner",()-> BlockEntityType.Builder.of(GlyphidSpawner.GlyphidSpawnerEntity::new, ModBlocks.GLYPHID_SPAWNER.get()).build(null));
+    public static final RegistryObject<BlockEntityType<TileWoodBurner>> WOOD_BURNER =
+            REGISTER.register("tile_wood_burner",()-> BlockEntityType.Builder.of(TileWoodBurner::new, ModBlocks.WOOD_BURNER.get()).build(null));
 }

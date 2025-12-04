@@ -179,7 +179,8 @@ public class WrapperRegistry<T> implements Supplier<T>{
                 case HBMKey.ORDERLY_GEN -> provider.add(get(), RegistryHelper.generateOrderlyName(getId().getPath()));
                 case HBMKey.REVERSE_GEN -> provider.add(get(), RegistryHelper.generateReversedName(getId().getPath()));
                 case HBMKey.ORDERLY_GEN_EXCEPT_FIRST -> provider.add(get(), RegistryHelper.generateOrderlyExceptFirstName(getId().getPath()));
-                default -> provider.add(get(), getId().toLanguageKey());
+//                default -> provider.add(get(), getId().toLanguageKey());
+                default -> provider.add(get(), genNameWay);
             }
         }
 

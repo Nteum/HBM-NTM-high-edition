@@ -60,6 +60,15 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
 //        this.add(HBMLang.ITEMGROUP_BLOCK.key(), "HBM Block");
 //        this.add(HBMLang.ITEMGROUP_MACHINE.key(), "HBM Machine");
 //        this.add(HBMLang.ITEMGROUP_TOOL.key(), "HBM Tool");
+        this.add(HBMLang.HBM_PARTS);
+        this.add(HBMLang.HBM_CONTROL);
+        this.add(HBMLang.HBM_TEMPLATE);
+        this.add(HBMLang.HBM_BLOCKS);
+        this.add(HBMLang.HBM_MACHINE);
+        this.add(HBMLang.HBM_NUKE);
+        this.add(HBMLang.HBM_MISSILE);
+        this.add(HBMLang.HBM_WEAPON);
+        this.add(HBMLang.HBM_CONSUMABLE);
     }
     private void addItems(){
 //        HBMComponent.languageSupport(this);
@@ -94,7 +103,7 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
         this.add(HBMLang.UPGRADE_GC_SPEED, "Gas Centrifuge Upgrade\nAllows for total isotopic separation of HEUF6\nalso your centrifuge goes sicko mode");
 
         this.add(HBMLang.TOOLTIP_LEFT_TIME, "Please wait %s s");
-        this.add(HBMLang.TOOLTIP_TANK_VOLUME, "%s : %s mB");
+//        this.add(HBMLang.TOOLTIP_TANK_VOLUME, "%s : %s mB");
         this.add(HBMLang.TOOLTIP_ENERGY, "Energy: %s HE");
 
         this.add(HBMLang.TOOLTIP_GEIGER0);

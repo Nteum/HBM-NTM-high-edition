@@ -1,7 +1,11 @@
 package com.hbm.gui.screen;
 
+import com.hbm.HBMKey;
+import com.hbm.network.ModMessages;
+import com.hbm.network.packet.toserver.C2SSyncTileMessage;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
@@ -35,12 +39,6 @@ public abstract class BaseMachineGui<T extends AbstractContainerMenu> extends Ab
 
     protected void showBgTexture(GuiGraphics pGuiGraphics, ResourceLocation texture){
         pGuiGraphics.blit(texture,leftPos,topPos,0,0,imageWidth,imageHeight);
-    }
-    /** 在鼠标指针位置显示tooltip */
-    public void drawCustomInfoStat(GuiGraphics pGuiGraphics, int mouseX, int mouseY, int x, int y, int width, int height, List<Component> tooltips) {
-        if(x <= mouseX && x + width > mouseX && y < mouseY && y + height >= mouseY)
-            pGuiGraphics.renderComponentTooltip(this.font, tooltips, mouseX, mouseY);
-//            this.func_146283_a(text, tPosX, tPosY);
     }
 
     protected boolean isMouseInside(int mouseX, int mouseY, int x, int y, int w, int h) {

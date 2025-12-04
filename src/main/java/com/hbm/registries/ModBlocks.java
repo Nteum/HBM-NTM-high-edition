@@ -1,6 +1,7 @@
 package com.hbm.registries;
 
 import com.hbm.HBMKey;
+import com.hbm.HBMLang;
 import com.hbm.block.HBMBlockComponent;
 import com.hbm.block.HBMBlockProperties;
 import com.hbm.block.HBMMachine;
@@ -11,6 +12,7 @@ import com.hbm.block.env.*;
 import com.hbm.block.logistic.BlockCable;
 import com.hbm.block.machine.*;
 import com.hbm.block.logistic.BlockConveyor;
+import com.hbm.block.machine.generator.BlockWoodBurner;
 import com.hbm.block.weapon.*;
 import com.hbm.datagen.LanguageProvider;
 import com.hbm.datagen.loot.BlockLootGen;
@@ -73,6 +75,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> BATTERY_DINEUTRONIUM = new BlockBuilder("battery_dineutronium", ()->new BlockBattery(Properties.of(), BlockBattery.BatteryType.DINEUTRONIUM)).model(HBMKey.MODEL_FRONT_SIDE_TOP).tab(ModTabs.MACHINE.getKey()).item(block -> new BatteryBlockItem(block, new Item.Properties())).loot(HBMKey.DROP_SELF).loc("Spark Energy Storage Block").build();
     public static final RegistryObject<Block> ASSEMBLER = new BlockBuilder("assembler", ()->new BlockAssembler(Properties.copy(Blocks.IRON_BLOCK))).model(HBMKey.MODEL_HORIZONTAL_WITH_FILE).loot(HBMKey.DROP_SELF).tab(ModTabs.MACHINE.getKey()).item(block -> new ItemBlockCustomModel(block, new Item.Properties(), 4).setOffset(0.5, 0.5, 0.5)).build();
     public static final RegistryObject<Block> CRUCIBLE = new BlockBuilder("crucible",()->new BlockCrucible(Properties.copy(Blocks.BRICKS))).model((block, blockstateGen) -> blockstateGen.horizontalBlockWithItem(block)).tab(ModTabs.MACHINE.getKey()).loc(HBMKey.ORDERLY_GEN).loot(HBMKey.DROP_SELF).build();
+    public static final RegistryObject<Block> WOOD_BURNER = new BlockBuilder("wood_burner",()->new BlockWoodBurner(Properties.copy(Blocks.BRICKS))).model((block, blockstateGen) -> blockstateGen.horizontalBlockWithItem(block)).tab(ModTabs.MACHINE.getKey()).loc(HBMLang.CONTAINER_WOOD_BURNER.key()).loot(HBMKey.DROP_SELF).build();
 
     // nuke
     public static final RegistryObject<Block> BOMB_FAT_MAN = add("bomb_fat_man", () -> new NukeFat(Properties.copy(Blocks.STONE), 200), ModTabs.NUKE.getKey(), HBMKey.MODEL_EXISTING_FILE, HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMKey.DROP_SELF);

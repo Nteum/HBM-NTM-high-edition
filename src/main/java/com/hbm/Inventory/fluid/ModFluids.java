@@ -63,6 +63,7 @@ public class ModFluids {
 //    public static final ExtendedFluidType COOLANT = new ExtendedFluidType(0xd8fcff, solution, ExtendedProperties.of().pfr(1).traits(LIQUID));
     public static final ExtendedFluidType hydrogen = new ExtendedFluidType("hydrogen",0x4286f4, solution.descriptionId("Hydrogen"),ExtendedProperties.of().pfr(3,4,0));
     public static final ExtendedFluidType diesel = new ExtendedFluidType("diesel", 0xf2eed5, solution.descriptionId("Diesel"), ExtendedProperties.of().pfr(1, 2, 0));
+    public static final ExtendedFluidType wood_oil = new ExtendedFluidType("woodoil", 0xf2eed5, solution.descriptionId("Wood Oil"), ExtendedProperties.of().pfr(1, 2, 0));
 
     // 流体注册
     public static FluidRegistryHolder<ExtendedFluidType, ForgeFlowingFluid.Source, ForgeFlowingFluid.Flowing,LiquidBlock, BucketItem> HYDROGEN = register(hydrogen);
@@ -71,6 +72,7 @@ public class ModFluids {
     public static FluidRegistryHolder<ExtendedFluidType, ForgeFlowingFluid.Source, ForgeFlowingFluid.Flowing,LiquidBlock, BucketItem> SULFURIC_ACID = register(sulfuric_acid);
     public static FluidRegistryHolder<ExtendedFluidType, ForgeFlowingFluid.Source, ForgeFlowingFluid.Flowing,LiquidBlock, BucketItem> STEAM = register(steam);
     public static FluidRegistryHolder<ExtendedFluidType, ForgeFlowingFluid.Source, ForgeFlowingFluid.Flowing,LiquidBlock, BucketItem> DIESEL = register(diesel);
+    public static FluidRegistryHolder<ExtendedFluidType, ForgeFlowingFluid.Source, ForgeFlowingFluid.Flowing,LiquidBlock, BucketItem> WOOD_OIL = register(wood_oil);
 
     public static FluidRegistryHolder register(ExtendedFluidType fluidType){
         String name = fluidType.name;

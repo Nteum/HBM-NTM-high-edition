@@ -39,6 +39,12 @@ public class Pollution implements INBTSerializable<CompoundTag> {
     public static int UPDATE_FREQUENCY = 10;
     protected static final float DESTRUCTION_THRESHOLD = 15F;
     protected static final int DESTRUCTION_COUNT = 5;
+    /** Baserate of soot generation for a furnace-equivalent machine per second */
+    public static final float SOOT_PER_SECOND = 1F / 25F;
+    /** Baserate of heavy metal generation, balanced around the soot values of combustion engines */
+    public static final float HEAVY_METAL_PER_SECOND = 1F / 50F;
+    /** Baserate for poison when spilled */
+    public static final float POISON_PER_SECOND = 1F / 50F;
     float[] pollution;
 
     public Pollution(){

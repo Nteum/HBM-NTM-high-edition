@@ -37,12 +37,18 @@ public enum HBMLang implements ILangEntry {
     BARREL("container", "barrel"),
     BATTERY("container", "battery"),
     CONTAINER_LAUNCHPAD("Launch Pad"),
+    CONTAINER_WOOD_BURNER("Wood-Burning Generator"),
     // GUI
     TOOLTIP_LEFT_TIME("gui","left_time.tooltip"),
-    TOOLTIP_TANK_VOLUME("gui","volume.tooltip"),
     TOOLTIP_ENERGY("gui","stored_energy.tooltip"),
     GUI_TOOLTIP_PROGRESS("Progress: %s %"),
-    GUI_TOOLTIP_LEFTTIME("Left time: %s s"),
+    GUI_TOOLTIP_LEFT_TIME("Left time: %s s"),
+    GUI_TOOLTIP_BURN_TIME("Burn time: %s s"),
+    GUI_TOOLTIP_ENERGY("Energy: %s / %s HE"),
+    GUI_TOOLTIP_FLUID("Fluid: %s / %s mB"),
+    GUI_TOOLTIP_NO_FLUID("No Fluid"),
+    GUI_TOOLTIP_BURN_TIME_BONUS("Burn time bonus: %s"),
+    GUI_TOOLTIP_BURN_HEAT_BONUS("Burn heat bonus: %s"),
     // Item
     ITEM_INGOT_NEPTUNIUM_DESC("That one's my favourite!"),
     ITEM_INGOT_SCHRARANIUM_NAME_ALTER("Nikonium Ingot"),
@@ -144,7 +150,7 @@ public enum HBMLang implements ILangEntry {
         this(content,true);
     }
     HBMLang(String content, boolean autoAdd){
-        String[] split = this.name().toLowerCase().split("_");
+        String[] split = this.name().toLowerCase().split("_", 2);
         split[0] = split[0] + "." + HBM.MODID;
         this.key = Strings.join(split, ".");
         this.content = content;

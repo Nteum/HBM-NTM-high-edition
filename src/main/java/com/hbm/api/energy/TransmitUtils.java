@@ -48,20 +48,21 @@ public class TransmitUtils {
     public static void chargeItem(BlockEntity pBlockEntity, ItemStack itemStack){
         if (itemStack.isEmpty())return;
         IEnergyHandler energyHandler = pBlockEntity.getCapability(HBMCaps.LONG_ENERGY).orElse(null);
-        if (energyHandler == null)return;
+        chargeItem(energyHandler, itemStack);
+    }
+    public static void chargeItem(IEnergyHandler blockEnergy, ItemStack itemStack){
+        if (blockEnergy == null || itemStack.isEmpty()) return;
         IEnergyHandler itemEnergy = itemStack.getCapability(HBMCaps.LONG_ENERGY).orElse(null);
         if (itemEnergy == null){
             if (itemStack.getCapability(ForgeCapabilities.ENERGY).isPresent()){
                 // 物品使用forge能量的情况下，就转换成hbm能量
                 IEnergyStorage FEStorage = itemStack.getCapability(ForgeCapabilities.ENERGY).orElse(null);
                 itemEnergy = new ProxyEnergyHandler(new FEAdapter(FEStorage));
+            }else {
+                return;
             }
         }
-
-        if (itemStack.is(ModItems.BATTERY_CREATIVE.get())){
-            return;
-        }
-        energyHandler.extract(itemEnergy.receive(energyHandler.getStored(),false),false);
+        blockEnergy.extract(itemEnergy.receive(blockEnergy.getStored(), false), false);
     }
     // 指某个方块仅向外提供能量，用于调试
     public static void outputOnly(BlockEntity pBlockEntity){
