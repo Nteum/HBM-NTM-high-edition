@@ -28,7 +28,7 @@ public class BlockRBMKHeater extends Block implements EntityBlock {
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
 
     public BlockRBMKHeater(Properties properties) {
-        super(properties.lightLevel(state -> state.getValue(LIT) ? 7 : 0));
+        super(properties);
         registerDefaultState(stateDefinition.any().setValue(LIT, Boolean.FALSE));
     }
 
@@ -47,13 +47,27 @@ public class BlockRBMKHeater extends Block implements EntityBlock {
         if (level.isClientSide) {
             return InteractionResult.SUCCESS;
         }
-        boolean next = !state.getValue(LIT);
-        level.setBlock(pos, state.setValue(LIT, next), Block.UPDATE_ALL);
+        toggle(level, pos, state, !state.getValue(LIT));
+        return InteractionResult.CONSUME;
+    }
+
+    @Override
+    public void neighborChanged(BlockState state, Level level, BlockPos pos, Block pNeighborBlock, BlockPos pNeighborPos, boolean pMovedByPiston) {
+        if (level.isClientSide) {
+            return;
+        }
+        boolean powered = level.hasNeighborSignal(pos);
+        if (powered != state.getValue(LIT)) {
+            toggle(level, pos, state, powered);
+        }
+    }
+
+    private static void toggle(Level level, BlockPos pos, BlockState state, boolean active) {
+        level.setBlock(pos, state.setValue(LIT, active), Block.UPDATE_ALL);
         BlockEntity be = level.getBlockEntity(pos);
         if (be instanceof RBMKHeaterEntity heater) {
-            heater.setActive(next);
+            heater.setActive(active);
         }
-        return InteractionResult.CONSUME;
     }
 
     @Nullable

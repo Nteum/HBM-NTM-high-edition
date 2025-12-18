@@ -49,6 +49,16 @@ public class BlockStateGen extends BlockStateProvider {
                 new ResourceLocation(HBM.MODID, "block/machine_shredder_front"),
                 new ResourceLocation(HBM.MODID, "block/machine_shredder_bottom"),
                 new ResourceLocation(HBM.MODID, "block/machine_shredder_top")));
+        // Tokamak components
+        ResourceLocation tokamakSide = new ResourceLocation(HBM.MODID, "block/tokamak_coil");
+        ResourceLocation tokamakFront = new ResourceLocation(HBM.MODID, "block/tokamak_controller_front");
+        ModelFile tokamakController = this.models().orientableWithBottom("tokamak_controller", tokamakSide, tokamakFront, tokamakSide, tokamakSide);
+        horizontalBlockWithItem(ModBlocks.tokamak_controller.get(), tokamakController);
+        simpleBlockWithItem(ModBlocks.tokamak_casing.get(), this.models().cubeAll("tokamak_casing", new ResourceLocation(HBM.MODID, "block/block_steel")));
+        simpleBlockWithItem(ModBlocks.tokamak_coil.get(), this.models().cubeAll("tokamak_coil", tokamakSide));
+        simpleBlockWithItem(ModBlocks.tokamak_heater.get(), this.models().cubeAll("tokamak_heater", tokamakSide));
+        simpleBlockWithItem(ModBlocks.tokamak_injector.get(), this.models().cubeAll("tokamak_injector", tokamakSide));
+        simpleBlockWithItem(ModBlocks.tokamak_port.get(), this.models().cubeAll("tokamak_port", tokamakSide));
 
         ModelFile.ExistingModelFile conveyorModel = this.models().getExistingFile(new ResourceLocation(HBM.MODID, "block/conveyor"));
         horizontalBlock(ModBlocks.conveyor.get(),conveyorModel);

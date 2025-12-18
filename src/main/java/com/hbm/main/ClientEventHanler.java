@@ -17,6 +17,7 @@ import com.hbm.render.pipeline.GeoRenderPipeline;
 import com.hbm.render.model.entity.TestEntityModel;
 import com.hbm.particle.ModParticleTypes;
 import com.hbm.render.blockentity.*;
+import com.hbm.render.blockentity.TokamakRenderer;
 import com.hbm.render.entity.TestEntityRenderer;
 import com.hbm.render.entity.effect.BlackHoleRender;
 import com.hbm.render.entity.EntityBlankRender;
@@ -71,6 +72,8 @@ public class ClientEventHanler {
             MenuScreens.register(ModMenuType.ELECTRIC_FURNACE_MENU.get(), ElectricFurnaceGui::new);
             MenuScreens.register(ModMenuType.LAUNCH_PAD_MENU.get(), LaunchPadGui::new);
             MenuScreens.register(ModMenuType.SHREDDER_MENU.get(), ShredderGui::new);
+            MenuScreens.register(ModMenuType.TOKAMAK_MENU.get(), TokamakGui::new);
+            MenuScreens.register(ModMenuType.RBMK_BASE_MENU.get(), RBMKBaseScreen::new);
             //方块实体渲染
             BlockEntityRenderers.register(ModBlockEntityType.PRESS_ENTITY.get(), PressRenderer::new);
             BlockEntityRenderers.register(ModBlockEntityType.ASSEMBLER_ENTITY.get(), AssemblerRenderer::new);
@@ -80,6 +83,7 @@ public class ClientEventHanler {
             BlockEntityRenderers.register(ModBlockEntityType.NUKE_BOMB_CUSTOM_ENTITY.get(), NukeCustomRender::new);
             BlockEntityRenderers.register(ModBlockEntityType.CHEMPLANT_ENTITY.get(), ChemplantRenderer::new);
             BlockEntityRenderers.register(ModBlockEntityType.LAUNCHPAD_ENTITY.get(), LaunchPadRender::new);
+            BlockEntityRenderers.register(ModBlockEntityType.TOKAMAK_CONTROLLER.get(), TokamakRenderer::new);
             //实体渲染
             EntityRenderers.register(ModEntityType.TEST_ENTITY.get(), TestEntityRenderer::new);
             EntityRenderers.register(ModEntityType.ENTITY_GRENADE_GENETIC.get(), ThrownItemRenderer::new);

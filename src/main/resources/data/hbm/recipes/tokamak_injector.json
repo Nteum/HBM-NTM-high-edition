@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "CTC",
+    "IDI",
+    "CTC"
+  ],
+  "key": {
+    "C": { "item": "hbm:tokamak_casing" },
+    "T": { "item": "hbm:cell_tritium" },
+    "I": { "item": "hbm:ingot_advanced_alloy" },
+    "D": { "item": "hbm:cell_deuterium" }
+  },
+  "result": {
+    "item": "hbm:tokamak_injector"
+  }
+}

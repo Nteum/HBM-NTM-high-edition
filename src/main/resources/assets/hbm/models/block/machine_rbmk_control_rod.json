@@ -1,0 +1,9 @@
+{
+  "parent": "block/cube_bottom_top",
+  "textures": {
+    "top": "hbm:block/rbmk/rbmk_top",
+    "bottom": "hbm:block/rbmk/rbmk_top",
+    "side": "hbm:block/rbmk/rbmk_side"
+  }
+}
+

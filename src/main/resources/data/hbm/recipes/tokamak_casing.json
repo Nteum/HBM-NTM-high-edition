@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "APA",
+    "MCM",
+    "APA"
+  ],
+  "key": {
+    "A": { "item": "hbm:plate_advanced_alloy" },
+    "P": { "item": "hbm:ingot_advanced_alloy" },
+    "M": { "item": "hbm:ingot_magnetized_tungsten" },
+    "C": { "item": "minecraft:blast_furnace" }
+  },
+  "result": {
+    "item": "hbm:tokamak_casing",
+    "count": 4
+  }
+}

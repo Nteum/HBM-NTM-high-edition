@@ -22,12 +22,16 @@ public final class RBMKSettings {
     private final double passiveCooling;
     private final double columnHeatFlow;
     private final double reactivityModifier;
+    private final double meltdownHeat;
+    private final double meltdownExplosionStrength;
 
     private RBMKSettings(final Builder builder) {
         this.columnHeight = builder.columnHeight;
         this.passiveCooling = builder.passiveCooling;
         this.columnHeatFlow = builder.columnHeatFlow;
         this.reactivityModifier = builder.reactivityModifier;
+        this.meltdownHeat = builder.meltdownHeat;
+        this.meltdownExplosionStrength = builder.meltdownExplosionStrength;
     }
 
     public int columnHeight() {
@@ -46,6 +50,14 @@ public final class RBMKSettings {
         return reactivityModifier;
     }
 
+    public double meltdownHeat() {
+        return meltdownHeat;
+    }
+
+    public double meltdownExplosionStrength() {
+        return meltdownExplosionStrength;
+    }
+
     public static Builder builder() {
         return new Builder();
     }
@@ -55,7 +67,9 @@ public final class RBMKSettings {
                 .columnHeight(columnHeight)
                 .passiveCooling(passiveCooling)
                 .columnHeatFlow(columnHeatFlow)
-                .reactivityModifier(reactivityModifier);
+                .reactivityModifier(reactivityModifier)
+                .meltdownHeat(meltdownHeat)
+                .meltdownExplosionStrength(meltdownExplosionStrength);
     }
 
     /**
@@ -70,6 +84,8 @@ public final class RBMKSettings {
                 .passiveCooling(ConfigRBMK.passiveCooling)
                 .columnHeatFlow(ConfigRBMK.columnHeatFlow)
                 .reactivityModifier(ConfigRBMK.reactivityModifier)
+                .meltdownHeat(ConfigRBMK.meltdownHeat)
+                .meltdownExplosionStrength(ConfigRBMK.meltdownExplosionStrength)
                 .build();
     }
 
@@ -78,6 +94,8 @@ public final class RBMKSettings {
         private double passiveCooling = 1.0D;
         private double columnHeatFlow = 0.2D;
         private double reactivityModifier = 1.0D;
+        private double meltdownHeat = 10_000.0D;
+        private double meltdownExplosionStrength = 6.0D;
 
         private Builder() {
         }
@@ -99,6 +117,16 @@ public final class RBMKSettings {
 
         public Builder reactivityModifier(final double reactivityModifier) {
             this.reactivityModifier = Math.max(0.0D, reactivityModifier);
+            return this;
+        }
+
+        public Builder meltdownHeat(final double meltdownHeat) {
+            this.meltdownHeat = Math.max(0.0D, meltdownHeat);
+            return this;
+        }
+
+        public Builder meltdownExplosionStrength(final double meltdownExplosionStrength) {
+            this.meltdownExplosionStrength = Math.max(0.0D, meltdownExplosionStrength);
             return this;
         }
 

@@ -27,7 +27,7 @@ public class ModCreativeModeTab {
     public static final RegistryObject<CreativeModeTab> HBM_ITEM = CREATIVE_MODE_TABS.register("hbm_item", () -> CreativeModeTab.builder()
         .title(Component.translatable(HBMLang.ITEMGROUP_ITEM.key()))
         .icon(() -> HBMtools.UPGRADE_BASE.get().getDefaultInstance())
-        .displayItems((parameters, output) -> {
+	        .displayItems((parameters, output) -> {
             output.accept(ModItems.ingot_red_copper.get());
             output.accept(ModItems.ingot_tungsten.get());
             output.accept(ModItems.ingot_aluminium.get());
@@ -87,13 +87,56 @@ public class ModCreativeModeTab {
             output.accept(ModBlocks.machine_crucible.get());
             output.accept(ModBlocks.machine_assembler.get());
             output.accept(ModBlocks.machine_shredder.get());
-            output.accept(ModBlocks.machine_rbmk_base.get());
-            output.accept(ModBlocks.machine_rbmk_heater.get());
-            output.accept(ModItems.rbmk_lid.get());
-            output.accept(ModItems.rbmk_lid_glass.get());
-            output.accept(ModBlocks.RED_CABLE.get());
-            HBMMachine.creativeTab(output);
-        }).build());
+	            output.accept(ModBlocks.machine_rbmk_base.get());
+	            output.accept(ModBlocks.machine_rbmk_heater.get());
+	            output.accept(ModBlocks.machine_rbmk_fuel_channel.get());
+	            output.accept(ModBlocks.machine_rbmk_control_rod.get());
+	            output.accept(ModBlocks.tokamak_controller.get());
+            output.accept(ModBlocks.tokamak_casing.get());
+            output.accept(ModBlocks.tokamak_coil.get());
+            output.accept(ModBlocks.tokamak_heater.get());
+            output.accept(ModBlocks.tokamak_injector.get());
+	            output.accept(ModBlocks.tokamak_port.get());
+	            output.accept(ModItems.rbmk_lid.get());
+	            output.accept(ModItems.rbmk_lid_glass.get());
+	            output.accept(ModItems.rbmk_fuel_base.get());
+	            output.accept(ModItems.rbmk_fuel_lea.get());
+	            output.accept(ModItems.rbmk_fuel_leaus.get());
+	            output.accept(ModItems.rbmk_fuel_lep.get());
+	            output.accept(ModItems.rbmk_fuel_les.get());
+	            output.accept(ModItems.rbmk_fuel_mea.get());
+	            output.accept(ModItems.rbmk_fuel_men.get());
+	            output.accept(ModItems.rbmk_fuel_mep.get());
+	            output.accept(ModItems.rbmk_fuel_mes.get());
+	            output.accept(ModItems.rbmk_fuel_meu.get());
+	            output.accept(ModItems.rbmk_fuel_ueu.get());
+	            output.accept(ModItems.rbmk_fuel_mox.get());
+	            output.accept(ModItems.rbmk_fuel_thmeu.get());
+	            output.accept(ModItems.rbmk_fuel_heu233.get());
+	            output.accept(ModItems.rbmk_fuel_heu235.get());
+	            output.accept(ModItems.rbmk_fuel_heaus.get());
+	            output.accept(ModItems.rbmk_fuel_hea241.get());
+	            output.accept(ModItems.rbmk_fuel_hea242.get());
+	            output.accept(ModItems.rbmk_fuel_hen.get());
+	            output.accept(ModItems.rbmk_fuel_hep.get());
+	            output.accept(ModItems.rbmk_fuel_hep241.get());
+	            output.accept(ModItems.rbmk_fuel_hes.get());
+	            output.accept(ModItems.rbmk_fuel_drx.get());
+	            output.accept(ModItems.rbmk_fuel_flashlead.get());
+	            output.accept(ModItems.rbmk_fuel_balefire.get());
+	            output.accept(ModItems.rbmk_fuel_balefire_gold.get());
+	            output.accept(ModItems.rbmk_fuel_po210be.get());
+	            output.accept(ModItems.rbmk_fuel_pu238be.get());
+	            output.accept(ModItems.rbmk_fuel_ra226be.get());
+	            output.accept(ModItems.rbmk_fuel_zfb_base.get());
+	            output.accept(ModItems.rbmk_fuel_zfb_bismuth.get());
+	            output.accept(ModItems.rbmk_fuel_zfb_pu241.get());
+	            output.accept(ModItems.rbmk_fuel_zfb_am_mix.get());
+	            output.accept(ModItems.rbmk_fuel_test.get());
+	            output.accept(ModItems.rbmk_fuel_empty.get());
+	            output.accept(ModBlocks.RED_CABLE.get());
+	            HBMMachine.creativeTab(output);
+	        }).build());
     public static final RegistryObject<CreativeModeTab> HBM_TOOL = CREATIVE_MODE_TABS.register("hbm_weapon", () -> CreativeModeTab.builder()
         .title(Component.translatable(HBMLang.ITEMGROUP_TOOL.key()))
             .icon(()->ModItems.DETONATOR.get().getDefaultInstance())

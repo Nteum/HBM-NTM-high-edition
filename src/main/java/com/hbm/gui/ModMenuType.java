@@ -37,4 +37,8 @@ public class ModMenuType {
             MOD_MENU_TYPES.register("launch_pad_menu",()->new MenuType<>(LaunchPadMenu::new, FeatureFlags.VANILLA_SET));
     public static final RegistryObject<MenuType<ShredderMenu>> SHREDDER_MENU =
             MOD_MENU_TYPES.register("shredder_menu",()->new MenuType<>(ShredderMenu::new, FeatureFlags.VANILLA_SET));
+    public static final RegistryObject<MenuType<TokamakMenu>> TOKAMAK_MENU =
+            MOD_MENU_TYPES.register("tokamak_menu",()->new MenuType<>(TokamakMenu::new, FeatureFlags.VANILLA_SET));
+    public static final RegistryObject<MenuType<RBMKBaseMenu>> RBMK_BASE_MENU =
+            MOD_MENU_TYPES.register("rbmk_base_menu",()->new MenuType<>(RBMKBaseMenu::new, FeatureFlags.VANILLA_SET));
 }

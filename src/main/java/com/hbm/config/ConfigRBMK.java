@@ -13,6 +13,8 @@ public final class ConfigRBMK {
     public static double passiveCooling = 1.0D;
     public static double columnHeatFlow = 0.2D;
     public static double reactivityModifier = 1.0D;
+    public static double meltdownHeat = 10_000.0D;
+    public static double meltdownExplosionStrength = 6.0D;
 
     private ConfigRBMK() {
     }
@@ -28,6 +30,10 @@ public final class ConfigRBMK {
                 .defineInRange("columnHeatFlow", columnHeatFlow, 0.0D, 1.0D);
         builder.comment("反应度修正系数，可用于整体增/减输出。")
                 .defineInRange("reactivityModifier", reactivityModifier, 0.0D, 10.0D);
+        builder.comment("当柱体热量超过该阈值时触发熔毁/爆炸（0 = 禁用）。")
+                .defineInRange("meltdownHeat", meltdownHeat, 0.0D, 1.0E12D);
+        builder.comment("熔毁爆炸强度，越高破坏范围越大。")
+                .defineInRange("meltdownExplosionStrength", meltdownExplosionStrength, 0.0D, 50.0D);
 
         builder.pop();
     }
@@ -45,6 +51,8 @@ public final class ConfigRBMK {
         passiveCooling = Math.max(0.0D, ((Number) category.get("passiveCooling")).doubleValue());
         columnHeatFlow = clamp01(((Number) category.get("columnHeatFlow")).doubleValue());
         reactivityModifier = Math.max(0.0D, ((Number) category.get("reactivityModifier")).doubleValue());
+        meltdownHeat = Math.max(0.0D, ((Number) category.get("meltdownHeat")).doubleValue());
+        meltdownExplosionStrength = Math.max(0.0D, ((Number) category.get("meltdownExplosionStrength")).doubleValue());
     }
 
     private static double clamp01(final double value) {

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "insertion=0": { "model": "hbm:block/machine_rbmk_control_rod" },
+    "insertion=1": { "model": "hbm:block/machine_rbmk_control_rod" },
+    "insertion=2": { "model": "hbm:block/machine_rbmk_control_rod" },
+    "insertion=3": { "model": "hbm:block/machine_rbmk_control_rod" },
+    "insertion=4": { "model": "hbm:block/machine_rbmk_control_rod" }
+  }
+}
+

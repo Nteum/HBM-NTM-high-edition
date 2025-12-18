@@ -4,6 +4,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.level.LevelEvent;
 import net.minecraftforge.event.server.ServerStoppedEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -56,6 +57,19 @@ public final class RBMKManager {
         @SubscribeEvent
         public void onServerStopped(final ServerStoppedEvent event) {
             RBMKManager.clear();
+        }
+
+        @SubscribeEvent
+        public void onLevelTick(final TickEvent.LevelTickEvent event) {
+            if (event.phase != TickEvent.Phase.END) {
+                return;
+            }
+            if (event.level instanceof ServerLevel serverLevel) {
+                final RBMKLevelContext context = CONTEXTS.get(serverLevel.dimension());
+                if (context != null) {
+                    context.tick();
+                }
+            }
         }
     }
 }

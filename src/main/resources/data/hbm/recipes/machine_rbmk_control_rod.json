@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "LRL",
+    "CBC",
+    "LRL"
+  ],
+  "key": {
+    "L": { "item": "hbm:ingot_lead" },
+    "R": { "item": "minecraft:redstone" },
+    "C": { "item": "minecraft:iron_bars" },
+    "B": { "item": "hbm:circuit" }
+  },
+  "result": {
+    "item": "hbm:machine_rbmk_control_rod"
+  }
+}

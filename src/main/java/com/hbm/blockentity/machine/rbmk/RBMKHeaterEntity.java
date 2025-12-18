@@ -22,10 +22,11 @@ import java.util.Optional;
  */
 public class RBMKHeaterEntity extends BaseMachineBlockEntity {
 
-    private static final int HEAT_PER_TICK = 5;
+    private static final double HEAT_PER_SECOND = 5.0D;
+    private static final double TIME_STEP = 1.0D / 20.0D;
 
     private boolean active;
-    private int heatBuffer;
+    private double heatBuffer;
 
     public RBMKHeaterEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntityType.RBMK_HEATER_ENTITY.get(), pos, state);
@@ -46,10 +47,14 @@ public class RBMKHeaterEntity extends BaseMachineBlockEntity {
         RBMKLevelContext context = RBMKManager.context(serverLevel);
         Optional<RBMKColumnState> column = context.column(below);
         column.ifPresent(state -> {
-            heatBuffer += HEAT_PER_TICK;
-            if (heatBuffer >= 20) {
-                HBM.LOGGER.debug("RBMK heater at {} delivered {} heat to column {}", worldPosition, heatBuffer, state.corePosition());
-                heatBuffer = 0;
+            if (!context.addHeat(below, HEAT_PER_SECOND * TIME_STEP)) {
+                return;
+            }
+            heatBuffer += HEAT_PER_SECOND * TIME_STEP;
+            if (heatBuffer >= HEAT_PER_SECOND) {
+                HBM.LOGGER.debug("RBMK heater at {} delivered {} heat to column {} (heat={})",
+                        worldPosition, heatBuffer, state.corePosition(), state.heat());
+                heatBuffer = 0.0D;
             }
         });
     }
@@ -58,14 +63,14 @@ public class RBMKHeaterEntity extends BaseMachineBlockEntity {
     public void load(CompoundTag tag) {
         super.load(tag);
         this.active = tag.getBoolean("Active");
-        this.heatBuffer = tag.getInt("HeatBuffer");
+        this.heatBuffer = tag.getDouble("HeatBuffer");
     }
 
     @Override
     protected void saveAdditional(CompoundTag tag) {
         super.saveAdditional(tag);
         tag.putBoolean("Active", active);
-        tag.putInt("HeatBuffer", heatBuffer);
+        tag.putDouble("HeatBuffer", heatBuffer);
     }
 
     @Override

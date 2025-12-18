@@ -9,6 +9,8 @@ import com.hbm.HBM;
 import com.hbm.blockentity.base.DummibleBlockEntity;
 import com.hbm.blockentity.tools.TileEntityGeiger;
 import com.hbm.blockentity.machine.rbmk.RBMKBaseEntity;
+import com.hbm.blockentity.machine.rbmk.RBMKControlRodEntity;
+import com.hbm.blockentity.machine.rbmk.RBMKFuelChannelEntity;
 import com.hbm.blockentity.machine.rbmk.RBMKHeaterEntity;
 import com.hbm.blockentity.weapon.*;
 import com.hbm.registries.ModBlocks;
@@ -85,4 +87,14 @@ public class ModBlockEntityType {
             REGISTER.register("rbmk_base_entity", () -> BlockEntityType.Builder.of(RBMKBaseEntity::new, ModBlocks.machine_rbmk_base.get()).build(null));
     public static final RegistryObject<BlockEntityType<RBMKHeaterEntity>> RBMK_HEATER_ENTITY =
             REGISTER.register("rbmk_heater_entity", () -> BlockEntityType.Builder.of(RBMKHeaterEntity::new, ModBlocks.machine_rbmk_heater.get()).build(null));
+    public static final RegistryObject<BlockEntityType<RBMKFuelChannelEntity>> RBMK_FUEL_CHANNEL_ENTITY =
+            REGISTER.register("rbmk_fuel_channel_entity", () -> BlockEntityType.Builder.of(RBMKFuelChannelEntity::new, ModBlocks.machine_rbmk_fuel_channel.get()).build(null));
+    public static final RegistryObject<BlockEntityType<RBMKControlRodEntity>> RBMK_CONTROL_ROD_ENTITY =
+            REGISTER.register("rbmk_control_rod_entity", () -> BlockEntityType.Builder.of(RBMKControlRodEntity::new, ModBlocks.machine_rbmk_control_rod.get()).build(null));
+    public static final RegistryObject<BlockEntityType<com.hbm.blockentity.machine.tokamak.TokamakControllerBlockEntity>> TOKAMAK_CONTROLLER =
+            REGISTER.register("tokamak_controller", () -> BlockEntityType.Builder.of(com.hbm.blockentity.machine.tokamak.TokamakControllerBlockEntity::new, ModBlocks.tokamak_controller.get()).build(null));
+    public static final RegistryObject<BlockEntityType<com.hbm.blockentity.machine.tokamak.TokamakPortBlockEntity>> TOKAMAK_PORT_ENTITY =
+            REGISTER.register("tokamak_port_entity", () -> BlockEntityType.Builder.of(com.hbm.blockentity.machine.tokamak.TokamakPortBlockEntity::new, ModBlocks.tokamak_port.get()).build(null));
+    public static final RegistryObject<BlockEntityType<com.hbm.blockentity.machine.tokamak.TokamakInjectorBlockEntity>> TOKAMAK_INJECTOR_ENTITY =
+            REGISTER.register("tokamak_injector_entity", () -> BlockEntityType.Builder.of(com.hbm.blockentity.machine.tokamak.TokamakInjectorBlockEntity::new, ModBlocks.tokamak_injector.get()).build(null));
 }

@@ -7,6 +7,7 @@
 out
 gen
 /.gradle/
+/.gradle-home/
 /build/
 /logs/
 /run/
@@ -40,3 +41,5 @@ bin
 media
 /manim_datagen_overview.py
 /crash-2025-11-11_02.04.22-client.txt
+!/Ballistix/
+

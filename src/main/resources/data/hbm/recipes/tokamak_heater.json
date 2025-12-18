@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "RHR",
+    "CSC",
+    "RHR"
+  ],
+  "key": {
+    "R": { "item": "minecraft:redstone" },
+    "H": { "item": "minecraft:magma_block" },
+    "C": { "item": "hbm:tokamak_casing" },
+    "S": { "item": "minecraft:blast_furnace" }
+  },
+  "result": {
+    "item": "hbm:tokamak_heater"
+  }
+}

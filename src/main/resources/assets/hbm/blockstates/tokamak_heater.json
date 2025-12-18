@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "active=false": { "model": "hbm:block/tokamak_heater" },
+    "active=true": { "model": "hbm:block/tokamak_heater" }
+  }
+}

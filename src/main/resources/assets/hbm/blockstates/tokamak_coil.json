@@ -1,0 +1,9 @@
+{
+  "variants": {
+    "strength=0": { "model": "hbm:block/tokamak_coil" },
+    "strength=1": { "model": "hbm:block/tokamak_coil" },
+    "strength=2": { "model": "hbm:block/tokamak_coil" },
+    "strength=3": { "model": "hbm:block/tokamak_coil" },
+    "strength=4": { "model": "hbm:block/tokamak_coil" }
+  }
+}
