@@ -98,7 +98,16 @@ public abstract class BaseMachineBlockEntity extends HBMBlockEntity implements W
 
     @Override
     public Mode getMode(int tank) {
-        return tank > 0 && tank < getSlots() ? slotModes.get(tank) : Mode.NONE;
+        if (items == null || tank < 0 || tank >= items.size()) {
+            return Mode.NONE;
+        }
+        if (slotModes == null || slotModes.isEmpty()) {
+            return Mode.BOTH;
+        }
+        if (tank >= slotModes.size()) {
+            return Mode.BOTH;
+        }
+        return slotModes.get(tank);
     }
 
     @Override
@@ -111,7 +120,10 @@ public abstract class BaseMachineBlockEntity extends HBMBlockEntity implements W
     @Override
     public int @NotNull [] getSlotsForFace(Direction pSide) {
         // 默认所有口都可以访问
-        return IntStream.range(0, this.items.size()-1).toArray();
+        if (this.items == null || this.items.isEmpty()) {
+            return new int[0];
+        }
+        return IntStream.range(0, this.items.size()).toArray();
     }
 
     @Override
@@ -133,7 +145,15 @@ public abstract class BaseMachineBlockEntity extends HBMBlockEntity implements W
 
     @Override
     public boolean isEmpty() {
-        return isEmpty();
+        if (this.items == null || this.items.isEmpty()) {
+            return true;
+        }
+        for (ItemStack stack : this.items) {
+            if (!stack.isEmpty()) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override

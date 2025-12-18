@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "PTP",
+    "CBC",
+    "PTP"
+  ],
+  "key": {
+    "P": { "item": "hbm:plate_advanced_alloy" },
+    "T": { "item": "hbm:ingot_tungsten" },
+    "C": { "item": "minecraft:iron_bars" },
+    "B": { "item": "hbm:circuit" }
+  },
+  "result": {
+    "item": "hbm:machine_rbmk_fuel_channel"
+  }
+}

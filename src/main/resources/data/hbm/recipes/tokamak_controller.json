@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "CIC",
+    "RGR",
+    "CMC"
+  ],
+  "key": {
+    "C": { "item": "hbm:tokamak_casing" },
+    "I": { "item": "hbm:tokamak_injector" },
+    "R": { "item": "hbm:circuit" },
+    "G": { "item": "hbm:tokamak_coil" },
+    "M": { "item": "hbm:tokamak_heater" }
+  },
+  "result": {
+    "item": "hbm:tokamak_controller"
+  }
+}

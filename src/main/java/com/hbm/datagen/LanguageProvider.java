@@ -52,6 +52,12 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
         this.add(ModBlocks.machine_dineutronium_battery.get(),"Spark Energy Storage Block");
         this.add(ModBlocks.anvil_iron.get(),"Tier 1 anvil");
         this.add(ModBlocks.machine_shredder.get(),"Shredder");
+        this.add(ModBlocks.tokamak_controller.get(),"Tokamak Controller");
+        this.add(ModBlocks.tokamak_casing.get(),"Tokamak Casing");
+        this.add(ModBlocks.tokamak_coil.get(),"Tokamak Field Coil");
+        this.add(ModBlocks.tokamak_heater.get(),"Tokamak Heater");
+        this.add(ModBlocks.tokamak_injector.get(),"Tokamak Injector");
+        this.add(ModBlocks.tokamak_port.get(),"Tokamak Port");
 //        //方块实体
 //        this.add("hbmxx.container.difurnace","Blast Furnace");
 //        this.add("hbmxx.container.crucible","Crucible");
@@ -99,6 +105,18 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
         this.add(HBMLang.TOOLTIP_TANK_VOLUME);
         this.add(HBMLang.TOOLTIP_ENERGY);
         this.add("gui.hbm.shredder.no_blade", "Error: Shredder blades are broken or missing!");
+        this.add("gui.hbm.tokamak.start", "Start fusion");
+        this.add("gui.hbm.tokamak.stop", "Scram");
+        this.add("gui.hbm.tokamak.running", "Status: Online");
+        this.add("gui.hbm.tokamak.idle", "Status: Idle");
+        this.add("gui.hbm.rbmk.az5", "AZ-5 SCRAM");
+        this.add("gui.hbm.rbmk.heat", "Heat: %1$s / %2$s kHE");
+        this.add("gui.hbm.rbmk.energy", "Energy: %1$s / %2$s HE");
+        this.add("gui.hbm.rbmk.coolant", "Coolant: %s mB");
+        this.add("gui.hbm.rbmk.steam", "Steam: %s mB");
+        this.add("gui.hbm.rbmk.control_local", "Local control: %s%%");
+        this.add("gui.hbm.rbmk.control_global", "Global control: %s%%");
+        this.add("gui.hbm.rbmk.no_column", "Column not registered");
 
         this.add(HBMLang.TOOLTIP_GEIGER0);
         this.add(HBMLang.TOOLTIP_GEIGER1);
@@ -118,6 +136,8 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
         this.add(HBMLang.SHREDDER);
         this.add(HBMLang.BARREL);
         this.add(HBMLang.BATTERY);
+        this.add(HBMLang.TOKAMAK);
+        this.add(HBMLang.RBMK);
     }
     private void addFluidTrait(){
         this.add(HBMLang.FT_GASEOUS);

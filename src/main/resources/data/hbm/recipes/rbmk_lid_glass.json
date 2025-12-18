@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "GGG",
+    "GPG",
+    "GGG"
+  ],
+  "key": {
+    "G": { "item": "minecraft:glass" },
+    "P": { "item": "hbm:plate_advanced_alloy" }
+  },
+  "result": {
+    "item": "hbm:rbmk_lid_glass"
+  }
+}

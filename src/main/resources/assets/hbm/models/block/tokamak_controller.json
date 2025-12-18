@@ -1,0 +1,9 @@
+{
+  "parent": "block/orientable_with_bottom",
+  "textures": {
+    "bottom": "hbm:block/tokamak_coil",
+    "front": "hbm:block/tokamak_controller_front",
+    "side": "hbm:block/tokamak_coil",
+    "top": "hbm:block/tokamak_coil"
+  }
+}

@@ -1,3 +1,5 @@
+import org.gradle.language.jvm.tasks.ProcessResources
+
 buildscript {
     repositories {
         // These repositories are only for Gradle plugins, put any other repositories in the repository block further below
@@ -236,7 +238,7 @@ configurations.configureEach {
         if (details.requested.group == 'io.netty' && details.requested.version != nettySafeVersion) {
             details.useVersion(nettySafeVersion)
             details.because('Align all Netty modules with CVE-fixed version.')
-        } else if (details.requested.group == 'commons-io' && details.requested.name == 'commons-io' && details.requested.version != commonsIoSafeVersion) {
+        } else if  (details.requested.group == 'commons-io' && details.requested.name == 'commons-io' && details.requested.version != commonsIoSafeVersion) {
             details.useVersion(commonsIoSafeVersion)
             details.because('Force Mend-recommended commons-io version to fix CVE-2024-47554.')
         } else if (details.requested.group == 'org.apache.commons' && details.requested.name == 'commons-compress' && details.requested.version != commonsCompressSafeVersion) {
@@ -254,7 +256,7 @@ configurations.configureEach {
 // When "copyIdeResources" is enabled, this will also run before the game launches in IDE environments.
 // See https://docs.gradle.org/current/dsl/org.gradle.language.jvm.tasks.ProcessResources.html
 tasks.named('processResources', ProcessResources).configure {
-    var replaceProperties = [
+    def replaceProperties = [
             minecraft_version: mc_version, minecraft_version_range: minecraft_version_range,
             forge_version: forge_version, forge_version_range: forge_version_range,
             loader_version_range: loader_version_range,

@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "": { "model": "hbm:block/machine_rbmk_fuel_channel" }
+  }
+}
+

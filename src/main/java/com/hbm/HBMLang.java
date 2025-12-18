@@ -34,6 +34,8 @@ public enum HBMLang implements ILangEntry {
     CHEMPLANT("container", "chemplant","化工厂"),
     BARREL("container", "barrel","桶"),
     BATTERY("container", "battery","电池"),
+    TOKAMAK("container", "tokamak","托卡马克聚变堆"),
+    RBMK("container", "rbmk","RBMK 反应堆"),
     CONTAINER_LAUNCHPAD("发射台"),
     // command
     COMMAND_DEBUG("command","debug","调试"),

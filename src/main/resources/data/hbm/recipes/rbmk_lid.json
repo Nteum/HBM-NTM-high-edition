@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "AAA",
+    "ABA",
+    "AAA"
+  ],
+  "key": {
+    "A": { "item": "hbm:plate_advanced_alloy" },
+    "B": { "item": "minecraft:iron_bars" }
+  },
+  "result": {
+    "item": "hbm:rbmk_lid"
+  }
+}

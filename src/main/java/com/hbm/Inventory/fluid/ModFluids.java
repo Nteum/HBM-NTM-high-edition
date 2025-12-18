@@ -56,7 +56,7 @@ public class ModFluids {
     public static final ExtendedFluidType HOTSTEAM = new ExtendedFluidType("hot_steam",0xE7D6D6, solution.temperature(573), ExtendedProperties.of().pfr(4,0,0).traits(GASEOUS, UNSIPHONABLE));
     public static final ExtendedFluidType SUPERHOTSTEAM = new ExtendedFluidType("superhot_steam",0xE7B7B7, solution.temperature(723), ExtendedProperties.of().pfr(4,0,0).traits(GASEOUS, UNSIPHONABLE));
     public static final ExtendedFluidType ULTRAHOTSTEAM = new ExtendedFluidType("ultrahot_steam",0xE39393, solution.temperature(873), ExtendedProperties.of().pfr(4,0,0).traits(GASEOUS, UNSIPHONABLE));
-    public static final ExtendedFluidType COOLANT = new ExtendedFluidType("coolant",0xd8fcff, solution, ExtendedProperties.of().pfr(1,0,0).traits(LIQUID));
+    public static final ExtendedFluidType coolant = new ExtendedFluidType("coolant",0xd8fcff, solution, ExtendedProperties.of().pfr(1,0,0).traits(LIQUID));
 //    public static final ExtendedFluidType DEUTERIUM = new ExtendedFluidType(0x0000FF, solution, ExtendedProperties.of().pfr(3,4,0).burn(10).traits(GASEOUS));
 //    public static final ExtendedFluidType TRITIUM = new ExtendedFluidType(0x000099, solution, ExtendedProperties.of().pfr(3,4,0).burn(5).traits(GASEOUS).rad(0.001F));
 //    public static final ExtendedFluidType OIL = new ExtendedFluidType(0x020202, solution, ExtendedProperties.of().pfr(2,1,0).burn(10).traits(LIQUID,VISCOUS));
@@ -83,6 +83,7 @@ public class ModFluids {
     public static final ExtendedFluidType spent_steam = new ExtendedFluidType("spent_steam", 0xc9c9c9, solution.descriptionId("Spent Steam"), ExtendedProperties.of().pfr(0,0,0).traits(GASEOUS, UNSIPHONABLE));
 
     // 流体注册
+    public static FluidRegistryHolder<ExtendedFluidType, ForgeFlowingFluid.Source, ForgeFlowingFluid.Flowing,LiquidBlock, BucketItem> COOLANT = register(coolant);
     public static FluidRegistryHolder<ExtendedFluidType, ForgeFlowingFluid.Source, ForgeFlowingFluid.Flowing,LiquidBlock, BucketItem> HYDROGEN = register(hydrogen);
     public static FluidRegistryHolder<ExtendedFluidType, ForgeFlowingFluid.Source, ForgeFlowingFluid.Flowing,LiquidBlock, BucketItem> IRRADIATED_WATER = register(irradiated_water);
     public static FluidRegistryHolder<ExtendedFluidType, ForgeFlowingFluid.Source, ForgeFlowingFluid.Flowing,LiquidBlock, BucketItem> IRRADIATED_POLLUTED = register(irradiated_polluted);

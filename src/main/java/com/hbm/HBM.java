@@ -5,6 +5,7 @@ import com.hbm.config.ClientConfig;
 import com.hbm.config.CommonConfig;
 import com.hbm.config.ServerConfig;
 import com.hbm.compat.bigexplosives.BigExplosivesMod;
+import com.hbm.compat.ballistix.BallistixCompat;
 import com.hbm.datagen.damageSource.HBMDamageTagProvider;
 import com.hbm.dev.AssetConsistencyChecker;
 import com.hbm.dev.ModelValidator;
@@ -107,6 +108,7 @@ public class HBM {
         ModMenuType.MOD_MENU_TYPES.register(modEventBus);
         ModEffects.register(modEventBus);
         BigExplosivesMod.register(modEventBus);
+        BallistixCompat.register(modEventBus);
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CommonConfig.CONFIG_SPEC, "hbm-common.toml");
     }

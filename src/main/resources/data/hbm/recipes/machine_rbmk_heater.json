@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "RMR",
+    "CHC",
+    "RMR"
+  ],
+  "key": {
+    "R": { "item": "minecraft:redstone" },
+    "M": { "item": "hbm:ingot_magnetized_tungsten" },
+    "C": { "item": "hbm:plate_advanced_alloy" },
+    "H": { "item": "minecraft:blast_furnace" }
+  },
+  "result": {
+    "item": "hbm:machine_rbmk_heater"
+  }
+}

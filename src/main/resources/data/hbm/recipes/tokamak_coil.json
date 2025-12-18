@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "WWW",
+    "WMW",
+    "WWW"
+  ],
+  "key": {
+    "W": { "item": "hbm:wiring_red_copper" },
+    "M": { "item": "hbm:ingot_magnetized_tungsten" }
+  },
+  "result": {
+    "item": "hbm:tokamak_coil",
+    "count": 2
+  }
+}
