@@ -20,11 +20,13 @@ import net.minecraft.world.inventory.StackedContentsCompatible;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.*;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.common.ForgeHooks;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
@@ -47,23 +49,23 @@ public class DifurnaceEntity extends BaseContainerBlockEntity implements Worldly
 //    public byte sideFuel = 1;
 //    public byte sideUpper = 1;
 //    public byte sideLower = 1;
-    static {
-        fuelPower.put(Items.COAL,200);
-        fuelPower.put(Blocks.COAL_BLOCK,2000);
-        fuelPower.put(Items.LAVA_BUCKET,12800);
-        fuelPower.put(Items.BLAZE_ROD,1000);    //烈焰棒
-        fuelPower.put(Items.BLAZE_POWDER,300);  //烈焰粉
-        fuelPower.put(ModItems.LIGNITE.get(),150);
-        fuelPower.put(ModItems.POWDER_LIGNITE.get(),150);
-        fuelPower.put(ModItems.POWDER_COAL.get(),200);
-        fuelPower.put(ModItems.coke_coal.get(),400);        //煤焦炭
-        fuelPower.put(ModItems.coke_lignite.get(),400);
-        fuelPower.put(ModItems.coke_petroleum.get(),400);
-        fuelPower.put(ModItems.SOLID_FUEL.get(),400);
-        fuelPower.put(ModItems.briquette_coal.get(),200);   //煤球
-        fuelPower.put(ModItems.briquette_lignite.get(),200);
-        fuelPower.put(ModItems.briquette_wood.get(),200);
-    }
+//    static {
+//        fuelPower.put(Items.COAL,200);
+//        fuelPower.put(Blocks.COAL_BLOCK,2000);
+//        fuelPower.put(Items.LAVA_BUCKET,12800);
+//        fuelPower.put(Items.BLAZE_ROD,1000);    //烈焰棒
+//        fuelPower.put(Items.BLAZE_POWDER,300);  //烈焰粉
+//        fuelPower.put(ModItems.LIGNITE.get(),150);
+//        fuelPower.put(ModItems.POWDER_LIGNITE.get(),150);
+//        fuelPower.put(ModItems.POWDER_COAL.get(),200);
+//        fuelPower.put(ModItems.coke_coal.get(),400);        //煤焦炭
+//        fuelPower.put(ModItems.coke_lignite.get(),400);
+//        fuelPower.put(ModItems.coke_petroleum.get(),400);
+//        fuelPower.put(ModItems.SOLID_FUEL.get(),400);
+//        fuelPower.put(ModItems.briquette_coal.get(),200);   //煤球
+//        fuelPower.put(ModItems.briquette_lignite.get(),200);
+//        fuelPower.put(ModItems.briquette_wood.get(),200);
+//    }
     //用于和menu传递的消息。
     protected final ContainerData containerData = new ContainerData() {
         @Override
@@ -192,8 +194,9 @@ public class DifurnaceEntity extends BaseContainerBlockEntity implements Worldly
         }
     }
     public static int getFuel(ItemStack itemStack){
-        Integer fuel_power = fuelPower.get(itemStack.getItem());
-        return fuel_power == null?0:fuel_power;
+//        Integer fuel_power = fuelPower.get(itemStack.getItem());
+//        return fuel_power == null?0:fuel_power;
+        return ForgeHooks.getBurnTime(itemStack, RecipeType.SMELTING);
     }
 
     /** 继承自BaseContainerBlockEntity */

@@ -13,10 +13,7 @@ import com.hbm.item.HBMtools;
 import com.hbm.item.env.BedrockOreItem;
 import com.hbm.item.env.ItemEggGlyphid;
 import com.hbm.item.env.ItemEggGlyphidToBirth;
-import com.hbm.item.misc.ItemCustomInfo;
-import com.hbm.item.misc.ItemFELCrystal;
-import com.hbm.item.misc.ItemLemon;
-import com.hbm.item.misc.ItemStarmetal;
+import com.hbm.item.misc.*;
 import com.hbm.item.tool.BatteryItem;
 import com.hbm.item.tool.ItemStamp;
 import com.hbm.item.weapon.ItemDetonator;
@@ -225,12 +222,10 @@ public class ModItems {
 //    public static final RegistryObject<Item> powder_coal = ITEMS.register("powder_coal",()->new Item(new Item.Properties()));
 //    public static final RegistryObject<Item> powder_lignite = ITEMS.register("powder_lignite",()->new Item(new Item.Properties()));
 //    public static final RegistryObject<Item> powder_coal_tiny = ITEMS.register("powder_coal_tiny",()->new Item(new Item.Properties()));
-    public static final RegistryObject<Item> coke_coal = ITEMS.register("coke_coal",()->new Item(new Item.Properties()));
-    public static final RegistryObject<Item> coke_lignite = ITEMS.register("coke_lignite",()->new Item(new Item.Properties()));
-    public static final RegistryObject<Item> coke_petroleum = ITEMS.register("coke_petroleum",()->new Item(new Item.Properties()));
-    public static final RegistryObject<Item> briquette_coal = ITEMS.register("briquette_coal",()->new Item(new Item.Properties()));
-    public static final RegistryObject<Item> briquette_lignite = ITEMS.register("briquette_lignite",()->new Item(new Item.Properties()));
-    public static final RegistryObject<Item> briquette_wood = ITEMS.register("briquette_wood",()->new Item(new Item.Properties()));
+//    public static final RegistryObject<Item> coke_coal = ITEMS.register("coke_coal",()->new Item(new Item.Properties()));
+//    public static final RegistryObject<Item> coke_lignite = ITEMS.register("coke_lignite",()->new Item(new Item.Properties()));
+//    public static final RegistryObject<Item> coke_petroleum = ITEMS.register("coke_petroleum",()->new Item(new Item.Properties()));
+
 
 //    undefined = new ItemCustomLore().setUnlocalizedName("undefined").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":undefined");
 
@@ -357,26 +352,30 @@ public class ModItems {
     public static final RegistryObject<Item> PLATE_ARMOR_DNT = parts("plate_armor_dnt", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
 
 //    oil_tar = new ItemEnumMulti(EnumTarType.class, true, true).setUnlocalizedName("oil_tar").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":oil_tar");
-    public static final RegistryObject<Item> SOLID_FUEL = parts("solid_fuel", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> SOLID_FUEL_PRESTO = parts("solid_fuel_presto", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> SOLID_FUEL_PRESTO_TRIPLET = parts("solid_fuel_presto_triplet", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> SOLID_FUEL_BF = parts("solid_fuel_bf", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> SOLID_FUEL_PRESTO_BF = parts("solid_fuel_presto_bf", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> SOLID_FUEL_PRESTO_TRIPLET_BF = parts("solid_fuel_presto_triplet_bf", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> ROCKET_FUEL = parts("rocket_fuel", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-//    coke = new ItemEnumMulti(EnumCokeType.class, true, true).setUnlocalizedName("coke").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":coke");
-    public static final RegistryObject<Item> LIGNITE = parts("lignite", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-//    briquette = new ItemEnumMulti(EnumBriquetteType.class, true, true).setUnlocalizedName("briquette").setCreativeTab(MainRegistry.partsTab);
-    public static final RegistryObject<Item> POWDER_LIGNITE = parts("powder_lignite", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> COAL_INFERNAL = parts("coal_infernal", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> SOLID_FUEL = parts("solid_fuel", ()->new ItemFuel(new Item.Properties(), 200 * 16), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> SOLID_FUEL_PRESTO = parts("solid_fuel_presto", ()->new ItemFuel(new Item.Properties(), 200 * 40), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> SOLID_FUEL_PRESTO_TRIPLET = parts("solid_fuel_presto_triplet", ()->new ItemFuel(new Item.Properties(), 200 * 200), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> SOLID_FUEL_BF = parts("solid_fuel_bf", ()->new ItemFuel(new Item.Properties(), 200 * 160), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> SOLID_FUEL_PRESTO_BF = parts("solid_fuel_presto_bf", ()->new ItemFuel(new Item.Properties(), 200 * 400), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> SOLID_FUEL_PRESTO_TRIPLET_BF = parts("solid_fuel_presto_triplet_bf", ()->new ItemFuel(new Item.Properties(), 200 * 2000), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> ROCKET_FUEL = parts("rocket_fuel", ()->new ItemFuel(new Item.Properties(), 200 * 32), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> COKE_COAL = parts("coke_coal", ()->new ItemFuel(new Item.Properties(), 200 * 16), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> COKE_LIGNITE = parts("coke_lignite", ()->new ItemFuel(new Item.Properties(), 200 * 16), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> COKE_PETROLEUM = parts("coke_petroleum", ()->new ItemFuel(new Item.Properties(), 200 * 16), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> LIGNITE = parts("lignite", ()->new ItemFuel(new Item.Properties(), 1200), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> BRIQUETTE_COAL = parts("briquette_coal", ()->new ItemFuel(new Item.Properties(), 200 * 10), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> BRIQUETTE_LIGNITE = parts("briquette_lignite", ()->new ItemFuel(new Item.Properties(), 200 * 8), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> BRIQUETTE_WOOD = parts("briquette_wood", ()->new ItemFuel(new Item.Properties(), 200 * 2), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> POWDER_LIGNITE = parts("powder_lignite", ()->new ItemFuel(new Item.Properties(), 1200), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> COAL_INFERNAL = parts("coal_infernal", ()->new ItemFuel(new Item.Properties(), 4800), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     public static final RegistryObject<Item> CINNEBAR = parts("cinnebar", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
 
-    public static final RegistryObject<Item> POWDER_ASH_COAL = parts("powder_ash_coal", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
-    public static final RegistryObject<Item> POWDER_ASH_FLY = parts("powder_ash_fly", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
-    public static final RegistryObject<Item> POWDER_ASH_FULLERENE = parts("powder_ash_fullerene", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
-    public static final RegistryObject<Item> POWDER_ASH_MISC = parts("powder_ash_misc", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
-    public static final RegistryObject<Item> POWDER_ASH_SOOT = parts("powder_ash_soot", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
-    public static final RegistryObject<Item> POWDER_ASH_WOOD = parts("powder_ash_wood", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> POWDER_ASH_COAL = parts("powder_ash_coal", ()->new ItemFuel(new Item.Properties(), 200), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> POWDER_ASH_FLY = parts("powder_ash_fly", ()->new ItemFuel(new Item.Properties(), 200), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> POWDER_ASH_FULLERENE = parts("powder_ash_fullerene", ()->new ItemFuel(new Item.Properties(), 200), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> POWDER_ASH_MISC = parts("powder_ash_misc", ()->new ItemFuel(new Item.Properties(), 200 / 2), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> POWDER_ASH_SOOT = parts("powder_ash_soot", ()->new ItemFuel(new Item.Properties(), 200 / 2), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> POWDER_ASH_WOOD = parts("powder_ash_wood", ()->new ItemFuel(new Item.Properties(), 200 / 2), HBMKey.REVERSE_GEN);
 //    powder_limestone = new Item().setUnlocalizedName("powder_limestone").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":powder_limestone");
 //    powder_cement = new ItemLemon(2, 0.5F, false).setUnlocalizedName("powder_cement").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":powder_cement");
 //
@@ -446,7 +445,7 @@ public class ModItems {
     public static final RegistryObject<Item> NUGGET_LES = parts("nugget_les", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     public static final RegistryObject<Item> PLATE_COMBINE_STEEL = parts("plate_combine_steel", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     
-    public static final RegistryObject<Item> CRYSTAL_COAL = parts("crystal_coal", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> CRYSTAL_COAL = parts("crystal_coal", ()->new ItemFuel(new Item.Properties(), 6400), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     public static final RegistryObject<Item> CRYSTAL_IRON = parts("crystal_iron", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     public static final RegistryObject<Item> CRYSTAL_GOLD = parts("crystal_gold", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     public static final RegistryObject<Item> CRYSTAL_REDSTONE = parts("crystal_redstone", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
@@ -508,11 +507,12 @@ public class ModItems {
     public static final RegistryObject<Item> POWDER_URANIUM = parts("powder_uranium", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     public static final RegistryObject<Item> POWDER_PLUTONIUM = parts("powder_plutonium", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
 //    dust = new ItemCustomLore().setUnlocalizedName("dust").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":dust");
+    public static final RegistryObject<Item> DUST = parts("dust", ()->new ItemFuel(new Item.Properties(), 200 / 8), HBMKey.ORDERLY_GEN);
     public static final RegistryObject<Item> DUST_TINY = parts("dust_tiny", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     public static final RegistryObject<Item> FALLOUT = parts("fallout", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     public static final RegistryObject<Item> POWDER_ADVANCED_ALLOY = parts("powder_advanced_alloy", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     public static final RegistryObject<Item> POWDER_TCALLOY = parts("powder_tcalloy", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> POWDER_COAL = parts("powder_coal", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> POWDER_COAL = parts("powder_coal", ()->new ItemFuel(new Item.Properties(), 200 * 8), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     public static final RegistryObject<Item> POWDER_COAL_TINY = parts("powder_coal_tiny", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     public static final RegistryObject<Item> POWDER_COMBINE_STEEL = parts("powder_combine_steel", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     public static final RegistryObject<Item> POWDER_DIAMOND = parts("powder_diamond", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
@@ -566,7 +566,7 @@ public class ModItems {
     public static final RegistryObject<Item> POWDER_YELLOWCAKE = parts("powder_yellowcake", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     public static final RegistryObject<Item> POWDER_MAGIC = parts("powder_magic", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     public static final RegistryObject<Item> POWDER_BALEFIRE = parts("powder_balefire", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> POWDER_SAWDUST = parts("powder_sawdust", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> POWDER_SAWDUST = parts("powder_sawdust", ()->new ItemFuel(new Item.Properties(), 200 / 2), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     public static final RegistryObject<Item> POWDER_FLUX = parts("powder_flux", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
 //    powder_fertilizer = new ItemFertilizer().setUnlocalizedName("powder_fertilizer").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":powder_fertilizer");
     public static final RegistryObject<Item> POWDER_COLTAN_ORE = parts("powder_coltan_ore", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
@@ -590,8 +590,8 @@ public class ModItems {
     public static final RegistryObject<Item> FRAGMENT_COLTAN = parts("fragment_coltan", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
 //    chunk_ore = new ItemEnumMulti(EnumChunkType.class, true, true).setUnlocalizedName("chunk_ore").setCreativeTab(MainRegistry.partsTab);
 
-    public static final RegistryObject<Item> BIOMASS = parts("biomass", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> BIOMASS_COMPRESSED = parts("biomass_compressed", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> BIOMASS = parts("biomass", ()->new ItemFuel(new Item.Properties(), 200 * 2), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> BIOMASS_COMPRESSED = parts("biomass_compressed", ()->new ItemFuel(new Item.Properties(), 200 * 4), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
 //    bio_wafer = new ItemLemon(4, 2F, false).setUnlocalizedName("bio_wafer").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":bio_wafer");
 //    plant_item = new ItemEnumMulti(EnumPlantType.class, true, true).setUnlocalizedName("plant_item").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":plant_item");
 
@@ -674,6 +674,9 @@ public class ModItems {
     public static final RegistryObject<Item> SHIMMER_AXE_HEAD = parts("shimmer_axe_head", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     public static final RegistryObject<Item> SHIMMER_HANDLE = parts("shimmer_handle", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
 
+    public static final RegistryObject<Item> POWDER_FIRE = parts("powder_red_phosphorus", ()->new ItemFuel(new Item.Properties(), 6400), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+
+    public static final RegistryObject<Item> GUIDE_BOOK = consumable("book_guide", ()->new WritableBookItem(new Item.Properties()), HBMKey.REVERSE_GEN);
 
 //    entanglement_kit = new ItemCustomLore().setUnlocalizedName("entanglement_kit").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":entanglement_kit");
 //
@@ -748,6 +751,8 @@ public class ModItems {
     public static final RegistryObject<Item> WIRE_FINE_ALUMINIUM = parts("wire_aluminium", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     public static final RegistryObject<Item> SHELL = parts("shell", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     public static final RegistryObject<Item> DUCT_TAPE = parts("duct_tape", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+
+    public static final RegistryObject<Item> SCRAP = parts("scrap", () -> new ItemFuel(new Item.Properties(), 200 / 4), HBMKey.ORDERLY_GEN);
 
 
 

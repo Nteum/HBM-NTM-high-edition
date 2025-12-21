@@ -21,6 +21,7 @@ import com.hbm.render.entity.effect.BlackHoleRender;
 import com.hbm.render.entity.EntityBlankRender;
 import com.hbm.render.entity.effect.EntityTorexRender;
 import com.hbm.render.item.SpecialItemRender;
+import com.hbm.settings.tooltips.TooltipRegistries;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
@@ -52,6 +53,7 @@ public class ClientEventHanler {
         modBus.addListener(ClientEventHanler::registerColorHandlerItem);
         // forge总线事件
         forgeBus.addListener(ClientEventHanler::onKeyPressed);
+        forgeBus.addListener(TooltipRegistries::onTooltip);
     }
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event)

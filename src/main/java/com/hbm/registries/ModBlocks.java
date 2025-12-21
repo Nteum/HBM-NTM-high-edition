@@ -27,6 +27,8 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.FallingBlock;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockBehaviour.*;
 import net.minecraft.world.level.block.state.BlockState;
@@ -77,6 +79,10 @@ public class ModBlocks {
     public static final RegistryObject<Block> CRUCIBLE = new BlockBuilder("crucible",()->new BlockCrucible(Properties.copy(Blocks.BRICKS))).model((block, blockstateGen) -> blockstateGen.horizontalBlockWithItem(block)).tab(ModTabs.MACHINE.getKey()).loc(HBMKey.ORDERLY_GEN).loot(HBMKey.DROP_SELF).build();
     public static final RegistryObject<Block> WOOD_BURNER = new BlockBuilder("wood_burner",()->new BlockWoodBurner(Properties.copy(Blocks.BRICKS))).model((block, blockstateGen) -> blockstateGen.horizontalBlockWithItem(block)).tab(ModTabs.MACHINE.getKey()).loc(HBMLang.CONTAINER_WOOD_BURNER.key()).loot(HBMKey.DROP_SELF).build();
 
+    public static final RegistryObject<Block> BLOCK_SCRAP = new BlockBuilder("block_scrap", ()->new FallingBlock(Properties.of().strength(2.5f, 5.0f).sound(SoundType.GRAVEL))).model(HBMKey.MODEL_CUBE_ALL).tab(ModTabs.BLOCKS.getKey()).loc(HBMKey.REVERSE_GEN).loot(HBMKey.DROP_SELF).build();
+    public static final RegistryObject<Block> BLOCK_COKE_COAL = new BlockBuilder("block_coke_coal", ()->new Block(Properties.of().strength(5f, 10.0f).sound(SoundType.GRAVEL))).model(HBMKey.MODEL_CUBE_ALL).tab(ModTabs.BLOCKS.getKey()).loc(HBMKey.REVERSE_GEN).loot(HBMKey.DROP_SELF).build();
+    public static final RegistryObject<Block> BLOCK_COKE_LIGNITE = new BlockBuilder("block_coke_lignite", ()->new FallingBlock(Properties.of().strength(5f, 10.0f).sound(SoundType.GRAVEL))).model(HBMKey.MODEL_CUBE_ALL).tab(ModTabs.BLOCKS.getKey()).loc(HBMKey.REVERSE_GEN).loot(HBMKey.DROP_SELF).build();
+    public static final RegistryObject<Block> BLOCK_COKE_PETROLEUM = new BlockBuilder("block_coke_petroleum", ()->new FallingBlock(Properties.of().strength(5f, 10.0f).sound(SoundType.GRAVEL))).model(HBMKey.MODEL_CUBE_ALL).tab(ModTabs.BLOCKS.getKey()).loc(HBMKey.REVERSE_GEN).loot(HBMKey.DROP_SELF).build();
     // nuke
     public static final RegistryObject<Block> BOMB_FAT_MAN = add("bomb_fat_man", () -> new NukeFat(Properties.copy(Blocks.STONE), 200), ModTabs.NUKE.getKey(), HBMKey.MODEL_EXISTING_FILE, HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMKey.DROP_SELF);
     public static final RegistryObject<Block> BOMB_BOY = add("bomb_boy",()->new NukeBoy(Properties.copy(Blocks.STONE),120), ModTabs.NUKE.getKey(), HBMKey.MODEL_EXISTING_FILE, HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMKey.DROP_SELF);

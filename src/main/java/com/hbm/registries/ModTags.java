@@ -6,6 +6,7 @@ import com.hbm.registries.OreDictManager.DictFrame;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -39,6 +40,7 @@ public class ModTags {
         public static final TagKey<Block> BATTERY = forgeTag("battery");
         public static final TagKey<Block> ANVIL = tag("anvil");
         public static final TagKey<Block> MACHINE = forgeTag("machine");
+        public static final TagKey<Block> BLOCK_COKE = tag("block_coke");
 
         //注册本模组tag，如果只限于本模组使用，请注册此tag
         private static TagKey<Block> tag(String pName) {
@@ -79,7 +81,7 @@ public class ModTags {
         public static final TagKey<Item> WOOD = forgeTag("wood");
         public static final TagKey<Item> SAPLING = forgeTag("sapling");
 
-
+        public static final TagKey<Item> BLOCK_COKE = ItemTags.create(Blocks.BLOCK_COKE.location());
         public static TagKey<Item> tag(String pName) {
             return TagKey.create(Registries.ITEM, HBM.rl(pName));
         }

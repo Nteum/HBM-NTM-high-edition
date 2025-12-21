@@ -38,9 +38,9 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
         addEffect();
         autoAdd();
         ModKeyMapping.localName(this);
-        //物品
-        this.add(ModItems.coke_coal.get(),"Coal Coke");
-        //方块
+//        //物品
+//        this.add(ModItems.coke_coal.get(),"Coal Coke");
+//        //方块
 //        this.add(ModBlocks.machine_difurnace.get(),"Blast Furnace");
 //        this.add(ModBlocks.machine_electric_furnace.get(),"Electric Furnace");
 //        this.add(ModBlocks.machine_boiler.get(),"Oil Heater");

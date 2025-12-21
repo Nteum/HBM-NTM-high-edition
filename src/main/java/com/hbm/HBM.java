@@ -1,5 +1,7 @@
 package com.hbm;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.hbm.capabilities.network.TransmitterNetworkRegistry;
 import com.hbm.config.ClientConfig;
 import com.hbm.config.CommonConfig;
@@ -36,6 +38,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.common.data.ForgeAdvancementProvider;
@@ -50,6 +53,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.loading.FMLEnvironment;
 import net.minecraftforge.fml.loading.FMLPaths;
 import org.slf4j.Logger;
 
@@ -69,6 +73,10 @@ public class HBM {
     public static       boolean debug       = false;
     public static final Path    CONFIG_PATH = FMLPaths.CONFIGDIR.get().resolve(MODID + "Configs");
     public static final Path    RECIPE_PATH = FMLPaths.CONFIGDIR.get().resolve(MODID + "Recipes");
+    // datapck gson
+    public static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
+    public static boolean IS_DATA_GEN = FMLEnvironment.dist == Dist.DEDICATED_SERVER && !FMLEnvironment.production;
+
 
     public HBM() {
         //forge事件总线
@@ -117,6 +125,7 @@ public class HBM {
     public void onPostLoad(FMLLoadCompleteEvent event){
         ClientConfig.initConfig();
         ServerConfig.initConfig();
+        LOGGER.info("===========================POST LOAD " + IS_DATA_GEN);
     }
 
     private void onServerStopped(ServerStoppedEvent event){
@@ -127,6 +136,7 @@ public class HBM {
      * 数据生成入口，只会在runData时候被调用
      * */
     private void onGatherData(GatherDataEvent event){
+        LOGGER.info("===========================GATHER DATA " + IS_DATA_GEN);
         DataGenerator generator = event.getGenerator();
         PackOutput packOutput = generator.getPackOutput();
         ExistingFileHelper helper = event.getExistingFileHelper();

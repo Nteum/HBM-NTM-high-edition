@@ -56,6 +56,8 @@ public enum HBMLang implements ILangEntry {
     ITEM_BILLETFLASHLEAD_DESC("The lattice decays, causing antimatter-matter$annihilation reactions, causing the release of$pions, decaying into muons, catalyzing fusion of$the nuclei, creating the new element.$Please try to keep up."),
     ITEM_INGOTASBESTOS_DESC("§o\"Filled with life, self-doubt and asbestos. That comes with the air.\"§r"),
     ITEM_INGOTCOMBINE_STEEL_DESC("*insert Civil Protection reference here*"),
+    ITEM_DUST_DESC("I hate dust!"),
+    ITEM_POWDER_FIRE_DESC("Used in multi purpose bombs:$Incendiary bombs are fun!"),
     // handoverTexts
     ENERGY("item","battery.tooltip"),
     FLUID_CAPACITY("item","fluid_capacity"),

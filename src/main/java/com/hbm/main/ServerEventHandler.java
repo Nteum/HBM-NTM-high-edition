@@ -6,12 +6,12 @@ import com.hbm.entity.mob.EntityGlyphid;
 import com.hbm.item.HBMComponent;
 import com.hbm.item.env.ItemEggGlyphid;
 import com.hbm.network.ServerMsgHandler;
-import com.hbm.registries.HBMDamage;
-import com.hbm.registries.ModCommands;
-import com.hbm.registries.ModItems;
+import com.hbm.registries.*;
 import com.hbm.utils.transport_net.FluidNetworkSystem;
 import net.minecraft.commands.Commands;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraftforge.event.ItemStackedOnOtherEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.TickEvent;
@@ -19,6 +19,7 @@ import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent;
 import net.minecraftforge.event.entity.item.ItemTossEvent;
 import net.minecraftforge.event.entity.living.MobSpawnEvent;
+import net.minecraftforge.event.furnace.FurnaceFuelBurnTimeEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent;
@@ -35,6 +36,7 @@ public class ServerEventHandler {
         forgeBus.addListener(ServerEventHandler::serverTick);
         forgeBus.addListener(ServerEventHandler::onPlayerClickInventory);
         forgeBus.addListener(ServerEventHandler::onPlayerTossItem);
+        forgeBus.addListener(ServerEventHandler::setBurnTime);
 //        forgeBus.addListener(ServerEventHandler::onFinialSpawn);
     }
     @SubscribeEvent
@@ -85,6 +87,18 @@ public class ServerEventHandler {
     @SubscribeEvent
     public static void onSpawnPlacementRegisterEvent(SpawnPlacementRegisterEvent event){
         Pollution.rampantScoutPopulator(event);
+    }
+
+    /**
+     * 设置一些燃料的燃烧时间，并不包括所有燃料，只是在其他地方设置比较麻烦（比如方块物品）才在这里设置
+     * */
+    @SubscribeEvent
+    public static void setBurnTime(FurnaceFuelBurnTimeEvent event){
+        ItemStack itemStack = event.getItemStack();
+        if (itemStack.is(ModBlocks.BLOCK_SCRAP.get().asItem())) event.setBurnTime(200 * 2);
+        if (itemStack.is(ModTags.Items.BLOCK_COKE)) event.setBurnTime(200 * 160);
+        if (itemStack.is(ModItems.GUIDE_BOOK.get())) event.setBurnTime(200);
+
     }
 
 //    @SubscribeEvent

@@ -6,5 +6,5 @@
     "texture0": "hbm:block/press/press_body",
     "particle": "hbm:block/press/press_body"
   },
-  "ambientocclusion": false,
+  "ambientocclusion": false
 }

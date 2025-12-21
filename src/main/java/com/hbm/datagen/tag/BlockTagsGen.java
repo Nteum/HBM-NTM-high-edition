@@ -52,6 +52,7 @@ public class BlockTagsGen extends BlockTagsProvider {
         this.tag(ModTags.Blocks.MOD_ORES.get(OreType.TIKITE)).add(HBMBlockComponent.TIKITE_ORE_END.get());
         this.tag(Tags.Blocks.ORES_COAL).add(HBMBlockComponent.FIRE_ORE_NETHER.get());
         ModTags.Blocks.MOD_ORES.values().forEach(oretag-> this.tag(Tags.Blocks.ORES).addTag(oretag));
+        this.tag(ModTags.Blocks.BLOCK_COKE).add(ModBlocks.BLOCK_COKE_COAL.get(), ModBlocks.BLOCK_COKE_PETROLEUM.get(), ModBlocks.BLOCK_COKE_LIGNITE.get());
 
         //机器
         this.tag(ModTags.Blocks.BATTERY).add(ModBlocks.BATTERY.get(),ModBlocks.BATTERY_LITHIUM.get(),ModBlocks.BATTERY_DINEUTRONIUM.get(),ModBlocks.BATTERY_DINEUTRONIUM.get());

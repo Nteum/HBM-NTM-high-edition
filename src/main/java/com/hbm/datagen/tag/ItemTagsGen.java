@@ -9,6 +9,7 @@ import com.hbm.registries.OreDictManager;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -34,6 +35,10 @@ public class ItemTagsGen extends ItemTagsProvider {
         this.tag(ModTags.Items.CHARGEABLE).addTag(ModTags.Items.BATTERY);
         this.tag(ModTags.Items.UPGRADE).add(HBMtools.UPGRADE_BASE.get());
         this.tag(ModTags.Items.MISSILE).add(ModItems.MISSILE_GENERIC.get());
+        this.tag(ModTags.Items.WOOD).addTags(ItemTags.WOODEN_BUTTONS, ItemTags.WOODEN_DOORS, ItemTags.WOODEN_FENCES, ItemTags.WOODEN_SLABS, ItemTags.WOODEN_STAIRS, ItemTags.WOODEN_PRESSURE_PLATES, ItemTags.WOODEN_TRAPDOORS);
+
+        this.tag(ModTags.Items.COKE).add(ModItems.COKE_PETROLEUM.get(), ModItems.COKE_COAL.get(), ModItems.COKE_LIGNITE.get());
+        this.copy(ModTags.Blocks.BLOCK_COKE, ModTags.Items.BLOCK_COKE);
     }
 
     @Override
