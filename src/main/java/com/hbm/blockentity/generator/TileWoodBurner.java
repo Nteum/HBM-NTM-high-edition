@@ -15,6 +15,7 @@ import com.hbm.blockentity.base2.DummyableBlockEntity;
 import com.hbm.blockentity.interfaces.IControlReceiver;
 import com.hbm.blockentity.machine.ChemplantEntity;
 import com.hbm.capabilities.HBMCaps;
+import com.hbm.datagen.recipe.provider.PressRecipeProvider;
 import com.hbm.gui.menu.ChemplantMenu;
 import com.hbm.gui.menu.MenuWoodBurner;
 import com.hbm.registries.ModTags;
@@ -29,18 +30,21 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Fallable;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.fluids.FluidStack;
@@ -128,6 +132,14 @@ public class TileWoodBurner extends DummyableBlockEntity implements IControlRece
     @Override
     public Component getDefaultName() {
         return HBMLang.CONTAINER_WOOD_BURNER.translate();
+    }
+
+    protected int getBurnTime(ItemStack stack){
+        int baseTime = stack.getBurnTime(RecipeType.SMELTING);
+        if (stack.is(ItemTags.LOGS)) return baseTime * 4;
+        // 1.7.10版本这里写的是wood，但由于mc目前没有对所有木制品统一的tag，所以暂时仅限于木板
+        if (stack.is(ModTags.Items.WOOD)) return baseTime * 2;
+        return baseTime;
     }
 
     @Override

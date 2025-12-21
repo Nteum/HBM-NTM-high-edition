@@ -1,4 +1,4 @@
-package com.hbm.world.fuel;
+package com.hbm.settings.fuel;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
