@@ -110,8 +110,8 @@ public class ModBlocks {
     //装饰
     public static final RegistryObject<Block> TEST12 = registerBlockWithItem("test12",()->new BlockTest12(Properties.of()));
     // glyphid
-    public static final WrappedBlockRegistry GLYPHID_BLOCK = add("glyphid_block", ()->new GlyphidBlock(Properties.copy(Blocks.STONE).pushReaction(PushReaction.IGNORE).explosionResistance(0.5f)), ModCreativeModeTab.HBM_BLOCK.getKey(), HBMKey.STANDALONE_MODEL, HBMKey.ORDERLY_GEN, HBMKey.DROP_NONE);
-    public static final WrappedBlockRegistry GLYPHID_SPAWNER = add("glyphid_spawner", ()->new GlyphidSpawner(Properties.copy(Blocks.STONE).pushReaction(PushReaction.IGNORE).explosionResistance(0.5f)), ModCreativeModeTab.HBM_BLOCK.getKey(), HBMKey.STANDALONE_MODEL, HBMKey.ORDERLY_GEN, HBMKey.DROP_NONE);
+    public static final RegistryObject<Block> GLYPHID_BLOCK = add("glyphid_block", ()->new GlyphidBlock(Properties.copy(Blocks.STONE).pushReaction(PushReaction.IGNORE).explosionResistance(0.5f)), ModCreativeModeTab.HBM_BLOCK.getKey(), HBMKey.MODEL_STANDALONE, HBMKey.ORDERLY_GEN, HBMKey.DROP_NONE);
+    public static final RegistryObject<Block> GLYPHID_SPAWNER = add("glyphid_spawner", ()->new GlyphidSpawner(Properties.copy(Blocks.STONE).pushReaction(PushReaction.IGNORE).explosionResistance(0.5f)), ModCreativeModeTab.HBM_BLOCK.getKey(), HBMKey.MODEL_STANDALONE, HBMKey.ORDERLY_GEN, HBMKey.DROP_NONE);
 
     public static ToIntFunction<BlockState> litEmission(int value){
         return state -> {
@@ -162,26 +162,21 @@ public class ModBlocks {
         }
     }
 
-    public static WrappedBlockRegistry natural(final String name, final Supplier<? extends Block> sup, String genNameWay){
-        return add(name, sup, CreativeModeTabs.NATURAL_BLOCKS, HBMKey.BASIC_MODEL, HBMKey.DROP_SELF, genNameWay, null);
+    protected static RegistryObject<Block> block(final String name, final Supplier<? extends Block> sup, String genModelWay, String lootWay){
+        return ModBlocks.add(name, sup, ModTabs.BLOCKS.getKey(), genModelWay, HBMKey.ORDERLY_GEN_EXCEPT_FIRST, lootWay);
     }
 
-    public static WrappedBlockRegistry add(final String name, final Supplier<? extends Block> sup, ResourceKey<CreativeModeTab> tabKey, String genNameWay){
+    protected static RegistryObject<Block> machine(final String name, final Supplier<? extends Block> sup, String genModelWay, String lootWay){
+        return ModBlocks.add(name, sup, ModTabs.MACHINE.getKey(), genModelWay, HBMKey.ORDERLY_GEN_EXCEPT_FIRST, lootWay);
+    }
+
+    protected static RegistryObject<Block> add(final String name, final Supplier<? extends Block> sup, ResourceKey<CreativeModeTab> tabKey, String genNameWay){
         return add(name, sup, tabKey, HBMKey.BASIC_MODEL, genNameWay, HBMKey.DROP_SELF, null);
     }
-    public static WrappedBlockRegistry add(final String name, final Supplier<? extends Block> sup, ResourceKey<CreativeModeTab> tabKey, String genModelWay, String genNameWay, String lootWay){
+    protected static RegistryObject<Block> add(final String name, final Supplier<? extends Block> sup, ResourceKey<CreativeModeTab> tabKey, String genModelWay, String genNameWay, String lootWay){
         return add(name, sup, tabKey, genModelWay, genNameWay, lootWay, null);
     }
-    public static WrappedBlockRegistry add(final String name, final Supplier<? extends Block> sup, ResourceKey<CreativeModeTab> tabKey, String genModelWay, String genNameWay, String lootWay, String localizedName){
-        WrappedBlockRegistry blockRegistry = new WrappedBlockRegistry();
-        blockRegistry.registryObject = registerBlockWithItem(name, sup);
-        blockRegistry.creativeKey = tabKey;
-        blockRegistry.genModelWay = genModelWay;
-        blockRegistry.genNameWay = genNameWay;
-        blockRegistry.lootWay = lootWay;
-        if (blockRegistry.genNameWay!= null && blockRegistry.genNameWay.equals(HBMKey.LITERALLY) && localizedName!=null)
-            blockRegistry.localizedName = localizedName;
-        blockList.add(blockRegistry);
-        return blockRegistry;
+    protected static RegistryObject<Block> add(final String name, final Supplier<? extends Block> sup, ResourceKey<CreativeModeTab> tabKey, String genModelWay, String genNameWay, String lootWay, String localizedName){
+        return new BlockBuilder(name, sup).tab(tabKey).model(genModelWay).loc(genNameWay).loot(lootWay).build();
     }
 }

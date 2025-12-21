@@ -3,6 +3,7 @@ package com.hbm.block.machine.rbmk;
 import com.hbm.block.base.BlockDummyable;
 import com.hbm.blockentity.machine.rbmk.RBMKFuelChannelEntity;
 import com.hbm.blockentity.machine.rbmk.RBMKBaseEntity;
+import com.hbm.item.HBMItems;
 import com.hbm.reactor.rbmk.RBMKColumnState;
 import com.hbm.reactor.rbmk.RBMKLevelContext;
 import com.hbm.reactor.rbmk.RBMKManager;
@@ -133,9 +134,9 @@ public class BlockRBMKBase extends BlockDummyable {
     public static void dropLidItem(Level level, BlockPos pos, RBMKLidType lid) {
         ItemStack stack = ItemStack.EMPTY;
         if (lid == RBMKLidType.GLASS) {
-            stack = ModItems.rbmk_lid_glass.get().getDefaultInstance();
+            stack = HBMItems.rbmk_lid_glass.get().getDefaultInstance();
         } else if (lid == RBMKLidType.SOLID) {
-            stack = ModItems.rbmk_lid.get().getDefaultInstance();
+            stack = HBMItems.rbmk_lid.get().getDefaultInstance();
         }
         if (!stack.isEmpty()) {
             Containers.dropItemStack(level, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, stack);

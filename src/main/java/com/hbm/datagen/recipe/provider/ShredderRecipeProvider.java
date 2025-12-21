@@ -3,6 +3,7 @@ package com.hbm.datagen.recipe.provider;
 import com.hbm.datagen.recipe.ISubRecipeProvider;
 import com.hbm.datagen.recipe.builder.SingleItemRecipeBuilder;
 import com.hbm.item.HBMComponent;
+import com.hbm.item.HBMItems;
 import com.hbm.registries.ModItems;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.world.item.Items;
@@ -15,7 +16,7 @@ public class ShredderRecipeProvider implements ISubRecipeProvider {
     public void addRecipes(Consumer<FinishedRecipe> consumer) {
         String base = "shredder/";
 
-        SingleItemRecipeBuilder.shredder(ModItems.powder_coal.get(), 2)
+        SingleItemRecipeBuilder.shredder(HBMItems.POWDER_COAL.get(), 2)
                 .requires(Items.COAL)
                 .duration(40)
                 .save(consumer, base + "coal_to_powder");

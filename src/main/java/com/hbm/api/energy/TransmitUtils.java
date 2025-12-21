@@ -2,6 +2,7 @@ package com.hbm.api.energy;
 
 import com.hbm.capabilities.HBMCaps;
 import com.hbm.item.HBMComponent;
+import com.hbm.item.HBMItems;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -37,7 +38,7 @@ public class TransmitUtils {
         }
 
         long needed = energyHandler.getEnergyContainer().getNeeded();
-        if (itemStack.is(HBMComponent.BATTERY_CREATIVE.get())){
+        if (itemStack.is(HBMItems.BATTERY_CREATIVE.get())){
             energyHandler.setEnergy(energyHandler.getCapacity());
             return;
         }
@@ -57,7 +58,7 @@ public class TransmitUtils {
             }
         }
 
-        if (itemStack.is(HBMComponent.BATTERY_CREATIVE.get())){
+        if (itemStack.is(HBMItems.BATTERY_CREATIVE.get())){
             return;
         }
         energyHandler.extract(itemEnergy.receive(energyHandler.getStored(),false),false);

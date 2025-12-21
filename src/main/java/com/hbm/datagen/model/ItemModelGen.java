@@ -2,10 +2,7 @@ package com.hbm.datagen.model;
 
 import com.hbm.HBM;
 import com.hbm.Inventory.fluid.ModFluids;
-import com.hbm.item.HBMCombat;
-import com.hbm.item.HBMComponent;
-import com.hbm.item.HBMWeapon;
-import com.hbm.item.HBMtools;
+import com.hbm.item.*;
 import com.hbm.registries.ModItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
@@ -13,6 +10,7 @@ import net.minecraft.server.packs.PackType;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
+import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -38,41 +36,50 @@ public class ItemModelGen extends ItemModelProvider {
         HBMWeapon.genModel(this);
         HBMCombat.genModel(this);
         ModFluids.bucketModel(this);
-        this.basicItem(ModItems.ingot_red_copper.get());
-        this.basicItem(ModItems.ingot_tungsten.get());
-        this.basicItem(ModItems.ingot_aluminium.get());
-        this.basicItem(ModItems.ingot_lead.get());
-        this.basicItem(ModItems.ingot_zirconium.get());
-        this.basicItem(ModItems.ingot_magnetized_tungsten.get());
-        this.basicItem(ModItems.ingot_solinium.get());
-        this.basicItem(ModItems.plate_iron.get());
-        this.basicItem(ModItems.fluorite.get());
-        this.basicItem(ModItems.nugget_zirconium.get());
-
-        this.basicItem(ModItems.ingot_advanced_alloy.get());
-        this.basicItem(ModItems.solid_fuel.get());
-        this.basicItem(ModItems.lignite.get());
-        this.basicItem(ModItems.powder_lignite.get());
-        this.basicItem(ModItems.powder_coal.get());
-        this.basicItem(ModItems.coke_coal.get());
-        this.basicItem(ModItems.coke_lignite.get());
-        this.basicItem(ModItems.coke_petroleum.get());
-        this.basicItem(ModItems.briquette_wood.get());
-        this.basicItem(ModItems.briquette_lignite.get());
-        this.basicItem(ModItems.briquette_coal.get());
-
-//        this.basicItem(ModItems.detonator.get());
-        this.basicItem(ModItems.grenade_generic.get());
-        this.basicItem(ModItems.grenade_strong.get());
-        this.basicItem(ModItems.grenade_fire.get());
-        this.basicItem(ModItems.grenade_frag.get());
-        this.basicItem(ModItems.grenade_black_hole.get());
-        this.basicItem(ModItems.overlay_my_fluid.get());
-        this.basicItem(ModItems.BEDROCK_ORE.get());
+//        this.basicItem(ModItems.ingot_red_copper.get());
+//        this.basicItem(ModItems.ingot_tungsten.get());
+//        this.basicItem(ModItems.ingot_aluminium.get());
+//        this.basicItem(ModItems.ingot_lead.get());
+//        this.basicItem(ModItems.ingot_zirconium.get());
+//        this.basicItem(ModItems.ingot_magnetized_tungsten.get());
+//        this.basicItem(ModItems.ingot_solinium.get());
+//        this.basicItem(ModItems.plate_iron.get());
+//        this.basicItem(ModItems.fluorite.get());
+//        this.basicItem(ModItems.nugget_zirconium.get());
+//
+//        this.basicItem(ModItems.ingot_advanced_alloy.get());
+//        this.basicItem(ModItems.solid_fuel.get());
+//        this.basicItem(ModItems.lignite.get());
+//        this.basicItem(ModItems.powder_lignite.get());
+//        this.basicItem(ModItems.powder_coal.get());
+//        this.basicItem(ModItems.coke_coal.get());
+//        this.basicItem(ModItems.coke_lignite.get());
+//        this.basicItem(ModItems.coke_petroleum.get());
+//        this.basicItem(ModItems.briquette_wood.get());
+//        this.basicItem(ModItems.briquette_lignite.get());
+//        this.basicItem(ModItems.briquette_coal.get());
+//
+////        this.basicItem(ModItems.detonator.get());
+//        this.basicItem(ModItems.grenade_generic.get());
+//        this.basicItem(ModItems.grenade_strong.get());
+//        this.basicItem(ModItems.grenade_fire.get());
+//        this.basicItem(ModItems.grenade_frag.get());
+//        this.basicItem(ModItems.grenade_black_hole.get());
+        this.basicItem(HBMItems.overlay_my_fluid.get());
+        this.basicItem(HBMItems.BEDROCK_ORE.get());
         /* tool */
-        this.basicItem(ModItems.SCREWDRIVER.get());
+        this.basicItem(HBMItems.SCREWDRIVER.get());
 
         generateMissingSimpleItemModels();
+
+        ResourceLocation u238m2 = Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(HBMItems.INGOT_U238M2.get()));
+        this.getBuilder(u238m2.toString()).parent(new ModelFile.UncheckedModelFile("item/generated"))
+                .texture("layer0", new ResourceLocation(u238m2.getNamespace(), "item/ingot_u238m2"))
+                .override()
+                .predicate(HBM.rl("stage"), 1).model(this.basicItem(HBM.rl("item/hs-elements")))
+                .predicate(HBM.rl("stage"), 2).model(this.basicItem(HBM.rl("item/hs-arsenic")))
+                .predicate(HBM.rl("stage"), 3).model(this.basicItem(HBM.rl("item/hs-vault")))
+                .end();
     }
 
     public void registerOrdinaryItemModel(String key){
@@ -86,6 +93,13 @@ public class ItemModelGen extends ItemModelProvider {
         ResourceLocation resourceLocation = Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(item));
         this.withExistingParent(resourceLocation.toString(), "builtin/entity");
     }
+//    // 产生可变化的实体
+//    public void dynamicModel(Item item){
+//        ResourceLocation rl = Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(item));
+//        this.getBuilder(rl.toString()).parent(new ModelFile.UncheckedModelFile("item/generated"))
+//                .texture("layer0", new ResourceLocation(rl.getNamespace(), "item/" + rl.getPath()))
+//                .override().model(this.basicItem(HBM.rl("item/ingot_nikonium"))).end();
+//    }
 
     @Override
     public ItemModelBuilder basicItem(Item item) {

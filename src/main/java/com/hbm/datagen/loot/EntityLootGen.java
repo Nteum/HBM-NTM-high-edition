@@ -1,6 +1,7 @@
 package com.hbm.datagen.loot;
 
 import com.hbm.entity.ModEntityType;
+import com.hbm.item.HBMItems;
 import com.hbm.registries.ModItems;
 import net.minecraft.data.loot.EntityLootSubProvider;
 import net.minecraft.world.entity.EntityType;
@@ -32,7 +33,7 @@ public class EntityLootGen extends EntityLootSubProvider {
         this.add(ModEntityType.GLYPHID.get(), LootTable.lootTable()
             .withPool(LootPool.lootPool()
                 .setRolls(ConstantValue.exactly(2.0f))
-                .add(LootItem.lootTableItem(ModItems.GLYPHID_MEAT.get())
+                .add(LootItem.lootTableItem(HBMItems.GLYPHID_MEAT.get())
                     .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F)))
                     .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F))))
                 .apply(SmeltItemFunction.smelted()

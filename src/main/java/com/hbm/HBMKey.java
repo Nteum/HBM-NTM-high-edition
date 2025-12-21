@@ -8,6 +8,27 @@ public class HBMKey {
     // block state
     public static final String IS_CORE = "is_core";
     public static final String VARIANT = "variant";
+    // 注册表
+    public static final String BASIC_MODEL = "basic_model";
+    public static final String SPAWN_EGG_MODEL = "spawn_egg_model";
+    public static final String MODEL_ENTITY = "entity_model";
+    public static final String MODEL_DYNAMIC = "model_dynamic";
+    public static final String MODEL_CUBE_ALL = "model_cube_all";
+    public static final String MODEL_FRONT_SIDE = "model_front_side";
+    public static final String MODEL_FRONT_SIDE_TOP = "model_front_side_top";
+    public static final String MODEL_EXISTING_FILE = "model_existing_file";
+    public static final String MODEL_STANDALONE = "model_standalone";
+    public static final String MODEL_DIFURNACE = "model_difurnace";
+    public static final String MODEL_HORIZONTAL_WITH_FILE = "model_horizontal_with_file";
+
+    public static final String LITERALLY = "literally";
+    public static final String ORDERLY_GEN = "orderly_gen";
+    public static final String REVERSE_GEN = "reverse_gen";
+    public static final String ORDERLY_GEN_EXCEPT_FIRST = "orderly_gen_except_first";
+    public static final String DROP_SELF = "drop_self";
+    public static final String DROP_NONE = "drop_none";
+    public static final String DROP_STANDALONE = "drop_standalone";
+    public static final String SHREDDER = "shredder";
     // key relate to capability
     public static final String DATA = "hbmdata";
     public static final String CAPS = "capability";
@@ -26,6 +47,7 @@ public class HBMKey {
     public static final String DURATION = "duration";
     public static final String TICK_POWER = "tick_power";
     public static final String POLLUTION_TYPE = "pollution_type";
+    public static final String TYPE = "type";
     public static final String POLLUTION = "pollution";
     public static final String RADIATION = "radiation";
     public static final String FLUX = "flux";
@@ -59,18 +81,6 @@ public class HBMKey {
     public static final String BLAST = "blast";
     public static final String ASSEMBLER = "assembler";
     public static final String CHEMPLANT = "chemplant";
-    public static final String SHREDDER = "shredder";
-    //
-    public static final String BASIC_MODEL = "basic_model";
-    public static final String SPAWN_EGG_MODEL = "spawn_egg_model";
-    public static final String ENTITY_MODEL = "entity_model";
-    public static final String CUBE_ALL_MODEL = "cube_all_model";
-    public static final String STANDALONE_MODEL = "standalone_model";
-    public static final String LITERALLY = "literally";
-    public static final String ORDERLY_GEN = "orderly_gen";
-    public static final String REVERSE_GEN = "reverse_gen";
-    public static final String ORDERLY_GEN_EXCEPT_FIRST = "orderly_gen_except_first";
-    public static final String DROP_SELF = "drop_self";
-    public static final String DROP_NONE = "drop_none";
-    public static final String DROP_STANDALONE = "drop_standalone";
+    // 物品和方块定义
+
 }

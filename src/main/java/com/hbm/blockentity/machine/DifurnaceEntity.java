@@ -1,10 +1,10 @@
 package com.hbm.blockentity.machine;
 
+import com.hbm.item.HBMItems;
 import com.hbm.block.machine.BlockDifurnace;
 import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.gui.menu.DifurnaceMenu;
 import com.hbm.Inventory.recipe.BlastFurnaceRecipe;
-import com.hbm.registries.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
@@ -53,16 +53,16 @@ public class DifurnaceEntity extends BaseContainerBlockEntity implements Worldly
         fuelPower.put(Items.LAVA_BUCKET,12800);
         fuelPower.put(Items.BLAZE_ROD,1000);    //烈焰棒
         fuelPower.put(Items.BLAZE_POWDER,300);  //烈焰粉
-        fuelPower.put(ModItems.lignite.get(),150);
-        fuelPower.put(ModItems.powder_lignite.get(),150);
-        fuelPower.put(ModItems.powder_coal.get(),200);
-        fuelPower.put(ModItems.coke_coal.get(),400);        //煤焦炭
-        fuelPower.put(ModItems.coke_lignite.get(),400);
-        fuelPower.put(ModItems.coke_petroleum.get(),400);
-        fuelPower.put(ModItems.solid_fuel.get(),400);
-        fuelPower.put(ModItems.briquette_coal.get(),200);   //煤球
-        fuelPower.put(ModItems.briquette_lignite.get(),200);
-        fuelPower.put(ModItems.briquette_wood.get(),200);
+        fuelPower.put(HBMItems.LIGNITE.get(),150);
+        fuelPower.put(HBMItems.POWDER_LIGNITE.get(),150);
+        fuelPower.put(HBMItems.POWDER_COAL.get(),200);
+        fuelPower.put(HBMItems.COKE_COAL.get(),400);        //煤焦炭
+        fuelPower.put(HBMItems.COKE_LIGNITE.get(),400);
+        fuelPower.put(HBMItems.COKE_PETROLEUM.get(),400);
+        fuelPower.put(HBMItems.SOLID_FUEL.get(),400);
+        fuelPower.put(HBMItems.BRIQUETTE_COAL.get(),200);   //煤球
+        fuelPower.put(HBMItems.BRIQUETTE_LIGNITE.get(),200);
+        fuelPower.put(HBMItems.BRIQUETTE_WOOD.get(),200);
     }
     //用于和menu传递的消息。
     protected final ContainerData containerData = new ContainerData() {

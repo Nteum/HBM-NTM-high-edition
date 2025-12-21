@@ -37,12 +37,12 @@ public class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, HBM.MODID);
 
     public static final List<WrappedItemRegistry> itemList = new ArrayList<>();
-    static {
-        HBMtools.register(ITEMS);
-        HBMComponent.register(ITEMS);
-        HBMWeapon.register(ITEMS);
-        HBMCombat.register(ITEMS);
-    }
+//    static {
+//        HBMtools.register(ITEMS);
+//        HBMComponent.register(ITEMS);
+//        HBMWeapon.register(ITEMS);
+//        HBMCombat.register(ITEMS);
+//    }
     /* weapon */
     //armor
     //grenade
@@ -139,7 +139,7 @@ public class ModItems {
 //    public static final RegistryObject<Item> DESIGNATOR = ITEMS.register("designator",()->new ItemDesignator(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> MISSILE_GENERIC = ITEMS.register("missile_generic",()->new ItemMissilePart(new Item.Properties().stacksTo(1), ItemMissilePart.MissileTier.TIER1));
     // 填充物品，游戏内无法获得，用于避免物品被匹配上
-    public static final RegistryObject<Item> DUMMY_ITEM = ITEMS.register("dummy_item", ()->new Item(new Item.Properties()));
+//    public static final RegistryObject<Item> DUMMY_ITEM = ITEMS.register("dummy_item", ()->new Item(new Item.Properties()));
     public static void register(IEventBus eventBus){
         ITEMS.register(eventBus);
     }

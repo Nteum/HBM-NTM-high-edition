@@ -1,11 +1,13 @@
 package com.hbm.main;
 
+import com.hbm.HBM;
 import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.entity.ModEntityType;
 import com.hbm.Inventory.fluid.ModFluids;
 import com.hbm.gui.ModMenuType;
 import com.hbm.gui.screen.*;
 import com.hbm.gui.screen.RenderUtils;
+import com.hbm.item.HBMItems;
 import com.hbm.item.tool.FluidBucketItem;
 import com.hbm.registries.ModKeyMapping;
 import com.hbm.registries.ModItems;
@@ -23,11 +25,14 @@ import com.hbm.render.entity.effect.BlackHoleRender;
 import com.hbm.render.entity.EntityBlankRender;
 import com.hbm.render.entity.effect.EntityTorexRender;
 import com.hbm.render.item.SpecialItemRender;
+import com.hbm.settings.tooltip.TooltipRegistries;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
+import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.*;
@@ -56,6 +61,7 @@ public class ClientEventHanler {
         forgeBus.addListener(ClientEventHanler::onKeyPressed);
         forgeBus.addListener(AtomicFlashOverlay::onClientTick);
         forgeBus.addListener(AtomicFlashOverlay::onGuiRender);
+        forgeBus.addListener(TooltipRegistries::onTooltip);
     }
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event)
@@ -98,7 +104,9 @@ public class ClientEventHanler {
             EntityRenderers.register(ModEntityType.GLYPHID.get(), GlyphidRender::new);
 
             RenderUtils.init();
-//            specialItemRender = new SpecialItemRender(Minecraft.getInstance().getBlockEntityRenderDispatcher(),Minecraft.getInstance().getEntityModels());
+            // 物品贴图逻辑
+            ItemProperties.register(HBMItems.INGOT_U238M2.get(), HBM.rl("stage"),
+                    (stack, level, entity, seed) -> stack.hasTag() ? stack.getTag().getInt("stage") : 0);
         });
     }
 
@@ -169,6 +177,6 @@ public class ClientEventHanler {
         // 流体桶的染色
         FluidBucketItem[] fluidBucketItems = ModFluids.fluidList.stream().map(holder -> holder.bucket().get()).filter(bucket -> bucket instanceof FluidBucketItem).toArray(FluidBucketItem[]::new);
         event.register(FluidBucketItem::getColor, fluidBucketItems);
-        event.register((itemstack,color)->0xEC9A63, ModItems.BEDROCK_ORE.get());
+        event.register((itemstack,color)->0xEC9A63, HBMItems.BEDROCK_ORE.get());
     }
 }

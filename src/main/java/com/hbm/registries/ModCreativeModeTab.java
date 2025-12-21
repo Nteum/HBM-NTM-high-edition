@@ -4,10 +4,7 @@ import com.hbm.HBMLang;
 import com.hbm.Inventory.fluid.ModFluids;
 import com.hbm.block.HBMBlockComponent;
 import com.hbm.block.HBMMachine;
-import com.hbm.item.HBMCombat;
-import com.hbm.item.HBMComponent;
-import com.hbm.item.HBMWeapon;
-import com.hbm.item.HBMtools;
+import com.hbm.item.*;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.BucketItem;
@@ -28,31 +25,31 @@ public class ModCreativeModeTab {
         .title(Component.translatable(HBMLang.ITEMGROUP_ITEM.key()))
         .icon(() -> HBMtools.UPGRADE_BASE.get().getDefaultInstance())
 	        .displayItems((parameters, output) -> {
-            output.accept(ModItems.ingot_red_copper.get());
-            output.accept(ModItems.ingot_tungsten.get());
-            output.accept(ModItems.ingot_aluminium.get());
-            output.accept(ModItems.ingot_lead.get());
-            output.accept(ModItems.ingot_zirconium.get());
-            output.accept(ModItems.ingot_magnetized_tungsten.get());
-            output.accept(ModItems.ingot_solinium.get());
-            output.accept(ModItems.ingot_advanced_alloy.get());
-            output.accept(ModItems.plate_iron.get());
-            output.accept(ModItems.plate_advanced_alloy.get());
-            output.accept(ModItems.fluorite.get());
-            output.accept(ModItems.nugget_zirconium.get());
-            output.accept(ModItems.solid_fuel.get());
-            output.accept(ModItems.lignite.get());
-            output.accept(ModItems.powder_lignite.get());
-            output.accept(ModItems.powder_coal.get());
-            output.accept(ModItems.powder_coal_tiny.get());
-            output.accept(ModItems.coke_coal.get());
-            output.accept(ModItems.coke_lignite.get());
-            output.accept(ModItems.coke_petroleum.get());
-            output.accept(ModItems.briquette_wood.get());
-            output.accept(ModItems.briquette_coal.get());
-            output.accept(ModItems.briquette_lignite.get());
-
-            output.accept(ModItems.BEDROCK_ORE.get());
+//            output.accept(ModItems.ingot_red_copper.get());
+//            output.accept(ModItems.ingot_tungsten.get());
+//            output.accept(ModItems.ingot_aluminium.get());
+//            output.accept(ModItems.ingot_lead.get());
+//            output.accept(ModItems.ingot_zirconium.get());
+//            output.accept(ModItems.ingot_magnetized_tungsten.get());
+//            output.accept(ModItems.ingot_solinium.get());
+//            output.accept(ModItems.ingot_advanced_alloy.get());
+//            output.accept(ModItems.plate_iron.get());
+//            output.accept(ModItems.plate_advanced_alloy.get());
+//            output.accept(ModItems.fluorite.get());
+//            output.accept(ModItems.nugget_zirconium.get());
+//            output.accept(ModItems.solid_fuel.get());
+//            output.accept(ModItems.lignite.get());
+//            output.accept(ModItems.powder_lignite.get());
+//            output.accept(ModItems.powder_coal.get());
+//            output.accept(ModItems.powder_coal_tiny.get());
+//            output.accept(ModItems.coke_coal.get());
+//            output.accept(ModItems.coke_lignite.get());
+//            output.accept(ModItems.coke_petroleum.get());
+//            output.accept(ModItems.briquette_wood.get());
+//            output.accept(ModItems.briquette_coal.get());
+//            output.accept(ModItems.briquette_lignite.get());
+//
+//            output.accept(ModItems.BEDROCK_ORE.get());
 
             output.accept(HBMtools.UPGRADE_BASE.get());
 
@@ -97,64 +94,64 @@ public class ModCreativeModeTab {
             output.accept(ModBlocks.tokamak_heater.get());
             output.accept(ModBlocks.tokamak_injector.get());
 	            output.accept(ModBlocks.tokamak_port.get());
-	            output.accept(ModItems.rbmk_lid.get());
-	            output.accept(ModItems.rbmk_lid_glass.get());
-	            output.accept(ModItems.rbmk_fuel_base.get());
-	            output.accept(ModItems.rbmk_fuel_lea.get());
-	            output.accept(ModItems.rbmk_fuel_leaus.get());
-	            output.accept(ModItems.rbmk_fuel_lep.get());
-	            output.accept(ModItems.rbmk_fuel_les.get());
-	            output.accept(ModItems.rbmk_fuel_mea.get());
-	            output.accept(ModItems.rbmk_fuel_men.get());
-	            output.accept(ModItems.rbmk_fuel_mep.get());
-	            output.accept(ModItems.rbmk_fuel_mes.get());
-	            output.accept(ModItems.rbmk_fuel_meu.get());
-	            output.accept(ModItems.rbmk_fuel_ueu.get());
-	            output.accept(ModItems.rbmk_fuel_mox.get());
-	            output.accept(ModItems.rbmk_fuel_thmeu.get());
-	            output.accept(ModItems.rbmk_fuel_heu233.get());
-	            output.accept(ModItems.rbmk_fuel_heu235.get());
-	            output.accept(ModItems.rbmk_fuel_heaus.get());
-	            output.accept(ModItems.rbmk_fuel_hea241.get());
-	            output.accept(ModItems.rbmk_fuel_hea242.get());
-	            output.accept(ModItems.rbmk_fuel_hen.get());
-	            output.accept(ModItems.rbmk_fuel_hep.get());
-	            output.accept(ModItems.rbmk_fuel_hep241.get());
-	            output.accept(ModItems.rbmk_fuel_hes.get());
-	            output.accept(ModItems.rbmk_fuel_drx.get());
-	            output.accept(ModItems.rbmk_fuel_flashlead.get());
-	            output.accept(ModItems.rbmk_fuel_balefire.get());
-	            output.accept(ModItems.rbmk_fuel_balefire_gold.get());
-	            output.accept(ModItems.rbmk_fuel_po210be.get());
-	            output.accept(ModItems.rbmk_fuel_pu238be.get());
-	            output.accept(ModItems.rbmk_fuel_ra226be.get());
-	            output.accept(ModItems.rbmk_fuel_zfb_base.get());
-	            output.accept(ModItems.rbmk_fuel_zfb_bismuth.get());
-	            output.accept(ModItems.rbmk_fuel_zfb_pu241.get());
-	            output.accept(ModItems.rbmk_fuel_zfb_am_mix.get());
-	            output.accept(ModItems.rbmk_fuel_test.get());
-	            output.accept(ModItems.rbmk_fuel_empty.get());
-	            output.accept(ModBlocks.RED_CABLE.get());
+//	            output.accept(ModItems.rbmk_lid.get());
+//	            output.accept(ModItems.rbmk_lid_glass.get());
+//	            output.accept(ModItems.rbmk_fuel_base.get());
+//	            output.accept(ModItems.rbmk_fuel_lea.get());
+//	            output.accept(ModItems.rbmk_fuel_leaus.get());
+//	            output.accept(ModItems.rbmk_fuel_lep.get());
+//	            output.accept(ModItems.rbmk_fuel_les.get());
+//	            output.accept(ModItems.rbmk_fuel_mea.get());
+//	            output.accept(ModItems.rbmk_fuel_men.get());
+//	            output.accept(ModItems.rbmk_fuel_mep.get());
+//	            output.accept(ModItems.rbmk_fuel_mes.get());
+//	            output.accept(ModItems.rbmk_fuel_meu.get());
+//	            output.accept(ModItems.rbmk_fuel_ueu.get());
+//	            output.accept(ModItems.rbmk_fuel_mox.get());
+//	            output.accept(ModItems.rbmk_fuel_thmeu.get());
+//	            output.accept(ModItems.rbmk_fuel_heu233.get());
+//	            output.accept(ModItems.rbmk_fuel_heu235.get());
+//	            output.accept(ModItems.rbmk_fuel_heaus.get());
+//	            output.accept(ModItems.rbmk_fuel_hea241.get());
+//	            output.accept(ModItems.rbmk_fuel_hea242.get());
+//	            output.accept(ModItems.rbmk_fuel_hen.get());
+//	            output.accept(ModItems.rbmk_fuel_hep.get());
+//	            output.accept(ModItems.rbmk_fuel_hep241.get());
+//	            output.accept(ModItems.rbmk_fuel_hes.get());
+//	            output.accept(ModItems.rbmk_fuel_drx.get());
+//	            output.accept(ModItems.rbmk_fuel_flashlead.get());
+//	            output.accept(ModItems.rbmk_fuel_balefire.get());
+//	            output.accept(ModItems.rbmk_fuel_balefire_gold.get());
+//	            output.accept(ModItems.rbmk_fuel_po210be.get());
+//	            output.accept(ModItems.rbmk_fuel_pu238be.get());
+//	            output.accept(ModItems.rbmk_fuel_ra226be.get());
+//	            output.accept(ModItems.rbmk_fuel_zfb_base.get());
+//	            output.accept(ModItems.rbmk_fuel_zfb_bismuth.get());
+//	            output.accept(ModItems.rbmk_fuel_zfb_pu241.get());
+//	            output.accept(ModItems.rbmk_fuel_zfb_am_mix.get());
+//	            output.accept(ModItems.rbmk_fuel_test.get());
+//	            output.accept(ModItems.rbmk_fuel_empty.get());
+//	            output.accept(ModBlocks.RED_CABLE.get());
 	            HBMMachine.creativeTab(output);
 	        }).build());
     public static final RegistryObject<CreativeModeTab> HBM_TOOL = CREATIVE_MODE_TABS.register("hbm_weapon", () -> CreativeModeTab.builder()
         .title(Component.translatable(HBMLang.ITEMGROUP_TOOL.key()))
-            .icon(()->ModItems.DETONATOR.get().getDefaultInstance())
+            .icon(()-> HBMItems.DETONATOR.get().getDefaultInstance())
         .displayItems((parameters, output) -> {
 //            output.accept(ModItems.detonator.get());
 
-            output.accept(ModItems.grenade_generic.get());
-            output.accept(ModItems.grenade_strong.get());
-            output.accept(ModItems.grenade_fire.get());
-            output.accept(ModItems.grenade_frag.get());
-            output.accept(ModItems.grenade_black_hole.get());
+//            output.accept(ModItems.grenade_generic.get());
+//            output.accept(ModItems.grenade_strong.get());
+//            output.accept(ModItems.grenade_fire.get());
+//            output.accept(ModItems.grenade_frag.get());
+//            output.accept(ModItems.grenade_black_hole.get());
 
 //            output.accept(ModItems.bucket_irradiated_water.get());
 //            output.accept(ModItems.bucket_irradiated_polluted.get());
 //            output.accept(ModItems.bucket_sulfuric_acid.get());
             output.accept(ModBlocks.conveyor.get());
 
-            output.accept(ModItems.SCREWDRIVER.get());
+            output.accept(HBMItems.SCREWDRIVER.get());
 
             HBMtools.creativeTab(output);
             HBMWeapon.creativeTab(output);

@@ -5,6 +5,7 @@ import com.hbm.api.Mode;
 import com.hbm.api.inventory.ModeBuilder;
 import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.blockentity.base2.BaseMachineBlockEntity;
+import com.hbm.item.HBMItems;
 import com.hbm.item.rbmk.ItemRBMKFuelRod;
 import com.hbm.reactor.rbmk.RBMKColumnState;
 import com.hbm.reactor.rbmk.RBMKLevelContext;
@@ -128,7 +129,7 @@ public class RBMKFuelChannelEntity extends BaseMachineBlockEntity {
             setChanged();
         }
         if (burnTimeRemaining == 0 && burnTimeTotal > 0) {
-            ItemStack spentFuel = ModItems.rbmk_fuel_empty.get().getDefaultInstance();
+            ItemStack spentFuel = HBMItems.rbmk_fuel_empty.get().getDefaultInstance();
             if (!insertIntoOutput(spentFuel.copy())) {
                 Containers.dropItemStack(serverLevel, worldPosition.getX() + 0.5D, worldPosition.getY() + 1.0D, worldPosition.getZ() + 0.5D, spentFuel.copy());
             }

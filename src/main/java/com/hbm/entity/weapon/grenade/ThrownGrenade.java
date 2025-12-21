@@ -1,5 +1,6 @@
 package com.hbm.entity.weapon.grenade;
 
+import com.hbm.item.HBMItems;
 import com.hbm.registries.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -158,7 +159,7 @@ abstract public class ThrownGrenade extends Projectile implements ItemSupplier {
     protected ItemStack getItemRaw() {
         return this.getEntityData().get(DATA_GRENADE_STACK);
     }
-    protected @NotNull Item getDefaultItem() {return ModItems.grenade_generic.get();}
+    protected @NotNull Item getDefaultItem() {return HBMItems.grenade_generic.get();}
     public @NotNull ItemStack getItem() {
         ItemStack itemstack = this.getItemRaw();
         return itemstack.isEmpty() ? new ItemStack(this.getDefaultItem()) : itemstack;

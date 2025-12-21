@@ -5,21 +5,30 @@ import com.hbm.datagen.LanguageProvider;
 import com.hbm.datagen.loot.BlockLootGen;
 import com.hbm.datagen.model.BlockStateGen;
 import com.hbm.datagen.model.ItemModelGen;
+import com.hbm.item.HBMItems;
+import com.hbm.registries.ModBlocks;
+import com.hbm.registries.RegistryHelper;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.Nullable;
 
-public class WrapperRegistry<T> {
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Supplier;
+
+public class WrapperRegistry<T> implements Supplier<T>{
     RegistryObject<T> registryObject;
     String localizedName;
+    // 根据id生成本地语言名的方式或者就是本地语言名本身。
     String genNameWay = HBMKey.ORDERLY_GEN;
     public T get(){
         return registryObject.get();
@@ -37,13 +46,15 @@ public class WrapperRegistry<T> {
     public static class WrappedItemRegistry extends WrapperRegistry<Item>{
         ResourceKey<CreativeModeTab> creativeKey;
         String genModelWay = HBMKey.BASIC_MODEL;
+        Consumer<ItemModelGen> modelFactory;
         public void languageSupport(LanguageProvider provider){
             switch (genNameWay){
                 case HBMKey.LITERALLY -> provider.add(get(), localizedName);
                 case HBMKey.ORDERLY_GEN -> provider.add(get(), RegistryHelper.generateOrderlyName(getId().getPath()));
                 case HBMKey.REVERSE_GEN -> provider.add(get(), RegistryHelper.generateReversedName(getId().getPath()));
                 case HBMKey.ORDERLY_GEN_EXCEPT_FIRST -> provider.add(get(), RegistryHelper.generateOrderlyExceptFirstName(getId().getPath()));
-                default -> provider.add(get(), getId().toLanguageKey());
+                // 如何无法匹配上，则视为直接输入的翻译内容
+                default -> provider.add(get(), genNameWay);
             }
         }
 
@@ -54,11 +65,94 @@ public class WrapperRegistry<T> {
         }
 
         public void modelSupport(ItemModelGen provider){
-            if (genModelWay.equals(HBMKey.BASIC_MODEL)){
-                provider.basicItem(get());
-            }else if (genModelWay.equals(HBMKey.SPAWN_EGG_MODEL)){
-                provider.withExistingParent(localizedName, "minecraft:item/template_spawn_egg");
+            switch (genModelWay) {
+                case HBMKey.BASIC_MODEL -> provider.basicItem(get());
+                case HBMKey.SPAWN_EGG_MODEL ->
+                        provider.withExistingParent(localizedName, "minecraft:item/template_spawn_egg");
+                case HBMKey.MODEL_STANDALONE -> {
+                    if (modelFactory != null) modelFactory.accept(provider);
+                }
+                case HBMKey.MODEL_DYNAMIC -> {
+
+                }
             }
+        }
+    }
+
+    private static abstract class Builder<T>{
+        final String name;
+        final Supplier<? extends T> sup;
+        String genNameWay = HBMKey.ORDERLY_GEN;
+        String localizedName;
+
+        Builder(String name, Supplier<? extends T> sup){
+            this.name = name;
+            this.sup = sup;
+        }
+
+        public abstract RegistryObject<T> build();
+    }
+
+    public static class ItemBuilder extends Builder<Item>{
+        ResourceKey<CreativeModeTab> creativeKey;
+        String genModelWay = HBMKey.BASIC_MODEL;
+        Consumer<ItemModelGen> modelGen;
+        // 动态物品模型参数
+        String propertyName;
+        Supplier<Boolean> condition;
+        public ItemBuilder(String name, Supplier<? extends Item> sup) {
+            super(name, sup);
+        }
+
+        public ItemBuilder tab(ResourceKey<CreativeModeTab> tabKey){
+            creativeKey = tabKey;
+            return this;
+        }
+        // 直接指定模型生成函数
+        public ItemBuilder model(Consumer<ItemModelGen> modelGen){
+            this.genModelWay = HBMKey.MODEL_STANDALONE;
+            this.modelGen = modelGen;
+            return this;
+        }
+
+        public ItemBuilder model(String genModelWay){
+            this.genModelWay = genModelWay;
+            return this;
+        }
+
+        /**
+         * 新增方法：配置文件控制贴图
+         * @param propertyName 客户端 property 名称，对应模型 overrides 的 predicate 名
+         * @param condition 返回 true 或 false，根据配置切换贴图
+         */
+        public ItemBuilder withConfigTexture(String propertyName, Supplier<Boolean> condition) {
+            this.propertyName = propertyName;
+            this.condition = condition;
+            this.genModelWay = HBMKey.MODEL_DYNAMIC;
+            return this;
+        }
+        public ItemBuilder loc(String genNameWay){
+            this.genNameWay = genNameWay;
+            return this;
+        }
+
+        @Override
+        public RegistryObject<Item> build() {
+            WrappedItemRegistry itemRegistry = new WrappedItemRegistry();
+            itemRegistry.registryObject = HBMItems.ITEMS.register(name, sup);
+            itemRegistry.creativeKey = creativeKey;
+            itemRegistry.genModelWay = genModelWay;
+            itemRegistry.genNameWay = genNameWay;
+            itemRegistry.modelFactory = modelGen;
+            if (itemRegistry.genNameWay!= null && itemRegistry.genNameWay.equals(HBMKey.LITERALLY) && localizedName!=null)
+                itemRegistry.localizedName = localizedName;
+//            // 不要在这里直接 ItemProperties.register！
+//            if (propertyName != null && condition != null) {
+//                // 将 supplier 交给 ModItemProperties，建议传 RegistryObject::get 或包装后的 Item supplier
+//                HBMItemProperties.add(itemRegistry, propertyName, condition);
+//            }
+            HBMItems.itemList.add(itemRegistry);
+            return itemRegistry.registryObject;
         }
     }
 
@@ -66,13 +160,15 @@ public class WrapperRegistry<T> {
         ResourceKey<CreativeModeTab> creativeKey;
         String genModelWay = HBMKey.BASIC_MODEL;
         String lootWay = HBMKey.DROP_SELF;
+        BiConsumer<Block, BlockStateGen> modelFactory;
         public void languageSupport(LanguageProvider provider){
             switch (genNameWay){
                 case HBMKey.LITERALLY -> provider.add(get(), localizedName);
                 case HBMKey.ORDERLY_GEN -> provider.add(get(), RegistryHelper.generateOrderlyName(getId().getPath()));
                 case HBMKey.REVERSE_GEN -> provider.add(get(), RegistryHelper.generateReversedName(getId().getPath()));
                 case HBMKey.ORDERLY_GEN_EXCEPT_FIRST -> provider.add(get(), RegistryHelper.generateOrderlyExceptFirstName(getId().getPath()));
-                default -> provider.add(get(), getId().toLanguageKey());
+//                default -> provider.add(get(), getId().toLanguageKey());
+                default -> provider.add(get(), genNameWay);
             }
         }
 
@@ -83,8 +179,15 @@ public class WrapperRegistry<T> {
         }
 
         public void modelSupport(BlockStateGen provider){
-            if (genModelWay.equals(HBMKey.CUBE_ALL_MODEL)){
-                provider.cubeAll(get());
+            switch (genModelWay) {
+//                case HBMKey.MODEL_CUBE_ALL -> provider.simpleBlockWithItem(get());
+//                case HBMKey.MODEL_FRONT_SIDE -> provider.frontSideBlockWithItem(get());
+//                case HBMKey.MODEL_FRONT_SIDE_TOP -> provider.frontSideTopBlockWithItem(get());
+//                case HBMKey.MODEL_DIFURNACE -> provider.difuranceBlockWithItem(get());
+//                case HBMKey.MODEL_HORIZONTAL_WITH_FILE -> provider.addObjHorizonalModel(get());
+                default -> {
+                    if (modelFactory instanceof BiConsumer<Block, BlockStateGen>) modelFactory.accept(get(), provider);
+                }
             }
         }
 
@@ -93,6 +196,66 @@ public class WrapperRegistry<T> {
                 case HBMKey.DROP_SELF -> provider.dropSelf(registryObject.get());
                 case HBMKey.DROP_NONE -> provider.add(registryObject.get(), BlockLootSubProvider.noDrop());
             }
+        }
+
+    }
+
+    public static class BlockBuilder extends Builder<Block>{
+        // 这个默认值是要保留的
+        String genModelWay = HBMKey.BASIC_MODEL;
+        String lootWay = HBMKey.DROP_SELF;
+        ResourceKey<CreativeModeTab> creativeKey;
+        BiConsumer<Block, BlockStateGen> modelGen;
+        Function<Block, BlockItem> blockItem;
+        public BlockBuilder(String name, Supplier<? extends Block> sup) {
+            super(name, sup);
+        }
+
+        public BlockBuilder tab(ResourceKey<CreativeModeTab> tabKey){
+            creativeKey = tabKey;
+            return this;
+        }
+
+        public BlockBuilder model(BiConsumer<Block, BlockStateGen> modelGen){
+            this.genModelWay = HBMKey.MODEL_STANDALONE;
+            this.modelGen = modelGen;
+            return this;
+        }
+
+        public BlockBuilder model(String genModelWay){
+            this.genModelWay = genModelWay;
+            return this;
+        }
+        // 仅限于简单的loot，过于复杂的loot请在LootGen中单独指定
+        public BlockBuilder loot(String lootWay){
+            this.lootWay = lootWay;
+            return this;
+        }
+
+        public BlockBuilder loc(String genNameWay){
+            this.genNameWay = genNameWay;
+            return this;
+        }
+
+        public BlockBuilder item(Function<Block, BlockItem> blockItem){
+            this.blockItem = blockItem;
+            return this;
+        }
+
+        @Override
+        public RegistryObject<Block> build() {
+            WrappedBlockRegistry blockRegistry = new WrappedBlockRegistry();
+            blockRegistry.registryObject = ModBlocks.BLOCKS.register(name, sup);
+            HBMItems.ITEMS.register(name, blockItem != null ? () -> blockItem.apply(blockRegistry.get()) : ()->new BlockItem(blockRegistry.get(),new Item.Properties()));
+            blockRegistry.creativeKey = creativeKey;
+            blockRegistry.genModelWay = genModelWay;
+            blockRegistry.genNameWay = genNameWay;
+            blockRegistry.modelFactory = modelGen;
+            blockRegistry.lootWay = lootWay;
+            if (blockRegistry.genNameWay!= null && blockRegistry.genNameWay.equals(HBMKey.LITERALLY) && localizedName!=null)
+                blockRegistry.localizedName = localizedName;
+            ModBlocks.blockList.add(blockRegistry);
+            return blockRegistry.registryObject;
         }
     }
 }

@@ -8,6 +8,7 @@ import com.hbm.block.HBMMachine;
 import com.hbm.blockentity.interfaces.IUpgradeInfoProvider;
 import com.hbm.item.HBMCombat;
 import com.hbm.item.HBMComponent;
+import com.hbm.item.HBMItems;
 import com.hbm.registries.HBMDamage;
 import com.hbm.registries.ModKeyMapping;
 import com.hbm.registries.ModBlocks;
@@ -21,25 +22,27 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
 
     @Override
     protected void addTranslations() {
+        autoAdd();
+        HBMItems.languageSupport(this);
+        HBMDamage.languageSupport(this);
+        ModFluids.localName(this);
+        ModKeyMapping.localName(this);
+
         ModItems.languageSupport(this);
         ModBlocks.languageSupport(this);
-        HBMDamage.languageSupport(this);
+
         addCreativeTabs();
         addItems();
         addBlocks();
-        addMisc();
         addTooltip();
-        addContainer();
-        addFluidTrait();
-        addLookTooltip();
-        addDebug();
-        addGeneral();
-        ModFluids.localName(this);
-        addEffect();
-        autoAdd();
-        ModKeyMapping.localName(this);
-        //物品
-        this.add(ModItems.coke_coal.get(),"Coal Coke");
+//        addLookTooltip();
+//        addGeneral();
+
+//        addEffect();
+//        autoAdd();
+
+//        //物品
+//        this.add(ModItems.coke_coal.get(),"Coal Coke");
         //方块
         this.add(ModBlocks.machine_difurnace.get(),"Blast Furnace");
         this.add(ModBlocks.machine_electric_furnace.get(),"Electric Furnace");
@@ -63,11 +66,11 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
 //        this.add("hbmxx.container.crucible","Crucible");
     }
     private void addCreativeTabs(){
-        this.add(HBMLang.ITEMGROUP_ITEM);
-        this.add(HBMLang.ITEMGROUP_BLOCK);
-        this.add(HBMLang.ITEMGROUP_MACHINE);
-        this.add(HBMLang.ITEMGROUP_TOOL);
-        this.add(HBMLang.ITEMGROUP_WEAPON);
+//        this.add(HBMLang.ITEMGROUP_ITEM);
+//        this.add(HBMLang.ITEMGROUP_BLOCK);
+//        this.add(HBMLang.ITEMGROUP_MACHINE);
+//        this.add(HBMLang.ITEMGROUP_TOOL);
+//        this.add(HBMLang.ITEMGROUP_WEAPON);
     }
     private void addItems(){
         HBMComponent.languageSupport(this);
@@ -76,9 +79,6 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
     private void addBlocks(){
         HBMMachine.languageSupport(this);
         HBMBlockComponent.languageSupport(this);
-    }
-    private void addMisc(){
-        this.add(HBMLang.ENERGY);
     }
     private void addTooltip(){
         this.add(IUpgradeInfoProvider.KEY_ACID,"Acid required %s");
@@ -91,19 +91,6 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
         this.add(IUpgradeInfoProvider.KEY_PRODUCTIVITY,"Productivity %s");
         this.add(IUpgradeInfoProvider.KEY_FORTUNE,"Fortune %s");
         this.add(IUpgradeInfoProvider.KEY_RANGE,"Range %s");
-        this.add(HBMLang.UPGRADE_RADIUS);
-        this.add(HBMLang.UPGRADE_HEALTH);
-        this.add(HBMLang.UPGRADE_SMELTER);
-        this.add(HBMLang.UPGRADE_SHREDDER);
-        this.add(HBMLang.UPGRADE_CENTRIFUGE);
-        this.add(HBMLang.UPGRADE_CRYSTALLIZER);
-        this.add(HBMLang.UPGRADE_SCREAM);
-        this.add(HBMLang.UPGRADE_NULLIFIER);
-        this.add(HBMLang.UPGRADE_GC_SPEED);
-
-        this.add(HBMLang.TOOLTIP_LEFT_TIME);
-        this.add(HBMLang.TOOLTIP_TANK_VOLUME);
-        this.add(HBMLang.TOOLTIP_ENERGY);
         this.add("gui.hbm.shredder.no_blade", "Error: Shredder blades are broken or missing!");
         this.add("gui.hbm.tokamak.start", "Start fusion");
         this.add("gui.hbm.tokamak.stop", "Scram");
@@ -117,85 +104,76 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
         this.add("gui.hbm.rbmk.control_local", "Local control: %s%%");
         this.add("gui.hbm.rbmk.control_global", "Global control: %s%%");
         this.add("gui.hbm.rbmk.no_column", "Column not registered");
-
-        this.add(HBMLang.TOOLTIP_GEIGER0);
-        this.add(HBMLang.TOOLTIP_GEIGER1);
-        this.add(HBMLang.TOOLTIP_GEIGER2);
-        this.add(HBMLang.TOOLTIP_GEIGER3);
-        this.add(HBMLang.TOOLTIP_GEIGER4);
     }
-    private void addContainer(){
-        this.add(HBMLang.DIFURNACE);
-        this.add(HBMLang.CRUCIBLE);
-        this.add(HBMLang.ELECTRIC_FURNACE);
-        this.add(HBMLang.BOILER);
-        this.add(HBMLang.ELECTRIC_BOILER);
-        this.add(HBMLang.NUCLEAR_BOILER);
-        this.add(HBMLang.ASSEMBLER);
-        this.add(HBMLang.CHEMPLANT);
-        this.add(HBMLang.SHREDDER);
-        this.add(HBMLang.BARREL);
-        this.add(HBMLang.BATTERY);
-        this.add(HBMLang.TOKAMAK);
-        this.add(HBMLang.RBMK);
-    }
-    private void addFluidTrait(){
-        this.add(HBMLang.FT_GASEOUS);
-        this.add(HBMLang.FT_GASEOUS_ART);
-        this.add(HBMLang.FT_LIQUID);
-        this.add(HBMLang.FT_VISCOUS);
-        this.add(HBMLang.FT_PLASMA);
-        this.add(HBMLang.FT_AMAT);
-        this.add(HBMLang.FT_LEAD_CONTAINER);
-        this.add(HBMLang.FT_DELICIOUS);
-        this.add(HBMLang.FT_UNSIPHONABLE);
-        this.add(HBMLang.FT_FLAME);
-        this.add(HBMLang.FT_VENT_RADIATION);
-        this.add(HBMLang.FT_COMBUSTIBLE1);
-        this.add(HBMLang.FT_COMBUSTIBLE2);
-        this.add(HBMLang.FT_COMBUSTIBLE3);
-        this.add(HBMLang.FT_THERMAL_CAPACITY);
-        this.add(HBMLang.FT_EFFICIENCY);
-        this.add(HBMLang.FT_CORROSIVE1);
-        this.add(HBMLang.FT_CORROSIVE2);
-        this.add(HBMLang.FT_FLAMMABLE1);
-        this.add(HBMLang.FT_FLAMMABLE2);
-        this.add(HBMLang.FT_HEATABLE1);
-        this.add(HBMLang.FT_PHEROMONE1);
-        this.add(HBMLang.FT_PHEROMONE2);
-        this.add(HBMLang.FT_POISON);
-        this.add(HBMLang.FT_PER_MB);
-        this.add(HBMLang.FT_POLLUTION1);
-        this.add(HBMLang.FT_POLLUTION2);
-        this.add(HBMLang.FT_POLLUTION3);
-        this.add(HBMLang.FT_PWRMODERATOR);
-        this.add(HBMLang.FT_CORE_FLUX);
-        this.add(HBMLang.FT_RADIOACTIVE);
-    }
-    private void addDebug(){
-        this.add(HBMLang.CACHED_DATA);
-        this.add(HBMLang.POS_DATA);
-        this.add(HBMLang.CHUNK_DATA);
-        this.add(HBMLang.BLOCK_STATE_LOSE);
-        this.add(HBMLang.BLOCK_STATE_INFO);
-    }
+//    private void addContainer(){
+//        this.add(HBMLang.DIFURNACE);
+//        this.add(HBMLang.CRUCIBLE);
+//        this.add(HBMLang.ELECTRIC_FURNACE);
+//        this.add(HBMLang.BOILER);
+//        this.add(HBMLang.ELECTRIC_BOILER);
+//        this.add(HBMLang.NUCLEAR_BOILER);
+//        this.add(HBMLang.ASSEMBLER);
+//        this.add(HBMLang.CHEMPLANT);
+//        this.add(HBMLang.SHREDDER);
+//        this.add(HBMLang.BARREL);
+//        this.add(HBMLang.BATTERY);
+//        this.add(HBMLang.TOKAMAK);
+//        this.add(HBMLang.RBMK);
+//    }
+//    private void addFluidTrait(){
+//        this.add(HBMLang.FT_GASEOUS);
+//        this.add(HBMLang.FT_GASEOUS_ART);
+//        this.add(HBMLang.FT_LIQUID);
+//        this.add(HBMLang.FT_VISCOUS);
+//        this.add(HBMLang.FT_PLASMA);
+//        this.add(HBMLang.FT_AMAT);
+//        this.add(HBMLang.FT_LEAD_CONTAINER);
+//        this.add(HBMLang.FT_DELICIOUS);
+//        this.add(HBMLang.FT_UNSIPHONABLE);
+//        this.add(HBMLang.FT_FLAME);
+//        this.add(HBMLang.FT_VENT_RADIATION);
+//        this.add(HBMLang.FT_COMBUSTIBLE1);
+//        this.add(HBMLang.FT_COMBUSTIBLE2);
+//        this.add(HBMLang.FT_COMBUSTIBLE3);
+//        this.add(HBMLang.FT_THERMAL_CAPACITY);
+//        this.add(HBMLang.FT_EFFICIENCY);
+//        this.add(HBMLang.FT_CORROSIVE1);
+//        this.add(HBMLang.FT_CORROSIVE2);
+//        this.add(HBMLang.FT_FLAMMABLE1);
+//        this.add(HBMLang.FT_FLAMMABLE2);
+//        this.add(HBMLang.FT_HEATABLE1);
+//        this.add(HBMLang.FT_PHEROMONE1);
+//        this.add(HBMLang.FT_PHEROMONE2);
+//        this.add(HBMLang.FT_POISON);
+//        this.add(HBMLang.FT_PER_MB);
+//        this.add(HBMLang.FT_POLLUTION1);
+//        this.add(HBMLang.FT_POLLUTION2);
+//        this.add(HBMLang.FT_POLLUTION3);
+//        this.add(HBMLang.FT_PWRMODERATOR);
+//        this.add(HBMLang.FT_CORE_FLUX);
+//        this.add(HBMLang.FT_RADIOACTIVE);
+//    }
+//    private void addDebug(){
+//        this.add(HBMLang.CACHED_DATA);
+//        this.add(HBMLang.POS_DATA);
+//        this.add(HBMLang.CHUNK_DATA);
+//        this.add(HBMLang.BLOCK_STATE_LOSE);
+//        this.add(HBMLang.BLOCK_STATE_INFO);
+//    }
     private void autoAdd(){
         for (HBMLang value : HBMLang.values()) {
-            if (value.autoAdd) this.add(value);
+            this.add(value);
         }
     }
-    private void addEffect(){
-        this.add(HBMLang.EFFECT_RADIATION);
-    }
-    private void addGeneral(){
-        this.add(HBMLang.RECIPE);
-    }
-    private void addLookTooltip(){
-        this.add(HBMLang.LOOKTOOLTIP_CHEMPLANT);
-    }
-    private void add(ILangEntry entry,String value){
-        this.add(entry.key(), value);
-    }
+//    private void addEffect(){
+//        this.add(HBMLang.EFFECT_RADIATION);
+//    }
+//    private void addGeneral(){
+//        this.add(HBMLang.RECIPE);
+//    }
+//    private void addLookTooltip(){
+//        this.add(HBMLang.LOOKTOOLTIP_CHEMPLANT);
+//    }
     private void add(HBMLang entry){
         this.add(entry.key(), entry.content());
     }
