@@ -1,0 +1,125 @@
+{
+  "total": {
+    "done": 76,
+    "all": 114,
+    "percent": 67
+  },
+  "modules": [
+    {
+      "name": "工程 & 基础设施",
+      "done": 6,
+      "total": 9,
+      "percent": 67
+    },
+    {
+      "name": "数据与资源（Assets/DataPack）",
+      "done": 2,
+      "total": 6,
+      "percent": 33
+    },
+    {
+      "name": "基础产线（机器）",
+      "done": 11,
+      "total": 14,
+      "percent": 79
+    },
+    {
+      "name": "物流 & 能量",
+      "done": 5,
+      "total": 8,
+      "percent": 62
+    },
+    {
+      "name": "核爆 & 爆炸",
+      "done": 5,
+      "total": 9,
+      "percent": 56
+    },
+    {
+      "name": "辐射 & 污染",
+      "done": 4,
+      "total": 8,
+      "percent": 50
+    },
+    {
+      "name": "世界生成 & 生物",
+      "done": 3,
+      "total": 6,
+      "percent": 50
+    },
+    {
+      "name": "RBMK 反应堆（移植中）",
+      "done": 20,
+      "total": 20,
+      "percent": 100
+    },
+    {
+      "name": "托卡马克（移植中）",
+      "done": 10,
+      "total": 10,
+      "percent": 100
+    },
+    {
+      "name": "兼容 & 联动",
+      "done": 4,
+      "total": 6,
+      "percent": 67
+    },
+    {
+      "name": "客户端体验（GUI/渲染/音效）",
+      "done": 4,
+      "total": 7,
+      "percent": 57
+    },
+    {
+      "name": "测试 & 性能 & 发布",
+      "done": 1,
+      "total": 4,
+      "percent": 25
+    }
+  ],
+  "milestones": [
+    {
+      "id": "M0",
+      "title": "工程可编译",
+      "detail": "`./gradlew test --offline`",
+      "done": true
+    },
+    {
+      "id": "M0.5",
+      "title": "`runClient` 可启动并进入世界",
+      "detail": "人工验证",
+      "done": false
+    },
+    {
+      "id": "M1",
+      "title": "基础产线可玩",
+      "detail": "第一批机器 + 配方 + 电力/物流",
+      "done": false
+    },
+    {
+      "id": "M2",
+      "title": "核爆可玩",
+      "detail": "MK3/MK5 + 手榴弹/导弹",
+      "done": false
+    },
+    {
+      "id": "M3",
+      "title": "辐射可玩",
+      "detail": "物品辐射 + 环境辐射 + 防护/盖格",
+      "done": false
+    },
+    {
+      "id": "M4",
+      "title": "反应堆可玩",
+      "detail": "RBMK + Tokamak",
+      "done": false
+    },
+    {
+      "id": "M5",
+      "title": "整合发布",
+      "detail": "配置/平衡/兼容/性能/文档",
+      "done": false
+    }
+  ]
+}
