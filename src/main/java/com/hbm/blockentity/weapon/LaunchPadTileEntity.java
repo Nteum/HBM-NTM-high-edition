@@ -4,6 +4,7 @@ package com.hbm.blockentity.weapon;
 import com.hbm.HBMKey;
 import com.hbm.api.Mode;
 import com.hbm.api.energy.BasicEnergyContainer;
+import com.hbm.api.energy.HybridEnergyStorage;
 import com.hbm.api.energy.ProxyEnergyHandler;
 import com.hbm.api.inventory.ModeBuilder;
 import com.hbm.block.HBMMachine;
@@ -29,6 +30,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 public class LaunchPadTileEntity extends EntityLaunchPadBase {
+	private final HybridEnergyStorage forgeEnergy;
 	protected ContainerData containerData = new ContainerData() {
 		@Override
 		public int get(int pIndex) {
@@ -49,7 +51,9 @@ public class LaunchPadTileEntity extends EntityLaunchPadBase {
 		super(ModBlockEntityType.LAUNCHPAD_ENTITY.get(),pPos, pBlockState, 7);
 		this.slotModes = new ModeBuilder().addModes(7, Mode.BOTH).get();
 		this.energyContainer = new BasicEnergyContainer(maxPower, maxPower, 0, 0);
+		this.forgeEnergy = new HybridEnergyStorage(this.energyContainer);
 		this.capabilitiesContent.addCapability(HBMCaps.LONG_ENERGY, new ProxyEnergyHandler(energyContainer));
+		this.capabilitiesContent.addCapability(ForgeCapabilities.ENERGY, this.forgeEnergy);
 		this.capabilitiesContent.addCapability(ForgeCapabilities.FLUID_HANDLER, this.fluidHandler);
 		this.multiblockData = MultiblockData.mapping.get(HBMMachine.LAUNCH_PAD.get());
 	}

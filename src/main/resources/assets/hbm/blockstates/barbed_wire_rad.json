@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "hbm:block/barbed_wire_rad",
+      "y": 0
+    },
+    "facing=east": {
+      "model": "hbm:block/barbed_wire_rad",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "hbm:block/barbed_wire_rad",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "hbm:block/barbed_wire_rad",
+      "y": 270
+    }
+  }
+}

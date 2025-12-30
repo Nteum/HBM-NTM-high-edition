@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "": { "model": "hbm:block/freaky_alien_block" }
+  }
+}

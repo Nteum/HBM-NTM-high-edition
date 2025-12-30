@@ -9,7 +9,7 @@ import com.hbm.block.weapon.LaunchPad;
 import com.hbm.datagen.LanguageProvider;
 import com.hbm.datagen.loot.BlockLootGen;
 import com.hbm.datagen.model.BlockStateGen;
-import com.hbm.registries.ModItems;
+import com.hbm.item.HBMItems;
 import com.hbm.utils.debug.BlockDebug;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.item.BlockItem;
@@ -53,7 +53,7 @@ public class HBMMachine {
     }
     public static RegistryObject<Block> registerBlockWithItem(DeferredRegister<Block> BLOCKS, final String name, final Supplier<? extends Block> blocksup){
         RegistryObject<Block> block = BLOCKS.register(name,blocksup);
-        ModItems.ITEMS.register(name,()->new BlockItem(block.get(),new Item.Properties()));
+        HBMItems.ITEMS.register(name,()->new BlockItem(block.get(),new Item.Properties()));
         return block;
     }
 

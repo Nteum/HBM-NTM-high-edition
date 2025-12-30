@@ -42,6 +42,7 @@ public class BlockLootGen extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.machine_nuclear_boiler.get());
         this.dropSelf(ModBlocks.machine_press.get());
         this.dropSelf(ModBlocks.machine_shredder.get());
+        this.dropSelf(ModBlocks.machine_wood_burner.get());
         this.dropSelf(ModBlocks.machine_battery.get());
         this.dropSelf(ModBlocks.machine_lithium_battery.get());
         this.dropSelf(ModBlocks.machine_schrabidium_battery.get());
@@ -56,6 +57,12 @@ public class BlockLootGen extends BlockLootSubProvider {
 	        this.dropSelf(ModBlocks.machine_rbmk_heater.get());
 	        this.dropSelf(ModBlocks.machine_rbmk_fuel_channel.get());
 	        this.dropSelf(ModBlocks.machine_rbmk_control_rod.get());
+	        this.dropSelf(ModBlocks.machine_rbmk_console.get());
+	        this.dropSelf(ModBlocks.machine_rbmk_element.get());
+	        this.dropSelf(ModBlocks.machine_rbmk_reflector.get());
+	        this.dropSelf(ModBlocks.machine_rbmk_debris.get());
+	        this.dropSelf(ModBlocks.machine_rbmk_crane_console.get());
+	        this.dropSelf(ModBlocks.machine_rbmk_autoloader.get());
 	        this.dropSelf(ModBlocks.RED_CABLE.get());
         this.dropSelf(ModBlocks.tokamak_controller.get());
         this.dropSelf(ModBlocks.tokamak_casing.get());
@@ -64,6 +71,8 @@ public class BlockLootGen extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.tokamak_injector.get());
         this.dropSelf(ModBlocks.tokamak_port.get());
         this.dropSelf(ModBlocks.conveyor.get());
+        this.dropSelf(ModBlocks.crate_iron.get());
+        this.dropSelf(ModBlocks.crate_steel.get());
         this.dropSelf(ModBlocks.bomb_boy.get());
         this.dropSelf(ModBlocks.bomb_fat_man.get());
         this.dropSelf(ModBlocks.bomb_custom.get());

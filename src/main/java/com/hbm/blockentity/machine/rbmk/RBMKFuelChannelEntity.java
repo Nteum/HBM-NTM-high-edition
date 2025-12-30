@@ -5,12 +5,11 @@ import com.hbm.api.Mode;
 import com.hbm.api.inventory.ModeBuilder;
 import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.blockentity.base2.BaseMachineBlockEntity;
-import com.hbm.item.HBMItems;
 import com.hbm.item.rbmk.ItemRBMKFuelRod;
 import com.hbm.reactor.rbmk.RBMKColumnState;
 import com.hbm.reactor.rbmk.RBMKLevelContext;
 import com.hbm.reactor.rbmk.RBMKManager;
-import com.hbm.registries.ModItems;
+import com.hbm.item.HBMItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
@@ -21,6 +20,8 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
@@ -45,6 +46,8 @@ public class RBMKFuelChannelEntity extends BaseMachineBlockEntity {
     private int burnTimeTotal;
     private int lastRedstoneSignal = -1;
     private int lastComparatorSignal = -1;
+    private final ContainerData containerData = new SimpleContainerData(12);
+    private final int[] dataSlots = new int[12];
 
     public RBMKFuelChannelEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntityType.RBMK_FUEL_CHANNEL_ENTITY.get(), pos, state);
@@ -85,24 +88,21 @@ public class RBMKFuelChannelEntity extends BaseMachineBlockEntity {
             return;
         }
 
-        ItemStack fuelStack = items.get(FUEL_SLOT);
-        if (fuelStack.isEmpty()) {
-            if (burnTimeRemaining != 0 || burnTimeTotal != 0) {
-                burnTimeRemaining = 0;
-                burnTimeTotal = 0;
-                setChanged();
-            }
-            updateSignalLevels();
-            return;
-        }
+        final BlockPos corePos = worldPosition.below();
+        final RBMKLevelContext context = RBMKManager.context(serverLevel);
+        final Optional<RBMKColumnState> column = context.column(corePos);
+        final RBMKBaseEntity baseEntity = level.getBlockEntity(corePos) instanceof RBMKBaseEntity base ? base : null;
+        double reportedHeatPerSecond = 0.0D;
 
-        if (!(fuelStack.getItem() instanceof ItemRBMKFuelRod fuelRod)) {
+        ItemStack fuelStack = items.get(FUEL_SLOT);
+        if (fuelStack.isEmpty() || !(fuelStack.getItem() instanceof ItemRBMKFuelRod fuelRod)) {
             if (burnTimeRemaining != 0 || burnTimeTotal != 0) {
                 burnTimeRemaining = 0;
                 burnTimeTotal = 0;
                 setChanged();
             }
             updateSignalLevels();
+            updateClientData(column.orElse(null), baseEntity, context, reportedHeatPerSecond);
             return;
         }
 
@@ -112,17 +112,15 @@ public class RBMKFuelChannelEntity extends BaseMachineBlockEntity {
             setChanged();
         }
 
-        BlockPos corePos = worldPosition.below();
-        RBMKLevelContext context = RBMKManager.context(serverLevel);
-        Optional<RBMKColumnState> column = context.column(corePos);
-        column.ifPresent(state -> {
+        if (column.isPresent()) {
+            RBMKColumnState state = column.get();
             double controlRod = context.controlRodAverage();
             double heatPerSecond = fuelRod.heatPerSecond() * state.settings().reactivityModifier() * (1.0D - controlRod);
-            if (heatPerSecond <= 0.0D) {
-                return;
+            if (heatPerSecond > 0.0D) {
+                reportedHeatPerSecond = heatPerSecond;
+                context.addHeat(corePos, heatPerSecond * TIME_STEP);
             }
-            context.addHeat(corePos, heatPerSecond * TIME_STEP);
-        });
+        }
 
         if (burnTimeRemaining > 0) {
             burnTimeRemaining--;
@@ -140,6 +138,7 @@ public class RBMKFuelChannelEntity extends BaseMachineBlockEntity {
         }
 
         updateSignalLevels();
+        updateClientData(column.orElse(null), baseEntity, context, reportedHeatPerSecond);
     }
 
     public boolean tryInsertFuel(final Player player, final InteractionHand hand) {
@@ -151,7 +150,7 @@ public class RBMKFuelChannelEntity extends BaseMachineBlockEntity {
             return false;
         }
         ItemStack output = items.get(OUTPUT_SLOT);
-        ItemStack spentPrototype = ModItems.rbmk_fuel_empty.get().getDefaultInstance();
+        ItemStack spentPrototype = HBMItems.rbmk_fuel_empty.get().getDefaultInstance();
         if (!output.isEmpty()) {
             if (!ItemStack.isSameItemSameTags(output, spentPrototype)) {
                 return false;
@@ -224,7 +223,11 @@ public class RBMKFuelChannelEntity extends BaseMachineBlockEntity {
 
     @Override
     public AbstractContainerMenu createMenu(int containerId, Inventory inventory) {
-        return null;
+        return new com.hbm.gui.menu.RBMKFuelChannelMenu(containerId, inventory, this, getContainerData());
+    }
+
+    public ContainerData getContainerData() {
+        return containerData;
     }
 
     public void prepareForDrop() {
@@ -355,6 +358,26 @@ public class RBMKFuelChannelEntity extends BaseMachineBlockEntity {
             return REDSTONE_SIGNAL_ON;
         }
         return Math.min(REDSTONE_SIGNAL_ON, Math.max(0, (int) Math.ceil(fraction * REDSTONE_SIGNAL_ON)));
+    }
+
+    private void updateClientData(@Nullable RBMKColumnState column, @Nullable RBMKBaseEntity base,
+                                  RBMKLevelContext context, double heatPerSecond) {
+        dataSlots[0] = column != null ? (int) Math.round(column.heat() * 10.0D) : 0;
+        dataSlots[1] = column != null ? (int) Math.round(column.settings().meltdownHeat() * 10.0D) : 0;
+        dataSlots[2] = base != null ? (int) Math.min(Integer.MAX_VALUE, base.getEnergyStored()) : 0;
+        dataSlots[3] = base != null ? (int) Math.min(Integer.MAX_VALUE, base.getEnergyCapacity()) : 0;
+        dataSlots[4] = base != null ? base.getWaterAmount() : 0;
+        dataSlots[5] = base != null ? base.getSteamAmount() : 0;
+        dataSlots[6] = burnTimeRemaining;
+        dataSlots[7] = burnTimeTotal;
+        dataSlots[8] = isBurning() ? 1 : 0;
+        dataSlots[9] = (int) Math.round(Math.max(0.0D, heatPerSecond) * 10.0D);
+        dataSlots[10] = column != null ? (int) Math.round(column.controlRodInsertion() * 100.0D) : 0;
+        dataSlots[11] = (int) Math.round(context.controlRodAverage() * 100.0D);
+
+        for (int i = 0; i < dataSlots.length; i++) {
+            containerData.set(i, dataSlots[i]);
+        }
     }
 
     private boolean insertIntoOutput(final ItemStack stack) {

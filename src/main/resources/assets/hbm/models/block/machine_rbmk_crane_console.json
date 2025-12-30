@@ -1,0 +1,9 @@
+{
+  "loader": "forge:obj",
+  "flip_v": true,
+  "ambientocclusion": false,
+  "model": "hbm:models/rbmk/crane_console.obj",
+  "textures": {
+    "texture0": "hbm:block/rbmk/rbmk_crane_console"
+  }
+}

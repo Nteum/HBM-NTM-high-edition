@@ -8,6 +8,7 @@ import com.hbm.Inventory.recipe.HBMRecipeMatcher;
 import com.hbm.Inventory.recipe.ModRecipes;
 import com.hbm.api.Mode;
 import com.hbm.api.energy.BasicEnergyContainer;
+import com.hbm.api.energy.HybridEnergyStorage;
 import com.hbm.api.energy.ProxyEnergyHandler;
 import com.hbm.api.energy.TransmitUtils;
 import com.hbm.api.fluid.*;
@@ -60,6 +61,7 @@ public class ChemplantEntity extends DummyableBlockEntity {
     int speed = 100;
     public UpgradeManagerNT upgradeManager = new UpgradeManagerNT();
     private BasicEnergyContainer energyContainer = new BasicEnergyContainer(100_100);
+    private final HybridEnergyStorage forgeEnergy = new HybridEnergyStorage(this.energyContainer);
     private BasicFluidHandler fluidHandler;
     private final RecipeManager.CachedCheck<Container, ChemplantRecipe> recipeChecker = RecipeManager.createCheck(ModRecipes.CHEMPLANT.type().get());
     private ChemplantRecipe recipeNow = null;
@@ -71,8 +73,8 @@ public class ChemplantEntity extends DummyableBlockEntity {
             return switch (pIndex){
                 case 0 -> getProgress();
                 case 1 -> maxProgress;
-                case 2 -> MathUtils.clampToInt(getCapability(HBMCaps.LONG_ENERGY).orElse(null).getStored());
-                case 3 -> MathUtils.clampToInt(getCapability(HBMCaps.LONG_ENERGY).orElse(null).getCapacity());
+                case 2 -> MathUtils.clampToInt(energyContainer.getEnergy());
+                case 3 -> MathUtils.clampToInt(energyContainer.getCapacity());
                 default -> 0;
             };
         }
@@ -92,6 +94,7 @@ public class ChemplantEntity extends DummyableBlockEntity {
         this.fluidHandler = new BasicFluidHandler().addTanks(2, maxFluid, Mode.INPUT).addTanks(2, maxFluid, Mode.OUTPUT);
         this.capabilitiesContent.addCapability(ForgeCapabilities.FLUID_HANDLER, this.fluidHandler);
         this.capabilitiesContent.addCapability(HBMCaps.LONG_ENERGY, new ProxyEnergyHandler(this.energyContainer));
+        this.capabilitiesContent.addCapability(ForgeCapabilities.ENERGY, this.forgeEnergy);
         this.multiblockData = MultiblockData.mapping.get(HBMMachine.CHEMPLANT.get());
     }
 

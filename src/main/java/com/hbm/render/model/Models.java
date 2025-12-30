@@ -66,6 +66,7 @@ public class Models {
     public static final ResourceLocation CHEMPLANT_PISTON = add(HBM.rl("block/chemplant/chemplant_new_piston"));
     public static final ResourceLocation CHEMPLANT_SPINNER = add(HBM.rl("block/chemplant/chemplant_new_spinner"));
     public static final ResourceLocation LAUNCH_PAD = add(HBM.rl("block/launch_pad"));
+    public static final ResourceLocation WOOD_BURNER = add(HBM.rl("block/machine_wood_burner"));
 
     public static final ResourceLocation MP_W_15_BALEFIRE = addItem(HBM.rl("item/mp_warhead_15_balefire"), HBMWeapon.MP_WARHEAD_15_BALEFIRE);
 //    public static final ResourceLocation GUN_RIFLE = addItem(HBM.rl("item/gun_marseleg"), HBMItems.GUN_RIFLE.getId());

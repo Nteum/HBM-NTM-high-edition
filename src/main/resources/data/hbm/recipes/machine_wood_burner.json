@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "$$$",
+    "@&@",
+    "% %"
+  ],
+  "key": {
+    "$": { "item": "hbm:plate_steel" },
+    "@": { "item": "hbm:coil_copper" },
+    "&": { "item": "minecraft:furnace" },
+    "%": { "item": "minecraft:iron_ingot" }
+  },
+  "result": {
+    "item": "hbm:machine_wood_burner"
+  }
+}

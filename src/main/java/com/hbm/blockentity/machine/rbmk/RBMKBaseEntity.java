@@ -3,6 +3,7 @@ package com.hbm.blockentity.machine.rbmk;
 import com.hbm.HBMKey;
 import com.hbm.api.Mode;
 import com.hbm.api.energy.BasicEnergyContainer;
+import com.hbm.api.energy.HybridEnergyStorage;
 import com.hbm.api.energy.ProxyEnergyHandler;
 import com.hbm.api.energy.TransmitUtils;
 import com.hbm.api.fluid.BasicFluidHandler;
@@ -83,6 +84,7 @@ public class RBMKBaseEntity extends DummyableBlockEntity {
         this.multiblockData = MultiblockData.mapping.get(ModBlocks.machine_rbmk_base.get());
         this.capabilitiesContent.addCapability(ForgeCapabilities.ITEM_HANDLER, this);
         this.capabilitiesContent.addCapability(HBMCaps.LONG_ENERGY, new ProxyEnergyHandler(this.energy));
+        this.capabilitiesContent.addCapability(ForgeCapabilities.ENERGY, new HybridEnergyStorage(this.energy));
         this.capabilitiesContent.addCapability(ForgeCapabilities.FLUID_HANDLER, this.fluidHandler);
         // 限制冷却液类型：仅允许水及放射性水
         this.fluidHandler.getFluidTanks().set(0, new FluidTank(WATER_TANK_CAPACITY) {
@@ -233,6 +235,22 @@ public class RBMKBaseEntity extends DummyableBlockEntity {
         return containerData;
     }
 
+    public long getEnergyStored() {
+        return energy.getEnergy();
+    }
+
+    public long getEnergyCapacity() {
+        return energy.getCapacity();
+    }
+
+    public int getWaterAmount() {
+        return fluidHandler.getFluidTanks().get(0).getFluidAmount();
+    }
+
+    public int getSteamAmount() {
+        return fluidHandler.getFluidTanks().get(1).getFluidAmount();
+    }
+
     public void triggerAz5() {
         if (!(level instanceof ServerLevel serverLevel)) {
             return;
@@ -240,7 +258,9 @@ public class RBMKBaseEntity extends DummyableBlockEntity {
 
         BlockPos controlPos = worldPosition.above();
         BlockState stateAbove = level.getBlockState(controlPos);
-        if (stateAbove.getBlock() instanceof BlockRBMKControlRod controlRod) {
+        if (level.getBlockEntity(controlPos) instanceof RBMKControlRodEntity controlRodEntity) {
+            controlRodEntity.engageAz5();
+        } else if (stateAbove.getBlock() instanceof BlockRBMKControlRod controlRod) {
             if (stateAbove.getValue(BlockRBMKControlRod.INSERTION) != BlockRBMKControlRod.MAX_INSERTION) {
                 level.setBlock(controlPos, stateAbove.setValue(BlockRBMKControlRod.INSERTION, BlockRBMKControlRod.MAX_INSERTION), Block.UPDATE_ALL);
             }

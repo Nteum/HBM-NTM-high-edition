@@ -5,6 +5,8 @@ import com.hbm.block.base.BlockDummyable;
 import com.hbm.block.env.GlyphidSpawner;
 import com.hbm.blockentity.base2.TileProxyCombo;
 import com.hbm.blockentity.machine.*;
+import com.hbm.blockentity.machine.IronCrateBlockEntity;
+import com.hbm.blockentity.machine.SteelCrateBlockEntity;
 import com.hbm.HBM;
 import com.hbm.blockentity.base.DummibleBlockEntity;
 import com.hbm.blockentity.tools.TileEntityGeiger;
@@ -12,6 +14,7 @@ import com.hbm.blockentity.machine.rbmk.RBMKBaseEntity;
 import com.hbm.blockentity.machine.rbmk.RBMKControlRodEntity;
 import com.hbm.blockentity.machine.rbmk.RBMKFuelChannelEntity;
 import com.hbm.blockentity.machine.rbmk.RBMKHeaterEntity;
+import com.hbm.blockentity.machine.rbmk.RBMKPeripheralEntity;
 import com.hbm.blockentity.weapon.*;
 import com.hbm.registries.ModBlocks;
 import com.hbm.registries.ModTags;
@@ -71,8 +74,14 @@ public class ModBlockEntityType {
             REGISTER.register("barrel_entity",()-> BlockEntityType.Builder.of(BarrelEntity::new, HBMMachine.PLASTIC_BARREL.get(),HBMMachine.CORRODED_BARREL.get(),HBMMachine.IRON_BARREL.get(),HBMMachine.STEEL_BARREL.get(),HBMMachine.TCALLOY_BARREL.get(),HBMMachine.ANTIMATTER_BARREL.get()).build(null));
     public static final RegistryObject<BlockEntityType<ShredderEntity>> SHREDDER_ENTITY =
             REGISTER.register("shredder_entity",()-> BlockEntityType.Builder.of(ShredderEntity::new, ModBlocks.machine_shredder.get()).build(null));
+    public static final RegistryObject<BlockEntityType<WoodBurnerBlockEntity>> WOOD_BURNER_ENTITY =
+            REGISTER.register("wood_burner_entity", () -> BlockEntityType.Builder.of(WoodBurnerBlockEntity::new, ModBlocks.machine_wood_burner.get()).build(null));
     public static final RegistryObject<BlockEntityType<CrackingTowerEntity>> CRACKING_TOWER_ENTITY =
             REGISTER.register("cracking_tower_entity", () -> BlockEntityType.Builder.of(CrackingTowerEntity::new, ModBlocks.machine_cracking_tower.get()).build(null));
+    public static final RegistryObject<BlockEntityType<IronCrateBlockEntity>> IRON_CRATE_ENTITY =
+            REGISTER.register("iron_crate_entity", () -> BlockEntityType.Builder.of(IronCrateBlockEntity::new, ModBlocks.crate_iron.get()).build(null));
+    public static final RegistryObject<BlockEntityType<SteelCrateBlockEntity>> STEEL_CRATE_ENTITY =
+            REGISTER.register("steel_crate_entity", () -> BlockEntityType.Builder.of(SteelCrateBlockEntity::new, ModBlocks.crate_steel.get()).build(null));
     public static final RegistryObject<BlockEntityType<TileProxyCombo>> PROXY_ENTITY =
             REGISTER.register("proxy_entity",()-> BlockEntityType.Builder.of(TileProxyCombo::new,
                     ModBlocks.machine_crucible.get(), ModBlocks.machine_assembler.get(), ModBlocks.machine_cracking_tower.get(), HBMMachine.CHEMPLANT.get(), HBMMachine.LAUNCH_PAD.get(), ModBlocks.bomb_boy.get(), ModBlocks.bomb_custom.get(), ModBlocks.bomb_fat_man.get()
@@ -91,6 +100,14 @@ public class ModBlockEntityType {
             REGISTER.register("rbmk_fuel_channel_entity", () -> BlockEntityType.Builder.of(RBMKFuelChannelEntity::new, ModBlocks.machine_rbmk_fuel_channel.get()).build(null));
     public static final RegistryObject<BlockEntityType<RBMKControlRodEntity>> RBMK_CONTROL_ROD_ENTITY =
             REGISTER.register("rbmk_control_rod_entity", () -> BlockEntityType.Builder.of(RBMKControlRodEntity::new, ModBlocks.machine_rbmk_control_rod.get()).build(null));
+    public static final RegistryObject<BlockEntityType<RBMKPeripheralEntity>> RBMK_PERIPHERAL_ENTITY =
+            REGISTER.register("rbmk_peripheral_entity", () -> BlockEntityType.Builder.of(RBMKPeripheralEntity::new,
+                    ModBlocks.machine_rbmk_console.get(),
+                    ModBlocks.machine_rbmk_element.get(),
+                    ModBlocks.machine_rbmk_reflector.get(),
+                    ModBlocks.machine_rbmk_debris.get(),
+                    ModBlocks.machine_rbmk_crane_console.get(),
+                    ModBlocks.machine_rbmk_autoloader.get()).build(null));
     public static final RegistryObject<BlockEntityType<com.hbm.blockentity.machine.tokamak.TokamakControllerBlockEntity>> TOKAMAK_CONTROLLER =
             REGISTER.register("tokamak_controller", () -> BlockEntityType.Builder.of(com.hbm.blockentity.machine.tokamak.TokamakControllerBlockEntity::new, ModBlocks.tokamak_controller.get()).build(null));
     public static final RegistryObject<BlockEntityType<com.hbm.blockentity.machine.tokamak.TokamakPortBlockEntity>> TOKAMAK_PORT_ENTITY =

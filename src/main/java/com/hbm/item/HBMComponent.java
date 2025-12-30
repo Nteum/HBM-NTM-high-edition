@@ -5,7 +5,6 @@ import com.hbm.item.env.ItemEggGlyphid;
 import com.hbm.item.env.ItemEggGlyphidToBirth;
 import com.hbm.item.misc.ItemCircuit;
 import com.hbm.item.tool.BatteryItem;
-import com.hbm.registries.ModItems;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -26,6 +25,7 @@ public class HBMComponent {
     private static final List<RegistryObject<Item>> matherialList = new ArrayList<>();
     // 线圈等物品，明明逻辑是 物品类型 + 材料 ，游戏内的名称需要颠倒过来
     private static final List<RegistryObject<Item>> partList = new ArrayList<>();
+    private static boolean initialized = false;
     public static RegistryObject<Item> LASER_CRYSTAL_DIGAMMA;
     //工业元件
     public static RegistryObject<Item> BATTERY_CREATIVE;
@@ -673,15 +673,19 @@ public class HBMComponent {
     public static RegistryObject<Item>     PARTICLE_SPARKTICLE;
     public static RegistryObject<Item>     PARTICLE_DIGAMMA;
     public static RegistryObject<Item>     PARTICLE_LUTECE;
-    public static void register(DeferredRegister<Item> ITEMS){
-        LASER_CRYSTAL_DIGAMMA = ITEMS.register("laser_crystal_digamma",()->new Item(new Item.Properties()));
-        BATTERY_CREATIVE = ITEMS.register("battery_creative",()->new BatteryItem(-1, 1_000_000L, new Item.Properties().stacksTo(1)));
-        BATTERY_GENERIC = ITEMS.register("battery_generic",()->new BatteryItem(false,5_000, 100, new Item.Properties()));
-        BATTERY_ADVANCED = ITEMS.register("battery_advanced",()->new BatteryItem(false,60_000, 500, new Item.Properties()));
-        BATTERY_LITHIUM = ITEMS.register("battery_lithium",()->new BatteryItem(false,250_000, 1000, new Item.Properties()));
+    public static synchronized void register(DeferredRegister<Item> ITEMS){
+        if(initialized){
+            return;
+        }
+        initialized = true;
+        LASER_CRYSTAL_DIGAMMA = getOrRegister("laser_crystal_digamma",()->new Item(new Item.Properties()));
+        BATTERY_CREATIVE = getOrRegister("battery_creative",()->new BatteryItem(-1, 1_000_000L, new Item.Properties().stacksTo(1)));
+        BATTERY_GENERIC = getOrRegister("battery_generic",()->new BatteryItem(false,5_000, 100, new Item.Properties()));
+        BATTERY_ADVANCED = getOrRegister("battery_advanced",()->new BatteryItem(false,60_000, 500, new Item.Properties()));
+        BATTERY_LITHIUM = getOrRegister("battery_lithium",()->new BatteryItem(false,250_000, 1000, new Item.Properties()));
 
-        EGG_GLYPHID = ITEMS.register("egg_glyphid",()->new ItemEggGlyphid(new Item.Properties()));
-        EGG_GLYPHID_TO_BIRTH = ITEMS.register("egg_glyphid_to_birth",()->new ItemEggGlyphidToBirth(new Item.Properties()));
+        EGG_GLYPHID = getOrRegister("egg_glyphid",()->new ItemEggGlyphid(new Item.Properties()));
+        EGG_GLYPHID_TO_BIRTH = getOrRegister("egg_glyphid_to_birth",()->new ItemEggGlyphidToBirth(new Item.Properties()));
         //==================元件 part======================
         CIRCUIT_BASIC = register(partList, "circuit_basic",()->new Item(new Item.Properties()));
         WIRE_FINE_ALUMINIUM = register(partList, "wire_aluminium",()->new Item(new Item.Properties()));
@@ -1356,9 +1360,16 @@ public class HBMComponent {
         return strings.subList(0, strings.size() - 1).stream().reduce(strings.get(strings.size() - 1), (s, s1) -> s + " " + s1);
     }
     protected static RegistryObject<Item> register(List<RegistryObject<Item>> list, final String name, final Supplier<? extends Item> sup){
-        RegistryObject<Item> registryObject = ModItems.ITEMS.register(name, sup);
+        RegistryObject<Item> registryObject = getOrRegister(name, sup);
         list.add(registryObject);
         return registryObject;
+    }
+
+    private static RegistryObject<Item> getOrRegister(final String name, final Supplier<? extends Item> sup){
+        return HBMItems.ITEMS.getEntries().stream()
+                .filter(ro -> ro.getId() != null && ro.getId().getPath().equals(name))
+                .findFirst()
+                .orElseGet(() -> HBMItems.ITEMS.register(name, sup));
     }
 
     //===============enum==========================

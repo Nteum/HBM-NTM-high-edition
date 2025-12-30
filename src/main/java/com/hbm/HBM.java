@@ -35,6 +35,7 @@ import com.hbm.Inventory.recipe.ModRecipes;
 import com.hbm.reactor.rbmk.RBMKManager;
 import com.hbm.render.model.Models;
 import com.hbm.world.feature.ModFeatures;
+import com.hbm.world.structure.ModStructureProcessors;
 import com.mojang.logging.LogUtils;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
@@ -107,6 +108,7 @@ public class HBM {
         ModParticleTypes.PARTICLE_TYPES.register(modEventBus);
         ModSounds.SOUNDS.register(modEventBus);
         ModFeatures.register(modEventBus);
+        ModStructureProcessors.STRUCTURE_PROCESSORS.register(modEventBus);
         ModMenuType.MOD_MENU_TYPES.register(modEventBus);
         ModEffects.register(modEventBus);
         BigExplosivesMod.register(modEventBus);

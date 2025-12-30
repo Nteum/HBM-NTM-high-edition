@@ -4,6 +4,7 @@ import com.hbm.HBMKey;
 import com.hbm.HBMLang;
 import com.hbm.Inventory.UpgradeManagerNT;
 import com.hbm.api.energy.BasicEnergyContainer;
+import com.hbm.api.energy.HybridEnergyStorage;
 import com.hbm.api.energy.ProxyEnergyHandler;
 import com.hbm.api.energy.TransmitUtils;
 import com.hbm.api.math.MathUtils;
@@ -50,6 +51,7 @@ public class ElectricFurnaceEntity extends BaseMachineBlockEntity implements Men
     private int cooldown = 0;
     public UpgradeManagerNT upgradeManager = new UpgradeManagerNT();
     private final BasicEnergyContainer energyContainer = new BasicEnergyContainer(maxPower);
+    private final HybridEnergyStorage forgeEnergy = new HybridEnergyStorage(this.energyContainer);
     private final RecipeManager.CachedCheck<Container, ? extends AbstractCookingRecipe> quickCheck;
     protected final ContainerData containerData = new ContainerData() {
         @Override
@@ -79,6 +81,7 @@ public class ElectricFurnaceEntity extends BaseMachineBlockEntity implements Men
         items = NonNullList.withSize(4, ItemStack.EMPTY);
         capabilitiesContent.addCapability(ForgeCapabilities.ITEM_HANDLER, this);
         capabilitiesContent.addCapability(HBMCaps.LONG_ENERGY, new ProxyEnergyHandler(this.energyContainer));
+        capabilitiesContent.addCapability(ForgeCapabilities.ENERGY, this.forgeEnergy);
     }
 
     @Override

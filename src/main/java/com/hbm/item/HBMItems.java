@@ -10,6 +10,7 @@ import com.hbm.item.env.BedrockOreItem;
 import com.hbm.item.env.ItemEggGlyphid;
 import com.hbm.item.env.ItemEggGlyphidToBirth;
 import com.hbm.item.misc.*;
+import com.hbm.item.rbmk.ItemRBMKControlRod;
 import com.hbm.item.rbmk.ItemRBMKFuelRod;
 import com.hbm.item.rbmk.ItemRBMKLid;
 import com.hbm.item.special.ItemUnstable;
@@ -53,7 +54,7 @@ public class HBMItems {
     public static final List<WrappedItemRegistry> itemList = new ArrayList<>();
 
         static {
-//            HBMtools.register(ITEMS);
+            HBMtools.register(ITEMS);
 //            HBMComponent.register(ITEMS);
             HBMWeapon.register(ITEMS);
             HBMCombat.register(ITEMS);
@@ -439,6 +440,7 @@ public class HBMItems {
     public static final RegistryObject<Item> HAZMAT_CLOTH_RED = parts("hazmat_cloth_red", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     public static final RegistryObject<Item> HAZMAT_CLOTH_GREY = parts("hazmat_cloth_grey", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     public static final RegistryObject<Item> ASBESTOS_CLOTH = parts("asbestos_cloth", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> WOOD_ASH_POWDER = parts("wood_ash_powder", () -> new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     //    rag = new ItemRag().setUnlocalizedName("rag").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":rag");
     public static final RegistryObject<Item> RAG_DAMP = parts("rag_damp", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     public static final RegistryObject<Item> RAG_PISS = parts("rag_piss", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
@@ -787,6 +789,7 @@ public class HBMItems {
     // RBMK
     public static final RegistryObject<Item> rbmk_lid = machine("rbmk_lid", () -> new ItemRBMKLid(new Item.Properties(), RBMKLidType.SOLID));
     public static final RegistryObject<Item> rbmk_lid_glass = machine("rbmk_lid_glass", () -> new ItemRBMKLid(new Item.Properties(), RBMKLidType.GLASS));
+    public static final RegistryObject<Item> rbmk_control_rod = machine("rbmk_control_rod", () -> new ItemRBMKControlRod(new Item.Properties().stacksTo(1)));
     // RBMK fuel rods (placeholder stats, real values will be wired in later).
     public static final RegistryObject<Item> rbmk_fuel_base = machine("rbmk_fuel_base", () -> new ItemRBMKFuelRod(new Item.Properties().stacksTo(1), 12.0D, 20 * 60 * 10));
     public static final RegistryObject<Item> rbmk_fuel_lea = machine("rbmk_fuel_lea", () -> new ItemRBMKFuelRod(new Item.Properties().stacksTo(1), 14.0D, 20 * 60 * 12));
@@ -828,6 +831,7 @@ public class HBMItems {
     // 填充物品，游戏内无法获得，用于避免物品被匹配上
     public static final RegistryObject<Item> DUMMY_ITEM = ITEMS.register("dummy_item", ()->new Item(new Item.Properties()));
     public static void register(IEventBus eventBus){
+        HBMComponent.register(ITEMS);
         ITEMS.register(eventBus);
     }
     public static RegistryObject<Item> machine(final String name, final Supplier<? extends Item> sup){

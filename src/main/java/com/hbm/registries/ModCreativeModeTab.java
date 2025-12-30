@@ -52,6 +52,7 @@ public class ModCreativeModeTab {
 //            output.accept(ModItems.BEDROCK_ORE.get());
 
             output.accept(HBMtools.UPGRADE_BASE.get());
+            output.accept(HBMItems.WOOD_ASH_POWDER.get());
 
             HBMComponent.creativeTab(output);
         }).build());
@@ -84,10 +85,17 @@ public class ModCreativeModeTab {
             output.accept(ModBlocks.machine_crucible.get());
             output.accept(ModBlocks.machine_assembler.get());
             output.accept(ModBlocks.machine_shredder.get());
+            output.accept(ModBlocks.machine_wood_burner.get());
 	            output.accept(ModBlocks.machine_rbmk_base.get());
 	            output.accept(ModBlocks.machine_rbmk_heater.get());
 	            output.accept(ModBlocks.machine_rbmk_fuel_channel.get());
 	            output.accept(ModBlocks.machine_rbmk_control_rod.get());
+	            output.accept(ModBlocks.machine_rbmk_console.get());
+	            output.accept(ModBlocks.machine_rbmk_element.get());
+	            output.accept(ModBlocks.machine_rbmk_reflector.get());
+	            output.accept(ModBlocks.machine_rbmk_debris.get());
+	            output.accept(ModBlocks.machine_rbmk_crane_console.get());
+	            output.accept(ModBlocks.machine_rbmk_autoloader.get());
 	            output.accept(ModBlocks.tokamak_controller.get());
             output.accept(ModBlocks.tokamak_casing.get());
             output.accept(ModBlocks.tokamak_coil.get());
@@ -150,6 +158,8 @@ public class ModCreativeModeTab {
 //            output.accept(ModItems.bucket_irradiated_polluted.get());
 //            output.accept(ModItems.bucket_sulfuric_acid.get());
             output.accept(ModBlocks.conveyor.get());
+            output.accept(ModBlocks.crate_iron.get());
+            output.accept(ModBlocks.crate_steel.get());
 
             output.accept(HBMItems.SCREWDRIVER.get());
 
@@ -170,7 +180,7 @@ public class ModCreativeModeTab {
      * 将模组中的物品注册到原版创造模式物品栏中
      * */
     public static void addCreative(BuildCreativeModeTabContentsEvent event){
-            ModItems.creativeTab(event);
+            HBMItems.creativeTab(event);
             ModBlocks.creativeTab(event);
             if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS){}
 

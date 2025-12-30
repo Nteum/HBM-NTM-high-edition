@@ -5,6 +5,7 @@ import com.hbm.HBMLang;
 import com.hbm.Inventory.fluid.ModFluids;
 import com.hbm.api.Mode;
 import com.hbm.api.energy.BasicEnergyContainer;
+import com.hbm.api.energy.HybridEnergyStorage;
 import com.hbm.api.energy.ProxyEnergyHandler;
 import com.hbm.api.energy.TransmitUtils;
 import com.hbm.api.fluid.BasicFluidHandler;
@@ -107,6 +108,7 @@ public class TokamakControllerBlockEntity extends BaseMachineBlockEntity impleme
         this.items = NonNullList.withSize(6, ItemStack.EMPTY);
         this.capabilitiesContent.addCapability(ForgeCapabilities.ITEM_HANDLER, this);
         this.capabilitiesContent.addCapability(HBMCaps.LONG_ENERGY, new ProxyEnergyHandler(energy));
+        this.capabilitiesContent.addCapability(ForgeCapabilities.ENERGY, new HybridEnergyStorage(energy));
         this.capabilitiesContent.addCapability(ForgeCapabilities.FLUID_HANDLER, fluids);
         this.energy.setListener(this);
         this.slotModes = new ModeBuilder().addModes(

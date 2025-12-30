@@ -1,0 +1,9 @@
+{
+	"parent": "block/orientable",
+	"textures": {
+		"top": "hbm:block/shredder_top",
+		"front": "hbm:block/shredder_front",
+		"side": "hbm:block/shredder_side",
+		"bottom": "hbm:block/shredder_bottom"
+	}
+}

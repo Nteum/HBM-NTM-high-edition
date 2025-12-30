@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "facing=north": { "model": "hbm:block/flood_lamp", "y": 270 },
+    "facing=east": { "model": "hbm:block/flood_lamp", "y": 0 },
+    "facing=south": { "model": "hbm:block/flood_lamp", "y": 90 },
+    "facing=west": { "model": "hbm:block/flood_lamp", "y": 180 },
+    "facing=up": { "model": "hbm:block/flood_lamp_top"},
+    "facing=down": { "model": "hbm:block/flood_lamp_bottom"}
+  }
+}

@@ -5,6 +5,7 @@ import com.hbm.item.rbmk.ItemRBMKFuelRod;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -20,6 +21,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
+import net.minecraftforge.network.NetworkHooks;
 
 /**
  * Minimal RBMK fuel channel. Accepts {@link ItemRBMKFuelRod} items and injects
@@ -51,7 +53,14 @@ public class BlockRBMKFuelChannel extends Block implements EntityBlock {
             return InteractionResult.CONSUME;
         }
 
-        return fuelChannel.tryInsertFuel(player, hand) ? InteractionResult.CONSUME : InteractionResult.PASS;
+        if (fuelChannel.tryInsertFuel(player, hand)) {
+            return InteractionResult.CONSUME;
+        }
+
+        if (player instanceof ServerPlayer serverPlayer) {
+            NetworkHooks.openScreen(serverPlayer, fuelChannel, pos);
+        }
+        return InteractionResult.CONSUME;
     }
 
     @Nullable
