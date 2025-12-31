@@ -5,6 +5,7 @@ import com.hbm.item.env.ItemEggGlyphid;
 import com.hbm.item.env.ItemEggGlyphidToBirth;
 import com.hbm.item.misc.ItemCircuit;
 import com.hbm.item.tool.BatteryItem;
+import com.hbm.registries.ModItems;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -1366,10 +1367,10 @@ public class HBMComponent {
     }
 
     private static RegistryObject<Item> getOrRegister(final String name, final Supplier<? extends Item> sup){
-        return HBMItems.ITEMS.getEntries().stream()
+        return ModItems.ITEMS.getEntries().stream()
                 .filter(ro -> ro.getId() != null && ro.getId().getPath().equals(name))
                 .findFirst()
-                .orElseGet(() -> HBMItems.ITEMS.register(name, sup));
+                .orElseGet(() -> ModItems.ITEMS.register(name, sup));
     }
 
     //===============enum==========================

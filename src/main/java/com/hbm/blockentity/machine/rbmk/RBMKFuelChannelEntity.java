@@ -9,7 +9,7 @@ import com.hbm.item.rbmk.ItemRBMKFuelRod;
 import com.hbm.reactor.rbmk.RBMKColumnState;
 import com.hbm.reactor.rbmk.RBMKLevelContext;
 import com.hbm.reactor.rbmk.RBMKManager;
-import com.hbm.item.HBMItems;
+import com.hbm.registries.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
@@ -127,7 +127,7 @@ public class RBMKFuelChannelEntity extends BaseMachineBlockEntity {
             setChanged();
         }
         if (burnTimeRemaining == 0 && burnTimeTotal > 0) {
-            ItemStack spentFuel = HBMItems.rbmk_fuel_empty.get().getDefaultInstance();
+            ItemStack spentFuel = ModItems.rbmk_fuel_empty.get().getDefaultInstance();
             if (!insertIntoOutput(spentFuel.copy())) {
                 Containers.dropItemStack(serverLevel, worldPosition.getX() + 0.5D, worldPosition.getY() + 1.0D, worldPosition.getZ() + 0.5D, spentFuel.copy());
             }
@@ -150,7 +150,7 @@ public class RBMKFuelChannelEntity extends BaseMachineBlockEntity {
             return false;
         }
         ItemStack output = items.get(OUTPUT_SLOT);
-        ItemStack spentPrototype = HBMItems.rbmk_fuel_empty.get().getDefaultInstance();
+        ItemStack spentPrototype = ModItems.rbmk_fuel_empty.get().getDefaultInstance();
         if (!output.isEmpty()) {
             if (!ItemStack.isSameItemSameTags(output, spentPrototype)) {
                 return false;

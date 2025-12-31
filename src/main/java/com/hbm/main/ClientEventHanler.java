@@ -8,10 +8,10 @@ import com.hbm.Inventory.fluid.ModFluids;
 import com.hbm.gui.ModMenuType;
 import com.hbm.gui.screen.*;
 import com.hbm.gui.screen.RenderUtils;
-import com.hbm.item.HBMItems;
+import com.hbm.registries.ModItems;
 import com.hbm.item.tool.FluidBucketItem;
 import com.hbm.registries.ModKeyMapping;
-import com.hbm.registries.ModItems;
+import com.hbm.registries.ModItems;;
 import com.hbm.render.entity.missile.MissileTaintRenderer;
 import com.hbm.render.entity.mob.GlyphidRender;
 import com.hbm.render.item.ItemModelReloader;
@@ -84,7 +84,7 @@ public class ClientEventHanler {
     public static void onClientSetup(FMLClientSetupEvent event)
     {
         // 物品贴图逻辑
-        ItemProperties.register(HBMItems.INGOT_U238M2.get(), HBM.rl("stage"),
+        ItemProperties.register(ModItems.INGOT_U238M2.get(), HBM.rl("stage"),
                 (stack, level, entity, seed) -> stack.hasTag() && stack.getTag().contains("stage", Tag.TAG_INT) ? (float) stack.getTag().getInt("stage") : 0);
         /** 注册menu和gui */
         event.enqueueWork(()-> {
@@ -132,7 +132,7 @@ public class ClientEventHanler {
             RenderUtils.init();
         });
         event.enqueueWork(() -> {
-            ItemProperties.register(HBMItems.INGOT_NEPTUNIUM.get(), HBM.rl("stage"),
+            ItemProperties.register(ModItems.INGOT_NEPTUNIUM.get(), HBM.rl("stage"),
                     (stack, level, entity, seed) -> ConfigLBSM.enableLBSM && ConfigLBSM.enableLBSMFullSchrab ? 1 : 0);
         });
     }
@@ -241,6 +241,6 @@ public class ClientEventHanler {
         // 流体桶的染色
         FluidBucketItem[] fluidBucketItems = ModFluids.fluidList.stream().map(holder -> holder.bucket().get()).filter(bucket -> bucket instanceof FluidBucketItem).toArray(FluidBucketItem[]::new);
         event.register(FluidBucketItem::getColor, fluidBucketItems);
-        event.register((itemstack,color)->0xEC9A63, HBMItems.BEDROCK_ORE.get());
+        event.register((itemstack,color)->0xEC9A63, ModItems.BEDROCK_ORE.get());
     }
 }

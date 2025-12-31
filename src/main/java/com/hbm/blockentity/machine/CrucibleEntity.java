@@ -2,8 +2,8 @@ package com.hbm.blockentity.machine;
 
 import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.blockentity.base2.BaseMachineBlockEntity;
-import com.hbm.item.HBMItems;
 import com.hbm.registries.ModItems;
+import com.hbm.registries.ModItems;;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
@@ -51,7 +51,7 @@ public class CrucibleEntity extends BaseMachineBlockEntity {
     public boolean canPlaceItem(int pIndex, ItemStack pStack) {
         //模板栏只能输入模板
         if (pIndex == 0){
-            return pStack.is(HBMItems.crucible_template.get());
+            return pStack.is(ModItems.crucible_template.get());
         }
         //其他栏位看物品是否可被熔化
         return isItemSmeltable(pStack);

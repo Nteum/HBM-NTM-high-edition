@@ -1,6 +1,6 @@
 package com.hbm.item.special;
 
-import com.hbm.item.HBMItems;
+import com.hbm.registries.ModItems;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;

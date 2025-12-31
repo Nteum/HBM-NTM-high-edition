@@ -4,7 +4,7 @@ import com.hbm.block.HBMBlockComponent;
 import com.hbm.datagen.tag.BlockTagsGen;
 import com.hbm.datagen.tag.ItemTagsGen;
 import com.hbm.item.HBMComponent;
-import com.hbm.item.HBMItems;
+import com.hbm.registries.ModItems;
 import net.minecraft.data.tags.IntrinsicHolderTagsProvider;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -219,10 +219,10 @@ public class OreDictManager {
     public static final DictFrame AT209 = new DictFrame("astatine_209");
 
     static {
-        U.nugget(HBMItems.NUGGET_ZIRCONIUM);
-        STEEL.ingot(HBMItems.INGOT_STEEL).
+        U.nugget(ModItems.NUGGET_ZIRCONIUM);
+        STEEL.ingot(ModItems.INGOT_STEEL).
 //                .dust(HBMComponent.STEEL_DUST).dustSmall(HBMComponent.STEEL_SMALL_DUST).
-                plate(HBMItems.PLATE_STEEL);
+                plate(ModItems.PLATE_STEEL);
     }
 
     /**

@@ -3,7 +3,7 @@ package com.hbm.main;
 import com.hbm.entity.ModEntityType;
 import com.hbm.entity.mob.EntityGlyphid;
 import com.hbm.item.HBMComponent;
-import com.hbm.item.HBMItems;
+import com.hbm.registries.ModItems;
 import com.hbm.item.env.ItemEggGlyphid;
 import com.hbm.network.ServerMsgHandler;
 import com.hbm.registries.HBMDamage;
@@ -63,7 +63,7 @@ public class ServerEventHandler {
     @SubscribeEvent
     public static void onPlayerTossItem(ItemTossEvent event){
         ItemStack itemStack = event.getEntity().getItem();
-        if (itemStack.is(HBMItems.EGG_GLYPHID.get()) || itemStack.is(HBMItems.EGG_GLYPHID_TO_BIRTH.get())){
+        if (itemStack.is(ModItems.EGG_GLYPHID.get()) || itemStack.is(ModItems.EGG_GLYPHID_TO_BIRTH.get())){
             event.getPlayer().addItem(itemStack);
             event.setCanceled(true);
         }

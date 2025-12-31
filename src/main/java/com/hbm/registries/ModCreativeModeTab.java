@@ -23,7 +23,7 @@ public class ModCreativeModeTab {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
     public static final RegistryObject<CreativeModeTab> HBM_ITEM = CREATIVE_MODE_TABS.register("hbm_item", () -> CreativeModeTab.builder()
         .title(Component.translatable(HBMLang.ITEMGROUP_ITEM.key()))
-        .icon(() -> HBMtools.UPGRADE_BASE.get().getDefaultInstance())
+        .icon(() -> ModItems.UPGRADE_BASE.get().getDefaultInstance())
 	        .displayItems((parameters, output) -> {
 //            output.accept(ModItems.ingot_red_copper.get());
 //            output.accept(ModItems.ingot_tungsten.get());
@@ -51,8 +51,8 @@ public class ModCreativeModeTab {
 //
 //            output.accept(ModItems.BEDROCK_ORE.get());
 
-            output.accept(HBMtools.UPGRADE_BASE.get());
-            output.accept(HBMItems.WOOD_ASH_POWDER.get());
+//            output.accept(HBMtools.UPGRADE_BASE.get());
+            output.accept(ModItems.WOOD_ASH_POWDER.get());
 
             HBMComponent.creativeTab(output);
         }).build());
@@ -144,7 +144,7 @@ public class ModCreativeModeTab {
 	        }).build());
     public static final RegistryObject<CreativeModeTab> HBM_TOOL = CREATIVE_MODE_TABS.register("hbm_weapon", () -> CreativeModeTab.builder()
         .title(Component.translatable(HBMLang.ITEMGROUP_TOOL.key()))
-            .icon(()-> HBMItems.DETONATOR.get().getDefaultInstance())
+            .icon(()-> ModItems.DETONATOR.get().getDefaultInstance())
         .displayItems((parameters, output) -> {
 //            output.accept(ModItems.detonator.get());
 
@@ -161,9 +161,9 @@ public class ModCreativeModeTab {
             output.accept(ModBlocks.crate_iron.get());
             output.accept(ModBlocks.crate_steel.get());
 
-            output.accept(HBMItems.SCREWDRIVER.get());
+            output.accept(ModItems.SCREWDRIVER.get());
 
-            HBMtools.creativeTab(output);
+//            HBMtools.creativeTab(output);
             HBMWeapon.creativeTab(output);
         for (ModFluids.FluidRegistryHolder registryHolder : ModFluids.fluidList) {
                 output.accept((BucketItem)registryHolder.bucket().get());
@@ -180,7 +180,7 @@ public class ModCreativeModeTab {
      * 将模组中的物品注册到原版创造模式物品栏中
      * */
     public static void addCreative(BuildCreativeModeTabContentsEvent event){
-            HBMItems.creativeTab(event);
+            ModItems.creativeTab(event);
             ModBlocks.creativeTab(event);
             if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS){}
 
@@ -207,7 +207,7 @@ public class ModCreativeModeTab {
             else if (event.getTabKey() == HBM_MISSILE.getKey()){
                     event.getEntries().put(new ItemStack(HBMWeapon.MP_WARHEAD_15_BALEFIRE.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
                     event.getEntries().put(new ItemStack(HBMMachine.LAUNCH_PAD.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-                    event.getEntries().put(new ItemStack(HBMtools.DESIGNATOR.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+//                    event.getEntries().put(new ItemStack(HBMtools.DESIGNATOR.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
             }
     }
 }

@@ -5,6 +5,7 @@ import com.hbm.config.Config528;
 import com.hbm.config.ConfigGeneral;
 import com.hbm.config.RadiationConfig;
 import com.hbm.registries.ModItems;
+import com.hbm.registries.ModItems;;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;

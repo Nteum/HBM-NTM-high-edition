@@ -4,7 +4,7 @@ import com.hbm.HBM;
 import com.hbm.Inventory.fluid.trait.FT_Corrosive;
 import com.hbm.item.tool.FluidBucketItem;
 import com.hbm.registries.ModBlocks;
-import com.hbm.registries.ModItems;
+import com.hbm.registries.ModItems;;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BucketItem;

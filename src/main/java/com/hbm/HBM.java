@@ -19,7 +19,7 @@ import com.hbm.datagen.recipe.RecipeGen;
 import com.hbm.datagen.tag.BlockTagsGen;
 import com.hbm.datagen.tag.ItemTagsGen;
 import com.hbm.effect.ModEffects;
-import com.hbm.item.HBMItems;
+import com.hbm.registries.ModItems;
 import com.hbm.main.ClientEventHanler;
 import com.hbm.main.ServerEventHandler;
 import com.hbm.registries.*;
@@ -99,7 +99,7 @@ public class HBM {
 
         //模组内容的注册
         ModEntityType.ENTITY_TYPES.register(modEventBus);
-        HBMItems.register(modEventBus);
+        ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
         ModTabs.CREATIVE_MODE_TABS.register(modEventBus);
         ModBlockEntityType.REGISTER.register(modEventBus);

@@ -2,7 +2,7 @@ package com.hbm.item.env;
 
 import com.hbm.HBMKey;
 import com.hbm.item.HBMComponent;
-import com.hbm.item.HBMItems;
+import com.hbm.registries.ModItems;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
@@ -36,7 +36,7 @@ public class ItemEggGlyphid extends Item {
                             foodData.setFoodLevel(Math.max(0, foodData.getFoodLevel() - 2));
                             foodData.setSaturation(Math.max(0, foodData.getSaturationLevel() - 2));
                         }
-                        ItemStack newitem = pLevel.getRandom().nextDouble() < 0.7 ? HBMItems.EGG_GLYPHID.get().getDefaultInstance() : HBMItems.EGG_GLYPHID_TO_BIRTH.get().getDefaultInstance();
+                        ItemStack newitem = pLevel.getRandom().nextDouble() < 0.7 ? ModItems.EGG_GLYPHID.get().getDefaultInstance() : ModItems.EGG_GLYPHID_TO_BIRTH.get().getDefaultInstance();
                         player.addItem(newitem);
                     }
                     countdown = MAX_COUNTDOWN;

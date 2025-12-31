@@ -8,7 +8,7 @@ import com.hbm.block.HBMMachine;
 import com.hbm.block.tools.GeigerCounter;
 import com.hbm.blockentity.tools.TileEntityGeiger;
 import com.hbm.item.HBMCombat;
-import com.hbm.item.HBMItems;
+import com.hbm.registries.ModItems;
 import com.hbm.item.HBMtools;
 import com.hbm.item.tool.ItemGeigerCounter;
 import com.hbm.render.model.armor.ModelArmorBase;
@@ -214,7 +214,7 @@ public class ItemArmorFSB extends ArmorItem implements IArmorDisableModel {
                 for (MobEffectInstance effect : chestplate.effects) {
                     player.addEffect(effect);
                 }
-                if (chestplate.geigerSound && !player.getInventory().hasAnyOf(Set.of(HBMItems.GEIGER_COUNTER.get(), HBMMachine.GEIGER_COUNTER.get().asItem()))){
+                if (chestplate.geigerSound && !player.getInventory().hasAnyOf(Set.of(ModItems.GEIGER_COUNTER.get(), HBMMachine.GEIGER_COUNTER.get().asItem()))){
                     TileEntityGeiger.show(level, null, player, player.tickCount, TileEntityGeiger.check(level, player.getOnPos()));
                 }
             } else if (step && chestplate.step != null && player.onGround()){

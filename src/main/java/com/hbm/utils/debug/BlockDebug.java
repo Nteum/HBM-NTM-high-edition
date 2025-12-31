@@ -1,6 +1,6 @@
 package com.hbm.utils.debug;
 
-import com.hbm.item.HBMItems;
+import com.hbm.registries.ModItems;
 import com.hbm.item.HBMtools;
 import com.hbm.particle.ModParticleTypes;
 import com.hbm.particle.ParticleSystem;
@@ -38,7 +38,7 @@ public class BlockDebug extends Block {
 
     @Override
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-        if (!pLevel.isClientSide && pPlayer.getItemInHand(pHand).is(HBMItems.DEBUG_WAND.get())){
+        if (!pLevel.isClientSide && pPlayer.getItemInHand(pHand).is(ModItems.DEBUG_WAND.get())){
 //            BlockState newState = pState.cycle(ACTIVE);
 //            pLevel.setBlock(pPos, newState,2);
 //            pPlayer.sendSystemMessage(Component.literal("Debug block switch to " + (newState.getValue(ACTIVE) ? "active" : "inactive")));

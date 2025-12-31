@@ -3,7 +3,7 @@ package com.hbm.block.logistic;
 import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.blockentity.machine.CableEntity;
 import com.hbm.registries.ModBlocks;
-import com.hbm.registries.ModItems;
+import com.hbm.registries.ModItems;;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;

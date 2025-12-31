@@ -8,11 +8,11 @@ import com.hbm.block.HBMMachine;
 import com.hbm.blockentity.interfaces.IUpgradeInfoProvider;
 import com.hbm.item.HBMCombat;
 import com.hbm.item.HBMComponent;
-import com.hbm.item.HBMItems;
+import com.hbm.registries.ModItems;
 import com.hbm.registries.HBMDamage;
 import com.hbm.registries.ModKeyMapping;
 import com.hbm.registries.ModBlocks;
-import com.hbm.registries.ModItems;
+import com.hbm.registries.ModItems;;
 import net.minecraft.data.PackOutput;
 
 public class LanguageProvider extends net.minecraftforge.common.data.LanguageProvider {
@@ -23,7 +23,7 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
     @Override
     protected void addTranslations() {
         autoAdd();
-        HBMItems.languageSupport(this);
+        ModItems.languageSupport(this);
         HBMDamage.languageSupport(this);
         ModFluids.localName(this);
         ModKeyMapping.localName(this);
@@ -141,17 +141,15 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
         this.add("gui.hbm.rbmk.action.normal", "Status nominal.");
         this.add("gui.hbm.rbmk.action.insert_rods", "Insert control rods / consider AZ-5.");
         this.add("gui.hbm.rbmk.action.raise_rods", "Rods fully inserted — you can raise them.");
-        this.add(ModBlocks.crate_iron.get(), "Iron Crate");
         this.add("container.hbm.crate_iron", "Iron Crate");
-        this.add(ModBlocks.crate_steel.get(), "Steel Crate");
         this.add("container.hbm.crate_steel", "Steel Crate");
         this.add(ModBlocks.machine_wood_burner.get(), "Wood Burner Generator");
         this.add("container.hbm.machine_wood_burner", "Wood Burner Generator");
         this.add("tooltip.hbm.crate_empty", "[Empty]");
         this.add("tooltip.hbm.crate_more", "  and %s more...");
         this.add("tooltip.hbm.crate_fill", "  Used %s / %s slots");
-        this.add(HBMItems.rbmk_control_rod.get(), "RBMK Control Rod");
-        this.add(HBMItems.WOOD_ASH_POWDER.get(), "Wood Ash Powder");
+//        this.add(ModItems.rbmk_control_rod.get(), "RBMK Control Rod");
+//        this.add(ModItems.WOOD_ASH_POWDER.get(), "Wood Ash Powder");
         this.add("gui.hbm.wood_burner.no_fuel", "No fuel loaded.");
         this.add("gui.hbm.wood_burner.enabled", "Enabled");
         this.add("gui.hbm.wood_burner.disabled", "Disabled");

@@ -20,7 +20,7 @@ import com.hbm.blockentity.base2.BaseMachineBlockEntity;
 import com.hbm.capabilities.HBMCaps;
 import com.hbm.gui.menu.TokamakMenu;
 import com.hbm.item.HBMComponent;
-import com.hbm.item.HBMItems;
+import com.hbm.registries.ModItems;
 import com.hbm.registries.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -338,9 +338,9 @@ public class TokamakControllerBlockEntity extends BaseMachineBlockEntity impleme
     }
 
     private void refuelFromItems() {
-        Item deuteriumCell = HBMItems.CELL_DEUTERIUM.get();
-        Item tritiumCell = HBMItems.CELL_TRITIUM.get();
-        Item emptyCell = HBMItems.CELL_EMPTY.get();
+        Item deuteriumCell = ModItems.CELL_DEUTERIUM.get();
+        Item tritiumCell = ModItems.CELL_TRITIUM.get();
+        Item emptyCell = ModItems.CELL_EMPTY.get();
         ItemStack dStack = this.items.get(0);
         ItemStack tStack = this.items.get(1);
         if (fuelD < 1.0D && dStack.is(deuteriumCell)) {
@@ -503,8 +503,8 @@ public class TokamakControllerBlockEntity extends BaseMachineBlockEntity impleme
     //==================== 物品槽规则 ====================//
     @Override
     public boolean canPlaceItem(int index, ItemStack stack) {
-        Item deuteriumCell = HBMItems.CELL_DEUTERIUM.get();
-        Item tritiumCell = HBMItems.CELL_TRITIUM.get();
+        Item deuteriumCell = ModItems.CELL_DEUTERIUM.get();
+        Item tritiumCell = ModItems.CELL_TRITIUM.get();
         if (index == 0) return stack.is(deuteriumCell);
         if (index == 1) return stack.is(tritiumCell);
         if (index == 2) {

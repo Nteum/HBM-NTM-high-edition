@@ -3,7 +3,7 @@ package com.hbm.datagen.model;
 import com.hbm.HBM;
 import com.hbm.Inventory.fluid.ModFluids;
 import com.hbm.item.*;
-import com.hbm.registries.ModItems;
+import com.hbm.registries.ModItems;;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
@@ -31,22 +31,22 @@ public class ItemModelGen extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        HBMItems.genModel(this);
+        ModItems.genModel(this);
         HBMWeapon.genModel(this);
         HBMCombat.genModel(this);
         ModFluids.bucketModel(this);
 
-//        this.basicItem(HBMItems.overlay_my_fluid.get());
-//        this.basicItem(HBMItems.BEDROCK_ORE.get());
+//        this.basicItem(ModItems.overlay_my_fluid.get());
+//        this.basicItem(ModItems.BEDROCK_ORE.get());
 //        /* tool */
-//        this.basicItem(HBMItems.SCREWDRIVER.get());
+//        this.basicItem(ModItems.SCREWDRIVER.get());
 
         generateMissingSimpleItemModels();
 
         ResourceLocation item_path;
         ResourceLocation property_stage = HBM.rl("stage");
         ResourceLocation property_broken = new ResourceLocation("broken");
-        item_path = Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(HBMItems.INGOT_U238M2.get()));
+        item_path = Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(ModItems.INGOT_U238M2.get()));
         this.getBuilder(item_path.toString()).parent(new ModelFile.UncheckedModelFile("item/generated"))
                 .texture("layer0", new ResourceLocation(item_path.getNamespace(), "item/ingot_u238m2"))
 //                .override().predicate(property_broken,0).model(this.basicItem(HBM.rl("ingot_u238m2"))).end()
@@ -56,7 +56,7 @@ public class ItemModelGen extends ItemModelProvider {
                 .override().predicate(property_stage, 2).model(this.basicItem(HBM.rl("hs-arsenic"))).end()
                 .override().predicate(property_stage, 3).model(this.basicItem(HBM.rl("hs-vault"))).end();
 
-        item_path = Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(HBMItems.INGOT_NEPTUNIUM.get()));
+        item_path = Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(ModItems.INGOT_NEPTUNIUM.get()));
         this.getBuilder(item_path.toString()).parent(new ModelFile.UncheckedModelFile("item/generated"))
                 .texture("layer0", new ResourceLocation(item_path.getNamespace(), "item/" + item_path.getPath()))
                 .override()

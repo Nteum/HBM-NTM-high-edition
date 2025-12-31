@@ -5,7 +5,7 @@ import com.hbm.datagen.LanguageProvider;
 import com.hbm.datagen.model.ItemModelGen;
 import com.hbm.effect.ModEffects;
 import com.hbm.item.armor.*;
-import com.hbm.registries.ModItems;
+import com.hbm.registries.ModItems;;
 import com.hbm.registries.ModSounds;
 import com.hbm.registries.RegistryHelper;
 import net.minecraft.client.model.ArmorStandModel;
@@ -213,7 +213,7 @@ public class HBMCombat{
         standaloneModels.forEach(itemRegistryObject -> provider.add(itemRegistryObject.get(), RegistryHelper.generateOrderlyName(itemRegistryObject.getId().getPath())));
     }
     protected static RegistryObject<Item> register(List<RegistryObject<Item>> list, final String name, final Supplier<? extends Item> sup){
-        RegistryObject<Item> registryObject = HBMItems.ITEMS.register(name, sup);
+        RegistryObject<Item> registryObject = ModItems.ITEMS.register(name, sup);
         list.add(registryObject);
         return registryObject;
     }

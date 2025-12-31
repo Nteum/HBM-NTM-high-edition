@@ -9,7 +9,7 @@ import com.hbm.block.weapon.LaunchPad;
 import com.hbm.datagen.LanguageProvider;
 import com.hbm.datagen.loot.BlockLootGen;
 import com.hbm.datagen.model.BlockStateGen;
-import com.hbm.item.HBMItems;
+import com.hbm.registries.ModItems;
 import com.hbm.utils.debug.BlockDebug;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.item.BlockItem;
@@ -53,7 +53,7 @@ public class HBMMachine {
     }
     public static RegistryObject<Block> registerBlockWithItem(DeferredRegister<Block> BLOCKS, final String name, final Supplier<? extends Block> blocksup){
         RegistryObject<Block> block = BLOCKS.register(name,blocksup);
-        HBMItems.ITEMS.register(name,()->new BlockItem(block.get(),new Item.Properties()));
+        ModItems.ITEMS.register(name,()->new BlockItem(block.get(),new Item.Properties()));
         return block;
     }
 
@@ -80,8 +80,8 @@ public class HBMMachine {
         provider.add(STEEL_BARREL.get(), "Steel Barrel");
         provider.add(TCALLOY_BARREL.get(), "Technetium Steel Barrel");
         provider.add(ANTIMATTER_BARREL.get(), "Magnetic Antimatter Container");
-        provider.add(HBMLang.FLUID_CAPACITY.key(), "Capacity: %1$s mB");
-        provider.add(HBMLang.BARREL.key(), "HBM Barrel");
+//        provider.add(HBMLang.FLUID_CAPACITY.key(), "Capacity: %1$s mB");
+//        provider.add(HBMLang.BARREL.key(), "HBM Barrel");
         provider.add(GEIGER_COUNTER.get(), "Geiger Counter");
         provider.add(LAUNCH_PAD.get(), "Launch Pad");
 

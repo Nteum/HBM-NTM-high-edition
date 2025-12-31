@@ -3,9 +3,9 @@ package com.hbm.block.logistic;
 import com.hbm.api.Mode;
 import com.hbm.capabilities.network.ConnType;
 import com.hbm.blockentity.base.BasePipeBlockEntity;
-import com.hbm.item.HBMItems;
-import com.hbm.registries.ModBlocks;
 import com.hbm.registries.ModItems;
+import com.hbm.registries.ModBlocks;
+import com.hbm.registries.ModItems;;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -104,7 +104,7 @@ public abstract class AbstractPipeBlock extends PipeBlock implements EntityBlock
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
         if (!pLevel.isClientSide()){
             // 螺丝刀点击对应方向使导线可连接/不连接
-            if (pPlayer.getItemInHand(pHand).is(HBMItems.SCREWDRIVER.get())){
+            if (pPlayer.getItemInHand(pHand).is(ModItems.SCREWDRIVER.get())){
                 Direction hitDir = cableHitDirection(pHit.getBlockPos().getCenter(),pHit.getLocation());
                 hitDir = hitDir==null?pHit.getDirection():hitDir;
                 if (pLevel.getBlockEntity(pPos) instanceof BasePipeBlockEntity pipeEntity){

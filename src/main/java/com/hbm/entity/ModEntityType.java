@@ -12,7 +12,7 @@ import com.hbm.entity.weapon.grenade.*;
 //import com.hbm.entity.logic.NukeExplodeEntity;
 import com.hbm.entity.weapon.missile.EntityMissileAntiBallistic;
 import com.hbm.entity.weapon.missile.EntityMissileTier0.*;
-import com.hbm.registries.ModItems;
+import com.hbm.registries.ModItems;;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;

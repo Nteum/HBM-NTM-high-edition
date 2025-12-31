@@ -88,7 +88,7 @@ def old_fluids() -> Set[str]:
 
 
 def hbmitems_builder_names() -> Set[str]:
-    path = NEW_JAVA / 'com' / 'hbm' / 'item' / 'HBMItems.java'
+    path = NEW_JAVA / 'com' / 'hbm' / 'item' / 'ModItems.java'
     text = read(path)
     pattern = re.compile(r'=\s*(?:new\s+ItemBuilder|parts|machine|missile|gun|consumable|template|control|add)\(\s*"([^"]+)"', re.S)
     return set(pattern.findall(text))

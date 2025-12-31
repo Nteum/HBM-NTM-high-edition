@@ -17,14 +17,14 @@ import com.hbm.block.machine.rbmk.BlockRBMKPeripheral;
 import com.hbm.block.logistic.BlockConveyor;
 import com.hbm.block.weapon.*;
 import com.hbm.Inventory.fluid.ModFluids;
-import com.hbm.item.HBMItems;
+import com.hbm.registries.ModItems;
 import com.hbm.item.blockitem.IronCrateItem;
 import com.hbm.item.blockitem.SteelCrateItem;
 import com.hbm.datagen.LanguageProvider;
 import com.hbm.datagen.loot.BlockLootGen;
 import com.hbm.datagen.model.BlockStateGen;
 import com.hbm.datagen.model.ItemModelGen;
-import com.hbm.item.HBMItems;
+import com.hbm.registries.ModItems;
 import com.hbm.item.tool.BatteryBlockItem;
 import com.hbm.block.base.DummibleBlock;
 import com.hbm.registries.WrapperRegistry.*;
@@ -117,7 +117,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> crate_steel =
             new BlockBuilder("crate_steel", () -> new SteelCrateBlock(Properties.of().strength(4.0F).sound(SoundType.METAL)))
                     .tab(ModCreativeModeTab.HBM_MACHINE.getKey())
-                    .item(block -> new SteelCrateItem(block, new Item.Properties().stacksTo(1)))
+                    .item(block -> new SteelCrateItem(block, new Item.Properties().stacksTo(1))).loc(HBMKey.REVERSE_GEN)
                     .build();
     //炸弹
     public static final RegistryObject<Block> bomb_boy = registerBlockWithItem("bomb_boy",()->new NukeBoy(Properties.of(),120));
@@ -150,12 +150,12 @@ public class ModBlocks {
 //    }
     public static RegistryObject<Block> registerBattery(final String name, final Supplier<? extends Block> blocksup){
         RegistryObject<Block> block = BLOCKS.register(name,blocksup);
-        HBMItems.ITEMS.register(name,()->new BatteryBlockItem(block.get(),new Item.Properties()));
+        ModItems.ITEMS.register(name,()->new BatteryBlockItem(block.get(),new Item.Properties()));
         return block;
     }
     public static RegistryObject<Block> registerBlockWithItem(final String name, final Supplier<? extends Block> blocksup){
         RegistryObject<Block> block = BLOCKS.register(name,blocksup);
-        HBMItems.ITEMS.register(name,()->new BlockItem(block.get(),new Item.Properties()));
+        ModItems.ITEMS.register(name,()->new BlockItem(block.get(),new Item.Properties()));
         return block;
     }
     public static void register(IEventBus modEventBus){

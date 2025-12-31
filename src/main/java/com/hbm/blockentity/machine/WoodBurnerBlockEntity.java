@@ -12,7 +12,7 @@ import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.blockentity.base2.BaseMachineBlockEntity;
 import com.hbm.capabilities.HBMCaps;
 import com.hbm.gui.menu.WoodBurnerMenu;
-import com.hbm.item.HBMItems;
+import com.hbm.registries.ModItems;
 import com.hbm.registries.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -155,8 +155,8 @@ public class WoodBurnerBlockEntity extends BaseMachineBlockEntity {
         if (random.nextFloat() < 0.5F) {
             ItemStack ash = getStackInSlot(ASH_SLOT);
             if (ash.isEmpty()) {
-                setItem(ASH_SLOT, new ItemStack(HBMItems.WOOD_ASH_POWDER.get()));
-            } else if (ash.is(HBMItems.WOOD_ASH_POWDER.get()) && ash.getCount() < ash.getMaxStackSize()) {
+                setItem(ASH_SLOT, new ItemStack(ModItems.WOOD_ASH_POWDER.get()));
+            } else if (ash.is(ModItems.WOOD_ASH_POWDER.get()) && ash.getCount() < ash.getMaxStackSize()) {
                 ash.grow(1);
                 setChanged();
             }

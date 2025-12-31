@@ -3,8 +3,8 @@ package com.hbm.api.badthing.hazard.type;
 import com.hbm.api.badthing.ContaminationUtil;
 import com.hbm.api.badthing.hazard.modifier.HazardModifier;
 import com.hbm.config.Config528;
-import com.hbm.item.HBMItems;
 import com.hbm.registries.ModItems;
+import com.hbm.registries.ModItems;;
 import com.hbm.utils.BobMth;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -25,7 +25,7 @@ public class HazardTypeRadiation extends HazardTypeBase {
 		boolean reacher = false;
 		
 		if(target instanceof Player)
-			reacher = ((Player) target).getInventory().countItem(HBMItems.reacher.get()) > 0;
+			reacher = ((Player) target).getInventory().countItem(ModItems.reacher.get()) > 0;
 		
 		level *= stack.getCount();
 		

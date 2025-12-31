@@ -3,7 +3,7 @@ package com.hbm.Inventory.recipe;
 import com.google.gson.JsonObject;
 import com.hbm.HBM;
 import com.hbm.HBMKey;
-import com.hbm.item.HBMItems;
+import com.hbm.registries.ModItems;
 import com.hbm.utils.Tuple;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.CriterionTriggerInstance;
@@ -242,11 +242,11 @@ public class BlastFurnaceRecipe implements Recipe<Container> {
     }
 
     public static void addDefaultRecipe(Consumer<FinishedRecipe> pWriter){
-        registerRecipe(pWriter, Items.IRON_INGOT,Items.COAL,new ItemStack(HBMItems.INGOT_STEEL.get(),1));
-        registerRecipe(pWriter, Items.RAW_IRON,Items.COAL,new ItemStack(HBMItems.INGOT_STEEL.get(),1));
-        registerRecipe(pWriter, Blocks.IRON_ORE,Items.COAL,new ItemStack(HBMItems.INGOT_STEEL.get(),2));
-        registerRecipe(pWriter, Items.COPPER_INGOT,Items.REDSTONE,new ItemStack(HBMItems.INGOT_RED_COPPER.get(),2));
-        registerRecipe(pWriter, HBMItems.INGOT_STEEL.get(),HBMItems.INGOT_RED_COPPER.get(),new ItemStack(HBMItems.INGOT_ADVANCED_ALLOY.get(),2));
+        registerRecipe(pWriter, Items.IRON_INGOT,Items.COAL,new ItemStack(ModItems.INGOT_STEEL.get(),1));
+        registerRecipe(pWriter, Items.RAW_IRON,Items.COAL,new ItemStack(ModItems.INGOT_STEEL.get(),1));
+        registerRecipe(pWriter, Blocks.IRON_ORE,Items.COAL,new ItemStack(ModItems.INGOT_STEEL.get(),2));
+        registerRecipe(pWriter, Items.COPPER_INGOT,Items.REDSTONE,new ItemStack(ModItems.INGOT_RED_COPPER.get(),2));
+        registerRecipe(pWriter, ModItems.INGOT_STEEL.get(),ModItems.INGOT_RED_COPPER.get(),new ItemStack(ModItems.INGOT_ADVANCED_ALLOY.get(),2));
     }
     public static void registerRecipe(Consumer<FinishedRecipe> pwriter, ItemLike input1,ItemLike input2,ItemStack output){
         BlastFurnaceRecipe.BlastFurnaceRecipeBuilder.blast(output.getItem(),output.getCount())

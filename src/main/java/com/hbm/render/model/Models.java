@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import com.hbm.HBM;
-import com.hbm.item.HBMItems;
+import com.hbm.registries.ModItems;
 import com.hbm.item.HBMWeapon;
 import com.hbm.render.model.armor.*;
 import com.hbm.render.model.entity.ModelGlyphid;
@@ -69,7 +69,7 @@ public class Models {
     public static final ResourceLocation WOOD_BURNER = add(HBM.rl("block/machine_wood_burner"));
 
     public static final ResourceLocation MP_W_15_BALEFIRE = addItem(HBM.rl("item/mp_warhead_15_balefire"), HBMWeapon.MP_WARHEAD_15_BALEFIRE);
-//    public static final ResourceLocation GUN_RIFLE = addItem(HBM.rl("item/gun_marseleg"), HBMItems.GUN_RIFLE.getId());
+//    public static final ResourceLocation GUN_RIFLE = addItem(HBM.rl("item/gun_marseleg"), ModItems.GUN_RIFLE.getId());
 
     public static final ResourceLocation MISSILE_TEST = addEntity(HBM.modelRl("entity/missile/missile_test"), ObjEntityModelSingle::new);
     public static final ResourceLocation MISSILE_NUKE = addEntity(HBM.rl("entity/missile_nuclear"), ObjEntityModelSingle::new);

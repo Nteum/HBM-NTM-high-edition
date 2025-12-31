@@ -5,7 +5,7 @@ import com.hbm.datagen.LanguageProvider;
 import com.hbm.datagen.loot.BlockLootGen;
 import com.hbm.datagen.model.BlockStateGen;
 import com.hbm.datagen.model.ItemModelGen;
-import com.hbm.item.HBMItems;
+import com.hbm.registries.ModItems;
 import com.hbm.registries.ModBlocks;
 import com.hbm.registries.RegistryHelper;
 import net.minecraft.data.loot.BlockLootSubProvider;
@@ -139,7 +139,7 @@ public class WrapperRegistry<T> implements Supplier<T>{
         @Override
         public RegistryObject<Item> build() {
             WrappedItemRegistry itemRegistry = new WrappedItemRegistry();
-            itemRegistry.registryObject = HBMItems.ITEMS.register(name, sup);
+            itemRegistry.registryObject = ModItems.ITEMS.register(name, sup);
             itemRegistry.creativeKey = creativeKey;
             itemRegistry.genModelWay = genModelWay;
             itemRegistry.genNameWay = genNameWay;
@@ -151,7 +151,7 @@ public class WrapperRegistry<T> implements Supplier<T>{
 //                // 将 supplier 交给 ModItemProperties，建议传 RegistryObject::get 或包装后的 Item supplier
 //                HBMItemProperties.add(itemRegistry, propertyName, condition);
 //            }
-            HBMItems.itemList.add(itemRegistry);
+            ModItems.itemList.add(itemRegistry);
             return itemRegistry.registryObject;
         }
     }
@@ -246,7 +246,7 @@ public class WrapperRegistry<T> implements Supplier<T>{
         public RegistryObject<Block> build() {
             WrappedBlockRegistry blockRegistry = new WrappedBlockRegistry();
             blockRegistry.registryObject = ModBlocks.BLOCKS.register(name, sup);
-            HBMItems.ITEMS.register(name, blockItem != null ? () -> blockItem.apply(blockRegistry.get()) : ()->new BlockItem(blockRegistry.get(),new Item.Properties()));
+            ModItems.ITEMS.register(name, blockItem != null ? () -> blockItem.apply(blockRegistry.get()) : ()->new BlockItem(blockRegistry.get(),new Item.Properties()));
             blockRegistry.creativeKey = creativeKey;
             blockRegistry.genModelWay = genModelWay;
             blockRegistry.genNameWay = genNameWay;

@@ -1,7 +1,7 @@
 package com.hbm.settings.tooltip;
 
 import com.hbm.HBMLang;
-import com.hbm.item.HBMItems;
+import com.hbm.registries.ModItems;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -16,9 +16,9 @@ public class TooltipRegistries {
     public static final Map<Item, List<Component>> TOOLTIP_MAP = new HashMap<>();
 
     static {
-        addTooltip(HBMItems.INGOT_NEPTUNIUM.get(), HBMLang.ITEM_INGOT_NEPTUNIUM_DESC.translate());
-        addTooltip(HBMItems.DUST.get(), HBMLang.ITEM_DUST_DESC.translate());
-        addTooltip(HBMItems.POWDER_FIRE.get(), HBMLang.ITEM_POWDER_FIRE_DESC.translate());
+        addTooltip(ModItems.INGOT_NEPTUNIUM.get(), HBMLang.ITEM_INGOT_NEPTUNIUM_DESC.translate());
+        addTooltip(ModItems.DUST.get(), HBMLang.ITEM_DUST_DESC.translate());
+        addTooltip(ModItems.POWDER_FIRE.get(), HBMLang.ITEM_POWDER_FIRE_DESC.translate());
     }
 
     public static void addTooltip(Item item, Component ... components) {

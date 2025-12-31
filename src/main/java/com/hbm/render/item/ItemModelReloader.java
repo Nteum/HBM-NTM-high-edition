@@ -3,7 +3,7 @@ package com.hbm.render.item;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
-import com.hbm.item.HBMItems;
+import com.hbm.registries.ModItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemModelShaper;
 import net.minecraft.client.renderer.entity.ItemRenderer;
@@ -32,7 +32,7 @@ public class ItemModelReloader extends SimpleJsonResourceReloadListener {
 
     @Override
     protected void apply(Map<ResourceLocation, JsonElement> pObject, ResourceManager pResourceManager, ProfilerFiller pProfiler) {
-//        reloadSpecificItemModel(HBMItems.INGOT_U238M2.get());
+//        reloadSpecificItemModel(ModItems.INGOT_U238M2.get());
     }
 
     public static void reloadSpecificItemModel(Item item) {
