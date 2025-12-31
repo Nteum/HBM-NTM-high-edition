@@ -13,9 +13,13 @@ import com.hbm.block.machine.rbmk.BlockRBMKBase;
 import com.hbm.block.machine.rbmk.BlockRBMKFuelChannel;
 import com.hbm.block.machine.rbmk.BlockRBMKHeater;
 import com.hbm.block.machine.rbmk.BlockRBMKControlRod;
+import com.hbm.block.machine.rbmk.BlockRBMKPeripheral;
 import com.hbm.block.logistic.BlockConveyor;
 import com.hbm.block.weapon.*;
 import com.hbm.Inventory.fluid.ModFluids;
+import com.hbm.item.HBMItems;
+import com.hbm.item.blockitem.IronCrateItem;
+import com.hbm.item.blockitem.SteelCrateItem;
 import com.hbm.datagen.LanguageProvider;
 import com.hbm.datagen.loot.BlockLootGen;
 import com.hbm.datagen.model.BlockStateGen;
@@ -32,6 +36,7 @@ import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockBehaviour.*;
@@ -68,6 +73,9 @@ public class ModBlocks {
     public static final RegistryObject<Block> machine_nuclear_boiler = registerBlockWithItem("machine_nuclear_boiler", ()->new BlockNuclearBoiler(Properties.of().lightLevel(litEmission(15))));
     public static final RegistryObject<Block> machine_press = registerBlockWithItem("machine_press", ()->new BlockPress(Properties.of()));
     public static final RegistryObject<Block> machine_shredder = registerBlockWithItem("machine_shredder", ()->new BlockShredder(Properties.of()));
+    public static final RegistryObject<Block> machine_wood_burner = registerBlockWithItem("machine_wood_burner",
+            () -> new WoodBurnerBlock(Properties.of().strength(3.0F).sound(SoundType.METAL)
+                    .lightLevel(state -> state.getValue(WoodBurnerBlock.LIT) ? 13 : 0)));
     // Tokamak 聚变堆组件
     public static final RegistryObject<Block> tokamak_controller = registerBlockWithItem("tokamak_controller", ()->new TokamakControllerBlock(Properties.of().strength(5.0F).lightLevel(state -> 8)));
     public static final RegistryObject<Block> tokamak_casing = registerBlockWithItem("tokamak_casing", ()->new TokamakCasingBlock(Properties.of().strength(6.0F).explosionResistance(18.0F)));
@@ -89,12 +97,28 @@ public class ModBlocks {
     public static final RegistryObject<Block> machine_rbmk_heater = registerBlockWithItem("machine_rbmk_heater", () -> new BlockRBMKHeater(Properties.of().strength(4.0F).explosionResistance(12.0F).lightLevel(state -> state.getValue(BlockRBMKHeater.LIT) ? 8 : 0)));
     public static final RegistryObject<Block> machine_rbmk_fuel_channel = registerBlockWithItem("machine_rbmk_fuel_channel", () -> new BlockRBMKFuelChannel(Properties.of().strength(4.0F).explosionResistance(12.0F)));
     public static final RegistryObject<Block> machine_rbmk_control_rod = registerBlockWithItem("machine_rbmk_control_rod", () -> new BlockRBMKControlRod(Properties.of().strength(4.0F).explosionResistance(12.0F)));
+    public static final RegistryObject<Block> machine_rbmk_console = registerBlockWithItem("machine_rbmk_console", () -> new BlockRBMKPeripheral(Properties.of().strength(4.0F).explosionResistance(16.0F), com.hbm.reactor.rbmk.RBMKPeripheralType.CONSOLE));
+    public static final RegistryObject<Block> machine_rbmk_element = registerBlockWithItem("machine_rbmk_element", () -> new BlockRBMKPeripheral(Properties.of().strength(4.0F).explosionResistance(16.0F), com.hbm.reactor.rbmk.RBMKPeripheralType.ELEMENT));
+    public static final RegistryObject<Block> machine_rbmk_reflector = registerBlockWithItem("machine_rbmk_reflector", () -> new BlockRBMKPeripheral(Properties.of().strength(5.0F).explosionResistance(20.0F), com.hbm.reactor.rbmk.RBMKPeripheralType.REFLECTOR));
+    public static final RegistryObject<Block> machine_rbmk_debris = registerBlockWithItem("machine_rbmk_debris", () -> new BlockRBMKPeripheral(Properties.of().strength(3.0F).explosionResistance(8.0F), com.hbm.reactor.rbmk.RBMKPeripheralType.DEBRIS));
+    public static final RegistryObject<Block> machine_rbmk_crane_console = registerBlockWithItem("machine_rbmk_crane_console", () -> new BlockRBMKPeripheral(Properties.of().strength(4.0F).explosionResistance(12.0F), com.hbm.reactor.rbmk.RBMKPeripheralType.CRANE_CONSOLE));
+    public static final RegistryObject<Block> machine_rbmk_autoloader = registerBlockWithItem("machine_rbmk_autoloader", () -> new BlockRBMKPeripheral(Properties.of().strength(4.0F).explosionResistance(12.0F), com.hbm.reactor.rbmk.RBMKPeripheralType.AUTOLOADER));
     //模型部分（仅仅用于加载模型渲染，而不会在游戏单独出现，名称以part开头）
     public static final RegistryObject<Block> part_press_head = BLOCKS.register("part_press_head",()->new Block(Properties.of().noLootTable()));
     //电力
     public static final RegistryObject<Block> RED_CABLE = registerBlockWithItem("red_cable",()->new BlockCable(Properties.copy(Blocks.STONE_BRICK_WALL)));
     //输送带
     public static final RegistryObject<Block> conveyor = registerBlockWithItem("conveyor",()->new BlockConveyor(Properties.of()));
+    public static final RegistryObject<Block> crate_iron =
+            new BlockBuilder("crate_iron", () -> new IronCrateBlock(Properties.of().strength(3.0F).sound(SoundType.WOOD)))
+                    .tab(ModCreativeModeTab.HBM_MACHINE.getKey())
+                    .item(block -> new IronCrateItem(block, new Item.Properties().stacksTo(1)))
+                    .build();
+    public static final RegistryObject<Block> crate_steel =
+            new BlockBuilder("crate_steel", () -> new SteelCrateBlock(Properties.of().strength(4.0F).sound(SoundType.METAL)))
+                    .tab(ModCreativeModeTab.HBM_MACHINE.getKey())
+                    .item(block -> new SteelCrateItem(block, new Item.Properties().stacksTo(1)))
+                    .build();
     //炸弹
     public static final RegistryObject<Block> bomb_boy = registerBlockWithItem("bomb_boy",()->new NukeBoy(Properties.of(),120));
     public static final RegistryObject<Block> bomb_fat_man = registerBlockWithItem("bomb_fat_man",()->new NukeFat(Properties.of(),200));

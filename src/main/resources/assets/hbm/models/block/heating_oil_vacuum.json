@@ -1,6 +1,5 @@
 {
-  "loader": "forge:fluid",
-  "custom": {
-    "fluid": "hbm:heating_oil_vacuum"
+  "textures": {
+    "particle": "minecraft:block/water_still"
   }
 }

@@ -1,39 +1,84 @@
 package com.hbm.utils.transport_net;
 
-import com.google.common.graph.Graph;
-import com.google.common.graph.GraphBuilder;
-import com.google.common.graph.Graphs;
-import com.google.common.graph.MutableGraph;
 import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraftforge.fluids.FluidType;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
+/**
+ * Extremely lightweight representation of a pipe graph. We only need to know which
+ * transmitters participate and the fluid bound to the network. All topology-aware
+ * operations happen inside {@link FluidNetworkSystem}.
+ */
 public class FluidNetwork {
-    // 一般网络只允许同时存在一种流体类型
-    public Fluid fluid;
-    List<BlockEntity> machines;
-    MutableGraph<BlockPos> transmitters;
 
-    public FluidNetwork(){
-        this(Fluids.EMPTY, null, null);
-    }
-    public FluidNetwork(BlockPos pos){
-        this(Fluids.EMPTY, new ArrayList<>(), GraphBuilder.undirected().build());
-        this.transmitters.addNode(pos);
-    }
-    public FluidNetwork(Fluid fluid, List<BlockEntity> machines, MutableGraph<BlockPos> transmitters){
-        this.fluid = fluid;
-        this.machines = machines;
-        this.transmitters = transmitters;
+    private final Set<BlockPos> transmitters = new HashSet<>();
+    private Fluid fluid = Fluids.EMPTY;
+
+    public FluidNetwork() {
     }
 
-    public void tick(){
+    public Fluid getFluid() {
+        return fluid;
+    }
 
+    public void setFluid(final Fluid fluid) {
+        this.fluid = fluid == null ? Fluids.EMPTY : fluid;
+    }
+
+    public void addTransmitter(final BlockPos pos) {
+        transmitters.add(pos.immutable());
+    }
+
+    public void removeTransmitter(final BlockPos pos) {
+        transmitters.remove(pos);
+    }
+
+    public boolean isEmpty() {
+        return transmitters.isEmpty();
+    }
+
+    public boolean contains(final BlockPos pos) {
+        return transmitters.contains(pos);
+    }
+
+    public Set<BlockPos> getTransmitters() {
+        return Collections.unmodifiableSet(transmitters);
+    }
+
+    public void absorb(final FluidNetwork other) {
+        if (other == null) {
+            return;
+        }
+        other.transmitters.forEach(transmitters::add);
+        if (this.fluid == Fluids.EMPTY) {
+            this.fluid = other.fluid;
+        }
+    }
+
+    public void replaceTransmitters(final Set<BlockPos> newMembers) {
+        transmitters.clear();
+        if (newMembers != null) {
+            newMembers.stream().filter(Objects::nonNull).forEach(pos -> transmitters.add(pos.immutable()));
+        }
+    }
+
+    public boolean canMergeWith(final FluidNetwork other) {
+        if (other == null) {
+            return false;
+        }
+        if (this.fluid == Fluids.EMPTY || other.fluid == Fluids.EMPTY) {
+            return true;
+        }
+        return this.fluid == other.fluid;
+    }
+
+    public void tick() {
+        // Placeholder for future fluid balancing. The Stage 2 goal is stability, so the
+        // manager simply keeps networks coherent while higher-level handlers push/pull.
     }
 }

@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "hbm:block/mine_fat",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "hbm:block/mine_fat",
+      "y": 0
+    },
+    "facing=south": {
+      "model": "hbm:block/mine_fat",
+      "y": 90
+    },
+    "facing=west": {
+      "model": "hbm:block/mine_fat",
+      "y": 180
+    }
+  }
+}

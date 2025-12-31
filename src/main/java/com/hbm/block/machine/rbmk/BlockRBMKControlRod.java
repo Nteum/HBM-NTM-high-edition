@@ -1,9 +1,7 @@
 package com.hbm.block.machine.rbmk;
 
 import com.hbm.blockentity.machine.rbmk.RBMKControlRodEntity;
-import com.hbm.registries.ModSounds;
 import net.minecraft.core.BlockPos;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -19,6 +17,8 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraftforge.network.NetworkHooks;
 
 /**
  * Minimal RBMK control rod column. Stores a simple insertion level (0-4) and
@@ -49,13 +49,14 @@ public class BlockRBMKControlRod extends Block implements EntityBlock {
         if (level.isClientSide) {
             return InteractionResult.SUCCESS;
         }
-        int current = state.getValue(INSERTION);
-        int next = player.isShiftKeyDown() ? Math.max(0, current - 1) : Math.min(MAX_INSERTION, current + 1);
-        if (next != current) {
-            level.setBlock(pos, state.setValue(INSERTION, next), Block.UPDATE_ALL);
-            level.playSound(null, pos, ModSounds.BLOCK_RBMK_AZ5_COVER.get(), SoundSource.BLOCKS, 1.0F, 1.0F);
+
+        BlockEntity entity = level.getBlockEntity(pos);
+        if (entity instanceof RBMKControlRodEntity controlRod && player instanceof ServerPlayer serverPlayer) {
+            NetworkHooks.openScreen(serverPlayer, controlRod, pos);
+            return InteractionResult.CONSUME;
         }
-        return InteractionResult.CONSUME;
+
+        return InteractionResult.PASS;
     }
 
     @Nullable

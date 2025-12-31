@@ -41,4 +41,16 @@ public class ModMenuType {
             MOD_MENU_TYPES.register("tokamak_menu",()->new MenuType<>(TokamakMenu::new, FeatureFlags.VANILLA_SET));
     public static final RegistryObject<MenuType<RBMKBaseMenu>> RBMK_BASE_MENU =
             MOD_MENU_TYPES.register("rbmk_base_menu",()->new MenuType<>(RBMKBaseMenu::new, FeatureFlags.VANILLA_SET));
+    public static final RegistryObject<MenuType<RBMKFuelChannelMenu>> RBMK_FUEL_CHANNEL_MENU =
+            MOD_MENU_TYPES.register("rbmk_fuel_channel_menu", () -> IForgeMenuType.create(RBMKFuelChannelMenu::new));
+    public static final RegistryObject<MenuType<RBMKControlRodMenu>> RBMK_CONTROL_ROD_MENU =
+            MOD_MENU_TYPES.register("rbmk_control_rod_menu", () -> new MenuType<>(RBMKControlRodMenu::new, FeatureFlags.VANILLA_SET));
+    public static final RegistryObject<MenuType<RBMKPeripheralMenu>> RBMK_PERIPHERAL_MENU =
+            MOD_MENU_TYPES.register("rbmk_peripheral_menu", () -> new MenuType<>(RBMKPeripheralMenu::new, FeatureFlags.VANILLA_SET));
+    public static final RegistryObject<MenuType<IronCrateMenu>> IRON_CRATE_MENU =
+            MOD_MENU_TYPES.register("iron_crate_menu", () -> IForgeMenuType.create(IronCrateMenu::new));
+    public static final RegistryObject<MenuType<SteelCrateMenu>> STEEL_CRATE_MENU =
+            MOD_MENU_TYPES.register("steel_crate_menu", () -> IForgeMenuType.create(SteelCrateMenu::new));
+    public static final RegistryObject<MenuType<WoodBurnerMenu>> WOOD_BURNER_MENU =
+            MOD_MENU_TYPES.register("wood_burner_menu", () -> IForgeMenuType.create(WoodBurnerMenu::new));
 }

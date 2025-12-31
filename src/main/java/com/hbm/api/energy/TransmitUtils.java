@@ -42,6 +42,9 @@ public class TransmitUtils {
             energyHandler.setEnergy(energyHandler.getCapacity());
             return;
         }
+        if (itemEnergy == null) {
+            return;
+        }
         energyHandler.receive(itemEnergy.extract(needed,false),false);
     }
     //为物品槽中的物品充电
@@ -56,6 +59,10 @@ public class TransmitUtils {
                 IEnergyStorage FEStorage = itemStack.getCapability(ForgeCapabilities.ENERGY).orElse(null);
                 itemEnergy = new ProxyEnergyHandler(new FEAdapter(FEStorage));
             }
+        }
+
+        if (itemEnergy == null) {
+            return;
         }
 
         if (itemStack.is(HBMItems.BATTERY_CREATIVE.get())){

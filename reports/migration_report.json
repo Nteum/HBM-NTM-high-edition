@@ -1,0 +1,4678 @@
+{
+  "block": {
+    "advanced_assembly_machine": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "airbomb": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "aluminum_ore": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "aluminum_ore_deepslate": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "armor_table": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "asbestos_ore": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "asphalt": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "asphalt_slab": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "asphalt_stairs": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "b29": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "balebomb_test": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "barbed_wire": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "barbed_wire_fire": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "barbed_wire_poison": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "barbed_wire_rad": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "barbed_wire_wither": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "barrel_corroded": {
+      "mapped_to": "barrel_corroded",
+      "new": true,
+      "old": true
+    },
+    "barrel_iron": {
+      "mapped_to": "barrel_iron",
+      "new": true,
+      "old": true
+    },
+    "barrel_lox": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "barrel_pink": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "barrel_plastic": {
+      "mapped_to": "barrel_plastic",
+      "new": true,
+      "old": true
+    },
+    "barrel_red": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "barrel_steel": {
+      "mapped_to": "barrel_steel",
+      "new": true,
+      "old": true
+    },
+    "barrel_taint": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "barrel_tcalloy": {
+      "mapped_to": "barrel_tcalloy",
+      "new": true,
+      "old": true
+    },
+    "barrel_vitrified": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "barrel_yellow": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "barricade": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "basalt_brick": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "basalt_brick_slab": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "basalt_brick_stairs": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "basalt_polished": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "basalt_polished_slab": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "basalt_polished_stairs": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "bedrock_oil": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "beryllium_ore": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "beryllium_ore_deepslate": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "blast_furnace": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "blast_furnace_extension": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "block_actinium": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "block_advanced_alloy": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "block_aluminum": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "block_australium": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "block_beryllium": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "block_bismuth": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "block_boron": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "block_cadmium": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "block_cdalloy": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "block_cobalt": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "block_combine_steel": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "block_copper": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "block_desh": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "block_dineutronium": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "block_dura_steel": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "block_euphemium": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "block_ferrouranium": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "block_lanthanium": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "block_lead": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "block_mox_fuel": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "block_neptunium": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "block_niobium": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "block_plutonium": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "block_plutonium_fuel": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "block_pu238": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "block_pu239": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "block_pu240": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "block_pu241": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "block_ra226": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "block_red_copper": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "block_saturnite": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "block_schrabidium": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "block_schrabidium_fuel": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "block_starmetal": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "block_steel": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "block_tcalloy": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "block_thorium": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "block_thorium_fuel": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "block_titanium": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "block_tungsten": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "block_u233": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "block_u235": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "block_u238": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "block_uranium": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "block_uranium_fuel": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "block_zirconium": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "brick_base": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "brick_base_slab": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "brick_base_stairs": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "brick_concrete": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "brick_concrete_broken": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "brick_concrete_broken_slab": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "brick_concrete_broken_stairs": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "brick_concrete_cracked": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "brick_concrete_cracked_slab": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "brick_concrete_cracked_stairs": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "brick_concrete_marked": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "brick_concrete_mossy": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "brick_concrete_mossy_slab": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "brick_concrete_mossy_stairs": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "brick_concrete_slab": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "brick_concrete_stairs": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "brick_ducrete": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "brick_ducrete_slab": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "brick_ducrete_stairs": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "brick_fire": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "brick_fire_slab": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "brick_fire_stairs": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "brick_light": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "brick_light_slab": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "brick_light_stairs": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "brick_obsidian": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "brick_obsidian_slab": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "brick_obsidian_stairs": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "burned_grass": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "c4": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "cage_lamp": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "cinnabar_ore": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "cinnabar_ore_deepslate": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "cobalt_ore": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "cobalt_ore_deepslate": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_asbestos": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_asbestos_slab": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_asbestos_stairs": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_black": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_black_slab": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_black_stairs": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_blue": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_blue_slab": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_blue_stairs": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_brown": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_brown_slab": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_brown_stairs": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_colored_bronze": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_colored_bronze_slab": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_colored_bronze_stairs": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_colored_indigo": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_colored_indigo_slab": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_colored_indigo_stairs": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_colored_machine": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_colored_machine_slab": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_colored_machine_stairs": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_colored_machine_stripe": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_colored_pink": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_colored_pink_slab": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_colored_pink_stairs": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_colored_purple": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_colored_purple_slab": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_colored_purple_stairs": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_colored_sand": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_colored_sand_slab": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_colored_sand_stairs": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_cracked": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_cracked_slab": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_cracked_stairs": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_cyan": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_cyan_slab": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_cyan_stairs": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_fan": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_flat": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_flat_slab": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_flat_stairs": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_gray": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_gray_slab": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_gray_stairs": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_green": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_green_slab": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_green_stairs": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_hazard": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_hazard_slab": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_hazard_stairs": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_light_blue": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_light_blue_slab": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_light_blue_stairs": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_lime": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_lime_slab": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_lime_stairs": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_magenta": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_magenta_slab": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_magenta_stairs": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_marked": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_mossy": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_mossy_slab": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_mossy_stairs": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_orange": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_orange_slab": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_orange_stairs": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_pillar": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_pink": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_pink_slab": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_pink_stairs": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_purple": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_purple_slab": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_purple_stairs": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_rebar": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_rebar_alt": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_rebar_slab": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_rebar_stairs": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_red": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_red_slab": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_red_stairs": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_silver": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_silver_slab": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_silver_stairs": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_slab": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_stairs": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_super": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_super_broken": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_super_broken_slab": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_super_broken_stairs": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_super_m0": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_super_m0_slab": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_super_m0_stairs": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_super_m1": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_super_m1_slab": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_super_m1_stairs": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_super_m2": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_super_m2_slab": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_super_m2_stairs": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_super_m3": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_super_m3_slab": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_super_m3_stairs": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_super_slab": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_super_stairs": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_tile": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_tile_slab": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_tile_stairs": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_tile_trefoil": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_vent": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_white": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_white_slab": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_white_stairs": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_yellow": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_yellow_slab": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "concrete_yellow_stairs": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "converter_block": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "crate": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "crate_conserve": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "crate_desh": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "crate_iron": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "crate_lead": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "crate_metal": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "crate_steel": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "crate_weapon": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "crt_broken": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "crt_bsod": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "crt_clean": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "dead_dirt": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "deco_steel": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "depth_borax": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "depth_brick": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "depth_brick_slab": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "depth_brick_stairs": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "depth_cinnabar": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "depth_iron": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "depth_nether_brick": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "depth_nether_brick_slab": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "depth_nether_brick_stairs": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "depth_nether_tiles": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "depth_nether_tiles_slab": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "depth_nether_tiles_stairs": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "depth_stone": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "depth_stone_nether": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "depth_stone_nether_slab": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "depth_stone_slab": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "depth_tiles": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "depth_tiles_slab": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "depth_tiles_stairs": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "depth_titanium": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "depth_tungsten": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "depth_zirconium": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "det_miner": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "door_bunker": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "door_office": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "dornier": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "dud_fugas_tong": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "dud_nuke": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "dud_salted": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "explosive_charge": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "falling_sellafit1": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "falling_sellafit2": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "falling_sellafit3": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "falling_sellafit4": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "file_cabinet": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "fire_door": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "flood_lamp": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "fluid_tank": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "fluorescent_lamp": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "fluorite_ore": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "freaky_alien_block": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "geiger_counter_block": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "geysir_dirt": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "geysir_stone": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "giga_det": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "gneiss_brick": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "gneiss_brick_slab": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "gneiss_brick_stairs": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "gneiss_chiseled": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "gneiss_stone": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "gneiss_tile": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "gneiss_tile_slab": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "gneiss_tile_stairs": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "large_vehicle_door": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "lead_ore": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "lead_ore_deepslate": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "lignite_ore": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "machine_assembler": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "metal_door": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "meteor": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "meteor_brick": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "meteor_brick_chiseled": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "meteor_brick_cracked": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "meteor_brick_cracked_slab": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "meteor_brick_cracked_stairs": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "meteor_brick_mossy": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "meteor_brick_mossy_slab": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "meteor_brick_mossy_stairs": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "meteor_brick_slab": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "meteor_brick_stairs": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "meteor_cobble": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "meteor_crushed": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "meteor_crushed_slab": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "meteor_crushed_stairs": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "meteor_pillar": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "meteor_polished": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "meteor_polished_slab": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "meteor_polished_stairs": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "meteor_treasure": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "mine_ap": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "mine_fat": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "nuclear_charge": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "nuclear_fallout": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "ore_oil": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "polonium210_block": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "press": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "qe_containment_door": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "qe_sliding_door": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "rareground_ore": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "rareground_ore_deepslate": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "reinforced_glass": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "reinforced_stone": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "reinforced_stone_slab": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "reinforced_stone_stairs": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "resource_asbestos": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "resource_bauxite": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "resource_hematite": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "resource_limestone": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "resource_malachite": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "resource_sulfur": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "round_airlock_door": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "secure_access_door": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "sellafield_slaked": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "sellafield_slaked1": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "sellafield_slaked2": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "sellafield_slaked3": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "sequestrum_ore": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "shredder": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "silo_hatch": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "silo_hatch_large": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "sliding_blast_door": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "sliding_seal_door": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "smoke_bomb": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "strawberry_bush": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "sulfur_ore": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "switch": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "tape_recorder": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "thorium_ore": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "thorium_ore_deepslate": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "titanium_ore": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "titanium_ore_deepslate": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "toaster": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "transition_seal": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "tungsten_ore": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "universal_machine_part": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "uranium_ore": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "uranium_ore_deepslate": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "uranium_ore_h": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "vinyl_tile": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "vinyl_tile_slab": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "vinyl_tile_small": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "vinyl_tile_small_slab": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "vinyl_tile_small_stairs": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "vinyl_tile_stairs": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "waste_charge": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "waste_grass": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "waste_leaves": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "waste_log": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "waste_planks": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "water_door": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "wire_coated": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "wood_burner": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    }
+  },
+  "fluid": {
+    "crude_oil": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "crude_oil_flowing": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "crude_oil_source": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    }
+  },
+  "item": {
+    "actinium_ingot": {
+      "mapped_to": "ingot_actinium",
+      "new": true,
+      "old": true
+    },
+    "actinium_powder": {
+      "mapped_to": "powder_actinium",
+      "new": true,
+      "old": true
+    },
+    "actinium_powder_tiny": {
+      "mapped_to": "powder_actinium_tiny",
+      "new": true,
+      "old": true
+    },
+    "advanced_alloy_ingot": {
+      "mapped_to": "ingot_advanced_alloy",
+      "new": true,
+      "old": true
+    },
+    "advanced_alloy_powder": {
+      "mapped_to": "powder_advanced_alloy",
+      "new": true,
+      "old": true
+    },
+    "advanced_assembly_machine": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "advanced_circuit": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "airbomb_a": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "airnukebomb_a": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "airstrike_agent": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "airstrike_heavy": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "airstrike_nuke": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "airstrike_test": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "ajr_boots": {
+      "mapped_to": "ajr_boots",
+      "new": true,
+      "old": true
+    },
+    "ajr_chestplate": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "ajr_helmet": {
+      "mapped_to": "ajr_helmet",
+      "new": true,
+      "old": true
+    },
+    "ajr_leggings": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "alloy_axe": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "alloy_boots": {
+      "mapped_to": "alloy_boots",
+      "new": true,
+      "old": true
+    },
+    "alloy_chestplate": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "alloy_helmet": {
+      "mapped_to": "alloy_helmet",
+      "new": true,
+      "old": true
+    },
+    "alloy_hoe": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "alloy_leggings": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "alloy_pickaxe": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "alloy_shovel": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "alloy_sword": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "aluminum_ingot": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "aluminum_powder": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "aluminum_raw": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "am241_ingot": {
+      "mapped_to": "ingot_am241",
+      "new": true,
+      "old": true
+    },
+    "am242_ingot": {
+      "mapped_to": "ingot_am242",
+      "new": true,
+      "old": true
+    },
+    "am_mix_ingot": {
+      "mapped_to": "ingot_am_mix",
+      "new": true,
+      "old": true
+    },
+    "americium_fuel_ingot": {
+      "mapped_to": "ingot_americium_fuel",
+      "new": true,
+      "old": true
+    },
+    "americium_ingot": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "analog_circuit": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "arsenic_bronze_ingot": {
+      "mapped_to": "ingot_arsenic_bronze",
+      "new": true,
+      "old": true
+    },
+    "arsenic_ingot": {
+      "mapped_to": "ingot_arsenic",
+      "new": true,
+      "old": true
+    },
+    "asbestos_boots": {
+      "mapped_to": "asbestos_boots",
+      "new": true,
+      "old": true
+    },
+    "asbestos_chestplate": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "asbestos_helmet": {
+      "mapped_to": "asbestos_helmet",
+      "new": true,
+      "old": true
+    },
+    "asbestos_ingot": {
+      "mapped_to": "ingot_asbestos",
+      "new": true,
+      "old": true
+    },
+    "asbestos_leggings": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "asbestos_powder": {
+      "mapped_to": "powder_asbestos",
+      "new": true,
+      "old": true
+    },
+    "assembly_template": {
+      "mapped_to": "assembly_template",
+      "new": true,
+      "old": true
+    },
+    "astatine_ingot": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "astatine_powder": {
+      "mapped_to": "powder_astatine",
+      "new": true,
+      "old": true
+    },
+    "atomic_clock": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "au198_ingot": {
+      "mapped_to": "ingot_au198",
+      "new": true,
+      "old": true
+    },
+    "au198_powder": {
+      "mapped_to": "powder_au198",
+      "new": true,
+      "old": true
+    },
+    "australium_ingot": {
+      "mapped_to": "ingot_australium",
+      "new": true,
+      "old": true
+    },
+    "australium_powder": {
+      "mapped_to": "powder_australium",
+      "new": true,
+      "old": true
+    },
+    "bakelite_ingot": {
+      "mapped_to": "ingot_bakelite",
+      "new": true,
+      "old": true
+    },
+    "bakelite_powder": {
+      "mapped_to": "powder_bakelite",
+      "new": true,
+      "old": true
+    },
+    "ball_tnt": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "battery": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "battery_advanced": {
+      "mapped_to": "battery_advanced",
+      "new": true,
+      "old": true
+    },
+    "battery_advanced_cell": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "battery_advanced_cell_12": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "battery_advanced_cell_4": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "battery_creative": {
+      "mapped_to": "battery_creative",
+      "new": true,
+      "old": true
+    },
+    "battery_lithium": {
+      "mapped_to": "battery_lithium",
+      "new": true,
+      "old": true
+    },
+    "battery_lithium_cell": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "battery_lithium_cell_3": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "battery_lithium_cell_6": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "battery_potato": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "battery_red_cell": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "battery_red_cell_24": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "battery_red_cell_6": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "battery_schrabidium": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "battery_schrabidium_cell": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "battery_schrabidium_cell_2": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "battery_schrabidium_cell_4": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "battery_spark": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "battery_spark_cell_100": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "battery_spark_cell_1000": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "battery_spark_cell_10000": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "battery_spark_cell_25": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "battery_spark_cell_2500": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "battery_spark_cell_6": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "battery_spark_cell_power": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "battery_trixite": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "battle_casing": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "battle_counter": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "battle_gears": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "battle_module": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "battle_sensor": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "beryllium_ingot": {
+      "mapped_to": "ingot_beryllium",
+      "new": true,
+      "old": true
+    },
+    "beryllium_powder": {
+      "mapped_to": "powder_beryllium",
+      "new": true,
+      "old": true
+    },
+    "beryllium_raw": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "beskar_double_ingot": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "beskar_ingot": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "billet_plutonium": {
+      "mapped_to": "billet_plutonium",
+      "new": true,
+      "old": true
+    },
+    "billet_silicon": {
+      "mapped_to": "billet_silicon",
+      "new": true,
+      "old": true
+    },
+    "biorubber_ingot": {
+      "mapped_to": "ingot_biorubber",
+      "new": true,
+      "old": true
+    },
+    "bismoid_chip": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "bismoid_circuit": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "bismuth_bronze_ingot": {
+      "mapped_to": "ingot_bismuth_bronze",
+      "new": true,
+      "old": true
+    },
+    "bismuth_ingot": {
+      "mapped_to": "ingot_bismuth",
+      "new": true,
+      "old": true
+    },
+    "bismuth_powder": {
+      "mapped_to": "powder_bismuth",
+      "new": true,
+      "old": true
+    },
+    "black_diamond": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "blade_alloy": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "blade_steel": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "blade_test": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "blade_titanium": {
+      "mapped_to": "blade_titanium",
+      "new": true,
+      "old": true
+    },
+    "blueprint_folder": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "bolt_steel": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "borax": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "boron_ingot": {
+      "mapped_to": "ingot_boron",
+      "new": true,
+      "old": true
+    },
+    "boron_powder": {
+      "mapped_to": "powder_boron",
+      "new": true,
+      "old": true
+    },
+    "boron_powder_tiny": {
+      "mapped_to": "powder_boron_tiny",
+      "new": true,
+      "old": true
+    },
+    "bromide_ingot": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "bromide_powder": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "bscco_ingot": {
+      "mapped_to": "ingot_bscco",
+      "new": true,
+      "old": true
+    },
+    "bucket_crude_oil": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "c4_ingot": {
+      "mapped_to": "ingot_c4",
+      "new": true,
+      "old": true
+    },
+    "cadmium_ingot": {
+      "mapped_to": "ingot_cadmium",
+      "new": true,
+      "old": true
+    },
+    "cadmium_powder": {
+      "mapped_to": "powder_cadmium",
+      "new": true,
+      "old": true
+    },
+    "caesium_ingot": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "caesium_powder": {
+      "mapped_to": "powder_caesium",
+      "new": true,
+      "old": true
+    },
+    "calcium_ingot": {
+      "mapped_to": "ingot_calcium",
+      "new": true,
+      "old": true
+    },
+    "calcium_powder": {
+      "mapped_to": "powder_calcium",
+      "new": true,
+      "old": true
+    },
+    "can_bepis": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "can_breen": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "can_creature": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "can_empty": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "can_key": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "can_luna": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "can_mrsugar": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "can_mug": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "can_overcharge": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "can_redbomb": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "can_smart": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "canned_asbestos": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "canned_ass": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "canned_bark": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "canned_beef": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "canned_bhole": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "canned_cheese": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "canned_chinese": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "canned_diesel": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "canned_fist": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "canned_fried": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "canned_hotdogs": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "canned_jizz": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "canned_kerosene": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "canned_leftovers": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "canned_milk": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "canned_mystery": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "canned_napalm": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "canned_oil": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "canned_pashtet": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "canned_pizza": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "canned_recursion": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "canned_spam": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "canned_stew": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "canned_tomato": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "canned_tube": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "canned_tuna": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "canned_yogurt": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "capacitor": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "capacitor_board": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "capacitor_tantalum": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "cdalloy_ingot": {
+      "mapped_to": "ingot_cdalloy",
+      "new": true,
+      "old": true
+    },
+    "celneutronophyrium_ingot": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "celneutronophyrium_new_ingot": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "ceramic_ingot": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "cerium_ingot": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "cerium_powder": {
+      "mapped_to": "powder_cerium",
+      "new": true,
+      "old": true
+    },
+    "cerium_powder_tiny": {
+      "mapped_to": "powder_cerium_tiny",
+      "new": true,
+      "old": true
+    },
+    "cft_ingot": {
+      "mapped_to": "ingot_cft",
+      "new": true,
+      "old": true
+    },
+    "chainsteel_hot_ingot": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "chainsteel_ingot": {
+      "mapped_to": "ingot_chainsteel",
+      "new": true,
+      "old": true
+    },
+    "cinnabar": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "cladding_desh": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "cladding_ghiorsium": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "cladding_lead": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "cladding_paint": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "cladding_rubber": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "co60_ingot": {
+      "mapped_to": "ingot_co60",
+      "new": true,
+      "old": true
+    },
+    "co60_powder": {
+      "mapped_to": "powder_co60",
+      "new": true,
+      "old": true
+    },
+    "coal_powder": {
+      "mapped_to": "powder_coal",
+      "new": true,
+      "old": true
+    },
+    "cobalt_boots": {
+      "mapped_to": "cobalt_boots",
+      "new": true,
+      "old": true
+    },
+    "cobalt_chestplate": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "cobalt_helmet": {
+      "mapped_to": "cobalt_helmet",
+      "new": true,
+      "old": true
+    },
+    "cobalt_ingot": {
+      "mapped_to": "ingot_cobalt",
+      "new": true,
+      "old": true
+    },
+    "cobalt_leggings": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "cobalt_powder": {
+      "mapped_to": "powder_cobalt",
+      "new": true,
+      "old": true
+    },
+    "cobalt_powder_tiny": {
+      "mapped_to": "powder_cobalt_tiny",
+      "new": true,
+      "old": true
+    },
+    "cobalt_raw": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "coil_advanced_alloy": {
+      "mapped_to": "coil_advanced_alloy",
+      "new": true,
+      "old": true
+    },
+    "coil_advanced_alloy_torus": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "coil_copper": {
+      "mapped_to": "coil_copper",
+      "new": true,
+      "old": true
+    },
+    "coil_copper_torus": {
+      "mapped_to": "coil_copper_torus",
+      "new": true,
+      "old": true
+    },
+    "coil_gold": {
+      "mapped_to": "coil_gold",
+      "new": true,
+      "old": true
+    },
+    "coil_gold_torus": {
+      "mapped_to": "coil_gold_torus",
+      "new": true,
+      "old": true
+    },
+    "coil_magnetized_tungsten": {
+      "mapped_to": "coil_magnetized_tungsten",
+      "new": true,
+      "old": true
+    },
+    "coil_magnetized_tungsten_torus": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "coil_tungsten": {
+      "mapped_to": "coil_tungsten",
+      "new": true,
+      "old": true
+    },
+    "combine_steel_ingot": {
+      "mapped_to": "ingot_combine_steel",
+      "new": true,
+      "old": true
+    },
+    "combine_steel_powder": {
+      "mapped_to": "powder_combine_steel",
+      "new": true,
+      "old": true
+    },
+    "controller": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "controller_advanced": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "controller_chassis": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "crate_iron": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "crate_steel": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "crowbar": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "crt_display": {
+      "mapped_to": "crt_display",
+      "new": true,
+      "old": true
+    },
+    "crystalline_ingot": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "defuser": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "depth_ores_scanner": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "desh_ingot": {
+      "mapped_to": "ingot_desh",
+      "new": true,
+      "old": true
+    },
+    "desh_powder": {
+      "mapped_to": "powder_desh",
+      "new": true,
+      "old": true
+    },
+    "desh_rainbow_ingot": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "detonator": {
+      "mapped_to": "detonator",
+      "new": true,
+      "old": true
+    },
+    "digamma_ingot": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "dineutronium_ingot": {
+      "mapped_to": "ingot_dineutronium",
+      "new": true,
+      "old": true
+    },
+    "dineutronium_powder": {
+      "mapped_to": "powder_dineutronium",
+      "new": true,
+      "old": true
+    },
+    "dosimeter": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "dura_steel_ingot": {
+      "mapped_to": "ingot_dura_steel",
+      "new": true,
+      "old": true
+    },
+    "dura_steel_powder": {
+      "mapped_to": "powder_dura_steel",
+      "new": true,
+      "old": true
+    },
+    "dust": {
+      "mapped_to": "dust",
+      "new": true,
+      "old": true
+    },
+    "dust_tiny": {
+      "mapped_to": "dust_tiny",
+      "new": true,
+      "old": true
+    },
+    "electronium_ingot": {
+      "mapped_to": "ingot_electronium",
+      "new": true,
+      "old": true
+    },
+    "euphemium_ingot": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "euphemium_powder": {
+      "mapped_to": "powder_euphemium",
+      "new": true,
+      "old": true
+    },
+    "ferrouranium_ingot": {
+      "mapped_to": "ingot_ferrouranium",
+      "new": true,
+      "old": true
+    },
+    "ferrouranium_powder": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "fiberglass_ingot": {
+      "mapped_to": "ingot_fiberglass",
+      "new": true,
+      "old": true
+    },
+    "fire_door": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "firebrick": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "fireclay_ball": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "fluorite": {
+      "mapped_to": "fluorite",
+      "new": true,
+      "old": true
+    },
+    "geiger_counter": {
+      "mapped_to": "geiger_counter",
+      "new": true,
+      "old": true
+    },
+    "gold_powder": {
+      "mapped_to": "powder_gold",
+      "new": true,
+      "old": true
+    },
+    "graphene_ingot": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "graphite_ingot": {
+      "mapped_to": "ingot_graphite",
+      "new": true,
+      "old": true
+    },
+    "grenade": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "grenade_if": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "grenade_if_fire": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "grenade_if_he": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "grenade_if_slime": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "grenade_nuc": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "grenadefire": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "grenadehe": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "grenadeslime": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "grenadesmart": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "gunmetal_ingot": {
+      "mapped_to": "ingot_gunmetal",
+      "new": true,
+      "old": true
+    },
+    "gunsteel_ingot": {
+      "mapped_to": "ingot_gunsteel",
+      "new": true,
+      "old": true
+    },
+    "hazmat_boots": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "hazmat_chestplate": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "hazmat_helmet": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "hazmat_leggings": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "heart_booster": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "heart_container": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "heart_fab": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "heart_piece": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "inf_water": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "inf_water_mk2": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "insulator": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "integrated_circuit": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "iodine_ingot": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "iodine_powder": {
+      "mapped_to": "powder_iodine",
+      "new": true,
+      "old": true
+    },
+    "iron_powder": {
+      "mapped_to": "powder_iron",
+      "new": true,
+      "old": true
+    },
+    "iron_small_ingot": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "lanthanium_ingot": {
+      "mapped_to": "ingot_lanthanium",
+      "new": true,
+      "old": true
+    },
+    "lanthanium_powder": {
+      "mapped_to": "powder_lanthanium",
+      "new": true,
+      "old": true
+    },
+    "lanthanium_powder_tiny": {
+      "mapped_to": "powder_lanthanium_tiny",
+      "new": true,
+      "old": true
+    },
+    "large_vehicle_door": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "lead_ingot": {
+      "mapped_to": "ingot_lead",
+      "new": true,
+      "old": true
+    },
+    "lead_powder": {
+      "mapped_to": "powder_lead",
+      "new": true,
+      "old": true
+    },
+    "lead_raw": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "les_ingot": {
+      "mapped_to": "ingot_les",
+      "new": true,
+      "old": true
+    },
+    "les_powder": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "lignite": {
+      "mapped_to": "lignite",
+      "new": true,
+      "old": true
+    },
+    "limestone": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "liquidator_boots": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "liquidator_chestplate": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "liquidator_helmet": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "liquidator_leggings": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "machine_assembler": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "magnetized_tungsten_ingot": {
+      "mapped_to": "ingot_magnetized_tungsten",
+      "new": true,
+      "old": true
+    },
+    "magnetized_tungsten_powder": {
+      "mapped_to": "powder_magnetized_tungsten",
+      "new": true,
+      "old": true
+    },
+    "malachite_chunk": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "man_core": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "metal.scrap_ingot": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "metal_rod": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "meteorite_forged_hot_ingot": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "meteorite_forged_ingot": {
+      "mapped_to": "ingot_meteorite_forged",
+      "new": true,
+      "old": true
+    },
+    "meteorite_hot_ingot": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "meteorite_ingot": {
+      "mapped_to": "ingot_meteorite",
+      "new": true,
+      "old": true
+    },
+    "meteorite_powder": {
+      "mapped_to": "powder_meteorite",
+      "new": true,
+      "old": true
+    },
+    "meteorite_powder_tiny": {
+      "mapped_to": "powder_meteorite_tiny",
+      "new": true,
+      "old": true
+    },
+    "microchip": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "motor": {
+      "mapped_to": "motor",
+      "new": true,
+      "old": true
+    },
+    "motor_bismuth": {
+      "mapped_to": "motor_bismuth",
+      "new": true,
+      "old": true
+    },
+    "motor_desh": {
+      "mapped_to": "motor_desh",
+      "new": true,
+      "old": true
+    },
+    "mox_fuel_ingot": {
+      "mapped_to": "ingot_mox_fuel",
+      "new": true,
+      "old": true
+    },
+    "mud_ingot": {
+      "mapped_to": "ingot_mud",
+      "new": true,
+      "old": true
+    },
+    "multi_detonator": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "neodymium_ingot": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "neodymium_powder": {
+      "mapped_to": "powder_neodymium",
+      "new": true,
+      "old": true
+    },
+    "neodymium_powder_tiny": {
+      "mapped_to": "powder_neodymium_tiny",
+      "new": true,
+      "old": true
+    },
+    "neptunium_fuel_ingot": {
+      "mapped_to": "ingot_neptunium_fuel",
+      "new": true,
+      "old": true
+    },
+    "neptunium_ingot": {
+      "mapped_to": "ingot_neptunium",
+      "new": true,
+      "old": true
+    },
+    "neptunium_powder": {
+      "mapped_to": "powder_neptunium",
+      "new": true,
+      "old": true
+    },
+    "niobium_ingot": {
+      "mapped_to": "ingot_niobium",
+      "new": true,
+      "old": true
+    },
+    "niobium_powder": {
+      "mapped_to": "powder_niobium",
+      "new": true,
+      "old": true
+    },
+    "niobium_powder_tiny": {
+      "mapped_to": "powder_niobium_tiny",
+      "new": true,
+      "old": true
+    },
+    "nugget_silicon": {
+      "mapped_to": "nugget_silicon",
+      "new": true,
+      "old": true
+    },
+    "oil_detector": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "osmiridium_ingot": {
+      "mapped_to": "ingot_osmiridium",
+      "new": true,
+      "old": true
+    },
+    "paa_boots": {
+      "mapped_to": "paa_boots",
+      "new": true,
+      "old": true
+    },
+    "paa_chestplate": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "paa_helmet": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "paa_leggings": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "pb209_ingot": {
+      "mapped_to": "ingot_pb209",
+      "new": true,
+      "old": true
+    },
+    "pc_ingot": {
+      "mapped_to": "ingot_pc",
+      "new": true,
+      "old": true
+    },
+    "pcb": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "pet_ingot": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "phosphorus_ingot": {
+      "mapped_to": "ingot_phosphorus",
+      "new": true,
+      "old": true
+    },
+    "plate_advanced_alloy": {
+      "mapped_to": "plate_advanced_alloy",
+      "new": true,
+      "old": true
+    },
+    "plate_aluminum": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "plate_armor_ajr": {
+      "mapped_to": "plate_armor_ajr",
+      "new": true,
+      "old": true
+    },
+    "plate_armor_dnt": {
+      "mapped_to": "plate_armor_dnt",
+      "new": true,
+      "old": true
+    },
+    "plate_armor_dnt_rusted": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "plate_armor_fau": {
+      "mapped_to": "plate_armor_fau",
+      "new": true,
+      "old": true
+    },
+    "plate_armor_hev": {
+      "mapped_to": "plate_armor_hev",
+      "new": true,
+      "old": true
+    },
+    "plate_armor_lunar": {
+      "mapped_to": "plate_armor_lunar",
+      "new": true,
+      "old": true
+    },
+    "plate_armor_titanium": {
+      "mapped_to": "plate_armor_titanium",
+      "new": true,
+      "old": true
+    },
+    "plate_bismuth": {
+      "mapped_to": "plate_bismuth",
+      "new": true,
+      "old": true
+    },
+    "plate_cast": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "plate_cast_alt": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "plate_cast_bismuth": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "plate_cast_dark": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "plate_combine_steel": {
+      "mapped_to": "plate_combine_steel",
+      "new": true,
+      "old": true
+    },
+    "plate_copper": {
+      "mapped_to": "plate_copper",
+      "new": true,
+      "old": true
+    },
+    "plate_dalekanium": {
+      "mapped_to": "plate_dalekanium",
+      "new": true,
+      "old": true
+    },
+    "plate_desh": {
+      "mapped_to": "plate_desh",
+      "new": true,
+      "old": true
+    },
+    "plate_dineutronium": {
+      "mapped_to": "plate_dineutronium",
+      "new": true,
+      "old": true
+    },
+    "plate_dura_steel": {
+      "mapped_to": "plate_dura_steel",
+      "new": true,
+      "old": true
+    },
+    "plate_euphemium": {
+      "mapped_to": "plate_euphemium",
+      "new": true,
+      "old": true
+    },
+    "plate_fuel_mox": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "plate_fuel_pu238be": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "plate_fuel_pu239": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "plate_fuel_ra226be": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "plate_fuel_sa326": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "plate_fuel_u233": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "plate_fuel_u235": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "plate_gold": {
+      "mapped_to": "plate_gold",
+      "new": true,
+      "old": true
+    },
+    "plate_gunmetal": {
+      "mapped_to": "plate_gunmetal",
+      "new": true,
+      "old": true
+    },
+    "plate_gunsteel": {
+      "mapped_to": "plate_gunsteel",
+      "new": true,
+      "old": true
+    },
+    "plate_iron": {
+      "mapped_to": "plate_iron",
+      "new": true,
+      "old": true
+    },
+    "plate_kevlar": {
+      "mapped_to": "plate_kevlar",
+      "new": true,
+      "old": true
+    },
+    "plate_lead": {
+      "mapped_to": "plate_lead",
+      "new": true,
+      "old": true
+    },
+    "plate_mixed": {
+      "mapped_to": "plate_mixed",
+      "new": true,
+      "old": true
+    },
+    "plate_paa": {
+      "mapped_to": "plate_paa",
+      "new": true,
+      "old": true
+    },
+    "plate_saturnite": {
+      "mapped_to": "plate_saturnite",
+      "new": true,
+      "old": true
+    },
+    "plate_schrabidium": {
+      "mapped_to": "plate_schrabidium",
+      "new": true,
+      "old": true
+    },
+    "plate_steel": {
+      "mapped_to": "plate_steel",
+      "new": true,
+      "old": true
+    },
+    "plate_titanium": {
+      "mapped_to": "plate_titanium",
+      "new": true,
+      "old": true
+    },
+    "plutonium_fuel_ingot": {
+      "mapped_to": "ingot_plutonium_fuel",
+      "new": true,
+      "old": true
+    },
+    "plutonium_ingot": {
+      "mapped_to": "ingot_plutonium",
+      "new": true,
+      "old": true
+    },
+    "plutonium_powder": {
+      "mapped_to": "powder_plutonium",
+      "new": true,
+      "old": true
+    },
+    "polonium_ingot": {
+      "mapped_to": "ingot_polonium",
+      "new": true,
+      "old": true
+    },
+    "polonium_powder": {
+      "mapped_to": "powder_polonium",
+      "new": true,
+      "old": true
+    },
+    "polymer_ingot": {
+      "mapped_to": "ingot_polymer",
+      "new": true,
+      "old": true
+    },
+    "polymer_powder": {
+      "mapped_to": "powder_polymer",
+      "new": true,
+      "old": true
+    },
+    "powder_coal": {
+      "mapped_to": "powder_coal",
+      "new": true,
+      "old": true
+    },
+    "powder_coal_small": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "press": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "pu238_ingot": {
+      "mapped_to": "ingot_pu238",
+      "new": true,
+      "old": true
+    },
+    "pu239_ingot": {
+      "mapped_to": "ingot_pu239",
+      "new": true,
+      "old": true
+    },
+    "pu240_ingot": {
+      "mapped_to": "ingot_pu240",
+      "new": true,
+      "old": true
+    },
+    "pu241_ingot": {
+      "mapped_to": "ingot_pu241",
+      "new": true,
+      "old": true
+    },
+    "pu_mix_ingot": {
+      "mapped_to": "ingot_pu_mix",
+      "new": true,
+      "old": true
+    },
+    "pvc_ingot": {
+      "mapped_to": "ingot_pvc",
+      "new": true,
+      "old": true
+    },
+    "qe_containment_door": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "qe_sliding_door": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "quantum_chip": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "quantum_circuit": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "quantum_computer": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "ra226_ingot": {
+      "mapped_to": "ingot_ra226",
+      "new": true,
+      "old": true
+    },
+    "ra226_powder": {
+      "mapped_to": "powder_ra226",
+      "new": true,
+      "old": true
+    },
+    "radaway": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "range_detonator": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "rareground_ore_chunk": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "red_copper_ingot": {
+      "mapped_to": "ingot_red_copper",
+      "new": true,
+      "old": true
+    },
+    "red_copper_powder": {
+      "mapped_to": "powder_red_copper",
+      "new": true,
+      "old": true
+    },
+    "round_airlock_door": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "rubber_ingot": {
+      "mapped_to": "ingot_rubber",
+      "new": true,
+      "old": true
+    },
+    "saturnite_ingot": {
+      "mapped_to": "ingot_saturnite",
+      "new": true,
+      "old": true
+    },
+    "schrabidate_ingot": {
+      "mapped_to": "ingot_schrabidate",
+      "new": true,
+      "old": true
+    },
+    "schrabidate_powder": {
+      "mapped_to": "powder_schrabidate",
+      "new": true,
+      "old": true
+    },
+    "schrabidium_fuel_ingot": {
+      "mapped_to": "ingot_schrabidium_fuel",
+      "new": true,
+      "old": true
+    },
+    "schrabidium_ingot": {
+      "mapped_to": "ingot_schrabidium",
+      "new": true,
+      "old": true
+    },
+    "schrabidium_powder": {
+      "mapped_to": "powder_schrabidium",
+      "new": true,
+      "old": true
+    },
+    "schraranium_ingot": {
+      "mapped_to": "ingot_schraranium",
+      "new": true,
+      "old": true
+    },
+    "scrap": {
+      "mapped_to": "scrap",
+      "new": true,
+      "old": true
+    },
+    "screwdriver": {
+      "mapped_to": "screwdriver",
+      "new": true,
+      "old": true
+    },
+    "secure_access_door": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "security_boots": {
+      "mapped_to": "security_boots",
+      "new": true,
+      "old": true
+    },
+    "security_chestplate": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "security_helmet": {
+      "mapped_to": "security_helmet",
+      "new": true,
+      "old": true
+    },
+    "security_leggings": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "selenium_ingot": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "selenium_powder": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "semtex_ingot": {
+      "mapped_to": "ingot_semtex",
+      "new": true,
+      "old": true
+    },
+    "sequestrum": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "silicon_circuit": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "silicon_ingot": {
+      "mapped_to": "ingot_silicon",
+      "new": true,
+      "old": true
+    },
+    "silo_hatch": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "silo_hatch_large": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "sliding_blast_door": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "sliding_seal_door": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "smore_ingot": {
+      "mapped_to": "ingot_smore",
+      "new": true,
+      "old": true
+    },
+    "solinium_ingot": {
+      "mapped_to": "ingot_solinium",
+      "new": true,
+      "old": true
+    },
+    "sr90_ingot": {
+      "mapped_to": "ingot_sr90",
+      "new": true,
+      "old": true
+    },
+    "sr90_powder": {
+      "mapped_to": "powder_sr90",
+      "new": true,
+      "old": true
+    },
+    "sr90_powder_tiny": {
+      "mapped_to": "powder_sr90_tiny",
+      "new": true,
+      "old": true
+    },
+    "staballoy_ingot": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "stamp_desh_357": {
+      "mapped_to": "stamp_357_desh",
+      "new": true,
+      "old": true
+    },
+    "stamp_desh_44": {
+      "mapped_to": "stamp_44_desh",
+      "new": true,
+      "old": true
+    },
+    "stamp_desh_50": {
+      "mapped_to": "stamp_50_desh",
+      "new": true,
+      "old": true
+    },
+    "stamp_desh_9": {
+      "mapped_to": "stamp_9_desh",
+      "new": true,
+      "old": true
+    },
+    "stamp_desh_circuit": {
+      "mapped_to": "stamp_desh_circuit",
+      "new": true,
+      "old": true
+    },
+    "stamp_desh_flat": {
+      "mapped_to": "stamp_desh_flat",
+      "new": true,
+      "old": true
+    },
+    "stamp_desh_plate": {
+      "mapped_to": "stamp_desh_plate",
+      "new": true,
+      "old": true
+    },
+    "stamp_desh_wire": {
+      "mapped_to": "stamp_desh_wire",
+      "new": true,
+      "old": true
+    },
+    "stamp_iron_357": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "stamp_iron_44": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "stamp_iron_50": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "stamp_iron_9": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "stamp_iron_circuit": {
+      "mapped_to": "stamp_iron_circuit",
+      "new": true,
+      "old": true
+    },
+    "stamp_iron_flat": {
+      "mapped_to": "stamp_iron_flat",
+      "new": true,
+      "old": true
+    },
+    "stamp_iron_plate": {
+      "mapped_to": "stamp_iron_plate",
+      "new": true,
+      "old": true
+    },
+    "stamp_iron_wire": {
+      "mapped_to": "stamp_iron_wire",
+      "new": true,
+      "old": true
+    },
+    "stamp_obsidian_circuit": {
+      "mapped_to": "stamp_obsidian_circuit",
+      "new": true,
+      "old": true
+    },
+    "stamp_obsidian_flat": {
+      "mapped_to": "stamp_obsidian_flat",
+      "new": true,
+      "old": true
+    },
+    "stamp_obsidian_plate": {
+      "mapped_to": "stamp_obsidian_plate",
+      "new": true,
+      "old": true
+    },
+    "stamp_obsidian_wire": {
+      "mapped_to": "stamp_obsidian_wire",
+      "new": true,
+      "old": true
+    },
+    "stamp_steel_circuit": {
+      "mapped_to": "stamp_steel_circuit",
+      "new": true,
+      "old": true
+    },
+    "stamp_steel_flat": {
+      "mapped_to": "stamp_steel_flat",
+      "new": true,
+      "old": true
+    },
+    "stamp_steel_plate": {
+      "mapped_to": "stamp_steel_plate",
+      "new": true,
+      "old": true
+    },
+    "stamp_steel_wire": {
+      "mapped_to": "stamp_steel_wire",
+      "new": true,
+      "old": true
+    },
+    "stamp_stone_circuit": {
+      "mapped_to": "stamp_stone_circuit",
+      "new": true,
+      "old": true
+    },
+    "stamp_stone_flat": {
+      "mapped_to": "stamp_stone_flat",
+      "new": true,
+      "old": true
+    },
+    "stamp_stone_plate": {
+      "mapped_to": "stamp_stone_plate",
+      "new": true,
+      "old": true
+    },
+    "stamp_stone_wire": {
+      "mapped_to": "stamp_stone_wire",
+      "new": true,
+      "old": true
+    },
+    "stamp_titanium_circuit": {
+      "mapped_to": "stamp_titanium_circuit",
+      "new": true,
+      "old": true
+    },
+    "stamp_titanium_flat": {
+      "mapped_to": "stamp_titanium_flat",
+      "new": true,
+      "old": true
+    },
+    "stamp_titanium_plate": {
+      "mapped_to": "stamp_titanium_plate",
+      "new": true,
+      "old": true
+    },
+    "stamp_titanium_wire": {
+      "mapped_to": "stamp_titanium_wire",
+      "new": true,
+      "old": true
+    },
+    "starmetal_astra_base_ingot": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "starmetal_astra_ingot": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "starmetal_axe": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "starmetal_boots": {
+      "mapped_to": "starmetal_boots",
+      "new": true,
+      "old": true
+    },
+    "starmetal_chestplate": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "starmetal_helmet": {
+      "mapped_to": "starmetal_helmet",
+      "new": true,
+      "old": true
+    },
+    "starmetal_hoe": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "starmetal_ingot": {
+      "mapped_to": "ingot_starmetal",
+      "new": true,
+      "old": true
+    },
+    "starmetal_leggings": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "starmetal_orion_base_ingot": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "starmetal_orion_ingot": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "starmetal_pickaxe": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "starmetal_shovel": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "starmetal_sword": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "starmetal_ursa_base_ingot": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "starmetal_ursa_ingot": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "steel_axe": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "steel_boots": {
+      "mapped_to": "steel_boots",
+      "new": true,
+      "old": true
+    },
+    "steel_chestplate": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "steel_dusted_ingot": {
+      "mapped_to": "ingot_steel_dusted",
+      "new": true,
+      "old": true
+    },
+    "steel_helmet": {
+      "mapped_to": "steel_helmet",
+      "new": true,
+      "old": true
+    },
+    "steel_hoe": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "steel_ingot": {
+      "mapped_to": "ingot_steel",
+      "new": true,
+      "old": true
+    },
+    "steel_leggings": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "steel_pickaxe": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "steel_powder": {
+      "mapped_to": "powder_steel",
+      "new": true,
+      "old": true
+    },
+    "steel_powder_tiny": {
+      "mapped_to": "powder_steel_tiny",
+      "new": true,
+      "old": true
+    },
+    "steel_shovel": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "steel_sword": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "strawberry": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "strontium_ingot": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "strontium_powder": {
+      "mapped_to": "powder_strontium",
+      "new": true,
+      "old": true
+    },
+    "sulfur": {
+      "mapped_to": "sulfur",
+      "new": true,
+      "old": true
+    },
+    "tantalium_ingot": {
+      "mapped_to": "ingot_tantalium",
+      "new": true,
+      "old": true
+    },
+    "tantalium_powder": {
+      "mapped_to": "powder_tantalium",
+      "new": true,
+      "old": true
+    },
+    "tcalloy_ingot": {
+      "mapped_to": "ingot_tcalloy",
+      "new": true,
+      "old": true
+    },
+    "technetium_ingot": {
+      "mapped_to": "ingot_technetium",
+      "new": true,
+      "old": true
+    },
+    "template_folder": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "tennessine_ingot": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "tennessine_powder": {
+      "mapped_to": "powder_tennessine",
+      "new": true,
+      "old": true
+    },
+    "tetraneutronium_ingot": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "tetraneutronium_new_ingot": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "th232_ingot": {
+      "mapped_to": "ingot_th232",
+      "new": true,
+      "old": true
+    },
+    "thorium_fuel_ingot": {
+      "mapped_to": "ingot_thorium_fuel",
+      "new": true,
+      "old": true
+    },
+    "thorium_ingot": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "thorium_powder": {
+      "mapped_to": "powder_thorium",
+      "new": true,
+      "old": true
+    },
+    "thorium_raw": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "titanium_axe": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "titanium_boots": {
+      "mapped_to": "titanium_boots",
+      "new": true,
+      "old": true
+    },
+    "titanium_chestplate": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "titanium_helmet": {
+      "mapped_to": "titanium_helmet",
+      "new": true,
+      "old": true
+    },
+    "titanium_hoe": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "titanium_ingot": {
+      "mapped_to": "ingot_titanium",
+      "new": true,
+      "old": true
+    },
+    "titanium_leggings": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "titanium_pickaxe": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "titanium_powder": {
+      "mapped_to": "powder_titanium",
+      "new": true,
+      "old": true
+    },
+    "titanium_raw": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "titanium_shovel": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "titanium_sword": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "transition_seal": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "tungsten_ingot": {
+      "mapped_to": "ingot_tungsten",
+      "new": true,
+      "old": true
+    },
+    "tungsten_powder": {
+      "mapped_to": "powder_tungsten",
+      "new": true,
+      "old": true
+    },
+    "tungsten_raw": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "u233_ingot": {
+      "mapped_to": "ingot_u233",
+      "new": true,
+      "old": true
+    },
+    "u235_ingot": {
+      "mapped_to": "ingot_u235",
+      "new": true,
+      "old": true
+    },
+    "u238_ingot": {
+      "mapped_to": "ingot_u238",
+      "new": true,
+      "old": true
+    },
+    "u238m2_ingot": {
+      "mapped_to": "ingot_u238m2",
+      "new": true,
+      "old": true
+    },
+    "uranium_fuel_ingot": {
+      "mapped_to": "ingot_uranium_fuel",
+      "new": true,
+      "old": true
+    },
+    "uranium_ingot": {
+      "mapped_to": "ingot_uranium",
+      "new": true,
+      "old": true
+    },
+    "uranium_powder": {
+      "mapped_to": "powder_uranium",
+      "new": true,
+      "old": true
+    },
+    "uranium_raw": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "vacuum_tube": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "water_door": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "wire_advanced_alloy": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "wire_aluminium": {
+      "mapped_to": "wire_aluminium",
+      "new": true,
+      "old": true
+    },
+    "wire_carbon": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "wire_copper": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "wire_fine": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "wire_gold": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "wire_magnetized_tungsten": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "wire_red_copper": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "wire_schrabidium": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "wire_tungsten": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "wood_ash_powder": {
+      "mapped_to": "wood_ash_powder",
+      "new": true,
+      "old": true
+    },
+    "wood_burner": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    },
+    "zirconium_ingot": {
+      "mapped_to": "ingot_zirconium",
+      "new": true,
+      "old": true
+    },
+    "zirconium_powder": {
+      "mapped_to": "powder_zirconium",
+      "new": true,
+      "old": true
+    },
+    "zirconium_sharp": {
+      "mapped_to": null,
+      "new": false,
+      "old": true
+    }
+  }
+}

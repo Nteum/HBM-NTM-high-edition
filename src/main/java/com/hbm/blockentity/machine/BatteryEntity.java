@@ -3,6 +3,7 @@ package com.hbm.blockentity.machine;
 import com.hbm.HBMKey;
 import com.hbm.HBMLang;
 import com.hbm.api.energy.BasicEnergyContainer;
+import com.hbm.api.energy.HybridEnergyStorage;
 import com.hbm.api.energy.ProxyEnergyHandler;
 import com.hbm.api.energy.TransmitUtils;
 import com.hbm.block.machine.BlockBattery;
@@ -21,6 +22,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -69,7 +71,9 @@ public class BatteryEntity extends BaseMachineBlockEntity {
         BlockBattery block = (BlockBattery)pBlockState.getBlock();
         type = block.type;
         energyContainer = new BasicEnergyContainer(type.getMaxEnergy(), type.getOutput());
-        this.capabilitiesContent.addCapability(HBMCaps.LONG_ENERGY, new ProxyEnergyHandler(this.energyContainer));
+        ProxyEnergyHandler handler = new ProxyEnergyHandler(this.energyContainer);
+        this.capabilitiesContent.addCapability(HBMCaps.LONG_ENERGY, handler);
+        this.capabilitiesContent.addCapability(ForgeCapabilities.ENERGY, new HybridEnergyStorage(this.energyContainer));
 //        this.capabilitiesCache.addCapabilityResolver(new SidedEnergyWrapper(new HBMEnergyStorage(type.getMaxEnergy(),type.getOutput(),type.getOutput())));
     }
 

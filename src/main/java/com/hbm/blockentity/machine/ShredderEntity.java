@@ -5,6 +5,7 @@ import com.hbm.HBMLang;
 import com.hbm.Inventory.recipe.ShredderRecipe;
 import com.hbm.api.Mode;
 import com.hbm.api.energy.BasicEnergyContainer;
+import com.hbm.api.energy.HybridEnergyStorage;
 import com.hbm.api.energy.ProxyEnergyHandler;
 import com.hbm.api.energy.TransmitUtils;
 import com.hbm.api.inventory.ModeBuilder;
@@ -25,6 +26,7 @@ import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
@@ -41,6 +43,7 @@ public class ShredderEntity extends BaseMachineBlockEntity {
     private static final int BATTERY_SLOT = 29;
 
     private final BasicEnergyContainer energyContainer = new BasicEnergyContainer(MAX_POWER, MAX_POWER, MAX_POWER);
+    private final HybridEnergyStorage forgeEnergy = new HybridEnergyStorage(this.energyContainer);
     private final SimpleContainer recipeContainer = new SimpleContainer(1);
     private int progress;
     private int processTarget = DEFAULT_PROCESS_TICKS;
@@ -80,6 +83,7 @@ public class ShredderEntity extends BaseMachineBlockEntity {
                 .addModes(1, Mode.BOTH) // battery
                 .get();
         this.capabilitiesContent.addCapability(HBMCaps.LONG_ENERGY, new ProxyEnergyHandler(this.energyContainer));
+        this.capabilitiesContent.addCapability(ForgeCapabilities.ENERGY, this.forgeEnergy);
     }
 
     @Override

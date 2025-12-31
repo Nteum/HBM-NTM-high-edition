@@ -1,0 +1,9 @@
+
+{
+  "variants": {
+    "facing=north": { "model": "hbm:block/dornier", "y": 0 },
+    "facing=south": { "model": "hbm:block/dornier", "y": 180 },
+    "facing=west":  { "model": "hbm:block/dornier", "y": 270 },
+    "facing=east":  { "model": "hbm:block/dornier", "y": 90 }
+  }
+}

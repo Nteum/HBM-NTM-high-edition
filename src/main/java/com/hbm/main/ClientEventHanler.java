@@ -100,6 +100,12 @@ public class ClientEventHanler {
             MenuScreens.register(ModMenuType.SHREDDER_MENU.get(), ShredderGui::new);
             MenuScreens.register(ModMenuType.TOKAMAK_MENU.get(), TokamakGui::new);
             MenuScreens.register(ModMenuType.RBMK_BASE_MENU.get(), RBMKBaseScreen::new);
+            MenuScreens.register(ModMenuType.RBMK_FUEL_CHANNEL_MENU.get(), RBMKFuelChannelScreen::new);
+            MenuScreens.register(ModMenuType.RBMK_CONTROL_ROD_MENU.get(), RBMKControlRodScreen::new);
+            MenuScreens.register(ModMenuType.RBMK_PERIPHERAL_MENU.get(), RBMKPeripheralScreen::new);
+            MenuScreens.register(ModMenuType.IRON_CRATE_MENU.get(), IronCrateScreen::new);
+            MenuScreens.register(ModMenuType.STEEL_CRATE_MENU.get(), SteelCrateScreen::new);
+            MenuScreens.register(ModMenuType.WOOD_BURNER_MENU.get(), WoodBurnerScreen::new);
             //方块实体渲染
             BlockEntityRenderers.register(ModBlockEntityType.PRESS_ENTITY.get(), PressRenderer::new);
             BlockEntityRenderers.register(ModBlockEntityType.ASSEMBLER_ENTITY.get(), AssemblerRenderer::new);

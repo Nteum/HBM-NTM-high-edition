@@ -1,8 +1,9 @@
 {
-  "parent": "block/cube_bottom_top",
+  "loader": "forge:obj",
+  "flip_v": true,
+  "ambientocclusion": false,
+  "model": "hbm:models/rbmk/rbmk_rods.obj",
   "textures": {
-    "top": "hbm:block/rbmk/rbmk_top",
-    "bottom": "hbm:block/rbmk/rbmk_top",
-    "side": "hbm:block/rbmk/rbmk_side"
+    "texture0": "hbm:block/rbmk/rbmk_base"
   }
 }

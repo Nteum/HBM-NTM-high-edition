@@ -1,6 +1,5 @@
 {
-  "loader": "forge:fluid",
-  "custom": {
-    "fluid": "hbm:petroleum"
+  "textures": {
+    "particle": "minecraft:block/water_still"
   }
 }

@@ -1,6 +1,5 @@
 {
-  "loader": "forge:fluid",
-  "custom": {
-    "fluid": "hbm:irradiated_polluted"
+  "textures": {
+    "particle": "hbm:block/fluid/irradiated_polluted_still"
   }
 }

@@ -17,13 +17,13 @@ public class PipeEntity extends BasePipeBlockEntity {
     }
 
     public Fluid getFluid(){
-        return network != null ? network.fluid : Fluids.EMPTY;
+        return network != null ? network.getFluid() : Fluids.EMPTY;
     }
 
     @Override
     public void onLoad() {
         super.onLoad();
-        if (this.hasLevel()){
+        if (this.hasLevel() && !this.getLevel().isClientSide()) {
             FluidNetworkSystem.getOrCreate(this.getLevel()).load(this.getLevel().getChunk(this.worldPosition).getPos(), this.worldPosition);
         }
     }
@@ -31,7 +31,7 @@ public class PipeEntity extends BasePipeBlockEntity {
     @Override
     public void onChunkUnloaded() {
         super.onChunkUnloaded();
-        if (this.hasLevel()){
+        if (this.hasLevel() && !this.getLevel().isClientSide()) {
             FluidNetworkSystem.getOrCreate(this.getLevel()).unload(this.getLevel().getChunk(this.worldPosition).getPos(), this.worldPosition);
         }
     }

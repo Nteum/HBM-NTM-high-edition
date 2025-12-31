@@ -3,8 +3,8 @@ package com.hbm.blockentity.machine;
 import com.hbm.HBMKey;
 import com.hbm.Inventory.recipe.ModRecipes;
 import com.hbm.api.energy.BasicEnergyContainer;
+import com.hbm.api.energy.HybridEnergyStorage;
 import com.hbm.api.energy.ProxyEnergyHandler;
-import com.hbm.api.energy.fe.HBMEnergyStorage;
 import com.hbm.api.energy.fe.TransmitHelper;
 import com.hbm.block.machine.BlockAssembler;
 import com.hbm.blockentity.ModBlockEntityType;
@@ -51,6 +51,7 @@ public class AssemblerEntity extends BedLikeBlockEntity {
     static final int[] INPUT_SLOTS = IntStream.range(5,17).toArray();
     static final int[] OUTPUT_SLOTS = new int[]{4};
     public final BasicEnergyContainer energyContainer = new BasicEnergyContainer(energyCapacity, energyCapacity, 0);
+    private final HybridEnergyStorage forgeEnergy = new HybridEnergyStorage(this.energyContainer);
 
     protected final ContainerData containerData = new ContainerData() {
         @Override
@@ -77,12 +78,13 @@ public class AssemblerEntity extends BedLikeBlockEntity {
         items = NonNullList.withSize(17,ItemStack.EMPTY);
 //        capabilitiesCache.addCapabilityResolver(new SidedEnergyWrapper(HBMEnergyStorage.input(100_000)));
         this.capabilitiesContent.addCapability(HBMCaps.LONG_ENERGY, new ProxyEnergyHandler(energyContainer));
+        this.capabilitiesContent.addCapability(ForgeCapabilities.ENERGY, this.forgeEnergy);
         multiblockData.put(ForgeCapabilities.ENERGY, -1,0,1,Direction.SOUTH, 0,0,1,Direction.SOUTH, -1,0,-2,Direction.NORTH, 0,0,-2,Direction.NORTH)
                 .put(ForgeCapabilities.ITEM_HANDLER, 1,0,-1, Direction.EAST, -2,0,0,Direction.WEST);
         multiblockData.transDirection(pPos,pBlockState.getValue(BlockAssembler.FACING));
     }
     public IEnergyStorage getEnergy(){
-        return getCapability(ForgeCapabilities.ENERGY,null).orElse(null);
+        return this.forgeEnergy;
     }
 
     @Override
@@ -103,9 +105,9 @@ public class AssemblerEntity extends BedLikeBlockEntity {
                 ItemStack resultItem = this.recipeNow.assemble(this, level.registryAccess());
 //                    entity.items.set(4,itemStack);
                 processOutput(this,resultItem);
-            }else if (this.checkRecipe() && ((HBMEnergyStorage)this.getEnergy()).recipeExtract(this.power,true)==this.power){
+            }else if (this.checkRecipe() && this.consumeEnergy(this.power, true)){
                 this.countdown--;
-                ((HBMEnergyStorage) this.getEnergy()).recipeExtract(this.power,false);
+                this.consumeEnergy(this.power, false);
             }else stopMachine(this);
         }else if (!flagEmpty){
             AssemblerRecipe recipe = AssemblerEntity.quickCheck.getRecipeFor(this, level).orElse(null);
@@ -187,7 +189,7 @@ public class AssemblerEntity extends BedLikeBlockEntity {
         ItemStack resultItem = recipe.getResultItem(level.registryAccess());
         int energyToUse = recipe.getProcessingTime() * entity.power;
         return  (resultStack.isEmpty() || resultStack.is(resultItem.getItem()) && resultStack.getCount()+resultItem.getCount()<resultStack.getMaxStackSize())
-                && ((HBMEnergyStorage)entity.getEnergy()).recipeExtract(energyToUse,true)==energyToUse;
+                && entity.consumeEnergy(energyToUse, true);
     }
 
     @Override
@@ -230,6 +232,7 @@ public class AssemblerEntity extends BedLikeBlockEntity {
     protected void saveAdditional(CompoundTag pTag) {
         super.saveAdditional(pTag);
         pTag.putInt("countDown",countdown);
+        pTag.put(HBMKey.ENERGY, this.energyContainer.serializeNBT());
         if (recipeNow!=null)
             pTag.putString("recipeNow",recipeNow.getId().toString());
     }
@@ -238,6 +241,9 @@ public class AssemblerEntity extends BedLikeBlockEntity {
     public void load(CompoundTag pTag) {
         super.load(pTag);
         countdown = pTag.getInt("countDown");
+        if (pTag.contains(HBMKey.ENERGY)) {
+            this.energyContainer.deserializeNBT(pTag.getCompound(HBMKey.ENERGY));
+        }
         if (pTag.contains("recipeNow")){
             ResourceLocation resourceLocation = new ResourceLocation(pTag.getString("recipeNow"));
             this.recipeNow = (AssemblerRecipe) this.level.getRecipeManager().byKey(resourceLocation).orElse(null);
@@ -247,5 +253,18 @@ public class AssemblerEntity extends BedLikeBlockEntity {
         if (hasLevel() && !level.isClientSide()){
 //            this.capabilitiesCache.allocDummyBlockCaps(level,this.multiblockData);
         }
+    }
+
+    private boolean consumeEnergy(long amount, boolean simulate) {
+        if (amount <= 0) return true;
+        long stored = this.energyContainer.getEnergy();
+        if (stored < amount) {
+            return false;
+        }
+        if (!simulate) {
+            this.energyContainer.setEnergy(stored - amount);
+            this.energyContainer.onContentsChanged();
+        }
+        return true;
     }
 }

@@ -17,45 +17,45 @@ import net.minecraftforge.registries.RegistryObject;
 import org.ietf.jgss.Oid;
 
 import static com.hbm.HBM.MODID;
-import static com.hbm.registries.ModTabs.CREATIVE_MODE_TABS;
 
 public class ModCreativeModeTab {
     //创造模式物品栏注册表
-//    public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
-//    public static final RegistryObject<CreativeModeTab> HBM_ITEM = CREATIVE_MODE_TABS.register("hbm_item", () -> CreativeModeTab.builder()
-//        .title(Component.translatable(HBMLang.ITEMGROUP_ITEM.key()))
-//        .icon(() -> HBMItems.UPGRADE_BASE.get().getDefaultInstance())
-//	        .displayItems((parameters, output) -> {
-////            output.accept(ModItems.ingot_red_copper.get());
-////            output.accept(ModItems.ingot_tungsten.get());
-////            output.accept(ModItems.ingot_aluminium.get());
-////            output.accept(ModItems.ingot_lead.get());
-////            output.accept(ModItems.ingot_zirconium.get());
-////            output.accept(ModItems.ingot_magnetized_tungsten.get());
-////            output.accept(ModItems.ingot_solinium.get());
-////            output.accept(ModItems.ingot_advanced_alloy.get());
-////            output.accept(ModItems.plate_iron.get());
-////            output.accept(ModItems.plate_advanced_alloy.get());
-////            output.accept(ModItems.fluorite.get());
-////            output.accept(ModItems.nugget_zirconium.get());
-////            output.accept(ModItems.solid_fuel.get());
-////            output.accept(ModItems.lignite.get());
-////            output.accept(ModItems.powder_lignite.get());
-////            output.accept(ModItems.powder_coal.get());
-////            output.accept(ModItems.powder_coal_tiny.get());
-////            output.accept(ModItems.coke_coal.get());
-////            output.accept(ModItems.coke_lignite.get());
-////            output.accept(ModItems.coke_petroleum.get());
-////            output.accept(ModItems.briquette_wood.get());
-////            output.accept(ModItems.briquette_coal.get());
-////            output.accept(ModItems.briquette_lignite.get());
-////
-////            output.accept(ModItems.BEDROCK_ORE.get());
+    public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
+    public static final RegistryObject<CreativeModeTab> HBM_ITEM = CREATIVE_MODE_TABS.register("hbm_item", () -> CreativeModeTab.builder()
+        .title(Component.translatable(HBMLang.ITEMGROUP_ITEM.key()))
+        .icon(() -> HBMtools.UPGRADE_BASE.get().getDefaultInstance())
+	        .displayItems((parameters, output) -> {
+//            output.accept(ModItems.ingot_red_copper.get());
+//            output.accept(ModItems.ingot_tungsten.get());
+//            output.accept(ModItems.ingot_aluminium.get());
+//            output.accept(ModItems.ingot_lead.get());
+//            output.accept(ModItems.ingot_zirconium.get());
+//            output.accept(ModItems.ingot_magnetized_tungsten.get());
+//            output.accept(ModItems.ingot_solinium.get());
+//            output.accept(ModItems.ingot_advanced_alloy.get());
+//            output.accept(ModItems.plate_iron.get());
+//            output.accept(ModItems.plate_advanced_alloy.get());
+//            output.accept(ModItems.fluorite.get());
+//            output.accept(ModItems.nugget_zirconium.get());
+//            output.accept(ModItems.solid_fuel.get());
+//            output.accept(ModItems.lignite.get());
+//            output.accept(ModItems.powder_lignite.get());
+//            output.accept(ModItems.powder_coal.get());
+//            output.accept(ModItems.powder_coal_tiny.get());
+//            output.accept(ModItems.coke_coal.get());
+//            output.accept(ModItems.coke_lignite.get());
+//            output.accept(ModItems.coke_petroleum.get());
+//            output.accept(ModItems.briquette_wood.get());
+//            output.accept(ModItems.briquette_coal.get());
+//            output.accept(ModItems.briquette_lignite.get());
 //
-////            output.accept(HBMtools.UPGRADE_BASE.get());
-//
-////            HBMComponent.creativeTab(output);
-//        }).build());
+//            output.accept(ModItems.BEDROCK_ORE.get());
+
+            output.accept(HBMtools.UPGRADE_BASE.get());
+            output.accept(HBMItems.WOOD_ASH_POWDER.get());
+
+            HBMComponent.creativeTab(output);
+        }).build());
     public static final RegistryObject<CreativeModeTab> HBM_BLOCK = CREATIVE_MODE_TABS.register("hbm_block", () -> CreativeModeTab.builder()
         .title(Component.translatable(HBMLang.ITEMGROUP_BLOCK.key()))
         .icon(()->HBMBlockComponent.URANIUM_ORE.get().asItem().getDefaultInstance())
@@ -85,10 +85,17 @@ public class ModCreativeModeTab {
             output.accept(ModBlocks.machine_crucible.get());
             output.accept(ModBlocks.machine_assembler.get());
             output.accept(ModBlocks.machine_shredder.get());
+            output.accept(ModBlocks.machine_wood_burner.get());
 	            output.accept(ModBlocks.machine_rbmk_base.get());
 	            output.accept(ModBlocks.machine_rbmk_heater.get());
 	            output.accept(ModBlocks.machine_rbmk_fuel_channel.get());
 	            output.accept(ModBlocks.machine_rbmk_control_rod.get());
+	            output.accept(ModBlocks.machine_rbmk_console.get());
+	            output.accept(ModBlocks.machine_rbmk_element.get());
+	            output.accept(ModBlocks.machine_rbmk_reflector.get());
+	            output.accept(ModBlocks.machine_rbmk_debris.get());
+	            output.accept(ModBlocks.machine_rbmk_crane_console.get());
+	            output.accept(ModBlocks.machine_rbmk_autoloader.get());
 	            output.accept(ModBlocks.tokamak_controller.get());
             output.accept(ModBlocks.tokamak_casing.get());
             output.accept(ModBlocks.tokamak_coil.get());
@@ -151,10 +158,12 @@ public class ModCreativeModeTab {
 //            output.accept(ModItems.bucket_irradiated_polluted.get());
 //            output.accept(ModItems.bucket_sulfuric_acid.get());
             output.accept(ModBlocks.conveyor.get());
+            output.accept(ModBlocks.crate_iron.get());
+            output.accept(ModBlocks.crate_steel.get());
 
             output.accept(HBMItems.SCREWDRIVER.get());
 
-//            HBMtools.creativeTab(output);
+            HBMtools.creativeTab(output);
             HBMWeapon.creativeTab(output);
         for (ModFluids.FluidRegistryHolder registryHolder : ModFluids.fluidList) {
                 output.accept((BucketItem)registryHolder.bucket().get());
@@ -171,7 +180,7 @@ public class ModCreativeModeTab {
      * 将模组中的物品注册到原版创造模式物品栏中
      * */
     public static void addCreative(BuildCreativeModeTabContentsEvent event){
-            ModItems.creativeTab(event);
+            HBMItems.creativeTab(event);
             ModBlocks.creativeTab(event);
             if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS){}
 
@@ -198,7 +207,7 @@ public class ModCreativeModeTab {
             else if (event.getTabKey() == HBM_MISSILE.getKey()){
                     event.getEntries().put(new ItemStack(HBMWeapon.MP_WARHEAD_15_BALEFIRE.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
                     event.getEntries().put(new ItemStack(HBMMachine.LAUNCH_PAD.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-                    event.getEntries().put(new ItemStack(HBMItems.DESIGNATOR.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+                    event.getEntries().put(new ItemStack(HBMtools.DESIGNATOR.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
             }
     }
 }

@@ -26,15 +26,6 @@ public class RBMKBaseMenu extends BaseMachineMenu {
         this.addDataSlots(data);
     }
 
-    @Override
-    public boolean clickMenuButton(Player player, int id) {
-        if (id == 0 && this.container instanceof RBMKBaseEntity baseEntity) {
-            baseEntity.triggerAz5();
-            return true;
-        }
-        return super.clickMenuButton(player, id);
-    }
-
     public float getHeat() {
         return containerData.get(0) / 10F;
     }
