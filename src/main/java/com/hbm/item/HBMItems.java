@@ -13,14 +13,8 @@ import com.hbm.item.misc.*;
 import com.hbm.item.rbmk.ItemRBMKFuelRod;
 import com.hbm.item.rbmk.ItemRBMKLid;
 import com.hbm.item.special.ItemUnstable;
-import com.hbm.item.tool.BatteryItem;
-import com.hbm.item.tool.BigSword;
-import com.hbm.item.tool.ItemStamp;
-import com.hbm.item.tool.RedstoneSword;
-import com.hbm.item.weapon.ItemDetonator;
-import com.hbm.item.weapon.ItemGun;
-import com.hbm.item.weapon.ItemMissile;
-import com.hbm.item.weapon.ItemMissilePart;
+import com.hbm.item.tool.*;
+import com.hbm.item.weapon.*;
 import com.hbm.item.weapon.grenade.ItemGrenade;
 import com.hbm.reactor.rbmk.RBMKLidType;
 import com.hbm.registries.ModTabs;
@@ -28,6 +22,7 @@ import com.hbm.registries.WrapperRegistry.ItemBuilder;
 import com.hbm.registries.WrapperRegistry.WrappedItemRegistry;
 import com.hbm.render.model.Models;
 import com.hbm.utils.debug.GunSuicide;
+import com.hbm.utils.debug.ItemDebugWand;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -53,8 +48,6 @@ public class HBMItems {
     public static final List<WrappedItemRegistry> itemList = new ArrayList<>();
 
         static {
-//            HBMtools.register(ITEMS);
-//            HBMComponent.register(ITEMS);
             HBMWeapon.register(ITEMS);
             HBMCombat.register(ITEMS);
         }
@@ -95,23 +88,6 @@ public class HBMItems {
     public static final RegistryObject<Item> SULFUR = parts("sulfur", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     public static final RegistryObject<Item> NITRA = parts("nitra", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     public static final RegistryObject<Item> NITRA_SMALL = parts("nitra_small", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-
-    public static final RegistryObject<Item> PELLET_RTG = control("pellet_rtg", () -> new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> ASSEMBLY_TEMPLATE = template("assembly_template", () -> new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> MISSILE_NUCLEAR = new ItemBuilder("missile_nuclear", () -> new ItemMissile(new Item.Properties(), ItemMissile.MissileFormFactor.ATLAS, ItemMissile.MissileTier.TIER4, null).setModel(() -> Models.getEntityModel(Models.MISSILE_NUKE)))
-            .model(HBMKey.MODEL_EXISTING_FILE).build();
-    public static final RegistryObject<Item> GUN_RIFLE = new ItemBuilder("gun_maresleg", () -> new ItemGun(new Item.Properties())).model(HBMKey.MODEL_EXISTING_FILE).tab(ModTabs.WEAPON.getKey()).loc("Lever Action Shotgun").build();
-    public static final RegistryObject<Item> BOTTLE_NUKA = consumable("bottle_nuka", () -> new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    /* weapon */
-    //armor
-    //grenade
-    public static final RegistryObject<Item> grenade_generic = ITEMS.register("grenade_generic",()->new ItemGrenade(new Item.Properties(), ItemGrenade.Type.GENERIC));
-    public static final RegistryObject<Item> grenade_strong = ITEMS.register("grenade_strong",()->new ItemGrenade(new Item.Properties(), ItemGrenade.Type.STRONG));
-    public static final RegistryObject<Item> grenade_fire = ITEMS.register("grenade_fire",()->new ItemGrenade(new Item.Properties(), ItemGrenade.Type.FIRE));
-    public static final RegistryObject<Item> grenade_frag = ITEMS.register("grenade_frag",()->new ItemGrenade(new Item.Properties(), ItemGrenade.Type.FRAG));
-    public static final RegistryObject<Item> grenade_black_hole = ITEMS.register("grenade_black_hole",()->new ItemGrenade(new Item.Properties(), ItemGrenade.Type.BLACK_HOLE));
-
-
 
     public static final RegistryObject<Item> INGOT_URANIUM_FUEL = parts("ingot_uranium_fuel", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     public static final RegistryObject<Item> INGOT_PLUTONIUM_FUEL = parts("ingot_plutonium_fuel", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
@@ -158,14 +134,7 @@ public class HBMItems {
             if (ConfigLBSM.enableLBSM && ConfigLBSM.enableLBSMFullSchrab) return HBMLang.ITEM_INGOT_SCHRARANIUM_NAME_ALTER.translate();
             else return super.getName(pStack);
         }
-    }).tab(ModTabs.PARTS.getKey()).loc(HBMKey.REVERSE_GEN)
-            .withConfigTexture("condition_state", () -> ConfigLBSM.enableLBSM && ConfigLBSM.enableLBSMFullSchrab).model(itemModelGen -> {
-                // 我的评价是没办法，需要的参数太多了，一个一个传非常麻烦，只能手动了。
-                ResourceLocation rl = HBM.rl("ingot_schraranium");
-                itemModelGen.getBuilder(rl.toString()).parent(new ModelFile.UncheckedModelFile("item/generated"))
-                        .texture("layer0", new ResourceLocation(rl.getNamespace(), "item/" + rl.getPath()))
-                        .override().predicate(new ResourceLocation("condition_state"), 1.0f).model(itemModelGen.basicItem(HBM.rl("ingot_nikonium"))).end();
-            }).build();
+    }).tab(ModTabs.PARTS.getKey()).loc(HBMKey.REVERSE_GEN).build();
     public static final RegistryObject<Item> INGOT_SCHRABIDIUM = parts("ingot_schrabidium", ()->new Item(new Item.Properties().rarity(Rarity.RARE)), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     public static final RegistryObject<Item> INGOT_SCHRABIDATE = parts("ingot_schrabidate", ()->new Item(new Item.Properties().rarity(Rarity.RARE)), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     public static final RegistryObject<Item> PLATE_SCHRABIDIUM = parts("plate_schrabidium", ()->new Item(new Item.Properties().rarity(Rarity.RARE)), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
@@ -174,6 +143,22 @@ public class HBMItems {
     public static final RegistryObject<Item> PLATE_ADVANCED_ALLOY = parts("plate_advanced_alloy", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     public static final RegistryObject<Item> LITHIUM = parts("lithium", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     public static final RegistryObject<Item> INGOT_ZIRCONIUM = parts("ingot_zirconium", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+
+    public static final RegistryObject<Item> ASSEMBLY_TEMPLATE = template("assembly_template", () -> new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> MISSILE_NUCLEAR = new ItemBuilder("missile_nuclear", () -> new ItemMissile(new Item.Properties(), ItemMissile.MissileFormFactor.ATLAS, ItemMissile.MissileTier.TIER4, null).setModel(() -> Models.getEntityModel(Models.MISSILE_NUKE)))
+            .model(HBMKey.MODEL_EXISTING_FILE).build();
+    public static final RegistryObject<Item> GUN_RIFLE = new ItemBuilder("gun_maresleg", () -> new ItemGun(new Item.Properties())).model(HBMKey.MODEL_EXISTING_FILE).tab(ModTabs.WEAPON.getKey()).loc("Lever Action Shotgun").build();
+    public static final RegistryObject<Item> BOTTLE_NUKA = consumable("bottle_nuka", () -> new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    /* weapon */
+    //armor
+    //grenade
+    public static final RegistryObject<Item> grenade_generic = ITEMS.register("grenade_generic",()->new ItemGrenade(new Item.Properties(), ItemGrenade.Type.GENERIC));
+    public static final RegistryObject<Item> grenade_strong = ITEMS.register("grenade_strong",()->new ItemGrenade(new Item.Properties(), ItemGrenade.Type.STRONG));
+    public static final RegistryObject<Item> grenade_fire = ITEMS.register("grenade_fire",()->new ItemGrenade(new Item.Properties(), ItemGrenade.Type.FIRE));
+    public static final RegistryObject<Item> grenade_frag = ITEMS.register("grenade_frag",()->new ItemGrenade(new Item.Properties(), ItemGrenade.Type.FRAG));
+    public static final RegistryObject<Item> grenade_black_hole = ITEMS.register("grenade_black_hole",()->new ItemGrenade(new Item.Properties(), ItemGrenade.Type.BLACK_HOLE));
+
+
 
     //    ingot_semtex = new ItemLemon(4, 5, true).setUnlocalizedName("ingot_semtex").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":ingot_semtex");
     public static final RegistryObject<Item> INGOT_C4 = parts("ingot_c4", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
@@ -636,6 +621,7 @@ public class HBMItems {
     public static final RegistryObject<Item> BLADE_TITANIUM = parts("blade_titanium", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     public static final RegistryObject<Item> TURBINE_TITANIUM = parts("turbine_titanium", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     public static final RegistryObject<Item> BLADE_TUNGSTEN = parts("blade_tungsten", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> BLADE_METEORITE = parts("blade_meteorite", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     public static final RegistryObject<Item> TURBINE_TUNGSTEN = parts("turbine_tungsten", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
 
 
@@ -695,7 +681,17 @@ public class HBMItems {
 //    wiring_red_copper = new ItemWiring().setUnlocalizedName("wiring_red_copper").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":wiring_red_copper");
 //
 //    pellet_rtg_depleted = new ItemRTGPelletDepleted().setContainerItem(plate_iron).setUnlocalizedName("pellet_rtg_depleted").setCreativeTab(MainRegistry.controlTab);
-//
+
+     public static final RegistryObject<Item>  PELLET_RTG_RADIUM = parts("pellet_rtg_radium", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
+     public static final RegistryObject<Item>  PELLET_RTG_WEAK = parts("pellet_rtg_weak", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
+     public static final RegistryObject<Item>  PELLET_RTG = parts("pellet_rtg", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
+     public static final RegistryObject<Item>  PELLET_RTG_STRONTIUM = parts("pellet_rtg_strontium", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
+     public static final RegistryObject<Item>  PELLET_RTG_COBALT = parts("pellet_rtg_cobalt", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
+     public static final RegistryObject<Item>  PELLET_RTG_ACTINIUM = parts("pellet_rtg_actinium", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
+     public static final RegistryObject<Item>  PELLET_RTG_AMERICIUM = parts("pellet_rtg_americium", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
+     public static final RegistryObject<Item>  PELLET_RTG_POLONIUM = parts("pellet_rtg_polonium", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
+     public static final RegistryObject<Item>  PELLET_RTG_GOLD = parts("pellet_rtg_gold", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
+     public static final RegistryObject<Item>  PELLET_RTG_LEAD = parts("pellet_rtg_lead", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
 //    pellet_rtg_radium = new ItemRTGPellet(3).setDecays(DepletedRTGMaterial.LEAD, (long) (RTGUtil.getLifespan(16.0F, HalfLifeType.LONG, false) * 1.5)).setUnlocalizedName("pellet_rtg_radium").setCreativeTab(MainRegistry.controlTab).setMaxStackSize(1).setTextureName(RefStrings.MODID + ":pellet_rtg_radium");
 //    pellet_rtg_weak = new ItemRTGPellet(5).setDecays(DepletedRTGMaterial.LEAD, (long) (RTGUtil.getLifespan(1.0F, HalfLifeType.LONG, false) * 1.5)).setUnlocalizedName("pellet_rtg_weak").setCreativeTab(MainRegistry.controlTab).setMaxStackSize(1).setTextureName(RefStrings.MODID + ":pellet_rtg_weak");
 //    pellet_rtg = new ItemRTGPellet(10).setDecays(DepletedRTGMaterial.LEAD, (long) (RTGUtil.getLifespan(87.7F, HalfLifeType.MEDIUM, false) * 1.5)).setUnlocalizedName("pellet_rtg").setCreativeTab(MainRegistry.controlTab).setMaxStackSize(1).setTextureName(RefStrings.MODID + ":pellet_rtg");
@@ -780,7 +776,7 @@ public class HBMItems {
     public static final RegistryObject<Item> reacher = ITEMS.register("reacher",()->new Item(new Item.Properties()));
     public static final RegistryObject<Item> SCREWDRIVER = ITEMS.register("screwdriver",()->new Item(new Item.Properties()));
     //升级组件
-//    public static final RegistryObject<Item> UPGRADE_BASE = ITEMS.register("upgrade_base",()->new Item(new Item.Properties()));
+    public static final RegistryObject<Item> UPGRADE_BASE = control("upgrade_base",()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
     //导弹
 //    public static final RegistryObject<Item> DESIGNATOR = ITEMS.register("designator",()->new ItemDesignator(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> MISSILE_GENERIC = ITEMS.register("missile_generic",()->new ItemMissilePart(new Item.Properties().stacksTo(1), ItemMissilePart.MissileTier.TIER1));
@@ -824,6 +820,71 @@ public class HBMItems {
     public static final RegistryObject<Item> rbmk_fuel_test = machine("rbmk_fuel_test", () -> new ItemRBMKFuelRod(new Item.Properties().stacksTo(1), 40.0D, 20 * 60));
     public static final RegistryObject<Item> rbmk_fuel_empty = machine("rbmk_fuel_empty", () -> new Item(new Item.Properties().stacksTo(1)));
     
+    // HBMComponent的内容，暂时放在这里
+    public static final RegistryObject<Item> TRITIUM_DEUTERIUM_CAKE = parts("tritium_deuterium_cake", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
+
+    public static final RegistryObject<Item> PISTON_SELENIUM = parts("piston_selenium", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> PISTON_SET = parts("piston_set", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
+
+    public static final RegistryObject<Item> RUNE_BLANK = parts("rune_blank", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> RUNE_ISA = parts("rune_isa", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> RUNE_DAGAZ = parts("rune_dagaz", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> RUNE_HAGALAZ = parts("rune_hagalaz", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> RUNE_JERA = parts("rune_jera", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> RUNE_THURISAZ = parts("rune_thurisaz", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
+
+    public static final RegistryObject<Item> AMS_CATALYST_BLANK = parts("ams_catalyst_blank", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> AMS_CATALYST_ALUMINIUM = parts("ams_catalyst_aluminium", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> AMS_CATALYST_BERYLLIUM = parts("ams_catalyst_beryllium", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> AMS_CATALYST_CAESIUM = parts("ams_catalyst_caesium", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> AMS_CATALYST_CERIUM = parts("ams_catalyst_cerium", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> AMS_CATALYST_COBALT = parts("ams_catalyst_cobalt", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> AMS_CATALYST_COPPER = parts("ams_catalyst_copper", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> AMS_CATALYST_DINEUTRONIUM = parts("ams_catalyst_dineutronium", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> AMS_CATALYST_EUPHEMIUM = parts("ams_catalyst_euphemium", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> AMS_CATALYST_IRON = parts("ams_catalyst_iron", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> AMS_CATALYST_LITHIUM = parts("ams_catalyst_lithium", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> AMS_CATALYST_NIOBIUM = parts("ams_catalyst_niobium", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> AMS_CATALYST_SCHRABIDIUM = parts("ams_catalyst_schrabidium", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> AMS_CATALYST_STRONTIUM = parts("ams_catalyst_strontium", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> AMS_CATALYST_THORIUM = parts("ams_catalyst_thorium", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> AMS_CATALYST_TUNGSTEN = parts("ams_catalyst_tungsten", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
+
+    public static final RegistryObject<Item> CELL_EMPTY = parts("cell_empty", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> CELL_UF6 = parts("cell_uf6", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> CELL_PUF6 = parts("cell_puf6", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> CELL_ANTIMATTER = parts("cell_antimatter", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> CELL_DEUTERIUM = parts("cell_deuterium", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> CELL_TRITIUM = parts("cell_tritium", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> CELL_SAS3 = parts("cell_sas3", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> CELL_ANTI_SCHRABIDIUM = parts("cell_anti_schrabidium", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> CELL_BALEFIRE = parts("cell_balefire", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
+
+    public static final RegistryObject<Item> DEMON_CORE_OPEN = parts("demon_core_open", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> DEMON_CORE_CLOSED = parts("demon_core_closed", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
+
+    public static final RegistryObject<Item> PARTICLE_EMPTY = parts("particle_empty", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> PARTICLE_HYDROGEN = parts("particle_hydrogen", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> PARTICLE_COPPER = parts("particle_copper", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> PARTICLE_LEAD = parts("particle_lead", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> PARTICLE_APROTON = parts("particle_aproton", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> PARTICLE_AELECTRON = parts("particle_aelectron", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> PARTICLE_AMAT = parts("particle_amat", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> PARTICLE_ASCHRAB = parts("particle_aschrab", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> PARTICLE_HIGGS = parts("particle_higgs", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> PARTICLE_MUON = parts("particle_muon", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> PARTICLE_TACHYON = parts("particle_tachyon", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> PARTICLE_STRANGE = parts("particle_strange", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> PARTICLE_DARK = parts("particle_dark", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> PARTICLE_SPARKTICLE = parts("particle_sparkticle", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> PARTICLE_DIGAMMA = parts("particle_digamma", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> PARTICLE_LUTECE = parts("particle_lutece", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
+
+    // 其他
+    public static final RegistryObject<Item> DEBUG_WAND = parts("debug_wand",()->new ItemDebugWand(new Item.Properties()), HBMKey.ORDERLY_GEN);
+    public static final RegistryObject<Item> GEIGER_COUNTER = parts("geiger_counter",()->new ItemGeigerCounter(new Item.Properties()), HBMKey.ORDERLY_GEN);
+
+    public static final RegistryObject<Item> DESIGNATOR = parts("designator",()->new ItemDesignator(new Item.Properties().stacksTo(1)), HBMKey.ORDERLY_GEN);
     
     // 填充物品，游戏内无法获得，用于避免物品被匹配上
     public static final RegistryObject<Item> DUMMY_ITEM = ITEMS.register("dummy_item", ()->new Item(new Item.Properties()));

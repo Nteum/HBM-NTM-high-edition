@@ -36,11 +36,13 @@ import com.hbm.reactor.rbmk.RBMKManager;
 import com.hbm.render.model.Models;
 import com.hbm.world.feature.ModFeatures;
 import com.mojang.logging.LogUtils;
+import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.LootTableProvider;
+import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraftforge.common.MinecraftForge;
@@ -97,9 +99,8 @@ public class HBM {
         //模组内容的注册
         ModEntityType.ENTITY_TYPES.register(modEventBus);
         HBMItems.register(modEventBus);
-//        ModItems.ITEMS.register(modEventBus);
         ModBlocks.register(modEventBus);
-        ModCreativeModeTab.CREATIVE_MODE_TABS.register(modEventBus);
+        ModTabs.CREATIVE_MODE_TABS.register(modEventBus);
         ModBlockEntityType.REGISTER.register(modEventBus);
         ModRecipes.RECIPE_TYPE.register(modEventBus);
         ModRecipes.SERIALIZER.register(modEventBus);

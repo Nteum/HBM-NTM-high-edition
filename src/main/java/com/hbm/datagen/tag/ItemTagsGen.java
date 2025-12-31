@@ -28,18 +28,18 @@ public class ItemTagsGen extends ItemTagsProvider {
     protected void addTags(HolderLookup.Provider pProvider) {
         OreDictManager.addItemTags(this);
         //电池
-        this.tag(ModTags.Items.BATTERY).add(HBMItems.BATTERY_CREATIVE.get(),HBMComponent.BATTERY_GENERIC.get(),HBMComponent.BATTERY_ADVANCED.get(),HBMComponent.BATTERY_LITHIUM.get(),
+        this.tag(ModTags.Items.BATTERY).add(HBMItems.BATTERY_CREATIVE.get(),HBMItems.BATTERY_GENERIC.get(),HBMItems.BATTERY_ADVANCED.get(),HBMItems.BATTERY_LITHIUM.get(),
                 ModBlocks.machine_battery.get().asItem(),ModBlocks.machine_lithium_battery.get().asItem(),
                 ModBlocks.machine_schrabidium_battery.get().asItem(),ModBlocks.machine_dineutronium_battery.get().asItem());
         //可以被充电的
         this.tag(ModTags.Items.CHARGEABLE).addTag(ModTags.Items.BATTERY);
-        this.tag(ModTags.Items.UPGRADE).add(HBMtools.UPGRADE_BASE.get());
+        this.tag(ModTags.Items.UPGRADE).add(HBMItems.UPGRADE_BASE.get());
         this.tag(ModTags.Items.MISSILE).add(HBMItems.MISSILE_GENERIC.get());
         this.tag(ModTags.Items.SHREDDER_BLADES).add(
-                HBMComponent.BLADE_METEORITE.get(),
-                HBMComponent.BLADE_TITANIUM.get(),
-                HBMComponent.BLADE_TUNGSTEN.get(),
-                HBMComponent.SAWBLADE.get()
+                HBMItems.BLADE_METEORITE.get(),
+                HBMItems.BLADE_TITANIUM.get(),
+                HBMItems.BLADE_TUNGSTEN.get(),
+                HBMItems.SAWBLADE.get()
         );
     }
 

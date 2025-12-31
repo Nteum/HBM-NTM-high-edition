@@ -5,7 +5,9 @@ import com.hbm.datagen.LanguageProvider;
 import com.hbm.datagen.model.ItemModelGen;
 import com.hbm.effect.ModEffects;
 import com.hbm.item.armor.*;
+import com.hbm.registries.ModItems;
 import com.hbm.registries.ModSounds;
+import com.hbm.registries.RegistryHelper;
 import net.minecraft.client.model.ArmorStandModel;
 import net.minecraft.client.model.HumanoidArmorModel;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -20,11 +22,12 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 
 /**
  * 战斗物品，注册在原版创造物品栏里战斗物品那块
  * */
-public class HBMCombat extends HBMComponent{
+public class HBMCombat{
     private static final List<RegistryObject<Item>> itemList = new ArrayList<>();
     private static final List<RegistryObject<Item>> standaloneModels = new ArrayList<>();
     public static Suit STEEL;
@@ -206,8 +209,13 @@ public class HBMCombat extends HBMComponent{
 //        standaloneModels.forEach(itemRegistryObject -> provider.builtinModel(itemRegistryObject.get()));
     }
     public static void languageSupport(LanguageProvider provider){
-        itemList.forEach(itemRegistryObject -> provider.add(itemRegistryObject.get(), generateOrderlyName(itemRegistryObject.getId().getPath())));
-        standaloneModels.forEach(itemRegistryObject -> provider.add(itemRegistryObject.get(), generateOrderlyName(itemRegistryObject.getId().getPath())));
+        itemList.forEach(itemRegistryObject -> provider.add(itemRegistryObject.get(), RegistryHelper.generateOrderlyName(itemRegistryObject.getId().getPath())));
+        standaloneModels.forEach(itemRegistryObject -> provider.add(itemRegistryObject.get(), RegistryHelper.generateOrderlyName(itemRegistryObject.getId().getPath())));
+    }
+    protected static RegistryObject<Item> register(List<RegistryObject<Item>> list, final String name, final Supplier<? extends Item> sup){
+        RegistryObject<Item> registryObject = HBMItems.ITEMS.register(name, sup);
+        list.add(registryObject);
+        return registryObject;
     }
     public record Suit(@Nullable RegistryObject<Item> HELMET, RegistryObject<Item> PLATE, RegistryObject<Item> LEGS, RegistryObject<Item> BOOT){
     }

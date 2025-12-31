@@ -27,10 +27,10 @@ public class HBMtools {
         DESIGNATOR = ITEMS.register("designator",()->new ItemDesignator(new Item.Properties().stacksTo(1)));
     }
     public static void creativeTab(CreativeModeTab.Output pOutput){
-        pOutput.accept(UPGRADE_BASE.get());
-        pOutput.accept(GEIGER_COUNTER.get());
-
-        pOutput.accept(DEBUG_WAND.get());
+//        pOutput.accept(UPGRADE_BASE.get());
+//        pOutput.accept(GEIGER_COUNTER.get());
+//
+//        pOutput.accept(DEBUG_WAND.get());
     }
     public static void genModel(ItemModelProvider provider){
         provider.basicItem(UPGRADE_BASE.get());

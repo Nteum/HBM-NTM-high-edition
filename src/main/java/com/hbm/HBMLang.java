@@ -24,10 +24,10 @@ public enum HBMLang implements ILangEntry {
     HBM_CONTROL("itemGroup","hbm_control", "NTM Machine Items and Fuel"),
     HBM_TEMPLATE("itemGroup","hbm_template", "NTM Templates"),
     HBM_BLOCKS("itemGroup","hbm_blocks", "NTM Ores and Blocks"),
-    HBM_MACHINE("itemGroup","hbm_machine", "NTM Machines"),
+    HBM_MACHINE("itemGroup","hbm_machines", "NTM Machines"),
     HBM_NUKE("itemGroup","hbm_nuke", "NTM Bombs"),
     HBM_MISSILE("itemGroup","hbm_missile", "NTM Missiles and Satellites"),
-    HBM_WEAPON("itemGroup","hbm_weapon", "NTM Weapons and Turrets"),
+    HBM_WEAPON("itemGroup","hbm_weapons", "NTM Weapons and Turrets"),
     HBM_CONSUMABLE("itemGroup","hbm_consumable", "NTM Consumables and Gear"),
     // 机器
     CONTAINER_PRESS("Burner Press"),

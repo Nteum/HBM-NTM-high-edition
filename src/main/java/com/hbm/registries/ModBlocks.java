@@ -20,6 +20,7 @@ import com.hbm.datagen.LanguageProvider;
 import com.hbm.datagen.loot.BlockLootGen;
 import com.hbm.datagen.model.BlockStateGen;
 import com.hbm.datagen.model.ItemModelGen;
+import com.hbm.item.HBMItems;
 import com.hbm.item.tool.BatteryBlockItem;
 import com.hbm.block.base.DummibleBlock;
 import com.hbm.registries.WrapperRegistry.*;
@@ -125,12 +126,12 @@ public class ModBlocks {
 //    }
     public static RegistryObject<Block> registerBattery(final String name, final Supplier<? extends Block> blocksup){
         RegistryObject<Block> block = BLOCKS.register(name,blocksup);
-        ModItems.ITEMS.register(name,()->new BatteryBlockItem(block.get(),new Item.Properties()));
+        HBMItems.ITEMS.register(name,()->new BatteryBlockItem(block.get(),new Item.Properties()));
         return block;
     }
     public static RegistryObject<Block> registerBlockWithItem(final String name, final Supplier<? extends Block> blocksup){
         RegistryObject<Block> block = BLOCKS.register(name,blocksup);
-        ModItems.ITEMS.register(name,()->new BlockItem(block.get(),new Item.Properties()));
+        HBMItems.ITEMS.register(name,()->new BlockItem(block.get(),new Item.Properties()));
         return block;
     }
     public static void register(IEventBus modEventBus){

@@ -2,6 +2,7 @@ package com.hbm.main;
 
 import com.hbm.HBM;
 import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.config.ConfigLBSM;
 import com.hbm.entity.ModEntityType;
 import com.hbm.Inventory.fluid.ModFluids;
 import com.hbm.gui.ModMenuType;
@@ -13,7 +14,10 @@ import com.hbm.registries.ModKeyMapping;
 import com.hbm.registries.ModItems;
 import com.hbm.render.entity.missile.MissileTaintRenderer;
 import com.hbm.render.entity.mob.GlyphidRender;
+import com.hbm.render.item.ItemModelReloader;
 import com.hbm.render.model.Models;
+import com.hbm.render.model.item.SimpleOverridesWrapper;
+import com.hbm.render.model.item.SimpleOverridesWrapper.*;
 import com.hbm.render.overlay.AtomicFlashOverlay;
 import com.hbm.render.pipeline.GeoRenderPipeline;
 import com.hbm.render.model.entity.TestEntityModel;
@@ -26,12 +30,20 @@ import com.hbm.render.entity.EntityBlankRender;
 import com.hbm.render.entity.effect.EntityTorexRender;
 import com.hbm.render.item.SpecialItemRender;
 import com.hbm.settings.tooltip.TooltipRegistries;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
+import net.minecraft.client.renderer.block.model.ItemOverride;
+import net.minecraft.client.renderer.block.model.ItemOverrides;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.client.resources.model.ModelBakery;
+import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.client.resources.model.SimpleBakedModel;
+import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -41,6 +53,11 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 //@Mod.EventBusSubscriber(modid = HBM.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 @OnlyIn(Dist.CLIENT)
@@ -66,6 +83,9 @@ public class ClientEventHanler {
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event)
     {
+        // 物品贴图逻辑
+        ItemProperties.register(HBMItems.INGOT_U238M2.get(), HBM.rl("stage"),
+                (stack, level, entity, seed) -> stack.hasTag() && stack.getTag().contains("stage", Tag.TAG_INT) ? (float) stack.getTag().getInt("stage") : 0);
         /** 注册menu和gui */
         event.enqueueWork(()-> {
             // menu和screen的对应关系
@@ -104,9 +124,10 @@ public class ClientEventHanler {
             EntityRenderers.register(ModEntityType.GLYPHID.get(), GlyphidRender::new);
 
             RenderUtils.init();
-            // 物品贴图逻辑
-            ItemProperties.register(HBMItems.INGOT_U238M2.get(), HBM.rl("stage"),
-                    (stack, level, entity, seed) -> stack.hasTag() ? stack.getTag().getInt("stage") : 0);
+        });
+        event.enqueueWork(() -> {
+            ItemProperties.register(HBMItems.INGOT_NEPTUNIUM.get(), HBM.rl("stage"),
+                    (stack, level, entity, seed) -> ConfigLBSM.enableLBSM && ConfigLBSM.enableLBSMFullSchrab ? 1 : 0);
         });
     }
 
@@ -141,12 +162,53 @@ public class ClientEventHanler {
     public static void registerAdditional(ModelEvent.RegisterAdditional event){
         //注册自定义加载模型
         Models.registerModels(event);
+//        // 显式告知游戏加载这些模型资源
+//        event.register(new ResourceLocation("hbm", "item/hs-elements"));
+//        event.register(new ResourceLocation("hbm", "item/hs-arsenic"));
+//        event.register(new ResourceLocation("hbm", "item/hs-vault"));
     }
 
     @SubscribeEvent
     public static void modifyBakingResult(ModelEvent.ModifyBakingResult event){
         // 修改模型烘焙结果
         Models.modifyBakingResult(event);
+//        // 添加overrides
+//        // 1. 获取你的物品注册名对应的模型资源位置
+//        ModelResourceLocation mainModelLoc = new ModelResourceLocation(new ResourceLocation("hbm", "ingot_u238m2"), "inventory");
+//
+//        // 2. 获取主模型实例
+//        BakedModel mainModel = event.getModels().get(mainModelLoc);
+//
+//        if (mainModel != null) {
+//            // 3. 定义你的谓词逻辑（对应 JSON 中的 predicate）
+//            // 注意：ResourceLocation 必须和你代码中注册 ItemProperties 的一致
+//            ResourceLocation stageProperty = new ResourceLocation("hbm", "stage");
+//
+//            // 4. 获取子模型（这些模型必须在资源文件夹里有对应的 JSON 文件）
+//            Map<ItemOverride, BakedModel> itemOverrides = new HashMap<>();
+//            ModelResourceLocation modelLoc1 = new ModelResourceLocation(new ResourceLocation("hbm", "hs-elements"), "inventory");
+//            ModelResourceLocation modelLoc2 = new ModelResourceLocation(new ResourceLocation("hbm", "hs-arsenic"), "inventory");
+//            ModelResourceLocation modelLoc3 = new ModelResourceLocation(new ResourceLocation("hbm", "hs-vault"), "inventory");
+//            // 即使 JSON 里没写 overrides，只要这几个文件存在，加载器就会预加载它们
+//            BakedModel stage1Model = event.getModels().get(modelLoc1);
+//            BakedModel stage2Model = event.getModels().get(modelLoc2);
+//            BakedModel stage3Model = event.getModels().get(modelLoc3);
+//            if (stage1Model != null) {
+//                itemOverrides.put(new ItemOverride(modelLoc1, List.of(new ItemOverride.Predicate(stageProperty, 1.0F))), stage1Model);
+//            }
+//            if (stage2Model != null) {
+//                itemOverrides.put(new ItemOverride(modelLoc2, List.of(new ItemOverride.Predicate(stageProperty, 2.0F))), stage2Model);
+//            }
+//            if (stage3Model != null) {
+//                itemOverrides.put(new ItemOverride(modelLoc3, List.of(new ItemOverride.Predicate(stageProperty, 3.0F))), stage3Model);
+//            }
+//            // 创建ItemOverrides
+//            BakedModel customModel = new SimpleOverridesWrapper((SimpleBakedModel) mainModel, new SimpleOverridesWrapper.BakedItemOverrides(itemOverrides));
+//            // 7. 将修改后的模型放回注册表
+//            event.getModels().put(mainModelLoc, customModel);
+//
+//            System.out.println("HBM Debug: 成功手动注入了 " + itemOverrides.size() + " 个 Overrides！");
+//        }
     }
 
     @SubscribeEvent
@@ -157,12 +219,8 @@ public class ClientEventHanler {
 
     @SubscribeEvent
     public static void registerClientReloadListeners(RegisterClientReloadListenersEvent event){
-//        BlockEntityRenderDispatcher blockEntityRenderDispatcher = Minecraft.getInstance().getBlockEntityRenderDispatcher();
-//        EntityModelSet entityModels = Minecraft.getInstance().getEntityModels();
-//        specialItemRender = new SpecialItemRender(blockEntityRenderDispatcher,entityModels);
-//        //注册模组客户端专属的资源加载器
-//        event.registerReloadListener(specialItemRender);
         event.registerReloadListener(GeoRenderPipeline.INSTANCE);
+        event.registerReloadListener(ItemModelReloader.INSTANCE);
     }
     public static BlockEntityWithoutLevelRenderer getLazyItemRender(){
         if (specialItemRender == null){

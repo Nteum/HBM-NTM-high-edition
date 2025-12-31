@@ -21,17 +21,17 @@ public class ShredderRecipeProvider implements ISubRecipeProvider {
                 .duration(40)
                 .save(consumer, base + "coal_to_powder");
 
-        SingleItemRecipeBuilder.shredder(HBMComponent.POWDER_IRON.get())
+        SingleItemRecipeBuilder.shredder(HBMItems.POWDER_IRON.get())
                 .requires(Tags.Items.INGOTS_IRON)
                 .duration(60)
                 .save(consumer, base + "iron_ingot");
 
-        SingleItemRecipeBuilder.shredder(HBMComponent.POWDER_GOLD.get())
+        SingleItemRecipeBuilder.shredder(HBMItems.POWDER_GOLD.get())
                 .requires(Tags.Items.INGOTS_GOLD)
                 .duration(60)
                 .save(consumer, base + "gold_ingot");
 
-        SingleItemRecipeBuilder.shredder(HBMComponent.POWDER_COPPER.get())
+        SingleItemRecipeBuilder.shredder(HBMItems.POWDER_COPPER.get())
                 .requires(Tags.Items.INGOTS_COPPER)
                 .duration(60)
                 .save(consumer, base + "copper_ingot");

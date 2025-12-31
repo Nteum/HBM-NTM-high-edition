@@ -28,7 +28,7 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
         ModFluids.localName(this);
         ModKeyMapping.localName(this);
 
-        ModItems.languageSupport(this);
+//        ModItems.languageSupport(this);
         ModBlocks.languageSupport(this);
 
         addCreativeTabs();
@@ -73,7 +73,7 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
 //        this.add(HBMLang.ITEMGROUP_WEAPON);
     }
     private void addItems(){
-        HBMComponent.languageSupport(this);
+//        HBMComponent.languageSupport(this);
         HBMCombat.languageSupport(this);
     }
     private void addBlocks(){

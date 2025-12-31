@@ -8,6 +8,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
@@ -30,55 +31,36 @@ public class ItemModelGen extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        ModItems.genModel(this);
-        HBMtools.genModel(this);
-        HBMComponent.genModel(this);
+        HBMItems.genModel(this);
         HBMWeapon.genModel(this);
         HBMCombat.genModel(this);
         ModFluids.bucketModel(this);
-//        this.basicItem(ModItems.ingot_red_copper.get());
-//        this.basicItem(ModItems.ingot_tungsten.get());
-//        this.basicItem(ModItems.ingot_aluminium.get());
-//        this.basicItem(ModItems.ingot_lead.get());
-//        this.basicItem(ModItems.ingot_zirconium.get());
-//        this.basicItem(ModItems.ingot_magnetized_tungsten.get());
-//        this.basicItem(ModItems.ingot_solinium.get());
-//        this.basicItem(ModItems.plate_iron.get());
-//        this.basicItem(ModItems.fluorite.get());
-//        this.basicItem(ModItems.nugget_zirconium.get());
-//
-//        this.basicItem(ModItems.ingot_advanced_alloy.get());
-//        this.basicItem(ModItems.solid_fuel.get());
-//        this.basicItem(ModItems.lignite.get());
-//        this.basicItem(ModItems.powder_lignite.get());
-//        this.basicItem(ModItems.powder_coal.get());
-//        this.basicItem(ModItems.coke_coal.get());
-//        this.basicItem(ModItems.coke_lignite.get());
-//        this.basicItem(ModItems.coke_petroleum.get());
-//        this.basicItem(ModItems.briquette_wood.get());
-//        this.basicItem(ModItems.briquette_lignite.get());
-//        this.basicItem(ModItems.briquette_coal.get());
-//
-////        this.basicItem(ModItems.detonator.get());
-//        this.basicItem(ModItems.grenade_generic.get());
-//        this.basicItem(ModItems.grenade_strong.get());
-//        this.basicItem(ModItems.grenade_fire.get());
-//        this.basicItem(ModItems.grenade_frag.get());
-//        this.basicItem(ModItems.grenade_black_hole.get());
-        this.basicItem(HBMItems.overlay_my_fluid.get());
-        this.basicItem(HBMItems.BEDROCK_ORE.get());
-        /* tool */
-        this.basicItem(HBMItems.SCREWDRIVER.get());
+
+//        this.basicItem(HBMItems.overlay_my_fluid.get());
+//        this.basicItem(HBMItems.BEDROCK_ORE.get());
+//        /* tool */
+//        this.basicItem(HBMItems.SCREWDRIVER.get());
 
         generateMissingSimpleItemModels();
 
-        ResourceLocation u238m2 = Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(HBMItems.INGOT_U238M2.get()));
-        this.getBuilder(u238m2.toString()).parent(new ModelFile.UncheckedModelFile("item/generated"))
-                .texture("layer0", new ResourceLocation(u238m2.getNamespace(), "item/ingot_u238m2"))
+        ResourceLocation item_path;
+        ResourceLocation property_stage = HBM.rl("stage");
+        ResourceLocation property_broken = new ResourceLocation("broken");
+        item_path = Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(HBMItems.INGOT_U238M2.get()));
+        this.getBuilder(item_path.toString()).parent(new ModelFile.UncheckedModelFile("item/generated"))
+                .texture("layer0", new ResourceLocation(item_path.getNamespace(), "item/ingot_u238m2"))
+//                .override().predicate(property_broken,0).model(this.basicItem(HBM.rl("ingot_u238m2"))).end()
+//                .override().predicate(property_broken, 0.5f).model(this.basicItem(Items.IRON_BOOTS)).end();
+                .override().predicate(property_stage,0).model(this.basicItem(HBM.rl("ingot_u238m2"))).end()
+                .override().predicate(property_stage, 1).model(this.basicItem(HBM.rl("hs-elements"))).end()
+                .override().predicate(property_stage, 2).model(this.basicItem(HBM.rl("hs-arsenic"))).end()
+                .override().predicate(property_stage, 3).model(this.basicItem(HBM.rl("hs-vault"))).end();
+
+        item_path = Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(HBMItems.INGOT_NEPTUNIUM.get()));
+        this.getBuilder(item_path.toString()).parent(new ModelFile.UncheckedModelFile("item/generated"))
+                .texture("layer0", new ResourceLocation(item_path.getNamespace(), "item/" + item_path.getPath()))
                 .override()
-                .predicate(HBM.rl("stage"), 1).model(this.basicItem(HBM.rl("item/hs-elements")))
-                .predicate(HBM.rl("stage"), 2).model(this.basicItem(HBM.rl("item/hs-arsenic")))
-                .predicate(HBM.rl("stage"), 3).model(this.basicItem(HBM.rl("item/hs-vault")))
+                .predicate(property_stage, 1.0f).model(this.basicItem(HBM.rl("ingot_nikonium")))
                 .end();
     }
 

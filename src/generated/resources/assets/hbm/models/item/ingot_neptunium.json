@@ -1,5 +1,13 @@
 {
-  "parent": "item/generated",
+  "parent": "minecraft:item/generated",
+  "overrides": [
+    {
+      "model": "hbm:item/ingot_nikonium",
+      "predicate": {
+        "hbm:stage": 1.0
+      }
+    }
+  ],
   "textures": {
     "layer0": "hbm:item/ingot_neptunium"
   }

@@ -1,5 +1,5 @@
 {
   "values": [
-    "hbm:upgrade_template"
+    "hbm:upgrade_base"
   ]
 }

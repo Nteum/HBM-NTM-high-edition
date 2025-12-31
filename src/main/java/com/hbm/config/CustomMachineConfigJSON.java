@@ -8,6 +8,7 @@ import com.google.gson.stream.JsonWriter;
 import com.hbm.HBM;
 import com.hbm.config.CustomMachineConfigJSON.MachineConfiguration.ComponentDefinition;
 import com.hbm.datagen.recipe.ingredient.CountableIngredient;
+import com.hbm.item.HBMItems;
 import com.hbm.registries.OreDictManager;
 import com.hbm.item.HBMComponent;
 import net.minecraft.world.item.crafting.ShapedRecipe;
@@ -77,7 +78,7 @@ public class CustomMachineConfigJSON {
 			CountableIngredient.writeConfigJson(CountableIngredient.of(OreDictManager.STEEL.plate()), writer);
 			writer.setIndent("");
 			writer.value("C");
-			CountableIngredient.writeConfigJson(CountableIngredient.of(HBMComponent.CIRCUIT_BASIC.get(), 1), writer);
+			CountableIngredient.writeConfigJson(CountableIngredient.of(HBMItems.CIRCUIT_BASIC.get(), 1), writer);
 			writer.endArray().setIndent("  ");
 
 			writer.name("components").beginArray();

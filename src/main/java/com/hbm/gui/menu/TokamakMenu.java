@@ -4,6 +4,7 @@ import com.hbm.gui.ModMenuType;
 import com.hbm.blockentity.machine.tokamak.TokamakControllerBlockEntity;
 import com.hbm.item.HBMComponent;
 import com.hbm.capabilities.HBMCaps;
+import com.hbm.item.HBMItems;
 import com.hbm.registries.ModTags;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
@@ -53,9 +54,9 @@ public class TokamakMenu extends BaseMachineMenu {
                     return ItemStack.EMPTY;
                 }
             } else {
-                if (current.is(HBMComponent.CELL_DEUTERIUM.get())) {
+                if (current.is(HBMItems.CELL_DEUTERIUM.get())) {
                     if (!moveItemStackTo(current, 0, 1, false)) return ItemStack.EMPTY;
-                } else if (current.is(HBMComponent.CELL_TRITIUM.get())) {
+                } else if (current.is(HBMItems.CELL_TRITIUM.get())) {
                     if (!moveItemStackTo(current, 1, 2, false)) return ItemStack.EMPTY;
                 } else if (isChargeable(current)) {
                     if (!moveItemStackTo(current, 5, 6, false)) return ItemStack.EMPTY;
