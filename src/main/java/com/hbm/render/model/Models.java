@@ -1,10 +1,6 @@
 package com.hbm.render.model;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonObject;
 import com.hbm.HBM;
-import com.hbm.registries.ModItems;
 import com.hbm.item.HBMWeapon;
 import com.hbm.render.model.armor.*;
 import com.hbm.render.model.entity.ModelGlyphid;
@@ -12,34 +8,26 @@ import com.hbm.render.model.entity.ObjEntityModelSingle;
 import com.hbm.render.model.item.SimpleBakedModelWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.Model;
-import net.minecraft.client.renderer.ItemModelShaper;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.entity.ItemRenderer;
-import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelManager;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.client.resources.model.SimpleBakedModel;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimplePreparableReloadListener;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ModelEvent;
-import net.minecraftforge.client.model.obj.ObjLoader;
-import net.minecraftforge.client.model.obj.ObjModel;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 import net.minecraftforge.registries.RegistryObject;
 
-import java.io.InputStreamReader;
-import java.util.*;
+import java.lang.ref.WeakReference;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
-import java.lang.ref.WeakReference;
 import java.util.function.Supplier;
 
 @Mod.EventBusSubscriber(modid = HBM.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)

@@ -88,7 +88,6 @@ public class HBM {
         //模组事件总线
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         modEventBus.addListener(this::commonSetup);
-//        modEventBus.addListener(this::onServerSetup);
         modEventBus.addListener(this::onClientSetup);
         modEventBus.addListener(this::onPostLoad);
         modEventBus.addListener(this::onGatherData);
@@ -125,6 +124,7 @@ public class HBM {
         TransmitterNetworkRegistry.initiate(); //注册传输网络系统
         RBMKManager.init();
         CrackingRecipes.registerDefaults();
+        event.enqueueWork(HBMBiomes::setUp);    // 生物群系的注册
     }
 
     public void onClientSetup(FMLClientSetupEvent event){

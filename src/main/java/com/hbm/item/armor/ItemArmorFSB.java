@@ -1,30 +1,22 @@
 package com.hbm.item.armor;
 
-import com.google.gson.internal.reflect.ReflectionHelper;
 import com.hbm.HBM;
 import com.hbm.HBMLang;
-import com.hbm.block.HBMBlockComponent;
 import com.hbm.block.HBMMachine;
-import com.hbm.block.tools.GeigerCounter;
 import com.hbm.blockentity.tools.TileEntityGeiger;
 import com.hbm.item.HBMCombat;
 import com.hbm.registries.ModItems;
-import com.hbm.item.HBMtools;
-import com.hbm.item.tool.ItemGeigerCounter;
 import com.hbm.render.model.armor.ModelArmorBase;
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -36,9 +28,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import org.jetbrains.annotations.Nullable;
-import org.lwjgl.opengl.GL11;
 
-import java.lang.reflect.Field;
 import java.util.*;
 import java.util.function.Supplier;
 

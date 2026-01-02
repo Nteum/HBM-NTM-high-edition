@@ -18,7 +18,6 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 
-//@Mod.EventBusSubscriber(modid = HBM.MODID)
 public class ServerEventHandler {
 
     public static void registerEvents(IEventBus forgeBus, IEventBus modBus){

@@ -64,3 +64,9 @@ description='''${mod_description}'''
    versionRange="${minecraft_version_range}"
    ordering="NONE"
    side="BOTH"
+[[dependencies."${mod_id}"]]
+   modId="terrablender"
+   mandatory=true
+   versionRange="[1.0.0.59,)"
+   ordering="NONE"
+   side="BOTH"

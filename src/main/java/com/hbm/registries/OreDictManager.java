@@ -1,22 +1,19 @@
 package com.hbm.registries;
 
-import com.hbm.block.HBMBlockComponent;
 import com.hbm.datagen.tag.BlockTagsGen;
 import com.hbm.datagen.tag.ItemTagsGen;
-import com.hbm.item.HBMComponent;
-import com.hbm.registries.ModItems;
 import net.minecraft.data.tags.IntrinsicHolderTagsProvider;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.Tags;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Supplier;
 
-import static com.hbm.registries.ModTags.Items.*;
 import static com.hbm.registries.ModTags.Blocks;
+import static com.hbm.registries.ModTags.Items.*;
 
 /**
  * 你可能很奇怪我为什么把它放在这里了，这是因为我在写代码的过程中发现移植旧版的矿物辞典还是和tag生成更有关系

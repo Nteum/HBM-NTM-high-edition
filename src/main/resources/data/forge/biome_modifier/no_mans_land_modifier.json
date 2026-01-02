@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "hbm:no_mans_land",
+  "features": "minecraft:forest_rock",
+  "step": "underground_ores"
+}
