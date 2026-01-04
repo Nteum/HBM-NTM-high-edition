@@ -18,6 +18,7 @@ import com.hbm.datagen.model.ItemModelGen;
 import com.hbm.datagen.recipe.RecipeGen;
 import com.hbm.datagen.tag.BlockTagsGen;
 import com.hbm.datagen.tag.ItemTagsGen;
+import com.hbm.dim.HBMChunkGenerators;
 import com.hbm.effect.ModEffects;
 import com.hbm.registries.ModItems;
 import com.hbm.main.ClientEventHanler;
@@ -113,6 +114,7 @@ public class HBM {
         ModEffects.register(modEventBus);
         BigExplosivesMod.register(modEventBus);
         BallistixCompat.register(modEventBus);
+        HBMChunkGenerators.register(modEventBus);
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CommonConfig.CONFIG_SPEC, "hbm-common.toml");
     }

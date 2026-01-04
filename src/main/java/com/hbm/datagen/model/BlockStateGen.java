@@ -145,7 +145,12 @@ public class BlockStateGen extends BlockStateProvider {
         cableBlockWithItem();
         //电池
     }
-
+    // 方块和物品：纯cube all
+    public void simpleBlockWithItem(Block block){
+        ModelFile modelFile = cubeAll(block);
+        simpleBlock(block, modelFile);
+        simpleBlockItem(block, modelFile);
+    }
     public void simpleBlockWithItem(Block block, String path){
         ModelFile.ExistingModelFile model = models().getExistingFile(HBM.rl(path));
         simpleBlockWithItem(block,model);
@@ -227,6 +232,7 @@ public class BlockStateGen extends BlockStateProvider {
             }
         });
     }
+
     public String path(Block block){
         return key(block).getPath();
     }

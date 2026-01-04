@@ -30,6 +30,7 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.FallingBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 import net.minecraft.world.level.block.state.BlockState;
@@ -129,16 +130,17 @@ public class ModBlocks {
     public static final RegistryObject<Block> GLYPHID_BLOCK = add("glyphid_block", ()->new GlyphidBlock(Properties.copy(Blocks.STONE).pushReaction(PushReaction.IGNORE).explosionResistance(0.5f)), ModCreativeModeTab.HBM_BLOCK.getKey(), HBMKey.MODEL_STANDALONE, HBMKey.ORDERLY_GEN, HBMKey.DROP_NONE);
     public static final RegistryObject<Block> GLYPHID_SPAWNER = add("glyphid_spawner", ()->new GlyphidSpawner(Properties.copy(Blocks.STONE).pushReaction(PushReaction.IGNORE).explosionResistance(0.5f)), ModCreativeModeTab.HBM_BLOCK.getKey(), HBMKey.MODEL_STANDALONE, HBMKey.ORDERLY_GEN, HBMKey.DROP_NONE);
 
+    /**
+     * 航天版方块
+     * */
+    public static final RegistryObject<Block> moon_rock = block("moon_rock", ()->new Block(Properties.of().sound(SoundType.STONE).strength(1.5f, 10f)));
+    public static final RegistryObject<Block> moon_turf = block("moon_turf", ()->new FallingBlock(Properties.of().sound(SoundType.SAND).strength(0.5f)));
     public static ToIntFunction<BlockState> litEmission(int value){
         return state -> {
             return state.getValue(BlockStateProperties.LIT)?value:0;
         };
     }
 
-//    public static void registerItem(){
-//        //主要用于注册一些特殊模型的物品
-//        ModItems.ITEMS.register("bomb_fat_man",()->new NukeFat.NukeItem(bomb_fat_man.get(),new Item.Properties()));
-//    }
     public static RegistryObject<Block> registerBattery(final String name, final Supplier<? extends Block> blocksup){
         RegistryObject<Block> block = BLOCKS.register(name,blocksup);
         ModItems.ITEMS.register(name,()->new BatteryBlockItem(block.get(),new Item.Properties()));
@@ -151,6 +153,21 @@ public class ModBlocks {
     }
     public static void register(IEventBus modEventBus){
         BLOCKS.register(modEventBus);
+    }
+
+    protected static RegistryObject<Block> block(final String name, final Supplier<? extends Block> sup){
+        return ModBlocks.add(name, sup, ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.ORDERLY_GEN, HBMKey.DROP_SELF);
+    }
+
+    protected static RegistryObject<Block> machine(final String name, final Supplier<? extends Block> sup){
+        return ModBlocks.add(name, sup, ModTabs.MACHINE.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.ORDERLY_GEN, HBMKey.DROP_SELF);
+    }
+
+    protected static RegistryObject<Block> add(final String name, final Supplier<? extends Block> sup, ResourceKey<CreativeModeTab> tabKey, String genNameWay){
+        return add(name, sup, tabKey, HBMKey.MODEL_CUBE_ALL, genNameWay, HBMKey.DROP_SELF);
+    }
+    protected static RegistryObject<Block> add(final String name, final Supplier<? extends Block> sup, ResourceKey<CreativeModeTab> tabKey, String genModelWay, String genNameWay, String lootWay){
+        return new BlockBuilder(name, sup).tab(tabKey).model(genModelWay).loc(genNameWay).loot(lootWay).build();
     }
 
     public static void creativeTab(BuildCreativeModeTabContentsEvent event){
@@ -176,23 +193,5 @@ public class ModBlocks {
         for (WrappedBlockRegistry blockRegistry : blockList) {
             blockRegistry.lootSupport(provider);
         }
-    }
-
-    protected static RegistryObject<Block> block(final String name, final Supplier<? extends Block> sup, String genModelWay, String lootWay){
-        return ModBlocks.add(name, sup, ModTabs.BLOCKS.getKey(), genModelWay, HBMKey.ORDERLY_GEN_EXCEPT_FIRST, lootWay);
-    }
-
-    protected static RegistryObject<Block> machine(final String name, final Supplier<? extends Block> sup, String genModelWay, String lootWay){
-        return ModBlocks.add(name, sup, ModTabs.MACHINE.getKey(), genModelWay, HBMKey.ORDERLY_GEN_EXCEPT_FIRST, lootWay);
-    }
-
-    protected static RegistryObject<Block> add(final String name, final Supplier<? extends Block> sup, ResourceKey<CreativeModeTab> tabKey, String genNameWay){
-        return add(name, sup, tabKey, HBMKey.BASIC_MODEL, genNameWay, HBMKey.DROP_SELF, null);
-    }
-    protected static RegistryObject<Block> add(final String name, final Supplier<? extends Block> sup, ResourceKey<CreativeModeTab> tabKey, String genModelWay, String genNameWay, String lootWay){
-        return add(name, sup, tabKey, genModelWay, genNameWay, lootWay, null);
-    }
-    protected static RegistryObject<Block> add(final String name, final Supplier<? extends Block> sup, ResourceKey<CreativeModeTab> tabKey, String genModelWay, String genNameWay, String lootWay, String localizedName){
-        return new BlockBuilder(name, sup).tab(tabKey).model(genModelWay).loc(genNameWay).loot(lootWay).build();
     }
 }

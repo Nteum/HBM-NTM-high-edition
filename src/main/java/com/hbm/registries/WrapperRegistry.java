@@ -143,11 +143,6 @@ public class WrapperRegistry<T> implements Supplier<T>{
             itemRegistry.modelFactory = modelGen;
             if (itemRegistry.genNameWay!= null && itemRegistry.genNameWay.equals(HBMKey.LITERALLY) && localizedName!=null)
                 itemRegistry.localizedName = localizedName;
-//            // 不要在这里直接 ItemProperties.register！
-//            if (propertyName != null && condition != null) {
-//                // 将 supplier 交给 ModItemProperties，建议传 RegistryObject::get 或包装后的 Item supplier
-//                HBMItemProperties.add(itemRegistry, propertyName, condition);
-//            }
             ModItems.itemList.add(itemRegistry);
             return itemRegistry.registryObject;
         }
@@ -155,7 +150,7 @@ public class WrapperRegistry<T> implements Supplier<T>{
 
     public static class WrappedBlockRegistry extends WrapperRegistry<Block> {
         ResourceKey<CreativeModeTab> creativeKey;
-        String genModelWay = HBMKey.BASIC_MODEL;
+        String genModelWay = HBMKey.MODEL_CUBE_ALL;
         String lootWay = HBMKey.DROP_SELF;
         BiConsumer<Block, BlockStateGen> modelFactory;
         public void languageSupport(LanguageProvider provider){
@@ -177,7 +172,7 @@ public class WrapperRegistry<T> implements Supplier<T>{
 
         public void modelSupport(BlockStateGen provider){
             switch (genModelWay) {
-//                case HBMKey.MODEL_CUBE_ALL -> provider.simpleBlockWithItem(get());
+                case HBMKey.MODEL_CUBE_ALL -> provider.simpleBlock(get());
 //                case HBMKey.MODEL_FRONT_SIDE -> provider.frontSideBlockWithItem(get());
 //                case HBMKey.MODEL_FRONT_SIDE_TOP -> provider.frontSideTopBlockWithItem(get());
 //                case HBMKey.MODEL_DIFURNACE -> provider.difuranceBlockWithItem(get());
@@ -199,7 +194,7 @@ public class WrapperRegistry<T> implements Supplier<T>{
 
     public static class BlockBuilder extends Builder<Block>{
         // 这个默认值是要保留的
-        String genModelWay = HBMKey.BASIC_MODEL;
+        String genModelWay = HBMKey.MODEL_CUBE_ALL;
         String lootWay = HBMKey.DROP_SELF;
         ResourceKey<CreativeModeTab> creativeKey;
         BiConsumer<Block, BlockStateGen> modelGen;
