@@ -7,6 +7,7 @@ import com.hbm.config.ServerConfig;
 import com.hbm.compat.bigexplosives.BigExplosivesMod;
 import com.hbm.compat.ballistix.BallistixCompat;
 import com.hbm.datagen.damageSource.HBMDamageTagProvider;
+import com.hbm.datagen.levelgen.HBMWorldGenProvider;
 import com.hbm.dev.AssetConsistencyChecker;
 import com.hbm.dev.ModelValidator;
 import com.hbm.datagen.loot.BlockLootGen;
@@ -180,6 +181,7 @@ public class HBM {
         resourcePack.addProvider(output -> new LanguageProvider(output,HBM.MODID,"en_us"));
         resourcePack.addProvider(output -> new ItemModelGen(output, HBM.MODID, helper));
         resourcePack.addProvider(output -> new BlockStateGen(output, HBM.MODID,helper));
+        resourcePack.addProvider(output -> new HBMWorldGenProvider(output,lookupProvider));
         LOGGER.info("Datagen providers registered: {}", generator.getProvidersView().keySet());
     }
 

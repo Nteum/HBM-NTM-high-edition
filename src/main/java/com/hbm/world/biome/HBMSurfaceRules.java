@@ -2,6 +2,7 @@ package com.hbm.world.biome;
 
 
 import com.hbm.registries.HBMBiomes;
+import com.hbm.registries.ModBlocks;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.Noises;
@@ -11,7 +12,8 @@ public class HBMSurfaceRules {
     private static final SurfaceRules.RuleSource DIRT = makeStateRule(Blocks.DIRT);
     private static final SurfaceRules.RuleSource GRASS_BLOCK = makeStateRule(Blocks.GRASS_BLOCK);
     private static final SurfaceRules.RuleSource GRAVEL = makeStateRule(Blocks.GRAVEL);
-
+    private static final SurfaceRules.RuleSource MOON_TURF = makeStateRule(ModBlocks.moon_turf.get());
+    private static final SurfaceRules.RuleSource MOON_ROCK = makeStateRule(ModBlocks.moon_rock.get());
     public static SurfaceRules.RuleSource overworldRules()
     {
         SurfaceRules.ConditionSource isAtOrAboveWaterLevel = SurfaceRules.waterBlockCheck(-1, 0);
@@ -25,6 +27,15 @@ public class HBMSurfaceRules {
                 )),
                 // Default to a grass and dirt surface
                 SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, grassSurface)
+        );
+    }
+
+    public static SurfaceRules.RuleSource moonRules(){
+        return SurfaceRules.sequence(
+                SurfaceRules.ifTrue(SurfaceRules.isBiome(HBMBiomes.MUN), SurfaceRules.sequence(
+                        SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, MOON_TURF),
+                        MOON_ROCK
+                ))
         );
     }
 

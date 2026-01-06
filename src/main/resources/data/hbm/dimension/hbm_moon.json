@@ -2,7 +2,7 @@
   "type": "hbm:hbm_moon_type",
   "generator": {
     "type": "minecraft:noise",
-    "settings": "minecraft:overworld",
+    "settings": "hbm:moon_settings",
     "biome_source": {
       "type": "minecraft:multi_noise",
       "biomes": [
