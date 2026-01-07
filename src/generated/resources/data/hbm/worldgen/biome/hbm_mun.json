@@ -18,19 +18,7 @@
     "water_color": 4159204,
     "water_fog_color": 329011
   },
-  "features": [
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    []
-  ],
+  "features": [],
   "has_precipitation": true,
   "spawn_costs": {},
   "spawners": {
@@ -39,9 +27,9 @@
     "creature": [
       {
         "type": "minecraft:cow",
-        "maxCount": 4,
-        "minCount": 4,
-        "weight": 8
+        "maxCount": 10,
+        "minCount": 2,
+        "weight": 4
       }
     ],
     "misc": [],

@@ -3,10 +3,13 @@ package com.hbm.world.biome;
 
 import com.hbm.registries.HBMBiomes;
 import com.hbm.registries.ModBlocks;
+import net.minecraft.data.worldgen.SurfaceRuleData;
+import net.minecraft.data.worldgen.biome.OverworldBiomes;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.Noises;
 import net.minecraft.world.level.levelgen.SurfaceRules;
+import net.minecraft.world.level.levelgen.placement.CaveSurface;
 
 public class HBMSurfaceRules {
     private static final SurfaceRules.RuleSource DIRT = makeStateRule(Blocks.DIRT);
@@ -32,15 +35,16 @@ public class HBMSurfaceRules {
 
     public static SurfaceRules.RuleSource moonRules(){
         return SurfaceRules.sequence(
-                SurfaceRules.ifTrue(SurfaceRules.isBiome(HBMBiomes.MUN), SurfaceRules.sequence(
-                        SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, MOON_TURF),
-                        MOON_ROCK
-                ))
+                SurfaceRules.ifTrue(SurfaceRules.stoneDepthCheck(5, false, 0, CaveSurface.CEILING), MOON_TURF), MOON_ROCK
+//                SurfaceRules.ifTrue(surfaceNoiseAbove(-1.0D), MOON_TURF), MOON_ROCK
         );
     }
 
     private static SurfaceRules.RuleSource makeStateRule(Block block)
     {
         return SurfaceRules.state(block.defaultBlockState());
+    }
+    private static SurfaceRules.ConditionSource surfaceNoiseAbove(double pValue) {
+        return SurfaceRules.noiseCondition(Noises.SURFACE, pValue / 8.25D, Double.MAX_VALUE);
     }
 }

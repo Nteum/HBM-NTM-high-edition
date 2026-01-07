@@ -337,37 +337,23 @@
       {
         "type": "minecraft:condition",
         "if_true": {
-          "type": "minecraft:biome",
-          "biome_is": [
-            "hbm:hbm_mun"
-          ]
+          "type": "minecraft:stone_depth",
+          "add_surface_depth": false,
+          "offset": 5,
+          "secondary_depth_range": 0,
+          "surface_type": "ceiling"
         },
         "then_run": {
-          "type": "minecraft:sequence",
-          "sequence": [
-            {
-              "type": "minecraft:condition",
-              "if_true": {
-                "type": "minecraft:stone_depth",
-                "add_surface_depth": false,
-                "offset": 0,
-                "secondary_depth_range": 0,
-                "surface_type": "floor"
-              },
-              "then_run": {
-                "type": "minecraft:block",
-                "result_state": {
-                  "Name": "hbm:moon_turf"
-                }
-              }
-            },
-            {
-              "type": "minecraft:block",
-              "result_state": {
-                "Name": "hbm:moon_rock"
-              }
-            }
-          ]
+          "type": "minecraft:block",
+          "result_state": {
+            "Name": "hbm:moon_turf"
+          }
+        }
+      },
+      {
+        "type": "minecraft:block",
+        "result_state": {
+          "Name": "hbm:moon_rock"
         }
       }
     ]

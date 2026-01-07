@@ -13,16 +13,20 @@ import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.Carvers;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.valueproviders.ConstantInt;
-import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.biome.Climate;
-import net.minecraft.world.level.biome.MultiNoiseBiomeSource;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.level.biome.*;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.dimension.BuiltinDimensionTypes;
 import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.dimension.LevelStem;
 import net.minecraft.world.level.levelgen.*;
+import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
+import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraftforge.common.data.DatapackBuiltinEntriesProvider;
 
 import java.util.List;
@@ -32,15 +36,46 @@ import java.util.concurrent.CompletableFuture;
 
 public class HBMWorldGenProvider extends DatapackBuiltinEntriesProvider {
     public static final RegistrySetBuilder BUILDER = new RegistrySetBuilder()
+            .add(Registries.BIOME, HBMWorldGenProvider::bootstrapBiomes)
             // 1. 注册维度类型
             .add(Registries.DIMENSION_TYPE, HBMWorldGenProvider::bootstrapType)
             // 2. 注册噪声设置 (Surface Rules 绑定在这里)
             .add(Registries.NOISE_SETTINGS, HBMWorldGenProvider::bootstrapNoise)
             // 3. 注册维度实例
-//            .add(Registries.LEVEL_STEM, HBMWorldGenProvider::bootstrapDimension)
+            .add(Registries.LEVEL_STEM, HBMWorldGenProvider::bootstrapDimension)
             ;
     public HBMWorldGenProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         super(output, registries, BUILDER, Set.of(HBM.MODID));
+    }
+    private static void bootstrapBiomes(BootstapContext<Biome> context) {
+        HolderGetter<PlacedFeature> featureHolder = context.lookup(Registries.PLACED_FEATURE);
+        HolderGetter<ConfiguredWorldCarver<?>> carverHolder = context.lookup(Registries.CONFIGURED_CARVER);
+        context.register(HBMBiomes.MUN, new Biome.BiomeBuilder()
+                .hasPrecipitation(true)
+                .temperature(-1f)
+                .downfall(0.9f)
+                .specialEffects(new BiomeSpecialEffects.Builder()
+                        .fogColor(12638463).waterColor(4159204).waterFogColor(329011).skyColor(0).ambientMoodSound(AmbientMoodSettings.LEGACY_CAVE_SETTINGS).build())
+                .mobSpawnSettings(new MobSpawnSettings.Builder().addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.COW, 4, 2, 10)).build())
+                .generationSettings(new BiomeGenerationSettings.Builder(featureHolder,carverHolder)
+                        .addCarver(GenerationStep.Carving.AIR, Carvers.CAVE)
+                        .addCarver(GenerationStep.Carving.AIR, Carvers.CAVE_EXTRA_UNDERGROUND)
+                        .build())
+                .build()
+        );
+        context.register(HBMBiomes.MOON_HEIGHTLAND, new Biome.BiomeBuilder()
+                .hasPrecipitation(true)
+                .temperature(-1f)
+                .downfall(0.9f)
+                .specialEffects(new BiomeSpecialEffects.Builder()
+                        .fogColor(12638463).waterColor(4159204).waterFogColor(329011).skyColor(0).ambientMoodSound(AmbientMoodSettings.LEGACY_CAVE_SETTINGS).build())
+                .mobSpawnSettings(new MobSpawnSettings.Builder().addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.COW, 4, 2, 10)).build())
+                .generationSettings(new BiomeGenerationSettings.Builder(featureHolder,carverHolder)
+                        .addCarver(GenerationStep.Carving.AIR, Carvers.CAVE)
+                        .addCarver(GenerationStep.Carving.AIR, Carvers.CAVE_EXTRA_UNDERGROUND)
+                        .build())
+                .build()
+        );
     }
     // --- 步骤 1: 定义维度属性 ---
     private static void bootstrapType(BootstapContext<DimensionType> context) {
@@ -96,8 +131,7 @@ public class HBMWorldGenProvider extends DatapackBuiltinEntriesProvider {
         // 使用 Multi-Noise 放置你的月球群系
         var biomeSource = MultiNoiseBiomeSource.createFromList(
                 new Climate.ParameterList<>(List.of(
-                        Pair.of(Climate.parameters(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F),
-                                biomes.getOrThrow(HBMBiomes.MUN))
+                        Pair.of(Climate.parameters(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F), biomes.getOrThrow(HBMBiomes.MUN))
                 ))
         );
 

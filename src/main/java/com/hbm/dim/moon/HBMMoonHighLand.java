@@ -14,8 +14,8 @@ import terrablender.api.VanillaParameterOverlayBuilder;
 
 import java.util.function.Consumer;
 
-public class HBMMun extends Region {
-    public HBMMun(ResourceLocation name, int weight) {
+public class HBMMoonHighLand extends Region {
+    public HBMMoonHighLand(ResourceLocation name, int weight) {
         super(name, RegionType.NETHER, weight);
     }
 
@@ -26,11 +26,11 @@ public class HBMMun extends Region {
         new ParameterUtils.ParameterPointListBuilder()
                 .temperature(ParameterUtils.Temperature.FROZEN)
                 .humidity(ParameterUtils.Humidity.ARID)
-                .continentalness(ParameterUtils.Continentalness.span(ParameterUtils.Continentalness.MUSHROOM_FIELDS, ParameterUtils.Continentalness.DEEP_OCEAN))
-                .erosion(ParameterUtils.Erosion.EROSION_0, ParameterUtils.Erosion.EROSION_1)
+                .continentalness(ParameterUtils.Continentalness.span(ParameterUtils.Continentalness.INLAND, ParameterUtils.Continentalness.FAR_INLAND))
+                .erosion(ParameterUtils.Erosion.EROSION_4, ParameterUtils.Erosion.EROSION_6)
                 .depth(ParameterUtils.Depth.SURFACE, ParameterUtils.Depth.FLOOR)
                 .weirdness(ParameterUtils.Weirdness.MID_SLICE_NORMAL_ASCENDING, ParameterUtils.Weirdness.MID_SLICE_NORMAL_DESCENDING)
-                .build().forEach(point -> builder.add(point, HBMBiomes.MUN));
+                .build().forEach(point -> builder.add(point, HBMBiomes.MOON_HEIGHTLAND));
 
         // Add our points to the mapper
         builder.build().forEach(mapper::accept);
