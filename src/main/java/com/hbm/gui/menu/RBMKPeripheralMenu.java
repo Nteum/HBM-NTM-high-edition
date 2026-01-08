@@ -19,7 +19,7 @@ public class RBMKPeripheralMenu extends BaseMachineMenu {
     public RBMKPeripheralMenu(int containerId, Inventory playerInventory, Container container, ContainerData data) {
         super(ModMenuType.RBMK_PERIPHERAL_MENU.get(), containerId, container, data);
         this.slotNum = 0;
-        addPlayerSlot(playerInventory, 22, 104);
+        // 原版 RBMK 外设控制台不显示玩家物品栏
         this.addDataSlots(data);
     }
 

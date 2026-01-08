@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "axis=y": { "model": "hbm:block/pwr_channel" },
+    "axis=z": { "model": "hbm:block/pwr_channel", "x": 90 },
+    "axis=x": { "model": "hbm:block/pwr_channel", "x": 90, "y": 90 }
+  }
+}

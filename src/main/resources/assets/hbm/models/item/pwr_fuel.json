@@ -1,0 +1,98 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "hbm:item/pwr_fuel_base"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "hbm:pwr_type": 0
+      },
+      "model": "hbm:item/pwr_fuel_meu"
+    },
+    {
+      "predicate": {
+        "hbm:pwr_type": 1
+      },
+      "model": "hbm:item/pwr_fuel_heu233"
+    },
+    {
+      "predicate": {
+        "hbm:pwr_type": 2
+      },
+      "model": "hbm:item/pwr_fuel_heu235"
+    },
+    {
+      "predicate": {
+        "hbm:pwr_type": 3
+      },
+      "model": "hbm:item/pwr_fuel_men"
+    },
+    {
+      "predicate": {
+        "hbm:pwr_type": 4
+      },
+      "model": "hbm:item/pwr_fuel_hen237"
+    },
+    {
+      "predicate": {
+        "hbm:pwr_type": 5
+      },
+      "model": "hbm:item/pwr_fuel_mox"
+    },
+    {
+      "predicate": {
+        "hbm:pwr_type": 6
+      },
+      "model": "hbm:item/pwr_fuel_mep"
+    },
+    {
+      "predicate": {
+        "hbm:pwr_type": 7
+      },
+      "model": "hbm:item/pwr_fuel_hep239"
+    },
+    {
+      "predicate": {
+        "hbm:pwr_type": 8
+      },
+      "model": "hbm:item/pwr_fuel_hep241"
+    },
+    {
+      "predicate": {
+        "hbm:pwr_type": 9
+      },
+      "model": "hbm:item/pwr_fuel_mea"
+    },
+    {
+      "predicate": {
+        "hbm:pwr_type": 10
+      },
+      "model": "hbm:item/pwr_fuel_hea242"
+    },
+    {
+      "predicate": {
+        "hbm:pwr_type": 11
+      },
+      "model": "hbm:item/pwr_fuel_hes326"
+    },
+    {
+      "predicate": {
+        "hbm:pwr_type": 12
+      },
+      "model": "hbm:item/pwr_fuel_hes327"
+    },
+    {
+      "predicate": {
+        "hbm:pwr_type": 13
+      },
+      "model": "hbm:item/pwr_fuel_bfb_am_mix"
+    },
+    {
+      "predicate": {
+        "hbm:pwr_type": 14
+      },
+      "model": "hbm:item/pwr_fuel_bfb_pu241"
+    }
+  ]
+}

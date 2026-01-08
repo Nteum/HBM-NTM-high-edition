@@ -20,6 +20,7 @@ public enum HBMLang implements ILangEntry {
     ITEMGROUP_MACHINE("itemGroup","hbm_machine","HBM 机器"),
     ITEMGROUP_TOOL("itemGroup","hbm_tool","HBM 工具"),
     ITEMGROUP_WEAPON("itemGroup","hbm_weapon","HBM 武器"),
+    ITEMGROUP_EQUIPMENT("itemGroup","hbm_equipment","HBM 装备"),
     HBM_PARTS("itemGroup","hbm_parts", "NTM Resources and Parts"),
     HBM_CONTROL("itemGroup","hbm_control", "NTM Machine Items and Fuel"),
     HBM_TEMPLATE("itemGroup","hbm_template", "NTM Templates"),
@@ -46,6 +47,11 @@ public enum HBMLang implements ILangEntry {
     SHREDDER("container","shredder","Shredder"),
     TOKAMAK("container", "tokamak","Tokamak Reactor"),
     RBMK("container", "rbmk","RBMK Reactor"),
+    ICF("container", "icf","ICF Reactor"),
+    ICF_CONTROLLER("container", "icf_controller", "ICF Laser Controller"),
+    ICF_PRESS("container", "icf_press", "ICF Fuel Press"),
+    RESEARCH_REACTOR("container", "research_reactor", "Research Reactor"),
+    BREEDER_REACTOR("container", "reactor_breeder", "Breeder Reactor"),
     // GUI
     TOOLTIP_LEFT_TIME("gui","left_time.tooltip"),
     TOOLTIP_ENERGY("gui","stored_energy.tooltip"),
@@ -104,6 +110,7 @@ public enum HBMLang implements ILangEntry {
     FT_COMBUSTIBLE3("fluid", "combustible.tooltip3"),
     FT_THERMAL_CAPACITY("fluid","thermal_capacity.tooltip1"),
     FT_EFFICIENCY("fluid","efficiency.tooltip2"),
+
     FT_CORROSIVE1("fluid","corrosive.tooltip1"),
     FT_CORROSIVE2("fluid","corrosive.tooltip2"),
     FT_FLAMMABLE1("fluid","flammable.tooltip1"),

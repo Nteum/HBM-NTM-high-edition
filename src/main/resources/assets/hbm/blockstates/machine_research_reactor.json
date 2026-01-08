@@ -1,0 +1,12 @@
+{
+  "variants": {
+    "facing=north,is_core=false": { "model": "hbm:block/machine_research_reactor" },
+    "facing=north,is_core=true": { "model": "hbm:block/machine_research_reactor" },
+    "facing=south,is_core=false": { "model": "hbm:block/machine_research_reactor", "y": 180 },
+    "facing=south,is_core=true": { "model": "hbm:block/machine_research_reactor", "y": 180 },
+    "facing=east,is_core=false": { "model": "hbm:block/machine_research_reactor", "y": 90 },
+    "facing=east,is_core=true": { "model": "hbm:block/machine_research_reactor", "y": 90 },
+    "facing=west,is_core=false": { "model": "hbm:block/machine_research_reactor", "y": 270 },
+    "facing=west,is_core=true": { "model": "hbm:block/machine_research_reactor", "y": 270 }
+  }
+}

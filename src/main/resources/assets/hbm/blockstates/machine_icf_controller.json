@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "hbm:block/machine_icf_controller" },
+    "facing=south": { "model": "hbm:block/machine_icf_controller", "y": 180 },
+    "facing=west": { "model": "hbm:block/machine_icf_controller", "y": 270 },
+    "facing=east": { "model": "hbm:block/machine_icf_controller", "y": 90 }
+  }
+}

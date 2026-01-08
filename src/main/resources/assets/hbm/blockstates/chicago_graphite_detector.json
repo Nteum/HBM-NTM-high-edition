@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x,shielded=false,triggered=false": { "model": "hbm:block/chicago_graphite_detector_idle", "x": 90, "y": 90 },
+    "axis=x,shielded=false,triggered=true": { "model": "hbm:block/chicago_graphite_detector_triggered", "x": 90, "y": 90 },
+    "axis=x,shielded=true,triggered=false": { "model": "hbm:block/chicago_graphite_detector_idle_shielded", "x": 90, "y": 90 },
+    "axis=x,shielded=true,triggered=true": { "model": "hbm:block/chicago_graphite_detector_triggered_shielded", "x": 90, "y": 90 },
+    "axis=y,shielded=false,triggered=false": { "model": "hbm:block/chicago_graphite_detector_idle" },
+    "axis=y,shielded=false,triggered=true": { "model": "hbm:block/chicago_graphite_detector_triggered" },
+    "axis=y,shielded=true,triggered=false": { "model": "hbm:block/chicago_graphite_detector_idle_shielded" },
+    "axis=y,shielded=true,triggered=true": { "model": "hbm:block/chicago_graphite_detector_triggered_shielded" },
+    "axis=z,shielded=false,triggered=false": { "model": "hbm:block/chicago_graphite_detector_idle", "x": 90 },
+    "axis=z,shielded=false,triggered=true": { "model": "hbm:block/chicago_graphite_detector_triggered", "x": 90 },
+    "axis=z,shielded=true,triggered=false": { "model": "hbm:block/chicago_graphite_detector_idle_shielded", "x": 90 },
+    "axis=z,shielded=true,triggered=true": { "model": "hbm:block/chicago_graphite_detector_triggered_shielded", "x": 90 }
+  }
+}

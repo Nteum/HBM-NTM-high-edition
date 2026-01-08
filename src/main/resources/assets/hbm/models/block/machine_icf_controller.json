@@ -1,0 +1,9 @@
+{
+  "parent": "block/orientable_with_bottom",
+  "textures": {
+    "bottom": "hbm:block/icf_block",
+    "top": "hbm:block/icf_block",
+    "side": "hbm:block/icf_block",
+    "front": "hbm:block/icf_controller"
+  }
+}

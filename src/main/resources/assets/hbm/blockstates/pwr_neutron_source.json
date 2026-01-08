@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "": { "model": "hbm:block/pwr_neutron_source" }
+  }
+}

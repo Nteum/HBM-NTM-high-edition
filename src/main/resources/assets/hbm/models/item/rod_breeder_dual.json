@@ -1,0 +1,110 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "hbm:item/rod_dual.lithium"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "hbm:breeder_type": 0
+      },
+      "model": "hbm:item/rod_dual.lithium"
+    },
+    {
+      "predicate": {
+        "hbm:breeder_type": 1
+      },
+      "model": "hbm:item/rod_dual.tritium"
+    },
+    {
+      "predicate": {
+        "hbm:breeder_type": 2
+      },
+      "model": "hbm:item/rod_dual.co"
+    },
+    {
+      "predicate": {
+        "hbm:breeder_type": 3
+      },
+      "model": "hbm:item/rod_dual.co60"
+    },
+    {
+      "predicate": {
+        "hbm:breeder_type": 4
+      },
+      "model": "hbm:item/rod_dual.th232"
+    },
+    {
+      "predicate": {
+        "hbm:breeder_type": 5
+      },
+      "model": "hbm:item/rod_dual.thf"
+    },
+    {
+      "predicate": {
+        "hbm:breeder_type": 6
+      },
+      "model": "hbm:item/rod_dual.u235"
+    },
+    {
+      "predicate": {
+        "hbm:breeder_type": 7
+      },
+      "model": "hbm:item/rod_dual.np237"
+    },
+    {
+      "predicate": {
+        "hbm:breeder_type": 8
+      },
+      "model": "hbm:item/rod_dual.u238"
+    },
+    {
+      "predicate": {
+        "hbm:breeder_type": 9
+      },
+      "model": "hbm:item/rod_dual.pu238"
+    },
+    {
+      "predicate": {
+        "hbm:breeder_type": 10
+      },
+      "model": "hbm:item/rod_dual.pu239"
+    },
+    {
+      "predicate": {
+        "hbm:breeder_type": 11
+      },
+      "model": "hbm:item/rod_dual.rgp"
+    },
+    {
+      "predicate": {
+        "hbm:breeder_type": 12
+      },
+      "model": "hbm:item/rod_dual.waste"
+    },
+    {
+      "predicate": {
+        "hbm:breeder_type": 13
+      },
+      "model": "hbm:item/rod_dual.lead"
+    },
+    {
+      "predicate": {
+        "hbm:breeder_type": 14
+      },
+      "model": "hbm:item/rod_dual.uranium"
+    },
+    {
+      "predicate": {
+        "hbm:breeder_type": 15
+      },
+      "model": "hbm:item/rod_dual.ra226"
+    },
+    {
+      "predicate": {
+        "hbm:breeder_type": 16
+      },
+      "model": "hbm:item/rod_dual.ac227"
+    }
+  ]
+}

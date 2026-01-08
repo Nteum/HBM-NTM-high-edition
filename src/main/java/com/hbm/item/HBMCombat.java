@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.function.Supplier;
 
 /**
- * 战斗物品，注册在原版创造物品栏里战斗物品那块
+ * 战斗/装备物品，注册在模组装备页
  * */
 public class HBMCombat{
     private static final List<RegistryObject<Item>> itemList = new ArrayList<>();
@@ -203,6 +203,10 @@ public class HBMCombat{
     public static void creativeTab(MutableHashedLinkedMap<ItemStack, CreativeModeTab.TabVisibility> entries){
         itemList.forEach(itemRegistryObject -> entries.put(new ItemStack(itemRegistryObject.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS));
         standaloneModels.forEach(itemRegistryObject -> entries.put(new ItemStack(itemRegistryObject.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS));
+    }
+    public static void creativeTab(CreativeModeTab.Output output){
+        itemList.forEach(itemRegistryObject -> output.accept(itemRegistryObject.get()));
+        standaloneModels.forEach(itemRegistryObject -> output.accept(itemRegistryObject.get()));
     }
     public static void genModel(ItemModelGen provider){
         itemList.forEach(itemRegistryObject -> provider.basicItem(itemRegistryObject.get()));

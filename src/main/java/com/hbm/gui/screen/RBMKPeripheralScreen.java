@@ -4,7 +4,8 @@ import com.hbm.HBM;
 import com.hbm.gui.menu.RBMKPeripheralMenu;
 import com.hbm.reactor.rbmk.RBMKPeripheralType;
 import com.mojang.blaze3d.systems.RenderSystem;
-import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.AbstractButton;
+import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -12,9 +13,13 @@ import net.minecraft.world.entity.player.Inventory;
 
 public class RBMKPeripheralScreen extends AbstractRBMKScreen<RBMKPeripheralMenu> {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(HBM.MODID, "textures/gui/rbmk/rbmk_console.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(HBM.MODID, "textures/gui/reactors/gui_rbmk_console.png");
+    private static final int AZ5_BUTTON_X = 26;
+    private static final int AZ5_BUTTON_Y = 143;
+    private static final int AZ5_BUTTON_WIDTH = 28;
+    private static final int AZ5_BUTTON_HEIGHT = 15;
     private final boolean consoleScreen;
-    private Button az5Button;
+    private AbstractButton az5Button;
 
     public RBMKPeripheralScreen(RBMKPeripheralMenu menu, Inventory inventory, Component title) {
         super(menu, inventory, title);
@@ -27,11 +32,9 @@ public class RBMKPeripheralScreen extends AbstractRBMKScreen<RBMKPeripheralMenu>
     protected void init() {
         super.init();
         if (consoleScreen) {
-            int buttonX = guiX(CONTROL_X + 4);
-            int buttonY = guiY(CONTROL_Y + 16);
-            az5Button = Button.builder(Component.translatable("gui.hbm.rbmk.az5"), b -> sendAz5())
-                    .bounds(buttonX, buttonY, 90, 20)
-                    .build();
+            int buttonX = guiX(AZ5_BUTTON_X);
+            int buttonY = guiY(AZ5_BUTTON_Y);
+            az5Button = new InvisibleButton(buttonX, buttonY, AZ5_BUTTON_WIDTH, AZ5_BUTTON_HEIGHT, this::sendAz5);
             addRenderableWidget(az5Button);
         }
     }
@@ -62,38 +65,58 @@ public class RBMKPeripheralScreen extends AbstractRBMKScreen<RBMKPeripheralMenu>
     @Override
     protected void renderControlPanel(GuiGraphics graphics, RBMKReadings readings) {
         int y = drawSectionHeader(graphics, CONTROL_X, CONTROL_Y, Component.translatable("gui.hbm.rbmk.section.control"));
-        if (consoleScreen) {
-            y = drawValueLine(graphics, CONTROL_X + 4, y,
-                    Component.translatable("gui.hbm.rbmk.console.az5_hint"),
-                    0xFF7777);
-        } else {
-            y = drawValueLine(graphics, CONTROL_X + 4, y,
-                    Component.translatable("gui.hbm.rbmk.peripheral_kind", menu.getPeripheralType().displayName()),
-                    0xFFFFFF);
-            drawValueLine(graphics, CONTROL_X + 4, y,
-                    Component.translatable("gui.hbm.rbmk.control.no_manual"),
-                    0xB0B0B0);
-        }
+        y = drawValueLine(graphics, CONTROL_X, y,
+                Component.translatable("gui.hbm.rbmk.peripheral_kind", menu.getPeripheralType().displayName()), SECTION_COLOR);
+        y = drawValueLine(graphics, CONTROL_X, y,
+                Component.translatable("gui.hbm.rbmk.control_local", menu.getLocalControlPercent()), SECTION_COLOR);
+        y = drawValueLine(graphics, CONTROL_X, y,
+                Component.translatable("gui.hbm.rbmk.control_global", menu.getGlobalControlPercent()), SECTION_COLOR);
+        Component consoleHint = consoleScreen
+                ? Component.translatable("gui.hbm.rbmk.console.az5_hint")
+                : Component.translatable("gui.hbm.rbmk.control.no_manual");
+        drawValueLine(graphics, CONTROL_X, y, consoleHint, SECTION_COLOR);
     }
 
     @Override
     protected void renderAdvancedDetails(GuiGraphics graphics, RBMKReadings readings, int x, int startY) {
-        int y = drawValueLine(graphics, x, startY,
-                Component.translatable("gui.hbm.rbmk.control_local", menu.getLocalControlPercent()),
-                0xFFD580);
+        int y = startY;
         y = drawValueLine(graphics, x, y,
-                Component.translatable("gui.hbm.rbmk.control_global", menu.getGlobalControlPercent()),
-                0xFFD580);
-        drawValueLine(graphics, x, y,
-                Component.translatable("gui.hbm.rbmk.columns_online", menu.getColumnCount()),
-                0xFFFFFF);
+                Component.translatable("gui.hbm.rbmk.columns_online", menu.getColumnCount()), SECTION_COLOR);
+        if (menu.getColumnCount() <= 0) {
+            y = drawValueLine(graphics, x, y, Component.translatable("gui.hbm.rbmk.console.idle"), SECTION_COLOR);
+        }
+        drawValueLine(graphics, x, y, recommendAction(readings, menu.getLocalControlPercent(), menu.getGlobalControlPercent()), SECTION_COLOR);
     }
 
     @Override
     protected void updateInteractionState(boolean hasData) {
         if (az5Button != null) {
-            az5Button.active = hasData;
-            az5Button.visible = true;
+            az5Button.active = hasData && consoleScreen;
+            az5Button.visible = hasData && consoleScreen;
+        }
+    }
+
+    private static final class InvisibleButton extends AbstractButton {
+        private final Runnable onPress;
+
+        private InvisibleButton(int x, int y, int width, int height, Runnable onPress) {
+            super(x, y, width, height, Component.empty());
+            this.onPress = onPress;
+        }
+
+        @Override
+        public void onPress() {
+            onPress.run();
+        }
+
+        @Override
+        public void renderWidget(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
+            // Intentionally invisible; click region aligns with legacy texture button.
+        }
+
+        @Override
+        protected void updateWidgetNarration(NarrationElementOutput output) {
+            // No narration for invisible legacy button.
         }
     }
 }

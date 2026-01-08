@@ -1,0 +1,12 @@
+{
+  "variants": {
+    "facing=north,is_core=false": { "model": "hbm:block/machine_icf" },
+    "facing=north,is_core=true": { "model": "hbm:block/machine_icf" },
+    "facing=south,is_core=false": { "model": "hbm:block/machine_icf", "y": 180 },
+    "facing=south,is_core=true": { "model": "hbm:block/machine_icf", "y": 180 },
+    "facing=east,is_core=false": { "model": "hbm:block/machine_icf", "y": 90 },
+    "facing=east,is_core=true": { "model": "hbm:block/machine_icf", "y": 90 },
+    "facing=west,is_core=false": { "model": "hbm:block/machine_icf", "y": 270 },
+    "facing=west,is_core=true": { "model": "hbm:block/machine_icf", "y": 270 }
+  }
+}

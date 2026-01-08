@@ -52,6 +52,7 @@ public class HBMKey {
     public static final String RADIATION = "radiation";
     public static final String FLUX = "flux";
     public static final String HEAT = "heat";
+    public static final String PRESSURE = "pressure";
     public static final String DELAY = "delay";
     //cable
     public static final String FORBID_DIR = "forbidDir";
@@ -77,6 +78,7 @@ public class HBMKey {
     public static final String DIMENSION = "dimension";
     public static final String TOOLTIP = "tooltip";
     public static final String COUNTDOWN = "countdown";
+    public static final String WATER_TIMER = "waterTimer";
     // machine name
     public static final String BLAST = "blast";
     public static final String ASSEMBLER = "assembler";

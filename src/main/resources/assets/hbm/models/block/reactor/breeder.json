@@ -1,0 +1,10 @@
+{
+  "loader": "forge:obj",
+  "flip_v": true,
+  "model": "hbm:models/block/reactor/breeder.obj",
+  "ambientocclusion": false,
+  "textures": {
+    "texture0": "hbm:block/breeder",
+    "particle": "hbm:block/breeder"
+  }
+}

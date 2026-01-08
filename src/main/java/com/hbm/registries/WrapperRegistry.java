@@ -57,7 +57,12 @@ public class WrapperRegistry<T> implements Supplier<T>{
 
         public void creativeTabSupport(BuildCreativeModeTabContentsEvent event){
             if (event.getTabKey() == this.creativeKey){
-                event.getEntries().put(new ItemStack(get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+                Item item = get();
+                if (item instanceof com.hbm.item.CreativeTabVariantItem variantItem) {
+                    variantItem.fillCreativeTab(event);
+                } else {
+                    event.getEntries().put(new ItemStack(item), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+                }
             }
         }
 

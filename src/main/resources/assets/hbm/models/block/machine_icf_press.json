@@ -1,0 +1,9 @@
+{
+  "parent": "block/orientable",
+  "textures": {
+    "top": "hbm:block/machine_icf_press_top",
+    "bottom": "hbm:block/machine_icf_press_top",
+    "side": "hbm:block/machine_icf_press_side",
+    "front": "hbm:block/machine_icf_press_side"
+  }
+}

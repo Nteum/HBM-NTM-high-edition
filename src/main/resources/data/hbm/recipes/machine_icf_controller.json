@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "GTG",
+    "CBC",
+    "PTP"
+  ],
+  "key": {
+    "G": { "item": "minecraft:glass" },
+    "T": { "item": "hbm:tokamak_port" },
+    "C": { "item": "hbm:circuit" },
+    "B": { "item": "minecraft:beacon" },
+    "P": { "item": "hbm:plate_titanium" }
+  },
+  "result": {
+    "item": "hbm:machine_icf_controller"
+  }
+}

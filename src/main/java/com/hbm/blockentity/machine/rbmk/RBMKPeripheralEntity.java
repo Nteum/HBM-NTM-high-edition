@@ -14,6 +14,7 @@ import com.hbm.registries.ModSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Inventory;
@@ -43,6 +44,7 @@ public class RBMKPeripheralEntity extends BaseMachineBlockEntity {
     private final int[] dataBacking = new int[DATA_SLOTS];
 
     private BlockPos linkedColumn;
+    private BlockPos manualLink;
     private int tickCounter;
 
     public RBMKPeripheralEntity(BlockPos pos, BlockState state) {
@@ -54,6 +56,25 @@ public class RBMKPeripheralEntity extends BaseMachineBlockEntity {
     }
 
     @Override
+    protected void saveAdditional(CompoundTag tag) {
+        super.saveAdditional(tag);
+        if (manualLink != null) {
+            tag.putLong("ManualLink", manualLink.asLong());
+        }
+    }
+
+    @Override
+    public void load(CompoundTag tag) {
+        super.load(tag);
+        if (tag.contains("ManualLink")) {
+            manualLink = BlockPos.of(tag.getLong("ManualLink"));
+            linkedColumn = manualLink;
+        } else {
+            manualLink = null;
+        }
+    }
+
+    @Override
     protected void onUpdateServer() {
         if (!(level instanceof ServerLevel serverLevel)) {
             return;
@@ -61,7 +82,16 @@ public class RBMKPeripheralEntity extends BaseMachineBlockEntity {
         // embed the type ordinal for the client screen
         dataBacking[9] = peripheralType.ordinal();
 
-        if (++tickCounter % SEARCH_INTERVAL_TICKS == 0 || !isLinkedColumnValid()) {
+        if (manualLink != null) {
+            if (isColumnValid(manualLink)) {
+                linkedColumn = manualLink;
+            } else {
+                manualLink = null;
+                linkedColumn = null;
+            }
+        }
+
+        if (manualLink == null && (++tickCounter % SEARCH_INTERVAL_TICKS == 0 || !isLinkedColumnValid())) {
             linkedColumn = findNearestColumn();
         }
 
@@ -120,6 +150,17 @@ public class RBMKPeripheralEntity extends BaseMachineBlockEntity {
             return false;
         }
         BlockState state = level.getBlockState(linkedColumn);
+        if (!(state.getBlock() instanceof BlockRBMKBase)) {
+            return false;
+        }
+        return state.hasProperty(BlockRBMKBase.IS_CORE) && state.getValue(BlockRBMKBase.IS_CORE);
+    }
+
+    private boolean isColumnValid(BlockPos pos) {
+        if (level == null) {
+            return false;
+        }
+        BlockState state = level.getBlockState(pos);
         if (!(state.getBlock() instanceof BlockRBMKBase)) {
             return false;
         }
@@ -211,6 +252,25 @@ public class RBMKPeripheralEntity extends BaseMachineBlockEntity {
             level.playSound(null, worldPosition, ModSounds.BLOCK_RBMK_AZ5_COVER.get(), SoundSource.BLOCKS, 1.0F, 1.0F);
         }
         return changed;
+    }
+
+    public boolean linkToColumn(BlockPos target) {
+        if (level == null || !isColumnValid(target)) {
+            return false;
+        }
+        manualLink = target.immutable();
+        linkedColumn = manualLink;
+        setChanged();
+        level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL);
+        return true;
+    }
+
+    public void clearManualLink() {
+        if (manualLink != null) {
+            manualLink = null;
+            linkedColumn = null;
+            setChanged();
+        }
     }
 
     @Override
