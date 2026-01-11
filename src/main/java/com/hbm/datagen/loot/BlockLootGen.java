@@ -4,6 +4,7 @@ import com.google.common.collect.Iterables;
 import com.hbm.block.HBMBlockComponent;
 import com.hbm.block.HBMMachine;
 import com.hbm.registries.ModBlocks;
+import com.hbm.registries.ModItems;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.data.loot.packs.VanillaBlockLoot;
 import net.minecraft.world.flag.FeatureFlagSet;
@@ -12,7 +13,10 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.Collections;
@@ -52,18 +56,18 @@ public class BlockLootGen extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.anvil_bismuth.get());
         this.dropSelf(ModBlocks.machine_cracking_tower.get());
         this.dropSelf(ModBlocks.machine_assembler.get());
-	        this.dropSelf(ModBlocks.machine_crucible.get());
-	        this.dropSelf(ModBlocks.machine_rbmk_base.get());
-	        this.dropSelf(ModBlocks.machine_rbmk_heater.get());
-	        this.dropSelf(ModBlocks.machine_rbmk_fuel_channel.get());
-	        this.dropSelf(ModBlocks.machine_rbmk_control_rod.get());
-	        this.dropSelf(ModBlocks.machine_rbmk_console.get());
-	        this.dropSelf(ModBlocks.machine_rbmk_element.get());
-	        this.dropSelf(ModBlocks.machine_rbmk_reflector.get());
-	        this.dropSelf(ModBlocks.machine_rbmk_debris.get());
-	        this.dropSelf(ModBlocks.machine_rbmk_crane_console.get());
-	        this.dropSelf(ModBlocks.machine_rbmk_autoloader.get());
-	        this.dropSelf(ModBlocks.RED_CABLE.get());
+            this.dropSelf(ModBlocks.machine_crucible.get());
+            this.dropSelf(ModBlocks.machine_rbmk_base.get());
+            this.dropSelf(ModBlocks.machine_rbmk_heater.get());
+            this.dropSelf(ModBlocks.machine_rbmk_fuel_channel.get());
+            this.dropSelf(ModBlocks.machine_rbmk_control_rod.get());
+            this.dropSelf(ModBlocks.machine_rbmk_console.get());
+            this.dropSelf(ModBlocks.machine_rbmk_element.get());
+            this.dropSelf(ModBlocks.machine_rbmk_reflector.get());
+            this.dropSelf(ModBlocks.machine_rbmk_debris.get());
+            this.dropSelf(ModBlocks.machine_rbmk_crane_console.get());
+            this.dropSelf(ModBlocks.machine_rbmk_autoloader.get());
+            this.dropSelf(ModBlocks.RED_CABLE.get());
         this.dropSelf(ModBlocks.tokamak_controller.get());
         this.dropSelf(ModBlocks.tokamak_casing.get());
         this.dropSelf(ModBlocks.tokamak_coil.get());
@@ -80,6 +84,24 @@ public class BlockLootGen extends BlockLootSubProvider {
 
         //饰品
         this.dropSelf(ModBlocks.TEST12.get());
+        // 单独定义凋落物的方块
+        dropStandalone();
+    }
+
+    public void dropStandalone(){
+        this.dropOther(ModBlocks.BLOCK_METEOR_COBBLE.get(), ModItems.FRAGMENT_METEORITE.get());
+        this.dropOther(ModBlocks.BLOCK_METEOR_BROKEN.get(), ModItems.FRAGMENT_METEORITE.get());
+        this.add(ModBlocks.BLOCK_METEOR_TREASURE.get(), LootTable.lootTable().withPool(LootPool.lootPool()
+                .setRolls(UniformGenerator.between(1, 4))
+                .add(LootItem.lootTableItem(ModItems.INGOT_ZIRCONIUM.get()).setWeight(10))
+                .add(LootItem.lootTableItem(ModItems.INGOT_NIOBIUM.get()).setWeight(10))
+                .add(LootItem.lootTableItem(ModItems.INGOT_COBALT.get()).setWeight(10))
+                .add(LootItem.lootTableItem(ModItems.INGOT_BORON.get()).setWeight(10))
+                .add(LootItem.lootTableItem(ModItems.INGOT_STARMETAL.get()).setWeight(5))
+                .add(LootItem.lootTableItem(ModItems.CRYSTAL_GOLD.get()).setWeight(10))
+                .add(LootItem.lootTableItem(ModItems.CIRCUIT_BASIC.get()).setWeight(10))
+                .add(LootItem.lootTableItem(ModItems.EGG_GLYPHID.get()).setWeight(1))
+        ));
     }
 //    public void generateMachineLoot(){
 //        this.dropSelf(HBMMachine.CHEMPLANT.get());

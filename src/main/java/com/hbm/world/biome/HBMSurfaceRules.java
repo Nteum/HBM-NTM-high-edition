@@ -35,8 +35,9 @@ public class HBMSurfaceRules {
 
     public static SurfaceRules.RuleSource moonRules(){
         return SurfaceRules.sequence(
-                SurfaceRules.ifTrue(SurfaceRules.stoneDepthCheck(5, false, 0, CaveSurface.CEILING), MOON_TURF), MOON_ROCK
-//                SurfaceRules.ifTrue(surfaceNoiseAbove(-1.0D), MOON_TURF), MOON_ROCK
+                SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, MOON_TURF),
+                SurfaceRules.ifTrue(SurfaceRules.stoneDepthCheck(4, true, 0, CaveSurface.FLOOR), MOON_TURF),
+                MOON_ROCK
         );
     }
 

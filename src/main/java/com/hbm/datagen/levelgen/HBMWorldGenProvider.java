@@ -5,6 +5,8 @@ import com.hbm.registries.HBMBiomes;
 import com.hbm.registries.HBMDimensions;
 import com.hbm.registries.ModBlocks;
 import com.hbm.world.biome.HBMSurfaceRules;
+import com.hbm.world.feature.ModConfiguredFeatures;
+import com.hbm.world.feature.ModPlacedFeatures;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
@@ -36,6 +38,9 @@ import java.util.concurrent.CompletableFuture;
 
 public class HBMWorldGenProvider extends DatapackBuiltinEntriesProvider {
     public static final RegistrySetBuilder BUILDER = new RegistrySetBuilder()
+            .add(Registries.CONFIGURED_FEATURE, ModConfiguredFeatures::bootstrap)
+            .add(Registries.PLACED_FEATURE, ModPlacedFeatures::bootstrap)
+            // 注册生物群系
             .add(Registries.BIOME, HBMWorldGenProvider::bootstrapBiomes)
             // 1. 注册维度类型
             .add(Registries.DIMENSION_TYPE, HBMWorldGenProvider::bootstrapType)
@@ -60,6 +65,7 @@ public class HBMWorldGenProvider extends DatapackBuiltinEntriesProvider {
                 .generationSettings(new BiomeGenerationSettings.Builder(featureHolder,carverHolder)
                         .addCarver(GenerationStep.Carving.AIR, Carvers.CAVE)
                         .addCarver(GenerationStep.Carving.AIR, Carvers.CAVE_EXTRA_UNDERGROUND)
+                        .addFeature(GenerationStep.Decoration.LAKES, ModPlacedFeatures.METE_CREATOR_MOON)
                         .build())
                 .build()
         );
@@ -73,6 +79,7 @@ public class HBMWorldGenProvider extends DatapackBuiltinEntriesProvider {
                 .generationSettings(new BiomeGenerationSettings.Builder(featureHolder,carverHolder)
                         .addCarver(GenerationStep.Carving.AIR, Carvers.CAVE)
                         .addCarver(GenerationStep.Carving.AIR, Carvers.CAVE_EXTRA_UNDERGROUND)
+                        .addFeature(GenerationStep.Decoration.LAKES, ModPlacedFeatures.METE_CREATOR_MOON)
                         .build())
                 .build()
         );
@@ -131,7 +138,8 @@ public class HBMWorldGenProvider extends DatapackBuiltinEntriesProvider {
         // 使用 Multi-Noise 放置你的月球群系
         var biomeSource = MultiNoiseBiomeSource.createFromList(
                 new Climate.ParameterList<>(List.of(
-                        Pair.of(Climate.parameters(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F), biomes.getOrThrow(HBMBiomes.MUN))
+                        Pair.of(Climate.parameters(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F), biomes.getOrThrow(HBMBiomes.MUN)),
+                        Pair.of(Climate.parameters(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F), biomes.getOrThrow(HBMBiomes.MOON_HEIGHTLAND))
                 ))
         );
 

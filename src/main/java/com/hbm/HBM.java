@@ -163,13 +163,14 @@ public class HBM {
         generator.addProvider(event.includeServer(), new RecipeGen(packOutput,helper,MODID));
         generator.addProvider(event.includeServer(), blockTagsGen);
         generator.addProvider(event.includeServer(), new ItemTagsGen(packOutput,lookupProvider,blockTagsGen.contentsGetter(),MODID,helper));
-        generator.addProvider(event.includeServer(), new WorldGen(packOutput, lookupProvider));
+//        generator.addProvider(event.includeServer(), new WorldGen(packOutput, lookupProvider));
         generator.addProvider(event.includeServer(), (DataProvider.Factory<LootTableProvider>) output->new LootTableProvider(output, Collections.emptySet(),List.of(
                 new LootTableProvider.SubProviderEntry(BlockLootGen::new, LootContextParamSets.BLOCK),
                 new LootTableProvider.SubProviderEntry(ChestLootGen::new, LootContextParamSets.CHEST),
                 new LootTableProvider.SubProviderEntry(FishLootGen::new, LootContextParamSets.FISHING),
                 new LootTableProvider.SubProviderEntry(EntityLootGen::new, LootContextParamSets.ENTITY)
         )));
+        generator.addProvider(event.includeServer(), new HBMWorldGenProvider(packOutput, lookupProvider));
         /** 客户端数据生成，生成到assets目录下 */
         boolean includeClient = event.includeClient();
         LOGGER.info("GatherData flags -> includeServer: {}, includeClient: {}", event.includeServer(), includeClient);
@@ -181,7 +182,7 @@ public class HBM {
         resourcePack.addProvider(output -> new LanguageProvider(output,HBM.MODID,"en_us"));
         resourcePack.addProvider(output -> new ItemModelGen(output, HBM.MODID, helper));
         resourcePack.addProvider(output -> new BlockStateGen(output, HBM.MODID,helper));
-        resourcePack.addProvider(output -> new HBMWorldGenProvider(output,lookupProvider));
+//        resourcePack.addProvider(output -> new HBMWorldGenProvider(output,lookupProvider));
         LOGGER.info("Datagen providers registered: {}", generator.getProvidersView().keySet());
     }
 

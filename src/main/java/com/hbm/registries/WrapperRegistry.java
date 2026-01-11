@@ -13,6 +13,10 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.RotatedPillarBlock;
+import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
+import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.Nullable;
@@ -173,6 +177,10 @@ public class WrapperRegistry<T> implements Supplier<T>{
         public void modelSupport(BlockStateGen provider){
             switch (genModelWay) {
                 case HBMKey.MODEL_CUBE_ALL -> provider.simpleBlock(get());
+                case HBMKey.MODEL_PILLAR -> {
+                    provider.logBlock((RotatedPillarBlock) get());
+                    provider.simpleBlockItem(get(), new ModelFile.UncheckedModelFile(provider.key(get())));
+                }
 //                case HBMKey.MODEL_FRONT_SIDE -> provider.frontSideBlockWithItem(get());
 //                case HBMKey.MODEL_FRONT_SIDE_TOP -> provider.frontSideTopBlockWithItem(get());
 //                case HBMKey.MODEL_DIFURNACE -> provider.difuranceBlockWithItem(get());
