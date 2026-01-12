@@ -16,16 +16,24 @@ import org.jetbrains.annotations.Nullable;
 @OnlyIn(Dist.CLIENT)
 public class HBMSmokeParticle extends TextureSheetParticle {
     private final SpriteSet sprites;
-    protected HBMSmokeParticle(ClientLevel pLevel, double pX, double pY, double pZ,double pQuadSizeMultiplier, SpriteSet pSprites) {
-        super(pLevel, pX, pY, pZ);
+    public HBMSmokeParticle(ClientLevel pLevel, double pX, double pY, double pZ, double pXSpeed, double pYSpeed, double pZSpeed, SpriteSet pSprites) {
+        super(pLevel, pX, pY, pZ, pXSpeed, pYSpeed, pZSpeed);
         this.lifetime = 100 + this.random.nextInt(40);
         float f = this.random.nextFloat() * 0.6F + 0.4F;
         this.rCol = f;
         this.gCol = f;
         this.bCol = f;
-        this.quadSize = 2.0F * (1.0F - (float)pQuadSizeMultiplier * 0.5F);
+//        this.quadSize = 2.0F * (1.0F - (float)pQuadSizeMultiplier * 0.5F);
         this.sprites = pSprites;
         this.setSpriteFromAge(pSprites);
+    }
+
+    public HBMSmokeParticle(ClientLevel pLevel, double pX, double pY, double pZ, double pXSpeed, SpriteSet sprites) {
+        this(pLevel, pX, pY, pZ, pXSpeed, pXSpeed, pXSpeed, sprites);
+    }
+
+    public void setQuadMultiplier(float pQuadSizeMultiplier){
+        this.quadSize = 2.0F * (1.0F - (float)pQuadSizeMultiplier * 0.5F);
     }
 
     @Override

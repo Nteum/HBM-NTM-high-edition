@@ -2,6 +2,7 @@ package com.hbm.entity.effect;
 
 import com.hbm.config.ConfigWorld;
 import com.hbm.entity.ModEntityType;
+import com.hbm.particle.ParticleSystem;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -28,7 +29,16 @@ public class EntityMeteor extends Entity {
         if (level().isClientSide) {
             tickCount ++;
             if (ConfigWorld.enableMeteorTails.get()){
+                CompoundTag data = new CompoundTag();
+                data.putString("type", "exhaust");
+                data.putString("mode", "meteor");
+                data.putInt("count", 10);
+                data.putDouble("width", 1);
+                data.putDouble("x", getX() - getDeltaMovement().x);
+                data.putDouble("y", getY() - getDeltaMovement().y);
+                data.putDouble("z", getZ() - getDeltaMovement().z);
 
+                ParticleSystem.handleParticleCombo(data);
             }
         }
     }
