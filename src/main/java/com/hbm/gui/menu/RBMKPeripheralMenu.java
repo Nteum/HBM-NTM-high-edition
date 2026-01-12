@@ -12,8 +12,19 @@ import net.minecraft.world.inventory.SimpleContainerData;
 
 public class RBMKPeripheralMenu extends BaseMachineMenu {
 
+    public static final int GRID_SIZE = 15;
+    public static final int GRID_CENTER = GRID_SIZE / 2;
+    public static final int GRID_EMPTY = 0;
+    public static final int GRID_COLUMN = 1;
+    public static final int GRID_FUEL = 2;
+    public static final int GRID_CONTROL = 3;
+
+    private static final int TELEMETRY_SLOTS = 10;
+    private static final int GRID_DATA_START = TELEMETRY_SLOTS;
+    private static final int DATA_SLOTS = TELEMETRY_SLOTS + GRID_SIZE;
+
     public RBMKPeripheralMenu(int containerId, Inventory playerInventory) {
-        this(containerId, playerInventory, new SimpleContainer(0), new SimpleContainerData(10));
+        this(containerId, playerInventory, new SimpleContainer(0), new SimpleContainerData(DATA_SLOTS));
     }
 
     public RBMKPeripheralMenu(int containerId, Inventory playerInventory, Container container, ContainerData data) {
@@ -80,5 +91,17 @@ public class RBMKPeripheralMenu extends BaseMachineMenu {
 
     public boolean hasColumnData() {
         return containerData.get(1) > 0;
+    }
+
+    public int getGridCell(int col, int row) {
+        if (col < 0 || col >= GRID_SIZE || row < 0 || row >= GRID_SIZE) {
+            return GRID_EMPTY;
+        }
+        int index = GRID_DATA_START + row;
+        if (index < 0 || index >= containerData.getCount()) {
+            return GRID_EMPTY;
+        }
+        int rowMask = containerData.get(index);
+        return (rowMask >>> (col * 2)) & 0x3;
     }
 }

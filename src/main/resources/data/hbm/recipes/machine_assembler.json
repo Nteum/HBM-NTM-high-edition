@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SCS",
+    "PMB",
+    "SCS"
+  ],
+  "key": {
+    "S": {
+      "item": "hbm:plate_steel"
+    },
+    "C": {
+      "item": "hbm:circuit_basic"
+    },
+    "P": {
+      "item": "hbm:plate_polymer"
+    },
+    "M": {
+      "item": "hbm:motor"
+    },
+    "B": {
+      "item": "minecraft:crafting_table"
+    }
+  },
+  "result": {
+    "item": "hbm:machine_assembler"
+  }
+}

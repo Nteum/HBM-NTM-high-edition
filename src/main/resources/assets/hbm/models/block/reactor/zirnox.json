@@ -3,6 +3,7 @@
   "flip_v": true,
   "model": "hbm:models/block/reactor/zirnox.obj",
   "ambientocclusion": false,
+  "render_type": "minecraft:cutout",
   "textures": {
     "texture0": "hbm:block/zirnox",
     "particle": "hbm:block/zirnox"

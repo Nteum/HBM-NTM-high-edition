@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GIG",
+    "IFI",
+    "GIG"
+  ],
+  "key": {
+    "G": {
+      "item": "hbm:ingot_graphite"
+    },
+    "I": {
+      "item": "minecraft:iron_nugget"
+    },
+    "F": {
+      "item": "hbm:machine_rbmk_element"
+    }
+  },
+  "result": {
+    "item": "hbm:machine_rbmk_debris",
+    "count": 4
+  }
+}

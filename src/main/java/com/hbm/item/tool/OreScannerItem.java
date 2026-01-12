@@ -4,7 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.tags.BlockTags;
+import net.minecraftforge.common.Tags;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.context.UseOnContext;
@@ -51,7 +51,7 @@ public class OreScannerItem extends Item {
                 for (int dy = -VERTICAL_RADIUS; dy <= VERTICAL_RADIUS; dy++) {
                     cursor.set(origin.getX() + dx, origin.getY() + dy, origin.getZ() + dz);
                     BlockState state = level.getBlockState(cursor);
-                    if (state.is(BlockTags.ORES)) {
+                    if (state.is(Tags.Blocks.ORES)) {
                         total++;
                     }
                 }

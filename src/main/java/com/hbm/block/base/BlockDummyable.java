@@ -5,6 +5,7 @@ import com.hbm.HBMKey;
 import com.hbm.block.HBMBlockProperties;
 import com.hbm.block.HBMMachine;
 import com.hbm.block.interfaces.ICustomBlockHighlight;
+import com.hbm.blockentity.base2.BaseMachineBlockEntity;
 import com.hbm.blockentity.base2.DummyableBlockEntity;
 import com.hbm.blockentity.base2.TileProxyBase;
 import com.hbm.blockentity.base2.TileProxyCombo;
@@ -32,6 +33,8 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -174,6 +177,14 @@ public abstract class BlockDummyable extends BlockMachineBase implements ICustom
     @Override
     public RenderShape getRenderShape(BlockState pState) {
         return RenderShape.INVISIBLE;
+    }
+
+    @Override
+    public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
+        if (!pState.getValue(IS_CORE)) {
+            return null;
+        }
+        return pLevel.isClientSide() ? BaseMachineBlockEntity::clientTicker : BaseMachineBlockEntity::serverTicker;
     }
 
     public int[] getDimensions(){

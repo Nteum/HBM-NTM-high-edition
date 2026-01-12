@@ -23,6 +23,7 @@ import com.hbm.render.entity.missile.MissileTaintRenderer;
 import com.hbm.render.entity.mob.GlyphidRender;
 import com.hbm.render.model.Models;
 import com.hbm.render.overlay.AtomicFlashOverlay;
+import com.hbm.render.overlay.DebugTagOverlay;
 import com.hbm.render.pipeline.GeoRenderPipeline;
 import com.hbm.render.model.entity.TestEntityModel;
 >>>>>>> 6e858a28 (反应堆已全部搬运完毕、配方以及生存可玩性都可用。)
@@ -80,6 +81,7 @@ public class ClientEventHanler {
         forgeBus.addListener(ClientEventHanler::onKeyPressed);
         forgeBus.addListener(AtomicFlashOverlay::onClientTick);
         forgeBus.addListener(AtomicFlashOverlay::onGuiRender);
+        forgeBus.addListener(DebugTagOverlay::onGuiRender);
         forgeBus.addListener(TooltipRegistries::onTooltip);
     }
     @SubscribeEvent

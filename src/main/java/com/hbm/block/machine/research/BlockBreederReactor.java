@@ -21,6 +21,6 @@ public class BlockBreederReactor extends BlockDummyable {
 
     @Override
     public RenderShape getRenderShape(BlockState state) {
-        return state.getValue(IS_CORE) ? RenderShape.MODEL : RenderShape.INVISIBLE;
+        return RenderShape.INVISIBLE;
     }
 }

@@ -3,6 +3,7 @@
   "flip_v": true,
   "model": "hbm:models/block/reactor/reactor_small_rods.obj",
   "ambientocclusion": false,
+  "render_type": "minecraft:cutout",
   "textures": {
     "texture0": "hbm:block/reactor_small_rods",
     "particle": "hbm:block/reactor_small_rods"

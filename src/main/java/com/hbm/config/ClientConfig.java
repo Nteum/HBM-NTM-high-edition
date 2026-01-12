@@ -34,6 +34,7 @@ public class ClientConfig extends RunningConfig {
 	public static ConfigWrapper<Boolean> NEI_HIDE_SECRETS =					new ConfigWrapper(true);
 	public static ConfigWrapper<Boolean> COOLING_TOWER_PARTICLES =			new ConfigWrapper(true);
 	public static ConfigWrapper<Boolean> RENDER_REBAR_SIMPLE =				new ConfigWrapper(false);
+	public static ConfigWrapper<Boolean> DEBUG_TAG_OVERLAY =				new ConfigWrapper(true);
 
 	private static void initDefaults() {
 		configMap.put("GEIGER_OFFSET_HORIZONTAL", GEIGER_OFFSET_HORIZONTAL);
@@ -56,6 +57,7 @@ public class ClientConfig extends RunningConfig {
 		configMap.put("NEI_HIDE_SECRETS", NEI_HIDE_SECRETS);
 		configMap.put("COOLING_TOWER_PARTICLES", COOLING_TOWER_PARTICLES);
 		configMap.put("RENDER_REBAR_SIMPLE", RENDER_REBAR_SIMPLE);
+		configMap.put("DEBUG_TAG_OVERLAY", DEBUG_TAG_OVERLAY);
 	}
 
 	/** Initializes defaults, then reads the config file if it exists, then writes the config file. */

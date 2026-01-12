@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SCS",
+    "TMT",
+    "SRS"
+  ],
+  "key": {
+    "S": {
+      "item": "hbm:plate_steel"
+    },
+    "C": {
+      "item": "hbm:circuit_basic"
+    },
+    "T": {
+      "item": "hbm:turbine_titanium"
+    },
+    "M": {
+      "item": "hbm:motor"
+    },
+    "R": {
+      "item": "minecraft:redstone_block"
+    }
+  },
+  "result": {
+    "item": "hbm:machine_turbine_gas"
+  }
+}
