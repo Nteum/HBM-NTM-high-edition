@@ -188,14 +188,6 @@ public class BlockStateGen extends BlockStateProvider {
         this.simpleBlockItem(block,model1);
     }
 
-    private void add2LayerBlock(Block block){
-        ResourceLocation parent = new ResourceLocation("hbm:block/abstract/cube_all_2_layer");
-        BlockModelBuilder modelFile = models().withExistingParent(name(block), parent)
-                .texture("all", key(ModBlocks.BLOCK_METEOR.get()).withPrefix(ModelProvider.BLOCK_FOLDER))
-                .texture("all1", key(block).withPrefix(ModelProvider.BLOCK_FOLDER));
-        this.simpleBlockWithItem(block, modelFile);
-    }
-
     public  <E extends Enum<E> & StringRepresentable> void addEnumStateBlock(Block block, EnumProperty<E> enumProperty, Function<Enum<E>, ModelFile> enumModelFileFunction){
         this.getVariantBuilder(block)
                 .forAllStates(state -> {

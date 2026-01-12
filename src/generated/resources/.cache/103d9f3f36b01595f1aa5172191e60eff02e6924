@@ -1,10 +1,11 @@
-// 1.20.1	2026-01-11T17:55:01.2453575	Registries
+// 1.20.1	2026-01-12T10:52:06.1659243	Registries
 f802ac3c4252dc48a4209612020ad9ac4ab73eb6 data/hbm/dimension/hbm_moon.json
 a898f20d47077303c9f89466abc25bc0d47b450c data/hbm/dimension_type/hbm_moon_type.json
 ea3d0e5a521728cec599609b681d773e1a0061bc data/hbm/worldgen/biome/hbm_moon_heighland.json
 ea3d0e5a521728cec599609b681d773e1a0061bc data/hbm/worldgen/biome/hbm_mun.json
 29c09620d64ee5750fef75a24d8e54fbddde251d data/hbm/worldgen/configured_feature/bedrock_ore_overworld.json
 a2eef93d501821cd34205f1071e3f359aeb36cdf data/hbm/worldgen/configured_feature/glyphid_hive.json
+1ce07a9627643f3e21942b7e08a32fa2143c694e data/hbm/worldgen/configured_feature/meteorite.json
 8c2cc9b330c923ee0c2cd8adb1082faa8b05beb7 data/hbm/worldgen/configured_feature/mete_creator_moon.json
 b1777f055db4fabe9d8e3b7a609d9b865a31ba2f data/hbm/worldgen/configured_feature/ore_sphere_overworld.json
 d9a7ebcdc958676305c918928c5ec4ad3e628217 data/hbm/worldgen/configured_feature/uranium_ore_overworld.json

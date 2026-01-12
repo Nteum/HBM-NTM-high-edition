@@ -176,10 +176,10 @@ public class WrapperRegistry<T> implements Supplier<T>{
 
         public void modelSupport(BlockStateGen provider){
             switch (genModelWay) {
-                case HBMKey.MODEL_CUBE_ALL -> provider.simpleBlock(get());
+                case HBMKey.MODEL_CUBE_ALL -> provider.simpleBlockWithItem(get());
                 case HBMKey.MODEL_PILLAR -> {
                     provider.logBlock((RotatedPillarBlock) get());
-                    provider.simpleBlockItem(get(), new ModelFile.UncheckedModelFile(provider.key(get())));
+                    provider.simpleBlockItem(get(), new ModelFile.UncheckedModelFile(provider.key(get()).withPrefix("block/")));
                 }
 //                case HBMKey.MODEL_FRONT_SIDE -> provider.frontSideBlockWithItem(get());
 //                case HBMKey.MODEL_FRONT_SIDE_TOP -> provider.frontSideTopBlockWithItem(get());
