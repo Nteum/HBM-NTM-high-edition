@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SLS",
+    "CFC",
+    "SRS"
+  ],
+  "key": {
+    "S": {
+      "item": "hbm:plate_steel"
+    },
+    "L": {
+      "item": "hbm:coil_copper"
+    },
+    "C": {
+      "item": "hbm:circuit_basic"
+    },
+    "F": {
+      "item": "minecraft:furnace"
+    },
+    "R": {
+      "item": "minecraft:redstone_block"
+    }
+  },
+  "result": {
+    "item": "hbm:machine_electric_furnace"
+  }
+}

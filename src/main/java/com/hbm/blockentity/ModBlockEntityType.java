@@ -10,6 +10,10 @@ import com.hbm.blockentity.machine.SteelCrateBlockEntity;
 import com.hbm.HBM;
 import com.hbm.blockentity.base.DummibleBlockEntity;
 import com.hbm.blockentity.tools.TileEntityGeiger;
+import com.hbm.blockentity.machine.pile.ChicagoBreederBlockEntity;
+import com.hbm.blockentity.machine.pile.ChicagoDetectorBlockEntity;
+import com.hbm.blockentity.machine.pile.ChicagoFuelBlockEntity;
+import com.hbm.blockentity.machine.pile.ChicagoSourceBlockEntity;
 import com.hbm.blockentity.machine.rbmk.RBMKBaseEntity;
 import com.hbm.blockentity.machine.rbmk.RBMKControlRodEntity;
 import com.hbm.blockentity.machine.rbmk.RBMKFuelChannelEntity;
@@ -72,6 +76,20 @@ public class ModBlockEntityType {
             REGISTER.register("chemplant_entity",()-> BlockEntityType.Builder.of(ChemplantEntity::new, HBMMachine.CHEMPLANT.get()).build(null));
     public static final RegistryObject<BlockEntityType<BarrelEntity>> BARREL_ENTITY =
             REGISTER.register("barrel_entity",()-> BlockEntityType.Builder.of(BarrelEntity::new, HBMMachine.PLASTIC_BARREL.get(),HBMMachine.CORRODED_BARREL.get(),HBMMachine.IRON_BARREL.get(),HBMMachine.STEEL_BARREL.get(),HBMMachine.TCALLOY_BARREL.get(),HBMMachine.ANTIMATTER_BARREL.get()).build(null));
+    public static final RegistryObject<BlockEntityType<CondenserBlockEntity>> CONDENSER_ENTITY =
+            REGISTER.register("condenser_entity", () -> BlockEntityType.Builder.of(CondenserBlockEntity::new, ModBlocks.machine_condenser.get()).build(null));
+    public static final RegistryObject<BlockEntityType<CoolingTowerBlockEntity>> COOLING_TOWER_ENTITY =
+            REGISTER.register("cooling_tower_entity", () -> BlockEntityType.Builder.of(CoolingTowerBlockEntity::new, ModBlocks.machine_cooling_tower.get()).build(null));
+    public static final RegistryObject<BlockEntityType<GasTurbineBlockEntity>> GAS_TURBINE_ENTITY =
+            REGISTER.register("gas_turbine_entity", () -> BlockEntityType.Builder.of(GasTurbineBlockEntity::new, ModBlocks.machine_turbine_gas.get()).build(null));
+    public static final RegistryObject<BlockEntityType<ChicagoFuelBlockEntity>> CHICAGO_FUEL =
+            REGISTER.register("chicago_fuel", () -> BlockEntityType.Builder.of(ChicagoFuelBlockEntity::new, ModBlocks.chicago_graphite_fuel.get()).build(null));
+    public static final RegistryObject<BlockEntityType<ChicagoSourceBlockEntity>> CHICAGO_SOURCE =
+            REGISTER.register("chicago_source", () -> BlockEntityType.Builder.of(ChicagoSourceBlockEntity::new, ModBlocks.chicago_graphite_source.get()).build(null));
+    public static final RegistryObject<BlockEntityType<ChicagoBreederBlockEntity>> CHICAGO_BREEDER =
+            REGISTER.register("chicago_breeder", () -> BlockEntityType.Builder.of(ChicagoBreederBlockEntity::new, ModBlocks.chicago_graphite_breeder.get()).build(null));
+    public static final RegistryObject<BlockEntityType<ChicagoDetectorBlockEntity>> CHICAGO_DETECTOR =
+            REGISTER.register("chicago_detector", () -> BlockEntityType.Builder.of(ChicagoDetectorBlockEntity::new, ModBlocks.chicago_graphite_detector.get()).build(null));
     public static final RegistryObject<BlockEntityType<ShredderEntity>> SHREDDER_ENTITY =
             REGISTER.register("shredder_entity",()-> BlockEntityType.Builder.of(ShredderEntity::new, ModBlocks.machine_shredder.get()).build(null));
     public static final RegistryObject<BlockEntityType<WoodBurnerBlockEntity>> WOOD_BURNER_ENTITY =
@@ -84,7 +102,8 @@ public class ModBlockEntityType {
             REGISTER.register("steel_crate_entity", () -> BlockEntityType.Builder.of(SteelCrateBlockEntity::new, ModBlocks.crate_steel.get()).build(null));
     public static final RegistryObject<BlockEntityType<TileProxyCombo>> PROXY_ENTITY =
             REGISTER.register("proxy_entity",()-> BlockEntityType.Builder.of(TileProxyCombo::new,
-                    ModBlocks.machine_crucible.get(), ModBlocks.machine_assembler.get(), ModBlocks.machine_cracking_tower.get(), HBMMachine.CHEMPLANT.get(), HBMMachine.LAUNCH_PAD.get(), ModBlocks.bomb_boy.get(), ModBlocks.bomb_custom.get(), ModBlocks.bomb_fat_man.get()
+                    ModBlocks.machine_crucible.get(), ModBlocks.machine_assembler.get(), ModBlocks.machine_cracking_tower.get(), HBMMachine.CHEMPLANT.get(), HBMMachine.LAUNCH_PAD.get(), ModBlocks.bomb_boy.get(), ModBlocks.bomb_custom.get(), ModBlocks.bomb_fat_man.get(),
+                    ModBlocks.machine_zirnox.get()
 //                    ForgeRegistries.BLOCKS.getValues().toArray(Block[]::new)
 //                    BuiltInRegistries.BLOCK.stream().filter(block -> block.builtInRegistryHolder().is(ModTags.Blocks.MACHINE)).toArray(Block[]::new)
             ).build(null));
@@ -110,8 +129,24 @@ public class ModBlockEntityType {
                     ModBlocks.machine_rbmk_autoloader.get()).build(null));
     public static final RegistryObject<BlockEntityType<com.hbm.blockentity.machine.tokamak.TokamakControllerBlockEntity>> TOKAMAK_CONTROLLER =
             REGISTER.register("tokamak_controller", () -> BlockEntityType.Builder.of(com.hbm.blockentity.machine.tokamak.TokamakControllerBlockEntity::new, ModBlocks.tokamak_controller.get()).build(null));
+    public static final RegistryObject<BlockEntityType<PWRControllerBlockEntity>> PWR_CONTROLLER_ENTITY =
+            REGISTER.register("pwr_controller_entity", () -> BlockEntityType.Builder.of(PWRControllerBlockEntity::new, ModBlocks.pwr_controller.get()).build(null));
+    public static final RegistryObject<BlockEntityType<PWRBlockEntity>> PWR_BLOCK_ENTITY =
+            REGISTER.register("pwr_block_entity", () -> BlockEntityType.Builder.of(PWRBlockEntity::new, ModBlocks.pwr_block.get()).build(null));
     public static final RegistryObject<BlockEntityType<com.hbm.blockentity.machine.tokamak.TokamakPortBlockEntity>> TOKAMAK_PORT_ENTITY =
             REGISTER.register("tokamak_port_entity", () -> BlockEntityType.Builder.of(com.hbm.blockentity.machine.tokamak.TokamakPortBlockEntity::new, ModBlocks.tokamak_port.get()).build(null));
     public static final RegistryObject<BlockEntityType<com.hbm.blockentity.machine.tokamak.TokamakInjectorBlockEntity>> TOKAMAK_INJECTOR_ENTITY =
             REGISTER.register("tokamak_injector_entity", () -> BlockEntityType.Builder.of(com.hbm.blockentity.machine.tokamak.TokamakInjectorBlockEntity::new, ModBlocks.tokamak_injector.get()).build(null));
+    public static final RegistryObject<BlockEntityType<ZirnoxReactorBlockEntity>> ZIRNOX_REACTOR_ENTITY =
+            REGISTER.register("zirnox_reactor_entity", () -> BlockEntityType.Builder.of(ZirnoxReactorBlockEntity::new, ModBlocks.machine_zirnox.get()).build(null));
+    public static final RegistryObject<BlockEntityType<com.hbm.blockentity.machine.icf.ICFReactorBlockEntity>> ICF_REACTOR_ENTITY =
+            REGISTER.register("icf_reactor_entity", () -> BlockEntityType.Builder.of(com.hbm.blockentity.machine.icf.ICFReactorBlockEntity::new, ModBlocks.machine_icf.get()).build(null));
+    public static final RegistryObject<BlockEntityType<com.hbm.blockentity.machine.icf.ICFControllerBlockEntity>> ICF_CONTROLLER_ENTITY =
+            REGISTER.register("icf_controller_entity", () -> BlockEntityType.Builder.of(com.hbm.blockentity.machine.icf.ICFControllerBlockEntity::new, ModBlocks.machine_icf_controller.get()).build(null));
+    public static final RegistryObject<BlockEntityType<com.hbm.blockentity.machine.icf.ICFPressBlockEntity>> ICF_PRESS_ENTITY =
+            REGISTER.register("icf_press_entity", () -> BlockEntityType.Builder.of(com.hbm.blockentity.machine.icf.ICFPressBlockEntity::new, ModBlocks.machine_icf_press.get()).build(null));
+    public static final RegistryObject<BlockEntityType<com.hbm.blockentity.machine.research.ResearchReactorBlockEntity>> RESEARCH_REACTOR_ENTITY =
+            REGISTER.register("research_reactor_entity", () -> BlockEntityType.Builder.of(com.hbm.blockentity.machine.research.ResearchReactorBlockEntity::new, ModBlocks.machine_research_reactor.get()).build(null));
+    public static final RegistryObject<BlockEntityType<com.hbm.blockentity.machine.research.BreederReactorBlockEntity>> BREEDER_REACTOR_ENTITY =
+            REGISTER.register("breeder_reactor_entity", () -> BlockEntityType.Builder.of(com.hbm.blockentity.machine.research.BreederReactorBlockEntity::new, ModBlocks.machine_reactor_breeding.get()).build(null));
 }

@@ -55,6 +55,8 @@ public class BlockLootGen extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.anvil_desh.get());
         this.dropSelf(ModBlocks.anvil_bismuth.get());
         this.dropSelf(ModBlocks.machine_cracking_tower.get());
+        this.dropSelf(ModBlocks.machine_condenser.get());
+        this.dropSelf(ModBlocks.machine_cooling_tower.get());
         this.dropSelf(ModBlocks.machine_assembler.get());
             this.dropSelf(ModBlocks.machine_crucible.get());
             this.dropSelf(ModBlocks.machine_rbmk_base.get());
@@ -74,6 +76,11 @@ public class BlockLootGen extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.tokamak_heater.get());
         this.dropSelf(ModBlocks.tokamak_injector.get());
         this.dropSelf(ModBlocks.tokamak_port.get());
+        this.dropSelf(ModBlocks.machine_icf.get());
+        this.dropSelf(ModBlocks.machine_icf_controller.get());
+        this.dropSelf(ModBlocks.machine_icf_press.get());
+        this.dropSelf(ModBlocks.machine_research_reactor.get());
+        this.dropSelf(ModBlocks.machine_reactor_breeding.get());
         this.dropSelf(ModBlocks.conveyor.get());
         this.dropSelf(ModBlocks.crate_iron.get());
         this.dropSelf(ModBlocks.crate_steel.get());

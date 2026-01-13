@@ -6,11 +6,13 @@ import com.hbm.Inventory.recipe.ModRecipes;
 import com.hbm.registries.ModBlocks;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
+import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import net.minecraft.client.Minecraft;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeManager;
@@ -35,6 +37,7 @@ public class JEIHBMPlugin implements IModPlugin {
     public void registerCategories(IRecipeCategoryRegistration registration) {
         IGuiHelper guiHelper = registration.getJeiHelpers().getGuiHelper();
         registration.addRecipeCategories(new JEIAssemblerCategory(guiHelper));
+        registration.addRecipeCategories(new JEIICFPelletCategory(guiHelper));
     }
 
     @Override
@@ -46,11 +49,26 @@ public class JEIHBMPlugin implements IModPlugin {
 
         // 将这些配方添加到JEI，并指定它们属于你的配方类别
         registration.addRecipes(JEIAssemblerCategory.TYPE, yourRecipes);
+        registration.addRecipes(JEIICFPelletCategory.TYPE, JEIICFPelletCategory.createRecipes());
+
+        registration.addIngredientInfo(new ItemStack(ModBlocks.machine_icf.get()), VanillaTypes.ITEM_STACK,
+                Component.translatable("jei.hbm.machine_icf.info1"),
+                Component.translatable("jei.hbm.machine_icf.info2"),
+                Component.translatable("jei.hbm.machine_icf.info3"));
+        registration.addIngredientInfo(new ItemStack(ModBlocks.machine_icf_controller.get()), VanillaTypes.ITEM_STACK,
+                Component.translatable("jei.hbm.machine_icf_controller.info1"),
+                Component.translatable("jei.hbm.machine_icf_controller.info2"),
+                Component.translatable("jei.hbm.machine_icf_controller.info3"));
+        registration.addIngredientInfo(new ItemStack(ModBlocks.machine_icf_press.get()), VanillaTypes.ITEM_STACK,
+                Component.translatable("jei.hbm.machine_icf_press.info1"),
+                Component.translatable("jei.hbm.machine_icf_press.info2"),
+                Component.translatable("jei.hbm.machine_icf_press.info3"));
     }
 
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
         // 将你的机器方块物品添加为配方催化剂
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.machine_assembler.get()), JEIAssemblerCategory.TYPE);
+        registration.addRecipeCatalyst(new ItemStack(ModBlocks.machine_icf_press.get()), JEIICFPelletCategory.TYPE);
     }
 }

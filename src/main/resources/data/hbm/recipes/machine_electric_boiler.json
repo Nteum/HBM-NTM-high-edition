@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SLS",
+    "CBC",
+    "SRS"
+  ],
+  "key": {
+    "S": {
+      "item": "hbm:plate_steel"
+    },
+    "L": {
+      "item": "hbm:coil_copper"
+    },
+    "C": {
+      "item": "hbm:circuit_basic"
+    },
+    "B": {
+      "item": "hbm:machine_boiler"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "result": {
+    "item": "hbm:machine_electric_boiler"
+  }
+}

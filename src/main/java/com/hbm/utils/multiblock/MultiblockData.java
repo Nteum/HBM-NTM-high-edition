@@ -42,6 +42,58 @@ public class MultiblockData {
                 .addCap(new Vec3i(0, 0, 2), ForgeCapabilities.FLUID_HANDLER, NORTH)
                 .addCap(new Vec3i(-2, 0, 0), ForgeCapabilities.FLUID_HANDLER, WEST)
                 .addCap(new Vec3i(1, 0, 2), ForgeCapabilities.FLUID_HANDLER, NORTH));
+        mapping.put(ModBlocks.machine_cooling_tower.get(), new MultiblockData(12, 0, 4, 4, 4, 4)
+                .addCap(new Vec3i(0, 0, 4), ForgeCapabilities.FLUID_HANDLER, SOUTH)
+                .addCap(new Vec3i(4, 0, 0), ForgeCapabilities.FLUID_HANDLER, EAST)
+                .addCap(new Vec3i(0, 0, -4), ForgeCapabilities.FLUID_HANDLER, NORTH)
+                .addCap(new Vec3i(-4, 0, 0), ForgeCapabilities.FLUID_HANDLER, WEST)
+                .addCap(new Vec3i(3, 0, 3), ForgeCapabilities.FLUID_HANDLER, SOUTH)
+                .addCap(new Vec3i(-3, 0, 3), ForgeCapabilities.FLUID_HANDLER, SOUTH)
+                .addCap(new Vec3i(3, 0, -3), ForgeCapabilities.FLUID_HANDLER, NORTH)
+                .addCap(new Vec3i(-3, 0, -3), ForgeCapabilities.FLUID_HANDLER, NORTH)
+                .addCap(new Vec3i(0, 1, 4), ForgeCapabilities.FLUID_HANDLER, SOUTH)
+                .addCap(new Vec3i(4, 1, 0), ForgeCapabilities.FLUID_HANDLER, EAST)
+                .addCap(new Vec3i(0, 1, -4), ForgeCapabilities.FLUID_HANDLER, NORTH)
+                .addCap(new Vec3i(-4, 1, 0), ForgeCapabilities.FLUID_HANDLER, WEST)
+                .addCap(new Vec3i(3, 1, 3), ForgeCapabilities.FLUID_HANDLER, SOUTH)
+                .addCap(new Vec3i(-3, 1, 3), ForgeCapabilities.FLUID_HANDLER, SOUTH)
+                .addCap(new Vec3i(3, 1, -3), ForgeCapabilities.FLUID_HANDLER, NORTH)
+                .addCap(new Vec3i(-3, 1, -3), ForgeCapabilities.FLUID_HANDLER, NORTH));
+        int[] turbineDims = new int[]{2, 0, 1, 1, 4, 5};
+        List<Vec3i> turbineOffsets = new ArrayList<>(square(turbineDims));
+        Vec3i extraWest = new Vec3i(-5, 1, 0);
+        if (!turbineOffsets.contains(extraWest)) {
+            turbineOffsets.add(extraWest);
+        }
+        mapping.put(ModBlocks.machine_turbine_gas.get(), new MultiblockData(turbineOffsets, turbineDims)
+                .addCap(new Vec3i(-1, 0, -1), ForgeCapabilities.FLUID_HANDLER, Direction.values())
+                .addCap(new Vec3i(-1, 0, 1), ForgeCapabilities.FLUID_HANDLER, Direction.values())
+                .addCap(new Vec3i(-2, 0, -1), ForgeCapabilities.FLUID_HANDLER, Direction.values())
+                .addCap(new Vec3i(-2, 0, 1), ForgeCapabilities.FLUID_HANDLER, Direction.values())
+                .addCap(new Vec3i(2, 0, -1), ForgeCapabilities.FLUID_HANDLER, Direction.values())
+                .addCap(new Vec3i(2, 0, 1), ForgeCapabilities.FLUID_HANDLER, Direction.values())
+                .addCap(new Vec3i(3, 1, 0), ForgeCapabilities.FLUID_HANDLER, Direction.values())
+                .addCap(new Vec3i(0, 1, -1), ForgeCapabilities.ENERGY, Direction.values())
+                .addCap(new Vec3i(0, 1, -1), HBMCaps.LONG_ENERGY, Direction.values()));
+
+        List<Vec3i> zirnoxOffsets = new ArrayList<>(square(new int[]{1, 0, 2, 2, 2, 2}));
+        for (int y = 2; y <= 4; y++) {
+            for (int x = -1; x <= 1; x++) {
+                for (int z = -1; z <= 1; z++) {
+                    zirnoxOffsets.add(new Vec3i(x, y, z));
+                }
+            }
+            zirnoxOffsets.add(new Vec3i(-2, y, 0));
+            zirnoxOffsets.add(new Vec3i(2, y, 0));
+        }
+        mapping.put(ModBlocks.machine_zirnox.get(), new MultiblockData(zirnoxOffsets, new int[]{1, 0, 2, 2, 2, 2})
+                .addCap(new Vec3i(-2, 1, 0), ForgeCapabilities.FLUID_HANDLER, WEST)
+                .addCap(new Vec3i(2, 1, 0), ForgeCapabilities.FLUID_HANDLER, EAST)
+                .addCap(new Vec3i(-2, 3, 0), ForgeCapabilities.FLUID_HANDLER, WEST)
+                .addCap(new Vec3i(2, 3, 0), ForgeCapabilities.FLUID_HANDLER, EAST));
+        mapping.put(ModBlocks.machine_icf.get(), new MultiblockData(new ArrayList<>(), new int[]{0, 0, 0, 0, 0, 0}));
+        mapping.put(ModBlocks.machine_research_reactor.get(), new MultiblockData(2, 0, 0, 0, 0, 0));
+        mapping.put(ModBlocks.machine_reactor_breeding.get(), new MultiblockData(2, 0, 0, 0, 0, 0));
     }
 
     MultiblockData(List<Vec3i> offsets, int[] dirOffsets){

@@ -5,6 +5,7 @@ import com.hbm.HBMKey;
 import com.hbm.block.HBMBlockProperties;
 import com.hbm.block.HBMMachine;
 import com.hbm.block.interfaces.ICustomBlockHighlight;
+import com.hbm.blockentity.base2.BaseMachineBlockEntity;
 import com.hbm.blockentity.base2.DummyableBlockEntity;
 import com.hbm.blockentity.base2.TileProxyBase;
 import com.hbm.blockentity.base2.TileProxyCombo;
@@ -32,6 +33,8 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -61,6 +64,10 @@ public abstract class BlockDummyable extends BlockMachineBase implements ICustom
         super(pProperties.noOcclusion().isViewBlocking(BlockDummyable::never));
         this.registerDefaultState(this.getStateDefinition().any().setValue(IS_CORE, Boolean.TRUE));
     }
+    /** core position offset along facing direction, useful for legacy multiblocks */
+    protected int placementOffset() {
+        return 0;
+    }
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
         super.createBlockStateDefinition(pBuilder);
@@ -72,16 +79,22 @@ public abstract class BlockDummyable extends BlockMachineBase implements ICustom
         if (!pLevel.isClientSide){
             List<Vec3i> offsets = MultiblockData.mapping.get(this).offsets;
             Direction direction = pState.getValue(FACING);
+            int offset = placementOffset();
+            BlockPos corePos = offset == 0 ? pPos : pPos.relative(direction, offset);
             //判断多方块结构是被会被阻挡
-            if (!DummableHelper.checkRequirement(pLevel,pPos,direction,offsets)){
+            if (!DummableHelper.checkRequirement(pLevel, corePos, direction, offsets, pPos)){
                 //方块掉落
                 pLevel.removeBlock(pPos,false);
                 Containers.dropItemStack(pLevel,pPos.getCenter().x,pPos.getCenter().y,pPos.getCenter().z,pStack.getItem().getDefaultInstance());
                 return;
             }
-//            pState.setValue(IS_CORE, Boolean.TRUE);     // 设为中心方块
+            //放置核心方块
+            if (!corePos.equals(pPos)) {
+                pLevel.removeBlock(pPos, false);
+                pLevel.setBlock(corePos, pState, 3);
+            }
             //放置方块
-            DummableHelper.fillSpace(pLevel, pPos, pState, direction, offsets);
+            DummableHelper.fillSpace(pLevel, corePos, pState, direction, offsets);
         }
         super.setPlacedBy(pLevel, pPos, pState, pPlacer, pStack);
     }
@@ -147,8 +160,15 @@ public abstract class BlockDummyable extends BlockMachineBase implements ICustom
             if (pState.getValue(IS_CORE)){
                 super.neighborChanged(pState, pLevel, pPos, pNeighborBlock, pNeighborPos, pMovedByPiston);
             } else {
-                BlockState coreState = pLevel.getBlockState(getCore(pState, pLevel, pPos));
-                coreState.neighborChanged(pLevel, pPos, pNeighborBlock, pNeighborPos, pMovedByPiston);
+                BlockPos corePos = getCore(pState, pLevel, pPos);
+                if (corePos.equals(pPos)) {
+                    return;
+                }
+                BlockState coreState = pLevel.getBlockState(corePos);
+                if (!coreState.is(this) || !coreState.getValue(IS_CORE)) {
+                    return;
+                }
+                coreState.neighborChanged(pLevel, corePos, pNeighborBlock, pNeighborPos, pMovedByPiston);
             }
         }
     }
@@ -157,6 +177,14 @@ public abstract class BlockDummyable extends BlockMachineBase implements ICustom
     @Override
     public RenderShape getRenderShape(BlockState pState) {
         return RenderShape.INVISIBLE;
+    }
+
+    @Override
+    public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
+        if (!pState.getValue(IS_CORE)) {
+            return null;
+        }
+        return pLevel.isClientSide() ? BaseMachineBlockEntity::clientTicker : BaseMachineBlockEntity::serverTicker;
     }
 
     public int[] getDimensions(){

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " P ",
+    "WWW",
+    " P "
+  ],
+  "key": {
+    "P": {
+      "item": "hbm:plate_polymer"
+    },
+    "W": {
+      "item": "hbm:wire_aluminium"
+    }
+  },
+  "result": {
+    "item": "hbm:red_cable",
+    "count": 4
+  }
+}

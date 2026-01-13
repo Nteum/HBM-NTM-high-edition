@@ -1,0 +1,23 @@
+{
+  "type": "hbm:chemplant",
+  "duration": 100,
+  "inputFluids": [
+    {
+      "fluids": "minecraft:water",
+      "volume": 1000
+    }
+  ],
+  "inputItems": [
+    {
+      "count": 2,
+      "item": "minecraft:end_stone"
+    }
+  ],
+  "resultFluids": [
+    {
+      "amount": 125,
+      "fluids": "hbm:helium3"
+    }
+  ],
+  "resultItems": []
+}

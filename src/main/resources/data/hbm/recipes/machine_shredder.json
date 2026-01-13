@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SBS",
+    "PEP",
+    "SBS"
+  ],
+  "key": {
+    "S": {
+      "item": "hbm:plate_steel"
+    },
+    "B": {
+      "item": "minecraft:iron_bars"
+    },
+    "P": {
+      "item": "hbm:sawblade"
+    },
+    "E": {
+      "item": "hbm:circuit_basic"
+    }
+  },
+  "result": {
+    "item": "hbm:machine_shredder"
+  }
+}

@@ -149,7 +149,7 @@ public class ExtendedFluidType extends FluidType {
         }
     }
     public <T extends FluidTrait> T getTrait(Class<? extends T> trait) { //generics, yeah!
-        return (T) this.hbmProperties.traits.get(trait.getModifiers());
+        return (T) this.hbmProperties.traits.get(trait);
     }
     //需要继承这个方法，以便可以在客户端渲染流体
     @Override

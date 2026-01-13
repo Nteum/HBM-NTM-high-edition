@@ -1,9 +1,10 @@
 package com.hbm.datagen.recipe;
 
 import com.hbm.HBM;
-import com.hbm.datagen.recipe.provider.AssemblerRecipeProvider;
 import com.hbm.Inventory.recipe.BlastFurnaceRecipe;
+import com.hbm.datagen.recipe.provider.AssemblerRecipeProvider;
 import com.hbm.datagen.recipe.provider.ChemplantRecipeProvider;
+import com.hbm.datagen.recipe.provider.MachineBlockRecipeProvider;
 import com.hbm.datagen.recipe.provider.ShredderRecipeProvider;
 import com.hbm.registries.ModItems;
 import com.hbm.registries.ModItems;;
@@ -49,7 +50,8 @@ public class RecipeGen extends RecipeProvider {
         return List.of(
                 new AssemblerRecipeProvider(),
                 new ChemplantRecipeProvider(),
-                new ShredderRecipeProvider()
+                new ShredderRecipeProvider(),
+                new MachineBlockRecipeProvider()
         );
     }
     //添加有序配方（默认加入MISC组，并使用获得物品来解锁，通过输入物品来区分）

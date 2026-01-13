@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SBS",
+    "MCM",
+    "SBS"
+  ],
+  "key": {
+    "S": {
+      "item": "hbm:plate_steel"
+    },
+    "B": {
+      "item": "hbm:ingot_boron"
+    },
+    "M": {
+      "item": "hbm:motor"
+    },
+    "C": {
+      "item": "hbm:circuit_basic"
+    }
+  },
+  "result": {
+    "item": "hbm:pwr_control",
+    "count": 2
+  }
+}

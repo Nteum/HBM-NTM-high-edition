@@ -35,6 +35,7 @@ import com.hbm.gui.ModMenuType;
 import com.hbm.Inventory.recipe.CrackingRecipes;
 import com.hbm.Inventory.recipe.ModRecipes;
 import com.hbm.reactor.rbmk.RBMKManager;
+import com.hbm.reactor.pile.PileNeutronTicker;
 import com.hbm.render.model.Models;
 import com.hbm.world.feature.ModFeatures;
 import com.hbm.world.structure.ModStructureProcessors;
@@ -126,6 +127,7 @@ public class HBM {
         ModMessages.register(); //注册所有的消息
         TransmitterNetworkRegistry.initiate(); //注册传输网络系统
         RBMKManager.init();
+        PileNeutronTicker.init();
         CrackingRecipes.registerDefaults();
         event.enqueueWork(HBMBiomes::setUp);    // 生物群系的注册
     }

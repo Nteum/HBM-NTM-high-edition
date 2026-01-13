@@ -5,6 +5,8 @@ import com.hbm.blockentity.base2.CapabilityBlockEntity;
 import com.hbm.blockentity.machine.ElectricFurnaceEntity;
 import com.hbm.gui.menu.*;
 import com.hbm.HBM;
+import com.hbm.gui.menu.ICFMenu;
+import com.hbm.gui.menu.ICFPressMenu;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
@@ -31,6 +33,8 @@ public class ModMenuType {
             MOD_MENU_TYPES.register("chemplant_menu", ()->IForgeMenuType.create((windowId, inv, data) -> (ChemplantMenu) ITileAccess.getInstance(windowId,inv,data, ChemplantMenu.class)));
     public static final RegistryObject<MenuType<BarrelMenu>> BARREL_MENU =
             MOD_MENU_TYPES.register("barrel_menu",()->IForgeMenuType.create((windowId, inv, data) -> (BarrelMenu) ITileAccess.getInstance(windowId,inv,data, BarrelMenu.class)));
+    public static final RegistryObject<MenuType<GasTurbineMenu>> GAS_TURBINE_MENU =
+            MOD_MENU_TYPES.register("gas_turbine_menu", () -> IForgeMenuType.create((windowId, inv, data) -> (GasTurbineMenu) ITileAccess.getInstance(windowId, inv, data, GasTurbineMenu.class)));
     public static final RegistryObject<MenuType<ElectricFurnaceMenu>> ELECTRIC_FURNACE_MENU =
             MOD_MENU_TYPES.register("electric_furnace_menu",()->new MenuType<>(ElectricFurnaceMenu::new, FeatureFlags.VANILLA_SET));
     public static final RegistryObject<MenuType<LaunchPadMenu>> LAUNCH_PAD_MENU =
@@ -39,6 +43,10 @@ public class ModMenuType {
             MOD_MENU_TYPES.register("shredder_menu",()->new MenuType<>(ShredderMenu::new, FeatureFlags.VANILLA_SET));
     public static final RegistryObject<MenuType<TokamakMenu>> TOKAMAK_MENU =
             MOD_MENU_TYPES.register("tokamak_menu",()->new MenuType<>(TokamakMenu::new, FeatureFlags.VANILLA_SET));
+    public static final RegistryObject<MenuType<PWRMenu>> PWR_MENU =
+            MOD_MENU_TYPES.register("pwr_menu", () -> new MenuType<>(PWRMenu::new, FeatureFlags.VANILLA_SET));
+    public static final RegistryObject<MenuType<ZirnoxMenu>> ZIRNOX_MENU =
+            MOD_MENU_TYPES.register("zirnox_menu", () -> new MenuType<>(ZirnoxMenu::new, FeatureFlags.VANILLA_SET));
     public static final RegistryObject<MenuType<RBMKBaseMenu>> RBMK_BASE_MENU =
             MOD_MENU_TYPES.register("rbmk_base_menu",()->new MenuType<>(RBMKBaseMenu::new, FeatureFlags.VANILLA_SET));
     public static final RegistryObject<MenuType<RBMKFuelChannelMenu>> RBMK_FUEL_CHANNEL_MENU =
@@ -53,4 +61,12 @@ public class ModMenuType {
             MOD_MENU_TYPES.register("steel_crate_menu", () -> IForgeMenuType.create(SteelCrateMenu::new));
     public static final RegistryObject<MenuType<WoodBurnerMenu>> WOOD_BURNER_MENU =
             MOD_MENU_TYPES.register("wood_burner_menu", () -> IForgeMenuType.create(WoodBurnerMenu::new));
+    public static final RegistryObject<MenuType<ICFMenu>> ICF_MENU =
+            MOD_MENU_TYPES.register("icf_menu", () -> new MenuType<>(ICFMenu::new, FeatureFlags.VANILLA_SET));
+    public static final RegistryObject<MenuType<ICFPressMenu>> ICF_PRESS_MENU =
+            MOD_MENU_TYPES.register("icf_press_menu", () -> new MenuType<>(ICFPressMenu::new, FeatureFlags.VANILLA_SET));
+    public static final RegistryObject<MenuType<com.hbm.gui.menu.ResearchReactorMenu>> RESEARCH_REACTOR_MENU =
+            MOD_MENU_TYPES.register("research_reactor_menu", () -> new MenuType<>(com.hbm.gui.menu.ResearchReactorMenu::new, FeatureFlags.VANILLA_SET));
+    public static final RegistryObject<MenuType<com.hbm.gui.menu.BreederReactorMenu>> BREEDER_REACTOR_MENU =
+            MOD_MENU_TYPES.register("breeder_reactor_menu", () -> new MenuType<>(com.hbm.gui.menu.BreederReactorMenu::new, FeatureFlags.VANILLA_SET));
 }

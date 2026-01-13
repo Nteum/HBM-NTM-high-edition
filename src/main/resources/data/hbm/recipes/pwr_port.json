@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SPS",
+    "CAC",
+    "SPS"
+  ],
+  "key": {
+    "S": {
+      "item": "hbm:plate_steel"
+    },
+    "P": {
+      "item": "hbm:pipes_steel"
+    },
+    "C": {
+      "item": "hbm:plate_lead"
+    },
+    "A": {
+      "item": "hbm:pwr_casing"
+    }
+  },
+  "result": {
+    "item": "hbm:pwr_port",
+    "count": 4
+  }
+}

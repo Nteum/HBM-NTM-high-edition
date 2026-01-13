@@ -40,13 +40,14 @@ public class RBMKControlRodMenu extends BaseMachineMenu {
     public RBMKControlRodMenu(int containerId, Inventory playerInventory, Container container, ContainerData data) {
         super(ModMenuType.RBMK_CONTROL_ROD_MENU.get(), containerId, container, data);
         this.slotNum = 1;
-        this.addSlot(new Slot(container, 0, 52, 50) {
+        this.addSlot(new Slot(container, 0, 80, 45) {
             @Override
             public boolean mayPlace(ItemStack stack) {
                 return stack.getItem() instanceof ItemRBMKControlRod;
             }
         });
-        addPlayerSlot(playerInventory, 22, 104);
+        // 对齐旧版 RBMK GUI 的背包栏位置（贴图内置槽位）
+        addPlayerSlot(playerInventory, -1, 19);
         this.addDataSlots(data);
     }
 

@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SPS",
+    "CHC",
+    "SPS"
+  ],
+  "key": {
+    "S": {
+      "item": "hbm:plate_steel"
+    },
+    "P": {
+      "item": "hbm:pipes_steel"
+    },
+    "C": {
+      "item": "hbm:circuit_basic"
+    },
+    "H": {
+      "item": "hbm:coil_copper"
+    }
+  },
+  "result": {
+    "item": "hbm:machine_cracking_tower"
+  }
+}

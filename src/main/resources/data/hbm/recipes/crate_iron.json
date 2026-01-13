@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PPP",
+    "I I",
+    "III"
+  ],
+  "key": {
+    "P": {
+      "item": "hbm:plate_iron"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "item": "hbm:crate_iron"
+  }
+}

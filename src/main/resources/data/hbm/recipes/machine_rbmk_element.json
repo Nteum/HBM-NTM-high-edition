@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GGG",
+    "GPG",
+    "GGG"
+  ],
+  "key": {
+    "G": {
+      "item": "hbm:ingot_graphite"
+    },
+    "P": {
+      "item": "hbm:pile_rod_source"
+    }
+  },
+  "result": {
+    "item": "hbm:machine_rbmk_element"
+  }
+}
