@@ -18,7 +18,6 @@ public class DecorateBlockStateProvider implements ICategoryStateProvider{
     @Override
     public void registerStatesAndModels(){
         stateProvider.horizontalBlockWithItem(ModBlocks.TEST12.get(),"block/test12/test12");
-        stateProvider.simpleBlockWithItem(HBMMachine.DEBUG_BLOCK.get(),stateProvider.cubeAll(HBMMachine.DEBUG_BLOCK.get()));
 
         HBMBlockComponent.genModel(stateProvider);
     }

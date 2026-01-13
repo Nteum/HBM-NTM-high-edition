@@ -53,6 +53,8 @@ public class ModConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?,?>> ORE_SPHERE_OVERWORLD = createKey("ore_sphere_overworld");
     public static final ResourceKey<ConfiguredFeature<?,?>> BEDROCK_ORE_OVERWORLD = createKey("bedrock_ore_overworld");
     public static final ResourceKey<ConfiguredFeature<?,?>> GLYPHID_HIVE = createKey("glyphid_hive");
+    public static final ResourceKey<ConfiguredFeature<?,?>> METE_CREATOR_MOON = createKey("mete_creator_moon");
+    public static final ResourceKey<ConfiguredFeature<?,?>> METEORITE = createKey("meteorite");
     public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context){
         //替换规则
         RuleTest stoneReplace = new TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES);
@@ -78,6 +80,12 @@ public class ModConfiguredFeatures {
         FeatureUtils.register(context, BEDROCK_ORE_OVERWORLD, ModFeatures.BEDROCK_ORE.get());
         // 异虫巢生成
         FeatureUtils.register(context, GLYPHID_HIVE, ModFeatures.GLYPHID_HIVE.get());
+        // 月球陨石坑生成
+        FeatureUtils.register(context, METE_CREATOR_MOON, ModFeatures.METE_CREATOR.get(),
+                new MeteCreator.CreatorConfiguration(ModBlocks.moon_rock.get().defaultBlockState(), Blocks.BASALT.defaultBlockState(), 8, 24));
+        // 陨石自然生成
+        FeatureUtils.register(context, METEORITE, ModFeatures.METEORITE.get(),
+                new Meteorite.Configuration(false, false, false));
     }
 
     public static ResourceKey<ConfiguredFeature<?, ?>> createKey(String pName) {

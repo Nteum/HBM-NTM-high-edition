@@ -21,12 +21,12 @@ public class ParticleRocketFlame extends TextureSheetParticle {
     float[] floatRands;
     double[] gaussianRands;
 
-    public ParticleRocketFlame(ClientLevel pLevel, double pX, double pY, double pZ, SpriteSet sprite) {
-        super(pLevel, pX, pY, pZ);
-//        this.gravity = -0.2f;
+    public ParticleRocketFlame(ClientLevel pLevel, double pX, double pY, double pZ, double pXSpeed, double pYSpeed, double pZSpeed, SpriteSet sprites) {
+        super(pLevel, pX, pY, pZ, pXSpeed, pYSpeed, pZSpeed);
+        this.gravity = -0.2f;
         this.friction = 0.91f;
         this.lifetime = 300 + pLevel.random.nextInt(50);
-        this.setSpriteFromAge(sprite);
+//        this.setSpriteFromAge(sprite);
 
         this.seed = pLevel.random.nextLong();
         floatRands = new float[10];
@@ -35,6 +35,9 @@ public class ParticleRocketFlame extends TextureSheetParticle {
             floatRands[i] = pLevel.getRandom().nextFloat();
             gaussianRands[i] = pLevel.getRandom().nextGaussian();
         }
+        setSprite(sprites.get(pLevel.random));
+        // 测试静止陨石
+        this.yd = 1;
     }
 
     @Override
@@ -96,17 +99,17 @@ public class ParticleRocketFlame extends TextureSheetParticle {
         }
     }
 
-    @OnlyIn(Dist.CLIENT)
-    public static class Provider implements ParticleProvider<SimpleParticleType> {
-        private final SpriteSet sprites;
-        public Provider(SpriteSet pSprites) {
-            this.sprites = pSprites;
-        }
-
-        @Nullable
-        @Override
-        public Particle createParticle(SimpleParticleType pType, ClientLevel pLevel, double pX, double pY, double pZ, double pXSpeed, double pYSpeed, double pZSpeed) {
-            return new ParticleRocketFlame(pLevel, pX, pY, pZ, this.sprites);
-        }
-    }
+//    @OnlyIn(Dist.CLIENT)
+//    public static class Provider implements ParticleProvider<SimpleParticleType> {
+//        private final SpriteSet sprites;
+//        public Provider(SpriteSet pSprites) {
+//            this.sprites = pSprites;
+//        }
+//
+//        @Nullable
+//        @Override
+//        public Particle createParticle(SimpleParticleType pType, ClientLevel pLevel, double pX, double pY, double pZ, double pXSpeed, double pYSpeed, double pZSpeed) {
+//            return new ParticleRocketFlame(pLevel, pX, pY, pZ, this.sprites);
+//        }
+//    }
 }

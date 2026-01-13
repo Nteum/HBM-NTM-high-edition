@@ -144,6 +144,9 @@ public class BlockStateGen extends BlockStateProvider {
         //线缆
         cableBlockWithItem();
         //电池
+
+        // 特殊模型
+
     }
     // 方块和物品：纯cube all
     public void simpleBlockWithItem(Block block){

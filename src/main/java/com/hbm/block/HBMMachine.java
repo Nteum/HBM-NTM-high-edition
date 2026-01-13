@@ -46,7 +46,7 @@ public class HBMMachine {
         GEIGER_COUNTER = registerBlockWithItem(BLOCKS, "geiger", ()->new GeigerCounter(BlockBehaviour.Properties.of().strength(5.0F).explosionResistance(10.0F)));
         LAUNCH_PAD = registerBlockWithItem(BLOCKS, "launch_pad", ()->new LaunchPad(BlockBehaviour.Properties.of().strength(5.0F).explosionResistance(10.0F)));
 
-        DEBUG_BLOCK = registerBlockWithItem(BLOCKS, "debug_block", ()->new BlockDebug(BlockBehaviour.Properties.copy(Blocks.STONE)));
+//        DEBUG_BLOCK = registerBlockWithItem(BLOCKS, "debug_block", ()->new BlockDebug(BlockBehaviour.Properties.copy(Blocks.STONE)));
     }
     public static RegistryObject<Block> registerBlockWithItem(DeferredRegister<Block> BLOCKS, final String name, final Supplier<? extends Block> blocksup){
         RegistryObject<Block> block = BLOCKS.register(name,blocksup);
@@ -66,7 +66,7 @@ public class HBMMachine {
         pOutput.accept(GEIGER_COUNTER.get());
 
 
-        pOutput.accept(DEBUG_BLOCK.get());
+//        pOutput.accept(DEBUG_BLOCK.get());
     }
 
     public static void languageSupport(LanguageProvider provider){
@@ -82,7 +82,7 @@ public class HBMMachine {
         provider.add(GEIGER_COUNTER.get(), "Geiger Counter");
         provider.add(LAUNCH_PAD.get(), "Launch Pad");
 
-        provider.add(DEBUG_BLOCK.get(), "Debug Block");
+//        provider.add(DEBUG_BLOCK.get(), "Debug Block");
     }
     
     public static void lootable(BlockLootGen provider){
@@ -97,7 +97,7 @@ public class HBMMachine {
         provider.dropSelf(HBMMachine.GEIGER_COUNTER.get());
         provider.dropSelf(HBMMachine.LAUNCH_PAD.get());
 
-        provider.dropSelf(DEBUG_BLOCK.get());
+//        provider.dropSelf(DEBUG_BLOCK.get());
     }
 
     public static void model(BlockStateGen provider){
