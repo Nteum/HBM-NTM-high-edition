@@ -195,6 +195,10 @@ public class WrapperRegistry<T> implements Supplier<T>{
             switch (lootWay){
                 case HBMKey.DROP_SELF -> provider.dropSelf(registryObject.get());
                 case HBMKey.DROP_NONE -> provider.add(registryObject.get(), BlockLootSubProvider.noDrop());
+                // 没有掉落物表用这个
+                case HBMKey.DROP_NO_EXIST -> {
+                    return;
+                }
             }
         }
 

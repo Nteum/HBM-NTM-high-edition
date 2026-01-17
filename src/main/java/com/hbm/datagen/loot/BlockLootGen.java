@@ -102,6 +102,7 @@ public class BlockLootGen extends BlockLootSubProvider {
                 .add(LootItem.lootTableItem(ModItems.CIRCUIT_BASIC.get()).setWeight(10))
                 .add(LootItem.lootTableItem(ModItems.EGG_GLYPHID.get()).setWeight(1))
         ));
+        this.dropOther(ModBlocks.WASTE_GRASS.get(), Blocks.DIRT);
     }
 //    public void generateMachineLoot(){
 //        this.dropSelf(HBMMachine.CHEMPLANT.get());

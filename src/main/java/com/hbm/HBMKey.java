@@ -29,6 +29,7 @@ public class HBMKey {
     public static final String DROP_SELF = "drop_self";
     public static final String DROP_NONE = "drop_none";
     public static final String DROP_STANDALONE = "drop_standalone";
+    public static final String DROP_NO_EXIST = "drop_no_exist";
     public static final String SHREDDER = "shredder";
     // key relate to capability
     public static final String DATA = "hbmdata";

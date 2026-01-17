@@ -10,6 +10,8 @@ import com.hbm.block.decoriate.BlockMolten;
 import com.hbm.block.decoriate.BlockTest12;
 import com.hbm.block.env.GlyphidBlock;
 import com.hbm.block.env.GlyphidSpawner;
+import com.hbm.block.env.WasteEarth;
+import com.hbm.block.env.WasteLeaves;
 import com.hbm.block.logistic.BlockCable;
 import com.hbm.block.logistic.BlockConveyor;
 import com.hbm.block.machine.*;
@@ -143,6 +145,8 @@ public class ModBlocks {
     public static final RegistryObject<Block> ORE_METEOR_COBALT = add("ore_meteor_cobalt", () -> new BlockBase(Properties.copy(Blocks.STONE).strength(15, 360)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF);
 
     public static final RegistryObject<Block> TAINT = block("taint", () -> new Block(Properties.copy(Blocks.IRON_BLOCK)));
+    public static final RegistryObject<Block> WASTE_LEAVES = add("waste_leaves", () -> new WasteLeaves(Properties.copy(Blocks.ACACIA_LEAVES).noLootTable()), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_STANDALONE, HBMKey.ORDERLY_GEN, HBMKey.DROP_NO_EXIST);
+    public static final RegistryObject<Block> WASTE_GRASS = add("waste_grass", () -> new WasteEarth(Properties.copy(Blocks.DIRT)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_DIFURNACE, HBMKey.ORDERLY_GEN, HBMKey.DROP_STANDALONE);
     /**
      * 航天版方块
      * */
