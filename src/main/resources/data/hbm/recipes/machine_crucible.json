@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "FSF",
+    "LBL",
+    "FSF"
+  ],
+  "key": {
+    "F": {
+      "item": "hbm:ingot_firebrick"
+    },
+    "S": {
+      "item": "hbm:plate_steel"
+    },
+    "L": {
+      "item": "minecraft:lava_bucket"
+    },
+    "B": {
+      "item": "minecraft:bucket"
+    }
+  },
+  "result": {
+    "item": "hbm:machine_crucible"
+  }
+}

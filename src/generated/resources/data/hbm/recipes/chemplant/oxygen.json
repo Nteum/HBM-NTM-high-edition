@@ -1,0 +1,18 @@
+{
+  "type": "hbm:chemplant",
+  "duration": 20,
+  "inputFluids": [
+    {
+      "fluids": "minecraft:water",
+      "volume": 8000
+    }
+  ],
+  "inputItems": [],
+  "resultFluids": [
+    {
+      "amount": 400,
+      "fluids": "hbm:oxygen"
+    }
+  ],
+  "resultItems": []
+}

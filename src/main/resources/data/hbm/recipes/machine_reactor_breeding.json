@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GGG",
+    "CBC",
+    "GTG"
+  ],
+  "key": {
+    "G": {
+      "item": "hbm:ingot_graphite"
+    },
+    "C": {
+      "item": "hbm:circuit_basic"
+    },
+    "B": {
+      "item": "hbm:pile_rod_lithium"
+    },
+    "T": {
+      "item": "hbm:pile_rod_plutonium"
+    }
+  },
+  "result": {
+    "item": "hbm:machine_reactor_breeding"
+  }
+}

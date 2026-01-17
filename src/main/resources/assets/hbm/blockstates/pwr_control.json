@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "axis=y": { "model": "hbm:block/pwr_control" },
+    "axis=z": { "model": "hbm:block/pwr_control", "x": 90 },
+    "axis=x": { "model": "hbm:block/pwr_control", "x": 90, "y": 90 }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GPG",
+    "BHB",
+    "GUG"
+  ],
+  "key": {
+    "G": {
+      "item": "hbm:ingot_graphite"
+    },
+    "P": {
+      "item": "hbm:pellet_rtg"
+    },
+    "B": {
+      "item": "hbm:machine_electric_boiler"
+    },
+    "H": {
+      "item": "hbm:circuit_basic"
+    },
+    "U": {
+      "item": "hbm:ingot_u235"
+    }
+  },
+  "result": {
+    "item": "hbm:machine_nuclear_boiler"
+  }
+}

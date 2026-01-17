@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "STS",
+    "CHC",
+    "SFS"
+  ],
+  "key": {
+    "S": {
+      "item": "hbm:plate_steel"
+    },
+    "T": {
+      "item": "hbm:ingot_tungsten"
+    },
+    "C": {
+      "item": "hbm:circuit_basic"
+    },
+    "H": {
+      "item": "minecraft:hopper"
+    },
+    "F": {
+      "item": "minecraft:furnace"
+    }
+  },
+  "result": {
+    "item": "hbm:machine_difurnace"
+  }
+}

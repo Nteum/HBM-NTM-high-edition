@@ -1,0 +1,23 @@
+{
+  "type": "hbm:chemplant",
+  "duration": 80,
+  "inputFluids": [
+    {
+      "fluids": "hbm:deuterium",
+      "volume": 2000
+    }
+  ],
+  "inputItems": [
+    {
+      "count": 1,
+      "item": "hbm:tritium_deuterium_cake"
+    }
+  ],
+  "resultFluids": [
+    {
+      "amount": 250,
+      "fluids": "hbm:tritium"
+    }
+  ],
+  "resultItems": []
+}

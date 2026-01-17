@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "IRI",
+    "RPC",
+    "IPI"
+  ],
+  "key": {
+    "I": { "item": "minecraft:iron_ingot" },
+    "R": { "item": "minecraft:redstone" },
+    "P": { "item": "minecraft:paper" },
+    "C": { "item": "hbm:circuit_basic" }
+  },
+  "result": {
+    "item": "hbm:pwr_printer"
+  }
+}

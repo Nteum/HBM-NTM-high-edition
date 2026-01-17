@@ -1,0 +1,25 @@
+{
+  "loader": "forge:obj",
+  "flip_v": true,
+  "model": "hbm:models/block/reactor/reactor_small_base.obj",
+  "ambientocclusion": false,
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "texture0": "hbm:block/reactor_small_base",
+    "particle": "hbm:block/reactor_small_base"
+  },
+  "display": {
+    "gui": {
+      "rotation": [30, 45, 0],
+      "scale": [0.2, 0.2, 0.2]
+    },
+    "ground": {
+      "rotation": [30, 45, 0],
+      "scale": [0.2, 0.2, 0.2]
+    },
+    "fixed": {
+      "rotation": [0, 45, 0],
+      "scale": [0.2, 0.2, 0.2]
+    }
+  }
+}

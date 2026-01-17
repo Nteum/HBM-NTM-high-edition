@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "PTP",
+    "CMC",
+    "PTP"
+  ],
+  "key": {
+    "P": { "item": "hbm:plate_titanium" },
+    "T": { "item": "hbm:tokamak_coil" },
+    "C": { "item": "hbm:circuit" },
+    "M": { "item": "hbm:tokamak_controller" }
+  },
+  "result": {
+    "item": "hbm:machine_icf"
+  }
+}

@@ -19,10 +19,18 @@ public class DummableHelper {
 
     /** 检查方块是否可以放得下 */
     public static boolean checkRequirement(Level level, BlockPos blockPos, Direction dir, List<Vec3i> offsets){
+        return checkRequirement(level, blockPos, dir, offsets, null);
+    }
+
+    public static boolean checkRequirement(Level level, BlockPos blockPos, Direction dir, List<Vec3i> offsets, BlockPos ignorePos){
 //        List<Vec3i> offsets2 = MultiblockData.transOffsets(offsets, dir);
         List<Vec3i> offsets2 = DirectionUtils.offsetRot(offsets, Direction.SOUTH, dir);
         for (Vec3i offset : offsets2) {
-            if (!level.getBlockState(blockPos.offset(offset)).canBeReplaced())return false;
+            BlockPos targetPos = blockPos.offset(offset);
+            if (ignorePos != null && targetPos.equals(ignorePos)) {
+                continue;
+            }
+            if (!level.getBlockState(targetPos).canBeReplaced()) return false;
         }
         return true;
     }

@@ -1,0 +1,19 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "hbm:item/rod_zirnox_natural_uranium_fuel"
+  },
+  "overrides": [
+    { "predicate": { "hbm:zirnox_type": 0 }, "model": "hbm:item/rod_zirnox_natural_uranium_fuel" },
+    { "predicate": { "hbm:zirnox_type": 1 }, "model": "hbm:item/rod_zirnox_uranium_fuel" },
+    { "predicate": { "hbm:zirnox_type": 2 }, "model": "hbm:item/rod_zirnox_th232" },
+    { "predicate": { "hbm:zirnox_type": 3 }, "model": "hbm:item/rod_zirnox_thorium_fuel" },
+    { "predicate": { "hbm:zirnox_type": 4 }, "model": "hbm:item/rod_zirnox_mox_fuel" },
+    { "predicate": { "hbm:zirnox_type": 5 }, "model": "hbm:item/rod_zirnox_plutonium_fuel" },
+    { "predicate": { "hbm:zirnox_type": 6 }, "model": "hbm:item/rod_zirnox_u233_fuel" },
+    { "predicate": { "hbm:zirnox_type": 7 }, "model": "hbm:item/rod_zirnox_u235_fuel" },
+    { "predicate": { "hbm:zirnox_type": 8 }, "model": "hbm:item/rod_zirnox_les_fuel" },
+    { "predicate": { "hbm:zirnox_type": 9 }, "model": "hbm:item/rod_zirnox_lithium" },
+    { "predicate": { "hbm:zirnox_type": 10 }, "model": "hbm:item/rod_zirnox_zfb_mox" }
+  ]
+}

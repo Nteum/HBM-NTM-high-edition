@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SBS",
+    "MCM",
+    "SRS"
+  ],
+  "key": {
+    "S": {
+      "item": "hbm:plate_steel"
+    },
+    "B": {
+      "item": "minecraft:iron_bars"
+    },
+    "M": {
+      "item": "hbm:motor"
+    },
+    "C": {
+      "item": "hbm:circuit_basic"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "result": {
+    "item": "hbm:machine_rbmk_crane_console"
+  }
+}

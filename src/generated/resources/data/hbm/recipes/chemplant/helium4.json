@@ -1,0 +1,22 @@
+{
+  "type": "hbm:chemplant",
+  "duration": 60,
+  "inputFluids": [
+    {
+      "fluids": "hbm:helium3",
+      "volume": 500
+    },
+    {
+      "fluids": "hbm:hydrogen",
+      "volume": 500
+    }
+  ],
+  "inputItems": [],
+  "resultFluids": [
+    {
+      "amount": 500,
+      "fluids": "hbm:helium4"
+    }
+  ],
+  "resultItems": []
+}

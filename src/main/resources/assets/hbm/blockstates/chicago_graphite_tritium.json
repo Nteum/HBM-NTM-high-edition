@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "axis=x,shielded=false": { "model": "hbm:block/chicago_graphite_tritium", "x": 90, "y": 90 },
+    "axis=y,shielded=false": { "model": "hbm:block/chicago_graphite_tritium" },
+    "axis=z,shielded=false": { "model": "hbm:block/chicago_graphite_tritium", "x": 90 },
+    "axis=x,shielded=true": { "model": "hbm:block/chicago_graphite_tritium_shielded", "x": 90, "y": 90 },
+    "axis=y,shielded=true": { "model": "hbm:block/chicago_graphite_tritium_shielded" },
+    "axis=z,shielded=true": { "model": "hbm:block/chicago_graphite_tritium_shielded", "x": 90 }
+  }
+}

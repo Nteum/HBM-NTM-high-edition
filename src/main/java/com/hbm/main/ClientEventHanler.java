@@ -7,7 +7,26 @@ import com.hbm.config.ConfigLBSM;
 import com.hbm.entity.ModEntityType;
 import com.hbm.gui.ModMenuType;
 import com.hbm.gui.screen.*;
+<<<<<<< HEAD
 import com.hbm.item.tool.FluidBucketItem;
+=======
+import com.hbm.gui.screen.RenderUtils;
+import com.hbm.item.HBMItems;
+import com.hbm.item.pwr.ItemPWRFuel;
+import com.hbm.item.zirnox.ItemZirnoxRod;
+import com.hbm.item.research.ItemBreedingRod;
+import com.hbm.item.tool.FluidBucketItem;
+import com.hbm.item.icf.ItemICFPellet;
+import com.hbm.registries.ModKeyMapping;
+import com.hbm.registries.ModItems;
+import com.hbm.render.entity.missile.MissileTaintRenderer;
+import com.hbm.render.entity.mob.GlyphidRender;
+import com.hbm.render.model.Models;
+import com.hbm.render.overlay.AtomicFlashOverlay;
+import com.hbm.render.overlay.DebugTagOverlay;
+import com.hbm.render.pipeline.GeoRenderPipeline;
+import com.hbm.render.model.entity.TestEntityModel;
+>>>>>>> 6e858a28 (反应堆已全部搬运完毕、配方以及生存可玩性都可用。)
 import com.hbm.particle.ModParticleTypes;
 import com.hbm.registries.ModItems;
 import com.hbm.registries.ModKeyMapping;
@@ -64,6 +83,7 @@ public class ClientEventHanler {
         forgeBus.addListener(ClientEventHanler::onKeyPressed);
         forgeBus.addListener(AtomicFlashOverlay::onClientTick);
         forgeBus.addListener(AtomicFlashOverlay::onGuiRender);
+        forgeBus.addListener(DebugTagOverlay::onGuiRender);
         forgeBus.addListener(TooltipRegistries::onTooltip);
     }
     @SubscribeEvent
@@ -81,10 +101,13 @@ public class ClientEventHanler {
             MenuScreens.register(ModMenuType.ASSEMBLER_MENU.get(), AssemblerGui::new);
             MenuScreens.register(ModMenuType.CHEMPLANT_MENU.get(), ChemplantGui::new);
             MenuScreens.register(ModMenuType.BARREL_MENU.get(), BarrelGui::new);
+            MenuScreens.register(ModMenuType.GAS_TURBINE_MENU.get(), GasTurbineScreen::new);
             MenuScreens.register(ModMenuType.ELECTRIC_FURNACE_MENU.get(), ElectricFurnaceGui::new);
             MenuScreens.register(ModMenuType.LAUNCH_PAD_MENU.get(), LaunchPadGui::new);
             MenuScreens.register(ModMenuType.SHREDDER_MENU.get(), ShredderGui::new);
             MenuScreens.register(ModMenuType.TOKAMAK_MENU.get(), TokamakGui::new);
+            MenuScreens.register(ModMenuType.PWR_MENU.get(), PWRScreen::new);
+            MenuScreens.register(ModMenuType.ZIRNOX_MENU.get(), ZirnoxScreen::new);
             MenuScreens.register(ModMenuType.RBMK_BASE_MENU.get(), RBMKBaseScreen::new);
             MenuScreens.register(ModMenuType.RBMK_FUEL_CHANNEL_MENU.get(), RBMKFuelChannelScreen::new);
             MenuScreens.register(ModMenuType.RBMK_CONTROL_ROD_MENU.get(), RBMKControlRodScreen::new);
@@ -92,6 +115,10 @@ public class ClientEventHanler {
             MenuScreens.register(ModMenuType.IRON_CRATE_MENU.get(), IronCrateScreen::new);
             MenuScreens.register(ModMenuType.STEEL_CRATE_MENU.get(), SteelCrateScreen::new);
             MenuScreens.register(ModMenuType.WOOD_BURNER_MENU.get(), WoodBurnerScreen::new);
+            MenuScreens.register(ModMenuType.ICF_MENU.get(), ICFScreen::new);
+            MenuScreens.register(ModMenuType.ICF_PRESS_MENU.get(), ICFPressScreen::new);
+            MenuScreens.register(ModMenuType.RESEARCH_REACTOR_MENU.get(), ResearchReactorScreen::new);
+            MenuScreens.register(ModMenuType.BREEDER_REACTOR_MENU.get(), BreederReactorScreen::new);
             //方块实体渲染
             BlockEntityRenderers.register(ModBlockEntityType.PRESS_ENTITY.get(), PressRenderer::new);
             BlockEntityRenderers.register(ModBlockEntityType.ASSEMBLER_ENTITY.get(), AssemblerRenderer::new);
@@ -102,6 +129,9 @@ public class ClientEventHanler {
             BlockEntityRenderers.register(ModBlockEntityType.CHEMPLANT_ENTITY.get(), ChemplantRenderer::new);
             BlockEntityRenderers.register(ModBlockEntityType.LAUNCHPAD_ENTITY.get(), LaunchPadRender::new);
             BlockEntityRenderers.register(ModBlockEntityType.TOKAMAK_CONTROLLER.get(), TokamakRenderer::new);
+            BlockEntityRenderers.register(ModBlockEntityType.ZIRNOX_REACTOR_ENTITY.get(), ZirnoxRenderer::new);
+            BlockEntityRenderers.register(ModBlockEntityType.RESEARCH_REACTOR_ENTITY.get(), ResearchReactorRenderer::new);
+            BlockEntityRenderers.register(ModBlockEntityType.BREEDER_REACTOR_ENTITY.get(), ctx -> new BreederReactorRenderer());
             //实体渲染
             EntityRenderers.register(ModEntityType.TEST_ENTITY.get(), TestEntityRenderer::new);
             EntityRenderers.register(ModEntityType.ENTITY_GRENADE_GENETIC.get(), ThrownItemRenderer::new);
@@ -118,10 +148,26 @@ public class ClientEventHanler {
             EntityRenderers.register(ModEntityType.ENTITY_RUBBLE.get(), RenderRubble::new);
 
             RenderUtils.init();
+<<<<<<< HEAD
         });
         event.enqueueWork(() -> {
             ItemProperties.register(ModItems.INGOT_NEPTUNIUM.get(), HBM.rl("stage"),
                     (stack, level, entity, seed) -> ConfigLBSM.enableLBSM && ConfigLBSM.enableLBSMFullSchrab ? 1 : 0);
+=======
+            // 物品贴图逻辑
+            ItemProperties.register(HBMItems.INGOT_U238M2.get(), HBM.rl("stage"),
+                    (stack, level, entity, seed) -> stack.hasTag() ? stack.getTag().getInt("stage") : 0);
+            ItemProperties.register(HBMItems.pwr_fuel.get(), HBM.rl("pwr_type"),
+                    (stack, level, entity, seed) -> ItemPWRFuel.getFuelTypeIndex(stack));
+            ItemProperties.register(HBMItems.rod_zirnox.get(), HBM.rl("zirnox_type"),
+                    (stack, level, entity, seed) -> ItemZirnoxRod.getRodTypeIndex(stack));
+            ItemProperties.register(HBMItems.rod_breeder_single.get(), HBM.rl("breeder_type"),
+                    (stack, level, entity, seed) -> ItemBreedingRod.getType(stack).ordinal());
+            ItemProperties.register(HBMItems.rod_breeder_dual.get(), HBM.rl("breeder_type"),
+                    (stack, level, entity, seed) -> ItemBreedingRod.getType(stack).ordinal());
+            ItemProperties.register(HBMItems.rod_breeder_quad.get(), HBM.rl("breeder_type"),
+                    (stack, level, entity, seed) -> ItemBreedingRod.getType(stack).ordinal());
+>>>>>>> 6e858a28 (反应堆已全部搬运完毕、配方以及生存可玩性都可用。)
         });
     }
 
@@ -229,6 +275,11 @@ public class ClientEventHanler {
         // 流体桶的染色
         FluidBucketItem[] fluidBucketItems = ModFluids.fluidList.stream().map(holder -> holder.bucket().get()).filter(bucket -> bucket instanceof FluidBucketItem).toArray(FluidBucketItem[]::new);
         event.register(FluidBucketItem::getColor, fluidBucketItems);
+<<<<<<< HEAD
         event.register((itemstack,color)->0xEC9A63, ModItems.BEDROCK_ORE.get());
+=======
+        event.register((itemstack,color)->0xEC9A63, HBMItems.BEDROCK_ORE.get());
+        event.register((stack, tintIndex) -> tintIndex == 0 ? ItemICFPellet.getFuelColor(stack) : 0xFFFFFF, HBMItems.icf_pellet.get());
+>>>>>>> 6e858a28 (反应堆已全部搬运完毕、配方以及生存可玩性都可用。)
     }
 }

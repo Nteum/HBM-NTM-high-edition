@@ -1,0 +1,23 @@
+{
+  "type": "hbm:chemplant",
+  "duration": 60,
+  "inputFluids": [
+    {
+      "fluids": "hbm:hydrogen",
+      "volume": 4000
+    }
+  ],
+  "inputItems": [
+    {
+      "count": 1,
+      "item": "hbm:deuterium_filter"
+    }
+  ],
+  "resultFluids": [
+    {
+      "amount": 250,
+      "fluids": "hbm:deuterium"
+    }
+  ],
+  "resultItems": []
+}

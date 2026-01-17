@@ -1,0 +1,2851 @@
+[
+  {
+    "name": "ammo_bag",
+    "tab": "consumableTab",
+    "class": "ItemAmmoBag",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3512
+  },
+  {
+    "name": "ammo_bag_infinite",
+    "tab": "consumableTab",
+    "class": "ItemAmmoBag",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3513
+  },
+  {
+    "name": "analysis_tool",
+    "tab": "consumableTab",
+    "class": "ItemAnalysisTool",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4082
+  },
+  {
+    "name": "anchor_remote",
+    "tab": "consumableTab",
+    "class": "ItemAnchorRemote",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4061
+  },
+  {
+    "name": "apple_lead",
+    "tab": "consumableTab",
+    "class": "ItemAppleSchrabidium",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3813
+  },
+  {
+    "name": "apple_schrabidium",
+    "tab": "consumableTab",
+    "class": "ItemAppleSchrabidium",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3814
+  },
+  {
+    "name": "bdcl",
+    "tab": "consumableTab",
+    "class": "ItemBDCL",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3007
+  },
+  {
+    "name": "bobmazon",
+    "tab": "consumableTab",
+    "class": "ItemCatalog",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4139
+  },
+  {
+    "name": "bomb_caller",
+    "tab": "consumableTab",
+    "class": "ItemBombCaller",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4059
+  },
+  {
+    "name": "bomb_waffle",
+    "tab": "consumableTab",
+    "class": "ItemWaffle",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3810
+  },
+  {
+    "name": "book_guide",
+    "tab": "consumableTab",
+    "class": "ItemGuideBook",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4920
+  },
+  {
+    "name": "bottle_opener",
+    "tab": "consumableTab",
+    "class": "WeaponSpecial",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4859
+  },
+  {
+    "name": "can_empty",
+    "tab": "consumableTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3082
+  },
+  {
+    "name": "can_key",
+    "tab": "consumableTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3107
+  },
+  {
+    "name": "canned_conserve",
+    "tab": "consumableTab",
+    "class": "ItemConserve",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3106
+  },
+  {
+    "name": "canteen_vodka",
+    "tab": "consumableTab",
+    "class": "ItemCanteen",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3831
+  },
+  {
+    "name": "cap_fritz",
+    "tab": "consumableTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3079
+  },
+  {
+    "name": "cap_korl",
+    "tab": "consumableTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3078
+  },
+  {
+    "name": "cap_nuka",
+    "tab": "consumableTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3074
+  },
+  {
+    "name": "cap_quantum",
+    "tab": "consumableTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3075
+  },
+  {
+    "name": "cap_rad",
+    "tab": "consumableTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3077
+  },
+  {
+    "name": "cap_sparkle",
+    "tab": "consumableTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3076
+  },
+  {
+    "name": "cape_gasmask",
+    "tab": "consumableTab",
+    "class": "ArmorModel",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4852
+  },
+  {
+    "name": "cape_hidden",
+    "tab": "consumableTab",
+    "class": "ArmorModel",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4854
+  },
+  {
+    "name": "cape_radiation",
+    "tab": "consumableTab",
+    "class": "ArmorModel",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4851
+  },
+  {
+    "name": "cape_schrabidium",
+    "tab": "consumableTab",
+    "class": "ArmorModel",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4853
+  },
+  {
+    "name": "casing_bag",
+    "tab": "consumableTab",
+    "class": "ItemCasingBag",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3514
+  },
+  {
+    "name": "chocolate",
+    "tab": "consumableTab",
+    "class": "ItemPill",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3105
+  },
+  {
+    "name": "cigarette",
+    "tab": "consumableTab",
+    "class": "ItemCigarette",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3005
+  },
+  {
+    "name": "coin_creeper",
+    "tab": "consumableTab",
+    "class": "ItemCustomLore",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3114
+  },
+  {
+    "name": "coin_maskman",
+    "tab": "consumableTab",
+    "class": "ItemCustomLore",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3116
+  },
+  {
+    "name": "coin_radiation",
+    "tab": "consumableTab",
+    "class": "ItemCustomLore",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3115
+  },
+  {
+    "name": "coin_ufo",
+    "tab": "consumableTab",
+    "class": "ItemCustomLore",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3118
+  },
+  {
+    "name": "coin_worm",
+    "tab": "consumableTab",
+    "class": "ItemCustomLore",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3117
+  },
+  {
+    "name": "coltan_tool",
+    "tab": "consumableTab",
+    "class": "ItemColtanCompass",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4080
+  },
+  {
+    "name": "containment_box",
+    "tab": "consumableTab",
+    "class": "ItemLeadBox",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3509
+  },
+  {
+    "name": "coupling_tool",
+    "tab": "consumableTab",
+    "class": "ItemCouplingTool",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4083
+  },
+  {
+    "name": "crackpipe",
+    "tab": "consumableTab",
+    "class": "ItemCigarette",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3006
+  },
+  {
+    "name": "crate",
+    "tab": "consumableTab",
+    "class": "BlockCrate",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/blocks/ModBlocks.java",
+    "line": 2192
+  },
+  {
+    "name": "crate_ammo",
+    "tab": "consumableTab",
+    "class": "BlockAmmoCrate",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/blocks/ModBlocks.java",
+    "line": 2198
+  },
+  {
+    "name": "crate_can",
+    "tab": "consumableTab",
+    "class": "BlockCanCrate",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/blocks/ModBlocks.java",
+    "line": 2197
+  },
+  {
+    "name": "crate_jungle",
+    "tab": "consumableTab",
+    "class": "BlockJungleCrate",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/blocks/ModBlocks.java",
+    "line": 2199
+  },
+  {
+    "name": "crate_lead",
+    "tab": "consumableTab",
+    "class": "BlockCrate",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/blocks/ModBlocks.java",
+    "line": 2194
+  },
+  {
+    "name": "crate_metal",
+    "tab": "consumableTab",
+    "class": "BlockCrate",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/blocks/ModBlocks.java",
+    "line": 2195
+  },
+  {
+    "name": "crate_weapon",
+    "tab": "consumableTab",
+    "class": "BlockCrate",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/blocks/ModBlocks.java",
+    "line": 2193
+  },
+  {
+    "name": "digamma_diagnostic",
+    "tab": "consumableTab",
+    "class": "ItemDigammaDiagnostic",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4074
+  },
+  {
+    "name": "dosimeter",
+    "tab": "consumableTab",
+    "class": "ItemDosimeter",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4072
+  },
+  {
+    "name": "drone_linker",
+    "tab": "consumableTab",
+    "class": "ItemDroneLinker",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4084
+  },
+  {
+    "name": "egg_glyphid",
+    "tab": "consumableTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3841
+  },
+  {
+    "name": "five_htp",
+    "tab": "consumableTab",
+    "class": "ItemPill",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2991
+  },
+  {
+    "name": "flask_infusion",
+    "tab": "consumableTab",
+    "class": "ItemFlask",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3101
+  },
+  {
+    "name": "fmn",
+    "tab": "consumableTab",
+    "class": "ItemPill",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2990
+  },
+  {
+    "name": "geiger_counter",
+    "tab": "consumableTab",
+    "class": "ItemGeigerCounter",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4073
+  },
+  {
+    "name": "glitch",
+    "tab": "consumableTab",
+    "class": "ItemGlitch",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4927
+  },
+  {
+    "name": "gun_kit_1",
+    "tab": "consumableTab",
+    "class": "ItemRepairKit",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3002
+  },
+  {
+    "name": "gun_kit_2",
+    "tab": "consumableTab",
+    "class": "ItemRepairKit",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3003
+  },
+  {
+    "name": "hazmat_grey_kit",
+    "tab": "consumableTab",
+    "class": "ItemStarterKit",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4037
+  },
+  {
+    "name": "hazmat_kit",
+    "tab": "consumableTab",
+    "class": "ItemStarterKit",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4035
+  },
+  {
+    "name": "hazmat_red_kit",
+    "tab": "consumableTab",
+    "class": "ItemStarterKit",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4036
+  },
+  {
+    "name": "jetpack_tank",
+    "tab": "consumableTab",
+    "class": "ItemSyringe",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3001
+  },
+  {
+    "name": "key",
+    "tab": "consumableTab",
+    "class": "ItemKey",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4088
+  },
+  {
+    "name": "key_fake",
+    "tab": "consumableTab",
+    "class": "ItemKey",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4092
+  },
+  {
+    "name": "key_kit",
+    "tab": "consumableTab",
+    "class": "ItemCounterfitKeys",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4091
+  },
+  {
+    "name": "kit_custom",
+    "tab": "consumableTab",
+    "class": "ItemKitCustom",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4038
+  },
+  {
+    "name": "legacy_toolbox",
+    "tab": "consumableTab",
+    "class": "ItemKitNBT",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4040
+  },
+  {
+    "name": "linker",
+    "tab": "consumableTab",
+    "class": "ItemTeleLink",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4066
+  },
+  {
+    "name": "machine_armor_table",
+    "tab": "consumableTab",
+    "class": "BlockArmorTable",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/blocks/ModBlocks.java",
+    "line": 1995
+  },
+  {
+    "name": "machine_keyforge",
+    "tab": "consumableTab",
+    "class": "MachineKeyForge",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/blocks/ModBlocks.java",
+    "line": 1994
+  },
+  {
+    "name": "machine_weapon_table",
+    "tab": "consumableTab",
+    "class": "BlockWeaponTable",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/blocks/ModBlocks.java",
+    "line": 1996
+  },
+  {
+    "name": "marshmallow",
+    "tab": "consumableTab",
+    "class": "ItemMarshmallow",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3835
+  },
+  {
+    "name": "med_bag",
+    "tab": "consumableTab",
+    "class": "ItemSyringe",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2985
+  },
+  {
+    "name": "med_ipecac",
+    "tab": "consumableTab",
+    "class": "ItemLemon",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3821
+  },
+  {
+    "name": "med_ptsd",
+    "tab": "consumableTab",
+    "class": "ItemLemon",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3822
+  },
+  {
+    "name": "med_schizophrenia",
+    "tab": "consumableTab",
+    "class": "ItemLemon",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3823
+  },
+  {
+    "name": "meteor_remote",
+    "tab": "consumableTab",
+    "class": "ItemMeteorRemote",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4060
+  },
+  {
+    "name": "mirror_tool",
+    "tab": "consumableTab",
+    "class": "ItemMirrorTool",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4078
+  },
+  {
+    "name": "multitool_dig",
+    "tab": "consumableTab",
+    "class": "ItemMultitoolTool",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4878
+  },
+  {
+    "name": "nuke_advanced_kit",
+    "tab": "consumableTab",
+    "class": "ItemStarterKit",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4019
+  },
+  {
+    "name": "nuke_commercially_kit",
+    "tab": "consumableTab",
+    "class": "ItemStarterKit",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4020
+  },
+  {
+    "name": "nuke_electric_kit",
+    "tab": "consumableTab",
+    "class": "ItemStarterKit",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4021
+  },
+  {
+    "name": "nuke_starter_kit",
+    "tab": "consumableTab",
+    "class": "ItemStarterKit",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4018
+  },
+  {
+    "name": "oil_detector",
+    "tab": "consumableTab",
+    "class": "ItemOilDetector",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4068
+  },
+  {
+    "name": "ore_density_scanner",
+    "tab": "consumableTab",
+    "class": "ItemOreDensityScanner",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4076
+  },
+  {
+    "name": "padlock",
+    "tab": "consumableTab",
+    "class": "ItemLock",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4095
+  },
+  {
+    "name": "padlock_reinforced",
+    "tab": "consumableTab",
+    "class": "ItemLock",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4096
+  },
+  {
+    "name": "padlock_rusty",
+    "tab": "consumableTab",
+    "class": "ItemLock",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4094
+  },
+  {
+    "name": "peas",
+    "tab": "consumableTab",
+    "class": "ItemPeas",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3834
+  },
+  {
+    "name": "pill_herbal",
+    "tab": "consumableTab",
+    "class": "ItemPill",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2988
+  },
+  {
+    "name": "pill_iodine",
+    "tab": "consumableTab",
+    "class": "ItemPill",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2992
+  },
+  {
+    "name": "pill_red",
+    "tab": "consumableTab",
+    "class": "ItemPill",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2994
+  },
+  {
+    "name": "pin",
+    "tab": "consumableTab",
+    "class": "ItemCustomLore",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4093
+  },
+  {
+    "name": "plan_c",
+    "tab": "consumableTab",
+    "class": "ItemPill",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2993
+  },
+  {
+    "name": "plastic_bag",
+    "tab": "consumableTab",
+    "class": "ItemPlasticBag",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3510
+  },
+  {
+    "name": "polaroid",
+    "tab": "consumableTab",
+    "class": "ItemPolaroid",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4926
+  },
+  {
+    "name": "pollution_detector",
+    "tab": "consumableTab",
+    "class": "ItemPollutionDetector",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4075
+  },
+  {
+    "name": "power_net_tool",
+    "tab": "consumableTab",
+    "class": "ItemPowerNetTool",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4081
+  },
+  {
+    "name": "radar_linker",
+    "tab": "consumableTab",
+    "class": "ItemRadarLinker",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4085
+  },
+  {
+    "name": "radx",
+    "tab": "consumableTab",
+    "class": "ItemPill",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2986
+  },
+  {
+    "name": "rbmk_tool",
+    "tab": "consumableTab",
+    "class": "ItemRBMKTool",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4079
+  },
+  {
+    "name": "reactor_sensor",
+    "tab": "consumableTab",
+    "class": "ItemReactorSensor",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4067
+  },
+  {
+    "name": "rebar_placer",
+    "tab": "consumableTab",
+    "class": "ItemRebarPlacer",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4004
+  },
+  {
+    "name": "ring_pull",
+    "tab": "consumableTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3080
+  },
+  {
+    "name": "rod_of_discord",
+    "tab": "consumableTab",
+    "class": "ItemDiscord",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4016
+  },
+  {
+    "name": "settings_tool",
+    "tab": "consumableTab",
+    "class": "ItemSettingsTool",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4086
+  },
+  {
+    "name": "siox",
+    "tab": "consumableTab",
+    "class": "ItemPill",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2987
+  },
+  {
+    "name": "spawn_chopper",
+    "tab": "consumableTab",
+    "class": "ItemChopper",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4062
+  },
+  {
+    "name": "spawn_duck",
+    "tab": "consumableTab",
+    "class": "ItemChopper",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4065
+  },
+  {
+    "name": "spawn_ufo",
+    "tab": "consumableTab",
+    "class": "ItemChopper",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4064
+  },
+  {
+    "name": "spawn_worm",
+    "tab": "consumableTab",
+    "class": "ItemChopper",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4063
+  },
+  {
+    "name": "stealth_boy",
+    "tab": "consumableTab",
+    "class": "ItemStarterKit",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2995
+  },
+  {
+    "name": "structure_custommachine",
+    "tab": "consumableTab",
+    "class": "ItemCMStructure",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4014
+  },
+  {
+    "name": "survey_scanner",
+    "tab": "consumableTab",
+    "class": "ItemSurveyScanner",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4077
+  },
+  {
+    "name": "syringe_empty",
+    "tab": "consumableTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2976
+  },
+  {
+    "name": "syringe_metal_empty",
+    "tab": "consumableTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2977
+  },
+  {
+    "name": "syringe_metal_medx",
+    "tab": "consumableTab",
+    "class": "ItemSyringe",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2979
+  },
+  {
+    "name": "syringe_metal_psycho",
+    "tab": "consumableTab",
+    "class": "ItemSyringe",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2980
+  },
+  {
+    "name": "syringe_metal_stimpak",
+    "tab": "consumableTab",
+    "class": "ItemSyringe",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2978
+  },
+  {
+    "name": "syringe_metal_super",
+    "tab": "consumableTab",
+    "class": "ItemSyringe",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2981
+  },
+  {
+    "name": "syringe_taint",
+    "tab": "consumableTab",
+    "class": "ItemSyringe",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2982
+  },
+  {
+    "name": "toolbox",
+    "tab": "consumableTab",
+    "class": "ItemToolBox",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4039
+  },
+  {
+    "name": "wand",
+    "tab": "consumableTab",
+    "class": "ItemWand",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4005
+  },
+  {
+    "name": "wand_d",
+    "tab": "consumableTab",
+    "class": "ItemWandD",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4007
+  },
+  {
+    "name": "wand_s",
+    "tab": "consumableTab",
+    "class": "ItemWandS",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4006
+  },
+  {
+    "name": "xanax",
+    "tab": "consumableTab",
+    "class": "ItemPill",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2989
+  },
+  {
+    "name": "ams_catalyst_aluminium",
+    "tab": "controlTab",
+    "class": "ItemCatalyst",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2832
+  },
+  {
+    "name": "ams_catalyst_beryllium",
+    "tab": "controlTab",
+    "class": "ItemCatalyst",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2833
+  },
+  {
+    "name": "ams_catalyst_blank",
+    "tab": "controlTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2831
+  },
+  {
+    "name": "ams_catalyst_caesium",
+    "tab": "controlTab",
+    "class": "ItemCatalyst",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2834
+  },
+  {
+    "name": "ams_catalyst_cerium",
+    "tab": "controlTab",
+    "class": "ItemCatalyst",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2835
+  },
+  {
+    "name": "ams_catalyst_cobalt",
+    "tab": "controlTab",
+    "class": "ItemCatalyst",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2836
+  },
+  {
+    "name": "ams_catalyst_copper",
+    "tab": "controlTab",
+    "class": "ItemCatalyst",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2837
+  },
+  {
+    "name": "ams_catalyst_dineutronium",
+    "tab": "controlTab",
+    "class": "ItemCatalyst",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2838
+  },
+  {
+    "name": "ams_catalyst_euphemium",
+    "tab": "controlTab",
+    "class": "ItemCatalyst",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2839
+  },
+  {
+    "name": "ams_catalyst_iron",
+    "tab": "controlTab",
+    "class": "ItemCatalyst",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2840
+  },
+  {
+    "name": "ams_catalyst_lithium",
+    "tab": "controlTab",
+    "class": "ItemCatalyst",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2841
+  },
+  {
+    "name": "ams_catalyst_niobium",
+    "tab": "controlTab",
+    "class": "ItemCatalyst",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2842
+  },
+  {
+    "name": "ams_catalyst_schrabidium",
+    "tab": "controlTab",
+    "class": "ItemCatalyst",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2843
+  },
+  {
+    "name": "ams_catalyst_strontium",
+    "tab": "controlTab",
+    "class": "ItemCatalyst",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2844
+  },
+  {
+    "name": "ams_catalyst_thorium",
+    "tab": "controlTab",
+    "class": "ItemCatalyst",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2845
+  },
+  {
+    "name": "ams_catalyst_tungsten",
+    "tab": "controlTab",
+    "class": "ItemCatalyst",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2846
+  },
+  {
+    "name": "ams_core_eyeofharmony",
+    "tab": "controlTab",
+    "class": "ItemAMSCore",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3962
+  },
+  {
+    "name": "ams_core_sing",
+    "tab": "controlTab",
+    "class": "ItemAMSCore",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3960
+  },
+  {
+    "name": "ams_core_wormhole",
+    "tab": "controlTab",
+    "class": "ItemAMSCore",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3961
+  },
+  {
+    "name": "ams_focus_blank",
+    "tab": "controlTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3955
+  },
+  {
+    "name": "ams_focus_booster",
+    "tab": "controlTab",
+    "class": "ItemCustomLore",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3957
+  },
+  {
+    "name": "ams_focus_limiter",
+    "tab": "controlTab",
+    "class": "ItemCustomLore",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3956
+  },
+  {
+    "name": "ams_lens",
+    "tab": "controlTab",
+    "class": "ItemLens",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3959
+  },
+  {
+    "name": "ams_muzzle",
+    "tab": "controlTab",
+    "class": "ItemCustomLore",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3958
+  },
+  {
+    "name": "arc_electrode",
+    "tab": "controlTab",
+    "class": "ItemArcElectrode",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3952
+  },
+  {
+    "name": "arc_electrode_burnt",
+    "tab": "controlTab",
+    "class": "ItemArcElectrodeBurnt",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3953
+  },
+  {
+    "name": "battery_advanced",
+    "tab": "controlTab",
+    "class": "ItemBattery",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3897
+  },
+  {
+    "name": "battery_advanced_cell",
+    "tab": "controlTab",
+    "class": "ItemBattery",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3907
+  },
+  {
+    "name": "battery_advanced_cell_12",
+    "tab": "controlTab",
+    "class": "ItemBattery",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3909
+  },
+  {
+    "name": "battery_advanced_cell_4",
+    "tab": "controlTab",
+    "class": "ItemBattery",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3908
+  },
+  {
+    "name": "battery_creative",
+    "tab": "controlTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3902
+  },
+  {
+    "name": "battery_generic",
+    "tab": "controlTab",
+    "class": "ItemBattery",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3896
+  },
+  {
+    "name": "battery_lithium",
+    "tab": "controlTab",
+    "class": "ItemBattery",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3898
+  },
+  {
+    "name": "battery_lithium_cell",
+    "tab": "controlTab",
+    "class": "ItemBattery",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3910
+  },
+  {
+    "name": "battery_lithium_cell_3",
+    "tab": "controlTab",
+    "class": "ItemBattery",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3911
+  },
+  {
+    "name": "battery_lithium_cell_6",
+    "tab": "controlTab",
+    "class": "ItemBattery",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3912
+  },
+  {
+    "name": "battery_potato",
+    "tab": "controlTab",
+    "class": "ItemBattery",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3933
+  },
+  {
+    "name": "battery_potatos",
+    "tab": "controlTab",
+    "class": "ItemPotatos",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3934
+  },
+  {
+    "name": "battery_red_cell",
+    "tab": "controlTab",
+    "class": "ItemBattery",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3904
+  },
+  {
+    "name": "battery_red_cell_24",
+    "tab": "controlTab",
+    "class": "ItemBattery",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3906
+  },
+  {
+    "name": "battery_red_cell_6",
+    "tab": "controlTab",
+    "class": "ItemBattery",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3905
+  },
+  {
+    "name": "battery_sc_americium",
+    "tab": "controlTab",
+    "class": "ItemSelfcharger",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3931
+  },
+  {
+    "name": "battery_sc_gold",
+    "tab": "controlTab",
+    "class": "ItemSelfcharger",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3929
+  },
+  {
+    "name": "battery_sc_lead",
+    "tab": "controlTab",
+    "class": "ItemSelfcharger",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3930
+  },
+  {
+    "name": "battery_sc_plutonium",
+    "tab": "controlTab",
+    "class": "ItemSelfcharger",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3927
+  },
+  {
+    "name": "battery_sc_polonium",
+    "tab": "controlTab",
+    "class": "ItemSelfcharger",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3928
+  },
+  {
+    "name": "battery_sc_technetium",
+    "tab": "controlTab",
+    "class": "ItemSelfcharger",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3926
+  },
+  {
+    "name": "battery_sc_uranium",
+    "tab": "controlTab",
+    "class": "ItemSelfcharger",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3925
+  },
+  {
+    "name": "battery_schrabidium",
+    "tab": "controlTab",
+    "class": "ItemBattery",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3899
+  },
+  {
+    "name": "battery_schrabidium_cell",
+    "tab": "controlTab",
+    "class": "ItemBattery",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3913
+  },
+  {
+    "name": "battery_schrabidium_cell_2",
+    "tab": "controlTab",
+    "class": "ItemBattery",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3914
+  },
+  {
+    "name": "battery_schrabidium_cell_4",
+    "tab": "controlTab",
+    "class": "ItemBattery",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3915
+  },
+  {
+    "name": "battery_spark",
+    "tab": "controlTab",
+    "class": "ItemBattery",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3900
+  },
+  {
+    "name": "battery_spark_cell_100",
+    "tab": "controlTab",
+    "class": "ItemBattery",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3918
+  },
+  {
+    "name": "battery_spark_cell_1000",
+    "tab": "controlTab",
+    "class": "ItemBattery",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3919
+  },
+  {
+    "name": "battery_spark_cell_10000",
+    "tab": "controlTab",
+    "class": "ItemBattery",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3921
+  },
+  {
+    "name": "battery_spark_cell_25",
+    "tab": "controlTab",
+    "class": "ItemBattery",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3917
+  },
+  {
+    "name": "battery_spark_cell_2500",
+    "tab": "controlTab",
+    "class": "ItemBattery",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3920
+  },
+  {
+    "name": "battery_spark_cell_6",
+    "tab": "controlTab",
+    "class": "ItemBattery",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3916
+  },
+  {
+    "name": "battery_spark_cell_power",
+    "tab": "controlTab",
+    "class": "ItemBattery",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3922
+  },
+  {
+    "name": "battery_trixite",
+    "tab": "controlTab",
+    "class": "ItemBattery",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3901
+  },
+  {
+    "name": "black_hole",
+    "tab": "controlTab",
+    "class": "ItemDrop",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2883
+  },
+  {
+    "name": "blades_advanced_alloy",
+    "tab": "controlTab",
+    "class": "ItemBlades",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2925
+  },
+  {
+    "name": "blades_desh",
+    "tab": "controlTab",
+    "class": "ItemBlades",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2926
+  },
+  {
+    "name": "blades_steel",
+    "tab": "controlTab",
+    "class": "ItemBlades",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2923
+  },
+  {
+    "name": "blades_titanium",
+    "tab": "controlTab",
+    "class": "ItemBlades",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2924
+  },
+  {
+    "name": "canister_empty",
+    "tab": "controlTab",
+    "class": "ItemCustomLore",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2967
+  },
+  {
+    "name": "canister_full",
+    "tab": "controlTab",
+    "class": "ItemCanister",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2968
+  },
+  {
+    "name": "canister_napalm",
+    "tab": "controlTab",
+    "class": "ItemCustomLore",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2969
+  },
+  {
+    "name": "catalytic_converter",
+    "tab": "controlTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2963
+  },
+  {
+    "name": "cell_anti_schrabidium",
+    "tab": "controlTab",
+    "class": "ItemDrop",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2855
+  },
+  {
+    "name": "cell_antimatter",
+    "tab": "controlTab",
+    "class": "ItemDrop",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2851
+  },
+  {
+    "name": "cell_balefire",
+    "tab": "controlTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2856
+  },
+  {
+    "name": "cell_deuterium",
+    "tab": "controlTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2852
+  },
+  {
+    "name": "cell_empty",
+    "tab": "controlTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2848
+  },
+  {
+    "name": "cell_puf6",
+    "tab": "controlTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2850
+  },
+  {
+    "name": "cell_sas3",
+    "tab": "controlTab",
+    "class": "ItemCustomLore",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2854
+  },
+  {
+    "name": "cell_tritium",
+    "tab": "controlTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2853
+  },
+  {
+    "name": "cell_uf6",
+    "tab": "controlTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2849
+  },
+  {
+    "name": "crystal_xen",
+    "tab": "controlTab",
+    "class": "ItemDrop",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2886
+  },
+  {
+    "name": "cube_power",
+    "tab": "controlTab",
+    "class": "ItemBattery",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3923
+  },
+  {
+    "name": "debris_concrete",
+    "tab": "controlTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3519
+  },
+  {
+    "name": "debris_element",
+    "tab": "controlTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3522
+  },
+  {
+    "name": "debris_exchanger",
+    "tab": "controlTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3520
+  },
+  {
+    "name": "debris_fuel",
+    "tab": "controlTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3518
+  },
+  {
+    "name": "debris_graphite",
+    "tab": "controlTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3516
+  },
+  {
+    "name": "debris_metal",
+    "tab": "controlTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3517
+  },
+  {
+    "name": "debris_shrapnel",
+    "tab": "controlTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3521
+  },
+  {
+    "name": "drillbit",
+    "tab": "controlTab",
+    "class": "ItemDrillbit",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2822
+  },
+  {
+    "name": "energy_core",
+    "tab": "controlTab",
+    "class": "ItemBattery",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3937
+  },
+  {
+    "name": "euphemium_capacitor",
+    "tab": "controlTab",
+    "class": "ItemCustomLore",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3940
+  },
+  {
+    "name": "fluid_barrel_empty",
+    "tab": "controlTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4114
+  },
+  {
+    "name": "fluid_barrel_full",
+    "tab": "controlTab",
+    "class": "ItemFluidTank",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4115
+  },
+  {
+    "name": "fluid_barrel_infinite",
+    "tab": "controlTab",
+    "class": "ItemInfiniteFluid",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4116
+  },
+  {
+    "name": "fluid_pack_empty",
+    "tab": "controlTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4117
+  },
+  {
+    "name": "fluid_pack_full",
+    "tab": "controlTab",
+    "class": "ItemFluidTank",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4118
+  },
+  {
+    "name": "fluid_tank_empty",
+    "tab": "controlTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4110
+  },
+  {
+    "name": "fluid_tank_full",
+    "tab": "controlTab",
+    "class": "ItemFluidTank",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4111
+  },
+  {
+    "name": "fluid_tank_lead_empty",
+    "tab": "controlTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4112
+  },
+  {
+    "name": "fluid_tank_lead_full",
+    "tab": "controlTab",
+    "class": "ItemFluidTank",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4113
+  },
+  {
+    "name": "fuel_additive",
+    "tab": "controlTab",
+    "class": "ItemEnumMulti",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2965
+  },
+  {
+    "name": "fuse",
+    "tab": "controlTab",
+    "class": "ItemCustomLore",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3938
+  },
+  {
+    "name": "fusion_core",
+    "tab": "controlTab",
+    "class": "ItemFusionCore",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3936
+  },
+  {
+    "name": "fusion_shield_chlorophyte",
+    "tab": "controlTab",
+    "class": "ItemFusionShield",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3967
+  },
+  {
+    "name": "fusion_shield_desh",
+    "tab": "controlTab",
+    "class": "ItemFusionShield",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3966
+  },
+  {
+    "name": "fusion_shield_tungsten",
+    "tab": "controlTab",
+    "class": "ItemFusionShield",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3965
+  },
+  {
+    "name": "fusion_shield_vaporwave",
+    "tab": "controlTab",
+    "class": "ItemFusionShield",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3968
+  },
+  {
+    "name": "gas_empty",
+    "tab": "controlTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2970
+  },
+  {
+    "name": "gas_full",
+    "tab": "controlTab",
+    "class": "ItemGasTank",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2971
+  },
+  {
+    "name": "hev_battery",
+    "tab": "controlTab",
+    "class": "ItemFusionCore",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3935
+  },
+  {
+    "name": "icf_pellet",
+    "tab": "controlTab",
+    "class": "ItemICFPellet",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3489
+  },
+  {
+    "name": "icf_pellet_depleted",
+    "tab": "controlTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3490
+  },
+  {
+    "name": "icf_pellet_empty",
+    "tab": "controlTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3488
+  },
+  {
+    "name": "inf_water",
+    "tab": "controlTab",
+    "class": "ItemInfiniteFluid",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4123
+  },
+  {
+    "name": "inf_water_mk2",
+    "tab": "controlTab",
+    "class": "ItemInfiniteFluid",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4124
+  },
+  {
+    "name": "laser_crystal_bismuth",
+    "tab": "controlTab",
+    "class": "ItemFELCrystal",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2957
+  },
+  {
+    "name": "laser_crystal_cmb",
+    "tab": "controlTab",
+    "class": "ItemFELCrystal",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2958
+  },
+  {
+    "name": "laser_crystal_co2",
+    "tab": "controlTab",
+    "class": "ItemFELCrystal",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2956
+  },
+  {
+    "name": "laser_crystal_digamma",
+    "tab": "controlTab",
+    "class": "ItemFELCrystal",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2960
+  },
+  {
+    "name": "laser_crystal_dnt",
+    "tab": "controlTab",
+    "class": "ItemFELCrystal",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2959
+  },
+  {
+    "name": "meltdown_tool",
+    "tab": "controlTab",
+    "class": "ItemDyatlov",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3846
+  },
+  {
+    "name": "mold",
+    "tab": "controlTab",
+    "class": "ItemMold",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2929
+  },
+  {
+    "name": "mold_base",
+    "tab": "controlTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2928
+  },
+  {
+    "name": "pa_coil",
+    "tab": "controlTab",
+    "class": "ItemPACoil",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2861
+  },
+  {
+    "name": "part_beryllium",
+    "tab": "controlTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2951
+  },
+  {
+    "name": "part_carbon",
+    "tab": "controlTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2952
+  },
+  {
+    "name": "part_copper",
+    "tab": "controlTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2953
+  },
+  {
+    "name": "part_lithium",
+    "tab": "controlTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2950
+  },
+  {
+    "name": "part_plutonium",
+    "tab": "controlTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2954
+  },
+  {
+    "name": "particle_aelectron",
+    "tab": "controlTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2868
+  },
+  {
+    "name": "particle_amat",
+    "tab": "controlTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2869
+  },
+  {
+    "name": "particle_aproton",
+    "tab": "controlTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2867
+  },
+  {
+    "name": "particle_aschrab",
+    "tab": "controlTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2870
+  },
+  {
+    "name": "particle_copper",
+    "tab": "controlTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2865
+  },
+  {
+    "name": "particle_dark",
+    "tab": "controlTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2875
+  },
+  {
+    "name": "particle_digamma",
+    "tab": "controlTab",
+    "class": "ItemDigamma",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2877
+  },
+  {
+    "name": "particle_empty",
+    "tab": "controlTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2863
+  },
+  {
+    "name": "particle_higgs",
+    "tab": "controlTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2871
+  },
+  {
+    "name": "particle_hydrogen",
+    "tab": "controlTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2864
+  },
+  {
+    "name": "particle_lead",
+    "tab": "controlTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2866
+  },
+  {
+    "name": "particle_lutece",
+    "tab": "controlTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2878
+  },
+  {
+    "name": "particle_muon",
+    "tab": "controlTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2872
+  },
+  {
+    "name": "particle_sparkticle",
+    "tab": "controlTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2876
+  },
+  {
+    "name": "particle_strange",
+    "tab": "controlTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2874
+  },
+  {
+    "name": "particle_tachyon",
+    "tab": "controlTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2873
+  },
+  {
+    "name": "pellet_antimatter",
+    "tab": "controlTab",
+    "class": "ItemDrop",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2885
+  },
+  {
+    "name": "pellet_rtg",
+    "tab": "controlTab",
+    "class": "ItemRTGPellet",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2809
+  },
+  {
+    "name": "pellet_rtg_actinium",
+    "tab": "controlTab",
+    "class": "ItemRTGPellet",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2812
+  },
+  {
+    "name": "pellet_rtg_americium",
+    "tab": "controlTab",
+    "class": "ItemRTGPellet",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2813
+  },
+  {
+    "name": "pellet_rtg_cobalt",
+    "tab": "controlTab",
+    "class": "ItemRTGPellet",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2811
+  },
+  {
+    "name": "pellet_rtg_depleted",
+    "tab": "controlTab",
+    "class": "ItemRTGPelletDepleted",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2805
+  },
+  {
+    "name": "pellet_rtg_gold",
+    "tab": "controlTab",
+    "class": "ItemRTGPellet",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2815
+  },
+  {
+    "name": "pellet_rtg_lead",
+    "tab": "controlTab",
+    "class": "ItemRTGPellet",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2816
+  },
+  {
+    "name": "pellet_rtg_polonium",
+    "tab": "controlTab",
+    "class": "ItemRTGPellet",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2814
+  },
+  {
+    "name": "pellet_rtg_radium",
+    "tab": "controlTab",
+    "class": "ItemRTGPellet",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2807
+  },
+  {
+    "name": "pellet_rtg_strontium",
+    "tab": "controlTab",
+    "class": "ItemRTGPellet",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2810
+  },
+  {
+    "name": "pellet_rtg_weak",
+    "tab": "controlTab",
+    "class": "ItemRTGPellet",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2808
+  },
+  {
+    "name": "pile_rod_boron",
+    "tab": "controlTab",
+    "class": "ItemPileRod",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3174
+  },
+  {
+    "name": "pile_rod_detector",
+    "tab": "controlTab",
+    "class": "ItemPileRod",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3176
+  },
+  {
+    "name": "pile_rod_lithium",
+    "tab": "controlTab",
+    "class": "ItemPileRod",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3175
+  },
+  {
+    "name": "pile_rod_plutonium",
+    "tab": "controlTab",
+    "class": "ItemPileRod",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3172
+  },
+  {
+    "name": "pile_rod_pu239",
+    "tab": "controlTab",
+    "class": "ItemPileRod",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3171
+  },
+  {
+    "name": "pile_rod_source",
+    "tab": "controlTab",
+    "class": "ItemPileRod",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3173
+  },
+  {
+    "name": "pile_rod_uranium",
+    "tab": "controlTab",
+    "class": "ItemPileRod",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3170
+  },
+  {
+    "name": "pipette",
+    "tab": "controlTab",
+    "class": "ItemPipette",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4119
+  },
+  {
+    "name": "pipette_boron",
+    "tab": "controlTab",
+    "class": "ItemPipette",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4120
+  },
+  {
+    "name": "pipette_laboratory",
+    "tab": "controlTab",
+    "class": "ItemPipette",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4121
+  },
+  {
+    "name": "piston_selenium",
+    "tab": "controlTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2820
+  },
+  {
+    "name": "piston_set",
+    "tab": "controlTab",
+    "class": "ItemPistons",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2821
+  },
+  {
+    "name": "plate_fuel_mox",
+    "tab": "controlTab",
+    "class": "ItemPlateFuel",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3180
+  },
+  {
+    "name": "plate_fuel_pu238be",
+    "tab": "controlTab",
+    "class": "ItemPlateFuel",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3184
+  },
+  {
+    "name": "plate_fuel_pu239",
+    "tab": "controlTab",
+    "class": "ItemPlateFuel",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3181
+  },
+  {
+    "name": "plate_fuel_ra226be",
+    "tab": "controlTab",
+    "class": "ItemPlateFuel",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3183
+  },
+  {
+    "name": "plate_fuel_sa326",
+    "tab": "controlTab",
+    "class": "ItemPlateFuel",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3182
+  },
+  {
+    "name": "plate_fuel_u233",
+    "tab": "controlTab",
+    "class": "ItemPlateFuel",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3178
+  },
+  {
+    "name": "plate_fuel_u235",
+    "tab": "controlTab",
+    "class": "ItemPlateFuel",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3179
+  },
+  {
+    "name": "pwr_fuel",
+    "tab": "controlTab",
+    "class": "ItemPWRFuel",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3186
+  },
+  {
+    "name": "pwr_fuel_depleted",
+    "tab": "controlTab",
+    "class": "ItemEnumMulti",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3188
+  },
+  {
+    "name": "pwr_fuel_hot",
+    "tab": "controlTab",
+    "class": "ItemEnumMulti",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3187
+  },
+  {
+    "name": "pwr_printer",
+    "tab": "controlTab",
+    "class": "ItemPWRPrinter",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3189
+  },
+  {
+    "name": "rbmk_fuel_empty",
+    "tab": "controlTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3226
+  },
+  {
+    "name": "rbmk_lid",
+    "tab": "controlTab",
+    "class": "ItemRBMKLid",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3191
+  },
+  {
+    "name": "rbmk_lid_glass",
+    "tab": "controlTab",
+    "class": "ItemRBMKLid",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3192
+  },
+  {
+    "name": "reacher",
+    "tab": "controlTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3844
+  },
+  {
+    "name": "redcoil_capacitor",
+    "tab": "controlTab",
+    "class": "ItemCapacitor",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3939
+  },
+  {
+    "name": "rod",
+    "tab": "controlTab",
+    "class": "ItemBreedingRod",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3121
+  },
+  {
+    "name": "rod_dual",
+    "tab": "controlTab",
+    "class": "ItemBreedingRod",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3123
+  },
+  {
+    "name": "rod_dual_empty",
+    "tab": "controlTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3122
+  },
+  {
+    "name": "rod_empty",
+    "tab": "controlTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3120
+  },
+  {
+    "name": "rod_quad",
+    "tab": "controlTab",
+    "class": "ItemBreedingRod",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3125
+  },
+  {
+    "name": "rod_quad_empty",
+    "tab": "controlTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3124
+  },
+  {
+    "name": "rod_zirnox",
+    "tab": "controlTab",
+    "class": "ItemZirnoxRod",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3140
+  },
+  {
+    "name": "rod_zirnox_empty",
+    "tab": "controlTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3127
+  },
+  {
+    "name": "rod_zirnox_les_fuel",
+    "tab": "controlTab",
+    "class": "ItemZirnoxRodDeprecated",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3136
+  },
+  {
+    "name": "rod_zirnox_les_fuel_depleted",
+    "tab": "controlTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3149
+  },
+  {
+    "name": "rod_zirnox_lithium",
+    "tab": "controlTab",
+    "class": "ItemZirnoxBreedingRod",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3137
+  },
+  {
+    "name": "rod_zirnox_mox_fuel",
+    "tab": "controlTab",
+    "class": "ItemZirnoxRodDeprecated",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3132
+  },
+  {
+    "name": "rod_zirnox_mox_fuel_depleted",
+    "tab": "controlTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3145
+  },
+  {
+    "name": "rod_zirnox_natural_uranium_fuel",
+    "tab": "controlTab",
+    "class": "ItemZirnoxRodDeprecated",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3128
+  },
+  {
+    "name": "rod_zirnox_natural_uranium_fuel_depleted",
+    "tab": "controlTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3142
+  },
+  {
+    "name": "rod_zirnox_plutonium_fuel",
+    "tab": "controlTab",
+    "class": "ItemZirnoxRodDeprecated",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3133
+  },
+  {
+    "name": "rod_zirnox_plutonium_fuel_depleted",
+    "tab": "controlTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3146
+  },
+  {
+    "name": "rod_zirnox_th232",
+    "tab": "controlTab",
+    "class": "ItemZirnoxBreedingRod",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3130
+  },
+  {
+    "name": "rod_zirnox_thorium_fuel",
+    "tab": "controlTab",
+    "class": "ItemZirnoxRodDeprecated",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3131
+  },
+  {
+    "name": "rod_zirnox_thorium_fuel_depleted",
+    "tab": "controlTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3144
+  },
+  {
+    "name": "rod_zirnox_tritium",
+    "tab": "controlTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3138
+  },
+  {
+    "name": "rod_zirnox_u233_fuel",
+    "tab": "controlTab",
+    "class": "ItemZirnoxRodDeprecated",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3134
+  },
+  {
+    "name": "rod_zirnox_u233_fuel_depleted",
+    "tab": "controlTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3147
+  },
+  {
+    "name": "rod_zirnox_u235_fuel",
+    "tab": "controlTab",
+    "class": "ItemZirnoxRodDeprecated",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3135
+  },
+  {
+    "name": "rod_zirnox_u235_fuel_depleted",
+    "tab": "controlTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3148
+  },
+  {
+    "name": "rod_zirnox_uranium_fuel",
+    "tab": "controlTab",
+    "class": "ItemZirnoxRodDeprecated",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3129
+  },
+  {
+    "name": "rod_zirnox_uranium_fuel_depleted",
+    "tab": "controlTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3143
+  },
+  {
+    "name": "rod_zirnox_zfb_mox",
+    "tab": "controlTab",
+    "class": "ItemZirnoxRodDeprecated",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3139
+  },
+  {
+    "name": "rod_zirnox_zfb_mox_depleted",
+    "tab": "controlTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3150
+  },
+  {
+    "name": "singularity",
+    "tab": "controlTab",
+    "class": "ItemDrop",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2880
+  },
+  {
+    "name": "singularity_counter_resonant",
+    "tab": "controlTab",
+    "class": "ItemDrop",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2881
+  },
+  {
+    "name": "singularity_spark",
+    "tab": "controlTab",
+    "class": "ItemDrop",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2884
+  },
+  {
+    "name": "singularity_super_heated",
+    "tab": "controlTab",
+    "class": "ItemDrop",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2882
+  },
+  {
+    "name": "siphon",
+    "tab": "controlTab",
+    "class": "ItemFluidSiphon",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4122
+  },
+  {
+    "name": "stamp_357",
+    "tab": "controlTab",
+    "class": "ItemStamp",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2912
+  },
+  {
+    "name": "stamp_44",
+    "tab": "controlTab",
+    "class": "ItemStamp",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2913
+  },
+  {
+    "name": "stamp_50",
+    "tab": "controlTab",
+    "class": "ItemStamp",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2915
+  },
+  {
+    "name": "stamp_9",
+    "tab": "controlTab",
+    "class": "ItemStamp",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2914
+  },
+  {
+    "name": "stamp_desh_357",
+    "tab": "controlTab",
+    "class": "ItemStamp",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2918
+  },
+  {
+    "name": "stamp_desh_44",
+    "tab": "controlTab",
+    "class": "ItemStamp",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2919
+  },
+  {
+    "name": "stamp_desh_50",
+    "tab": "controlTab",
+    "class": "ItemStamp",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2921
+  },
+  {
+    "name": "stamp_desh_9",
+    "tab": "controlTab",
+    "class": "ItemStamp",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2920
+  },
+  {
+    "name": "stamp_desh_circuit",
+    "tab": "controlTab",
+    "class": "ItemStamp",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2911
+  },
+  {
+    "name": "stamp_desh_flat",
+    "tab": "controlTab",
+    "class": "ItemStamp",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2908
+  },
+  {
+    "name": "stamp_desh_plate",
+    "tab": "controlTab",
+    "class": "ItemStamp",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2909
+  },
+  {
+    "name": "stamp_desh_wire",
+    "tab": "controlTab",
+    "class": "ItemStamp",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2910
+  },
+  {
+    "name": "stamp_iron_circuit",
+    "tab": "controlTab",
+    "class": "ItemStamp",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2895
+  },
+  {
+    "name": "stamp_iron_flat",
+    "tab": "controlTab",
+    "class": "ItemStamp",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2892
+  },
+  {
+    "name": "stamp_iron_plate",
+    "tab": "controlTab",
+    "class": "ItemStamp",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2893
+  },
+  {
+    "name": "stamp_iron_wire",
+    "tab": "controlTab",
+    "class": "ItemStamp",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2894
+  },
+  {
+    "name": "stamp_obsidian_circuit",
+    "tab": "controlTab",
+    "class": "ItemStamp",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2907
+  },
+  {
+    "name": "stamp_obsidian_flat",
+    "tab": "controlTab",
+    "class": "ItemStamp",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2904
+  },
+  {
+    "name": "stamp_obsidian_plate",
+    "tab": "controlTab",
+    "class": "ItemStamp",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2905
+  },
+  {
+    "name": "stamp_obsidian_wire",
+    "tab": "controlTab",
+    "class": "ItemStamp",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2906
+  },
+  {
+    "name": "stamp_steel_circuit",
+    "tab": "controlTab",
+    "class": "ItemStamp",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2899
+  },
+  {
+    "name": "stamp_steel_flat",
+    "tab": "controlTab",
+    "class": "ItemStamp",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2896
+  },
+  {
+    "name": "stamp_steel_plate",
+    "tab": "controlTab",
+    "class": "ItemStamp",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2897
+  },
+  {
+    "name": "stamp_steel_wire",
+    "tab": "controlTab",
+    "class": "ItemStamp",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2898
+  },
+  {
+    "name": "stamp_stone_circuit",
+    "tab": "controlTab",
+    "class": "ItemStamp",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2891
+  },
+  {
+    "name": "stamp_stone_flat",
+    "tab": "controlTab",
+    "class": "ItemStamp",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2888
+  },
+  {
+    "name": "stamp_stone_plate",
+    "tab": "controlTab",
+    "class": "ItemStamp",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2889
+  },
+  {
+    "name": "stamp_stone_wire",
+    "tab": "controlTab",
+    "class": "ItemStamp",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2890
+  },
+  {
+    "name": "stamp_titanium_circuit",
+    "tab": "controlTab",
+    "class": "ItemStamp",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2903
+  },
+  {
+    "name": "stamp_titanium_flat",
+    "tab": "controlTab",
+    "class": "ItemStamp",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2900
+  },
+  {
+    "name": "stamp_titanium_plate",
+    "tab": "controlTab",
+    "class": "ItemStamp",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2901
+  },
+  {
+    "name": "stamp_titanium_wire",
+    "tab": "controlTab",
+    "class": "ItemStamp",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2902
+  },
+  {
+    "name": "thermo_element",
+    "tab": "controlTab",
+    "class": "Item",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2962
+  },
+  {
+    "name": "tritium_deuterium_cake",
+    "tab": "controlTab",
+    "class": "ItemCustomLore",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 2818
+  },
+  {
+    "name": "upgrade_5g",
+    "tab": "controlTab",
+    "class": "ItemMachineUpgrade",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4000
+  },
+  {
+    "name": "upgrade_afterburn_1",
+    "tab": "controlTab",
+    "class": "ItemMachineUpgrade",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3985
+  },
+  {
+    "name": "upgrade_afterburn_2",
+    "tab": "controlTab",
+    "class": "ItemMachineUpgrade",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3986
+  },
+  {
+    "name": "upgrade_afterburn_3",
+    "tab": "controlTab",
+    "class": "ItemMachineUpgrade",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3987
+  },
+  {
+    "name": "upgrade_centrifuge",
+    "tab": "controlTab",
+    "class": "ItemMachineUpgrade",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3995
+  },
+  {
+    "name": "upgrade_crystallizer",
+    "tab": "controlTab",
+    "class": "ItemMachineUpgrade",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3996
+  },
+  {
+    "name": "upgrade_effect_1",
+    "tab": "controlTab",
+    "class": "ItemMachineUpgrade",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3976
+  },
+  {
+    "name": "upgrade_effect_2",
+    "tab": "controlTab",
+    "class": "ItemMachineUpgrade",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3977
+  },
+  {
+    "name": "upgrade_effect_3",
+    "tab": "controlTab",
+    "class": "ItemMachineUpgrade",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3978
+  },
+  {
+    "name": "upgrade_ejector",
+    "tab": "controlTab",
+    "class": "ItemMetaUpgrade",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4002
+  },
+  {
+    "name": "upgrade_fortune_1",
+    "tab": "controlTab",
+    "class": "ItemMachineUpgrade",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3982
+  },
+  {
+    "name": "upgrade_fortune_2",
+    "tab": "controlTab",
+    "class": "ItemMachineUpgrade",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3983
+  },
+  {
+    "name": "upgrade_fortune_3",
+    "tab": "controlTab",
+    "class": "ItemMachineUpgrade",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3984
+  },
+  {
+    "name": "upgrade_gc_speed",
+    "tab": "controlTab",
+    "class": "ItemMachineUpgrade",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3999
+  },
+  {
+    "name": "upgrade_health",
+    "tab": "controlTab",
+    "class": "ItemMachineUpgrade",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3992
+  },
+  {
+    "name": "upgrade_nullifier",
+    "tab": "controlTab",
+    "class": "ItemMachineUpgrade",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3997
+  },
+  {
+    "name": "upgrade_overdrive_1",
+    "tab": "controlTab",
+    "class": "ItemMachineUpgrade",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3988
+  },
+  {
+    "name": "upgrade_overdrive_2",
+    "tab": "controlTab",
+    "class": "ItemMachineUpgrade",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3989
+  },
+  {
+    "name": "upgrade_overdrive_3",
+    "tab": "controlTab",
+    "class": "ItemMachineUpgrade",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3990
+  },
+  {
+    "name": "upgrade_power_1",
+    "tab": "controlTab",
+    "class": "ItemMachineUpgrade",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3979
+  },
+  {
+    "name": "upgrade_power_2",
+    "tab": "controlTab",
+    "class": "ItemMachineUpgrade",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3980
+  },
+  {
+    "name": "upgrade_power_3",
+    "tab": "controlTab",
+    "class": "ItemMachineUpgrade",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3981
+  },
+  {
+    "name": "upgrade_radius",
+    "tab": "controlTab",
+    "class": "ItemMachineUpgrade",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3991
+  },
+  {
+    "name": "upgrade_screm",
+    "tab": "controlTab",
+    "class": "ItemMachineUpgrade",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3998
+  },
+  {
+    "name": "upgrade_shredder",
+    "tab": "controlTab",
+    "class": "ItemMachineUpgrade",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3994
+  },
+  {
+    "name": "upgrade_smelter",
+    "tab": "controlTab",
+    "class": "ItemMachineUpgrade",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3993
+  },
+  {
+    "name": "upgrade_speed_1",
+    "tab": "controlTab",
+    "class": "ItemMachineUpgrade",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3973
+  },
+  {
+    "name": "upgrade_speed_2",
+    "tab": "controlTab",
+    "class": "ItemMachineUpgrade",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3974
+  },
+  {
+    "name": "upgrade_speed_3",
+    "tab": "controlTab",
+    "class": "ItemMachineUpgrade",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 3975
+  },
+  {
+    "name": "upgrade_stack",
+    "tab": "controlTab",
+    "class": "ItemMetaUpgrade",
+    "file": "Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/items/ModItems.java",
+    "line": 4001
+  }
+]

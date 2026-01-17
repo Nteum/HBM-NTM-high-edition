@@ -2,6 +2,7 @@ package com.hbm.registries;
 
 import com.hbm.commands.RadiationCommand;
 import com.hbm.commands.TestCommand;
+import com.hbm.commands.WandCommand;
 import com.mojang.brigadier.CommandDispatcher;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
@@ -19,5 +20,6 @@ public class ModCommands {
 //        TestCommand.register(dispatcher);
         dispatcher.register(TestCommand.register());
         RadiationCommand.register(dispatcher);
+        WandCommand.register(dispatcher);
     }
 }

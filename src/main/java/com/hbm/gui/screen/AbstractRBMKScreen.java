@@ -172,6 +172,23 @@ public abstract class AbstractRBMKScreen<M extends BaseMachineMenu> extends Abst
         return true;
     }
 
+    protected Component recommendAction(RBMKReadings readings, int localControlPercent, int globalControlPercent) {
+        if (readings.coolantMb() < 2_000) {
+            return Component.translatable("gui.hbm.rbmk.action.coolant");
+        }
+        if (readings.energyCapacity() > 0 && readings.energyStored() >= readings.energyCapacity()) {
+            return Component.translatable("gui.hbm.rbmk.action.dump_power");
+        }
+        ReactorStatus status = resolveStatus(readings);
+        if (status == ReactorStatus.CRITICAL || status == ReactorStatus.WARNING) {
+            return Component.translatable("gui.hbm.rbmk.action.insert_rods");
+        }
+        if (localControlPercent >= 95 && readings.heat() < readings.meltdownThreshold() * 0.3F) {
+            return Component.translatable("gui.hbm.rbmk.action.raise_rods");
+        }
+        return Component.translatable("gui.hbm.rbmk.action.normal");
+    }
+
     protected record RBMKReadings(float heat, float meltdownThreshold, int energyStored,
                                   int energyCapacity, int coolantMb, int steamMb) {}
 

@@ -11,7 +11,7 @@ import net.minecraft.world.entity.player.Inventory;
 
 public class RBMKControlRodScreen extends AbstractContainerScreen<RBMKControlRodMenu> {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(HBM.MODID, "textures/gui/rbmk/gui_rbmk_control.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(HBM.MODID, "textures/gui/reactors/gui_rbmk_control.png");
     private static final int GAUGE_X = 75;
     private static final int GAUGE_Y = 29;
     private static final int GAUGE_WIDTH = 8;
@@ -70,12 +70,7 @@ public class RBMKControlRodScreen extends AbstractContainerScreen<RBMKControlRod
 
     @Override
     protected void renderLabels(GuiGraphics graphics, int mouseX, int mouseY) {
-        int titleWidth = this.font.width(this.title);
-        graphics.drawString(this.font, this.title, this.imageWidth / 2 - titleWidth / 2, 6, 0x404040, false);
-        graphics.drawString(this.font, this.playerInventoryTitle, 8, this.imageHeight - 96 + 2, 0x404040, false);
-        if (!menu.hasControlRodItem()) {
-            graphics.drawString(this.font, Component.translatable("gui.hbm.rbmk.control.missing_rod"), 8, 64, 0xFF5555, false);
-        }
+        // 旧版 RBMK 控制棒 GUI 无标题/文本叠加
     }
 
     @Override

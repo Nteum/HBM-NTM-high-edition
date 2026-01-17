@@ -3,10 +3,10 @@ package com.hbm.Inventory.recipe;
 import com.hbm.HBM;
 import com.hbm.HBMKey;
 import net.minecraft.world.Container;
-import net.minecraft.world.item.crafting.BlastingRecipe;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.SimpleCraftingRecipeSerializer;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -19,6 +19,8 @@ public class ModRecipes {
     public static final RecipeHolder<AssemblerRecipe> ASSEMBLER = register(HBMKey.ASSEMBLER, AssemblerRecipe.Serializer.INSTANCE);
     public static final RecipeHolder<ChemplantRecipe> CHEMPLANT = register(HBMKey.CHEMPLANT, ChemplantRecipe.SERIALIZER);
     public static final RecipeHolder<ShredderRecipe> SHREDDER = register(HBMKey.SHREDDER, ShredderRecipe.Serializer.INSTANCE);
+    public static final RegistryObject<RecipeSerializer<PWRFuelPrinterRecipe>> PWR_FUEL_PRINTER =
+            SERIALIZER.register("pwr_fuel_printer", () -> new SimpleCraftingRecipeSerializer<>(PWRFuelPrinterRecipe::new));
 //    public static final RegistryObject<RecipeSerializer<BlastFurnaceRecipe>> ALLOY_SERIALIZER =
 //            SERIALIZER.register(HBMKey.BLAST,()-> BlastFurnaceRecipe.Serializer.INSTANCE);
 //    public static final RegistryObject<RecipeSerializer<AssemblerRecipe>> ASSEMBLER_SERIALIZER =

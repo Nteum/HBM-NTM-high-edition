@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SSS",
+    "LBL",
+    "SSS"
+  ],
+  "key": {
+    "S": {
+      "item": "hbm:plate_steel"
+    },
+    "L": {
+      "item": "hbm:battery_lithium"
+    },
+    "B": {
+      "item": "hbm:machine_battery"
+    }
+  },
+  "result": {
+    "item": "hbm:machine_lithium_battery"
+  }
+}

@@ -26,13 +26,14 @@ public class RBMKFuelChannelMenu extends BaseMachineMenu {
     private static final int FUEL_SLOT_INDEX = 0;     // 燃料棒槽位
     private static final int OUTPUT_SLOT_INDEX = 1;   // 废燃料槽位
 
-    private static final int INPUT_SLOT_X = 50;
-    private static final int INPUT_SLOT_Y = 52;
-    private static final int OUTPUT_SLOT_X = 110;
-    private static final int OUTPUT_SLOT_Y = 52;
+    // 对齐旧版 RBMK GUI（中心列 3 格中的上/下格）
+    private static final int INPUT_SLOT_X = 80;
+    private static final int INPUT_SLOT_Y = 45;
+    private static final int OUTPUT_SLOT_X = 80;
+    private static final int OUTPUT_SLOT_Y = 45;
 
-    private static final int PLAYER_INV_X_OFFSET = 0;
-    private static final int PLAYER_INV_Y_OFFSET = 0;
+    private static final int PLAYER_INV_X_OFFSET = -1;
+    private static final int PLAYER_INV_Y_OFFSET = 19;
     private static final int TANK_CAPACITY = 16_000; // RBMK Base 的冷却水/蒸汽容量
 
     private final ContainerLevelAccess access;
@@ -68,6 +69,11 @@ public class RBMKFuelChannelMenu extends BaseMachineMenu {
             public boolean mayPlace(ItemStack stack) {
                 return isFuelRod(stack);
             }
+
+            @Override
+            public boolean isActive() {
+                return RBMKFuelChannelMenu.this.container.getItem(OUTPUT_SLOT_INDEX).isEmpty();
+            }
         });
 
         // 废燃料输出槽：只负责产物输出，禁止放入
@@ -75,6 +81,11 @@ public class RBMKFuelChannelMenu extends BaseMachineMenu {
             @Override
             public boolean mayPlace(ItemStack stack) {
                 return false;
+            }
+
+            @Override
+            public boolean isActive() {
+                return this.hasItem();
             }
         });
 

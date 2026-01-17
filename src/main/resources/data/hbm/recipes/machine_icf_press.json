@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "SPS",
+    "CMC",
+    "IRI"
+  ],
+  "key": {
+    "S": { "item": "hbm:plate_steel" },
+    "P": { "item": "minecraft:piston" },
+    "C": { "item": "hbm:circuit_basic" },
+    "M": { "item": "hbm:piston_set" },
+    "I": { "item": "minecraft:iron_ingot" },
+    "R": { "item": "minecraft:redstone_block" }
+  },
+  "result": {
+    "item": "hbm:machine_icf_press"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "hbm:chemplant",
+  "duration": 40,
+  "inputFluids": [
+    {
+      "fluids": "minecraft:water",
+      "volume": 4000
+    }
+  ],
+  "inputItems": [
+    {
+      "count": 4,
+      "item": "minecraft:prismarine_crystals"
+    }
+  ],
+  "resultFluids": [
+    {
+      "amount": 250,
+      "fluids": "hbm:chlorine"
+    }
+  ],
+  "resultItems": []
+}
