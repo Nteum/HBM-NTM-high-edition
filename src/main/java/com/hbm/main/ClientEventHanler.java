@@ -7,26 +7,12 @@ import com.hbm.config.ConfigLBSM;
 import com.hbm.entity.ModEntityType;
 import com.hbm.gui.ModMenuType;
 import com.hbm.gui.screen.*;
-<<<<<<< HEAD
-import com.hbm.item.tool.FluidBucketItem;
-=======
-import com.hbm.gui.screen.RenderUtils;
 import com.hbm.item.HBMItems;
+import com.hbm.item.icf.ItemICFPellet;
 import com.hbm.item.pwr.ItemPWRFuel;
-import com.hbm.item.zirnox.ItemZirnoxRod;
 import com.hbm.item.research.ItemBreedingRod;
 import com.hbm.item.tool.FluidBucketItem;
-import com.hbm.item.icf.ItemICFPellet;
-import com.hbm.registries.ModKeyMapping;
-import com.hbm.registries.ModItems;
-import com.hbm.render.entity.missile.MissileTaintRenderer;
-import com.hbm.render.entity.mob.GlyphidRender;
-import com.hbm.render.model.Models;
-import com.hbm.render.overlay.AtomicFlashOverlay;
-import com.hbm.render.overlay.DebugTagOverlay;
-import com.hbm.render.pipeline.GeoRenderPipeline;
-import com.hbm.render.model.entity.TestEntityModel;
->>>>>>> 6e858a28 (反应堆已全部搬运完毕、配方以及生存可玩性都可用。)
+import com.hbm.item.zirnox.ItemZirnoxRod;
 import com.hbm.particle.ModParticleTypes;
 import com.hbm.registries.ModItems;
 import com.hbm.registries.ModKeyMapping;
@@ -44,6 +30,7 @@ import com.hbm.render.item.SpecialItemRender;
 import com.hbm.render.model.Models;
 import com.hbm.render.model.entity.TestEntityModel;
 import com.hbm.render.overlay.AtomicFlashOverlay;
+import com.hbm.render.overlay.DebugTagOverlay;
 import com.hbm.render.pipeline.GeoRenderPipeline;
 import com.hbm.settings.tooltip.TooltipRegistries;
 import net.minecraft.client.gui.screens.MenuScreens;
@@ -61,8 +48,6 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
-
-;
 
 //@Mod.EventBusSubscriber(modid = HBM.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 @OnlyIn(Dist.CLIENT)
@@ -89,9 +74,6 @@ public class ClientEventHanler {
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event)
     {
-        // 物品贴图逻辑
-        ItemProperties.register(ModItems.INGOT_U238M2.get(), HBM.rl("stage"),
-                (stack, level, entity, seed) -> stack.hasTag() && stack.getTag().contains("stage", Tag.TAG_INT) ? (float) stack.getTag().getInt("stage") : 0);
         /** 注册menu和gui */
         event.enqueueWork(()-> {
             // menu和screen的对应关系
@@ -148,15 +130,12 @@ public class ClientEventHanler {
             EntityRenderers.register(ModEntityType.ENTITY_RUBBLE.get(), RenderRubble::new);
 
             RenderUtils.init();
-<<<<<<< HEAD
-        });
-        event.enqueueWork(() -> {
+            // 物品贴图逻辑
+            ItemProperties.register(ModItems.INGOT_U238M2.get(), HBM.rl("stage"),
+                    (stack, level, entity, seed) -> stack.hasTag() && stack.getTag().contains("stage", Tag.TAG_INT)
+                            ? (float) stack.getTag().getInt("stage") : 0);
             ItemProperties.register(ModItems.INGOT_NEPTUNIUM.get(), HBM.rl("stage"),
                     (stack, level, entity, seed) -> ConfigLBSM.enableLBSM && ConfigLBSM.enableLBSMFullSchrab ? 1 : 0);
-=======
-            // 物品贴图逻辑
-            ItemProperties.register(HBMItems.INGOT_U238M2.get(), HBM.rl("stage"),
-                    (stack, level, entity, seed) -> stack.hasTag() ? stack.getTag().getInt("stage") : 0);
             ItemProperties.register(HBMItems.pwr_fuel.get(), HBM.rl("pwr_type"),
                     (stack, level, entity, seed) -> ItemPWRFuel.getFuelTypeIndex(stack));
             ItemProperties.register(HBMItems.rod_zirnox.get(), HBM.rl("zirnox_type"),
@@ -167,7 +146,6 @@ public class ClientEventHanler {
                     (stack, level, entity, seed) -> ItemBreedingRod.getType(stack).ordinal());
             ItemProperties.register(HBMItems.rod_breeder_quad.get(), HBM.rl("breeder_type"),
                     (stack, level, entity, seed) -> ItemBreedingRod.getType(stack).ordinal());
->>>>>>> 6e858a28 (反应堆已全部搬运完毕、配方以及生存可玩性都可用。)
         });
     }
 
@@ -275,11 +253,7 @@ public class ClientEventHanler {
         // 流体桶的染色
         FluidBucketItem[] fluidBucketItems = ModFluids.fluidList.stream().map(holder -> holder.bucket().get()).filter(bucket -> bucket instanceof FluidBucketItem).toArray(FluidBucketItem[]::new);
         event.register(FluidBucketItem::getColor, fluidBucketItems);
-<<<<<<< HEAD
         event.register((itemstack,color)->0xEC9A63, ModItems.BEDROCK_ORE.get());
-=======
-        event.register((itemstack,color)->0xEC9A63, HBMItems.BEDROCK_ORE.get());
         event.register((stack, tintIndex) -> tintIndex == 0 ? ItemICFPellet.getFuelColor(stack) : 0xFFFFFF, HBMItems.icf_pellet.get());
->>>>>>> 6e858a28 (反应堆已全部搬运完毕、配方以及生存可玩性都可用。)
     }
 }

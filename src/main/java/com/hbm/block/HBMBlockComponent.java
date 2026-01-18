@@ -1,6 +1,7 @@
 package com.hbm.block;
 
 import com.hbm.HBM;
+import com.hbm.block.decoriate.BlockOilOre;
 import com.hbm.block.decoriate.BlockOre;
 import com.hbm.block.env.BedRockOre;
 import com.hbm.block.env.WasteEarth;
@@ -95,9 +96,13 @@ public class HBMBlockComponent {
         ASBESTOS_ORE = registerWithItem("ore_asbestos",()->new BlockOre(BlockBehaviour.Properties.copy(Blocks.STONE)), true);
         BASALT_ASBESTOS_ORE = registerWithItem("ore_basalt_asbestos",()->new BlockOre(BlockBehaviour.Properties.copy(Blocks.BASALT)), true);
         //oil
-        OIL_ORE = registerWithItem("ore_oil",()->new BlockOre(BlockBehaviour.Properties.copy(Blocks.GOLD_ORE)), true);
+        OIL_ORE = registerWithItem("ore_oil", () -> new BlockOilOre(
+                BlockBehaviour.Properties.copy(Blocks.GOLD_ORE),
+                () -> OIL_ORE_EMPTY.get().defaultBlockState()), true);
         OIL_ORE_EMPTY = registerWithItem("oil_ore_empty",()->new BlockOre(BlockBehaviour.Properties.copy(Blocks.GOLD_ORE)), true);
-        OIL_ORE_SAND = registerWithItem("oil_ore_sand",()->new BlockOre(BlockBehaviour.Properties.copy(Blocks.SAND)), true);
+        OIL_ORE_SAND = registerWithItem("oil_ore_sand", () -> new BlockOilOre(
+                BlockBehaviour.Properties.copy(Blocks.SAND),
+                () -> Blocks.SAND.defaultBlockState()), true);
         //rare ore
         RARE_EARTH_ORE = registerWithItem("rare_earth",()->new BlockOre(BlockBehaviour.Properties.copy(Blocks.GOLD_ORE)), true);
         DEEPSLATE_RARE_EARTH_ORE = registerWithItem("ore_deepslate_rare",()->new BlockOre(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_GOLD_ORE)), true);

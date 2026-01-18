@@ -13,8 +13,6 @@ import com.hbm.block.env.GlyphidSpawner;
 import com.hbm.block.env.WasteEarth;
 import com.hbm.block.env.WasteLeaves;
 import com.hbm.block.logistic.BlockCable;
-<<<<<<< HEAD
-=======
 import com.hbm.block.machine.*;
 import com.hbm.block.machine.icf.BlockICFController;
 import com.hbm.block.machine.icf.BlockICFPress;
@@ -32,7 +30,6 @@ import com.hbm.block.machine.generator.BlockPWR;
 import com.hbm.block.machine.generator.BlockPWRController;
 import com.hbm.block.machine.generator.BlockPWRPillar;
 import com.hbm.block.machine.generator.BlockGenericPWR;
->>>>>>> 6e858a28 (反应堆已全部搬运完毕、配方以及生存可玩性都可用。)
 import com.hbm.block.logistic.BlockConveyor;
 import com.hbm.block.machine.*;
 import com.hbm.block.machine.rbmk.*;

@@ -144,6 +144,13 @@ public class WrapperRegistry<T> implements Supplier<T>{
 
         @Override
         public RegistryObject<Item> build() {
+            RegistryObject<Item> existing = ModItems.ITEMS.getEntries().stream()
+                    .filter(entry -> entry.getId().getPath().equals(name))
+                    .findFirst()
+                    .orElse(null);
+            if (existing != null) {
+                return existing;
+            }
             WrappedItemRegistry itemRegistry = new WrappedItemRegistry();
             itemRegistry.registryObject = ModItems.ITEMS.register(name, sup);
             itemRegistry.creativeKey = creativeKey;

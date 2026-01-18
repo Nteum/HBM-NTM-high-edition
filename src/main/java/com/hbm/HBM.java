@@ -21,6 +21,7 @@ import com.hbm.datagen.tag.BlockTagsGen;
 import com.hbm.datagen.tag.ItemTagsGen;
 import com.hbm.dim.HBMChunkGenerators;
 import com.hbm.effect.ModEffects;
+import com.hbm.item.HBMItems;
 import com.hbm.registries.ModItems;
 import com.hbm.main.ClientEventHanler;
 import com.hbm.main.ServerEventHandler;
@@ -101,8 +102,10 @@ public class HBM {
 
         //模组内容的注册
         ModEntityType.ENTITY_TYPES.register(modEventBus);
+        HBMItems.bootstrap();
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
+        ModCreativeModeTab.CREATIVE_MODE_TABS.register(modEventBus);
         ModTabs.CREATIVE_MODE_TABS.register(modEventBus);
         ModBlockEntityType.REGISTER.register(modEventBus);
         ModRecipes.RECIPE_TYPE.register(modEventBus);

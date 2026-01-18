@@ -54,12 +54,9 @@ public class ModCreativeModeTab {
 //
 //            output.accept(ModItems.BEDROCK_ORE.get());
 
-<<<<<<< HEAD
-//            output.accept(HBMtools.UPGRADE_BASE.get());
-            output.accept(ModItems.WOOD_ASH_POWDER.get());
-=======
+            output.accept(ModItems.UPGRADE_BASE.get());
             output.accept(HBMtools.UPGRADE_BASE.get());
-            output.accept(HBMItems.WOOD_ASH_POWDER.get());
+            output.accept(ModItems.WOOD_ASH_POWDER.get());
             for (com.hbm.reactor.pwr.PWRFuelType type : com.hbm.reactor.pwr.PWRFuelType.values()) {
                 output.accept(com.hbm.item.pwr.ItemPWRFuel.createStack(HBMItems.pwr_fuel.get(), type));
                 output.accept(com.hbm.item.pwr.ItemPWRFuel.createStack(HBMItems.pwr_fuel_hot.get(), type));
@@ -87,7 +84,6 @@ public class ModCreativeModeTab {
                 output.accept(com.hbm.item.research.ItemBreedingRod.createStack(com.hbm.item.research.ItemBreedingRod.RodForm.DUAL, type));
                 output.accept(com.hbm.item.research.ItemBreedingRod.createStack(com.hbm.item.research.ItemBreedingRod.RodForm.QUAD, type));
             }
->>>>>>> 6e858a28 (反应堆已全部搬运完毕、配方以及生存可玩性都可用。)
 
             HBMComponent.creativeTab(output);
         }).build());
@@ -185,9 +181,7 @@ public class ModCreativeModeTab {
             output.accept(ModBlocks.crate_iron.get());
             output.accept(ModBlocks.crate_steel.get());
 
-            output.accept(ModItems.SCREWDRIVER.get());
-
-//            HBMtools.creativeTab(output);
+            HBMtools.creativeTab(output);
             HBMWeapon.creativeTab(output);
         for (ModFluids.FluidRegistryHolder registryHolder : ModFluids.fluidList) {
                 output.accept((BucketItem)registryHolder.bucket().get());
@@ -213,6 +207,7 @@ public class ModCreativeModeTab {
      * */
     public static void addCreative(BuildCreativeModeTabContentsEvent event){
             ModItems.creativeTab(event);
+            HBMItems.creativeTab(event);
             ModBlocks.creativeTab(event);
             if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS){}
 
@@ -238,7 +233,7 @@ public class ModCreativeModeTab {
             else if (event.getTabKey() == HBM_MISSILE.getKey()){
                     event.getEntries().put(new ItemStack(HBMWeapon.MP_WARHEAD_15_BALEFIRE.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
                     event.getEntries().put(new ItemStack(HBMMachine.LAUNCH_PAD.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-//                    event.getEntries().put(new ItemStack(HBMtools.DESIGNATOR.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+                    event.getEntries().put(new ItemStack(HBMtools.DESIGNATOR.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
             }
     }
 
