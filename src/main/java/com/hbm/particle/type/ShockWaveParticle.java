@@ -1,5 +1,6 @@
 package com.hbm.particle.type;
 
+import com.hbm.particle.ParticleRenderTypes;
 import com.mojang.blaze3d.platform.GlConst;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
@@ -37,24 +38,7 @@ public class ShockWaveParticle extends TextureSheetParticle {
 
     @Override
     public ParticleRenderType getRenderType() {
-        return new ParticleRenderType() {
-            @Override
-            public void begin(BufferBuilder pBuilder, TextureManager pTextureManager) {
-                RenderSystem.enableBlend();
-                RenderSystem.depthMask(false);
-                RenderSystem.blendFunc(GlConst.GL_SRC_ALPHA, GlConst.GL_ONE);
-                RenderSystem.disableCull();
-                pBuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.PARTICLE);
-            }
-
-            @Override
-            public void end(Tesselator pTesselator) {
-                pTesselator.end();
-            }
-            public String toString() {
-                return "SHOCK_WAVE";
-            }
-        };
+        return ParticleRenderTypes.SHOCK_WAVE;
     }
 
     @Override

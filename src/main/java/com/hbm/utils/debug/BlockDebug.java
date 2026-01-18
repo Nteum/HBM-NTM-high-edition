@@ -1,5 +1,6 @@
 package com.hbm.utils.debug;
 
+import com.hbm.entity.effect.EntityMeteor;
 import com.hbm.registries.ModItems;
 import com.hbm.item.HBMtools;
 import com.hbm.particle.ModParticleTypes;
@@ -38,11 +39,12 @@ public class BlockDebug extends Block {
 
     @Override
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-        if (!pLevel.isClientSide && pPlayer.getItemInHand(pHand).is(ModItems.DEBUG_WAND.get())){
-//            BlockState newState = pState.cycle(ACTIVE);
-//            pLevel.setBlock(pPos, newState,2);
-//            pPlayer.sendSystemMessage(Component.literal("Debug block switch to " + (newState.getValue(ACTIVE) ? "active" : "inactive")));
-            dropParticle(ModParticleTypes.DEAD_LEAF.get(), pLevel, pPos, pPlayer);
+        if (!pLevel.isClientSide){
+            if (pPlayer.getItemInHand(pHand).is(ModItems.DEBUG_WAND.get()))
+                dropParticle(ModParticleTypes.DEAD_LEAF.get(), pLevel, pPos, pPlayer);
+            else if (pPlayer.getItemInHand(pHand).is(ModItems.METEOR_REMOTE.get())){
+                testMeteorite(pState, pLevel, pPos, pPlayer);
+            }
         }
         if (pLevel.isClientSide){
 
@@ -79,5 +81,13 @@ public class BlockDebug extends Block {
         }else {
             pLevel.addParticle(type, center.x, center.y, center.z, 0, 0, 0);
         }
+    }
+
+    // 测试陨石实体
+    public void testMeteorite(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer){
+        if (pState.getValue(ACTIVE)) return;
+        EntityMeteor meteor = new EntityMeteor(pLevel);
+        meteor.setPos(pPos.getCenter().x, pPos.getCenter().y + 300, pPos.getCenter().z);
+        pLevel.addFreshEntity(meteor);
     }
 }

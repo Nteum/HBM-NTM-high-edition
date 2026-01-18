@@ -45,6 +45,8 @@ public class CommonConfig {
 		Config528.addConfig(builder);
 		ConfigLBSM.addConfig(builder);
 
+		ConfigWorld.addConfig(builder);
+
 		CONFIG_SPEC = builder.build();
 	}
 

@@ -1,0 +1,8 @@
+{
+  "type": "hbm:meteorite",
+  "config": {
+    "allowSpecials": false,
+    "damagingImpact": false,
+    "safe": false
+  }
+}

@@ -3,10 +3,12 @@ package com.hbm.entity;
 import com.hbm.HBM;
 import com.hbm.HBMKey;
 import com.hbm.entity.effect.EntityBlackHole;
+import com.hbm.entity.effect.EntityMeteor;
 import com.hbm.entity.effect.EntityNukeTorex;
 import com.hbm.entity.logic.EntityNukeExplosionMK5;
 //import com.hbm.entity.mob.EntityGlyphid;
 import com.hbm.entity.mob.EntityGlyphid;
+import com.hbm.entity.projectile.EntityRubble;
 import com.hbm.entity.weapon.grenade.*;
 //import com.hbm.entity.logic.GrenadeGeneticEntity;
 //import com.hbm.entity.logic.NukeExplodeEntity;
@@ -54,6 +56,10 @@ public class ModEntityType {
             = register("black_hole",EntityType.Builder.<EntityBlackHole>of(EntityBlackHole::new, MobCategory.MISC));
     public static final RegistryObject<EntityType<EntityNukeTorex>> ENTITY_NUKE_TOREX
             = register("torex",EntityType.Builder.<EntityNukeTorex>of(EntityNukeTorex::new, MobCategory.MISC));
+    public static final RegistryObject<EntityType<EntityMeteor>> ENTITY_METEOR
+            = register("meteor",EntityType.Builder.<EntityMeteor>of(EntityMeteor::new, MobCategory.MISC).sized(4f, 4f).fireImmune());
+    public static final RegistryObject<EntityType<EntityRubble>> ENTITY_RUBBLE
+            = register("rubble",EntityType.Builder.<EntityRubble>of(EntityRubble::new, MobCategory.MISC));
     /**
      * 炸弹实体
      * */

@@ -73,6 +73,7 @@ public enum HBMLang implements ILangEntry {
     ITEM_INGOTCOMBINE_STEEL_DESC("*insert Civil Protection reference here*"),
     ITEM_DUST_DESC("I hate dust!"),
     ITEM_POWDER_FIRE_DESC("Used in multi purpose bombs:$Incendiary bombs are fun!"),
+    ITEM_METEOR_REMOTE_DESC("Right click to summon a meteorite!"),
     // handoverTexts
     ENERGY("item","battery.tooltip"),
     FLUID_CAPACITY("item","fluid_capacity"),

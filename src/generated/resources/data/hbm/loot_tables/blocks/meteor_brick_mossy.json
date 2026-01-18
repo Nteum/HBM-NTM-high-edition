@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:dirt"
+          "name": "hbm:meteor_brick_mossy"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "hbm:blocks/wast_earth"
+  "random_sequence": "hbm:blocks/meteor_brick_mossy"
 }

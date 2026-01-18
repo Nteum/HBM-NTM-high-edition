@@ -1,0 +1,16 @@
+{
+  "type": "hbm:mete_creator",
+  "config": {
+    "core_target": {
+      "Name": "minecraft:basalt",
+      "Properties": {
+        "axis": "y"
+      }
+    },
+    "max_size": 24,
+    "min_size": 8,
+    "target": {
+      "Name": "hbm:moon_rock"
+    }
+  }
+}

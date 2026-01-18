@@ -2,10 +2,7 @@ package com.hbm.particle;
 
 import com.hbm.HBM;
 import com.hbm.datagen.HBMJsonProvider;
-import com.hbm.particle.type.DeadLeafParticle;
-import com.hbm.particle.type.HBMSmokeParticle;
-import com.hbm.particle.type.ParticleRocketFlame;
-import com.hbm.particle.type.ShockWaveParticle;
+import com.hbm.particle.type.*;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleEngine;
@@ -23,25 +20,35 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 //注册所有的粒子类型
 public class ModParticleTypes {
     public static final DeferredRegister<ParticleType<?>> PARTICLE_TYPES = DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, HBM.MODID);
     public static final Map<RegistryObject<SimpleParticleType>, ParticleEngine.SpriteParticleRegistration<SimpleParticleType>> simpleParticles = new HashMap<>();
+    public static Map<String, String> texMap = new HashMap<>();
 
-    public static final RegistryObject<SimpleParticleType> HBM_SMOKE = PARTICLE_TYPES.register("nuke_smoke",() -> new SimpleParticleType(false));
-    public static final RegistryObject<SimpleParticleType> ROCKET_FLAME = PARTICLE_TYPES.register("missile_contrail",() -> new SimpleParticleType(false));
-    public static final RegistryObject<SimpleParticleType> RADIATION_FOG = PARTICLE_TYPES.register("fog",() -> new SimpleParticleType(false));
+    public static final RegistryObject<SimpleParticleType> HBM_SMOKE = addSimple("nuke_smoke",HBMSmokeParticle::new);
+    public static final RegistryObject<SimpleParticleType> ROCKET_FLAME = addSimple("rocket_flame", "contrail", ParticleRocketFlame::new, true);
+    public static final RegistryObject<SimpleParticleType> RADIATION_FOG = addSimple("radiation_fog", "fog", ParticleRadiationFog::new);
     public static final RegistryObject<SimpleParticleType> SHOCKWAVE = addSimple("shockwave", ShockWaveParticle::new);
     public static final RegistryObject<SimpleParticleType> DEAD_LEAF = addSimple("dead_leaf", DeadLeafParticle::new);
-    public static final RegistryObject<SimpleParticleType> LAUNCH_SMOKE = addSimple("launch_smoke", DeadLeafParticle::new);
+    public static final RegistryObject<SimpleParticleType> LAUNCH_SMOKE = addSimple("launch_smoke", "contrail", ParticleSmokePlume::new);
+    public static final RegistryObject<SimpleParticleType> CONTRAIL = addSimple("contrail", "contrail", ParticleContrail::new);
+    public static final RegistryObject<SimpleParticleType> EX_SMOKE = addSimple("ex_smoke", "particle_base", ParticleExSmoke::new);
+    public static final RegistryObject<SimpleParticleType> DIGAMMA_SMOKE = addSimple("digamma_smoke", "particle_base", ParticleDigammaSmoke::new);
+    public static final RegistryObject<SimpleParticleType> FOAM = addSimple("foam", "particle_base", ParticleFoam::new);
+    public static final RegistryObject<SimpleParticleType> LETTER = addSimple("letter", "particle_base", ParticleLetter::new);
+    public static final RegistryObject<SimpleParticleType> MUKEWAVE = addSimple("mukewave", "shockwave", ParticleMukeWave::new);
 
     public static RegistryObject<SimpleParticleType> addSimple(String name, SimpleParticleConstructor<? extends Particle> constructor){
-        RegistryObject<SimpleParticleType> object = PARTICLE_TYPES.register(name, () -> new SimpleParticleType(false));
+        return addSimple(name, name, constructor);
+    }
+    public static RegistryObject<SimpleParticleType> addSimple(String name, String tex, SimpleParticleConstructor<? extends Particle> constructor){
+        return addSimple(name, tex, constructor, false);
+    }
+    public static RegistryObject<SimpleParticleType> addSimple(String name, String tex, SimpleParticleConstructor<? extends Particle> constructor, boolean overridelimiter){
+        RegistryObject<SimpleParticleType> object = PARTICLE_TYPES.register(name, () -> new SimpleParticleType(overridelimiter));
         simpleParticles.put(object, spriteSet -> new ParticleProvider<>() {
             @Nullable
             @Override
@@ -49,17 +56,19 @@ public class ModParticleTypes {
                 return constructor.create(pLevel, pX, pY, pZ, pXSpeed, pYSpeed, pZSpeed, spriteSet);
             }
         });
+        texMap.put(name, tex);
         return object;
     }
     public static void register(RegisterParticleProvidersEvent event){
         //注册模组专属粒子效果
-        event.registerSpriteSet(ModParticleTypes.HBM_SMOKE.get(), HBMSmokeParticle.Provider::new);
-        event.registerSpriteSet(ModParticleTypes.ROCKET_FLAME.get(), ParticleRocketFlame.Provider::new);
         simpleParticles.forEach((registry, provider) -> event.registerSpriteSet(registry.get(), provider));
     }
 
     public static void generateJson(HBMJsonProvider provider){
-        simpleParticles.forEach((k,v) -> provider.simpleParticle(k.getId().getPath()));
+//        simpleParticles.forEach((k,v) -> provider.simpleParticle(k.getId().getPath()));
+        // 由于hbm中多种粒子复用同一个贴图，因此这里直接把名称分为两部分
+        simpleParticles.forEach((k,v) -> provider.simpleParticle2Name(k.getId().getPath(), texMap.get(k.getId().getPath())));
+//        texMap = null;
     }
 
     @FunctionalInterface

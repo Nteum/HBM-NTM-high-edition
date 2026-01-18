@@ -16,6 +16,7 @@ public class HBMKey {
     public static final String MODEL_CUBE_ALL = "model_cube_all";
     public static final String MODEL_FRONT_SIDE = "model_front_side";
     public static final String MODEL_FRONT_SIDE_TOP = "model_front_side_top";
+    public static final String MODEL_PILLAR = "model_pillar";
     public static final String MODEL_EXISTING_FILE = "model_existing_file";
     public static final String MODEL_STANDALONE = "model_standalone";
     public static final String MODEL_DIFURNACE = "model_difurnace";
@@ -28,6 +29,7 @@ public class HBMKey {
     public static final String DROP_SELF = "drop_self";
     public static final String DROP_NONE = "drop_none";
     public static final String DROP_STANDALONE = "drop_standalone";
+    public static final String DROP_NO_EXIST = "drop_no_exist";
     public static final String SHREDDER = "shredder";
     // key relate to capability
     public static final String DATA = "hbmdata";

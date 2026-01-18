@@ -143,7 +143,9 @@ public class BlockStateGen extends BlockStateProvider {
 
         //线缆
         cableBlockWithItem();
-        //电池
+
+        simpleBlockWithItem(ModBlocks.WASTE_LEAVES.get(), genBuiltInModelFile(ModBlocks.WASTE_LEAVES.get(), "leaves"));
+        simpleBlockWithItem(ModBlocks.WASTE_GRASS.get(), genBuiltInModelFile(ModBlocks.WASTE_GRASS.get(), "cube_bottom_top"));
     }
     // 方块和物品：纯cube all
     public void simpleBlockWithItem(Block block){
@@ -241,5 +243,18 @@ public class BlockStateGen extends BlockStateProvider {
     }
     public String name(Block block) {
         return key(block).getPath();
+    }
+
+    public ModelFile genBuiltInModelFile(Block block, String type){
+        String name = name(block);
+        ResourceLocation blockTexture = blockTexture(block);
+        return switch (type){
+            case "cube_all" -> cubeAll(block);
+            case "cube_top" -> models().cubeTop(name, blockTexture.withSuffix("side"), blockTexture.withSuffix("top"));
+            case "cube_bottom_top" -> models().cubeBottomTop(name, blockTexture.withSuffix("side"), blockTexture.withSuffix("bottom"), blockTexture.withSuffix("top"));
+            case "cube_column" -> models().cubeColumn(name, blockTexture.withSuffix("side"), blockTexture.withSuffix("end"));
+            case "leaves" -> models().leaves(name, blockTexture);
+            default -> throw new IllegalStateException("Unexpected value: " + type);
+        };
     }
 }
