@@ -3,8 +3,8 @@ package com.hbm.block.machine.pile;
 import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.blockentity.machine.pile.ChicagoFuelBlockEntity;
 import com.hbm.blockentity.machine.pile.ChicagoPileBlockEntity;
-import com.hbm.item.HBMItems;
 import com.hbm.registries.ModBlocks;
+import com.hbm.registries.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -66,7 +66,7 @@ public class ChicagoGraphiteFuelBlock extends ChicagoMachineBlock {
                         popResource(level, pos, stack);
                     }
                 } else {
-                    popResource(level, pos, new ItemStack(HBMItems.PILE_ROD_URANIUM.get()));
+                    popResource(level, pos, new ItemStack(ModItems.PILE_ROD_URANIUM.get()));
                 }
             }
         }

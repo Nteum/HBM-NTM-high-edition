@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "P": {
+      "item": "hbm:plate_polymer"
+    },
+    "W": {
+      "item": "hbm:wire_aluminium"
+    }
+  },
+  "pattern": [
+    " P ",
+    "WWW",
+    " P "
+  ],
+  "result": {
+    "count": 4,
+    "item": "hbm:red_cable"
+  },
+  "show_notification": true
+}

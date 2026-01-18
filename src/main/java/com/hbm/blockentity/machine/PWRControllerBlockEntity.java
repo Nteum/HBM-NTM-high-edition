@@ -8,7 +8,6 @@ import com.hbm.api.math.MathUtils;
 import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.blockentity.base2.BaseMachineBlockEntity;
 import com.hbm.gui.menu.PWRMenu;
-import com.hbm.item.HBMItems;
 import com.hbm.item.pwr.ItemPWRFuel;
 import com.hbm.reactor.pwr.PWRFuelType;
 import com.hbm.registries.ModBlocks;
@@ -18,6 +17,7 @@ import com.hbm.Inventory.fluid.trait.FT_Heatable;
 import com.hbm.Inventory.fluid.trait.FT_Heatable.HeatingStep;
 import com.hbm.Inventory.fluid.trait.FT_Heatable.HeatingType;
 import com.hbm.Inventory.fluid.trait.FT_PWRModerator;
+import com.hbm.registries.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
@@ -215,7 +215,7 @@ public class PWRControllerBlockEntity extends BaseMachineBlockEntity {
             if (progress >= processTime) {
                 progress -= processTime;
                 ItemStack out = items.get(SLOT_OUTPUT);
-                ItemStack produced = ItemPWRFuel.createStack(HBMItems.pwr_fuel_hot.get(), fuel);
+                ItemStack produced = ItemPWRFuel.createStack(ModItems.pwr_fuel_hot.get(), fuel);
                 if (out.isEmpty()) {
                     items.set(SLOT_OUTPUT, produced);
                 } else if (ItemPWRFuel.isHotFuel(out)

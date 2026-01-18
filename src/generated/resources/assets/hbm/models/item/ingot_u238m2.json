@@ -2,6 +2,12 @@
   "parent": "minecraft:item/generated",
   "overrides": [
     {
+      "model": "hbm:item/ingot_u238m2",
+      "predicate": {
+        "hbm:stage": 0.0
+      }
+    },
+    {
       "model": "hbm:item/hs-elements",
       "predicate": {
         "hbm:stage": 1.0

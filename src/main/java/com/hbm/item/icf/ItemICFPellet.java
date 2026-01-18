@@ -1,8 +1,8 @@
 package com.hbm.item.icf;
 
 import com.hbm.Inventory.fluid.ModFluids;
-import com.hbm.item.HBMComponent;
-import com.hbm.item.HBMItems;
+
+import com.hbm.registries.ModItems;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -40,8 +40,8 @@ public class ItemICFPellet extends Item {
     private static final Map<FuelType, List<Supplier<? extends Fluid>>> FLUID_SOURCES = new EnumMap<>(FuelType.class);
 
     static {
-        registerFuel(FuelType.DEUTERIUM, HBMComponent.CELL_DEUTERIUM);
-        registerFuel(FuelType.TRITIUM, HBMComponent.CELL_TRITIUM);
+        registerFuel(FuelType.DEUTERIUM, ModItems.CELL_DEUTERIUM);
+        registerFuel(FuelType.TRITIUM, ModItems.CELL_TRITIUM);
         registerFluid(FuelType.HYDROGEN, ModFluids.HYDROGEN.source());
         registerFluid(FuelType.DEUTERIUM, ModFluids.DEUTERIUM.source());
         registerFluid(FuelType.TRITIUM, ModFluids.TRITIUM.source());
@@ -49,13 +49,13 @@ public class ItemICFPellet extends Item {
         registerFluid(FuelType.HELIUM4, ModFluids.HELIUM4.source());
         registerFluid(FuelType.OXYGEN, ModFluids.OXYGEN.source());
         registerFluid(FuelType.CHLORINE, ModFluids.CHLORINE.source());
-        registerFuel(FuelType.LITHIUM, HBMItems.LITHIUM);
-        registerFuel(FuelType.BERYLLIUM, HBMItems.INGOT_BERYLLIUM);
-        registerFuel(FuelType.BORON, HBMItems.INGOT_BORON);
-        registerFuel(FuelType.CARBON, HBMItems.INGOT_GRAPHITE);
-        registerFuel(FuelType.SODIUM, HBMItems.POWDER_SODIUM);
-        registerFuel(FuelType.CHLORINE, HBMComponent.CHLORINE_PINWHEEL);
-        registerFuel(FuelType.CALCIUM, HBMItems.INGOT_CALCIUM);
+        registerFuel(FuelType.LITHIUM, ModItems.LITHIUM);
+        registerFuel(FuelType.BERYLLIUM, ModItems.INGOT_BERYLLIUM);
+        registerFuel(FuelType.BORON, ModItems.INGOT_BORON);
+        registerFuel(FuelType.CARBON, ModItems.INGOT_GRAPHITE);
+        registerFuel(FuelType.SODIUM, ModItems.POWDER_SODIUM);
+        registerFuel(FuelType.CHLORINE, ModItems.CHLORINE_PINWHEEL);
+        registerFuel(FuelType.CALCIUM, ModItems.INGOT_CALCIUM);
     }
 
     public enum FuelType {
@@ -116,7 +116,7 @@ public class ItemICFPellet extends Item {
     }
 
     public static ItemStack createStack(FuelType primary, FuelType secondary, boolean muon) {
-        ItemStack stack = new ItemStack(HBMItems.icf_pellet.get());
+        ItemStack stack = new ItemStack(ModItems.icf_pellet.get());
         setFuelTypes(stack, primary, secondary, muon);
         return stack;
     }

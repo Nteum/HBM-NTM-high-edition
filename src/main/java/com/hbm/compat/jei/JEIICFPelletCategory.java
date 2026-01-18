@@ -1,15 +1,13 @@
 package com.hbm.compat.jei;
 
 import com.hbm.HBM;
-import com.hbm.gui.menu.ICFPressMenu;
-import com.hbm.item.HBMComponent;
-import com.hbm.item.HBMItems;
+
 import com.hbm.item.icf.ItemICFPellet;
 import com.hbm.registries.ModBlocks;
+import com.hbm.registries.ModItems;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
-import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
@@ -33,6 +31,7 @@ public class JEIICFPelletCategory extends AbstractRecipeCategory<JEIICFPelletCat
         this.background = guiHelper.createDrawable(TEXTURE, 0, 0, 176, 186);
     }
 
+    @SuppressWarnings("removal")
     @Override
     public IDrawable getBackground() {
         return background;
@@ -41,7 +40,7 @@ public class JEIICFPelletCategory extends AbstractRecipeCategory<JEIICFPelletCat
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, PelletRecipe recipe, IFocusGroup focuses) {
         builder.addSlot(RecipeIngredientRole.INPUT, 98, 17)
-                .addItemStack(new ItemStack(HBMItems.icf_pellet_empty.get()))
+                .addItemStack(new ItemStack(ModItems.icf_pellet_empty.get()))
                 .setStandardSlotBackground();
         builder.addSlot(RecipeIngredientRole.INPUT, 62, 53)
                 .addIngredients(VanillaTypes.ITEM_STACK, recipe.leftInputs)
@@ -51,11 +50,11 @@ public class JEIICFPelletCategory extends AbstractRecipeCategory<JEIICFPelletCat
                 .setStandardSlotBackground();
         if (recipe.requiresMuon) {
             builder.addSlot(RecipeIngredientRole.INPUT, 8, 17)
-                    .addItemStack(new ItemStack(HBMComponent.PARTICLE_MUON.get()))
+                    .addItemStack(new ItemStack(ModItems.PARTICLE_MUON.get()))
                     .setStandardSlotBackground();
         } else {
             builder.addSlot(RecipeIngredientRole.CATALYST, 8, 17)
-                    .addItemStack(new ItemStack(HBMComponent.PARTICLE_EMPTY.get()))
+                    .addItemStack(new ItemStack(ModItems.PARTICLE_EMPTY.get()))
                     .setStandardSlotBackground();
         }
         builder.addSlot(RecipeIngredientRole.OUTPUT, 98, 53)

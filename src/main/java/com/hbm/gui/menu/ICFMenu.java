@@ -3,8 +3,9 @@ package com.hbm.gui.menu;
 import com.hbm.gui.ModMenuType;
 import com.hbm.gui.menu.slot.OutputSlot;
 import com.hbm.blockentity.machine.icf.ICFReactorBlockEntity;
-import com.hbm.item.HBMItems;
+
 import com.hbm.item.icf.ItemICFPellet;
+import com.hbm.registries.ModItems;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -56,7 +57,7 @@ public class ICFMenu extends BaseMachineMenu {
                     return ItemStack.EMPTY;
                 }
             } else {
-                if (current.is(HBMItems.icf_pellet.get())) {
+                if (current.is(ModItems.icf_pellet.get())) {
                     if (!moveItemStackTo(current, 0, ICFReactorBlockEntity.SLOT_ACTIVE, false)) {
                         return ItemStack.EMPTY;
                     }

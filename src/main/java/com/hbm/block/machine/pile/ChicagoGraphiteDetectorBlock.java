@@ -3,8 +3,8 @@ package com.hbm.block.machine.pile;
 import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.blockentity.machine.pile.ChicagoDetectorBlockEntity;
 import com.hbm.blockentity.machine.pile.ChicagoPileBlockEntity;
-import com.hbm.item.HBMItems;
 import com.hbm.registries.ModBlocks;
+import com.hbm.registries.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -70,7 +70,7 @@ public class ChicagoGraphiteDetectorBlock extends ChicagoMachineBlock {
             return InteractionResult.sidedSuccess(level.isClientSide);
         }
 
-        if (held.is(HBMItems.SCREWDRIVER.get())) {
+        if (held.is(ModItems.SCREWDRIVER.get())) {
             if (!level.isClientSide) {
                 BlockEntity be = level.getBlockEntity(pos);
                 if (be instanceof ChicagoDetectorBlockEntity detector) {

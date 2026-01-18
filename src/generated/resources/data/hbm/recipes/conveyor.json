@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "L": {
+      "item": "minecraft:leather"
+    },
+    "M": {
+      "item": "hbm:motor"
+    },
+    "S": {
+      "item": "hbm:plate_steel"
+    }
+  },
+  "pattern": [
+    "LLL",
+    "SMS",
+    "LLL"
+  ],
+  "result": {
+    "count": 6,
+    "item": "hbm:conveyor"
+  },
+  "show_notification": true
+}

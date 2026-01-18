@@ -10,8 +10,6 @@ import com.hbm.config.CustomMachineConfigJSON.MachineConfiguration.ComponentDefi
 import com.hbm.datagen.recipe.ingredient.CountableIngredient;
 import com.hbm.registries.ModItems;
 import com.hbm.registries.OreDictManager;
-import com.hbm.item.HBMComponent;
-import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.level.block.Block;
 
 import java.io.File;

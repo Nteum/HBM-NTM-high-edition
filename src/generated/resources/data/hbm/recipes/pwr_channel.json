@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "hbm:plate_copper"
+    },
+    "P": {
+      "item": "hbm:pipes_steel"
+    },
+    "S": {
+      "item": "hbm:plate_steel"
+    }
+  },
+  "pattern": [
+    "PCP",
+    "S S",
+    "PCP"
+  ],
+  "result": {
+    "count": 4,
+    "item": "hbm:pwr_channel"
+  },
+  "show_notification": true
+}

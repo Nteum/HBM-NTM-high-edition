@@ -3,9 +3,10 @@ package com.hbm.gui.screen;
 import com.hbm.HBM;
 import com.hbm.blockentity.machine.PWRControllerBlockEntity;
 import com.hbm.gui.menu.PWRMenu;
-import com.hbm.item.HBMItems;
+
 import com.hbm.item.pwr.ItemPWRFuel;
 import com.hbm.reactor.pwr.PWRFuelType;
+import com.hbm.registries.ModItems;
 import com.hbm.render.utils.GaugeUtil;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
@@ -95,7 +96,7 @@ public class PWRScreen extends BaseMachineGui<PWRMenu> {
         int rodCount = menu.getRodCount();
         if (fuelTypeIndex >= 0 && amountLoaded > 0) {
             PWRFuelType fuel = PWRFuelType.fromIndex(fuelTypeIndex);
-            ItemStack display = ItemPWRFuel.createStack(HBMItems.pwr_fuel.get(), fuel);
+            ItemStack display = ItemPWRFuel.createStack(ModItems.pwr_fuel.get(), fuel);
             graphics.renderItem(display, this.leftPos + 89, this.topPos + 5);
             graphics.renderItemDecorations(this.font, display, this.leftPos + 89, this.topPos + 5,
                     String.format(Locale.ROOT, "%d/%d", amountLoaded, rodCount));
@@ -151,7 +152,7 @@ public class PWRScreen extends BaseMachineGui<PWRMenu> {
             int fy = guiTop + 4;
             if (mouseX >= fx && mouseX < fx + 18 && mouseY >= fy && mouseY < fy + 18) {
                 PWRFuelType fuel = PWRFuelType.fromIndex(fuelTypeIndex);
-                ItemStack display = ItemPWRFuel.createStack(HBMItems.pwr_fuel.get(), fuel);
+                ItemStack display = ItemPWRFuel.createStack(ModItems.pwr_fuel.get(), fuel);
                 graphics.renderTooltip(this.font, display, mouseX, mouseY);
             }
         }

@@ -1,8 +1,8 @@
 package com.hbm.blockentity.machine.pile;
 
-import com.hbm.item.HBMItems;
 import com.hbm.item.research.ItemPileRod;
 import com.hbm.registries.ModBlocks;
+import com.hbm.registries.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.Item;
@@ -163,8 +163,8 @@ public class ChicagoFuelBlockEntity extends ChicagoPileBlockEntity {
     }
 
     public enum FuelVariant {
-        URANIUM(HBMItems.PILE_ROD_URANIUM, 50000, 0.8D, 0.25D),
-        PU239(HBMItems.PILE_ROD_PU239, 40000, 1.0D, 0.3D);
+        URANIUM(ModItems.PILE_ROD_URANIUM, 50000, 0.8D, 0.25D),
+        PU239(ModItems.PILE_ROD_PU239, 40000, 1.0D, 0.3D);
 
         public final java.util.function.Supplier<? extends Item> item;
         public final int maxLife;

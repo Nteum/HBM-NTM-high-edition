@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "P": {
+      "item": "hbm:plate_iron"
+    }
+  },
+  "pattern": [
+    "PPP",
+    "I I",
+    "III"
+  ],
+  "result": {
+    "item": "hbm:crate_iron"
+  },
+  "show_notification": true
+}

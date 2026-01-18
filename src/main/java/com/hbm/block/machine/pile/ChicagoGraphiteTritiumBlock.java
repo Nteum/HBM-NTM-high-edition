@@ -1,7 +1,7 @@
 package com.hbm.block.machine.pile;
 
-import com.hbm.item.HBMComponent;
 import com.hbm.registries.ModBlocks;
+import com.hbm.registries.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -25,7 +25,7 @@ public class ChicagoGraphiteTritiumBlock extends ChicagoInsertableBlock {
         }
         if (player.isShiftKeyDown() && player.getItemInHand(hand).isEmpty()) {
             if (!level.isClientSide) {
-                popResource(level, pos, new ItemStack(HBMComponent.CELL_TRITIUM.get()));
+                popResource(level, pos, new ItemStack(ModItems.CELL_TRITIUM.get()));
                 level.setBlock(pos, copyAxisShield(state, ModBlocks.chicago_graphite_drilled.get().defaultBlockState()), 3);
             }
             return InteractionResult.sidedSuccess(level.isClientSide);
@@ -37,7 +37,7 @@ public class ChicagoGraphiteTritiumBlock extends ChicagoInsertableBlock {
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
         if (!state.is(newState.getBlock())) {
             if (!level.isClientSide) {
-                popResource(level, pos, new ItemStack(HBMComponent.CELL_TRITIUM.get()));
+                popResource(level, pos, new ItemStack(ModItems.CELL_TRITIUM.get()));
             }
         }
         super.onRemove(state, level, pos, newState, isMoving);

@@ -2,9 +2,9 @@ package com.hbm.gui.menu;
 
 import com.hbm.gui.ModMenuType;
 import com.hbm.blockentity.machine.icf.ICFPressBlockEntity;
-import com.hbm.item.HBMComponent;
-import com.hbm.item.HBMItems;
+
 import com.hbm.item.icf.ItemICFPellet;
+import com.hbm.registries.ModItems;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -50,11 +50,11 @@ public class ICFPressMenu extends BaseMachineMenu {
                 if (!moveItemStackTo(current, slotNum, slotNum + 36, true)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (current.is(HBMItems.icf_pellet_empty.get())) {
+            } else if (current.is(ModItems.icf_pellet_empty.get())) {
                 if (!moveItemStackTo(current, ICFPressBlockEntity.SLOT_EMPTY, ICFPressBlockEntity.SLOT_EMPTY + 1, false)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (current.is(HBMComponent.PARTICLE_MUON.get())) {
+            } else if (current.is(ModItems.PARTICLE_MUON.get())) {
                 if (!moveItemStackTo(current, ICFPressBlockEntity.SLOT_MUON, ICFPressBlockEntity.SLOT_MUON + 1, false)) {
                     return ItemStack.EMPTY;
                 }

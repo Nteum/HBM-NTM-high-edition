@@ -1,18 +1,12 @@
 package com.hbm.entity.weapon.missile;
 
-import com.hbm.block.HBMBlockComponent;
 import com.hbm.entity.ModEntityType;
-import com.hbm.item.HBMComponent;
 import com.hbm.registries.ModItems;
-import com.hbm.item.HBMWeapon;
 import net.minecraft.core.BlockPos;
-import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.projectile.ThrowableProjectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 

@@ -58,34 +58,34 @@ public class ModCreativeModeTab {
             output.accept(HBMtools.UPGRADE_BASE.get());
             output.accept(ModItems.WOOD_ASH_POWDER.get());
             for (com.hbm.reactor.pwr.PWRFuelType type : com.hbm.reactor.pwr.PWRFuelType.values()) {
-                output.accept(com.hbm.item.pwr.ItemPWRFuel.createStack(HBMItems.pwr_fuel.get(), type));
-                output.accept(com.hbm.item.pwr.ItemPWRFuel.createStack(HBMItems.pwr_fuel_hot.get(), type));
-                output.accept(com.hbm.item.pwr.ItemPWRFuel.createStack(HBMItems.pwr_fuel_depleted.get(), type));
+                output.accept(com.hbm.item.pwr.ItemPWRFuel.createStack(ModItems.pwr_fuel.get(), type));
+                output.accept(com.hbm.item.pwr.ItemPWRFuel.createStack(ModItems.pwr_fuel_hot.get(), type));
+                output.accept(com.hbm.item.pwr.ItemPWRFuel.createStack(ModItems.pwr_fuel_depleted.get(), type));
             }
             for (ItemZirnoxRod.ZirnoxRodType type : ItemZirnoxRod.ZirnoxRodType.values()) {
-                output.accept(ItemZirnoxRod.createStack(HBMItems.rod_zirnox.get(), type));
+                output.accept(ItemZirnoxRod.createStack(ModItems.rod_zirnox.get(), type));
             }
-            output.accept(HBMItems.rod_zirnox_empty.get());
-            output.accept(HBMItems.rod_zirnox_tritium.get());
-            output.accept(HBMItems.rod_zirnox_natural_uranium_fuel_depleted.get());
-            output.accept(HBMItems.rod_zirnox_uranium_fuel_depleted.get());
-            output.accept(HBMItems.rod_zirnox_thorium_fuel_depleted.get());
-            output.accept(HBMItems.rod_zirnox_mox_fuel_depleted.get());
-            output.accept(HBMItems.rod_zirnox_plutonium_fuel_depleted.get());
-            output.accept(HBMItems.rod_zirnox_u233_fuel_depleted.get());
-            output.accept(HBMItems.rod_zirnox_u235_fuel_depleted.get());
-            output.accept(HBMItems.rod_zirnox_les_fuel_depleted.get());
-            output.accept(HBMItems.rod_zirnox_zfb_mox_depleted.get());
-            output.accept(HBMItems.rod_empty.get());
-            output.accept(HBMItems.rod_dual_empty.get());
-            output.accept(HBMItems.rod_quad_empty.get());
+            output.accept(ModItems.rod_zirnox_empty.get());
+            output.accept(ModItems.rod_zirnox_tritium.get());
+            output.accept(ModItems.rod_zirnox_natural_uranium_fuel_depleted.get());
+            output.accept(ModItems.rod_zirnox_uranium_fuel_depleted.get());
+            output.accept(ModItems.rod_zirnox_thorium_fuel_depleted.get());
+            output.accept(ModItems.rod_zirnox_mox_fuel_depleted.get());
+            output.accept(ModItems.rod_zirnox_plutonium_fuel_depleted.get());
+            output.accept(ModItems.rod_zirnox_u233_fuel_depleted.get());
+            output.accept(ModItems.rod_zirnox_u235_fuel_depleted.get());
+            output.accept(ModItems.rod_zirnox_les_fuel_depleted.get());
+            output.accept(ModItems.rod_zirnox_zfb_mox_depleted.get());
+            output.accept(ModItems.rod_empty.get());
+            output.accept(ModItems.rod_dual_empty.get());
+            output.accept(ModItems.rod_quad_empty.get());
             for (com.hbm.item.research.ItemBreedingRod.RodType type : com.hbm.item.research.ItemBreedingRod.RodType.values()) {
                 output.accept(com.hbm.item.research.ItemBreedingRod.createStack(com.hbm.item.research.ItemBreedingRod.RodForm.SINGLE, type));
                 output.accept(com.hbm.item.research.ItemBreedingRod.createStack(com.hbm.item.research.ItemBreedingRod.RodForm.DUAL, type));
                 output.accept(com.hbm.item.research.ItemBreedingRod.createStack(com.hbm.item.research.ItemBreedingRod.RodForm.QUAD, type));
             }
 
-            HBMComponent.creativeTab(output);
+//            HBMComponent.creativeTab(output);
         }).build());
     public static final RegistryObject<CreativeModeTab> HBM_BLOCK = CREATIVE_MODE_TABS.register("hbm_block", () -> CreativeModeTab.builder()
         .title(Component.translatable(HBMLang.ITEMGROUP_BLOCK.key()))
@@ -152,8 +152,8 @@ public class ModCreativeModeTab {
             output.accept(ModBlocks.machine_icf_press.get());
             output.accept(ModBlocks.machine_research_reactor.get());
             output.accept(ModBlocks.machine_reactor_breeding.get());
-            output.accept(HBMItems.icf_pellet_empty.get());
-            output.accept(HBMItems.icf_pellet_depleted.get());
+            output.accept(ModItems.icf_pellet_empty.get());
+            output.accept(ModItems.icf_pellet_depleted.get());
             output.accept(ItemICFPellet.createStack(ItemICFPellet.FuelType.DEUTERIUM, ItemICFPellet.FuelType.TRITIUM, false));
             output.accept(ItemICFPellet.createStack(ItemICFPellet.FuelType.HELIUM3, ItemICFPellet.FuelType.HELIUM4, false));
             output.accept(ItemICFPellet.createStack(ItemICFPellet.FuelType.LITHIUM, ItemICFPellet.FuelType.OXYGEN, false));
@@ -189,10 +189,10 @@ public class ModCreativeModeTab {
         }).build());
     public static final RegistryObject<CreativeModeTab> HBM_EQUIPMENT = CREATIVE_MODE_TABS.register("hbm_equipment", () -> CreativeModeTab.builder()
         .title(Component.translatable(HBMLang.ITEMGROUP_EQUIPMENT.key()))
-        .icon(() -> HBMItems.BIG_SWORD.get().getDefaultInstance())
+        .icon(() -> ModItems.BIG_SWORD.get().getDefaultInstance())
         .displayItems((parameters, output) -> {
-            output.accept(HBMItems.REDSTONE_SWORD.get());
-            output.accept(HBMItems.BIG_SWORD.get());
+            output.accept(ModItems.REDSTONE_SWORD.get());
+            output.accept(ModItems.BIG_SWORD.get());
             HBMCombat.creativeTab(output);
         }).build());
     public static final RegistryObject<CreativeModeTab> HBM_MISSILE = CREATIVE_MODE_TABS.register("hbm_missile", () -> CreativeModeTab.builder()
@@ -207,7 +207,7 @@ public class ModCreativeModeTab {
      * */
     public static void addCreative(BuildCreativeModeTabContentsEvent event){
             ModItems.creativeTab(event);
-            HBMItems.creativeTab(event);
+            ModItems.creativeTab(event);
             ModBlocks.creativeTab(event);
             if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS){}
 
@@ -238,47 +238,47 @@ public class ModCreativeModeTab {
     }
 
     private static final List<RegistryObject<? extends Item>> RBMK_FUEL_ITEMS = List.of(
-            HBMItems.rbmk_fuel_base,
-            HBMItems.rbmk_fuel_lea,
-            HBMItems.rbmk_fuel_leaus,
-            HBMItems.rbmk_fuel_lep,
-            HBMItems.rbmk_fuel_les,
-            HBMItems.rbmk_fuel_mea,
-            HBMItems.rbmk_fuel_men,
-            HBMItems.rbmk_fuel_mep,
-            HBMItems.rbmk_fuel_mes,
-            HBMItems.rbmk_fuel_meu,
-            HBMItems.rbmk_fuel_ueu,
-            HBMItems.rbmk_fuel_mox,
-            HBMItems.rbmk_fuel_heu233,
-            HBMItems.rbmk_fuel_heu235,
-            HBMItems.rbmk_fuel_heaus,
-            HBMItems.rbmk_fuel_hea241,
-            HBMItems.rbmk_fuel_hea242,
-            HBMItems.rbmk_fuel_hen,
-            HBMItems.rbmk_fuel_hep,
-            HBMItems.rbmk_fuel_hep241,
-            HBMItems.rbmk_fuel_hes,
-            HBMItems.rbmk_fuel_thmeu,
-            HBMItems.rbmk_fuel_drx,
-            HBMItems.rbmk_fuel_flashlead,
-            HBMItems.rbmk_fuel_balefire,
-            HBMItems.rbmk_fuel_balefire_gold,
-            HBMItems.rbmk_fuel_po210be,
-            HBMItems.rbmk_fuel_pu238be,
-            HBMItems.rbmk_fuel_ra226be,
-            HBMItems.rbmk_fuel_zfb_base,
-            HBMItems.rbmk_fuel_zfb_bismuth,
-            HBMItems.rbmk_fuel_zfb_pu241,
-            HBMItems.rbmk_fuel_zfb_am_mix,
-            HBMItems.rbmk_fuel_test
+            ModItems.rbmk_fuel_base,
+            ModItems.rbmk_fuel_lea,
+            ModItems.rbmk_fuel_leaus,
+            ModItems.rbmk_fuel_lep,
+            ModItems.rbmk_fuel_les,
+            ModItems.rbmk_fuel_mea,
+            ModItems.rbmk_fuel_men,
+            ModItems.rbmk_fuel_mep,
+            ModItems.rbmk_fuel_mes,
+            ModItems.rbmk_fuel_meu,
+            ModItems.rbmk_fuel_ueu,
+            ModItems.rbmk_fuel_mox,
+            ModItems.rbmk_fuel_heu233,
+            ModItems.rbmk_fuel_heu235,
+            ModItems.rbmk_fuel_heaus,
+            ModItems.rbmk_fuel_hea241,
+            ModItems.rbmk_fuel_hea242,
+            ModItems.rbmk_fuel_hen,
+            ModItems.rbmk_fuel_hep,
+            ModItems.rbmk_fuel_hep241,
+            ModItems.rbmk_fuel_hes,
+            ModItems.rbmk_fuel_thmeu,
+            ModItems.rbmk_fuel_drx,
+            ModItems.rbmk_fuel_flashlead,
+            ModItems.rbmk_fuel_balefire,
+            ModItems.rbmk_fuel_balefire_gold,
+            ModItems.rbmk_fuel_po210be,
+            ModItems.rbmk_fuel_pu238be,
+            ModItems.rbmk_fuel_ra226be,
+            ModItems.rbmk_fuel_zfb_base,
+            ModItems.rbmk_fuel_zfb_bismuth,
+            ModItems.rbmk_fuel_zfb_pu241,
+            ModItems.rbmk_fuel_zfb_am_mix,
+            ModItems.rbmk_fuel_test
     );
 
     private static void addRBMKItems(CreativeModeTab.Output output) {
-        output.accept(HBMItems.rbmk_lid.get());
-        output.accept(HBMItems.rbmk_lid_glass.get());
-        output.accept(HBMItems.rbmk_control_rod.get());
+        output.accept(ModItems.rbmk_lid.get());
+        output.accept(ModItems.rbmk_lid_glass.get());
+        output.accept(ModItems.rbmk_control_rod.get());
         RBMK_FUEL_ITEMS.forEach(fuel -> output.accept(fuel.get()));
-        output.accept(HBMItems.rbmk_fuel_empty.get());
+        output.accept(ModItems.rbmk_fuel_empty.get());
     }
 }

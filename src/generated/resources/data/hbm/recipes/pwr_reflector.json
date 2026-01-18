@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "hbm:ingot_boron"
+    },
+    "G": {
+      "item": "hbm:ingot_graphite"
+    },
+    "S": {
+      "item": "hbm:plate_steel"
+    }
+  },
+  "pattern": [
+    "BGB",
+    "GSG",
+    "BGB"
+  ],
+  "result": {
+    "count": 4,
+    "item": "hbm:pwr_reflector"
+  },
+  "show_notification": true
+}

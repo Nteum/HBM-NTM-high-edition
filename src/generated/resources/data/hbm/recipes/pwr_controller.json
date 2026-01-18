@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "hbm:circuit_basic"
+    },
+    "L": {
+      "item": "hbm:plate_lead"
+    },
+    "M": {
+      "item": "hbm:motor"
+    },
+    "P": {
+      "item": "hbm:pwr_casing"
+    },
+    "S": {
+      "item": "hbm:plate_steel"
+    }
+  },
+  "pattern": [
+    "SCS",
+    "LPL",
+    "SMS"
+  ],
+  "result": {
+    "item": "hbm:pwr_controller"
+  },
+  "show_notification": true
+}

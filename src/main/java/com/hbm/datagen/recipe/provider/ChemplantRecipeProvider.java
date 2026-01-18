@@ -3,9 +3,9 @@ package com.hbm.datagen.recipe.provider;
 import com.hbm.HBM;
 import com.hbm.HBMKey;
 import com.hbm.Inventory.fluid.ModFluids;
-import com.hbm.item.HBMComponent;
 import com.hbm.datagen.recipe.ISubRecipeProvider;
 import com.hbm.datagen.recipe.builder.ItemFluidRecipeBuilder;
+import com.hbm.registries.ModItems;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -23,11 +23,11 @@ public class ChemplantRecipeProvider implements ISubRecipeProvider {
         ItemFluidRecipeBuilder.of(HBM.rl(ROOT+"oxygen")).duration(20).requireFluids(new FluidStack(Fluids.WATER, 8000))
                 .resultFluids(new FluidStack(ModFluids.OXYGEN.source().get(), 400)).save(consumer);
         ItemFluidRecipeBuilder.of(HBM.rl(ROOT+"deuterium")).duration(60)
-                .requireItems(new ItemStack(HBMComponent.DEUTERIUM_FILTER.get()))
+                .requireItems(new ItemStack(ModItems.DEUTERIUM_FILTER.get()))
                 .requireFluids(new FluidStack(ModFluids.HYDROGEN.source().get(), 4000))
                 .resultFluids(new FluidStack(ModFluids.DEUTERIUM.source().get(), 250)).save(consumer);
         ItemFluidRecipeBuilder.of(HBM.rl(ROOT+"tritium")).duration(80)
-                .requireItems(new ItemStack(HBMComponent.TRITIUM_DEUTERIUM_CAKE.get()))
+                .requireItems(new ItemStack(ModItems.TRITIUM_DEUTERIUM_CAKE.get()))
                 .requireFluids(new FluidStack(ModFluids.DEUTERIUM.source().get(), 2000))
                 .resultFluids(new FluidStack(ModFluids.TRITIUM.source().get(), 250)).save(consumer);
         ItemFluidRecipeBuilder.of(HBM.rl(ROOT+"helium3")).duration(100)

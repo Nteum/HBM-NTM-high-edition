@@ -8,10 +8,10 @@ import com.hbm.api.inventory.ModeBuilder;
 import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.blockentity.base2.BaseMachineBlockEntity;
 import com.hbm.gui.menu.ICFPressMenu;
-import com.hbm.item.HBMComponent;
-import com.hbm.item.HBMItems;
+
 import com.hbm.item.icf.ItemICFPellet;
 import com.hbm.item.icf.ItemICFPellet.FuelType;
+import com.hbm.registries.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
@@ -100,10 +100,10 @@ public class ICFPressBlockEntity extends BaseMachineBlockEntity implements MenuP
 
     private boolean chargeMuon() {
         ItemStack muon = items.get(SLOT_MUON);
-        if (muonCharge >= MUON_CAPACITY || muon.isEmpty() || !muon.is(HBMComponent.PARTICLE_MUON.get())) {
+        if (muonCharge >= MUON_CAPACITY || muon.isEmpty() || !muon.is(ModItems.PARTICLE_MUON.get())) {
             return false;
         }
-        ItemStack container = new ItemStack(HBMComponent.PARTICLE_EMPTY.get());
+        ItemStack container = new ItemStack(ModItems.PARTICLE_EMPTY.get());
         ItemStack returnSlot = items.get(SLOT_MUON_RETURN);
         if (!returnSlot.isEmpty() && (!ItemStack.isSameItemSameTags(returnSlot, container) || returnSlot.getCount() >= returnSlot.getMaxStackSize())) {
             return false;
@@ -137,7 +137,7 @@ public class ICFPressBlockEntity extends BaseMachineBlockEntity implements MenuP
 
     private boolean tryAssemble() {
         ItemStack empty = items.get(SLOT_EMPTY);
-        if (empty.isEmpty() || !empty.is(HBMItems.icf_pellet_empty.get())) {
+        if (empty.isEmpty() || !empty.is(ModItems.icf_pellet_empty.get())) {
             return false;
         }
         ItemStack output = items.get(SLOT_OUTPUT);
@@ -210,8 +210,8 @@ public class ICFPressBlockEntity extends BaseMachineBlockEntity implements MenuP
 
     @Override
     public boolean canPlaceItem(int index, ItemStack stack) {
-        if (index == SLOT_EMPTY) return stack.is(HBMItems.icf_pellet_empty.get());
-        if (index == SLOT_MUON) return stack.is(HBMComponent.PARTICLE_MUON.get());
+        if (index == SLOT_EMPTY) return stack.is(ModItems.icf_pellet_empty.get());
+        if (index == SLOT_MUON) return stack.is(ModItems.PARTICLE_MUON.get());
         if (index == SLOT_LEFT_BUFFER || index == SLOT_FUEL_LEFT) return ItemICFPellet.fuelFromStack(stack) != null;
         if (index == SLOT_RIGHT_BUFFER || index == SLOT_FUEL_RIGHT) return ItemICFPellet.fuelFromStack(stack) != null;
         return false;

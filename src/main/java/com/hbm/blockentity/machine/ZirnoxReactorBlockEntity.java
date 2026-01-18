@@ -8,10 +8,11 @@ import com.hbm.block.machine.BlockZirnoxReactor;
 import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.blockentity.base2.DummyableBlockEntity;
 import com.hbm.gui.menu.ZirnoxMenu;
-import com.hbm.item.HBMItems;
+
 import com.hbm.item.zirnox.ItemZirnoxRod;
 import com.hbm.item.zirnox.ItemZirnoxRod.ZirnoxRodType;
 import com.hbm.registries.ModBlocks;
+import com.hbm.registries.ModItems;
 import com.hbm.utils.InventoryUtils;
 import com.hbm.utils.multiblock.DummableHelper;
 import com.hbm.utils.multiblock.MultiblockData;
@@ -220,17 +221,17 @@ public class ZirnoxReactorBlockEntity extends DummyableBlockEntity {
 
     private ItemStack getDepletedStack(ZirnoxRodType type) {
         return switch (type) {
-            case NATURAL_URANIUM_FUEL -> new ItemStack(HBMItems.rod_zirnox_natural_uranium_fuel_depleted.get());
-            case URANIUM_FUEL -> new ItemStack(HBMItems.rod_zirnox_uranium_fuel_depleted.get());
-            case TH232 -> ItemZirnoxRod.createStack(HBMItems.rod_zirnox.get(), ZirnoxRodType.THORIUM_FUEL);
-            case THORIUM_FUEL -> new ItemStack(HBMItems.rod_zirnox_thorium_fuel_depleted.get());
-            case MOX_FUEL -> new ItemStack(HBMItems.rod_zirnox_mox_fuel_depleted.get());
-            case PLUTONIUM_FUEL -> new ItemStack(HBMItems.rod_zirnox_plutonium_fuel_depleted.get());
-            case U233_FUEL -> new ItemStack(HBMItems.rod_zirnox_u233_fuel_depleted.get());
-            case U235_FUEL -> new ItemStack(HBMItems.rod_zirnox_u235_fuel_depleted.get());
-            case LES_FUEL -> new ItemStack(HBMItems.rod_zirnox_les_fuel_depleted.get());
-            case LITHIUM -> new ItemStack(HBMItems.rod_zirnox_tritium.get());
-            case ZFB_MOX -> new ItemStack(HBMItems.rod_zirnox_zfb_mox_depleted.get());
+            case NATURAL_URANIUM_FUEL -> new ItemStack(ModItems.rod_zirnox_natural_uranium_fuel_depleted.get());
+            case URANIUM_FUEL -> new ItemStack(ModItems.rod_zirnox_uranium_fuel_depleted.get());
+            case TH232 -> ItemZirnoxRod.createStack(ModItems.rod_zirnox.get(), ZirnoxRodType.THORIUM_FUEL);
+            case THORIUM_FUEL -> new ItemStack(ModItems.rod_zirnox_thorium_fuel_depleted.get());
+            case MOX_FUEL -> new ItemStack(ModItems.rod_zirnox_mox_fuel_depleted.get());
+            case PLUTONIUM_FUEL -> new ItemStack(ModItems.rod_zirnox_plutonium_fuel_depleted.get());
+            case U233_FUEL -> new ItemStack(ModItems.rod_zirnox_u233_fuel_depleted.get());
+            case U235_FUEL -> new ItemStack(ModItems.rod_zirnox_u235_fuel_depleted.get());
+            case LES_FUEL -> new ItemStack(ModItems.rod_zirnox_les_fuel_depleted.get());
+            case LITHIUM -> new ItemStack(ModItems.rod_zirnox_tritium.get());
+            case ZFB_MOX -> new ItemStack(ModItems.rod_zirnox_zfb_mox_depleted.get());
         };
     }
 

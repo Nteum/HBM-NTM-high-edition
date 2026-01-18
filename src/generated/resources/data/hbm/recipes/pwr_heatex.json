@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "hbm:plate_copper"
+    },
+    "M": {
+      "item": "hbm:motor"
+    },
+    "S": {
+      "item": "hbm:plate_steel"
+    }
+  },
+  "pattern": [
+    "CSC",
+    "M M",
+    "CSC"
+  ],
+  "result": {
+    "count": 2,
+    "item": "hbm:pwr_heatex"
+  },
+  "show_notification": true
+}

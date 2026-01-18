@@ -8,6 +8,7 @@ import com.hbm.item.tool.ItemRBMKTool;
 import com.hbm.item.tool.OreScannerItem;
 import com.hbm.item.tool.PollutionDetectorItem;
 import com.hbm.item.weapon.ItemDesignator;
+import com.hbm.registries.ModItems;
 import com.hbm.utils.debug.ItemDebugWand;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -61,10 +62,10 @@ public class HBMtools {
         pOutput.accept(DIGAMMA_DIAGNOSTIC.get());
         pOutput.accept(POLLUTION_DETECTOR.get());
         pOutput.accept(ORE_SCANNER.get());
-        pOutput.accept(HBMItems.HAND_DRILL.get());
-        pOutput.accept(HBMItems.HAND_DRILL_DESH.get());
-        pOutput.accept(HBMItems.SCREWDRIVER.get());
-        pOutput.accept(HBMItems.reacher.get());
+        pOutput.accept(ModItems.HAND_DRILL.get());
+        pOutput.accept(ModItems.HAND_DRILL_DESH.get());
+        pOutput.accept(ModItems.SCREWDRIVER.get());
+        pOutput.accept(ModItems.reacher.get());
     }
     public static void genModel(ItemModelProvider provider){
         provider.basicItem(UPGRADE_BASE.get());

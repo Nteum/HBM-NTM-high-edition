@@ -2,7 +2,6 @@ package com.hbm.main;
 
 import com.hbm.entity.ModEntityType;
 import com.hbm.entity.mob.EntityGlyphid;
-import com.hbm.item.HBMComponent;
 import com.hbm.registries.ModItems;
 import com.hbm.item.env.ItemEggGlyphid;
 import com.hbm.network.ServerMsgHandler;
@@ -16,7 +15,6 @@ import net.minecraftforge.event.entity.item.ItemTossEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 
 public class ServerEventHandler {
 

@@ -1,7 +1,6 @@
 package com.hbm.item.env;
 
 import com.hbm.HBMKey;
-import com.hbm.item.HBMComponent;
 import com.hbm.registries.ModItems;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;

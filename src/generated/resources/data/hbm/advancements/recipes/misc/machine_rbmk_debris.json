@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_machine_rbmk_element": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "hbm:machine_rbmk_element"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "hbm:machine_rbmk_debris"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_machine_rbmk_element",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "hbm:machine_rbmk_debris"
+    ]
+  },
+  "sends_telemetry_event": false
+}

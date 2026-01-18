@@ -1,6 +1,6 @@
 package com.hbm.block.machine.pile;
 
-import com.hbm.item.HBMItems;
+import com.hbm.registries.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
@@ -47,7 +47,7 @@ public abstract class ChicagoInsertableBlock extends RotatedPillarBlock {
 
     protected InteractionResult handleShieldUse(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand) {
         ItemStack held = player.getItemInHand(hand);
-        if (held.is(HBMItems.SHELL.get())) {
+        if (held.is(ModItems.SHELL.get())) {
             if (state.getValue(SHIELDED)) {
                 return InteractionResult.PASS;
             }
@@ -62,7 +62,7 @@ public abstract class ChicagoInsertableBlock extends RotatedPillarBlock {
         if (held.isEmpty() && player.isShiftKeyDown() && state.getValue(SHIELDED)) {
             if (!level.isClientSide) {
                 level.setBlock(pos, state.setValue(SHIELDED, Boolean.FALSE), 3);
-                ItemStack shell = new ItemStack(HBMItems.SHELL.get());
+                ItemStack shell = new ItemStack(ModItems.SHELL.get());
                 popResource(level, pos, shell);
             }
             return InteractionResult.sidedSuccess(level.isClientSide);

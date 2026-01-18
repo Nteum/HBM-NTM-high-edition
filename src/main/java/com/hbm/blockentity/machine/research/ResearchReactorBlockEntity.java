@@ -7,9 +7,10 @@ import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.blockentity.base2.DummyableBlockEntity;
 import com.hbm.gui.menu.ResearchReactorMenu;
 import com.hbm.handler.radiation.ChunkRadiationManager;
-import com.hbm.item.HBMItems;
+
 import com.hbm.item.research.ItemResearchFuelPlate;
 import com.hbm.registries.ModBlocks;
+import com.hbm.registries.ModItems;
 import com.hbm.utils.multiblock.MultiblockData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -59,13 +60,13 @@ public class ResearchReactorBlockEntity extends DummyableBlockEntity implements 
     };
 
     private static final Map<Supplier<Item>, Supplier<Item>> WASTE_MAP = Map.of(
-            HBMItems.plate_fuel_u233, HBMItems.waste_plate_u233,
-            HBMItems.plate_fuel_u235, HBMItems.waste_plate_u235,
-            HBMItems.plate_fuel_mox, HBMItems.waste_plate_mox,
-            HBMItems.plate_fuel_pu239, HBMItems.waste_plate_pu239,
-            HBMItems.plate_fuel_sa326, HBMItems.waste_plate_sa326,
-            HBMItems.plate_fuel_ra226be, HBMItems.waste_plate_ra226be,
-            HBMItems.plate_fuel_pu238be, HBMItems.waste_plate_pu238be
+            ModItems.plate_fuel_u233, ModItems.waste_plate_u233,
+            ModItems.plate_fuel_u235, ModItems.waste_plate_u235,
+            ModItems.plate_fuel_mox, ModItems.waste_plate_mox,
+            ModItems.plate_fuel_pu239, ModItems.waste_plate_pu239,
+            ModItems.plate_fuel_sa326, ModItems.waste_plate_sa326,
+            ModItems.plate_fuel_ra226be, ModItems.waste_plate_ra226be,
+            ModItems.plate_fuel_pu238be, ModItems.waste_plate_pu238be
     );
 
     private final int[] slotFlux = new int[SLOT_COUNT];

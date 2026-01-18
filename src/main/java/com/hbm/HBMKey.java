@@ -26,6 +26,7 @@ public class HBMKey {
     public static final String ORDERLY_GEN = "orderly_gen";
     public static final String REVERSE_GEN = "reverse_gen";
     public static final String ORDERLY_GEN_EXCEPT_FIRST = "orderly_gen_except_first";
+    public static final String GEN_STANDALONE = "gen_standalone";
     public static final String DROP_SELF = "drop_self";
     public static final String DROP_NONE = "drop_none";
     public static final String DROP_STANDALONE = "drop_standalone";

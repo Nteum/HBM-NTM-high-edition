@@ -19,7 +19,6 @@ import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.blockentity.base2.BaseMachineBlockEntity;
 import com.hbm.capabilities.HBMCaps;
 import com.hbm.gui.menu.TokamakMenu;
-import com.hbm.item.HBMComponent;
 import com.hbm.registries.ModItems;
 import com.hbm.registries.ModTags;
 import net.minecraft.core.BlockPos;

@@ -2,9 +2,8 @@ package com.hbm.datagen.recipe.provider;
 
 import com.hbm.datagen.recipe.ISubRecipeProvider;
 import com.hbm.datagen.recipe.builder.ShapelessItemRecipeBuilder;
-import com.hbm.item.HBMComponent;
 import com.hbm.registries.ModItems;
-import com.hbm.registries.ModItems;;
+;
 import com.hbm.registries.ModTags;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.world.item.Items;

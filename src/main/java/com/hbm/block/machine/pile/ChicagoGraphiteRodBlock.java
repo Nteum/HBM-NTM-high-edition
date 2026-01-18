@@ -1,6 +1,7 @@
 package com.hbm.block.machine.pile;
 
-import com.hbm.item.HBMItems;
+
+import com.hbm.registries.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
@@ -75,7 +76,7 @@ public class ChicagoGraphiteRodBlock extends ChicagoInsertableBlock {
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState replacement, boolean isMoving) {
         if (!state.is(replacement.getBlock())) {
             if (!level.isClientSide) {
-                popResource(level, pos, new ItemStack(HBMItems.PILE_ROD_BORON.get()));
+                popResource(level, pos, new ItemStack(ModItems.PILE_ROD_BORON.get()));
             }
         }
         super.onRemove(state, level, pos, replacement, isMoving);

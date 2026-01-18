@@ -6,8 +6,8 @@ import com.hbm.blockentity.machine.pile.ChicagoFuelBlockEntity;
 import com.hbm.blockentity.machine.pile.ChicagoSourceBlockEntity;
 import com.hbm.blockentity.machine.pile.ChicagoFuelBlockEntity.FuelVariant;
 import com.hbm.blockentity.machine.pile.ChicagoSourceBlockEntity.SourceType;
-import com.hbm.item.HBMItems;
 import com.hbm.registries.ModBlocks;
+import com.hbm.registries.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -37,25 +37,25 @@ public class ChicagoGraphiteDrilledBlock extends ChicagoInsertableBlock {
             return InteractionResult.PASS;
         }
 
-        if (held.is(HBMItems.PILE_ROD_URANIUM.get())) {
+        if (held.is(ModItems.PILE_ROD_URANIUM.get())) {
             return placeFuel(state, level, pos, player, held, FuelVariant.URANIUM);
         }
-        if (held.is(HBMItems.PILE_ROD_PU239.get())) {
+        if (held.is(ModItems.PILE_ROD_PU239.get())) {
             return placeFuel(state, level, pos, player, held, FuelVariant.PU239);
         }
-        if (held.is(HBMItems.PILE_ROD_SOURCE.get())) {
+        if (held.is(ModItems.PILE_ROD_SOURCE.get())) {
             return placeSource(state, level, pos, player, held, SourceType.SOURCE);
         }
-        if (held.is(HBMItems.PILE_ROD_PLUTONIUM.get())) {
+        if (held.is(ModItems.PILE_ROD_PLUTONIUM.get())) {
             return placeSource(state, level, pos, player, held, SourceType.PLUTONIUM);
         }
-        if (held.is(HBMItems.PILE_ROD_BORON.get())) {
+        if (held.is(ModItems.PILE_ROD_BORON.get())) {
             return placeSimple(state, level, pos, player, held, ModBlocks.chicago_graphite_rod.get().defaultBlockState(), null);
         }
-        if (held.is(HBMItems.PILE_ROD_LITHIUM.get())) {
+        if (held.is(ModItems.PILE_ROD_LITHIUM.get())) {
             return placeBreeder(state, level, pos, player, held);
         }
-        if (held.is(HBMItems.PILE_ROD_DETECTOR.get())) {
+        if (held.is(ModItems.PILE_ROD_DETECTOR.get())) {
             return placeDetector(state, level, pos, player, held);
         }
 

@@ -1,7 +1,6 @@
 package com.hbm.api.energy;
 
 import com.hbm.capabilities.HBMCaps;
-import com.hbm.item.HBMComponent;
 import com.hbm.registries.ModItems;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;

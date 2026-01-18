@@ -9,9 +9,10 @@ import com.hbm.api.inventory.ModeBuilder;
 import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.blockentity.base2.DummyableBlockEntity;
 import com.hbm.gui.menu.ICFMenu;
-import com.hbm.item.HBMItems;
+
 import com.hbm.item.icf.ItemICFPellet;
 import com.hbm.registries.ModBlocks;
+import com.hbm.registries.ModItems;
 import com.hbm.utils.multiblock.MultiblockData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
@@ -174,7 +175,7 @@ public class ICFReactorBlockEntity extends DummyableBlockEntity implements MenuP
 
     private void handlePelletTransfer() {
         ItemStack active = items.get(SLOT_ACTIVE);
-        if (!active.isEmpty() && active.is(HBMItems.icf_pellet_depleted.get())) {
+        if (!active.isEmpty() && active.is(ModItems.icf_pellet_depleted.get())) {
             pushToOutputs(active.copy());
             items.set(SLOT_ACTIVE, ItemStack.EMPTY);
             setChanged();
@@ -182,7 +183,7 @@ public class ICFReactorBlockEntity extends DummyableBlockEntity implements MenuP
         if (items.get(SLOT_ACTIVE).isEmpty()) {
             for (int i = SLOT_INPUT_START; i <= SLOT_INPUT_END; i++) {
                 ItemStack stack = items.get(i);
-                if (!stack.isEmpty() && stack.is(HBMItems.icf_pellet.get())) {
+                if (!stack.isEmpty() && stack.is(ModItems.icf_pellet.get())) {
                     items.set(SLOT_ACTIVE, stack.copy());
                     items.set(i, ItemStack.EMPTY);
                     setChanged();
@@ -204,7 +205,7 @@ public class ICFReactorBlockEntity extends DummyableBlockEntity implements MenuP
 
     private void processActivePellet() {
         ItemStack active = items.get(SLOT_ACTIVE);
-        if (active.isEmpty() || !active.is(HBMItems.icf_pellet.get())) {
+        if (active.isEmpty() || !active.is(ModItems.icf_pellet.get())) {
             return;
         }
         long difficulty = ItemICFPellet.getFusingDifficulty(active);
@@ -218,7 +219,7 @@ public class ICFReactorBlockEntity extends DummyableBlockEntity implements MenuP
         long produced = ItemICFPellet.react(active, laserInput);
         heat = Math.min(MAX_HEAT, heat + produced);
         if (ItemICFPellet.isSpent(active)) {
-            ItemStack depleted = new ItemStack(HBMItems.icf_pellet_depleted.get());
+            ItemStack depleted = new ItemStack(ModItems.icf_pellet_depleted.get());
             items.set(SLOT_ACTIVE, depleted);
         }
         setChanged();
@@ -296,7 +297,7 @@ public class ICFReactorBlockEntity extends DummyableBlockEntity implements MenuP
     @Override
     public boolean isItemValid(int slot, ItemStack stack) {
         if (slot >= SLOT_INPUT_START && slot <= SLOT_INPUT_END) {
-            return stack.is(HBMItems.icf_pellet.get());
+            return stack.is(ModItems.icf_pellet.get());
         }
         if (slot >= SLOT_OUTPUT_START && slot <= SLOT_OUTPUT_END) {
             return false;

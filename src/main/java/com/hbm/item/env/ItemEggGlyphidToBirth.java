@@ -1,7 +1,6 @@
 package com.hbm.item.env;
 
 import com.hbm.HBMKey;
-import com.hbm.item.HBMComponent;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
@@ -12,7 +11,6 @@ import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.Tags;
 
 public class ItemEggGlyphidToBirth extends ItemEggGlyphid{
     public ItemEggGlyphidToBirth(Properties pProperties) {

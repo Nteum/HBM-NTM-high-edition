@@ -1,6 +1,6 @@
 package com.hbm.blockentity.machine.pile;
 
-import com.hbm.item.HBMItems;
+import com.hbm.registries.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.state.BlockState;
@@ -80,8 +80,8 @@ public class ChicagoSourceBlockEntity extends ChicagoPileBlockEntity {
     }
 
     public enum SourceType {
-        SOURCE(HBMItems.PILE_ROD_SOURCE, 1, 12),
-        PLUTONIUM(HBMItems.PILE_ROD_PLUTONIUM, 2, 16);
+        SOURCE(ModItems.PILE_ROD_SOURCE, 1, 12),
+        PLUTONIUM(ModItems.PILE_ROD_PLUTONIUM, 2, 16);
 
         private final Supplier<? extends Item> rod;
         private final int fluxPerStream;

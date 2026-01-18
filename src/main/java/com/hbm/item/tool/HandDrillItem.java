@@ -5,8 +5,9 @@ import com.hbm.blockentity.machine.pile.ChicagoDetectorBlockEntity;
 import com.hbm.blockentity.machine.pile.ChicagoFuelBlockEntity;
 import com.hbm.blockentity.machine.pile.ChicagoPileBlockEntity;
 import com.hbm.blockentity.machine.pile.ChicagoSourceBlockEntity;
-import com.hbm.item.HBMItems;
+
 import com.hbm.registries.ModBlocks;
+import com.hbm.registries.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -70,7 +71,7 @@ public class HandDrillItem extends Item {
             BlockState target = ModBlocks.chicago_graphite_drilled.get().defaultBlockState()
                     .setValue(RotatedPillarBlock.AXIS, axis);
             level.setBlock(pos, target, Block.UPDATE_ALL);
-            Block.popResource(level, pos, new ItemStack(HBMItems.INGOT_GRAPHITE.get()));
+            Block.popResource(level, pos, new ItemStack(ModItems.INGOT_GRAPHITE.get()));
             SoundType sound = state.getSoundType(level, pos, context.getPlayer());
             level.playSound(null, pos, sound.getBreakSound(), SoundSource.BLOCKS, (sound.getVolume() + 1.0F) / 2.0F, sound.getPitch() * 0.8F);
             level.gameEvent(context.getPlayer(), GameEvent.BLOCK_CHANGE, pos);

@@ -1,8 +1,9 @@
 package com.hbm.Inventory.recipe;
 
-import com.hbm.item.HBMItems;
+
 import com.hbm.item.pwr.ItemPWRFuel;
 import com.hbm.reactor.pwr.PWRFuelType;
+import com.hbm.registries.ModItems;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
@@ -22,21 +23,21 @@ public class PWRFuelPrinterRecipe extends CustomRecipe {
     private static final Map<RegistryObject<net.minecraft.world.item.Item>, PWRFuelType> FUEL_MAP = new LinkedHashMap<>();
 
     static {
-        FUEL_MAP.put(HBMItems.BILLET_URANIUM_FUEL, PWRFuelType.MEU);
-        FUEL_MAP.put(HBMItems.BILLET_U233, PWRFuelType.HEU233);
-        FUEL_MAP.put(HBMItems.BILLET_U235, PWRFuelType.HEU235);
-        FUEL_MAP.put(HBMItems.BILLET_NEPTUNIUM_FUEL, PWRFuelType.MEN);
-        FUEL_MAP.put(HBMItems.BILLET_NEPTUNIUM, PWRFuelType.HEN237);
-        FUEL_MAP.put(HBMItems.BILLET_MOX_FUEL, PWRFuelType.MOX);
-        FUEL_MAP.put(HBMItems.BILLET_PLUTONIUM_FUEL, PWRFuelType.MEP);
-        FUEL_MAP.put(HBMItems.BILLET_PU239, PWRFuelType.HEP239);
-        FUEL_MAP.put(HBMItems.BILLET_PU241, PWRFuelType.HEP241);
-        FUEL_MAP.put(HBMItems.BILLET_AMERICIUM_FUEL, PWRFuelType.MEA);
-        FUEL_MAP.put(HBMItems.BILLET_AM242, PWRFuelType.HEA242);
-        FUEL_MAP.put(HBMItems.BILLET_SCHRABIDIUM_FUEL, PWRFuelType.HES326);
-        FUEL_MAP.put(HBMItems.BILLET_HES, PWRFuelType.HES327);
-        FUEL_MAP.put(HBMItems.BILLET_ZFB_AM_MIX, PWRFuelType.BFB_AM_MIX);
-        FUEL_MAP.put(HBMItems.BILLET_ZFB_PU241, PWRFuelType.BFB_PU241);
+        FUEL_MAP.put(ModItems.BILLET_URANIUM_FUEL, PWRFuelType.MEU);
+        FUEL_MAP.put(ModItems.BILLET_U233, PWRFuelType.HEU233);
+        FUEL_MAP.put(ModItems.BILLET_U235, PWRFuelType.HEU235);
+        FUEL_MAP.put(ModItems.BILLET_NEPTUNIUM_FUEL, PWRFuelType.MEN);
+        FUEL_MAP.put(ModItems.BILLET_NEPTUNIUM, PWRFuelType.HEN237);
+        FUEL_MAP.put(ModItems.BILLET_MOX_FUEL, PWRFuelType.MOX);
+        FUEL_MAP.put(ModItems.BILLET_PLUTONIUM_FUEL, PWRFuelType.MEP);
+        FUEL_MAP.put(ModItems.BILLET_PU239, PWRFuelType.HEP239);
+        FUEL_MAP.put(ModItems.BILLET_PU241, PWRFuelType.HEP241);
+        FUEL_MAP.put(ModItems.BILLET_AMERICIUM_FUEL, PWRFuelType.MEA);
+        FUEL_MAP.put(ModItems.BILLET_AM242, PWRFuelType.HEA242);
+        FUEL_MAP.put(ModItems.BILLET_SCHRABIDIUM_FUEL, PWRFuelType.HES326);
+        FUEL_MAP.put(ModItems.BILLET_HES, PWRFuelType.HES327);
+        FUEL_MAP.put(ModItems.BILLET_ZFB_AM_MIX, PWRFuelType.BFB_AM_MIX);
+        FUEL_MAP.put(ModItems.BILLET_ZFB_PU241, PWRFuelType.BFB_PU241);
     }
 
     public PWRFuelPrinterRecipe(ResourceLocation id, CraftingBookCategory category) {
@@ -53,7 +54,7 @@ public class PWRFuelPrinterRecipe extends CustomRecipe {
             if (stack.isEmpty()) {
                 continue;
             }
-            if (stack.is(HBMItems.pwr_printer.get())) {
+            if (stack.is(ModItems.pwr_printer.get())) {
                 if (foundPrinter) {
                     return false;
                 }
@@ -94,7 +95,7 @@ public class PWRFuelPrinterRecipe extends CustomRecipe {
         if (type == null) {
             return ItemStack.EMPTY;
         }
-        return ItemPWRFuel.createStack(HBMItems.pwr_fuel.get(), type);
+        return ItemPWRFuel.createStack(ModItems.pwr_fuel.get(), type);
     }
 
     @Override
@@ -107,7 +108,7 @@ public class PWRFuelPrinterRecipe extends CustomRecipe {
         NonNullList<ItemStack> remaining = NonNullList.withSize(container.getContainerSize(), ItemStack.EMPTY);
         for (int i = 0; i < container.getContainerSize(); i++) {
             ItemStack stack = container.getItem(i);
-            if (stack.is(HBMItems.pwr_printer.get())) {
+            if (stack.is(ModItems.pwr_printer.get())) {
                 remaining.set(i, stack.copy());
             }
         }

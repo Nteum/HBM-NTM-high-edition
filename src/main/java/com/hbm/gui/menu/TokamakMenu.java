@@ -2,7 +2,6 @@ package com.hbm.gui.menu;
 
 import com.hbm.gui.ModMenuType;
 import com.hbm.blockentity.machine.tokamak.TokamakControllerBlockEntity;
-import com.hbm.item.HBMComponent;
 import com.hbm.capabilities.HBMCaps;
 import com.hbm.registries.ModItems;
 import com.hbm.registries.ModTags;

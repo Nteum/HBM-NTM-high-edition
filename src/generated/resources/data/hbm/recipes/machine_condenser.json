@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:bucket"
+    },
+    "C": {
+      "item": "hbm:circuit_basic"
+    },
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "S": {
+      "item": "hbm:plate_steel"
+    },
+    "W": {
+      "item": "minecraft:water_bucket"
+    }
+  },
+  "pattern": [
+    "SWS",
+    "GBG",
+    "SCS"
+  ],
+  "result": {
+    "item": "hbm:machine_condenser"
+  },
+  "show_notification": true
+}

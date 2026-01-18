@@ -7,7 +7,7 @@ import com.hbm.config.ConfigLBSM;
 import com.hbm.entity.ModEntityType;
 import com.hbm.gui.ModMenuType;
 import com.hbm.gui.screen.*;
-import com.hbm.item.HBMItems;
+
 import com.hbm.item.icf.ItemICFPellet;
 import com.hbm.item.pwr.ItemPWRFuel;
 import com.hbm.item.research.ItemBreedingRod;
@@ -136,15 +136,15 @@ public class ClientEventHanler {
                             ? (float) stack.getTag().getInt("stage") : 0);
             ItemProperties.register(ModItems.INGOT_NEPTUNIUM.get(), HBM.rl("stage"),
                     (stack, level, entity, seed) -> ConfigLBSM.enableLBSM && ConfigLBSM.enableLBSMFullSchrab ? 1 : 0);
-            ItemProperties.register(HBMItems.pwr_fuel.get(), HBM.rl("pwr_type"),
+            ItemProperties.register(ModItems.pwr_fuel.get(), HBM.rl("pwr_type"),
                     (stack, level, entity, seed) -> ItemPWRFuel.getFuelTypeIndex(stack));
-            ItemProperties.register(HBMItems.rod_zirnox.get(), HBM.rl("zirnox_type"),
+            ItemProperties.register(ModItems.rod_zirnox.get(), HBM.rl("zirnox_type"),
                     (stack, level, entity, seed) -> ItemZirnoxRod.getRodTypeIndex(stack));
-            ItemProperties.register(HBMItems.rod_breeder_single.get(), HBM.rl("breeder_type"),
+            ItemProperties.register(ModItems.rod_breeder_single.get(), HBM.rl("breeder_type"),
                     (stack, level, entity, seed) -> ItemBreedingRod.getType(stack).ordinal());
-            ItemProperties.register(HBMItems.rod_breeder_dual.get(), HBM.rl("breeder_type"),
+            ItemProperties.register(ModItems.rod_breeder_dual.get(), HBM.rl("breeder_type"),
                     (stack, level, entity, seed) -> ItemBreedingRod.getType(stack).ordinal());
-            ItemProperties.register(HBMItems.rod_breeder_quad.get(), HBM.rl("breeder_type"),
+            ItemProperties.register(ModItems.rod_breeder_quad.get(), HBM.rl("breeder_type"),
                     (stack, level, entity, seed) -> ItemBreedingRod.getType(stack).ordinal());
         });
     }
@@ -254,6 +254,6 @@ public class ClientEventHanler {
         FluidBucketItem[] fluidBucketItems = ModFluids.fluidList.stream().map(holder -> holder.bucket().get()).filter(bucket -> bucket instanceof FluidBucketItem).toArray(FluidBucketItem[]::new);
         event.register(FluidBucketItem::getColor, fluidBucketItems);
         event.register((itemstack,color)->0xEC9A63, ModItems.BEDROCK_ORE.get());
-        event.register((stack, tintIndex) -> tintIndex == 0 ? ItemICFPellet.getFuelColor(stack) : 0xFFFFFF, HBMItems.icf_pellet.get());
+        event.register((stack, tintIndex) -> tintIndex == 0 ? ItemICFPellet.getFuelColor(stack) : 0xFFFFFF, ModItems.icf_pellet.get());
     }
 }

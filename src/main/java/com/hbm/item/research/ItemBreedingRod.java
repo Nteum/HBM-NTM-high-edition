@@ -1,5 +1,6 @@
 package com.hbm.item.research;
 
+import com.hbm.registries.ModItems;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -28,9 +29,9 @@ public class ItemBreedingRod extends Item {
 
     public static ItemStack createStack(RodForm form, RodType type) {
         Item item = switch (form) {
-            case SINGLE -> com.hbm.item.HBMItems.rod_breeder_single.get();
-            case DUAL -> com.hbm.item.HBMItems.rod_breeder_dual.get();
-            case QUAD -> com.hbm.item.HBMItems.rod_breeder_quad.get();
+            case SINGLE -> ModItems.rod_breeder_single.get();
+            case DUAL -> ModItems.rod_breeder_dual.get();
+            case QUAD -> ModItems.rod_breeder_quad.get();
         };
         ItemStack stack = new ItemStack(item);
         setType(stack, type);

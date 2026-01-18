@@ -2,7 +2,8 @@ package com.hbm.blockentity.machine.pile;
 
 import com.hbm.block.machine.pile.ChicagoPileStateProperties;
 import com.hbm.blockentity.ModBlockEntityType;
-import com.hbm.item.HBMItems;
+
+import com.hbm.registries.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -76,7 +77,7 @@ public class ChicagoDetectorBlockEntity extends ChicagoPileBlockEntity {
     }
 
     public void reset() {
-        insertRod(new ItemStack(HBMItems.PILE_ROD_DETECTOR.get()));
+        insertRod(new ItemStack(ModItems.PILE_ROD_DETECTOR.get()));
     }
 
     @Override

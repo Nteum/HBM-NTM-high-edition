@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "L": {
+      "item": "hbm:plate_lead"
+    },
+    "P": {
+      "item": "minecraft:smooth_stone"
+    },
+    "S": {
+      "item": "hbm:plate_steel"
+    }
+  },
+  "pattern": [
+    "LSL",
+    "SPS",
+    "LSL"
+  ],
+  "result": {
+    "count": 4,
+    "item": "hbm:pwr_casing"
+  },
+  "show_notification": true
+}

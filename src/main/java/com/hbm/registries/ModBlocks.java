@@ -43,6 +43,7 @@ import com.hbm.datagen.model.BlockStateGen;
 import com.hbm.item.blockitem.IronCrateItem;
 import com.hbm.item.blockitem.SteelCrateItem;
 import com.hbm.item.tool.BatteryBlockItem;
+import com.hbm.reactor.rbmk.RBMKPeripheralType;
 import com.hbm.registries.WrapperRegistry.BlockBuilder;
 import com.hbm.registries.WrapperRegistry.WrappedBlockRegistry;
 import com.hbm.utils.debug.BlockDebug;
@@ -100,19 +101,19 @@ public class ModBlocks {
     public static final RegistryObject<Block> machine_icf_press = registerBlockWithItem("machine_icf_press", () -> new BlockICFPress(Properties.of().strength(4.0F).explosionResistance(15.0F)));
     public static final RegistryObject<Block> machine_reactor_breeding = registerBlockWithItem("machine_reactor_breeding", () -> new BlockBreederReactor(Properties.of().strength(5.0F).explosionResistance(20.0F)));
     public static final RegistryObject<Block> machine_research_reactor = registerBlockWithItem("machine_research_reactor", () -> new BlockResearchReactor(Properties.of().strength(5.0F).explosionResistance(20.0F)));
-    public static final RegistryObject<Block> pwr_controller = registerBlockWithItem("pwr_controller", ()->new BlockPWRController(Properties.of().strength(5.0F).explosionResistance(10.0F)));
-    public static final RegistryObject<Block> pwr_casing = registerBlockWithItem("pwr_casing", () -> new BlockGenericPWR(Properties.of().strength(5.0F).explosionResistance(10.0F)));
-    public static final RegistryObject<Block> pwr_port = registerBlockWithItem("pwr_port", () -> new BlockGenericPWR(Properties.of().strength(5.0F).explosionResistance(10.0F)));
-    public static final RegistryObject<Block> pwr_reflector = registerBlockWithItem("pwr_reflector", () -> new BlockGenericPWR(Properties.of().strength(5.0F).explosionResistance(10.0F)));
-    public static final RegistryObject<Block> pwr_fuel_block = registerBlockWithItem("pwr_fuel_block", () -> new BlockPWRPillar(Properties.of().strength(4.0F).explosionResistance(8.0F)));
-    public static final RegistryObject<Block> pwr_control = registerBlockWithItem("pwr_control", () -> new BlockPWRPillar(Properties.of().strength(4.0F).explosionResistance(8.0F)));
-    public static final RegistryObject<Block> pwr_channel = registerBlockWithItem("pwr_channel", () -> new BlockPWRPillar(Properties.of().strength(4.0F).explosionResistance(8.0F)));
-    public static final RegistryObject<Block> pwr_heatex = registerBlockWithItem("pwr_heatex", () -> new BlockGenericPWR(Properties.of().strength(4.0F).explosionResistance(8.0F)));
-    public static final RegistryObject<Block> pwr_heatsink = registerBlockWithItem("pwr_heatsink", () -> new BlockGenericPWR(Properties.of().strength(4.0F).explosionResistance(8.0F)));
-    public static final RegistryObject<Block> pwr_neutron_source = registerBlockWithItem("pwr_neutron_source", () -> new BlockGenericPWR(Properties.of().strength(4.0F).explosionResistance(8.0F)));
-    public static final RegistryObject<Block> pwr_block = BLOCKS.register("pwr_block", () -> new BlockPWR(Properties.of().strength(5.0F).explosionResistance(10.0F).noLootTable()));
-    public static final RegistryObject<Block> machine_zirnox = registerBlockWithItem("machine_zirnox", () -> new BlockZirnoxReactor(Properties.of().strength(5.0F).explosionResistance(100.0F)));
-    public static final RegistryObject<Block> zirnox_destroyed = BLOCKS.register("zirnox_destroyed", () -> new Block(Properties.of().strength(100.0F).explosionResistance(800.0F).noLootTable()));
+    public static final RegistryObject<Block> pwr_controller = add("pwr_controller", ()->new BlockPWRController(Properties.of().strength(5.0F).explosionResistance(10.0F)), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, "PWR Controller", HBMKey.DROP_SELF);
+    public static final RegistryObject<Block> pwr_casing = add("pwr_casing", () -> new BlockGenericPWR(Properties.of().strength(5.0F).explosionResistance(10.0F)), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, "PWR Casting", HBMKey.DROP_SELF);
+    public static final RegistryObject<Block> pwr_port = add("pwr_port", () -> new BlockGenericPWR(Properties.of().strength(5.0F).explosionResistance(10.0F)), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, "PWR Port", HBMKey.DROP_SELF);
+    public static final RegistryObject<Block> pwr_reflector = add("pwr_reflector", () -> new BlockGenericPWR(Properties.of().strength(5.0F).explosionResistance(10.0F)), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, "PWR Reflector", HBMKey.DROP_SELF);
+    public static final RegistryObject<Block> pwr_fuel_block = add("pwr_fuel_block", () -> new BlockPWRPillar(Properties.of().strength(4.0F).explosionResistance(8.0F)), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, "PWR Fuel Block", HBMKey.DROP_SELF);
+    public static final RegistryObject<Block> pwr_control = add("pwr_control", () -> new BlockPWRPillar(Properties.of().strength(4.0F).explosionResistance(8.0F)), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, "PWR Control", HBMKey.DROP_SELF);
+    public static final RegistryObject<Block> pwr_channel = add("pwr_channel", () -> new BlockPWRPillar(Properties.of().strength(4.0F).explosionResistance(8.0F)), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, "PWR Channel", HBMKey.DROP_SELF);
+    public static final RegistryObject<Block> pwr_heatex = add("pwr_heatex", () -> new BlockGenericPWR(Properties.of().strength(4.0F).explosionResistance(8.0F)), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, "PWR Heat Tex", HBMKey.DROP_SELF);
+    public static final RegistryObject<Block> pwr_heatsink = add("pwr_heatsink", () -> new BlockGenericPWR(Properties.of().strength(4.0F).explosionResistance(8.0F)), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, "PWR Heat Sink", HBMKey.DROP_SELF);
+    public static final RegistryObject<Block> pwr_neutron_source = add("pwr_neutron_source", () -> new BlockGenericPWR(Properties.of().strength(4.0F).explosionResistance(8.0F)), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, "PWR Neuron Source", HBMKey.DROP_SELF);
+    public static final RegistryObject<Block> pwr_block = add("pwr_block", () -> new BlockPWR(Properties.of().strength(5.0F).explosionResistance(10.0F).noLootTable()), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, "PWR Block", HBMKey.DROP_NO_EXIST);
+    public static final RegistryObject<Block> machine_zirnox = add("machine_zirnox", () -> new BlockZirnoxReactor(Properties.of().strength(5.0F).explosionResistance(100.0F)), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, "Zirnox Reactor", HBMKey.DROP_SELF);
+    public static final RegistryObject<Block> zirnox_destroyed = add("zirnox_destroyed", () -> new Block(Properties.of().strength(100.0F).explosionResistance(800.0F).noLootTable()), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, "Zirnox Ruins", HBMKey.DROP_NO_EXIST);
 
     // Chicago Pile components
     public static final RegistryObject<Block> chicago_graphite_block = new BlockBuilder("chicago_graphite_block",
@@ -157,19 +158,19 @@ public class ModBlocks {
     public static final RegistryObject<Block> machine_cracking_tower = registerBlockWithItem("machine_cracking_tower",()->new BlockCrackingTower(Properties.of()));
     public static final RegistryObject<Block> machine_condenser = registerBlockWithItem("machine_condenser", () -> new CondenserBlock(Properties.of().strength(4.0F).sound(SoundType.METAL)));
     public static final RegistryObject<Block> machine_cooling_tower = registerBlockWithItem("machine_cooling_tower", () -> new CoolingTowerBlock(Properties.of().strength(5.0F).sound(SoundType.METAL)));
-    public static final RegistryObject<Block> machine_turbine_gas = registerBlockWithItem("machine_turbine_gas", () -> new BlockTurbineGas(Properties.of().strength(6.0F).sound(SoundType.METAL)));
+    public static final RegistryObject<Block> machine_turbine_gas = machine("machine_turbine_gas", () -> new BlockTurbineGas(Properties.of().strength(6.0F).sound(SoundType.METAL)));
     public static final RegistryObject<Block> machine_assembler = registerBlockWithItem("machine_assembler",()->new BlockAssembler(Properties.of()));
     public static final RegistryObject<Block> machine_crucible = registerBlockWithItem("machine_crucible",()->new BlockCrucible(Properties.of()));
     public static final RegistryObject<Block> machine_rbmk_base = registerBlockWithItem("machine_rbmk_base", () -> new BlockRBMKBase(Properties.of().strength(6.0F).explosionResistance(30.0F)));
     public static final RegistryObject<Block> machine_rbmk_heater = registerBlockWithItem("machine_rbmk_heater", () -> new BlockRBMKHeater(Properties.of().strength(4.0F).explosionResistance(12.0F).lightLevel(state -> state.getValue(BlockRBMKHeater.LIT) ? 8 : 0)));
     public static final RegistryObject<Block> machine_rbmk_fuel_channel = registerBlockWithItem("machine_rbmk_fuel_channel", () -> new BlockRBMKFuelChannel(Properties.of().strength(4.0F).explosionResistance(12.0F)));
     public static final RegistryObject<Block> machine_rbmk_control_rod = registerBlockWithItem("machine_rbmk_control_rod", () -> new BlockRBMKControlRod(Properties.of().strength(4.0F).explosionResistance(12.0F)));
-    public static final RegistryObject<Block> machine_rbmk_console = registerBlockWithItem("machine_rbmk_console", () -> new BlockRBMKPeripheral(Properties.of().strength(4.0F).explosionResistance(16.0F), com.hbm.reactor.rbmk.RBMKPeripheralType.CONSOLE));
-    public static final RegistryObject<Block> machine_rbmk_element = registerBlockWithItem("machine_rbmk_element", () -> new BlockRBMKPeripheral(Properties.of().strength(4.0F).explosionResistance(16.0F), com.hbm.reactor.rbmk.RBMKPeripheralType.ELEMENT));
-    public static final RegistryObject<Block> machine_rbmk_reflector = registerBlockWithItem("machine_rbmk_reflector", () -> new BlockRBMKPeripheral(Properties.of().strength(5.0F).explosionResistance(20.0F), com.hbm.reactor.rbmk.RBMKPeripheralType.REFLECTOR));
-    public static final RegistryObject<Block> machine_rbmk_debris = registerBlockWithItem("machine_rbmk_debris", () -> new BlockRBMKPeripheral(Properties.of().strength(3.0F).explosionResistance(8.0F), com.hbm.reactor.rbmk.RBMKPeripheralType.DEBRIS));
-    public static final RegistryObject<Block> machine_rbmk_crane_console = registerBlockWithItem("machine_rbmk_crane_console", () -> new BlockRBMKPeripheral(Properties.of().strength(4.0F).explosionResistance(12.0F), com.hbm.reactor.rbmk.RBMKPeripheralType.CRANE_CONSOLE));
-    public static final RegistryObject<Block> machine_rbmk_autoloader = registerBlockWithItem("machine_rbmk_autoloader", () -> new BlockRBMKPeripheral(Properties.of().strength(4.0F).explosionResistance(12.0F), com.hbm.reactor.rbmk.RBMKPeripheralType.AUTOLOADER));
+    public static final RegistryObject<Block> machine_rbmk_console = registerBlockWithItem("machine_rbmk_console", () -> new BlockRBMKPeripheral(Properties.of().strength(4.0F).explosionResistance(16.0F), RBMKPeripheralType.CONSOLE));
+    public static final RegistryObject<Block> machine_rbmk_element = registerBlockWithItem("machine_rbmk_element", () -> new BlockRBMKPeripheral(Properties.of().strength(4.0F).explosionResistance(16.0F), RBMKPeripheralType.ELEMENT));
+    public static final RegistryObject<Block> machine_rbmk_reflector = registerBlockWithItem("machine_rbmk_reflector", () -> new BlockRBMKPeripheral(Properties.of().strength(5.0F).explosionResistance(20.0F), RBMKPeripheralType.REFLECTOR));
+    public static final RegistryObject<Block> machine_rbmk_debris = registerBlockWithItem("machine_rbmk_debris", () -> new BlockRBMKPeripheral(Properties.of().strength(3.0F).explosionResistance(8.0F), RBMKPeripheralType.DEBRIS));
+    public static final RegistryObject<Block> machine_rbmk_crane_console = registerBlockWithItem("machine_rbmk_crane_console", () -> new BlockRBMKPeripheral(Properties.of().strength(4.0F).explosionResistance(12.0F), RBMKPeripheralType.CRANE_CONSOLE));
+    public static final RegistryObject<Block> machine_rbmk_autoloader = registerBlockWithItem("machine_rbmk_autoloader", () -> new BlockRBMKPeripheral(Properties.of().strength(4.0F).explosionResistance(12.0F), RBMKPeripheralType.AUTOLOADER));
     //模型部分（仅仅用于加载模型渲染，而不会在游戏单独出现，名称以part开头）
     public static final RegistryObject<Block> part_press_head = BLOCKS.register("part_press_head",()->new Block(Properties.of().noLootTable()));
     //电力
@@ -178,12 +179,12 @@ public class ModBlocks {
     public static final RegistryObject<Block> conveyor = registerBlockWithItem("conveyor",()->new BlockConveyor(Properties.of()));
     public static final RegistryObject<Block> crate_iron =
             new BlockBuilder("crate_iron", () -> new IronCrateBlock(Properties.of().strength(3.0F).sound(SoundType.WOOD)))
-                    .tab(ModCreativeModeTab.HBM_MACHINE.getKey())
+                    .tab(ModCreativeModeTab.HBM_MACHINE.getKey()).loc(HBMKey.REVERSE_GEN)
                     .item(block -> new IronCrateItem(block, new Item.Properties().stacksTo(1)))
                     .build();
     public static final RegistryObject<Block> crate_steel =
             new BlockBuilder("crate_steel", () -> new SteelCrateBlock(Properties.of().strength(4.0F).sound(SoundType.METAL)))
-                    .tab(ModCreativeModeTab.HBM_MACHINE.getKey())
+                    .tab(ModCreativeModeTab.HBM_MACHINE.getKey()).loc(HBMKey.REVERSE_GEN)
                     .item(block -> new SteelCrateItem(block, new Item.Properties().stacksTo(1))).loc(HBMKey.REVERSE_GEN)
                     .build();
     //炸弹
