@@ -29,9 +29,14 @@ public class HBMtools {
     public static RegistryObject<Item> ORE_SCANNER;
 
     public static RegistryObject<Item> DESIGNATOR;
+    private static boolean registered;
 //    // 流体桶
 //    public static RegistryObject<Item> FLUID_BUCKET;
     public static void register(DeferredRegister<Item> ITEMS){
+        if (registered) {
+            return;
+        }
+        registered = true;
         UPGRADE_BASE = ITEMS.register("upgrade_template",()->new Item(new Item.Properties()));
         BUILD_WAND = ITEMS.register("wand", () -> new ItemBuildWand(new Item.Properties().stacksTo(1)));
         DEBUG_WAND = ITEMS.register("debug_wand",()->new ItemDebugWand(new Item.Properties()));
@@ -45,12 +50,6 @@ public class HBMtools {
         DESIGNATOR = ITEMS.register("designator",()->new ItemDesignator(new Item.Properties().stacksTo(1)));
     }
     public static void creativeTab(CreativeModeTab.Output pOutput){
-<<<<<<< HEAD
-//        pOutput.accept(UPGRADE_BASE.get());
-//        pOutput.accept(GEIGER_COUNTER.get());
-//
-//        pOutput.accept(DEBUG_WAND.get());
-=======
         pOutput.accept(UPGRADE_BASE.get());
         pOutput.accept(GEIGER_COUNTER.get());
 
@@ -66,7 +65,6 @@ public class HBMtools {
         pOutput.accept(HBMItems.HAND_DRILL_DESH.get());
         pOutput.accept(HBMItems.SCREWDRIVER.get());
         pOutput.accept(HBMItems.reacher.get());
->>>>>>> 6e858a28 (反应堆已全部搬运完毕、配方以及生存可玩性都可用。)
     }
     public static void genModel(ItemModelProvider provider){
         provider.basicItem(UPGRADE_BASE.get());

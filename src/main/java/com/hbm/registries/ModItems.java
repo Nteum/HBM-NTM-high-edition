@@ -54,7 +54,7 @@ public class ModItems {
     public static final List<WrappedItemRegistry> itemList = new ArrayList<>();
 
     static {
-//        HBMtools.register(ITEMS);
+        HBMtools.register(ITEMS);
 //            HBMComponent.register(ITEMS);
         HBMWeapon.register(ITEMS);
         HBMCombat.register(ITEMS);

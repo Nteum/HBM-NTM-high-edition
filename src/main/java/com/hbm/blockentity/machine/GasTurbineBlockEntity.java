@@ -67,9 +67,19 @@ public class GasTurbineBlockEntity extends DummyableBlockEntity {
         FUEL_MULTIPLIER.put(ModFluids.BIOGAS.source().getId().toString(), 15D);
         FUEL_MULTIPLIER.put(ModFluids.REFORM_GAS.source().getId().toString(), 5D);
         FUEL_MULTIPLIER.put(ModFluids.DEUTERIUM.source().getId().toString(), 30D);
+        FUEL_MULTIPLIER.put(ModFluids.OIL.source().getId().toString(), 20D);
+        FUEL_MULTIPLIER.put(ModFluids.CRACK_OIL.source().getId().toString(), 22D);
+        FUEL_MULTIPLIER.put(ModFluids.PETROLEUM.source().getId().toString(), 25D);
+        FUEL_MULTIPLIER.put(ModFluids.NAPHTHA.source().getId().toString(), 22D);
+        FUEL_MULTIPLIER.put(ModFluids.DIESEL.source().getId().toString(), 30D);
+        FUEL_MULTIPLIER.put(ModFluids.DIESEL_CRACK.source().getId().toString(), 28D);
+        FUEL_MULTIPLIER.put(ModFluids.KEROSENE.source().getId().toString(), 26D);
+        FUEL_MULTIPLIER.put(ModFluids.HEATING_OIL.source().getId().toString(), 18D);
+        FUEL_MULTIPLIER.put(ModFluids.HEATING_OIL_VACUUM.source().getId().toString(), 16D);
+        FUEL_MULTIPLIER.put(ModFluids.WOOD_OIL.source().getId().toString(), 12D);
     }
 
-    private final BasicEnergyContainer energy = new BasicEnergyContainer(CAPACITY, 0, MAX_EXTRACT);
+    private final BasicEnergyContainer energy = new BasicEnergyContainer(CAPACITY, MAX_EXTRACT, MAX_EXTRACT);
     private final BasicFluidHandler fluids;
     private final ContainerData containerData;
 
@@ -108,7 +118,7 @@ public class GasTurbineBlockEntity extends DummyableBlockEntity {
                 .addTank(16_000, Mode.INPUT)
                 .addTank(16_000, Mode.INPUT)
                 .addTank(160_000, Mode.OUTPUT);
-        handler.getFluidTanks().get(FUEL_TANK).setValidator(stack -> hasGasTrait(stack));
+        handler.getFluidTanks().get(FUEL_TANK).setValidator(stack -> hasCombustibleTrait(stack));
         handler.getFluidTanks().get(LUBE_TANK).setValidator(stack -> stack.getFluid() == ModFluids.OIL.source().get());
         handler.getFluidTanks().get(WATER_TANK).setValidator(stack -> stack.getFluid().isSame(net.minecraft.world.level.material.Fluids.WATER));
         handler.getFluidTanks().get(STEAM_TANK).setValidator(stack -> stack.getFluid() == ModFluids.HOT_STEAM.source().get());
@@ -323,15 +333,15 @@ public class GasTurbineBlockEntity extends DummyableBlockEntity {
         return FUEL_MULTIPLIER.getOrDefault(name, 5D);
     }
 
-    private boolean hasGasTrait(FluidStack stack) {
-        return hasGasTrait(stack.getFluid());
+    private boolean hasCombustibleTrait(FluidStack stack) {
+        return hasCombustibleTrait(stack.getFluid());
     }
 
-    private boolean hasGasTrait(net.minecraft.world.level.material.Fluid fluid) {
+    private boolean hasCombustibleTrait(net.minecraft.world.level.material.Fluid fluid) {
         FluidType type = fluid.getFluidType();
         if (type instanceof com.hbm.Inventory.fluid.ExtendedFluidType extended) {
             FT_Combustible trait = extended.getTrait(FT_Combustible.class);
-            return trait != null && trait.getGrade() == FT_Combustible.FuelGrade.GAS;
+            return trait != null;
         }
         return false;
     }
@@ -346,7 +356,7 @@ public class GasTurbineBlockEntity extends DummyableBlockEntity {
 
     private boolean hasAcceptableFuel() {
         FluidTank fuel = fluids.getFluidTanks().get(FUEL_TANK);
-        return !fuel.isEmpty() && hasGasTrait(fuel.getFluid());
+        return !fuel.isEmpty() && hasCombustibleTrait(fuel.getFluid());
     }
 
     private boolean hasLubricant() {

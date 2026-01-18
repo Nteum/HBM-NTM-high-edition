@@ -9,8 +9,6 @@ import com.hbm.block.decoriate.BlockTest12;
 import com.hbm.block.env.GlyphidBlock;
 import com.hbm.block.env.GlyphidSpawner;
 import com.hbm.block.logistic.BlockCable;
-<<<<<<< HEAD
-=======
 import com.hbm.block.machine.*;
 import com.hbm.block.machine.icf.BlockICFController;
 import com.hbm.block.machine.icf.BlockICFPress;
@@ -28,7 +26,6 @@ import com.hbm.block.machine.generator.BlockPWR;
 import com.hbm.block.machine.generator.BlockPWRController;
 import com.hbm.block.machine.generator.BlockPWRPillar;
 import com.hbm.block.machine.generator.BlockGenericPWR;
->>>>>>> 6e858a28 (反应堆已全部搬运完毕、配方以及生存可玩性都可用。)
 import com.hbm.block.logistic.BlockConveyor;
 import com.hbm.block.machine.*;
 import com.hbm.block.machine.rbmk.*;
@@ -52,6 +49,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FallingBlock;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;

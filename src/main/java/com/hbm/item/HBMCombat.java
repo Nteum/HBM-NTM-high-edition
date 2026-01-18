@@ -30,6 +30,7 @@ import java.util.function.Supplier;
 public class HBMCombat{
     private static final List<RegistryObject<Item>> itemList = new ArrayList<>();
     private static final List<RegistryObject<Item>> standaloneModels = new ArrayList<>();
+    private static boolean registered;
     public static Suit STEEL;
     public static Suit TITANIUM;
     public static Suit ALLOY;
@@ -56,6 +57,10 @@ public class HBMCombat{
     public static RegistryObject<Item> BJ_JETPACK;
 
     public static void register(DeferredRegister<Item> ITEMS){
+        if (registered) {
+            return;
+        }
+        registered = true;
         // 一般盔甲
         STEEL = new Suit(register(itemList, "steel_helmet", () -> new ItemArmorFSB(HBMArmorMats.STEEL, ArmorItem.Type.HELMET, new Item.Properties())),
                 register(itemList, "steel_plate", () -> new ItemArmorFSB(HBMArmorMats.STEEL, ArmorItem.Type.CHESTPLATE, new Item.Properties(), ()->STEEL).cloneStats((ItemArmorFSB) STEEL.HELMET.get())),

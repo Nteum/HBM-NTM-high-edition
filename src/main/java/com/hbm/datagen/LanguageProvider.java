@@ -8,16 +8,12 @@ import com.hbm.block.HBMMachine;
 import com.hbm.blockentity.interfaces.IUpgradeInfoProvider;
 import com.hbm.item.HBMCombat;
 import com.hbm.item.HBMComponent;
-<<<<<<< HEAD
-import com.hbm.registries.ModItems;
-=======
 import com.hbm.item.HBMItems;
 import com.hbm.item.HBMtools;
->>>>>>> 6e858a28 (反应堆已全部搬运完毕、配方以及生存可玩性都可用。)
 import com.hbm.registries.HBMDamage;
 import com.hbm.registries.ModKeyMapping;
 import com.hbm.registries.ModBlocks;
-import com.hbm.registries.ModItems;;
+import com.hbm.registries.ModItems;
 import net.minecraft.data.PackOutput;
 
 public class LanguageProvider extends net.minecraftforge.common.data.LanguageProvider {
@@ -29,11 +25,11 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
     protected void addTranslations() {
         autoAdd();
         ModItems.languageSupport(this);
+        HBMItems.languageSupport(this);
         HBMDamage.languageSupport(this);
         ModFluids.localName(this);
         ModKeyMapping.localName(this);
 
-//        ModItems.languageSupport(this);
         ModBlocks.languageSupport(this);
 
         addCreativeTabs();
@@ -83,7 +79,7 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
 //        this.add(HBMLang.ITEMGROUP_WEAPON);
     }
     private void addItems(){
-//        HBMComponent.languageSupport(this);
+        HBMComponent.languageSupport(this);
         HBMCombat.languageSupport(this);
         this.add(HBMtools.POLLUTION_DETECTOR.get(), "Pollution Detector");
         this.add(HBMtools.ORE_SCANNER.get(), "Ore Density Scanner");
@@ -153,8 +149,7 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
         this.add("gui.hbm.rbmk.action.normal", "Status nominal.");
         this.add("gui.hbm.rbmk.action.insert_rods", "Insert control rods / consider AZ-5.");
         this.add("gui.hbm.rbmk.action.raise_rods", "Rods fully inserted — you can raise them.");
-<<<<<<< HEAD
-=======
+
         this.add("item.hbm.rbmk_tool", "RBMK Console Linking Device");
         this.add("item.hbm.rbmk_tool.desc1", "Sneak-right-click a RBMK column to store its location.");
         this.add("item.hbm.rbmk_tool.desc2", "Then sneak-right-click a console/crane to force-link it.");
@@ -168,18 +163,14 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
         this.add("item.hbm.digamma_diagnostic", "Digamma Diagnostic");
         this.add("item.hbm.digamma_diagnostic.desc1", "Sneak-right-click to read personal digamma exposure.");
         this.add(ModBlocks.crate_iron.get(), "Iron Crate");
->>>>>>> 6e858a28 (反应堆已全部搬运完毕、配方以及生存可玩性都可用。)
         this.add("container.hbm.crate_iron", "Iron Crate");
+        this.add(ModBlocks.crate_steel.get(), "Steel Crate");
         this.add("container.hbm.crate_steel", "Steel Crate");
         this.add(ModBlocks.machine_wood_burner.get(), "Wood Burner Generator");
         this.add("container.hbm.machine_wood_burner", "Wood Burner Generator");
         this.add("tooltip.hbm.crate_empty", "[Empty]");
         this.add("tooltip.hbm.crate_more", "  and %s more...");
         this.add("tooltip.hbm.crate_fill", "  Used %s / %s slots");
-<<<<<<< HEAD
-//        this.add(ModItems.rbmk_control_rod.get(), "RBMK Control Rod");
-//        this.add(ModItems.WOOD_ASH_POWDER.get(), "Wood Ash Powder");
-=======
         this.add(HBMItems.rbmk_control_rod.get(), "RBMK Control Rod");
         this.add(ModBlocks.machine_icf_controller.get(), "ICF Laser Controller");
         this.add(ModBlocks.machine_icf_press.get(), "ICF Fuel Press");
@@ -207,7 +198,6 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
         this.add(HBMItems.rod_empty.get(), "Empty Rod Casing");
         this.add(HBMItems.rod_dual_empty.get(), "Empty Dual Rod Casing");
         this.add(HBMItems.rod_quad_empty.get(), "Empty Quad Rod Casing");
->>>>>>> 6e858a28 (反应堆已全部搬运完毕、配方以及生存可玩性都可用。)
         this.add("gui.hbm.wood_burner.no_fuel", "No fuel loaded.");
         this.add("gui.hbm.wood_burner.enabled", "Enabled");
         this.add("gui.hbm.wood_burner.disabled", "Disabled");

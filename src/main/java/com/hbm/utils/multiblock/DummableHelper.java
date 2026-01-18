@@ -12,10 +12,13 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class DummableHelper {
     private DummableHelper(){}
+    private static final ThreadLocal<Set<BlockPos>> CLEARING = ThreadLocal.withInitial(HashSet::new);
 
     /** 检查方块是否可以放得下 */
     public static boolean checkRequirement(Level level, BlockPos blockPos, Direction dir, List<Vec3i> offsets){
@@ -59,7 +62,15 @@ public class DummableHelper {
             corePos = tileProxyBase.cachedPos;
         }else corePos = blockPos;
         BlockEntity coreEntity = level.getBlockEntity(corePos);
-        if (coreEntity != null && coreEntity instanceof DummyableBlockEntity){
+        if (!(coreEntity instanceof DummyableBlockEntity)){
+            return;
+        }
+        BlockPos coreKey = corePos.immutable();
+        Set<BlockPos> clearing = CLEARING.get();
+        if (!clearing.add(coreKey)) {
+            return;
+        }
+        try {
             // 移除填充方块
 //            List<Vec3i> offsets2 = MultipartUtils.transOffsets(MultiblockData.mapping.get(blockState.getBlock()).offsets, direction);
             List<Vec3i> offsets2 = DirectionUtils.offsetRot(MultiblockData.mapping.get(blockState.getBlock()).offsets, Direction.SOUTH, direction);
@@ -71,6 +82,11 @@ public class DummableHelper {
             }
             // 移除核心方块
             level.removeBlock(corePos, false);
+        } finally {
+            clearing.remove(coreKey);
+            if (clearing.isEmpty()) {
+                CLEARING.remove();
+            }
         }
     }
 }

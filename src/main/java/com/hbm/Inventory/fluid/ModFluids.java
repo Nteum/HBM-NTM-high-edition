@@ -3,6 +3,7 @@ package com.hbm.Inventory.fluid;
 import com.hbm.HBM;
 import com.hbm.Inventory.fluid.trait.FT_Corrosive;
 import com.hbm.Inventory.fluid.trait.FT_Coolable;
+import com.hbm.Inventory.fluid.trait.FT_Combustible;
 import com.hbm.Inventory.fluid.trait.FT_Heatable;
 import com.hbm.item.tool.FluidBucketItem;
 import com.hbm.registries.ModBlocks;
@@ -72,24 +73,50 @@ public class ModFluids {
     public static final ExtendedFluidType helium4 = new ExtendedFluidType("helium4",0xffb480, solution.descriptionId("Helium-4"),ExtendedProperties.of().pfr(2,2,0).traits(GASEOUS));
     public static final ExtendedFluidType oxygen = new ExtendedFluidType("oxygen",0xb4e2ff, solution.descriptionId("Oxygen"),ExtendedProperties.of().pfr(2,1,0).traits(GASEOUS));
     public static final ExtendedFluidType chlorine = new ExtendedFluidType("chlorine",0xdae598, solution.descriptionId("Chlorine"),ExtendedProperties.of().pfr(2,1,0).traits(GASEOUS));
-    public static final ExtendedFluidType diesel = new ExtendedFluidType("diesel", 0xf2eed5, solution.descriptionId("Diesel"), ExtendedProperties.of().pfr(1, 2, 0));
-    public static final ExtendedFluidType oil = new ExtendedFluidType("oil", 0x1d150d, solution.descriptionId("Crude Oil"), ExtendedProperties.of().pfr(1, 2, 0).traits(LIQUID, VISCOUS));
-    public static final ExtendedFluidType crack_oil = new ExtendedFluidType("crack_oil", 0x2b1a10, solution.descriptionId("Cracked Oil"), ExtendedProperties.of().pfr(1, 3, 0).traits(LIQUID, VISCOUS));
+    public static final ExtendedFluidType diesel = new ExtendedFluidType("diesel", 0xf2eed5, solution.descriptionId("Diesel"),
+            ExtendedProperties.of().pfr(1, 2, 0)
+                    .traits(new FT_Combustible(FT_Combustible.FuelGrade.HIGH, 55_000L)));
+    public static final ExtendedFluidType oil = new ExtendedFluidType("oil", 0x1d150d, solution.descriptionId("Crude Oil"),
+            ExtendedProperties.of().pfr(1, 2, 0)
+                    .traits(LIQUID, VISCOUS, new FT_Combustible(FT_Combustible.FuelGrade.LOW, 30_000L)));
+    public static final ExtendedFluidType crack_oil = new ExtendedFluidType("crack_oil", 0x2b1a10, solution.descriptionId("Cracked Oil"),
+            ExtendedProperties.of().pfr(1, 3, 0)
+                    .traits(LIQUID, VISCOUS, new FT_Combustible(FT_Combustible.FuelGrade.MEDIUM, 35_000L)));
     public static final ExtendedFluidType bitumen = new ExtendedFluidType("bitumen", 0x150f0b, solution.descriptionId("Bitumen"), ExtendedProperties.of().pfr(1, 3, 0).traits(LIQUID, VISCOUS));
     public static final ExtendedFluidType smear = new ExtendedFluidType("smear", 0x402213, solution.descriptionId("Heavy Residue"), ExtendedProperties.of().pfr(1, 2, 0).traits(LIQUID, VISCOUS));
-    public static final ExtendedFluidType naphtha = new ExtendedFluidType("naphtha", 0xfff1b5, solution.descriptionId("Naphtha"), ExtendedProperties.of().pfr(1, 1, 0));
-    public static final ExtendedFluidType petroleum = new ExtendedFluidType("petroleum", 0x2e2e2e, solution.descriptionId("Petroleum"), ExtendedProperties.of().pfr(1, 3, 0));
+    public static final ExtendedFluidType naphtha = new ExtendedFluidType("naphtha", 0xfff1b5, solution.descriptionId("Naphtha"),
+            ExtendedProperties.of().pfr(1, 1, 0)
+                    .traits(new FT_Combustible(FT_Combustible.FuelGrade.MEDIUM, 42_000L)));
+    public static final ExtendedFluidType petroleum = new ExtendedFluidType("petroleum", 0x2e2e2e, solution.descriptionId("Petroleum"),
+            ExtendedProperties.of().pfr(1, 3, 0)
+                    .traits(new FT_Combustible(FT_Combustible.FuelGrade.MEDIUM, 40_000L)));
     public static final ExtendedFluidType aromatics = new ExtendedFluidType("aromatics", 0xb04b8e, solution.descriptionId("Aromatics"), ExtendedProperties.of().pfr(2, 2, 1));
     public static final ExtendedFluidType unsaturateds = new ExtendedFluidType("unsaturateds", 0xffb347, solution.descriptionId("Unsaturateds"), ExtendedProperties.of().pfr(2, 1, 1));
-    public static final ExtendedFluidType refinery_gas = new ExtendedFluidType("refinery_gas", 0xffd966, solution.descriptionId("Refinery Gas"), ExtendedProperties.of().pfr(1, 2, 0).traits(GASEOUS));
-    public static final ExtendedFluidType diesel_crack = new ExtendedFluidType("diesel_crack", 0xe5d4ab, solution.descriptionId("Cracked Diesel"), ExtendedProperties.of().pfr(1, 2, 0));
-    public static final ExtendedFluidType kerosene = new ExtendedFluidType("kerosene", 0xf6f2d9, solution.descriptionId("Kerosene"), ExtendedProperties.of().pfr(1, 1, 0));
-    public static final ExtendedFluidType wood_oil = new ExtendedFluidType("wood_oil", 0x2f2519, solution.descriptionId("Wood Oil"), ExtendedProperties.of().pfr(1, 1, 0).traits(LIQUID, VISCOUS));
-    public static final ExtendedFluidType heating_oil = new ExtendedFluidType("heating_oil", 0x8c6b2b, solution.descriptionId("Heating Oil"), ExtendedProperties.of().pfr(1, 2, 0));
-    public static final ExtendedFluidType heating_oil_vacuum = new ExtendedFluidType("heating_oil_vacuum", 0xa37932, solution.descriptionId("Vacuum Heating Oil"), ExtendedProperties.of().pfr(1, 2, 0));
-    public static final ExtendedFluidType reform_gas = new ExtendedFluidType("reform_gas", 0xfceea1, solution.descriptionId("Reform Gas"), ExtendedProperties.of().pfr(1, 1, 1).traits(GASEOUS));
+    public static final ExtendedFluidType refinery_gas = new ExtendedFluidType("refinery_gas", 0xffd966, solution.descriptionId("Refinery Gas"),
+            ExtendedProperties.of().pfr(1, 2, 0)
+                    .traits(GASEOUS, new FT_Combustible(FT_Combustible.FuelGrade.GAS, 45_000L)));
+    public static final ExtendedFluidType diesel_crack = new ExtendedFluidType("diesel_crack", 0xe5d4ab, solution.descriptionId("Cracked Diesel"),
+            ExtendedProperties.of().pfr(1, 2, 0)
+                    .traits(new FT_Combustible(FT_Combustible.FuelGrade.HIGH, 50_000L)));
+    public static final ExtendedFluidType kerosene = new ExtendedFluidType("kerosene", 0xf6f2d9, solution.descriptionId("Kerosene"),
+            ExtendedProperties.of().pfr(1, 1, 0)
+                    .traits(new FT_Combustible(FT_Combustible.FuelGrade.AERO, 50_000L)));
+    public static final ExtendedFluidType wood_oil = new ExtendedFluidType("wood_oil", 0x2f2519, solution.descriptionId("Wood Oil"),
+            ExtendedProperties.of().pfr(1, 1, 0)
+                    .traits(LIQUID, VISCOUS, new FT_Combustible(FT_Combustible.FuelGrade.LOW, 20_000L)));
+    public static final ExtendedFluidType heating_oil = new ExtendedFluidType("heating_oil", 0x8c6b2b, solution.descriptionId("Heating Oil"),
+            ExtendedProperties.of().pfr(1, 2, 0)
+                    .traits(new FT_Combustible(FT_Combustible.FuelGrade.LOW, 25_000L)));
+    public static final ExtendedFluidType heating_oil_vacuum = new ExtendedFluidType("heating_oil_vacuum", 0xa37932, solution.descriptionId("Vacuum Heating Oil"),
+            ExtendedProperties.of().pfr(1, 2, 0)
+                    .traits(new FT_Combustible(FT_Combustible.FuelGrade.LOW, 22_000L)));
+    public static final ExtendedFluidType reform_gas = new ExtendedFluidType("reform_gas", 0xfceea1, solution.descriptionId("Reform Gas"),
+            ExtendedProperties.of().pfr(1, 1, 1)
+                    .traits(GASEOUS, new FT_Combustible(FT_Combustible.FuelGrade.GAS, 35_000L)));
     public static final ExtendedFluidType reformate = new ExtendedFluidType("reformate", 0xe0d342, solution.descriptionId("Reformate"), ExtendedProperties.of().pfr(1, 1, 0));
-    public static final ExtendedFluidType biogas = new ExtendedFluidType("biogas", 0x7ed691, solution.descriptionId("Biogas"), ExtendedProperties.of().pfr(1, 1, 0).traits(GASEOUS));
+    public static final ExtendedFluidType biogas = new ExtendedFluidType("biogas", 0x7ed691, solution.descriptionId("Biogas"),
+            ExtendedProperties.of().pfr(1, 1, 0)
+                    .traits(GASEOUS, new FT_Combustible(FT_Combustible.FuelGrade.GAS, 30_000L)));
     public static final ExtendedFluidType spent_steam = new ExtendedFluidType("spent_steam", 0xc9c9c9, solution.descriptionId("Spent Steam"), ExtendedProperties.of().pfr(0,0,0).traits(GASEOUS, UNSIPHONABLE));
 
     static {

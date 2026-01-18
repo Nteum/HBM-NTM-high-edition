@@ -285,6 +285,14 @@ tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
 }
 
+tasks.named('compileJava', JavaCompile).configure {
+    options.incremental = true
+}
+
+tasks.named('compileTestJava', JavaCompile).configure {
+    options.incremental = true
+}
+
 // 确保受控临时目录存在，避免回退到共享 tmp 目录
 tasks.withType(JavaExec).configureEach {
     doFirst { file("${projectDir}/run/tmp_secure").mkdirs() }
