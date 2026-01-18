@@ -49,8 +49,6 @@ public class ItemModelGen extends ItemModelProvider {
         item_path = Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(ModItems.INGOT_U238M2.get()));
         this.getBuilder(item_path.toString()).parent(new ModelFile.UncheckedModelFile("item/generated"))
                 .texture("layer0", new ResourceLocation(item_path.getNamespace(), "item/ingot_u238m2"))
-//                .override().predicate(property_broken,0).model(this.basicItem(HBM.rl("ingot_u238m2"))).end()
-//                .override().predicate(property_broken, 0.5f).model(this.basicItem(Items.IRON_BOOTS)).end();
                 .override().predicate(property_stage,0).model(this.basicItem(HBM.rl("ingot_u238m2"))).end()
                 .override().predicate(property_stage, 1).model(this.basicItem(HBM.rl("hs-elements"))).end()
                 .override().predicate(property_stage, 2).model(this.basicItem(HBM.rl("hs-arsenic"))).end()
@@ -75,13 +73,6 @@ public class ItemModelGen extends ItemModelProvider {
         ResourceLocation resourceLocation = Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(item));
         this.withExistingParent(resourceLocation.toString(), "builtin/entity");
     }
-//    // 产生可变化的实体
-//    public void dynamicModel(Item item){
-//        ResourceLocation rl = Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(item));
-//        this.getBuilder(rl.toString()).parent(new ModelFile.UncheckedModelFile("item/generated"))
-//                .texture("layer0", new ResourceLocation(rl.getNamespace(), "item/" + rl.getPath()))
-//                .override().model(this.basicItem(HBM.rl("item/ingot_nikonium"))).end();
-//    }
 
     @Override
     public ItemModelBuilder basicItem(Item item) {

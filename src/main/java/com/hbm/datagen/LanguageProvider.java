@@ -6,7 +6,6 @@ import com.hbm.block.HBMBlockComponent;
 import com.hbm.block.HBMMachine;
 import com.hbm.blockentity.interfaces.IUpgradeInfoProvider;
 import com.hbm.item.HBMCombat;
-import com.hbm.item.HBMtools;
 import com.hbm.registries.HBMDamage;
 import com.hbm.registries.ModKeyMapping;
 import com.hbm.registries.ModBlocks;
@@ -28,7 +27,6 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
 
         ModBlocks.languageSupport(this);
 
-        addCreativeTabs();
         addItems();
         addBlocks();
         addTooltip();
@@ -67,18 +65,11 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
 //        this.add("hbmxx.container.difurnace","Blast Furnace");
 //        this.add("hbmxx.container.crucible","Crucible");
     }
-    private void addCreativeTabs(){
-//        this.add(HBMLang.ITEMGROUP_ITEM);
-//        this.add(HBMLang.ITEMGROUP_BLOCK);
-//        this.add(HBMLang.ITEMGROUP_MACHINE);
-//        this.add(HBMLang.ITEMGROUP_TOOL);
-//        this.add(HBMLang.ITEMGROUP_WEAPON);
-    }
     private void addItems(){
 //        HBMComponent.languageSupport(this);
         HBMCombat.languageSupport(this);
-        this.add(HBMtools.POLLUTION_DETECTOR.get(), "Pollution Detector");
-        this.add(HBMtools.ORE_SCANNER.get(), "Ore Density Scanner");
+//        this.add(HBMtools.POLLUTION_DETECTOR.get(), "Pollution Detector");
+//        this.add(HBMtools.ORE_SCANNER.get(), "Ore Density Scanner");
     }
     private void addBlocks(){
         HBMMachine.languageSupport(this);

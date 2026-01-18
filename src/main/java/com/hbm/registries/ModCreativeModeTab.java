@@ -55,7 +55,7 @@ public class ModCreativeModeTab {
 //            output.accept(ModItems.BEDROCK_ORE.get());
 
             output.accept(ModItems.UPGRADE_BASE.get());
-            output.accept(HBMtools.UPGRADE_BASE.get());
+            output.accept(ModItems.UPGRADE_BASE.get());
             output.accept(ModItems.WOOD_ASH_POWDER.get());
             for (com.hbm.reactor.pwr.PWRFuelType type : com.hbm.reactor.pwr.PWRFuelType.values()) {
                 output.accept(com.hbm.item.pwr.ItemPWRFuel.createStack(ModItems.pwr_fuel.get(), type));
@@ -181,7 +181,7 @@ public class ModCreativeModeTab {
             output.accept(ModBlocks.crate_iron.get());
             output.accept(ModBlocks.crate_steel.get());
 
-            HBMtools.creativeTab(output);
+//            HBMtools.creativeTab(output);
             HBMWeapon.creativeTab(output);
         for (ModFluids.FluidRegistryHolder registryHolder : ModFluids.fluidList) {
                 output.accept((BucketItem)registryHolder.bucket().get());
@@ -233,7 +233,7 @@ public class ModCreativeModeTab {
             else if (event.getTabKey() == HBM_MISSILE.getKey()){
                     event.getEntries().put(new ItemStack(HBMWeapon.MP_WARHEAD_15_BALEFIRE.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
                     event.getEntries().put(new ItemStack(HBMMachine.LAUNCH_PAD.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-                    event.getEntries().put(new ItemStack(HBMtools.DESIGNATOR.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+//                    event.getEntries().put(new ItemStack(HBMtools.DESIGNATOR.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
             }
     }
 

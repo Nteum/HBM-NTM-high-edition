@@ -8,7 +8,6 @@ import com.hbm.datagen.LanguageProvider;
 import com.hbm.datagen.model.ItemModelGen;
 import com.hbm.item.HBMCombat;
 import com.hbm.item.HBMWeapon;
-import com.hbm.item.HBMtools;
 import com.hbm.item.env.BedrockOreItem;
 import com.hbm.item.env.ItemEggGlyphid;
 import com.hbm.item.env.ItemEggGlyphidToBirth;
@@ -23,10 +22,7 @@ import com.hbm.item.research.ItemPileRod;
 import com.hbm.item.research.ItemResearchFuelPlate;
 import com.hbm.item.special.ItemUnstable;
 import com.hbm.item.tool.*;
-import com.hbm.item.weapon.ItemDetonator;
-import com.hbm.item.weapon.ItemGun;
-import com.hbm.item.weapon.ItemMissile;
-import com.hbm.item.weapon.ItemMissilePart;
+import com.hbm.item.weapon.*;
 import com.hbm.item.weapon.grenade.ItemGrenade;
 import com.hbm.item.zirnox.ItemZirnoxRod;
 import com.hbm.registries.WrapperRegistry.WrappedItemRegistry;
@@ -59,7 +55,7 @@ public class ModItems {
     public static final List<WrappedItemRegistry> itemList = new ArrayList<>();
 
     static {
-        HBMtools.register(ITEMS);
+//        HBMtools.register(ITEMS);
         HBMWeapon.register(ITEMS);
         HBMCombat.register(ITEMS);
     }
@@ -906,9 +902,19 @@ public class ModItems {
     public static final RegistryObject<Item> CELL_DEUTERIUM = parts("cell_deuterium", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
     public static final RegistryObject<Item> CELL_TRITIUM = parts("cell_tritium", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
     public static final RegistryObject<Item> CELL_EMPTY = parts("cell_empty", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
-    public static final RegistryObject<Item> GEIGER_COUNTER = parts("geiger_counter_hand", ()->new ItemGeigerCounter(new Item.Properties()), HBMKey.ORDERLY_GEN);
-    public static final RegistryObject<Item> DEBUG_WAND = parts("debug_wand", ()->new ItemDebugWand(new Item.Properties()), HBMKey.ORDERLY_GEN);
-    public static final RegistryObject<Item> METEOR_REMOTE = parts("meteor_remote", ()->new ItemMeteorRemote(new Item.Properties().durability(2)), "Meteorite Remote");
+    /**
+     * 控制类物品
+     * */
+    public static final RegistryObject<Item> GEIGER_COUNTER = control("geiger_counter_hand", ()->new ItemGeigerCounter(new Item.Properties()), HBMKey.ORDERLY_GEN);
+    public static final RegistryObject<Item> DEBUG_WAND = control("debug_wand", ()->new ItemDebugWand(new Item.Properties()), HBMKey.ORDERLY_GEN);
+    public static final RegistryObject<Item> METEOR_REMOTE = control("meteor_remote", ()->new ItemMeteorRemote(new Item.Properties().durability(2)), "Meteorite Remote");
+    public static final RegistryObject<Item> BUILD_WAND = control("wand", () -> new ItemBuildWand(new Item.Properties().stacksTo(1)), HBMKey.ORDERLY_GEN);
+    public static final RegistryObject<Item> RBMK_TOOL = control("rbmk_tool", () -> new ItemRBMKTool(new Item.Properties()), HBMKey.GEN_STANDALONE);
+    public static final RegistryObject<Item> DOSIMETER = control("dosimeter", () -> new ItemDosimeter(new Item.Properties()), HBMKey.GEN_STANDALONE);
+    public static final RegistryObject<Item> DIGAMMA_DIAGNOSTIC = control("digamma_diagnostic", () -> new ItemDigammaDiagnostic(new Item.Properties()), HBMKey.GEN_STANDALONE);
+    public static final RegistryObject<Item> POLLUTION_DETECTOR = control("pollution_detector", () -> new PollutionDetectorItem(new Item.Properties()), HBMKey.ORDERLY_GEN);
+    public static final RegistryObject<Item> ORE_CANNER = control("ore_density_scanner", () -> new OreScannerItem(new Item.Properties()), HBMKey.ORDERLY_GEN);
+    public static final RegistryObject<Item> DESIGNATOR = control("designator",()->new ItemDesignator(new Item.Properties().stacksTo(1)), HBMKey.ORDERLY_GEN);
     // 从旧HBMComponet中迁移来的
     public static final RegistryObject<Item> TRITIUM_DEUTERIUM_CAKE = parts("tritium_deuterium_cake", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN);
     public static final RegistryObject<Item> PISTON_SELENIUM = parts("piston_selenium", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN);
