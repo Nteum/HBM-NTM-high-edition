@@ -24,7 +24,7 @@
       "hbm:mete_creator_moon"
     ]
   ],
-  "has_precipitation": true,
+  "has_precipitation": false,
   "spawn_costs": {},
   "spawners": {
     "ambient": [],

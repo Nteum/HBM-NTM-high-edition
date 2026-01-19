@@ -1,6 +1,7 @@
 package com.hbm.datagen.levelgen;
 
 import com.hbm.HBM;
+import com.hbm.dim.orbit.Space;
 import com.hbm.registries.HBMBiomes;
 import com.hbm.registries.HBMDimensions;
 import com.hbm.registries.ModBlocks;
@@ -38,15 +39,17 @@ import java.util.concurrent.CompletableFuture;
 
 public class HBMWorldGenProvider extends DatapackBuiltinEntriesProvider {
     public static final RegistrySetBuilder BUILDER = new RegistrySetBuilder()
+            // 1. 地物配置
             .add(Registries.CONFIGURED_FEATURE, ModConfiguredFeatures::bootstrap)
+            // 2. 地物放置
             .add(Registries.PLACED_FEATURE, ModPlacedFeatures::bootstrap)
-            // 注册生物群系
+            // 3. 生物群系
             .add(Registries.BIOME, HBMWorldGenProvider::bootstrapBiomes)
-            // 1. 注册维度类型
+            // 4. 维度类型
             .add(Registries.DIMENSION_TYPE, HBMWorldGenProvider::bootstrapType)
-            // 2. 注册噪声设置 (Surface Rules 绑定在这里)
+            // 5. 噪声设置 (Surface Rules 绑定在这里)
             .add(Registries.NOISE_SETTINGS, HBMWorldGenProvider::bootstrapNoise)
-            // 3. 注册维度实例
+            // 6. 注册维度实例
             .add(Registries.LEVEL_STEM, HBMWorldGenProvider::bootstrapDimension)
             ;
     public HBMWorldGenProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
@@ -56,7 +59,7 @@ public class HBMWorldGenProvider extends DatapackBuiltinEntriesProvider {
         HolderGetter<PlacedFeature> featureHolder = context.lookup(Registries.PLACED_FEATURE);
         HolderGetter<ConfiguredWorldCarver<?>> carverHolder = context.lookup(Registries.CONFIGURED_CARVER);
         context.register(HBMBiomes.MUN, new Biome.BiomeBuilder()
-                .hasPrecipitation(true)
+                .hasPrecipitation(false)
                 .temperature(-1f)
                 .downfall(0.9f)
                 .specialEffects(new BiomeSpecialEffects.Builder()
@@ -70,7 +73,7 @@ public class HBMWorldGenProvider extends DatapackBuiltinEntriesProvider {
                 .build()
         );
         context.register(HBMBiomes.MOON_HEIGHTLAND, new Biome.BiomeBuilder()
-                .hasPrecipitation(true)
+                .hasPrecipitation(false)
                 .temperature(-1f)
                 .downfall(0.9f)
                 .specialEffects(new BiomeSpecialEffects.Builder()
@@ -83,6 +86,7 @@ public class HBMWorldGenProvider extends DatapackBuiltinEntriesProvider {
                         .build())
                 .build()
         );
+        Space.genBiomes(context);
     }
     // --- 步骤 1: 定义维度属性 ---
     private static void bootstrapType(BootstapContext<DimensionType> context) {
@@ -103,6 +107,7 @@ public class HBMWorldGenProvider extends DatapackBuiltinEntriesProvider {
                 0.1f,  // 环境光照
                 new DimensionType.MonsterSettings(false, false, ConstantInt.of(0), 0)
         ));
+        Space.genDimensionType(context);
     }
 
     // --- 步骤 2: 定义地形和表面规则 ---
@@ -127,6 +132,7 @@ public class HBMWorldGenProvider extends DatapackBuiltinEntriesProvider {
                 false, // 禁用主世界矿脉 (用你自己的)
                 false
         ));
+        Space.genNoiseSetting(context);
     }
 
     // --- 步骤 3: 组合维度 ---
@@ -147,5 +153,6 @@ public class HBMWorldGenProvider extends DatapackBuiltinEntriesProvider {
                 types.getOrThrow(HBMDimensions.MOON_TYPE),
                 new NoiseBasedChunkGenerator(biomeSource, settings.getOrThrow(HBMDimensions.MOON_NOISE_SETTINGS))
         ));
+        Space.genDimension(context);
     }
 }

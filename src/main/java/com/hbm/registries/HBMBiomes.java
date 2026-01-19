@@ -17,7 +17,7 @@ public class HBMBiomes {
     public static final ResourceKey<Biome> MUN = register("hbm_mun");
     public static final ResourceKey<Biome> MOON_HEIGHTLAND = register("hbm_moon_heighland");
 
-    private static ResourceKey<Biome> register(String name)
+    public static ResourceKey<Biome> register(String name)
     {
         return ResourceKey.create(Registries.BIOME, new ResourceLocation(HBM.MODID, name));
     }

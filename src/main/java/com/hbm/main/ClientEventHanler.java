@@ -4,6 +4,7 @@ import com.hbm.HBM;
 import com.hbm.Inventory.fluid.ModFluids;
 import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.config.ConfigLBSM;
+import com.hbm.dim.orbit.SpaceSpecialEffects;
 import com.hbm.entity.ModEntityType;
 import com.hbm.gui.ModMenuType;
 import com.hbm.gui.screen.*;
@@ -35,6 +36,7 @@ import com.hbm.render.pipeline.GeoRenderPipeline;
 import com.hbm.settings.tooltip.TooltipRegistries;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
+import net.minecraft.client.renderer.DimensionSpecialEffects;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
@@ -42,6 +44,7 @@ import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.nbt.Tag;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.DimensionSpecialEffectsManager;
 import net.minecraftforge.client.event.*;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -64,6 +67,7 @@ public class ClientEventHanler {
         modBus.addListener(ClientEventHanler::registerClientReloadListeners);
         modBus.addListener(ClientEventHanler::onClientSetupFinished);
         modBus.addListener(ClientEventHanler::registerColorHandlerItem);
+        modBus.addListener(ClientEventHanler::registerDimensionsSpecialEffects);
         // forge总线事件
         forgeBus.addListener(ClientEventHanler::onKeyPressed);
         forgeBus.addListener(AtomicFlashOverlay::onClientTick);
@@ -130,7 +134,7 @@ public class ClientEventHanler {
             EntityRenderers.register(ModEntityType.ENTITY_RUBBLE.get(), RenderRubble::new);
 
             RenderUtils.init();
-            // 物品贴图逻辑
+            // 物品属性，用于贴图变化
             ItemProperties.register(ModItems.INGOT_U238M2.get(), HBM.rl("stage"),
                     (stack, level, entity, seed) -> stack.hasTag() && stack.getTag().contains("stage", Tag.TAG_INT)
                             ? (float) stack.getTag().getInt("stage") : 0);
@@ -146,6 +150,7 @@ public class ClientEventHanler {
                     (stack, level, entity, seed) -> ItemBreedingRod.getType(stack).ordinal());
             ItemProperties.register(ModItems.rod_breeder_quad.get(), HBM.rl("breeder_type"),
                     (stack, level, entity, seed) -> ItemBreedingRod.getType(stack).ordinal());
+            // 世界渲染特效
         });
     }
 
@@ -180,53 +185,12 @@ public class ClientEventHanler {
     public static void registerAdditional(ModelEvent.RegisterAdditional event){
         //注册自定义加载模型
         Models.registerModels(event);
-//        // 显式告知游戏加载这些模型资源
-//        event.register(new ResourceLocation("hbm", "item/hs-elements"));
-//        event.register(new ResourceLocation("hbm", "item/hs-arsenic"));
-//        event.register(new ResourceLocation("hbm", "item/hs-vault"));
     }
 
     @SubscribeEvent
     public static void modifyBakingResult(ModelEvent.ModifyBakingResult event){
         // 修改模型烘焙结果
         Models.modifyBakingResult(event);
-//        // 添加overrides
-//        // 1. 获取你的物品注册名对应的模型资源位置
-//        ModelResourceLocation mainModelLoc = new ModelResourceLocation(new ResourceLocation("hbm", "ingot_u238m2"), "inventory");
-//
-//        // 2. 获取主模型实例
-//        BakedModel mainModel = event.getModels().get(mainModelLoc);
-//
-//        if (mainModel != null) {
-//            // 3. 定义你的谓词逻辑（对应 JSON 中的 predicate）
-//            // 注意：ResourceLocation 必须和你代码中注册 ItemProperties 的一致
-//            ResourceLocation stageProperty = new ResourceLocation("hbm", "stage");
-//
-//            // 4. 获取子模型（这些模型必须在资源文件夹里有对应的 JSON 文件）
-//            Map<ItemOverride, BakedModel> itemOverrides = new HashMap<>();
-//            ModelResourceLocation modelLoc1 = new ModelResourceLocation(new ResourceLocation("hbm", "hs-elements"), "inventory");
-//            ModelResourceLocation modelLoc2 = new ModelResourceLocation(new ResourceLocation("hbm", "hs-arsenic"), "inventory");
-//            ModelResourceLocation modelLoc3 = new ModelResourceLocation(new ResourceLocation("hbm", "hs-vault"), "inventory");
-//            // 即使 JSON 里没写 overrides，只要这几个文件存在，加载器就会预加载它们
-//            BakedModel stage1Model = event.getModels().get(modelLoc1);
-//            BakedModel stage2Model = event.getModels().get(modelLoc2);
-//            BakedModel stage3Model = event.getModels().get(modelLoc3);
-//            if (stage1Model != null) {
-//                itemOverrides.put(new ItemOverride(modelLoc1, List.of(new ItemOverride.Predicate(stageProperty, 1.0F))), stage1Model);
-//            }
-//            if (stage2Model != null) {
-//                itemOverrides.put(new ItemOverride(modelLoc2, List.of(new ItemOverride.Predicate(stageProperty, 2.0F))), stage2Model);
-//            }
-//            if (stage3Model != null) {
-//                itemOverrides.put(new ItemOverride(modelLoc3, List.of(new ItemOverride.Predicate(stageProperty, 3.0F))), stage3Model);
-//            }
-//            // 创建ItemOverrides
-//            BakedModel customModel = new SimpleOverridesWrapper((SimpleBakedModel) mainModel, new SimpleOverridesWrapper.BakedItemOverrides(itemOverrides));
-//            // 7. 将修改后的模型放回注册表
-//            event.getModels().put(mainModelLoc, customModel);
-//
-//            System.out.println("HBM Debug: 成功手动注入了 " + itemOverrides.size() + " 个 Overrides！");
-//        }
     }
 
     @SubscribeEvent
@@ -255,5 +219,10 @@ public class ClientEventHanler {
         event.register(FluidBucketItem::getColor, fluidBucketItems);
         event.register((itemstack,color)->0xEC9A63, ModItems.BEDROCK_ORE.get());
         event.register((stack, tintIndex) -> tintIndex == 0 ? ItemICFPellet.getFuelColor(stack) : 0xFFFFFF, ModItems.icf_pellet.get());
+    }
+    // 注册各维度天空渲染
+    @SubscribeEvent
+    public static void registerDimensionsSpecialEffects(RegisterDimensionSpecialEffectsEvent event){
+        event.register(HBM.rl("space_effects"), new SpaceSpecialEffects());
     }
 }
