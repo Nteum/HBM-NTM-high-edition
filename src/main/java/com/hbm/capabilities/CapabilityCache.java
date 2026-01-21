@@ -2,16 +2,10 @@ package com.hbm.capabilities;
 
 import com.hbm.HBM;
 import com.hbm.HBMKey;
-import com.hbm.utils.multiblock.HBMMultiData;
-import com.hbm.blockentity.base.DummibleBlockEntity;
 import com.hbm.capabilities.resolver.ICapabilityResolver;
 import it.unimi.dsi.fastutil.objects.ReferenceOpenHashSet;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.util.Tuple;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.INBTSerializable;
@@ -127,18 +121,6 @@ public class CapabilityCache implements INBTSerializable<CompoundTag> {
             Object cap = entry.getValue().resolve(entry.getKey(), null).orElse(null);
             if (cap instanceof INBTSerializable serializable)
                 serializable.deserializeNBT(nbt.get(CAPABILITY_NAME.get(entry.getKey())));
-        }
-    }
-
-    public void allocDummyBlockCaps(Level level, HBMMultiData multiblockData){
-        for (Map.Entry<Capability<?>, List<Tuple<BlockPos, Direction>>> entry : multiblockData.afterTrans.entrySet()) {
-            Capability<?> capability = entry.getKey();
-            for (Tuple<BlockPos, Direction> tuple : entry.getValue()) {
-                BlockEntity blockEntity = level.getBlockEntity(tuple.getA());
-                if (blockEntity instanceof DummibleBlockEntity dummibleBlock){
-                    dummibleBlock.setCaps(capability, capabilityResolvers.get(capability),tuple.getB());
-                }
-            }
         }
     }
 }

@@ -1,14 +1,12 @@
 package com.hbm.blockentity;
 
 import com.hbm.block.HBMMachine;
-import com.hbm.block.base.BlockDummyable;
 import com.hbm.block.env.GlyphidSpawner;
 import com.hbm.blockentity.base2.TileProxyCombo;
 import com.hbm.blockentity.machine.*;
 import com.hbm.blockentity.machine.IronCrateBlockEntity;
 import com.hbm.blockentity.machine.SteelCrateBlockEntity;
 import com.hbm.HBM;
-import com.hbm.blockentity.base.DummibleBlockEntity;
 import com.hbm.blockentity.tools.TileEntityGeiger;
 import com.hbm.blockentity.machine.pile.ChicagoBreederBlockEntity;
 import com.hbm.blockentity.machine.pile.ChicagoDetectorBlockEntity;
@@ -21,18 +19,10 @@ import com.hbm.blockentity.machine.rbmk.RBMKHeaterEntity;
 import com.hbm.blockentity.machine.rbmk.RBMKPeripheralEntity;
 import com.hbm.blockentity.weapon.*;
 import com.hbm.registries.ModBlocks;
-import com.hbm.registries.ModTags;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.registries.VanillaRegistries;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-
-import java.util.stream.Collectors;
 
 public class ModBlockEntityType {
     public static final DeferredRegister<BlockEntityType<?>> REGISTER = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, HBM.MODID);
@@ -53,8 +43,6 @@ public class ModBlockEntityType {
             REGISTER.register("crucible_entity",()-> BlockEntityType.Builder.of(CrucibleEntity::new, ModBlocks.machine_crucible.get()).build(null));
 //    public static final RegistryObject<BlockEntityType<BedRockOre.BedRockOreEntity>> BEDROCK_ORE_ENTITY =
 //            REGISTER.register("bedrock_ore_entity",()-> BlockEntityType.Builder.of(BedRockOre.BedRockOreEntity::new, ModBlocks.BEDROCK_ORE.get()).build(null));
-    public static final RegistryObject<BlockEntityType<DummibleBlockEntity>> DUMMIBLEBLOCK =
-            REGISTER.register("dummible_block_entity",()-> BlockEntityType.Builder.of(DummibleBlockEntity::new, ModBlocks.DUMMIBLE.get()).build(null));
     public static final RegistryObject<BlockEntityType<CableEntity>> CABLE_ENTITY =
             REGISTER.register("cable_entity",()-> BlockEntityType.Builder.of(CableEntity::new, ModBlocks.RED_CABLE.get()).build(null));
     public static final RegistryObject<BlockEntityType<PipeEntity>> PIPE_ENTITY =

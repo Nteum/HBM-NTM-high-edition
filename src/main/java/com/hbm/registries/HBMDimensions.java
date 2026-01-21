@@ -10,6 +10,7 @@ import net.minecraft.world.level.dimension.LevelStem;
 import net.minecraft.world.level.levelgen.NoiseGeneratorSettings;
 
 public class HBMDimensions {
+    public static final ResourceKey<Level> MOON_KEY = ResourceKey.create(Registries.DIMENSION, HBM.rl("hbm_moon"));
     // 维度的 Key
     public static final ResourceKey<LevelStem> MOON_LEVEL_KEY = ResourceKey.create(Registries.LEVEL_STEM, HBM.rl("hbm_moon"));
     // 维度类型的 Key

@@ -9,12 +9,14 @@ import com.hbm.utils.DirectionUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
+import net.minecraft.util.Tuple;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import org.apache.logging.log4j.core.Core;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
@@ -145,6 +147,17 @@ public class MultiblockData {
             }
         }
         return this;
+    }
+    public List<Tuple<BlockPos, Direction>> getCapLocation(Capability<?> cap, BlockPos corePos, Direction facing){
+        List<Tuple<BlockPos, Direction>> list = new ArrayList<>();
+        for (Map.Entry<Vec3i, Map<Capability<?>, Set<Direction>>> entry : capsMap.entrySet()) {
+            if (!entry.getValue().containsKey(cap)) continue;
+            BlockPos pos = corePos.offset(entry.getKey());
+            for (Direction direction : entry.getValue().get(cap)) {
+                list.add(new Tuple<>(pos, direction));
+            }
+        }
+        return list;
     }
 
     /** 工具函数，用于计算立方体型空间的偏移量

@@ -1,6 +1,6 @@
 package com.hbm.blockentity.dummy;
 
-import com.hbm.blockentity.base.DummibleBlockEntity;
+import com.hbm.blockentity.base2.TileProxyCombo;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.state.BlockState;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
@@ -15,7 +15,7 @@ import software.bernie.geckolib.util.GeckoLibUtil;
  * advanced workbench logic was never ported, but geckolib still expects a
  * BlockEntity type parameter.
  */
-public class GeckoAdvancedWorkbenchTileEntity extends DummibleBlockEntity implements GeoAnimatable {
+public class GeckoAdvancedWorkbenchTileEntity extends TileProxyCombo implements GeoAnimatable {
 
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 

@@ -5,7 +5,6 @@ import com.hbm.block.HBMBlockComponent;
 import com.hbm.block.HBMBlockProperties;
 import com.hbm.block.HBMMachine;
 import com.hbm.block.base.BlockBase;
-import com.hbm.block.base.DummibleBlock;
 import com.hbm.block.decoriate.BlockMolten;
 import com.hbm.block.decoriate.BlockTest12;
 import com.hbm.block.env.GlyphidBlock;
@@ -31,9 +30,6 @@ import com.hbm.block.machine.generator.BlockPWRController;
 import com.hbm.block.machine.generator.BlockPWRPillar;
 import com.hbm.block.machine.generator.BlockGenericPWR;
 import com.hbm.block.logistic.BlockConveyor;
-import com.hbm.block.machine.*;
-import com.hbm.block.machine.rbmk.*;
-import com.hbm.block.machine.tokamak.*;
 import com.hbm.block.weapon.NukeBoy;
 import com.hbm.block.weapon.NukeCustom;
 import com.hbm.block.weapon.NukeFat;
@@ -192,8 +188,6 @@ public class ModBlocks {
     public static final RegistryObject<Block> bomb_fat_man = registerBlockWithItem("bomb_fat_man",()->new NukeFat(Properties.of(),200));
     public static final RegistryObject<Block> bomb_custom = registerBlockWithItem("bomb_custom",()->new NukeCustom(Properties.of(),350));
     //发射台
-    //逻辑物
-    public static final RegistryObject<Block> DUMMIBLE = registerBlockWithItem("dummible",()->new DummibleBlock(Properties.copy(Blocks.STONE).noLootTable()));
     //装饰
     public static final RegistryObject<Block> TEST12 = registerBlockWithItem("test12",()->new BlockTest12(Properties.of()));
     // glyphid

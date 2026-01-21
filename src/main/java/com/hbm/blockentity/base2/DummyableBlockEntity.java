@@ -1,7 +1,6 @@
 package com.hbm.blockentity.base2;
 
 import com.hbm.HBMKey;
-import com.hbm.utils.multiblock.HBMMultiData;
 import com.hbm.utils.multiblock.MultiblockData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -24,7 +23,6 @@ public abstract class DummyableBlockEntity extends BaseMachineBlockEntity {
     public boolean isFormed = false;
     // 不需要序列化，每次重载都需要重新分配
     public boolean distributed = false;
-    HBMMultiData multiData;
     public MultiblockData multiblockData;
     public DummyableBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);

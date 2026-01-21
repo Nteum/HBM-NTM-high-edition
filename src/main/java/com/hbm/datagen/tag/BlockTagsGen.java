@@ -60,7 +60,7 @@ public class BlockTagsGen extends BlockTagsProvider {
 //                .addTag(ModTags.Blocks.BATTERY);
 
         /** 原版tag */
-        this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.DUMMIBLE.get()).addTag(ModTags.Blocks.MACHINE).addTag(Tags.Blocks.ORES);
+        this.tag(BlockTags.MINEABLE_WITH_PICKAXE).addTag(ModTags.Blocks.MACHINE).addTag(Tags.Blocks.ORES);
     }
 
     @Override

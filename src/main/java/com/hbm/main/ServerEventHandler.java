@@ -1,5 +1,7 @@
 package com.hbm.main;
 
+import com.hbm.dim.orbit.CelestialBodies;
+import com.hbm.dim.orbit.Space;
 import com.hbm.entity.ModEntityType;
 import com.hbm.entity.mob.EntityGlyphid;
 import com.hbm.registries.ModItems;
@@ -8,6 +10,7 @@ import com.hbm.network.ServerMsgHandler;
 import com.hbm.registries.HBMDamage;
 import com.hbm.utils.transport_net.FluidNetworkSystem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.event.ItemStackedOnOtherEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
@@ -33,6 +36,12 @@ public class ServerEventHandler {
 
     @SubscribeEvent
     public static void worldTick(TickEvent.LevelTickEvent event){
+        if (event.phase == TickEvent.Phase.END){
+            Level level = event.level;
+            if (level.dimension() == Space.LEVEL_KEY){
+                CelestialBodies.runServer(level);
+            }
+        }
     }
 
     @SubscribeEvent

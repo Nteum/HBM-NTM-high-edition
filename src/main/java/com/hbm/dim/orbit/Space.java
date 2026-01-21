@@ -8,6 +8,7 @@ import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.valueproviders.ConstantInt;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.*;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.dimension.DimensionType;
@@ -18,15 +19,18 @@ import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
 import java.util.List;
 import java.util.OptionalLong;
+import java.util.Set;
 
 /**
  * 太空维度
  * */
 public class Space {
+    public static final ResourceKey<Level> LEVEL_KEY = ResourceKey.create(Registries.DIMENSION, HBM.rl("hbm_space"));
     public static final ResourceKey<LevelStem> SPACE = ResourceKey.create(Registries.LEVEL_STEM, HBM.rl("hbm_space"));
     public static final ResourceKey<Biome> SPACE_BIOME = ResourceKey.create(Registries.BIOME, HBM.rl("hbm_space_biome"));
     public static final ResourceKey<DimensionType> SPACE_TYPE = ResourceKey.create(Registries.DIMENSION_TYPE, HBM.rl("hbm_space_type"));
     public static final ResourceKey<NoiseGeneratorSettings> SPACE_NOISE_SETTINGS = ResourceKey.create(Registries.NOISE_SETTINGS, HBM.rl("space_settings"));
+    public static Set<CelestialBody> CELESTIAL_BODIES;
     public static void genBiomes(BootstapContext<Biome> context){
         HolderGetter<PlacedFeature> featureHolder = context.lookup(Registries.PLACED_FEATURE);
         HolderGetter<ConfiguredWorldCarver<?>> carverHolder = context.lookup(Registries.CONFIGURED_CARVER);
@@ -111,4 +115,6 @@ public class Space {
                 new NoiseBasedChunkGenerator(biomeSource, settings.getOrThrow(SPACE_NOISE_SETTINGS))
         ));
     }
+
+
 }

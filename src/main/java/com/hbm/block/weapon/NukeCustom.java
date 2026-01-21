@@ -1,31 +1,16 @@
 package com.hbm.block.weapon;
 
-import com.hbm.block.base.BedLikeBlock;
-import com.hbm.blockentity.base2.TileProxyCombo;
-import com.hbm.blockentity.machine.ChemplantEntity;
 import com.hbm.blockentity.weapon.NukeBombCustomEntity;
-import com.hbm.blockentity.weapon.NukeBombFatEntity;
 import com.hbm.entity.effect.EntityNukeTorex;
 import com.hbm.entity.logic.EntityNukeExplosionMK5;
 import com.hbm.registries.ModSounds;
-import com.hbm.utils.MultipartUtils;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Vec3i;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.Shapes;
-import net.minecraft.world.phys.shapes.VoxelShape;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
-import java.util.Random;
 
 public class NukeCustom extends NukeBomb implements IBomb{
 //    public static final VoxelShape SHAPE = Block.box(-30,0,0,24,16,16);

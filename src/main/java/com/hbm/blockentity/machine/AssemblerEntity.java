@@ -6,13 +6,15 @@ import com.hbm.api.energy.BasicEnergyContainer;
 import com.hbm.api.energy.HybridEnergyStorage;
 import com.hbm.api.energy.ProxyEnergyHandler;
 import com.hbm.api.energy.fe.TransmitHelper;
-import com.hbm.block.machine.BlockAssembler;
+import com.hbm.block.base.BlockContainerBase;
 import com.hbm.blockentity.ModBlockEntityType;
-import com.hbm.blockentity.base.BedLikeBlockEntity;
+import com.hbm.blockentity.base2.DummyableBlockEntity;
 import com.hbm.capabilities.HBMCaps;
 import com.hbm.gui.menu.AssemblerMenu;
 import com.hbm.Inventory.recipe.AssemblerRecipe;
+import com.hbm.registries.ModBlocks;
 import com.hbm.utils.InventoryUtils;
+import com.hbm.utils.multiblock.MultiblockData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
@@ -37,7 +39,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 import java.util.stream.IntStream;
 
-public class AssemblerEntity extends BedLikeBlockEntity {
+public class AssemblerEntity extends DummyableBlockEntity {
 //    int progress = 0;               //进度
     int power = 100;                //功率
     int energyCapacity = 100_000;   //最大储能
@@ -79,9 +81,10 @@ public class AssemblerEntity extends BedLikeBlockEntity {
 //        capabilitiesCache.addCapabilityResolver(new SidedEnergyWrapper(HBMEnergyStorage.input(100_000)));
         this.capabilitiesContent.addCapability(HBMCaps.LONG_ENERGY, new ProxyEnergyHandler(energyContainer));
         this.capabilitiesContent.addCapability(ForgeCapabilities.ENERGY, this.forgeEnergy);
-        multiblockData.put(ForgeCapabilities.ENERGY, -1,0,1,Direction.SOUTH, 0,0,1,Direction.SOUTH, -1,0,-2,Direction.NORTH, 0,0,-2,Direction.NORTH)
-                .put(ForgeCapabilities.ITEM_HANDLER, 1,0,-1, Direction.EAST, -2,0,0,Direction.WEST);
-        multiblockData.transDirection(pPos,pBlockState.getValue(BlockAssembler.FACING));
+        multiblockData = MultiblockData.mapping.get(ModBlocks.machine_assembler.get());
+//        multiblockData.put(ForgeCapabilities.ENERGY, -1,0,1,Direction.SOUTH, 0,0,1,Direction.SOUTH, -1,0,-2,Direction.NORTH, 0,0,-2,Direction.NORTH)
+//                .put(ForgeCapabilities.ITEM_HANDLER, 1,0,-1, Direction.EAST, -2,0,0,Direction.WEST);
+//        multiblockData.transDirection(pPos,pBlockState.getValue(BlockAssembler.FACING));
     }
     public IEnergyStorage getEnergy(){
         return this.forgeEnergy;
@@ -90,9 +93,9 @@ public class AssemblerEntity extends BedLikeBlockEntity {
     @Override
     protected void onUpdateServer() {
         super.onUpdateServer();
-        if (this.flagFormed) {
+        if (this.isFormed) {
             this.setDummyCaps();
-            this.flagFormed = false;
+            this.isFormed = false;
         }
         runDummyCaps(level, getBlockPos(), getBlockState(), this);
         absorbBatteryItem(this);
@@ -157,16 +160,16 @@ public class AssemblerEntity extends BedLikeBlockEntity {
     }
     public static void transportItem(AssemblerEntity entity){
         if (entity.hasLevel()){
-            List<Tuple<BlockPos, Direction>> tuples = entity.multiblockData.afterTrans.get(ForgeCapabilities.ITEM_HANDLER);
+            List<Tuple<BlockPos, Direction>> tuples = entity.multiblockData.getCapLocation(ForgeCapabilities.ITEM_HANDLER, entity.worldPosition, entity.getBlockState().getValue(BlockContainerBase.FACING));
             if (entity.recipeNow != null)
                 InventoryUtils.extractItem(entity.level,entity,tuples.get(0).getA(), Arrays.stream(INPUT_SLOTS).boxed().toList(),tuples.get(0).getB(),itemStack -> entity.recipeNow.checkItem(itemStack)); //拉取物品
             InventoryUtils.insertItem(entity,tuples.get(1).getA(),Arrays.stream(OUTPUT_SLOTS).boxed().toList(),tuples.get(1).getB());               //输出物品
         }
     }
     public static void runDummyCaps(Level level, BlockPos pPos, BlockState pState, BlockEntity pBlockEntity){
-        AssemblerEntity assemblerEntity = (AssemblerEntity) pBlockEntity;
-        List<Tuple<BlockPos, Direction>> tupleList = assemblerEntity.multiblockData.afterTrans.get(ForgeCapabilities.ENERGY);
-        for (Tuple<BlockPos, Direction> tuple : tupleList) {
+        AssemblerEntity entity = (AssemblerEntity) pBlockEntity;
+        List<Tuple<BlockPos, Direction>> tuples = entity.multiblockData.getCapLocation(HBMCaps.LONG_ENERGY, entity.worldPosition, entity.getBlockState().getValue(BlockContainerBase.FACING));
+        for (Tuple<BlockPos, Direction> tuple : tuples) {
             BlockPos dummyPos = tuple.getA();
             TransmitHelper.machineTransmit(level,dummyPos,level.getBlockState(dummyPos),level.getBlockEntity(dummyPos));
         }

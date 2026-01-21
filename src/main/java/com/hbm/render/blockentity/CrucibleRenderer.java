@@ -2,7 +2,7 @@ package com.hbm.render.blockentity;
 
 import com.hbm.blockentity.machine.CrucibleEntity;
 import com.hbm.render.model.Models;
-import com.hbm.render.utils.ModelAdjustUtils;
+import com.hbm.utils.DirectionUtils;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -37,7 +37,8 @@ public class CrucibleRenderer implements BlockEntityRenderer<CrucibleEntity> {
 //            case SOUTH -> rotation = 180;
 //            case EAST -> rotation = 270;
 //        }
-        ModelAdjustUtils.generalMachineRotate(pPoseStack, blockState);
+//        ModelAdjustUtils.generalMachineRotate(pPoseStack, blockState);
+        DirectionUtils.generalMachineRotate(pPoseStack, blockState);
 
         //坩埚本体部分
         pPoseStack.pushPose();

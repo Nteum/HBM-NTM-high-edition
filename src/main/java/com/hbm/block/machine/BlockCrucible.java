@@ -1,12 +1,10 @@
 package com.hbm.block.machine;
 
-import com.hbm.block.base.BaseMachineBlock;
-import com.hbm.block.base.BedLikeBlock;
+import com.hbm.block.base.BlockDummyable;
 import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.blockentity.machine.CrucibleEntity;
 import com.hbm.blockentity.machine.DifurnaceEntity;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Vec3i;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -19,9 +17,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
-
-public class BlockCrucible extends BedLikeBlock {
+public class BlockCrucible extends BlockDummyable {
     public static VoxelShape SHAPE = Block.box(-16,0,-16,32,24,32);
     public BlockCrucible(Properties pProperties) {
         super(pProperties);
@@ -47,14 +43,5 @@ public class BlockCrucible extends BedLikeBlock {
     @Override
     public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
         return SHAPE;
-    }
-    @Override
-    public int[] getOffset() {
-        return new int[] {1, 0, 1, 1, 1, 1};
-    }
-
-    @Override
-    public List<Vec3i> getOffsets() {
-        return square(getOffset());
     }
 }
