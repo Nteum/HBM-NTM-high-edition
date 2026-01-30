@@ -96,6 +96,7 @@ public class MultiblockData {
         mapping.put(ModBlocks.machine_icf.get(), new MultiblockData(new ArrayList<>(), new int[]{0, 0, 0, 0, 0, 0}));
         mapping.put(ModBlocks.machine_research_reactor.get(), new MultiblockData(2, 0, 0, 0, 0, 0));
         mapping.put(ModBlocks.machine_reactor_breeding.get(), new MultiblockData(2, 0, 0, 0, 0, 0));
+        mapping.put(ModBlocks.SPACE_STATION_BASE.get(), new MultiblockData(1, 0, 2, 2, 2, 2));
     }
 
     MultiblockData(List<Vec3i> offsets, int[] dirOffsets){

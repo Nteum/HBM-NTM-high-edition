@@ -9,11 +9,18 @@ import com.hbm.item.env.ItemEggGlyphid;
 import com.hbm.network.ServerMsgHandler;
 import com.hbm.registries.HBMDamage;
 import com.hbm.utils.transport_net.FluidNetworkSystem;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.event.ItemStackedOnOtherEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
+import net.minecraftforge.event.entity.EntityEvent;
+import net.minecraftforge.event.entity.EntityJoinLevelEvent;
+import net.minecraftforge.event.entity.EntityLeaveLevelEvent;
 import net.minecraftforge.event.entity.item.ItemTossEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -28,6 +35,7 @@ public class ServerEventHandler {
         forgeBus.addListener(ServerEventHandler::serverTick);
         forgeBus.addListener(ServerEventHandler::onPlayerClickInventory);
         forgeBus.addListener(ServerEventHandler::onPlayerTossItem);
+        forgeBus.addListener(ServerEventHandler::onEntityJoin);
     }
     @SubscribeEvent
     public static void onServerSetup(FMLDedicatedServerSetupEvent event) {
@@ -72,6 +80,28 @@ public class ServerEventHandler {
         if (itemStack.is(ModItems.EGG_GLYPHID.get()) || itemStack.is(ModItems.EGG_GLYPHID_TO_BIRTH.get())){
             event.getPlayer().addItem(itemStack);
             event.setCanceled(true);
+        }
+    }
+
+    @SubscribeEvent
+    public static void onEntityJoin(EntityJoinLevelEvent event) {
+        Entity entity = event.getEntity();
+        double gravityBase = 0.08;
+        boolean isNoGravity = false;
+
+        if (event.getLevel().dimension() == Space.LEVEL_KEY){
+            gravityBase = 0;
+            isNoGravity = true;
+        }
+
+        if (entity instanceof LivingEntity living) {
+            var gravity = living.getAttribute(ForgeMod.ENTITY_GRAVITY.get());
+            if (gravity != null) {
+                // 将重力设为 0（默认是 0.08 左右）
+                gravity.setBaseValue(gravityBase);
+            }
+        }else {
+            entity.setNoGravity(isNoGravity);
         }
     }
 }

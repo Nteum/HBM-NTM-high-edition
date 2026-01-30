@@ -59,6 +59,7 @@ public class Models {
     public static final ResourceLocation RESEARCH_REACTOR_BASE = add(HBM.rl("block/reactor/reactor_small_base"));
     public static final ResourceLocation RESEARCH_REACTOR_RODS = add(HBM.rl("block/reactor/reactor_small_rods"));
     public static final ResourceLocation BREEDER_REACTOR = add(HBM.rl("block/reactor/breeder"));
+    public static final ResourceLocation SPACE_STATION_BASE = add(HBM.rl("block/space_station_base"));
 
     public static final ResourceLocation MP_W_15_BALEFIRE = addItem(HBM.rl("item/mp_warhead_15_balefire"), HBMWeapon.MP_WARHEAD_15_BALEFIRE);
 //    public static final ResourceLocation GUN_RIFLE = addItem(HBM.rl("item/gun_marseleg"), ModItems.GUN_RIFLE.getId());

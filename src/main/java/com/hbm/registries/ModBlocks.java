@@ -30,6 +30,7 @@ import com.hbm.block.machine.generator.BlockPWRController;
 import com.hbm.block.machine.generator.BlockPWRPillar;
 import com.hbm.block.machine.generator.BlockGenericPWR;
 import com.hbm.block.logistic.BlockConveyor;
+import com.hbm.block.space.BlockSpaceStation;
 import com.hbm.block.weapon.NukeBoy;
 import com.hbm.block.weapon.NukeCustom;
 import com.hbm.block.weapon.NukeFat;
@@ -219,6 +220,7 @@ public class ModBlocks {
      * */
     public static final RegistryObject<Block> moon_rock = block("moon_rock", ()->new Block(Properties.of().sound(SoundType.STONE).strength(1.5f, 10f)));
     public static final RegistryObject<Block> moon_turf = block("moon_turf", ()->new FallingBlock(Properties.of().sound(SoundType.SAND).strength(0.5f)));
+    public static final RegistryObject<Block> SPACE_STATION_BASE = add("space_station_base", ()->new BlockSpaceStation(Properties.of().sound(SoundType.SAND).strength(0.5f)), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, HBMKey.ORDERLY_GEN, HBMKey.DROP_SELF);
     /**
      * 调试方块
      * */
