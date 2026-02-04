@@ -14,6 +14,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import org.apache.logging.log4j.core.Core;
@@ -225,4 +227,8 @@ public class MultiblockData {
         return result;
     }
 
+    public VoxelShape toShape(){
+        return Shapes.box(dirOffsets[4] * -16, dirOffsets[1] * -16, dirOffsets[2] * -16,
+                dirOffsets[5] * 16, dirOffsets[0] * 16, dirOffsets[3] * 16);
+    }
 }

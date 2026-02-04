@@ -40,7 +40,7 @@ public class RenderUtils {
                     state, model, f,f1,f2, pPackedLight, pPackedOverlay, ModelData.EMPTY, rt);
     }
     /**
-     * 主要参考ModelBlockRender#renderModel
+     * 参考原版 ModelBlockRender#renderModel
      * */
     public static void renderModel(BakedModel model, PoseStack pPose, MultiBufferSource pBuffer, int pPackedLight, int pPackedOverlay, RenderType renderType){
         VertexConsumer buffer;
@@ -54,7 +54,7 @@ public class RenderUtils {
             renderQuadList(pPose.last(), buffer, pRed, pGreen, pBlue, model.getQuads(dummyState, direction, randomSource), pPackedLight, pPackedOverlay);
         }
 
-        renderQuadList(pPose.last(), buffer, pRed, pGreen, pBlue, model.getQuads(dummyState, (Direction)null, randomSource), pPackedLight, pPackedOverlay);
+        renderQuadList(pPose.last(), buffer, pRed, pGreen, pBlue, model.getQuads(dummyState, null, randomSource), pPackedLight, pPackedOverlay);
     }
     private static void renderQuadList(PoseStack.Pose pPose, VertexConsumer pConsumer, float pRed, float pGreen, float pBlue, List<BakedQuad> pQuads, int pPackedLight, int pPackedOverlay) {
         for(BakedQuad bakedquad : pQuads) {

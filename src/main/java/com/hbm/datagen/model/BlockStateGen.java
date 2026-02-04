@@ -146,6 +146,7 @@ public class BlockStateGen extends BlockStateProvider {
 
         simpleBlockWithItem(ModBlocks.WASTE_LEAVES.get(), genBuiltInModelFile(ModBlocks.WASTE_LEAVES.get(), "leaves"));
         simpleBlockWithItem(ModBlocks.WASTE_GRASS.get(), genBuiltInModelFile(ModBlocks.WASTE_GRASS.get(), "cube_bottom_top"));
+        addObjHorizonalModel(ModBlocks.SPACE_STATION_BASE.get(), "block/space_station_base");
     }
     // 方块和物品：纯cube all
     public void simpleBlockWithItem(Block block){

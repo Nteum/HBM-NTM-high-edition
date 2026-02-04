@@ -52,6 +52,7 @@ public enum HBMLang implements ILangEntry {
     ICF_PRESS("container", "icf_press", "ICF Fuel Press"),
     RESEARCH_REACTOR("container", "research_reactor", "Research Reactor"),
     BREEDER_REACTOR("container", "reactor_breeder", "Breeder Reactor"),
+    CONTAINER_SPACE_STATION_DOCKER("Space Station Docker"),
     // GUI
     TOOLTIP_LEFT_TIME("gui","left_time.tooltip"),
     TOOLTIP_ENERGY("gui","stored_energy.tooltip"),

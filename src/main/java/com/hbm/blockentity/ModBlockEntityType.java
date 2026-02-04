@@ -91,7 +91,7 @@ public class ModBlockEntityType {
     public static final RegistryObject<BlockEntityType<TileProxyCombo>> PROXY_ENTITY =
             REGISTER.register("proxy_entity",()-> BlockEntityType.Builder.of(TileProxyCombo::new,
                     ModBlocks.machine_crucible.get(), ModBlocks.machine_assembler.get(), ModBlocks.machine_cracking_tower.get(), HBMMachine.CHEMPLANT.get(), HBMMachine.LAUNCH_PAD.get(), ModBlocks.bomb_boy.get(), ModBlocks.bomb_custom.get(), ModBlocks.bomb_fat_man.get(),
-                    ModBlocks.machine_zirnox.get()
+                    ModBlocks.machine_zirnox.get(), ModBlocks.SPACE_STATION_BASE.get()
 //                    ForgeRegistries.BLOCKS.getValues().toArray(Block[]::new)
 //                    BuiltInRegistries.BLOCK.stream().filter(block -> block.builtInRegistryHolder().is(ModTags.Blocks.MACHINE)).toArray(Block[]::new)
             ).build(null));
@@ -114,7 +114,8 @@ public class ModBlockEntityType {
                     ModBlocks.machine_rbmk_reflector.get(),
                     ModBlocks.machine_rbmk_debris.get(),
                     ModBlocks.machine_rbmk_crane_console.get(),
-                    ModBlocks.machine_rbmk_autoloader.get()).build(null));
+                    ModBlocks.machine_rbmk_autoloader.get()
+            ).build(null));
     public static final RegistryObject<BlockEntityType<com.hbm.blockentity.machine.tokamak.TokamakControllerBlockEntity>> TOKAMAK_CONTROLLER =
             REGISTER.register("tokamak_controller", () -> BlockEntityType.Builder.of(com.hbm.blockentity.machine.tokamak.TokamakControllerBlockEntity::new, ModBlocks.tokamak_controller.get()).build(null));
     public static final RegistryObject<BlockEntityType<PWRControllerBlockEntity>> PWR_CONTROLLER_ENTITY =
@@ -137,4 +138,6 @@ public class ModBlockEntityType {
             REGISTER.register("research_reactor_entity", () -> BlockEntityType.Builder.of(com.hbm.blockentity.machine.research.ResearchReactorBlockEntity::new, ModBlocks.machine_research_reactor.get()).build(null));
     public static final RegistryObject<BlockEntityType<com.hbm.blockentity.machine.research.BreederReactorBlockEntity>> BREEDER_REACTOR_ENTITY =
             REGISTER.register("breeder_reactor_entity", () -> BlockEntityType.Builder.of(com.hbm.blockentity.machine.research.BreederReactorBlockEntity::new, ModBlocks.machine_reactor_breeding.get()).build(null));
+    public static final RegistryObject<BlockEntityType<TileSpaceStaion>> TILE_SPACE_STATION =
+            REGISTER.register("tile_space_station", () -> BlockEntityType.Builder.of(TileSpaceStaion::new, ModBlocks.SPACE_STATION_BASE.get()).build(null));
 }

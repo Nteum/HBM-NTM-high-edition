@@ -29,6 +29,7 @@ import com.hbm.render.entity.projectile.RenderRubble;
 import com.hbm.render.item.ItemModelReloader;
 import com.hbm.render.item.SpecialItemRender;
 import com.hbm.render.model.Models;
+import com.hbm.render.model.engine.CustomPartsModel;
 import com.hbm.render.model.entity.TestEntityModel;
 import com.hbm.render.overlay.AtomicFlashOverlay;
 import com.hbm.render.overlay.DebugTagOverlay;
@@ -36,7 +37,6 @@ import com.hbm.render.pipeline.GeoRenderPipeline;
 import com.hbm.settings.tooltip.TooltipRegistries;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
-import net.minecraft.client.renderer.DimensionSpecialEffects;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
@@ -44,7 +44,6 @@ import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.nbt.Tag;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.DimensionSpecialEffectsManager;
 import net.minecraftforge.client.event.*;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -68,6 +67,7 @@ public class ClientEventHanler {
         modBus.addListener(ClientEventHanler::onClientSetupFinished);
         modBus.addListener(ClientEventHanler::registerColorHandlerItem);
         modBus.addListener(ClientEventHanler::registerDimensionsSpecialEffects);
+        modBus.addListener(ClientEventHanler::registerGeometryLoaders);
         // forge总线事件
         forgeBus.addListener(ClientEventHanler::onKeyPressed);
         forgeBus.addListener(AtomicFlashOverlay::onClientTick);
@@ -118,6 +118,7 @@ public class ClientEventHanler {
             BlockEntityRenderers.register(ModBlockEntityType.ZIRNOX_REACTOR_ENTITY.get(), ZirnoxRenderer::new);
             BlockEntityRenderers.register(ModBlockEntityType.RESEARCH_REACTOR_ENTITY.get(), ResearchReactorRenderer::new);
             BlockEntityRenderers.register(ModBlockEntityType.BREEDER_REACTOR_ENTITY.get(), ctx -> new BreederReactorRenderer());
+            BlockEntityRenderers.register(ModBlockEntityType.TILE_SPACE_STATION.get(), SpaceStationRender::new);
             //实体渲染
             EntityRenderers.register(ModEntityType.TEST_ENTITY.get(), TestEntityRenderer::new);
             EntityRenderers.register(ModEntityType.ENTITY_GRENADE_GENETIC.get(), ThrownItemRenderer::new);
@@ -224,5 +225,10 @@ public class ClientEventHanler {
     @SubscribeEvent
     public static void registerDimensionsSpecialEffects(RegisterDimensionSpecialEffectsEvent event){
         event.register(HBM.rl("space_effects"), new SpaceSpecialEffects());
+    }
+    // 注册单独加入的模型加载器
+    @SubscribeEvent
+    public static void registerGeometryLoaders(ModelEvent.RegisterGeometryLoaders event){
+        event.register("multi_parts_obj", CustomPartsModel.Loader.INSTANCE);
     }
 }
