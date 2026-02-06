@@ -3,6 +3,6 @@
   "flip_v": true,
   "model": "hbm:models/item/armor/t51.obj",
   "textures": {
-    "texture0": "hbm:textures/models/armor/t51_chest"
+    "texture0": "hbm:models/armor/t51_chest"
   }
 }

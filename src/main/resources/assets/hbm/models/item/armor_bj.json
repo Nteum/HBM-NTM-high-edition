@@ -3,6 +3,6 @@
   "flip_v": true,
   "model": "hbm:models/item/armor/bj.obj",
   "textures": {
-    "texture0": "hbm:textures/models/armor/bj_chest"
+    "texture0": "hbm:models/armor/bj_chest"
   }
 }

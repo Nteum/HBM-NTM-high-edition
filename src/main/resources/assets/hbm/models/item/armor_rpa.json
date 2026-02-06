@@ -3,6 +3,6 @@
   "flip_v": true,
   "model": "hbm:models/item/armor/remnant.obj",
   "textures": {
-    "texture0": "hbm:textures/models/armor/rpa_chest"
+    "texture0": "hbm:models/armor/rpa_chest"
   }
 }
