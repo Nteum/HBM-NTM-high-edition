@@ -1,0 +1,5090 @@
+{
+  "acetylene_torch": {
+    "tab": "parts",
+    "texture": null
+  },
+  "achievement_icon": {
+    "tab": "parts",
+    "texture": null
+  },
+  "ajr_boots": {
+    "tab": "parts",
+    "texture": "ajr_boots"
+  },
+  "ajr_helmet": {
+    "tab": "parts",
+    "texture": "ajr_helmet"
+  },
+  "ajr_legs": {
+    "tab": "parts",
+    "texture": "ajr_legs"
+  },
+  "ajr_plate": {
+    "tab": "parts",
+    "texture": "ajr_plate"
+  },
+  "ajro_boots": {
+    "tab": "parts",
+    "texture": "ajro_boots"
+  },
+  "ajro_helmet": {
+    "tab": "parts",
+    "texture": "ajro_helmet"
+  },
+  "ajro_legs": {
+    "tab": "parts",
+    "texture": "ajro_legs"
+  },
+  "ajro_plate": {
+    "tab": "parts",
+    "texture": "ajro_plate"
+  },
+  "alloy_axe": {
+    "tab": "parts",
+    "texture": "alloy_axe"
+  },
+  "alloy_boots": {
+    "tab": "parts",
+    "texture": "alloy_boots"
+  },
+  "alloy_helmet": {
+    "tab": "parts",
+    "texture": "alloy_helmet"
+  },
+  "alloy_hoe": {
+    "tab": "parts",
+    "texture": "alloy_hoe"
+  },
+  "alloy_legs": {
+    "tab": "parts",
+    "texture": "alloy_legs"
+  },
+  "alloy_pickaxe": {
+    "tab": "parts",
+    "texture": "alloy_pickaxe"
+  },
+  "alloy_plate": {
+    "tab": "parts",
+    "texture": "alloy_plate"
+  },
+  "alloy_shovel": {
+    "tab": "parts",
+    "texture": "alloy_shovel"
+  },
+  "alloy_sword": {
+    "tab": "parts",
+    "texture": "alloy_sword"
+  },
+  "ammo_arty": {
+    "tab": "parts",
+    "texture": null
+  },
+  "ammo_bag": {
+    "tab": "consumable",
+    "texture": "ammo_bag"
+  },
+  "ammo_bag_infinite": {
+    "tab": "consumable",
+    "texture": "ammo_bag_infinite"
+  },
+  "ammo_container": {
+    "tab": "weapon",
+    "texture": "ammo_container"
+  },
+  "ammo_dgk": {
+    "tab": "weapon",
+    "texture": null
+  },
+  "ammo_fireext": {
+    "tab": "weapon",
+    "texture": null
+  },
+  "ammo_himars": {
+    "tab": "parts",
+    "texture": null
+  },
+  "ammo_misc": {
+    "tab": "parts",
+    "texture": null
+  },
+  "ammo_shell": {
+    "tab": "weapon",
+    "texture": null
+  },
+  "ams_catalyst_aluminium": {
+    "tab": "control",
+    "texture": "ams_catalyst_aluminium"
+  },
+  "ams_catalyst_beryllium": {
+    "tab": "control",
+    "texture": "ams_catalyst_beryllium"
+  },
+  "ams_catalyst_blank": {
+    "tab": "control",
+    "texture": "ams_catalyst_blank"
+  },
+  "ams_catalyst_caesium": {
+    "tab": "control",
+    "texture": "ams_catalyst_caesium"
+  },
+  "ams_catalyst_cerium": {
+    "tab": "control",
+    "texture": "ams_catalyst_cerium"
+  },
+  "ams_catalyst_cobalt": {
+    "tab": "control",
+    "texture": "ams_catalyst_cobalt"
+  },
+  "ams_catalyst_copper": {
+    "tab": "control",
+    "texture": "ams_catalyst_copper"
+  },
+  "ams_catalyst_dineutronium": {
+    "tab": "control",
+    "texture": "ams_catalyst_dineutronium"
+  },
+  "ams_catalyst_euphemium": {
+    "tab": "control",
+    "texture": "ams_catalyst_euphemium"
+  },
+  "ams_catalyst_iron": {
+    "tab": "control",
+    "texture": "ams_catalyst_iron"
+  },
+  "ams_catalyst_lithium": {
+    "tab": "control",
+    "texture": "ams_catalyst_lithium"
+  },
+  "ams_catalyst_niobium": {
+    "tab": "control",
+    "texture": "ams_catalyst_niobium"
+  },
+  "ams_catalyst_schrabidium": {
+    "tab": "control",
+    "texture": "ams_catalyst_schrabidium"
+  },
+  "ams_catalyst_strontium": {
+    "tab": "control",
+    "texture": "ams_catalyst_strontium"
+  },
+  "ams_catalyst_thorium": {
+    "tab": "control",
+    "texture": "ams_catalyst_thorium"
+  },
+  "ams_catalyst_tungsten": {
+    "tab": "control",
+    "texture": "ams_catalyst_tungsten"
+  },
+  "ams_core_eyeofharmony": {
+    "tab": "control",
+    "texture": "ams_core_eyeofharmony"
+  },
+  "ams_core_sing": {
+    "tab": "control",
+    "texture": "ams_core_sing"
+  },
+  "ams_core_thingy": {
+    "tab": "parts",
+    "texture": "ams_core_thingy"
+  },
+  "ams_core_wormhole": {
+    "tab": "control",
+    "texture": "ams_core_wormhole"
+  },
+  "ams_focus_blank": {
+    "tab": "control",
+    "texture": "ams_focus_blank"
+  },
+  "ams_focus_booster": {
+    "tab": "control",
+    "texture": "ams_focus_booster"
+  },
+  "ams_focus_limiter": {
+    "tab": "control",
+    "texture": "ams_focus_limiter"
+  },
+  "ams_lens": {
+    "tab": "control",
+    "texture": "ams_lens"
+  },
+  "ams_muzzle": {
+    "tab": "control",
+    "texture": "ams_muzzle"
+  },
+  "analysis_tool": {
+    "tab": "consumable",
+    "texture": "analysis_tool"
+  },
+  "anchor_remote": {
+    "tab": "consumable",
+    "texture": "anchor_remote"
+  },
+  "apple_euphemium": {
+    "tab": "parts",
+    "texture": "apple_euphemium"
+  },
+  "apple_lead": {
+    "tab": "consumable",
+    "texture": "apple_lead"
+  },
+  "apple_schrabidium": {
+    "tab": "consumable",
+    "texture": "apple_schrabidium"
+  },
+  "arc_electrode": {
+    "tab": "control",
+    "texture": "arc_electrode"
+  },
+  "arc_electrode_burnt": {
+    "tab": "control",
+    "texture": "arc_electrode_burnt"
+  },
+  "armor_battery": {
+    "tab": "parts",
+    "texture": "armor_battery"
+  },
+  "armor_battery_mk2": {
+    "tab": "parts",
+    "texture": "armor_battery_mk2"
+  },
+  "armor_battery_mk3": {
+    "tab": "parts",
+    "texture": "armor_battery_mk3"
+  },
+  "armor_polish": {
+    "tab": "parts",
+    "texture": "armor_polish"
+  },
+  "asbestos_boots": {
+    "tab": "parts",
+    "texture": "asbestos_boots"
+  },
+  "asbestos_helmet": {
+    "tab": "parts",
+    "texture": "asbestos_helmet"
+  },
+  "asbestos_legs": {
+    "tab": "parts",
+    "texture": "asbestos_legs"
+  },
+  "asbestos_plate": {
+    "tab": "parts",
+    "texture": "asbestos_plate"
+  },
+  "ashglasses": {
+    "tab": "parts",
+    "texture": "ashglasses"
+  },
+  "assembly_nuke": {
+    "tab": "parts",
+    "texture": "assembly_nuke"
+  },
+  "attachment_mask": {
+    "tab": "parts",
+    "texture": "attachment_mask"
+  },
+  "attachment_mask_mono": {
+    "tab": "parts",
+    "texture": "attachment_mask_mono"
+  },
+  "australium_iii": {
+    "tab": "parts",
+    "texture": "australium_iii"
+  },
+  "back_tesla": {
+    "tab": "parts",
+    "texture": "back_tesla"
+  },
+  "balefire_and_steel": {
+    "tab": "control",
+    "texture": "balefire_and_steel"
+  },
+  "ball_dynamite": {
+    "tab": "parts",
+    "texture": "ball_dynamite"
+  },
+  "ball_fireclay": {
+    "tab": "parts",
+    "texture": "ball_fireclay"
+  },
+  "ball_resin": {
+    "tab": "parts",
+    "texture": "ball_resin"
+  },
+  "ball_tatb": {
+    "tab": "parts",
+    "texture": "ball_tatb"
+  },
+  "ball_tnt": {
+    "tab": "parts",
+    "texture": "ball_tnt"
+  },
+  "ballistic_gauntlet": {
+    "tab": "parts",
+    "texture": "ballistic_gauntlet"
+  },
+  "ballistite": {
+    "tab": "parts",
+    "texture": "ballistite"
+  },
+  "bandaid": {
+    "tab": "parts",
+    "texture": "bandaid"
+  },
+  "bathwater": {
+    "tab": "parts",
+    "texture": "bathwater"
+  },
+  "bathwater_mk2": {
+    "tab": "parts",
+    "texture": "bathwater_mk2"
+  },
+  "battery_advanced_cell": {
+    "tab": "control",
+    "texture": "battery_advanced_cell"
+  },
+  "battery_advanced_cell_12": {
+    "tab": "control",
+    "texture": "battery_advanced_cell_12"
+  },
+  "battery_advanced_cell_4": {
+    "tab": "control",
+    "texture": "battery_advanced_cell_4"
+  },
+  "battery_lithium_cell": {
+    "tab": "control",
+    "texture": "battery_lithium_cell"
+  },
+  "battery_lithium_cell_3": {
+    "tab": "control",
+    "texture": "battery_lithium_cell_3"
+  },
+  "battery_lithium_cell_6": {
+    "tab": "control",
+    "texture": "battery_lithium_cell_6"
+  },
+  "battery_potato": {
+    "tab": "control",
+    "texture": "battery_potato"
+  },
+  "battery_potatos": {
+    "tab": "control",
+    "texture": "battery_potatos"
+  },
+  "battery_red_cell": {
+    "tab": "control",
+    "texture": "battery_red_cell"
+  },
+  "battery_red_cell_24": {
+    "tab": "control",
+    "texture": "battery_red_cell_24"
+  },
+  "battery_red_cell_6": {
+    "tab": "control",
+    "texture": "battery_red_cell_6"
+  },
+  "battery_sc_americium": {
+    "tab": "control",
+    "texture": "battery_sc_americium"
+  },
+  "battery_sc_gold": {
+    "tab": "control",
+    "texture": "battery_sc_gold"
+  },
+  "battery_sc_lead": {
+    "tab": "control",
+    "texture": "battery_sc_lead"
+  },
+  "battery_sc_plutonium": {
+    "tab": "control",
+    "texture": "battery_sc_plutonium"
+  },
+  "battery_sc_polonium": {
+    "tab": "control",
+    "texture": "battery_sc_polonium"
+  },
+  "battery_sc_technetium": {
+    "tab": "control",
+    "texture": "battery_sc_technetium"
+  },
+  "battery_sc_uranium": {
+    "tab": "control",
+    "texture": "battery_sc_uranium"
+  },
+  "battery_schrabidium": {
+    "tab": "control",
+    "texture": "battery_schrabidium_new"
+  },
+  "battery_schrabidium_cell": {
+    "tab": "control",
+    "texture": "battery_schrabidium_cell"
+  },
+  "battery_schrabidium_cell_2": {
+    "tab": "control",
+    "texture": "battery_schrabidium_cell_2"
+  },
+  "battery_schrabidium_cell_4": {
+    "tab": "control",
+    "texture": "battery_schrabidium_cell_4"
+  },
+  "battery_spark": {
+    "tab": "control",
+    "texture": "battery_spark"
+  },
+  "battery_spark_cell_100": {
+    "tab": "control",
+    "texture": "battery_spark_cell_100"
+  },
+  "battery_spark_cell_1000": {
+    "tab": "control",
+    "texture": "battery_spark_cell_1000"
+  },
+  "battery_spark_cell_10000": {
+    "tab": "control",
+    "texture": "battery_spark_cell_10000"
+  },
+  "battery_spark_cell_25": {
+    "tab": "control",
+    "texture": "battery_spark_cell_25"
+  },
+  "battery_spark_cell_2500": {
+    "tab": "control",
+    "texture": "battery_spark_cell_2500"
+  },
+  "battery_spark_cell_6": {
+    "tab": "control",
+    "texture": "battery_spark_cell_6"
+  },
+  "battery_spark_cell_power": {
+    "tab": "control",
+    "texture": "battery_spark_cell_power"
+  },
+  "battery_trixite": {
+    "tab": "control",
+    "texture": "battery_trixite"
+  },
+  "bdcl": {
+    "tab": "consumable",
+    "texture": "bdcl"
+  },
+  "bedrock_ore": {
+    "tab": "parts",
+    "texture": "bedrock_ore_new"
+  },
+  "bedrock_ore_fragment": {
+    "tab": "parts",
+    "texture": "bedrock_ore_fragment"
+  },
+  "beta": {
+    "tab": "parts",
+    "texture": "beta"
+  },
+  "bio_wafer": {
+    "tab": "parts",
+    "texture": "bio_wafer"
+  },
+  "bismuth_axe": {
+    "tab": "parts",
+    "texture": "bismuth_axe"
+  },
+  "bismuth_boots": {
+    "tab": "parts",
+    "texture": "bismuth_boots"
+  },
+  "bismuth_helmet": {
+    "tab": "parts",
+    "texture": "bismuth_helmet"
+  },
+  "bismuth_legs": {
+    "tab": "parts",
+    "texture": "bismuth_legs"
+  },
+  "bismuth_pickaxe": {
+    "tab": "parts",
+    "texture": "bismuth_pickaxe"
+  },
+  "bismuth_plate": {
+    "tab": "parts",
+    "texture": "bismuth_plate"
+  },
+  "bismuth_tool": {
+    "tab": "parts",
+    "texture": "bismuth_tool"
+  },
+  "bj_boots": {
+    "tab": "parts",
+    "texture": "bj_boots"
+  },
+  "bj_helmet": {
+    "tab": "parts",
+    "texture": "bj_helmet"
+  },
+  "bj_legs": {
+    "tab": "parts",
+    "texture": "bj_legs"
+  },
+  "bj_plate": {
+    "tab": "parts",
+    "texture": "bj_plate"
+  },
+  "bj_plate_jetpack": {
+    "tab": "parts",
+    "texture": "bj_plate_jetpack"
+  },
+  "black_diamond": {
+    "tab": "parts",
+    "texture": "black_diamond"
+  },
+  "black_hole": {
+    "tab": "control",
+    "texture": "singularity_4"
+  },
+  "blades_advanced_alloy": {
+    "tab": "control",
+    "texture": "blades_advanced_alloy"
+  },
+  "blades_desh": {
+    "tab": "control",
+    "texture": "blades_desh"
+  },
+  "blades_steel": {
+    "tab": "control",
+    "texture": "blades_steel"
+  },
+  "blades_titanium": {
+    "tab": "control",
+    "texture": "blades_titanium"
+  },
+  "blowtorch": {
+    "tab": "parts",
+    "texture": null
+  },
+  "blueprint_folder": {
+    "tab": "template",
+    "texture": "blueprint_folder"
+  },
+  "blueprints": {
+    "tab": "template",
+    "texture": "blueprints"
+  },
+  "boat_rubber": {
+    "tab": "parts",
+    "texture": "boat_rubber"
+  },
+  "bob_assembly": {
+    "tab": "parts",
+    "texture": "bob_assembly"
+  },
+  "bob_chemistry": {
+    "tab": "parts",
+    "texture": "bob_chemistry"
+  },
+  "bob_metalworks": {
+    "tab": "parts",
+    "texture": "bob_metalworks"
+  },
+  "bob_nuclear": {
+    "tab": "parts",
+    "texture": "bob_nuclear"
+  },
+  "bob_oil": {
+    "tab": "parts",
+    "texture": "bob_oil"
+  },
+  "bobmazon": {
+    "tab": "consumable",
+    "texture": "bobmazon"
+  },
+  "bobmazon_hidden": {
+    "tab": "parts",
+    "texture": "bobmazon_special"
+  },
+  "bolt": {
+    "tab": "parts",
+    "texture": "bolt"
+  },
+  "bolt_spike": {
+    "tab": "parts",
+    "texture": "bolt_spike"
+  },
+  "boltgun": {
+    "tab": "parts",
+    "texture": null
+  },
+  "bomb_caller": {
+    "tab": "consumable",
+    "texture": "bomb_caller"
+  },
+  "bomb_waffle": {
+    "tab": "consumable",
+    "texture": "bomb_waffle"
+  },
+  "book_lemegeton": {
+    "tab": "parts",
+    "texture": "book_lemegeton"
+  },
+  "book_lore": {
+    "tab": "parts",
+    "texture": "book_pages"
+  },
+  "book_of_": {
+    "tab": "parts",
+    "texture": "book_of_"
+  },
+  "book_secret": {
+    "tab": "parts",
+    "texture": "book_secret"
+  },
+  "bottle2_empty": {
+    "tab": "parts",
+    "texture": "bottle2_empty"
+  },
+  "bottle2_fritz": {
+    "tab": "parts",
+    "texture": "bottle2_fritz"
+  },
+  "bottle2_korl": {
+    "tab": "parts",
+    "texture": "bottle2_korl"
+  },
+  "bottle_cherry": {
+    "tab": "parts",
+    "texture": "bottle_cherry"
+  },
+  "bottle_empty": {
+    "tab": "parts",
+    "texture": "bottle_empty"
+  },
+  "bottle_mercury": {
+    "tab": "parts",
+    "texture": "bottle_mercury"
+  },
+  "bottle_opener": {
+    "tab": "consumable",
+    "texture": "bottle_opener"
+  },
+  "bottle_quantum": {
+    "tab": "parts",
+    "texture": "bottle_quantum"
+  },
+  "bottle_rad": {
+    "tab": "parts",
+    "texture": "bottle_rad"
+  },
+  "bottle_sparkle": {
+    "tab": "parts",
+    "texture": "bottle_sparkle"
+  },
+  "bottled_cloud": {
+    "tab": "parts",
+    "texture": "bottled_cloud"
+  },
+  "boy_bullet": {
+    "tab": "nuke",
+    "texture": "boy_bullet"
+  },
+  "boy_igniter": {
+    "tab": "nuke",
+    "texture": "boy_igniter"
+  },
+  "boy_kit": {
+    "tab": "nuke",
+    "texture": "boy_kit"
+  },
+  "boy_propellant": {
+    "tab": "nuke",
+    "texture": "boy_propellant"
+  },
+  "boy_shielding": {
+    "tab": "nuke",
+    "texture": "boy_shielding"
+  },
+  "boy_target": {
+    "tab": "nuke",
+    "texture": "boy_target"
+  },
+  "briquette": {
+    "tab": "parts",
+    "texture": null
+  },
+  "bucket_acid": {
+    "tab": "blocks",
+    "texture": "bucket_acid"
+  },
+  "bucket_mud": {
+    "tab": "blocks",
+    "texture": "bucket_mud"
+  },
+  "bucket_schrabidic_acid": {
+    "tab": "blocks",
+    "texture": "bucket_schrabidic_acid"
+  },
+  "bucket_toxic": {
+    "tab": "blocks",
+    "texture": "bucket_toxic"
+  },
+  "burnt_bark": {
+    "tab": "parts",
+    "texture": "burnt_bark"
+  },
+  "can_bepis": {
+    "tab": "parts",
+    "texture": "can_bepis"
+  },
+  "can_breen": {
+    "tab": "parts",
+    "texture": "can_breen"
+  },
+  "can_creature": {
+    "tab": "parts",
+    "texture": "can_creature"
+  },
+  "can_empty": {
+    "tab": "consumable",
+    "texture": "can_empty"
+  },
+  "can_key": {
+    "tab": "consumable",
+    "texture": "can_key"
+  },
+  "can_luna": {
+    "tab": "parts",
+    "texture": "can_luna"
+  },
+  "can_mrsugar": {
+    "tab": "parts",
+    "texture": "can_mrsugar"
+  },
+  "can_mug": {
+    "tab": "parts",
+    "texture": "can_mug"
+  },
+  "can_overcharge": {
+    "tab": "parts",
+    "texture": "can_overcharge"
+  },
+  "can_redbomb": {
+    "tab": "parts",
+    "texture": "can_redbomb"
+  },
+  "can_smart": {
+    "tab": "parts",
+    "texture": "can_smart"
+  },
+  "canister_empty": {
+    "tab": "control",
+    "texture": "canister_empty"
+  },
+  "canister_full": {
+    "tab": "control",
+    "texture": "canister_empty"
+  },
+  "canister_napalm": {
+    "tab": "control",
+    "texture": "canister_napalm"
+  },
+  "canned_conserve": {
+    "tab": "consumable",
+    "texture": "canned"
+  },
+  "canteen_vodka": {
+    "tab": "consumable",
+    "texture": "canteen_vodka"
+  },
+  "cap_fritz": {
+    "tab": "consumable",
+    "texture": "cap_fritz"
+  },
+  "cap_korl": {
+    "tab": "consumable",
+    "texture": "cap_korl"
+  },
+  "cap_nuka": {
+    "tab": "consumable",
+    "texture": "cap_nuka"
+  },
+  "cap_quantum": {
+    "tab": "consumable",
+    "texture": "cap_quantum"
+  },
+  "cap_rad": {
+    "tab": "consumable",
+    "texture": "cap_rad"
+  },
+  "cap_sparkle": {
+    "tab": "consumable",
+    "texture": "cap_sparkle"
+  },
+  "cape_gasmask": {
+    "tab": "consumable",
+    "texture": "cape_gasmask"
+  },
+  "cape_hidden": {
+    "tab": "consumable",
+    "texture": "cape_unknown"
+  },
+  "cape_radiation": {
+    "tab": "consumable",
+    "texture": "cape_radiation"
+  },
+  "cape_schrabidium": {
+    "tab": "consumable",
+    "texture": "cape_schrabidium"
+  },
+  "card_aos": {
+    "tab": "parts",
+    "texture": "card_aos"
+  },
+  "card_qos": {
+    "tab": "parts",
+    "texture": "card_qos"
+  },
+  "cart": {
+    "tab": "parts",
+    "texture": null
+  },
+  "casing": {
+    "tab": "parts",
+    "texture": "casing"
+  },
+  "casing_bag": {
+    "tab": "consumable",
+    "texture": "casing_bag"
+  },
+  "catalytic_converter": {
+    "tab": "control",
+    "texture": "catalytic_converter"
+  },
+  "cbt_device": {
+    "tab": "parts",
+    "texture": "cbt_device"
+  },
+  "cell_anti_schrabidium": {
+    "tab": "control",
+    "texture": "cell_anti_schrabidium"
+  },
+  "cell_antimatter": {
+    "tab": "control",
+    "texture": "cell_antimatter"
+  },
+  "cell_balefire": {
+    "tab": "control",
+    "texture": "cell_balefire"
+  },
+  "cell_puf6": {
+    "tab": "control",
+    "texture": "cell_puf6"
+  },
+  "cell_sas3": {
+    "tab": "control",
+    "texture": "cell_sas3"
+  },
+  "cell_uf6": {
+    "tab": "control",
+    "texture": "cell_uf6"
+  },
+  "centri_stick": {
+    "tab": "parts",
+    "texture": "centri_stick"
+  },
+  "chainsaw": {
+    "tab": "parts",
+    "texture": "chainsaw"
+  },
+  "cheese_quesadilla": {
+    "tab": "consumable",
+    "texture": "quesadilla"
+  },
+  "chemical_dye": {
+    "tab": "parts",
+    "texture": "chemical_dye"
+  },
+  "chemistry_icon": {
+    "tab": "parts",
+    "texture": null
+  },
+  "chemistry_set": {
+    "tab": "parts",
+    "texture": null
+  },
+  "chemistry_set_boron": {
+    "tab": "parts",
+    "texture": null
+  },
+  "chemistry_template": {
+    "tab": "template",
+    "texture": "chemistry_template"
+  },
+  "chernobylsign": {
+    "tab": "parts",
+    "texture": "chernobylsign"
+  },
+  "chlorine1": {
+    "tab": "parts",
+    "texture": "chlorine1"
+  },
+  "chlorine2": {
+    "tab": "parts",
+    "texture": "chlorine2"
+  },
+  "chlorine3": {
+    "tab": "parts",
+    "texture": "chlorine3"
+  },
+  "chlorine4": {
+    "tab": "parts",
+    "texture": "chlorine4"
+  },
+  "chlorine5": {
+    "tab": "parts",
+    "texture": "chlorine5"
+  },
+  "chlorine6": {
+    "tab": "parts",
+    "texture": "chlorine6"
+  },
+  "chlorine7": {
+    "tab": "parts",
+    "texture": "chlorine7"
+  },
+  "chlorine8": {
+    "tab": "parts",
+    "texture": "chlorine8"
+  },
+  "chlorine_pinwheel": {
+    "tab": "parts",
+    "texture": "chlorine_pinwheel"
+  },
+  "chlorophyte_axe": {
+    "tab": "parts",
+    "texture": "chlorophyte_axe"
+  },
+  "chlorophyte_pickaxe": {
+    "tab": "parts",
+    "texture": "chlorophyte_pickaxe"
+  },
+  "chocolate": {
+    "tab": "consumable",
+    "texture": "chocolate"
+  },
+  "chocolate_milk": {
+    "tab": "parts",
+    "texture": "chocolate_milk"
+  },
+  "chopper": {
+    "tab": "consumable",
+    "texture": "chopper"
+  },
+  "chunk_ore": {
+    "tab": "parts",
+    "texture": null
+  },
+  "cigarette": {
+    "tab": "consumable",
+    "texture": "cigarette"
+  },
+  "circuit_star_component": {
+    "tab": "parts",
+    "texture": null
+  },
+  "circuit_star_piece": {
+    "tab": "parts",
+    "texture": null
+  },
+  "cladding_desh": {
+    "tab": "parts",
+    "texture": "cladding_desh"
+  },
+  "cladding_ghiorsium": {
+    "tab": "parts",
+    "texture": "cladding_ghiorsium"
+  },
+  "cladding_iron": {
+    "tab": "parts",
+    "texture": "cladding_iron"
+  },
+  "cladding_lead": {
+    "tab": "parts",
+    "texture": "cladding_lead"
+  },
+  "cladding_obsidian": {
+    "tab": "parts",
+    "texture": "cladding_obsidian"
+  },
+  "cladding_paint": {
+    "tab": "parts",
+    "texture": "cladding_paint"
+  },
+  "cladding_rubber": {
+    "tab": "parts",
+    "texture": "cladding_rubber"
+  },
+  "clay_tablet": {
+    "tab": "parts",
+    "texture": "clay_tablet"
+  },
+  "cloud1": {
+    "tab": "parts",
+    "texture": "cloud1"
+  },
+  "cloud2": {
+    "tab": "parts",
+    "texture": "cloud2"
+  },
+  "cloud3": {
+    "tab": "parts",
+    "texture": "cloud3"
+  },
+  "cloud4": {
+    "tab": "parts",
+    "texture": "cloud4"
+  },
+  "cloud5": {
+    "tab": "parts",
+    "texture": "cloud5"
+  },
+  "cloud6": {
+    "tab": "parts",
+    "texture": "cloud6"
+  },
+  "cloud7": {
+    "tab": "parts",
+    "texture": "cloud7"
+  },
+  "cloud8": {
+    "tab": "parts",
+    "texture": "cloud8"
+  },
+  "cmb_axe": {
+    "tab": "parts",
+    "texture": "cmb_axe"
+  },
+  "cmb_boots": {
+    "tab": "parts",
+    "texture": "cmb_boots"
+  },
+  "cmb_helmet": {
+    "tab": "parts",
+    "texture": "cmb_helmet"
+  },
+  "cmb_hoe": {
+    "tab": "parts",
+    "texture": "cmb_hoe"
+  },
+  "cmb_legs": {
+    "tab": "parts",
+    "texture": "cmb_legs"
+  },
+  "cmb_pickaxe": {
+    "tab": "parts",
+    "texture": "cmb_pickaxe"
+  },
+  "cmb_plate": {
+    "tab": "parts",
+    "texture": "cmb_plate"
+  },
+  "cmb_shovel": {
+    "tab": "parts",
+    "texture": "cmb_shovel"
+  },
+  "cmb_sword": {
+    "tab": "parts",
+    "texture": "cmb_sword"
+  },
+  "cobalt_axe": {
+    "tab": "parts",
+    "texture": "cobalt_axe"
+  },
+  "cobalt_boots": {
+    "tab": "parts",
+    "texture": "cobalt_boots"
+  },
+  "cobalt_decorated_axe": {
+    "tab": "parts",
+    "texture": "cobalt_decorated_axe"
+  },
+  "cobalt_decorated_hoe": {
+    "tab": "parts",
+    "texture": "cobalt_decorated_hoe"
+  },
+  "cobalt_decorated_pickaxe": {
+    "tab": "parts",
+    "texture": "cobalt_decorated_pickaxe"
+  },
+  "cobalt_decorated_shovel": {
+    "tab": "parts",
+    "texture": "cobalt_decorated_shovel"
+  },
+  "cobalt_decorated_sword": {
+    "tab": "parts",
+    "texture": "cobalt_decorated_sword"
+  },
+  "cobalt_helmet": {
+    "tab": "parts",
+    "texture": "cobalt_helmet"
+  },
+  "cobalt_hoe": {
+    "tab": "parts",
+    "texture": "cobalt_hoe"
+  },
+  "cobalt_legs": {
+    "tab": "parts",
+    "texture": "cobalt_legs"
+  },
+  "cobalt_pickaxe": {
+    "tab": "parts",
+    "texture": "cobalt_pickaxe"
+  },
+  "cobalt_plate": {
+    "tab": "parts",
+    "texture": "cobalt_plate"
+  },
+  "cobalt_shovel": {
+    "tab": "parts",
+    "texture": "cobalt_shovel"
+  },
+  "cobalt_sword": {
+    "tab": "parts",
+    "texture": "cobalt_sword"
+  },
+  "coffee": {
+    "tab": "parts",
+    "texture": "coffee"
+  },
+  "coffee_radium": {
+    "tab": "parts",
+    "texture": "coffee_radium"
+  },
+  "coin_creeper": {
+    "tab": "consumable",
+    "texture": "coin_creeper"
+  },
+  "coin_maskman": {
+    "tab": "consumable",
+    "texture": "coin_maskman"
+  },
+  "coin_radiation": {
+    "tab": "consumable",
+    "texture": "coin_radiation"
+  },
+  "coin_ufo": {
+    "tab": "consumable",
+    "texture": "coin_ufo"
+  },
+  "coin_worm": {
+    "tab": "consumable",
+    "texture": "coin_worm"
+  },
+  "coke": {
+    "tab": "parts",
+    "texture": "coke"
+  },
+  "coltan_tool": {
+    "tab": "consumable",
+    "texture": "coltass"
+  },
+  "containment_box": {
+    "tab": "consumable",
+    "texture": "containment_box"
+  },
+  "conveyor_wand": {
+    "tab": "machine",
+    "texture": "wand_s"
+  },
+  "cordite": {
+    "tab": "parts",
+    "texture": "cordite"
+  },
+  "coupling_tool": {
+    "tab": "consumable",
+    "texture": "coupling_tool"
+  },
+  "crackpipe": {
+    "tab": "consumable",
+    "texture": "crackpipe"
+  },
+  "crayon": {
+    "tab": "parts",
+    "texture": "crayon"
+  },
+  "crowbar": {
+    "tab": "parts",
+    "texture": "crowbar"
+  },
+  "crt_display": {
+    "tab": "parts",
+    "texture": "crt_display"
+  },
+  "crucible": {
+    "tab": "weapon",
+    "texture": "crucible"
+  },
+  "crystal_charred": {
+    "tab": "parts",
+    "texture": "crystal_charred"
+  },
+  "crystal_horn": {
+    "tab": "parts",
+    "texture": "crystal_horn"
+  },
+  "crystal_schrabidium": {
+    "tab": "parts",
+    "texture": "crystal_schrabidium"
+  },
+  "crystal_schraranium": {
+    "tab": "parts",
+    "texture": "crystal_schraranium"
+  },
+  "crystal_xen": {
+    "tab": "control",
+    "texture": "crystal_xen"
+  },
+  "cube_power": {
+    "tab": "control",
+    "texture": "cube_power"
+  },
+  "custom_amat": {
+    "tab": "nuke",
+    "texture": "custom_amat"
+  },
+  "custom_dirty": {
+    "tab": "nuke",
+    "texture": "custom_dirty"
+  },
+  "custom_fall": {
+    "tab": "nuke",
+    "texture": "custom_fall"
+  },
+  "custom_hydro": {
+    "tab": "nuke",
+    "texture": "custom_hydro"
+  },
+  "custom_kit": {
+    "tab": "nuke",
+    "texture": "custom_kit"
+  },
+  "custom_nuke": {
+    "tab": "nuke",
+    "texture": "custom_nuke"
+  },
+  "custom_schrab": {
+    "tab": "nuke",
+    "texture": "custom_schrab"
+  },
+  "custom_tnt": {
+    "tab": "nuke",
+    "texture": "custom_tnt"
+  },
+  "debris_concrete": {
+    "tab": "control",
+    "texture": "debris_concrete"
+  },
+  "debris_element": {
+    "tab": "control",
+    "texture": "debris_element"
+  },
+  "debris_exchanger": {
+    "tab": "control",
+    "texture": "debris_exchanger"
+  },
+  "debris_fuel": {
+    "tab": "control",
+    "texture": "debris_fuel"
+  },
+  "debris_graphite": {
+    "tab": "control",
+    "texture": "debris_graphite"
+  },
+  "debris_metal": {
+    "tab": "control",
+    "texture": "debris_metal"
+  },
+  "debris_shrapnel": {
+    "tab": "control",
+    "texture": "debris_shrapnel"
+  },
+  "defuser": {
+    "tab": "nuke",
+    "texture": "defuser"
+  },
+  "defuser_gold": {
+    "tab": "parts",
+    "texture": "defuser_gold"
+  },
+  "demon_core_closed": {
+    "tab": "nuke",
+    "texture": "demon_core_closed"
+  },
+  "demon_core_open": {
+    "tab": "nuke",
+    "texture": "demon_core_open"
+  },
+  "desh_axe": {
+    "tab": "parts",
+    "texture": "desh_axe"
+  },
+  "desh_hoe": {
+    "tab": "parts",
+    "texture": "desh_hoe"
+  },
+  "desh_pickaxe": {
+    "tab": "parts",
+    "texture": "desh_pickaxe"
+  },
+  "desh_shovel": {
+    "tab": "parts",
+    "texture": "desh_shovel"
+  },
+  "desh_sword": {
+    "tab": "parts",
+    "texture": "desh_sword"
+  },
+  "designator_arty_range": {
+    "tab": "missile",
+    "texture": "designator_arty_range"
+  },
+  "designator_manual": {
+    "tab": "missile",
+    "texture": "designator_manual"
+  },
+  "designator_range": {
+    "tab": "missile",
+    "texture": "designator_range_alt"
+  },
+  "detonator_de": {
+    "tab": "nuke",
+    "texture": "detonator_de"
+  },
+  "detonator_deadman": {
+    "tab": "nuke",
+    "texture": "detonator_deadman"
+  },
+  "detonator_laser": {
+    "tab": "nuke",
+    "texture": "detonator_laser"
+  },
+  "detonator_multi": {
+    "tab": "nuke",
+    "texture": "detonator_multi"
+  },
+  "diamond_gavel": {
+    "tab": "parts",
+    "texture": "diamond_gavel"
+  },
+  "dieselsuit_boots": {
+    "tab": "parts",
+    "texture": "dieselsuit_boots"
+  },
+  "dieselsuit_helmet": {
+    "tab": "parts",
+    "texture": "dieselsuit_helmet"
+  },
+  "dieselsuit_legs": {
+    "tab": "parts",
+    "texture": "dieselsuit_legs"
+  },
+  "dieselsuit_plate": {
+    "tab": "parts",
+    "texture": "dieselsuit_plate"
+  },
+  "digamma_diagnostic": {
+    "tab": "consumable",
+    "texture": "digamma_diagnostic"
+  },
+  "disperser_canister": {
+    "tab": "weapon",
+    "texture": "disperser_canister"
+  },
+  "disperser_canister_empty": {
+    "tab": "weapon",
+    "texture": "disperser_canister"
+  },
+  "dns_boots": {
+    "tab": "parts",
+    "texture": "dns_boots"
+  },
+  "dns_helmet": {
+    "tab": "parts",
+    "texture": "dns_helmet"
+  },
+  "dns_legs": {
+    "tab": "parts",
+    "texture": "dns_legs"
+  },
+  "dns_plate": {
+    "tab": "parts",
+    "texture": "dns_plate"
+  },
+  "dnt_boots": {
+    "tab": "parts",
+    "texture": "dnt_boots"
+  },
+  "dnt_helmet": {
+    "tab": "parts",
+    "texture": "dnt_helmet"
+  },
+  "dnt_legs": {
+    "tab": "parts",
+    "texture": "dnt_legs"
+  },
+  "dnt_plate": {
+    "tab": "parts",
+    "texture": "dnt_plate"
+  },
+  "dnt_sword": {
+    "tab": "parts",
+    "texture": "dnt_sword"
+  },
+  "door_bunker": {
+    "tab": "blocks",
+    "texture": "door_bunker"
+  },
+  "door_metal": {
+    "tab": "blocks",
+    "texture": "door_metal"
+  },
+  "door_office": {
+    "tab": "blocks",
+    "texture": "door_office"
+  },
+  "door_red": {
+    "tab": "parts",
+    "texture": "door_red"
+  },
+  "dosimeter": {
+    "tab": "consumable",
+    "texture": "dosimeter"
+  },
+  "drax": {
+    "tab": "parts",
+    "texture": "drax"
+  },
+  "drax_mk2": {
+    "tab": "parts",
+    "texture": "drax_mk2"
+  },
+  "drax_mk3": {
+    "tab": "parts",
+    "texture": "drax_mk3"
+  },
+  "drillbit": {
+    "tab": "control",
+    "texture": null
+  },
+  "drone": {
+    "tab": "parts",
+    "texture": null
+  },
+  "drone_linker": {
+    "tab": "consumable",
+    "texture": "drone_linker"
+  },
+  "dwarven_pickaxe": {
+    "tab": "parts",
+    "texture": "dwarven_pickaxe"
+  },
+  "early_explosive_lenses": {
+    "tab": "nuke",
+    "texture": "gadget_explosive8"
+  },
+  "egg_balefire": {
+    "tab": "nuke",
+    "texture": "egg_balefire"
+  },
+  "egg_balefire_shard": {
+    "tab": "nuke",
+    "texture": "egg_balefire_shard"
+  },
+  "elec_axe": {
+    "tab": "parts",
+    "texture": "elec_chainsaw_anim"
+  },
+  "elec_pickaxe": {
+    "tab": "parts",
+    "texture": "elec_drill_anim"
+  },
+  "elec_shovel": {
+    "tab": "parts",
+    "texture": "elec_shovel_anim"
+  },
+  "elec_sword": {
+    "tab": "parts",
+    "texture": "elec_sword_anim"
+  },
+  "energy_core": {
+    "tab": "control",
+    "texture": "energy_core"
+  },
+  "entanglement_kit": {
+    "tab": "parts",
+    "texture": "entanglement_kit"
+  },
+  "envsuit_boots": {
+    "tab": "parts",
+    "texture": "envsuit_boots"
+  },
+  "envsuit_helmet": {
+    "tab": "parts",
+    "texture": "envsuit_helmet"
+  },
+  "envsuit_legs": {
+    "tab": "parts",
+    "texture": "envsuit_legs"
+  },
+  "envsuit_plate": {
+    "tab": "parts",
+    "texture": "envsuit_plate"
+  },
+  "euphemium_boots": {
+    "tab": "parts",
+    "texture": "euphemium_boots"
+  },
+  "euphemium_capacitor": {
+    "tab": "control",
+    "texture": "redcoil_capacitor_euphemium"
+  },
+  "euphemium_helmet": {
+    "tab": "parts",
+    "texture": "euphemium_helmet"
+  },
+  "euphemium_kit": {
+    "tab": "parts",
+    "texture": "code"
+  },
+  "euphemium_legs": {
+    "tab": "parts",
+    "texture": "euphemium_legs"
+  },
+  "euphemium_plate": {
+    "tab": "parts",
+    "texture": "euphemium_plate"
+  },
+  "explosive_lenses": {
+    "tab": "nuke",
+    "texture": "man_explosive8"
+  },
+  "fau_boots": {
+    "tab": "parts",
+    "texture": "fau_boots"
+  },
+  "fau_helmet": {
+    "tab": "parts",
+    "texture": "fau_helmet"
+  },
+  "fau_legs": {
+    "tab": "parts",
+    "texture": "fau_legs"
+  },
+  "fau_plate": {
+    "tab": "parts",
+    "texture": "fau_plate"
+  },
+  "five_htp": {
+    "tab": "consumable",
+    "texture": "5htp"
+  },
+  "flame_conspiracy": {
+    "tab": "parts",
+    "texture": "flame_conspiracy"
+  },
+  "flame_opinion": {
+    "tab": "parts",
+    "texture": "flame_opinion"
+  },
+  "flame_politics": {
+    "tab": "parts",
+    "texture": "flame_politics"
+  },
+  "flame_pony": {
+    "tab": "parts",
+    "texture": "flame_pony"
+  },
+  "flask_infusion": {
+    "tab": "consumable",
+    "texture": "flask"
+  },
+  "fleija_core": {
+    "tab": "nuke",
+    "texture": "fleija_core"
+  },
+  "fleija_igniter": {
+    "tab": "nuke",
+    "texture": "fleija_igniter"
+  },
+  "fleija_kit": {
+    "tab": "nuke",
+    "texture": "fleija_kit"
+  },
+  "fleija_propellant": {
+    "tab": "nuke",
+    "texture": "fleija_propellant"
+  },
+  "fluid_barrel_empty": {
+    "tab": "control",
+    "texture": "fluid_barrel"
+  },
+  "fluid_barrel_full": {
+    "tab": "control",
+    "texture": "fluid_barrel"
+  },
+  "fluid_barrel_infinite": {
+    "tab": "control",
+    "texture": "fluid_barrel_infinite"
+  },
+  "fluid_duct": {
+    "tab": "template",
+    "texture": "duct"
+  },
+  "fluid_icon": {
+    "tab": "parts",
+    "texture": "fluid_icon"
+  },
+  "fluid_identifier_multi": {
+    "tab": "template",
+    "texture": "fluid_identifier_multi"
+  },
+  "fluid_pack_empty": {
+    "tab": "control",
+    "texture": "fluid_pack"
+  },
+  "fluid_pack_full": {
+    "tab": "control",
+    "texture": "fluid_pack"
+  },
+  "fluid_tank_empty": {
+    "tab": "control",
+    "texture": "fluid_tank"
+  },
+  "fluid_tank_full": {
+    "tab": "control",
+    "texture": "fluid_tank"
+  },
+  "fluid_tank_lead_empty": {
+    "tab": "control",
+    "texture": "fluid_tank_lead"
+  },
+  "fluid_tank_lead_full": {
+    "tab": "control",
+    "texture": "fluid_tank_lead"
+  },
+  "fmn": {
+    "tab": "consumable",
+    "texture": "tablet"
+  },
+  "fuel_additive": {
+    "tab": "control",
+    "texture": "fuel_additive"
+  },
+  "fuse": {
+    "tab": "control",
+    "texture": "fuse"
+  },
+  "fusion_core": {
+    "tab": "control",
+    "texture": "fusion_core"
+  },
+  "fusion_shield_chlorophyte": {
+    "tab": "control",
+    "texture": "fusion_shield_chlorophyte"
+  },
+  "fusion_shield_desh": {
+    "tab": "control",
+    "texture": "fusion_shield_desh"
+  },
+  "fusion_shield_tungsten": {
+    "tab": "control",
+    "texture": "fusion_shield_tungsten"
+  },
+  "fusion_shield_vaporwave": {
+    "tab": "control",
+    "texture": "fusion_shield_vaporwave"
+  },
+  "gadget_core": {
+    "tab": "nuke",
+    "texture": "gadget_core"
+  },
+  "gadget_kit": {
+    "tab": "nuke",
+    "texture": "gadget_kit"
+  },
+  "gadget_wireing": {
+    "tab": "nuke",
+    "texture": "gadget_wireing"
+  },
+  "gas_empty": {
+    "tab": "control",
+    "texture": "gas_empty"
+  },
+  "gas_full": {
+    "tab": "control",
+    "texture": "gas_empty"
+  },
+  "gas_mask": {
+    "tab": "parts",
+    "texture": "gas_mask"
+  },
+  "gas_mask_filter": {
+    "tab": "parts",
+    "texture": "gas_mask_filter"
+  },
+  "gas_mask_filter_combo": {
+    "tab": "parts",
+    "texture": "gas_mask_filter_combo"
+  },
+  "gas_mask_filter_mono": {
+    "tab": "parts",
+    "texture": "gas_mask_filter_mono"
+  },
+  "gas_mask_filter_piss": {
+    "tab": "parts",
+    "texture": "gas_mask_filter_piss"
+  },
+  "gas_mask_filter_rag": {
+    "tab": "parts",
+    "texture": "gas_mask_filter_rag"
+  },
+  "gas_mask_m65": {
+    "tab": "parts",
+    "texture": "gas_mask_m65"
+  },
+  "gas_mask_mono": {
+    "tab": "parts",
+    "texture": "gas_mask_mono"
+  },
+  "gas_mask_olde": {
+    "tab": "parts",
+    "texture": "gas_mask_olde"
+  },
+  "gas_tester": {
+    "tab": "parts",
+    "texture": "gas_tester"
+  },
+  "gear_large": {
+    "tab": "parts",
+    "texture": "gear_large"
+  },
+  "geiger_counter": {
+    "tab": "consumable",
+    "texture": "geiger_counter"
+  },
+  "gem_alexandrite": {
+    "tab": "parts",
+    "texture": "gem_alexandrite"
+  },
+  "gem_rad": {
+    "tab": "parts",
+    "texture": "gem_rad"
+  },
+  "gem_sodalite": {
+    "tab": "parts",
+    "texture": "gem_sodalite"
+  },
+  "gem_tantalium": {
+    "tab": "parts",
+    "texture": "gem_tantalium"
+  },
+  "gem_volcanic": {
+    "tab": "parts",
+    "texture": "gem_volcanic"
+  },
+  "glitch": {
+    "tab": "consumable",
+    "texture": null
+  },
+  "glyphid_gland": {
+    "tab": "weapon",
+    "texture": "glyphid_gland"
+  },
+  "glyphid_gland_empty": {
+    "tab": "weapon",
+    "texture": "glyphid_gland"
+  },
+  "goggles": {
+    "tab": "parts",
+    "texture": "goggles"
+  },
+  "grenade_aschrab": {
+    "tab": "weapon",
+    "texture": "grenade_aschrab"
+  },
+  "grenade_breach": {
+    "tab": "weapon",
+    "texture": "grenade_breach"
+  },
+  "grenade_burst": {
+    "tab": "weapon",
+    "texture": "grenade_burst"
+  },
+  "grenade_cloud": {
+    "tab": "weapon",
+    "texture": "grenade_cloud"
+  },
+  "grenade_cluster": {
+    "tab": "weapon",
+    "texture": "grenade_cluster_alt"
+  },
+  "grenade_electric": {
+    "tab": "weapon",
+    "texture": "grenade_electric_alt"
+  },
+  "grenade_flare": {
+    "tab": "weapon",
+    "texture": "grenade_flare_alt"
+  },
+  "grenade_gas": {
+    "tab": "weapon",
+    "texture": "grenade_gas_alt"
+  },
+  "grenade_gascan": {
+    "tab": "weapon",
+    "texture": "grenade_gascan"
+  },
+  "grenade_if_bouncy": {
+    "tab": "weapon",
+    "texture": "grenade_if_bouncy"
+  },
+  "grenade_if_brimstone": {
+    "tab": "weapon",
+    "texture": "grenade_if_brimstone"
+  },
+  "grenade_if_concussion": {
+    "tab": "weapon",
+    "texture": "grenade_if_concussion"
+  },
+  "grenade_if_generic": {
+    "tab": "weapon",
+    "texture": "grenade_if_generic"
+  },
+  "grenade_if_he": {
+    "tab": "weapon",
+    "texture": "grenade_if_he"
+  },
+  "grenade_if_hopwire": {
+    "tab": "weapon",
+    "texture": "grenade_if_hopwire"
+  },
+  "grenade_if_impact": {
+    "tab": "weapon",
+    "texture": "grenade_if_impact"
+  },
+  "grenade_if_incendiary": {
+    "tab": "weapon",
+    "texture": "grenade_if_incendiary"
+  },
+  "grenade_if_mystery": {
+    "tab": "weapon",
+    "texture": "grenade_if_mystery"
+  },
+  "grenade_if_null": {
+    "tab": "weapon",
+    "texture": "grenade_if_null"
+  },
+  "grenade_if_spark": {
+    "tab": "weapon",
+    "texture": "grenade_if_spark"
+  },
+  "grenade_if_sticky": {
+    "tab": "weapon",
+    "texture": "grenade_if_sticky"
+  },
+  "grenade_if_toxic": {
+    "tab": "weapon",
+    "texture": "grenade_if_toxic"
+  },
+  "grenade_kit": {
+    "tab": "weapon",
+    "texture": "grenade_kit"
+  },
+  "grenade_kyiv": {
+    "tab": "weapon",
+    "texture": "grenade_kyiv"
+  },
+  "grenade_lemon": {
+    "tab": "weapon",
+    "texture": "grenade_lemon"
+  },
+  "grenade_mirv": {
+    "tab": "weapon",
+    "texture": "grenade_mirv"
+  },
+  "grenade_mk2": {
+    "tab": "weapon",
+    "texture": "grenade_mk2_alt"
+  },
+  "grenade_nuclear": {
+    "tab": "weapon",
+    "texture": "grenade_nuclear"
+  },
+  "grenade_nuke": {
+    "tab": "weapon",
+    "texture": "grenade_nuke_alt"
+  },
+  "grenade_pink_cloud": {
+    "tab": "parts",
+    "texture": "grenade_pink_cloud"
+  },
+  "grenade_plasma": {
+    "tab": "weapon",
+    "texture": "grenade_plasma_alt"
+  },
+  "grenade_poison": {
+    "tab": "weapon",
+    "texture": "grenade_poison_alt"
+  },
+  "grenade_pulse": {
+    "tab": "weapon",
+    "texture": "grenade_pulse"
+  },
+  "grenade_schrabidium": {
+    "tab": "weapon",
+    "texture": "grenade_schrabidium_alt"
+  },
+  "grenade_shrapnel": {
+    "tab": "weapon",
+    "texture": "grenade_shrapnel"
+  },
+  "grenade_smart": {
+    "tab": "weapon",
+    "texture": "grenade_smart"
+  },
+  "grenade_tau": {
+    "tab": "weapon",
+    "texture": "grenade_tau_alt"
+  },
+  "grenade_zomg": {
+    "tab": "weapon",
+    "texture": "grenade_zomg"
+  },
+  "gun_b92": {
+    "tab": "weapon",
+    "texture": "gun_b92"
+  },
+  "gun_b92_ammo": {
+    "tab": "weapon",
+    "texture": "gun_b92_ammo_alt"
+  },
+  "gun_kit_1": {
+    "tab": "consumable",
+    "texture": "gun_kit_1"
+  },
+  "gun_kit_2": {
+    "tab": "consumable",
+    "texture": "gun_kit_2"
+  },
+  "hazmat_boots": {
+    "tab": "parts",
+    "texture": "hazmat_boots"
+  },
+  "hazmat_boots_grey": {
+    "tab": "parts",
+    "texture": "hazmat_boots_grey"
+  },
+  "hazmat_boots_red": {
+    "tab": "parts",
+    "texture": "hazmat_boots_red"
+  },
+  "hazmat_grey_kit": {
+    "tab": "consumable",
+    "texture": "hazmat_grey_kit"
+  },
+  "hazmat_helmet": {
+    "tab": "parts",
+    "texture": "hazmat_helmet"
+  },
+  "hazmat_helmet_grey": {
+    "tab": "parts",
+    "texture": "hazmat_helmet_grey"
+  },
+  "hazmat_helmet_red": {
+    "tab": "parts",
+    "texture": "hazmat_helmet_red"
+  },
+  "hazmat_kit": {
+    "tab": "consumable",
+    "texture": "hazmat_kit"
+  },
+  "hazmat_legs": {
+    "tab": "parts",
+    "texture": "hazmat_legs"
+  },
+  "hazmat_legs_grey": {
+    "tab": "parts",
+    "texture": "hazmat_legs_grey"
+  },
+  "hazmat_legs_red": {
+    "tab": "parts",
+    "texture": "hazmat_legs_red"
+  },
+  "hazmat_paa_boots": {
+    "tab": "parts",
+    "texture": "hazmat_paa_boots"
+  },
+  "hazmat_paa_helmet": {
+    "tab": "parts",
+    "texture": "hazmat_paa_helmet"
+  },
+  "hazmat_paa_legs": {
+    "tab": "parts",
+    "texture": "hazmat_paa_legs"
+  },
+  "hazmat_paa_plate": {
+    "tab": "parts",
+    "texture": "hazmat_paa_plate"
+  },
+  "hazmat_plate": {
+    "tab": "parts",
+    "texture": "hazmat_plate"
+  },
+  "hazmat_plate_grey": {
+    "tab": "parts",
+    "texture": "hazmat_plate_grey"
+  },
+  "hazmat_plate_red": {
+    "tab": "parts",
+    "texture": "hazmat_plate_red"
+  },
+  "hazmat_red_kit": {
+    "tab": "consumable",
+    "texture": "hazmat_red_kit"
+  },
+  "heart_booster": {
+    "tab": "parts",
+    "texture": "heart_booster"
+  },
+  "heart_container": {
+    "tab": "parts",
+    "texture": "heart_container"
+  },
+  "heart_fab": {
+    "tab": "parts",
+    "texture": "heart_fab"
+  },
+  "heart_piece": {
+    "tab": "parts",
+    "texture": "heart_piece"
+  },
+  "hev_battery": {
+    "tab": "control",
+    "texture": "hev_battery"
+  },
+  "hev_boots": {
+    "tab": "parts",
+    "texture": "hev_boots"
+  },
+  "hev_helmet": {
+    "tab": "parts",
+    "texture": "hev_helmet"
+  },
+  "hev_legs": {
+    "tab": "parts",
+    "texture": "hev_legs"
+  },
+  "hev_plate": {
+    "tab": "parts",
+    "texture": "hev_plate"
+  },
+  "holotape_damaged": {
+    "tab": "parts",
+    "texture": "holotape_damaged"
+  },
+  "holotape_image": {
+    "tab": "parts",
+    "texture": "holotape"
+  },
+  "horseshoe_magnet": {
+    "tab": "parts",
+    "texture": "horseshoe_magnet"
+  },
+  "igniter": {
+    "tab": "nuke",
+    "texture": "trigger"
+  },
+  "industrial_magnet": {
+    "tab": "parts",
+    "texture": "industrial_magnet"
+  },
+  "inf_water": {
+    "tab": "control",
+    "texture": "inf_water"
+  },
+  "inf_water_mk2": {
+    "tab": "control",
+    "texture": "inf_water_mk2"
+  },
+  "ingot_actinium": {
+    "tab": "parts",
+    "texture": "ingot_actinium"
+  },
+  "ingot_arsenic": {
+    "tab": "parts",
+    "texture": "ingot_arsenic"
+  },
+  "ingot_bakelite": {
+    "tab": "parts",
+    "texture": "ingot_bakelite"
+  },
+  "ingot_biorubber": {
+    "tab": "parts",
+    "texture": "ingot_biorubber"
+  },
+  "ingot_chainsteel": {
+    "tab": "parts",
+    "texture": "ingot_chainsteel"
+  },
+  "ingot_dura_steel": {
+    "tab": "parts",
+    "texture": "ingot_dura_steel"
+  },
+  "ingot_electronium": {
+    "tab": "parts",
+    "texture": "ingot_electronium"
+  },
+  "ingot_euphemium": {
+    "tab": "parts",
+    "texture": "ingot_euphemium"
+  },
+  "ingot_ferrouranium": {
+    "tab": "parts",
+    "texture": "ingot_ferrouranium"
+  },
+  "ingot_fiberglass": {
+    "tab": "parts",
+    "texture": "ingot_fiberglass"
+  },
+  "ingot_gh336": {
+    "tab": "parts",
+    "texture": "ingot_gh336"
+  },
+  "ingot_lanthanium": {
+    "tab": "parts",
+    "texture": "ingot_lanthanium"
+  },
+  "ingot_metal": {
+    "tab": "parts",
+    "texture": "ingot_metal"
+  },
+  "ingot_meteorite": {
+    "tab": "parts",
+    "texture": "ingot_meteorite"
+  },
+  "ingot_meteorite_forged": {
+    "tab": "parts",
+    "texture": "ingot_meteorite_forged"
+  },
+  "ingot_osmiridium": {
+    "tab": "parts",
+    "texture": "ingot_osmiridium"
+  },
+  "ingot_pc": {
+    "tab": "parts",
+    "texture": "ingot_pc"
+  },
+  "ingot_polymer": {
+    "tab": "parts",
+    "texture": "ingot_polymer"
+  },
+  "ingot_pvc": {
+    "tab": "parts",
+    "texture": "ingot_pvc"
+  },
+  "ingot_raw": {
+    "tab": "parts",
+    "texture": "ingot_raw"
+  },
+  "ingot_rubber": {
+    "tab": "parts",
+    "texture": "ingot_rubber"
+  },
+  "ingot_saturnite": {
+    "tab": "parts",
+    "texture": "ingot_saturnite"
+  },
+  "ingot_semtex": {
+    "tab": "parts",
+    "texture": "ingot_semtex"
+  },
+  "ingot_steel_dusted": {
+    "tab": "parts",
+    "texture": "ingot_steel_dusted"
+  },
+  "ingot_tantalium": {
+    "tab": "parts",
+    "texture": "ingot_tantalium"
+  },
+  "injector_5htp": {
+    "tab": "parts",
+    "texture": "injector_5htp"
+  },
+  "injector_knife": {
+    "tab": "parts",
+    "texture": "injector_knife"
+  },
+  "ink": {
+    "tab": "parts",
+    "texture": "ink"
+  },
+  "insert_doxium": {
+    "tab": "parts",
+    "texture": "insert_doxium"
+  },
+  "insert_du": {
+    "tab": "parts",
+    "texture": "insert_du"
+  },
+  "insert_era": {
+    "tab": "parts",
+    "texture": "insert_era"
+  },
+  "insert_esapi": {
+    "tab": "parts",
+    "texture": "insert_esapi"
+  },
+  "insert_ghiorsium": {
+    "tab": "parts",
+    "texture": "insert_ghiorsium"
+  },
+  "insert_kevlar": {
+    "tab": "parts",
+    "texture": "insert_kevlar"
+  },
+  "insert_polonium": {
+    "tab": "parts",
+    "texture": "insert_polonium"
+  },
+  "insert_sapi": {
+    "tab": "parts",
+    "texture": "insert_sapi"
+  },
+  "insert_steel": {
+    "tab": "parts",
+    "texture": "insert_steel"
+  },
+  "insert_xsapi": {
+    "tab": "parts",
+    "texture": "insert_xsapi"
+  },
+  "insert_yharonite": {
+    "tab": "parts",
+    "texture": "insert_yharonite"
+  },
+  "item_expensive": {
+    "tab": "parts",
+    "texture": "item_expensive"
+  },
+  "item_secret": {
+    "tab": "parts",
+    "texture": "item_secret"
+  },
+  "jackt": {
+    "tab": "parts",
+    "texture": "jackt"
+  },
+  "jackt2": {
+    "tab": "parts",
+    "texture": "jackt2"
+  },
+  "jetpack_boost": {
+    "tab": "weapon",
+    "texture": "jetpack_boost"
+  },
+  "jetpack_break": {
+    "tab": "weapon",
+    "texture": "jetpack_break"
+  },
+  "jetpack_fly": {
+    "tab": "weapon",
+    "texture": "jetpack_fly"
+  },
+  "jetpack_tank": {
+    "tab": "consumable",
+    "texture": "jetpack_tank"
+  },
+  "jetpack_vector": {
+    "tab": "weapon",
+    "texture": "jetpack_vector"
+  },
+  "key": {
+    "tab": "consumable",
+    "texture": "key"
+  },
+  "key_fake": {
+    "tab": "consumable",
+    "texture": "key_gold"
+  },
+  "key_kit": {
+    "tab": "consumable",
+    "texture": "key_pair"
+  },
+  "key_red": {
+    "tab": "parts",
+    "texture": "key_red"
+  },
+  "key_red_cracked": {
+    "tab": "parts",
+    "texture": "key_red_cracked"
+  },
+  "kit_custom": {
+    "tab": "consumable",
+    "texture": "kit"
+  },
+  "laser_crystal_bismuth": {
+    "tab": "control",
+    "texture": "laser_crystal_bismuth"
+  },
+  "laser_crystal_cmb": {
+    "tab": "control",
+    "texture": "laser_crystal_cmb"
+  },
+  "laser_crystal_co2": {
+    "tab": "control",
+    "texture": "laser_crystal_co2"
+  },
+  "laser_crystal_dnt": {
+    "tab": "control",
+    "texture": "laser_crystal_dnt"
+  },
+  "launch_code": {
+    "tab": "parts",
+    "texture": "launch_code"
+  },
+  "launch_code_piece": {
+    "tab": "parts",
+    "texture": "launch_code_piece"
+  },
+  "launch_key": {
+    "tab": "parts",
+    "texture": "launch_key"
+  },
+  "lead_gavel": {
+    "tab": "parts",
+    "texture": "lead_gavel"
+  },
+  "linker": {
+    "tab": "consumable",
+    "texture": "linker"
+  },
+  "liquidator_boots": {
+    "tab": "parts",
+    "texture": "liquidator_boots"
+  },
+  "liquidator_helmet": {
+    "tab": "parts",
+    "texture": "liquidator_helmet"
+  },
+  "liquidator_legs": {
+    "tab": "parts",
+    "texture": "liquidator_legs"
+  },
+  "liquidator_plate": {
+    "tab": "parts",
+    "texture": "liquidator_plate"
+  },
+  "lodestone": {
+    "tab": "parts",
+    "texture": "lodestone"
+  },
+  "loot_10": {
+    "tab": "missile",
+    "texture": "loot_10"
+  },
+  "loot_15": {
+    "tab": "missile",
+    "texture": "loot_15"
+  },
+  "loot_misc": {
+    "tab": "missile",
+    "texture": "loot_misc"
+  },
+  "magnetron": {
+    "tab": "parts",
+    "texture": "magnetron_alt"
+  },
+  "man_core": {
+    "tab": "nuke",
+    "texture": "man_core"
+  },
+  "man_igniter": {
+    "tab": "nuke",
+    "texture": "man_igniter"
+  },
+  "man_kit": {
+    "tab": "nuke",
+    "texture": "man_kit"
+  },
+  "marshmallow": {
+    "tab": "consumable",
+    "texture": "marshmallow"
+  },
+  "mask_of_infamy": {
+    "tab": "parts",
+    "texture": "mask_of_infamy"
+  },
+  "mask_piss": {
+    "tab": "parts",
+    "texture": "mask_piss"
+  },
+  "mask_rag": {
+    "tab": "parts",
+    "texture": "mask_rag"
+  },
+  "matchstick": {
+    "tab": "control",
+    "texture": "matchstick"
+  },
+  "mech_key": {
+    "tab": "parts",
+    "texture": "mech_key"
+  },
+  "med_bag": {
+    "tab": "consumable",
+    "texture": "med_bag"
+  },
+  "med_ipecac": {
+    "tab": "consumable",
+    "texture": "med_ipecac_new"
+  },
+  "med_ptsd": {
+    "tab": "consumable",
+    "texture": "med_ptsd_new"
+  },
+  "med_schizophrenia": {
+    "tab": "consumable",
+    "texture": "med_schizophrenia_new"
+  },
+  "medal_liquidator": {
+    "tab": "parts",
+    "texture": "medal_liquidator"
+  },
+  "meltdown_tool": {
+    "tab": "control",
+    "texture": "meltdown_tool"
+  },
+  "memespoon": {
+    "tab": "parts",
+    "texture": "memespoon"
+  },
+  "memory": {
+    "tab": "parts",
+    "texture": "mo8_anim"
+  },
+  "mese_axe": {
+    "tab": "parts",
+    "texture": "mese_axe"
+  },
+  "mese_gavel": {
+    "tab": "parts",
+    "texture": "mese_gavel"
+  },
+  "mese_pickaxe": {
+    "tab": "parts",
+    "texture": "mese_pickaxe"
+  },
+  "meteor_charm": {
+    "tab": "parts",
+    "texture": "meteor_charm"
+  },
+  "meteorite_sword": {
+    "tab": "parts",
+    "texture": "meteorite_sword"
+  },
+  "meteorite_sword_alloyed": {
+    "tab": "parts",
+    "texture": "meteorite_sword"
+  },
+  "meteorite_sword_baleful": {
+    "tab": "parts",
+    "texture": "meteorite_sword"
+  },
+  "meteorite_sword_bred": {
+    "tab": "parts",
+    "texture": "meteorite_sword"
+  },
+  "meteorite_sword_etched": {
+    "tab": "parts",
+    "texture": "meteorite_sword"
+  },
+  "meteorite_sword_fused": {
+    "tab": "parts",
+    "texture": "meteorite_sword"
+  },
+  "meteorite_sword_hardened": {
+    "tab": "parts",
+    "texture": "meteorite_sword"
+  },
+  "meteorite_sword_irradiated": {
+    "tab": "parts",
+    "texture": "meteorite_sword"
+  },
+  "meteorite_sword_machined": {
+    "tab": "parts",
+    "texture": "meteorite_sword"
+  },
+  "meteorite_sword_reforged": {
+    "tab": "parts",
+    "texture": "meteorite_sword"
+  },
+  "meteorite_sword_seared": {
+    "tab": "parts",
+    "texture": "meteorite_sword"
+  },
+  "meteorite_sword_treated": {
+    "tab": "parts",
+    "texture": "meteorite_sword"
+  },
+  "mike_cooling_unit": {
+    "tab": "nuke",
+    "texture": "mike_cooling_unit"
+  },
+  "mike_core": {
+    "tab": "nuke",
+    "texture": "mike_core"
+  },
+  "mike_deut": {
+    "tab": "nuke",
+    "texture": "mike_deut"
+  },
+  "mike_kit": {
+    "tab": "nuke",
+    "texture": "mike_kit"
+  },
+  "mirror_tool": {
+    "tab": "consumable",
+    "texture": "mirror_tool"
+  },
+  "missile_anti_ballistic": {
+    "tab": "missile",
+    "texture": "missile_anti_ballistic"
+  },
+  "missile_assembly": {
+    "tab": "parts",
+    "texture": "missile_assembly"
+  },
+  "missile_bhole": {
+    "tab": "missile",
+    "texture": "missile_bhole"
+  },
+  "missile_burst": {
+    "tab": "missile",
+    "texture": "missile_burst"
+  },
+  "missile_buster": {
+    "tab": "missile",
+    "texture": "missile_buster"
+  },
+  "missile_buster_strong": {
+    "tab": "missile",
+    "texture": "missile_buster_strong"
+  },
+  "missile_cluster": {
+    "tab": "missile",
+    "texture": "missile_cluster"
+  },
+  "missile_cluster_strong": {
+    "tab": "missile",
+    "texture": "missile_cluster_strong"
+  },
+  "missile_custom": {
+    "tab": "parts",
+    "texture": "missile_custom"
+  },
+  "missile_decoy": {
+    "tab": "missile",
+    "texture": "missile_decoy"
+  },
+  "missile_doomsday": {
+    "tab": "missile",
+    "texture": "missile_doomsday"
+  },
+  "missile_doomsday_rusted": {
+    "tab": "missile",
+    "texture": "missile_doomsday"
+  },
+  "missile_drill": {
+    "tab": "missile",
+    "texture": "missile_drill"
+  },
+  "missile_emp": {
+    "tab": "missile",
+    "texture": "missile_emp"
+  },
+  "missile_emp_strong": {
+    "tab": "missile",
+    "texture": "missile_emp_strong"
+  },
+  "missile_incendiary": {
+    "tab": "missile",
+    "texture": "missile_incendiary"
+  },
+  "missile_incendiary_strong": {
+    "tab": "missile",
+    "texture": "missile_incendiary_strong"
+  },
+  "missile_inferno": {
+    "tab": "missile",
+    "texture": "missile_inferno"
+  },
+  "missile_kit": {
+    "tab": "missile",
+    "texture": "missile_kit"
+  },
+  "missile_micro": {
+    "tab": "missile",
+    "texture": "missile_micro"
+  },
+  "missile_nuclear_cluster": {
+    "tab": "missile",
+    "texture": "missile_nuclear_cluster"
+  },
+  "missile_rain": {
+    "tab": "missile",
+    "texture": "missile_rain"
+  },
+  "missile_schrabidium": {
+    "tab": "missile",
+    "texture": "missile_schrabidium"
+  },
+  "missile_shuttle": {
+    "tab": "missile",
+    "texture": "missile_shuttle"
+  },
+  "missile_skin_camo": {
+    "tab": "missile",
+    "texture": "missile_skin_camo"
+  },
+  "missile_skin_desert": {
+    "tab": "missile",
+    "texture": "missile_skin_desert"
+  },
+  "missile_skin_flames": {
+    "tab": "missile",
+    "texture": "missile_skin_flames"
+  },
+  "missile_skin_manly_pink": {
+    "tab": "missile",
+    "texture": "missile_skin_manly_pink"
+  },
+  "missile_skin_metal": {
+    "tab": "missile",
+    "texture": "missile_skin_metal"
+  },
+  "missile_skin_orange_insulation": {
+    "tab": "missile",
+    "texture": "missile_skin_orange_insulation"
+  },
+  "missile_skin_sleek": {
+    "tab": "missile",
+    "texture": "missile_skin_sleek"
+  },
+  "missile_skin_soviet_glory": {
+    "tab": "missile",
+    "texture": "missile_skin_soviet_glory"
+  },
+  "missile_skin_soviet_stank": {
+    "tab": "missile",
+    "texture": "missile_skin_soviet_stank"
+  },
+  "missile_soyuz": {
+    "tab": "missile",
+    "texture": "soyuz"
+  },
+  "missile_soyuz_lander": {
+    "tab": "missile",
+    "texture": "soyuz_lander"
+  },
+  "missile_stealth": {
+    "tab": "missile",
+    "texture": "missile_stealth"
+  },
+  "missile_strong": {
+    "tab": "missile",
+    "texture": "missile_strong"
+  },
+  "missile_taint": {
+    "tab": "missile",
+    "texture": "missile_taint"
+  },
+  "missile_test": {
+    "tab": "parts",
+    "texture": "missile_micro"
+  },
+  "missile_volcano": {
+    "tab": "missile",
+    "texture": "missile_volcano"
+  },
+  "mold": {
+    "tab": "control",
+    "texture": null
+  },
+  "mold_base": {
+    "tab": "control",
+    "texture": "mold_base"
+  },
+  "morning_glory": {
+    "tab": "parts",
+    "texture": "morning_glory"
+  },
+  "mp_c_1": {
+    "tab": "missile",
+    "texture": "mp_c_1"
+  },
+  "mp_c_2": {
+    "tab": "missile",
+    "texture": "mp_c_2"
+  },
+  "mp_c_3": {
+    "tab": "missile",
+    "texture": "mp_c_3"
+  },
+  "mp_c_4": {
+    "tab": "missile",
+    "texture": "mp_c_4"
+  },
+  "mp_c_5": {
+    "tab": "missile",
+    "texture": "mp_c_5"
+  },
+  "mp_fuselage_10_15_balefire": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_10_15_hydrogen": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_10_15_kerosene": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_10_15_solid": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_10_kerosene": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_10_kerosene_camo": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_10_kerosene_desert": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_10_kerosene_flames": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_10_kerosene_insulation": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_10_kerosene_metal": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_10_kerosene_sky": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_10_kerosene_sleek": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_10_kerosene_taint": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_10_long_kerosene": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_10_long_kerosene_camo": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_10_long_kerosene_dash": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_10_long_kerosene_desert": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_10_long_kerosene_flames": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_10_long_kerosene_insulation": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_10_long_kerosene_metal": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_10_long_kerosene_sky": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_10_long_kerosene_sleek": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_10_long_kerosene_taint": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_10_long_kerosene_vap": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_10_long_solid": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_10_long_solid_bullet": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_10_long_solid_flames": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_10_long_solid_insulation": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_10_long_solid_silvermoonlight": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_10_long_solid_sleek": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_10_long_solid_soviet_glory": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_10_solid": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_10_solid_battery": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_10_solid_cathedral": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_10_solid_duracell": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_10_solid_flames": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_10_solid_insulation": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_10_solid_moonlit": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_10_solid_sleek": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_10_solid_soviet_glory": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_10_xenon": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_10_xenon_bhole": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_15_20_kerosene": {
+    "tab": "missile",
+    "texture": "mp_fuselage"
+  },
+  "mp_fuselage_15_20_kerosene_magnusson": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_15_20_solid": {
+    "tab": "missile",
+    "texture": "mp_fuselage"
+  },
+  "mp_fuselage_15_balefire": {
+    "tab": "missile",
+    "texture": "mp_fuselage"
+  },
+  "mp_fuselage_15_hydrogen": {
+    "tab": "missile",
+    "texture": "mp_fuselage"
+  },
+  "mp_fuselage_15_hydrogen_cathedral": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_15_kerosene": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_15_kerosene_blackjack": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_15_kerosene_camo": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_15_kerosene_decorated": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_15_kerosene_desert": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_15_kerosene_insulation": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_15_kerosene_lambda": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_15_kerosene_metal": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_15_kerosene_minuteman": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_15_kerosene_pip": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_15_kerosene_polite": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_15_kerosene_sky": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_15_kerosene_steampunk": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_15_kerosene_taint": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_15_kerosene_yuck": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_15_solid": {
+    "tab": "missile",
+    "texture": "mp_fuselage"
+  },
+  "mp_fuselage_15_solid_desh": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_15_solid_faust": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_15_solid_insulation": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_15_solid_mimi": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_15_solid_panorama": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_15_solid_roses": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_15_solid_silvermoonlight": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_15_solid_snowy": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_15_solid_soviet_glory": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_fuselage_15_solid_soviet_stank": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_s_20": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_stability_10_cruise": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_stability_10_flat": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_stability_10_space": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_stability_15_flat": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_stability_15_soyuz": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_stability_15_thin": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_thruster_10_kerosene": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_thruster_10_solid": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_thruster_10_xenon": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_thruster_15_balefire": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_thruster_15_balefire_large": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_thruster_15_balefire_large_rad": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_thruster_15_balefire_short": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_thruster_15_hydrogen": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_thruster_15_hydrogen_dual": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_thruster_15_kerosene": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_thruster_15_kerosene_dual": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_thruster_15_kerosene_triple": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_thruster_15_solid": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_thruster_15_solid_hexdecuple": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_thruster_20_kerosene": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_thruster_20_kerosene_dual": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_thruster_20_kerosene_triple": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_thruster_20_solid": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_thruster_20_solid_multi": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_thruster_20_solid_multier": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_warhead_10_buster": {
+    "tab": "missile",
+    "texture": "mp_warhead"
+  },
+  "mp_warhead_10_cloud": {
+    "tab": "missile",
+    "texture": "mp_warhead"
+  },
+  "mp_warhead_10_he": {
+    "tab": "missile",
+    "texture": "mp_warhead"
+  },
+  "mp_warhead_10_incendiary": {
+    "tab": "missile",
+    "texture": "mp_warhead"
+  },
+  "mp_warhead_10_nuclear": {
+    "tab": "missile",
+    "texture": "mp_warhead"
+  },
+  "mp_warhead_10_nuclear_large": {
+    "tab": "missile",
+    "texture": "mp_warhead"
+  },
+  "mp_warhead_10_taint": {
+    "tab": "missile",
+    "texture": "mp_warhead"
+  },
+  "mp_warhead_15_balefire": {
+    "tab": "missile",
+    "texture": "mp_warhead"
+  },
+  "mp_warhead_15_boxcar": {
+    "tab": "missile",
+    "texture": "mp_warhead"
+  },
+  "mp_warhead_15_he": {
+    "tab": "missile",
+    "texture": "mp_warhead"
+  },
+  "mp_warhead_15_incendiary": {
+    "tab": "missile",
+    "texture": "mp_warhead"
+  },
+  "mp_warhead_15_n2": {
+    "tab": "missile",
+    "texture": "mp_warhead"
+  },
+  "mp_warhead_15_nuclear": {
+    "tab": "missile",
+    "texture": "mp_warhead"
+  },
+  "mp_warhead_15_nuclear_mimi": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_warhead_15_nuclear_shark": {
+    "tab": "parts",
+    "texture": null
+  },
+  "mp_warhead_15_turbine": {
+    "tab": "missile",
+    "texture": "mp_warhead"
+  },
+  "multi_kit": {
+    "tab": "nuke",
+    "texture": "multi_kit"
+  },
+  "multitool_beam": {
+    "tab": "parts",
+    "texture": "multitool_pointer"
+  },
+  "multitool_decon": {
+    "tab": "parts",
+    "texture": "multitool_fist"
+  },
+  "multitool_dig": {
+    "tab": "consumable",
+    "texture": "multitool_claw"
+  },
+  "multitool_ext": {
+    "tab": "parts",
+    "texture": "multitool_open"
+  },
+  "multitool_hit": {
+    "tab": "parts",
+    "texture": "multitool_fist"
+  },
+  "multitool_joule": {
+    "tab": "parts",
+    "texture": "multitool_fist"
+  },
+  "multitool_mega": {
+    "tab": "parts",
+    "texture": "multitool_fist"
+  },
+  "multitool_miner": {
+    "tab": "parts",
+    "texture": "multitool_pointer"
+  },
+  "multitool_silk": {
+    "tab": "parts",
+    "texture": "multitool_claw"
+  },
+  "multitool_sky": {
+    "tab": "parts",
+    "texture": "multitool_open"
+  },
+  "mysteryshovel": {
+    "tab": "parts",
+    "texture": "cursed_shovel"
+  },
+  "n2_charge": {
+    "tab": "nuke",
+    "texture": "n2_charge"
+  },
+  "neutrino_lens": {
+    "tab": "parts",
+    "texture": "neutrino_lens"
+  },
+  "night_vision": {
+    "tab": "parts",
+    "texture": "night_vision"
+  },
+  "niter": {
+    "tab": "parts",
+    "texture": "salpeter"
+  },
+  "no9": {
+    "tab": "parts",
+    "texture": "no9"
+  },
+  "nossy_hat": {
+    "tab": "parts",
+    "texture": "hat"
+  },
+  "nothing": {
+    "tab": "parts",
+    "texture": "nothing"
+  },
+  "nuclear_waste": {
+    "tab": "parts",
+    "texture": "nuclear_waste"
+  },
+  "nuclear_waste_long": {
+    "tab": "parts",
+    "texture": "nuclear_waste_long"
+  },
+  "nuclear_waste_long_depleted": {
+    "tab": "parts",
+    "texture": "nuclear_waste_long_depleted"
+  },
+  "nuclear_waste_long_depleted_tiny": {
+    "tab": "parts",
+    "texture": "nuclear_waste_long_depleted_tiny"
+  },
+  "nuclear_waste_long_tiny": {
+    "tab": "parts",
+    "texture": "nuclear_waste_long_tiny"
+  },
+  "nuclear_waste_pearl": {
+    "tab": "weapon",
+    "texture": "nuclear_waste_pearl"
+  },
+  "nuclear_waste_short": {
+    "tab": "parts",
+    "texture": "nuclear_waste_short"
+  },
+  "nuclear_waste_short_depleted": {
+    "tab": "parts",
+    "texture": "nuclear_waste_short_depleted"
+  },
+  "nuclear_waste_short_depleted_tiny": {
+    "tab": "parts",
+    "texture": "nuclear_waste_short_depleted_tiny"
+  },
+  "nuclear_waste_short_tiny": {
+    "tab": "parts",
+    "texture": "nuclear_waste_short_tiny"
+  },
+  "nuclear_waste_tiny": {
+    "tab": "parts",
+    "texture": "nuclear_waste_tiny"
+  },
+  "nuclear_waste_vitrified": {
+    "tab": "parts",
+    "texture": "nuclear_waste_vitrified"
+  },
+  "nuclear_waste_vitrified_tiny": {
+    "tab": "parts",
+    "texture": "nuclear_waste_vitrified_tiny"
+  },
+  "nugget_australium": {
+    "tab": "parts",
+    "texture": "nugget_australium"
+  },
+  "nugget_australium_greater": {
+    "tab": "parts",
+    "texture": "nugget_australium_greater"
+  },
+  "nugget_australium_lesser": {
+    "tab": "parts",
+    "texture": "nugget_australium_lesser"
+  },
+  "nugget_desh": {
+    "tab": "parts",
+    "texture": "nugget_desh"
+  },
+  "nugget_dineutronium": {
+    "tab": "parts",
+    "texture": "nugget_dineutronium"
+  },
+  "nugget_euphemium": {
+    "tab": "parts",
+    "texture": "nugget_euphemium"
+  },
+  "nugget_gh336": {
+    "tab": "parts",
+    "texture": "nugget_gh336"
+  },
+  "nugget_mercury": {
+    "tab": "parts",
+    "texture": "nugget_mercury"
+  },
+  "nugget_osmiridium": {
+    "tab": "parts",
+    "texture": "nugget_osmiridium"
+  },
+  "nugget_schrabidium": {
+    "tab": "parts",
+    "texture": "nugget_schrabidium"
+  },
+  "nugget_tantalium": {
+    "tab": "parts",
+    "texture": "nugget_tantalium"
+  },
+  "nuke_advanced_kit": {
+    "tab": "consumable",
+    "texture": "nuke_advanced_kit"
+  },
+  "nuke_commercially_kit": {
+    "tab": "consumable",
+    "texture": "nuke_commercially_kit"
+  },
+  "nuke_electric_kit": {
+    "tab": "consumable",
+    "texture": "nuke_electric_kit"
+  },
+  "nuke_starter_kit": {
+    "tab": "consumable",
+    "texture": "nuke_starter_kit"
+  },
+  "oil_detector": {
+    "tab": "consumable",
+    "texture": "oil_detector"
+  },
+  "oil_tar": {
+    "tab": "parts",
+    "texture": "oil_tar"
+  },
+  "orange1": {
+    "tab": "parts",
+    "texture": "orange1"
+  },
+  "orange2": {
+    "tab": "parts",
+    "texture": "orange2"
+  },
+  "orange3": {
+    "tab": "parts",
+    "texture": "orange3"
+  },
+  "orange4": {
+    "tab": "parts",
+    "texture": "orange4"
+  },
+  "orange5": {
+    "tab": "parts",
+    "texture": "orange5"
+  },
+  "orange6": {
+    "tab": "parts",
+    "texture": "orange6"
+  },
+  "orange7": {
+    "tab": "parts",
+    "texture": "orange7"
+  },
+  "orange8": {
+    "tab": "parts",
+    "texture": "orange8"
+  },
+  "ore_bedrock": {
+    "tab": "parts",
+    "texture": "ore_bedrock"
+  },
+  "ore_byproduct": {
+    "tab": "parts",
+    "texture": "byproduct"
+  },
+  "ore_centrifuged": {
+    "tab": "parts",
+    "texture": "ore_centrifuged"
+  },
+  "ore_cleaned": {
+    "tab": "parts",
+    "texture": "ore_cleaned"
+  },
+  "ore_deepcleaned": {
+    "tab": "parts",
+    "texture": "ore_deepcleaned"
+  },
+  "ore_density_scanner": {
+    "tab": "consumable",
+    "texture": "ore_density_scanner"
+  },
+  "ore_enriched": {
+    "tab": "parts",
+    "texture": "ore_enriched"
+  },
+  "ore_nitrated": {
+    "tab": "parts",
+    "texture": "ore_nitrated"
+  },
+  "ore_nitrocrystalline": {
+    "tab": "parts",
+    "texture": "ore_nitrocrystalline"
+  },
+  "ore_purified": {
+    "tab": "parts",
+    "texture": "ore_purified"
+  },
+  "ore_seared": {
+    "tab": "parts",
+    "texture": "ore_seared"
+  },
+  "ore_separated": {
+    "tab": "parts",
+    "texture": "ore_separated"
+  },
+  "overfuse": {
+    "tab": "parts",
+    "texture": "overfuse"
+  },
+  "pa_coil": {
+    "tab": "control",
+    "texture": "pa_coil"
+  },
+  "paa_boots": {
+    "tab": "parts",
+    "texture": "paa_boots"
+  },
+  "paa_legs": {
+    "tab": "parts",
+    "texture": "paa_legs"
+  },
+  "paa_plate": {
+    "tab": "parts",
+    "texture": "paa_plate"
+  },
+  "padlock": {
+    "tab": "consumable",
+    "texture": "padlock"
+  },
+  "padlock_reinforced": {
+    "tab": "consumable",
+    "texture": "padlock_reinforced"
+  },
+  "padlock_rusty": {
+    "tab": "consumable",
+    "texture": "padlock_rusty"
+  },
+  "padlock_unbreakable": {
+    "tab": "parts",
+    "texture": "padlock_unbreakable"
+  },
+  "pads_rubber": {
+    "tab": "parts",
+    "texture": "pads_rubber"
+  },
+  "pads_slime": {
+    "tab": "parts",
+    "texture": "pads_slime"
+  },
+  "pads_static": {
+    "tab": "parts",
+    "texture": "pads_static"
+  },
+  "page_of_": {
+    "tab": "parts",
+    "texture": "page_of_"
+  },
+  "part_barrel_heavy": {
+    "tab": "parts",
+    "texture": "part_barrel_heavy"
+  },
+  "part_barrel_light": {
+    "tab": "parts",
+    "texture": "part_barrel_light"
+  },
+  "part_beryllium": {
+    "tab": "control",
+    "texture": "part_beryllium"
+  },
+  "part_carbon": {
+    "tab": "control",
+    "texture": "part_carbon"
+  },
+  "part_copper": {
+    "tab": "control",
+    "texture": "part_copper"
+  },
+  "part_generic": {
+    "tab": "parts",
+    "texture": "part_generic"
+  },
+  "part_grip": {
+    "tab": "parts",
+    "texture": "part_grip"
+  },
+  "part_lithium": {
+    "tab": "control",
+    "texture": "part_lithium"
+  },
+  "part_mechanism": {
+    "tab": "parts",
+    "texture": "part_mechanism"
+  },
+  "part_plutonium": {
+    "tab": "control",
+    "texture": "part_plutonium"
+  },
+  "part_receiver_heavy": {
+    "tab": "parts",
+    "texture": "part_receiver_heavy"
+  },
+  "part_receiver_light": {
+    "tab": "parts",
+    "texture": "part_receiver_light"
+  },
+  "part_stock": {
+    "tab": "parts",
+    "texture": "part_stock"
+  },
+  "particle_aelectron": {
+    "tab": "control",
+    "texture": "particle_aelectron"
+  },
+  "particle_amat": {
+    "tab": "control",
+    "texture": "particle_amat"
+  },
+  "particle_aproton": {
+    "tab": "control",
+    "texture": "particle_aproton"
+  },
+  "particle_aschrab": {
+    "tab": "control",
+    "texture": "particle_aschrab"
+  },
+  "particle_copper": {
+    "tab": "control",
+    "texture": "particle_copper"
+  },
+  "particle_dark": {
+    "tab": "control",
+    "texture": "particle_dark"
+  },
+  "particle_digamma": {
+    "tab": "control",
+    "texture": "particle_digamma"
+  },
+  "particle_empty": {
+    "tab": "control",
+    "texture": "particle_empty"
+  },
+  "particle_higgs": {
+    "tab": "control",
+    "texture": "particle_higgs"
+  },
+  "particle_hydrogen": {
+    "tab": "control",
+    "texture": "particle_hydrogen"
+  },
+  "particle_lead": {
+    "tab": "control",
+    "texture": "particle_lead"
+  },
+  "particle_lutece": {
+    "tab": "control",
+    "texture": "particle_lutece"
+  },
+  "particle_muon": {
+    "tab": "control",
+    "texture": "particle_muon"
+  },
+  "particle_sparkticle": {
+    "tab": "control",
+    "texture": "particle_sparkticle"
+  },
+  "particle_strange": {
+    "tab": "control",
+    "texture": "particle_strange"
+  },
+  "particle_tachyon": {
+    "tab": "control",
+    "texture": "particle_tachyon"
+  },
+  "parts_legendary": {
+    "tab": "parts",
+    "texture": "parts_legendary"
+  },
+  "pc1": {
+    "tab": "parts",
+    "texture": "pc1"
+  },
+  "pc2": {
+    "tab": "parts",
+    "texture": "pc2"
+  },
+  "pc3": {
+    "tab": "parts",
+    "texture": "pc3"
+  },
+  "pc4": {
+    "tab": "parts",
+    "texture": "pc4"
+  },
+  "pc5": {
+    "tab": "parts",
+    "texture": "pc5"
+  },
+  "pc6": {
+    "tab": "parts",
+    "texture": "pc6"
+  },
+  "pc7": {
+    "tab": "parts",
+    "texture": "pc7"
+  },
+  "pc8": {
+    "tab": "parts",
+    "texture": "pc8"
+  },
+  "pch": {
+    "tab": "parts",
+    "texture": "schrabidium_hammer"
+  },
+  "peas": {
+    "tab": "consumable",
+    "texture": "peas"
+  },
+  "pellet_antimatter": {
+    "tab": "control",
+    "texture": "pellet_antimatter"
+  },
+  "pellet_buckshot": {
+    "tab": "parts",
+    "texture": "pellets_lead"
+  },
+  "pellet_charged": {
+    "tab": "parts",
+    "texture": "pellets_charged"
+  },
+  "pellet_cluster": {
+    "tab": "parts",
+    "texture": "pellet_cluster"
+  },
+  "pellet_gas": {
+    "tab": "parts",
+    "texture": "pellet_gas"
+  },
+  "pellet_rtg_actinium": {
+    "tab": "control",
+    "texture": "pellet_rtg_actinium"
+  },
+  "pellet_rtg_americium": {
+    "tab": "control",
+    "texture": "pellet_rtg_americium"
+  },
+  "pellet_rtg_cobalt": {
+    "tab": "control",
+    "texture": "pellet_rtg_cobalt"
+  },
+  "pellet_rtg_depleted": {
+    "tab": "control",
+    "texture": null
+  },
+  "pellet_rtg_gold": {
+    "tab": "control",
+    "texture": "pellet_rtg_gold"
+  },
+  "pellet_rtg_lead": {
+    "tab": "control",
+    "texture": "pellet_rtg_lead"
+  },
+  "pellet_rtg_polonium": {
+    "tab": "control",
+    "texture": "pellet_rtg_polonium"
+  },
+  "pellet_rtg_radium": {
+    "tab": "control",
+    "texture": "pellet_rtg_radium"
+  },
+  "pellet_rtg_strontium": {
+    "tab": "control",
+    "texture": "pellet_rtg_strontium"
+  },
+  "pellet_rtg_weak": {
+    "tab": "control",
+    "texture": "pellet_rtg_weak"
+  },
+  "pill_herbal": {
+    "tab": "consumable",
+    "texture": "pill_herbal"
+  },
+  "pill_iodine": {
+    "tab": "consumable",
+    "texture": "pill_iodine"
+  },
+  "pill_red": {
+    "tab": "consumable",
+    "texture": "pill_red"
+  },
+  "pin": {
+    "tab": "consumable",
+    "texture": "pin"
+  },
+  "pipe": {
+    "tab": "parts",
+    "texture": "pipe"
+  },
+  "pipette": {
+    "tab": "control",
+    "texture": "pipette"
+  },
+  "pipette_boron": {
+    "tab": "control",
+    "texture": "pipette_boron"
+  },
+  "pipette_laboratory": {
+    "tab": "control",
+    "texture": "pipette_laboratory"
+  },
+  "piston_selenium": {
+    "tab": "control",
+    "texture": "piston_selenium"
+  },
+  "piston_set": {
+    "tab": "control",
+    "texture": null
+  },
+  "plan_c": {
+    "tab": "consumable",
+    "texture": "plan_c"
+  },
+  "plant_item": {
+    "tab": "parts",
+    "texture": "plant_item"
+  },
+  "plastic_bag": {
+    "tab": "consumable",
+    "texture": "plastic_bag"
+  },
+  "plate_bismuth": {
+    "tab": "parts",
+    "texture": "plate_bismuth"
+  },
+  "plate_cast": {
+    "tab": "parts",
+    "texture": "plate_cast"
+  },
+  "plate_saturnite": {
+    "tab": "parts",
+    "texture": "plate_saturnite"
+  },
+  "plate_welded": {
+    "tab": "parts",
+    "texture": "plate_welded"
+  },
+  "polaroid": {
+    "tab": "consumable",
+    "texture": null
+  },
+  "pollution_detector": {
+    "tab": "consumable",
+    "texture": "pollution_detector"
+  },
+  "powder_actinium": {
+    "tab": "parts",
+    "texture": "powder_actinium"
+  },
+  "powder_asbestos": {
+    "tab": "parts",
+    "texture": "powder_asbestos"
+  },
+  "powder_ash": {
+    "tab": "parts",
+    "texture": "powder_ash"
+  },
+  "powder_astatine": {
+    "tab": "parts",
+    "texture": "powder_astatine"
+  },
+  "powder_australium": {
+    "tab": "parts",
+    "texture": "powder_australium"
+  },
+  "powder_bakelite": {
+    "tab": "parts",
+    "texture": "powder_bakelite"
+  },
+  "powder_boron": {
+    "tab": "parts",
+    "texture": "powder_boron"
+  },
+  "powder_bromine": {
+    "tab": "parts",
+    "texture": "powder_bromine"
+  },
+  "powder_caesium": {
+    "tab": "parts",
+    "texture": "powder_caesium"
+  },
+  "powder_cement": {
+    "tab": "parts",
+    "texture": "powder_cement"
+  },
+  "powder_cerium": {
+    "tab": "parts",
+    "texture": "powder_cerium"
+  },
+  "powder_cobalt": {
+    "tab": "parts",
+    "texture": "powder_cobalt"
+  },
+  "powder_dineutronium": {
+    "tab": "parts",
+    "texture": "powder_dineutronium"
+  },
+  "powder_dura_steel": {
+    "tab": "parts",
+    "texture": "powder_dura_steel"
+  },
+  "powder_euphemium": {
+    "tab": "parts",
+    "texture": "powder_euphemium"
+  },
+  "powder_fertilizer": {
+    "tab": "parts",
+    "texture": "powder_fertilizer"
+  },
+  "powder_fire": {
+    "tab": "parts",
+    "texture": "powder_red_phosphorus"
+  },
+  "powder_ice": {
+    "tab": "parts",
+    "texture": "powder_ice"
+  },
+  "powder_iodine": {
+    "tab": "parts",
+    "texture": "powder_iodine"
+  },
+  "powder_lanthanium": {
+    "tab": "parts",
+    "texture": "powder_lanthanium"
+  },
+  "powder_limestone": {
+    "tab": "parts",
+    "texture": "powder_limestone"
+  },
+  "powder_neodymium": {
+    "tab": "parts",
+    "texture": "powder_neodymium"
+  },
+  "powder_niobium": {
+    "tab": "parts",
+    "texture": "powder_niobium"
+  },
+  "powder_poison": {
+    "tab": "parts",
+    "texture": "powder_poison"
+  },
+  "powder_polymer": {
+    "tab": "parts",
+    "texture": "powder_polymer"
+  },
+  "powder_power": {
+    "tab": "parts",
+    "texture": "powder_energy_alt"
+  },
+  "powder_schrabidate": {
+    "tab": "parts",
+    "texture": "powder_schrabidate"
+  },
+  "powder_schrabidium": {
+    "tab": "parts",
+    "texture": "powder_schrabidium"
+  },
+  "powder_strontium": {
+    "tab": "parts",
+    "texture": "powder_strontium"
+  },
+  "powder_tennessine": {
+    "tab": "parts",
+    "texture": "powder_tennessine"
+  },
+  "powder_thermite": {
+    "tab": "parts",
+    "texture": "powder_thermite"
+  },
+  "powder_thorium": {
+    "tab": "parts",
+    "texture": "powder_thorium"
+  },
+  "power_net_tool": {
+    "tab": "consumable",
+    "texture": "power_net_tool"
+  },
+  "protection_charm": {
+    "tab": "parts",
+    "texture": "protection_charm"
+  },
+  "prototype_kit": {
+    "tab": "nuke",
+    "texture": "prototype_kit"
+  },
+  "quartz_plutonium": {
+    "tab": "parts",
+    "texture": "quartz_plutonium"
+  },
+  "radar_linker": {
+    "tab": "consumable",
+    "texture": "radar_linker"
+  },
+  "radx": {
+    "tab": "consumable",
+    "texture": "radx"
+  },
+  "rag": {
+    "tab": "parts",
+    "texture": "rag"
+  },
+  "rangefinder": {
+    "tab": "missile",
+    "texture": "rangefinder"
+  },
+  "rbmk_pellet_balefire": {
+    "tab": "parts",
+    "texture": "rbmk_pellet_balefire"
+  },
+  "rbmk_pellet_balefire_gold": {
+    "tab": "parts",
+    "texture": "rbmk_pellet_balefire_gold"
+  },
+  "rbmk_pellet_drx": {
+    "tab": "parts",
+    "texture": "rbmk_pellet_drx"
+  },
+  "rbmk_pellet_flashlead": {
+    "tab": "parts",
+    "texture": "rbmk_pellet_flashlead"
+  },
+  "rbmk_pellet_hea241": {
+    "tab": "parts",
+    "texture": "rbmk_pellet_hea241"
+  },
+  "rbmk_pellet_hea242": {
+    "tab": "parts",
+    "texture": "rbmk_pellet_hea242"
+  },
+  "rbmk_pellet_heaus": {
+    "tab": "parts",
+    "texture": "rbmk_pellet_heaus"
+  },
+  "rbmk_pellet_hen": {
+    "tab": "parts",
+    "texture": "rbmk_pellet_hen"
+  },
+  "rbmk_pellet_hep239": {
+    "tab": "parts",
+    "texture": "rbmk_pellet_hep239"
+  },
+  "rbmk_pellet_hep241": {
+    "tab": "parts",
+    "texture": "rbmk_pellet_hep241"
+  },
+  "rbmk_pellet_hes": {
+    "tab": "parts",
+    "texture": "rbmk_pellet_hes"
+  },
+  "rbmk_pellet_heu233": {
+    "tab": "parts",
+    "texture": "rbmk_pellet_heu233"
+  },
+  "rbmk_pellet_heu235": {
+    "tab": "parts",
+    "texture": "rbmk_pellet_heu235"
+  },
+  "rbmk_pellet_lea": {
+    "tab": "parts",
+    "texture": "rbmk_pellet_lea"
+  },
+  "rbmk_pellet_leaus": {
+    "tab": "parts",
+    "texture": "rbmk_pellet_leaus"
+  },
+  "rbmk_pellet_lep": {
+    "tab": "parts",
+    "texture": "rbmk_pellet_lep"
+  },
+  "rbmk_pellet_les": {
+    "tab": "parts",
+    "texture": "rbmk_pellet_les"
+  },
+  "rbmk_pellet_mea": {
+    "tab": "parts",
+    "texture": "rbmk_pellet_mea"
+  },
+  "rbmk_pellet_men": {
+    "tab": "parts",
+    "texture": "rbmk_pellet_men"
+  },
+  "rbmk_pellet_mep": {
+    "tab": "parts",
+    "texture": "rbmk_pellet_mep"
+  },
+  "rbmk_pellet_mes": {
+    "tab": "parts",
+    "texture": "rbmk_pellet_mes"
+  },
+  "rbmk_pellet_meu": {
+    "tab": "parts",
+    "texture": "rbmk_pellet_meu"
+  },
+  "rbmk_pellet_mox": {
+    "tab": "parts",
+    "texture": "rbmk_pellet_mox"
+  },
+  "rbmk_pellet_po210be": {
+    "tab": "parts",
+    "texture": "rbmk_pellet_po210be"
+  },
+  "rbmk_pellet_pu238be": {
+    "tab": "parts",
+    "texture": "rbmk_pellet_pu238be"
+  },
+  "rbmk_pellet_ra226be": {
+    "tab": "parts",
+    "texture": "rbmk_pellet_ra226be"
+  },
+  "rbmk_pellet_thmeu": {
+    "tab": "parts",
+    "texture": "rbmk_pellet_thmeu"
+  },
+  "rbmk_pellet_ueu": {
+    "tab": "parts",
+    "texture": "rbmk_pellet_ueu"
+  },
+  "rbmk_pellet_zfb_am_mix": {
+    "tab": "parts",
+    "texture": "rbmk_pellet_zfb_am_mix"
+  },
+  "rbmk_pellet_zfb_bismuth": {
+    "tab": "parts",
+    "texture": "rbmk_pellet_zfb_bismuth"
+  },
+  "rbmk_pellet_zfb_pu241": {
+    "tab": "parts",
+    "texture": "rbmk_pellet_zfb_pu241"
+  },
+  "rbmk_tool": {
+    "tab": "consumable",
+    "texture": "rbmk_tool"
+  },
+  "reactor_sensor": {
+    "tab": "consumable",
+    "texture": "reactor_sensor"
+  },
+  "rebar_placer": {
+    "tab": "consumable",
+    "texture": "rebar_placer"
+  },
+  "record_glass": {
+    "tab": "parts",
+    "texture": "record_glass"
+  },
+  "record_lc": {
+    "tab": "consumable",
+    "texture": "record_lc"
+  },
+  "record_ss": {
+    "tab": "consumable",
+    "texture": "record_ss"
+  },
+  "record_vc": {
+    "tab": "consumable",
+    "texture": "record_vc"
+  },
+  "redcoil_capacitor": {
+    "tab": "control",
+    "texture": "redcoil_capacitor"
+  },
+  "reer_graar": {
+    "tab": "parts",
+    "texture": "reer_graar_hd"
+  },
+  "ring_pull": {
+    "tab": "consumable",
+    "texture": "ring_pull"
+  },
+  "robes_boots": {
+    "tab": "parts",
+    "texture": "robes_boots"
+  },
+  "robes_helmet": {
+    "tab": "parts",
+    "texture": "robes_helmet"
+  },
+  "robes_legs": {
+    "tab": "parts",
+    "texture": "robes_legs"
+  },
+  "robes_plate": {
+    "tab": "parts",
+    "texture": "robes_plate"
+  },
+  "rod": {
+    "tab": "control",
+    "texture": null
+  },
+  "rod_dual": {
+    "tab": "control",
+    "texture": null
+  },
+  "rod_of_discord": {
+    "tab": "consumable",
+    "texture": "rod_of_discord"
+  },
+  "rod_quad": {
+    "tab": "control",
+    "texture": null
+  },
+  "rpa_boots": {
+    "tab": "parts",
+    "texture": "rpa_boots"
+  },
+  "rpa_helmet": {
+    "tab": "parts",
+    "texture": "rpa_helmet"
+  },
+  "rpa_legs": {
+    "tab": "parts",
+    "texture": "rpa_legs"
+  },
+  "rpa_plate": {
+    "tab": "parts",
+    "texture": "rpa_plate"
+  },
+  "rune_blank": {
+    "tab": "parts",
+    "texture": "rune_blank"
+  },
+  "rune_dagaz": {
+    "tab": "parts",
+    "texture": "rune_dagaz"
+  },
+  "rune_hagalaz": {
+    "tab": "parts",
+    "texture": "rune_hagalaz"
+  },
+  "rune_isa": {
+    "tab": "parts",
+    "texture": "rune_isa"
+  },
+  "rune_jera": {
+    "tab": "parts",
+    "texture": "rune_jera"
+  },
+  "rune_thurisaz": {
+    "tab": "parts",
+    "texture": "rune_thurisaz"
+  },
+  "sat_chip": {
+    "tab": "missile",
+    "texture": "sat_chip"
+  },
+  "sat_coord": {
+    "tab": "missile",
+    "texture": "sat_coord"
+  },
+  "sat_designator": {
+    "tab": "missile",
+    "texture": "sat_designator"
+  },
+  "sat_foeq": {
+    "tab": "missile",
+    "texture": "sat_foeq"
+  },
+  "sat_gerald": {
+    "tab": "missile",
+    "texture": "sat_gerald"
+  },
+  "sat_interface": {
+    "tab": "missile",
+    "texture": "sat_interface"
+  },
+  "sat_laser": {
+    "tab": "missile",
+    "texture": "sat_laser"
+  },
+  "sat_lunar_miner": {
+    "tab": "missile",
+    "texture": "sat_lunar_miner"
+  },
+  "sat_mapper": {
+    "tab": "missile",
+    "texture": "sat_mapper"
+  },
+  "sat_miner": {
+    "tab": "missile",
+    "texture": "sat_miner"
+  },
+  "sat_radar": {
+    "tab": "missile",
+    "texture": "sat_radar"
+  },
+  "sat_relay": {
+    "tab": "missile",
+    "texture": "sat_relay"
+  },
+  "sat_resonator": {
+    "tab": "missile",
+    "texture": "sat_resonator"
+  },
+  "sat_scanner": {
+    "tab": "missile",
+    "texture": "sat_scanner"
+  },
+  "schrabidium_axe": {
+    "tab": "parts",
+    "texture": "schrabidium_axe"
+  },
+  "schrabidium_boots": {
+    "tab": "parts",
+    "texture": "schrabidium_boots"
+  },
+  "schrabidium_hammer": {
+    "tab": "parts",
+    "texture": "schrabidium_hammer"
+  },
+  "schrabidium_helmet": {
+    "tab": "parts",
+    "texture": "schrabidium_helmet"
+  },
+  "schrabidium_hoe": {
+    "tab": "parts",
+    "texture": "schrabidium_hoe"
+  },
+  "schrabidium_legs": {
+    "tab": "parts",
+    "texture": "schrabidium_legs"
+  },
+  "schrabidium_pickaxe": {
+    "tab": "parts",
+    "texture": "schrabidium_pickaxe"
+  },
+  "schrabidium_plate": {
+    "tab": "parts",
+    "texture": "schrabidium_plate"
+  },
+  "schrabidium_shovel": {
+    "tab": "parts",
+    "texture": "schrabidium_shovel"
+  },
+  "schrabidium_sword": {
+    "tab": "parts",
+    "texture": "schrabidium_sword"
+  },
+  "scrap_nuclear": {
+    "tab": "parts",
+    "texture": "scrap_nuclear"
+  },
+  "scrap_oil": {
+    "tab": "parts",
+    "texture": "scrap_oil"
+  },
+  "scrap_plastic": {
+    "tab": "parts",
+    "texture": "scrap_plastic"
+  },
+  "scraps": {
+    "tab": "parts",
+    "texture": "scraps"
+  },
+  "screwdriver_desh": {
+    "tab": "parts",
+    "texture": null
+  },
+  "scrumpy": {
+    "tab": "parts",
+    "texture": "scrumpy"
+  },
+  "security_boots": {
+    "tab": "parts",
+    "texture": "security_boots"
+  },
+  "security_helmet": {
+    "tab": "parts",
+    "texture": "security_helmet"
+  },
+  "security_legs": {
+    "tab": "parts",
+    "texture": "security_legs"
+  },
+  "security_plate": {
+    "tab": "parts",
+    "texture": "security_plate"
+  },
+  "serum": {
+    "tab": "parts",
+    "texture": "serum"
+  },
+  "servo_set": {
+    "tab": "parts",
+    "texture": "servo_set"
+  },
+  "servo_set_desh": {
+    "tab": "parts",
+    "texture": "servo_set_desh"
+  },
+  "settings_tool": {
+    "tab": "consumable",
+    "texture": "settings_tool"
+  },
+  "shackles": {
+    "tab": "parts",
+    "texture": "shackles"
+  },
+  "shimmer_axe": {
+    "tab": "parts",
+    "texture": "shimmer_axe"
+  },
+  "shimmer_sledge": {
+    "tab": "parts",
+    "texture": "shimmer_sledge_original"
+  },
+  "singularity": {
+    "tab": "control",
+    "texture": "singularity"
+  },
+  "singularity_counter_resonant": {
+    "tab": "control",
+    "texture": "singularity_alt"
+  },
+  "singularity_spark": {
+    "tab": "control",
+    "texture": "singularity_spark_alt"
+  },
+  "singularity_super_heated": {
+    "tab": "control",
+    "texture": "singularity_5"
+  },
+  "siox": {
+    "tab": "consumable",
+    "texture": "siox"
+  },
+  "siphon": {
+    "tab": "control",
+    "texture": "siphon"
+  },
+  "siren_track": {
+    "tab": "template",
+    "texture": "cassette"
+  },
+  "sliding_blast_door_skin": {
+    "tab": "consumable",
+    "texture": "sliding_blast_door_default"
+  },
+  "smashing_hammer": {
+    "tab": "parts",
+    "texture": "smashing_hammer"
+  },
+  "solinium_core": {
+    "tab": "nuke",
+    "texture": "solinium_core"
+  },
+  "solinium_igniter": {
+    "tab": "nuke",
+    "texture": "solinium_igniter"
+  },
+  "solinium_kit": {
+    "tab": "nuke",
+    "texture": "solinium_kit"
+  },
+  "solinium_propellant": {
+    "tab": "nuke",
+    "texture": "solinium_propellant"
+  },
+  "sopsign": {
+    "tab": "parts",
+    "texture": "sopsign"
+  },
+  "spawn_duck": {
+    "tab": "consumable",
+    "texture": "spawn_duck"
+  },
+  "spawn_ufo": {
+    "tab": "consumable",
+    "texture": "spawn_ufo"
+  },
+  "spawn_worm": {
+    "tab": "consumable",
+    "texture": "spawn_worm"
+  },
+  "spider_milk": {
+    "tab": "parts",
+    "texture": "spider_milk"
+  },
+  "stamp_book": {
+    "tab": "parts",
+    "texture": "stamp_book"
+  },
+  "stamp_desh_357": {
+    "tab": "control",
+    "texture": "stamp_357_desh"
+  },
+  "stamp_desh_44": {
+    "tab": "control",
+    "texture": "stamp_44_desh"
+  },
+  "stamp_desh_50": {
+    "tab": "control",
+    "texture": "stamp_50_desh"
+  },
+  "stamp_desh_9": {
+    "tab": "control",
+    "texture": "stamp_9_desh"
+  },
+  "starmetal_axe": {
+    "tab": "parts",
+    "texture": "starmetal_axe"
+  },
+  "starmetal_boots": {
+    "tab": "parts",
+    "texture": "starmetal_boots"
+  },
+  "starmetal_helmet": {
+    "tab": "parts",
+    "texture": "starmetal_helmet"
+  },
+  "starmetal_hoe": {
+    "tab": "parts",
+    "texture": "starmetal_hoe"
+  },
+  "starmetal_legs": {
+    "tab": "parts",
+    "texture": "starmetal_legs"
+  },
+  "starmetal_pickaxe": {
+    "tab": "parts",
+    "texture": "starmetal_pickaxe"
+  },
+  "starmetal_plate": {
+    "tab": "parts",
+    "texture": "starmetal_plate"
+  },
+  "starmetal_shovel": {
+    "tab": "parts",
+    "texture": "starmetal_shovel"
+  },
+  "starmetal_sword": {
+    "tab": "parts",
+    "texture": "starmetal_sword"
+  },
+  "stealth_boy": {
+    "tab": "consumable",
+    "texture": "stealth_boy"
+  },
+  "steamsuit_boots": {
+    "tab": "parts",
+    "texture": "steamsuit_boots"
+  },
+  "steamsuit_helmet": {
+    "tab": "parts",
+    "texture": "steamsuit_helmet"
+  },
+  "steamsuit_legs": {
+    "tab": "parts",
+    "texture": "steamsuit_legs"
+  },
+  "steamsuit_plate": {
+    "tab": "parts",
+    "texture": "steamsuit_plate"
+  },
+  "steel_axe": {
+    "tab": "parts",
+    "texture": "steel_axe"
+  },
+  "steel_boots": {
+    "tab": "parts",
+    "texture": "steel_boots"
+  },
+  "steel_helmet": {
+    "tab": "parts",
+    "texture": "steel_helmet"
+  },
+  "steel_hoe": {
+    "tab": "parts",
+    "texture": "steel_hoe"
+  },
+  "steel_legs": {
+    "tab": "parts",
+    "texture": "steel_legs"
+  },
+  "steel_pickaxe": {
+    "tab": "parts",
+    "texture": "steel_pickaxe"
+  },
+  "steel_plate": {
+    "tab": "parts",
+    "texture": "steel_plate"
+  },
+  "steel_shovel": {
+    "tab": "parts",
+    "texture": "steel_shovel"
+  },
+  "steel_sword": {
+    "tab": "parts",
+    "texture": "steel_sword"
+  },
+  "stick_c4": {
+    "tab": "weapon",
+    "texture": "stick_c4"
+  },
+  "stick_dynamite": {
+    "tab": "weapon",
+    "texture": "stick_dynamite"
+  },
+  "stick_dynamite_fishing": {
+    "tab": "weapon",
+    "texture": "stick_dynamite_fishing"
+  },
+  "stick_semtex": {
+    "tab": "weapon",
+    "texture": "stick_semtex"
+  },
+  "stick_tnt": {
+    "tab": "weapon",
+    "texture": "stick_tnt"
+  },
+  "stopsign": {
+    "tab": "parts",
+    "texture": "stopsign"
+  },
+  "structure_custommachine": {
+    "tab": "consumable",
+    "texture": "structure_custommachine"
+  },
+  "structure_pattern": {
+    "tab": "parts",
+    "texture": "structure_pattern"
+  },
+  "structure_randomized": {
+    "tab": "parts",
+    "texture": "structure_randomized"
+  },
+  "structure_randomly": {
+    "tab": "parts",
+    "texture": "structure_randomly"
+  },
+  "structure_single": {
+    "tab": "parts",
+    "texture": "structure_single"
+  },
+  "structure_solid": {
+    "tab": "parts",
+    "texture": "structure_solid"
+  },
+  "survey_scanner": {
+    "tab": "consumable",
+    "texture": "survey_scanner"
+  },
+  "syringe_empty": {
+    "tab": "consumable",
+    "texture": "syringe_empty"
+  },
+  "syringe_metal_empty": {
+    "tab": "consumable",
+    "texture": "syringe_metal_empty"
+  },
+  "syringe_metal_medx": {
+    "tab": "consumable",
+    "texture": "syringe_metal_medx"
+  },
+  "syringe_metal_psycho": {
+    "tab": "consumable",
+    "texture": "syringe_metal_psycho"
+  },
+  "syringe_metal_stimpak": {
+    "tab": "consumable",
+    "texture": "syringe_metal_stimpak"
+  },
+  "syringe_metal_super": {
+    "tab": "consumable",
+    "texture": "syringe_metal_super"
+  },
+  "syringe_mkunicorn": {
+    "tab": "parts",
+    "texture": "syringe_mkunicorn"
+  },
+  "syringe_taint": {
+    "tab": "consumable",
+    "texture": "syringe_taint"
+  },
+  "t45_boots": {
+    "tab": "parts",
+    "texture": "t45_boots"
+  },
+  "t45_helmet": {
+    "tab": "parts",
+    "texture": "t45_helmet"
+  },
+  "t45_legs": {
+    "tab": "parts",
+    "texture": "t45_legs"
+  },
+  "t45_plate": {
+    "tab": "parts",
+    "texture": "t45_plate"
+  },
+  "t51_boots": {
+    "tab": "parts",
+    "texture": "armor"
+  },
+  "t51_helmet": {
+    "tab": "parts",
+    "texture": "armor"
+  },
+  "t51_legs": {
+    "tab": "parts",
+    "texture": "armor"
+  },
+  "t51_plate": {
+    "tab": "parts",
+    "texture": "armor"
+  },
+  "taurun_boots": {
+    "tab": "parts",
+    "texture": "taurun_boots"
+  },
+  "taurun_helmet": {
+    "tab": "parts",
+    "texture": "taurun_helmet"
+  },
+  "taurun_legs": {
+    "tab": "parts",
+    "texture": "taurun_legs"
+  },
+  "taurun_plate": {
+    "tab": "parts",
+    "texture": "taurun_plate"
+  },
+  "template_folder": {
+    "tab": "template",
+    "texture": "template_folder"
+  },
+  "thermo_element": {
+    "tab": "control",
+    "texture": "thermo_element"
+  },
+  "titanium_axe": {
+    "tab": "parts",
+    "texture": "titanium_axe"
+  },
+  "titanium_boots": {
+    "tab": "parts",
+    "texture": "titanium_boots"
+  },
+  "titanium_helmet": {
+    "tab": "parts",
+    "texture": "titanium_helmet"
+  },
+  "titanium_hoe": {
+    "tab": "parts",
+    "texture": "titanium_hoe"
+  },
+  "titanium_legs": {
+    "tab": "parts",
+    "texture": "titanium_legs"
+  },
+  "titanium_pickaxe": {
+    "tab": "parts",
+    "texture": "titanium_pickaxe"
+  },
+  "titanium_plate": {
+    "tab": "parts",
+    "texture": "titanium_plate"
+  },
+  "titanium_shovel": {
+    "tab": "parts",
+    "texture": "titanium_shovel"
+  },
+  "titanium_sword": {
+    "tab": "parts",
+    "texture": "titanium_sword"
+  },
+  "toolbox": {
+    "tab": "consumable",
+    "texture": "kit_toolbox"
+  },
+  "toolbox_legacy": {
+    "tab": "consumable",
+    "texture": "kit_toolbox"
+  },
+  "train": {
+    "tab": "parts",
+    "texture": null
+  },
+  "trenchmaster_boots": {
+    "tab": "parts",
+    "texture": "trenchmaster_boots"
+  },
+  "trenchmaster_helmet": {
+    "tab": "parts",
+    "texture": "trenchmaster_helmet"
+  },
+  "trenchmaster_legs": {
+    "tab": "parts",
+    "texture": "trenchmaster_legs"
+  },
+  "trenchmaster_plate": {
+    "tab": "parts",
+    "texture": "trenchmaster_plate"
+  },
+  "trinitite": {
+    "tab": "parts",
+    "texture": "trinitite_new"
+  },
+  "tritium_deuterium_cake": {
+    "tab": "control",
+    "texture": "tritium_deuterium_cake"
+  },
+  "tsar_core": {
+    "tab": "nuke",
+    "texture": "tsar_core"
+  },
+  "tsar_kit": {
+    "tab": "nuke",
+    "texture": "tsar_kit"
+  },
+  "turret_chip": {
+    "tab": "weapon",
+    "texture": "turret_chip"
+  },
+  "ullapool_caber": {
+    "tab": "weapon",
+    "texture": "ullapool_caber"
+  },
+  "undefined": {
+    "tab": "parts",
+    "texture": "undefined"
+  },
+  "upgrade_5g": {
+    "tab": "control",
+    "texture": "upgrade_5g"
+  },
+  "upgrade_afterburn_1": {
+    "tab": "control",
+    "texture": "upgrade_afterburn_1"
+  },
+  "upgrade_afterburn_2": {
+    "tab": "control",
+    "texture": "upgrade_afterburn_2"
+  },
+  "upgrade_afterburn_3": {
+    "tab": "control",
+    "texture": "upgrade_afterburn_3"
+  },
+  "upgrade_centrifuge": {
+    "tab": "control",
+    "texture": "upgrade_centrifuge"
+  },
+  "upgrade_crystallizer": {
+    "tab": "control",
+    "texture": "upgrade_crystallizer"
+  },
+  "upgrade_effect_1": {
+    "tab": "control",
+    "texture": "upgrade_effect_1"
+  },
+  "upgrade_effect_2": {
+    "tab": "control",
+    "texture": "upgrade_effect_2"
+  },
+  "upgrade_effect_3": {
+    "tab": "control",
+    "texture": "upgrade_effect_3"
+  },
+  "upgrade_ejector": {
+    "tab": "control",
+    "texture": "upgrade_ejector"
+  },
+  "upgrade_fortune_1": {
+    "tab": "control",
+    "texture": "upgrade_fortune_1"
+  },
+  "upgrade_fortune_2": {
+    "tab": "control",
+    "texture": "upgrade_fortune_2"
+  },
+  "upgrade_fortune_3": {
+    "tab": "control",
+    "texture": "upgrade_fortune_3"
+  },
+  "upgrade_gc_speed": {
+    "tab": "control",
+    "texture": "upgrade_gc_speed"
+  },
+  "upgrade_health": {
+    "tab": "control",
+    "texture": "upgrade_health"
+  },
+  "upgrade_muffler": {
+    "tab": "parts",
+    "texture": "upgrade_muffler"
+  },
+  "upgrade_nullifier": {
+    "tab": "control",
+    "texture": "upgrade_nullifier"
+  },
+  "upgrade_overdrive_1": {
+    "tab": "control",
+    "texture": "upgrade_overdrive_1"
+  },
+  "upgrade_overdrive_2": {
+    "tab": "control",
+    "texture": "upgrade_overdrive_2"
+  },
+  "upgrade_overdrive_3": {
+    "tab": "control",
+    "texture": "upgrade_overdrive_3"
+  },
+  "upgrade_power_1": {
+    "tab": "control",
+    "texture": "upgrade_power_1"
+  },
+  "upgrade_power_2": {
+    "tab": "control",
+    "texture": "upgrade_power_2"
+  },
+  "upgrade_power_3": {
+    "tab": "control",
+    "texture": "upgrade_power_3"
+  },
+  "upgrade_radius": {
+    "tab": "control",
+    "texture": "upgrade_radius"
+  },
+  "upgrade_screm": {
+    "tab": "control",
+    "texture": "upgrade_screm"
+  },
+  "upgrade_shredder": {
+    "tab": "control",
+    "texture": "upgrade_shredder"
+  },
+  "upgrade_smelter": {
+    "tab": "control",
+    "texture": "upgrade_smelter"
+  },
+  "upgrade_speed_1": {
+    "tab": "control",
+    "texture": "upgrade_speed_1"
+  },
+  "upgrade_speed_2": {
+    "tab": "control",
+    "texture": "upgrade_speed_2"
+  },
+  "upgrade_speed_3": {
+    "tab": "control",
+    "texture": "upgrade_speed_3"
+  },
+  "upgrade_stack": {
+    "tab": "control",
+    "texture": "upgrade_stack"
+  },
+  "upgrade_template": {
+    "tab": "parts",
+    "texture": "upgrade_template"
+  },
+  "volcanic_axe": {
+    "tab": "parts",
+    "texture": "volcanic_axe"
+  },
+  "volcanic_pickaxe": {
+    "tab": "parts",
+    "texture": "volcanic_pickaxe"
+  },
+  "wand_d": {
+    "tab": "consumable",
+    "texture": "wand_d"
+  },
+  "wand_k": {
+    "tab": "consumable",
+    "texture": "wand"
+  },
+  "wand_s": {
+    "tab": "consumable",
+    "texture": "wand_s"
+  },
+  "waste_mox": {
+    "tab": "parts",
+    "texture": "waste_mox"
+  },
+  "waste_natural_uranium": {
+    "tab": "parts",
+    "texture": "waste_uranium"
+  },
+  "waste_plutonium": {
+    "tab": "parts",
+    "texture": "waste_plutonium"
+  },
+  "waste_schrabidium": {
+    "tab": "parts",
+    "texture": "waste_schrabidium"
+  },
+  "waste_thorium": {
+    "tab": "parts",
+    "texture": "waste_thorium"
+  },
+  "waste_u233": {
+    "tab": "parts",
+    "texture": "waste_uranium"
+  },
+  "waste_u235": {
+    "tab": "parts",
+    "texture": "waste_uranium"
+  },
+  "waste_uranium": {
+    "tab": "parts",
+    "texture": "waste_uranium"
+  },
+  "waste_zfb_mox": {
+    "tab": "parts",
+    "texture": "waste_zfb_mox"
+  },
+  "watch": {
+    "tab": "parts",
+    "texture": "watch"
+  },
+  "watz_pellet": {
+    "tab": "parts",
+    "texture": "watz_pellet"
+  },
+  "watz_pellet_depleted": {
+    "tab": "parts",
+    "texture": "watz_pellet"
+  },
+  "wd40": {
+    "tab": "parts",
+    "texture": "wd40"
+  },
+  "weapon_bat": {
+    "tab": "parts",
+    "texture": "bat"
+  },
+  "weapon_bat_nail": {
+    "tab": "parts",
+    "texture": "bat_nail"
+  },
+  "weapon_golf_club": {
+    "tab": "parts",
+    "texture": "golf_club"
+  },
+  "weapon_pipe_lead": {
+    "tab": "parts",
+    "texture": "pipe_lead"
+  },
+  "weapon_pipe_rusty": {
+    "tab": "parts",
+    "texture": "pipe_rusty"
+  },
+  "weapon_saw": {
+    "tab": "parts",
+    "texture": "saw"
+  },
+  "weaponized_starblaster_cell": {
+    "tab": "weapon",
+    "texture": "gun_b92_ammo_weaponized"
+  },
+  "wild_p": {
+    "tab": "parts",
+    "texture": "wild_p"
+  },
+  "wings_limp": {
+    "tab": "weapon",
+    "texture": "wings_limp"
+  },
+  "wings_murk": {
+    "tab": "weapon",
+    "texture": "wings_murk"
+  },
+  "wire_dense": {
+    "tab": "parts",
+    "texture": "wire_dense"
+  },
+  "wire_fine": {
+    "tab": "parts",
+    "texture": "wire_fine"
+  },
+  "wiring_red_copper": {
+    "tab": "parts",
+    "texture": "wiring_red_copper"
+  },
+  "wood_gavel": {
+    "tab": "parts",
+    "texture": "wood_gavel"
+  },
+  "wrench": {
+    "tab": "parts",
+    "texture": "wrench"
+  },
+  "wrench_archineer": {
+    "tab": "parts",
+    "texture": "wrench_archineer_hd"
+  },
+  "wrench_flipped": {
+    "tab": "parts",
+    "texture": "wrench_flipped"
+  },
+  "xanax": {
+    "tab": "consumable",
+    "texture": "xanax_2"
+  },
+  "zirconium_legs": {
+    "tab": "parts",
+    "texture": "zirconium_legs"
+  }
+}
