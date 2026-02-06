@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GHG",
+    "GRG",
+    "GTG"
+  ],
+  "key": {
+    "G": {
+      "item": "hbm:steel_grate"
+    },
+    "H": {
+      "item": "minecraft:hopper"
+    },
+    "T": {
+      "item": "hbm:tank_steel"
+    },
+    "R": {
+      "item": "hbm:rbmk_blank"
+    }
+  },
+  "result": {
+    "item": "hbm:rbmk_outgasser",
+    "count": 1
+  }
+}

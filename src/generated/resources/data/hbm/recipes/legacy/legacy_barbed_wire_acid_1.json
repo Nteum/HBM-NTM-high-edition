@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BBB",
+    "BIB",
+    "BBB"
+  ],
+  "key": {
+    "B": {
+      "item": "hbm:barbed_wire"
+    },
+    "I": {
+      "item": "hbm:fluid_tank_full"
+    }
+  },
+  "result": {
+    "item": "hbm:barbed_wire_acid",
+    "count": 8
+  }
+}

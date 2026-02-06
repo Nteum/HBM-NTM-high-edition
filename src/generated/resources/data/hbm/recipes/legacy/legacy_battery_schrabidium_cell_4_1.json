@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "WPW",
+    "BWB",
+    "WPW"
+  ],
+  "key": {
+    "W": {
+      "item": "hbm:wire_fine"
+    },
+    "P": {
+      "item": "hbm:plate_schrabidium"
+    },
+    "B": {
+      "item": "hbm:battery_schrabidium_cell_2"
+    }
+  },
+  "result": {
+    "item": "hbm:battery_schrabidium_cell_4",
+    "count": 1
+  }
+}

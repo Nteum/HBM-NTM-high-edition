@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:rbmk_fuel_empty"
+    },
+    {
+      "item": "hbm:billet_plutonium239"
+    },
+    {
+      "item": "hbm:billet_plutonium239"
+    },
+    {
+      "item": "hbm:billet_plutonium239"
+    },
+    {
+      "item": "hbm:billet_plutonium239"
+    },
+    {
+      "item": "hbm:billet_plutonium239"
+    },
+    {
+      "item": "hbm:billet_plutonium239"
+    },
+    {
+      "item": "hbm:billet_plutonium239"
+    },
+    {
+      "item": "hbm:billet_plutonium239"
+    }
+  ],
+  "result": {
+    "item": "hbm:rbmk_fuel_hep239",
+    "count": 1
+  }
+}

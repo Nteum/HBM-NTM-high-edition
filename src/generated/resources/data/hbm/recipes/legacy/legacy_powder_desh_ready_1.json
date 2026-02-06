@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:powder_desh_mix"
+    },
+    {
+      "item": "hbm:ingot_mercury"
+    },
+    {
+      "item": "hbm:ingot_mercury"
+    },
+    {
+      "item": "hbm:powder_coal"
+    }
+  ],
+  "result": {
+    "item": "hbm:powder_desh_ready",
+    "count": 1
+  }
+}

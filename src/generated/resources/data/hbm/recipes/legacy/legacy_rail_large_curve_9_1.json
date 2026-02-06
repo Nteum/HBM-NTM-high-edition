@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "RR ",
+    "  R",
+    "  R"
+  ],
+  "key": {
+    "R": {
+      "item": "hbm:rail_large_straight"
+    }
+  },
+  "result": {
+    "item": "hbm:rail_large_curve_9",
+    "count": 1
+  }
+}

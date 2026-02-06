@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "H",
+    "G",
+    "G"
+  ],
+  "key": {
+    "G": {
+      "item": "hbm:shimmer_handle"
+    },
+    "H": {
+      "item": "hbm:shimmer_head"
+    }
+  },
+  "result": {
+    "item": "hbm:shimmer_sledge",
+    "count": 1
+  }
+}

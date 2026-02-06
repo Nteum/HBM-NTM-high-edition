@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PPP",
+    "PPP",
+    "WIW"
+  ],
+  "key": {
+    "P": {
+      "item": "minecraft:paper"
+    },
+    "W": {
+      "tag": "minecraft:planks"
+    },
+    "I": {
+      "item": "hbm:ingot_iron"
+    }
+  },
+  "result": {
+    "item": "hbm:fireworks",
+    "count": 1
+  }
+}

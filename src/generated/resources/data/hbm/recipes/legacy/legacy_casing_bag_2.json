@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " L ",
+    "LGL",
+    " L "
+  ],
+  "key": {
+    "L": {
+      "item": "hbm:ingot_latex"
+    },
+    "G": {
+      "item": "hbm:plate_gun_metal"
+    }
+  },
+  "result": {
+    "item": "hbm:casing_bag",
+    "count": 1
+  }
+}

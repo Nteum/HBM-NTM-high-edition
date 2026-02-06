@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "hbm:ingot_zirconium"
+    },
+    "C": {
+      "item": "hbm:circuit_basic"
+    },
+    "H": {
+      "item": "hbm:ingot_schrabidium"
+    },
+    "R": {
+      "item": "hbm:rod_zirnox_tritium"
+    },
+    "Z": {
+      "item": "hbm:rod_zirnox"
+    }
+  },
+  "pattern": [
+    "ZCZ",
+    "RBR",
+    "ZHZ"
+  ],
+  "result": {
+    "item": "hbm:machine_zirnox"
+  },
+  "show_notification": true
+}

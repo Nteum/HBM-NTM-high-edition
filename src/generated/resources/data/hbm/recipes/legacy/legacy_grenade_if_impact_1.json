@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "G",
+    "A"
+  ],
+  "key": {
+    "G": {
+      "item": "hbm:grenade_if_generic"
+    },
+    "A": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "result": {
+    "item": "hbm:grenade_if_impact",
+    "count": 1
+  }
+}

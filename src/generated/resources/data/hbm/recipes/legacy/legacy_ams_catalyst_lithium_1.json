@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:ams_catalyst_blank"
+    },
+    {
+      "item": "hbm:rune_isa"
+    },
+    {
+      "item": "hbm:rune_isa"
+    },
+    {
+      "item": "hbm:rune_jera"
+    },
+    {
+      "item": "hbm:rune_jera"
+    },
+    {
+      "item": "hbm:powder_lithium"
+    },
+    {
+      "item": "hbm:powder_lithium"
+    },
+    {
+      "item": "hbm:powder_lithium"
+    },
+    {
+      "item": "hbm:powder_lithium"
+    }
+  ],
+  "result": {
+    "item": "hbm:ams_catalyst_lithium",
+    "count": 1
+  }
+}

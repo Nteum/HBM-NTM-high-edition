@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SPS",
+    "SMS",
+    "SPS"
+  ],
+  "key": {
+    "S": {
+      "item": "hbm:syringe_empty"
+    },
+    "P": {
+      "item": "minecraft:pumpkin_seeds"
+    },
+    "M": {
+      "item": "minecraft:milk_bucket"
+    }
+  },
+  "result": {
+    "item": "hbm:syringe_antidote",
+    "count": 6
+  }
+}

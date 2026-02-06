@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "IAI",
+    "   ",
+    "IAI"
+  ],
+  "key": {
+    "I": {
+      "item": "hbm:plate_iron"
+    },
+    "A": {
+      "item": "hbm:plate_aluminium"
+    }
+  },
+  "result": {
+    "item": "hbm:fluid_duct_neo",
+    "count": 8
+  }
+}

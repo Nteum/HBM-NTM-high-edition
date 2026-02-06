@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " S ",
+    "PGP",
+    "IMI"
+  ],
+  "key": {
+    "S": {
+      "item": "hbm:shell"
+    },
+    "P": {
+      "item": "hbm:pipe"
+    },
+    "G": {
+      "item": "hbm:ingot_graphite"
+    },
+    "I": {
+      "item": "hbm:ingot_steel"
+    },
+    "M": {
+      "item": "hbm:motor"
+    }
+  },
+  "result": {
+    "item": "hbm:fluid_pump",
+    "count": 1
+  }
+}

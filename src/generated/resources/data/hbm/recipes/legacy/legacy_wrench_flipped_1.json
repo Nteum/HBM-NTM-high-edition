@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "S",
+    "D",
+    "W"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:iron_sword"
+    },
+    "D": {
+      "item": "hbm:ducttape"
+    },
+    "W": {
+      "item": "hbm:wrench"
+    }
+  },
+  "result": {
+    "item": "hbm:wrench_flipped",
+    "count": 1
+  }
+}

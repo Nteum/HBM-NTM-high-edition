@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "RRR",
+    "R R",
+    "RRR"
+  ],
+  "key": {
+    "R": {
+      "item": "hbm:deco_rbmk_smooth"
+    }
+  },
+  "result": {
+    "item": "hbm:rbmk_blank",
+    "count": 1
+  }
+}

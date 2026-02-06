@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:canister_napalm"
+    },
+    {
+      "item": "hbm:bottle2_empty"
+    },
+    {
+      "item": "hbm:rag"
+    }
+  ],
+  "result": {
+    "item": "hbm:grenade_kyiv",
+    "count": 1
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "II",
+    " I",
+    " I"
+  ],
+  "key": {
+    "I": {
+      "item": "hbm:ingot_steel"
+    }
+  },
+  "result": {
+    "item": "hbm:crowbar",
+    "count": 1
+  }
+}

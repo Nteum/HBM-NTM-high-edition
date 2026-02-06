@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " B ",
+    "BIB",
+    " B "
+  ],
+  "key": {
+    "B": {
+      "item": "hbm:ingot_firebrick"
+    },
+    "I": {
+      "item": "hbm:ingot_iron"
+    }
+  },
+  "result": {
+    "item": "hbm:mold_base",
+    "count": 1
+  }
+}

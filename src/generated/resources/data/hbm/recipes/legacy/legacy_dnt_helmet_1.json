@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "EEE",
+    "EE "
+  ],
+  "key": {
+    "E": {
+      "item": "hbm:ingot_dineutronium"
+    }
+  },
+  "result": {
+    "item": "hbm:dnt_helmet",
+    "count": 1
+  }
+}

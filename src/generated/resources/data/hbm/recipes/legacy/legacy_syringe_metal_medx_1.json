@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " N ",
+    "NSN",
+    " N "
+  ],
+  "key": {
+    "N": {
+      "item": "minecraft:quartz"
+    },
+    "S": {
+      "item": "hbm:syringe_metal_empty"
+    }
+  },
+  "result": {
+    "item": "hbm:syringe_metal_medx",
+    "count": 1
+  }
+}

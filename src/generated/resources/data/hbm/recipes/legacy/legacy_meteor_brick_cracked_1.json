@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " C ",
+    "C C",
+    " C "
+  ],
+  "key": {
+    "C": {
+      "item": "hbm:meteor_brick"
+    }
+  },
+  "result": {
+    "item": "hbm:meteor_brick_cracked",
+    "count": 6
+  }
+}

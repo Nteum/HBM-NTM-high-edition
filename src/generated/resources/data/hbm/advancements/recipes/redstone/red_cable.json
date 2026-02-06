@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "hbm:red_cable"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_wire_aluminium": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "hbm:wire_aluminium"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_wire_aluminium",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "hbm:red_cable"
+    ]
+  },
+  "sends_telemetry_event": false
+}

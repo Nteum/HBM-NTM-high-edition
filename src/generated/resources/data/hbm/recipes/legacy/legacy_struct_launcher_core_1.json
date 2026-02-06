@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SCS",
+    "SIS",
+    "BEB"
+  ],
+  "key": {
+    "S": {
+      "item": "hbm:steel_scaffold"
+    },
+    "I": {
+      "item": "minecraft:iron_bars"
+    },
+    "C": {
+      "item": "hbm:circuit"
+    },
+    "B": {
+      "item": "hbm:struct_launcher"
+    },
+    "E": {
+      "item": "hbm:machine_battery"
+    }
+  },
+  "result": {
+    "item": "hbm:struct_launcher_core",
+    "count": 1
+  }
+}

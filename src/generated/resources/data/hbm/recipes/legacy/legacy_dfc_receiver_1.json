@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SDS",
+    "TXL",
+    "SDS"
+  ],
+  "key": {
+    "S": {
+      "item": "hbm:plate_welded"
+    },
+    "D": {
+      "item": "hbm:plate_desh"
+    },
+    "T": {
+      "item": "hbm:machine_transformer_dnt"
+    },
+    "X": {
+      "item": "hbm:block_dineutronium"
+    },
+    "L": {
+      "item": "hbm:shell"
+    }
+  },
+  "result": {
+    "item": "hbm:dfc_receiver",
+    "count": 1
+  }
+}

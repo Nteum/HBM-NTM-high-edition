@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DSD",
+    "SCS",
+    "DSD"
+  ],
+  "key": {
+    "D": {
+      "item": "hbm:ingot_white_phosphorus"
+    },
+    "S": {
+      "item": "hbm:ammo_arty"
+    },
+    "C": {
+      "item": "hbm:det_cord"
+    }
+  },
+  "result": {
+    "item": "hbm:ammo_arty",
+    "count": 1
+  }
+}

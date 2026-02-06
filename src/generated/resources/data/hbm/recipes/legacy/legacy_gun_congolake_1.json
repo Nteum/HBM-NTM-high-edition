@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BM ",
+    "BRS",
+    "G  "
+  ],
+  "key": {
+    "B": {
+      "item": "hbm:part_barrel_heavy"
+    },
+    "M": {
+      "item": "hbm:part_mechanism"
+    },
+    "R": {
+      "item": "hbm:part_receiver_light"
+    },
+    "S": {
+      "item": "hbm:part_stock"
+    },
+    "G": {
+      "item": "hbm:part_grip"
+    }
+  },
+  "result": {
+    "item": "hbm:gun_congolake",
+    "count": 1
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:powder_boron"
+    },
+    {
+      "item": "hbm:powder_boron"
+    },
+    {
+      "item": "hbm:dust_lanthanum"
+    },
+    {
+      "item": "hbm:dust_lanthanum"
+    },
+    {
+      "item": "hbm:powder_cerium"
+    },
+    {
+      "item": "hbm:powder_cobalt"
+    },
+    {
+      "item": "hbm:powder_lithium"
+    },
+    {
+      "item": "hbm:powder_neodymium"
+    },
+    {
+      "item": "hbm:powder_niobium"
+    }
+  ],
+  "result": {
+    "item": "hbm:powder_desh_mix",
+    "count": 9
+  }
+}

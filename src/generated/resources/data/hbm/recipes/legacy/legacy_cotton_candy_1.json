@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " S ",
+    "SPS",
+    " H "
+  ],
+  "key": {
+    "P": {
+      "item": "hbm:nugget_plutonium239"
+    },
+    "S": {
+      "item": "minecraft:sugar"
+    },
+    "H": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "hbm:cotton_candy",
+    "count": 2
+  }
+}

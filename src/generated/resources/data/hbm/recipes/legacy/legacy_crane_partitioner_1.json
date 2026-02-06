@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " M ",
+    "BCB"
+  ],
+  "key": {
+    "M": {
+      "item": "hbm:circuit"
+    },
+    "B": {
+      "item": "hbm:conveyor_wand"
+    },
+    "C": {
+      "item": "hbm:crate_steel"
+    }
+  },
+  "result": {
+    "item": "hbm:crane_partitioner",
+    "count": 1
+  }
+}

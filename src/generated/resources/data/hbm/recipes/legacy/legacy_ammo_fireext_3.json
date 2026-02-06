@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "NNN",
+    "NFN",
+    "NNN"
+  ],
+  "key": {
+    "N": {
+      "item": "hbm:sand_mix"
+    },
+    "F": {
+      "item": "hbm:ammo_fireext"
+    }
+  },
+  "result": {
+    "item": "hbm:ammo_fireext",
+    "count": 1
+  }
+}

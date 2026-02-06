@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " IP",
+    "IIM",
+    " IP"
+  ],
+  "key": {
+    "I": {
+      "item": "hbm:ingot_tc_alloy"
+    },
+    "P": {
+      "item": "hbm:ingot_rubber"
+    },
+    "M": {
+      "item": "hbm:part_mechanism"
+    }
+  },
+  "result": {
+    "item": "hbm:weapon_mod_special",
+    "count": 1
+  }
+}

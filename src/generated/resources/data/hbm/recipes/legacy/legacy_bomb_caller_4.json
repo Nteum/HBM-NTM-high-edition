@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "TRT"
+  ],
+  "key": {
+    "T": {
+      "item": "hbm:grenade_cloud"
+    },
+    "R": {
+      "item": "hbm:rangefinder"
+    }
+  },
+  "result": {
+    "item": "hbm:bomb_caller",
+    "count": 1
+  }
+}

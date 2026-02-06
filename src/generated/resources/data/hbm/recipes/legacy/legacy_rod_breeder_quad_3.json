@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:rod_quad_empty"
+    },
+    {
+      "item": "hbm:billet_radium226"
+    },
+    {
+      "item": "hbm:billet_radium226"
+    },
+    {
+      "item": "hbm:billet_radium226"
+    },
+    {
+      "item": "hbm:billet_radium226"
+    }
+  ],
+  "result": {
+    "item": "hbm:rod_breeder_quad",
+    "count": 1,
+    "nbt": "{hbmRodType:15b}"
+  }
+}

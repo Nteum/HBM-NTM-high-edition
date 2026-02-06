@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:rod_zirnox_uranium_fuel_depleted"
+    }
+  ],
+  "result": {
+    "item": "hbm:waste_uranium",
+    "count": 2
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "LYL",
+    "EWE",
+    "LYL"
+  ],
+  "key": {
+    "E": {
+      "item": "hbm:ingot_euphemium"
+    },
+    "L": {
+      "item": "minecraft:blue_dye"
+    },
+    "W": {
+      "item": "minecraft:clock"
+    },
+    "Y": {
+      "item": "hbm:billet_yharonite"
+    }
+  },
+  "result": {
+    "item": "hbm:watch",
+    "count": 1
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "III",
+    "CBC",
+    "III"
+  ],
+  "key": {
+    "I": {
+      "item": "hbm:ingot_latex"
+    },
+    "C": {
+      "item": "hbm:cladding_lead"
+    },
+    "B": {
+      "item": "hbm:hazmat_helmet_grey"
+    }
+  },
+  "result": {
+    "item": "hbm:liquidator_helmet",
+    "count": 1
+  }
+}

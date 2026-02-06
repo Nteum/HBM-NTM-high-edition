@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CRM",
+    "GG "
+  ],
+  "key": {
+    "C": {
+      "item": "hbm:crystal_redstone"
+    },
+    "R": {
+      "item": "hbm:part_receiver_light"
+    },
+    "M": {
+      "item": "hbm:part_mechanism"
+    },
+    "G": {
+      "item": "hbm:part_grip"
+    }
+  },
+  "result": {
+    "item": "hbm:gun_laser_pistol",
+    "count": 1
+  }
+}

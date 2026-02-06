@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "NNN",
+    "ZCZ",
+    "NNN"
+  ],
+  "key": {
+    "Z": {
+      "item": "hbm:plate_cast"
+    },
+    "N": {
+      "item": "hbm:neutron_reflector"
+    },
+    "C": {
+      "item": "hbm:reactor_core"
+    }
+  },
+  "result": {
+    "item": "hbm:cm_flux",
+    "count": 1
+  }
+}

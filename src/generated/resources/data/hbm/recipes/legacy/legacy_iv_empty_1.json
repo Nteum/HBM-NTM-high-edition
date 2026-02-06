@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "S",
+    "I",
+    "S"
+  ],
+  "key": {
+    "S": {
+      "item": "hbm:ingot_latex"
+    },
+    "I": {
+      "item": "hbm:plate_iron"
+    }
+  },
+  "result": {
+    "item": "hbm:iv_empty",
+    "count": 4
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:fluid_duct_paintable"
+    },
+    {
+      "item": "hbm:ingot_steel"
+    },
+    {
+      "item": "hbm:circuit"
+    }
+  ],
+  "result": {
+    "item": "hbm:fluid_duct_gauge",
+    "count": 1
+  }
+}

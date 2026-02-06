@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:iron_bars"
+    },
+    "C": {
+      "item": "hbm:machine_condenser"
+    },
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "S": {
+      "item": "hbm:plate_steel"
+    },
+    "W": {
+      "item": "minecraft:water_bucket"
+    }
+  },
+  "pattern": [
+    "SBS",
+    "GCG",
+    "SWS"
+  ],
+  "result": {
+    "item": "hbm:machine_cooling_tower"
+  },
+  "show_notification": true
+}

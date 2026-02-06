@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "TCT",
+    "MJM",
+    "B B"
+  ],
+  "key": {
+    "C": {
+      "item": "hbm:circuit"
+    },
+    "T": {
+      "item": "hbm:tank_steel"
+    },
+    "J": {
+      "item": "hbm:jetpack_break"
+    },
+    "M": {
+      "item": "hbm:motor"
+    },
+    "B": {
+      "item": "hbm:bolt"
+    }
+  },
+  "result": {
+    "item": "hbm:jetpack_vector",
+    "count": 1
+  }
+}

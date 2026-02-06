@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BBB",
+    "PGM"
+  ],
+  "key": {
+    "B": {
+      "item": "hbm:part_barrel_heavy"
+    },
+    "P": {
+      "item": "hbm:circuit"
+    },
+    "G": {
+      "item": "hbm:part_grip"
+    },
+    "M": {
+      "item": "hbm:part_mechanism"
+    }
+  },
+  "result": {
+    "item": "hbm:gun_stinger",
+    "count": 1
+  }
+}

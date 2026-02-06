@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PCP",
+    "SRS",
+    "PCP"
+  ],
+  "key": {
+    "P": {
+      "item": "hbm:ingot_polymer"
+    },
+    "C": {
+      "item": "hbm:circuit"
+    },
+    "S": {
+      "item": "hbm:plate_steel"
+    },
+    "R": {
+      "item": "hbm:crt_display"
+    }
+  },
+  "result": {
+    "item": "hbm:radar_screen",
+    "count": 1
+  }
+}

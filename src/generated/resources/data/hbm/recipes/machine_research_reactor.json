@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "hbm:circuit_basic"
+    },
+    "E": {
+      "item": "hbm:pile_rod_source"
+    },
+    "G": {
+      "item": "hbm:ingot_graphite"
+    },
+    "L": {
+      "item": "hbm:pile_rod_boron"
+    }
+  },
+  "pattern": [
+    "GGG",
+    "CEC",
+    "GLG"
+  ],
+  "result": {
+    "item": "hbm:machine_research_reactor"
+  },
+  "show_notification": true
+}

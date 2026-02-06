@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DSD",
+    "PPP",
+    "DSD"
+  ],
+  "key": {
+    "D": {
+      "item": "hbm:plate_cast"
+    },
+    "P": {
+      "item": "hbm:piston_selenium"
+    },
+    "S": {
+      "item": "hbm:part_mechanism"
+    }
+  },
+  "result": {
+    "item": "hbm:weapon_mod_special",
+    "count": 1
+  }
+}

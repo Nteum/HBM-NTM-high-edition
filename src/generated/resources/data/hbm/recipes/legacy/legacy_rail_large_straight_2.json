@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:rail_large_straight_short"
+    },
+    {
+      "item": "hbm:rail_large_straight_short"
+    },
+    {
+      "item": "hbm:rail_large_straight_short"
+    },
+    {
+      "item": "hbm:rail_large_straight_short"
+    },
+    {
+      "item": "hbm:rail_large_straight_short"
+    }
+  ],
+  "result": {
+    "item": "hbm:rail_large_straight",
+    "count": 1
+  }
+}

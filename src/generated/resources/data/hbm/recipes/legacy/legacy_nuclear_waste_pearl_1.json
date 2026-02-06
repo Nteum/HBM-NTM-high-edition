@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "WWW",
+    "WFW",
+    "WWW"
+  ],
+  "key": {
+    "W": {
+      "item": "hbm:nuclear_waste_tiny"
+    },
+    "F": {
+      "item": "hbm:block_fallout"
+    }
+  },
+  "result": {
+    "item": "hbm:nuclear_waste_pearl",
+    "count": 1
+  }
+}

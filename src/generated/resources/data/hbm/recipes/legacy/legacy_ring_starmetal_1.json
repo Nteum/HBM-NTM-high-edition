@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " S ",
+    "S S",
+    " S "
+  ],
+  "key": {
+    "S": {
+      "item": "hbm:ingot_starmetal"
+    }
+  },
+  "result": {
+    "item": "hbm:ring_starmetal",
+    "count": 1
+  }
+}

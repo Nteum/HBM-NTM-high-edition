@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PCP",
+    "DJD",
+    "PAP"
+  ],
+  "key": {
+    "C": {
+      "item": "hbm:circuit"
+    },
+    "P": {
+      "item": "hbm:plate_saturnite"
+    },
+    "D": {
+      "item": "hbm:ingot_workers_alloy"
+    },
+    "J": {
+      "item": "hbm:jetpack_vector"
+    },
+    "A": {
+      "item": "hbm:plate_cast"
+    }
+  },
+  "result": {
+    "item": "hbm:jetpack_boost",
+    "count": 1
+  }
+}

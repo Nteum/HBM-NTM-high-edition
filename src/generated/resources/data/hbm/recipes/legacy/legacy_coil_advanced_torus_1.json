@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " C ",
+    "CPC",
+    " C "
+  ],
+  "key": {
+    "P": {
+      "item": "hbm:plate_iron"
+    },
+    "C": {
+      "item": "hbm:coil_advanced_alloy"
+    }
+  },
+  "result": {
+    "item": "hbm:coil_advanced_torus",
+    "count": 2
+  }
+}

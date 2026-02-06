@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " P ",
+    "ICI",
+    " L "
+  ],
+  "key": {
+    "C": {
+      "item": "hbm:hazmat_cloth_red"
+    },
+    "P": {
+      "item": "hbm:plate_iron"
+    },
+    "L": {
+      "item": "hbm:plate_lead"
+    },
+    "I": {
+      "item": "hbm:ingot_latex"
+    }
+  },
+  "result": {
+    "item": "hbm:hazmat_cloth_grey",
+    "count": 1
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:ammo_standard"
+    },
+    {
+      "item": "hbm:ammo_standard"
+    },
+    {
+      "item": "hbm:ammo_standard"
+    },
+    {
+      "item": "hbm:ammo_standard"
+    },
+    {
+      "item": "hbm:ammo_standard"
+    },
+    {
+      "item": "hbm:ammo_standard"
+    },
+    {
+      "item": "hbm:ammo_standard"
+    },
+    {
+      "item": "hbm:ducttape"
+    },
+    {
+      "item": "hbm:ducttape"
+    }
+  ],
+  "result": {
+    "item": "hbm:ammo_standard",
+    "count": 1
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " A ",
+    "SGS",
+    " T "
+  ],
+  "key": {
+    "A": {
+      "item": "hbm:powder_aluminium"
+    },
+    "S": {
+      "item": "hbm:plate_steel"
+    },
+    "G": {
+      "item": "minecraft:glass_pane"
+    },
+    "T": {
+      "item": "hbm:circuit"
+    }
+  },
+  "result": {
+    "item": "hbm:crt_display",
+    "count": 4
+  }
+}

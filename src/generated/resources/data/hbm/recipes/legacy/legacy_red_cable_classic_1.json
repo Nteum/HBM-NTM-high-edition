@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:red_cable"
+    }
+  ],
+  "result": {
+    "item": "hbm:red_cable_classic",
+    "count": 1
+  }
+}

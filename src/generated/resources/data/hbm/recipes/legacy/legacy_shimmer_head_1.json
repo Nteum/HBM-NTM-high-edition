@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SSS",
+    "DTD",
+    "SSS"
+  ],
+  "key": {
+    "S": {
+      "item": "hbm:ingot_steel"
+    },
+    "D": {
+      "item": "hbm:block_workers_alloy"
+    },
+    "T": {
+      "item": "hbm:block_tungsten"
+    }
+  },
+  "result": {
+    "item": "hbm:shimmer_head",
+    "count": 1
+  }
+}

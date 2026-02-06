@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "LLL",
+    "GGG",
+    "CCC"
+  ],
+  "key": {
+    "L": {
+      "item": "hbm:plate_lead"
+    },
+    "G": {
+      "item": "hbm:ballistite"
+    },
+    "C": {
+      "item": "hbm:ingot_copper"
+    }
+  },
+  "result": {
+    "item": "hbm:ammo_dgk",
+    "count": 1
+  }
+}

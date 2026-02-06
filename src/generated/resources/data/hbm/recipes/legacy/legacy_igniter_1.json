@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " W",
+    "SC",
+    "CE"
+  ],
+  "key": {
+    "S": {
+      "item": "hbm:plate_steel"
+    },
+    "W": {
+      "item": "hbm:wire_fine"
+    },
+    "C": {
+      "item": "hbm:circuit"
+    },
+    "E": {
+      "item": "hbm:ingot_euphemium"
+    }
+  },
+  "result": {
+    "item": "hbm:igniter",
+    "count": 1
+  }
+}

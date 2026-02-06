@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " C ",
+    "LCR",
+    " C "
+  ],
+  "key": {
+    "L": {
+      "item": "hbm:cigarette"
+    },
+    "C": {
+      "item": "hbm:rag"
+    },
+    "R": {
+      "item": "hbm:gem_coal"
+    }
+  },
+  "result": {
+    "item": "hbm:plushie",
+    "count": 1
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "QBQ",
+    "CSC",
+    "QBQ"
+  ],
+  "key": {
+    "Q": {
+      "item": "hbm:glass_quartz"
+    },
+    "B": {
+      "item": "hbm:ingot_cmb_steel"
+    },
+    "C": {
+      "item": "hbm:ingot_schrabidate"
+    },
+    "S": {
+      "item": "hbm:cell_anti_schrabidium"
+    }
+  },
+  "result": {
+    "item": "hbm:laser_crystal_cmb",
+    "count": 1
+  }
+}

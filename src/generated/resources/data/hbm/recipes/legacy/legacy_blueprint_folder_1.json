@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:blueprints"
+    },
+    {
+      "item": "hbm:blueprints"
+    },
+    {
+      "item": "hbm:blueprints"
+    }
+  ],
+  "result": {
+    "item": "hbm:blueprint_folder",
+    "count": 1
+  }
+}

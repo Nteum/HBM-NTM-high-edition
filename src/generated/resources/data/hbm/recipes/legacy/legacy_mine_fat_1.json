@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CDN"
+  ],
+  "key": {
+    "C": {
+      "item": "hbm:circuit"
+    },
+    "D": {
+      "item": "hbm:ducttape"
+    },
+    "N": {
+      "item": "hbm:ammo_standard"
+    }
+  },
+  "result": {
+    "item": "hbm:mine_fat",
+    "count": 1
+  }
+}

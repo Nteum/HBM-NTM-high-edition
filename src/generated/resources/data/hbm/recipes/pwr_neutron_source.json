@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "L": {
+      "item": "hbm:plate_lead"
+    },
+    "R": {
+      "item": "hbm:billet_ra226be"
+    },
+    "S": {
+      "item": "hbm:plate_steel"
+    }
+  },
+  "pattern": [
+    "LSL",
+    "SRS",
+    "LSL"
+  ],
+  "result": {
+    "item": "hbm:pwr_neutron_source"
+  },
+  "show_notification": true
+}

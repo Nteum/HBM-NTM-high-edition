@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "A A",
+    "PLP",
+    "PSP"
+  ],
+  "key": {
+    "A": {
+      "item": "hbm:wire_fine"
+    },
+    "P": {
+      "item": "hbm:plate_titanium"
+    },
+    "S": {
+      "item": "hbm:powder_lithium"
+    },
+    "L": {
+      "item": "hbm:powder_cobalt"
+    }
+  },
+  "result": {
+    "item": "hbm:battery_lithium",
+    "count": 1
+  }
+}

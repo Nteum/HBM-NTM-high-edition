@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:rod_dual_empty"
+    },
+    {
+      "item": "hbm:rod_dual_empty"
+    }
+  ],
+  "result": {
+    "item": "hbm:rod_quad_empty",
+    "count": 1
+  }
+}

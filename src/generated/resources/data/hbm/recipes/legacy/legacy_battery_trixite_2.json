@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " A ",
+    "PTP",
+    "PSP"
+  ],
+  "key": {
+    "A": {
+      "item": "hbm:wire_fine"
+    },
+    "P": {
+      "item": "hbm:plate_aluminium"
+    },
+    "S": {
+      "item": "hbm:powder_power"
+    },
+    "T": {
+      "item": "hbm:crystal_trixite"
+    }
+  },
+  "result": {
+    "item": "hbm:battery_trixite",
+    "count": 1
+  }
+}

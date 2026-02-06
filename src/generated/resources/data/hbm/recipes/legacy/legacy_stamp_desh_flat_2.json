@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BDB",
+    "DSD",
+    "BDB"
+  ],
+  "key": {
+    "D": {
+      "item": "hbm:ingot_workers_alloy"
+    },
+    "S": {
+      "item": "hbm:ingot_ferrouranium"
+    },
+    "B": {
+      "item": "minecraft:nether_brick"
+    }
+  },
+  "result": {
+    "item": "hbm:stamp_desh_flat",
+    "count": 1
+  }
+}

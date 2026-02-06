@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PP",
+    "PP"
+  ],
+  "key": {
+    "P": {
+      "item": "hbm:deco_pipe"
+    }
+  },
+  "result": {
+    "item": "hbm:deco_pipe_quad",
+    "count": 4
+  }
+}

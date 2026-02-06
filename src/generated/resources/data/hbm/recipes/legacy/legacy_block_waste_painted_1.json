@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:yellow_dye"
+    },
+    {
+      "item": "hbm:block_waste"
+    }
+  ],
+  "result": {
+    "item": "hbm:block_waste_painted",
+    "count": 1
+  }
+}

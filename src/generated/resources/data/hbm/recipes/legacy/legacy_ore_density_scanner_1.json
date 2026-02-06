@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "VVV",
+    "CSC",
+    "GGG"
+  ],
+  "key": {
+    "V": {
+      "item": "hbm:circuit"
+    },
+    "C": {
+      "item": "hbm:circuit"
+    },
+    "S": {
+      "item": "hbm:circuit"
+    },
+    "G": {
+      "item": "hbm:plate_gold"
+    }
+  },
+  "result": {
+    "item": "hbm:ore_density_scanner",
+    "count": 1
+  }
+}

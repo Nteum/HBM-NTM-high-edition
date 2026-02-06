@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PPP",
+    "BSR",
+    "G M"
+  ],
+  "key": {
+    "P": {
+      "item": "hbm:plate_saturnite"
+    },
+    "B": {
+      "item": "hbm:part_barrel_heavy"
+    },
+    "S": {
+      "item": "hbm:shell"
+    },
+    "R": {
+      "item": "hbm:part_receiver_heavy"
+    },
+    "G": {
+      "item": "hbm:part_grip"
+    },
+    "M": {
+      "item": "hbm:part_mechanism"
+    }
+  },
+  "result": {
+    "item": "hbm:gun_fatman",
+    "count": 1
+  }
+}

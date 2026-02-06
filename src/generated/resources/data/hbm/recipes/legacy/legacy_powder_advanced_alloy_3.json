@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:redstone"
+    },
+    {
+      "item": "hbm:powder_copper"
+    },
+    {
+      "item": "hbm:dust_steel"
+    },
+    {
+      "item": "hbm:dust_steel"
+    }
+  ],
+  "result": {
+    "item": "hbm:powder_advanced_alloy",
+    "count": 4
+  }
+}

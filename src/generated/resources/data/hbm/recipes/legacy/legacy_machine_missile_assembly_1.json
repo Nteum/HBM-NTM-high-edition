@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PWP",
+    "SSS",
+    "CCC"
+  ],
+  "key": {
+    "P": {
+      "item": "hbm:pedestal_steel"
+    },
+    "W": {
+      "item": "hbm:wrench"
+    },
+    "S": {
+      "item": "hbm:plate_steel"
+    },
+    "C": {
+      "item": "hbm:steel_scaffold"
+    }
+  },
+  "result": {
+    "item": "hbm:machine_missile_assembly",
+    "count": 1
+  }
+}

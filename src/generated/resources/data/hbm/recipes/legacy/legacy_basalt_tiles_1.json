@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CC",
+    "CC"
+  ],
+  "key": {
+    "C": {
+      "item": "hbm:basalt_brick"
+    }
+  },
+  "result": {
+    "item": "hbm:basalt_tiles",
+    "count": 4
+  }
+}

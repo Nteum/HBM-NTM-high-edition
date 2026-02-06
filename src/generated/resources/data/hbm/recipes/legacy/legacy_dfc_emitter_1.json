@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SDS",
+    "TXL",
+    "SDS"
+  ],
+  "key": {
+    "S": {
+      "item": "hbm:plate_welded"
+    },
+    "D": {
+      "item": "hbm:plate_desh"
+    },
+    "T": {
+      "item": "hbm:machine_transformer_dnt"
+    },
+    "X": {
+      "item": "hbm:crystal_xen"
+    },
+    "L": {
+      "item": "hbm:sat_head_laser"
+    }
+  },
+  "result": {
+    "item": "hbm:dfc_emitter",
+    "count": 1
+  }
+}

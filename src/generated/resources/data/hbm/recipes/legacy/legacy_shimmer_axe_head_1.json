@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PII",
+    "PBB",
+    "PII"
+  ],
+  "key": {
+    "P": {
+      "item": "hbm:plate_steel"
+    },
+    "B": {
+      "item": "hbm:block_workers_alloy"
+    },
+    "I": {
+      "item": "hbm:ingot_tungsten"
+    }
+  },
+  "result": {
+    "item": "hbm:shimmer_axe_head",
+    "count": 1
+  }
+}

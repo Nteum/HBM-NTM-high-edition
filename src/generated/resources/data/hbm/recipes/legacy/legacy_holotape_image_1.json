@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:holotape_image"
+    },
+    {
+      "item": "hbm:screwdriver"
+    },
+    {
+      "item": "hbm:ducttape"
+    },
+    {
+      "item": "hbm:armor_polish"
+    }
+  ],
+  "result": {
+    "item": "hbm:holotape_image",
+    "count": 1
+  }
+}

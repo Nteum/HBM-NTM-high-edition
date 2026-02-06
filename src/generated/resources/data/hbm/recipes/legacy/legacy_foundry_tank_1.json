@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "B B",
+    "I I",
+    "BSB"
+  ],
+  "key": {
+    "B": {
+      "item": "hbm:ingot_firebrick"
+    },
+    "I": {
+      "item": "hbm:ingot_steel"
+    },
+    "S": {
+      "item": "minecraft:stone_slab"
+    }
+  },
+  "result": {
+    "item": "hbm:foundry_tank",
+    "count": 1
+  }
+}

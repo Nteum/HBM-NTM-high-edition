@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PKP",
+    "DSD",
+    "PKP"
+  ],
+  "key": {
+    "P": {
+      "item": "hbm:ingot_polymer"
+    },
+    "K": {
+      "item": "hbm:insert_sapi"
+    },
+    "D": {
+      "item": "hbm:ducttape"
+    },
+    "S": {
+      "item": "hbm:plate_weapon_steel"
+    }
+  },
+  "result": {
+    "item": "hbm:insert_esapi",
+    "count": 1
+  }
+}

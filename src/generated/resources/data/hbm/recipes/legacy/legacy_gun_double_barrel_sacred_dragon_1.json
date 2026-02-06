@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:gun_double_barrel"
+    },
+    {
+      "item": "hbm:item_secret"
+    }
+  ],
+  "result": {
+    "item": "hbm:gun_double_barrel_sacred_dragon",
+    "count": 1
+  }
+}

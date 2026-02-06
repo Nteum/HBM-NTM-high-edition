@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:spider_eye"
+    },
+    {
+      "item": "minecraft:redstone"
+    },
+    {
+      "item": "hbm:gem_nether_quartz"
+    }
+  ],
+  "result": {
+    "item": "hbm:powder_poison",
+    "count": 4
+  }
+}

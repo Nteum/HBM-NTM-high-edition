@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:powder_iron"
+    },
+    {
+      "item": "hbm:powder_copper"
+    },
+    {
+      "item": "hbm:powder_lithium"
+    },
+    {
+      "item": "hbm:dust_nether_quartz"
+    }
+  ],
+  "result": {
+    "item": "hbm:powder_meteorite",
+    "count": 4
+  }
+}

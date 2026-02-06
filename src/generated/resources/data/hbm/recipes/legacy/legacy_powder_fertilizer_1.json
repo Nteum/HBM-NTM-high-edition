@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:powder_calcium"
+    },
+    {
+      "item": "hbm:powder_red_phosphorus"
+    },
+    {
+      "item": "hbm:dust_saltpeter"
+    },
+    {
+      "item": "hbm:dust_sulfur"
+    }
+  ],
+  "result": {
+    "item": "hbm:powder_fertilizer",
+    "count": 4
+  }
+}

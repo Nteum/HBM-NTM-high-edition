@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "YSY",
+    "SCS",
+    "YSY"
+  ],
+  "key": {
+    "S": {
+      "item": "hbm:singularity_spark"
+    },
+    "C": {
+      "item": "hbm:battery_spark_cell_10000"
+    },
+    "Y": {
+      "item": "hbm:billet_yharonite"
+    }
+  },
+  "result": {
+    "item": "hbm:battery_spark_cell_power",
+    "count": 1
+  }
+}

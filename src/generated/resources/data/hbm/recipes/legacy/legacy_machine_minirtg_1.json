@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "LLL",
+    "PPP",
+    "TRT"
+  ],
+  "key": {
+    "L": {
+      "item": "hbm:plate_lead"
+    },
+    "P": {
+      "item": "hbm:billet_plutonium238"
+    },
+    "T": {
+      "item": "hbm:thermo_element"
+    },
+    "R": {
+      "item": "hbm:rtg_unit"
+    }
+  },
+  "result": {
+    "item": "hbm:machine_minirtg",
+    "count": 1
+  }
+}

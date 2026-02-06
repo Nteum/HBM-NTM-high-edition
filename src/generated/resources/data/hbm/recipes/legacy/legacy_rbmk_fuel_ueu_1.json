@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:rbmk_fuel_empty"
+    },
+    {
+      "item": "hbm:billet_uraninite"
+    },
+    {
+      "item": "hbm:billet_uraninite"
+    },
+    {
+      "item": "hbm:billet_uraninite"
+    },
+    {
+      "item": "hbm:billet_uraninite"
+    },
+    {
+      "item": "hbm:billet_uraninite"
+    },
+    {
+      "item": "hbm:billet_uraninite"
+    },
+    {
+      "item": "hbm:billet_uraninite"
+    },
+    {
+      "item": "hbm:billet_uraninite"
+    }
+  ],
+  "result": {
+    "item": "hbm:rbmk_fuel_ueu",
+    "count": 1
+  }
+}

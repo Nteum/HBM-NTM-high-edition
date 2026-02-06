@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " E ",
+    "ECE",
+    " E "
+  ],
+  "key": {
+    "E": {
+      "item": "hbm:billet_cobalt"
+    },
+    "C": {
+      "item": "hbm:steel_plate"
+    }
+  },
+  "result": {
+    "item": "hbm:cobalt_plate",
+    "count": 1
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:rod_dual_empty"
+    },
+    {
+      "item": "hbm:billet_uranium235"
+    },
+    {
+      "item": "hbm:billet_uranium235"
+    }
+  ],
+  "result": {
+    "item": "hbm:rod_breeder_dual",
+    "count": 1,
+    "nbt": "{hbmRodType:6b}"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:rod_empty"
+    },
+    {
+      "item": "hbm:billet_plutonium239"
+    }
+  ],
+  "result": {
+    "item": "hbm:rod_breeder_single",
+    "count": 1,
+    "nbt": "{hbmRodType:10b}"
+  }
+}

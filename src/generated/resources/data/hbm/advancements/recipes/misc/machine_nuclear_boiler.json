@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_machine_electric_boiler": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "hbm:machine_electric_boiler"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "hbm:machine_nuclear_boiler"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_machine_electric_boiler",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "hbm:machine_nuclear_boiler"
+    ]
+  },
+  "sends_telemetry_event": false
+}

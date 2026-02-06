@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "P P",
+    "MLM",
+    "PKP"
+  ],
+  "key": {
+    "L": {
+      "item": "hbm:parts_legendary"
+    },
+    "K": {
+      "item": "hbm:plate_kevlar"
+    },
+    "P": {
+      "item": "hbm:plate_armor_ajr"
+    },
+    "M": {
+      "item": "hbm:motor_desh"
+    }
+  },
+  "result": {
+    "item": "hbm:rpa_plate",
+    "count": 1
+  }
+}

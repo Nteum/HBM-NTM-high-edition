@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:rbmk_fuel_empty"
+    },
+    {
+      "item": "hbm:billet_australium_lesser"
+    },
+    {
+      "item": "hbm:billet_australium_lesser"
+    },
+    {
+      "item": "hbm:billet_australium_lesser"
+    },
+    {
+      "item": "hbm:billet_australium_lesser"
+    },
+    {
+      "item": "hbm:billet_australium_lesser"
+    },
+    {
+      "item": "hbm:billet_australium_lesser"
+    },
+    {
+      "item": "hbm:billet_australium_lesser"
+    },
+    {
+      "item": "hbm:billet_australium_lesser"
+    }
+  ],
+  "result": {
+    "item": "hbm:rbmk_fuel_leaus",
+    "count": 1
+  }
+}

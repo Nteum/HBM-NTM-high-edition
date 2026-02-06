@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:rod_zirnox_thorium_fuel_depleted"
+    }
+  ],
+  "result": {
+    "item": "hbm:waste_thorium",
+    "count": 2
+  }
+}

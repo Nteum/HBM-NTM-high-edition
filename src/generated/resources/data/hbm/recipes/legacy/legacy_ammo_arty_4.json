@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "D",
+    "S",
+    "D"
+  ],
+  "key": {
+    "D": {
+      "item": "hbm:ingot_white_phosphorus"
+    },
+    "S": {
+      "item": "hbm:ammo_arty"
+    }
+  },
+  "result": {
+    "item": "hbm:ammo_arty",
+    "count": 1
+  }
+}

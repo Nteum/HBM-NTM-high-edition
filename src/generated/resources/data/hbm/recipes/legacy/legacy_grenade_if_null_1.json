@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BAB",
+    "AGA",
+    "BAB"
+  ],
+  "key": {
+    "G": {
+      "item": "hbm:grenade_if_generic"
+    },
+    "A": {
+      "item": "hbm:undefined"
+    },
+    "B": {
+      "item": "hbm:ingot_saturnite"
+    }
+  },
+  "result": {
+    "item": "hbm:grenade_if_null",
+    "count": 1
+  }
+}

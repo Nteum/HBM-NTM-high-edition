@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "T T",
+    "TCT",
+    "RRR"
+  ],
+  "key": {
+    "T": {
+      "item": "hbm:plate_titanium"
+    },
+    "C": {
+      "item": "hbm:plate_cast"
+    },
+    "R": {
+      "item": "hbm:ingot_rubber"
+    }
+  },
+  "result": {
+    "item": "hbm:envsuit_plate",
+    "count": 1
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:powder_coal"
+    },
+    {
+      "item": "minecraft:poisonous_potato"
+    },
+    {
+      "item": "minecraft:nether_wart"
+    },
+    {
+      "item": "hbm:plant_flower"
+    }
+  ],
+  "result": {
+    "item": "hbm:pill_herbal",
+    "count": 1
+  }
+}

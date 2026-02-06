@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "C",
+    "R",
+    "C"
+  ],
+  "key": {
+    "C": {
+      "item": "hbm:shell"
+    },
+    "R": {
+      "item": "hbm:rbmk_blank"
+    }
+  },
+  "result": {
+    "item": "hbm:rbmk_rod",
+    "count": 1
+  }
+}

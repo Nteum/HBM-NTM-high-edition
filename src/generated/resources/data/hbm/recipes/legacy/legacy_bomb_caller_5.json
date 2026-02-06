@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "TRC"
+  ],
+  "key": {
+    "T": {
+      "item": "hbm:ammo_standard"
+    },
+    "R": {
+      "item": "hbm:rangefinder"
+    },
+    "C": {
+      "item": "hbm:circuit"
+    }
+  },
+  "result": {
+    "item": "hbm:bomb_caller",
+    "count": 1
+  }
+}

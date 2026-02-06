@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:sat_resonator"
+    }
+  ],
+  "result": {
+    "item": "hbm:sat_resonator",
+    "count": 1
+  }
+}

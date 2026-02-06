@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "FPF",
+    "PIP",
+    "FPF"
+  ],
+  "key": {
+    "F": {
+      "item": "minecraft:red_flower"
+    },
+    "P": {
+      "item": "hbm:armor_polish"
+    },
+    "I": {
+      "item": "minecraft:black_dye"
+    }
+  },
+  "result": {
+    "item": "hbm:ink",
+    "count": 1
+  }
+}

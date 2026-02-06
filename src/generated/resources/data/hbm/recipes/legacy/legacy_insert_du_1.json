@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DPD",
+    "PSP",
+    "DPD"
+  ],
+  "key": {
+    "D": {
+      "item": "hbm:ducttape"
+    },
+    "P": {
+      "item": "hbm:plate_iron"
+    },
+    "S": {
+      "item": "hbm:block_uranium238"
+    }
+  },
+  "result": {
+    "item": "hbm:insert_du",
+    "count": 1
+  }
+}

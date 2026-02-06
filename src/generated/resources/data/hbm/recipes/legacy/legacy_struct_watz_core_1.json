@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CBC",
+    "BHB",
+    "CBC"
+  ],
+  "key": {
+    "C": {
+      "item": "hbm:circuit"
+    },
+    "B": {
+      "item": "hbm:plate_cast"
+    },
+    "H": {
+      "item": "hbm:watz_cooler"
+    }
+  },
+  "result": {
+    "item": "hbm:struct_watz_core",
+    "count": 1
+  }
+}

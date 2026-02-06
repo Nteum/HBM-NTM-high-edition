@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "G",
+    "M",
+    "A"
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:glass_pane"
+    },
+    "M": {
+      "item": "hbm:ingot_mercury"
+    },
+    "A": {
+      "item": "hbm:plate_aluminium"
+    }
+  },
+  "result": {
+    "item": "hbm:spotlight_fluoro",
+    "count": 8
+  }
+}

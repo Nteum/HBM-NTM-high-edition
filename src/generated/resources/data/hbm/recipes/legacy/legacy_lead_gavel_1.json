@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PIP",
+    "IGI",
+    "PIP"
+  ],
+  "key": {
+    "P": {
+      "item": "hbm:pellet_buckshot"
+    },
+    "I": {
+      "item": "hbm:ingot_lead"
+    },
+    "G": {
+      "item": "hbm:wood_gavel"
+    }
+  },
+  "result": {
+    "item": "hbm:lead_gavel",
+    "count": 1
+  }
+}

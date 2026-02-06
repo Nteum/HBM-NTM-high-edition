@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BSB",
+    " W ",
+    " P "
+  ],
+  "key": {
+    "B": {
+      "item": "hbm:blades_desh"
+    },
+    "S": {
+      "item": "hbm:block_schrabidium"
+    },
+    "W": {
+      "item": "hbm:desh_pickaxe"
+    },
+    "P": {
+      "item": "hbm:ingot_polymer"
+    }
+  },
+  "result": {
+    "item": "hbm:schrabidium_pickaxe",
+    "count": 1
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SSS",
+    "STS",
+    " D "
+  ],
+  "key": {
+    "S": {
+      "item": "hbm:plate_steel"
+    },
+    "T": {
+      "item": "hbm:ingot_tungsten"
+    },
+    "D": {
+      "item": "hbm:bolt"
+    }
+  },
+  "result": {
+    "item": "hbm:piston_selenium",
+    "count": 1
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BPB",
+    "BPB",
+    "BPB"
+  ],
+  "key": {
+    "B": {
+      "item": "hbm:bolt"
+    },
+    "P": {
+      "item": "hbm:plate_iron"
+    }
+  },
+  "result": {
+    "item": "hbm:plate_cast",
+    "count": 1
+  }
+}

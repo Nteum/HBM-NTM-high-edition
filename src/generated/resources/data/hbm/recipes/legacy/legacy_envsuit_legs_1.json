@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "TCT",
+    "R R",
+    "T T"
+  ],
+  "key": {
+    "T": {
+      "item": "hbm:plate_titanium"
+    },
+    "C": {
+      "item": "hbm:plate_cast"
+    },
+    "R": {
+      "item": "hbm:ingot_rubber"
+    }
+  },
+  "result": {
+    "item": "hbm:envsuit_legs",
+    "count": 1
+  }
+}

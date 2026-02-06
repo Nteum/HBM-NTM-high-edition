@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "MBM",
+    "NSN",
+    "N N"
+  ],
+  "key": {
+    "N": {
+      "item": "hbm:plate_armor_lunar"
+    },
+    "M": {
+      "item": "hbm:motor_desh"
+    },
+    "S": {
+      "item": "hbm:starmetal_legs"
+    },
+    "B": {
+      "item": "hbm:block_starmetal"
+    }
+  },
+  "result": {
+    "item": "hbm:bj_legs",
+    "count": 1
+  }
+}

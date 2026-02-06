@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ICI",
+    "CTC",
+    "ICI"
+  ],
+  "key": {
+    "C": {
+      "item": "hbm:plate_steel"
+    },
+    "I": {
+      "item": "hbm:plate_iron"
+    },
+    "T": {
+      "item": "hbm:mp_fuselage_10_kerosene"
+    }
+  },
+  "result": {
+    "item": "hbm:mp_fuselage_10_kerosene_metal",
+    "count": 1
+  }
+}

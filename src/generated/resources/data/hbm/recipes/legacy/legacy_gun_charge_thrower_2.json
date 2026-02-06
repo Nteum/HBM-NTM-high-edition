@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "MMM",
+    "BBL",
+    "GG "
+  ],
+  "key": {
+    "M": {
+      "item": "hbm:part_mechanism"
+    },
+    "B": {
+      "item": "hbm:part_barrel_heavy"
+    },
+    "G": {
+      "item": "hbm:part_grip"
+    },
+    "L": {
+      "item": "hbm:ingot_latex"
+    }
+  },
+  "result": {
+    "item": "hbm:gun_charge_thrower",
+    "count": 1
+  }
+}

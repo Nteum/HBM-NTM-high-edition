@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:steel_wall"
+    },
+    {
+      "item": "hbm:steel_wall"
+    }
+  ],
+  "result": {
+    "item": "hbm:steel_corner",
+    "count": 1
+  }
+}

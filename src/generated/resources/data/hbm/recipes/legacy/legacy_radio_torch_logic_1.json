@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "G",
+    "R",
+    "I"
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:glowstone_dust"
+    },
+    "R": {
+      "item": "minecraft:redstone_torch"
+    },
+    "I": {
+      "item": "hbm:circuit"
+    }
+  },
+  "result": {
+    "item": "hbm:radio_torch_logic",
+    "count": 4
+  }
+}

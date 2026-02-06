@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "MCM",
+    "PBP",
+    "PSP"
+  ],
+  "key": {
+    "M": {
+      "item": "hbm:motor_desh"
+    },
+    "C": {
+      "item": "hbm:demon_core_closed"
+    },
+    "P": {
+      "item": "hbm:plate_armor_fau"
+    },
+    "B": {
+      "item": "hbm:starmetal_plate"
+    },
+    "S": {
+      "item": "hbm:ancient_scrap"
+    }
+  },
+  "result": {
+    "item": "hbm:fau_plate",
+    "count": 1
+  }
+}

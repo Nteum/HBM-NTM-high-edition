@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ISI",
+    "SCS",
+    "ISI"
+  ],
+  "key": {
+    "I": {
+      "item": "hbm:ingot_saturnite"
+    },
+    "S": {
+      "item": "hbm:ingot_starmetal"
+    },
+    "C": {
+      "item": "hbm:chlorine_pinwheel"
+    }
+  },
+  "result": {
+    "item": "hbm:vent_chlorine_seal",
+    "count": 1
+  }
+}

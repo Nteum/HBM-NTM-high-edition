@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:part_mechanism"
+    },
+    {
+      "item": "hbm:plate_cast"
+    },
+    {
+      "item": "hbm:plate_cast"
+    },
+    {
+      "item": "hbm:plate_cast"
+    },
+    {
+      "item": "hbm:ducttape"
+    }
+  ],
+  "result": {
+    "item": "hbm:weapon_mod_generic",
+    "count": 1
+  }
+}

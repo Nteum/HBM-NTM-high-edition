@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " P ",
+    "NSN",
+    " P "
+  ],
+  "key": {
+    "P": {
+      "item": "hbm:nugget_plutonium239"
+    },
+    "N": {
+      "item": "hbm:neutron_reflector"
+    },
+    "S": {
+      "item": "hbm:ammo_shell"
+    }
+  },
+  "result": {
+    "item": "hbm:ammo_shell",
+    "count": 1
+  }
+}

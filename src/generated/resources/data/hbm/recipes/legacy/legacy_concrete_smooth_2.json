@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:concrete_colored_ext"
+    }
+  ],
+  "result": {
+    "item": "hbm:concrete_smooth",
+    "count": 1
+  }
+}

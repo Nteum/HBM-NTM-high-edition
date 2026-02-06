@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GPG",
+    "PRP",
+    "GPG"
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:gunpowder"
+    },
+    "P": {
+      "item": "hbm:plate_gold"
+    },
+    "R": {
+      "tag": "minecraft:music_discs"
+    }
+  },
+  "result": {
+    "item": "hbm:defuser_gold",
+    "count": 1
+  }
+}

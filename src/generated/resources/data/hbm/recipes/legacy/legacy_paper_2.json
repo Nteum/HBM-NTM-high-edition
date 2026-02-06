@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:assembly_template"
+    }
+  ],
+  "result": {
+    "item": "minecraft:paper",
+    "count": 1
+  }
+}

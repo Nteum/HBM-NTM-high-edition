@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "III",
+    "PCP",
+    "III"
+  ],
+  "key": {
+    "P": {
+      "item": "hbm:part_generic"
+    },
+    "I": {
+      "item": "hbm:ingot_steel"
+    },
+    "C": {
+      "item": "hbm:circuit"
+    }
+  },
+  "result": {
+    "item": "hbm:crane_splitter",
+    "count": 1
+  }
+}

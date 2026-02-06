@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "STS",
+    "THT",
+    "STS"
+  ],
+  "key": {
+    "S": {
+      "item": "hbm:cell_uf6"
+    },
+    "T": {
+      "item": "hbm:powder_aluminium"
+    },
+    "H": {
+      "item": "hbm:crystal_charred"
+    }
+  },
+  "result": {
+    "item": "hbm:crystal_pulsar",
+    "count": 32
+  }
+}

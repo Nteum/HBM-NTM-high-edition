@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " I ",
+    "IGI",
+    " I "
+  ],
+  "key": {
+    "I": {
+      "item": "hbm:ingot_pu_mix"
+    },
+    "G": {
+      "item": "hbm:ingot_graphite"
+    }
+  },
+  "result": {
+    "item": "hbm:watz_pellet",
+    "count": 1
+  }
+}

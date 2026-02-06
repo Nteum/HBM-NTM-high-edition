@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:bottle_nuka"
+    },
+    {
+      "item": "minecraft:carrot"
+    },
+    {
+      "item": "hbm:nugget_gold"
+    }
+  ],
+  "result": {
+    "item": "hbm:bottle_sparkle",
+    "count": 1
+  }
+}

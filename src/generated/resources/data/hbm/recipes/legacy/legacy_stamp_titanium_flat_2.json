@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "III",
+    "SSS"
+  ],
+  "key": {
+    "S": {
+      "item": "hbm:ingot_titanium"
+    },
+    "I": {
+      "item": "minecraft:nether_brick"
+    }
+  },
+  "result": {
+    "item": "hbm:stamp_titanium_flat",
+    "count": 1
+  }
+}

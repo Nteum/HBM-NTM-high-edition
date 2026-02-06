@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "G",
+    "A"
+  ],
+  "key": {
+    "G": {
+      "item": "hbm:grenade_if_generic"
+    },
+    "A": {
+      "item": "minecraft:slime_ball"
+    }
+  },
+  "result": {
+    "item": "hbm:grenade_if_sticky",
+    "count": 1
+  }
+}

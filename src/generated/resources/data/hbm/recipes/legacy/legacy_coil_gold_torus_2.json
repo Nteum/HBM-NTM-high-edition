@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " C ",
+    "CPC",
+    " C "
+  ],
+  "key": {
+    "P": {
+      "item": "hbm:plate_steel"
+    },
+    "C": {
+      "item": "hbm:coil_gold"
+    }
+  },
+  "result": {
+    "item": "hbm:coil_gold_torus",
+    "count": 2
+  }
+}
