@@ -20,10 +20,10 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class NukeBoy extends NukeBomb{
-//    public static final VoxelShape SHAPE = Block.box(-30,0,0,24,16,16);
+//    public static final VoxelShape this.shape = Block.box(-30,0,0,24,16,16);
     public NukeBoy(Properties pProperties, int range) {
         super(pProperties, range);
-        SHAPE = Block.box(-24,0,0,16,16,16);
+        this.shape = Block.box(-24,0,0,16,16,16);
     }
 
     @Override

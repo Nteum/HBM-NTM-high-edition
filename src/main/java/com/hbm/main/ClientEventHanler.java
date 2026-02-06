@@ -24,7 +24,6 @@ import com.hbm.render.entity.effect.EntityTorexRender;
 import com.hbm.render.entity.effect.RenderMeteor;
 import com.hbm.render.entity.missile.MissileTaintRenderer;
 import com.hbm.render.entity.mob.GlyphidRender;
-import com.hbm.render.entity.projectile.RenderRubble;
 import com.hbm.render.item.ItemModelReloader;
 import com.hbm.render.item.SpecialItemRender;
 import com.hbm.render.model.Models;
@@ -54,7 +53,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 public class ClientEventHanler {
     public static SpecialItemRender specialItemRender;
 
-    public static void registerEvents(IEventBus forgeBus, IEventBus modBus){
+    public static void registerEvents(IEventBus forgeBus, IEventBus modBus) {
         // mod总线事件
         modBus.addListener(ClientEventHanler::onClientSetup);
         modBus.addListener(ClientEventHanler::registerEntityLayers);
@@ -71,9 +70,13 @@ public class ClientEventHanler {
         forgeBus.addListener(DebugTagOverlay::onGuiRender);
         forgeBus.addListener(TooltipRegistries::onTooltip);
     }
+
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event)
     {
+        // 物品贴图逻辑
+        ItemProperties.register(ModItems.INGOT_U238M2.get(), HBM.rl("stage"),
+                (stack, level, entity, seed) -> stack.hasTag() && stack.getTag().contains("stage", Tag.TAG_INT) ? (float) stack.getTag().getInt("stage") : 0);
         /** 注册menu和gui */
         event.enqueueWork(()-> {
             // menu和screen的对应关系
@@ -127,13 +130,10 @@ public class ClientEventHanler {
             EntityRenderers.register(ModEntityType.ENTITY_MISSILE_TEST.get(), MissileTaintRenderer::new);
             EntityRenderers.register(ModEntityType.GLYPHID.get(), GlyphidRender::new);
             EntityRenderers.register(ModEntityType.ENTITY_METEOR.get(), RenderMeteor::new);
-            EntityRenderers.register(ModEntityType.ENTITY_RUBBLE.get(), RenderRubble::new);
 
             RenderUtils.init();
-            // 物品贴图逻辑
-            ItemProperties.register(ModItems.INGOT_U238M2.get(), HBM.rl("stage"),
-                    (stack, level, entity, seed) -> stack.hasTag() && stack.getTag().contains("stage", Tag.TAG_INT)
-                            ? (float) stack.getTag().getInt("stage") : 0);
+        });
+        event.enqueueWork(() -> {
             ItemProperties.register(ModItems.INGOT_NEPTUNIUM.get(), HBM.rl("stage"),
                     (stack, level, entity, seed) -> ConfigLBSM.enableLBSM && ConfigLBSM.enableLBSMFullSchrab ? 1 : 0);
             ItemProperties.register(HBMItems.pwr_fuel.get(), HBM.rl("pwr_type"),
@@ -150,12 +150,12 @@ public class ClientEventHanler {
     }
 
     @SubscribeEvent
-    public static void onClientSetupFinished(FMLLoadCompleteEvent event){
+    public static void onClientSetupFinished(FMLLoadCompleteEvent event) {
     }
 
     @SubscribeEvent
-    public static void onClientTick(TickEvent.ClientTickEvent event){
-        if (event.phase == TickEvent.Phase.END){
+    public static void onClientTick(TickEvent.ClientTickEvent event) {
+        if (event.phase == TickEvent.Phase.END) {
         }
     }
 
@@ -163,85 +163,94 @@ public class ClientEventHanler {
      * 关于按键事件：
      * - ScreenEvent.KeyPressed是在GUI里触发的，包括玩家物品栏界面/交流窗/物品gui，但不在没有gui的情况下触发
      * - InputEvent.Key是在没有GUI时出发的，有GUI时它会被覆盖，如果监听操控性按键，应当使用这个
-     * */
+     */
     @SubscribeEvent
-    public static void onKeyPressed(InputEvent.Key event){
+    public static void onKeyPressed(InputEvent.Key event) {
         ModKeyMapping.preCheck(event);
     }
 
     @SubscribeEvent
-    public static void registerEntityLayers(EntityRenderersEvent.RegisterLayerDefinitions event)
-    {
+    public static void registerEntityLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
         /* 注册entity model */
-        event.registerLayerDefinition(TestEntityModel.LAYER_LOCATION,TestEntityModel::createBodyLayer);
+        event.registerLayerDefinition(TestEntityModel.LAYER_LOCATION, TestEntityModel::createBodyLayer);
     }
 
     @SubscribeEvent
-    public static void registerAdditional(ModelEvent.RegisterAdditional event){
-        //注册自定义加载模型
+    public static void registerAdditional(ModelEvent.RegisterAdditional event) {
+        // 注册自定义加载模型
         Models.registerModels(event);
-//        // 显式告知游戏加载这些模型资源
-//        event.register(new ResourceLocation("hbm", "item/hs-elements"));
-//        event.register(new ResourceLocation("hbm", "item/hs-arsenic"));
-//        event.register(new ResourceLocation("hbm", "item/hs-vault"));
+        // // 显式告知游戏加载这些模型资源
+        // event.register(new ResourceLocation("hbm", "item/hs-elements"));
+        // event.register(new ResourceLocation("hbm", "item/hs-arsenic"));
+        // event.register(new ResourceLocation("hbm", "item/hs-vault"));
     }
 
     @SubscribeEvent
-    public static void modifyBakingResult(ModelEvent.ModifyBakingResult event){
+    public static void modifyBakingResult(ModelEvent.ModifyBakingResult event) {
         // 修改模型烘焙结果
         Models.modifyBakingResult(event);
-//        // 添加overrides
-//        // 1. 获取你的物品注册名对应的模型资源位置
-//        ModelResourceLocation mainModelLoc = new ModelResourceLocation(new ResourceLocation("hbm", "ingot_u238m2"), "inventory");
-//
-//        // 2. 获取主模型实例
-//        BakedModel mainModel = event.getModels().get(mainModelLoc);
-//
-//        if (mainModel != null) {
-//            // 3. 定义你的谓词逻辑（对应 JSON 中的 predicate）
-//            // 注意：ResourceLocation 必须和你代码中注册 ItemProperties 的一致
-//            ResourceLocation stageProperty = new ResourceLocation("hbm", "stage");
-//
-//            // 4. 获取子模型（这些模型必须在资源文件夹里有对应的 JSON 文件）
-//            Map<ItemOverride, BakedModel> itemOverrides = new HashMap<>();
-//            ModelResourceLocation modelLoc1 = new ModelResourceLocation(new ResourceLocation("hbm", "hs-elements"), "inventory");
-//            ModelResourceLocation modelLoc2 = new ModelResourceLocation(new ResourceLocation("hbm", "hs-arsenic"), "inventory");
-//            ModelResourceLocation modelLoc3 = new ModelResourceLocation(new ResourceLocation("hbm", "hs-vault"), "inventory");
-//            // 即使 JSON 里没写 overrides，只要这几个文件存在，加载器就会预加载它们
-//            BakedModel stage1Model = event.getModels().get(modelLoc1);
-//            BakedModel stage2Model = event.getModels().get(modelLoc2);
-//            BakedModel stage3Model = event.getModels().get(modelLoc3);
-//            if (stage1Model != null) {
-//                itemOverrides.put(new ItemOverride(modelLoc1, List.of(new ItemOverride.Predicate(stageProperty, 1.0F))), stage1Model);
-//            }
-//            if (stage2Model != null) {
-//                itemOverrides.put(new ItemOverride(modelLoc2, List.of(new ItemOverride.Predicate(stageProperty, 2.0F))), stage2Model);
-//            }
-//            if (stage3Model != null) {
-//                itemOverrides.put(new ItemOverride(modelLoc3, List.of(new ItemOverride.Predicate(stageProperty, 3.0F))), stage3Model);
-//            }
-//            // 创建ItemOverrides
-//            BakedModel customModel = new SimpleOverridesWrapper((SimpleBakedModel) mainModel, new SimpleOverridesWrapper.BakedItemOverrides(itemOverrides));
-//            // 7. 将修改后的模型放回注册表
-//            event.getModels().put(mainModelLoc, customModel);
-//
-//            System.out.println("HBM Debug: 成功手动注入了 " + itemOverrides.size() + " 个 Overrides！");
-//        }
+        // // 添加overrides
+        // // 1. 获取你的物品注册名对应的模型资源位置
+        // ModelResourceLocation mainModelLoc = new ModelResourceLocation(new
+        // ResourceLocation("hbm", "ingot_u238m2"), "inventory");
+        //
+        // // 2. 获取主模型实例
+        // BakedModel mainModel = event.getModels().get(mainModelLoc);
+        //
+        // if (mainModel != null) {
+        // // 3. 定义你的谓词逻辑（对应 JSON 中的 predicate）
+        // // 注意：ResourceLocation 必须和你代码中注册 ItemProperties 的一致
+        // ResourceLocation stageProperty = new ResourceLocation("hbm", "stage");
+        //
+        // // 4. 获取子模型（这些模型必须在资源文件夹里有对应的 JSON 文件）
+        // Map<ItemOverride, BakedModel> itemOverrides = new HashMap<>();
+        // ModelResourceLocation modelLoc1 = new ModelResourceLocation(new
+        // ResourceLocation("hbm", "hs-elements"), "inventory");
+        // ModelResourceLocation modelLoc2 = new ModelResourceLocation(new
+        // ResourceLocation("hbm", "hs-arsenic"), "inventory");
+        // ModelResourceLocation modelLoc3 = new ModelResourceLocation(new
+        // ResourceLocation("hbm", "hs-vault"), "inventory");
+        // // 即使 JSON 里没写 overrides，只要这几个文件存在，加载器就会预加载它们
+        // BakedModel stage1Model = event.getModels().get(modelLoc1);
+        // BakedModel stage2Model = event.getModels().get(modelLoc2);
+        // BakedModel stage3Model = event.getModels().get(modelLoc3);
+        // if (stage1Model != null) {
+        // itemOverrides.put(new ItemOverride(modelLoc1, List.of(new
+        // ItemOverride.Predicate(stageProperty, 1.0F))), stage1Model);
+        // }
+        // if (stage2Model != null) {
+        // itemOverrides.put(new ItemOverride(modelLoc2, List.of(new
+        // ItemOverride.Predicate(stageProperty, 2.0F))), stage2Model);
+        // }
+        // if (stage3Model != null) {
+        // itemOverrides.put(new ItemOverride(modelLoc3, List.of(new
+        // ItemOverride.Predicate(stageProperty, 3.0F))), stage3Model);
+        // }
+        // // 创建ItemOverrides
+        // BakedModel customModel = new SimpleOverridesWrapper((SimpleBakedModel)
+        // mainModel, new SimpleOverridesWrapper.BakedItemOverrides(itemOverrides));
+        // // 7. 将修改后的模型放回注册表
+        // event.getModels().put(mainModelLoc, customModel);
+        //
+        // System.out.println("HBM Debug: 成功手动注入了 " + itemOverrides.size() + " 个
+        // Overrides！");
+        // }
     }
 
     @SubscribeEvent
-    public static void registerParticleProvidersEvent(RegisterParticleProvidersEvent event){
-        //注册模组专属粒子效果
+    public static void registerParticleProvidersEvent(RegisterParticleProvidersEvent event) {
+        // 注册模组专属粒子效果
         ModParticleTypes.register(event);
     }
 
     @SubscribeEvent
-    public static void registerClientReloadListeners(RegisterClientReloadListenersEvent event){
+    public static void registerClientReloadListeners(RegisterClientReloadListenersEvent event) {
         event.registerReloadListener(GeoRenderPipeline.INSTANCE);
         event.registerReloadListener(ItemModelReloader.INSTANCE);
     }
-    public static BlockEntityWithoutLevelRenderer getLazyItemRender(){
-        if (specialItemRender == null){
+
+    public static BlockEntityWithoutLevelRenderer getLazyItemRender() {
+        if (specialItemRender == null) {
             specialItemRender = new SpecialItemRender();
         }
         return specialItemRender;

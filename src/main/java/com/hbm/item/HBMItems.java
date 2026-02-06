@@ -33,7 +33,6 @@ import com.hbm.item.weapon.ItemMissile;
 import com.hbm.item.weapon.ItemMissilePart;
 import com.hbm.item.weapon.grenade.ItemGrenade;
 import com.hbm.reactor.rbmk.RBMKLidType;
-import com.hbm.registries.ModItems;
 import com.hbm.registries.ModTabs;
 import com.hbm.registries.WrapperRegistry.ItemBuilder;
 import com.hbm.registries.WrapperRegistry.WrappedItemRegistry;
@@ -64,13 +63,11 @@ public class HBMItems {
 
     public static final List<WrappedItemRegistry> itemList = new ArrayList<>();
 
-    static {
-        // Static init for item definitions; registration is handled by ModItems.
-    }
-
-    public static void bootstrap() {
-        // No-op: forces class loading so ItemBuilder registrations run.
-    }
+        static {
+            // Tools are registered via ModItems to keep a single item registry.
+//            HBMComponent.register(ITEMS);
+            HBMWeapon.register(ITEMS);
+        }
 
     public static final RegistryObject<Item> REDSTONE_SWORD = new ItemBuilder("redstone_sword", ()->new RedstoneSword(Tiers.STONE, 3, -2.4F, new Item.Properties())).build();
     public static final RegistryObject<Item> BIG_SWORD = new ItemBuilder("big_sword", ()->new BigSword(Tiers.GOLD, 3, -2.4F, new Item.Properties())).build();
@@ -233,11 +230,11 @@ public class HBMItems {
     /* weapon */
     //armor
     //grenade
-    public static final RegistryObject<Item> grenade_generic = registerShared("grenade_generic",()->new ItemGrenade(new Item.Properties(), ItemGrenade.Type.GENERIC));
-    public static final RegistryObject<Item> grenade_strong = registerShared("grenade_strong",()->new ItemGrenade(new Item.Properties(), ItemGrenade.Type.STRONG));
-    public static final RegistryObject<Item> grenade_fire = registerShared("grenade_fire",()->new ItemGrenade(new Item.Properties(), ItemGrenade.Type.FIRE));
-    public static final RegistryObject<Item> grenade_frag = registerShared("grenade_frag",()->new ItemGrenade(new Item.Properties(), ItemGrenade.Type.FRAG));
-    public static final RegistryObject<Item> grenade_black_hole = registerShared("grenade_black_hole",()->new ItemGrenade(new Item.Properties(), ItemGrenade.Type.BLACK_HOLE));
+    public static final RegistryObject<Item> grenade_generic = ITEMS.register("grenade_generic",()->new ItemGrenade(new Item.Properties(), ItemGrenade.Type.GENERIC));
+    public static final RegistryObject<Item> grenade_strong = ITEMS.register("grenade_strong",()->new ItemGrenade(new Item.Properties(), ItemGrenade.Type.STRONG));
+    public static final RegistryObject<Item> grenade_fire = ITEMS.register("grenade_fire",()->new ItemGrenade(new Item.Properties(), ItemGrenade.Type.FIRE));
+    public static final RegistryObject<Item> grenade_frag = ITEMS.register("grenade_frag",()->new ItemGrenade(new Item.Properties(), ItemGrenade.Type.FRAG));
+    public static final RegistryObject<Item> grenade_black_hole = ITEMS.register("grenade_black_hole",()->new ItemGrenade(new Item.Properties(), ItemGrenade.Type.BLACK_HOLE));
 
 
 
@@ -898,19 +895,19 @@ public class HBMItems {
 //    public static final RegistryObject<Item> bucket_irradiated_polluted = ITEMS.register("bucket_irradiated_polluted",()->new BucketItem(ModFluids.IRRADIATED_POLLUTED_SOURCE_BLOCK,new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
 //    public static final RegistryObject<Item> bucket_sulfuric_acid = ITEMS.register("bucket_sulfuric_acid",()->new BucketItem(ModFluids.SULFURIC_ACID_SOURCE_BLOCK,new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
     //part
-    public static final RegistryObject<Item> overlay_my_fluid = registerShared("overlay_my_fluid",()->new Item(new Item.Properties()));
-    public static final RegistryObject<Item> crucible_template = registerShared("crucible_template",()->new Item(new Item.Properties()));
+    public static final RegistryObject<Item> overlay_my_fluid = ITEMS.register("overlay_my_fluid",()->new Item(new Item.Properties()));
+    public static final RegistryObject<Item> crucible_template = ITEMS.register("crucible_template",()->new Item(new Item.Properties()));
 
     //矿物
-    public static final RegistryObject<Item> BEDROCK_ORE = registerShared("bedrock_ore_base",()->new BedrockOreItem(new Item.Properties()));
+    public static final RegistryObject<Item> BEDROCK_ORE = ITEMS.register("bedrock_ore_base",()->new BedrockOreItem(new Item.Properties()));
 
-    public static final RegistryObject<Item> reacher = registerShared("reacher",()->new Item(new Item.Properties()));
-    public static final RegistryObject<Item> SCREWDRIVER = registerShared("screwdriver",()->new Item(new Item.Properties()));
+    public static final RegistryObject<Item> reacher = ITEMS.register("reacher",()->new Item(new Item.Properties()));
+    public static final RegistryObject<Item> SCREWDRIVER = ITEMS.register("screwdriver",()->new Item(new Item.Properties()));
     //升级组件
 //    public static final RegistryObject<Item> UPGRADE_BASE = ITEMS.register("upgrade_base",()->new Item(new Item.Properties()));
     //导弹
 //    public static final RegistryObject<Item> DESIGNATOR = ITEMS.register("designator",()->new ItemDesignator(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> MISSILE_GENERIC = registerShared("missile_generic",()->new ItemMissilePart(new Item.Properties().stacksTo(1), ItemMissilePart.MissileTier.TIER1));
+    public static final RegistryObject<Item> MISSILE_GENERIC = ITEMS.register("missile_generic",()->new ItemMissilePart(new Item.Properties().stacksTo(1), ItemMissilePart.MissileTier.TIER1));
     // RBMK
     public static final RegistryObject<Item> rbmk_lid = machine("rbmk_lid", () -> new ItemRBMKLid(new Item.Properties(), RBMKLidType.SOLID));
     public static final RegistryObject<Item> rbmk_lid_glass = machine("rbmk_lid_glass", () -> new ItemRBMKLid(new Item.Properties(), RBMKLidType.GLASS));
@@ -1022,17 +1019,7 @@ public class HBMItems {
     
     
     // 填充物品，游戏内无法获得，用于避免物品被匹配上
-    public static final RegistryObject<Item> DUMMY_ITEM = registerShared("dummy_item", ()->new Item(new Item.Properties()));
-    private static RegistryObject<Item> registerShared(String name, Supplier<? extends Item> sup) {
-        RegistryObject<Item> existing = ModItems.ITEMS.getEntries().stream()
-                .filter(entry -> entry.getId() != null && entry.getId().getPath().equals(name))
-                .findFirst()
-                .orElse(null);
-        if (existing != null) {
-            return existing;
-        }
-        return ModItems.ITEMS.register(name, sup);
-    }
+    public static final RegistryObject<Item> DUMMY_ITEM = ITEMS.register("dummy_item", ()->new Item(new Item.Properties()));
     public static void register(IEventBus eventBus){
         HBMComponent.register(ITEMS);
         ITEMS.register(eventBus);

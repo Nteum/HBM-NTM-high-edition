@@ -3,6 +3,8 @@ package com.hbm.gui.menu;
 import com.hbm.blockentity.machine.rbmk.RBMKPeripheralEntity;
 import com.hbm.gui.ModMenuType;
 import com.hbm.reactor.rbmk.RBMKPeripheralType;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.Mth;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -19,9 +21,24 @@ public class RBMKPeripheralMenu extends BaseMachineMenu {
     public static final int GRID_FUEL = 2;
     public static final int GRID_CONTROL = 3;
 
+    public static final int LINK_CLEAR_BUTTON = 1;
+    public static final int LINK_APPLY_BUTTON = 2;
+    public static final int AXIS_X = 0;
+    public static final int AXIS_Y = 1;
+    public static final int AXIS_Z = 2;
+
+    private static final int COORD_LIMIT = 30_000_000;
+    private static final int COORD_OFFSET = COORD_LIMIT;
+    private static final int COORD_RANGE = COORD_OFFSET * 2 + 1;
+    private static final int COORD_BUTTON_BASE = 1_000_000_000;
+
     private static final int TELEMETRY_SLOTS = 10;
     private static final int GRID_DATA_START = TELEMETRY_SLOTS;
     private static final int DATA_SLOTS = TELEMETRY_SLOTS + GRID_SIZE;
+
+    private int pendingLinkX;
+    private int pendingLinkY;
+    private int pendingLinkZ;
 
     public RBMKPeripheralMenu(int containerId, Inventory playerInventory) {
         this(containerId, playerInventory, new SimpleContainer(0), new SimpleContainerData(DATA_SLOTS));
@@ -36,8 +53,30 @@ public class RBMKPeripheralMenu extends BaseMachineMenu {
 
     @Override
     public boolean clickMenuButton(Player player, int id) {
-        if (id == 0 && this.container instanceof RBMKPeripheralEntity peripheral) {
-            return peripheral.triggerAz5();
+        if (this.container instanceof RBMKPeripheralEntity peripheral) {
+            if (id == 0) {
+                return peripheral.triggerAz5();
+            }
+            if (id == LINK_CLEAR_BUTTON) {
+                peripheral.clearManualLink();
+                return true;
+            }
+            if (id == LINK_APPLY_BUTTON) {
+                return peripheral.linkToColumn(new BlockPos(pendingLinkX, pendingLinkY, pendingLinkZ));
+            }
+            if (isCoordButton(id)) {
+                int axis = decodeAxis(id);
+                int value = decodeCoord(id);
+                switch (axis) {
+                    case AXIS_X -> pendingLinkX = value;
+                    case AXIS_Y -> pendingLinkY = value;
+                    case AXIS_Z -> pendingLinkZ = value;
+                    default -> {
+                        return false;
+                    }
+                }
+                return true;
+            }
         }
         return super.clickMenuButton(player, id);
     }
@@ -103,5 +142,23 @@ public class RBMKPeripheralMenu extends BaseMachineMenu {
         }
         int rowMask = containerData.get(index);
         return (rowMask >>> (col * 2)) & 0x3;
+    }
+
+    public static int coordButtonId(int axis, int value) {
+        int clamped = Mth.clamp(value, -COORD_LIMIT, COORD_LIMIT);
+        return COORD_BUTTON_BASE + axis * COORD_RANGE + (clamped + COORD_OFFSET);
+    }
+
+    private static boolean isCoordButton(int id) {
+        return id >= COORD_BUTTON_BASE && id < COORD_BUTTON_BASE + (COORD_RANGE * 3);
+    }
+
+    private static int decodeAxis(int id) {
+        return (id - COORD_BUTTON_BASE) / COORD_RANGE;
+    }
+
+    private static int decodeCoord(int id) {
+        int offset = (id - COORD_BUTTON_BASE) % COORD_RANGE;
+        return offset - COORD_OFFSET;
     }
 }

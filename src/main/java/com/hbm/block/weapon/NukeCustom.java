@@ -28,12 +28,12 @@ import java.util.List;
 import java.util.Random;
 
 public class NukeCustom extends NukeBomb implements IBomb{
-//    public static final VoxelShape SHAPE = Block.box(-30,0,0,24,16,16);
+//    public static final VoxelShape this.shape = Block.box(-30,0,0,24,16,16);
     public static final int maxNuke = 200;
 
     public NukeCustom(Properties pProperties, int range) {
         super(pProperties,range);
-        SHAPE = Block.box(-8,0,0,48,16,16);
+        this.shape = Block.box(-8,0,0,48,16,16);
     }
 
     @Override

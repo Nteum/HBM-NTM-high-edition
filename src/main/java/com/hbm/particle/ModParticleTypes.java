@@ -29,7 +29,7 @@ public class ModParticleTypes {
     public static Map<String, String> texMap = new HashMap<>();
 
     public static final RegistryObject<SimpleParticleType> HBM_SMOKE = addSimple("nuke_smoke",HBMSmokeParticle::new);
-    public static final RegistryObject<SimpleParticleType> ROCKET_FLAME = addSimple("rocket_flame", "contrail", ParticleRocketFlame::new, true);
+    public static final RegistryObject<SimpleParticleType> ROCKET_FLAME = addSimple("rocket_flame", "contrail", ParticleRocketFlame::new);
     public static final RegistryObject<SimpleParticleType> RADIATION_FOG = addSimple("radiation_fog", "fog", ParticleRadiationFog::new);
     public static final RegistryObject<SimpleParticleType> SHOCKWAVE = addSimple("shockwave", ShockWaveParticle::new);
     public static final RegistryObject<SimpleParticleType> DEAD_LEAF = addSimple("dead_leaf", DeadLeafParticle::new);
@@ -45,10 +45,7 @@ public class ModParticleTypes {
         return addSimple(name, name, constructor);
     }
     public static RegistryObject<SimpleParticleType> addSimple(String name, String tex, SimpleParticleConstructor<? extends Particle> constructor){
-        return addSimple(name, tex, constructor, false);
-    }
-    public static RegistryObject<SimpleParticleType> addSimple(String name, String tex, SimpleParticleConstructor<? extends Particle> constructor, boolean overridelimiter){
-        RegistryObject<SimpleParticleType> object = PARTICLE_TYPES.register(name, () -> new SimpleParticleType(overridelimiter));
+        RegistryObject<SimpleParticleType> object = PARTICLE_TYPES.register(name, () -> new SimpleParticleType(false));
         simpleParticles.put(object, spriteSet -> new ParticleProvider<>() {
             @Nullable
             @Override

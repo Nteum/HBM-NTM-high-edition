@@ -33,7 +33,7 @@ import java.util.List;
 public class BlockChemplant extends BlockDummyable {
     public BlockChemplant(Properties pProperties) {
         super(pProperties);
-        SHAPE = Block.box(-32.0,0.0D,-32.0D,32.0D,48.0D,32.0D);
+        this.shape = Block.box(-32.0,0.0D,-32.0D,32.0D,48.0D,32.0D);
     }
 
     @Override

@@ -11,7 +11,7 @@ public class BlockICFReactor extends BlockDummyable {
 
     public BlockICFReactor(Properties properties) {
         super(properties);
-        SHAPE = box(-32.0D, 0.0D, -32.0D, 32.0D, 64.0D, 32.0D);
+        this.shape = box(-32.0D, 0.0D, -32.0D, 32.0D, 64.0D, 32.0D);
     }
 
     @Override

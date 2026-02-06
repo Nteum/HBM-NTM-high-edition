@@ -56,8 +56,8 @@ import java.util.List;
 //所有多方块结构的父类
 //主要处理可以协同破坏和恢复的多方块机器
 public abstract class BlockDummyable extends BlockMachineBase implements ICustomBlockHighlight {
-    public static boolean doShapeRot = false;
-    public static VoxelShape SHAPE;
+    protected boolean shapeRotates = false;
+    protected VoxelShape shape = Shapes.block();
     // 某个方块是否为核心，如果是核心，建立功能性方块实体，否则只是代理方块实体。
     public static final BooleanProperty IS_CORE = HBMBlockProperties.IS_CORE;
     public BlockDummyable(Properties pProperties) {
@@ -200,7 +200,9 @@ public abstract class BlockDummyable extends BlockMachineBase implements ICustom
 
     @Override
     public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
-        return pState.getValue(IS_CORE) ? (doShapeRot ? DirectionUtils.voxelShapeRot(SHAPE, pState.getValue(FACING)) : SHAPE) : Shapes.block();
+        return pState.getValue(IS_CORE)
+                ? (shapeRotates ? DirectionUtils.voxelShapeRot(shape, pState.getValue(FACING)) : shape)
+                : Shapes.block();
     }
 
     @Override

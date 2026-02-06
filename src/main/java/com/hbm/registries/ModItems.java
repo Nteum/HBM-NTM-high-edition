@@ -6,6 +6,7 @@ import com.hbm.HBMLang;
 import com.hbm.config.ConfigLBSM;
 import com.hbm.datagen.LanguageProvider;
 import com.hbm.datagen.model.ItemModelGen;
+import com.hbm.compat.legacy.LegacyItems;
 import com.hbm.item.HBMCombat;
 import com.hbm.item.HBMComponent;
 import com.hbm.item.HBMWeapon;
@@ -54,6 +55,7 @@ public class ModItems {
     public static final List<WrappedItemRegistry> itemList = new ArrayList<>();
 
     static {
+        HBMtools.register(ITEMS);
         HBMWeapon.register(ITEMS);
         HBMCombat.register(ITEMS);
     }
@@ -832,10 +834,11 @@ public class ModItems {
     public static final RegistryObject<Item> CELL_EMPTY = parts("cell_empty", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
     public static final RegistryObject<Item> GEIGER_COUNTER = parts("geiger_counter_hand", ()->new ItemGeigerCounter(new Item.Properties()), HBMKey.ORDERLY_GEN);
     public static final RegistryObject<Item> DEBUG_WAND = parts("debug_wand", ()->new ItemDebugWand(new Item.Properties()), HBMKey.ORDERLY_GEN);
-    public static final RegistryObject<Item> METEOR_REMOTE = parts("meteor_remote", ()->new ItemMeteorRemote(new Item.Properties().durability(2)), "Meteorite Remote");
+    public static final RegistryObject<Item> METEOR_REMOTE = parts("meteor_remote", ()->new ItemMeteorRemote(new Item.Properties()), "Meteorite Remote");
     // 填充物品，游戏内无法获得，用于避免物品被匹配上
     public static final RegistryObject<Item> DUMMY_ITEM = ITEMS.register("dummy_item", ()->new Item(new Item.Properties()));
     public static void register(IEventBus eventBus){
+        LegacyItems.registerLegacy();
         HBMComponent.register(ITEMS);
         ITEMS.register(eventBus);
     }

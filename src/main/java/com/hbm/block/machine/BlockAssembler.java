@@ -28,10 +28,10 @@ import java.util.List;
 import static com.hbm.block.base.BedLikeBlock.square;
 
 public class BlockAssembler extends BlockDummyable {
-//    public static final VoxelShape SHAPE = Block.box(-32.0,0.0D,-32.0D,32.0D,32.0D,32.0D);
+//    public static final VoxelShape this.shape = Block.box(-32.0,0.0D,-32.0D,32.0D,32.0D,32.0D);
     public BlockAssembler(Properties pProperties) {
         super(pProperties);
-        SHAPE = Block.box(-32.0,0.0D,-32.0D,32.0D,32.0D,32.0D);
+        this.shape = Block.box(-32.0,0.0D,-32.0D,32.0D,32.0D,32.0D);
     }
 
     @Override
