@@ -1,6 +1,7 @@
 package com.hbm.utils.multiblock;
 
 import com.hbm.block.HBMMachine;
+import com.hbm.block.machine.BlockAssembler;
 import com.hbm.blockentity.base2.DummyableBlockEntity;
 import com.hbm.blockentity.base2.TileProxyBase;
 import com.hbm.capabilities.HBMCaps;
@@ -161,6 +162,19 @@ public class MultiblockData {
             }
         }
         return list;
+    }
+
+    public void assignCapabilities(DummyableBlockEntity be, Direction facing){
+        if (!be.hasLevel() || be.getLevel().isClientSide) return;
+        Level level = be.getLevel();
+        capsMap.forEach((offset, capMap) -> {
+            BlockPos dummyablePos = be.getBlockPos().offset(DirectionUtils.offsetRot(offset, SOUTH, facing));
+            BlockEntity dummyableTile = level.getBlockEntity(dummyablePos);
+            if (dummyableTile != null && dummyableTile instanceof TileProxyBase tileProxy){
+                capMap.forEach((cap, dirSet) -> be.getCapability(cap).ifPresent(handler -> tileProxy.capabilitiesContent.addCapability(cap, handler, new HashSet<>(DirectionUtils.horizRot(SOUTH, facing, dirSet)))));
+                be.getLevel().updateNeighborsAt(dummyableTile.getBlockPos(), dummyableTile.getBlockState().getBlock());
+            }
+        });
     }
 
     /** 工具函数，用于计算立方体型空间的偏移量

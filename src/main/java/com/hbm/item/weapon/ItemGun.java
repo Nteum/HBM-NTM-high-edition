@@ -1,6 +1,6 @@
 package com.hbm.item.weapon;
 
-import com.hbm.main.ClientEventHanler;
+import com.hbm.main.ClientEventHandler;
 import com.hbm.render.RenderUtils;
 import com.hbm.render.model.Models;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -30,7 +30,7 @@ public class ItemGun extends Item {
         consumer.accept(new IClientItemExtensions() {
             @Override
             public BlockEntityWithoutLevelRenderer getCustomRenderer() {
-                return ClientEventHanler.getLazyItemRender();
+                return ClientEventHandler.getLazyItemRender();
             }
         });
     }

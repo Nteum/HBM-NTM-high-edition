@@ -7,6 +7,8 @@ import com.mojang.blaze3d.vertex.Tesselator;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.color.block.BlockColors;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.ModelBlockRenderer;
@@ -15,17 +17,26 @@ import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.SimpleBakedModel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Vec3i;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.BlockAndTintGetter;
+import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RegisterShadersEvent;
 import net.minecraftforge.client.model.data.ModelData;
 import net.minecraftforge.client.model.renderable.ITextureRenderTypeLookup;
+import org.joml.Matrix3f;
+import org.joml.Matrix4f;
 
 import java.util.List;
 
+@OnlyIn(Dist.CLIENT)
 public class RenderUtils {
     //参考blockRenderDispatcher的renderSingleBlock对单个模型进行渲染
     public static void renderBlockModel(BakedModel model, BlockState state, ModelBlockRenderer modelRenderer,
@@ -73,6 +84,65 @@ public class RenderUtils {
 
             pConsumer.putBulkData(pPose, bakedquad, f, f1, f2, pPackedLight, pPackedOverlay);
         }
+    }
+    public static void renderLeash(Vec3 start, Vec3 end, PoseStack pPose, MultiBufferSource pBuffer,float pPartialTick){
+        pPose.pushPose();
+        double d0 = (Mth.lerp(pPartialTick, start.y, end.y) * ((float)Math.PI / 180F)) + (Math.PI / 2D);
+        double d1 = Math.cos(d0) * end.z + Math.sin(d0) * end.x;
+        double d2 = Math.sin(d0) * end.z - Math.cos(d0) * end.x;
+        pPose.translate(d1, end.y, d2);
+        float distX = (float)(start.x - end.x);
+        float distY = (float)(start.y - end.y);
+        float distZ = (float)(start.z - end.z);
+        float f3 = 0.025F;
+        VertexConsumer vertexconsumer = pBuffer.getBuffer(RenderType.leash());
+        Matrix4f matrix4f = pPose.last().pose();
+        float f4 = Mth.invSqrt(distX * distX + distZ * distZ) * f3 / 2.0F;
+        float f5 = distZ * f4;
+        float f6 = distX * f4;
+        ClientLevel level = Minecraft.getInstance().level;
+        int i = level == null ? 0 : level.getBrightness(LightLayer.BLOCK, new BlockPos((int) start.x, (int) start.y, (int) start.z));
+        int j = level == null ? 0 : level.getBrightness(LightLayer.BLOCK, new BlockPos((int) end.x, (int) end.y, (int) end.z));
+        int k = level == null ? 0 : level.getBrightness(LightLayer.SKY, new BlockPos((int) start.x, (int) start.y, (int) start.z));
+        int l = level == null ? 0 : level.getBrightness(LightLayer.SKY, new BlockPos((int) end.x, (int) end.y, (int) end.z));
+
+        for(int i1 = 0; i1 <= 24; ++i1) {
+            addVertexPair(vertexconsumer, matrix4f, distX, distY, distZ, i, j, k, l, 0.025F, 0.025F, f5, f6, i1, false);
+        }
+
+        for(int j1 = 24; j1 >= 0; --j1) {
+            addVertexPair(vertexconsumer, matrix4f, distX, distY, distZ, i, j, k, l, 0.025F, 0.0F, f5, f6, j1, true);
+        }
+
+        pPose.popPose();
+    }
+    private static void addVertexPair(VertexConsumer consumer, Matrix4f matrix, float deltaX, float deltaY, float deltaZ, int pEntityBlockLightLevel, int pLeashHolderBlockLightLevel,
+                                      int pEntitySkyLightLevel, int pLeashHolderSkyLightLevel, float p_174317_, float p_174318_, float p_174319_, float p_174320_, int pIndex, boolean flagSide) {
+        float pointOrder = (float)pIndex / 24.0F;
+        int i = (int)Mth.lerp(pointOrder, (float)pEntityBlockLightLevel, (float)pLeashHolderBlockLightLevel);
+        int j = (int)Mth.lerp(pointOrder, (float)pEntitySkyLightLevel, (float)pLeashHolderSkyLightLevel);
+        int k = LightTexture.pack(i, j);
+        float f1 = pIndex % 2 == (flagSide ? 1 : 0) ? 0.7F : 1.0F;
+        float f2 = 0.5F * f1;
+        float f3 = 0.4F * f1;
+        float f4 = 0.3F * f1;
+        float f5 = deltaX * pointOrder;
+        float f6 = deltaY > 0.0F ? deltaY * pointOrder * pointOrder : deltaY - deltaY * (1.0F - pointOrder) * (1.0F - pointOrder);
+        float f7 = deltaZ * pointOrder;
+        consumer.vertex(matrix, f5 - p_174319_, f6 + p_174318_, f7 + p_174320_).color(f2, f3, f4, 1.0F).uv2(k).endVertex();
+        consumer.vertex(matrix, f5 + p_174319_, f6 + p_174317_ - p_174318_, f7 - p_174320_).color(f2, f3, f4, 1.0F).uv2(k).endVertex();
+    }
+    public static void renderLine(Vec3 start, Vec3 end, PoseStack pPose, MultiBufferSource pBuffer,float pPartialTick){
+        pPose.pushPose();
+        VertexConsumer buffer = pBuffer.getBuffer(RenderType.lineStrip());
+        Matrix4f matrix4f = pPose.last().pose();
+        Matrix3f normal = pPose.last().normal();
+        end = end.subtract(start);
+        start = new Vec3(start.x - Math.floor(start.x), start.y - Math.floor(start.y), start.z - Math.floor(start.z));
+        pPose.translate(start.x, start.y, start.z);
+        buffer.vertex(matrix4f, 0, 0, 0).color(255,0,0,255).normal(0, 1, 0).endVertex();
+        buffer.vertex(matrix4f, (float) end.x, (float) end.y, (float) end.z).color(255,0,0,255).normal(0, 1, 0).endVertex();
+        pPose.popPose();
     }
     /**
      * 独立建立局部multisource进行渲染，适用于只有VertexConsumer传进来，但需要单独的texture或rendertype渲染的情况

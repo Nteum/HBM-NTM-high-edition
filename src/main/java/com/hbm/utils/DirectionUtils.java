@@ -1,15 +1,18 @@
 package com.hbm.utils;
 
+import com.hbm.block.logistic.BlockConnector;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
+import net.minecraft.util.Mth;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class DirectionUtils {
@@ -36,8 +39,10 @@ public class DirectionUtils {
      * */
     public static Direction horizRot(Direction refDir, Direction newRefDir, Direction dir){
         // 只处理水平旋转（NORTH=2, EAST=5, SOUTH=3, WEST=4），上下方向不考虑
-        int times = (newRefDir.get2DDataValue() - refDir.get2DDataValue() + 4) % 4;
-        return Direction.from2DDataValue((dir.get2DDataValue() + times) % 4);
+        return dir.getAxis() == Direction.Axis.Y ? dir : Direction.from2DDataValue((dir.get2DDataValue() + (newRefDir.get2DDataValue() - refDir.get2DDataValue() + 4) % 4) % 4);
+    }
+    public static List<Direction> horizRot(Direction refDir, Direction newRefDir, Collection<Direction> dirs){
+        return dirs.stream().map(dir -> horizRot(refDir, newRefDir, dir)).toList();
     }
 
     /** 偏移量offset的旋转 */
@@ -72,7 +77,9 @@ public class DirectionUtils {
     }
     /** 模型旋转的逻辑 */
     public static void generalMachineRotate(PoseStack poseStack, BlockState blockState){
-        Direction facing = blockState.getValue(BlockStateProperties.HORIZONTAL_FACING);
+        Direction facing = blockState.hasProperty(BlockStateProperties.FACING) ? blockState.getValue(BlockStateProperties.FACING) :
+                blockState.hasProperty(BlockStateProperties.HORIZONTAL_FACING) ? blockState.getValue(BlockStateProperties.HORIZONTAL_FACING) :
+                Direction.NORTH;
         generalMachineRotate(poseStack, facing, 0.5f, 0.5f);
     }
     /**
@@ -99,6 +106,29 @@ public class DirectionUtils {
                 poseStack.mulPose(Axis.YP.rotationDegrees(270));
             }
         }
+    }
+    // 默认模型中心点在(0,0)，且UP为正方向
+    public static void generalMachineRotate(PoseStack poseStack, Direction facing, float centerX, float centerY, float centerZ){
+        // 先转y轴，后转x轴
+        poseStack.translate(centerX, centerY, centerZ);
+        switch (facing){
+            case UP -> {}
+            case DOWN -> poseStack.mulPose(Axis.XN.rotation(Mth.PI));
+            case SOUTH -> {
+                poseStack.mulPose(Axis.YN.rotation(Mth.PI));
+                poseStack.mulPose(Axis.XN.rotation(Mth.HALF_PI));
+            }
+            case EAST -> {
+                poseStack.mulPose(Axis.YN.rotation(Mth.HALF_PI));
+                poseStack.mulPose(Axis.XN.rotation(Mth.HALF_PI));
+            }
+            case NORTH -> poseStack.mulPose(Axis.XN.rotation(Mth.HALF_PI));
+            case WEST -> {
+                poseStack.mulPose(Axis.YN.rotation(-Mth.HALF_PI));
+                poseStack.mulPose(Axis.XN.rotation(Mth.HALF_PI));
+            }
+        }
+        poseStack.translate(-centerX, -centerY, -centerZ);
     }
     public static VoxelShape voxelShapeRot(VoxelShape shape, Direction facing) {
         return voxelShapeRot(shape, Direction.SOUTH, facing);

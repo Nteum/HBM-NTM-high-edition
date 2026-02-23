@@ -697,7 +697,7 @@ public class ModItems {
 //
 //    casing = new ItemEnumMulti(ItemEnums.EnumCasingType.class, true, true).setUnlocalizedName("casing").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":casing");
 //
-//    wiring_red_copper = new ItemWiring().setUnlocalizedName("wiring_red_copper").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":wiring_red_copper");
+    public static final RegistryObject<Item> WIRING_RED_COPPER = parts("wiring_red_copper", ()->new ItemWiring(new Item.Properties().stacksTo(1).durability(20)), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
 //
 //    pellet_rtg_depleted = new ItemRTGPelletDepleted().setContainerItem(plate_iron).setUnlocalizedName("pellet_rtg_depleted").setCreativeTab(MainRegistry.controlTab);
 //

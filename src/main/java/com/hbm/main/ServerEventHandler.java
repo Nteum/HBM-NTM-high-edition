@@ -8,6 +8,7 @@ import com.hbm.registries.ModItems;
 import com.hbm.item.env.ItemEggGlyphid;
 import com.hbm.network.ServerMsgHandler;
 import com.hbm.registries.HBMDamage;
+import com.hbm.utils.transport_net.EnergyNetworkSystem;
 import com.hbm.utils.transport_net.FluidNetworkSystem;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -22,6 +23,7 @@ import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.EntityLeaveLevelEvent;
 import net.minecraftforge.event.entity.item.ItemTossEvent;
+import net.minecraftforge.event.level.LevelEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent;
@@ -31,7 +33,8 @@ public class ServerEventHandler {
     public static void registerEvents(IEventBus forgeBus, IEventBus modBus){
         modBus.addListener(ServerEventHandler::onServerSetup);
         modBus.addListener(ServerEventHandler::createEntityAttribute);
-        forgeBus.addListener(ServerEventHandler::worldTick);
+        forgeBus.addListener(ServerEventHandler::levelTick);
+        forgeBus.addListener(ServerEventHandler::levelUnload);
         forgeBus.addListener(ServerEventHandler::serverTick);
         forgeBus.addListener(ServerEventHandler::onPlayerClickInventory);
         forgeBus.addListener(ServerEventHandler::onPlayerTossItem);
@@ -43,12 +46,21 @@ public class ServerEventHandler {
     }
 
     @SubscribeEvent
-    public static void worldTick(TickEvent.LevelTickEvent event){
+    public static void levelTick(TickEvent.LevelTickEvent event){
         if (event.phase == TickEvent.Phase.END){
             Level level = event.level;
             if (level.dimension() == Space.LEVEL_KEY){
                 CelestialBodies.runServer(level);
             }
+            // 能量系统
+            if (EnergyNetworkSystem.has(level)) EnergyNetworkSystem.getOrCreate(level).tick();
+        }
+    }
+
+    @SubscribeEvent
+    public static void levelUnload(LevelEvent.Unload event){
+        if (!event.getLevel().isClientSide()){
+            EnergyNetworkSystem.INSTANCES.remove(event.getLevel());
         }
     }
 

@@ -58,6 +58,7 @@ public class BlockTagsGen extends BlockTagsProvider {
         this.tag(ModTags.Blocks.ANVIL).add(ModBlocks.anvil_iron.get(),ModBlocks.anvil_desh.get(),ModBlocks.anvil_bismuth.get());
         this.tag(ModTags.Blocks.MACHINE).add(ModBlocks.machine_assembler.get(),ModBlocks.RED_CABLE.get(),HBMMachine.CHEMPLANT.get(), ModBlocks.machine_shredder.get());
 //                .addTag(ModTags.Blocks.BATTERY);
+        this.tag(ModTags.Blocks.ENERGY_TRANSMITTER).add(ModBlocks.CONNECTOR.get(), ModBlocks.RED_CABLE.get());
 
         /** 原版tag */
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE).addTag(ModTags.Blocks.MACHINE).addTag(Tags.Blocks.ORES);

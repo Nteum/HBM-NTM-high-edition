@@ -1,6 +1,6 @@
 package com.hbm.item.weapon;
 
-import com.hbm.main.ClientEventHanler;
+import com.hbm.main.ClientEventHandler;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.api.distmarker.Dist;
@@ -22,7 +22,7 @@ public class ItemMissilePart extends Item{
         consumer.accept(new IClientItemExtensions() {
             @Override
             public BlockEntityWithoutLevelRenderer getCustomRenderer() {
-                return ClientEventHanler.getLazyItemRender();
+                return ClientEventHandler.getLazyItemRender();
             }
         });
     }

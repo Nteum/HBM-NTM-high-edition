@@ -75,6 +75,7 @@ public class HBMKey {
     public static final String REDSTONE = "redstone";
     public static final String CONNECTION = "connection";
     public static final String POSITION = "position";
+    public static final String POSITIONS = "positions";
     public static final String X = "x";
     public static final String Y = "y";
     public static final String Z = "z";
@@ -82,10 +83,11 @@ public class HBMKey {
     public static final String TOOLTIP = "tooltip";
     public static final String COUNTDOWN = "countdown";
     public static final String WATER_TIMER = "waterTimer";
+    public static final String JOINED = "joined";
     // machine name
     public static final String BLAST = "blast";
     public static final String ASSEMBLER = "assembler";
     public static final String CHEMPLANT = "chemplant";
-    // 物品和方块定义
+    //
 
 }

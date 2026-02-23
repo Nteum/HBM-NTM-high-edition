@@ -1,6 +1,6 @@
 package com.hbm.item.armor;
 
-import com.hbm.main.ClientEventHanler;
+import com.hbm.main.ClientEventHandler;
 import com.hbm.render.model.Models;
 import com.hbm.render.model.armor.ModelArmorAJR;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -42,7 +42,7 @@ public class ItemArmorAJR extends ItemArmorFSBPowered{
 
             @Override
             public BlockEntityWithoutLevelRenderer getCustomRenderer() {
-                return ClientEventHanler.getLazyItemRender();
+                return ClientEventHandler.getLazyItemRender();
             }
         });
     }

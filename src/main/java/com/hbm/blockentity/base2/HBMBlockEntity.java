@@ -28,8 +28,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public abstract class HBMBlockEntity extends CapabilityBlockEntity implements IExtendedItemHandler, IEnergyHandler,
-        WorldlyContainer, Nameable {
+public abstract class HBMBlockEntity extends CapabilityBlockEntity implements IExtendedItemHandler, IEnergyHandler, WorldlyContainer, Nameable {
 
     @Nullable
     private Component name;

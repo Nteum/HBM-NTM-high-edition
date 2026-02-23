@@ -1,6 +1,7 @@
 package com.hbm.utils;
 
 import com.hbm.HBM;
+import com.hbm.HBMKey;
 import com.hbm.api.Coord4D;
 import com.hbm.api.annotations.ParametersAreNotNullByDefault;
 import com.hbm.addational_data.DataEntry;
@@ -11,18 +12,16 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectFunction;
 import it.unimi.dsi.fastutil.shorts.ShortConsumer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.NbtUtils;
-import net.minecraft.nbt.Tag;
+import net.minecraft.nbt.*;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.IForgeRegistry;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.UUID;
+import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.DoubleConsumer;
 import java.util.function.IntConsumer;
@@ -91,6 +90,35 @@ public class NBTUtils {
         }
         return null;
     }
+
+    public static Optional<CompoundTag> getSafeComponent(@Nullable CompoundTag tag, String key){
+        if (tag != null && tag.contains(key, Tag.TAG_COMPOUND)){
+            return Optional.of(tag.getCompound(key));
+        }
+        return Optional.empty();
+    }
+
+    public static void savePositions(CompoundTag tag, @Nullable Collection<BlockPos> positions){
+        if (positions == null || positions.isEmpty()) return;
+        int[] rawArray = new int[positions.size() * 3];
+        int i = 0;
+        for (BlockPos pos : positions) {
+            rawArray[i++] = pos.getX();
+            rawArray[i++] = pos.getY();
+            rawArray[i++] = pos.getZ();
+        }
+        tag.put(HBMKey.POSITIONS, new IntArrayTag(rawArray));
+    }
+    public static List<BlockPos> loadPositions(@Nullable CompoundTag tag){
+        if (tag == null || !tag.contains(HBMKey.POSITIONS, Tag.TAG_INT_ARRAY)) return new ArrayList<>();
+        int[] array = tag.getIntArray(HBMKey.POSITIONS);
+        List<BlockPos> result = new ArrayList<>(array.length / 3);
+        for (int i = 0; i < array.length; i += 3) {
+            result.add(new BlockPos(array[i], array[i + 1], array[i + 2]));
+        }
+        return result;
+    }
+
     public static void setByteIfPresent(CompoundTag nbt, String key, ByteConsumer setter) {
         if (nbt.contains(key, Tag.TAG_BYTE)) {
             setter.accept(nbt.getByte(key));
@@ -355,16 +383,5 @@ public class NBTUtils {
 
     public static void writeResourceKey(CompoundTag nbt, String key, ResourceKey<?> entry) {
         nbt.putString(key, entry.location().toString());
-    }
-
-    public static int[] blockpos2intarr(BlockPos pos){
-        return new int[]{pos.getX(),pos.getY(),pos.getZ()};
-    }
-    public static BlockPos intarr2blockpos(int[] arr){
-        if (arr.length < 3) {
-            HBM.LOGGER.warn("load block pos failed");
-            return BlockPos.ZERO;
-        }
-        return new BlockPos(arr[0],arr[1],arr[2]);
     }
 }

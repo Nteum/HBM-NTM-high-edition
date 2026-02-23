@@ -39,6 +39,7 @@ public class ModTags {
         public static final TagKey<Block> BATTERY = forgeTag("battery");
         public static final TagKey<Block> ANVIL = tag("anvil");
         public static final TagKey<Block> MACHINE = forgeTag("machine");
+        public static final TagKey<Block> ENERGY_TRANSMITTER = tag("energy_transmitter");
 
         //注册本模组tag，如果只限于本模组使用，请注册此tag
         private static TagKey<Block> tag(String pName) {

@@ -9,6 +9,7 @@ import com.hbm.api.energy.fe.TransmitHelper;
 import com.hbm.block.base.BlockContainerBase;
 import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.blockentity.base2.DummyableBlockEntity;
+import com.hbm.blockentity.interfaces.IPower;
 import com.hbm.capabilities.HBMCaps;
 import com.hbm.gui.menu.AssemblerMenu;
 import com.hbm.Inventory.recipe.AssemblerRecipe;
@@ -31,6 +32,7 @@ import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.*;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.energy.IEnergyStorage;
 import org.jetbrains.annotations.NotNull;
@@ -39,7 +41,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 import java.util.stream.IntStream;
 
-public class AssemblerEntity extends DummyableBlockEntity {
+public class AssemblerEntity extends DummyableBlockEntity implements IPower {
 //    int progress = 0;               //进度
     int power = 100;                //功率
     int energyCapacity = 100_000;   //最大储能
@@ -78,25 +80,18 @@ public class AssemblerEntity extends DummyableBlockEntity {
     public AssemblerEntity(BlockPos pPos, BlockState pBlockState) {
         super(ModBlockEntityType.ASSEMBLER_ENTITY.get(), pPos, pBlockState);
         items = NonNullList.withSize(17,ItemStack.EMPTY);
-//        capabilitiesCache.addCapabilityResolver(new SidedEnergyWrapper(HBMEnergyStorage.input(100_000)));
         this.capabilitiesContent.addCapability(HBMCaps.LONG_ENERGY, new ProxyEnergyHandler(energyContainer));
         this.capabilitiesContent.addCapability(ForgeCapabilities.ENERGY, this.forgeEnergy);
         multiblockData = MultiblockData.mapping.get(ModBlocks.machine_assembler.get());
-//        multiblockData.put(ForgeCapabilities.ENERGY, -1,0,1,Direction.SOUTH, 0,0,1,Direction.SOUTH, -1,0,-2,Direction.NORTH, 0,0,-2,Direction.NORTH)
-//                .put(ForgeCapabilities.ITEM_HANDLER, 1,0,-1, Direction.EAST, -2,0,0,Direction.WEST);
-//        multiblockData.transDirection(pPos,pBlockState.getValue(BlockAssembler.FACING));
     }
     public IEnergyStorage getEnergy(){
         return this.forgeEnergy;
     }
 
+
     @Override
     protected void onUpdateServer() {
         super.onUpdateServer();
-        if (this.isFormed) {
-            this.setDummyCaps();
-            this.isFormed = false;
-        }
         runDummyCaps(level, getBlockPos(), getBlockState(), this);
         absorbBatteryItem(this);
         transportItem(this);  //暂时只能不加判断地传入物品
@@ -171,7 +166,7 @@ public class AssemblerEntity extends DummyableBlockEntity {
         List<Tuple<BlockPos, Direction>> tuples = entity.multiblockData.getCapLocation(HBMCaps.LONG_ENERGY, entity.worldPosition, entity.getBlockState().getValue(BlockContainerBase.FACING));
         for (Tuple<BlockPos, Direction> tuple : tuples) {
             BlockPos dummyPos = tuple.getA();
-            TransmitHelper.machineTransmit(level,dummyPos,level.getBlockState(dummyPos),level.getBlockEntity(dummyPos));
+//            TransmitHelper.machineTransmit(level,dummyPos,level.getBlockState(dummyPos),level.getBlockEntity(dummyPos));
         }
     }
     private boolean craftSlotEmpty(){
@@ -220,14 +215,8 @@ public class AssemblerEntity extends DummyableBlockEntity {
     }
 
     @Override
-    public void onLoad() {
-        super.onLoad();
-        setDummyCaps();
-    }
-    @Override
     public void invalidateCaps() {
         super.invalidateCaps();
-//        capabilitiesCache.invalidateAll();
         this.capabilitiesContent.invalidateAll();
     }
 
@@ -252,11 +241,6 @@ public class AssemblerEntity extends DummyableBlockEntity {
             this.recipeNow = (AssemblerRecipe) this.level.getRecipeManager().byKey(resourceLocation).orElse(null);
         }
     }
-    public void setDummyCaps(){
-        if (hasLevel() && !level.isClientSide()){
-//            this.capabilitiesCache.allocDummyBlockCaps(level,this.multiblockData);
-        }
-    }
 
     private boolean consumeEnergy(long amount, boolean simulate) {
         if (amount <= 0) return true;
@@ -269,5 +253,16 @@ public class AssemblerEntity extends DummyableBlockEntity {
             this.energyContainer.onContentsChanged();
         }
         return true;
+    }
+
+    @Override
+    public long getPower() {
+        //运作就输入power，否则只需要输入三分之一功率
+        return running ? power : power / 3;
+    }
+
+    @Override
+    public void distributeCapabilities() {
+        this.multiblockData.assignCapabilities(this, this.getBlockState().getValue(BlockStateProperties.HORIZONTAL_FACING));
     }
 }

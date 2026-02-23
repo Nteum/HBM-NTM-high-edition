@@ -30,7 +30,7 @@ import java.util.stream.IntStream;
 public abstract class BaseMachineBlockEntity extends HBMBlockEntity implements WorldlyContainer, MenuProvider {
     //机器内部存储的物品，需要在子类中初始化
     private LockCode lockKey = LockCode.NO_LOCK;
-    public NonNullList<ItemStack> items;
+    public NonNullList<ItemStack> items = NonNullList.create(); // 默认设置为空用于避免程序崩溃
     public List<Mode> slotModes;
 
     public boolean running = false;    // 运行状态

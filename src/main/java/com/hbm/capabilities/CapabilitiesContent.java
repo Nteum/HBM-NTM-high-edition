@@ -86,15 +86,4 @@ public class CapabilitiesContent {
     public void invalidateAll(){
         lazyOptionalMap.forEach((capability,optional) -> optional.invalidate());
     }
-
-
-//    @Override
-//    public CompoundTag serializeNBT() {
-//        return null;
-//    }
-//
-//    @Override
-//    public void deserializeNBT(CompoundTag nbt) {
-//
-//    }
 }

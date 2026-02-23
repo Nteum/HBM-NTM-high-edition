@@ -12,6 +12,7 @@ import com.hbm.block.env.GlyphidSpawner;
 import com.hbm.block.env.WasteEarth;
 import com.hbm.block.env.WasteLeaves;
 import com.hbm.block.logistic.BlockCable;
+import com.hbm.block.logistic.BlockConnector;
 import com.hbm.block.machine.*;
 import com.hbm.block.machine.icf.BlockICFController;
 import com.hbm.block.machine.icf.BlockICFPress;
@@ -86,6 +87,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> machine_wood_burner = registerBlockWithItem("machine_wood_burner",
             () -> new WoodBurnerBlock(Properties.of().strength(3.0F).sound(SoundType.METAL)
                     .lightLevel(state -> state.getValue(WoodBurnerBlock.LIT) ? 13 : 0)));
+    public static final RegistryObject<Block> CONNECTOR = add("connector", ()->new BlockConnector(Properties.of()), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, HBMKey.ORDERLY_GEN, HBMKey.DROP_SELF);
     // Tokamak 聚变堆组件
     public static final RegistryObject<Block> tokamak_controller = registerBlockWithItem("tokamak_controller", ()->new TokamakControllerBlock(Properties.of().strength(5.0F).lightLevel(state -> 8)));
     public static final RegistryObject<Block> tokamak_casing = registerBlockWithItem("tokamak_casing", ()->new TokamakCasingBlock(Properties.of().strength(6.0F).explosionResistance(18.0F)));

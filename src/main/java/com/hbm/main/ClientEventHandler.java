@@ -26,7 +26,6 @@ import com.hbm.render.entity.effect.RenderMeteor;
 import com.hbm.render.entity.missile.MissileTaintRenderer;
 import com.hbm.render.entity.mob.GlyphidRender;
 import com.hbm.render.entity.projectile.RenderRubble;
-import com.hbm.render.item.ItemModelReloader;
 import com.hbm.render.item.SpecialItemRender;
 import com.hbm.render.model.Models;
 import com.hbm.render.model.engine.CustomPartsModel;
@@ -53,23 +52,23 @@ import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 
 //@Mod.EventBusSubscriber(modid = HBM.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 @OnlyIn(Dist.CLIENT)
-public class ClientEventHanler {
+public class ClientEventHandler {
     public static SpecialItemRender specialItemRender;
 
     public static void registerEvents(IEventBus forgeBus, IEventBus modBus){
         // mod总线事件
-        modBus.addListener(ClientEventHanler::onClientSetup);
-        modBus.addListener(ClientEventHanler::registerEntityLayers);
-        modBus.addListener(ClientEventHanler::registerAdditional);
-        modBus.addListener(ClientEventHanler::modifyBakingResult);
-        modBus.addListener(ClientEventHanler::registerParticleProvidersEvent);
-        modBus.addListener(ClientEventHanler::registerClientReloadListeners);
-        modBus.addListener(ClientEventHanler::onClientSetupFinished);
-        modBus.addListener(ClientEventHanler::registerColorHandlerItem);
-        modBus.addListener(ClientEventHanler::registerDimensionsSpecialEffects);
-        modBus.addListener(ClientEventHanler::registerGeometryLoaders);
+        modBus.addListener(ClientEventHandler::onClientSetup);
+        modBus.addListener(ClientEventHandler::registerEntityLayers);
+        modBus.addListener(ClientEventHandler::registerAdditional);
+        modBus.addListener(ClientEventHandler::modifyBakingResult);
+        modBus.addListener(ClientEventHandler::registerParticleProvidersEvent);
+        modBus.addListener(ClientEventHandler::registerClientReloadListeners);
+        modBus.addListener(ClientEventHandler::onClientSetupFinished);
+        modBus.addListener(ClientEventHandler::registerColorHandlerItem);
+        modBus.addListener(ClientEventHandler::registerDimensionsSpecialEffects);
+        modBus.addListener(ClientEventHandler::registerGeometryLoaders);
         // forge总线事件
-        forgeBus.addListener(ClientEventHanler::onKeyPressed);
+        forgeBus.addListener(ClientEventHandler::onKeyPressed);
         forgeBus.addListener(AtomicFlashOverlay::onClientTick);
         forgeBus.addListener(AtomicFlashOverlay::onGuiRender);
         forgeBus.addListener(DebugTagOverlay::onGuiRender);
@@ -119,6 +118,7 @@ public class ClientEventHanler {
             BlockEntityRenderers.register(ModBlockEntityType.RESEARCH_REACTOR_ENTITY.get(), ResearchReactorRenderer::new);
             BlockEntityRenderers.register(ModBlockEntityType.BREEDER_REACTOR_ENTITY.get(), ctx -> new BreederReactorRenderer());
             BlockEntityRenderers.register(ModBlockEntityType.TILE_SPACE_STATION.get(), SpaceStationRender::new);
+            BlockEntityRenderers.register(ModBlockEntityType.TILE_CONNECTOR.get(), ConnectorRender::new);
             //实体渲染
             EntityRenderers.register(ModEntityType.TEST_ENTITY.get(), TestEntityRenderer::new);
             EntityRenderers.register(ModEntityType.ENTITY_GRENADE_GENETIC.get(), ThrownItemRenderer::new);
@@ -203,7 +203,7 @@ public class ClientEventHanler {
     @SubscribeEvent
     public static void registerClientReloadListeners(RegisterClientReloadListenersEvent event){
         event.registerReloadListener(GeoRenderPipeline.INSTANCE);
-        event.registerReloadListener(ItemModelReloader.INSTANCE);
+//        event.registerReloadListener(ItemModelReloader.INSTANCE);
     }
     public static BlockEntityWithoutLevelRenderer getLazyItemRender(){
         if (specialItemRender == null){

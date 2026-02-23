@@ -21,9 +21,9 @@ import net.minecraftforge.common.util.LazyOptional;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
+
 /**
  * 基础的管道类，仅需存储管道的连接和模式
  * 暂时不需要考虑能力
@@ -58,5 +58,14 @@ public abstract class BasePipeBlockEntity extends UpdateableBlockEntity {
     }
     public static void serverTicker(Level level, BlockPos pPos, BlockState pState, BlockEntity pBlockEntity) {
         ((BasePipeBlockEntity)pBlockEntity).onUpdateServer();
+    }
+    public Set<BlockPos> getConnected(){
+        Set<BlockPos> set = new HashSet<>();
+        for (int i = 0; i < Direction.values().length; i++) {
+            if (connLimit[i] == Mode.BOTH){
+                set.add(this.getBlockPos().relative(Direction.from3DDataValue(i)));
+            }
+        }
+        return set;
     }
 }

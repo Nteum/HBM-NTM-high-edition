@@ -5,7 +5,7 @@ import net.minecraftforge.energy.IEnergyStorage;
 /**
  * Simple wrapper that exposes an {@link IEnergyContainer} as a Forge {@link IEnergyStorage}.
  */
-public final class HybridEnergyStorage implements IEnergyStorage {
+public final class HybridEnergyStorage implements IEnergyStorage, IEnergyHandler {
 
     private final IEnergyContainer delegate;
     private final int ratio;
@@ -57,7 +57,17 @@ public final class HybridEnergyStorage implements IEnergyStorage {
     }
 
     @Override
+    public IEnergyContainer getEnergyContainer() {
+        return delegate;
+    }
+
+    @Override
     public boolean canReceive() {
         return delegate.canReceive();
+    }
+
+    @Override
+    public void onContentsChanged() {
+
     }
 }

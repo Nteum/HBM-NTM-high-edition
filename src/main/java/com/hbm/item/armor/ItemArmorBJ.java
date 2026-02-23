@@ -1,11 +1,10 @@
 package com.hbm.item.armor;
 
 import com.hbm.item.HBMCombat;
-import com.hbm.main.ClientEventHanler;
+import com.hbm.main.ClientEventHandler;
 import com.hbm.render.model.Models;
 import com.hbm.render.model.armor.ModelArmorBJ;
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.client.model.HorseModel;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -13,7 +12,6 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.animal.horse.Horse;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
@@ -41,7 +39,7 @@ public class ItemArmorBJ extends ItemArmorFSBPowered{
 
             @Override
             public BlockEntityWithoutLevelRenderer getCustomRenderer() {
-                return ClientEventHanler.getLazyItemRender();
+                return ClientEventHandler.getLazyItemRender();
             }
         });
     }

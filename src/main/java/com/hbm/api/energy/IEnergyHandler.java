@@ -27,4 +27,7 @@ public interface IEnergyHandler extends IContentsListener {
     default void setEnergy(long amount){
         getEnergyContainer().setEnergy(amount);
     }
+    default long getNeeded(){
+        return getEnergyContainer().getNeeded();
+    }
 }

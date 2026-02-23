@@ -1,0 +1,16 @@
+{
+  "parent": "block/block",
+  "loader": "forge:obj",
+  "model": "hbm:models/block/connector.obj",
+  "mtl_override": "hbm:models/general.mtl",
+  "flip_v": true,
+  "textures": {
+    "texture0": "hbm:block/connector",
+    "particle": "hbm:block/connector"
+  },
+  "transform": {
+    "translation": [0.5, 0, 0.5],
+    "rotation": [0, 0, 0],
+    "scale": 1.0
+  }
+}

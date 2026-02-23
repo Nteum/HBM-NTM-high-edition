@@ -147,6 +147,7 @@ public class BlockStateGen extends BlockStateProvider {
         simpleBlockWithItem(ModBlocks.WASTE_LEAVES.get(), genBuiltInModelFile(ModBlocks.WASTE_LEAVES.get(), "leaves"));
         simpleBlockWithItem(ModBlocks.WASTE_GRASS.get(), genBuiltInModelFile(ModBlocks.WASTE_GRASS.get(), "cube_bottom_top"));
         addObjHorizonalModel(ModBlocks.SPACE_STATION_BASE.get(), "block/space_station_base");
+        simpleBlockWithItem(ModBlocks.CONNECTOR.get(), genBuiltInModelFile(ModBlocks.CONNECTOR.get(), "existing"));
     }
     // 方块和物品：纯cube all
     public void simpleBlockWithItem(Block block){
@@ -255,6 +256,8 @@ public class BlockStateGen extends BlockStateProvider {
             case "cube_bottom_top" -> models().cubeBottomTop(name, blockTexture.withSuffix("side"), blockTexture.withSuffix("bottom"), blockTexture.withSuffix("top"));
             case "cube_column" -> models().cubeColumn(name, blockTexture.withSuffix("side"), blockTexture.withSuffix("end"));
             case "leaves" -> models().leaves(name, blockTexture);
+            // 使用给定的model文件，这里假定只有
+            case "existing" -> models().getExistingFile(HBM.rl(name));
             default -> throw new IllegalStateException("Unexpected value: " + type);
         };
     }

@@ -2,10 +2,8 @@ package com.hbm.blockentity.machine;
 
 import com.hbm.HBMKey;
 import com.hbm.HBMLang;
-import com.hbm.api.energy.BasicEnergyContainer;
-import com.hbm.api.energy.HybridEnergyStorage;
-import com.hbm.api.energy.ProxyEnergyHandler;
-import com.hbm.api.energy.TransmitUtils;
+import com.hbm.api.energy.*;
+import com.hbm.api.energy.fe.TransmitHelper;
 import com.hbm.block.machine.BlockBattery;
 import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.blockentity.base2.BaseMachineBlockEntity;
@@ -21,6 +19,7 @@ import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import org.jetbrains.annotations.NotNull;
@@ -35,7 +34,8 @@ public class BatteryEntity extends BaseMachineBlockEntity {
     private static final int[] SLOTS_FOR_DOWN = new int[]{0,1};
     private static final int[] SLOTS_FOR_SIDES = new int[]{1};
     private BasicEnergyContainer energyContainer;
-//    protected NonNullList<ItemStack> items = NonNullList.withSize(2, ItemStack.EMPTY);
+//    private boolean reloadFlag = false;
+    private byte reloadTimer = 0;
     protected final ContainerData containerData = new ContainerData() {
         @Override
         public int get(int pIndex) {
@@ -71,41 +71,31 @@ public class BatteryEntity extends BaseMachineBlockEntity {
         BlockBattery block = (BlockBattery)pBlockState.getBlock();
         type = block.type;
         energyContainer = new BasicEnergyContainer(type.getMaxEnergy(), type.getOutput());
-        ProxyEnergyHandler handler = new ProxyEnergyHandler(this.energyContainer);
-        this.capabilitiesContent.addCapability(HBMCaps.LONG_ENERGY, handler);
+        this.capabilitiesContent.addCapability(HBMCaps.LONG_ENERGY, new SidedEnergyHandler(this.energyContainer));
         this.capabilitiesContent.addCapability(ForgeCapabilities.ENERGY, new HybridEnergyStorage(this.energyContainer));
-//        this.capabilitiesCache.addCapabilityResolver(new SidedEnergyWrapper(new HBMEnergyStorage(type.getMaxEnergy(),type.getOutput(),type.getOutput())));
     }
 
     private double[] powerWeight = new double[]{0.8,0.5,0.2};
 
     @Override
     protected void onUpdateServer() {
+        this.getCapability(HBMCaps.LONG_ENERGY, null).ifPresent(ienergyhandler -> reloadTimer = ((SidedEnergyHandler) ienergyhandler).checkNeighbourIfLoad(this.getLevel(), this.getTilePos()) ? 3 : reloadTimer);
+        if (reloadTimer > 0){
+            reloadTimer--;
+            energyReload();
+        }
         super.onUpdateServer();
         BlockState blockState = this.getBlockState();
-//        TransmitHelper.batteryTransmit(level,this.worldPosition, blockState,this);
-        TransmitUtils.outputOnly(this);
-        //对电池充放电
+        //向接触面的方块充放电（电缆等传输通过电网进行）
+        TransmitUtils.batteryTransmit(level, (SidedEnergyHandler) getCapability(HBMCaps.LONG_ENERGY).orElse(null));
+        //对物品槽中的电池充放电
         ItemStack itemStack0 = getStackInSlot(0);
         ItemStack itemStack1 = getStackInSlot(1);
         TransmitUtils.dischargeItem(this, itemStack0);
         TransmitUtils.chargeItem(this, itemStack1);
+        //发送更新信息
         level.sendBlockUpdated(this.worldPosition,blockState,blockState,2);
     }
-
-//    public static void tick(Level level, BlockPos pPos, BlockState pState, BlockEntity pBlockEntity) {
-//        if (!level.isClientSide() && pState.is(ModTags.Blocks.BATTERY) && pBlockEntity instanceof BatteryEntity entity){
-//            TransmitHelper.batteryTransmit(level,pPos,pState,pBlockEntity);
-//            //对电池充放电
-//            ItemStack itemStack0 = entity.items.get(0);
-//            ItemStack itemStack1 = entity.items.get(1);
-//            TransmitUtils.dischargeItem(pBlockEntity, itemStack0);
-//            TransmitUtils.chargeItem(pBlockEntity, itemStack1);
-////            TransmitHelper.dischargeItem(pBlockEntity,itemStack0);
-////            TransmitHelper.chargeItem(pBlockEntity,itemStack1);
-//            level.sendBlockUpdated(pPos,pState,pState,2);
-//        }
-//    }
 
     //===========数据===================
     @Override
@@ -141,13 +131,32 @@ public class BatteryEntity extends BaseMachineBlockEntity {
 
     @Override
     public Component getDefaultName() {
-        return Component.translatable(HBMLang.BARREL.key());
+        return Component.translatable(HBMLang.BATTERY.key());
     }
 
     @Override
     public AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory) {
         return new BatteryMenu(pContainerId,pInventory,this,containerData);
     }
+
+    public long getEnergy(){
+        return this.energyContainer.getEnergy();
+    }
+
+    public void onNeighbourChanged(BlockPos neighbor){
+        this.reloadTimer = 3;
+    }
+
+    @Override
+    public void onLoad() {
+        super.onLoad();
+        energyReload();
+    }
+
+    private void energyReload(){
+        this.getCapability(HBMCaps.LONG_ENERGY, null).ifPresent(ienergyhandler -> ((SidedEnergyHandler) ienergyhandler).rebuildSideData(this.getLevel(), this.getTilePos()));
+    }
+
     //======================WorldlyContainer=======================
     @Override
     public int[] getSlotsForFace(Direction pSide) {
@@ -169,53 +178,4 @@ public class BatteryEntity extends BaseMachineBlockEntity {
             return true;
         }
     }
-    //====================================================
-//    @Override
-//    public int getContainerSize() {
-//        return this.items.size();
-//    }
-//    @Override
-//    public boolean isEmpty() {
-//        for(ItemStack itemstack : this.items) {
-//            if (!itemstack.isEmpty()) {
-//                return false;
-//            }
-//        }
-//        return true;
-//    }
-//    @Override
-//    public ItemStack getItem(int pSlot) {
-//        return this.items.get(pSlot);
-//    }
-//    @Override
-//    public ItemStack removeItem(int pSlot, int pAmount) {
-//        return ContainerHelper.removeItem(this.items, pSlot, pAmount);
-//    }
-//    @Override
-//    public boolean canPlaceItem(int pIndex, ItemStack pStack) {
-//        return pStack.is(ModTags.Items.CHARGEABLE);
-//    }
-//    @Override
-//    public void setItem(int pSlot, ItemStack pStack) {
-//        this.items.set(pSlot, pStack);
-//        if (!pStack.isEmpty() && pStack.getCount() > this.getMaxStackSize()) {
-//            pStack.setCount(this.getMaxStackSize());
-//        }
-//        //是否任何变化都需要setChange呢？
-//        this.setChanged();
-//    }
-//    @Override
-//    public ItemStack removeItemNoUpdate(int pSlot) {
-//        return ContainerHelper.takeItem(this.items, pSlot);
-//    }
-//    @Override
-//    public boolean stillValid(Player pPlayer) {
-//        return Container.stillValidBlockEntity(this, pPlayer);
-//    }
-//    @Override
-//    public void clearContent() {
-//        this.items.clear();
-//    }
-
-    //====================================
 }

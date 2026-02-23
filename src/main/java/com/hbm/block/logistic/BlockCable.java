@@ -11,7 +11,6 @@ import org.jetbrains.annotations.Nullable;
 
 public class BlockCable extends AbstractPipeBlock implements EntityBlock{
 
-
     public BlockCable(Properties pProperties) {
         super(pProperties, 0.18F);
     }
@@ -21,7 +20,6 @@ public class BlockCable extends AbstractPipeBlock implements EntityBlock{
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
         return new CableEntity(pPos,pState);
     }
-
 
     @Override
     protected boolean connBlockEntityCond(LevelAccessor pLevel, BlockState state, BlockPos blockPos, BlockPos neighbourPos) {
