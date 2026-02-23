@@ -61,7 +61,7 @@ public abstract class BlockDummyable extends BlockMachineBase implements ICustom
     // 某个方块是否为核心，如果是核心，建立功能性方块实体，否则只是代理方块实体。
     public static final BooleanProperty IS_CORE = HBMBlockProperties.IS_CORE;
     public BlockDummyable(Properties pProperties) {
-        super(pProperties.noOcclusion().isViewBlocking(BlockDummyable::never));
+        super(pProperties.noOcclusion().isViewBlocking(BlockDummyable::never).dynamicShape());
         this.registerDefaultState(this.getStateDefinition().any().setValue(IS_CORE, Boolean.TRUE));
     }
     /** core position offset along facing direction, useful for legacy multiblocks */
@@ -122,17 +122,8 @@ public abstract class BlockDummyable extends BlockMachineBase implements ICustom
         if (!pLevel.isClientSide && !pPlayer.getPose().equals(Pose.CROUCHING)){
             BlockState coreState = pState;
             BlockPos core = getCore(pState, pLevel, pPos);
-            
-//            // 先找到核心点位
-//            if (!pState.getValue(IS_CORE)){
-//                BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
-//                if (blockEntity instanceof TileProxyBase tileProxy){
-//                    core = tileProxy.cachedPos;
-//                }
-//            }
             // 右键相当于直接对核心点位右键
             if (pLevel.getBlockEntity(core) instanceof DummyableBlockEntity entity){
-//                entity.onLeftClick(pState, pLevel, pPos, pPlayer, pHand, pHit);
                 coreState = pLevel.getBlockState(core);
                 // 但我还是觉得保留原本的触发位置可能是有必要的，因此在DummyableBlockEntity留了一个对应接口
                 entity.onLeftClick(pState, pLevel, pPos, pPlayer, pHand, pHit);
@@ -217,5 +208,15 @@ public abstract class BlockDummyable extends BlockMachineBase implements ICustom
 
     private static boolean never(BlockState p_50806_, BlockGetter p_50807_, BlockPos p_50808_) {
         return false;
+    }
+
+    @Override
+    public boolean propagatesSkylightDown(BlockState pState, BlockGetter pLevel, BlockPos pPos) {
+        return true;
+    }
+
+    @Override
+    public float getShadeBrightness(BlockState pState, BlockGetter pLevel, BlockPos pPos) {
+        return 1.0f;
     }
 }

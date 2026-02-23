@@ -111,6 +111,12 @@ public class BlockConnector extends BaseEntityBlock implements IFaceAttach {
         if (pNeighborPos.relative(pState.getValue(BlockStateProperties.FACING)).equals(pPos))
             pLevel.getBlockEntity(pPos, ModBlockEntityType.TILE_CONNECTOR.get()).ifPresent(TileConnector::neighbourChanged);
     }
+
+    @Override
+    public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pMovedByPiston) {
+        super.onRemove(pState, pLevel, pPos, pNewState, pMovedByPiston);
+        pLevel.getBlockEntity(pPos, ModBlockEntityType.TILE_CONNECTOR.get()).ifPresent(TileConnector::onRemoveCallback);
+    }
 }
 
 /*

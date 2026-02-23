@@ -32,6 +32,7 @@ public class EnergyNetwork {
         this.code = code;
     }
     protected void tick(){
+        if (this.transmitters.size() <= this.machines.size()) removeNet();
         int pri;
         LazyOptional<IEnergyHandler> handlerLazyOptional;
         long sum, sum1, sum2, sum3, sum4, sumPri1, sumPri2, sumPri3, sumPri4, transNeeded, posL, last1, last2, last3, temp1, temp2;
@@ -176,6 +177,15 @@ public class EnergyNetwork {
             }
             parent.nets.remove(code);
         }
+    }
+    private void removeNet(){
+        for (long l : this.transmitters) {
+            parent.nodeMap.getOrDefault(l, new MutablePair<>(-1, LongSet.of())).setLeft(-1);
+        }
+        for (long l : this.machines) {
+            parent.removeMachineLink(l, code);
+        }
+        parent.nets.remove(code);
     }
     static byte getIoState(byte b){
         return (byte) (b & 0x0F);

@@ -82,6 +82,9 @@ public class AssemblerMenu extends BaseMachineMenu{
     public int getEnergy(){
         return containerData.get(1);
     }
+    public int getEnergyCapacity(){
+        return containerData.get(2);
+    }
     public double getProgress(){
         return containerData.get(0);
     }

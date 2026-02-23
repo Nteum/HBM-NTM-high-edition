@@ -101,7 +101,6 @@ public class AssemblerEntity extends DummyableBlockEntity implements IPower {
             else if (this.countdown==0){
                 this.running = false;
                 ItemStack resultItem = this.recipeNow.assemble(this, level.registryAccess());
-//                    entity.items.set(4,itemStack);
                 processOutput(this,resultItem);
             }else if (this.checkRecipe() && this.consumeEnergy(this.power, true)){
                 this.countdown--;
@@ -161,13 +160,14 @@ public class AssemblerEntity extends DummyableBlockEntity implements IPower {
             InventoryUtils.insertItem(entity,tuples.get(1).getA(),Arrays.stream(OUTPUT_SLOTS).boxed().toList(),tuples.get(1).getB());               //输出物品
         }
     }
+    // 用于从临近方块吸收电力，现采用电网供电或电池主动供电，因此暂时空缺
     public static void runDummyCaps(Level level, BlockPos pPos, BlockState pState, BlockEntity pBlockEntity){
-        AssemblerEntity entity = (AssemblerEntity) pBlockEntity;
-        List<Tuple<BlockPos, Direction>> tuples = entity.multiblockData.getCapLocation(HBMCaps.LONG_ENERGY, entity.worldPosition, entity.getBlockState().getValue(BlockContainerBase.FACING));
-        for (Tuple<BlockPos, Direction> tuple : tuples) {
-            BlockPos dummyPos = tuple.getA();
+//        AssemblerEntity entity = (AssemblerEntity) pBlockEntity;
+//        List<Tuple<BlockPos, Direction>> tuples = entity.multiblockData.getCapLocation(HBMCaps.LONG_ENERGY, entity.worldPosition, entity.getBlockState().getValue(BlockContainerBase.FACING));
+//        for (Tuple<BlockPos, Direction> tuple : tuples) {
+//            BlockPos dummyPos = tuple.getA();
 //            TransmitHelper.machineTransmit(level,dummyPos,level.getBlockState(dummyPos),level.getBlockEntity(dummyPos));
-        }
+//        }
     }
     private boolean craftSlotEmpty(){
         for (int i = 5; i < 17; i++) {

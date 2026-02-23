@@ -24,7 +24,8 @@ import java.util.Set;
 public class TileConnector extends CapabilityBlockEntity implements IConnector {
     protected EnergyNetwork network;
     protected Set<BlockPos> connectedPos;
-    protected BlockPos tempPos = null;
+    private BlockPos tempPos = null;
+    private boolean isAdd = true;
     public TileConnector(BlockPos pPos, BlockState pBlockState) {
         super(ModBlockEntityType.TILE_CONNECTOR.get(), pPos, pBlockState);
         connectedPos = new HashSet<>();
@@ -35,14 +36,19 @@ public class TileConnector extends CapabilityBlockEntity implements IConnector {
         super.onLoad();
         if (this.hasLevel() && !this.getLevel().isClientSide){
             EnergyNetworkSystem.getOrCreate(this.level).join(this);
-            if (level != null && !level.isClientSide) sendUpdatePacket();
+            if (level != null && !level.isClientSide) {
+                isAdd = true;
+                sendUpdatePacket();
+            }
         }
     }
 
-    @Override
-    public void setRemoved() {
-        super.setRemoved();
+    public void onRemoveCallback(){
         if (this.hasLevel() && !this.getLevel().isClientSide){
+            for (BlockPos connPos : this.connectedPos) {
+                // 通知客户端
+                this.level.getBlockEntity(connPos, ModBlockEntityType.TILE_CONNECTOR.get()).ifPresent(connector -> connector.removeConnected(this.getBlockPos(), false));
+            }
             EnergyNetworkSystem.getOrCreate(this.level).leave(this);
         }
     }
@@ -76,19 +82,31 @@ public class TileConnector extends CapabilityBlockEntity implements IConnector {
     @Override
     public @NotNull CompoundTag getReducedUpdateTag() {
         CompoundTag tag = super.getReducedUpdateTag();
-        if (tempPos != null) tag.put(HBMKey.POSITION, NbtUtils.writeBlockPos(tempPos));
+        if (tempPos != null) {
+            tag.put(HBMKey.POSITION, NbtUtils.writeBlockPos(tempPos));
+        }
         else {
             NBTUtils.savePositions(tag, connectedPos);
         }
+        tag.putBoolean("add", isAdd);
         return tag;
     }
 
     @Override
     public void handleUpdatePacket(@NotNull CompoundTag tag) {
         super.handleUpdatePacket(tag);
+        boolean add = tag.getBoolean("add");
         if (tag.contains(HBMKey.POSITION, Tag.TAG_COMPOUND)){
             BlockPos pos = NbtUtils.readBlockPos(tag.getCompound(HBMKey.POSITION));
-            connectedPos.add(pos);
+            if (add) connectedPos.add(pos);
+            else connectedPos.remove(pos);
+            this.setChanged();
+        }else if (tag.contains(HBMKey.POSITIONS, Tag.TAG_COMPOUND)){
+            List<BlockPos> blockPosList = NBTUtils.loadPositions(tag);
+            for (BlockPos pos : blockPosList) {
+                if (add) connectedPos.add(pos);
+                else connectedPos.remove(pos);
+            }
             this.setChanged();
         }
     }
@@ -96,7 +114,16 @@ public class TileConnector extends CapabilityBlockEntity implements IConnector {
     public void addConnected(BlockPos blockPos){
         connectedPos.add(new BlockPos(blockPos));
         tempPos = blockPos;
+        isAdd = true;
         EnergyNetworkSystem.getOrCreate(this.level).link(this.getBlockPos(), blockPos);
+        this.setChanged();
+        sendUpdatePacket();
+    }
+    public void removeConnected(BlockPos blockPos, boolean triggerEnergyNetUpdate){
+        connectedPos.remove(blockPos);
+        tempPos = blockPos;
+        isAdd = false;
+        if (triggerEnergyNetUpdate) EnergyNetworkSystem.getOrCreate(this.level).cut(this.getBlockPos(), blockPos);
         this.setChanged();
         sendUpdatePacket();
     }

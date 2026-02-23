@@ -66,7 +66,6 @@ public class EnergyNetworkSystem {
         updateStructure();
         if (nets.isEmpty()) return;
         nets.forEach((code, net) -> net.tick());
-//        machineTickFlag.forEach((k,v) -> v = false);
     }
     // 节点加入
     public void join(@Nullable final BlockEntity be){
@@ -214,7 +213,6 @@ public class EnergyNetworkSystem {
                 nodeMap.putIfAbsent(posLong, new MutablePair<>(connFlag, new LongOpenHashSet()));
                 BlockPos fromPos = currentPos.relative(fromDir.getOpposite());
                 nodeMap.get(posLong).getRight().add(fromPos.asLong());
-//                nodeMap.getOrDefault(fromPos.asLong(), EMPTY_NODE_DATA).getRight().add(posLong);
                 MutablePair<Integer, LongSet> fromPosPair = nodeMap.getOrDefault(fromPos.asLong(), EMPTY_NODE_DATA);
                 fromPosPair.getRight().add(posLong);
                 if (fromPosPair.getLeft() >= 0) nets.get(fromPosPair.getLeft()).addTransmitter(posLong);
@@ -274,7 +272,7 @@ public class EnergyNetworkSystem {
     }
     private EnergyNetwork spreadNet(final long root){
         LongSet nodes = new LongOpenHashSet();
-        EnergyNetwork network = null;
+        EnergyNetwork network;
         int net = -1, temp;
         ArrayDeque<Long> queue = new ArrayDeque<>();
         queue.add(root);
@@ -287,8 +285,16 @@ public class EnergyNetworkSystem {
                 MutablePair<Integer, LongSet> pair1 = nodeMap.getOrDefault(l, EMPTY_NODE_DATA);
                 if ((temp = pair1.getLeft()) >= 0){
                     net = temp;
-                }else if (temp == -1 || temp == -2){
+                }else if (temp == -1){
                     queue.add(l);
+                }else if (temp == -2){
+                    queue.add(l);
+                    MutableTriple<Byte, IntSet, LazyOptional<IEnergyHandler>> triple = this.machines.get(l);
+                    boolean isBattery = (triple.getLeft() & 0x04 >> 2) == 1;
+                    if (isBattery){
+                        IntSet connNet = triple.getMiddle();
+                        if (!connNet.isEmpty()) net = connNet.toIntArray()[0];
+                    }
                 }
             }
         }
