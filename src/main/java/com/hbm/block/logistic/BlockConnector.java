@@ -29,6 +29,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
@@ -116,6 +117,18 @@ public class BlockConnector extends BaseEntityBlock implements IFaceAttach {
     public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pMovedByPiston) {
         super.onRemove(pState, pLevel, pPos, pNewState, pMovedByPiston);
         pLevel.getBlockEntity(pPos, ModBlockEntityType.TILE_CONNECTOR.get()).ifPresent(TileConnector::onRemoveCallback);
+    }
+
+    public static Vec3 getLinkPos(final BlockPos pos, final Direction facing){
+        Vec3 center = pos.getCenter();
+        return switch (facing){
+            case DOWN -> center.add(0, -0.0625, 0);
+            case UP -> center.add(0, 0.0625, 0);
+            case NORTH -> center.add(0, 0, -0.0625);
+            case SOUTH -> center.add(0, 0, 0.0625);
+            case WEST -> center.add(-0.0625, 0, 0);
+            case EAST -> center.add(0.0625, 0, 0);
+        };
     }
 }
 
