@@ -56,7 +56,7 @@ public enum HBMLang implements ILangEntry {
     // GUI
     TOOLTIP_LEFT_TIME("gui","left_time.tooltip"),
     TOOLTIP_ENERGY("gui","stored_energy.tooltip"),
-    GUI_TOOLTIP_PROGRESS("Progress: %s %"),
+    GUI_TOOLTIP_PROGRESS("Progress: %s %%"),
     GUI_TOOLTIP_LEFT_TIME("Left time: %s s"),
     GUI_TOOLTIP_BURN_TIME("Burn time: %s s"),
     GUI_TOOLTIP_ENERGY("Energy: %s / %s HE"),

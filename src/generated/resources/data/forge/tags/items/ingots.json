@@ -1,5 +1,7 @@
 {
   "values": [
-    "#forge:ingots/steel"
+    "#forge:ingots/advancedalloy",
+    "#forge:ingots/steel",
+    "#forge:ingots/iron"
   ]
 }

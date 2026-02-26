@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
-      "model": "hbm:block/press/press_body"
+    "facing=east": {
+      "model": "hbm:block/press",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "hbm:block/press"
+    },
+    "facing=south": {
+      "model": "hbm:block/press",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "hbm:block/press",
+      "y": 270
     }
   }
 }

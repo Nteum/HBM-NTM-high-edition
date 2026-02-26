@@ -18,7 +18,7 @@ public class ObjMachineBlockStateProvider extends DecorateBlockStateProvider{
     @Override
     public void registerStatesAndModels() {
         HBMMachine.model(stateProvider);
-        stateProvider.horizontalBlockWithItem(ModBlocks.machine_assembler.get(), "block/assembler/assembler_body");
+//        stateProvider.horizontalBlockWithItem(ModBlocks.machine_assembler.get(), "block/assembler/assembler_body");
         stateProvider.horizontalBlockWithItem(HBMMachine.CHEMPLANT.get(), "block/chemplant/chemplant_new_body");
         stateProvider.horizontalBlockWithItem(HBMMachine.PLASTIC_BARREL.get(), "block/barrel/barrel_plastic");
         stateProvider.horizontalBlockWithItem(HBMMachine.CORRODED_BARREL.get(), "block/barrel/barrel_corroded");

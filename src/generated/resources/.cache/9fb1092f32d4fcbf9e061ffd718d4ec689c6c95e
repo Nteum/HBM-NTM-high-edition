@@ -1,4 +1,4 @@
-// 1.20.1	2026-01-18T19:40:15.7358066	Recipes
+// 1.20.1	2026-02-26T23:32:34.5879651	Recipes
 a24f7e47b80bc3195a8af8b4fe5d337fd1d08c4c data/hbm/advancements/recipes/misc/conveyor.json
 e874513dda72dd1014f7b6350a77f2dc7028df3c data/hbm/advancements/recipes/misc/crate_iron.json
 6ca95a2394b2bc92509851ebc519ca024992b091 data/hbm/advancements/recipes/misc/crate_steel.json
@@ -86,6 +86,8 @@ a3c5b447e03b488c91855aebb7e9f18fe8226421 data/hbm/recipes/machine_rbmk_element.j
 e2f8a22676363430c86fe1351b2e2927616c69c2 data/hbm/recipes/machine_turbine_gas.json
 48c19d99aa91abc42bed9ddcf51f7c0ecd151cb4 data/hbm/recipes/machine_zirnox.json
 8bf9f8bf37bbe4b38feb47da76e51cae96287cf8 data/hbm/recipes/nugget_zirconium_5.json
+5b9ff54bf2d950175846531ecdb3563ae94a5cd3 data/hbm/recipes/press/plate_advanced_alloy_1.json
+7800cebfde9d513db46ae8935cfa2124677f78fa data/hbm/recipes/press/plate_iron_0.json
 09bf44b316977808b71e0258e56eeae1da41426e data/hbm/recipes/pwr_casing.json
 bd46e23d56cf34ed90eb9c3c20dbb55b7640cbcd data/hbm/recipes/pwr_channel.json
 6e90157ea9002d77024c3c821bdfca3b8a06d728 data/hbm/recipes/pwr_control.json

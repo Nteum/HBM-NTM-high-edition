@@ -1,6 +1,7 @@
 package com.hbm.block.machine;
 
 import com.hbm.block.base.BaseMachineBlock;
+import com.hbm.block.base.BlockMachineBase;
 import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.blockentity.machine.DifurnaceEntity;
 import com.hbm.blockentity.machine.PressEntity;
@@ -25,7 +26,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * 火力锻压机
  * */
-public class BlockPress extends BaseMachineBlock {
+public class BlockPress extends BlockMachineBase {
     public VoxelShape SHAPE = Block.box(2,0,2,14,48,14);
     public BlockPress(Properties pProperties) {
         super(pProperties);
@@ -37,21 +38,21 @@ public class BlockPress extends BaseMachineBlock {
         return new PressEntity(pPos,pState);
     }
 
-    @Override
-    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-        if (!pLevel.isClientSide){
-            pPlayer.openMenu(pState.getMenuProvider(pLevel,pPos));
-            return InteractionResult.CONSUME;
-        }else {
-            return InteractionResult.SUCCESS;
-        }
-    }
-
-    @Nullable
-    @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return pBlockEntityType == ModBlockEntityType.PRESS_ENTITY.get() ? PressEntity::tick : null;
-    }
+//    @Override
+//    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
+//        if (!pLevel.isClientSide){
+//            pPlayer.openMenu(pState.getMenuProvider(pLevel,pPos));
+//            return InteractionResult.CONSUME;
+//        }else {
+//            return InteractionResult.SUCCESS;
+//        }
+//    }
+//
+//    @Nullable
+//    @Override
+//    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
+//        return pBlockEntityType == ModBlockEntityType.PRESS_ENTITY.get() ? PressEntity::tick : null;
+//    }
 
     @Override
     public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {

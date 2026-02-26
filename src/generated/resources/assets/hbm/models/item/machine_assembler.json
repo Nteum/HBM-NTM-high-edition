@@ -1,3 +1,3 @@
 {
-  "parent": "hbm:block/assembler/assembler_body"
+  "parent": "hbm:block/assembler_body"
 }

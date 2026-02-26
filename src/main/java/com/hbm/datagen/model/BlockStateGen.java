@@ -117,18 +117,8 @@ public class BlockStateGen extends BlockStateProvider {
         addObjHorizonalModel(ModBlocks.machine_cracking_tower.get(),"block/cracking_tower/machine_cracking_tower");
         var press_body_model = this.models().getExistingFile(new ResourceLocation(HBM.MODID, "block/press/press_body"));
         var press_head_model = this.models().getExistingFile(new ResourceLocation(HBM.MODID, "block/press/press_head"));
-//        MultiPartBlockStateBuilder builder = this.getMultipartBuilder(ModBlocks.machine_press.get())
-//                .part().modelFile(press_body_model).addModel().end()
-//                .part().modelFile(press_head_model).addModel().end();
-//        itemModels().getBuilder("hbmxx:item/machine_press").parent(press_body_model);
-        this.simpleBlockWithItem(ModBlocks.machine_press.get(),press_body_model);
-        this.simpleBlock(ModBlocks.part_press_head.get(),press_head_model);
-//        var assembler_body_model = this.models().getExistingFile(new ResourceLocation(HBM.MODID, "block/assembler/assembler_body"));
-//        var assembler_arm_model = this.models().getExistingFile(new ResourceLocation(HBM.MODID, "block/assembler/assembler_arm"));
-//        var assembler_cog_model = this.models().getExistingFile(new ResourceLocation(HBM.MODID, "block/assembler/assembler_cog"));
-//        var assembler_slider_model = this.models().getExistingFile(new ResourceLocation(HBM.MODID, "block/assembler/assembler_slider"));
-//        this.horizontalBlock(ModBlocks.machine_assembler.get(),assembler_body_model);
-//        this.simpleBlockItem(ModBlocks.machine_assembler.get(),assembler_body_model);
+//        this.simpleBlockWithItem(ModBlocks.machine_press.get(),press_body_model);
+//        this.simpleBlock(ModBlocks.part_press_head.get(),press_head_model);
         //坩埚模型
         var crucible_model = this.models().getExistingFile(Models.CRUCIBLE);
         this.horizontalBlock(ModBlocks.machine_crucible.get(),crucible_model);
@@ -148,6 +138,8 @@ public class BlockStateGen extends BlockStateProvider {
         simpleBlockWithItem(ModBlocks.WASTE_GRASS.get(), genBuiltInModelFile(ModBlocks.WASTE_GRASS.get(), "cube_bottom_top"));
         addObjHorizonalModel(ModBlocks.SPACE_STATION_BASE.get(), "block/space_station_base");
         simpleBlockWithItem(ModBlocks.CONNECTOR.get(), genBuiltInModelFile(ModBlocks.CONNECTOR.get(), "existing"));
+        addObjHorizonalModel(ModBlocks.machine_assembler.get(), "block/assembler_body");
+        addObjHorizonalModel(ModBlocks.machine_press.get(), "block/press");
     }
     // 方块和物品：纯cube all
     public void simpleBlockWithItem(Block block){

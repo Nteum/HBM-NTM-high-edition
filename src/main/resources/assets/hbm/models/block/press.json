@@ -1,16 +1,28 @@
 {
-  "loader": "hbm:press_loader",
-  "base_model": "hbm:models/block/press.obj",
-  "head_model": "hbm:models/block/press_head.obj",
-  "flip_v": true,
-  "head_transform": {
-    "translation": [0.0, 0.8, 0.0],
-    "travel": 0.8
+  "loader": "forge:composite",
+  "children": {
+    "base_model": {
+      "loader": "forge:obj",
+      "model": "hbm:models/block/press.obj",
+      "flip_v": true,
+      "render_type": "minecraft:cutout",
+      "textures": {
+        "default": "hbm:block/press/press_body"
+      }
+    },
+    "head_model": {
+      "loader": "forge:obj",
+      "model": "hbm:models/block/press_head.obj",
+      "flip_v": true,
+      "render_type": "minecraft:cutout",
+      "textures": {
+        "default": "hbm:block/press/press_head"
+      }
+    }
   },
   "textures": {
-    "particle": "hbm:block/machine/press",
-    "default": "hbm:block/machine/press",
-    "press_head": "hbm:block/press_head"
+    "particle": "hbm:block/press/press_body",
+    "default": "hbm:block/press/press_body",
   },
   "transform": {
     "translation": [0.0, 0.0, 0.0],

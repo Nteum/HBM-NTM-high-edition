@@ -3,9 +3,12 @@ package com.hbm.utils;
 import com.hbm.block.logistic.BlockConnector;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
 import net.minecraft.util.Mth;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -172,5 +175,11 @@ public class DirectionUtils {
             result.set(i, v2);
         }
         return result;
+    }
+    public static boolean searchAround(Level level, BlockPos pos, Block targetBlock){
+        for (Direction direction : EnumUtils.DIRECTIONS) {
+            if (level.getBlockState(pos.relative(direction)).is(targetBlock)) return true;
+        }
+        return false;
     }
 }
