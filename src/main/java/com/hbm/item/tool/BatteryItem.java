@@ -3,7 +3,7 @@ package com.hbm.item.tool;
 import com.hbm.HBMLang;
 import com.hbm.api.energy.IEnergyHandler;
 import com.hbm.api.energy.ItemStackEnergyHandler;
-import com.hbm.capabilities.HBMCaps;
+import com.hbm.registries.HBMCaps;
 import com.hbm.capabilities.ItemCapabilityWrapper;
 import com.hbm.item.CapabilityItem;
 import net.minecraft.nbt.CompoundTag;

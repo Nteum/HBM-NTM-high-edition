@@ -11,7 +11,7 @@ import com.hbm.api.fluid.BasicFluidHandler;
 import com.hbm.block.machine.BlockLitSingleBlockMachine;
 import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.blockentity.base2.BaseMachineBlockEntity;
-import com.hbm.capabilities.HBMCaps;
+import com.hbm.registries.HBMCaps;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;

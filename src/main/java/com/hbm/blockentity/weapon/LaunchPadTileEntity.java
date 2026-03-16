@@ -10,7 +10,7 @@ import com.hbm.api.inventory.ModeBuilder;
 import com.hbm.block.HBMMachine;
 import com.hbm.block.weapon.LaunchPad;
 import com.hbm.blockentity.ModBlockEntityType;
-import com.hbm.capabilities.HBMCaps;
+import com.hbm.registries.HBMCaps;
 import com.hbm.entity.projectile.EntityThrowableNT;
 import com.hbm.gui.menu.LaunchPadMenu;
 import com.hbm.utils.multiblock.MultiblockData;

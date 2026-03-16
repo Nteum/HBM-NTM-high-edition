@@ -1,12 +1,9 @@
 package com.hbm.compat;
 
-import com.hbm.capabilities.HBMCaps;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 public class Compat {
     public static final String MOD_GT6 = "gregtech";

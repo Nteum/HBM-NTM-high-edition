@@ -5,9 +5,9 @@ import com.google.gson.JsonObject;
 import com.hbm.HBM;
 import com.hbm.HBMKey;
 import com.hbm.Inventory.recipe.ModRecipes;
+import com.hbm.addational_data.Pollution;
 import com.hbm.datagen.recipe.ingredient.CountableIngredient;
 import com.hbm.datagen.recipe.ingredient.FluidStackIngredient;
-import com.hbm.handler.pollution.PollutionType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeCategory;
@@ -44,7 +44,7 @@ public class ItemFluidRecipeBuilder implements FinishedRecipe {
 
     public int duration = -1;
     public int consumptionPerTick = -1;
-    public PollutionType pollutionType = PollutionType.NONE;
+    public Pollution.Type pollutionType = Pollution.Type.NONE;
     public float pollutionAmount = -1;
     public float radiationAmount = -1;
     public int flux = -1;
@@ -96,7 +96,7 @@ public class ItemFluidRecipeBuilder implements FinishedRecipe {
         this.consumptionPerTick = tickPower;
         return this;
     }
-    public ItemFluidRecipeBuilder pollution(PollutionType type, float pollutionAmount){
+    public ItemFluidRecipeBuilder pollution(Pollution.Type type, float pollutionAmount){
         this.pollutionType = type;
         this.pollutionAmount = pollutionAmount;
         return this;
@@ -163,7 +163,7 @@ public class ItemFluidRecipeBuilder implements FinishedRecipe {
 
         if (duration >= 0) pJson.addProperty(HBMKey.DURATION, this.duration);
         if (consumptionPerTick >= 0) pJson.addProperty(HBMKey.TICK_POWER, this.consumptionPerTick);
-        if (!pollutionType.equals(PollutionType.NONE) && pollutionAmount >= 0) {
+        if (!pollutionType.equals(Pollution.Type.NONE) && pollutionAmount >= 0) {
             pJson.addProperty(HBMKey.POLLUTION_TYPE, this.pollutionType.ordinal());
             pJson.addProperty(HBMKey.POLLUTION, this.pollutionAmount);
         }

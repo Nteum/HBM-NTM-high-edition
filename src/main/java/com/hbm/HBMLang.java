@@ -37,8 +37,8 @@ public enum HBMLang implements ILangEntry {
     ELECTRIC_FURNACE("container","electric_furnace"),
     BOILER("container","boiler"),
     ELECTRIC_BOILER("container","electric_boiler"),
-    NUCLEAR_BOILER("container","assembler"),
-    ASSEMBLER("container","nuclear_boiler"),
+    NUCLEAR_BOILER("container","nuclear_boiler"),
+    CONTAINER_ASSEMBLER("Assembler"),
     CHEMPLANT("container", "chemplant"),
     BARREL("container", "barrel"),
     BATTERY("container", "battery"),
@@ -53,6 +53,8 @@ public enum HBMLang implements ILangEntry {
     RESEARCH_REACTOR("container", "research_reactor", "Research Reactor"),
     BREEDER_REACTOR("container", "reactor_breeder", "Breeder Reactor"),
     CONTAINER_SPACE_STATION_DOCKER("Space Station Docker"),
+    CONTAINER_FIREBOX("Firebox"),
+    CONTAINER_CRUCIBLE("Crucible"),
     // GUI
     TOOLTIP_LEFT_TIME("gui","left_time.tooltip"),
     TOOLTIP_ENERGY("gui","stored_energy.tooltip"),
@@ -65,7 +67,9 @@ public enum HBMLang implements ILangEntry {
     GUI_TOOLTIP_BURN_TIME_BONUS("Burn time bonus: %s"),
     GUI_TOOLTIP_BURN_HEAT_BONUS("Burn heat bonus: %s"),
     TOOLTIP_TANK_VOLUME("gui","volume.tooltip","%s : %s mB"),
-    // Item
+    GUI_TOOLTIP_PARTIAL("%s / %s"),
+    GUI_TOOLTIP_CRUCIBLE_CAPACITY("Capacity: %s mB"),
+    // Item description
     ITEM_INGOT_NEPTUNIUM_DESC("That one's my favourite!"),
     ITEM_INGOT_SCHRARANIUM_NAME_ALTER("Nikonium Ingot"),
     ITEM_BILLETGH336_DESC("Seaborgium's colleague."),
@@ -75,6 +79,7 @@ public enum HBMLang implements ILangEntry {
     ITEM_DUST_DESC("I hate dust!"),
     ITEM_POWDER_FIRE_DESC("Used in multi purpose bombs:$Incendiary bombs are fun!"),
     ITEM_METEOR_REMOTE_DESC("Right click to summon a meteorite!"),
+    BLOCK_FIREBOX_DESC("Burns solid fuel to produce heat."),
     // handoverTexts
     ENERGY("item","battery.tooltip"),
     FLUID_CAPACITY("item","fluid_capacity"),

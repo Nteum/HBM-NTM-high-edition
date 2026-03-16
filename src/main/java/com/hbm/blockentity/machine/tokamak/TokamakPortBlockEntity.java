@@ -1,7 +1,7 @@
 package com.hbm.blockentity.machine.tokamak;
 
 import com.hbm.blockentity.ModBlockEntityType;
-import com.hbm.capabilities.HBMCaps;
+import com.hbm.registries.HBMCaps;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.entity.BlockEntityType;

@@ -76,7 +76,7 @@ public abstract class DummyableBlockEntity extends BaseMachineBlockEntity {
         isJoined = nbt.getBoolean(HBMKey.JOINED);
         isFormed = nbt.getBoolean(HBMKey.IS_FORMED);
     }
-    //===================wroldly container
+    //===================worldly container
     @Override
     public int[] getSlotsForFace(Direction pSide) {
         return null;

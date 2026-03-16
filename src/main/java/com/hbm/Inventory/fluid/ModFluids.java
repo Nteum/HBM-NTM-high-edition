@@ -62,10 +62,6 @@ public class ModFluids {
     public static final ExtendedFluidType carbon_dioxide = new ExtendedFluidType("carbon_dioxide", 0xb0b0b0, solution.descriptionId("Carbon Dioxide"), ExtendedProperties.of().pfr(0,0,0).traits(GASEOUS, UNSIPHONABLE));
     public static final ExtendedFluidType coolant_hot = new ExtendedFluidType("coolant_hot",0x99525E, solution, ExtendedProperties.of().pfr(1,0,0).traits(LIQUID));
     public static final ExtendedFluidType coolant = new ExtendedFluidType("coolant",0xd8fcff, solution, ExtendedProperties.of().pfr(1,0,0).traits(LIQUID));
-//    public static final ExtendedFluidType DEUTERIUM = new ExtendedFluidType(0x0000FF, solution, ExtendedProperties.of().pfr(3,4,0).burn(10).traits(GASEOUS));
-//    public static final ExtendedFluidType TRITIUM = new ExtendedFluidType(0x000099, solution, ExtendedProperties.of().pfr(3,4,0).burn(5).traits(GASEOUS).rad(0.001F));
-//    public static final ExtendedFluidType OIL = new ExtendedFluidType(0x020202, solution, ExtendedProperties.of().pfr(2,1,0).burn(10).traits(LIQUID,VISCOUS));
-//    public static final ExtendedFluidType COOLANT = new ExtendedFluidType(0xd8fcff, solution, ExtendedProperties.of().pfr(1).traits(LIQUID));
     public static final ExtendedFluidType hydrogen = new ExtendedFluidType("hydrogen",0x4286f4, solution.descriptionId("Hydrogen"),ExtendedProperties.of().pfr(3,4,0).traits(GASEOUS));
     public static final ExtendedFluidType deuterium = new ExtendedFluidType("deuterium",0x2f6bff, solution.descriptionId("Deuterium"),ExtendedProperties.of().pfr(3,4,0).traits(GASEOUS));
     public static final ExtendedFluidType tritium = new ExtendedFluidType("tritium",0x0b2a86, solution.descriptionId("Tritium"),ExtendedProperties.of().pfr(3,4,0).traits(GASEOUS));
@@ -118,7 +114,9 @@ public class ModFluids {
             ExtendedProperties.of().pfr(1, 1, 0)
                     .traits(GASEOUS, new FT_Combustible(FT_Combustible.FuelGrade.GAS, 30_000L)));
     public static final ExtendedFluidType spent_steam = new ExtendedFluidType("spent_steam", 0xc9c9c9, solution.descriptionId("Spent Steam"), ExtendedProperties.of().pfr(0,0,0).traits(GASEOUS, UNSIPHONABLE));
-
+    public static final ExtendedFluidType smoke = new ExtendedFluidType("smoke", 0x808080, solution.descriptionId("Smoke"), ExtendedProperties.of().pfr(0,0,0).traits(GASEOUS, NOID, NOCON));
+    public static final ExtendedFluidType smoke_leaded = new ExtendedFluidType("smoke_leaded", 0x808080, solution.descriptionId("Leaded Smoke"), ExtendedProperties.of().pfr(0,0,0).traits(GASEOUS, NOID, NOCON));
+    public static final ExtendedFluidType smoke_poison = new ExtendedFluidType("smoke_poison", 0x808080, solution.descriptionId("Poison Somke"), ExtendedProperties.of().pfr(0,0,0).traits(GASEOUS, NOID, NOCON));
     static {
         FT_Heatable coolantHeatable = new FT_Heatable()
                 .setEff(FT_Heatable.HeatingType.HEATEXCHANGER, 1.0D)
@@ -166,6 +164,9 @@ public class ModFluids {
     public static FluidRegistryHolder<ExtendedFluidType, ForgeFlowingFluid.Source, ForgeFlowingFluid.Flowing,LiquidBlock, BucketItem> REFORMATE = register(reformate);
     public static FluidRegistryHolder<ExtendedFluidType, ForgeFlowingFluid.Source, ForgeFlowingFluid.Flowing,LiquidBlock, BucketItem> BIOGAS = register(biogas);
     public static FluidRegistryHolder<ExtendedFluidType, ForgeFlowingFluid.Source, ForgeFlowingFluid.Flowing,LiquidBlock, BucketItem> SPENT_STEAM = register(spent_steam);
+    public static FluidRegistryHolder<ExtendedFluidType, ForgeFlowingFluid.Source, ForgeFlowingFluid.Flowing,LiquidBlock, BucketItem> SMOKE = register(smoke);
+    public static FluidRegistryHolder<ExtendedFluidType, ForgeFlowingFluid.Source, ForgeFlowingFluid.Flowing,LiquidBlock, BucketItem> SMOKE_LEADED = register(smoke_leaded);
+    public static FluidRegistryHolder<ExtendedFluidType, ForgeFlowingFluid.Source, ForgeFlowingFluid.Flowing,LiquidBlock, BucketItem> SMOKE_POISON = register(smoke_poison);
 
     public static FluidRegistryHolder register(ExtendedFluidType fluidType){
         String name = fluidType.name;

@@ -1,6 +1,7 @@
 package com.hbm.capabilities;
 
 import com.hbm.api.energy.IEnergyHandler;
+import com.hbm.registries.HBMCaps;
 import net.minecraft.core.Direction;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;

@@ -18,30 +18,13 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 public class BlockCrucible extends BlockDummyable {
-    public static VoxelShape SHAPE = Block.box(-16,0,-16,32,24,32);
     public BlockCrucible(Properties pProperties) {
         super(pProperties);
+        SHAPE = Block.box(-16.0,0,-16.0,16.0,24.0,16.0);
     }
 
-    @Nullable
     @Override
-    public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
+    protected BlockEntity mainBlockEntity(BlockPos pPos, BlockState pState) {
         return new CrucibleEntity(pPos,pState);
-    }
-
-    @Nullable
-    @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return pBlockEntityType == ModBlockEntityType.CRUCIBLE_ENTITY.get() ? DifurnaceEntity::tick : null;
-    }
-
-    @Override
-    public RenderShape getRenderShape(BlockState pState) {
-        return RenderShape.INVISIBLE;
-    }
-
-    @Override
-    public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
-        return SHAPE;
     }
 }

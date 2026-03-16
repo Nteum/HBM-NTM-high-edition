@@ -20,9 +20,14 @@ import com.hbm.blockentity.machine.rbmk.RBMKPeripheralEntity;
 import com.hbm.blockentity.weapon.*;
 import com.hbm.registries.ModBlocks;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
+
+import java.util.Arrays;
+import java.util.function.Supplier;
 
 public class ModBlockEntityType {
     public static final DeferredRegister<BlockEntityType<?>> REGISTER = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, HBM.MODID);
@@ -90,8 +95,9 @@ public class ModBlockEntityType {
             REGISTER.register("steel_crate_entity", () -> BlockEntityType.Builder.of(SteelCrateBlockEntity::new, ModBlocks.crate_steel.get()).build(null));
     public static final RegistryObject<BlockEntityType<TileProxyCombo>> PROXY_ENTITY =
             REGISTER.register("proxy_entity",()-> BlockEntityType.Builder.of(TileProxyCombo::new,
-                    ModBlocks.machine_crucible.get(), ModBlocks.machine_assembler.get(), ModBlocks.machine_cracking_tower.get(), HBMMachine.CHEMPLANT.get(), HBMMachine.LAUNCH_PAD.get(), ModBlocks.bomb_boy.get(), ModBlocks.bomb_custom.get(), ModBlocks.bomb_fat_man.get(),
-                    ModBlocks.machine_zirnox.get(), ModBlocks.SPACE_STATION_BASE.get()
+                    ModBlocks.machine_crucible.get(), ModBlocks.machine_assembler.get(), ModBlocks.machine_cracking_tower.get(), HBMMachine.CHEMPLANT.get(),
+                    HBMMachine.LAUNCH_PAD.get(), ModBlocks.bomb_boy.get(), ModBlocks.bomb_custom.get(), ModBlocks.bomb_fat_man.get(), ModBlocks.machine_zirnox.get(),
+                    ModBlocks.SPACE_STATION_BASE.get(), ModBlocks.HEATER_FIREBOX.get()
             ).build(null));
     public static final RegistryObject<BlockEntityType<TileEntityGeiger>> GEIGER_COUNTER =
             REGISTER.register("geiger_counter",()-> BlockEntityType.Builder.of(TileEntityGeiger::new, HBMMachine.GEIGER_COUNTER.get()).build(null));
@@ -136,9 +142,12 @@ public class ModBlockEntityType {
             REGISTER.register("research_reactor_entity", () -> BlockEntityType.Builder.of(com.hbm.blockentity.machine.research.ResearchReactorBlockEntity::new, ModBlocks.machine_research_reactor.get()).build(null));
     public static final RegistryObject<BlockEntityType<com.hbm.blockentity.machine.research.BreederReactorBlockEntity>> BREEDER_REACTOR_ENTITY =
             REGISTER.register("breeder_reactor_entity", () -> BlockEntityType.Builder.of(com.hbm.blockentity.machine.research.BreederReactorBlockEntity::new, ModBlocks.machine_reactor_breeding.get()).build(null));
-    // 为了调试暂时用machine_crucible占位
     public static final RegistryObject<BlockEntityType<TileSpaceStation>> TILE_SPACE_STATION =
             REGISTER.register("tile_space_station", () -> BlockEntityType.Builder.of(TileSpaceStation::new, ModBlocks.SPACE_STATION_BASE.get()).build(null));
     public static final RegistryObject<BlockEntityType<TileConnector>> TILE_CONNECTOR =
             REGISTER.register("tile_connector", () -> BlockEntityType.Builder.of(TileConnector::new, ModBlocks.CONNECTOR.get()).build(null));
+    public static final RegistryObject<BlockEntityType<TileFireboxBase>> TILE_FIREBOX = register("tile_firebox", TileFireBox::new, ModBlocks.HEATER_FIREBOX);
+    private static<T extends BlockEntity> RegistryObject<BlockEntityType<T>> register(String key, BlockEntityType.BlockEntitySupplier<T> pFactory, Supplier<Block>... pValidBlocks){
+        return REGISTER.register(key, () -> BlockEntityType.Builder.of(pFactory, Arrays.stream(pValidBlocks).map(Supplier::get).toArray(Block[]::new)).build(null));
+    }
 }

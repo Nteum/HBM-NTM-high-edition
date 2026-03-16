@@ -16,6 +16,7 @@ public abstract class BaseMachineMenu extends AbstractContainerMenu {
         super(pMenuType, pContainerId);
         container = inContainer;
         containerData = containerData1;
+        this.addDataSlots(containerData1);
     }
     /**
      * index排序：额外加入的物品槽...玩家物品槽...

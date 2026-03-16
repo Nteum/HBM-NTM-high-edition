@@ -1,0 +1,11 @@
+{
+  "type": "hbm:press",
+  "input": {
+    "item": "hbm:ingot_schrabidium"
+  },
+  "result": {
+    "count": 8,
+    "item": "hbm:wire_schrabidium"
+  },
+  "stamp": "WIRE"
+}

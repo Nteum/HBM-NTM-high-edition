@@ -29,7 +29,7 @@ public class JEIAssemblerCategory extends AbstractRecipeCategory<AssemblerRecipe
     private final IGuiHelper guiHelper;
 
     public JEIAssemblerCategory(IGuiHelper guiHelper) {
-        super(TYPE, Component.translatable(HBMLang.ASSEMBLER.key()), guiHelper.createDrawableItemLike(ModBlocks.machine_assembler.get()),164, 64);
+        super(TYPE, Component.translatable(HBMLang.CONTAINER_ASSEMBLER.key()), guiHelper.createDrawableItemLike(ModBlocks.machine_assembler.get()),164, 64);
         this.guiHelper = guiHelper;
     }
 

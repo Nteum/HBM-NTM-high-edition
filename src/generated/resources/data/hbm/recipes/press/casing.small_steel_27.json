@@ -1,0 +1,11 @@
+{
+  "type": "hbm:press",
+  "input": {
+    "item": "hbm:plate_weaponsteel"
+  },
+  "result": {
+    "count": 4,
+    "item": "hbm:casing.small_steel"
+  },
+  "stamp": "PLATE"
+}

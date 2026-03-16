@@ -1,6 +1,8 @@
 package com.hbm.datagen.model;
 
 import com.hbm.HBM;
+import com.hbm.block.HBMBlockProperties;
+import com.hbm.block.base.BlockDummyable;
 import com.hbm.block.env.BedRockOre;
 import com.hbm.registries.ModBlocks;
 import com.hbm.render.model.Models;
@@ -111,19 +113,6 @@ public class BlockStateGen extends BlockStateProvider {
                 new ResourceLocation(HBM.MODID, "block/machine_boiler_top"));
         addBooleanStateWithFace(ModBlocks.machine_nuclear_boiler.get(), BlockStateProperties.LIT, machine_nuclear_boiler_off, machine_nuclear_boiler_on);
         //obj机器
-        addObjHorizonalModel(ModBlocks.anvil_iron.get(),"block/anvil/anvil_iron");
-        addObjHorizonalModel(ModBlocks.anvil_bismuth.get(),"block/anvil/anvil_bismuth");
-        addObjHorizonalModel(ModBlocks.anvil_desh.get(),"block/anvil/anvil_desh");
-        addObjHorizonalModel(ModBlocks.machine_cracking_tower.get(),"block/cracking_tower/machine_cracking_tower");
-        var press_body_model = this.models().getExistingFile(new ResourceLocation(HBM.MODID, "block/press/press_body"));
-        var press_head_model = this.models().getExistingFile(new ResourceLocation(HBM.MODID, "block/press/press_head"));
-//        this.simpleBlockWithItem(ModBlocks.machine_press.get(),press_body_model);
-//        this.simpleBlock(ModBlocks.part_press_head.get(),press_head_model);
-        //坩埚模型
-        var crucible_model = this.models().getExistingFile(Models.CRUCIBLE);
-        this.horizontalBlock(ModBlocks.machine_crucible.get(),crucible_model);
-        this.simpleBlockItem(ModBlocks.machine_crucible.get(),crucible_model);
-
         ModelFile.ExistingModelFile bomb_model_fatman = this.models().getExistingFile(new ResourceLocation(HBM.MODID, "block/bomb/fat_man"));
         this.simpleBlockItem(ModBlocks.bomb_fat_man.get(),bomb_model_fatman);
         ModelFile.ExistingModelFile bomb_model_boy = this.models().getExistingFile(HBM.rl("block/bomb/boy"));
@@ -133,13 +122,19 @@ public class BlockStateGen extends BlockStateProvider {
 
         //线缆
         cableBlockWithItem();
-
+        // 新体系添加的物品
         simpleBlockWithItem(ModBlocks.WASTE_LEAVES.get(), genBuiltInModelFile(ModBlocks.WASTE_LEAVES.get(), "leaves"));
         simpleBlockWithItem(ModBlocks.WASTE_GRASS.get(), genBuiltInModelFile(ModBlocks.WASTE_GRASS.get(), "cube_bottom_top"));
         addObjHorizonalModel(ModBlocks.SPACE_STATION_BASE.get(), "block/space_station_base");
         simpleBlockWithItem(ModBlocks.CONNECTOR.get(), genBuiltInModelFile(ModBlocks.CONNECTOR.get(), "existing"));
         addObjHorizonalModel(ModBlocks.machine_assembler.get(), "block/assembler_body");
         addObjHorizonalModel(ModBlocks.machine_press.get(), "block/press");
+        addObjHorizonalModel(ModBlocks.HEATER_FIREBOX.get(), "block/firebox");
+        addObjHorizonalModel(ModBlocks.anvil_iron.get(),"block/anvil/anvil_iron");
+        addObjHorizonalModel(ModBlocks.anvil_bismuth.get(),"block/anvil/anvil_bismuth");
+        addObjHorizonalModel(ModBlocks.anvil_desh.get(),"block/anvil/anvil_desh");
+        addObjHorizonalModel(ModBlocks.machine_cracking_tower.get(),"block/cracking_tower/machine_cracking_tower");
+        addObjHorizonalModel(ModBlocks.machine_crucible.get(), "block/crucible");
     }
     // 方块和物品：纯cube all
     public void simpleBlockWithItem(Block block){
@@ -165,7 +160,12 @@ public class BlockStateGen extends BlockStateProvider {
 
     public void addObjHorizonalModel(Block block,String name){
         ModelFile.ExistingModelFile existingFile = this.models().getExistingFile(new ResourceLocation(HBM.MODID, name));
-        this.horizontalBlock(block,existingFile);
+//        this.horizontalBlock(block,existingFile);
+        getVariantBuilder(block)
+                .forAllStatesExcept(state -> ConfiguredModel.builder()
+                        .modelFile(existingFile)
+                        .rotationY(((int) state.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot() + 180) % 360)
+                        .build(), HBMBlockProperties.IS_CORE);
         this.simpleBlockItem(block,existingFile);
     }
     /** 添加有两个状态，并带有水平方向的方块（HBM的方块机器大部分属于此列） */

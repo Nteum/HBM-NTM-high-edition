@@ -14,6 +14,7 @@ import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.blockentity.base2.DummyableBlockEntity;
 import com.hbm.blockentity.base2.TileProxyBase;
 import com.hbm.gui.menu.GasTurbineMenu;
+import com.hbm.registries.HBMCaps;
 import com.hbm.registries.ModBlocks;
 import com.hbm.utils.multiblock.MultiblockData;
 import net.minecraft.core.BlockPos;
@@ -105,7 +106,7 @@ public class GasTurbineBlockEntity extends DummyableBlockEntity {
         this.fluids = buildFluidHandler();
         this.capabilitiesContent.addCapability(ForgeCapabilities.FLUID_HANDLER, this.fluids);
         this.capabilitiesContent.addCapability(ForgeCapabilities.ENERGY, new com.hbm.api.energy.HybridEnergyStorage(energy));
-        this.capabilitiesContent.addCapability(com.hbm.capabilities.HBMCaps.LONG_ENERGY, new ProxyEnergyHandler(this.energy));
+        this.capabilitiesContent.addCapability(HBMCaps.LONG_ENERGY, new ProxyEnergyHandler(this.energy));
         this.multiblockData = MultiblockData.mapping.get(ModBlocks.machine_turbine_gas.get());
         this.isFormed = true;
         this.containerData = createDataSlots();
@@ -513,7 +514,7 @@ public class GasTurbineBlockEntity extends DummyableBlockEntity {
                 proxy.capabilitiesContent.addCapability(cap, new VisitRestrictWrapper(fluids, false, STEAM_TANK), directions);
                 return;
             }
-        } else if (cap == ForgeCapabilities.ENERGY || cap == com.hbm.capabilities.HBMCaps.LONG_ENERGY) {
+        } else if (cap == ForgeCapabilities.ENERGY || cap == HBMCaps.LONG_ENERGY) {
             if (offset.equals(new Vec3i(0, 1, -1))) {
                 proxy.capabilitiesContent.addCapability(cap, proxyCap(cap), directions);
                 return;
@@ -531,7 +532,7 @@ public class GasTurbineBlockEntity extends DummyableBlockEntity {
         if (cap == ForgeCapabilities.ENERGY) {
             return new com.hbm.api.energy.HybridEnergyStorage(energy);
         }
-        if (cap == com.hbm.capabilities.HBMCaps.LONG_ENERGY) {
+        if (cap == HBMCaps.LONG_ENERGY) {
             return new ProxyEnergyHandler(energy);
         }
         return null;

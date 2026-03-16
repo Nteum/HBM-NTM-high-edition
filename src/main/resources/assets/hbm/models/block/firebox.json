@@ -1,0 +1,47 @@
+{
+  "loader": "hbm:multi_parts_obj",
+  "model": "hbm:models/block/machine/firebox.obj",
+  "mtl_override": "../../general.mtl",
+  "flip_v": true,
+  "textures": {
+    "texture0": "hbm:block/machine/firebox",
+    "particle": "hbm:block/machine/firebox"
+  },
+  "transform": {
+    "translation": [0.5, 0, 0.5],
+    "rotation": [0, 0, 0],
+    "scale": 1.0
+  },
+  "display": {
+    "gui": {
+      "rotation": [ 30, 225, 0 ],
+      "translation": [ 1, 0, 0],
+      "scale":[ 0.2083, 0.2083, 0.2083 ]
+    },
+    "ground": {
+      "rotation": [ 1, 0, 0 ],
+      "translation": [ 0, 3, 0],
+      "scale":[ 0.083, 0.083, 0.083 ]
+    },
+    "fixed": {
+      "rotation": [ 0, 0, 0 ],
+      "translation": [ 0, 0, 0],
+      "scale":[ 0.167, 0.167, 0.167 ]
+    },
+    "thirdperson_righthand": {
+      "rotation": [ 75, 45, 0 ],
+      "translation": [ 0, 2.5, 0],
+      "scale": [ 0.125, 0.125, 0.125 ]
+    },
+    "firstperson_righthand": {
+      "rotation": [ 0, 45, 0 ],
+      "translation": [ 0, 0, 0 ],
+      "scale": [ 0.13, 0.13, 0.13 ]
+    },
+    "firstperson_lefthand": {
+      "rotation": [ 0, 225, 0 ],
+      "translation": [ 0, 0, 0 ],
+      "scale": [ 0.13, 0.13, 0.13 ]
+    }
+  }
+}

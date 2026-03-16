@@ -40,7 +40,7 @@ public class PressGui extends BaseMachineGui<PressMenu> {
 
         renderGauge(pGuiGraphics, GAUGE, this.leftPos + 25, topPos + 16, 18, 18, (menu.getSpeed()) / PressEntity.MAX_SPEED);
 
-        int k = (int) (menu.pressEntity.renderPress * 16 / PressEntity.MAX_SPEED);
+        int k = (int) (menu.pressEntity.renderPress * 16 / PressEntity.MAX_PRESS);
         pGuiGraphics.blit(TEXTURE, leftPos + 79, topPos + 35, 194, 0, 18, k);
 
         if (menu.getBurnTime() >= 20){

@@ -1,6 +1,7 @@
 package com.hbm.settings.tooltip;
 
 import com.hbm.HBMLang;
+import com.hbm.registries.ModBlocks;
 import com.hbm.registries.ModItems;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
@@ -19,6 +20,7 @@ public class TooltipRegistries {
         addTooltip(ModItems.INGOT_NEPTUNIUM.get(), HBMLang.ITEM_INGOT_NEPTUNIUM_DESC.translate());
         addTooltip(ModItems.DUST.get(), HBMLang.ITEM_DUST_DESC.translate());
         addTooltip(ModItems.POWDER_FIRE.get(), HBMLang.ITEM_POWDER_FIRE_DESC.translate());
+        addTooltip(ModBlocks.HEATER_FIREBOX.get().asItem(), HBMLang.BLOCK_FIREBOX_DESC.translate());
     }
 
     public static void addTooltip(Item item, Component ... components) {

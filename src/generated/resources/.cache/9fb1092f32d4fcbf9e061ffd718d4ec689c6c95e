@@ -1,4 +1,4 @@
-// 1.20.1	2026-02-26T23:32:34.5879651	Recipes
+// 1.20.1	2026-03-02T20:24:19.0568226	Recipes
 a24f7e47b80bc3195a8af8b4fe5d337fd1d08c4c data/hbm/advancements/recipes/misc/conveyor.json
 e874513dda72dd1014f7b6350a77f2dc7028df3c data/hbm/advancements/recipes/misc/crate_iron.json
 6ca95a2394b2bc92509851ebc519ca024992b091 data/hbm/advancements/recipes/misc/crate_steel.json
@@ -86,8 +86,39 @@ a3c5b447e03b488c91855aebb7e9f18fe8226421 data/hbm/recipes/machine_rbmk_element.j
 e2f8a22676363430c86fe1351b2e2927616c69c2 data/hbm/recipes/machine_turbine_gas.json
 48c19d99aa91abc42bed9ddcf51f7c0ecd151cb4 data/hbm/recipes/machine_zirnox.json
 8bf9f8bf37bbe4b38feb47da76e51cae96287cf8 data/hbm/recipes/nugget_zirconium_5.json
-5b9ff54bf2d950175846531ecdb3563ae94a5cd3 data/hbm/recipes/press/plate_advanced_alloy_1.json
-7800cebfde9d513db46ae8935cfa2124677f78fa data/hbm/recipes/press/plate_iron_0.json
+7eb2a8b48593596f46a3671f5491f678ee99b0fd data/hbm/recipes/press/ball_resin_7.json
+ef69388a47c06acfac0224c376b560fb33b9c9ea data/hbm/recipes/press/biomass_compressed_5.json
+f401695acdd9e65cf9e11856aba448b1cbb38a02 data/hbm/recipes/press/briquette_coal_8.json
+73ff8223da9d6c74a308c6ca13d09727e4f3708d data/hbm/recipes/press/briquette_lignite_9.json
+75469768a30a437ba11201776585effe4eb4c31d data/hbm/recipes/press/briquette_wood_10.json
+6d2e78e7a91e8a60433a6fcb1f2b506c29b68ff5 data/hbm/recipes/press/casing.large_26.json
+bd1587744a51bc209a608dbfacf48692947732bc data/hbm/recipes/press/casing.large_steel_28.json
+fbafb68e0c79e00f84c315bb9dff3eab586e7005 data/hbm/recipes/press/casing.small_25.json
+08e11a974db5817be755f7c561ca0220622f9ea2 data/hbm/recipes/press/casing.small_steel_27.json
+d5d52b2c099136be6e7cec35049c38ac7f205583 data/hbm/recipes/press/ingot_graphite_6.json
+4324c9a07cd64b7eaedd6613ddcc21f26b540067 data/hbm/recipes/press/plate_advanced_alloy_18.json
+8aecc380850b7e4d6885d28dc798a87d7b690083 data/hbm/recipes/press/plate_aluminium_14.json
+b50ccab6ac8a02923c958427d6a408558684b7d5 data/hbm/recipes/press/plate_combine_steel_20.json
+9c085b05e043364db52351669c6101f821dfd861 data/hbm/recipes/press/plate_copper_17.json
+956b2ad9e646ba784b68e74e6486ca433418856d data/hbm/recipes/press/plate_dura_steel_24.json
+80ee7272215c319ec21e56333b59de1ace46a1b4 data/hbm/recipes/press/plate_gold_12.json
+02bd59471ccffff6166d63b5a0940c5c59f3e24b data/hbm/recipes/press/plate_gunmetal_21.json
+d5c6fa8e158b9c8e3cb5e7becdd7273bcf0764e6 data/hbm/recipes/press/plate_iron_11.json
+5f5bf94a3f0b3216942953e0de4866630f262fba data/hbm/recipes/press/plate_lead_16.json
+8c7fb8594fb4d412a7299b78de93ecc9a4c36d22 data/hbm/recipes/press/plate_saturnite_23.json
+c33650bab6c255bf83e6bc8589b20a6433af7eea data/hbm/recipes/press/plate_schrabidium_19.json
+502f526ec848e2663e0a6486236f71c71a81ce22 data/hbm/recipes/press/plate_steel_15.json
+7cf054c7741d84fbb60293362f8c246aaed079da data/hbm/recipes/press/plate_titanium_13.json
+97515f64519219eab78d8e123ea571e9c8ee161b data/hbm/recipes/press/plate_weaponsteel_22.json
+c31a3ab1c0a94ccbddb97f3e621ccc5b8e36250d data/hbm/recipes/press/wire_advanced_alloy_34.json
+e64c857bd5dfb42ba61f2774b5c6aae89d90ca16 data/hbm/recipes/press/wire_aluminium_29.json
+28368305414bd94e0daceb9fa8a78e6de052e584 data/hbm/recipes/press/wire_copper_30.json
+cca2335bcc91e0381358e6598983ddd734fbcc54 data/hbm/recipes/press/wire_gold_32.json
+f1bf481f7c88615b17d62701198c502677f420e6 data/hbm/recipes/press/wire_magnetized_tungsten_37.json
+a0c64cb1a630abf673b4b6a3175ba2e6b9c2a581 data/hbm/recipes/press/wire_red_copper_31.json
+aef721d715843b4c7e0d9d188dee69eeeb780df3 data/hbm/recipes/press/wire_schrabidium_35.json
+13b9f12aa2ab8abe4e64ff0303d0eb95bb7086d5 data/hbm/recipes/press/wire_tungsten_33.json
+5ed9d4a27be5864721248074a67d119dab9c6031 data/hbm/recipes/press/wire_zinc_36.json
 09bf44b316977808b71e0258e56eeae1da41426e data/hbm/recipes/pwr_casing.json
 bd46e23d56cf34ed90eb9c3c20dbb55b7640cbcd data/hbm/recipes/pwr_channel.json
 6e90157ea9002d77024c3c821bdfca3b8a06d728 data/hbm/recipes/pwr_control.json
@@ -105,3 +136,8 @@ d48a46fe95761d7c761029de6ef4cfe32ed078c8 data/hbm/recipes/shredder/gold_ingot.js
 4921992eea1c21a12dff6844eb6907a93ecbd30d data/hbm/recipes/shredder/iron_ingot.json
 dd2508ffb12b4413779a54cd2a0c146a1de5f1ed data/minecraft/advancements/recipes/food/glyphid_meat_grilled_from_smoking.json
 75cdc07d7f6baf9b7075840a656a3f523a15d1fc data/minecraft/recipes/glyphid_meat_grilled_from_smoking.json
+1775ec3b277aeca9eb38454f4594d6cd3ff9d3b1 data/minecraft/recipes/press/blue_dye_1.json
+81a54a3a81abb7f499e67defb6306066d9517e78 data/minecraft/recipes/press/diamond_2.json
+794e09768b9f191147a54c2a195c2769cda85917 data/minecraft/recipes/press/emerald_3.json
+794e09768b9f191147a54c2a195c2769cda85917 data/minecraft/recipes/press/emerald_4.json
+2e81da6b84898762acd90df1c7c77e9be87819ea data/minecraft/recipes/press/quartz_0.json

@@ -37,26 +37,26 @@ public class PressEntity extends BaseMachineBlockEntity {
     public static int SLOT_STAMP = 1;
     public static int SLOT_INPUT = 2;
     public static int SLOT_OUTPUT = 3;
-    public static final int MAX_SPEED = 400; // max speed ticks for acceleration
+    public static final int MAX_SPEED = 400;    // max speed ticks for acceleration
     public static final int progressAtMax = 25; // max progress speed when hot
-    public final static int MAX_PRESS = 200; // max tick count per operation assuming speed is 1
+    public final static int MAX_PRESS = 200;    // max tick count per operation assuming speed is 1
 
-    public int speed = 0;       // speed ticks up once (or four times if preheated) when operating
-    public int burnTime = 0;    // burn ticks of the loaded fuel, 200 ticks equal one operation
-    public int press;           // extension of the press, operation is completed if maxPress is reached
-    public double renderPress; // client-side version of the press var, a double for smoother rendering
-    public double lastPress; // for interp
-    private int syncPress; // for interp
-    private int turnProgress; // for interp 3: revenge of the sith
-    boolean isRetracting = false; // direction the press is currently going
-    private int delay; // delay between direction changes to look a bit more appealing
+    public int speed = 0;                       // speed ticks up once (or four times if preheated) when operating
+    public int burnTime = 0;                    // burn ticks of the loaded fuel, 200 ticks equal one operation
+    public int press;                           // extension of the press, operation is completed if maxPress is reached
+    public double renderPress;                  // client-side version of the press var, a double for smoother rendering
+    public double lastPress;                    // for interp
+    private int syncPress;                      // for interp
+    private int turnProgress;                   // for interp 3: revenge of the sith
+    boolean isRetracting = false;               // direction the press is currently going
+    private int delay;                          // delay between direction changes to look a bit more appealing
     /*
      * 0: 燃料
      * 1: 模板
      * 2: 输入
      * 3：输出
      * */
-    private ItemStackHandler items = new ItemStackHandler(4){
+    private final ItemStackHandler items = new ItemStackHandler(4){
         @Override
         protected void onContentsChanged(int slot) {
             setChanged();
@@ -71,7 +71,6 @@ public class PressEntity extends BaseMachineBlockEntity {
             };
         }
     };
-    //    public NonNullList<ItemStack> items = NonNullList.withSize(4,ItemStack.EMPTY);
     public final ContainerData containerData = new ContainerData() {
         @Override
         public int get(int pIndex) {

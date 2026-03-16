@@ -1,0 +1,11 @@
+{
+  "type": "hbm:press",
+  "input": {
+    "item": "hbm:plate_gunmetal"
+  },
+  "result": {
+    "count": 2,
+    "item": "hbm:casing.large"
+  },
+  "stamp": "PLATE"
+}

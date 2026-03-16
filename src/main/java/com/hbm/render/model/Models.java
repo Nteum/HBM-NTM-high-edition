@@ -45,7 +45,7 @@ public class Models {
     public static final ResourceLocation ASSEMBLER_COG = add(HBM.rl("block/assembler/assembler_cog"));
     public static final ResourceLocation ASSEMBLER_SLIDER = add(HBM.rl("block/assembler/assembler_slider"));
     public static final ResourceLocation ASSEMBLER_ARM = add(HBM.rl("block/assembler/assembler_arm"));
-    public static final ResourceLocation CRUCIBLE = add(HBM.rl("block/crucible/crucible"));
+    public static final ResourceLocation CRUCIBLE = add(HBM.rl("block/crucible"));
     public static final ResourceLocation FAT_MAN = add(HBM.rl("block/bomb/fat_man"));
     public static final ResourceLocation BOY = add(HBM.rl("block/bomb/boy"));
     public static final ResourceLocation CUSTOM_NUKE = add(HBM.rl("block/bomb/custom"));
@@ -62,6 +62,7 @@ public class Models {
     public static final ResourceLocation SPACE_STATION_BASE = add(HBM.rl("block/space_station_base"));
     public static final ResourceLocation CONNECTOR = add(HBM.rl("block/connector"));
     public static final ResourceLocation PRESS_HEAD = add(HBM.rl("block/press/press_head"));
+    public static final ResourceLocation FIREBOX = add(HBM.rl("block/firebox"));
 
     public static final ResourceLocation MP_W_15_BALEFIRE = addItem(HBM.rl("item/mp_warhead_15_balefire"), HBMWeapon.MP_WARHEAD_15_BALEFIRE);
 //    public static final ResourceLocation GUN_RIFLE = addItem(HBM.rl("item/gun_marseleg"), ModItems.GUN_RIFLE.getId());

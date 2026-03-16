@@ -26,7 +26,7 @@ public class RecipePress implements Recipe<Container> {
     }
     @Override
     public boolean matches(Container pContainer, Level pLevel) {
-        if (!(pContainer instanceof PressEntity)) return false;
+//        if (!(pContainer instanceof PressEntity)) return false;
         ItemStack stampItem = pContainer.getItem(1);
         ItemStack inputItem = pContainer.getItem(2);
         return input.test(inputItem) && stampItem.getItem() instanceof ItemStamp && ((ItemStamp) stampItem.getItem()).getType() == stamp;

@@ -1,25 +1,31 @@
 package com.hbm.blockentity.machine;
 
+import com.hbm.HBM;
 import com.hbm.HBMKey;
+import com.hbm.HBMLang;
 import com.hbm.Inventory.recipe.ModRecipes;
 import com.hbm.api.energy.BasicEnergyContainer;
 import com.hbm.api.energy.HybridEnergyStorage;
 import com.hbm.api.energy.ProxyEnergyHandler;
+import com.hbm.api.energy.TransmitUtils;
 import com.hbm.api.energy.fe.TransmitHelper;
 import com.hbm.block.base.BlockContainerBase;
 import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.blockentity.base2.DummyableBlockEntity;
 import com.hbm.blockentity.interfaces.IPower;
-import com.hbm.capabilities.HBMCaps;
+import com.hbm.item.tool.ItemStamp;
+import com.hbm.registries.HBMCaps;
 import com.hbm.gui.menu.AssemblerMenu;
 import com.hbm.Inventory.recipe.AssemblerRecipe;
 import com.hbm.registries.ModBlocks;
+import com.hbm.registries.ModTags;
 import com.hbm.utils.InventoryUtils;
 import com.hbm.utils.multiblock.MultiblockData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Tuple;
@@ -35,6 +41,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.energy.IEnergyStorage;
+import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -56,6 +63,22 @@ public class AssemblerEntity extends DummyableBlockEntity implements IPower {
     static final int[] OUTPUT_SLOTS = new int[]{4};
     public final BasicEnergyContainer energyContainer = new BasicEnergyContainer(energyCapacity, energyCapacity, 0);
     private final HybridEnergyStorage forgeEnergy = new HybridEnergyStorage(this.energyContainer);
+    private final ItemStackHandler items = new ItemStackHandler(17){
+        @Override
+        protected void onContentsChanged(int slot) {
+            setChanged();
+        }
+
+        @Override
+        public boolean isItemValid(int slot, @NotNull ItemStack stack) {
+            return switch (slot){
+                case 0 -> stack.is(ModTags.Items.BATTERY);
+                case 1,2,3 -> stack.is(ModTags.Items.UPGRADE);
+                case 4 -> false;
+                default -> true;
+            };
+        }
+    };
 
     protected final ContainerData containerData = new ContainerData() {
         @Override
@@ -79,9 +102,10 @@ public class AssemblerEntity extends DummyableBlockEntity implements IPower {
     };
     public AssemblerEntity(BlockPos pPos, BlockState pBlockState) {
         super(ModBlockEntityType.ASSEMBLER_ENTITY.get(), pPos, pBlockState);
-        items = NonNullList.withSize(17,ItemStack.EMPTY);
+//        items = NonNullList.withSize(17,ItemStack.EMPTY);
         this.capabilitiesContent.addCapability(HBMCaps.LONG_ENERGY, new ProxyEnergyHandler(energyContainer));
         this.capabilitiesContent.addCapability(ForgeCapabilities.ENERGY, this.forgeEnergy);
+        this.capabilitiesContent.addCapability(ForgeCapabilities.ITEM_HANDLER, this.items);
         multiblockData = MultiblockData.mapping.get(ModBlocks.machine_assembler.get());
     }
     public IEnergyStorage getEnergy(){
@@ -93,7 +117,7 @@ public class AssemblerEntity extends DummyableBlockEntity implements IPower {
     protected void onUpdateServer() {
         super.onUpdateServer();
         runDummyCaps(level, getBlockPos(), getBlockState(), this);
-        absorbBatteryItem(this);
+        TransmitUtils.dischargeItem(this,this.getItem(0));
         transportItem(this);  //暂时只能不加判断地传入物品
         boolean flagEmpty = this.craftSlotEmpty();
         if (this.running){
@@ -118,7 +142,7 @@ public class AssemblerEntity extends DummyableBlockEntity implements IPower {
         CompoundTag tag = new CompoundTag();
         tag.putBoolean(HBMKey.RUNNING, this.running);
         if (this.recipeNow != null)
-            tag.put(HBMKey.RESULT_ITEM, this.recipeNow.getResultItem(this.getLevel().registryAccess()).serializeNBT());
+            tag.putString(HBMKey.RECIPE_NOW, this.recipeNow.getId().toString());
         return super.getReducedUpdateTag().merge(tag);
     }
 
@@ -126,8 +150,25 @@ public class AssemblerEntity extends DummyableBlockEntity implements IPower {
     public void handleUpdatePacket(@NotNull CompoundTag tag) {
         super.handleUpdatePacket(tag);
         this.running = tag.getBoolean(HBMKey.RUNNING);
-        if (tag.contains(HBMKey.RESULT_ITEM))
-            this.showItem = ItemStack.of((CompoundTag) tag.get(HBMKey.RESULT_ITEM));
+        if (tag.contains(HBMKey.RECIPE_NOW)){
+            this.level.getRecipeManager().byKey(new ResourceLocation(tag.getString(HBMKey.RECIPE_NOW))).ifPresent(recipe -> {
+                this.recipeNow = (AssemblerRecipe) recipe;
+                this.showItem = recipeNow.getResultItem(this.level.registryAccess());
+            });
+        }
+    }
+
+    @Override
+    public void handleClientPacket(@NotNull CompoundTag tag) {
+        super.handleClientPacket(tag);
+        if (tag.contains(HBMKey.RECIPE_NOW, Tag.TAG_STRING)){
+            this.level.getRecipeManager().byKey(new ResourceLocation(tag.getString(HBMKey.RECIPE_NOW))).ifPresent(recipe -> {
+                if (this.recipeNow == null || !this.running){    // 客户端选中配方不影响当前配方
+                    this.recipeNow = (AssemblerRecipe) recipe;
+                    this.setChanged();
+                }
+            });
+        }
     }
 
     public static void startMachine(AssemblerEntity entity, AssemblerRecipe recipe){
@@ -140,18 +181,14 @@ public class AssemblerEntity extends DummyableBlockEntity implements IPower {
         entity.countdown = 0;
     }
     public static void processOutput(AssemblerEntity entity, ItemStack itemStack){
-        ItemStack resultStack = entity.items.get(4);
-        if (resultStack.isEmpty())entity.items.set(4,itemStack);
+        ItemStack resultStack = entity.items.getStackInSlot(4);
+        if (resultStack.isEmpty())entity.items.setStackInSlot(4,itemStack);
         else {
             resultStack.setCount(resultStack.getCount() + itemStack.getCount());
-            entity.items.set(4, resultStack);
+            entity.items.setStackInSlot(4, resultStack);
         }
     }
 
-    public static void absorbBatteryItem(AssemblerEntity entity){
-        ItemStack itemStack = entity.items.get(0);
-        TransmitHelper.dischargeItem(entity,itemStack);
-    }
     public static void transportItem(AssemblerEntity entity){
         if (entity.hasLevel()){
             List<Tuple<BlockPos, Direction>> tuples = entity.multiblockData.getCapLocation(ForgeCapabilities.ITEM_HANDLER, entity.worldPosition, entity.getBlockState().getValue(BlockContainerBase.FACING));
@@ -171,7 +208,7 @@ public class AssemblerEntity extends DummyableBlockEntity implements IPower {
     }
     private boolean craftSlotEmpty(){
         for (int i = 5; i < 17; i++) {
-            if (!this.items.get(i).isEmpty())return false;
+            if (!this.items.getStackInSlot(i).isEmpty())return false;
         }
         return true;
     }
@@ -183,7 +220,7 @@ public class AssemblerEntity extends DummyableBlockEntity implements IPower {
     }
     public boolean canProcess(@Nullable AssemblerRecipe recipe, AssemblerEntity entity){
         if (recipe == null)return false;
-        ItemStack resultStack = entity.items.get(4);
+        ItemStack resultStack = entity.items.getStackInSlot(4);
         ItemStack resultItem = recipe.getResultItem(level.registryAccess());
         int energyToUse = recipe.getProcessingTime() * entity.power;
         return  (resultStack.isEmpty() || resultStack.is(resultItem.getItem()) && resultStack.getCount()+resultItem.getCount()<resultStack.getMaxStackSize())
@@ -192,7 +229,8 @@ public class AssemblerEntity extends DummyableBlockEntity implements IPower {
 
     @Override
     public Component getDefaultName() {
-        return Component.translatable("hbm.machine.assembler");
+        return HBMLang.CONTAINER_ASSEMBLER.translate();
+//        return Component.translatable("hbm.machine.assembler");
     }
 
     @Override
@@ -227,6 +265,7 @@ public class AssemblerEntity extends DummyableBlockEntity implements IPower {
         pTag.put(HBMKey.ENERGY, this.energyContainer.serializeNBT());
         if (recipeNow!=null)
             pTag.putString("recipeNow",recipeNow.getId().toString());
+        pTag.put("items", this.items.serializeNBT());
     }
 
     @Override
@@ -239,6 +278,11 @@ public class AssemblerEntity extends DummyableBlockEntity implements IPower {
         if (pTag.contains("recipeNow")){
             ResourceLocation resourceLocation = new ResourceLocation(pTag.getString("recipeNow"));
             this.recipeNow = (AssemblerRecipe) this.level.getRecipeManager().byKey(resourceLocation).orElse(null);
+        }
+        try {
+            this.items.deserializeNBT((CompoundTag) pTag.get("items"));
+        }catch (Exception e){
+            HBM.LOGGER.warn("Assembler's Items data lost.");
         }
     }
 
@@ -264,5 +308,15 @@ public class AssemblerEntity extends DummyableBlockEntity implements IPower {
     @Override
     public void distributeCapabilities() {
         this.multiblockData.assignCapabilities(this, this.getBlockState().getValue(BlockStateProperties.HORIZONTAL_FACING));
+    }
+
+    public AssemblerRecipe getRecipeNow(){
+        return this.recipeNow;
+    }
+    public ItemStackHandler getItemHandler() { return items; }
+
+    @Override
+    public ItemStack getItem(int pSlot) {
+        return this.items.getStackInSlot(pSlot);
     }
 }

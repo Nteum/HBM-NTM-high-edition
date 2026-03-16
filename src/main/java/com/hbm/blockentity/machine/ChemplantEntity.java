@@ -19,7 +19,7 @@ import com.hbm.block.machine.BlockChemplant;
 import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.blockentity.base2.DummyableBlockEntity;
 import com.hbm.blockentity.base2.TileProxyBase;
-import com.hbm.capabilities.HBMCaps;
+import com.hbm.registries.HBMCaps;
 import com.hbm.gui.menu.ChemplantMenu;
 import com.hbm.item.machine.ItemMachineUpgrade.UpgradeType;
 import com.hbm.registries.ModSounds;

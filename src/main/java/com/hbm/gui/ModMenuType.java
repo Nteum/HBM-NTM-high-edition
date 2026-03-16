@@ -16,6 +16,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.extensions.IForgeMenuType;
+import net.minecraftforge.network.IContainerFactory;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
@@ -27,8 +28,8 @@ public class ModMenuType {
             MOD_MENU_TYPES.register("press_menu",()->IForgeMenuType.create(PressMenu::new));
     public static final RegistryObject<MenuType<BatteryMenu>> BATTERY_MENU =
             MOD_MENU_TYPES.register("battery_menu",()->new MenuType<>(BatteryMenu::new, FeatureFlags.VANILLA_SET));
-    public static final RegistryObject<MenuType<AssemblerMenu>> ASSEMBLER_MENU =
-            MOD_MENU_TYPES.register("assembler_menu",()->new MenuType<>(AssemblerMenu::new, FeatureFlags.VANILLA_SET));
+    public static final RegistryObject<MenuType<AssemblerMenu>> ASSEMBLER_MENU = register("menu_assembler", AssemblerMenu::new);
+//            MOD_MENU_TYPES.register("assembler_menu",()->new MenuType<>(AssemblerMenu::new, FeatureFlags.VANILLA_SET));
     public static final RegistryObject<MenuType<ChemplantMenu>> CHEMPLANT_MENU =
             MOD_MENU_TYPES.register("chemplant_menu", ()->IForgeMenuType.create((windowId, inv, data) -> (ChemplantMenu) ITileAccess.getInstance(windowId,inv,data, ChemplantMenu.class)));
     public static final RegistryObject<MenuType<BarrelMenu>> BARREL_MENU =
@@ -69,4 +70,9 @@ public class ModMenuType {
             MOD_MENU_TYPES.register("research_reactor_menu", () -> new MenuType<>(com.hbm.gui.menu.ResearchReactorMenu::new, FeatureFlags.VANILLA_SET));
     public static final RegistryObject<MenuType<com.hbm.gui.menu.BreederReactorMenu>> BREEDER_REACTOR_MENU =
             MOD_MENU_TYPES.register("breeder_reactor_menu", () -> new MenuType<>(com.hbm.gui.menu.BreederReactorMenu::new, FeatureFlags.VANILLA_SET));
+    public static final RegistryObject<MenuType<MenuFirebox>> MENU_FIREBOX = register("menu_firebox", MenuFirebox::new);
+    public static final RegistryObject<MenuType<MenuCrucible>> MENU_CRUCIBLE = register("menu_crucible", MenuCrucible::new);
+    private static <T extends AbstractContainerMenu> RegistryObject<MenuType<T>> register(String key, IContainerFactory<T> factory){
+        return MOD_MENU_TYPES.register(key, () -> IForgeMenuType.create(factory));
+    }
 }

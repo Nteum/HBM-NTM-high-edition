@@ -3,15 +3,13 @@ package com.hbm.gui.screen;
 import com.hbm.HBM;
 import com.hbm.blockentity.machine.ChemplantEntity;
 import com.hbm.gui.menu.ChemplantMenu;
-import com.hbm.gui.menu.ITileAccess;
-import com.hbm.gui.screen.component.BarEnergy;
-import com.hbm.gui.screen.component.BarFluid;
-import com.hbm.gui.screen.component.BarProgress;
+import com.hbm.gui.screen.widget.BarEnergy;
+import com.hbm.gui.screen.widget.BarFluid;
+import com.hbm.gui.screen.widget.BarProgress;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.fluids.IFluidTank;
 

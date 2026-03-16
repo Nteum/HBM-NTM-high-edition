@@ -1,94 +1,190 @@
 package com.hbm.blockentity.machine;
 
+import com.hbm.HBMKey;
+import com.hbm.HBMLang;
+import com.hbm.Inventory.fluid.CrucibleFluidHandler;
+import com.hbm.Inventory.material.BasicHeatHandler;
+import com.hbm.api.fluid.BasicFluidHandler;
 import com.hbm.blockentity.ModBlockEntityType;
-import com.hbm.blockentity.base2.BaseMachineBlockEntity;
-import com.hbm.registries.ModItems;
-import com.hbm.registries.ModItems;;
+import com.hbm.blockentity.base2.DummyableBlockEntity;
+import com.hbm.blockentity.base2.UpdateableBlockEntity;
+import com.hbm.gui.menu.MenuCrucible;
+import com.hbm.registries.HBMCaps;
+import com.hbm.registries.HBMMatters;
+import com.hbm.registries.ModBlocks;
+;
+import com.hbm.utils.multiblock.MultiblockData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.NonNullList;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.phys.AABB;
-import org.jetbrains.annotations.Nullable;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.items.ItemStackHandler;
+import org.jetbrains.annotations.NotNull;
 
-public class CrucibleEntity extends BaseMachineBlockEntity {
-    public int heat;
-    public int progress;
-    public static int processTime = 20_000;
+import java.util.Arrays;
+import java.util.List;
+
+public class CrucibleEntity extends DummyableBlockEntity {
+//    public int progress;    // 熔炼进度
+    public static int MAX_HEAT = 100_000;
+    public static int MAX_PROGRESS = 20_000;
     public static double diffusion = 0.25D;
-    public static int maxHeat = 100_000;
-    public static final AABB BOX = AABB.of(new BoundingBox(-1,0,-1,2,2,2));
+//    public static final AABB BOX = AABB.of(new BoundingBox(-1,0,-1,2,2,2));
+    private BasicHeatHandler heatHandler = BasicHeatHandler.of(MAX_HEAT);
+    // 两个流体槽，前一个单纯存储物质，后一个可以发生金属混合。
+    CrucibleFluidHandler storeStack = new CrucibleFluidHandler(20736);  // 存储熔融物质的stack
+    CrucibleFluidHandler alloyStack = new CrucibleFluidHandler(20736);  // 存储合金流体的stack
+//    public int[] progress = new int[]{0,0,0,0,0,0,0,0,0};
+    public int progress = 0;
+
+    private ItemStackHandler items = new ItemStackHandler(9){
+        @Override
+        protected void onContentsChanged(int slot) {
+            setChanged();
+        }
+
+        @Override
+        public boolean isItemValid(int slot, @NotNull ItemStack stack) {
+            return super.isItemValid(slot, stack);
+        }
+
+        @Override
+        public int getSlotLimit(int slot) {
+            return 1;
+        }
+    };
+    public ContainerData containerData = new ContainerData() {
+        @Override
+        public int get(int pIndex) {
+            return switch (pIndex){
+                case 0 -> heatHandler.getHeat();
+                case 1 -> progress;
+                default -> 0;
+            };
+        }
+
+        @Override
+        public void set(int pIndex, int pValue) {}
+
+        @Override
+        public int getCount() {
+            return 2;
+        }
+    };
+
     public CrucibleEntity(BlockPos pPos, BlockState pBlockState) {
         super(ModBlockEntityType.CRUCIBLE_ENTITY.get(), pPos, pBlockState);
-        items = NonNullList.withSize(10,ItemStack.EMPTY);   //物品栏，10个栏位
+        this.capabilitiesContent.addCapability(ForgeCapabilities.ITEM_HANDLER, items);
+        this.capabilitiesContent.addCapability(HBMCaps.HEAT, heatHandler);
+        multiblockData = MultiblockData.mapping.get(ModBlocks.machine_crucible.get());
     }
 
-    public static void tick(Level level, BlockPos pPos, BlockState pState, BlockEntity pBlockEntity) {
-        if (!level.isClientSide()){
+    @Override
+    protected void onUpdateServer() {
+        super.onUpdateServer();
+        this.heatHandler.receiveFromOther(this.level, this.worldPosition.relative(Direction.DOWN));
+        this.heatHandler.decay();
+        trySmelt();
 
+        sendUpdatePacket();
+    }
+
+    @Override
+    protected void onUpdateClient() {
+        super.onUpdateClient();
+    }
+    protected void trySmelt() {
+        int delta = this.heatHandler.getHeat() - this.heatHandler.getMaxHeat() / 2;
+        if(delta <= 0) return;
+        delta = (int) (delta * 0.05);
+        int slot = -1;
+        for (int i = 0; i < this.items.getSlots(); i++) {
+            ItemStack stackInSlot = this.items.getStackInSlot(i);
+            if (!stackInSlot.isEmpty() && HBMMatters.canSmelt(stackInSlot)){
+                slot = i;
+            }
+        }
+        if (slot == -1) return;
+//        this.progress[slot] += delta;
+        this.progress += delta;
+        this.heatHandler.extractHeat(delta, false);
+//        if (this.progress[slot] > processTime){
+        if (this.progress > MAX_PROGRESS){
+            FluidStack moltenMatter = HBMMatters.getMoltenMatter(this.items.getStackInSlot(slot));
+            if (this.storeStack.getNeeded() < moltenMatter.getAmount()) return;
+            this.storeStack.fill(moltenMatter, IFluidHandler.FluidAction.EXECUTE);
+            this.items.extractItem(slot, 1, false);
+//            this.progress[slot] = 0;
+            this.progress = 0;
         }
     }
 
     //GUI上显示的名字
     @Override
     public Component getDefaultName() {
-        return Component.translatable("hbmxx.container.crucible");
+        return HBMLang.CONTAINER_CRUCIBLE.translate();
     }
     //创建对应的菜单类
     @Override
     public AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory) {
-        return null;
+        return new MenuCrucible(pContainerId, pInventory, this, containerData);
     }
 
     @Override
-    public boolean canPlaceItem(int pIndex, ItemStack pStack) {
-        //模板栏只能输入模板
-        if (pIndex == 0){
-            return pStack.is(ModItems.crucible_template.get());
-        }
-        //其他栏位看物品是否可被熔化
-        return isItemSmeltable(pStack);
-    }
-    //判断物品是否可被熔化
-    public boolean isItemSmeltable(ItemStack itemStack){
-        return true;
-    }
-
-//    @Override
-//    public AABB getRenderBoundingBox() {
-//        //规定碰撞箱
-//        return BOX;
-//    }
-    @Override
-    public int getMaxStackSize() {
-        //坩埚一个栏位只能放一个东西
-        return 1;
+    public void load(@NotNull CompoundTag nbt) {
+        super.load(nbt);
+        if (nbt.contains(HBMKey.HEAT, Tag.TAG_COMPOUND)) heatHandler.deserializeNBT(nbt.getCompound(HBMKey.HEAT));
+        this.progress = nbt.getInt(HBMKey.PROGRESS);
+//        if (nbt.contains(HBMKey.PROGRESS, Tag.TAG_INT_ARRAY)) this.progress = nbt.getIntArray(HBMKey.PROGRESS);
+        if (nbt.contains("stack1", Tag.TAG_COMPOUND)) this.storeStack.deserializeNBT(nbt.getCompound("stack1"));
+        if (nbt.contains("stack2", Tag.TAG_COMPOUND)) this.alloyStack.deserializeNBT(nbt.getCompound("stack2"));
     }
 
     @Override
-    public void setItem(int pSlot, ItemStack pStack) {
-        super.setItem(pSlot, pStack);
+    protected void saveAdditional(CompoundTag pTag) {
+        super.saveAdditional(pTag);
+        pTag.put(HBMKey.HEAT, heatHandler.serializeNBT());
+        pTag.putInt(HBMKey.PROGRESS, this.progress);
+//        pTag.putIntArray(HBMKey.PROGRESS, progress);
+        pTag.put("stack1", this.storeStack.serializeNBT());
+        pTag.put("stack2", this.alloyStack.serializeNBT());
+    }
+
+    public ItemStackHandler getItemHandler(){
+        return this.items;
+    }
+
+    public CrucibleFluidHandler getStoreStack(){
+        return this.storeStack;
     }
 
     @Override
-    public int[] getSlotsForFace(Direction pSide) {
-        return new int[0];
+    public @NotNull CompoundTag getReducedUpdateTag() {
+        CompoundTag tag = super.getReducedUpdateTag();
+//        tag.put(HBMKey.HEAT, heatHandler.serializeNBT());
+//        tag.putIntArray(HBMKey.PROGRESS, progress);
+        tag.put("stack1", this.storeStack.serializeNBT());
+        tag.put("stack2", this.alloyStack.serializeNBT());
+        return tag;
     }
 
     @Override
-    public boolean canPlaceItemThroughFace(int pIndex, ItemStack pItemStack, @Nullable Direction pDirection) {
-        return false;
-    }
-
-    @Override
-    public boolean canTakeItemThroughFace(int pIndex, ItemStack pStack, Direction pDirection) {
-        return false;
+    public void handleUpdatePacket(@NotNull CompoundTag nbt) {
+        super.handleUpdatePacket(nbt);
+//        if (nbt.contains(HBMKey.HEAT, Tag.TAG_COMPOUND)) heatHandler.deserializeNBT(nbt.getCompound(HBMKey.HEAT));
+//        if (nbt.contains(HBMKey.PROGRESS, Tag.TAG_INT_ARRAY)) this.progress = nbt.getIntArray(HBMKey.PROGRESS);
+        if (nbt.contains("stack1", Tag.TAG_COMPOUND)) this.storeStack.deserializeNBT(nbt.getCompound("stack1"));
+        if (nbt.contains("stack2", Tag.TAG_COMPOUND)) this.alloyStack.deserializeNBT(nbt.getCompound("stack2"));
     }
 }

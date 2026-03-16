@@ -10,7 +10,7 @@ import com.hbm.api.inventory.ModeBuilder;
 import com.hbm.block.machine.WoodBurnerBlock;
 import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.blockentity.base2.BaseMachineBlockEntity;
-import com.hbm.capabilities.HBMCaps;
+import com.hbm.registries.HBMCaps;
 import com.hbm.gui.menu.WoodBurnerMenu;
 import com.hbm.registries.ModItems;
 import com.hbm.registries.ModTags;

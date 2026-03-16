@@ -3,7 +3,7 @@ package com.hbm.gui.screen;
 import com.hbm.HBM;
 import com.hbm.blockentity.machine.GasTurbineBlockEntity;
 import com.hbm.gui.menu.GasTurbineMenu;
-import com.hbm.gui.screen.component.BarFluid;
+import com.hbm.gui.screen.widget.BarFluid;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;

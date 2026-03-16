@@ -27,6 +27,9 @@ public class RecipePressBuilder implements FinishedRecipe {
     public RecipePressBuilder(ItemStamp.StampType stamp, Ingredient input, ItemStack result){
         this(BuiltInRegistries.ITEM.getKey(result.getItem()).withPrefix("press/").withSuffix("_" + counter), result, input, stamp);
     }
+    public RecipePressBuilder(ItemStamp.StampType stamp, Item input, Item result){
+        this(BuiltInRegistries.ITEM.getKey(result).withPrefix("press/").withSuffix("_" + counter), result.getDefaultInstance(), Ingredient.of(input), stamp);
+    }
     public RecipePressBuilder(ResourceLocation id, ItemStack result, Ingredient input, ItemStamp.StampType stamp){
         this.result = result;
         this.input = input;

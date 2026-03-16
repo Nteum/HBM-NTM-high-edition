@@ -1,7 +1,6 @@
 package com.hbm.item.tool;
 
-import com.hbm.handler.pollution.PollutionHandler;
-import com.hbm.handler.pollution.PollutionType;
+import com.hbm.addational_data.Pollution;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -37,9 +36,9 @@ public class PollutionDetectorItem extends Item {
             return;
         }
         BlockPos pos = player.blockPosition();
-        float soot = PollutionHandler.getPollution(level, pos, PollutionType.SOOT);
-        float poison = PollutionHandler.getPollution(level, pos, PollutionType.POISON);
-        float heavy = PollutionHandler.getPollution(level, pos, PollutionType.HEAVYMETAL);
+        float soot = Pollution.getPollution(level, pos, Pollution.Type.SOOT);
+        float poison = Pollution.getPollution(level, pos, Pollution.Type.POISON);
+        float heavy = Pollution.getPollution(level, pos, Pollution.Type.HEAVYMETAL);
         player.displayClientMessage(
                 Component.translatable("message.hbm.pollution_detector",
                         format(soot), format(poison), format(heavy)),

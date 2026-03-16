@@ -4,7 +4,7 @@ import com.hbm.HBMLang;
 import com.hbm.api.energy.IEnergyHandler;
 import com.hbm.api.energy.TransmitUtils;
 import com.hbm.api.energy.ItemStackEnergyHandler;
-import com.hbm.capabilities.HBMCaps;
+import com.hbm.registries.HBMCaps;
 import com.hbm.capabilities.ItemCapabilityWrapper;
 import com.hbm.item.tool.BatteryItem;
 import com.hbm.utils.BobMth;

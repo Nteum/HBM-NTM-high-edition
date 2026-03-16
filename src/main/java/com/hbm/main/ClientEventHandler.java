@@ -104,10 +104,11 @@ public class ClientEventHandler {
             MenuScreens.register(ModMenuType.ICF_PRESS_MENU.get(), ICFPressScreen::new);
             MenuScreens.register(ModMenuType.RESEARCH_REACTOR_MENU.get(), ResearchReactorScreen::new);
             MenuScreens.register(ModMenuType.BREEDER_REACTOR_MENU.get(), BreederReactorScreen::new);
+            MenuScreens.register(ModMenuType.MENU_FIREBOX.get(), GuiFirebox::new);
+            MenuScreens.register(ModMenuType.MENU_CRUCIBLE.get(), GuiCrucible::new);
             //方块实体渲染
             BlockEntityRenderers.register(ModBlockEntityType.PRESS_ENTITY.get(), PressRenderer::new);
             BlockEntityRenderers.register(ModBlockEntityType.ASSEMBLER_ENTITY.get(), AssemblerRenderer::new);
-            BlockEntityRenderers.register(ModBlockEntityType.CRUCIBLE_ENTITY.get(), CrucibleRenderer::new);
             BlockEntityRenderers.register(ModBlockEntityType.NUKE_BOMB_FAT_ENTITY.get(), NukeFatRender::new);
             BlockEntityRenderers.register(ModBlockEntityType.NUKE_BOMB_BOY_ENTITY.get(), NukeBoyRender::new);
             BlockEntityRenderers.register(ModBlockEntityType.NUKE_BOMB_CUSTOM_ENTITY.get(), NukeCustomRender::new);
@@ -119,6 +120,8 @@ public class ClientEventHandler {
             BlockEntityRenderers.register(ModBlockEntityType.BREEDER_REACTOR_ENTITY.get(), ctx -> new BreederReactorRenderer());
             BlockEntityRenderers.register(ModBlockEntityType.TILE_SPACE_STATION.get(), SpaceStationRender::new);
             BlockEntityRenderers.register(ModBlockEntityType.TILE_CONNECTOR.get(), ConnectorRender::new);
+            BlockEntityRenderers.register(ModBlockEntityType.TILE_FIREBOX.get(), RendererFirebox::new);
+            BlockEntityRenderers.register(ModBlockEntityType.CRUCIBLE_ENTITY.get(), CrucibleRenderer::new);
             //实体渲染
             EntityRenderers.register(ModEntityType.TEST_ENTITY.get(), TestEntityRenderer::new);
             EntityRenderers.register(ModEntityType.ENTITY_GRENADE_GENETIC.get(), ThrownItemRenderer::new);

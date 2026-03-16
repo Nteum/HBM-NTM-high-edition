@@ -7,12 +7,17 @@ import com.hbm.HBMKey;
 import com.hbm.datagen.recipe.ingredient.CountableIngredient;
 import com.hbm.datagen.recipe.ingredient.FluidStackIngredient;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.fluids.FluidStack;
@@ -111,5 +116,32 @@ public class RecipeHelper {
         } else {
             return fluid;
         }
+    }
+    // 展示配方的内容
+    public static List<Component> genTooltip(Recipe recipe, RegistryAccess reg){
+        List<Component> result = new ArrayList<>();
+        if (recipe.getType() == ModRecipes.ASSEMBLER.type().get()){
+            AssemblerRecipe assemblerRecipe = (AssemblerRecipe) recipe;
+            ItemStack resultItem = assemblerRecipe.getResultItem(reg);
+            result.add(Component.translatable(resultItem.getDescriptionId()).append(" ×" + resultItem.getCount()));
+            for (CountableIngredient ingredient : assemblerRecipe.ingredients) {
+                result.add(Component.literal(" - ").append(genIngredientTooltip(ingredient)));
+            }
+            result.add(Component.literal("Processing Time : " + assemblerRecipe.processingTime));
+        }
+        return result;
+    }
+
+    private static Component genItemStackTooltip(ItemStack itemStack){
+        return Component.translatable(itemStack.getDescriptionId()).append(" ×" + itemStack.getCount());
+    }
+
+    private static Component genIngredientTooltip(Ingredient ingredient){
+        ItemStack itemStack = ingredient.getItems()[0];
+        MutableComponent result = Component.translatable(itemStack.getDescriptionId());
+        if (ingredient instanceof CountableIngredient countableIngredient){
+            result.append(" ×" + countableIngredient.value.count);
+        }
+        return result;
     }
 }

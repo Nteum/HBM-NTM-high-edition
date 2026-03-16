@@ -1,6 +1,6 @@
 package com.hbm.compat;
 
-import com.hbm.capabilities.HBMCaps;
+import com.hbm.registries.HBMCaps;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 

@@ -7,9 +7,11 @@ import com.hbm.registries.ModTags;
 import com.hbm.registries.ModBlocks;
 import com.hbm.registries.OreDictManager;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.BlockTagsProvider;
@@ -25,6 +27,23 @@ public class BlockTagsGen extends BlockTagsProvider {
     }
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
+        for (ModTags.TagGenEntry<Block> tagGenEntry : ModTags.Blocks.LIST_TAG_GEN_REQ) {
+            TagKey<Block> key = tagGenEntry.key;
+            if (tagGenEntry.keyOut != null)
+                for (TagKey<Block> keyToJoin : tagGenEntry.keyOut) {
+                    this.tag(keyToJoin).addTag(key);
+                }
+            if (tagGenEntry.keyIn != null)
+                for (TagKey<Block> keyToContain : tagGenEntry.keyIn) {
+                    this.tag(key).addTag(keyToContain);
+                }
+            if (tagGenEntry.keyAutoGen != null)
+                for (TagKey<Block> keyToJoin : tagGenEntry.keyAutoGen) {
+                    this.tag(keyToJoin).addTag(TagKey.create(Registries.BLOCK, keyToJoin.location().withSuffix("/" + key.location().getPath())));
+                }
+        }
+        ModTags.Blocks.LIST_TAG_GEN_REQ.clear();
+
         OreDictManager.addBlockTags(this);
         //工具
         this.tag(BlockTags.NEEDS_IRON_TOOL).add(HBMBlockComponent.URANIUM_ORE.get());

@@ -2,9 +2,7 @@ package com.hbm.api.energy;
 
 import com.hbm.HBMKey;
 import com.hbm.api.IContentsListener;
-import com.hbm.api.energy.BasicEnergyContainer;
-import com.hbm.api.energy.ProxyEnergyHandler;
-import com.hbm.capabilities.HBMCaps;
+import com.hbm.registries.HBMCaps;
 import com.hbm.capabilities.ItemCapabilityWrapper;
 import com.hbm.capabilities.resolver.BasicCapabilityResolver;
 import com.hbm.capabilities.resolver.ICapabilityResolver;

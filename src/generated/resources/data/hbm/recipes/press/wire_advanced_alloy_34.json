@@ -1,0 +1,11 @@
+{
+  "type": "hbm:press",
+  "input": {
+    "item": "hbm:ingot_advanced_alloy"
+  },
+  "result": {
+    "count": 8,
+    "item": "hbm:wire_advanced_alloy"
+  },
+  "stamp": "WIRE"
+}

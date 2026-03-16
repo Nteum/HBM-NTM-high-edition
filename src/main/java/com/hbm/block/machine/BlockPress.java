@@ -38,22 +38,6 @@ public class BlockPress extends BlockMachineBase {
         return new PressEntity(pPos,pState);
     }
 
-//    @Override
-//    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-//        if (!pLevel.isClientSide){
-//            pPlayer.openMenu(pState.getMenuProvider(pLevel,pPos));
-//            return InteractionResult.CONSUME;
-//        }else {
-//            return InteractionResult.SUCCESS;
-//        }
-//    }
-//
-//    @Nullable
-//    @Override
-//    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-//        return pBlockEntityType == ModBlockEntityType.PRESS_ENTITY.get() ? PressEntity::tick : null;
-//    }
-
     @Override
     public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
         return SHAPE;

@@ -1,8 +1,7 @@
 package com.hbm.api.energy;
 
 import com.hbm.blockentity.interfaces.IPower;
-import com.hbm.blockentity.machine.BatteryEntity;
-import com.hbm.capabilities.HBMCaps;
+import com.hbm.registries.HBMCaps;
 import com.hbm.registries.ModItems;
 import com.hbm.utils.EnumUtils;
 import net.minecraft.core.Direction;

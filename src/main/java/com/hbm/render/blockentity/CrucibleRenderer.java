@@ -38,12 +38,15 @@ public class CrucibleRenderer implements BlockEntityRenderer<CrucibleEntity> {
 //            case EAST -> rotation = 270;
 //        }
 //        ModelAdjustUtils.generalMachineRotate(pPoseStack, blockState);
+        pPoseStack.pushPose();
         DirectionUtils.generalMachineRotate(pPoseStack, blockState);
 
         //坩埚本体部分
-        pPoseStack.pushPose();
+//        pPoseStack.pushPose();
 //        pPoseStack.mulPose(Axis.YP.rotationDegrees(rotation));
         renderBlockModel(crucible_model,blockState,modelRenderer,pPoseStack,pBuffer,pPackedLight,pPackedOverlay,null);
+//        pPoseStack.popPose();
+
         pPoseStack.popPose();
 
 //        ResourceLocation overlay = new ResourceLocation(HBMxx.MODID,"fluid/irradiated_water_overlay");

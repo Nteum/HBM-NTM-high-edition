@@ -1,18 +1,13 @@
 package com.hbm.block.env;
 
+import com.hbm.addational_data.Pollution;
 import com.hbm.block.HBMBlockProperties;
 import com.hbm.blockentity.ModBlockEntityType;
-import com.hbm.blockentity.base2.BaseMachineBlockEntity;
 import com.hbm.config.MobConfig;
 import com.hbm.entity.mob.EntityGlyphid;
-import com.hbm.handler.pollution.PollutionHandler;
-import com.hbm.handler.pollution.PollutionType;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.RandomSource;
-import net.minecraft.util.datafix.fixes.IglooMetadataRemovalFix;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
@@ -100,7 +95,7 @@ public class GlyphidSpawner extends BaseEntityBlock {
                     for (EntityGlyphid entity : level.getEntitiesOfClass(EntityGlyphid.class, spawner.getRenderBoundingBox().inflate(64, 64, 64), (entity) -> true)) {
                         if (++count >= MobConfig.spawnMax) return;
                     }
-                    float soot = PollutionHandler.getPollution(level, spawner.getBlockPos(), PollutionType.SOOT);
+                    float soot = Pollution.getPollution(level, spawner.getBlockPos(), Pollution.Type.SOOT);
                     int subtype = spawner.getBlockState().getValue(VARIANT);
 
                     if (count <= 3 || subtype == 2){

@@ -1,32 +1,17 @@
 {
   "variants": {
-    "facing=east,is_core=false": {
+    "facing=east": {
       "model": "hbm:block/space_station_base",
       "y": 90
     },
-    "facing=east,is_core=true": {
-      "model": "hbm:block/space_station_base",
-      "y": 90
-    },
-    "facing=north,is_core=false": {
+    "facing=north": {
       "model": "hbm:block/space_station_base"
     },
-    "facing=north,is_core=true": {
-      "model": "hbm:block/space_station_base"
-    },
-    "facing=south,is_core=false": {
+    "facing=south": {
       "model": "hbm:block/space_station_base",
       "y": 180
     },
-    "facing=south,is_core=true": {
-      "model": "hbm:block/space_station_base",
-      "y": 180
-    },
-    "facing=west,is_core=false": {
-      "model": "hbm:block/space_station_base",
-      "y": 270
-    },
-    "facing=west,is_core=true": {
+    "facing=west": {
       "model": "hbm:block/space_station_base",
       "y": 270
     }

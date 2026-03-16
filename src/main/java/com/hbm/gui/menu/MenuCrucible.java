@@ -1,0 +1,41 @@
+package com.hbm.gui.menu;
+
+import com.hbm.Inventory.fluid.CrucibleFluidHandler;
+import com.hbm.blockentity.machine.CrucibleEntity;
+import com.hbm.gui.ModMenuType;
+import com.hbm.utils.WorldUtils;
+import net.minecraft.client.Minecraft;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.inventory.SimpleContainerData;
+import net.minecraftforge.common.util.INBTSerializable;
+import net.minecraftforge.items.ItemStackHandler;
+import net.minecraftforge.items.SlotItemHandler;
+
+public class MenuCrucible extends BaseMachineMenu{
+    public CrucibleEntity be;
+    public MenuCrucible(int pContainerId, Inventory pPlayerInventory, CrucibleEntity tile, ContainerData containerData) {
+        super(ModMenuType.MENU_CRUCIBLE.get(), pContainerId, tile, containerData);
+        be = tile;
+        ItemStackHandler itemHandler = be.getItemHandler();
+        //input
+        for(int i = 0; i < 3; i++) {
+            for(int j = 0; j < 3; j++) {
+                this.addSlot(new SlotItemHandler(itemHandler, j + i * 3, 107 + j * 18, 18 + i * 18));
+            }
+        }
+        addPlayerSlot(pPlayerInventory, 0, 48);
+    }
+    public MenuCrucible(int id, Inventory playerInventory, FriendlyByteBuf buf) {
+        this(id, playerInventory, WorldUtils.getTileEntity(CrucibleEntity.class, Minecraft.getInstance().level, buf.readBlockPos()), new SimpleContainerData(9));
+    }
+
+    public int getHeat(){
+        return this.containerData.get(0);
+    }
+
+    public int getProgress(){
+        return containerData.get(1);
+    }
+}

@@ -1,37 +1,16 @@
 package com.hbm.gui.screen;
 
 import com.hbm.HBM;
-import com.hbm.HBMKey;
 import com.hbm.blockentity.machine.BarrelEntity;
-import com.hbm.blockentity.machine.ChemplantEntity;
 import com.hbm.gui.menu.BarrelMenu;
-import com.hbm.gui.menu.BatteryMenu;
-import com.hbm.gui.screen.component.BarFluid;
-import com.hbm.gui.screen.component.MultiStateButton;
-import com.hbm.network.ModMessages;
-import com.hbm.network.packet.toserver.C2SSyncTileMessage;
+import com.hbm.gui.screen.widget.BarFluid;
+import com.hbm.gui.screen.widget.MultiStateButton;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.components.Button;
-import net.minecraft.client.gui.components.ImageButton;
-import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.client.gui.screens.inventory.AbstractFurnaceScreen;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.IFluidTank;
-import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 
 public class BarrelGui extends BaseMachineGui<BarrelMenu> {
     private final ResourceLocation TEXTURE = HBM.rl("textures/gui/gui_barrel.png");

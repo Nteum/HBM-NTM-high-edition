@@ -71,7 +71,7 @@ public class AssemblerRecipe implements Recipe<Container> {
             int cnt = 0;
             List<ItemStack> inputs = new ArrayList<>();
             for (int i : AssemblerEntity.ASSEMBLE_SLOTS) {
-                if (!entity.items.get(i).isEmpty())inputs.add(entity.items.get(i));
+                if (!entity.getItemHandler().getStackInSlot(i).isEmpty())inputs.add(entity.getItemHandler().getStackInSlot(i));
             }
             return inputs.size() >= ingredients.size()
                     && HBMRecipeMatcher.orderlessMatch(inputs,this.ingredients);
@@ -92,13 +92,13 @@ public class AssemblerRecipe implements Recipe<Container> {
             for (CountableIngredient ingredient : this.ingredients) {
                 int tempCount = ingredient.value.count;
                 for (int i : AssemblerEntity.ASSEMBLE_SLOTS) {
-                    ItemStack itemStack = entity.items.get(i);
+                    ItemStack itemStack = entity.getItemHandler().getStackInSlot(i);
                     if (ingredient.value.flagTag && itemStack.is(ingredient.value.tagKey)
                             || !ingredient.value.flagTag && itemStack.is(ingredient.value.itemStack.getItem())){
                         int subsCount = Math.min(tempCount, itemStack.getCount());
                         itemStack.shrink(subsCount);
-                        if (itemStack.isEmpty())entity.items.set(i,ItemStack.EMPTY);
-                        else entity.items.set(i,itemStack);
+                        if (itemStack.isEmpty())entity.getItemHandler().setStackInSlot(i,ItemStack.EMPTY);
+                        else entity.getItemHandler().setStackInSlot(i,itemStack);
                         tempCount -= subsCount;
                         if (tempCount == 0)break;
                     }

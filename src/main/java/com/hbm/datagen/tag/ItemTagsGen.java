@@ -5,14 +5,17 @@ import com.hbm.registries.ModItems;
 import com.hbm.registries.ModTags;
 import com.hbm.registries.OreDictManager;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 ;
@@ -25,7 +28,6 @@ public class ItemTagsGen extends ItemTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
-        OreDictManager.addItemTags(this);
         //电池
         this.tag(ModTags.Items.BATTERY).add(ModItems.BATTERY_CREATIVE.get(),ModItems.BATTERY_GENERIC.get(),ModItems.BATTERY_ADVANCED.get(),ModItems.BATTERY_LITHIUM.get(),
                 ModBlocks.machine_battery.get().asItem(),ModBlocks.machine_lithium_battery.get().asItem(),
@@ -40,6 +42,28 @@ public class ItemTagsGen extends ItemTagsProvider {
                 ModItems.BLADE_TUNGSTEN.get(),
                 ModItems.SAWBLADE.get()
         );
+        ModItems.tagSupport(this);
+
+        for (ModTags.TagGenEntry<Item> tagGenEntry : ModTags.Items.LIST_TAG_GEN_REQ) {
+            TagKey<Item> key = tagGenEntry.key;
+            if (tagGenEntry.keyOut != null)
+                for (TagKey<Item> keyToJoin : tagGenEntry.keyOut) {
+                    this.tag(keyToJoin).addTag(key);
+                }
+            if (tagGenEntry.keyIn != null)
+                for (TagKey<Item> keyToContain : tagGenEntry.keyIn) {
+                    this.tag(key).addTag(keyToContain);
+                }
+            if (tagGenEntry.keyAutoGen != null)
+                for (TagKey<Item> keyToJoin : tagGenEntry.keyAutoGen) {
+                    this.tag(keyToJoin).addTag(TagKey.create(Registries.ITEM, keyToJoin.location().withSuffix("/" + key.location().getPath())));
+                }
+        }
+        ModTags.Items.LIST_TAG_GEN_REQ.clear();
+
+        for (Map.Entry<TagKey<Block>, TagKey<Item>> entry : ModTags.Items.BLOCK_ITEM_TRANS.entrySet()) {
+            this.copy(entry.getKey(), entry.getValue());
+        }
     }
 
     @Override

@@ -12,7 +12,7 @@ import com.hbm.block.machine.BlockElectricFurnace;
 import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.blockentity.base2.BaseMachineBlockEntity;
 import com.hbm.blockentity.interfaces.IUpgradeInfoProvider;
-import com.hbm.capabilities.HBMCaps;
+import com.hbm.registries.HBMCaps;
 import com.hbm.gui.menu.ElectricFurnaceMenu;
 import com.hbm.item.machine.ItemMachineUpgrade;
 import com.hbm.item.machine.ItemMachineUpgrade.UpgradeType;
@@ -131,7 +131,7 @@ public class ElectricFurnaceEntity extends BaseMachineBlockEntity implements Men
                 this.energyContainer.extract(this.consumption, false);
 
                 // 需要处理污染，暂时空着
-//                if(worldObj.getTotalWorldTime() % 20 == 0) PollutionHandler.incrementPollution(worldObj, xCoord, yCoord, zCoord, PollutionType.SOOT, PollutionHandler.SOOT_PER_SECOND);
+//                if(worldObj.getTotalWorldTime() % 20 == 0) PollutionHandler.incrementPollution(worldObj, xCoord, yCoord, zCoord, Pollution.Type.SOOT, PollutionHandler.SOOT_PER_SECOND);
 
                 if(this.progress >= maxProgress) {
                     this.progress = 0;
