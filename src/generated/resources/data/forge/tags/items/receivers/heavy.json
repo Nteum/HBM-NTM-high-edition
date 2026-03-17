@@ -1,0 +1,13 @@
+{
+  "values": [
+    "#forge:receivers/heavy/dura",
+    "#forge:receivers/heavy/ferro",
+    "#forge:receivers/heavy/tcalloy",
+    "#forge:receivers/heavy/cdalloy",
+    "#forge:receivers/heavy/bbronze",
+    "#forge:receivers/heavy/abronze",
+    "#forge:receivers/heavy/gunmetal",
+    "#forge:receivers/heavy/weaponsteel",
+    "#forge:receivers/heavy/saturn"
+  ]
+}

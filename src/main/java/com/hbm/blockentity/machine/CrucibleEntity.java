@@ -36,17 +36,15 @@ import java.util.Arrays;
 import java.util.List;
 
 public class CrucibleEntity extends DummyableBlockEntity {
-//    public int progress;    // 熔炼进度
+    public int progress = 0;
     public static int MAX_HEAT = 100_000;
     public static int MAX_PROGRESS = 20_000;
     public static double diffusion = 0.25D;
-//    public static final AABB BOX = AABB.of(new BoundingBox(-1,0,-1,2,2,2));
+    public static final int CAPACITY = 20736;
     private BasicHeatHandler heatHandler = BasicHeatHandler.of(MAX_HEAT);
     // 两个流体槽，前一个单纯存储物质，后一个可以发生金属混合。
-    CrucibleFluidHandler storeStack = new CrucibleFluidHandler(20736);  // 存储熔融物质的stack
-    CrucibleFluidHandler alloyStack = new CrucibleFluidHandler(20736);  // 存储合金流体的stack
-//    public int[] progress = new int[]{0,0,0,0,0,0,0,0,0};
-    public int progress = 0;
+    CrucibleFluidHandler storeStack = new CrucibleFluidHandler(CAPACITY);  // 存储熔融物质的stack
+    CrucibleFluidHandler alloyStack = new CrucibleFluidHandler(CAPACITY);  // 存储合金流体的stack
 
     private ItemStackHandler items = new ItemStackHandler(9){
         @Override
@@ -116,16 +114,13 @@ public class CrucibleEntity extends DummyableBlockEntity {
             }
         }
         if (slot == -1) return;
-//        this.progress[slot] += delta;
         this.progress += delta;
         this.heatHandler.extractHeat(delta, false);
-//        if (this.progress[slot] > processTime){
         if (this.progress > MAX_PROGRESS){
             FluidStack moltenMatter = HBMMatters.getMoltenMatter(this.items.getStackInSlot(slot));
             if (this.storeStack.getNeeded() < moltenMatter.getAmount()) return;
             this.storeStack.fill(moltenMatter, IFluidHandler.FluidAction.EXECUTE);
             this.items.extractItem(slot, 1, false);
-//            this.progress[slot] = 0;
             this.progress = 0;
         }
     }
@@ -146,9 +141,9 @@ public class CrucibleEntity extends DummyableBlockEntity {
         super.load(nbt);
         if (nbt.contains(HBMKey.HEAT, Tag.TAG_COMPOUND)) heatHandler.deserializeNBT(nbt.getCompound(HBMKey.HEAT));
         this.progress = nbt.getInt(HBMKey.PROGRESS);
-//        if (nbt.contains(HBMKey.PROGRESS, Tag.TAG_INT_ARRAY)) this.progress = nbt.getIntArray(HBMKey.PROGRESS);
         if (nbt.contains("stack1", Tag.TAG_COMPOUND)) this.storeStack.deserializeNBT(nbt.getCompound("stack1"));
         if (nbt.contains("stack2", Tag.TAG_COMPOUND)) this.alloyStack.deserializeNBT(nbt.getCompound("stack2"));
+        if (nbt.contains(HBMKey.ITEM, Tag.TAG_COMPOUND)) this.items.deserializeNBT(nbt.getCompound(HBMKey.ITEM));
     }
 
     @Override
@@ -156,9 +151,9 @@ public class CrucibleEntity extends DummyableBlockEntity {
         super.saveAdditional(pTag);
         pTag.put(HBMKey.HEAT, heatHandler.serializeNBT());
         pTag.putInt(HBMKey.PROGRESS, this.progress);
-//        pTag.putIntArray(HBMKey.PROGRESS, progress);
         pTag.put("stack1", this.storeStack.serializeNBT());
         pTag.put("stack2", this.alloyStack.serializeNBT());
+        pTag.put(HBMKey.ITEM, this.items.serializeNBT());
     }
 
     public ItemStackHandler getItemHandler(){
@@ -172,8 +167,6 @@ public class CrucibleEntity extends DummyableBlockEntity {
     @Override
     public @NotNull CompoundTag getReducedUpdateTag() {
         CompoundTag tag = super.getReducedUpdateTag();
-//        tag.put(HBMKey.HEAT, heatHandler.serializeNBT());
-//        tag.putIntArray(HBMKey.PROGRESS, progress);
         tag.put("stack1", this.storeStack.serializeNBT());
         tag.put("stack2", this.alloyStack.serializeNBT());
         return tag;
@@ -182,8 +175,6 @@ public class CrucibleEntity extends DummyableBlockEntity {
     @Override
     public void handleUpdatePacket(@NotNull CompoundTag nbt) {
         super.handleUpdatePacket(nbt);
-//        if (nbt.contains(HBMKey.HEAT, Tag.TAG_COMPOUND)) heatHandler.deserializeNBT(nbt.getCompound(HBMKey.HEAT));
-//        if (nbt.contains(HBMKey.PROGRESS, Tag.TAG_INT_ARRAY)) this.progress = nbt.getIntArray(HBMKey.PROGRESS);
         if (nbt.contains("stack1", Tag.TAG_COMPOUND)) this.storeStack.deserializeNBT(nbt.getCompound("stack1"));
         if (nbt.contains("stack2", Tag.TAG_COMPOUND)) this.alloyStack.deserializeNBT(nbt.getCompound("stack2"));
     }

@@ -38,8 +38,8 @@ public abstract class BaseMachineGui<T extends AbstractContainerMenu> extends Ab
     }
     /** 在鼠标指针位置显示tooltip */
     public void drawCustomInfoStat(GuiGraphics pGuiGraphics, int mouseX, int mouseY, int x, int y, int width, int height, List<Component> tooltips) {
-//        if(x <= mouseX && x + width > mouseX && y < mouseY && y + height >= mouseY)
-//            pGuiGraphics.renderComponentTooltip(this.font, tooltips, mouseX, mouseY);
-        if (isHovering(x, y, width, height, mouseX, mouseY)) pGuiGraphics.renderComponentTooltip(this.font, tooltips, mouseX, mouseY);
+        if(x <= mouseX && x + width > mouseX && y < mouseY && y + height >= mouseY)
+            pGuiGraphics.renderComponentTooltip(this.font, tooltips, mouseX, mouseY);
+//        if (isHovering(x, y, width, height, mouseX, mouseY)) pGuiGraphics.renderComponentTooltip(this.font, tooltips, mouseX, mouseY);
     }
 }

@@ -1,0 +1,16 @@
+{
+  "values": [
+    "#forge:plates/welded/iron",
+    "#forge:plates/welded/titanium",
+    "#forge:plates/welded/copper",
+    "#forge:plates/welded/tungsten",
+    "#forge:plates/welded/aluminium",
+    "#forge:plates/welded/zirconium",
+    "#forge:plates/welded/osmiridium",
+    "#forge:plates/welded/steel",
+    "#forge:plates/welded/tcalloy",
+    "#forge:plates/welded/cdalloy",
+    "#forge:plates/welded/cmb",
+    "#forge:plates/welded/stainless"
+  ]
+}

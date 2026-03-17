@@ -5,6 +5,7 @@ import com.google.common.collect.Table;
 import com.hbm.HBM;
 import com.hbm.HBMKey;
 import com.hbm.Inventory.fluid.ModFluids;
+import com.hbm.Inventory.material.HBMMatForm;
 import com.hbm.api.resource.OreType;
 import com.hbm.registries.OreDictManager.DictFrame;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -64,11 +65,11 @@ public class ModTags {
         public static TagKey<Block> forgeTag(String pName) {
             return TagKey.create(Registries.BLOCK, new ResourceLocation("forge",pName));
         }
-        protected static TagKey<Block> convertToBlockTag(TagKey<Item> itemTag) {
+        public static TagKey<Block> convertToBlockTag(TagKey<Item> itemTag) {
             return BlockTags.create(itemTag.location());
         }
 
-        protected static TagKey<Block> subBlockTag(TagKey<Block> base, TagKey<Item> matter) {
+        public static TagKey<Block> subBlockTag(TagKey<Block> base, TagKey<Item> matter) {
             return BlockTags.create(new ResourceLocation(base.location().getNamespace(),
                     base.location().getPath() + "/" + matter.location().getPath()));
         }
@@ -80,23 +81,6 @@ public class ModTags {
     }
     public static class Items{
         public static final TagKey<Item> RAW_MATERIAL  = forgeTag("raw_materials");
-        public static final Map<String, TagKey<Item>> NUGGETS = new HashMap<>();
-        public static final TagKey<Item> NUGGET  = forgeTag("nuggets");
-        public static final Map<String, TagKey<Item>> INGOTS = new HashMap<>();
-        public static final Map<String, TagKey<Item>> DUSTS = new HashMap<>();
-        public static final Map<String, TagKey<Item>> SMALL_DUSTS = new HashMap<>();
-        public static final TagKey<Item> SMALL_DUST  = forgeTag("small_dusts");
-        public static final Map<String, TagKey<Item>> GEMS = new HashMap<>();
-        public static final Map<String, TagKey<Item>> CRYSTALS = new HashMap<>();
-        public static final TagKey<Item> CRYSTAL  = forgeTag("crystals");
-        public static final Map<String, TagKey<Item>> PLATES = new HashMap<>();
-        public static final TagKey<Item> PLATE  = forgeTag("plates");
-        public static final Map<String, TagKey<Item>> CAST_PLATES = new HashMap<>();
-        public static final TagKey<Item> CAST_PLATE  = forgeTag("cast_plates");
-        public static final Map<String, TagKey<Item>> BILLETS = new HashMap<>();
-        public static final TagKey<Item> BILLET  = forgeTag("billets");
-        public static final Map<TagKey<Item>, Map<String, TagKey<Item>>> SERIALIZE_MAP = Map.of(NUGGET,NUGGETS,  Tags.Items.INGOTS,INGOTS,
-                Tags.Items.DUSTS,DUSTS,  SMALL_DUST,SMALL_DUSTS,  Tags.Items.GEMS,GEMS,  CRYSTAL,CRYSTALS,  PLATE,PLATES,  CAST_PLATE, CAST_PLATES,  BILLET, BILLETS);
 
         public static final TagKey<Item> BATTERY = forgeTag("battery");
         public static final TagKey<Item> CHARGEABLE = forgeTag("chargeable");
@@ -110,7 +94,7 @@ public class ModTags {
         public static final TagKey<Item> PLATE_STEEL = forgeTag(HBMKey.link(HBMKey.PLATES, HBMKey.STEEL));
         public static final TagKey<Item> INGOT_URANIUM = forgeTag(HBMKey.link(HBMKey.INGOTS, HBMKey.URANIUM));
 //        public static final TagKey<Item> INGOT_TITANIUM = forgeTag(HBMKey.link(HBMKey.INGOTS, HBMKey.TITANIUM));
-        public static final TagKey<Item> INGOT_ALUMINIUM = forgeTag(HBMKey.link(HBMKey.INGOTS, HBMKey.TITANIUM));
+        public static final TagKey<Item> INGOT_ALUMINIUM = forgeTag(HBMKey.link(HBMKey.INGOTS, HBMKey.ALUMINIUM));
         public static final TagKey<Item> INGOT_LEAD = forgeTag(HBMKey.link(HBMKey.INGOTS, HBMKey.LEAD));
         public static final TagKey<Item> DUST_QUARTZ = forgeTag(HBMKey.link(HBMKey.DUSTS, HBMKey.QUARTZ));
         public static final TagKey<Item> DUST_LAPIS = forgeTag(HBMKey.link(HBMKey.DUSTS, HBMKey.LAPIS));
@@ -122,7 +106,7 @@ public class ModTags {
         public static final TagKey<Item> DUST_LIGNITE = forgeTag(HBMKey.link(HBMKey.DUSTS, HBMKey.LIGNITE));
         public static final TagKey<Item> SAWDUST = forgeTag(HBMKey.SAWDUST);
 
-        public static final TagKey<Item> WIRE_FINE = tag(HBMKey.WIRE);
+//        public static final TagKey<Item> WIRE_FINE = tag(HBMKey.WIRE);
 
         public static TagKey<Item> tag(String pName) {
             return TagKey.create(Registries.ITEM, HBM.rl(pName));
@@ -152,21 +136,48 @@ public class ModTags {
 
         public static final TagKey<Item> NORMAL = tag("normal");
         public static final TagKey<Item> METAL = tag("metal");
-        // 材料形状
-        static Map<TagKey<Item>, MatterFormat> MATTER_FORMATS = new HashMap<>();
-        private static final int SIZE_NUGGIT = 16;              // 物质形式遵循匠魂的数值，一个粒相当于16mb
-        private static final int SIZE_INGOT = SIZE_NUGGIT * 9;
-        public static final TagKey<Item> QUANTUM = addMatterFormat(forgeTag("quantum"), false, 1);
-        public static final TagKey<Item> STOCK = addMatterFormat(forgeTag("stock"), false, SIZE_INGOT * 4);
-        public static final TagKey<Item> GRIP =	addMatterFormat(forgeTag("grip"), false, SIZE_INGOT * 2);
+//        // 材料形状
+//        static Map<TagKey<Item>, HBMMatForm> MATTER_FORMATS = new HashMap<>();
+        // 所有材质依赖的东西
+        public static final TagKey<Item> ANY = forgeTag("any");
+        public static final TagKey<Item> QUANTUM = forgeTag("quantum");
+        public static final TagKey<Item> TINY = forgeTag("tiny");
+        public static final TagKey<Item> DUST = forgeTag("dust");
+        public static final TagKey<Item> SMALL_DUST  = forgeTag("small_dusts");
+        public static final TagKey<Item> FRAGMENT = forgeTag("fragment");
+        public static final TagKey<Item> QUART = forgeTag("quart");
+        public static final TagKey<Item> CRYSTAL  = forgeTag("crystals");
+        public static final TagKey<Item> WIRE = forgeTag("wires/fine");
+        public static final TagKey<Item> DENSEWIRE = forgeTag("wires/dense");
+        public static final TagKey<Item> BOLT = forgeTag("bolts");
+        public static final TagKey<Item> PLATE = forgeTag("plates");
+        public static final TagKey<Item> CASTPLATE = forgeTag("plates/cast");
+        public static final TagKey<Item> WELDEDPLATE = forgeTag("plates/welded");
+        public static final TagKey<Item> PLATES_TRIPLE = forgeTag("plates/triple");
+        public static final TagKey<Item> PLATES_SEXTUPLE = forgeTag("plates/sextuple");
+        public static final TagKey<Item> SHELL = forgeTag("shells");
+        public static final TagKey<Item> PIPE = forgeTag("pipes");
+        public static final TagKey<Item> BILLET  = forgeTag("billets");
+        public static final TagKey<Item> LIGHTBARREL = forgeTag("barrels/light");
+        public static final TagKey<Item> HEAVYBARREL = forgeTag("barrels/heavy");
+        public static final TagKey<Item> LIGHTRECEIVER = forgeTag("receivers/light");
+        public static final TagKey<Item> HEAVYRECEIVER = forgeTag("receivers/heavy");
+        public static final TagKey<Item> MECHANISM = forgeTag("mechanisms/gun");
+        public static final TagKey<Item> STOCK = forgeTag("stocks");
+        public static final TagKey<Item> GRIP = forgeTag("grips");
 
-        public static final TagKey<Item> FRAGMENT =	addMatterFormat(forgeTag("fragment"), false, SIZE_INGOT * 2);
-        public static final TagKey<Item> DUST =	addMatterFormat(forgeTag("dust"), false, SIZE_INGOT * 2);
-//        public static final TagKey<Item> PLATE =	addMatterFormat(forgeTag("plate"), false, SIZE_INGOT * 2);
-        public static final TagKey<Item> DENSEWIRE =	addMatterFormat(forgeTag("densewire"), false, SIZE_INGOT * 2);
-        public static final TagKey<Item> CASTPLATE =	addMatterFormat(forgeTag("castplate"), false, SIZE_INGOT * 2);
-        public static final TagKey<Item> WELDEDPLATE =	addMatterFormat(forgeTag("weldedplate"), false, SIZE_INGOT * 2);
-        public static final TagKey<Item> SHELL =	addMatterFormat(forgeTag("shell"), false, SIZE_INGOT * 2);
+        // 旧oredict的东西，早晚要清理
+        public static final Map<String, TagKey<Item>> NUGGETS = new HashMap<>();
+        public static final Map<String, TagKey<Item>> INGOTS = new HashMap<>();
+        public static final Map<String, TagKey<Item>> DUSTS = new HashMap<>();
+        public static final Map<String, TagKey<Item>> SMALL_DUSTS = new HashMap<>();
+        public static final Map<String, TagKey<Item>> GEMS = new HashMap<>();
+        public static final Map<String, TagKey<Item>> CRYSTALS = new HashMap<>();
+        public static final Map<String, TagKey<Item>> PLATES = new HashMap<>();
+        public static final Map<String, TagKey<Item>> CAST_PLATES = new HashMap<>();
+        public static final Map<String, TagKey<Item>> BILLETS = new HashMap<>();
+        public static final Map<TagKey<Item>, Map<String, TagKey<Item>>> SERIALIZE_MAP = Map.of(Tags.Items.NUGGETS,NUGGETS,  Tags.Items.INGOTS,INGOTS,
+                Tags.Items.DUSTS,DUSTS,  SMALL_DUST,SMALL_DUSTS,  Tags.Items.GEMS,GEMS,  CRYSTAL,CRYSTALS,  PLATE,PLATES,  CASTPLATE, CAST_PLATES,  BILLET, BILLETS);
 
         public static final Map<TagKey<Block>, TagKey<Item>> BLOCK_ITEM_TRANS = Map.of(Tags.Blocks.ORES, Tags.Items.ORES, Tags.Blocks.STORAGE_BLOCKS,Tags.Items.STORAGE_BLOCKS);
         // 待生成tag的列表
@@ -175,118 +186,26 @@ public class ModTags {
             LIST_TAG_GEN_REQ.add(entry);
             return entry;
         }
-
-        private static TagKey<Item> addMatterFormat(TagKey<Item> key, boolean autoGen, int quantity){
-            MATTER_FORMATS.put(key, new MatterFormat(autoGen, quantity));
-            return key;
-        }
+//
+//        private static TagKey<Item> addMatterFormat(TagKey<Item> key, boolean autoGen, int quantity){
+//            MATTER_FORMATS.put(key, new MatterFormat(autoGen, quantity));
+//            return key;
+//        }
     }
-    public static class MatterFormat{
-        boolean autoGen = true; // 是否自动生成
-        int quantity = 72;      // 等效物质的量，默认8为一个粒，72为一个锭
-        Set<TagKey<Item>> content;
-        public MatterFormat(boolean autoGen, int quantity){
-            this.autoGen = autoGen;
-            this.quantity = quantity;
-        }
-        public MatterFormat add(TagKey<Item> ... keys){
-            if (content == null) content = new HashSet<>();
-            content.addAll(Arrays.stream(keys).toList());
-            return this;
-        }
-    }
-    public static class HBMMatter{
-        String name;
-        TagKey<Item> matterKey;
-        Map<TagKey<Item>, TagKey<Item>> shapes;         // 物品形状
-        Map<TagKey<Block>, TagKey<Block>> blockShapes;  // 方块形状
-        TagGenEntry<Item> genEntry;
-        TagGenEntry<Block> blockGen;
-        public int solidColorLight = 0xFF4A00;
-        public int solidColorDark = 0x802000;
-        public int moltenColor = 0xFF4A00;
-        // 0 - 不可融化；1 - 可被融化
-        public byte smeltProperty = 0;
-        // 融化后的流体，用于兼容匠魂系统，不是所有matter都可融化
-        RegistryObject<FluidType> fluidType;
-        RegistryObject<Fluid> source;
-        public HBMMatter(String name){
-            this.matterKey = Items.forgeTag(name);
-        }
-        public HBMMatter(String name, int solidColorLight, int solidColorDark, int moltenColor){
-            this(name);
-            color(solidColorLight, solidColorDark, moltenColor);
-        }
-        public HBMMatter color(int solidColorLight, int solidColorDark, int moltenColor){
-            this.solidColorLight = solidColorLight;
-            this.solidColorDark = solidColorDark;
-            this.moltenColor = moltenColor;
-            return this;
-        }
-        @SafeVarargs
-        public final HBMMatter shapes(TagKey<Item>... shapes){
-            if (this.shapes == null) this.shapes = new HashMap<>();
-            List<TagKey<Item>> itemTags = new ArrayList<>();
-            List<TagKey<Block>> blockTags = new ArrayList<>();
-            for (TagKey<Item> shape : shapes) {
-                this.shapes.put(shape, Items.subTag(shape, matterKey));
-                if (isPhysicallyPresent(shape)) {
-                    if (this.blockShapes == null) this.blockShapes = new HashMap<>();
-                    TagKey<Block> blockBase = Blocks.convertToBlockTag(shape);
-                    this.blockShapes.put(blockBase, Blocks.subBlockTag(blockBase, matterKey));
-                    blockTags.add(blockBase);
-                }else {
-                    itemTags.add(shape);
-                }
-            }
-            if (genEntry == null) genEntry = Items.make(matterKey);
-            genEntry.addKeyAutogen(itemTags.toArray(TagKey[]::new));
-            if (blockGen == null) blockGen = Blocks.make(matterKey);
-            blockGen.addKeyAutogen(blockTags.toArray(TagKey[]::new));
-            return this;
-        }
-        private boolean isPhysicallyPresent(TagKey<Item> shape) {
-            return Blocks.BLOCK_SHAPES.contains(Blocks.convertToBlockTag(shape));
-        }
-        public TagKey<Item> key(){
-            return matterKey;
-        }
-        public HBMMatter gen(Consumer<TagGenEntry<Item>> consumer){
-            consumer.accept(genEntry);
-            return this;
-        }
-        public TagKey<Item> getShape(TagKey<Item> shape){
-            return this.shapes.get(shape);
-        }
-        public HBMMatter toFluid() {
-            // 为每种金属生成唯一的 FluidType（用于区分颜色）
-            // 这里可以巧妙地把颜色作为温度参考
-            this.fluidType = ModFluids.FLUID_TYPES.register(name + "_type", () -> new FluidType(FluidType.Properties.create().temperature(moltenColor).descriptionId("fluid." + HBM.MODID + "." + name)));
-            this.source = ModFluids.FLUIDS.register("molten_" + name, () -> new ForgeFlowingFluid.Source(new ForgeFlowingFluid.Properties(fluidType, null, null)));
-            return this;
-        }
-        public Fluid fluid(){
-            return this.source.get();
-        }
-        public FluidType fluidType(){
-            return this.fluidType.get();
-        }
-        public boolean canMolten(){
-            return smeltProperty != 0 && this.source != null && this.fluidType != null;
-        }
-        // 锭的tag
-        public TagKey<Item> ingot(){
-            return getShape(Tags.Items.INGOTS);
-        }
-        // 粒的tag
-        public TagKey<Item> nugget(){
-            return getShape(Tags.Items.NUGGETS);
-        }
-        // 板
-        public TagKey<Item> plate(){
-            return getShape(Items.PLATE);
-        }
-    }
+//    public static class MatterFormat{
+//        boolean autoGen = true; // 是否自动生成
+//        int quantity = 72;      // 等效物质的量，默认8为一个粒，72为一个锭
+//        Set<TagKey<Item>> content;
+//        public MatterFormat(boolean autoGen, int quantity){
+//            this.autoGen = autoGen;
+//            this.quantity = quantity;
+//        }
+//        public MatterFormat add(TagKey<Item> ... keys){
+//            if (content == null) content = new HashSet<>();
+//            content.addAll(Arrays.stream(keys).toList());
+//            return this;
+//        }
+//    }
     public static class TagGenEntry<T>{
         public TagKey<T> key;
         public Set<TagKey<T>> keyIn;        // 需要加入这个key的key

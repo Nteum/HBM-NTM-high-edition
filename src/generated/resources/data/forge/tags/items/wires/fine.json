@@ -1,0 +1,25 @@
+{
+  "values": [
+    "hbm:wire_copper",
+    "hbm:wire_red_copper",
+    "hbm:wire_gold",
+    "hbm:wire_tungsten",
+    "hbm:wire_advanced_alloy",
+    "hbm:wire_schrabidium",
+    "hbm:wire_zinc",
+    "hbm:wire_magnetized_tungsten",
+    "#forge:wires/fine/carbon",
+    "#forge:wires/fine/gold",
+    "#forge:wires/fine/schrabidium",
+    "#forge:wires/fine/copper",
+    "#forge:wires/fine/tungsten",
+    "#forge:wires/fine/aluminium",
+    "#forge:wires/fine/lead",
+    "#forge:wires/fine/zirconium",
+    "#forge:wires/fine/zinc",
+    "#forge:wires/fine/steel",
+    "#forge:wires/fine/mingrade",
+    "#forge:wires/fine/alloy",
+    "#forge:wires/fine/magtung"
+  ]
+}

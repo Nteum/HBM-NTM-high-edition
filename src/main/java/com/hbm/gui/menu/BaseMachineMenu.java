@@ -35,12 +35,15 @@ public abstract class BaseMachineMenu extends AbstractContainerMenu {
                 }
             }else {
                 // 从玩家物品槽向机器物品槽移动，默认正序
-//                if (!this.moveItemStackTo(itemStack1, 0, slotNum, false)){
-//                    return ItemStack.EMPTY;
-//                }
                 if (!innerMovePlayer2Container(pIndex, itemStack1))
                     return ItemStack.EMPTY;
             }
+            // 核心校验：如果执行完移动，数量没变，说明移动没成功（比如目标槽满了）
+            if (itemStack.getCount() == itemStack1.getCount()) {
+                return ItemStack.EMPTY;
+            }
+            // 执行 Slot 后的收尾逻辑（如扣除耐久、触发成就等）
+            slot.onTake(pPlayer, itemStack1);
             if (itemStack1.isEmpty()) {
                 slot.setByPlayer(ItemStack.EMPTY);
             } else {

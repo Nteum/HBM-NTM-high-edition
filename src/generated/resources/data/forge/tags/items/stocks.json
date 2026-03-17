@@ -1,0 +1,13 @@
+{
+  "values": [
+    "#forge:stocks/wood",
+    "#forge:stocks/desh",
+    "#forge:stocks/gunmetal",
+    "#forge:stocks/weaponsteel",
+    "#forge:stocks/saturn",
+    "#forge:stocks/polymer",
+    "#forge:stocks/bakelite",
+    "#forge:stocks/hardplastic",
+    "#forge:stocks/pvc"
+  ]
+}

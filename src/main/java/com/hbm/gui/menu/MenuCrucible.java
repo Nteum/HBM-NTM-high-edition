@@ -9,6 +9,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.SimpleContainerData;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
@@ -17,6 +18,7 @@ public class MenuCrucible extends BaseMachineMenu{
     public CrucibleEntity be;
     public MenuCrucible(int pContainerId, Inventory pPlayerInventory, CrucibleEntity tile, ContainerData containerData) {
         super(ModMenuType.MENU_CRUCIBLE.get(), pContainerId, tile, containerData);
+        this.slotNum = 9;
         be = tile;
         ItemStackHandler itemHandler = be.getItemHandler();
         //input
@@ -29,6 +31,16 @@ public class MenuCrucible extends BaseMachineMenu{
     }
     public MenuCrucible(int id, Inventory playerInventory, FriendlyByteBuf buf) {
         this(id, playerInventory, WorldUtils.getTileEntity(CrucibleEntity.class, Minecraft.getInstance().level, buf.readBlockPos()), new SimpleContainerData(9));
+    }
+
+    @Override
+    public boolean innerMovePlayer2Container(int pIndex, ItemStack itemStack) {
+        int i = 0;
+        while (i < slotNum && !itemStack.isEmpty() && this.moveItemStackTo(itemStack.copyWithCount(1), 0, slotNum, false)){
+            itemStack.shrink(1);
+            i++;
+        }
+        return i > 0;
     }
 
     public int getHeat(){

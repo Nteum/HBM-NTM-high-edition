@@ -1,0 +1,28 @@
+{
+  "values": [
+    "#forge:plates/cast/iron",
+    "#forge:plates/cast/gold",
+    "#forge:plates/cast/schrabidium",
+    "#forge:plates/cast/schrabidate",
+    "#forge:plates/cast/titanium",
+    "#forge:plates/cast/copper",
+    "#forge:plates/cast/tungsten",
+    "#forge:plates/cast/aluminium",
+    "#forge:plates/cast/lead",
+    "#forge:plates/cast/zirconium",
+    "#forge:plates/cast/osmiridium",
+    "#forge:plates/cast/steel",
+    "#forge:plates/cast/alloy",
+    "#forge:plates/cast/dura",
+    "#forge:plates/cast/desh",
+    "#forge:plates/cast/ferro",
+    "#forge:plates/cast/tcalloy",
+    "#forge:plates/cast/cdalloy",
+    "#forge:plates/cast/bbronze",
+    "#forge:plates/cast/abronze",
+    "#forge:plates/cast/cmb",
+    "#forge:plates/cast/weaponsteel",
+    "#forge:plates/cast/saturn",
+    "#forge:plates/cast/stainless"
+  ]
+}

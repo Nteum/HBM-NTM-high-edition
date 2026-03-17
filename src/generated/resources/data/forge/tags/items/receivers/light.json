@@ -1,0 +1,14 @@
+{
+  "values": [
+    "#forge:receivers/light/steel",
+    "#forge:receivers/light/dura",
+    "#forge:receivers/light/desh",
+    "#forge:receivers/light/tcalloy",
+    "#forge:receivers/light/cdalloy",
+    "#forge:receivers/light/bbronze",
+    "#forge:receivers/light/abronze",
+    "#forge:receivers/light/gunmetal",
+    "#forge:receivers/light/weaponsteel",
+    "#forge:receivers/light/saturn"
+  ]
+}

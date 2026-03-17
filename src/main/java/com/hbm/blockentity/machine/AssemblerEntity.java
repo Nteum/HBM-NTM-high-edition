@@ -279,10 +279,13 @@ public class AssemblerEntity extends DummyableBlockEntity implements IPower {
             ResourceLocation resourceLocation = new ResourceLocation(pTag.getString("recipeNow"));
             this.recipeNow = (AssemblerRecipe) this.level.getRecipeManager().byKey(resourceLocation).orElse(null);
         }
-        try {
+        if (pTag.contains("items", Tag.TAG_COMPOUND)) {
             this.items.deserializeNBT((CompoundTag) pTag.get("items"));
-        }catch (Exception e){
-            HBM.LOGGER.warn("Assembler's Items data lost.");
+//            try {
+//                this.items.deserializeNBT((CompoundTag) pTag.get("items"));
+//            }catch (Exception e){
+//                HBM.LOGGER.warn("Assembler's Items data lost.");
+//            }
         }
     }
 

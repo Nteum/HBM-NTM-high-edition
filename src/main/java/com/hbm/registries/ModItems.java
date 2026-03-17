@@ -984,7 +984,7 @@ public class ModItems {
     public static final RegistryObject<Item> CASING_SHOTSHELL = parts("casing.shotshell", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
     public static final RegistryObject<Item> CASING_BUCKSHOT = parts("casing.buckshot", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
     public static final RegistryObject<Item> CASING_BUCKSHOT_ADVANCED = parts("casing.buckshot_advanced", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
-    public static final Map<String, RegistryObject<Item>> WIRE_FINE = Arrays.stream(WIRE_MAT).collect(Collectors.toMap(key -> key, value -> parts("wire_"+value, ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN, ModTags.Items.WIRE_FINE)));
+    public static final Map<String, RegistryObject<Item>> WIRE_FINE = Arrays.stream(WIRE_MAT).collect(Collectors.toMap(key -> key, value -> parts("wire_"+value, ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN, ModTags.Items.WIRE)));
     public static final Map<String, Supplier<Item>> MAP_INGOT = Map.of(
             HBMKey.ALUMINIUM,INGOT_ALUMINIUM, HBMKey.COPPER, () -> Items.COPPER_INGOT, HBMKey.RED_COPPER, INGOT_RED_COPPER, HBMKey.GOLD, () -> Items.GOLD_INGOT, HBMKey.TUNGSTEN, INGOT_TUNGSTEN,
             HBMKey.ADVANCED_ALLOY, INGOT_ADVANCED_ALLOY, HBMKey.SCHRABIDIUM, INGOT_SCHRABIDIUM, HBMKey.ZINC,INGOT_ZIRCONIUM, HBMKey.MAGNETIZED_TUNGSTEN, INGOT_MAGNETIZED_TUNGSTEN

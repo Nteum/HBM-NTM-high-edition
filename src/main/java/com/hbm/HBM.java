@@ -134,12 +134,12 @@ public class HBM {
     }
 
     public void onPostLoad(FMLLoadCompleteEvent event){
-        ClientConfig.initConfig();
-        ServerConfig.initConfig();
-        event.enqueueWork(() -> {
-            AssetConsistencyChecker.runIfRequested();
-            ModelValidator.runIfRequested();
-        });
+//        ClientConfig.initConfig();
+//        ServerConfig.initConfig();
+//        event.enqueueWork(() -> {
+//            AssetConsistencyChecker.runIfRequested();
+//            ModelValidator.runIfRequested();
+//        });
     }
 
     private void onServerStopped(ServerStoppedEvent event){

@@ -123,6 +123,7 @@ public class CrucibleFluidHandler implements IFluidHandler, INBTSerializable<Com
 
     @Override
     public void deserializeNBT(CompoundTag nbt) {
+        this.content.clear();
         if (! nbt.contains("num", Tag.TAG_INT)) return;
         int num = nbt.getInt("num");
         for (int i = 0; i < num; i++) {

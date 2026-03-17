@@ -1,0 +1,10 @@
+{
+  "values": [
+    "#forge:shells/titanium",
+    "#forge:shells/copper",
+    "#forge:shells/aluminium",
+    "#forge:shells/steel",
+    "#forge:shells/weaponsteel",
+    "#forge:shells/saturn"
+  ]
+}

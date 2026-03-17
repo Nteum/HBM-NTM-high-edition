@@ -60,7 +60,14 @@ public class AssemblerMenu extends BaseMachineMenu{
         addPlayerSlot(pPlayerInventory,0,56);
     }
 
-//    @Override
+    @Override
+    public boolean innerMovePlayer2Container(int pIndex, ItemStack itemStack) {
+        int[] temp = new int[]{0,0};
+        if (itemStack.is(ModTags.Items.CHARGEABLE)) temp = new int[]{0, 1};
+        else if (itemStack.is(ModTags.Items.UPGRADE)) temp = new int[]{1, 4};
+        return this.moveItemStackTo(itemStack, temp[0], temp[1], false) || this.moveItemStackTo(itemStack, 5, 17, false);
+    }
+    //    @Override
 //    public ItemStack quickMoveStack(Player pPlayer, int pIndex) {
 //        ItemStack itemStack = ItemStack.EMPTY;
 //        Slot slot = this.slots.get(pIndex);

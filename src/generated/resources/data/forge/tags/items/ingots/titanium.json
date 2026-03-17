@@ -1,6 +1,5 @@
 {
   "values": [
-    "hbm:ingot_titanium",
-    "hbm:ingot_aluminium"
+    "hbm:ingot_titanium"
   ]
 }

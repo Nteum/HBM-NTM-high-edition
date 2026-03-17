@@ -14,6 +14,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraftforge.fluids.FluidStack;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GuiCrucible extends BaseMachineGui<MenuCrucible> {
@@ -27,11 +28,6 @@ public class GuiCrucible extends BaseMachineGui<MenuCrucible> {
     protected void init() {
         this.imageHeight = 214;
         super.init();
-    }
-
-    @Override
-    public void render(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
-        super.render(pGuiGraphics, pMouseX, pMouseY, pPartialTick);
     }
 
     @Override
@@ -52,12 +48,15 @@ public class GuiCrucible extends BaseMachineGui<MenuCrucible> {
             for (int i = 0; i < storeStack.getSize(); i++) {
                 FluidStack fluidInTank = storeStack.getFluidInTank(i);
                 layerHeight = fluidInTank.getAmount() * 79 / storeStack.getTankCapacity(0);
-                layerHeight = layerHeight > 0 ? layerHeight : 1;
+                layerHeight = Math.max(layerHeight, 5);         // 避免物质条太小看不见
                 pGuiGraphics.blit(TEXTURE, leftPos + 17, topPos + 97 - accAmount, 176, 89 - accAmount, 34, layerHeight);
                 if (isHovering(leftPos + 17, topPos + 97 - accAmount, 34, layerHeight, pMouseX, pMouseY)){
                     pGuiGraphics.renderTooltip(this.font, Component.translatable(fluidInTank.getFluid().getFluidType().getDescriptionId()).append(" : " + fluidInTank.getAmount() + " mB"), pMouseX, pMouseY);
                 }
                 accAmount += layerHeight;
+            }
+            if (isHovering(leftPos + 17, topPos + 97, 34, 97 - layerHeight, pMouseX, pMouseY)){
+                pGuiGraphics.renderTooltip(this.font, HBMLang.GUI_TOOLTIP_CRUCIBLE_CAPACITY.translate(CrucibleEntity.CAPACITY), pMouseX, pMouseY);
             }
         }
     }
@@ -65,7 +64,14 @@ public class GuiCrucible extends BaseMachineGui<MenuCrucible> {
     @Override
     protected void renderTooltip(GuiGraphics pGuiGraphics, int pX, int pY) {
         super.renderTooltip(pGuiGraphics, pX, pY);
-        drawCustomInfoStat(pGuiGraphics, pX, pY, leftPos + 125, topPos + 81, 34, 7, List.of(HBMLang.GUI_TOOLTIP_PARTIAL.translate(menu.getProgress(), CrucibleEntity.MAX_PROGRESS)));
-        drawCustomInfoStat(pGuiGraphics, pX, pY, leftPos + 125, topPos + 90, 34, 7, List.of(HBMLang.GUI_TOOLTIP_PARTIAL.translate(menu.getHeat(), CrucibleEntity.MAX_HEAT).append("TU")));
+        List<Component> tooltips = new ArrayList<>();
+        if (isHovering(125, 81, 34, 7, pX, pY)){
+            tooltips.add(HBMLang.GUI_TOOLTIP_PARTIAL.translate(menu.getProgress(), CrucibleEntity.MAX_PROGRESS));
+        }else if (isHovering(125, 90, 34, 7, pX, pY)){
+            tooltips.add(HBMLang.GUI_TOOLTIP_PARTIAL.translate(menu.getHeat(), CrucibleEntity.MAX_HEAT).append("TU"));
+        }
+        if (!tooltips.isEmpty()) pGuiGraphics.renderComponentTooltip(font, tooltips, pX, pY);
+//        drawCustomInfoStat(pGuiGraphics, pX, pY, leftPos + 125, topPos + 81, 34, 7, List.of(HBMLang.GUI_TOOLTIP_PARTIAL.translate(menu.getProgress(), CrucibleEntity.MAX_PROGRESS)));
+//        drawCustomInfoStat(pGuiGraphics, pX, pY, leftPos + 125, topPos + 90, 34, 7, List.of(HBMLang.GUI_TOOLTIP_PARTIAL.translate(menu.getHeat(), CrucibleEntity.MAX_HEAT).append("TU")));
     }
 }

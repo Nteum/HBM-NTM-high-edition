@@ -1,0 +1,17 @@
+{
+  "values": [
+    "#forge:grips/wood",
+    "#forge:grips/bone",
+    "#forge:grips/steel",
+    "#forge:grips/dura",
+    "#forge:grips/desh",
+    "#forge:grips/gunmetal",
+    "#forge:grips/weaponsteel",
+    "#forge:grips/saturn",
+    "#forge:grips/polymer",
+    "#forge:grips/bakelite",
+    "#forge:grips/rubber",
+    "#forge:grips/hardplastic",
+    "#forge:grips/pvc"
+  ]
+}

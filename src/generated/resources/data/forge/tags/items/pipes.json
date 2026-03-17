@@ -1,0 +1,11 @@
+{
+  "values": [
+    "#forge:pipes/iron",
+    "#forge:pipes/copper",
+    "#forge:pipes/aluminium",
+    "#forge:pipes/lead",
+    "#forge:pipes/steel",
+    "#forge:pipes/dura",
+    "#forge:pipes/rubber"
+  ]
+}

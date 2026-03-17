@@ -1,9 +1,14 @@
 package com.hbm.main;
 
+import com.hbm.config.ClientConfig;
+import com.hbm.config.ServerConfig;
+import com.hbm.dev.AssetConsistencyChecker;
+import com.hbm.dev.ModelValidator;
 import com.hbm.dim.orbit.CelestialBodies;
 import com.hbm.dim.orbit.Space;
 import com.hbm.entity.ModEntityType;
 import com.hbm.entity.mob.EntityGlyphid;
+import com.hbm.registries.HBMMatters;
 import com.hbm.registries.ModItems;
 import com.hbm.item.env.ItemEggGlyphid;
 import com.hbm.network.ServerMsgHandler;
@@ -17,6 +22,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.event.ItemStackedOnOtherEvent;
+import net.minecraftforge.event.TagsUpdatedEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.entity.EntityEvent;
@@ -27,12 +33,15 @@ import net.minecraftforge.event.level.LevelEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 
 public class ServerEventHandler {
 
     public static void registerEvents(IEventBus forgeBus, IEventBus modBus){
         modBus.addListener(ServerEventHandler::onServerSetup);
+        modBus.addListener(ServerEventHandler::onLoadComplete);
         modBus.addListener(ServerEventHandler::createEntityAttribute);
+        forgeBus.addListener(ServerEventHandler::onTagsUpdated);
         forgeBus.addListener(ServerEventHandler::levelTick);
         forgeBus.addListener(ServerEventHandler::levelUnload);
         forgeBus.addListener(ServerEventHandler::serverTick);
@@ -43,6 +52,32 @@ public class ServerEventHandler {
     @SubscribeEvent
     public static void onServerSetup(FMLDedicatedServerSetupEvent event) {
         HBMDamage.clearLocalData();
+    }
+
+    @SubscribeEvent
+    public static void onLoadComplete(FMLLoadCompleteEvent event) {
+        ClientConfig.initConfig();
+        ServerConfig.initConfig();
+        event.enqueueWork(() -> {
+            AssetConsistencyChecker.runIfRequested();
+            ModelValidator.runIfRequested();
+//            HBMMatters.buildCache();
+        });
+    }
+
+    @SubscribeEvent
+    public static void onTagsUpdated(TagsUpdatedEvent event) {
+        HBMMatters.buildCache();
+        // 建议打个日志，你会发现它在进入世界前会触发
+        System.out.println("HBMMatter Cache rebuilt. Items mapped: " + HBMMatters.ITEM_TO_MATTER.size());
+//        // 只有当更新的是物品标签时才执行
+//        if (event.getUpdateCause() == TagsUpdatedEvent.UpdateCause.CLIENT_PACKET_RECEIVED ||
+//                event.getUpdateCause() == TagsUpdatedEvent.UpdateCause.SERVER_DATA_LOAD) {
+//
+//            HBMMatters.buildCache();
+//            // 建议打个日志，你会发现它在进入世界前会触发
+//            System.out.println("HBMMatter Cache rebuilt. Items mapped: " + HBMMatters.ITEM_TO_MATTER.size());
+//        }
     }
 
     @SubscribeEvent

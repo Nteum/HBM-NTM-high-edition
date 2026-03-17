@@ -1,5 +1,15 @@
 {
   "values": [
-    "#forge:plates/titanium"
+    "#forge:plates/schrabidium",
+    "#forge:plates/titanium",
+    "#forge:plates/copper",
+    "#forge:plates/aluminium",
+    "#forge:plates/lead",
+    "#forge:plates/steel",
+    "#forge:plates/alloy",
+    "#forge:plates/dura",
+    "#forge:plates/cmb",
+    "#forge:plates/saturn",
+    "#forge:plates/stainless"
   ]
 }

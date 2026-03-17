@@ -1,0 +1,30 @@
+{
+  "values": [
+    "#forge:billets/uranium",
+    "#forge:billets/u233",
+    "#forge:billets/u235",
+    "#forge:billets/u238",
+    "#forge:billets/thorium",
+    "#forge:billets/plutonium",
+    "#forge:billets/rgp",
+    "#forge:billets/pu238",
+    "#forge:billets/pu239",
+    "#forge:billets/pu240",
+    "#forge:billets/pu241",
+    "#forge:billets/rga",
+    "#forge:billets/am241",
+    "#forge:billets/am242",
+    "#forge:billets/neptunium",
+    "#forge:billets/polonium",
+    "#forge:billets/technetium",
+    "#forge:billets/radium",
+    "#forge:billets/actinium",
+    "#forge:billets/co60",
+    "#forge:billets/au198",
+    "#forge:billets/pb209",
+    "#forge:billets/schrabidium",
+    "#forge:billets/solinium",
+    "#forge:billets/ghiorsium",
+    "#forge:billets/gaas"
+  ]
+}

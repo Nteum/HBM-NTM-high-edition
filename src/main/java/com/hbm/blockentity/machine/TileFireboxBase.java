@@ -18,6 +18,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -193,6 +194,7 @@ public abstract class TileFireboxBase extends DummyableBlockEntity implements IB
         tag.putInt("burnHeat", burnHeat);
 //        tag.putInt("heatEnergy", heatEnergy);
         tag.put(HBMKey.HEAT, this.heatHandler.serializeNBT());
+        tag.put(HBMKey.ITEM, this.items.serializeNBT());
     }
 
     @Override
@@ -203,6 +205,7 @@ public abstract class TileFireboxBase extends DummyableBlockEntity implements IB
         this.burnHeat = nbt.getInt("burnHeat");
 //        this.heatEnergy = nbt.getInt("heatEnergy");
         this.heatHandler.deserializeNBT(nbt.getCompound(HBMKey.HEAT));
+        if (nbt.contains(HBMKey.ITEM, Tag.TAG_COMPOUND)) this.items.deserializeNBT(nbt.getCompound(HBMKey.ITEM));
     }
 
     public ItemStackHandler getItemHandler(){

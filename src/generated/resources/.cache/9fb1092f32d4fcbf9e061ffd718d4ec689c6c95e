@@ -1,4 +1,4 @@
-// 1.20.1	2026-03-02T20:24:19.0568226	Recipes
+// 1.20.1	2026-03-17T20:06:43.4601385	Recipes
 a24f7e47b80bc3195a8af8b4fe5d337fd1d08c4c data/hbm/advancements/recipes/misc/conveyor.json
 e874513dda72dd1014f7b6350a77f2dc7028df3c data/hbm/advancements/recipes/misc/crate_iron.json
 6ca95a2394b2bc92509851ebc519ca024992b091 data/hbm/advancements/recipes/misc/crate_steel.json
@@ -97,7 +97,7 @@ fbafb68e0c79e00f84c315bb9dff3eab586e7005 data/hbm/recipes/press/casing.small_25.
 08e11a974db5817be755f7c561ca0220622f9ea2 data/hbm/recipes/press/casing.small_steel_27.json
 d5d52b2c099136be6e7cec35049c38ac7f205583 data/hbm/recipes/press/ingot_graphite_6.json
 4324c9a07cd64b7eaedd6613ddcc21f26b540067 data/hbm/recipes/press/plate_advanced_alloy_18.json
-8aecc380850b7e4d6885d28dc798a87d7b690083 data/hbm/recipes/press/plate_aluminium_14.json
+5a1d1ec4a5caad48295607d56d47935c4039a738 data/hbm/recipes/press/plate_aluminium_14.json
 b50ccab6ac8a02923c958427d6a408558684b7d5 data/hbm/recipes/press/plate_combine_steel_20.json
 9c085b05e043364db52351669c6101f821dfd861 data/hbm/recipes/press/plate_copper_17.json
 956b2ad9e646ba784b68e74e6486ca433418856d data/hbm/recipes/press/plate_dura_steel_24.json
