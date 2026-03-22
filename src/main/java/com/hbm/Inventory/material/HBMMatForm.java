@@ -66,9 +66,4 @@ public class HBMMatForm {
 
         MATTER_FORMATS.put(format, this);
     }
-//    public HBMMatForm add(TagKey<Item> ... keys){
-//        if (content == null) content = new HashSet<>();
-//        content.addAll(Arrays.stream(keys).toList());
-//        return this;
-//    }
 }

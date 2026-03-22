@@ -1,6 +1,7 @@
 package com.hbm.gui.screen.page.recipe;
 
 import com.hbm.Inventory.recipe.RecipeHelper;
+import com.hbm.Inventory.recipe.alloy.CrucibleRecipe;
 import com.hbm.blockentity.machine.PressEntity;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
@@ -30,7 +31,7 @@ import java.util.function.Predicate;
  * 显示和选中配方的页面，原本打算复用原版的RecipeBook的，但太复杂了，所以单独写一个
  * */
 @OnlyIn(Dist.CLIENT)
-public class RecipePage <C extends Container, T extends Recipe<C>> implements Renderable, GuiEventListener {
+public class RecipePage <T> implements Renderable, GuiEventListener {
     private static final ResourceLocation RECIPE_BOOK_LOCATION = new ResourceLocation("textures/gui/recipe_book.png");
     private static final Component SEARCH_HINT = Component.translatable("gui.recipebook.search_hint").withStyle(ChatFormatting.ITALIC).withStyle(ChatFormatting.GRAY);
     private ResourceLocation BACKGROUND;
@@ -41,7 +42,6 @@ public class RecipePage <C extends Container, T extends Recipe<C>> implements Re
     private int xOffset;
     private boolean visible;
     private boolean ignoreTextInput;
-    private RecipeType<T> recipeType;
     private List<T> recipes;            // 可以使用的所有配方
     private List<T> recipeToShow;       // 显示在屏幕上的所有配方，因为需要支持搜索功能
     public T recipeChosen;             // 当前被选中的配方
@@ -53,13 +53,11 @@ public class RecipePage <C extends Container, T extends Recipe<C>> implements Re
     private StateSwitchingButton pageUpButton;
     private StateSwitchingButton pageDownButton;
     @Nullable
-    private Minecraft minecraft;
-    private RegistryAccess registryAccess;
+    protected Minecraft minecraft;
+    RegistryAccess registryAccess;
 
-    public void init(Minecraft minecraft, ResourceLocation bg, int imageWidth, int imageHeight, int width, int height, int xOffset, RecipeType<T> recipeType){
-        this.init(minecraft, bg, imageWidth, imageHeight, width, height, xOffset, recipeType, recipe -> true);
-    }
-    public void init(Minecraft minecraft, ResourceLocation bg, int imageWidth, int imageHeight, int width, int height, int xOffset, RecipeType<T> recipeType, Predicate<T> filter){
+
+    public void init(Minecraft minecraft, ResourceLocation bg, int imageWidth, int imageHeight, int width, int height, int xOffset, List<T> recipes, Predicate<T> filter){
         this.minecraft = minecraft;
         BACKGROUND = bg;
         this.backgroundWidth = imageWidth;
@@ -67,8 +65,7 @@ public class RecipePage <C extends Container, T extends Recipe<C>> implements Re
         this.width = width;
         this.height = height;
         this.xOffset = xOffset;
-        this.recipeType = recipeType;
-        this.recipes = minecraft.level.getRecipeManager().getAllRecipesFor(recipeType).stream().filter(filter).toList();
+        this.recipes = recipes.stream().filter(filter).toList();
         this.recipeToShow = this.recipes;
         this.visible = false;       // 一开始默认不打开的.
         this.registryAccess = this.minecraft.level.registryAccess();
@@ -114,22 +111,31 @@ public class RecipePage <C extends Container, T extends Recipe<C>> implements Re
             int j = borderY + hoverItemY * 25 + 4;
             pGuiGraphics.fillGradient(RenderType.guiOverlay(), i, j, i + 16, j + 16, -2130706433, -2130706433, 0);
             // 配方的tooltip
-            idx = this.page * this.row * this.column + this.row * hoverItemY + hoverItemX;
+            idx = this.page * this.row * this.column + this.column * hoverItemY + hoverItemX;
             if (idx < this.recipeToShow.size()){
                 T recipe = recipeToShow.get(idx);
-                pGuiGraphics.renderTooltip(this.minecraft.font, RecipeHelper.genTooltip(recipe, this.registryAccess), Optional.empty(), pMouseX, pMouseY);
+                pGuiGraphics.renderTooltip(this.minecraft.font, genTooltip(recipe, this.registryAccess), Optional.empty(), pMouseX, pMouseY);
             }
         }
         // 配方格子
         outer : for (int i = 0; i < this.row; i++) {
             for (int j = 0; j < this.column; j++) {
-                idx = this.page * this.row * this.column + this.row * i + j;
+                idx = this.page * this.row * this.column + this.column * i + j;
                 if (idx >= this.recipeToShow.size()) break outer;
-                ItemStack resultItem = this.recipeToShow.get(idx).getResultItem(this.registryAccess);
-                pGuiGraphics.renderItem(resultItem.copyWithCount(1), borderX + 25 * j + 4, borderY + 25 * i + 4);
+                renderRecipe(pGuiGraphics, this.recipeToShow.get(idx), borderX + 25 * j + 4, borderY + 25 * i + 4);
             }
         }
         pGuiGraphics.pose().popPose();
+    }
+
+    List<Component> genTooltip(T recipe, RegistryAccess reg) {
+        return null;
+    }
+
+    void renderRecipe(GuiGraphics pGuiGraphics, T recipe, int posX, int posY){ }
+
+    boolean filterRecipeName(T recipe, String query){
+        return true;
     }
 
     @Override
@@ -170,11 +176,7 @@ public class RecipePage <C extends Container, T extends Recipe<C>> implements Re
             this.recipeToShow = this.recipes;
             return;
         }
-        this.recipeToShow = this.recipes.stream()
-                .filter(r -> {
-                    var name = r.getResultItem(this.registryAccess).getHoverName().getString().toLowerCase();
-                    return name.contains(lowerQuery);
-                }).toList();
+        this.recipeToShow = this.recipes.stream().filter(r -> this.filterRecipeName(r, lowerQuery)).toList();
         this.page = 0;
     }
 
@@ -257,7 +259,7 @@ public class RecipePage <C extends Container, T extends Recipe<C>> implements Re
         int hoverItemX = pMouseX - borderY < 0 ? -1 : (int) ((pMouseX - borderX) / 25);
         int hoverItemY = pMouseY - borderY < 0 ? -1 : (int) ((pMouseY - borderY) / 25);
         if (hoverItemX >= 0 && hoverItemX < this.column && hoverItemY >= 0 && hoverItemY < this.row){
-            int idx = this.page * this.row * this.column + this.row * hoverItemY + hoverItemX;
+            int idx = this.page * this.row * this.column + this.column * hoverItemY + hoverItemX;
             return idx < this.recipeToShow.size() ? this.recipeToShow.get(idx) : null;
         }
         return null;

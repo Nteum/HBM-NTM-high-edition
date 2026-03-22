@@ -75,7 +75,7 @@ public class FluidStackIngredient {
                 return this.fluidStack.isFluidEqual(pStack);
             }else {
                 for (Holder<Fluid> fluidHolder : BuiltInRegistries.FLUID.getTagOrEmpty(this.tagKey)) {
-                    if (fluidHolder.value().isSame(pStack.getFluid()))
+                    if (pStack.getFluid().isSame(fluidHolder.value()))
                         return true;
                 }
             }

@@ -129,6 +129,10 @@ public class HBMKey {
     public static final String ZINC = "zinc";
     public static final String MAGNETIZED_TUNGSTEN = "magnetized_tungsten";
 
+    // GUI
+    public static final String BTN = "btn";
+    public static final String CLICK = "click";
+
     public static String link(String ... strings){
         return link('/', strings);
     }

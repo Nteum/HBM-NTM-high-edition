@@ -4,10 +4,12 @@ import com.hbm.HBMKey;
 import com.hbm.HBMLang;
 import com.hbm.Inventory.fluid.CrucibleFluidHandler;
 import com.hbm.Inventory.material.BasicHeatHandler;
+import com.hbm.Inventory.recipe.alloy.CrucibleRecipe;
 import com.hbm.api.fluid.BasicFluidHandler;
 import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.blockentity.base2.DummyableBlockEntity;
 import com.hbm.blockentity.base2.UpdateableBlockEntity;
+import com.hbm.datagen.recipe.ingredient.FluidStackIngredient;
 import com.hbm.gui.menu.MenuCrucible;
 import com.hbm.registries.HBMCaps;
 import com.hbm.registries.HBMMatters;
@@ -19,6 +21,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
@@ -32,6 +35,7 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -40,11 +44,13 @@ public class CrucibleEntity extends DummyableBlockEntity {
     public static int MAX_HEAT = 100_000;
     public static int MAX_PROGRESS = 20_000;
     public static double diffusion = 0.25D;
-    public static final int CAPACITY = 20736;
+//    public static final int CAPACITY = 20736;
+    public static final int CAPACITY = 4096;
     private BasicHeatHandler heatHandler = BasicHeatHandler.of(MAX_HEAT);
     // 两个流体槽，前一个单纯存储物质，后一个可以发生金属混合。
     CrucibleFluidHandler storeStack = new CrucibleFluidHandler(CAPACITY);  // 存储熔融物质的stack
     CrucibleFluidHandler alloyStack = new CrucibleFluidHandler(CAPACITY);  // 存储合金流体的stack
+    private CrucibleRecipe recipeNow;                                       // 当前指定的配方
 
     private ItemStackHandler items = new ItemStackHandler(9){
         @Override
@@ -94,6 +100,7 @@ public class CrucibleEntity extends DummyableBlockEntity {
         this.heatHandler.receiveFromOther(this.level, this.worldPosition.relative(Direction.DOWN));
         this.heatHandler.decay();
         trySmelt();
+        tryRecipe();
 
         sendUpdatePacket();
     }
@@ -122,6 +129,47 @@ public class CrucibleEntity extends DummyableBlockEntity {
             this.storeStack.fill(moltenMatter, IFluidHandler.FluidAction.EXECUTE);
             this.items.extractItem(slot, 1, false);
             this.progress = 0;
+        }
+    }
+
+    protected void tryRecipe(){
+        // 1. 安全检查：只有在配方存在且时间到达时进入手动逻辑
+        if (this.recipeNow != null && (this.level.getGameTime() + 1) % this.recipeNow.getFrequent() == 0) {
+            List<FluidStackIngredient> inputs = this.recipeNow.getInput();
+            boolean allAvailable = true;
+            // 2. 第一遍循环：纯检查，不移动任何流体
+            for (FluidStackIngredient ingredient : inputs) {
+                int totalAmount = this.alloyStack.getAmountOf(ingredient) + this.storeStack.getAmountOf(ingredient);
+                if (totalAmount < ingredient.getVolume()) {
+                    allAvailable = false;
+                    break;
+                }
+            }
+
+            if (allAvailable) {
+                // 3. 满足条件，开始消耗
+                for (FluidStackIngredient ingredient : inputs) {
+                    // 先从 alloyStack 扣，不够再从 storeStack 扣
+                    int needed = ingredient.getVolume();
+                    needed -= this.alloyStack.consume(ingredient, needed);
+                    if (needed > 0) {
+                        this.storeStack.consume(ingredient, needed);
+                    }
+                }
+
+                // 4. 生成产物：直接放入 alloyStack 底部
+                for (FluidStack output : recipeNow.getOutput()) {
+                    // 建议使用 absorb 直接合并到最底层，如果没有同类则新增一层
+                    this.alloyStack.absorb(0, output.copy());
+                }
+
+                // 反应成功，进行必要的清理
+                this.alloyStack.rebuild();
+                this.storeStack.rebuild();
+            }
+        } else {
+            // 自动融合逻辑
+            CrucibleRecipe.autoMerge(this.alloyStack, this.level, this.recipeNow);
         }
     }
 
@@ -164,6 +212,10 @@ public class CrucibleEntity extends DummyableBlockEntity {
         return this.storeStack;
     }
 
+    public CrucibleFluidHandler getAlloyStack(){
+        return this.alloyStack;
+    }
+
     @Override
     public @NotNull CompoundTag getReducedUpdateTag() {
         CompoundTag tag = super.getReducedUpdateTag();
@@ -177,5 +229,35 @@ public class CrucibleEntity extends DummyableBlockEntity {
         super.handleUpdatePacket(nbt);
         if (nbt.contains("stack1", Tag.TAG_COMPOUND)) this.storeStack.deserializeNBT(nbt.getCompound("stack1"));
         if (nbt.contains("stack2", Tag.TAG_COMPOUND)) this.alloyStack.deserializeNBT(nbt.getCompound("stack2"));
+    }
+
+    @Override
+    public void handleClientPacket(@NotNull CompoundTag tag) {
+        super.handleClientPacket(tag);
+        if (tag.contains(HBMKey.BTN, Tag.TAG_INT)){
+            int btnId = tag.getInt(HBMKey.BTN);
+            switch (btnId){
+                case 0 -> {     // 存储槽头部移动到合金槽头部
+                    FluidStack fluidStack = this.storeStack.removeFluid(0);
+                    this.alloyStack.absorb(0, fluidStack);
+                }
+                case 1 -> {     // 合金槽移动到存储槽
+                    FluidStack fluidStack = this.alloyStack.removeFluid(0);
+                    this.storeStack.absorb(0, fluidStack);
+                }
+            }
+        }
+        if (tag.contains(HBMKey.RECIPE_NOW, Tag.TAG_STRING)){
+            this.recipeNow = CrucibleRecipe.getRecipe(new ResourceLocation(tag.getString(HBMKey.RECIPE_NOW)));
+        }
+        if (tag.contains(HBMKey.CLICK, Tag.TAG_INT)){
+            int slotId = tag.getInt(HBMKey.CLICK);
+            FluidStack fluidStack = FluidStack.loadFluidStackFromNBT(tag.getCompound(HBMKey.FLUIDS));
+            if (slotId == 0){
+                this.storeStack.moveToBottom(fluidStack);
+            }else if (slotId == 1){
+                this.alloyStack.moveToBottom(fluidStack);
+            }
+        }
     }
 }

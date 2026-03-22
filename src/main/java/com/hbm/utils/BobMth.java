@@ -238,4 +238,35 @@ public class BobMth {
 	public static float degree2Radians(float degree){
 		return Mth.wrapDegrees(degree) * Mth.PI / 180;
 	}
+
+
+
+	// 最小公倍数
+	public static int lcm(int a, int b) {
+		if (a == 0 || b == 0) return 0;
+		// 先除后乘，防止 (a * b) 直接溢出
+		return Math.abs(a / gcd(a, b) * b);
+	}
+
+	// 最大公因数
+	public static int gcd(int a, int b) {
+		while (b != 0) {
+			int temp = a % b;
+			a = b;
+			b = temp;
+		}
+		return a;
+	}
+
+	// 2. 扩展：求多个数的 GCD (使用数组)
+	public static int getGCD(int ... numbers) {
+		if (numbers == null || numbers.length == 0) return 0;
+		int result = numbers[0];
+		for (int i = 1; i < numbers.length; i++) {
+			result = gcd(result, numbers[i]);
+			// 优化：如果中间结果已经变成 1，那么整体 GCD 必然是 1，可以直接结束
+			if (result == 1) return 1;
+		}
+		return result;
+	}
 }

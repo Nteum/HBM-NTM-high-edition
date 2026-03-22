@@ -6,6 +6,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -24,6 +25,7 @@ public class HBMMatters {
     public static final Map<Item, HBMMatter> ITEM_TO_MATTER = new HashMap<>();
     // 根据 Item 找到对应的形状（是锭、是粉还是粒）
     private static final Map<Item, TagKey<Item>> ITEM_TO_SHAPE = new HashMap<>();
+    private static final Map<Fluid, HBMMatter> FLUID_TO_MATTER = new HashMap<>();
 
     // 材料列表
     //Vanilla and vanilla-like
@@ -31,7 +33,8 @@ public class HBMMatters {
     public static final HBMMatter BONE = register(new HBMMatter("bone", 0xFFFEEE, 0x797870, 0xEDEBCA).shapes(GRIP).gen(entry -> entry.addKeyOut(METAL)));
     public static final HBMMatter CARBON = register(new HBMMatter("carbon", 0x363636, 0x030303, 0x404040).shapes(WIRE, Tags.Items.STORAGE_BLOCKS).toFluid(4).gen(entry -> entry.addKeyOut(METAL)));
     public static final HBMMatter STONE = register(new HBMMatter("stone", 0x7F7F7F, 0x353535, 0x4D2F23).toFluid(1).gen(entry -> entry.addKeyOut(NORMAL)));
-    public static final HBMMatter COAL = register(new HBMMatter("coal", 0x363636, 0x030303, 0x404040).convert(CARBON, 2, 1).shapes(FRAGMENT).gen(entry -> entry.addKeyOut(NORMAL)));
+    public static final HBMMatter COAL = register(new HBMMatter("coal", 0x363636, 0x030303, 0x404040).convert(CARBON, 2, 1).shapes(FRAGMENT)
+            .shape(Tags.Items.GEMS, ItemTags.COALS).shape(STORAGE_BLOCKS, STORAGE_BLOCKS_COAL).gen(entry -> entry.addKeyOut(NORMAL)));
     public static final HBMMatter LIGNITE = register(new HBMMatter("lignite", 0x542D0F, 0x261508, 0x472913).convert(CARBON, 3, 1).shapes(FRAGMENT).gen(entry -> entry.addKeyOut(NORMAL)));
     public static final HBMMatter COAL_COKE = register(new HBMMatter("coal_coke").convert(CARBON, 4, 3).gen(entry -> entry.addKeyOut(NORMAL)));
     public static final HBMMatter PET_COKE = register(new HBMMatter("pet_coke").convert(CARBON, 4, 3).gen(entry -> entry.addKeyOut(NORMAL)));
@@ -48,11 +51,11 @@ public class HBMMatters {
     public static final HBMMatter REDSTONE = register(new HBMMatter("redstone", 0xE3260C, 0x700E06, 0xFF1000).shapes(FRAGMENT).toFluid(1).gen(entry -> entry.addKeyOut(NORMAL)));
     public static final HBMMatter OBSIDIAN = register(new HBMMatter("obsidain", 0x3D234D, 0x3D234D, 0x3D234D).toFluid(1).gen(entry -> entry.addKeyOut(NORMAL)));
     public static final HBMMatter GLOWSTONE = register(new HBMMatter("glowstone", 0xFFFF00, 0x535300, 0xFFFF00).shapes(FRAGMENT).gen(entry -> entry.addKeyOut(NORMAL)));
-    public static final HBMMatter HEMATITE = register(new HBMMatter("hematite", 0xDFB7AE, 0x5F372E, 0x6E463D).gen(entry -> entry.addKeyOut(METAL)));
+    public static final HBMMatter HEMATITE = register(new HBMMatter("hematite", 0xDFB7AE, 0x5F372E, 0x6E463D).toFluid(4).gen(entry -> entry.addKeyOut(METAL)));
     public static final HBMMatter BAUXITE = register(new HBMMatter("bauxite", 0xF4BA30, 0xAA320A, 0xE2560F).shapes(FRAGMENT).gen(entry -> entry.addKeyOut(NORMAL)));
-    public static final HBMMatter MALACHITE = register(new HBMMatter("malachite", 0xA2F0C8, 0x227048, 0x61AF87).gen(entry -> entry.addKeyOut(METAL)));
+    public static final HBMMatter MALACHITE = register(new HBMMatter("malachite", 0xA2F0C8, 0x227048, 0x61AF87).toFluid(4).gen(entry -> entry.addKeyOut(METAL)));
     public static final HBMMatter CRYOLITE = register(new HBMMatter("cryolite", 0xCBC2A4, 0x8B711F, 0x8B701A).shapes(FRAGMENT).gen(entry -> entry.addKeyOut(NORMAL)));
-    public static final HBMMatter CONGLOMERATE = register(new HBMMatter("conglomerate", 0x797979, 0x797979, 0x797979).shapes(FRAGMENT).gen(entry -> entry.addKeyOut(NORMAL)));
+    public static final HBMMatter CONGLOMERATE = register(new HBMMatter("conglomerate", 0x797979, 0x797979, 0x797979).toFluid(4).shapes(FRAGMENT).gen(entry -> entry.addKeyOut(NORMAL)));
     //Radioactive
     public static final HBMMatter URANIUM = register(new HBMMatter("uranium", 0xC1C7BD, 0x2B3227, 0x9AA196).shapes(FRAGMENT, Tags.Items.NUGGETS, BILLET, DUST, Tags.Items.STORAGE_BLOCKS).toFluid(1).gen(entry -> entry.addKeyOut(METAL)));
     public static final HBMMatter U233 = register(new HBMMatter("u233", 0xC1C7BD, 0x2B3227, 0x9AA196).shapes(FRAGMENT, Tags.Items.NUGGETS, BILLET, DUST, Tags.Items.STORAGE_BLOCKS).toFluid(1).gen(entry -> entry.addKeyOut(METAL)));
@@ -143,7 +146,7 @@ public class HBMMatters {
     public static final HBMMatter MAGTUNG = register(new HBMMatter("magtung", 0x22A2A2, 0x0F0F0F, 0x22A2A2).shapes(WIRE, DUST, DENSEWIRE, Tags.Items.STORAGE_BLOCKS).toFluid(1).gen(entry -> entry.addKeyOut(METAL)));
     public static final HBMMatter CMB = register(new HBMMatter("cmb", 0x6F6FB4, 0x000011, 0x6F6FB4).shapes(DUST, PLATE, CASTPLATE, WELDEDPLATE, Tags.Items.STORAGE_BLOCKS).toFluid(1).gen(entry -> entry.addKeyOut(METAL)));
     public static final HBMMatter DNT = register(new HBMMatter("dnt", 0x7582B9, 0x16000E, 0x455289).shapes(DUST, DENSEWIRE, Tags.Items.STORAGE_BLOCKS).toFluid(1).gen(entry -> entry.addKeyOut(METAL)));
-    public static final HBMMatter FLUX = register(new HBMMatter("flux", 0xF1E0BB, 0x6F6256, 0xDECCAD).shapes(DUST).gen(entry -> entry.addKeyOut(NORMAL)));
+    public static final HBMMatter FLUX = register(new HBMMatter("flux", 0xF1E0BB, 0x6F6256, 0xDECCAD).toFluid(4).shapes(DUST).gen(entry -> entry.addKeyOut(NORMAL)));
     public static final HBMMatter SLAG = register(new HBMMatter("slag", 0x554940, 0x34281F, 0x6C6562).shapes(Tags.Items.INGOTS, Tags.Items.STORAGE_BLOCKS).toFluid(1).gen(entry -> entry.addKeyOut(NORMAL)));
     public static final HBMMatter MUD = register(new HBMMatter("mud", 0xBCB5A9, 0x481213, 0x96783B).toFluid(1).gen(entry -> entry.addKeyOut(NORMAL)));
     public static final HBMMatter GUNMETAL = register(new HBMMatter("gunmetal", 0xFFEF3F, 0xAD3600, 0xF9C62C).shapes(LIGHTBARREL, HEAVYBARREL, LIGHTRECEIVER, HEAVYRECEIVER, MECHANISM, STOCK, GRIP).toFluid(1).gen(entry -> entry.addKeyOut(NORMAL)));
@@ -181,6 +184,7 @@ public class HBMMatters {
                     ITEM_TO_SHAPE.put(item, shapeType);
                 });
             }
+            if (matter.fluid() != null) FLUID_TO_MATTER.put(matter.fluid(), matter);
         }
     }
 
@@ -192,7 +196,7 @@ public class HBMMatters {
 
         // 如果查到了 Matter，说明它是你定义的材料之一
         if (matter != null) {
-            return matter.canMolten();
+            return matter.getConvertMat() != null ? matter.getConvertMat().canMolten() : matter.canMolten();
         }
 
         return false;
@@ -202,10 +206,18 @@ public class HBMMatters {
         if (stack.isEmpty()) return FluidStack.EMPTY;
         Item item = stack.getItem();
         HBMMatter matter = ITEM_TO_MATTER.get(item);
+        HBMMatter convertMat = matter.getConvertMat();
         HBMMatForm matterFormat = HBMMatForm.MATTER_FORMATS.get(ITEM_TO_SHAPE.get(item));
-        if (matter != null && matter.canMolten() && matterFormat != null) {
-            return new FluidStack(matter.fluid(), matterFormat.quantity);
+        if (matter != null && (matter.canMolten() || convertMat.canMolten()) && matterFormat != null) {
+            if (convertMat == null)
+                return new FluidStack(matter.fluid(), matterFormat.quantity);
+            else
+                return new FluidStack(convertMat.fluid(), matterFormat.quantity * matter.convOut / matter.convIn);
         }
         return FluidStack.EMPTY;
+    }
+
+    public static HBMMatter getMatterFromFluid(FluidStack fluidStack){
+        return FLUID_TO_MATTER.get(fluidStack.getFluid());
     }
 }

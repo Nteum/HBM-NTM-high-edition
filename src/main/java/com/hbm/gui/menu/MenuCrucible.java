@@ -5,6 +5,7 @@ import com.hbm.blockentity.machine.CrucibleEntity;
 import com.hbm.gui.ModMenuType;
 import com.hbm.utils.WorldUtils;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.ContainerData;
@@ -49,5 +50,9 @@ public class MenuCrucible extends BaseMachineMenu{
 
     public int getProgress(){
         return containerData.get(1);
+    }
+
+    public BlockPos getPos(){
+        return this.be.getTilePos();
     }
 }

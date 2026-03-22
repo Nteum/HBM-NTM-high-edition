@@ -12,7 +12,11 @@ import com.hbm.registries.ModBlocks;
 import com.hbm.registries.ModItems;
 import net.minecraft.data.PackOutput;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class LanguageProvider extends net.minecraftforge.common.data.LanguageProvider {
+    public static Map<String, String> READY_TO_ADD = new HashMap<>();
     public LanguageProvider(PackOutput output, String modid, String locale) {
         super(output, modid, locale);
     }
@@ -64,6 +68,8 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
 //        //方块实体
 //        this.add("hbmxx.container.difurnace","Blast Furnace");
 //        this.add("hbmxx.container.crucible","Crucible");
+
+        READY_TO_ADD.forEach(this::add);
     }
     private void addItems(){
 //        HBMComponent.languageSupport(this);

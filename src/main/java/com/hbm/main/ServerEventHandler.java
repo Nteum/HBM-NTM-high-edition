@@ -1,5 +1,6 @@
 package com.hbm.main;
 
+import com.hbm.HBM;
 import com.hbm.config.ClientConfig;
 import com.hbm.config.ServerConfig;
 import com.hbm.dev.AssetConsistencyChecker;
@@ -49,6 +50,8 @@ public class ServerEventHandler {
         forgeBus.addListener(ServerEventHandler::onPlayerTossItem);
         forgeBus.addListener(ServerEventHandler::onEntityJoin);
     }
+
+
     @SubscribeEvent
     public static void onServerSetup(FMLDedicatedServerSetupEvent event) {
         HBMDamage.clearLocalData();
@@ -61,23 +64,12 @@ public class ServerEventHandler {
         event.enqueueWork(() -> {
             AssetConsistencyChecker.runIfRequested();
             ModelValidator.runIfRequested();
-//            HBMMatters.buildCache();
         });
     }
 
     @SubscribeEvent
     public static void onTagsUpdated(TagsUpdatedEvent event) {
         HBMMatters.buildCache();
-        // 建议打个日志，你会发现它在进入世界前会触发
-        System.out.println("HBMMatter Cache rebuilt. Items mapped: " + HBMMatters.ITEM_TO_MATTER.size());
-//        // 只有当更新的是物品标签时才执行
-//        if (event.getUpdateCause() == TagsUpdatedEvent.UpdateCause.CLIENT_PACKET_RECEIVED ||
-//                event.getUpdateCause() == TagsUpdatedEvent.UpdateCause.SERVER_DATA_LOAD) {
-//
-//            HBMMatters.buildCache();
-//            // 建议打个日志，你会发现它在进入世界前会触发
-//            System.out.println("HBMMatter Cache rebuilt. Items mapped: " + HBMMatters.ITEM_TO_MATTER.size());
-//        }
     }
 
     @SubscribeEvent

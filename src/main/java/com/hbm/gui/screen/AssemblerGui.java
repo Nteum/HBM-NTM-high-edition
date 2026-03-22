@@ -5,37 +5,29 @@ import com.hbm.HBMKey;
 import com.hbm.HBMLang;
 import com.hbm.Inventory.recipe.AssemblerRecipe;
 import com.hbm.Inventory.recipe.ModRecipes;
-import com.hbm.blockentity.machine.AssemblerEntity;
 import com.hbm.gui.menu.AssemblerMenu;
-import com.hbm.gui.recipebook.AssemblerBookComponent;
-import com.hbm.gui.screen.page.recipe.RecipePage;
+import com.hbm.gui.screen.page.recipe.RecipePageVanilla;
 import com.hbm.network.ModMessages;
 import com.hbm.network.packet.toserver.C2SSyncTileMessage;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ImageButton;
-import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.client.gui.screens.inventory.AbstractFurnaceScreen;
-import net.minecraft.client.gui.screens.inventory.FurnaceScreen;
-import net.minecraft.client.gui.screens.recipebook.AbstractFurnaceRecipeBookComponent;
-import net.minecraft.client.gui.screens.recipebook.RecipeBookComponent;
-import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.inventory.FurnaceMenu;
 import net.minecraft.world.item.ItemStack;
 
 public class AssemblerGui extends BaseMachineGui<AssemblerMenu> {
     private static final ResourceLocation TEXTURE = HBM.rl("textures/gui/gui_assembler.png");
     private static final ResourceLocation TEMPLATE_BUTTON_TEXTURE = HBM.rl("textures/gui/button_machine.png");
-    private final RecipePage recipePage;
+    private final RecipePageVanilla<Container, AssemblerRecipe> recipePage;
     private boolean widthTooNarrow;
     public AssemblerGui(AssemblerMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
         this.imageHeight = 222;
-        this.recipePage = new RecipePage();
+        this.recipePage = new RecipePageVanilla<>();
     }
 
     @Override

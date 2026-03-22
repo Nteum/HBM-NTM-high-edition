@@ -2,13 +2,18 @@ package com.hbm.Inventory.material;
 
 import com.hbm.HBM;
 import com.hbm.Inventory.fluid.ModFluids;
+import com.hbm.datagen.LanguageProvider;
+import com.hbm.datagen.recipe.ingredient.FluidStackIngredient;
+import com.hbm.datagen.tag.FluidTagsGen;
 import com.hbm.registries.HBMMatters;
 import com.hbm.registries.ModTags;
+import com.hbm.registries.RegistryHelper;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.common.Tags;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 import net.minecraftforge.registries.RegistryObject;
@@ -33,8 +38,8 @@ public class HBMMatter{
     RegistryObject<Fluid> source;
     // 材料的转化
     HBMMatter convertMat;
-    int convIn = 0;
-    int convOut = 0;
+    public int convIn = 0;
+    public int convOut = 0;
     public HBMMatter(String name){
         this.name = name;
         this.matterKey = ModTags.Items.forgeTag(name);
@@ -84,6 +89,9 @@ public class HBMMatter{
     public TagKey<Item> key(){
         return matterKey;
     }
+    public String name(){
+        return name;
+    }
     public HBMMatter gen(Consumer<ModTags.TagGenEntry<Item>> consumer){
         if (genEntry == null) genEntry = ModTags.Items.make(matterKey);
         consumer.accept(genEntry);
@@ -98,9 +106,14 @@ public class HBMMatter{
     public HBMMatter toFluid(int smeltProperty) {
         // 为每种金属生成唯一的 FluidType（用于区分颜色）
         // 这里可以巧妙地把颜色作为温度参考
-        this.fluidType = ModFluids.FLUID_TYPES.register(name + "_type", () -> new FluidType(FluidType.Properties.create().temperature(moltenColor).descriptionId("fluid." + HBM.MODID + "." + name)));
-        this.source = ModFluids.FLUIDS.register("molten_" + name, () -> new ForgeFlowingFluid.Source(new ForgeFlowingFluid.Properties(fluidType, null, null)));
+        String descriptionId = "fluid." + HBM.MODID + "." + name;
+        this.fluidType = ModFluids.FLUID_TYPES.register(name + "_type", () -> new FluidType(FluidType.Properties.create().temperature(moltenColor).descriptionId(descriptionId)));
+        this.source = ModFluids.FLUIDS.register("molten_" + name, () -> new ForgeFlowingFluid.Source(new ForgeFlowingFluid.Properties(fluidType, this.source, this.source)));
         this.smeltProperty = (byte) smeltProperty;
+        if (HBM.isDataGen()){
+            FluidTagsGen.register(ModTags.Fluids.forgeTag(this.source.getId().getPath()), this.source);
+            LanguageProvider.READY_TO_ADD.put(descriptionId, RegistryHelper.generateOrderlyName(this.name));
+        }
         return this;
     }
 
@@ -114,17 +127,23 @@ public class HBMMatter{
         if (this.genEntry == null) this.genEntry = ModTags.Items.make(matterKey);
         return this.genEntry;
     }
+    public HBMMatter getConvertMat(){
+        return this.convertMat;
+    }
     public TagKey<Item> getShape(TagKey<Item> shape){
         return this.shapes.get(shape);
     }
     public Fluid fluid(){
-        return this.source.get();
+        return this.source == null ? null : this.source.get();
     }
     public FluidType fluidType(){
-        return this.fluidType.get();
+        return this.fluidType == null ? null : this.fluidType.get();
+    }
+    public TagKey<Fluid> fluidTag(){
+        return ModTags.Fluids.forgeTag(this.source.getId().getPath());
     }
     public boolean canMolten(){
-        return smeltProperty != 0 && this.source != null && this.fluidType != null;
+        return (smeltProperty == 0 || smeltProperty == 4) && this.source != null && this.fluidType != null;
     }
     // 锭的tag
     public TagKey<Item> ingot(){

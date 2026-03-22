@@ -6,9 +6,9 @@ import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.resources.ResourceLocation;
 //具有多个状态的按钮
 public class MultiStateButton extends ImageButton {
-    int stateNum = 2;
-    int defaultState = 0;
-    public int stateNow = defaultState;
+    int stateNum;
+    int defaultState;
+    public int stateNow;
     public MultiStateButton(int pX, int pY, int pWidth, int pHeight, int pXTexStart, int pYTexStart, int stateNum, ResourceLocation pResourceLocation, OnPress pOnPress) {
         this(pX, pY, pWidth, pHeight, pXTexStart, pYTexStart,stateNum,0, pResourceLocation, pOnPress);
     }
@@ -25,14 +25,14 @@ public class MultiStateButton extends ImageButton {
     @Override
     public void renderWidget(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
         int i = yTexStart + yDiffTex * stateNow;
-//        if (!this.isActive()) {
-//            i = yTexStart + yDiffTex * stateNow;
-//        } else
-//        if (this.isHovered()) {
-//            i = yTexStart + yDiffTex * (stateNow+1==stateNum ? 0 : stateNow + 1);
-//        }
 
         RenderSystem.enableDepthTest();
         pGuiGraphics.blit(resourceLocation, getX(), getY(), (float)xTexStart, (float)i, width, height, textureWidth, textureHeight);
+    }
+
+    // 按顺序变换状态
+    public int changeState(){
+        this.stateNow = (this.stateNow + 1) % this.stateNum;
+        return this.stateNow;
     }
 }

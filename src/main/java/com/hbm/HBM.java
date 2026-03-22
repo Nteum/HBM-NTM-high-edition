@@ -8,6 +8,7 @@ import com.hbm.compat.bigexplosives.BigExplosivesMod;
 import com.hbm.compat.ballistix.BallistixCompat;
 import com.hbm.datagen.damageSource.HBMDamageTagProvider;
 import com.hbm.datagen.levelgen.HBMWorldGenProvider;
+import com.hbm.datagen.tag.FluidTagsGen;
 import com.hbm.dev.AssetConsistencyChecker;
 import com.hbm.dev.ModelValidator;
 import com.hbm.datagen.loot.BlockLootGen;
@@ -119,7 +120,6 @@ public class HBM {
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
-
         if (!CONFIG_PATH.toFile().exists()) CONFIG_PATH.toFile().mkdir();
         ModMessages.register(); //注册所有的消息
         TransmitterNetworkRegistry.initiate(); //注册传输网络系统
@@ -162,6 +162,7 @@ public class HBM {
         generator.addProvider(event.includeServer(), new RecipeGen(packOutput,helper,MODID));
         generator.addProvider(event.includeServer(), blockTagsGen);
         generator.addProvider(event.includeServer(), new ItemTagsGen(packOutput,lookupProvider,blockTagsGen.contentsGetter(),MODID,helper));
+        generator.addProvider(event.includeServer(), new FluidTagsGen(packOutput,lookupProvider,MODID,helper));
 //        generator.addProvider(event.includeServer(), new WorldGen(packOutput, lookupProvider));
         generator.addProvider(event.includeServer(), (DataProvider.Factory<LootTableProvider>) output->new LootTableProvider(output, Collections.emptySet(),List.of(
                 new LootTableProvider.SubProviderEntry(BlockLootGen::new, LootContextParamSets.BLOCK),
@@ -188,6 +189,13 @@ public class HBM {
     public static boolean isLoad(String modID){
         return ModList.get().isLoaded(modID);
     }
+    /**
+     * 判断当前是否处于数据生成模式，这个环境变量在build.gradle中加入的，而rundata中则没有加入。
+     */
+    public static boolean isDataGen() {
+        return System.getProperty("forge.enabledGameTestNamespaces") == null;
+    }
+
     public static ResourceLocation rl(String s){return ResourceLocation.tryBuild(HBM.MODID,s);}
     public static ResourceLocation modelRl(String s){return rl("models/" + s);}
 }

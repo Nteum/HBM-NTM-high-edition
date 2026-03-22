@@ -12,6 +12,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -186,26 +187,7 @@ public class ModTags {
             LIST_TAG_GEN_REQ.add(entry);
             return entry;
         }
-//
-//        private static TagKey<Item> addMatterFormat(TagKey<Item> key, boolean autoGen, int quantity){
-//            MATTER_FORMATS.put(key, new MatterFormat(autoGen, quantity));
-//            return key;
-//        }
     }
-//    public static class MatterFormat{
-//        boolean autoGen = true; // 是否自动生成
-//        int quantity = 72;      // 等效物质的量，默认8为一个粒，72为一个锭
-//        Set<TagKey<Item>> content;
-//        public MatterFormat(boolean autoGen, int quantity){
-//            this.autoGen = autoGen;
-//            this.quantity = quantity;
-//        }
-//        public MatterFormat add(TagKey<Item> ... keys){
-//            if (content == null) content = new HashSet<>();
-//            content.addAll(Arrays.stream(keys).toList());
-//            return this;
-//        }
-//    }
     public static class TagGenEntry<T>{
         public TagKey<T> key;
         public Set<TagKey<T>> keyIn;        // 需要加入这个key的key
@@ -234,6 +216,15 @@ public class ModTags {
         }
         public TagKey<T> key(){
             return this.key;
+        }
+    }
+
+    public static class Fluids{
+        public static TagKey<Fluid> tag(String pName) {
+            return TagKey.create(Registries.FLUID, HBM.rl(pName));
+        }
+        public static TagKey<Fluid> forgeTag(String pName) {
+            return TagKey.create(Registries.FLUID, new ResourceLocation("forge",pName));
         }
     }
 }
