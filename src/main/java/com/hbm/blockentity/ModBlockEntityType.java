@@ -17,6 +17,7 @@ import com.hbm.blockentity.machine.rbmk.RBMKControlRodEntity;
 import com.hbm.blockentity.machine.rbmk.RBMKFuelChannelEntity;
 import com.hbm.blockentity.machine.rbmk.RBMKHeaterEntity;
 import com.hbm.blockentity.machine.rbmk.RBMKPeripheralEntity;
+import com.hbm.blockentity.tools.TileFoundryMold;
 import com.hbm.blockentity.weapon.*;
 import com.hbm.registries.ModBlocks;
 import net.minecraft.core.registries.Registries;
@@ -147,6 +148,8 @@ public class ModBlockEntityType {
     public static final RegistryObject<BlockEntityType<TileConnector>> TILE_CONNECTOR =
             REGISTER.register("tile_connector", () -> BlockEntityType.Builder.of(TileConnector::new, ModBlocks.CONNECTOR.get()).build(null));
     public static final RegistryObject<BlockEntityType<TileFireboxBase>> TILE_FIREBOX = register("tile_firebox", TileFireBox::new, ModBlocks.HEATER_FIREBOX);
+    public static final RegistryObject<BlockEntityType<TileFoundryMold>> TILE_FOUNDRY_MOLD = register("tile_foundrymold", TileFoundryMold::new, ModBlocks.FOUNDRY_MOLD);
+    // 注册函数
     private static<T extends BlockEntity> RegistryObject<BlockEntityType<T>> register(String key, BlockEntityType.BlockEntitySupplier<T> pFactory, Supplier<Block>... pValidBlocks){
         return REGISTER.register(key, () -> BlockEntityType.Builder.of(pFactory, Arrays.stream(pValidBlocks).map(Supplier::get).toArray(Block[]::new)).build(null));
     }

@@ -25,6 +25,7 @@ import net.minecraft.world.level.chunk.ChunkStatus;
 import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.SoundActions;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidType;
@@ -675,5 +676,9 @@ public class WorldUtils {
      */
     public static BlockPos getBlockPosFromChunkPos(long chunkPos) {
         return new BlockPos((int) chunkPos, 0, (int) (chunkPos >> 32));
+    }
+
+    public static BlockPos blockPos(Vec3 vec3){
+        return new BlockPos(Mth.floor(vec3.x), Mth.floor(vec3.y), Mth.floor(vec3.z));
     }
 }

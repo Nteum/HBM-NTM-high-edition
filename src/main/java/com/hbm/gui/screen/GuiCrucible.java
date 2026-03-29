@@ -130,6 +130,7 @@ public class GuiCrucible extends BaseMachineGui<MenuCrucible> {
             layerHeight = fluidInTank.getAmount() * 79 / moltenStack.getTankCapacity(0);
             accAmount += layerHeight;
             HBMMatter matter = HBMMatters.getMatterFromFluid(fluidInTank);
+            if (matter == null) continue;
             int color = matter.moltenColor;
             int offset = matter.smeltProperty == 4 ? 34 : 0;
             pGuiGraphics.setColor(FastColor.ARGB32.red(color) / 255.0f, FastColor.ARGB32.green(color) / 255.0f, FastColor.ARGB32.blue(color) / 255.0f, 1.0f);

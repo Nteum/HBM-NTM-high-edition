@@ -1,6 +1,7 @@
 {
   "values": [
     "#forge:machine",
-    "#forge:ores"
+    "#forge:ores",
+    "hbm:foundry_mold"
   ]
 }

@@ -695,7 +695,7 @@
   "item.hbm.ingot_u238m2": "铀-238M2 锭",
   "item.hbm.ingot_uranium": "铀锭",
   "item.hbm.ingot_uranium_fuel": "燃料锭铀",
-  "item.hbm.laser_crystal_digamma": "激光晶体双伽马",
+  "item.hbm.laser_crystal_digamma": "迪伽马激光晶体",
   "item.hbm.lithium": "锂",
   "item.hbm.missile.desc.notlaunchable": "无法发射！",
   "item.hbm.missile.tier": "等级 %s",

@@ -112,6 +112,7 @@ public class HBMMatter{
         this.smeltProperty = (byte) smeltProperty;
         if (HBM.isDataGen()){
             FluidTagsGen.register(ModTags.Fluids.forgeTag(this.source.getId().getPath()), this.source);
+            FluidTagsGen.register(ModTags.Fluids.MOLTEN, this.source);
             LanguageProvider.READY_TO_ADD.put(descriptionId, RegistryHelper.generateOrderlyName(this.name));
         }
         return this;
@@ -143,7 +144,7 @@ public class HBMMatter{
         return ModTags.Fluids.forgeTag(this.source.getId().getPath());
     }
     public boolean canMolten(){
-        return (smeltProperty == 0 || smeltProperty == 4) && this.source != null && this.fluidType != null;
+        return (smeltProperty == 1 || smeltProperty == 4) && this.source != null && this.fluidType != null;
     }
     // 锭的tag
     public TagKey<Item> ingot(){

@@ -66,4 +66,8 @@ public class HBMMatForm {
 
         MATTER_FORMATS.put(format, this);
     }
+
+    public TagKey<Item> getFormat(){
+        return this.format;
+    }
 }

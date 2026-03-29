@@ -6,15 +6,18 @@ import com.hbm.Inventory.fluid.CrucibleFluidHandler;
 import com.hbm.Inventory.material.BasicHeatHandler;
 import com.hbm.Inventory.recipe.alloy.CrucibleRecipe;
 import com.hbm.api.fluid.BasicFluidHandler;
+import com.hbm.block.base.BlockMachineBase;
 import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.blockentity.base2.DummyableBlockEntity;
 import com.hbm.blockentity.base2.UpdateableBlockEntity;
+import com.hbm.blockentity.tools.TileFoundryBase;
 import com.hbm.datagen.recipe.ingredient.FluidStackIngredient;
 import com.hbm.gui.menu.MenuCrucible;
 import com.hbm.registries.HBMCaps;
 import com.hbm.registries.HBMMatters;
 import com.hbm.registries.ModBlocks;
 ;
+import com.hbm.utils.DirectionUtils;
 import com.hbm.utils.multiblock.MultiblockData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -26,7 +29,9 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
@@ -101,6 +106,7 @@ public class CrucibleEntity extends DummyableBlockEntity {
         this.heatHandler.decay();
         trySmelt();
         tryRecipe();
+        tryPourFluid();
 
         sendUpdatePacket();
     }
@@ -170,6 +176,21 @@ public class CrucibleEntity extends DummyableBlockEntity {
         } else {
             // 自动融合逻辑
             CrucibleRecipe.autoMerge(this.alloyStack, this.level, this.recipeNow);
+        }
+    }
+
+    public void tryPourFluid(){
+        Direction direction = DirectionUtils.horizRot(Direction.SOUTH, this.getBlockState().getValue(BlockStateProperties.HORIZONTAL_FACING), Direction.EAST);
+        BlockPos checkPos = this.getBlockPos().relative(direction, 2).relative(Direction.DOWN);
+        BlockEntity blockEntity = this.level.getBlockEntity(checkPos);
+        if (blockEntity != null && blockEntity instanceof TileFoundryBase foundry){
+            FluidStack fluidInTank = this.storeStack.getFluidInTank(0);
+            FluidStack copied = fluidInTank.copy();
+            if (!copied.isEmpty()) {
+                if (copied.getAmount() < 5) copied.setAmount(5);
+                FluidStack pourResult = foundry.pour(copied);
+                fluidInTank.shrink(pourResult.getAmount());
+            }
         }
     }
 

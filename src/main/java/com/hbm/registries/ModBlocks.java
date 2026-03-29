@@ -32,12 +32,14 @@ import com.hbm.block.machine.generator.BlockPWRPillar;
 import com.hbm.block.machine.generator.BlockGenericPWR;
 import com.hbm.block.logistic.BlockConveyor;
 import com.hbm.block.space.BlockSpaceStation;
+import com.hbm.block.tools.FoundryMold;
 import com.hbm.block.weapon.NukeBoy;
 import com.hbm.block.weapon.NukeCustom;
 import com.hbm.block.weapon.NukeFat;
 import com.hbm.datagen.LanguageProvider;
 import com.hbm.datagen.loot.BlockLootGen;
 import com.hbm.datagen.model.BlockStateGen;
+import com.hbm.datagen.tag.BlockTagsGen;
 import com.hbm.item.blockitem.IronCrateItem;
 import com.hbm.item.blockitem.SteelCrateItem;
 import com.hbm.item.tool.BatteryBlockItem;
@@ -46,6 +48,7 @@ import com.hbm.registries.WrapperRegistry.BlockBuilder;
 import com.hbm.registries.WrapperRegistry.WrappedBlockRegistry;
 import com.hbm.utils.debug.BlockDebug;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -219,6 +222,8 @@ public class ModBlocks {
     public static final RegistryObject<Block> TAINT = block("taint", () -> new Block(Properties.copy(Blocks.IRON_BLOCK)));
     public static final RegistryObject<Block> WASTE_LEAVES = add("waste_leaves", () -> new WasteLeaves(Properties.copy(Blocks.ACACIA_LEAVES).noLootTable()), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_STANDALONE, HBMKey.ORDERLY_GEN, HBMKey.DROP_NO_EXIST);
     public static final RegistryObject<Block> WASTE_GRASS = add("waste_grass", () -> new WasteEarth(Properties.copy(Blocks.DIRT)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_DIFURNACE, HBMKey.ORDERLY_GEN, HBMKey.DROP_STANDALONE);
+    // casting
+    public static final RegistryObject<Block> FOUNDRY_MOLD = new BlockBuilder("foundry_mold", () -> new FoundryMold(Properties.copy(Blocks.STONE))).tab(ModTabs.MACHINE.getKey()).model(HBMKey.MODEL_EXISTING).loc(HBMKey.ORDERLY_GEN).loot(HBMKey.DROP_SELF).tags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL).build();
     /**
      * 航天版方块
      * */
@@ -286,6 +291,12 @@ public class ModBlocks {
     public static void lootSupport(BlockLootGen provider){
         for (WrappedBlockRegistry blockRegistry : blockList) {
             blockRegistry.lootSupport(provider);
+        }
+    }
+
+    public static void tagSupport(BlockTagsGen provider){
+        for (WrappedBlockRegistry wrappedBlockRegistry : blockList) {
+            wrappedBlockRegistry.tagSupport(provider);
         }
     }
 }

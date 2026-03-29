@@ -1,24 +1,18 @@
 package com.hbm.block.base;
 
 import com.hbm.HBM;
-import com.hbm.HBMKey;
 import com.hbm.block.HBMBlockProperties;
-import com.hbm.block.HBMMachine;
 import com.hbm.block.interfaces.ICustomBlockHighlight;
 import com.hbm.blockentity.base2.BaseMachineBlockEntity;
 import com.hbm.blockentity.base2.DummyableBlockEntity;
 import com.hbm.blockentity.base2.TileProxyBase;
 import com.hbm.blockentity.base2.TileProxyCombo;
-import com.hbm.blockentity.machine.ChemplantEntity;
-import com.hbm.interfaces.ICopiable;
-import com.hbm.registries.ModBlocks;
 import com.hbm.utils.DirectionUtils;
 import com.hbm.utils.multiblock.DummableHelper;
 import com.hbm.utils.multiblock.MultiblockData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -30,16 +24,13 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -47,10 +38,8 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RenderHighlightEvent;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
 import java.util.List;
 
 //所有多方块结构的父类
@@ -206,7 +195,7 @@ public abstract class BlockDummyable extends BlockMachineBase implements ICustom
 
     }
 
-    private static boolean never(BlockState p_50806_, BlockGetter p_50807_, BlockPos p_50808_) {
+    public static boolean never(BlockState p_50806_, BlockGetter p_50807_, BlockPos p_50808_) {
         return false;
     }
 

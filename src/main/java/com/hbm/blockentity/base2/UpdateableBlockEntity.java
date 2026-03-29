@@ -168,6 +168,17 @@ public abstract class UpdateableBlockEntity extends BlockEntity implements ITile
         }
     }
 
+    // 客户端更新
+    protected void onUpdateClient(){}
+    // 服务器更新
+    protected void onUpdateServer(){}
+    public static void clientTicker(Level level, BlockPos pPos, BlockState pState, BlockEntity pBlockEntity) {
+        if (pBlockEntity instanceof UpdateableBlockEntity updateableBlockEntity) updateableBlockEntity.onUpdateClient();
+    }
+    public static void serverTicker(Level level, BlockPos pPos, BlockState pState, BlockEntity pBlockEntity) {
+        if (pBlockEntity instanceof UpdateableBlockEntity updateableBlockEntity) updateableBlockEntity.onUpdateServer();
+    }
+
     @Override
     public void load(@NotNull CompoundTag nbt) {
         super.load(nbt);

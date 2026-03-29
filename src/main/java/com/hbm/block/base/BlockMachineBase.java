@@ -1,6 +1,7 @@
 package com.hbm.block.base;
 
 import com.hbm.blockentity.base2.BaseMachineBlockEntity;
+import com.hbm.blockentity.base2.UpdateableBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -27,7 +28,7 @@ public abstract class BlockMachineBase extends BlockContainerBase{
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return pLevel.isClientSide() ? BaseMachineBlockEntity::clientTicker : BaseMachineBlockEntity::serverTicker;
+        return pLevel.isClientSide() ? UpdateableBlockEntity::clientTicker : UpdateableBlockEntity::serverTicker;
     }
     /** 右键 */
     @Override

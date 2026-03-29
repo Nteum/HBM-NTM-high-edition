@@ -58,18 +58,18 @@ public abstract class BaseMachineBlockEntity extends HBMBlockEntity implements W
             ContainerHelper.loadAllItems(pTag, this.items);
         }
     }
-    // 客户端更新
-    protected void onUpdateClient(){}
-    // 服务器更新
-    protected void onUpdateServer(){}
-    public static void clientTicker(Level level, BlockPos pPos, BlockState pState, BlockEntity pBlockEntity) {
-        if (pBlockEntity instanceof BaseMachineBlockEntity)
-            ((BaseMachineBlockEntity)pBlockEntity).onUpdateClient();
-    }
-    public static void serverTicker(Level level, BlockPos pPos, BlockState pState, BlockEntity pBlockEntity) {
-        if (pBlockEntity instanceof BaseMachineBlockEntity)
-            ((BaseMachineBlockEntity)pBlockEntity).onUpdateServer();
-    }
+//    // 客户端更新
+//    protected void onUpdateClient(){}
+//    // 服务器更新
+//    protected void onUpdateServer(){}
+//    public static void clientTicker(Level level, BlockPos pPos, BlockState pState, BlockEntity pBlockEntity) {
+//        if (pBlockEntity instanceof BaseMachineBlockEntity)
+//            ((BaseMachineBlockEntity)pBlockEntity).onUpdateClient();
+//    }
+//    public static void serverTicker(Level level, BlockPos pPos, BlockState pState, BlockEntity pBlockEntity) {
+//        if (pBlockEntity instanceof BaseMachineBlockEntity)
+//            ((BaseMachineBlockEntity)pBlockEntity).onUpdateServer();
+//    }
     public boolean canOpen(Player pPlayer) {
         return canUnlock(pPlayer, this.lockKey, this.getDisplayName());
     }

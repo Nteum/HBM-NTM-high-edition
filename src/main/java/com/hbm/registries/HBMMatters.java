@@ -43,7 +43,7 @@ public class HBMMatters {
     public static final HBMMatter DIAMOND = register(new HBMMatter("diamond", 0xFFFFFF, 0x1B7B6B, 0x8CF4E2).convert(CARBON, 1, 1).shapes(FRAGMENT).gen(entry -> entry.addKeyOut(NORMAL)));
     public static final HBMMatter IRON = register(new HBMMatter("iron", 0xFFFFFF, 0x353535, 0xFFA259)
             .shape(Tags.Items.INGOTS, INGOTS_IRON).shape(Tags.Items.NUGGETS, NUGGETS_IRON)
-            .shapes(FRAGMENT, DUST, PIPE, CASTPLATE, WELDEDPLATE, Tags.Items.STORAGE_BLOCKS).toFluid(1).gen(entry -> entry.addKeyOut(METAL)));
+            .shapes(PLATE, FRAGMENT, DUST, PIPE, CASTPLATE, WELDEDPLATE, Tags.Items.STORAGE_BLOCKS).toFluid(1).gen(entry -> entry.addKeyOut(METAL)));
     public static final HBMMatter WROUGHT_IRON = register(new HBMMatter("wrought_iron", 0xFAAB89, 0xFAAB89, 0xFAAB89).toFluid(1).gen(entry -> entry.addKeyOut(METAL)));
     public static final HBMMatter PIG_IRON = register(new HBMMatter("pig_iron", 0xFF8B59, 0xFF8B59, 0xFF8B59).toFluid(1).gen(entry -> entry.addKeyOut(METAL)));
     public static final HBMMatter METEORIC_IRON = register(new HBMMatter("meteoric_iron", 0x715347, 0x715347, 0x715347).toFluid(1).gen(entry -> entry.addKeyOut(METAL)));
@@ -219,5 +219,25 @@ public class HBMMatters {
 
     public static HBMMatter getMatterFromFluid(FluidStack fluidStack){
         return FLUID_TO_MATTER.get(fluidStack.getFluid());
+    }
+
+    public static Item getItemWithMatForm(FluidStack fluidStack, HBMMatForm matForm){
+        HBMMatter matter = getMatterFromFluid(fluidStack);
+        TagKey<Item> format = matForm.getFormat();
+        for (Map.Entry<Item, TagKey<Item>> entry : ITEM_TO_SHAPE.entrySet()) {
+            if (ITEM_TO_MATTER.get(entry.getKey()) == matter && entry.getValue() == format){
+                return entry.getKey();
+            }
+        }
+        return null;
+    }
+
+    public static boolean doFluidValidToForm(FluidStack fluidStack, HBMMatForm matForm){
+        HBMMatter matter = getMatterFromFluid(fluidStack);
+        if (matter == null || matForm == null) return false;
+        for (TagKey<Item> tagKey : matter.getShapes().keySet()) {
+            if (tagKey.equals(matForm.getFormat())) return true;
+        }
+        return false;
     }
 }

@@ -220,6 +220,7 @@ public class ModTags {
     }
 
     public static class Fluids{
+        public static TagKey<Fluid> MOLTEN = tag("molten");
         public static TagKey<Fluid> tag(String pName) {
             return TagKey.create(Registries.FLUID, HBM.rl(pName));
         }

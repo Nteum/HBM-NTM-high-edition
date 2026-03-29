@@ -81,6 +81,9 @@ public class BlockTagsGen extends BlockTagsProvider {
 
         /** 原版tag */
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE).addTag(ModTags.Blocks.MACHINE).addTag(Tags.Blocks.ORES);
+
+        // 注册物品批量添加tag
+        ModBlocks.tagSupport(this);
     }
 
     @Override

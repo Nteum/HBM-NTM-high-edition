@@ -3,6 +3,7 @@ package com.hbm.registries;
 import com.hbm.HBM;
 import com.hbm.HBMKey;
 import com.hbm.HBMLang;
+import com.hbm.Inventory.material.HBMMatForm;
 import com.hbm.config.ConfigLBSM;
 import com.hbm.datagen.LanguageProvider;
 import com.hbm.datagen.model.ItemModelGen;
@@ -149,9 +150,9 @@ public class ModItems {
     public static final RegistryObject<Item> INGOT_BERYLLIUM = parts("ingot_beryllium", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     public static final RegistryObject<Item> INGOT_STEEL = parts("ingot_steel", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, ModTags.Items.INGOT_STEEL);
     public static final RegistryObject<Item> PLATE_STEEL = parts("plate_steel", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, ModTags.Items.PLATE_STEEL);
-    public static final RegistryObject<Item> PLATE_IRON = parts("plate_iron", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> PLATE_IRON = parts("plate_iron", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.IRON.plate());
     public static final RegistryObject<Item> INGOT_LEAD = parts("ingot_lead", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, ModTags.Items.INGOT_LEAD);
-    public static final RegistryObject<Item> PLATE_LEAD = parts("plate_lead", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> PLATE_LEAD = parts("plate_lead", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.LEAD.plate());
     public static final RegistryObject<Item> PLATE_DURA_STEEL = parts("plate_dura_steel", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     public static final RegistryObject<Item> INGOT_SCHRARANIUM = new WrapperRegistry.ItemBuilder("ingot_schraranium", ()->new Item(new Item.Properties()){
         @Override
@@ -989,6 +990,21 @@ public class ModItems {
             HBMKey.ALUMINIUM,INGOT_ALUMINIUM, HBMKey.COPPER, () -> Items.COPPER_INGOT, HBMKey.RED_COPPER, INGOT_RED_COPPER, HBMKey.GOLD, () -> Items.GOLD_INGOT, HBMKey.TUNGSTEN, INGOT_TUNGSTEN,
             HBMKey.ADVANCED_ALLOY, INGOT_ADVANCED_ALLOY, HBMKey.SCHRABIDIUM, INGOT_SCHRABIDIUM, HBMKey.ZINC,INGOT_ZIRCONIUM, HBMKey.MAGNETIZED_TUNGSTEN, INGOT_MAGNETIZED_TUNGSTEN
     );
+
+    public static final RegistryObject<Item> MOLD_NUGGET = parts("mold_nugget", () -> new ItemMold(new Item.Properties(), HBMMatForm.NUGGET), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> MOLD_BILLET = parts("mold_billet", () -> new ItemMold(new Item.Properties(), HBMMatForm.BILLET), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> MOLD_INGOT = parts("mold_ingot", () -> new ItemMold(new Item.Properties(), HBMMatForm.INGOT), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> MOLD_PLATE = parts("mold_plate", () -> new ItemMold(new Item.Properties(), HBMMatForm.PLATE), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> MOLD_WIRE = parts("mold_wire", () -> new ItemMold(new Item.Properties(), HBMMatForm.WIRE), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> MOLD_PLATE_CAST = parts("mold_plate_cast", () -> new ItemMold(new Item.Properties(), HBMMatForm.CASTPLATE), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> MOLD_WIRE_DENSE = parts("mold_wire_dense", () -> new ItemMold(new Item.Properties(), HBMMatForm.DENSEWIRE), HBMKey.REVERSE_GEN);
+
+    public static final RegistryObject<Item> MOLD_SHELL = parts("mold_shell", () -> new ItemMold(new Item.Properties(), HBMMatForm.SHELL), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> MOLD_PIPE = parts("mold_pipe", () -> new ItemMold(new Item.Properties(), HBMMatForm.PIPE), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> MOLD_INGOTS = parts("mold_ingots", () -> new ItemMold(new Item.Properties(), HBMMatForm.INGOT, 9), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> MOLD_PLATES = parts("mold_plates", () -> new ItemMold(new Item.Properties(), HBMMatForm.PLATE, 9), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> MOLD_WIRES_DENSE = parts("mold_wires_dense", () -> new ItemMold(new Item.Properties(), HBMMatForm.DENSEWIRE, 9), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> MOLD_BLOCK = parts("mold_block", () -> new ItemMold(new Item.Properties(), HBMMatForm.BLOCK), HBMKey.REVERSE_GEN);
 
     // 填充物品，游戏内无法获得，用于避免物品被匹配上
     public static final RegistryObject<Item> DUMMY_ITEM = ITEMS.register("dummy_item", ()->new Item(new Item.Properties()));
