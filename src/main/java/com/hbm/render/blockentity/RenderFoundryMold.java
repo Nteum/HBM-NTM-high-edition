@@ -3,10 +3,7 @@ package com.hbm.render.blockentity;
 import com.hbm.HBM;
 import com.hbm.Inventory.material.HBMMatter;
 import com.hbm.blockentity.tools.TileFoundryMold;
-import com.hbm.gui.screen.GuiCrucible;
 import com.hbm.registries.HBMMatters;
-import com.hbm.registries.ModBlocks;
-import com.hbm.render.RenderUtils;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
@@ -21,7 +18,6 @@ import net.minecraft.util.FastColor;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.ItemStackHandler;
 import org.joml.Matrix3f;
@@ -49,12 +45,9 @@ public class RenderFoundryMold implements BlockEntityRenderer<TileFoundryMold> {
             float blue = FastColor.ARGB32.blue(color) / 255.0f;
             float alpha = 1.0f;
             pPoseStack.translate(0.5, flowHeight, 0.5);
-            VertexConsumer consumer = pBuffer.getBuffer(RenderType.entityCutout(FLUID_TEXTURE));
+            VertexConsumer consumer = pBuffer.getBuffer(RenderType.entityCutoutNoCull(FLUID_TEXTURE));
             Matrix4f pose = pPoseStack.last().pose();
             Matrix3f normal = pPoseStack.last().normal();
-
-            // 定义顶点数据：位置 (x, y, z), 纹理坐标 (u, v), 颜色 (RGBA), 光照 (light)
-            // 颜色通常为白色 (1,1,1,1) 保持不变，光照使用传入的 packedLight
             int light = pPackedLight; // 也可自行计算方块光照
             int overlay = pPackedOverlay; // 通常用 OverlayTexture.NO_OVERLAY
 

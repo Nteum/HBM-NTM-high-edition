@@ -181,7 +181,7 @@ public class CrucibleRecipe {
             }
         }
         if (matchedIdx < 0 || matchedRecipe == null) return;
-        for (int idx = matchedIdx; idx > 0 && idx > matchedIdx - matchedRecipe.inputFluid.size(); idx--) {
+        for (int idx = matchedIdx; idx >= 0 && idx > matchedIdx - matchedRecipe.inputFluid.size(); idx--) {
             FluidStack fluidInTank = fluidHandler.getFluidInTank(idx);
             for (FluidStackIngredient ingredient : matchedRecipe.inputFluid) {
                 if (ingredient.test(fluidInTank)) {
