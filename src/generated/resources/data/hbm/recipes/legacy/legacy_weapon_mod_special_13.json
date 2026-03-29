@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  P",
+    "BBB"
+  ],
+  "key": {
+    "P": {
+      "item": "hbm:plate_weapon_steel"
+    },
+    "B": {
+      "item": "hbm:bolt"
+    }
+  },
+  "result": {
+    "item": "hbm:weapon_mod_special",
+    "count": 1
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "G",
+    "T",
+    "I"
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:glass_pane"
+    },
+    "T": {
+      "item": "hbm:wire_fine"
+    },
+    "I": {
+      "item": "hbm:ingot_iron"
+    }
+  },
+  "result": {
+    "item": "hbm:spotlight_incandescent",
+    "count": 8
+  }
+}

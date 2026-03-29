@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " C ",
+    "PUP",
+    " C "
+  ],
+  "key": {
+    "C": {
+      "item": "hbm:circuit"
+    },
+    "P": {
+      "item": "hbm:part_generic"
+    },
+    "U": {
+      "item": "hbm:upgrade_template"
+    }
+  },
+  "result": {
+    "item": "hbm:upgrade_stack",
+    "count": 1
+  }
+}

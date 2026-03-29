@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "S S",
+    "LIL",
+    "III"
+  ],
+  "key": {
+    "S": {
+      "item": "hbm:plate_steel"
+    },
+    "L": {
+      "item": "minecraft:leather"
+    },
+    "I": {
+      "item": "hbm:ingot_latex"
+    }
+  },
+  "result": {
+    "item": "hbm:jackt2",
+    "count": 1
+  }
+}

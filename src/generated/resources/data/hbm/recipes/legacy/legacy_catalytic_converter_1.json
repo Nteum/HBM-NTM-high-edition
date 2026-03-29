@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PCP",
+    "PBP",
+    "PCP"
+  ],
+  "key": {
+    "P": {
+      "item": "hbm:ingot_polycarbonate"
+    },
+    "C": {
+      "item": "hbm:powder_cobalt"
+    },
+    "B": {
+      "item": "hbm:ingot_any_bismoid"
+    }
+  },
+  "result": {
+    "item": "hbm:catalytic_converter",
+    "count": 1
+  }
+}

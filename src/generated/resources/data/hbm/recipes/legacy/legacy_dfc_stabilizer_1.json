@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SDS",
+    "TXL",
+    "SDS"
+  ],
+  "key": {
+    "S": {
+      "item": "hbm:plate_welded"
+    },
+    "D": {
+      "item": "hbm:plate_desh"
+    },
+    "T": {
+      "item": "hbm:singularity_spark"
+    },
+    "X": {
+      "item": "hbm:fusion_conductor"
+    },
+    "L": {
+      "item": "hbm:crystal_xen"
+    }
+  },
+  "result": {
+    "item": "hbm:dfc_stabilizer",
+    "count": 1
+  }
+}

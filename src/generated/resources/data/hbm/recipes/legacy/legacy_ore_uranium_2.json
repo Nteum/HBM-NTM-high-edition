@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "OOO",
+    "OBO",
+    "OOO"
+  ],
+  "key": {
+    "O": {
+      "item": "hbm:ore_sellafield_uranium_scorched"
+    },
+    "B": {
+      "item": "minecraft:water_bucket"
+    }
+  },
+  "result": {
+    "item": "hbm:ore_uranium",
+    "count": 8
+  }
+}

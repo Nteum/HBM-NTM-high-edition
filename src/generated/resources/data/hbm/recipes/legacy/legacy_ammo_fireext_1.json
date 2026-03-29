@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " P ",
+    "BDB",
+    " P "
+  ],
+  "key": {
+    "P": {
+      "item": "hbm:plate_steel"
+    },
+    "B": {
+      "item": "hbm:bolt"
+    },
+    "D": {
+      "item": "hbm:fluid_tank_full"
+    }
+  },
+  "result": {
+    "item": "hbm:ammo_fireext",
+    "count": 1
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "G",
+    "W",
+    "I"
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:glass_pane"
+    },
+    "W": {
+      "item": "hbm:wire_fine"
+    },
+    "I": {
+      "item": "hbm:plate_polymer"
+    }
+  },
+  "result": {
+    "item": "hbm:circuit",
+    "count": 1
+  }
+}

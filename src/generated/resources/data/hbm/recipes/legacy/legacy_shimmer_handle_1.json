@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GP",
+    "GP",
+    "GP"
+  ],
+  "key": {
+    "G": {
+      "item": "hbm:plate_gold"
+    },
+    "P": {
+      "item": "hbm:ingot_polymer"
+    }
+  },
+  "result": {
+    "item": "hbm:shimmer_handle",
+    "count": 1
+  }
+}

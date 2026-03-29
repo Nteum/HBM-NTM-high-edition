@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " N ",
+    "NFN",
+    " N "
+  ],
+  "key": {
+    "N": {
+      "item": "hbm:dust_saltpeter"
+    },
+    "F": {
+      "item": "hbm:ammo_fireext"
+    }
+  },
+  "result": {
+    "item": "hbm:ammo_fireext",
+    "count": 1
+  }
+}

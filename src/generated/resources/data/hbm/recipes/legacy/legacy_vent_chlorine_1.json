@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "IGI",
+    "ICI",
+    "IDI"
+  ],
+  "key": {
+    "I": {
+      "item": "hbm:plate_iron"
+    },
+    "G": {
+      "item": "minecraft:iron_bars"
+    },
+    "C": {
+      "item": "hbm:pellet_gas"
+    },
+    "D": {
+      "item": "minecraft:dispenser"
+    }
+  },
+  "result": {
+    "item": "hbm:vent_chlorine",
+    "count": 1
+  }
+}

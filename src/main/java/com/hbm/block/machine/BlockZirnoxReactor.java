@@ -9,7 +9,7 @@ import net.minecraft.world.level.block.state.BlockState;
 public class BlockZirnoxReactor extends BlockDummyable {
     public BlockZirnoxReactor(Properties properties) {
         super(properties);
-        SHAPE = box(-32.0D, 0.0D, -32.0D, 48.0D, 80.0D, 48.0D);
+        this.shape = box(-32.0D, 0.0D, -32.0D, 48.0D, 80.0D, 48.0D);
     }
 
     @Override

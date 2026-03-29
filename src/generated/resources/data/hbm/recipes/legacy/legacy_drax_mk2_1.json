@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SCS",
+    "IDI",
+    "FEF"
+  ],
+  "key": {
+    "S": {
+      "item": "hbm:ingot_starmetal"
+    },
+    "C": {
+      "item": "hbm:crystal_trixite"
+    },
+    "I": {
+      "item": "hbm:ingot_saturnite"
+    },
+    "D": {
+      "item": "hbm:drax"
+    },
+    "F": {
+      "item": "hbm:fusion_core"
+    },
+    "E": {
+      "item": "hbm:circuit"
+    }
+  },
+  "result": {
+    "item": "hbm:drax_mk2",
+    "count": 1
+  }
+}

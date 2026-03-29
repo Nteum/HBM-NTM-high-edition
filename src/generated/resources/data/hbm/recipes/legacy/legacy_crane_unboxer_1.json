@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "WWW",
+    "WPW",
+    "CCC"
+  ],
+  "key": {
+    "W": {
+      "item": "minecraft:stick"
+    },
+    "P": {
+      "item": "minecraft:shears"
+    },
+    "C": {
+      "item": "hbm:conveyor_wand"
+    }
+  },
+  "result": {
+    "item": "hbm:crane_unboxer",
+    "count": 1
+  }
+}

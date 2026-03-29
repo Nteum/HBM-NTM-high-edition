@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "P",
+    "B",
+    "P"
+  ],
+  "key": {
+    "B": {
+      "item": "hbm:cm_block"
+    },
+    "P": {
+      "item": "hbm:plate_iron"
+    }
+  },
+  "result": {
+    "item": "hbm:cm_port",
+    "count": 1
+  }
+}

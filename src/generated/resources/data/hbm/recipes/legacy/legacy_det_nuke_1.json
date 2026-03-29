@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PFP",
+    "DCD",
+    "PFP"
+  ],
+  "key": {
+    "P": {
+      "item": "hbm:plate_cast"
+    },
+    "D": {
+      "item": "hbm:det_charge"
+    },
+    "C": {
+      "item": "hbm:man_core"
+    },
+    "F": {
+      "item": "hbm:circuit"
+    }
+  },
+  "result": {
+    "item": "hbm:det_nuke",
+    "count": 1
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "W W",
+    "WIW",
+    "WDW"
+  ],
+  "key": {
+    "W": {
+      "item": "hbm:ingot_schrabidium"
+    },
+    "D": {
+      "item": "minecraft:black_dye"
+    },
+    "I": {
+      "item": "hbm:circuit"
+    }
+  },
+  "result": {
+    "item": "hbm:cape_schrabidium",
+    "count": 1
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "N N",
+    "MSM",
+    "NCN"
+  ],
+  "key": {
+    "N": {
+      "item": "hbm:plate_armor_lunar"
+    },
+    "M": {
+      "item": "hbm:motor_desh"
+    },
+    "S": {
+      "item": "hbm:starmetal_plate"
+    },
+    "C": {
+      "item": "hbm:circuit"
+    }
+  },
+  "result": {
+    "item": "hbm:bj_plate",
+    "count": 1
+  }
+}

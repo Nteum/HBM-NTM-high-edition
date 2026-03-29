@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DD",
+    "DD"
+  ],
+  "key": {
+    "D": {
+      "item": "hbm:ducrete_smooth"
+    }
+  },
+  "result": {
+    "item": "hbm:ducrete",
+    "count": 4
+  }
+}

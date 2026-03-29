@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:rbmk_fuel_empty"
+    },
+    {
+      "item": "hbm:billet_les"
+    },
+    {
+      "item": "hbm:billet_les"
+    },
+    {
+      "item": "hbm:billet_les"
+    },
+    {
+      "item": "hbm:billet_les"
+    },
+    {
+      "item": "hbm:billet_les"
+    },
+    {
+      "item": "hbm:billet_les"
+    },
+    {
+      "item": "hbm:billet_les"
+    },
+    {
+      "item": "hbm:billet_les"
+    }
+  ],
+  "result": {
+    "item": "hbm:rbmk_fuel_les",
+    "count": 1
+  }
+}

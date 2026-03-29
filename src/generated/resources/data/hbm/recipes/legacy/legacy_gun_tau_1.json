@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " RD",
+    "CTT",
+    "GMS"
+  ],
+  "key": {
+    "D": {
+      "item": "hbm:circuit"
+    },
+    "C": {
+      "item": "hbm:pipe"
+    },
+    "T": {
+      "item": "hbm:coil_advanced_torus"
+    },
+    "G": {
+      "item": "hbm:part_grip"
+    },
+    "R": {
+      "item": "hbm:part_receiver_light"
+    },
+    "M": {
+      "item": "hbm:part_mechanism"
+    },
+    "S": {
+      "item": "hbm:part_stock"
+    }
+  },
+  "result": {
+    "item": "hbm:gun_tau",
+    "count": 1
+  }
+}

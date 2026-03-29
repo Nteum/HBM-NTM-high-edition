@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CC",
+    "CC"
+  ],
+  "key": {
+    "C": {
+      "item": "hbm:stone_depth"
+    }
+  },
+  "result": {
+    "item": "hbm:depth_brick",
+    "count": 4
+  }
+}

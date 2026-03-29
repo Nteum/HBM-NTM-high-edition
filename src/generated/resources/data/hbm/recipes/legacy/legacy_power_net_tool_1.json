@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "WRW",
+    " I ",
+    " B "
+  ],
+  "key": {
+    "W": {
+      "item": "hbm:wire_fine"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "I": {
+      "item": "hbm:ingot_iron"
+    },
+    "B": {
+      "item": "hbm:battery_generic"
+    }
+  },
+  "result": {
+    "item": "hbm:power_net_tool",
+    "count": 1
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " O ",
+    "DPD",
+    " O "
+  ],
+  "key": {
+    "D": {
+      "item": "minecraft:pink_dye"
+    },
+    "O": {
+      "item": "minecraft:yellow_dye"
+    },
+    "P": {
+      "item": "minecraft:paper"
+    }
+  },
+  "result": {
+    "item": "hbm:flame_pony",
+    "count": 1
+  }
+}

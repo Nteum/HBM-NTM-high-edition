@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PPP",
+    "CBB",
+    "PPP"
+  ],
+  "key": {
+    "P": {
+      "item": "hbm:ingot_polymer"
+    },
+    "C": {
+      "item": "hbm:crt_display"
+    },
+    "B": {
+      "item": "hbm:circuit"
+    }
+  },
+  "result": {
+    "item": "hbm:circuit",
+    "count": 1
+  }
+}

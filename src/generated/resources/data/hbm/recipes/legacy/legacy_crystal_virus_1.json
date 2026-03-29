@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "STS",
+    "THT",
+    "STS"
+  ],
+  "key": {
+    "S": {
+      "item": "hbm:particle_strange"
+    },
+    "T": {
+      "item": "hbm:powder_tungsten"
+    },
+    "H": {
+      "item": "hbm:crystal_horn"
+    }
+  },
+  "result": {
+    "item": "hbm:crystal_virus",
+    "count": 1
+  }
+}

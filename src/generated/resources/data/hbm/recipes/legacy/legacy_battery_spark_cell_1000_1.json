@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PCP",
+    "CSC",
+    "PCP"
+  ],
+  "key": {
+    "S": {
+      "item": "hbm:singularity_spark"
+    },
+    "P": {
+      "item": "hbm:powder_spark_mix"
+    },
+    "C": {
+      "item": "hbm:battery_spark_cell_100"
+    }
+  },
+  "result": {
+    "item": "hbm:battery_spark_cell_1000",
+    "count": 1
+  }
+}

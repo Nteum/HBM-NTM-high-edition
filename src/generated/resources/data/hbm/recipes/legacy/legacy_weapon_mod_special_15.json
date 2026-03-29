@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CCC",
+    "PIP"
+  ],
+  "key": {
+    "C": {
+      "item": "hbm:circuit"
+    },
+    "P": {
+      "item": "hbm:ingot_polycarbonate"
+    },
+    "I": {
+      "item": "hbm:circuit"
+    }
+  },
+  "result": {
+    "item": "hbm:weapon_mod_special",
+    "count": 1
+  }
+}

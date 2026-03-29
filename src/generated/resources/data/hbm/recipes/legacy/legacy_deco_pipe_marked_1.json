@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PPP",
+    "PCP",
+    "PPP"
+  ],
+  "key": {
+    "P": {
+      "item": "hbm:deco_pipe_green"
+    },
+    "C": {
+      "item": "minecraft:green_dye"
+    }
+  },
+  "result": {
+    "item": "hbm:deco_pipe_marked",
+    "count": 8
+  }
+}

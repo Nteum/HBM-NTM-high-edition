@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "RSR",
+    "I I",
+    "RSR"
+  ],
+  "key": {
+    "I": {
+      "item": "hbm:ingot_iron"
+    },
+    "R": {
+      "item": "hbm:plant_item"
+    },
+    "S": {
+      "item": "hbm:plate_iron"
+    }
+  },
+  "result": {
+    "item": "hbm:conveyor_wand",
+    "count": 16
+  }
+}

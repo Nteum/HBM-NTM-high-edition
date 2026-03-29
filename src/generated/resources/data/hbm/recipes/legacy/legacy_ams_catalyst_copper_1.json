@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:ams_catalyst_blank"
+    },
+    {
+      "item": "hbm:rune_dagaz"
+    },
+    {
+      "item": "hbm:rune_dagaz"
+    },
+    {
+      "item": "hbm:rune_jera"
+    },
+    {
+      "item": "hbm:rune_jera"
+    },
+    {
+      "item": "hbm:powder_copper"
+    },
+    {
+      "item": "hbm:powder_copper"
+    },
+    {
+      "item": "hbm:powder_copper"
+    },
+    {
+      "item": "hbm:powder_copper"
+    }
+  ],
+  "result": {
+    "item": "hbm:ams_catalyst_copper",
+    "count": 1
+  }
+}

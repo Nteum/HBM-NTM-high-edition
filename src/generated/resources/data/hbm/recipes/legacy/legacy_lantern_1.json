@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PGP",
+    " S ",
+    " S "
+  ],
+  "key": {
+    "P": {
+      "item": "minecraft:glass_pane"
+    },
+    "G": {
+      "item": "minecraft:glowstone_dust"
+    },
+    "S": {
+      "item": "hbm:steel_beam"
+    }
+  },
+  "result": {
+    "item": "hbm:lantern",
+    "count": 1
+  }
+}

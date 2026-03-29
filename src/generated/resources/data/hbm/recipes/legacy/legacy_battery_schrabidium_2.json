@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " A ",
+    "PSP",
+    "PNP"
+  ],
+  "key": {
+    "A": {
+      "item": "hbm:wire_fine"
+    },
+    "P": {
+      "item": "hbm:plate_schrabidium"
+    },
+    "S": {
+      "item": "hbm:powder_schrabidium"
+    },
+    "N": {
+      "item": "hbm:dust_neptunium237"
+    }
+  },
+  "result": {
+    "item": "hbm:battery_schrabidium",
+    "count": 1
+  }
+}

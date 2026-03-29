@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " D ",
+    "S S"
+  ],
+  "key": {
+    "D": {
+      "item": "hbm:demon_core_closed"
+    },
+    "S": {
+      "item": "hbm:ingot_steel"
+    }
+  },
+  "result": {
+    "item": "hbm:lamp_demon",
+    "count": 1
+  }
+}

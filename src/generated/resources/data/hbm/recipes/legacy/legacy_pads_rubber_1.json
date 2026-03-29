@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "P P",
+    "IDI",
+    "P P"
+  ],
+  "key": {
+    "P": {
+      "item": "hbm:ingot_latex"
+    },
+    "I": {
+      "item": "hbm:plate_iron"
+    },
+    "D": {
+      "item": "hbm:ducttape"
+    }
+  },
+  "result": {
+    "item": "hbm:pads_rubber",
+    "count": 1
+  }
+}

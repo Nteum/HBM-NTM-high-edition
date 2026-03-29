@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "A",
+    "G",
+    "A"
+  ],
+  "key": {
+    "G": {
+      "item": "hbm:grenade_if_generic"
+    },
+    "A": {
+      "item": "minecraft:gunpowder"
+    }
+  },
+  "result": {
+    "item": "hbm:grenade_if_he",
+    "count": 1
+  }
+}

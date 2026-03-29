@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:hev_battery"
+    }
+  ],
+  "result": {
+    "item": "hbm:hev_battery",
+    "count": 1
+  }
+}

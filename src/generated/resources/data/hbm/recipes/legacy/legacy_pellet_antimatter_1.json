@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "hbm:cell_antimatter"
+    }
+  },
+  "result": {
+    "item": "hbm:pellet_antimatter",
+    "count": 1
+  }
+}

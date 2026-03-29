@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GIG",
+    "GCG"
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "I": {
+      "item": "hbm:ingot_iron"
+    },
+    "C": {
+      "item": "hbm:ingot_copper"
+    }
+  },
+  "result": {
+    "item": "hbm:chemistry_set",
+    "count": 1
+  }
+}

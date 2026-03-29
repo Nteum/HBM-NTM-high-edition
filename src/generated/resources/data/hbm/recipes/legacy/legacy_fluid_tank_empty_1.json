@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "121",
+    "1G1",
+    "121"
+  ],
+  "key": {
+    "1": {
+      "item": "hbm:plate_aluminium"
+    },
+    "2": {
+      "item": "hbm:plate_iron"
+    },
+    "G": {
+      "item": "minecraft:glass_pane"
+    }
+  },
+  "result": {
+    "item": "hbm:fluid_tank_empty",
+    "count": 8
+  }
+}

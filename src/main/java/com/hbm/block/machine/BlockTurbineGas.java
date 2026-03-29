@@ -22,8 +22,8 @@ public class BlockTurbineGas extends BlockDummyable {
 
     public BlockTurbineGas(Properties properties) {
         super(properties);
-        SHAPE = Block.box(-64.0D, 0.0D, -16.0D, 96.0D, 48.0D, 16.0D);
-        doShapeRot = true;
+        this.shape = Block.box(-64.0D, 0.0D, -16.0D, 96.0D, 48.0D, 16.0D);
+        this.shapeRotates = true;
     }
 
     @Nullable

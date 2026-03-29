@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PPP",
+    "PIP",
+    "PPP"
+  ],
+  "key": {
+    "P": {
+      "tag": "minecraft:planks"
+    },
+    "I": {
+      "item": "hbm:plate_iron"
+    }
+  },
+  "result": {
+    "item": "hbm:mass_storage",
+    "count": 1
+  }
+}

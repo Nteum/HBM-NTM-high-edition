@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SPS",
+    "CAC",
+    "SPS"
+  ],
+  "key": {
+    "S": {
+      "item": "hbm:dust_sulfur"
+    },
+    "P": {
+      "item": "hbm:powder_poison"
+    },
+    "C": {
+      "item": "hbm:powder_copper"
+    },
+    "A": {
+      "item": "hbm:fluid_tank_full"
+    }
+  },
+  "result": {
+    "item": "hbm:grenade_cloud",
+    "count": 1
+  }
+}

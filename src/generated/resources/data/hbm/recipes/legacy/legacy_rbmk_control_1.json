@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " B ",
+    "GRG",
+    " B "
+  ],
+  "key": {
+    "G": {
+      "item": "hbm:ingot_graphite"
+    },
+    "B": {
+      "item": "hbm:motor"
+    },
+    "R": {
+      "item": "hbm:rbmk_absorber"
+    }
+  },
+  "result": {
+    "item": "hbm:rbmk_control",
+    "count": 1
+  }
+}

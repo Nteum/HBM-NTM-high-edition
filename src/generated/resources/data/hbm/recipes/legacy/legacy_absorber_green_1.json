@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ICI",
+    "CPC",
+    "ICI"
+  ],
+  "key": {
+    "I": {
+      "item": "hbm:ingot_polymer"
+    },
+    "C": {
+      "item": "hbm:powder_desh_mix"
+    },
+    "P": {
+      "item": "hbm:absorber_red"
+    }
+  },
+  "result": {
+    "item": "hbm:absorber_green",
+    "count": 1
+  }
+}

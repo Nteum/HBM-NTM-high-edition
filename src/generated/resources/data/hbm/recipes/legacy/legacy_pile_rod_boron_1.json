@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " B ",
+    " W ",
+    " B "
+  ],
+  "key": {
+    "B": {
+      "item": "hbm:ingot_boron"
+    },
+    "W": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "result": {
+    "item": "hbm:pile_rod_boron",
+    "count": 1
+  }
+}

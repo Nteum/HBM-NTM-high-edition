@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " G ",
+    "CGC",
+    " C "
+  ],
+  "key": {
+    "G": {
+      "item": "hbm:grenade_generic"
+    },
+    "C": {
+      "item": "hbm:pellet_gas"
+    }
+  },
+  "result": {
+    "item": "hbm:grenade_gas",
+    "count": 2
+  }
+}

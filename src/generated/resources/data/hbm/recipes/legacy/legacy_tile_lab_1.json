@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CBC",
+    "CBC",
+    "CBC"
+  ],
+  "key": {
+    "C": {
+      "item": "minecraft:brick"
+    },
+    "B": {
+      "item": "hbm:ingot_asbestos"
+    }
+  },
+  "result": {
+    "item": "hbm:tile_lab",
+    "count": 4
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:deco_pipe_quad"
+    }
+  ],
+  "result": {
+    "item": "hbm:deco_pipe",
+    "count": 1
+  }
+}

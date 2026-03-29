@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AIA",
+    "I I",
+    "AIA"
+  ],
+  "key": {
+    "A": {
+      "item": "hbm:wire_fine"
+    },
+    "I": {
+      "item": "hbm:ingot_iron"
+    }
+  },
+  "result": {
+    "item": "hbm:barbed_wire",
+    "count": 16
+  }
+}

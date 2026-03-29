@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:particle_aproton"
+    },
+    {
+      "item": "hbm:particle_aelectron"
+    },
+    {
+      "item": "hbm:particle_empty"
+    }
+  ],
+  "result": {
+    "item": "hbm:particle_amat",
+    "count": 1
+  }
+}

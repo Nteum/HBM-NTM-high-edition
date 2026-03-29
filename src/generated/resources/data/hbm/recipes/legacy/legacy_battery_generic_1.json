@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " A ",
+    "PRP",
+    "PRP"
+  ],
+  "key": {
+    "A": {
+      "item": "hbm:wire_fine"
+    },
+    "P": {
+      "item": "hbm:plate_aluminium"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "result": {
+    "item": "hbm:battery_generic",
+    "count": 1
+  }
+}

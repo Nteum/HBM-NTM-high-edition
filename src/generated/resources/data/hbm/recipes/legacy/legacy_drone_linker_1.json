@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "T",
+    "C"
+  ],
+  "key": {
+    "T": {
+      "item": "hbm:drone_waypoint"
+    },
+    "C": {
+      "item": "hbm:circuit"
+    }
+  },
+  "result": {
+    "item": "hbm:drone_linker",
+    "count": 1
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " D ",
+    "ERE",
+    " D "
+  ],
+  "key": {
+    "D": {
+      "item": "hbm:ducttape"
+    },
+    "E": {
+      "item": "hbm:det_charge"
+    },
+    "R": {
+      "item": "hbm:block_redstone"
+    }
+  },
+  "result": {
+    "item": "hbm:n2_charge",
+    "count": 1
+  }
+}

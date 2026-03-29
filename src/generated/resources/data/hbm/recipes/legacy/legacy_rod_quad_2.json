@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:rod_quad_empty"
+    },
+    {
+      "item": "hbm:ingot_lead"
+    },
+    {
+      "item": "hbm:ingot_lead"
+    },
+    {
+      "item": "hbm:nugget_lead"
+    },
+    {
+      "item": "hbm:nugget_lead"
+    },
+    {
+      "item": "hbm:nugget_lead"
+    },
+    {
+      "item": "hbm:nugget_lead"
+    },
+    {
+      "item": "hbm:nugget_lead"
+    },
+    {
+      "item": "hbm:nugget_lead"
+    }
+  ],
+  "result": {
+    "item": "hbm:rod_quad",
+    "count": 1
+  }
+}

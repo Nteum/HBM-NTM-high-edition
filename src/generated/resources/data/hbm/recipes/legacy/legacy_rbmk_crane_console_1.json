@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BCD",
+    "DDD"
+  ],
+  "key": {
+    "B": {
+      "item": "hbm:ingot_boron"
+    },
+    "D": {
+      "item": "hbm:deco_rbmk"
+    },
+    "C": {
+      "item": "hbm:circuit"
+    }
+  },
+  "result": {
+    "item": "hbm:rbmk_crane_console",
+    "count": 1
+  }
+}

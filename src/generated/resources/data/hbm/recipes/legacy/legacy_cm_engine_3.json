@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " I ",
+    "IMI",
+    " I "
+  ],
+  "key": {
+    "I": {
+      "item": "hbm:ingot_steel"
+    },
+    "M": {
+      "item": "hbm:motor_bismuth"
+    }
+  },
+  "result": {
+    "item": "hbm:cm_engine",
+    "count": 1
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "G",
+    "T",
+    "C"
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:green_dye"
+    },
+    "T": {
+      "item": "minecraft:redstone_torch"
+    },
+    "C": {
+      "item": "hbm:circuit"
+    }
+  },
+  "result": {
+    "item": "hbm:drone_waypoint",
+    "count": 4
+  }
+}

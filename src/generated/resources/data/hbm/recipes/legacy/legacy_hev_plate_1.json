@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "MPM",
+    "IBI",
+    "PPP"
+  ],
+  "key": {
+    "P": {
+      "item": "hbm:plate_armor_hev"
+    },
+    "B": {
+      "item": "hbm:titanium_plate"
+    },
+    "I": {
+      "item": "hbm:ingot_polymer"
+    },
+    "M": {
+      "item": "hbm:motor_desh"
+    }
+  },
+  "result": {
+    "item": "hbm:hev_plate",
+    "count": 1
+  }
+}

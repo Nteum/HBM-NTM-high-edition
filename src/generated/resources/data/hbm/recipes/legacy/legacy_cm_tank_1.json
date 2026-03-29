@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " B ",
+    "BGB",
+    " B "
+  ],
+  "key": {
+    "B": {
+      "item": "hbm:cm_block"
+    },
+    "G": {
+      "item": "minecraft:glass"
+    }
+  },
+  "result": {
+    "item": "hbm:cm_tank",
+    "count": 4
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "T",
+    "C",
+    "B"
+  ],
+  "key": {
+    "T": {
+      "item": "hbm:drone_waypoint_request"
+    },
+    "C": {
+      "item": "hbm:crate_steel"
+    },
+    "B": {
+      "item": "hbm:circuit"
+    }
+  },
+  "result": {
+    "item": "hbm:drone_dock",
+    "count": 1
+  }
+}

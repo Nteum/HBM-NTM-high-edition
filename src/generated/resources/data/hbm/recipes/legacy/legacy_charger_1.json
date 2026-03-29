@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "G",
+    "S",
+    "C"
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:glowstone_dust"
+    },
+    "S": {
+      "item": "hbm:ingot_steel"
+    },
+    "C": {
+      "item": "hbm:coil_copper"
+    }
+  },
+  "result": {
+    "item": "hbm:charger",
+    "count": 1
+  }
+}

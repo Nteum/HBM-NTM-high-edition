@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PCP",
+    "DMD",
+    "PCP"
+  ],
+  "key": {
+    "P": {
+      "item": "hbm:ingot_polymer"
+    },
+    "C": {
+      "item": "hbm:coil_gold_torus"
+    },
+    "D": {
+      "item": "hbm:ingot_workers_alloy"
+    },
+    "M": {
+      "item": "hbm:motor"
+    }
+  },
+  "result": {
+    "item": "hbm:motor_desh",
+    "count": 1
+  }
+}

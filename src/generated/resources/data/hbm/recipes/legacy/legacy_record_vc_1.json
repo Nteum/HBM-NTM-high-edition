@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " S ",
+    "SDS",
+    " S "
+  ],
+  "key": {
+    "S": {
+      "item": "hbm:ingot_polymer"
+    },
+    "D": {
+      "item": "hbm:dust_cmb_steel"
+    }
+  },
+  "result": {
+    "item": "hbm:record_vc",
+    "count": 1
+  }
+}

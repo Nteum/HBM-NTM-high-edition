@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "NIN",
+    "IGI",
+    "NIN"
+  ],
+  "key": {
+    "N": {
+      "item": "hbm:nugget_gold198"
+    },
+    "I": {
+      "item": "hbm:ink"
+    },
+    "G": {
+      "item": "hbm:gem_volcanic"
+    }
+  },
+  "result": {
+    "item": "hbm:black_diamond",
+    "count": 1
+  }
+}

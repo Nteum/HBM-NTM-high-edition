@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SIS",
+    "ICI",
+    "SIS"
+  ],
+  "key": {
+    "S": {
+      "item": "hbm:ingot_steel"
+    },
+    "I": {
+      "item": "hbm:plate_iron"
+    },
+    "C": {
+      "item": "hbm:plate_cast"
+    }
+  },
+  "result": {
+    "item": "hbm:machine_condenser",
+    "count": 1
+  }
+}

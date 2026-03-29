@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "E E",
+    "E E"
+  ],
+  "key": {
+    "E": {
+      "item": "hbm:plate_paa"
+    }
+  },
+  "result": {
+    "item": "hbm:hazmat_paa_boots",
+    "count": 1
+  }
+}

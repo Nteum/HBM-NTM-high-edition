@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "type": "forge:nbt",
+      "item": "hbm:rod_breeder_dual",
+      "nbt": "{hbmRodType:6b}"
+    }
+  ],
+  "result": {
+    "item": "hbm:billet_u235",
+    "count": 2
+  }
+}

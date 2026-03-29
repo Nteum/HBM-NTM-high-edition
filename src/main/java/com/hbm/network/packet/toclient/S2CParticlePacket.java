@@ -24,7 +24,7 @@ public class S2CParticlePacket implements IHBMMessage {
         buf.writeNbt(nbt);
     }
 
-    public static S2CParticlePacket decode(FriendlyByteBuf buf){
+    public S2CParticlePacket decode(FriendlyByteBuf buf){
         CompoundTag tag = buf.readNbt();
         return new S2CParticlePacket(tag, tag.getDouble("posX"), tag.getDouble("posY"), tag.getDouble("posZ"));
     }

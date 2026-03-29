@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BGB",
+    "SAS",
+    "BSB"
+  ],
+  "key": {
+    "B": {
+      "item": "hbm:ingot_beryllium"
+    },
+    "G": {
+      "item": "minecraft:iron_bars"
+    },
+    "S": {
+      "item": "hbm:ingot_steel"
+    },
+    "A": {
+      "item": "hbm:absorber"
+    }
+  },
+  "result": {
+    "item": "hbm:decon",
+    "count": 1
+  }
+}

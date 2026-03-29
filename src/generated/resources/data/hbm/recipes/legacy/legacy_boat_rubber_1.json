@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "L L",
+    "LLL"
+  ],
+  "key": {
+    "L": {
+      "item": "hbm:ingot_latex"
+    }
+  },
+  "result": {
+    "item": "hbm:boat_rubber",
+    "count": 1
+  }
+}

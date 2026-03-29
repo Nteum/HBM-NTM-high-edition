@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  P",
+    " B ",
+    "B  "
+  ],
+  "key": {
+    "P": {
+      "item": "hbm:ingot_rubber"
+    },
+    "B": {
+      "item": "hbm:glass_boron"
+    }
+  },
+  "result": {
+    "item": "hbm:pipette_boron",
+    "count": 1
+  }
+}

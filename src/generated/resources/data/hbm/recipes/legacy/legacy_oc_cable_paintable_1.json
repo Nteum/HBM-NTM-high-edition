@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "WRW",
+    "RIR",
+    "WRW"
+  ],
+  "key": {
+    "W": {
+      "item": "hbm:plate_steel"
+    },
+    "I": {
+      "item": "minecraft:redstone"
+    },
+    "R": {
+      "item": "hbm:wire_fine"
+    }
+  },
+  "result": {
+    "item": "hbm:oc_cable_paintable",
+    "count": 16
+  }
+}

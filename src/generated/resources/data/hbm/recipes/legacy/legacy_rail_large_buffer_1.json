@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " S",
+    "RS"
+  ],
+  "key": {
+    "R": {
+      "item": "hbm:rail_large_straight"
+    },
+    "S": {
+      "item": "hbm:ingot_steel"
+    }
+  },
+  "result": {
+    "item": "hbm:rail_large_buffer",
+    "count": 1
+  }
+}

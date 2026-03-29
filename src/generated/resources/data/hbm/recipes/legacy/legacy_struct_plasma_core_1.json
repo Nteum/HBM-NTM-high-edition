@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CBC",
+    "BHB",
+    "CBC"
+  ],
+  "key": {
+    "C": {
+      "item": "hbm:circuit"
+    },
+    "B": {
+      "item": "hbm:machine_lithium_battery"
+    },
+    "H": {
+      "item": "hbm:fusion_heater"
+    }
+  },
+  "result": {
+    "item": "hbm:struct_plasma_core",
+    "count": 1
+  }
+}

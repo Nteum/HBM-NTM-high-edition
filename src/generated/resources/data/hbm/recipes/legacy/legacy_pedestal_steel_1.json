@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "P P",
+    "P P",
+    "III"
+  ],
+  "key": {
+    "P": {
+      "item": "hbm:plate_steel"
+    },
+    "I": {
+      "item": "hbm:ingot_steel"
+    }
+  },
+  "result": {
+    "item": "hbm:pedestal_steel",
+    "count": 1
+  }
+}

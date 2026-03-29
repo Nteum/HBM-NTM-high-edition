@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BRM",
+    "BGS"
+  ],
+  "key": {
+    "B": {
+      "item": "hbm:part_barrel_light"
+    },
+    "R": {
+      "item": "hbm:part_receiver_light"
+    },
+    "M": {
+      "item": "hbm:part_mechanism"
+    },
+    "G": {
+      "item": "hbm:part_grip"
+    },
+    "S": {
+      "item": "hbm:part_stock"
+    }
+  },
+  "result": {
+    "item": "hbm:gun_spas12",
+    "count": 1
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "KLK",
+    "P P"
+  ],
+  "key": {
+    "L": {
+      "item": "hbm:parts_legendary"
+    },
+    "K": {
+      "item": "hbm:plate_kevlar"
+    },
+    "P": {
+      "item": "hbm:plate_armor_ajr"
+    }
+  },
+  "result": {
+    "item": "hbm:rpa_boots",
+    "count": 1
+  }
+}

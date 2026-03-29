@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GRC",
+    "  S"
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:glass_pane"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "C": {
+      "item": "hbm:circuit"
+    },
+    "S": {
+      "item": "hbm:plate_steel"
+    }
+  },
+  "result": {
+    "item": "hbm:rangefinder",
+    "count": 1
+  }
+}

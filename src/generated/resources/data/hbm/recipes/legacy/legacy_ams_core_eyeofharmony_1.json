@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ALA",
+    "LSL",
+    "ALA"
+  ],
+  "key": {
+    "A": {
+      "item": "hbm:plate_dalekanium"
+    },
+    "L": {
+      "item": "hbm:fluid_barrel_full"
+    },
+    "S": {
+      "item": "hbm:black_hole"
+    }
+  },
+  "result": {
+    "item": "hbm:ams_core_eyeofharmony",
+    "count": 1
+  }
+}

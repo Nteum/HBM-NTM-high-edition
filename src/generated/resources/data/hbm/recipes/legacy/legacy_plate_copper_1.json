@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "hbm:ingot_copper"
+    }
+  },
+  "result": {
+    "item": "hbm:plate_copper",
+    "count": 4
+  }
+}

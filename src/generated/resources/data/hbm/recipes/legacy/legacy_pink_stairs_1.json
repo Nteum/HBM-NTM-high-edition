@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "W  ",
+    "WW ",
+    "WWW"
+  ],
+  "key": {
+    "W": {
+      "item": "hbm:pink_planks"
+    }
+  },
+  "result": {
+    "item": "hbm:pink_stairs",
+    "count": 6
+  }
+}

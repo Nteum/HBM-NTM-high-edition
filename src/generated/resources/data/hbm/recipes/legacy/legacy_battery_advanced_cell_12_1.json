@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "WPW",
+    "BBB",
+    "WPW"
+  ],
+  "key": {
+    "W": {
+      "item": "hbm:wire_fine"
+    },
+    "P": {
+      "item": "hbm:plate_copper"
+    },
+    "B": {
+      "item": "hbm:battery_advanced_cell_4"
+    }
+  },
+  "result": {
+    "item": "hbm:battery_advanced_cell_12",
+    "count": 1
+  }
+}

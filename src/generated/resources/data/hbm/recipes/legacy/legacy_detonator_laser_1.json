@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:rangefinder"
+    },
+    {
+      "item": "hbm:circuit"
+    },
+    {
+      "item": "hbm:ingot_rubber"
+    },
+    {
+      "item": "hbm:wire_dense"
+    }
+  ],
+  "result": {
+    "item": "hbm:detonator_laser",
+    "count": 1
+  }
+}

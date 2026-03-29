@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " M ",
+    "PGP",
+    " M "
+  ],
+  "key": {
+    "M": {
+      "item": "hbm:part_mechanism"
+    },
+    "P": {
+      "item": "hbm:plate_cast"
+    },
+    "G": {
+      "item": "hbm:gun_henry"
+    }
+  },
+  "result": {
+    "item": "hbm:gun_henry_lincoln",
+    "count": 1
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CIC",
+    " S ",
+    " S "
+  ],
+  "key": {
+    "C": {
+      "item": "hbm:ingot_copper"
+    },
+    "I": {
+      "item": "hbm:ingot_iron"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "hbm:dwarven_pickaxe",
+    "count": 1
+  }
+}

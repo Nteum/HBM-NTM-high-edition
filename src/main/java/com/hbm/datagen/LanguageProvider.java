@@ -14,9 +14,12 @@ import net.minecraft.data.PackOutput;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.HashSet;
+import java.util.Set;
 
 public class LanguageProvider extends net.minecraftforge.common.data.LanguageProvider {
-    public static Map<String, String> READY_TO_ADD = new HashMap<>();
+    public static final Map<String, String> READY_TO_ADD = new HashMap<>();
+    private final Set<String> seenKeys = new HashSet<>();
     public LanguageProvider(PackOutput output, String modid, String locale) {
         super(output, modid, locale);
     }
@@ -29,58 +32,70 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
         ModFluids.localName(this);
         ModKeyMapping.localName(this);
 
+        // ModItems.languageSupport(this);
         ModBlocks.languageSupport(this);
 
         addItems();
         addBlocks();
         addTooltip();
-//        addLookTooltip();
-//        addGeneral();
+        // addLookTooltip();
+        // addGeneral();
 
-//        addEffect();
-//        autoAdd();
+        // addEffect();
+        // autoAdd();
 
-//        //物品
-//        this.add(ModItems.coke_coal.get(),"Coal Coke");
-        //方块
-        this.add(ModBlocks.machine_difurnace.get(),"Blast Furnace");
-        this.add(ModBlocks.machine_electric_furnace.get(),"Electric Furnace");
-        this.add(ModBlocks.machine_boiler.get(),"Oil Heater");
-        this.add(ModBlocks.machine_electric_boiler.get(),"Electric Oil Heater");
-        this.add(ModBlocks.machine_nuclear_boiler.get(),"Nuclear Oil Heater");
-        this.add(ModBlocks.machine_battery.get(),"Energy Storage Block");
-        this.add(ModBlocks.machine_lithium_battery.get(),"Li-Ion Energy Storage Block");
-        this.add(ModBlocks.machine_schrabidium_battery.get(),"Schrabidium Energy Storage Block");
-        this.add(ModBlocks.machine_dineutronium_battery.get(),"Spark Energy Storage Block");
-        this.add(ModBlocks.anvil_iron.get(),"Tier 1 anvil");
-        this.add(ModBlocks.machine_shredder.get(),"Shredder");
+        // //物品
+        // this.add(ModItems.coke_coal.get(),"Coal Coke");
+        // 方块
+        this.add(ModBlocks.machine_difurnace.get(), "Blast Furnace");
+        this.add(ModBlocks.machine_electric_furnace.get(), "Electric Furnace");
+        this.add(ModBlocks.machine_boiler.get(), "Oil Heater");
+        this.add(ModBlocks.machine_electric_boiler.get(), "Electric Oil Heater");
+        this.add(ModBlocks.machine_nuclear_boiler.get(), "Nuclear Oil Heater");
+        this.add(ModBlocks.machine_battery.get(), "Energy Storage Block");
+        this.add(ModBlocks.machine_lithium_battery.get(), "Li-Ion Energy Storage Block");
+        this.add(ModBlocks.machine_schrabidium_battery.get(), "Schrabidium Energy Storage Block");
+        this.add(ModBlocks.machine_dineutronium_battery.get(), "Spark Energy Storage Block");
+        this.add(ModBlocks.anvil_iron.get(), "Tier 1 anvil");
+        this.add(ModBlocks.machine_shredder.get(), "Shredder");
         this.add(ModBlocks.machine_condenser.get(), "Condenser");
         this.add(ModBlocks.machine_cooling_tower.get(), "Auxiliary Cooling Tower");
-        this.add(ModBlocks.tokamak_controller.get(),"Tokamak Controller");
-        this.add(ModBlocks.tokamak_casing.get(),"Tokamak Casing");
-        this.add(ModBlocks.tokamak_coil.get(),"Tokamak Field Coil");
-        this.add(ModBlocks.tokamak_heater.get(),"Tokamak Heater");
-        this.add(ModBlocks.tokamak_injector.get(),"Tokamak Injector");
-        this.add(ModBlocks.tokamak_port.get(),"Tokamak Port");
-        this.add(ModBlocks.machine_icf.get(),"ICF Reactor");
+        this.add(ModBlocks.tokamak_controller.get(), "Tokamak Controller");
+        this.add(ModBlocks.tokamak_casing.get(), "Tokamak Casing");
+        this.add(ModBlocks.tokamak_coil.get(), "Tokamak Field Coil");
+        this.add(ModBlocks.tokamak_heater.get(), "Tokamak Heater");
+        this.add(ModBlocks.tokamak_injector.get(), "Tokamak Injector");
+        this.add(ModBlocks.tokamak_port.get(), "Tokamak Port");
+        this.add(ModBlocks.machine_icf.get(), "ICF Reactor");
         this.add(ModBlocks.machine_research_reactor.get(), "Research Reactor");
         this.add(ModBlocks.machine_reactor_breeding.get(), "Breeder Reactor");
-//        //方块实体
-//        this.add("hbmxx.container.difurnace","Blast Furnace");
-//        this.add("hbmxx.container.crucible","Crucible");
+        // //方块实体
+        // this.add("hbmxx.container.difurnace","Blast Furnace");
+        // this.add("hbmxx.container.crucible","Crucible");
 
         READY_TO_ADD.forEach(this::add);
     }
-    private void addItems(){
-//        HBMComponent.languageSupport(this);
+
+    @Override
+    public void add(String key, String value) {
+        if (!seenKeys.add(key)) {
+            return;
+        }
+        super.add(key, value);
+    }
+
+    private void addItems() {
+        // HBMComponent.languageSupport(this);
         HBMCombat.languageSupport(this);
 //        this.add(HBMtools.POLLUTION_DETECTOR.get(), "Pollution Detector");
 //        this.add(HBMtools.ORE_SCANNER.get(), "Ore Density Scanner");
     }
-    private void addBlocks(){
+
+    private void addBlocks() {
         HBMMachine.languageSupport(this);
         HBMBlockComponent.languageSupport(this);
     }
+
     private void addTooltip(){
         this.add(IUpgradeInfoProvider.KEY_ACID,"Acid required %s");
         this.add(IUpgradeInfoProvider.KEY_BURN,"Burn %smb/t for %sHE");
@@ -142,7 +157,6 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
         this.add("gui.hbm.rbmk.action.normal", "Status nominal.");
         this.add("gui.hbm.rbmk.action.insert_rods", "Insert control rods / consider AZ-5.");
         this.add("gui.hbm.rbmk.action.raise_rods", "Rods fully inserted — you can raise them.");
-
         this.add("item.hbm.rbmk_tool", "RBMK Console Linking Device");
         this.add("item.hbm.rbmk_tool.desc1", "Sneak-right-click a RBMK column to store its location.");
         this.add("item.hbm.rbmk_tool.desc2", "Then sneak-right-click a console/crane to force-link it.");
@@ -224,76 +238,78 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
         this.add("jei.hbm.machine_icf_press.info2", "Muon capsules charge the press for 16 uses and return an empty particle capsule in the lower-right slot.");
         this.add("jei.hbm.machine_icf_press.info3", "Once both fuels are valid the press assembles a pellet automatically. Outputs can be extracted by hoppers or pipes.");
     }
-//    private void addContainer(){
-//        this.add(HBMLang.DIFURNACE);
-//        this.add(HBMLang.CRUCIBLE);
-//        this.add(HBMLang.ELECTRIC_FURNACE);
-//        this.add(HBMLang.BOILER);
-//        this.add(HBMLang.ELECTRIC_BOILER);
-//        this.add(HBMLang.NUCLEAR_BOILER);
-//        this.add(HBMLang.ASSEMBLER);
-//        this.add(HBMLang.CHEMPLANT);
-//        this.add(HBMLang.SHREDDER);
-//        this.add(HBMLang.BARREL);
-//        this.add(HBMLang.BATTERY);
-//        this.add(HBMLang.TOKAMAK);
-//        this.add(HBMLang.RBMK);
-//    }
-//    private void addFluidTrait(){
-//        this.add(HBMLang.FT_GASEOUS);
-//        this.add(HBMLang.FT_GASEOUS_ART);
-//        this.add(HBMLang.FT_LIQUID);
-//        this.add(HBMLang.FT_VISCOUS);
-//        this.add(HBMLang.FT_PLASMA);
-//        this.add(HBMLang.FT_AMAT);
-//        this.add(HBMLang.FT_LEAD_CONTAINER);
-//        this.add(HBMLang.FT_DELICIOUS);
-//        this.add(HBMLang.FT_UNSIPHONABLE);
-//        this.add(HBMLang.FT_FLAME);
-//        this.add(HBMLang.FT_VENT_RADIATION);
-//        this.add(HBMLang.FT_COMBUSTIBLE1);
-//        this.add(HBMLang.FT_COMBUSTIBLE2);
-//        this.add(HBMLang.FT_COMBUSTIBLE3);
-//        this.add(HBMLang.FT_THERMAL_CAPACITY);
-//        this.add(HBMLang.FT_EFFICIENCY);
-//        this.add(HBMLang.FT_CORROSIVE1);
-//        this.add(HBMLang.FT_CORROSIVE2);
-//        this.add(HBMLang.FT_FLAMMABLE1);
-//        this.add(HBMLang.FT_FLAMMABLE2);
-//        this.add(HBMLang.FT_HEATABLE1);
-//        this.add(HBMLang.FT_PHEROMONE1);
-//        this.add(HBMLang.FT_PHEROMONE2);
-//        this.add(HBMLang.FT_POISON);
-//        this.add(HBMLang.FT_PER_MB);
-//        this.add(HBMLang.FT_POLLUTION1);
-//        this.add(HBMLang.FT_POLLUTION2);
-//        this.add(HBMLang.FT_POLLUTION3);
-//        this.add(HBMLang.FT_PWRMODERATOR);
-//        this.add(HBMLang.FT_CORE_FLUX);
-//        this.add(HBMLang.FT_RADIOACTIVE);
-//    }
-//    private void addDebug(){
-//        this.add(HBMLang.CACHED_DATA);
-//        this.add(HBMLang.POS_DATA);
-//        this.add(HBMLang.CHUNK_DATA);
-//        this.add(HBMLang.BLOCK_STATE_LOSE);
-//        this.add(HBMLang.BLOCK_STATE_INFO);
-//    }
-    private void autoAdd(){
+
+    // private void addContainer(){
+    // this.add(HBMLang.DIFURNACE);
+    // this.add(HBMLang.CRUCIBLE);
+    // this.add(HBMLang.ELECTRIC_FURNACE);
+    // this.add(HBMLang.BOILER);
+    // this.add(HBMLang.ELECTRIC_BOILER);
+    // this.add(HBMLang.NUCLEAR_BOILER);
+    // this.add(HBMLang.ASSEMBLER);
+    // this.add(HBMLang.CHEMPLANT);
+    // this.add(HBMLang.SHREDDER);
+    // this.add(HBMLang.BARREL);
+    // this.add(HBMLang.BATTERY);
+    // this.add(HBMLang.TOKAMAK);
+    // this.add(HBMLang.RBMK);
+    // }
+    // private void addFluidTrait(){
+    // this.add(HBMLang.FT_GASEOUS);
+    // this.add(HBMLang.FT_GASEOUS_ART);
+    // this.add(HBMLang.FT_LIQUID);
+    // this.add(HBMLang.FT_VISCOUS);
+    // this.add(HBMLang.FT_PLASMA);
+    // this.add(HBMLang.FT_AMAT);
+    // this.add(HBMLang.FT_LEAD_CONTAINER);
+    // this.add(HBMLang.FT_DELICIOUS);
+    // this.add(HBMLang.FT_UNSIPHONABLE);
+    // this.add(HBMLang.FT_FLAME);
+    // this.add(HBMLang.FT_VENT_RADIATION);
+    // this.add(HBMLang.FT_COMBUSTIBLE1);
+    // this.add(HBMLang.FT_COMBUSTIBLE2);
+    // this.add(HBMLang.FT_COMBUSTIBLE3);
+    // this.add(HBMLang.FT_THERMAL_CAPACITY);
+    // this.add(HBMLang.FT_EFFICIENCY);
+    // this.add(HBMLang.FT_CORROSIVE1);
+    // this.add(HBMLang.FT_CORROSIVE2);
+    // this.add(HBMLang.FT_FLAMMABLE1);
+    // this.add(HBMLang.FT_FLAMMABLE2);
+    // this.add(HBMLang.FT_HEATABLE1);
+    // this.add(HBMLang.FT_PHEROMONE1);
+    // this.add(HBMLang.FT_PHEROMONE2);
+    // this.add(HBMLang.FT_POISON);
+    // this.add(HBMLang.FT_PER_MB);
+    // this.add(HBMLang.FT_POLLUTION1);
+    // this.add(HBMLang.FT_POLLUTION2);
+    // this.add(HBMLang.FT_POLLUTION3);
+    // this.add(HBMLang.FT_PWRMODERATOR);
+    // this.add(HBMLang.FT_CORE_FLUX);
+    // this.add(HBMLang.FT_RADIOACTIVE);
+    // }
+    // private void addDebug(){
+    // this.add(HBMLang.CACHED_DATA);
+    // this.add(HBMLang.POS_DATA);
+    // this.add(HBMLang.CHUNK_DATA);
+    // this.add(HBMLang.BLOCK_STATE_LOSE);
+    // this.add(HBMLang.BLOCK_STATE_INFO);
+    // }
+    private void autoAdd() {
         for (HBMLang value : HBMLang.values()) {
             this.add(value);
         }
     }
-//    private void addEffect(){
-//        this.add(HBMLang.EFFECT_RADIATION);
-//    }
-//    private void addGeneral(){
-//        this.add(HBMLang.RECIPE);
-//    }
-//    private void addLookTooltip(){
-//        this.add(HBMLang.LOOKTOOLTIP_CHEMPLANT);
-//    }
-    private void add(HBMLang entry){
+
+    // private void addEffect(){
+    // this.add(HBMLang.EFFECT_RADIATION);
+    // }
+    // private void addGeneral(){
+    // this.add(HBMLang.RECIPE);
+    // }
+    // private void addLookTooltip(){
+    // this.add(HBMLang.LOOKTOOLTIP_CHEMPLANT);
+    // }
+    private void add(HBMLang entry) {
         this.add(entry.key(), entry.content());
     }
 }

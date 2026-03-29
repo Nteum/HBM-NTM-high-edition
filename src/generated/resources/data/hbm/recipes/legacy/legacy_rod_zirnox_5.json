@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:rod_zirnox_empty"
+    },
+    {
+      "item": "hbm:billet_thorium232"
+    },
+    {
+      "item": "hbm:billet_thorium232"
+    }
+  ],
+  "result": {
+    "item": "hbm:rod_zirnox",
+    "count": 1,
+    "nbt": "{zirnoxType:2}"
+  }
+}

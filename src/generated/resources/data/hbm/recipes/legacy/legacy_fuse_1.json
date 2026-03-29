@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:plate_steel"
+    },
+    {
+      "item": "hbm:plate_polymer"
+    },
+    {
+      "item": "hbm:wire_fine"
+    }
+  ],
+  "result": {
+    "item": "hbm:fuse",
+    "count": 1
+  }
+}

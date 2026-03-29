@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "WPW",
+    "BBB",
+    "WPW"
+  ],
+  "key": {
+    "W": {
+      "item": "hbm:wire_fine"
+    },
+    "P": {
+      "item": "hbm:plate_titanium"
+    },
+    "B": {
+      "item": "hbm:battery_lithium_cell"
+    }
+  },
+  "result": {
+    "item": "hbm:battery_lithium_cell_3",
+    "count": 1
+  }
+}

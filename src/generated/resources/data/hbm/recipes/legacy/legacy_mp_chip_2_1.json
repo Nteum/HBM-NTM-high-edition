@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "P",
+    "C",
+    "S"
+  ],
+  "key": {
+    "P": {
+      "item": "hbm:ingot_latex"
+    },
+    "C": {
+      "item": "hbm:circuit"
+    },
+    "S": {
+      "item": "hbm:steel_scaffold"
+    }
+  },
+  "result": {
+    "item": "hbm:mp_chip_2",
+    "count": 1
+  }
+}

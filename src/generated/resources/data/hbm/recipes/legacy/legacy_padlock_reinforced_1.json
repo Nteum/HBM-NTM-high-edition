@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " P ",
+    "PBP",
+    "PDP"
+  ],
+  "key": {
+    "P": {
+      "item": "hbm:plate_advanced_alloy"
+    },
+    "D": {
+      "item": "hbm:plate_desh"
+    },
+    "B": {
+      "item": "hbm:bolt"
+    }
+  },
+  "result": {
+    "item": "hbm:padlock_reinforced",
+    "count": 1
+  }
+}

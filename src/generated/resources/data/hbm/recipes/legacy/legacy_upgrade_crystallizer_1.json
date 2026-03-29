@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PHP",
+    "CUC",
+    "DTD"
+  ],
+  "key": {
+    "P": {
+      "item": "hbm:fluid_barrel_full"
+    },
+    "H": {
+      "item": "hbm:circuit"
+    },
+    "C": {
+      "item": "hbm:barrel_steel"
+    },
+    "U": {
+      "item": "hbm:upgrade_centrifuge"
+    },
+    "D": {
+      "item": "hbm:motor"
+    },
+    "T": {
+      "item": "hbm:machine_transformer"
+    }
+  },
+  "result": {
+    "item": "hbm:upgrade_crystallizer",
+    "count": 1
+  }
+}

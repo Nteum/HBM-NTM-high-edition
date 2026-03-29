@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CPC",
+    "CBC",
+    "CCC"
+  ],
+  "key": {
+    "C": {
+      "item": "hbm:plate_copper"
+    },
+    "P": {
+      "item": "hbm:machine_epress"
+    },
+    "B": {
+      "item": "hbm:conveyor_wand"
+    }
+  },
+  "result": {
+    "item": "hbm:machine_conveyor_press",
+    "count": 1
+  }
+}

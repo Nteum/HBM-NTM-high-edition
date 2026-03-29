@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "WWW",
+    "CPC",
+    "WWW"
+  ],
+  "key": {
+    "W": {
+      "item": "hbm:wire_fine"
+    },
+    "P": {
+      "item": "hbm:ingot_polymer"
+    },
+    "C": {
+      "item": "hbm:circuit"
+    }
+  },
+  "result": {
+    "item": "hbm:turret_chip",
+    "count": 1
+  }
+}

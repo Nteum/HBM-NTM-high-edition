@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "hbm:ingot_advanced_alloy"
+    }
+  },
+  "result": {
+    "item": "hbm:plate_advanced_alloy",
+    "count": 4
+  }
+}

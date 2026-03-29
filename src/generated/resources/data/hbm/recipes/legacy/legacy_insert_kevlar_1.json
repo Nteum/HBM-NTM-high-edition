@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "KIK",
+    "IDI",
+    "KIK"
+  ],
+  "key": {
+    "K": {
+      "item": "hbm:plate_kevlar"
+    },
+    "I": {
+      "item": "hbm:ingot_latex"
+    },
+    "D": {
+      "item": "hbm:ducttape"
+    }
+  },
+  "result": {
+    "item": "hbm:insert_kevlar",
+    "count": 1
+  }
+}

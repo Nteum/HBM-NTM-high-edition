@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:rbmk_fuel_empty"
+    },
+    {
+      "item": "hbm:billet_balefire_gold"
+    },
+    {
+      "item": "hbm:billet_balefire_gold"
+    },
+    {
+      "item": "hbm:billet_balefire_gold"
+    },
+    {
+      "item": "hbm:billet_balefire_gold"
+    },
+    {
+      "item": "hbm:billet_balefire_gold"
+    },
+    {
+      "item": "hbm:billet_balefire_gold"
+    },
+    {
+      "item": "hbm:billet_balefire_gold"
+    },
+    {
+      "item": "hbm:billet_balefire_gold"
+    }
+  ],
+  "result": {
+    "item": "hbm:rbmk_fuel_balefire_gold",
+    "count": 1
+  }
+}

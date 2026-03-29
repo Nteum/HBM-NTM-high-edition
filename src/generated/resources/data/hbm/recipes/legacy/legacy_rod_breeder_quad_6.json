@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:rod_quad_empty"
+    },
+    {
+      "item": "hbm:billet_thorium_fuel"
+    },
+    {
+      "item": "hbm:billet_thorium_fuel"
+    },
+    {
+      "item": "hbm:billet_thorium_fuel"
+    },
+    {
+      "item": "hbm:billet_thorium_fuel"
+    }
+  ],
+  "result": {
+    "item": "hbm:rod_breeder_quad",
+    "count": 1,
+    "nbt": "{hbmRodType:5b}"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "EEE",
+    "ESE",
+    " P "
+  ],
+  "key": {
+    "E": {
+      "item": "hbm:ingot_schrabidium"
+    },
+    "S": {
+      "item": "hbm:starmetal_helmet"
+    },
+    "P": {
+      "item": "hbm:pellet_charged"
+    }
+  },
+  "result": {
+    "item": "hbm:schrabidium_helmet",
+    "count": 1
+  }
+}

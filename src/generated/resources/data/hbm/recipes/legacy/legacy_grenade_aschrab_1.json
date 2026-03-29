@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "RS ",
+    "ITI",
+    " S "
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:glass"
+    },
+    "R": {
+      "item": "hbm:wire_fine"
+    },
+    "S": {
+      "item": "hbm:plate_steel"
+    },
+    "T": {
+      "item": "hbm:cell_anti_schrabidium"
+    }
+  },
+  "result": {
+    "item": "hbm:grenade_aschrab",
+    "count": 1
+  }
+}

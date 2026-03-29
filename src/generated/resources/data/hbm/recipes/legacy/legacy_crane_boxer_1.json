@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "WWW",
+    "WPW",
+    "CCC"
+  ],
+  "key": {
+    "W": {
+      "tag": "minecraft:planks"
+    },
+    "P": {
+      "item": "hbm:part_generic"
+    },
+    "C": {
+      "item": "hbm:conveyor_wand"
+    }
+  },
+  "result": {
+    "item": "hbm:crane_boxer",
+    "count": 1
+  }
+}

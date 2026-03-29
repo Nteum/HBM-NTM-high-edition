@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "RCA",
+    "CIC",
+    "KCR"
+  ],
+  "key": {
+    "R": {
+      "item": "minecraft:red_dye"
+    },
+    "C": {
+      "item": "hbm:wire_dense"
+    },
+    "A": {
+      "item": "hbm:gem_alexandrite"
+    },
+    "I": {
+      "item": "hbm:ingot_chainsteel"
+    },
+    "K": {
+      "item": "hbm:key"
+    }
+  },
+  "result": {
+    "item": "hbm:key_red",
+    "count": 1
+  }
+}

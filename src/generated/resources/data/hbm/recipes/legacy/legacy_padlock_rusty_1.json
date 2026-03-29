@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "I",
+    "B",
+    "I"
+  ],
+  "key": {
+    "I": {
+      "item": "hbm:ingot_iron"
+    },
+    "B": {
+      "item": "hbm:bolt"
+    }
+  },
+  "result": {
+    "item": "hbm:padlock_rusty",
+    "count": 1
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " P ",
+    "PBP",
+    "PDP"
+  ],
+  "key": {
+    "P": {
+      "item": "hbm:plate_saturnite"
+    },
+    "D": {
+      "item": "hbm:gem_diamond"
+    },
+    "B": {
+      "item": "hbm:bolt"
+    }
+  },
+  "result": {
+    "item": "hbm:padlock_unbreakable",
+    "count": 1
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CGC",
+    "PSP",
+    "IAI"
+  ],
+  "key": {
+    "C": {
+      "item": "hbm:powder_yellowcake"
+    },
+    "G": {
+      "item": "hbm:block_thorium232"
+    },
+    "P": {
+      "item": "hbm:photo_panel"
+    },
+    "S": {
+      "item": "hbm:steel_shovel"
+    },
+    "I": {
+      "item": "hbm:plate_polymer"
+    },
+    "A": {
+      "item": "hbm:ingot_australium"
+    }
+  },
+  "result": {
+    "item": "hbm:memespoon",
+    "count": 1
+  }
+}

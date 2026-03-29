@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PIP"
+  ],
+  "key": {
+    "P": {
+      "item": "hbm:plate_titanium"
+    },
+    "I": {
+      "item": "hbm:blades_titanium"
+    }
+  },
+  "result": {
+    "item": "hbm:blades_titanium",
+    "count": 1
+  }
+}

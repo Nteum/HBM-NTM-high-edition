@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:battery_potato"
+    },
+    {
+      "item": "hbm:turret_chip"
+    },
+    {
+      "item": "minecraft:redstone"
+    }
+  ],
+  "result": {
+    "item": "hbm:battery_potatos",
+    "count": 1
+  }
+}

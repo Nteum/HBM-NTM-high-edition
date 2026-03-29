@@ -22,8 +22,8 @@ public class CoolingTowerBlock extends BlockDummyable {
 
     public CoolingTowerBlock(Properties properties) {
         super(properties);
-        SHAPE = Block.box(-80.0D, 0.0D, -80.0D, 96.0D, 256.0D, 80.0D);
-        doShapeRot = true;
+        this.shape = Block.box(-80.0D, 0.0D, -80.0D, 96.0D, 256.0D, 80.0D);
+        this.shapeRotates = true;
     }
 
     @Nullable

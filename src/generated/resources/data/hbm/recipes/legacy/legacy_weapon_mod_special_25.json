@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "IGI",
+    "IGI"
+  ],
+  "key": {
+    "I": {
+      "item": "hbm:ingot_dura_steel"
+    },
+    "G": {
+      "item": "hbm:steel_grate"
+    }
+  },
+  "result": {
+    "item": "hbm:weapon_mod_special",
+    "count": 1
+  }
+}

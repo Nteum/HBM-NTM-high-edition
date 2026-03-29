@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:canister_full"
+    },
+    {
+      "item": "minecraft:redstone"
+    },
+    {
+      "item": "hbm:canister_empty"
+    }
+  ],
+  "result": {
+    "item": "hbm:canister_full",
+    "count": 1
+  }
+}

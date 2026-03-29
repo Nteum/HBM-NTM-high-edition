@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ICI",
+    "CPC",
+    "ICI"
+  ],
+  "key": {
+    "I": {
+      "item": "hbm:ingot_saturnite"
+    },
+    "C": {
+      "item": "hbm:powder_nitan_mix"
+    },
+    "P": {
+      "item": "hbm:absorber_green"
+    }
+  },
+  "result": {
+    "item": "hbm:absorber_pink",
+    "count": 1
+  }
+}

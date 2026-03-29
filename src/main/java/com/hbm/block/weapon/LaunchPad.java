@@ -13,8 +13,8 @@ import net.minecraft.world.phys.shapes.Shapes;
 public class LaunchPad extends BlockDummyable implements IBomb {
 	public LaunchPad(Properties pProperties) {
 		super(pProperties);
-		SHAPE = Block.box(-16, 0, -16, 32, 160, 32);
-//		SHAPE = Shapes.or(Shapes.box(-1.5D, 0D, -1.5D, -0.5D, 1D, -0.5D),
+		this.shape = Block.box(-16, 0, -16, 32, 160, 32);
+//		this.shape = Shapes.or(Shapes.box(-1.5D, 0D, -1.5D, -0.5D, 1D, -0.5D),
 //					Shapes.box(0.5D, 0D, -1.5D, 1.5D, 1D, -0.5D),
 //					Shapes.box(-1.5D, 0D, 0.5D, -0.5D, 1D, 1.5D),
 //					Shapes.box(0.5D, 0D, 0.5D, 1.5D, 1D, 1.5D),

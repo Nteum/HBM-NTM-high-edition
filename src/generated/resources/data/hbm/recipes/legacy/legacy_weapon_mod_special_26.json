@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " R ",
+    "CCC",
+    "SSS"
+  ],
+  "key": {
+    "R": {
+      "item": "hbm:pipe"
+    },
+    "C": {
+      "item": "hbm:canister_empty"
+    },
+    "S": {
+      "item": "hbm:plate_steel"
+    }
+  },
+  "result": {
+    "item": "hbm:weapon_mod_special",
+    "count": 1
+  }
+}

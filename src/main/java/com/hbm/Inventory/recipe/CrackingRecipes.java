@@ -27,7 +27,6 @@ public final class CrackingRecipes {
     public static void registerDefaults() {
         RECIPES.clear();
         put(ModFluids.OIL.source().get(), stack(ModFluids.CRACK_OIL.source().get(), 80), stack(ModFluids.PETROLEUM.source().get(), 20));
-        put(ModFluids.CRACK_OIL.source().get(), stack(ModFluids.DIESEL.source().get(), 60), stack(ModFluids.PETROLEUM.source().get(), 20));
         put(ModFluids.BITUMEN.source().get(), stack(ModFluids.OIL.source().get(), 80), stack(ModFluids.AROMATICS.source().get(), 20));
         put(ModFluids.SMEAR.source().get(), stack(ModFluids.NAPHTHA.source().get(), 60), stack(ModFluids.PETROLEUM.source().get(), 40));
         put(ModFluids.REFINERY_GAS.source().get(), stack(ModFluids.PETROLEUM.source().get(), 30), stack(ModFluids.UNSATURATEDS.source().get(), 20));

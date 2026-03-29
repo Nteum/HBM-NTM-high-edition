@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SNS",
+    "CBC",
+    "SFS"
+  ],
+  "key": {
+    "S": {
+      "item": "hbm:ingot_starmetal"
+    },
+    "N": {
+      "item": "hbm:det_nuke"
+    },
+    "C": {
+      "item": "hbm:circuit"
+    },
+    "B": {
+      "item": "hbm:boxcar"
+    },
+    "F": {
+      "item": "hbm:tritium_deuterium_cake"
+    }
+  },
+  "result": {
+    "item": "hbm:mp_warhead_15_boxcar",
+    "count": 1
+  }
+}

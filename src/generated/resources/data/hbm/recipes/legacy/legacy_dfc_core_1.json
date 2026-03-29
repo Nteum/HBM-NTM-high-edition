@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DLD",
+    "LML",
+    "DLD"
+  ],
+  "key": {
+    "D": {
+      "item": "hbm:ingot_bismuth"
+    },
+    "L": {
+      "item": "hbm:block_dineutronium"
+    },
+    "M": {
+      "item": "hbm:circuit"
+    }
+  },
+  "result": {
+    "item": "hbm:dfc_core",
+    "count": 1
+  }
+}

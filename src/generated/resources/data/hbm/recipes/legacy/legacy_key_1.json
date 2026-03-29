@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  B",
+    " B ",
+    "P  "
+  ],
+  "key": {
+    "P": {
+      "item": "hbm:plate_steel"
+    },
+    "B": {
+      "item": "hbm:bolt"
+    }
+  },
+  "result": {
+    "item": "hbm:key",
+    "count": 1
+  }
+}

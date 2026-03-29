@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CIC",
+    "PRP",
+    "CIC"
+  ],
+  "key": {
+    "C": {
+      "item": "hbm:pipe"
+    },
+    "P": {
+      "item": "hbm:shell"
+    },
+    "R": {
+      "item": "hbm:rbmk_blank"
+    },
+    "I": {
+      "item": "hbm:ingot_polymer"
+    }
+  },
+  "result": {
+    "item": "hbm:rbmk_heater",
+    "count": 1
+  }
+}

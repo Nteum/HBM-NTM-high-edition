@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " I ",
+    "GIG",
+    "CCC"
+  ],
+  "key": {
+    "I": {
+      "item": "hbm:ingot_uranium238"
+    },
+    "G": {
+      "item": "hbm:cordite"
+    },
+    "C": {
+      "item": "hbm:ingot_copper"
+    }
+  },
+  "result": {
+    "item": "hbm:ammo_shell",
+    "count": 1
+  }
+}

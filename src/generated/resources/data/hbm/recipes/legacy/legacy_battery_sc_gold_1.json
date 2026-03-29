@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "NBN",
+    "PCP",
+    "NBN"
+  ],
+  "key": {
+    "N": {
+      "item": "hbm:nugget_tantalum"
+    },
+    "B": {
+      "item": "hbm:billet_gold198"
+    },
+    "P": {
+      "item": "hbm:ingot_polymer"
+    },
+    "C": {
+      "item": "hbm:battery_sc_polonium"
+    }
+  },
+  "result": {
+    "item": "hbm:battery_sc_gold",
+    "count": 1
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "I",
+    "P"
+  ],
+  "key": {
+    "I": {
+      "item": "hbm:plate_polymer"
+    },
+    "P": {
+      "item": "hbm:plate_gold"
+    }
+  },
+  "result": {
+    "item": "hbm:circuit",
+    "count": 4
+  }
+}

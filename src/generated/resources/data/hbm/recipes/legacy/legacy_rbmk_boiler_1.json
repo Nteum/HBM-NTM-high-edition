@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CPC",
+    "CRC",
+    "CPC"
+  ],
+  "key": {
+    "C": {
+      "item": "hbm:pipe"
+    },
+    "P": {
+      "item": "hbm:shell"
+    },
+    "R": {
+      "item": "hbm:rbmk_blank"
+    }
+  },
+  "result": {
+    "item": "hbm:rbmk_boiler",
+    "count": 1
+  }
+}

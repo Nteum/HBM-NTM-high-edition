@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PPP",
+    "ICI",
+    "WWW"
+  ],
+  "key": {
+    "P": {
+      "item": "hbm:plate_steel"
+    },
+    "I": {
+      "item": "hbm:ingot_rubber"
+    },
+    "C": {
+      "item": "hbm:block_niobium"
+    },
+    "W": {
+      "item": "hbm:ingot_steel"
+    }
+  },
+  "result": {
+    "item": "hbm:capacitor_niobium",
+    "count": 1
+  }
+}

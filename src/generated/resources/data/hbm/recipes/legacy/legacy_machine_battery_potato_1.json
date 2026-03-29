@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PCP",
+    "WRW",
+    "PCP"
+  ],
+  "key": {
+    "P": {
+      "item": "hbm:battery_potato"
+    },
+    "C": {
+      "item": "hbm:ingot_copper"
+    },
+    "R": {
+      "item": "hbm:block_redstone"
+    },
+    "W": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "result": {
+    "item": "hbm:machine_battery_potato",
+    "count": 1
+  }
+}

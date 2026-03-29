@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "NSN",
+    "NGN",
+    "G G"
+  ],
+  "key": {
+    "N": {
+      "item": "hbm:nugget_gold"
+    },
+    "G": {
+      "item": "hbm:ingot_gold"
+    },
+    "S": {
+      "item": "hbm:battery_spark_cell_10000"
+    }
+  },
+  "result": {
+    "item": "hbm:ams_core_thingy",
+    "count": 1
+  }
+}

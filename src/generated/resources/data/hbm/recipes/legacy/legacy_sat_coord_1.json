@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SII",
+    "SCA",
+    "SPP"
+  ],
+  "key": {
+    "I": {
+      "item": "hbm:ingot_steel"
+    },
+    "S": {
+      "item": "hbm:ingot_starmetal"
+    },
+    "P": {
+      "item": "hbm:plate_polymer"
+    },
+    "C": {
+      "item": "hbm:sat_chip"
+    },
+    "A": {
+      "item": "hbm:circuit"
+    }
+  },
+  "result": {
+    "item": "hbm:sat_coord",
+    "count": 1
+  }
+}

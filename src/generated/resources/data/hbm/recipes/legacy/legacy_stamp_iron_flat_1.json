@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "III",
+    "SSS"
+  ],
+  "key": {
+    "S": {
+      "item": "hbm:ingot_iron"
+    },
+    "I": {
+      "item": "minecraft:brick"
+    }
+  },
+  "result": {
+    "item": "hbm:stamp_iron_flat",
+    "count": 1
+  }
+}

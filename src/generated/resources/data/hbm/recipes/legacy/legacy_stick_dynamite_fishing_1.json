@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:stick_dynamite"
+    },
+    {
+      "item": "hbm:stick_dynamite"
+    },
+    {
+      "item": "hbm:stick_dynamite"
+    },
+    {
+      "item": "minecraft:paper"
+    },
+    {
+      "item": "hbm:oil_tar"
+    }
+  ],
+  "result": {
+    "item": "hbm:stick_dynamite_fishing",
+    "count": 1
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "KPK",
+    "PLP",
+    " F "
+  ],
+  "key": {
+    "L": {
+      "item": "hbm:parts_legendary"
+    },
+    "K": {
+      "item": "hbm:plate_kevlar"
+    },
+    "P": {
+      "item": "hbm:plate_armor_ajr"
+    },
+    "F": {
+      "item": "hbm:gas_mask_filter_combo"
+    }
+  },
+  "result": {
+    "item": "hbm:rpa_helmet",
+    "count": 1
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "W W",
+    "W W",
+    "SCS"
+  ],
+  "key": {
+    "W": {
+      "tag": "minecraft:wool"
+    },
+    "S": {
+      "item": "hbm:ingot_steel"
+    },
+    "C": {
+      "item": "hbm:circuit"
+    }
+  },
+  "result": {
+    "item": "hbm:dieselsuit_helmet",
+    "count": 1
+  }
+}

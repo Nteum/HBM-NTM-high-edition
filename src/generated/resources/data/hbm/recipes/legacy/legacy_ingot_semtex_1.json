@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:slime_ball"
+    },
+    {
+      "item": "minecraft:tnt"
+    },
+    {
+      "item": "hbm:dust_saltpeter"
+    }
+  ],
+  "result": {
+    "item": "hbm:ingot_semtex",
+    "count": 3
+  }
+}

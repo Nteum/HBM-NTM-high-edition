@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "C",
+    "R",
+    "C"
+  ],
+  "key": {
+    "C": {
+      "item": "hbm:hazmat_cloth"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "result": {
+    "item": "hbm:hazmat_cloth_red",
+    "count": 1
+  }
+}

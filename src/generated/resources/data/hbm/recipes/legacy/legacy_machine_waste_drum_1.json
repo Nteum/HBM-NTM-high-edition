@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "LRL",
+    "BRB",
+    "LRL"
+  ],
+  "key": {
+    "L": {
+      "item": "hbm:ingot_lead"
+    },
+    "B": {
+      "item": "minecraft:iron_bars"
+    },
+    "R": {
+      "item": "hbm:rod_quad_empty"
+    }
+  },
+  "result": {
+    "item": "hbm:machine_waste_drum",
+    "count": 1
+  }
+}

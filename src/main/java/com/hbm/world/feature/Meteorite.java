@@ -1,7 +1,6 @@
 package com.hbm.world.feature;
 
 import com.hbm.config.ConfigWorld;
-import com.hbm.entity.effect.EntityMeteor;
 import com.hbm.registries.ModBlocks;
 import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;
@@ -11,7 +10,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.random.SimpleWeightedRandomList;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Block;
@@ -25,7 +23,6 @@ import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConf
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.world.phys.Vec3;
 
 import java.util.*;
 
@@ -313,22 +310,6 @@ public class Meteorite extends Feature<Meteorite.Configuration> {
 
         // 4. 执行生成
         meteorite.place(context);
-    }
-    public static void spawnMeteorByPlayer(Player player, boolean repell) {
-        EntityMeteor meteor = new EntityMeteor(player.level());
-        RandomSource rand = player.getRandom();
-        meteor.setPos(player.getX() + rand.nextInt(101) - 50, 384, player.getZ() + rand.nextInt(101) - 50);
-
-        Vec3 vec;
-        if(repell) {
-            vec = new Vec3(meteor.getX() - player.getX(), 0, meteor.getZ() - player.getZ()).normalize().scale(rand.nextDouble());
-            meteor.safe = true;
-        } else {
-            vec = new Vec3(rand.nextDouble() - 0.5, 0, 0).yRot(Mth.PI * rand.nextFloat());
-        }
-
-        meteor.setDeltaMovement(vec.x(), -2.4, vec.z());
-        player.level().addFreshEntity(meteor);
     }
 
     public record Configuration(boolean safe, boolean allowSpecials, boolean damagingImpact) implements FeatureConfiguration{

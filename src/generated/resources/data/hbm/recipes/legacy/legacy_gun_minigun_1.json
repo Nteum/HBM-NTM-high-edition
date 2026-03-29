@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BMG",
+    "BRE",
+    "BGM"
+  ],
+  "key": {
+    "B": {
+      "item": "hbm:part_barrel_light"
+    },
+    "M": {
+      "item": "hbm:part_mechanism"
+    },
+    "G": {
+      "item": "hbm:part_grip"
+    },
+    "R": {
+      "item": "hbm:part_receiver_heavy"
+    },
+    "E": {
+      "item": "hbm:motor_desh"
+    }
+  },
+  "result": {
+    "item": "hbm:gun_minigun",
+    "count": 1
+  }
+}

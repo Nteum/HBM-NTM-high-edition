@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BRM",
+    " P "
+  ],
+  "key": {
+    "B": {
+      "item": "hbm:part_barrel_light"
+    },
+    "R": {
+      "item": "hbm:part_receiver_light"
+    },
+    "M": {
+      "item": "hbm:part_mechanism"
+    },
+    "P": {
+      "item": "hbm:plate_saturnite"
+    }
+  },
+  "result": {
+    "item": "hbm:weapon_mod_special",
+    "count": 1
+  }
+}

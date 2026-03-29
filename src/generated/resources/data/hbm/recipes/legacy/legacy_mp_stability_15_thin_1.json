@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "A A",
+    "PSP",
+    "PSP"
+  ],
+  "key": {
+    "A": {
+      "item": "hbm:plate_aluminium"
+    },
+    "P": {
+      "item": "hbm:plate_steel"
+    },
+    "S": {
+      "item": "hbm:steel_scaffold"
+    }
+  },
+  "result": {
+    "item": "hbm:mp_stability_15_thin",
+    "count": 1
+  }
+}

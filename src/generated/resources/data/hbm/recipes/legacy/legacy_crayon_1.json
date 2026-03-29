@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:chemical_dye"
+    },
+    {
+      "item": "hbm:oil_tar"
+    },
+    {
+      "item": "minecraft:paper"
+    }
+  ],
+  "result": {
+    "item": "hbm:crayon",
+    "count": 4
+  }
+}

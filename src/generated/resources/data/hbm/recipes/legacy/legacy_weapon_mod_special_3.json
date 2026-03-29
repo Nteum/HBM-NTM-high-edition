@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BBS",
+    "BHS"
+  ],
+  "key": {
+    "B": {
+      "item": "hbm:bolt"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    },
+    "H": {
+      "item": "hbm:plate_dura_steel"
+    }
+  },
+  "result": {
+    "item": "hbm:weapon_mod_special",
+    "count": 1
+  }
+}

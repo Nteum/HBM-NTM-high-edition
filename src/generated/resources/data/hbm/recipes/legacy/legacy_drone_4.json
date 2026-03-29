@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:drone"
+    }
+  ],
+  "result": {
+    "item": "hbm:drone",
+    "count": 1
+  }
+}

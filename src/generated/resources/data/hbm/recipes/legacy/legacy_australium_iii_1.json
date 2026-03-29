@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "WSW",
+    "PAP",
+    "SPS"
+  ],
+  "key": {
+    "S": {
+      "item": "hbm:plate_welded"
+    },
+    "P": {
+      "item": "hbm:ingot_polymer"
+    },
+    "A": {
+      "item": "hbm:ingot_australium"
+    },
+    "W": {
+      "item": "hbm:wire_dense"
+    }
+  },
+  "result": {
+    "item": "hbm:australium_iii",
+    "count": 1
+  }
+}

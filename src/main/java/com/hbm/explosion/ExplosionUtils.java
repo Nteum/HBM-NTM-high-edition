@@ -1,52 +1,27 @@
 package com.hbm.explosion;
 
-import com.hbm.entity.projectile.EntityRubble;
 import com.hbm.network.ModMessages;
 import com.hbm.network.packet.toclient.S2CExplosionEffectPacket;
-import com.hbm.network.packet.toclient.S2CParticlePacket;
 import com.hbm.particle.ModParticleTypes;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.CampfireBlockEntity;
-import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.network.PacketDistributor;
 
-/**
- * 与爆炸相关的工具函数
- * */
 public class ExplosionUtils {
 
-    public static void spawnParticles(Level world, double x, double y, double z, int count) {
-        CompoundTag data = new CompoundTag();
-        data.putString("type", "smoke");
-        data.putString("mode", "cloud");
-        data.putInt("count", count);
-        ModMessages.sendToAllAround(new S2CParticlePacket(data, x, y, z), new PacketDistributor.TargetPoint(x, y, z, 250, world.dimension()));
-    }
-
-    public static void spawnRubble(Level world, double x, double y, double z, int count) {
-        for(int i = 0; i < count; i++) {
-            EntityRubble rubble = new EntityRubble(world, new Vec3(x,y,z));
-            rubble.setDeltaMovement(world.random.nextGaussian() * 0.75 * (1 + (double) count / 50), 0.75 * (1 + (double) (count + world.random.nextInt(count * 5)) / 25), world.random.nextGaussian() * 0.75 * (1 + count / 50));
-            rubble.setDataBlock(Blocks.STONE.defaultBlockState());
-            world.addFreshEntity(rubble);
-        }
-    }
     public static void explode(Level pLevel, double x, double y, double z, float radius, boolean cloud, boolean rubble, boolean shrapnel){
         pLevel.explode(null, x , y, z , radius, true, Level.ExplosionInteraction.TNT);
         if(cloud)
-            spawnParticleClouds(pLevel, x, y, z, cloudFunction((int)radius));
+            spawnParticles(pLevel, x, y, z, cloudFunction((int)radius));
 //        if(rubble)
 //            spawnRubble(world, x, y, z, rubbleFunction((int)strength));
 //        if(shrapnel)
 //            spawnShrapnels(world, x, y, z, shrapnelFunction((int)strength));
     }
 
-    public static void spawnParticleClouds(Level pLevel, double x, double y, double z,int count){
+    public static void spawnParticles(Level pLevel, double x, double y, double z,int count){
         for (ServerPlayer serverPlayer : ((ServerLevel) pLevel).players()) {
             if (serverPlayer.distanceToSqr(x, y, z) < 4096.0D) {
 //                ModMessages.sendToPlayer(new S2CExplosionEffectPacket(x,y,z,1,1,count),serverPlayer);

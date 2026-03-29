@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "E E",
+    "ECE"
+  ],
+  "key": {
+    "E": {
+      "item": "hbm:ingot_starmetal"
+    },
+    "C": {
+      "item": "hbm:cobalt_boots"
+    }
+  },
+  "result": {
+    "item": "hbm:starmetal_boots",
+    "count": 1
+  }
+}

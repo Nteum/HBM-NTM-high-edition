@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ECE",
+    "E E"
+  ],
+  "key": {
+    "E": {
+      "item": "hbm:billet_cobalt"
+    },
+    "C": {
+      "item": "hbm:steel_legs"
+    }
+  },
+  "result": {
+    "item": "hbm:cobalt_legs",
+    "count": 1
+  }
+}

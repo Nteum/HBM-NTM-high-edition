@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BN",
+    "NB"
+  ],
+  "key": {
+    "B": {
+      "item": "minecraft:brick"
+    },
+    "N": {
+      "item": "minecraft:netherbrick"
+    }
+  },
+  "result": {
+    "item": "hbm:ingot_firebrick",
+    "count": 4
+  }
+}

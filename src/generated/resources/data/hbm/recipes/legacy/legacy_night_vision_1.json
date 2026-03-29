@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "P P",
+    "GCG"
+  ],
+  "key": {
+    "P": {
+      "item": "hbm:ingot_polymer"
+    },
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "C": {
+      "item": "hbm:circuit"
+    }
+  },
+  "result": {
+    "item": "hbm:night_vision",
+    "count": 1
+  }
+}

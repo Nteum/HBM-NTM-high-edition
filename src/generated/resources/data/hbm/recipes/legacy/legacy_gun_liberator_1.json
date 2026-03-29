@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BB ",
+    "BBM",
+    "G G"
+  ],
+  "key": {
+    "B": {
+      "item": "hbm:part_barrel_light"
+    },
+    "M": {
+      "item": "hbm:part_mechanism"
+    },
+    "G": {
+      "item": "hbm:part_grip"
+    }
+  },
+  "result": {
+    "item": "hbm:gun_liberator",
+    "count": 1
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "HAH",
+    "ACA",
+    "HAH"
+  ],
+  "key": {
+    "H": {
+      "item": "hbm:heart_piece"
+    },
+    "A": {
+      "item": "hbm:ingot_aluminium"
+    },
+    "C": {
+      "item": "hbm:coin_creeper"
+    }
+  },
+  "result": {
+    "item": "hbm:heart_container",
+    "count": 1
+  }
+}

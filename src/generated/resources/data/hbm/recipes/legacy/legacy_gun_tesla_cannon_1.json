@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CCC",
+    "BRB",
+    "MGE"
+  ],
+  "key": {
+    "C": {
+      "item": "hbm:coil_advanced_alloy"
+    },
+    "B": {
+      "item": "hbm:part_barrel_heavy"
+    },
+    "R": {
+      "item": "hbm:part_receiver_heavy"
+    },
+    "M": {
+      "item": "hbm:part_mechanism"
+    },
+    "G": {
+      "item": "hbm:part_grip"
+    },
+    "E": {
+      "item": "hbm:circuit"
+    }
+  },
+  "result": {
+    "item": "hbm:gun_tesla_cannon",
+    "count": 1
+  }
+}

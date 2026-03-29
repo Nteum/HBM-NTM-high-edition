@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:redstone"
+    },
+    {
+      "item": "hbm:powder_emerald"
+    },
+    {
+      "item": "minecraft:wheat"
+    },
+    {
+      "item": "hbm:bolt"
+    },
+    {
+      "item": "hbm:wire_fine"
+    },
+    {
+      "item": "hbm:plate_steel"
+    }
+  ],
+  "result": {
+    "item": "hbm:pancake",
+    "count": 1
+  }
+}

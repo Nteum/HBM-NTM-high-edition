@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  E",
+    "E  ",
+    "E E"
+  ],
+  "key": {
+    "E": {
+      "item": "hbm:ingot_dineutronium"
+    }
+  },
+  "result": {
+    "item": "hbm:dnt_boots",
+    "count": 1
+  }
+}

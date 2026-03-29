@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "W ",
+    " W",
+    " W"
+  ],
+  "key": {
+    "W": {
+      "item": "hbm:ingot_pvc"
+    }
+  },
+  "result": {
+    "item": "hbm:part_grip",
+    "count": 1
+  }
+}

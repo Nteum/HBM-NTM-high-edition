@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BCB",
+    "SDS",
+    "BCB"
+  ],
+  "key": {
+    "B": {
+      "item": "hbm:nugget_bismuth"
+    },
+    "C": {
+      "item": "hbm:hadron_coil_alloy"
+    },
+    "S": {
+      "item": "hbm:plate_cast"
+    },
+    "D": {
+      "item": "hbm:ingot_dura_steel"
+    }
+  },
+  "result": {
+    "item": "hbm:motor_bismuth",
+    "count": 1
+  }
+}

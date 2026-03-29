@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " C ",
+    "C C",
+    " C "
+  ],
+  "key": {
+    "C": {
+      "item": "hbm:tile_lab"
+    }
+  },
+  "result": {
+    "item": "hbm:tile_lab_cracked",
+    "count": 6
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:dust_sulfur"
+    },
+    {
+      "item": "hbm:dust_saltpeter"
+    },
+    {
+      "item": "minecraft:coal"
+    }
+  ],
+  "result": {
+    "item": "minecraft:gunpowder",
+    "count": 3
+  }
+}

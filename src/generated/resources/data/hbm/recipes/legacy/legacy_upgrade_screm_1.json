@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SUS",
+    "SCS",
+    "SUS"
+  ],
+  "key": {
+    "S": {
+      "item": "hbm:plate_steel"
+    },
+    "U": {
+      "item": "hbm:upgrade_template"
+    },
+    "C": {
+      "item": "hbm:crystal_xen"
+    }
+  },
+  "result": {
+    "item": "hbm:upgrade_screm",
+    "count": 1
+  }
+}

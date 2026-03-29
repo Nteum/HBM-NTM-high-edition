@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " T ",
+    "GHG",
+    "CCC"
+  ],
+  "key": {
+    "T": {
+      "item": "hbm:ingot_any_plasticexplosive"
+    },
+    "G": {
+      "item": "hbm:cordite"
+    },
+    "H": {
+      "item": "hbm:shell"
+    },
+    "C": {
+      "item": "hbm:ingot_copper"
+    }
+  },
+  "result": {
+    "item": "hbm:ammo_shell",
+    "count": 1
+  }
+}

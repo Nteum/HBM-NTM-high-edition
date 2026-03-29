@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " G ",
+    "PGP",
+    " P "
+  ],
+  "key": {
+    "G": {
+      "item": "hbm:grenade_generic"
+    },
+    "P": {
+      "item": "hbm:powder_poison"
+    }
+  },
+  "result": {
+    "item": "hbm:grenade_poison",
+    "count": 2
+  }
+}

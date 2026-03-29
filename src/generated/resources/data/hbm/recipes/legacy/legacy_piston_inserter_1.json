@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ITI",
+    "TPT",
+    "ITI"
+  ],
+  "key": {
+    "P": {
+      "item": "hbm:part_generic"
+    },
+    "I": {
+      "item": "hbm:plate_iron"
+    },
+    "T": {
+      "item": "hbm:bolt"
+    }
+  },
+  "result": {
+    "item": "hbm:piston_inserter",
+    "count": 1
+  }
+}

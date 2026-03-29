@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "RPR",
+    "RPR",
+    " B "
+  ],
+  "key": {
+    "P": {
+      "item": "hbm:ingot_polymer"
+    },
+    "D": {
+      "item": "hbm:ingot_dura_steel"
+    },
+    "R": {
+      "item": "hbm:bolt"
+    },
+    "M": {
+      "item": "hbm:motor"
+    },
+    "B": {
+      "item": "hbm:battery_lithium"
+    }
+  },
+  "result": {
+    "item": "hbm:elec_sword",
+    "count": 1
+  }
+}

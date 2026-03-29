@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DSD",
+    "PPP",
+    "DSD"
+  ],
+  "key": {
+    "D": {
+      "item": "hbm:ingot_polymer"
+    },
+    "P": {
+      "item": "hbm:wire_dense"
+    },
+    "S": {
+      "item": "hbm:capacitor_gold"
+    }
+  },
+  "result": {
+    "item": "hbm:weapon_mod_special",
+    "count": 1
+  }
+}

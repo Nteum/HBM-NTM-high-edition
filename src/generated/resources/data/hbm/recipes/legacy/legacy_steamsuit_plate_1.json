@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "C C",
+    "DXD",
+    "CFC"
+  ],
+  "key": {
+    "D": {
+      "item": "hbm:ingot_workers_alloy"
+    },
+    "C": {
+      "item": "hbm:plate_copper"
+    },
+    "X": {
+      "item": "hbm:steel_plate"
+    },
+    "F": {
+      "item": "hbm:tank_steel"
+    }
+  },
+  "result": {
+    "item": "hbm:steamsuit_plate",
+    "count": 1
+  }
+}

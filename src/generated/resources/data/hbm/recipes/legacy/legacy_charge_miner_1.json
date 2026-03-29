@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " F ",
+    "FCF",
+    " F "
+  ],
+  "key": {
+    "F": {
+      "item": "minecraft:flint"
+    },
+    "C": {
+      "item": "hbm:charge_dynamite"
+    }
+  },
+  "result": {
+    "item": "hbm:charge_miner",
+    "count": 1
+  }
+}

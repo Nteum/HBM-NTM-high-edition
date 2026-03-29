@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " C ",
+    "LTL",
+    "LIL"
+  ],
+  "key": {
+    "C": {
+      "item": "hbm:plate_copper"
+    },
+    "L": {
+      "item": "hbm:plate_lead"
+    },
+    "I": {
+      "item": "hbm:plate_iron"
+    },
+    "T": {
+      "item": "hbm:cell_tritium"
+    }
+  },
+  "result": {
+    "item": "hbm:custom_hydro",
+    "count": 1
+  }
+}

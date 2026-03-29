@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "STS",
+    "G G",
+    "STS"
+  ],
+  "key": {
+    "S": {
+      "item": "hbm:plate_cast"
+    },
+    "T": {
+      "item": "hbm:coil_gold"
+    },
+    "G": {
+      "item": "minecraft:glass_pane"
+    }
+  },
+  "result": {
+    "item": "hbm:particle_empty",
+    "count": 2
+  }
+}

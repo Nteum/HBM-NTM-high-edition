@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:bottle2_empty"
+    },
+    {
+      "item": "minecraft:potionitem"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "item": "hbm:powder_copper"
+    }
+  ],
+  "result": {
+    "item": "hbm:bottle2_korl",
+    "count": 1
+  }
+}

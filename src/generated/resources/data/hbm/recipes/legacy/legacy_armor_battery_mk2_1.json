@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PCP",
+    "PCP",
+    "PCP"
+  ],
+  "key": {
+    "P": {
+      "item": "hbm:ingot_polymer"
+    },
+    "C": {
+      "item": "hbm:capacitor_niobium"
+    }
+  },
+  "result": {
+    "item": "hbm:armor_battery_mk2",
+    "count": 1
+  }
+}
