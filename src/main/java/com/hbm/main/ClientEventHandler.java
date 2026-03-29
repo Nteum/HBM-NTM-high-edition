@@ -251,6 +251,8 @@ public class ClientEventHandler {
     @SubscribeEvent
     public static void registerGeometryLoaders(ModelEvent.RegisterGeometryLoaders event){
         event.register("multi_parts_obj", CustomPartsModel.Loader.INSTANCE);
+        event.register("door", CustomPartsModel.Loader.INSTANCE);
+        event.register("advanced_assembly_machine_loader", CustomPartsModel.Loader.INSTANCE);
     }
 
     @SubscribeEvent
