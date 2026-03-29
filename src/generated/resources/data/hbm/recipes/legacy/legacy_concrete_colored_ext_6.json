@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CCC",
+    "1 2",
+    "CCC"
+  ],
+  "key": {
+    "C": {
+      "item": "hbm:concrete_smooth"
+    },
+    "1": {
+      "item": "minecraft:yellow_dye"
+    },
+    "2": {
+      "item": "minecraft:black_dye"
+    }
+  },
+  "result": {
+    "item": "hbm:concrete_colored_ext",
+    "count": 6
+  }
+}

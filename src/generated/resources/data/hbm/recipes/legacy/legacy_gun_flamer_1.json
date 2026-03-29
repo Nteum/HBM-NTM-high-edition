@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " MG",
+    "BBR",
+    " GM"
+  ],
+  "key": {
+    "M": {
+      "item": "hbm:part_mechanism"
+    },
+    "G": {
+      "item": "hbm:part_grip"
+    },
+    "B": {
+      "item": "hbm:part_barrel_heavy"
+    },
+    "R": {
+      "item": "hbm:part_receiver_heavy"
+    }
+  },
+  "result": {
+    "item": "hbm:gun_flamer",
+    "count": 1
+  }
+}

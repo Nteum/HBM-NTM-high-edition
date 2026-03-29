@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GPP",
+    "P  ",
+    "FPP"
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
+    "P": {
+      "item": "hbm:plate_bismuth"
+    },
+    "F": {
+      "item": "hbm:rag"
+    }
+  },
+  "result": {
+    "item": "hbm:bismuth_helmet",
+    "count": 1
+  }
+}

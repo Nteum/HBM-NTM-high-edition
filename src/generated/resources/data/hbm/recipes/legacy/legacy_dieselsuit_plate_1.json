@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "W W",
+    "CDC",
+    "SWS"
+  ],
+  "key": {
+    "W": {
+      "tag": "minecraft:wool"
+    },
+    "S": {
+      "item": "hbm:ingot_steel"
+    },
+    "C": {
+      "item": "hbm:circuit"
+    },
+    "D": {
+      "item": "hbm:machine_diesel"
+    }
+  },
+  "result": {
+    "item": "hbm:dieselsuit_plate",
+    "count": 1
+  }
+}

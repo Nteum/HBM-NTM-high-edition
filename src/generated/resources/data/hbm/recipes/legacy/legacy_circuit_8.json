@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "III",
+    "SNS",
+    "WWW"
+  ],
+  "key": {
+    "I": {
+      "item": "hbm:plate_polymer"
+    },
+    "S": {
+      "item": "hbm:circuit"
+    },
+    "N": {
+      "item": "hbm:nugget_any_bismoid"
+    },
+    "W": {
+      "item": "hbm:wire_fine"
+    }
+  },
+  "result": {
+    "item": "hbm:circuit",
+    "count": 1
+  }
+}

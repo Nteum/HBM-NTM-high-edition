@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:rod_quad_empty"
+    },
+    {
+      "item": "hbm:ingot_lithium"
+    },
+    {
+      "item": "hbm:ingot_lithium"
+    },
+    {
+      "item": "hbm:ingot_lithium"
+    },
+    {
+      "item": "hbm:ingot_lithium"
+    }
+  ],
+  "result": {
+    "item": "hbm:rod_quad",
+    "count": 1
+  }
+}

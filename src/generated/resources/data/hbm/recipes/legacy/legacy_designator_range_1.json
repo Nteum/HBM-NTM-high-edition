@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:rangefinder"
+    },
+    {
+      "item": "hbm:designator"
+    },
+    {
+      "item": "hbm:ingot_polymer"
+    }
+  ],
+  "result": {
+    "item": "hbm:designator_range",
+    "count": 1
+  }
+}

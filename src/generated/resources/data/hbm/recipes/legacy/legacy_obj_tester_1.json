@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "P",
+    "I",
+    "S"
+  ],
+  "key": {
+    "P": {
+      "item": "hbm:polaroid"
+    },
+    "I": {
+      "item": "hbm:flame_pony"
+    },
+    "S": {
+      "item": "hbm:plate_steel"
+    }
+  },
+  "result": {
+    "item": "hbm:obj_tester",
+    "count": 1
+  }
+}

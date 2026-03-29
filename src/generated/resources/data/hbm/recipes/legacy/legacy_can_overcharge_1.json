@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:can_empty"
+    },
+    {
+      "item": "minecraft:potionitem"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "item": "hbm:dust_sulfur"
+    }
+  ],
+  "result": {
+    "item": "hbm:can_overcharge",
+    "count": 1
+  }
+}

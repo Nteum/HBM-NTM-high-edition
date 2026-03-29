@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "IPI",
+    "IBI",
+    "IPI"
+  ],
+  "key": {
+    "I": {
+      "item": "hbm:plate_saturnite"
+    },
+    "P": {
+      "item": "hbm:coil_advanced_torus"
+    },
+    "B": {
+      "item": "hbm:battery_sc_technetium"
+    }
+  },
+  "result": {
+    "item": "hbm:barrel_antimatter",
+    "count": 1
+  }
+}

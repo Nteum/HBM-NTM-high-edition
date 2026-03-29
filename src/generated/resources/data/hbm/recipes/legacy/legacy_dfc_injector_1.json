@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SDS",
+    "TXL",
+    "SDS"
+  ],
+  "key": {
+    "S": {
+      "item": "hbm:plate_welded"
+    },
+    "D": {
+      "item": "hbm:plate_cmb_steel"
+    },
+    "T": {
+      "item": "hbm:machine_fluidtank"
+    },
+    "X": {
+      "item": "hbm:motor"
+    },
+    "L": {
+      "item": "hbm:pipe"
+    }
+  },
+  "result": {
+    "item": "hbm:dfc_injector",
+    "count": 1
+  }
+}

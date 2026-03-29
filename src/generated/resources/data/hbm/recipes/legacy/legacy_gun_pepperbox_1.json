@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "IIW",
+    "  C"
+  ],
+  "key": {
+    "I": {
+      "item": "hbm:ingot_iron"
+    },
+    "W": {
+      "tag": "minecraft:planks"
+    },
+    "C": {
+      "item": "hbm:ingot_copper"
+    }
+  },
+  "result": {
+    "item": "hbm:gun_pepperbox",
+    "count": 1
+  }
+}

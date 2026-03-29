@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SS",
+    "SS"
+  ],
+  "key": {
+    "S": {
+      "item": "hbm:steel_beam"
+    }
+  },
+  "result": {
+    "item": "hbm:steel_grate",
+    "count": 4
+  }
+}

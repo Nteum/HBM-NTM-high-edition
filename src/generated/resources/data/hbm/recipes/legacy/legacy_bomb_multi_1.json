@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAD",
+    "CHF",
+    "AAD"
+  ],
+  "key": {
+    "A": {
+      "item": "hbm:wire_fine"
+    },
+    "C": {
+      "item": "hbm:circuit"
+    },
+    "H": {
+      "item": "hbm:shell"
+    },
+    "F": {
+      "item": "hbm:fins_quad_titanium"
+    },
+    "D": {
+      "item": "minecraft:white_dye"
+    }
+  },
+  "result": {
+    "item": "hbm:bomb_multi",
+    "count": 1
+  }
+}

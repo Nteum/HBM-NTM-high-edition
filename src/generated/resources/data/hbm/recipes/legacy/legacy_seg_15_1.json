@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PP",
+    "SS",
+    "BB"
+  ],
+  "key": {
+    "P": {
+      "item": "hbm:plate_titanium"
+    },
+    "S": {
+      "item": "hbm:steel_scaffold"
+    },
+    "B": {
+      "item": "hbm:steel_beam"
+    }
+  },
+  "result": {
+    "item": "hbm:seg_15",
+    "count": 1
+  }
+}

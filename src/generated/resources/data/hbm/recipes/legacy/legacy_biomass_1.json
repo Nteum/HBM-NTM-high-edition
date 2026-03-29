@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "item": "hbm:powder_sawdust"
+    },
+    {
+      "item": "hbm:powder_sawdust"
+    },
+    {
+      "item": "hbm:powder_sawdust"
+    },
+    {
+      "item": "hbm:powder_sawdust"
+    },
+    {
+      "item": "hbm:powder_sawdust"
+    }
+  ],
+  "result": {
+    "item": "hbm:biomass",
+    "count": 4
+  }
+}

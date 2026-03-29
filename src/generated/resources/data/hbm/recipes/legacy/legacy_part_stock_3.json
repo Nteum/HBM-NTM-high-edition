@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "WWW",
+    "  W"
+  ],
+  "key": {
+    "W": {
+      "item": "hbm:ingot_bakelite"
+    }
+  },
+  "result": {
+    "item": "hbm:part_stock",
+    "count": 1
+  }
+}

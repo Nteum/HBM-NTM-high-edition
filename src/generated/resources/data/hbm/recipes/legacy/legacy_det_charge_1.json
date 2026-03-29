@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PDP",
+    "DTD",
+    "PDP"
+  ],
+  "key": {
+    "P": {
+      "item": "hbm:plate_steel"
+    },
+    "D": {
+      "item": "hbm:det_cord"
+    },
+    "T": {
+      "item": "hbm:ingot_any_plasticexplosive"
+    }
+  },
+  "result": {
+    "item": "hbm:det_charge",
+    "count": 1
+  }
+}

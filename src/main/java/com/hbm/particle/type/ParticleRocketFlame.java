@@ -23,7 +23,7 @@ public class ParticleRocketFlame extends TextureSheetParticle {
 
     public ParticleRocketFlame(ClientLevel pLevel, double pX, double pY, double pZ, double pXSpeed, double pYSpeed, double pZSpeed, SpriteSet sprites) {
         super(pLevel, pX, pY, pZ, pXSpeed, pYSpeed, pZSpeed);
-        this.gravity = 0f;
+        this.gravity = -0.2f;
         this.friction = 0.91f;
         this.lifetime = 300 + pLevel.random.nextInt(50);
 //        this.setSpriteFromAge(sprite);
@@ -44,7 +44,6 @@ public class ParticleRocketFlame extends TextureSheetParticle {
     public ParticleRenderType getRenderType() {
         return ParticleRenderType.PARTICLE_SHEET_LIT;
     }
-
 
     @Override
     public void render(VertexConsumer pBuffer, Camera pRenderInfo, float pPartialTicks) {
@@ -100,11 +99,7 @@ public class ParticleRocketFlame extends TextureSheetParticle {
         }
     }
 
-    @Override
-    public boolean shouldCull() {
-        return false;
-    }
-    //    @OnlyIn(Dist.CLIENT)
+//    @OnlyIn(Dist.CLIENT)
 //    public static class Provider implements ParticleProvider<SimpleParticleType> {
 //        private final SpriteSet sprites;
 //        public Provider(SpriteSet pSprites) {

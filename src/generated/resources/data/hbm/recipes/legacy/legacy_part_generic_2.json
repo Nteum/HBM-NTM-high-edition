@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " I ",
+    "CPC",
+    " I "
+  ],
+  "key": {
+    "I": {
+      "item": "hbm:ingot_tc_alloy"
+    },
+    "C": {
+      "item": "hbm:ingot_polymer"
+    },
+    "P": {
+      "item": "hbm:motor"
+    }
+  },
+  "result": {
+    "item": "hbm:part_generic",
+    "count": 4
+  }
+}

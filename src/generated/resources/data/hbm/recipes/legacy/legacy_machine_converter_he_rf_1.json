@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "RRR",
+    "WWW",
+    "III"
+  ],
+  "key": {
+    "R": {
+      "item": "hbm:circuit"
+    },
+    "W": {
+      "item": "minecraft:redstone"
+    },
+    "I": {
+      "item": "hbm:ingot_steel"
+    }
+  },
+  "result": {
+    "item": "hbm:machine_converter_he_rf",
+    "count": 1
+  }
+}

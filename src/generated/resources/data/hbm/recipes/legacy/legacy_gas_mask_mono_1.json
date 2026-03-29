@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " P ",
+    "PPP",
+    " F "
+  ],
+  "key": {
+    "P": {
+      "item": "hbm:ingot_latex"
+    },
+    "F": {
+      "item": "hbm:plate_iron"
+    }
+  },
+  "result": {
+    "item": "hbm:gas_mask_mono",
+    "count": 1
+  }
+}

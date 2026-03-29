@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:rod_zirnox_empty"
+    },
+    {
+      "item": "hbm:ingot_lithium"
+    },
+    {
+      "item": "hbm:ingot_lithium"
+    }
+  ],
+  "result": {
+    "item": "hbm:rod_zirnox",
+    "count": 1
+  }
+}

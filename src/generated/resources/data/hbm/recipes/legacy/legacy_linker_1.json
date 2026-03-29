@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "I I",
+    "ICI",
+    "GGG"
+  ],
+  "key": {
+    "I": {
+      "item": "hbm:plate_iron"
+    },
+    "G": {
+      "item": "hbm:plate_gold"
+    },
+    "C": {
+      "item": "hbm:circuit"
+    }
+  },
+  "result": {
+    "item": "hbm:linker",
+    "count": 1
+  }
+}

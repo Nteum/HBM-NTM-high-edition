@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "LLL",
+    "SIS",
+    "LLL"
+  ],
+  "key": {
+    "L": {
+      "item": "minecraft:leather"
+    },
+    "S": {
+      "item": "hbm:syringe_metal_stimpak"
+    },
+    "I": {
+      "item": "hbm:syringe_antidote"
+    }
+  },
+  "result": {
+    "item": "hbm:med_bag",
+    "count": 1
+  }
+}

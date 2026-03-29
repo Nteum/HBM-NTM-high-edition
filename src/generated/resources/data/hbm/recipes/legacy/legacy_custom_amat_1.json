@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " C ",
+    "MMM",
+    "AAA"
+  ],
+  "key": {
+    "C": {
+      "item": "hbm:plate_copper"
+    },
+    "A": {
+      "item": "hbm:plate_aluminium"
+    },
+    "M": {
+      "item": "hbm:cell_antimatter"
+    }
+  },
+  "result": {
+    "item": "hbm:custom_amat",
+    "count": 1
+  }
+}

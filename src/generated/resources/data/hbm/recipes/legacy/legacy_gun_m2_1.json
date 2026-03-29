@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  G",
+    "BRM",
+    "  G"
+  ],
+  "key": {
+    "G": {
+      "item": "hbm:part_grip"
+    },
+    "B": {
+      "item": "hbm:part_barrel_heavy"
+    },
+    "R": {
+      "item": "hbm:part_receiver_heavy"
+    },
+    "M": {
+      "item": "hbm:part_mechanism"
+    }
+  },
+  "result": {
+    "item": "hbm:gun_m2",
+    "count": 1
+  }
+}

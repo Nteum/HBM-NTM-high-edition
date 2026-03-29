@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " A ",
+    " IA",
+    "I  "
+  ],
+  "key": {
+    "A": {
+      "item": "hbm:ingot_aluminium"
+    },
+    "I": {
+      "item": "hbm:ingot_iron"
+    }
+  },
+  "result": {
+    "item": "hbm:mirror_tool",
+    "count": 1
+  }
+}

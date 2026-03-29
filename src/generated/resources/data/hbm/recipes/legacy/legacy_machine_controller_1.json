@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "TDT",
+    "DCD",
+    "TDT"
+  ],
+  "key": {
+    "T": {
+      "item": "hbm:ingot_tc_alloy"
+    },
+    "D": {
+      "item": "hbm:crt_display"
+    },
+    "C": {
+      "item": "hbm:circuit"
+    }
+  },
+  "result": {
+    "item": "hbm:machine_controller",
+    "count": 1
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " P ",
+    "PBP",
+    " P "
+  ],
+  "key": {
+    "P": {
+      "item": "hbm:plate_desh"
+    },
+    "B": {
+      "item": "hbm:blades_advanced_alloy"
+    }
+  },
+  "result": {
+    "item": "hbm:blades_desh",
+    "count": 1
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SSS",
+    "L L",
+    "SSS"
+  ],
+  "key": {
+    "S": {
+      "item": "hbm:plate_cast"
+    },
+    "L": {
+      "item": "hbm:plate_cast"
+    }
+  },
+  "result": {
+    "item": "hbm:rod_empty",
+    "count": 16
+  }
+}

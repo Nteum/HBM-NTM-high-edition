@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:rod_quad"
+    }
+  ],
+  "result": {
+    "item": "hbm:lithium",
+    "count": 4
+  }
+}

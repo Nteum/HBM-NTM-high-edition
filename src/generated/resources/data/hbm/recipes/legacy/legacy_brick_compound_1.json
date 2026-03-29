@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "FBF",
+    "BTB",
+    "FBF"
+  ],
+  "key": {
+    "F": {
+      "item": "hbm:bolt"
+    },
+    "B": {
+      "item": "hbm:reinforced_brick"
+    },
+    "T": {
+      "item": "hbm:oil_tar"
+    }
+  },
+  "result": {
+    "item": "hbm:brick_compound",
+    "count": 4
+  }
+}

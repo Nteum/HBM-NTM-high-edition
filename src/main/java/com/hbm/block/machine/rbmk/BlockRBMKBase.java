@@ -38,7 +38,7 @@ public class BlockRBMKBase extends BlockDummyable {
 
     public BlockRBMKBase(Properties properties) {
         super(properties);
-        SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D);
+        this.shape = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D);
         this.registerDefaultState(this.defaultBlockState().setValue(LID, RBMKLidType.NONE));
     }
 

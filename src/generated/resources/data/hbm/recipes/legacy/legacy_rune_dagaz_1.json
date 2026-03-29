@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:rune_blank"
+    },
+    {
+      "item": "hbm:powder_spark_mix"
+    },
+    {
+      "item": "hbm:singularity"
+    }
+  ],
+  "result": {
+    "item": "hbm:rune_dagaz",
+    "count": 1
+  }
+}

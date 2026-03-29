@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:powder_coal"
+    },
+    {
+      "item": "hbm:dust_saltpeter"
+    },
+    {
+      "item": "hbm:powder_bromine"
+    }
+  ],
+  "result": {
+    "item": "hbm:xanax",
+    "count": 1
+  }
+}

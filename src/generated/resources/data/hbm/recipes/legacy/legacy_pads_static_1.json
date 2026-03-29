@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CDC",
+    "ISI",
+    "CDC"
+  ],
+  "key": {
+    "C": {
+      "item": "hbm:ingot_copper"
+    },
+    "D": {
+      "item": "hbm:ducttape"
+    },
+    "I": {
+      "item": "hbm:ingot_latex"
+    },
+    "S": {
+      "item": "hbm:pads_slime"
+    }
+  },
+  "result": {
+    "item": "hbm:pads_static",
+    "count": 1
+  }
+}

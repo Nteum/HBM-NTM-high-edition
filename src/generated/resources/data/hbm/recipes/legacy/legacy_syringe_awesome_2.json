@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SNS",
+    "PCP",
+    "SNS"
+  ],
+  "key": {
+    "C": {
+      "item": "hbm:syringe_empty"
+    },
+    "S": {
+      "item": "hbm:dust_sulfur"
+    },
+    "P": {
+      "item": "hbm:nugget_plutonium239"
+    },
+    "N": {
+      "item": "hbm:nugget_plutonium238"
+    }
+  },
+  "result": {
+    "item": "hbm:syringe_awesome",
+    "count": 1
+  }
+}

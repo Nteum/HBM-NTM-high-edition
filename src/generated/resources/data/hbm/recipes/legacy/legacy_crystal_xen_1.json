@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "EEE",
+    "EIE",
+    "EEE"
+  ],
+  "key": {
+    "E": {
+      "item": "hbm:powder_power"
+    },
+    "I": {
+      "item": "hbm:ingot_euphemium"
+    }
+  },
+  "result": {
+    "item": "hbm:crystal_xen",
+    "count": 1
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:ams_catalyst_blank"
+    },
+    {
+      "item": "hbm:rune_isa"
+    },
+    {
+      "item": "hbm:rune_dagaz"
+    },
+    {
+      "item": "hbm:rune_jera"
+    },
+    {
+      "item": "hbm:rune_thurisaz"
+    },
+    {
+      "item": "hbm:powder_iron"
+    },
+    {
+      "item": "hbm:powder_iron"
+    },
+    {
+      "item": "hbm:powder_iron"
+    },
+    {
+      "item": "hbm:powder_iron"
+    }
+  ],
+  "result": {
+    "item": "hbm:ams_catalyst_iron",
+    "count": 1
+  }
+}

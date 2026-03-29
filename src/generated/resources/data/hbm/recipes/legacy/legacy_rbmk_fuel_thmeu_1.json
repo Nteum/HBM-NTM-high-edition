@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:rbmk_fuel_empty"
+    },
+    {
+      "item": "hbm:billet_thorium_fuel"
+    },
+    {
+      "item": "hbm:billet_thorium_fuel"
+    },
+    {
+      "item": "hbm:billet_thorium_fuel"
+    },
+    {
+      "item": "hbm:billet_thorium_fuel"
+    },
+    {
+      "item": "hbm:billet_thorium_fuel"
+    },
+    {
+      "item": "hbm:billet_thorium_fuel"
+    },
+    {
+      "item": "hbm:billet_thorium_fuel"
+    },
+    {
+      "item": "hbm:billet_thorium_fuel"
+    }
+  ],
+  "result": {
+    "item": "hbm:rbmk_fuel_thmeu",
+    "count": 1
+  }
+}

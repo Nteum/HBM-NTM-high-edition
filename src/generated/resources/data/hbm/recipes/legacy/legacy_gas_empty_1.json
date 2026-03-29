@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "S ",
+    "AA",
+    "AA"
+  ],
+  "key": {
+    "A": {
+      "item": "hbm:plate_steel"
+    },
+    "S": {
+      "item": "hbm:plate_copper"
+    }
+  },
+  "result": {
+    "item": "hbm:gas_empty",
+    "count": 2
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "EWE",
+    "EEE",
+    "EEE"
+  ],
+  "key": {
+    "E": {
+      "item": "hbm:plate_euphemium"
+    },
+    "W": {
+      "item": "hbm:watch"
+    }
+  },
+  "result": {
+    "item": "hbm:euphemium_plate",
+    "count": 1
+  }
+}

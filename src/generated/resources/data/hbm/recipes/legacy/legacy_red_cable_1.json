@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " W ",
+    "RRR",
+    " W "
+  ],
+  "key": {
+    "W": {
+      "item": "hbm:plate_polymer"
+    },
+    "R": {
+      "item": "hbm:wire_fine"
+    }
+  },
+  "result": {
+    "item": "hbm:red_cable",
+    "count": 16
+  }
+}

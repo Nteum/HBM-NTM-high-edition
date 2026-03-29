@@ -5,6 +5,6 @@
   "render_type": "minecraft:cutout",
   "model": "hbm:models/rbmk/rbmk_rods.obj",
   "textures": {
-    "texture0": "hbm:block/rbmk/rbmk_control"
+    "texture0": "hbm:block/rbmk/rbmk_element"
   }
 }

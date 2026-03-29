@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "type": "forge:nbt",
+      "item": "hbm:rod_breeder_quad",
+      "nbt": "{hbmRodType:3b}"
+    }
+  ],
+  "result": {
+    "item": "hbm:billet_co60",
+    "count": 4
+  }
+}

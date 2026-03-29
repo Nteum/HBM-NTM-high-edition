@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " C ",
+    "BRS",
+    " MG"
+  ],
+  "key": {
+    "G": {
+      "item": "hbm:part_grip"
+    },
+    "B": {
+      "item": "hbm:part_barrel_heavy"
+    },
+    "R": {
+      "item": "hbm:part_receiver_heavy"
+    },
+    "M": {
+      "item": "hbm:part_mechanism"
+    },
+    "C": {
+      "item": "hbm:weapon_mod_special"
+    },
+    "S": {
+      "item": "hbm:part_stock"
+    }
+  },
+  "result": {
+    "item": "hbm:gun_amat",
+    "count": 1
+  }
+}

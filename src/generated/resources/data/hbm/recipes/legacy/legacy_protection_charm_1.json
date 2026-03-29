@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " M ",
+    "MDM",
+    " M "
+  ],
+  "key": {
+    "M": {
+      "item": "hbm:fragment_meteorite"
+    },
+    "D": {
+      "item": "hbm:gem_diamond"
+    }
+  },
+  "result": {
+    "item": "hbm:protection_charm",
+    "count": 1
+  }
+}

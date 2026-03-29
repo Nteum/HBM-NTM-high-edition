@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ICI",
+    "TBT",
+    "ICI"
+  ],
+  "key": {
+    "I": {
+      "item": "hbm:ingot_latex"
+    },
+    "C": {
+      "item": "hbm:cladding_lead"
+    },
+    "B": {
+      "item": "hbm:hazmat_plate_grey"
+    },
+    "T": {
+      "item": "hbm:gas_empty"
+    }
+  },
+  "result": {
+    "item": "hbm:liquidator_plate",
+    "count": 1
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "IF"
+  ],
+  "key": {
+    "I": {
+      "item": "hbm:powder_iodine"
+    },
+    "F": {
+      "item": "hbm:dust_fluorite"
+    }
+  },
+  "result": {
+    "item": "hbm:pill_iodine",
+    "count": 8
+  }
+}

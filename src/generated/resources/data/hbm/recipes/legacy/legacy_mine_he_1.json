@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " C ",
+    "PTP"
+  ],
+  "key": {
+    "C": {
+      "item": "hbm:circuit"
+    },
+    "P": {
+      "item": "hbm:plate_steel"
+    },
+    "T": {
+      "item": "hbm:ingot_any_highexplosive"
+    }
+  },
+  "result": {
+    "item": "hbm:mine_he",
+    "count": 1
+  }
+}

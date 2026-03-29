@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DSD",
+    "PPP",
+    "DSD"
+  ],
+  "key": {
+    "D": {
+      "item": "hbm:plate_dura_steel"
+    },
+    "P": {
+      "item": "hbm:piston_selenium"
+    },
+    "S": {
+      "item": "hbm:pipe"
+    }
+  },
+  "result": {
+    "item": "hbm:weapon_mod_special",
+    "count": 1
+  }
+}

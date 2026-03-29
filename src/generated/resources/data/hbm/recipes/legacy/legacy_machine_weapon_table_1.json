@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PPP",
+    "TCT",
+    "TST"
+  ],
+  "key": {
+    "P": {
+      "item": "hbm:plate_gun_metal"
+    },
+    "T": {
+      "item": "hbm:ingot_steel"
+    },
+    "C": {
+      "item": "minecraft:crafting_table"
+    },
+    "S": {
+      "item": "hbm:block_steel"
+    }
+  },
+  "result": {
+    "item": "hbm:machine_weapon_table",
+    "count": 1
+  }
+}

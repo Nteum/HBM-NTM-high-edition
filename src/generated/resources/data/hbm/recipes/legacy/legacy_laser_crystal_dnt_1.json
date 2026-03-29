@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "QDQ",
+    "SBS",
+    "QDQ"
+  ],
+  "key": {
+    "Q": {
+      "item": "hbm:glass_quartz"
+    },
+    "D": {
+      "item": "hbm:ingot_dineutronium"
+    },
+    "B": {
+      "item": "hbm:egg_balefire"
+    },
+    "S": {
+      "item": "hbm:powder_spark_mix"
+    }
+  },
+  "result": {
+    "item": "hbm:laser_crystal_dnt",
+    "count": 1
+  }
+}

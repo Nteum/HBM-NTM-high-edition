@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CUC",
+    "TST",
+    "TBT"
+  ],
+  "key": {
+    "C": {
+      "item": "hbm:circuit"
+    },
+    "U": {
+      "item": "hbm:upgrade_power_3"
+    },
+    "T": {
+      "item": "hbm:barrel_steel"
+    },
+    "S": {
+      "item": "hbm:steel_scaffold"
+    },
+    "B": {
+      "item": "hbm:machine_lithium_battery"
+    }
+  },
+  "result": {
+    "item": "hbm:struct_soyuz_core",
+    "count": 1
+  }
+}

@@ -60,9 +60,6 @@ public class CrackingTowerEntity extends DummyableBlockEntity {
                 .addTank(4_000, Mode.OUTPUT)
                 .addTank(4_000, Mode.OUTPUT)
                 .addTank(1_000, Mode.OUTPUT);
-        this.fluidHandler.getFluidTanks().get(STEAM_TANK).setValidator(stack ->
-                stack.getFluid() == ModFluids.STEAM.source().get()
-                        || stack.getFluid() == ModFluids.HOT_STEAM.source().get());
         this.capabilitiesContent.addCapability(ForgeCapabilities.FLUID_HANDLER, this.fluidHandler);
         this.multiblockData = MultiblockData.mapping.get(ModBlocks.machine_cracking_tower.get());
         this.isFormed = true;

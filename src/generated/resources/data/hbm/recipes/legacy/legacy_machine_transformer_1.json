@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SCS",
+    "MDM",
+    "SCS"
+  ],
+  "key": {
+    "S": {
+      "item": "hbm:ingot_iron"
+    },
+    "D": {
+      "item": "hbm:ingot_mingrade"
+    },
+    "M": {
+      "item": "hbm:coil_advanced_alloy"
+    },
+    "C": {
+      "item": "hbm:circuit"
+    }
+  },
+  "result": {
+    "item": "hbm:machine_transformer",
+    "count": 1
+  }
+}

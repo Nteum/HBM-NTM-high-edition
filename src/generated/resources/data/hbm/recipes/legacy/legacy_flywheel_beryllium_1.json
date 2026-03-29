@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "IBI",
+    "BTB",
+    "IBI"
+  ],
+  "key": {
+    "B": {
+      "item": "hbm:block_beryllium"
+    },
+    "I": {
+      "item": "hbm:plate_cast"
+    },
+    "T": {
+      "item": "hbm:pipe"
+    }
+  },
+  "result": {
+    "item": "hbm:flywheel_beryllium",
+    "count": 1
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "LLL",
+    "MGM",
+    "LLL"
+  ],
+  "key": {
+    "L": {
+      "item": "hbm:ingot_latex"
+    },
+    "G": {
+      "item": "hbm:plate_weapon_steel"
+    },
+    "M": {
+      "item": "hbm:part_mechanism"
+    }
+  },
+  "result": {
+    "item": "hbm:ammo_bag",
+    "count": 1
+  }
+}

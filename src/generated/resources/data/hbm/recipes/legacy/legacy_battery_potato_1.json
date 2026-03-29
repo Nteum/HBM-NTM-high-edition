@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:potato"
+    },
+    {
+      "item": "hbm:wire_fine"
+    },
+    {
+      "item": "hbm:wire_fine"
+    }
+  ],
+  "result": {
+    "item": "hbm:battery_potato",
+    "count": 1
+  }
+}

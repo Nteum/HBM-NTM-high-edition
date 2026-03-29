@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:ingot_gold"
+    },
+    {
+      "item": "hbm:ingot_gold"
+    },
+    {
+      "item": "hbm:nugget_gold"
+    },
+    {
+      "item": "hbm:nugget_gold"
+    },
+    {
+      "item": "minecraft:paper"
+    }
+  ],
+  "result": {
+    "item": "hbm:tem_flakes",
+    "count": 1
+  }
+}

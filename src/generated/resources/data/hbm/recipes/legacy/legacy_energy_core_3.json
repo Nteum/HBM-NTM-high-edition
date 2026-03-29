@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:fusion_core"
+    },
+    {
+      "item": "hbm:fuse"
+    }
+  ],
+  "result": {
+    "item": "hbm:energy_core",
+    "count": 1
+  }
+}

@@ -4,14 +4,16 @@ import com.hbm.block.machine.rbmk.BlockRBMKBase;
 import com.hbm.block.machine.rbmk.BlockRBMKControlRod;
 import com.hbm.block.machine.rbmk.BlockRBMKFuelChannel;
 import com.hbm.block.machine.rbmk.BlockRBMKPeripheral;
+import com.hbm.block.machine.rbmk.BlockRBMKPeripheralLarge;
 import com.hbm.blockentity.ModBlockEntityType;
-import com.hbm.blockentity.base2.BaseMachineBlockEntity;
+import com.hbm.blockentity.base2.DummyableBlockEntity;
 import com.hbm.blockentity.machine.rbmk.RBMKControlRodEntity;
 import com.hbm.reactor.rbmk.RBMKColumnState;
 import com.hbm.reactor.rbmk.RBMKLevelContext;
 import com.hbm.reactor.rbmk.RBMKManager;
 import com.hbm.reactor.rbmk.RBMKPeripheralType;
 import com.hbm.registries.ModSounds;
+import com.hbm.utils.multiblock.MultiblockData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
@@ -35,7 +37,7 @@ import java.util.Optional;
  * Shared block entity for RBMK peripherals. Periodically searches for a nearby
  * RBMK column and mirrors its telemetry to container data for GUIs to consume.
  */
-public class RBMKPeripheralEntity extends BaseMachineBlockEntity {
+public class RBMKPeripheralEntity extends DummyableBlockEntity {
 
     private static final int SEARCH_INTERVAL_TICKS = 40;
     private static final int TELEMETRY_SLOTS = 10;
@@ -62,8 +64,18 @@ public class RBMKPeripheralEntity extends BaseMachineBlockEntity {
         super(ModBlockEntityType.RBMK_PERIPHERAL_ENTITY.get(), pos, state);
         this.items = NonNullList.create();
         this.slotModes = java.util.List.of();
-        this.peripheralType = state.getBlock() instanceof BlockRBMKPeripheral block
-                ? block.getPeripheralType() : RBMKPeripheralType.CONSOLE;
+        this.peripheralType = resolvePeripheralType(state.getBlock());
+        this.multiblockData = MultiblockData.mapping.get(state.getBlock());
+    }
+
+    private static RBMKPeripheralType resolvePeripheralType(Block block) {
+        if (block instanceof BlockRBMKPeripheral peripheral) {
+            return peripheral.getPeripheralType();
+        }
+        if (block instanceof BlockRBMKPeripheralLarge peripheralLarge) {
+            return peripheralLarge.getPeripheralType();
+        }
+        return RBMKPeripheralType.CONSOLE;
     }
 
     @Override
@@ -312,10 +324,18 @@ public class RBMKPeripheralEntity extends BaseMachineBlockEntity {
     }
 
     public boolean linkToColumn(BlockPos target) {
-        if (level == null || !isColumnValid(target)) {
+        if (level == null) {
             return false;
         }
-        manualLink = target.immutable();
+        BlockState state = level.getBlockState(target);
+        if (!(state.getBlock() instanceof BlockRBMKBase base)) {
+            return false;
+        }
+        BlockPos core = base.getCore(state, level, target);
+        if (!isColumnValid(core)) {
+            return false;
+        }
+        manualLink = core.immutable();
         linkedColumn = manualLink;
         setChanged();
         level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL);

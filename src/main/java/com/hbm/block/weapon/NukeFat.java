@@ -7,10 +7,10 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class NukeFat extends NukeBomb{
-//    public static final VoxelShape SHAPE = Block.box(-14,0,-16,14,24,30);
+//    public static final VoxelShape this.shape = Block.box(-14,0,-16,14,24,30);
     public NukeFat(Properties pProperties,int range) {
         super(pProperties,range);
-        SHAPE = Block.box(-20,0,-16,32,24,16);
+        this.shape = Block.box(-20,0,-16,32,24,16);
     }
 
     @Override

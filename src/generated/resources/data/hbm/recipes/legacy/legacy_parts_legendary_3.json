@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:ingot_chainsteel"
+    },
+    {
+      "item": "hbm:ingot_bismuth"
+    },
+    {
+      "item": "hbm:gem_alexandrite"
+    },
+    {
+      "item": "hbm:gem_alexandrite"
+    }
+  ],
+  "result": {
+    "item": "hbm:parts_legendary",
+    "count": 1
+  }
+}

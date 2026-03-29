@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "IBI",
+    "LBL",
+    "IBI"
+  ],
+  "key": {
+    "B": {
+      "item": "minecraft:book"
+    },
+    "I": {
+      "item": "minecraft:black_dye"
+    },
+    "L": {
+      "item": "minecraft:blue_dye"
+    }
+  },
+  "result": {
+    "item": "hbm:book_guide",
+    "count": 1
+  }
+}

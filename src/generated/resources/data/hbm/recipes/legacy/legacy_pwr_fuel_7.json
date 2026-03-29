@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "F",
+    "I",
+    "F"
+  ],
+  "key": {
+    "F": {
+      "item": "hbm:billet_pu_mix"
+    },
+    "I": {
+      "item": "hbm:plate_polymer"
+    }
+  },
+  "result": {
+    "item": "hbm:pwr_fuel",
+    "count": 1
+  }
+}

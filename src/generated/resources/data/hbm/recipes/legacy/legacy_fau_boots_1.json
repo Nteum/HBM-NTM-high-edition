@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PDP",
+    "PBP"
+  ],
+  "key": {
+    "P": {
+      "item": "hbm:plate_armor_fau"
+    },
+    "D": {
+      "item": "hbm:billet_polonium"
+    },
+    "B": {
+      "item": "hbm:starmetal_boots"
+    }
+  },
+  "result": {
+    "item": "hbm:fau_boots",
+    "count": 1
+  }
+}

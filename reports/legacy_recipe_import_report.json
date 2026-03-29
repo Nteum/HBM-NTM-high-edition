@@ -1,0 +1,430 @@
+{
+  "shaped_total": 1151,
+  "shapeless_total": 410,
+  "recipes_written": 1552,
+  "shaped_skipped": 38,
+  "shapeless_skipped": 67,
+  "skipped": [
+    {
+      "reason": "unresolved_output",
+      "call": "stack, parts"
+    },
+    {
+      "reason": "unresolved_ingredient",
+      "call": "new ItemStack(ModItems.watz_pellet, 1, num.ordinal()), new Object[] { \" I \", \"IGI\", \" I \", 'I', mat.ingot(), 'G', GRAPHITE.ingot() }"
+    },
+    {
+      "reason": "unresolved_ingredient",
+      "call": "new ItemStack(ModItems.watz_pellet, 1, num.ordinal()), new Object[] { \" I \", \"IGI\", \" I \", 'I', item, 'G', GRAPHITE.ingot() }"
+    },
+    {
+      "reason": "unresolved_output",
+      "call": "new ItemStack(armor), new Object[] { pattern, 'X', ingot }"
+    },
+    {
+      "reason": "unresolved_output",
+      "call": "ItemModMinecart.createCartItem(EnumCartBase.WOOD, EnumMinecart.EMPTY), new Object[] { \"P P\", \"WPW\", 'P',KEY_SLAB, 'W', KEY_PLANKS }"
+    },
+    {
+      "reason": "unresolved_output",
+      "call": "ItemModMinecart.createCartItem(EnumCartBase.STEEL, EnumMinecart.EMPTY), new Object[] { \"P P\", \"IPI\", 'P', STEEL.plate(), 'I', STEEL.ingot() }"
+    },
+    {
+      "reason": "unresolved_output",
+      "call": "ItemModMinecart.createCartItem(base, EnumMinecart.DESTROYER), new Object[] { \"S S\", \"BLB\", \"SCS\", 'S', STEEL.ingot(), 'B', ModItems.blades_steel, 'L', Fluids.LAVA.getDict(1000), 'C', ItemModMinecart.createCartItem(base, EnumMinecart.EMPTY) }"
+    },
+    {
+      "reason": "unresolved_output",
+      "call": "ItemModMinecart.createCartItem(base, EnumMinecart.POWDER), new Object[] { \"PPP\", \"PCP\", \"PPP\", 'P', Items.gunpowder, 'C', ItemModMinecart.createCartItem(base, EnumMinecart.EMPTY) }"
+    },
+    {
+      "reason": "unresolved_output",
+      "call": "ItemModMinecart.createCartItem(base, EnumMinecart.SEMTEX), new Object[] { \"S\", \"C\", 'S', ModBlocks.semtex, 'C', ItemModMinecart.createCartItem(base, EnumMinecart.EMPTY) }"
+    },
+    {
+      "reason": "unresolved_output",
+      "call": "new ItemStack(tool), new Object[] { pattern, 'X', ingot, '#', KEY_STICK }"
+    },
+    {
+      "reason": "unresolved_output",
+      "call": "new ItemStack((Block) array[2], 6, (int) array[3]), new Object[] { \"###\", '#', new ItemStack((Block) array[0], 1, (int) array[1]) }"
+    },
+    {
+      "reason": "unresolved_output",
+      "call": "new ItemStack((Block) array[2], 4), new Object[] { \"#  \",  \"## \",  \"###\", '#', new ItemStack((Block) array[0], 1, (int) array[1]) }"
+    },
+    {
+      "reason": "unresolved_ingredient",
+      "call": "DictFrame.fromOne(ModItems.conveyor_wand, ConveyorType.EXPRESS, 8), new Object[] { \"CCC\", \"CLC\", \"CCC\", 'C', DictFrame.fromOne(ModItems.conveyor_wand, ConveyorType.REGULAR), 'L', Fluids.LUBRICANT.getDict(1_000) }"
+    },
+    {
+      "reason": "unresolved_ingredient",
+      "call": "new ItemStack(ModItems.stamp_stone_flat, 1), new Object[] { \"III\", \"SSS\", 'I', brick, 'S', \"stone\" }"
+    },
+    {
+      "reason": "unresolved_ingredient",
+      "call": "new ItemStack(ModItems.stamp_iron_flat, 1), new Object[] { \"III\", \"SSS\", 'I', brick, 'S', IRON.ingot() }"
+    },
+    {
+      "reason": "unresolved_ingredient",
+      "call": "new ItemStack(ModItems.stamp_steel_flat, 1), new Object[] { \"III\", \"SSS\", 'I', brick, 'S', STEEL.ingot() }"
+    },
+    {
+      "reason": "unresolved_ingredient",
+      "call": "new ItemStack(ModItems.stamp_titanium_flat, 1), new Object[] { \"III\", \"SSS\", 'I', brick, 'S', TI.ingot() }"
+    },
+    {
+      "reason": "unresolved_ingredient",
+      "call": "new ItemStack(ModItems.stamp_obsidian_flat, 1), new Object[] { \"III\", \"SSS\", 'I', brick, 'S', Blocks.obsidian }"
+    },
+    {
+      "reason": "unresolved_ingredient",
+      "call": "new ItemStack(ModItems.stamp_desh_flat, 1), new Object[] { \"BDB\", \"DSD\", \"BDB\", 'B', brick, 'D', DESH.ingot(), 'S', FERRO.ingot() }"
+    },
+    {
+      "reason": "unresolved_ingredient",
+      "call": "new ItemStack(ModBlocks.concrete_colored, 8, i), new Object[] { \"CCC\", \"CDC\", \"CCC\", 'C', ModBlocks.concrete_smooth, 'D', dyeName }"
+    },
+    {
+      "reason": "unresolved_ingredient",
+      "call": "new ItemStack(ModItems.flame_conspiracy, 1), new Object[] { \" S \", \"STS\", \" S \", 'S', Fluids.KEROSENE.getDict(1000), 'T', STEEL.ingot() }"
+    },
+    {
+      "reason": "unresolved_ingredient",
+      "call": "new ItemStack(ModItems.jetpack_tank, 1), new Object[] { \" S \", \"BKB\", \" S \", 'S', STEEL.plate(), 'B', STEEL.bolt(), 'K', Fluids.KEROSENE.getDict(1000) }"
+    },
+    {
+      "reason": "unresolved_ingredient",
+      "call": "new ItemStack(ModBlocks.machine_powerrtg, 1), new Object[] { \"SRS\", \"PTP\", \"SRS\", 'S', STAR.ingot(), 'R', ModItems.rtg_unit, 'P', PO210.billet(), 'T', TS.dust() }"
+    },
+    {
+      "reason": "unresolved_ingredient",
+      "call": "new ItemStack(ModBlocks.struct_launcher, 8), new Object[] { \"PPP\", \"SDS\", \"CCC\", 'P', STEEL.plate(), 'S', ModBlocks.steel_scaffold, 'D', STEEL.pipe(), 'C', ANY_CONCRETE.any() }"
+    },
+    {
+      "reason": "unresolved_ingredient",
+      "call": "new ItemStack(ModItems.ams_catalyst_blank, 1), new Object[] { \"TET\", \"ETE\", \"TET\", 'T', TS.dust(), 'E', EUPH.ingot()}"
+    },
+    {
+      "reason": "unresolved_ingredient",
+      "call": "DictFrame.fromOne(ModItems.part_generic, EnumPartType.PISTON_HYDRAULIC, 4), new Object[] { \" I \", \"CPC\", \" I \", 'I', STEEL.ingot(), 'C', TI.ingot(), 'P', Fluids.LUBRICANT.getDict(1000) }"
+    },
+    {
+      "reason": "unresolved_ingredient",
+      "call": "new ItemStack(ModBlocks.crane_inserter, amount), new Object[] { \"CCC\", \"C C\", \"CBC\", 'C', casing, 'B', DictFrame.fromOne(ModItems.conveyor_wand, ConveyorType.REGULAR) }"
+    },
+    {
+      "reason": "unresolved_ingredient",
+      "call": "new ItemStack(ModBlocks.crane_inserter, amount), new Object[] { \"CCC\", \"C C\", \"CBC\", 'C', casing, 'B', ModBlocks.conveyor }"
+    },
+    {
+      "reason": "unresolved_ingredient",
+      "call": "new ItemStack(ModBlocks.crane_extractor, amount), new Object[] { \"CCC\", \"CPC\", \"CBC\", 'C', casing, 'B', DictFrame.fromOne(ModItems.conveyor_wand, ConveyorType.REGULAR), 'P', DictFrame.fromOne(ModItems.part_generic, EnumPartType.PISTON_PNEUMATIC) }"
+    },
+    {
+      "reason": "unresolved_ingredient",
+      "call": "new ItemStack(ModBlocks.crane_extractor, amount), new Object[] { \"CCC\", \"CPC\", \"CBC\", 'C', casing, 'B', ModBlocks.conveyor, 'P', DictFrame.fromOne(ModItems.part_generic, EnumPartType.PISTON_PNEUMATIC) }"
+    },
+    {
+      "reason": "unresolved_ingredient",
+      "call": "new ItemStack(ModBlocks.crane_grabber, amount), new Object[] { \"C C\", \"P P\", \"CBC\", 'C', casing, 'B', DictFrame.fromOne(ModItems.conveyor_wand, ConveyorType.REGULAR), 'P', DictFrame.fromOne(ModItems.part_generic, EnumPartType.PISTON_PNEUMATIC) }"
+    },
+    {
+      "reason": "unresolved_ingredient",
+      "call": "new ItemStack(ModBlocks.crane_grabber, amount), new Object[] { \"C C\", \"P P\", \"CBC\", 'C', casing, 'B', ModBlocks.conveyor, 'P', DictFrame.fromOne(ModItems.part_generic, EnumPartType.PISTON_PNEUMATIC) }"
+    },
+    {
+      "reason": "unresolved_ingredient",
+      "call": "new ItemStack(ModItems.drone, 1, EnumDroneType.PATROL_EXPRESS.ordinal()), new Object[] { \" P \", \"KDK\", \" P \", 'P', TI.plateWelded(), 'K', Fluids.KEROSENE.getDict(1_000), 'D', new ItemStack(ModItems.drone, 1, EnumDroneType.PATROL.ordinal()) }"
+    },
+    {
+      "reason": "unresolved_ingredient",
+      "call": "new ItemStack(ModItems.drone, 1, EnumDroneType.PATROL_EXPRESS_CHUNKLOADING.ordinal()), new Object[] { \" P \", \"KDK\", \" P \", 'P', TI.plateWelded(), 'K', Fluids.KEROSENE.getDict(1_000), 'D', new ItemStack(ModItems.drone, 1, EnumDroneType.PATROL_CHUNKLOADING.ordinal()) }"
+    },
+    {
+      "reason": "unresolved_ingredient",
+      "call": "new ItemStack(ModItems.wire_fine, 24, mat.id), new Object[] { \"###\", '#', MaterialShapes.INGOT.name() + name }"
+    },
+    {
+      "reason": "unresolved_ingredient",
+      "call": "new ItemStack(ModItems.bolt, 16, mat.id), new Object[] { \"#\", \"#\", '#', MaterialShapes.INGOT.name() + name }"
+    },
+    {
+      "reason": "unresolved_output",
+      "call": "new ItemStack(disassembler, 1), \"GAG\", \"EIE\", \" I \", 'G', GOLD.plateCast(), 'A', \"alloyUltimate\", 'E', \"battery\", 'I', \"ingotRefinedObsidian\""
+    },
+    {
+      "reason": "unresolved_output",
+      "call": "new ItemStack(generator, 1, 6), \" T \", \"TAT\", \"BCB\", 'T', TI.plateCast(), 'A', \"alloyAdvanced\", 'B', \"battery\", 'C', ANY_PLASTIC.ingot()"
+    },
+    {
+      "reason": "unresolved_output",
+      "call": "disks.get(\"PWRangler\").item, \"oc:floppy\", new ItemStack(ModBlocks.pwr_casing)"
+    },
+    {
+      "reason": "unresolved_ingredient",
+      "call": "new ItemStack(ModItems.weaponized_starblaster_cell, 1), new Object[] { new ItemStack(ModItems.fluid_tank_full, 1, Fluids.PEROXIDE.getID()), GunB92Cell.getFullCell(), CU.wireFine() }"
+    },
+    {
+      "reason": "unresolved_ingredient",
+      "call": "new ItemStack(ModItems.grenade_gascan, 1), new Object[] { Fluids.DIESEL.getDict(1000), Items.flint }"
+    },
+    {
+      "reason": "unresolved_ingredient",
+      "call": "new ItemStack(ModItems.grenade_gascan, 1), new Object[] { Fluids.DIESEL_CRACK.getDict(1000), Items.flint }"
+    },
+    {
+      "reason": "unresolved_ingredient",
+      "call": "new ItemStack(ModItems.grenade_gascan, 1), new Object[] { Fluids.PETROIL.getDict(1000), Items.flint }"
+    },
+    {
+      "reason": "unresolved_ingredient",
+      "call": "new ItemStack(ModItems.grenade_gascan, 1), new Object[] { Fluids.PETROIL_LEADED.getDict(1000), Items.flint }"
+    },
+    {
+      "reason": "unresolved_ingredient",
+      "call": "new ItemStack(ModItems.grenade_gascan, 1), new Object[] { Fluids.GASOLINE.getDict(1000), Items.flint }"
+    },
+    {
+      "reason": "unresolved_ingredient",
+      "call": "new ItemStack(ModItems.grenade_gascan, 1), new Object[] { Fluids.GASOLINE_LEADED.getDict(1000), Items.flint }"
+    },
+    {
+      "reason": "unresolved_ingredient",
+      "call": "new ItemStack(ModItems.grenade_gascan, 1), new Object[] { Fluids.BIOFUEL.getDict(1000), Items.flint }"
+    },
+    {
+      "reason": "unresolved_ingredient",
+      "call": "new ItemStack(ModItems.chocolate_milk, 1), new Object[] { KEY_ANYPANE, new ItemStack(Items.dye, 1, 3), Items.milk_bucket, Fluids.NITROGLYCERIN.getDict(1_000) }"
+    },
+    {
+      "reason": "unresolved_ingredient",
+      "call": "new ItemStack(ModItems.can_creature, 1), new Object[] { ModItems.can_empty, Items.potionitem, Items.sugar, Fluids.DIESEL.getDict(1000) }"
+    },
+    {
+      "reason": "unresolved_ingredient",
+      "call": "new ItemStack(ModItems.ball_tnt, 4), new Object[] { Fluids.AROMATICS.getDict(1000), KNO.dust(), KEY_TOOL_CHEMISTRYSET }"
+    },
+    {
+      "reason": "unresolved_ingredient",
+      "call": "new ItemStack(ModItems.ingot_c4, 4), new Object[] { Fluids.UNSATURATEDS.getDict(1000), KNO.dust(), KEY_TOOL_CHEMISTRYSET }"
+    },
+    {
+      "reason": "unresolved_ingredient",
+      "call": "new ItemStack(ModItems.powder_bakelite, 2), new Object[] { Fluids.AROMATICS.getDict(1000), Fluids.PETROLEUM.getDict(1000), KEY_TOOL_CHEMISTRYSET }"
+    },
+    {
+      "reason": "unresolved_ingredient",
+      "call": "new ItemStack(ModItems.powder_nitan_mix, 6), new Object[] { ST.dust(), CO.dust(), BR.dust(), TS.dust(), NB.dust(), CE.dust() }"
+    },
+    {
+      "reason": "unresolved_ingredient",
+      "call": "new ItemStack(ModItems.powder_desh_mix, 1), new Object[] { B.dustTiny(), B.dustTiny(), LA.dustTiny(), LA.dustTiny(), CE.dustTiny(), CO.dustTiny(), LI.dustTiny(), ND.dustTiny(), NB.dustTiny() }"
+    },
+    {
+      "reason": "unresolved_output",
+      "call": "ItemScraps.create(new MaterialStack(Mats.MAT_MINGRADE, MaterialShapes.INGOT.q(2))), new Object[] { CU.dust(), REDSTONE.dust() }"
+    },
+    {
+      "reason": "unresolved_output",
+      "call": "ItemScraps.create(new MaterialStack(Mats.MAT_MAGTUNG, MaterialShapes.INGOT.q(1))), new Object[] { W.dust(), SA326.nugget() }"
+    },
+    {
+      "reason": "unresolved_output",
+      "call": "ItemScraps.create(new MaterialStack(Mats.MAT_TCALLOY, MaterialShapes.INGOT.q(1))), new Object[] { STEEL.dust(), TC99.nugget() }"
+    },
+    {
+      "reason": "unresolved_output",
+      "call": "ItemScraps.create(new MaterialStack(Mats.MAT_STEEL, MaterialShapes.INGOT.q(1))), new Object[] { IRON.dust(), COAL.dust() }"
+    },
+    {
+      "reason": "unresolved_output",
+      "call": "ItemScraps.create(new MaterialStack(Mats.MAT_STEEL, MaterialShapes.INGOT.q(4))), new Object[] { IRON.dust(), IRON.dust(), IRON.dust(), IRON.dust(), COAL.dust(), COAL.dust(), COAL.dust(), COAL.dust() }"
+    },
+    {
+      "reason": "unresolved_output",
+      "call": "new ItemStack(out), new Object[] { ModItems.rod_empty, billet }"
+    },
+    {
+      "reason": "unresolved_output",
+      "call": "new ItemStack(out), new Object[] { ModItems.rod_dual_empty, billet, billet }"
+    },
+    {
+      "reason": "unresolved_output",
+      "call": "new ItemStack(out), new Object[] { ModItems.rod_quad_empty, billet, billet, billet, billet }"
+    },
+    {
+      "reason": "unresolved_output",
+      "call": "new ItemStack(out), new Object[] { ModItems.rod_empty, billet }"
+    },
+    {
+      "reason": "unresolved_output",
+      "call": "new ItemStack(billet, 1), new Object[] { out }"
+    },
+    {
+      "reason": "unresolved_output",
+      "call": "new ItemStack(out), new Object[] { ModItems.rod_empty, mat.billet() }"
+    },
+    {
+      "reason": "unresolved_output",
+      "call": "new ItemStack(billet, 1), new Object[] { out }"
+    },
+    {
+      "reason": "unresolved_output",
+      "call": "new ItemStack(out), new Object[] { ModItems.rod_dual_empty, billet, billet }"
+    },
+    {
+      "reason": "unresolved_output",
+      "call": "new ItemStack(billet, 2), new Object[] { out }"
+    },
+    {
+      "reason": "unresolved_output",
+      "call": "new ItemStack(out), new Object[] { ModItems.rod_dual_empty, mat.billet(), mat.billet() }"
+    },
+    {
+      "reason": "unresolved_output",
+      "call": "new ItemStack(billet, 2), new Object[] { out }"
+    },
+    {
+      "reason": "unresolved_output",
+      "call": "new ItemStack(out), new Object[] { ModItems.rod_quad_empty, billet, billet, billet, billet }"
+    },
+    {
+      "reason": "unresolved_output",
+      "call": "new ItemStack(billet, 4), new Object[] { out }"
+    },
+    {
+      "reason": "unresolved_output",
+      "call": "new ItemStack(out), new Object[] { ModItems.rod_quad_empty, mat.billet(), mat.billet(), mat.billet(), mat.billet() }"
+    },
+    {
+      "reason": "unresolved_output",
+      "call": "new ItemStack(billet, 4), new Object[] { out }"
+    },
+    {
+      "reason": "unresolved_ingredient",
+      "call": "new ItemStack(ModItems.rod, 1, type.ordinal()), new Object[] { ModItems.rod_empty, billet}"
+    },
+    {
+      "reason": "unresolved_ingredient",
+      "call": "new ItemStack(ModItems.rod_dual, 1, type.ordinal()), new Object[] { ModItems.rod_dual_empty, billet, billet}"
+    },
+    {
+      "reason": "unresolved_ingredient",
+      "call": "new ItemStack(ModItems.rod_quad, 1, type.ordinal()), new Object[] { ModItems.rod_quad_empty, billet, billet, billet, billet}"
+    },
+    {
+      "reason": "unresolved_output",
+      "call": "new ItemStack(billet, 1), new Object[] { new ItemStack(ModItems.rod, 1, type.ordinal()) }"
+    },
+    {
+      "reason": "unresolved_output",
+      "call": "new ItemStack(billet, 2), new Object[] { new ItemStack(ModItems.rod_dual, 1, type.ordinal()) }"
+    },
+    {
+      "reason": "unresolved_output",
+      "call": "new ItemStack(billet, 4), new Object[] { new ItemStack(ModItems.rod_quad, 1, type.ordinal()) }"
+    },
+    {
+      "reason": "unresolved_ingredient",
+      "call": "new ItemStack(ModItems.rod, 1, type.ordinal()), new Object[] { ModItems.rod_empty, mat.billet()}"
+    },
+    {
+      "reason": "unresolved_ingredient",
+      "call": "new ItemStack(ModItems.rod_dual, 1, type.ordinal()), new Object[] { ModItems.rod_dual_empty, mat.billet(), mat.billet()}"
+    },
+    {
+      "reason": "unresolved_ingredient",
+      "call": "new ItemStack(ModItems.rod_quad, 1, type.ordinal()), new Object[] { ModItems.rod_quad_empty, mat.billet(), mat.billet(), mat.billet(), mat.billet()}"
+    },
+    {
+      "reason": "unresolved_output",
+      "call": "new ItemStack(billet, 1), new Object[] { new ItemStack(ModItems.rod, 1, type.ordinal()) }"
+    },
+    {
+      "reason": "unresolved_output",
+      "call": "new ItemStack(billet, 2), new Object[] { new ItemStack(ModItems.rod_dual, 1, type.ordinal()) }"
+    },
+    {
+      "reason": "unresolved_output",
+      "call": "new ItemStack(billet, 4), new Object[] { new ItemStack(ModItems.rod_quad, 1, type.ordinal()) }"
+    },
+    {
+      "reason": "unresolved_output",
+      "call": "new ItemStack(out), new Object[] { ModItems.rbmk_fuel_empty, mat.billet(), mat.billet(), mat.billet(), mat.billet(), mat.billet(), mat.billet(), mat.billet(), mat.billet() }"
+    },
+    {
+      "reason": "unresolved_output",
+      "call": "new ItemStack(out), new Object[] { ModItems.rbmk_fuel_empty, billet, billet, billet, billet, billet, billet, billet, billet }"
+    },
+    {
+      "reason": "unresolved_ingredient",
+      "call": "new ItemStack(ModItems.rod_zirnox, 1, num.ordinal()), new Object[] { ModItems.rod_zirnox_empty, billet, billet }"
+    },
+    {
+      "reason": "unresolved_ingredient",
+      "call": "new ItemStack(ModItems.rod_zirnox, 1, num.ordinal()), new Object[] { ModItems.rod_zirnox_empty, mat.billet(), mat.billet() }"
+    },
+    {
+      "reason": "unresolved_output",
+      "call": "ItemModMinecart.createCartItem(EnumCartBase.PAINTED, EnumMinecart.EMPTY), new Object[] { ItemModMinecart.createCartItem(EnumCartBase.STEEL, EnumMinecart.EMPTY), KEY_RED }"
+    },
+    {
+      "reason": "unresolved_ingredient",
+      "call": "new ItemStack(ModItems.overfuse, 1), new Object[] { STEEL.bolt(), ST.dust(), BR.dust(), CO.dust(), TS.dust(), NB.dust(), CU.plateCast(), ModItems.black_hole, CE.dust() }"
+    },
+    {
+      "reason": "unresolved_ingredient",
+      "call": "new ItemStack(ModBlocks.lamp_tritium_green_off, 1), new Object[] { KEY_ANYGLASS, P_RED.dust(), Fluids.TRITIUM.getDict(1_000), S.dust() }"
+    },
+    {
+      "reason": "unresolved_ingredient",
+      "call": "new ItemStack(ModBlocks.lamp_tritium_blue_off, 1), new Object[] {  KEY_ANYGLASS, P_RED.dust(), Fluids.TRITIUM.getDict(1_000), AL.dust() }"
+    },
+    {
+      "reason": "unresolved_ingredient",
+      "call": "new ItemStack(ModItems.gun_kit_1, 1), new Object[] { ANY_RUBBER.ingot(), Fluids.WOODOIL.getDict(1_000), IRON.ingot() }"
+    },
+    {
+      "reason": "unresolved_ingredient",
+      "call": "new ItemStack(ModItems.gun_kit_2, 1), new Object[] { ModItems.gun_kit_1, ModItems.wrench, ModItems.ducttape, Fluids.LUBRICANT.getDict(1_000) }"
+    },
+    {
+      "reason": "unresolved_ingredient",
+      "call": "new ItemStack(ModItems.crystal_charred, 1), new Object[] { ST.dust(), CO.dust(), BR.dust(), NB.dust(), TS.dust(), CE.dust(), ModBlocks.block_meteor, AL.block(), Items.water_bucket }"
+    },
+    {
+      "reason": "unresolved_ingredient",
+      "call": "new ItemStack(Items.slime_ball, 16), new Object[] { new ItemStack(Items.dye, 1, 15), new ItemStack(Items.dye, 1, 15), new ItemStack(Items.dye, 1, 15), new ItemStack(Items.dye, 1, 15), Fluids.SULFURIC_ACID.getDict(1000) }"
+    },
+    {
+      "reason": "unresolved_ingredient",
+      "call": "new ItemStack(ModItems.fluid_duct, 1, i), new Object[] { new ItemStack(ModBlocks.fluid_duct_neo, 1), id }"
+    },
+    {
+      "reason": "unresolved_ingredient",
+      "call": "new ItemStack(ModItems.fluid_duct, 8, i),\n\t\t\t\t\tnew Object[] { new ItemStack(ModBlocks.fluid_duct_neo, 1), new ItemStack(ModBlocks.fluid_duct_neo, 1), new ItemStack(ModBlocks.fluid_duct_neo, 1),\n\t\t\t\t\t\t\tnew ItemStack(ModBlocks.fluid_duct_neo, 1), new ItemStack(ModBlocks.fluid_duct_neo, 1), new ItemStack(ModBlocks.fluid_duct_neo, 1),\n\t\t\t\t\t\t\tnew ItemStack(ModBlocks.fluid_duct_neo, 1), new ItemStack(ModBlocks.fluid_duct_neo, 1), id }"
+    },
+    {
+      "reason": "unresolved_ingredient",
+      "call": "new ItemStack(ModItems.fluid_duct, 1, i),\n\t\t\t\t\tnew Object[] { new ItemStack(ModItems.fluid_duct, 1, OreDictionary.WILDCARD_VALUE), id }"
+    },
+    {
+      "reason": "unresolved_ingredient",
+      "call": "new ItemStack(ModItems.fluid_duct, 8, i),\n\t\t\t\t\tnew Object[] { new ItemStack(ModItems.fluid_duct, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ModItems.fluid_duct, 1, OreDictionary.WILDCARD_VALUE),\n\t\t\t\t\t\t\tnew ItemStack(ModItems.fluid_duct, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ModItems.fluid_duct, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ModItems.fluid_duct, 1, OreDictionary.WILDCARD_VALUE),\n\t\t\t\t\t\t\tnew ItemStack(ModItems.fluid_duct, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ModItems.fluid_duct, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ModItems.fluid_duct, 1, OreDictionary.WILDCARD_VALUE), id }"
+    },
+    {
+      "reason": "unresolved_ingredient",
+      "call": "new ItemStack(ModItems.solid_fuel, 3), new Object[] { Fluids.HEATINGOIL.getDict(16000), KEY_TOOL_CHEMISTRYSET }"
+    },
+    {
+      "reason": "unresolved_ingredient",
+      "call": "new ItemStack(ModItems.canister_full, 2, Fluids.LUBRICANT.getID()), new Object[] { Fluids.HEATINGOIL.getDict(1000), Fluids.UNSATURATEDS.getDict(1000), ModItems.canister_empty, ModItems.canister_empty, KEY_TOOL_CHEMISTRYSET }"
+    },
+    {
+      "reason": "unresolved_ingredient",
+      "call": "new ItemStack(ModItems.holotape_damaged), new Object[] { DictFrame.fromOne(ModItems.holotape_image, EnumHoloImage.HOLO_RESTORED), ModItems.upgrade_muffler, ModItems.crt_display, ModItems.gem_alexandrite /* placeholder for amplifier */ }"
+    }
+  ],
+  "skipped_note": "Only first 200 skipped entries shown"
+}

@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:rod_quad_empty"
+    },
+    {
+      "item": "hbm:billet_uranium238"
+    },
+    {
+      "item": "hbm:billet_uranium238"
+    },
+    {
+      "item": "hbm:billet_uranium238"
+    },
+    {
+      "item": "hbm:billet_uranium238"
+    }
+  ],
+  "result": {
+    "item": "hbm:rod_breeder_quad",
+    "count": 1,
+    "nbt": "{hbmRodType:8b}"
+  }
+}

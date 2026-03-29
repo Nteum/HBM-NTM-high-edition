@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "HHH",
+    "SIS",
+    "WWW"
+  ],
+  "key": {
+    "H": {
+      "item": "hbm:ingot_polycarbonate"
+    },
+    "S": {
+      "item": "hbm:wire_dense"
+    },
+    "I": {
+      "item": "hbm:pellet_charged"
+    },
+    "W": {
+      "item": "hbm:wire_fine"
+    }
+  },
+  "result": {
+    "item": "hbm:circuit",
+    "count": 1
+  }
+}

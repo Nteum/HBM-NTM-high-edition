@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "G",
+    "C",
+    "I"
+  ],
+  "key": {
+    "G": {
+      "item": "hbm:plate_gold"
+    },
+    "C": {
+      "item": "hbm:circuit"
+    },
+    "I": {
+      "item": "hbm:plate_iron"
+    }
+  },
+  "result": {
+    "item": "hbm:gas_tester",
+    "count": 1
+  }
+}

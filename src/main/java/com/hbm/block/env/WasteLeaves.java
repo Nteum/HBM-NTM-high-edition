@@ -32,7 +32,7 @@ public class WasteLeaves extends LeavesBlock {
 			pLevel.setBlock(pPos, Blocks.AIR.defaultBlockState(), 3);
 			//生成掉落物
 			if (pLevel.getBlockState(pPos).isAir()){
-				ItemEntity itemEntity = new ItemEntity(pLevel, pPos.getX() + 0.5, pPos.getY() + 0.5, pPos.getZ() + 0.5, new ItemStack(ModBlocks.WASTE_LEAVES.get()));
+				ItemEntity itemEntity = new ItemEntity(pLevel, pPos.getX() + 0.5, pPos.getY() + 0.5, pPos.getZ() + 0.5, new ItemStack(HBMBlockComponent.WAST_LEAVES.get()));
 				pLevel.addFreshEntity(itemEntity);
 			}
 		}

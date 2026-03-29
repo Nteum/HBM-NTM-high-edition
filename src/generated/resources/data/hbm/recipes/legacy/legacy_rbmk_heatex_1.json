@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SCS",
+    "CBC",
+    "SCS"
+  ],
+  "key": {
+    "S": {
+      "item": "hbm:ingot_steel"
+    },
+    "C": {
+      "item": "hbm:plate_copper"
+    },
+    "B": {
+      "item": "hbm:pipes_steel"
+    }
+  },
+  "result": {
+    "item": "hbm:rbmk_heatex",
+    "count": 1
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "WW",
+    "WW"
+  ],
+  "key": {
+    "W": {
+      "item": "hbm:wire_dense"
+    }
+  },
+  "result": {
+    "item": "hbm:hadron_coil_alloy",
+    "count": 1
+  }
+}

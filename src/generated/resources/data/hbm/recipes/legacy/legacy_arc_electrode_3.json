@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "C",
+    "T",
+    "C"
+  ],
+  "key": {
+    "C": {
+      "item": "hbm:ingot_lanthanum"
+    },
+    "T": {
+      "item": "minecraft:brick"
+    }
+  },
+  "result": {
+    "item": "hbm:arc_electrode",
+    "count": 1
+  }
+}

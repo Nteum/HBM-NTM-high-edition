@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ZZZ",
+    "ZCZ",
+    "ZZZ"
+  ],
+  "key": {
+    "Z": {
+      "item": "hbm:nugget_zirconium"
+    },
+    "C": {
+      "item": "hbm:catalyst_clay"
+    }
+  },
+  "result": {
+    "item": "hbm:gas_mask_filter_mono",
+    "count": 1
+  }
+}

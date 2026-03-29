@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:iv_empty"
+    },
+    {
+      "item": "hbm:powder_magic"
+    }
+  ],
+  "result": {
+    "item": "hbm:iv_xp_empty",
+    "count": 1
+  }
+}

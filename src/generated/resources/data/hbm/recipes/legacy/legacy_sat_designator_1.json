@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "RRD",
+    "PIC",
+    "  P"
+  ],
+  "key": {
+    "P": {
+      "item": "hbm:plate_gold"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "C": {
+      "item": "hbm:circuit"
+    },
+    "D": {
+      "item": "hbm:sat_chip"
+    },
+    "I": {
+      "item": "hbm:ingot_gold"
+    }
+  },
+  "result": {
+    "item": "hbm:sat_designator",
+    "count": 1
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:hadron_coil_mese"
+    }
+  ],
+  "result": {
+    "item": "hbm:wire_dense",
+    "count": 1
+  }
+}

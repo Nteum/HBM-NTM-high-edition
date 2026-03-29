@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " C ",
+    "WLW",
+    "WLW"
+  ],
+  "key": {
+    "C": {
+      "item": "hbm:plate_copper"
+    },
+    "L": {
+      "item": "hbm:plate_lead"
+    },
+    "W": {
+      "item": "hbm:nuclear_waste"
+    }
+  },
+  "result": {
+    "item": "hbm:custom_dirty",
+    "count": 1
+  }
+}

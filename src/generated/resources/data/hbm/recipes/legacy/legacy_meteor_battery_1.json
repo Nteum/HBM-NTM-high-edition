@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "MSM",
+    "MWM",
+    "MSM"
+  ],
+  "key": {
+    "M": {
+      "item": "hbm:meteor_polished"
+    },
+    "S": {
+      "item": "hbm:block_starmetal"
+    },
+    "W": {
+      "item": "hbm:wire_fine"
+    }
+  },
+  "result": {
+    "item": "hbm:meteor_battery",
+    "count": 1
+  }
+}

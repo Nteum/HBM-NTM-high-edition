@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "S S",
+    "SRS",
+    "S S"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:stick"
+    },
+    "R": {
+      "item": "hbm:plant_item"
+    }
+  },
+  "result": {
+    "item": "hbm:rail_wood",
+    "count": 16
+  }
+}

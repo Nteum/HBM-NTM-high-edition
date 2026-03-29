@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "RS ",
+    "ITI",
+    " I "
+  ],
+  "key": {
+    "I": {
+      "item": "hbm:plate_iron"
+    },
+    "R": {
+      "item": "hbm:wire_fine"
+    },
+    "S": {
+      "item": "hbm:plate_steel"
+    },
+    "T": {
+      "item": "minecraft:tnt"
+    }
+  },
+  "result": {
+    "item": "hbm:grenade_generic",
+    "count": 4
+  }
+}

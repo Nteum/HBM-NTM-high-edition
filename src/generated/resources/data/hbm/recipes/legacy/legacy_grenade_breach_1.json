@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "G",
+    "G",
+    "P"
+  ],
+  "key": {
+    "G": {
+      "item": "hbm:grenade_smart"
+    },
+    "P": {
+      "item": "hbm:plate_saturnite"
+    }
+  },
+  "result": {
+    "item": "hbm:grenade_breach",
+    "count": 1
+  }
+}

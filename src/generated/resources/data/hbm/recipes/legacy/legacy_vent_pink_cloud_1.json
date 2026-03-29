@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "IGI",
+    "ICI",
+    "IDI"
+  ],
+  "key": {
+    "I": {
+      "item": "hbm:plate_iron"
+    },
+    "G": {
+      "item": "minecraft:iron_bars"
+    },
+    "C": {
+      "item": "hbm:grenade_pink_cloud"
+    },
+    "D": {
+      "item": "minecraft:dispenser"
+    }
+  },
+  "result": {
+    "item": "hbm:vent_pink_cloud",
+    "count": 1
+  }
+}

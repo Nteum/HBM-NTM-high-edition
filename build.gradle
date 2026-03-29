@@ -19,6 +19,86 @@ plugins {
 
 apply plugin: 'org.spongepowered.mixin'
 
+def buildNumberTaskNames = ['compilejava', 'build', 'rundata', 'runclient'] as Set
+def requestedTaskNames = gradle.startParameter.taskNames.collect { it.tokenize(':').last().toLowerCase(java.util.Locale.ROOT) }
+def shouldBumpBuildNumber = requestedTaskNames.any { it in buildNumberTaskNames }
+
+if (shouldBumpBuildNumber) {
+    def propsFile = file('gradle.properties')
+    def lines = propsFile.exists() ? propsFile.getText('UTF-8').readLines() : []
+
+    def getProp = { String key ->
+        for (String line : lines) {
+            def trimmed = line.trim()
+            if (trimmed.isEmpty() || trimmed.startsWith('#') || trimmed.startsWith('!')) {
+                continue
+            }
+            def idx = line.indexOf('=')
+            if (idx < 0) {
+                continue
+            }
+            def k = line.substring(0, idx).trim()
+            if (k == key) {
+                return line.substring(idx + 1).trim()
+            }
+        }
+        return null
+    }
+
+    def setProp = { String key, String value ->
+        for (int i = 0; i < lines.size(); i++) {
+            def line = lines[i]
+            def trimmed = line.trim()
+            if (trimmed.startsWith('#') || trimmed.startsWith('!')) {
+                continue
+            }
+            def idx = line.indexOf('=')
+            if (idx < 0) {
+                continue
+            }
+            def k = line.substring(0, idx).trim()
+            if (k == key) {
+                lines[i] = "${k}=${value}"
+                return true
+            }
+        }
+        lines.add("${key}=${value}")
+        return false
+    }
+
+    def rawVersion = getProp('mod_version') ?: (project.findProperty('mod_version') as String)
+    if (rawVersion) {
+        def matcher = rawVersion =~ /(.*)-Build(\d+)$/
+        def base = rawVersion
+        Integer buildNumber = null
+        if (matcher.matches()) {
+            base = matcher.group(1)
+            buildNumber = matcher.group(2) as Integer
+        }
+
+        def lastBase = getProp('mod_version_base')
+        def resetBuild = lastBase != null && lastBase != base
+        def nextBuildNumber = resetBuild || buildNumber == null ? 1000 : buildNumber + 1
+        def newVersion = "${base}-Build${nextBuildNumber}"
+
+        setProp('mod_version', newVersion)
+        setProp('mod_version_base', base)
+
+        def newText = lines.join(System.lineSeparator()) + System.lineSeparator()
+        if (propsFile.exists()) {
+            if (propsFile.getText('UTF-8') != newText) {
+                propsFile.setText(newText, 'UTF-8')
+            }
+        } else {
+            propsFile.setText(newText, 'UTF-8')
+        }
+
+        project.ext.set('mod_version', newVersion)
+    } else {
+        logger.warn('mod_version not found in gradle.properties; build number bump skipped.')
+    }
+}
+
 group = mod_group_id
 version = mod_version
 

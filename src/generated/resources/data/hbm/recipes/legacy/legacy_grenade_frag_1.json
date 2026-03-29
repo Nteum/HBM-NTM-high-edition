@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " G ",
+    "WGW",
+    " K "
+  ],
+  "key": {
+    "G": {
+      "item": "hbm:grenade_generic"
+    },
+    "W": {
+      "tag": "minecraft:planks"
+    },
+    "K": {
+      "item": "minecraft:gravel"
+    }
+  },
+  "result": {
+    "item": "hbm:grenade_frag",
+    "count": 2
+  }
+}

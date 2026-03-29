@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " W ",
+    "IEI",
+    "ICI"
+  ],
+  "key": {
+    "W": {
+      "item": "hbm:wire_fine"
+    },
+    "I": {
+      "item": "hbm:plate_polymer"
+    },
+    "E": {
+      "item": "minecraft:redstone"
+    },
+    "C": {
+      "item": "hbm:powder_cobalt"
+    }
+  },
+  "result": {
+    "item": "hbm:hev_battery",
+    "count": 4
+  }
+}

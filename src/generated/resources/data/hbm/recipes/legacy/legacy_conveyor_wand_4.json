@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CPC"
+  ],
+  "key": {
+    "C": {
+      "item": "hbm:conveyor_wand"
+    },
+    "P": {
+      "item": "hbm:plate_iron"
+    }
+  },
+  "result": {
+    "item": "hbm:conveyor_wand",
+    "count": 1
+  }
+}

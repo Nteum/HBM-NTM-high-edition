@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:ams_catalyst_blank"
+    },
+    {
+      "item": "hbm:rune_isa"
+    },
+    {
+      "item": "hbm:rune_dagaz"
+    },
+    {
+      "item": "hbm:rune_thurisaz"
+    },
+    {
+      "item": "hbm:rune_thurisaz"
+    },
+    {
+      "item": "hbm:dust_thorium232"
+    },
+    {
+      "item": "hbm:dust_thorium232"
+    },
+    {
+      "item": "hbm:dust_thorium232"
+    },
+    {
+      "item": "hbm:dust_thorium232"
+    }
+  ],
+  "result": {
+    "item": "hbm:ams_catalyst_thorium",
+    "count": 1
+  }
+}

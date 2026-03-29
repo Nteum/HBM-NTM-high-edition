@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BB",
+    "BB"
+  ],
+  "key": {
+    "B": {
+      "item": "hbm:cm_block"
+    }
+  },
+  "result": {
+    "item": "hbm:cm_sheet",
+    "count": 16
+  }
+}

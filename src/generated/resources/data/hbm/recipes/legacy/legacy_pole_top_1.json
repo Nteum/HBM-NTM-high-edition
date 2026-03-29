@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "T T",
+    "TRT",
+    "BBB"
+  ],
+  "key": {
+    "T": {
+      "item": "hbm:ingot_tungsten"
+    },
+    "B": {
+      "item": "hbm:ingot_beryllium"
+    },
+    "R": {
+      "item": "hbm:ingot_mingrade"
+    }
+  },
+  "result": {
+    "item": "hbm:pole_top",
+    "count": 1
+  }
+}

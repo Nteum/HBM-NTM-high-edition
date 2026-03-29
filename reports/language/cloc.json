@@ -1,0 +1,83 @@
+{
+  "header": {
+    "cloc_url": "github.com/AlDanial/cloc",
+    "cloc_version": "1.90",
+    "elapsed_seconds": 2.95859003067017,
+    "n_files": 3811,
+    "n_lines": 149277,
+    "files_per_second": 1288.1135812983,
+    "lines_per_second": 50455.4529193038
+  },
+  "JSON": {
+    "nFiles": 3001,
+    "blank": 14,
+    "comment": 0,
+    "code": 68941
+  },
+  "Java": {
+    "nFiles": 790,
+    "blank": 8465,
+    "comment": 8571,
+    "code": 59299
+  },
+  "Python": {
+    "nFiles": 5,
+    "blank": 161,
+    "comment": 18,
+    "code": 1658
+  },
+  "XML": {
+    "nFiles": 3,
+    "blank": 0,
+    "comment": 0,
+    "code": 834
+  },
+  "Markdown": {
+    "nFiles": 4,
+    "blank": 66,
+    "comment": 0,
+    "code": 315
+  },
+  "Gradle": {
+    "nFiles": 2,
+    "blank": 54,
+    "comment": 56,
+    "code": 291
+  },
+  "Bourne Shell": {
+    "nFiles": 1,
+    "blank": 28,
+    "comment": 116,
+    "code": 105
+  },
+  "DOS Batch": {
+    "nFiles": 1,
+    "blank": 21,
+    "comment": 2,
+    "code": 69
+  },
+  "GLSL": {
+    "nFiles": 2,
+    "blank": 16,
+    "comment": 2,
+    "code": 55
+  },
+  "TOML": {
+    "nFiles": 1,
+    "blank": 2,
+    "comment": 43,
+    "code": 27
+  },
+  "YAML": {
+    "nFiles": 1,
+    "blank": 9,
+    "comment": 34,
+    "code": 5
+  },
+  "SUM": {
+    "blank": 8836,
+    "comment": 8842,
+    "code": 131599,
+    "nFiles": 3811
+  }
+}

@@ -18,13 +18,8 @@ public class HBMWeapon{
     public static RegistryObject<Item> MP_WARHEAD_15_BALEFIRE;
     public static RegistryObject<Item> MISSILE_ANTI_BALLISTIC;
     public static RegistryObject<Item> MISSILE_TEST;
-    private static boolean registered;
     // Armor
     public static void register(DeferredRegister<Item> ITEMS){
-        if (registered) {
-            return;
-        }
-        registered = true;
         MP_WARHEAD_15_BALEFIRE = ITEMS.register("mp_warhead_15_balefire",()->new ItemMissilePart(new Item.Properties(), ItemMissilePart.MissileTier.TIER1));
         MISSILE_ANTI_BALLISTIC = ITEMS.register("missile_anti_ballistic",()->new ItemMissile(new Item.Properties(), ItemMissile.MissileFormFactor.ABM, ItemMissile.MissileTier.TIER1, null));
         MISSILE_TEST = ITEMS.register("missile_test",()->new ItemMissile(new Item.Properties(), ItemMissile.MissileFormFactor.MICRO, ItemMissile.MissileTier.TIER0, EntityMissileTier0.EntityMissileTest::new).setModel(()->Models.getEntityModel(Models.MISSILE_TEST)));

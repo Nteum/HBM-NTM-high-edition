@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GBG",
+    "BFB",
+    "GBG"
+  ],
+  "key": {
+    "G": {
+      "item": "hbm:nugget_gold198"
+    },
+    "B": {
+      "item": "hbm:ingot_boron"
+    },
+    "F": {
+      "item": "hbm:debris_fuel"
+    }
+  },
+  "result": {
+    "item": "hbm:medal_liquidator",
+    "count": 1
+  }
+}

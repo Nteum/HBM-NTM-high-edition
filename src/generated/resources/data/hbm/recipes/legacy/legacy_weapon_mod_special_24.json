@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "RGR",
+    "GBG",
+    "RGR"
+  ],
+  "key": {
+    "R": {
+      "item": "hbm:ingot_rubber"
+    },
+    "G": {
+      "item": "hbm:wire_dense"
+    },
+    "B": {
+      "item": "hbm:block_niobium"
+    }
+  },
+  "result": {
+    "item": "hbm:weapon_mod_special",
+    "count": 1
+  }
+}

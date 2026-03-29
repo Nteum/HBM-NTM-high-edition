@@ -11,7 +11,7 @@ public class BlockResearchReactor extends BlockDummyable {
 
     public BlockResearchReactor(Properties properties) {
         super(properties);
-        SHAPE = box(0.0D, 0.0D, 0.0D, 16.0D, 48.0D, 16.0D);
+        this.shape = box(0.0D, 0.0D, 0.0D, 16.0D, 48.0D, 16.0D);
     }
 
     @Override

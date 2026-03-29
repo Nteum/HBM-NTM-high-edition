@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:loops"
+    },
+    {
+      "item": "hbm:can_smart"
+    },
+    {
+      "item": "minecraft:bowl"
+    }
+  ],
+  "result": {
+    "item": "hbm:loop_stew",
+    "count": 1
+  }
+}

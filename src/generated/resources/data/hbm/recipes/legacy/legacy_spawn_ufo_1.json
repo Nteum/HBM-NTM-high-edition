@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "MMM",
+    "DCD",
+    "MMM"
+  ],
+  "key": {
+    "M": {
+      "item": "hbm:ingot_meteorite"
+    },
+    "D": {
+      "item": "hbm:ingot_dineutronium"
+    },
+    "C": {
+      "item": "hbm:coin_worm"
+    }
+  },
+  "result": {
+    "item": "hbm:spawn_ufo",
+    "count": 1
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:cell_empty"
+    },
+    {
+      "item": "hbm:ingot_lithium"
+    }
+  ],
+  "result": {
+    "item": "hbm:pile_rod_lithium",
+    "count": 1
+  }
+}

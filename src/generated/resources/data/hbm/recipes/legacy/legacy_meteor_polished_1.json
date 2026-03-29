@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CC",
+    "CC"
+  ],
+  "key": {
+    "C": {
+      "item": "hbm:block_meteor_broken"
+    }
+  },
+  "result": {
+    "item": "hbm:meteor_polished",
+    "count": 4
+  }
+}

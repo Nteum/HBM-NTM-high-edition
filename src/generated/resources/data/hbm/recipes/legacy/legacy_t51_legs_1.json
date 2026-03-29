@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "MPM",
+    "PBP",
+    "P P"
+  ],
+  "key": {
+    "M": {
+      "item": "hbm:motor"
+    },
+    "P": {
+      "item": "hbm:plate_armor_titanium"
+    },
+    "B": {
+      "item": "hbm:titanium_legs"
+    }
+  },
+  "result": {
+    "item": "hbm:t51_legs",
+    "count": 1
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "MPM",
+    "TBT",
+    "PPP"
+  ],
+  "key": {
+    "M": {
+      "item": "hbm:motor"
+    },
+    "P": {
+      "item": "hbm:plate_armor_titanium"
+    },
+    "T": {
+      "item": "hbm:gas_empty"
+    },
+    "B": {
+      "item": "hbm:titanium_plate"
+    }
+  },
+  "result": {
+    "item": "hbm:t51_plate",
+    "count": 1
+  }
+}

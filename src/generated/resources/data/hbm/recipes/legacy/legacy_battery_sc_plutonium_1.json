@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "NBN",
+    "PCP",
+    "NBN"
+  ],
+  "key": {
+    "N": {
+      "item": "hbm:nugget_technetium99"
+    },
+    "B": {
+      "item": "hbm:billet_plutonium238"
+    },
+    "P": {
+      "item": "hbm:plate_lead"
+    },
+    "C": {
+      "item": "hbm:battery_sc_technetium"
+    }
+  },
+  "result": {
+    "item": "hbm:battery_sc_plutonium",
+    "count": 1
+  }
+}

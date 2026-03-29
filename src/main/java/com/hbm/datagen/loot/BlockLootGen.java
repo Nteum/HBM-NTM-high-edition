@@ -17,9 +17,11 @@ import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
+import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -27,6 +29,8 @@ import java.util.Set;
  * */
 public class BlockLootGen extends BlockLootSubProvider {
 
+
+    private final Set<Block> handledBlocks = new HashSet<>();
 
     public BlockLootGen() {
         super(Collections.emptySet(), FeatureFlags.REGISTRY.allFlags());
@@ -81,6 +85,18 @@ public class BlockLootGen extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.machine_icf_press.get());
         this.dropSelf(ModBlocks.machine_research_reactor.get());
         this.dropSelf(ModBlocks.machine_reactor_breeding.get());
+        this.dropSelf(ModBlocks.pwr_controller.get());
+        this.dropSelf(ModBlocks.pwr_casing.get());
+        this.dropSelf(ModBlocks.pwr_port.get());
+        this.dropSelf(ModBlocks.pwr_reflector.get());
+        this.dropSelf(ModBlocks.pwr_fuel_block.get());
+        this.dropSelf(ModBlocks.pwr_control.get());
+        this.dropSelf(ModBlocks.pwr_channel.get());
+        this.dropSelf(ModBlocks.pwr_heatex.get());
+        this.dropSelf(ModBlocks.pwr_heatsink.get());
+        this.dropSelf(ModBlocks.pwr_neutron_source.get());
+        // Blocks with noLootTable are excluded in getKnownBlocks().
+        this.dropSelf(ModBlocks.machine_zirnox.get());
         this.dropSelf(ModBlocks.conveyor.get());
         this.dropSelf(ModBlocks.crate_iron.get());
         this.dropSelf(ModBlocks.crate_steel.get());
@@ -93,6 +109,7 @@ public class BlockLootGen extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.TEST12.get());
         // 单独定义凋落物的方块
         dropStandalone();
+        fillMissingLootTables();
     }
 
     public void dropStandalone(){
@@ -109,7 +126,6 @@ public class BlockLootGen extends BlockLootSubProvider {
                 .add(LootItem.lootTableItem(ModItems.CIRCUIT_BASIC.get()).setWeight(10))
                 .add(LootItem.lootTableItem(ModItems.EGG_GLYPHID.get()).setWeight(1))
         ));
-        this.dropOther(ModBlocks.WASTE_GRASS.get(), Blocks.DIRT);
     }
 //    public void generateMachineLoot(){
 //        this.dropSelf(HBMMachine.CHEMPLANT.get());
@@ -124,22 +140,41 @@ public class BlockLootGen extends BlockLootSubProvider {
 
     @Override
     public void dropSelf(Block pBlock) {
+        handledBlocks.add(pBlock);
         super.dropSelf(pBlock);
     }
 
     @Override
     public void dropOther(Block pBlock, ItemLike pItem) {
+        handledBlocks.add(pBlock);
         super.dropOther(pBlock, pItem);
     }
 
     @Override
     public void add(Block pBlock, LootTable.Builder pBuilder){
+        handledBlocks.add(pBlock);
         super.add(pBlock, pBuilder);
+    }
+
+    private void fillMissingLootTables() {
+        for (RegistryObject<Block> entry : ModBlocks.BLOCKS.getEntries()) {
+            Block block = entry.get();
+            if (handledBlocks.contains(block)) {
+                continue;
+            }
+            if (BuiltInLootTables.EMPTY.equals(block.getLootTable())) {
+                continue;
+            }
+            this.dropSelf(block);
+        }
     }
 
     @Override
     protected Iterable<Block> getKnownBlocks() {
         // 模组自定义的方块战利品表必须覆盖此方法，以绕过对原版方块战利品表的检查（此处返回该模组的所有方块）
-        return Iterables.transform(ModBlocks.BLOCKS.getEntries(), RegistryObject::get);
+        return Iterables.filter(
+                Iterables.transform(ModBlocks.BLOCKS.getEntries(), RegistryObject::get),
+                block -> !BuiltInLootTables.EMPTY.equals(block.getLootTable())
+        );
     }
 }

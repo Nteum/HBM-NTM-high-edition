@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "E",
+    "D"
+  ],
+  "key": {
+    "E": {
+      "item": "hbm:circuit"
+    },
+    "D": {
+      "item": "hbm:drone"
+    }
+  },
+  "result": {
+    "item": "hbm:drone",
+    "count": 1
+  }
+}

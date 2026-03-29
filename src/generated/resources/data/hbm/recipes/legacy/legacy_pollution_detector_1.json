@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SFS",
+    "SCS",
+    " S "
+  ],
+  "key": {
+    "S": {
+      "item": "hbm:plate_steel"
+    },
+    "F": {
+      "item": "hbm:filter_coal"
+    },
+    "C": {
+      "item": "hbm:circuit"
+    }
+  },
+  "result": {
+    "item": "hbm:pollution_detector",
+    "count": 1
+  }
+}

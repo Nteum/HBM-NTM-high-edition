@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PKP",
+    "DSD",
+    "PKP"
+  ],
+  "key": {
+    "P": {
+      "item": "hbm:ingot_asbestos"
+    },
+    "K": {
+      "item": "hbm:insert_esapi"
+    },
+    "D": {
+      "item": "hbm:ducttape"
+    },
+    "S": {
+      "item": "hbm:plate_saturnite"
+    }
+  },
+  "result": {
+    "item": "hbm:insert_xsapi",
+    "count": 1
+  }
+}

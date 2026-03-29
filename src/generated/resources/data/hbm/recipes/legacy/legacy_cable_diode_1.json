@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " Q ",
+    "CAC",
+    " Q "
+  ],
+  "key": {
+    "Q": {
+      "item": "hbm:nugget_silicon"
+    },
+    "C": {
+      "item": "hbm:red_cable"
+    },
+    "A": {
+      "item": "hbm:ingot_aluminium"
+    }
+  },
+  "result": {
+    "item": "hbm:cable_diode",
+    "count": 1
+  }
+}

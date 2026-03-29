@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "RRR"
+  ],
+  "key": {
+    "R": {
+      "item": "hbm:rag_damp"
+    }
+  },
+  "result": {
+    "item": "hbm:mask_rag",
+    "count": 1
+  }
+}

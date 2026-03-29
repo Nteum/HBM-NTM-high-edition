@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " S ",
+    "SDS",
+    " S "
+  ],
+  "key": {
+    "S": {
+      "item": "hbm:ingot_polymer"
+    },
+    "D": {
+      "item": "hbm:powder_lapis"
+    }
+  },
+  "result": {
+    "item": "hbm:record_lc",
+    "count": 1
+  }
+}

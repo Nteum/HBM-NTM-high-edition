@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:vinyl_tile"
+    }
+  ],
+  "result": {
+    "item": "hbm:vinyl_tile",
+    "count": 1
+  }
+}

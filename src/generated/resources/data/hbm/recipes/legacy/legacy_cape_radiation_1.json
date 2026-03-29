@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "W W",
+    "WIW",
+    "WDW"
+  ],
+  "key": {
+    "W": {
+      "tag": "minecraft:wool"
+    },
+    "D": {
+      "item": "minecraft:yellow_dye"
+    },
+    "I": {
+      "item": "hbm:nuclear_waste"
+    }
+  },
+  "result": {
+    "item": "hbm:cape_radiation",
+    "count": 1
+  }
+}

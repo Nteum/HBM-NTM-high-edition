@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PKP",
+    "DTD",
+    "PKP"
+  ],
+  "key": {
+    "P": {
+      "item": "hbm:plate_gold"
+    },
+    "K": {
+      "item": "hbm:key"
+    },
+    "D": {
+      "item": "hbm:dust_workers_alloy"
+    },
+    "T": {
+      "item": "hbm:screwdriver"
+    }
+  },
+  "result": {
+    "item": "hbm:key_kit",
+    "count": 1
+  }
+}

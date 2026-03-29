@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ICI",
+    "CPC",
+    "ICI"
+  ],
+  "key": {
+    "I": {
+      "item": "hbm:ingot_copper"
+    },
+    "C": {
+      "item": "hbm:powder_coal"
+    },
+    "P": {
+      "item": "hbm:powder_lead"
+    }
+  },
+  "result": {
+    "item": "hbm:absorber",
+    "count": 1
+  }
+}

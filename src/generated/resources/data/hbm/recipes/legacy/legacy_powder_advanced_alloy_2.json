@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:powder_iron"
+    },
+    {
+      "item": "hbm:powder_coal"
+    },
+    {
+      "item": "hbm:dust_mingrade"
+    },
+    {
+      "item": "hbm:dust_mingrade"
+    }
+  ],
+  "result": {
+    "item": "hbm:powder_advanced_alloy",
+    "count": 4
+  }
+}

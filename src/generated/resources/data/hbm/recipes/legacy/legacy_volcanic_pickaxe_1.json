@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " BM",
+    "BPB",
+    "TB "
+  ],
+  "key": {
+    "B": {
+      "item": "hbm:gem_volcanic"
+    },
+    "M": {
+      "item": "hbm:ingot_meteorite"
+    },
+    "P": {
+      "item": "hbm:starmetal_pickaxe"
+    },
+    "T": {
+      "item": "hbm:bolt"
+    }
+  },
+  "result": {
+    "item": "hbm:volcanic_pickaxe",
+    "count": 1
+  }
+}

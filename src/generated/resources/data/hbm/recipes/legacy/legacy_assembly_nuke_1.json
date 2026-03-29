@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " WP",
+    "SEP",
+    " WP"
+  ],
+  "key": {
+    "W": {
+      "item": "hbm:wire_fine"
+    },
+    "P": {
+      "item": "hbm:plate_weapon_steel"
+    },
+    "S": {
+      "item": "hbm:shell"
+    },
+    "E": {
+      "item": "hbm:ball_tatb"
+    }
+  },
+  "result": {
+    "item": "hbm:assembly_nuke",
+    "count": 1
+  }
+}

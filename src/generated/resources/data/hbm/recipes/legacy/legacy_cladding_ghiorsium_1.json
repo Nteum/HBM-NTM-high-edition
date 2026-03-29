@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DPD",
+    "PRP",
+    "DPD"
+  ],
+  "key": {
+    "R": {
+      "item": "hbm:cladding_desh"
+    },
+    "P": {
+      "item": "hbm:ingot_gh336"
+    },
+    "D": {
+      "item": "hbm:ducttape"
+    }
+  },
+  "result": {
+    "item": "hbm:cladding_ghiorsium",
+    "count": 1
+  }
+}

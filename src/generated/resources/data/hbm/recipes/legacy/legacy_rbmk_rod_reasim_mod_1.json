@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BGB",
+    "GRG",
+    "BGB"
+  ],
+  "key": {
+    "G": {
+      "item": "hbm:block_graphite"
+    },
+    "R": {
+      "item": "hbm:rbmk_rod_reasim"
+    },
+    "B": {
+      "item": "hbm:ingot_tc_alloy"
+    }
+  },
+  "result": {
+    "item": "hbm:rbmk_rod_reasim_mod",
+    "count": 1
+  }
+}

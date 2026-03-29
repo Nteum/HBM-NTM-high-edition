@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "MPM",
+    "PBP",
+    "PDP"
+  ],
+  "key": {
+    "M": {
+      "item": "hbm:motor_desh"
+    },
+    "P": {
+      "item": "hbm:plate_armor_fau"
+    },
+    "B": {
+      "item": "hbm:starmetal_legs"
+    },
+    "D": {
+      "item": "hbm:billet_polonium"
+    }
+  },
+  "result": {
+    "item": "hbm:fau_legs",
+    "count": 1
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:circuit_star_piece"
+    },
+    {
+      "item": "hbm:circuit_star_piece"
+    },
+    {
+      "item": "hbm:circuit_star_piece"
+    },
+    {
+      "item": "hbm:circuit_star_piece"
+    },
+    {
+      "item": "hbm:circuit_star_piece"
+    },
+    {
+      "item": "hbm:circuit_star_piece"
+    }
+  ],
+  "result": {
+    "item": "hbm:circuit_star_component",
+    "count": 1
+  }
+}

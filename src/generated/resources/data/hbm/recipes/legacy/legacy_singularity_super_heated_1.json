@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CTC",
+    "TST",
+    "CTC"
+  ],
+  "key": {
+    "C": {
+      "item": "hbm:plate_advanced_alloy"
+    },
+    "T": {
+      "item": "hbm:powder_power"
+    },
+    "S": {
+      "item": "hbm:singularity"
+    }
+  },
+  "result": {
+    "item": "hbm:singularity_super_heated",
+    "count": 1
+  }
+}

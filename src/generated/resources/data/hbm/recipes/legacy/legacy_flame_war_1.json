@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "WHW",
+    "CTP",
+    "WOW"
+  ],
+  "key": {
+    "W": {
+      "tag": "minecraft:planks"
+    },
+    "T": {
+      "item": "minecraft:tnt"
+    },
+    "H": {
+      "item": "hbm:flame_pony"
+    },
+    "C": {
+      "item": "hbm:flame_conspiracy"
+    },
+    "P": {
+      "item": "hbm:flame_politics"
+    },
+    "O": {
+      "item": "hbm:flame_opinion"
+    }
+  },
+  "result": {
+    "item": "hbm:flame_war",
+    "count": 1
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " C ",
+    "PTP",
+    " P "
+  ],
+  "key": {
+    "C": {
+      "item": "hbm:coil_tungsten"
+    },
+    "P": {
+      "item": "hbm:plate_steel"
+    },
+    "T": {
+      "item": "minecraft:tnt"
+    }
+  },
+  "result": {
+    "item": "hbm:grenade_if_generic",
+    "count": 1
+  }
+}

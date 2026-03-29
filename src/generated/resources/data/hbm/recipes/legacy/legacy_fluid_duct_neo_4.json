@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:fluid_duct"
+    }
+  ],
+  "result": {
+    "item": "hbm:fluid_duct_neo",
+    "count": 1
+  }
+}

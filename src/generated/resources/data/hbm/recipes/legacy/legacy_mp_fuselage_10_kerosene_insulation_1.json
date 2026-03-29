@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CCC",
+    "CTC",
+    "CCC"
+  ],
+  "key": {
+    "C": {
+      "item": "hbm:ingot_latex"
+    },
+    "T": {
+      "item": "hbm:mp_fuselage_10_kerosene"
+    }
+  },
+  "result": {
+    "item": "hbm:mp_fuselage_10_kerosene_insulation",
+    "count": 1
+  }
+}

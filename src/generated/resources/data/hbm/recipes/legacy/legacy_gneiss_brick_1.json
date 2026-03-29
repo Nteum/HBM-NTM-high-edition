@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CC",
+    "CC"
+  ],
+  "key": {
+    "C": {
+      "item": "hbm:gneiss_tile"
+    }
+  },
+  "result": {
+    "item": "hbm:gneiss_brick",
+    "count": 4
+  }
+}

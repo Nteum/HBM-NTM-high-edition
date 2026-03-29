@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BRS",
+    " GM"
+  ],
+  "key": {
+    "B": {
+      "item": "hbm:part_barrel_light"
+    },
+    "R": {
+      "item": "hbm:part_receiver_light"
+    },
+    "S": {
+      "item": "hbm:part_stock"
+    },
+    "G": {
+      "item": "hbm:part_grip"
+    },
+    "M": {
+      "item": "hbm:part_mechanism"
+    }
+  },
+  "result": {
+    "item": "hbm:gun_uzi",
+    "count": 1
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "STS",
+    "S S",
+    "STS"
+  ],
+  "key": {
+    "S": {
+      "item": "hbm:plate_steel"
+    },
+    "T": {
+      "item": "hbm:plate_titanium"
+    }
+  },
+  "result": {
+    "item": "hbm:tank_steel",
+    "count": 2
+  }
+}

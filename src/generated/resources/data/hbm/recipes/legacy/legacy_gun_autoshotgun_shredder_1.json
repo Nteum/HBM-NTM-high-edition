@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " M ",
+    "MAM",
+    " M "
+  ],
+  "key": {
+    "M": {
+      "item": "hbm:part_mechanism"
+    },
+    "A": {
+      "item": "hbm:gun_autoshotgun"
+    }
+  },
+  "result": {
+    "item": "hbm:gun_autoshotgun_shredder",
+    "count": 1
+  }
+}

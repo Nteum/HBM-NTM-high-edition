@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:rbmk_fuel_empty"
+    },
+    {
+      "item": "hbm:billet_americium241"
+    },
+    {
+      "item": "hbm:billet_americium241"
+    },
+    {
+      "item": "hbm:billet_americium241"
+    },
+    {
+      "item": "hbm:billet_americium241"
+    },
+    {
+      "item": "hbm:billet_americium241"
+    },
+    {
+      "item": "hbm:billet_americium241"
+    },
+    {
+      "item": "hbm:billet_americium241"
+    },
+    {
+      "item": "hbm:billet_americium241"
+    }
+  ],
+  "result": {
+    "item": "hbm:rbmk_fuel_hea241",
+    "count": 1
+  }
+}

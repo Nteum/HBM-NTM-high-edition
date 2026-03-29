@@ -1,0 +1,38 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DLC",
+    "BRS",
+    "MG "
+  ],
+  "key": {
+    "D": {
+      "item": "hbm:crystal_redstone"
+    },
+    "L": {
+      "item": "hbm:weapon_mod_special"
+    },
+    "C": {
+      "item": "hbm:circuit"
+    },
+    "B": {
+      "item": "hbm:part_barrel_light"
+    },
+    "R": {
+      "item": "hbm:part_receiver_light"
+    },
+    "S": {
+      "item": "hbm:part_stock"
+    },
+    "M": {
+      "item": "hbm:part_mechanism"
+    },
+    "G": {
+      "item": "hbm:part_grip"
+    }
+  },
+  "result": {
+    "item": "hbm:gun_lasrifle",
+    "count": 1
+  }
+}

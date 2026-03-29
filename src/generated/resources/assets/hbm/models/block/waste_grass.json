@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/cube_bottom_top",
-  "textures": {
-    "bottom": "hbm:block/waste_grassbottom",
-    "side": "hbm:block/waste_grassside",
-    "top": "hbm:block/waste_grasstop"
-  }
-}

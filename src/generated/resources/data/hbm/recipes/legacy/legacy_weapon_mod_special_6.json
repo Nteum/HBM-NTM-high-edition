@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PIP",
+    "WWW",
+    "PIP"
+  ],
+  "key": {
+    "P": {
+      "item": "hbm:plate_weapon_steel"
+    },
+    "I": {
+      "item": "hbm:ingot_gun_metal"
+    },
+    "W": {
+      "item": "hbm:wire_dense"
+    }
+  },
+  "result": {
+    "item": "hbm:weapon_mod_special",
+    "count": 1
+  }
+}

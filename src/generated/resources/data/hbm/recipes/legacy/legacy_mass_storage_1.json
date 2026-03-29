@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " L ",
+    "ICI",
+    " I "
+  ],
+  "key": {
+    "I": {
+      "item": "hbm:ingot_titanium"
+    },
+    "C": {
+      "item": "hbm:crate_steel"
+    },
+    "L": {
+      "item": "hbm:circuit"
+    }
+  },
+  "result": {
+    "item": "hbm:mass_storage",
+    "count": 1
+  }
+}

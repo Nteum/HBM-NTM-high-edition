@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:ams_catalyst_blank"
+    },
+    {
+      "item": "hbm:rune_isa"
+    },
+    {
+      "item": "hbm:rune_isa"
+    },
+    {
+      "item": "hbm:rune_jera"
+    },
+    {
+      "item": "hbm:rune_thurisaz"
+    },
+    {
+      "item": "hbm:powder_aluminium"
+    },
+    {
+      "item": "hbm:powder_aluminium"
+    },
+    {
+      "item": "hbm:powder_aluminium"
+    },
+    {
+      "item": "hbm:powder_aluminium"
+    }
+  ],
+  "result": {
+    "item": "hbm:ams_catalyst_aluminium",
+    "count": 1
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "IIP",
+    "CHW",
+    "IIP"
+  ],
+  "key": {
+    "I": {
+      "item": "hbm:ingot_latex"
+    },
+    "P": {
+      "item": "hbm:plate_saturnite"
+    },
+    "C": {
+      "item": "hbm:circuit"
+    },
+    "H": {
+      "item": "hbm:shell"
+    },
+    "W": {
+      "item": "hbm:coil_copper"
+    }
+  },
+  "result": {
+    "item": "hbm:custom_fall",
+    "count": 1
+  }
+}

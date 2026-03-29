@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:bolt"
+    },
+    {
+      "item": "hbm:dust_neptunium237"
+    },
+    {
+      "item": "hbm:powder_iodine"
+    },
+    {
+      "item": "hbm:dust_thorium232"
+    },
+    {
+      "item": "hbm:powder_astatine"
+    },
+    {
+      "item": "hbm:powder_neodymium"
+    },
+    {
+      "item": "hbm:plate_cast"
+    },
+    {
+      "item": "hbm:black_hole"
+    },
+    {
+      "item": "hbm:powder_caesium"
+    }
+  ],
+  "result": {
+    "item": "hbm:overfuse",
+    "count": 1
+  }
+}

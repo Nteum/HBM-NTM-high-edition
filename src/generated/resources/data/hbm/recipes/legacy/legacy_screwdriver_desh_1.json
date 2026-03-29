@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  I",
+    " I ",
+    "S  "
+  ],
+  "key": {
+    "S": {
+      "item": "hbm:ingot_polymer"
+    },
+    "I": {
+      "item": "hbm:ingot_workers_alloy"
+    }
+  },
+  "result": {
+    "item": "hbm:screwdriver_desh",
+    "count": 1
+  }
+}
