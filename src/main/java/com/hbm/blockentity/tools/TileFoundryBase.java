@@ -102,8 +102,14 @@ public abstract class TileFoundryBase extends CapabilityBlockEntity {
     public FluidStack pour(FluidStack fluidStack){
         ItemStack moldStack, resultStack;
         if (!(moldStack = this.items.getStackInSlot(0)).isEmpty() && (resultStack = this.items.getStackInSlot(1)).isEmpty() && this.tank.isFluidValid(fluidStack)){
-            fluidStack.setAmount(this.tank.fill(fluidStack, IFluidHandler.FluidAction.EXECUTE));
-            return fluidStack;
+            if (moldStack.getItem() instanceof ItemMold mold){
+                int quantity = mold.getQuantity();
+                int fillAmount = Math.min(quantity - this.tank.getFluidAmount(), fluidStack.getAmount());
+                FluidStack copied = fluidStack.copy();
+                copied.setAmount(fillAmount);
+                fluidStack.setAmount(this.tank.fill(copied, IFluidHandler.FluidAction.EXECUTE));
+                return fluidStack;
+            }
         }
         return FluidStack.EMPTY;
     }

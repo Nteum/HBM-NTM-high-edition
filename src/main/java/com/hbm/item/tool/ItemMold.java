@@ -15,7 +15,7 @@ public class ItemMold extends Item {
         this.size = size;
     }
     public int getQuantity(){
-        return form.quantity;
+        return form.quantity * size;
     }
 
     public HBMMatForm getForm(){

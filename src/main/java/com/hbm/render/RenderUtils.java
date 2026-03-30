@@ -8,6 +8,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.particle.SingleQuadParticle;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -20,6 +21,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.FastColor;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
@@ -37,9 +39,11 @@ import net.minecraftforge.client.model.data.ModelData;
 import net.minecraftforge.client.model.renderable.ITextureRenderTypeLookup;
 import org.joml.Matrix3f;
 import org.joml.Matrix4f;
+import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 @OnlyIn(Dist.CLIENT)
 public class RenderUtils {
@@ -160,5 +164,111 @@ public class RenderUtils {
         } finally {
             bufferSource.endBatch();
         }
+    }
+    // 渲染一个柱状物，主要是用于渲染流动的液体
+    public static void renderRectPillar(PoseStack poseStack, VertexConsumer consumer, int color, Vec3 start, Vec3 end, float width, int light, int overlay){
+        Vec3 dir = end.subtract(start);
+        if (dir.length() == 0) return;
+        float fullLength = (float) dir.length();
+        Vec3 center = new Vec3((start.x + end.x) / 2, (start.y + end.y) / 2, (start.z + end.z) / 2);
+        dir = dir.normalize();
+
+        poseStack.pushPose();
+        // 1. 平移到起点
+        poseStack.translate(center.x, center.y, center.z);
+        // 2. 旋转使局部 Y 轴指向 dir
+        Quaternionf rotation = getRotationBetween(new Vector3f(0, 1, 0), new Vector3f((float) dir.x, (float) dir.y, (float) dir.z));
+        poseStack.mulPose(rotation);
+        // 3. 缩放：X/Z 方向为 width，Y 方向为 fullLength
+        poseStack.scale(width, fullLength, width);
+
+        // 四个侧面：每个面都是矩形，尺寸为 1x1（在局部坐标中覆盖整个面）
+        float rectWidth = 1.0f;   // 沿 n1 方向（例如 Z 轴）
+        float rectLength = 1.0f;  // 沿 n2 方向（例如 Y 轴）
+        float offset = 0.5f;      // 矩形中心到轴线的距离（半宽）
+        // 定义局部坐标系中的基向量（单位）
+        Vec3 localX = new Vec3(1, 0, 0);
+        Vec3 localY = new Vec3(0, 1, 0);
+        Vec3 localZ = new Vec3(0, 0, 1);
+
+        addRectQuad(poseStack, consumer, color, 1, 1, offset, localX, localZ, localY, light, overlay);
+        addRectQuad(poseStack, consumer, color, 1, 1, offset, localX.scale(-1), localZ, localY, light, overlay);
+        addRectQuad(poseStack, consumer, color, 1, 1, offset, localZ, localX, localY, light, overlay);
+        addRectQuad(poseStack, consumer, color, 1, 1, offset, localZ.scale(-1), localX, localY, light, overlay);
+
+        poseStack.popPose();
+    }
+    // 渲染一个矩形quad
+    public static void addRectQuad(PoseStack poseStack, VertexConsumer consumer, int color, float width, float length, float height, Vec3 n, Vec3 n1, Vec3 n2, int light, int overlay){
+        Matrix4f pose = poseStack.last().pose();
+        Matrix3f normal = poseStack.last().normal();
+        float red = FastColor.ARGB32.red(color) / 255.0f;
+        float green = FastColor.ARGB32.green(color) / 255.0f;
+        float blue = FastColor.ARGB32.blue(color) / 255.0f;
+        float alpha = FastColor.ARGB32.alpha(color) / 255.0f;
+        if (alpha == 0f) alpha = 1.0f;
+
+        // 半长宽
+        float halfW = width * 0.5f;
+        float halfL = length * 0.5f;
+
+        // 矩形中心
+        float cx = (float) (n.x * height);
+        float cy = (float) (n.y * height);
+        float cz = (float) (n.z * height);
+
+        float[][] offsets = {{-halfW, -halfL}, {-halfW,  halfL}, { halfW,  halfL}, { halfW, -halfL}};
+
+        float deltaV = length * (float) Minecraft.getInstance().level.getGameTime() % 32 / 32;
+
+        for (int i = 0; i < 4; i++) {
+            float offU = offsets[i][0];
+            float offV = offsets[i][1];
+            float px = (float) (cx + offU * n1.x + offV * n2.x);
+            float py = (float) (cy + offU * n1.y + offV * n2.y);
+            float pz = (float) (cz + offU * n1.z + offV * n2.z);
+            // UV 坐标（简单映射，U 沿 width 方向从 0 到 1，V 沿 length 方向从 0 到 1）
+            float u = (offU + halfW) / width;   // 0~1
+            float v = (offV + halfL) / width - deltaV;  // 0~1
+//            v = v - Mth.floor(v);
+            consumer.vertex(pose, px, py, pz).color(red, green, blue, alpha).uv(u, v).overlayCoords(overlay).uv2(light).normal(normal, (float) n.x, (float) n.y, (float) n.z).endVertex();
+        }
+    }
+//    // 渲染一个单独的面
+//    public static void renderSingleSide(PoseStack poseStack, VertexConsumer consumer, int color,
+//                                        float x1, float y1, float z1,
+//                                        float x2, float y2, float z2,
+//                                        float x3, float y3, float z3,
+//                                        float x4, float y4, float z4,
+//                                        float nx, float ny, float nz,
+//                                        int light, int overlay){
+//        Matrix4f pose = poseStack.last().pose();
+//        Matrix3f normal = poseStack.last().normal();
+//        float red = FastColor.ARGB32.red(color) / 255.0f;
+//        float green = FastColor.ARGB32.green(color) / 255.0f;
+//        float blue = FastColor.ARGB32.blue(color) / 255.0f;
+//        float alpha = FastColor.ARGB32.alpha(color) / 255.0f;
+//        if (alpha == 0f) alpha = 1.0f;
+//
+//        consumer.vertex(pose, x1, y1, z1).color(red, green, blue, alpha).uv(0, 1).overlayCoords(overlay).uv2(light).normal(normal, nx, ny, nz).endVertex();
+//        consumer.vertex(pose, x2, y2, z2).color(red, green, blue, alpha).uv(1, 1).overlayCoords(overlay).uv2(light).normal(normal, nx, ny, nz).endVertex();
+//        consumer.vertex(pose, x3, y3, z3).color(red, green, blue, alpha).uv(1, 0).overlayCoords(overlay).uv2(light).normal(normal, nx, ny, nz).endVertex();
+//        consumer.vertex(pose, x4, y4, z4).color(red, green, blue, alpha).uv(0, 0).overlayCoords(overlay).uv2(light).normal(normal, nx, ny, nz).endVertex();
+//    }
+
+    // 计算旋转四元数
+    private static Quaternionf getRotationBetween(Vector3f from, Vector3f to) {
+        from = new Vector3f(from); from.normalize();
+        to = new Vector3f(to); to.normalize();
+        float dot = from.dot(to);
+        if (dot > 0.99999f) return new Quaternionf();
+        if (dot < -0.99999f) {
+            // 相反方向，旋转180度，绕X轴
+            return new Quaternionf().setAngleAxis((float) Math.PI, 1, 0, 0);
+        }
+        Vector3f axis = from.cross(to);
+        axis.normalize();
+        float angle = (float) Math.acos(dot);
+        return new Quaternionf().setAngleAxis(angle, axis.x(), axis.y(), axis.z());
     }
 }

@@ -25,6 +25,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
@@ -56,6 +57,7 @@ public class CrucibleEntity extends DummyableBlockEntity {
     CrucibleFluidHandler storeStack = new CrucibleFluidHandler(CAPACITY);  // 存储熔融物质的stack
     CrucibleFluidHandler alloyStack = new CrucibleFluidHandler(CAPACITY);  // 存储合金流体的stack
     private CrucibleRecipe recipeNow;                                       // 当前指定的配方
+    int isPour = 0;     // 是否正在向外浇筑金属
 
     private ItemStackHandler items = new ItemStackHandler(9){
         @Override
@@ -168,30 +170,51 @@ public class CrucibleEntity extends DummyableBlockEntity {
                     // 建议使用 absorb 直接合并到最底层，如果没有同类则新增一层
                     this.alloyStack.absorb(0, output.copy());
                 }
-
-                // 反应成功，进行必要的清理
-                this.alloyStack.rebuild();
-                this.storeStack.rebuild();
             }
         } else {
             // 自动融合逻辑
             CrucibleRecipe.autoMerge(this.alloyStack, this.level, this.recipeNow);
         }
+        // 对流体槽槽进行必要的重整
+        this.alloyStack.rebuild();
+        this.storeStack.rebuild();
     }
 
+    // 向周边铸造池灌注流体。
     public void tryPourFluid(){
         Direction direction = DirectionUtils.horizRot(Direction.SOUTH, this.getBlockState().getValue(BlockStateProperties.HORIZONTAL_FACING), Direction.EAST);
-        BlockPos checkPos = this.getBlockPos().relative(direction, 2).relative(Direction.DOWN);
-        BlockEntity blockEntity = this.level.getBlockEntity(checkPos);
+
+        boolean flagPour = tryPourFoundryOneSide(this.storeStack, direction);
+        this.isPour = flagPour ? this.isPour | 1 : this.isPour & 0xfffffffe;
+//        this.isPour |= 1;
+        flagPour = tryPourFoundryOneSide(this.alloyStack, direction.getOpposite());
+        this.isPour = flagPour ? this.isPour | 2 : this.isPour & 0xfffffffd;
+    }
+
+    private boolean tryPourFoundryOneSide(CrucibleFluidHandler fluidContainer, Direction direction){
+        boolean flagPour = false;
+        BlockPos pos = this.getBlockPos().relative(direction, 2);
+        if (!level.getBlockState(pos).canBeReplaced()) return flagPour;
+        pos = pos.relative(Direction.DOWN);
+        BlockEntity blockEntity = this.level.getBlockEntity(pos);
         if (blockEntity != null && blockEntity instanceof TileFoundryBase foundry){
-            FluidStack fluidInTank = this.storeStack.getFluidInTank(0);
+            FluidStack fluidInTank = fluidContainer.getFluidInTank(0);
             FluidStack copied = fluidInTank.copy();
             if (!copied.isEmpty()) {
-                if (copied.getAmount() < 5) copied.setAmount(5);
-                FluidStack pourResult = foundry.pour(copied);
-                fluidInTank.shrink(pourResult.getAmount());
+                if (copied.getAmount() > 1) copied.setAmount(1);
+                FluidStack matConsume = foundry.pour(copied);
+                fluidInTank.shrink(matConsume.getAmount());
+                // 烫伤处在浇筑口的生物
+                if (matConsume.getAmount() > 0){
+                    flagPour = true;
+                    List<LivingEntity> creatures = level.getEntitiesOfClass(LivingEntity.class, new AABB(pos, pos.relative(Direction.UP)));
+                    for (LivingEntity creature : creatures) {
+                        creature.setSecondsOnFire(10);
+                    }
+                }
             }
         }
+        return flagPour;
     }
 
     //GUI上显示的名字
@@ -213,6 +236,7 @@ public class CrucibleEntity extends DummyableBlockEntity {
         if (nbt.contains("stack1", Tag.TAG_COMPOUND)) this.storeStack.deserializeNBT(nbt.getCompound("stack1"));
         if (nbt.contains("stack2", Tag.TAG_COMPOUND)) this.alloyStack.deserializeNBT(nbt.getCompound("stack2"));
         if (nbt.contains(HBMKey.ITEM, Tag.TAG_COMPOUND)) this.items.deserializeNBT(nbt.getCompound(HBMKey.ITEM));
+        this.isPour = nbt.getInt("pour");
     }
 
     @Override
@@ -223,6 +247,7 @@ public class CrucibleEntity extends DummyableBlockEntity {
         pTag.put("stack1", this.storeStack.serializeNBT());
         pTag.put("stack2", this.alloyStack.serializeNBT());
         pTag.put(HBMKey.ITEM, this.items.serializeNBT());
+        pTag.putInt("pour", this.isPour);
     }
 
     public ItemStackHandler getItemHandler(){
@@ -242,6 +267,7 @@ public class CrucibleEntity extends DummyableBlockEntity {
         CompoundTag tag = super.getReducedUpdateTag();
         tag.put("stack1", this.storeStack.serializeNBT());
         tag.put("stack2", this.alloyStack.serializeNBT());
+        tag.putInt("pour", this.isPour);
         return tag;
     }
 
@@ -250,6 +276,7 @@ public class CrucibleEntity extends DummyableBlockEntity {
         super.handleUpdatePacket(nbt);
         if (nbt.contains("stack1", Tag.TAG_COMPOUND)) this.storeStack.deserializeNBT(nbt.getCompound("stack1"));
         if (nbt.contains("stack2", Tag.TAG_COMPOUND)) this.alloyStack.deserializeNBT(nbt.getCompound("stack2"));
+        this.isPour = nbt.getInt("pour");
     }
 
     @Override
@@ -280,5 +307,13 @@ public class CrucibleEntity extends DummyableBlockEntity {
                 this.alloyStack.moveToBottom(fluidStack);
             }
         }
+    }
+
+    public boolean isStoreStackPouring(){
+        return (this.isPour & 1) != 0;
+    }
+
+    public boolean isAlloyStackPouring(){
+        return (this.isPour & 2) != 0;
     }
 }
