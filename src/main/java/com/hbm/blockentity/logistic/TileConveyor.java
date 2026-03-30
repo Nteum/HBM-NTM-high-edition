@@ -30,7 +30,7 @@ import java.util.List;
 
 public class TileConveyor extends CapabilityBlockEntity {
     static int DOUBLE_CLICK_TIME = 10;
-    static int TRANSPORT_TIME = 20;
+    public static int TRANSPORT_TIME = 20;
     static float CONVEYOR_HEIGHT = 5.0f/16;
     int transPortTimer = -1;         // 判断物品输送的计时器
     int doubleClickTimer = -1;       // 判断玩家双击的计时器
@@ -134,7 +134,7 @@ public class TileConveyor extends CapabilityBlockEntity {
         return this.items;
     }
 
-    boolean isEmpty(){
+    public boolean isEmpty(){
         return this.items.getStackInSlot(0).isEmpty();
     }
 
@@ -148,5 +148,9 @@ public class TileConveyor extends CapabilityBlockEntity {
                 this.shouldSync = true;
             }
         }
+    }
+
+    public int getTransportTime(){
+        return this.transPortTimer;
     }
 }
