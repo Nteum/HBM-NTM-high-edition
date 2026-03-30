@@ -26,7 +26,6 @@ import com.hbm.render.entity.effect.EntityTorexRender;
 import com.hbm.render.entity.effect.RenderMeteor;
 import com.hbm.render.entity.missile.MissileTaintRenderer;
 import com.hbm.render.entity.mob.GlyphidRender;
-import com.hbm.render.entity.projectile.RenderRubble;
 import com.hbm.render.item.SpecialItemRender;
 import com.hbm.render.model.Models;
 import com.hbm.render.model.engine.CustomPartsModel;
@@ -153,7 +152,6 @@ public class ClientEventHandler {
             EntityRenderers.register(ModEntityType.ENTITY_MISSILE_TEST.get(), MissileTaintRenderer::new);
             EntityRenderers.register(ModEntityType.GLYPHID.get(), GlyphidRender::new);
             EntityRenderers.register(ModEntityType.ENTITY_METEOR.get(), RenderMeteor::new);
-            EntityRenderers.register(ModEntityType.ENTITY_RUBBLE.get(), RenderRubble::new);
 
             RenderUtils.init();
             // 物品属性，用于贴图变化

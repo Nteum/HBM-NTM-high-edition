@@ -891,8 +891,6 @@ public class ModItems {
     //    public static final RegistryObject<Item> detonator = ITEMS.register("detonator",()->new ItemDetonator(new Item.Properties()));
     public static final RegistryObject<Item> DETONATOR = add("detonator", ()->new ItemDetonator(new Item.Properties()), ModTabs.NUKE.getKey(), HBMKey.BASIC_MODEL, HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     public static final RegistryObject<Item> GUN_SUICIDE = add("gun_suicide", ()->new GunSuicide(new Item.Properties()), ModTabs.WEAPON.getKey(), HBMKey.BASIC_MODEL, HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> GLYPHID_MEAT_GRILLED = add("glyphid_meat_grilled", ()->new ItemLemon(new Item.Properties().food(Foods.ROTTEN_FLESH)), CreativeModeTabs.FOOD_AND_DRINKS, HBMKey.BASIC_MODEL, HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> GLYPHID_MEAT = add("glyphid_meat", ()->new ItemLemon(new Item.Properties().food(Foods.MUTTON)), CreativeModeTabs.FOOD_AND_DRINKS, HBMKey.BASIC_MODEL, HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     //    public static RegistryObject<Item> GLYPHID_SPAWN_EGG;
     //流体桶
 //    public static final RegistryObject<Item> bucket_irradiated_water = ITEMS.register("bucket_irradiated_water",()->new BucketItem(ModFluids.IRRADIATED_WATER_SOURCE_BLOCK,new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
