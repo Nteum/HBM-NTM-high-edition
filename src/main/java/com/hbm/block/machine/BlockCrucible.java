@@ -20,7 +20,7 @@ import org.jetbrains.annotations.Nullable;
 public class BlockCrucible extends BlockDummyable {
     public BlockCrucible(Properties pProperties) {
         super(pProperties);
-        SHAPE = Block.box(-16.0,0,-16.0,16.0,24.0,16.0);
+        shape = Block.box(-16.0,0,-16.0,16.0,24.0,16.0);
     }
 
     @Override

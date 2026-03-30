@@ -12,9 +12,9 @@ import net.minecraft.world.phys.shapes.Shapes;
 public class BlockFireBox extends BlockDummyable {
     public BlockFireBox(Properties pProperties) {
         super(pProperties);
-//        SHAPE = Block.box(-16.0, 0.0, -16.0, 32.0, 16.0, 32.0);
-//        SHAPE = Block.box(0, 0, 0, 16, 16, 16);
-        SHAPE = Shapes.block();
+//        shape = Block.box(-16.0, 0.0, -16.0, 32.0, 16.0, 32.0);
+//        shape = Block.box(0, 0, 0, 16, 16, 16);
+        shape = Shapes.block();
     }
 
     @Override
