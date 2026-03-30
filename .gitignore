@@ -49,3 +49,4 @@ __pycache__/
 *.pyc
 # ===== 临时文件 =======
 /src/main/temp/
+.gitnexus
