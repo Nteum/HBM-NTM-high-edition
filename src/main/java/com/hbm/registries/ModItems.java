@@ -59,6 +59,7 @@ import java.util.stream.Collectors;
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, HBM.MODID);
     public static final List<WrappedItemRegistry> itemList = new ArrayList<>();
+    private static boolean registeredToBus = false;
 
     public static final String[] WIRE_MAT = new String[]{HBMKey.ALUMINIUM, HBMKey.COPPER, HBMKey.RED_COPPER, HBMKey.GOLD, HBMKey.TUNGSTEN, HBMKey.ADVANCED_ALLOY, HBMKey.SCHRABIDIUM, HBMKey.ZINC, HBMKey.MAGNETIZED_TUNGSTEN};
 
@@ -1128,7 +1129,11 @@ public class ModItems {
      *
      * 以下为功能函数
      * */
-    public static void register(IEventBus eventBus){
+    public static synchronized void register(IEventBus eventBus){
+        if (registeredToBus) {
+            return;
+        }
+        registeredToBus = true;
         // Force block registration classes to populate their BlockItems first so
         // legacy placeholders only backfill truly missing ids.
         ModBlocks.BLOCKS.getEntries();
