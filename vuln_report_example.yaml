@@ -1,0 +1,87 @@
+meta:
+  title: "漏洞汇报：未授权同步导致任意状态写入（示例）"
+  id: "HBM-SEC-2026-001"
+  date: "2026-02-15"
+  target: "HBM-NTM (Forge Server)"
+  reporter: "your_name_here"
+
+severity:
+  # CVSS v3.x base score (example)
+  cvss: 9.1
+  rating: "Critical"
+
+summary:
+  - "攻击者可在未授权情况下触发服务端状态写入（示例化描述）"
+  - "可能导致权限绕过、远程崩溃（DoS）或数据破坏"
+  - "PoC 细节已脱敏；完整复现仅通过私下渠道提供"
+
+affected:
+  versions:
+    - "<= 1.2.3"
+    - "commit abcdef0 (example)"
+  components:
+    - "com.hbm.network.C2SSyncTileMessage"
+    - "com.hbm.blockentity.machine.PWRBlockEntity"
+
+impact:
+  - "权限绕过 / 非预期状态变更"
+  - "远程崩溃（DoS）"
+  - "潜在物品/数据破坏"
+
+attack:
+  prerequisites:
+    - "可连接到服务器的普通玩家账号"
+    - "无需 OP / 管理员权限（示例）"
+  vector:
+    - "客户端发送伪造同步消息到服务端（细节脱敏）"
+    - "利用服务端缺少 sender/距离/区块加载校验"
+
+repro:
+  notes: "为避免滥用，本段仅展示高层步骤与现象，字段/载荷已脱敏。"
+  steps:
+    - "加入服务器并定位一个可交互的方块实体（示例）"
+    - "构造一个异常的同步负载并发送（已脱敏）"
+    - "观察服务端未做授权校验，直接应用状态更新"
+    - "结果：状态被篡改/崩溃/异常日志（取决于具体实现）"
+
+root_cause:
+  bullets:
+    - "服务端未校验发送者与坐标/区块加载状态"
+    - "更新数据被直接应用到对象状态（缺少白名单）"
+    - "缺少速率限制与异常路径告警"
+  code:
+    - "// PSEUDOCODE (redacted)"
+    - "handle(message):"
+    - "    tile = getTileAt(pos)"
+    - "    tile.load(updateTag)   // missing auth & bounds checks"
+
+fix:
+  bullets:
+    - "校验 sender、距离、维度、区块加载状态；拒绝未授权请求"
+    - "改为字段白名单同步（拒绝任意 NBT/Tag 写入）"
+    - "添加告警日志与速率限制，降低扫描/爆破风险"
+  diff:
+    - "- tile.load(updateTag);"
+    - "+ if (!authorized(sender, tilePos)) return;"
+    - "+ tile.applyWhitelistedSync(updateTag);"
+
+timeline:
+  - date: "2026-02-10"
+    event: "发现问题并复现"
+  - date: "2026-02-11"
+    event: "私下通知维护者"
+  - date: "2026-02-14"
+    event: "修复合并"
+  - date: "2026-02-15"
+    event: "发布安全公告"
+
+recommendations:
+  - "优先升级到已修复版本；无法升级时临时禁用相关同步功能（如可行）"
+  - "开启审计日志并监控异常同步请求/频率"
+  - "对外公告提供最小必要信息，PoC 通过私下渠道分发"
+
+credits:
+  - "Reporter: your_name_here"
+  - "Maintainer: maintainer_name_here"
+  - "Contact: security@example.com"
+
