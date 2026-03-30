@@ -1,12 +1,15 @@
 package com.hbm.block.logistic;
 
 import com.hbm.api.Mode;
+import com.hbm.block.interfaces.ILookOverlay;
 import com.hbm.blockentity.machine.PipeEntity;
 import com.hbm.utils.EnumUtils;
 import com.hbm.utils.WorldUtils;
 import com.hbm.utils.transport_net.FluidNetworkSystem;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
@@ -19,7 +22,9 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import org.jetbrains.annotations.Nullable;
 
-public class BlockFluidPipe extends AbstractPipeBlock implements EntityBlock {
+import java.util.List;
+
+public class BlockFluidPipe extends AbstractPipeBlock implements EntityBlock, ILookOverlay {
     public BlockFluidPipe(Properties pProperties) {
         super(pProperties, 0.1875f);
     }
@@ -89,5 +94,16 @@ public class BlockFluidPipe extends AbstractPipeBlock implements EntityBlock {
             fluidNetworkSystem.leave(pPos);
         }
         super.onRemove(pState, pLevel, pPos, pNewState, pMovedByPiston);
+    }
+
+    @Override
+    public List<Component> getDesc(Level level, BlockPos pos) {
+        PipeEntity pipeEntity = WorldUtils.getTileEntity(PipeEntity.class, level, pos);
+        Fluid fluid = Fluids.EMPTY;
+        if (pipeEntity != null) fluid = pipeEntity.getFluid();
+        return List.of(
+                Component.translatable(this.getDescriptionId()).withStyle(ChatFormatting.YELLOW),
+                Component.translatable(fluid.getFluidType().getDescriptionId()).withStyle(ChatFormatting.WHITE)
+        );
     }
 }

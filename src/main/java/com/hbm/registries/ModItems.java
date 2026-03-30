@@ -788,7 +788,7 @@ public class ModItems {
     public static final RegistryObject<Item> BEDROCK_ORE = ITEMS.register("bedrock_ore_base",()->new BedrockOreItem(new Item.Properties()));
 
     public static final RegistryObject<Item> reacher = ITEMS.register("reacher",()->new Item(new Item.Properties()));
-    public static final RegistryObject<Item> SCREWDRIVER = ITEMS.register("screwdriver",()->new Item(new Item.Properties()));
+    public static final RegistryObject<Item> SCREWDRIVER = control("screwdriver", ()->new ItemTooling(new Item.Properties().stacksTo(1).durability(100).setNoRepair()), "Screw");
     //升级组件
     public static final RegistryObject<Item> UPGRADE_BASE = ITEMS.register("upgrade_base",()->new Item(new Item.Properties()));
     //导弹

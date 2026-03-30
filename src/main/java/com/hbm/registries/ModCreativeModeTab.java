@@ -177,7 +177,7 @@ public class ModCreativeModeTab {
 //            output.accept(ModItems.bucket_irradiated_water.get());
 //            output.accept(ModItems.bucket_irradiated_polluted.get());
 //            output.accept(ModItems.bucket_sulfuric_acid.get());
-            output.accept(ModBlocks.conveyor.get());
+//            output.accept(ModBlocks.conveyor.get());
             output.accept(ModBlocks.crate_iron.get());
             output.accept(ModBlocks.crate_steel.get());
 

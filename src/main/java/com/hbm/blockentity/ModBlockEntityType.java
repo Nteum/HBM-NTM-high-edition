@@ -3,6 +3,7 @@ package com.hbm.blockentity;
 import com.hbm.block.HBMMachine;
 import com.hbm.block.env.GlyphidSpawner;
 import com.hbm.blockentity.base2.TileProxyCombo;
+import com.hbm.blockentity.logistic.TileConveyor;
 import com.hbm.blockentity.machine.*;
 import com.hbm.blockentity.machine.IronCrateBlockEntity;
 import com.hbm.blockentity.machine.SteelCrateBlockEntity;
@@ -149,6 +150,7 @@ public class ModBlockEntityType {
             REGISTER.register("tile_connector", () -> BlockEntityType.Builder.of(TileConnector::new, ModBlocks.CONNECTOR.get()).build(null));
     public static final RegistryObject<BlockEntityType<TileFireboxBase>> TILE_FIREBOX = register("tile_firebox", TileFireBox::new, ModBlocks.HEATER_FIREBOX);
     public static final RegistryObject<BlockEntityType<TileFoundryMold>> TILE_FOUNDRY_MOLD = register("tile_foundrymold", TileFoundryMold::new, ModBlocks.FOUNDRY_MOLD);
+    public static final RegistryObject<BlockEntityType<TileConveyor>> TILE_CONVEYOR = register("tile_conveyor", TileConveyor::new, ModBlocks.conveyor);
     // 注册函数
     private static<T extends BlockEntity> RegistryObject<BlockEntityType<T>> register(String key, BlockEntityType.BlockEntitySupplier<T> pFactory, Supplier<Block>... pValidBlocks){
         return REGISTER.register(key, () -> BlockEntityType.Builder.of(pFactory, Arrays.stream(pValidBlocks).map(Supplier::get).toArray(Block[]::new)).build(null));

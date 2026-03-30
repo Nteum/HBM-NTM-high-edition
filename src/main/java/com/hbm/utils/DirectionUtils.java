@@ -34,6 +34,14 @@ public class DirectionUtils {
     public static Direction leftRot(Direction axis, Direction original){
         return EnumUtils.DIRECTIONS[ROTATION_MATRIX[axis.ordinal()][original.ordinal()]];
     }
+    // 从某个方向左右转后获得的方向 0 - 向前；1 - 左弯；2 - 右弯
+    public static Direction leftAndRightDir(Direction inDir, int bend){
+        return switch (bend){
+            case 1 -> Direction.from2DDataValue((inDir.get2DDataValue() - 1 + 4) % 4);
+            case 2 -> Direction.from2DDataValue((inDir.get2DDataValue() + 1 + 4) % 4);
+            default -> inDir;
+        };
+    }
 
     /**
      * 沿水平面旋转一个方向

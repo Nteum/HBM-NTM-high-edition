@@ -179,8 +179,9 @@ public class ModBlocks {
 //    public static final RegistryObject<Block> part_press_head = BLOCKS.register("part_press_head",()->new Block(Properties.of().noLootTable()));
     //电力
     public static final RegistryObject<Block> RED_CABLE = registerBlockWithItem("red_cable",()->new BlockCable(Properties.copy(Blocks.STONE_BRICK_WALL)));
-    //输送带
-    public static final RegistryObject<Block> conveyor = registerBlockWithItem("conveyor",()->new BlockConveyor(Properties.of()));
+    // 物流体系
+    public static final RegistryObject<Block> conveyor = add("conveyor",()->new BlockConveyor(Properties.of()), ModTabs.CONTROL.getKey(), HBMKey.MODEL_STANDALONE, HBMKey.ORDERLY_GEN, HBMKey.DROP_SELF);
+//    public static final RegistryObject<Block> conveyor = registerBlockWithItem("conveyor",()->new BlockConveyor(Properties.of()));
     public static final RegistryObject<Block> crate_iron =
             new BlockBuilder("crate_iron", () -> new IronCrateBlock(Properties.of().strength(3.0F).sound(SoundType.WOOD)))
                     .tab(ModCreativeModeTab.HBM_MACHINE.getKey()).loc(HBMKey.REVERSE_GEN)

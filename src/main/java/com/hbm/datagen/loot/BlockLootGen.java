@@ -81,7 +81,7 @@ public class BlockLootGen extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.machine_icf_press.get());
         this.dropSelf(ModBlocks.machine_research_reactor.get());
         this.dropSelf(ModBlocks.machine_reactor_breeding.get());
-        this.dropSelf(ModBlocks.conveyor.get());
+//        this.dropSelf(ModBlocks.conveyor.get());
         this.dropSelf(ModBlocks.crate_iron.get());
         this.dropSelf(ModBlocks.crate_steel.get());
         this.dropSelf(ModBlocks.bomb_boy.get());

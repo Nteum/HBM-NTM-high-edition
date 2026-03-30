@@ -4,6 +4,7 @@ import com.hbm.HBM;
 import com.hbm.block.HBMBlockProperties;
 import com.hbm.block.base.BlockDummyable;
 import com.hbm.block.env.BedRockOre;
+import com.hbm.gui.recipebook.HBMRecipeBooks;
 import com.hbm.registries.ModBlocks;
 import com.hbm.render.model.Models;
 import net.minecraft.core.Direction;
@@ -62,9 +63,9 @@ public class BlockStateGen extends BlockStateProvider {
         simpleBlockWithItem(ModBlocks.tokamak_injector.get(), this.models().cubeAll("tokamak_injector", tokamakSide));
         simpleBlockWithItem(ModBlocks.tokamak_port.get(), this.models().cubeAll("tokamak_port", tokamakSide));
 
-        ModelFile.ExistingModelFile conveyorModel = this.models().getExistingFile(new ResourceLocation(HBM.MODID, "block/conveyor"));
-        horizontalBlock(ModBlocks.conveyor.get(),conveyorModel);
-        simpleBlockItem(ModBlocks.conveyor.get(),conveyorModel);
+//        ModelFile.ExistingModelFile conveyorModel = this.models().getExistingFile(new ResourceLocation(HBM.MODID, "block/conveyor"));
+//        horizontalBlock(ModBlocks.conveyor.get(),conveyorModel);
+//        simpleBlockItem(ModBlocks.conveyor.get(),conveyorModel);
         //多状态的方块和物品
         //1. 高炉
         BlockModelBuilder machineDifurnace_off = this.models().orientableWithBottom("machine_difurnace_off", new ResourceLocation(HBM.MODID, "block/difurnace_side"), new ResourceLocation(HBM.MODID, "block/difurnace_front_off"), new ResourceLocation(HBM.MODID, "block/difurnace_bottom"), new ResourceLocation(HBM.MODID, "block/difurnace_top_off"));
@@ -125,16 +126,17 @@ public class BlockStateGen extends BlockStateProvider {
         // 新体系添加的物品
         simpleBlockWithItem(ModBlocks.WASTE_LEAVES.get(), genBuiltInModelFile(ModBlocks.WASTE_LEAVES.get(), "leaves"));
         simpleBlockWithItem(ModBlocks.WASTE_GRASS.get(), genBuiltInModelFile(ModBlocks.WASTE_GRASS.get(), "cube_bottom_top"));
-        addObjHorizonalModel(ModBlocks.SPACE_STATION_BASE.get(), "block/space_station_base");
+        addHorizontalModel(ModBlocks.SPACE_STATION_BASE.get(), "block/space_station_base");
         simpleBlockWithItem(ModBlocks.CONNECTOR.get(), genBuiltInModelFile(ModBlocks.CONNECTOR.get(), "existing"));
-        addObjHorizonalModel(ModBlocks.machine_assembler.get(), "block/assembler_body");
-        addObjHorizonalModel(ModBlocks.machine_press.get(), "block/press");
-        addObjHorizonalModel(ModBlocks.HEATER_FIREBOX.get(), "block/firebox");
-        addObjHorizonalModel(ModBlocks.anvil_iron.get(),"block/anvil/anvil_iron");
-        addObjHorizonalModel(ModBlocks.anvil_bismuth.get(),"block/anvil/anvil_bismuth");
-        addObjHorizonalModel(ModBlocks.anvil_desh.get(),"block/anvil/anvil_desh");
-        addObjHorizonalModel(ModBlocks.machine_cracking_tower.get(),"block/cracking_tower/machine_cracking_tower");
-        addObjHorizonalModel(ModBlocks.machine_crucible.get(), "block/crucible");
+        addHorizontalModel(ModBlocks.machine_assembler.get(), "block/assembler_body");
+        addHorizontalModel(ModBlocks.machine_press.get(), "block/press");
+        addHorizontalModel(ModBlocks.HEATER_FIREBOX.get(), "block/firebox");
+        addHorizontalModel(ModBlocks.anvil_iron.get(),"block/anvil/anvil_iron");
+        addHorizontalModel(ModBlocks.anvil_bismuth.get(),"block/anvil/anvil_bismuth");
+        addHorizontalModel(ModBlocks.anvil_desh.get(),"block/anvil/anvil_desh");
+        addHorizontalModel(ModBlocks.machine_cracking_tower.get(),"block/cracking_tower/machine_cracking_tower");
+        addHorizontalModel(ModBlocks.machine_crucible.get(), "block/crucible");
+        conveyor(ModBlocks.conveyor.get(), "block/conveyor");
     }
     // 方块和物品：纯cube all
     public void simpleBlockWithItem(Block block){
@@ -158,14 +160,25 @@ public class BlockStateGen extends BlockStateProvider {
         simpleBlockItem(block,model);
     }
 
-    public void addObjHorizonalModel(Block block,String name){
+    public void addHorizontalModel(Block block,String name){
         ModelFile.ExistingModelFile existingFile = this.models().getExistingFile(new ResourceLocation(HBM.MODID, name));
 //        this.horizontalBlock(block,existingFile);
-        getVariantBuilder(block)
-                .forAllStatesExcept(state -> ConfiguredModel.builder()
+        getVariantBuilder(block).forAllStatesExcept(state -> ConfiguredModel.builder()
                         .modelFile(existingFile)
                         .rotationY(((int) state.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot() + 180) % 360)
                         .build(), HBMBlockProperties.IS_CORE);
+        this.simpleBlockItem(block,existingFile);
+    }
+    // 专用于传送带模型
+    private void conveyor(Block block,String name){
+        ModelFile.ExistingModelFile existingFile = this.models().getExistingFile(HBM.rl(name));
+        getVariantBuilder(block).forAllStates(state -> {
+            int bend = state.getValue(HBMBlockProperties.VARIANT3).intValue();
+            return ConfiguredModel.builder()
+                    .modelFile(bend == 0 ? existingFile : bend == 1 ? this.models().getExistingFile(HBM.rl(name + "_left")) : this.models().getExistingFile(HBM.rl(name + "_right")))
+                    .rotationY(((int) state.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot() + 180) % 360)
+                    .build();
+        });
         this.simpleBlockItem(block,existingFile);
     }
     /** 添加有两个状态，并带有水平方向的方块（HBM的方块机器大部分属于此列） */

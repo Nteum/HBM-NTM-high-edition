@@ -36,6 +36,7 @@ public abstract class UpdateableBlockEntity extends BlockEntity implements ITile
     private long lastSave;
     // 代表机器是否倍东西挡住，挡住的话声音传不过来，似乎是用在这个上的
     public boolean muffled;
+    public boolean shouldSync = false;     // 是否应当同步，这个是新加的，可以用也可以不用
 
     public UpdateableBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);

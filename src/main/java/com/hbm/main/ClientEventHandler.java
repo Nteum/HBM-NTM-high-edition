@@ -9,7 +9,6 @@ import com.hbm.dim.orbit.SpaceSpecialEffects;
 import com.hbm.entity.ModEntityType;
 import com.hbm.gui.ModMenuType;
 import com.hbm.gui.screen.*;
-
 import com.hbm.item.icf.ItemICFPellet;
 import com.hbm.item.pwr.ItemPWRFuel;
 import com.hbm.item.research.ItemBreedingRod;
@@ -36,7 +35,6 @@ import com.hbm.render.overlay.DebugTagOverlay;
 import com.hbm.render.pipeline.GeoRenderPipeline;
 import com.hbm.settings.tooltip.TooltipRegistries;
 import com.hbm.utils.WorldUtils;
-import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.MenuScreens;
@@ -52,7 +50,6 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -140,6 +137,7 @@ public class ClientEventHandler {
             BlockEntityRenderers.register(ModBlockEntityType.TILE_FIREBOX.get(), RendererFirebox::new);
             BlockEntityRenderers.register(ModBlockEntityType.CRUCIBLE_ENTITY.get(), CrucibleRenderer::new);
             BlockEntityRenderers.register(ModBlockEntityType.TILE_FOUNDRY_MOLD.get(), RenderFoundryMold::new);
+            BlockEntityRenderers.register(ModBlockEntityType.TILE_CONVEYOR.get(), RendererConveyor::new);
             //实体渲染
             EntityRenderers.register(ModEntityType.TEST_ENTITY.get(), TestEntityRenderer::new);
             EntityRenderers.register(ModEntityType.ENTITY_GRENADE_GENETIC.get(), ThrownItemRenderer::new);

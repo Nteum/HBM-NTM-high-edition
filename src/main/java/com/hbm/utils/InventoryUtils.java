@@ -310,4 +310,19 @@ public class InventoryUtils {
             itemHandler.insertItem(slot2, output, false);
         }
     }
+
+    public static boolean insertNoCheckSlots(IItemHandler from, IItemHandler to, int slot, int amount){
+        ItemStack itemStack = from.extractItem(slot, amount, true);
+        ItemStack itemStack1 = itemStack.copy();
+        for (int i = 0; i < to.getSlots() && !itemStack1.isEmpty(); i++) {
+            itemStack1 = to.insertItem(i, itemStack1, false);
+        }
+        int count1 = itemStack1.getCount();
+        int count = itemStack.getCount();
+        if (count1 < count){
+            from.extractItem(slot, count - count1, false);
+            return true;
+        }
+        return false;
+    }
 }

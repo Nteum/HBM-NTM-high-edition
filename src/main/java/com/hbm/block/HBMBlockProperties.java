@@ -6,6 +6,10 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.block.state.properties.RotationSegment;
 
 public class HBMBlockProperties {
+    // 多方块机器中是否位于中心方块
     public static final BooleanProperty IS_CORE = BooleanProperty.create(HBMKey.IS_CORE);
+    // 任意存在三种变体的形态
+    // 对于异虫巢，表示三种异虫巢方块
+    // 对于传送带，0 - 向前传送；1 - 左弯；2 - 右弯
     public static final IntegerProperty VARIANT3 = IntegerProperty.create("variant3", 0, 2);
 }
