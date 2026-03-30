@@ -1129,6 +1129,9 @@ public class ModItems {
      * 以下为功能函数
      * */
     public static void register(IEventBus eventBus){
+        // Force block registration classes to populate their BlockItems first so
+        // legacy placeholders only backfill truly missing ids.
+        ModBlocks.BLOCKS.getEntries();
         LegacyItems.registerLegacy();
         ITEMS.register(eventBus);
     }
