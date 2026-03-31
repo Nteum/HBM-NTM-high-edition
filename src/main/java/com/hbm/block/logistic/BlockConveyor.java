@@ -56,7 +56,7 @@ public class BlockConveyor extends Block implements EntityBlock, IToolable {
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext pContext) {
-        return this.defaultBlockState().setValue(FACING, pContext.getHorizontalDirection().getOpposite());
+        return this.defaultBlockState().setValue(FACING, pContext.getHorizontalDirection());
     }
 
     @Override
@@ -70,8 +70,8 @@ public class BlockConveyor extends Block implements EntityBlock, IToolable {
         if (tool != ToolType.SCREWDRIVER || player.hasPose(Pose.CROUCHING)) return false;
         BlockState blockState = context.getLevel().getBlockState(context.getClickedPos());
         Integer bend = blockState.getValue(BEND);
-        blockState.setValue(BEND, (bend + 1) % 3);
-        context.getLevel().setBlock(context.getClickedPos(), blockState, 3);
+        BlockState newState = blockState.setValue(BEND, (bend + 1) % 3);
+        context.getLevel().setBlock(context.getClickedPos(), newState, 3);
         return true;
     }
 

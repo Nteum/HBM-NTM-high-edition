@@ -11,6 +11,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
@@ -33,14 +34,6 @@ public class DirectionUtils {
     };
     public static Direction leftRot(Direction axis, Direction original){
         return EnumUtils.DIRECTIONS[ROTATION_MATRIX[axis.ordinal()][original.ordinal()]];
-    }
-    // 从某个方向左右转后获得的方向 0 - 向前；1 - 左弯；2 - 右弯
-    public static Direction leftAndRightDir(Direction inDir, int bend){
-        return switch (bend){
-            case 1 -> Direction.from2DDataValue((inDir.get2DDataValue() - 1 + 4) % 4);
-            case 2 -> Direction.from2DDataValue((inDir.get2DDataValue() + 1 + 4) % 4);
-            default -> inDir;
-        };
     }
 
     /**
@@ -189,5 +182,28 @@ public class DirectionUtils {
             if (level.getBlockState(pos.relative(direction)).is(targetBlock)) return true;
         }
         return false;
+    }
+    // 从某个方向左右转后获得的方向 0 - 向前；1 - 左弯；2 - 右弯
+    public static Direction leftAndRightDir(Direction inDir, int bend){
+        return switch (bend){
+            case 1 -> Direction.from2DDataValue((inDir.get2DDataValue() - 1 + 4) % 4);
+            case 2 -> Direction.from2DDataValue((inDir.get2DDataValue() + 1 + 4) % 4);
+            default -> inDir;
+        };
+    }
+    // 一个点相对于所在方块内特点方向边的距离
+    public static double locToSideDist(Vec3 loc, Direction side){
+        return switch (side){
+            case EAST -> Math.ceil(loc.x) - loc.x;
+            case WEST -> loc.x - Math.floor(loc.x);
+            case SOUTH -> Math.ceil(loc.z) - loc.z;
+            case NORTH -> loc.z - Math.floor(loc.z);
+            case UP -> Math.ceil(loc.y) - loc.y;
+            case DOWN -> loc.y - Math.floor(loc.y);
+        };
+    }
+    // 一个点相对于两条边的角度
+    public static double locToCornerAngle(Vec3 loc, Direction inSide, Direction outSide){
+        return Math.atan(locToSideDist(loc, inSide) / locToSideDist(loc, outSide));
     }
 }

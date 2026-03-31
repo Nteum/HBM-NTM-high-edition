@@ -1,0 +1,10 @@
+{
+  "type": "hbm:press",
+  "input": {
+    "item": "hbm:ingot_dura_steel"
+  },
+  "result": {
+    "item": "hbm:plate_dura_steel"
+  },
+  "stamp": "PLATE"
+}

@@ -1,0 +1,10 @@
+{
+  "type": "hbm:press",
+  "input": {
+    "item": "hbm:ingot_advanced_alloy"
+  },
+  "result": {
+    "item": "hbm:plate_advanced_alloy"
+  },
+  "stamp": "PLATE"
+}

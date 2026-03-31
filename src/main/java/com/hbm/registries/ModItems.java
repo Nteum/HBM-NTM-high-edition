@@ -4,6 +4,7 @@ import com.hbm.HBM;
 import com.hbm.HBMKey;
 import com.hbm.HBMLang;
 import com.hbm.Inventory.material.HBMMatForm;
+import com.hbm.block.interfaces.ToolType;
 import com.hbm.config.ConfigLBSM;
 import com.hbm.datagen.LanguageProvider;
 import com.hbm.datagen.model.ItemModelGen;
@@ -788,7 +789,7 @@ public class ModItems {
     public static final RegistryObject<Item> BEDROCK_ORE = ITEMS.register("bedrock_ore_base",()->new BedrockOreItem(new Item.Properties()));
 
     public static final RegistryObject<Item> reacher = ITEMS.register("reacher",()->new Item(new Item.Properties()));
-    public static final RegistryObject<Item> SCREWDRIVER = control("screwdriver", ()->new ItemTooling(new Item.Properties().stacksTo(1).durability(100).setNoRepair()), "Screw");
+    public static final RegistryObject<Item> SCREWDRIVER = control("screwdriver", ()->new ItemTooling(new Item.Properties().stacksTo(1).durability(100).setNoRepair(), ToolType.SCREWDRIVER), "Screw");
     //升级组件
     public static final RegistryObject<Item> UPGRADE_BASE = ITEMS.register("upgrade_base",()->new Item(new Item.Properties()));
     //导弹

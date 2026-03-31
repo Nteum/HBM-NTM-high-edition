@@ -1,0 +1,10 @@
+{
+  "type": "hbm:press",
+  "input": {
+    "item": "minecraft:gold_ingot"
+  },
+  "result": {
+    "item": "hbm:plate_gold"
+  },
+  "stamp": "PLATE"
+}

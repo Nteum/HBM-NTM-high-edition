@@ -1,0 +1,10 @@
+{
+  "type": "hbm:press",
+  "input": {
+    "tag": "forge:coke"
+  },
+  "result": {
+    "item": "hbm:ingot_graphite"
+  },
+  "stamp": "FLAT"
+}

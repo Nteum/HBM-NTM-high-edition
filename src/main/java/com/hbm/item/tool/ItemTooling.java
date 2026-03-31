@@ -13,8 +13,9 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class ItemTooling extends Item {
     protected ToolType type;
-    public ItemTooling(Properties pProperties) {
+    public ItemTooling(Properties pProperties, ToolType type) {
         super(pProperties);
+        this.type = type;
     }
 
     @Override

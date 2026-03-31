@@ -9,6 +9,7 @@ import com.hbm.utils.InventoryUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.Vec3i;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.world.Containers;
@@ -20,6 +21,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.entity.EntityTypeTest;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.ItemStackHandler;
@@ -30,11 +32,11 @@ import java.util.List;
 
 public class TileConveyor extends CapabilityBlockEntity {
     static int DOUBLE_CLICK_TIME = 10;
-    public static int TRANSPORT_TIME = 20;
+    public static int MAX_TRANSPORT_PROGRESS = 40;
     static float CONVEYOR_HEIGHT = 5.0f/16;
-    int transPortTimer = -1;         // 判断物品输送的计时器
+    int transPortProgress = -1;      // 物品输送的进度（不等于计时器）
     int doubleClickTimer = -1;       // 判断玩家双击的计时器
-    Vec3 joinLoc;
+//    Vec3 joinLoc;
     ItemStackHandler items = new ItemStackHandler(1){
         @Override
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
@@ -49,6 +51,9 @@ public class TileConveyor extends CapabilityBlockEntity {
     };
     public TileConveyor(BlockPos pos, BlockState state) {
         super(ModBlockEntityType.TILE_CONVEYOR.get(), pos, state);
+        Direction facing = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
+        // 只能传送带来的方向接收物品
+        this.capabilitiesContent.addCapability(ForgeCapabilities.ITEM_HANDLER, this.items, facing.getOpposite());
     }
 
     @Override
@@ -59,23 +64,28 @@ public class TileConveyor extends CapabilityBlockEntity {
             doubleClickTimer = -1;
         }else if (doubleClickTimer >= 0) doubleClickTimer ++;
         // 更新输送定时器，若定时器时间到了，则试图向邻接的传送带传送物品
-        int oldValue = this.transPortTimer;
+        int oldValue = this.transPortProgress;
         if (!this.isEmpty()){
-            if (oldValue == -1) {
-                joinLoc = getDefaultJoinLoc();
-            }
-            this.transPortTimer ++;
-            if (this.transPortTimer >= TRANSPORT_TIME){
-                Direction facing = this.getBlockState().getValue(BlockStateProperties.HORIZONTAL_FACING);
-                Integer bend = this.getBlockState().getValue(HBMBlockProperties.VARIANT3);
-                Direction outDir = DirectionUtils.leftAndRightDir(facing, bend);
-                BlockEntity blockEntity = this.getLevel().getBlockEntity(this.worldPosition.relative(outDir));
-                if (blockEntity != null) blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER, outDir.getOpposite()).ifPresent(iItemHandler -> InventoryUtils.insertNoCheckSlots(this.items, iItemHandler, 0, 1));
+            if (oldValue == -1) {                               // 检测到有物品传入，放在传送带初始位置
+                this.transPortProgress = 0;
+            }else if (this.transPortProgress < MAX_TRANSPORT_PROGRESS){ // 尚未到终点，在传送带上移动
+                this.transPortProgress += 2;
+            }else{                                              // 到达传送带出口，尝试将物品传递给目标方向
+                Direction outDir = getOutDir();                 // 输出口的方向
+                BlockPos outNeighbour = this.worldPosition.relative(outDir);
+                BlockEntity blockEntity = this.getLevel().getBlockEntity(outNeighbour);
+                if (blockEntity != null) {                      // 如果输出口对方可以接收物品，则接收物品
+                    blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER, outDir.getOpposite()).ifPresent(iItemHandler -> InventoryUtils.insertNoCheckSlots(this.items, iItemHandler, 0, 1));
+                }else if (this.getLevel().getBlockState(outNeighbour).getCollisionShape(this.getLevel(), outNeighbour).isEmpty()){  // 如果输出口没有方块实体并且没有碰撞箱，就生成掉落物。
+                    ItemStack stackInSlot = this.items.extractItem(0, 1, false);
+                    Vec3 center = outNeighbour.getCenter();
+                    this.getLevel().addFreshEntity(new ItemEntity(this.getLevel(), center.x, center.y, center.z, stackInSlot));
+                }
             }
         }
         // 传送后再判断一次，确保不漏tick
         if (this.isEmpty()){
-            this.transPortTimer = -1;
+            this.transPortProgress = -1;                // 传送完了，进度重新设为0
             if (this.getLevel().getGameTime() % 5 == 0){
                 // 搜索掉落在传送带上的物品，如果传送带是空的，就把它放入传送带
                 List<ItemEntity> list = new ArrayList<>(1);
@@ -90,18 +100,29 @@ public class TileConveyor extends CapabilityBlockEntity {
                     }else {
                         itemEntity.setItem(itemStack);
                     }
-                    this.transPortTimer = 0;
-                    this.joinLoc = new Vec3(itemEntity.getX(), CONVEYOR_HEIGHT, itemEntity.getZ());
+                    this.transPortProgress = calcTransProgress(itemEntity.position());
                 }
             }
         }
-        if (this.transPortTimer != oldValue)
+        if (this.transPortProgress != oldValue)
             sendUpdatePacket();
     }
-    // 默认的物品运输点位置，用于确认物品确实在运输。
-    private Vec3 getDefaultJoinLoc(){
+    protected Direction getOutDir(){
         Direction facing = this.getBlockState().getValue(BlockStateProperties.HORIZONTAL_FACING);
-        return this.worldPosition.getCenter().relative(facing.getOpposite(), 0.5).relative(Direction.DOWN, 3.0 / 16);
+        Integer bend = this.getBlockState().getValue(HBMBlockProperties.VARIANT3);
+        return DirectionUtils.leftAndRightDir(facing, bend);    // 输出口的方向
+    }
+    // 计算掉落在传送带上的物品对应的传送位置
+    protected int calcTransProgress(Vec3 itemPos){
+        Direction facing = this.getBlockState().getValue(BlockStateProperties.HORIZONTAL_FACING);
+        Integer bend = this.getBlockState().getValue(HBMBlockProperties.VARIANT3);
+        Direction outDir = DirectionUtils.leftAndRightDir(facing, bend);    // 输出口的方向
+        Vec3i facingNormal = facing.getNormal();
+        if (bend == 0){
+            return (int) (DirectionUtils.locToSideDist(itemPos, facing.getOpposite()) * MAX_TRANSPORT_PROGRESS);
+        }else {
+            return (int) (DirectionUtils.locToCornerAngle(itemPos, facing.getOpposite(), outDir.getOpposite()) * 2 / Math.PI * MAX_TRANSPORT_PROGRESS);
+        }
     }
 
     @Override
@@ -120,14 +141,14 @@ public class TileConveyor extends CapabilityBlockEntity {
     public @NotNull CompoundTag getReducedUpdateTag() {
         CompoundTag tag = new CompoundTag();
         tag.put(HBMKey.ITEM, this.items.serializeNBT());
-        tag.putInt("transporttimer", this.transPortTimer);
+        tag.putInt("transPortProgress", this.transPortProgress);
         return tag;
     }
 
     @Override
     public void handleUpdatePacket(@NotNull CompoundTag tag) {
         if (tag.contains(HBMKey.ITEM, Tag.TAG_COMPOUND)) this.items.deserializeNBT(tag.getCompound(HBMKey.ITEM));
-        this.transPortTimer = tag.getInt("transporttimer");
+        this.transPortProgress = tag.getInt("transPortProgress");
     }
 
     public ItemStackHandler getItems(){
@@ -150,7 +171,7 @@ public class TileConveyor extends CapabilityBlockEntity {
         }
     }
 
-    public int getTransportTime(){
-        return this.transPortTimer;
+    public int getTransPortProgress(){
+        return this.transPortProgress;
     }
 }

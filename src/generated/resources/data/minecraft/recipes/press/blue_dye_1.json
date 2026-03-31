@@ -1,0 +1,11 @@
+{
+  "type": "hbm:press",
+  "input": {
+    "tag": "forge:dusts/lapis_lazuli"
+  },
+  "result": {
+    "count": 4,
+    "item": "minecraft:blue_dye"
+  },
+  "stamp": "FLAT"
+}

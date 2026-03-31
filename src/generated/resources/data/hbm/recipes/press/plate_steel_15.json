@@ -1,0 +1,10 @@
+{
+  "type": "hbm:press",
+  "input": {
+    "tag": "forge:ingots/steel"
+  },
+  "result": {
+    "item": "hbm:plate_steel"
+  },
+  "stamp": "PLATE"
+}

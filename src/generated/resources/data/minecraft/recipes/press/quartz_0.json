@@ -1,0 +1,10 @@
+{
+  "type": "hbm:press",
+  "input": {
+    "tag": "forge:dusts/quartz"
+  },
+  "result": {
+    "item": "minecraft:quartz"
+  },
+  "stamp": "FLAT"
+}

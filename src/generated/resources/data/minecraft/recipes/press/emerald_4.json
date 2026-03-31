@@ -1,0 +1,10 @@
+{
+  "type": "hbm:press",
+  "input": {
+    "tag": "forge:dusts/emerald"
+  },
+  "result": {
+    "item": "minecraft:emerald"
+  },
+  "stamp": "FLAT"
+}

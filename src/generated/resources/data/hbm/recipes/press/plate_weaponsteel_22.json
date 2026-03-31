@@ -1,0 +1,10 @@
+{
+  "type": "hbm:press",
+  "input": {
+    "item": "hbm:ingot_weaponsteel"
+  },
+  "result": {
+    "item": "hbm:plate_weaponsteel"
+  },
+  "stamp": "PLATE"
+}

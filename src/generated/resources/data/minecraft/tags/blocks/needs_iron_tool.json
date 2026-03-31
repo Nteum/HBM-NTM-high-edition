@@ -1,6 +1,7 @@
 {
   "values": [
     "hbm:ore_uranium",
+    "hbm:conveyor",
     "hbm:foundry_mold"
   ]
 }
