@@ -104,7 +104,7 @@ public class BlockConveyor extends Block implements EntityBlock, IToolable {
         if (!pLevel.isClientSide && pHand == InteractionHand.MAIN_HAND && !pPlayer.hasPose(Pose.CROUCHING)){
             TileConveyor tileConveyor = WorldUtils.getTileEntity(TileConveyor.class, pLevel, pPos);
             if (tileConveyor != null){
-                tileConveyor.onLeftClick(pLevel, pPos, pState);
+//                tileConveyor.onLeftClick(pLevel, pPos, pState);
             }
         }
         return super.use(pState, pLevel, pPos, pPlayer, pHand, pHit);
