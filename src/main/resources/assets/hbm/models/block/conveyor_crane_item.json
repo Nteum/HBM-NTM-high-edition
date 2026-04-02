@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/block",
+  "loader": "forge:composite",
+  "children": {
+    "cube": { "model": "hbm:block/conveyor_crane_cube" },
+    "port_in": { "model": "hbm:block/conveyor_crane_in"},
+    "port_out": { "model": "hbm:block/conveyor_crane_arrow1"}
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "arrow": "hbm:block/crane_arrow_green2",
+    "out": "hbm:block/crane_out"
+  },
+  "elements": [
+    {
+      "from": [0, 0, 0],
+      "to": [16, 16, 16],
+      "faces": {
+        "up": {"texture": "#out", "cullface": "up" },
+        "west": {"texture": "#arrow", "cullface": "west" },
+        "east": {"texture": "#arrow", "cullface": "east" }
+      }
+    }
+  ]
+}

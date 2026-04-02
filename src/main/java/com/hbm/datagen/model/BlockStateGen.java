@@ -4,6 +4,7 @@ import com.hbm.HBM;
 import com.hbm.block.HBMBlockProperties;
 import com.hbm.block.base.BlockDummyable;
 import com.hbm.block.env.BedRockOre;
+import com.hbm.block.logistic.ConveyorMachineBase;
 import com.hbm.gui.recipebook.HBMRecipeBooks;
 import com.hbm.registries.ModBlocks;
 import com.hbm.render.model.Models;
@@ -63,9 +64,6 @@ public class BlockStateGen extends BlockStateProvider {
         simpleBlockWithItem(ModBlocks.tokamak_injector.get(), this.models().cubeAll("tokamak_injector", tokamakSide));
         simpleBlockWithItem(ModBlocks.tokamak_port.get(), this.models().cubeAll("tokamak_port", tokamakSide));
 
-//        ModelFile.ExistingModelFile conveyorModel = this.models().getExistingFile(new ResourceLocation(HBM.MODID, "block/conveyor"));
-//        horizontalBlock(ModBlocks.conveyor.get(),conveyorModel);
-//        simpleBlockItem(ModBlocks.conveyor.get(),conveyorModel);
         //多状态的方块和物品
         //1. 高炉
         BlockModelBuilder machineDifurnace_off = this.models().orientableWithBottom("machine_difurnace_off", new ResourceLocation(HBM.MODID, "block/difurnace_side"), new ResourceLocation(HBM.MODID, "block/difurnace_front_off"), new ResourceLocation(HBM.MODID, "block/difurnace_bottom"), new ResourceLocation(HBM.MODID, "block/difurnace_top_off"));
@@ -137,6 +135,7 @@ public class BlockStateGen extends BlockStateProvider {
         addHorizontalModel(ModBlocks.machine_cracking_tower.get(),"block/cracking_tower/machine_cracking_tower");
         addHorizontalModel(ModBlocks.machine_crucible.get(), "block/crucible");
         conveyor(ModBlocks.conveyor.get(), "block/conveyor");
+        conveyorCrane(ModBlocks.CONVEYOR_EXTRACTOR.get(), "block/conveyor_crane");
     }
     // 方块和物品：纯cube all
     public void simpleBlockWithItem(Block block){
@@ -265,5 +264,33 @@ public class BlockStateGen extends BlockStateProvider {
             case "existing" -> models().getExistingFile(HBM.rl(name));
             default -> throw new IllegalStateException("Unexpected value: " + type);
         };
+    }
+    // 输送带控制器，鬼知道为什么bob用了crane这个词
+    private void conveyorCrane(Block block, String name){
+        ModelFile.ExistingModelFile existingFile;
+        MultiPartBlockStateBuilder builder = getMultipartBuilder(block);
+        builder.part().modelFile(this.models().getExistingFile(HBM.rl(name + "_cube"))).addModel().end();
+        for (Direction dir : BlockStateProperties.FACING.getPossibleValues()) {
+            existingFile = this.models().getExistingFile(HBM.rl(name + "_in"));
+            if (dir.getAxis().isHorizontal()) {
+                builder.part().modelFile(existingFile).rotationY((((int) dir.toYRot()) + 180) % 360).uvLock(true).addModel().condition(BlockStateProperties.FACING, dir);
+            }else {
+                builder.part().modelFile(existingFile).rotationX(dir == Direction.UP ? -90 : 90).uvLock(true).addModel().condition(BlockStateProperties.FACING, dir);
+            }
+            for (int relativeDir : HBMBlockProperties.RELATIVE_DIRECTION.getPossibleValues()) {
+                int[] xyRot = new int[]{dir == Direction.UP ? -90 : dir == Direction.DOWN ? 90 : 0, dir.getAxis().isHorizontal() ? (((int) dir.toYRot()) + 180) % 360 : 0};
+                if (relativeDir == 0) existingFile = this.models().getExistingFile(HBM.rl(name + "_arrow1"));
+                else {
+                    existingFile = this.models().getExistingFile(HBM.rl(name + "_arrow2"));
+                    switch (relativeDir){
+                        case 1 -> xyRot[0] += -90;
+                        case 2 -> xyRot[0] += 90;
+                        case 4 -> xyRot[0] += 180;
+                    }
+                }
+                builder.part().modelFile(existingFile).rotationX(xyRot[0]).rotationY(xyRot[1]).uvLock(true).addModel().condition(BlockStateProperties.FACING, dir).condition(HBMBlockProperties.RELATIVE_DIRECTION, relativeDir);
+            }
+        }
+        this.simpleBlockItem(block, this.models().getExistingFile(HBM.rl(name + "_item")));
     }
 }

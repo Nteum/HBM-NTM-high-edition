@@ -3,6 +3,7 @@
     "#forge:machine",
     "#forge:ores",
     "hbm:conveyor",
+    "hbm:conveyor_extractor",
     "hbm:foundry_mold"
   ]
 }

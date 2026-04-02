@@ -13,6 +13,7 @@ import com.hbm.block.env.WasteEarth;
 import com.hbm.block.env.WasteLeaves;
 import com.hbm.block.logistic.BlockCable;
 import com.hbm.block.logistic.BlockConnector;
+import com.hbm.block.logistic.ConveyorExtractor;
 import com.hbm.block.machine.*;
 import com.hbm.block.machine.icf.BlockICFController;
 import com.hbm.block.machine.icf.BlockICFPress;
@@ -181,8 +182,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> RED_CABLE = registerBlockWithItem("red_cable",()->new BlockCable(Properties.copy(Blocks.STONE_BRICK_WALL)));
     // 物流体系
     public static final RegistryObject<Block> conveyor = new BlockBuilder("conveyor", ()->new BlockConveyor(Properties.copy(Blocks.STONE))).tab(ModTabs.CONTROL.getKey()).model(HBMKey.MODEL_STANDALONE).loc(HBMKey.ORDERLY_GEN).loot(HBMKey.DROP_SELF).tags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL).build();
-//    public static final RegistryObject<Block> conveyor = add("conveyor",()->new BlockConveyor(Properties.copy(Blocks.STONE)), ModTabs.CONTROL.getKey(), HBMKey.MODEL_STANDALONE, HBMKey.ORDERLY_GEN, HBMKey.DROP_SELF);
-//    public static final RegistryObject<Block> conveyor = registerBlockWithItem("conveyor",()->new BlockConveyor(Properties.of()));
+    public static final RegistryObject<Block> CONVEYOR_EXTRACTOR = new BlockBuilder("conveyor_extractor", ()->new ConveyorExtractor(Properties.copy(Blocks.STONE))).tab(ModTabs.CONTROL.getKey()).model(HBMKey.MODEL_STANDALONE).loc(HBMKey.ORDERLY_GEN).loot(HBMKey.DROP_SELF).tags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL).build();
     public static final RegistryObject<Block> crate_iron =
             new BlockBuilder("crate_iron", () -> new IronCrateBlock(Properties.of().strength(3.0F).sound(SoundType.WOOD)))
                     .tab(ModCreativeModeTab.HBM_MACHINE.getKey()).loc(HBMKey.REVERSE_GEN)

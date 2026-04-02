@@ -12,4 +12,7 @@ public class HBMBlockProperties {
     // 对于异虫巢，表示三种异虫巢方块
     // 对于传送带，0 - 向前传送；1 - 左弯；2 - 右弯
     public static final IntegerProperty VARIANT3 = IntegerProperty.create("variant3", 0, 2);
+    // 相对方向，指某个面相对于已知面的方向
+    // 0 - 对面，1 - 左面 2 - 右面 3 - 上面 4 - 下面
+    public static final IntegerProperty RELATIVE_DIRECTION = IntegerProperty.create("relative_dir", 0, 4);
 }
