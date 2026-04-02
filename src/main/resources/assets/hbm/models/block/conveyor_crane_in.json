@@ -5,10 +5,10 @@
   },
   "elements": [
     {
-      "from": [0, 0, 0],
+      "from": [0, 0, -0.1],
       "to": [16, 16, 16],
       "faces": {
-        "north": {"texture": "#in", "cullface": "north"}
+        "north": {"texture": "#in"}
       }
     }
   ]
