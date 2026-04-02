@@ -288,7 +288,7 @@ public class BlockStateGen extends BlockStateProvider {
                         case 4 -> xyRot[0] += 180;
                     }
                 }
-                builder.part().modelFile(existingFile).rotationX(xyRot[0]).rotationY(xyRot[1]).uvLock(true).addModel().condition(BlockStateProperties.FACING, dir).condition(HBMBlockProperties.RELATIVE_DIRECTION, relativeDir);
+                builder.part().modelFile(existingFile).rotationX(xyRot[0]).rotationY(xyRot[1]).addModel().condition(BlockStateProperties.FACING, dir).condition(HBMBlockProperties.RELATIVE_DIRECTION, relativeDir);
             }
         }
         this.simpleBlockItem(block, this.models().getExistingFile(HBM.rl(name + "_item")));

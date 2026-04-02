@@ -4,14 +4,15 @@
     "arrow": "hbm:block/crane_arrow_green2",
     "out": "hbm:block/crane_out"
   },
+  "render_type": "cutout",
   "elements": [
     {
       "from": [0, 0, 0],
       "to": [16, 16, 16],
       "faces": {
         "up": {"texture": "#out"},
-        "west": {"texture": "#arrow"},
-        "east": {"texture": "#arrow"}
+        "north": {"texture": "#arrow", "rotation": 90 },
+        "south": {"texture": "#arrow", "rotation": 270 }
       }
     }
   ]

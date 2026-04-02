@@ -4,13 +4,14 @@
     "arrow": "hbm:block/crane_arrow_green1",
     "out": "hbm:block/crane_out"
   },
+  "render_type": "cutout",
   "elements": [
     {
-      "from": [0, -0.1, 0],
-      "to": [16, 16.1, 16.1],
+      "from": [0, 0, 0],
+      "to": [16, 16, 16],
       "faces": {
         "south": {"texture": "#out"},
-        "up": {"texture": "#arrow"},
+        "up": {"texture": "#arrow", "rotation": 180 },
         "down": {"texture": "#arrow"}
       }
     }

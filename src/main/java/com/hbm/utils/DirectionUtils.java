@@ -212,12 +212,12 @@ public class DirectionUtils {
     // 这虽然笨，但绝对不会在计算坐标轴正负号时出错
     private static final Direction[][] RELATIVE_MAP = {
             // 假设索引顺序：0:OPPOSITE, 1:LEFT, 2:RIGHT, 3:UP, 4:DOWN
+            { /* DOWN  */ Direction.UP,    Direction.WEST,  Direction.EAST,  Direction.NORTH, Direction.SOUTH },
+            { /* UP    */ Direction.DOWN,  Direction.WEST,  Direction.EAST,  Direction.SOUTH, Direction.NORTH },
             { /* NORTH */ Direction.SOUTH, Direction.WEST,  Direction.EAST,  Direction.UP,    Direction.DOWN },
             { /* SOUTH */ Direction.NORTH, Direction.EAST,  Direction.WEST,  Direction.UP,    Direction.DOWN },
             { /* WEST  */ Direction.EAST,  Direction.SOUTH, Direction.NORTH, Direction.UP,    Direction.DOWN },
-            { /* EAST  */ Direction.WEST,  Direction.NORTH, Direction.SOUTH, Direction.UP,    Direction.DOWN },
-            { /* UP    */ Direction.DOWN,  Direction.WEST,  Direction.EAST,  Direction.SOUTH, Direction.NORTH },
-            { /* DOWN  */ Direction.UP,    Direction.WEST,  Direction.EAST,  Direction.NORTH, Direction.SOUTH }
+            { /* EAST  */ Direction.WEST,  Direction.NORTH, Direction.SOUTH, Direction.UP,    Direction.DOWN }
     };
 
     public static Direction relativeDir2Dir(Direction ref, int relative) {

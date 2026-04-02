@@ -58,7 +58,7 @@ public abstract class ConveyorMachineBase extends Block implements EntityBlock, 
         if (clickedSide == mainPortSide || clickedSide == secondaryPortSide){   // 点击主副端口可以让主副端口互换
             newState = blockState.setValue(MAIN_PORT_SIDE, secondaryPortSide).setValue(SECONDARY_PORT_SIDE, DirectionUtils.dir2RelativeDir(secondaryPortSide, mainPortSide));
         }else {                                                                 // 点击空白面可以设置主端口
-            newState = blockState.setValue(MAIN_PORT_SIDE, clickedSide);
+            newState = blockState.setValue(MAIN_PORT_SIDE, clickedSide).setValue(SECONDARY_PORT_SIDE, DirectionUtils.dir2RelativeDir(clickedSide, secondaryPortSide));
         }
         context.getLevel().setBlock(context.getClickedPos(), newState, 3);
         return true;
