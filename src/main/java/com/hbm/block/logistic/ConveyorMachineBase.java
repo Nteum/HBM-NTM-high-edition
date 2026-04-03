@@ -53,13 +53,17 @@ public abstract class ConveyorMachineBase extends Block implements EntityBlock, 
         BlockState blockState = context.getLevel().getBlockState(context.getClickedPos());
         Direction clickedSide = context.getClickedFace();
         Direction mainPortSide = blockState.getValue(MAIN_PORT_SIDE);
-        Direction secondaryPortSide = DirectionUtils.relativeDir2Dir(mainPortSide, blockState.getValue(SECONDARY_PORT_SIDE));
+        int relativeDir = blockState.getValue(SECONDARY_PORT_SIDE);
+        Direction secondaryPortSide = DirectionUtils.relativeDir2Dir(mainPortSide, relativeDir);
         BlockState newState;
-        if (clickedSide == mainPortSide || clickedSide == secondaryPortSide){   // 点击主副端口可以让主副端口互换
-            newState = blockState.setValue(MAIN_PORT_SIDE, secondaryPortSide).setValue(SECONDARY_PORT_SIDE, DirectionUtils.dir2RelativeDir(secondaryPortSide, mainPortSide));
-        }else {                                                                 // 点击空白面可以设置主端口
-            newState = blockState.setValue(MAIN_PORT_SIDE, clickedSide).setValue(SECONDARY_PORT_SIDE, DirectionUtils.dir2RelativeDir(clickedSide, secondaryPortSide));
-        }
+        if (clickedSide == mainPortSide) {
+            newState = blockState.setValue(SECONDARY_PORT_SIDE, (relativeDir + 1) % 5);
+        }else newState = blockState.setValue(MAIN_PORT_SIDE, clickedSide).setValue(SECONDARY_PORT_SIDE, DirectionUtils.dir2RelativeDir(clickedSide, secondaryPortSide));
+//        if (clickedSide == mainPortSide || clickedSide == secondaryPortSide){   // 点击主副端口可以让主副端口互换
+//            newState = blockState.setValue(MAIN_PORT_SIDE, secondaryPortSide).setValue(SECONDARY_PORT_SIDE, DirectionUtils.dir2RelativeDir(secondaryPortSide, mainPortSide));
+//        }else {                                                                 // 点击空白面可以设置主端口
+//            newState = blockState.setValue(MAIN_PORT_SIDE, clickedSide).setValue(SECONDARY_PORT_SIDE, DirectionUtils.dir2RelativeDir(clickedSide, secondaryPortSide));
+//        }
         context.getLevel().setBlock(context.getClickedPos(), newState, 3);
         return true;
     }

@@ -11,8 +11,8 @@
       "to": [16, 16, 16],
       "faces": {
         "south": {"texture": "#out"},
-        "up": {"texture": "#arrow", "rotation": 180 },
-        "down": {"texture": "#arrow"}
+        "up": {"texture": "#arrow", "uv": [0, 16, 16, 0], "rotate": 90 },
+        "down": {"texture": "#arrow", "rotate": 90 }
       }
     }
   ]

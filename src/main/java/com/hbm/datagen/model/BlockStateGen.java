@@ -18,11 +18,13 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraftforge.client.model.CompositeModel;
 import net.minecraftforge.client.model.generators.*;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
 
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
@@ -266,6 +268,17 @@ public class BlockStateGen extends BlockStateProvider {
         };
     }
     // 输送带控制器，鬼知道为什么bob用了crane这个词
+    // 就是纯纯的屎山，我都不知道该说什么，摊上这玩意算我倒霉，硬着头皮搞了三个晚上，
+    /**
+     * 1. in 默认方向north，y轴旋转控制水平面，x轴旋转控制上下面
+     * 2. arrow1 和in方向相对，默认方向south，旋转与in同步
+     * 3. arrow2 默认方向east，即in的右侧。
+     *          in在水平面，且相对方向为2，arrow2跟随in旋转，相对方向为1，arrow2 x轴转180度，y轴反向旋转；
+     *          in在垂直面，arrow2 x轴旋转90/-90度，可满足左右情况
+     * 4. arrow3 默认方向up，即in的上方。
+     *          in在水平面，arrow3 y轴跟随in旋转，旋转x轴可满足下方。
+     *          in在垂直面，x轴旋转至南北两个面。
+     * */
     private void conveyorCrane(Block block, String name){
         ModelFile.ExistingModelFile existingFile;
         MultiPartBlockStateBuilder builder = getMultipartBuilder(block);
@@ -281,14 +294,36 @@ public class BlockStateGen extends BlockStateProvider {
                 int[] xyRot = new int[]{dir == Direction.UP ? -90 : dir == Direction.DOWN ? 90 : 0, dir.getAxis().isHorizontal() ? (((int) dir.toYRot()) + 180) % 360 : 0};
                 if (relativeDir == 0) existingFile = this.models().getExistingFile(HBM.rl(name + "_arrow1"));
                 else {
-                    existingFile = this.models().getExistingFile(HBM.rl(name + "_arrow2"));
+                    boolean horizontal = dir.getAxis().isHorizontal();
                     switch (relativeDir){
-                        case 1 -> xyRot[0] += -90;
-                        case 2 -> xyRot[0] += 90;
-                        case 4 -> xyRot[0] += 180;
+                        case 1 -> {
+                            existingFile = this.models().getExistingFile(HBM.rl(name + "_arrow2"));
+                            xyRot[0] = (xyRot[0] + (horizontal ? 180 : 0)) % 360;
+                            xyRot[1] = (xyRot[1] + 180) % 360;
+                        }case 2 -> {
+                            existingFile = this.models().getExistingFile(HBM.rl(name + "_arrow2"));
+                        }
+                        case 3 -> {
+                            if (horizontal){
+                                existingFile = this.models().getExistingFile(HBM.rl(name + "_arrow3"));
+                                xyRot[1] = (xyRot[1] + 270) % 360;
+                            }else {
+                                existingFile = this.models().getExistingFile(HBM.rl(name + "_arrow2"));
+                                xyRot[1] = 90;
+                            }
+                        }case 4 -> {
+                            if (horizontal){
+                                existingFile = this.models().getExistingFile(HBM.rl(name + "_arrow3"));
+                                xyRot[0] = (xyRot[0] + 180) % 360;
+                                xyRot[1] = (xyRot[1] + 270) % 360;
+                            }else {
+                                existingFile = this.models().getExistingFile(HBM.rl(name + "_arrow2"));
+                                xyRot[1] = -90;
+                            }
+                        }
                     }
                 }
-                builder.part().modelFile(existingFile).rotationX(xyRot[0]).rotationY(xyRot[1]).addModel().condition(BlockStateProperties.FACING, dir).condition(HBMBlockProperties.RELATIVE_DIRECTION, relativeDir);
+                builder.part().modelFile(existingFile).rotationY(xyRot[1]).rotationX(xyRot[0]).addModel().condition(BlockStateProperties.FACING, dir).condition(HBMBlockProperties.RELATIVE_DIRECTION, relativeDir);
             }
         }
         this.simpleBlockItem(block, this.models().getExistingFile(HBM.rl(name + "_item")));

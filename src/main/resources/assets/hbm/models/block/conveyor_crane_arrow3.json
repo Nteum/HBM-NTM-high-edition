@@ -10,9 +10,9 @@
       "from": [0, 0, 0],
       "to": [16, 16, 16],
       "faces": {
-        "east": {"texture": "#out"},
-        "up": {"texture": "#arrow", "rotation": 180 },
-        "down": {"texture": "#arrow", "uv": [0, 16, 16, 0], "rotation": 180 }
+        "up": {"texture": "#out"},
+        "north": {"texture": "#arrow", "rotation": 90 },
+        "south": {"texture": "#arrow", "uv": [0, 16, 16, 0], "rotation": 90 }
       }
     }
   ]
