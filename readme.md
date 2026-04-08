@@ -1,4 +1,4 @@
-```md
+
 # HBM-NTM High Edition-CN
 
 基于 **Minecraft Forge 1.20.1** 的 HBM / NTM 高版本移植与扩展工程。  
