@@ -1,0 +1,337 @@
+[
+  {
+    "current_id": "machine_rbmk_base",
+    "label": "RBMK空白柱",
+    "old_baseline_class": null,
+    "old_baseline_files": [],
+    "baseline_gui_texture": null,
+    "current_resources": {
+      "blockstate": "src/main/resources/assets/hbm/blockstates/machine_rbmk_base.json",
+      "block_model": "src/main/resources/assets/hbm/models/block/machine_rbmk_base.json",
+      "item_model": "src/main/resources/assets/hbm/models/item/machine_rbmk_base.json",
+      "blockstate_exists": true,
+      "block_model_exists": true,
+      "item_model_exists": true
+    }
+  },
+  {
+    "current_id": "machine_rbmk_fuel_channel",
+    "label": "RBMK燃料通道",
+    "old_baseline_class": "TileEntityRBMKBase",
+    "old_baseline_files": [
+      "/Users/a1/Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/tileentity/machine/rbmk/TileEntityRBMKBase.java"
+    ],
+    "baseline_gui_texture": "gui_rbmk_element.png",
+    "current_resources": {
+      "blockstate": "src/main/resources/assets/hbm/blockstates/machine_rbmk_fuel_channel.json",
+      "block_model": "src/main/resources/assets/hbm/models/block/machine_rbmk_fuel_channel.json",
+      "item_model": "src/main/resources/assets/hbm/models/item/machine_rbmk_fuel_channel.json",
+      "blockstate_exists": true,
+      "block_model_exists": true,
+      "item_model_exists": true
+    }
+  },
+  {
+    "current_id": "machine_rbmk_control_rod",
+    "label": "RBMK控制棒通道",
+    "old_baseline_class": "TileEntityRBMKControl",
+    "old_baseline_files": [
+      "/Users/a1/Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/tileentity/machine/rbmk/TileEntityRBMKControl.java"
+    ],
+    "baseline_gui_texture": "gui_rbmk_control.png",
+    "current_resources": {
+      "blockstate": "src/main/resources/assets/hbm/blockstates/machine_rbmk_control_rod.json",
+      "block_model": "src/main/resources/assets/hbm/models/block/machine_rbmk_control_rod.json",
+      "item_model": "src/main/resources/assets/hbm/models/item/machine_rbmk_control_rod.json",
+      "blockstate_exists": true,
+      "block_model_exists": true,
+      "item_model_exists": true
+    }
+  },
+  {
+    "current_id": "machine_rbmk_control_auto",
+    "label": "RBMK自动控制棒通道",
+    "old_baseline_class": "TileEntityRBMKControlAuto",
+    "old_baseline_files": [
+      "/Users/a1/Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/tileentity/machine/rbmk/TileEntityRBMKControlAuto.java"
+    ],
+    "baseline_gui_texture": "gui_rbmk_control_auto.png",
+    "current_resources": {
+      "blockstate": "src/main/resources/assets/hbm/blockstates/machine_rbmk_control_auto.json",
+      "block_model": "src/main/resources/assets/hbm/models/block/machine_rbmk_control_auto.json",
+      "item_model": "src/main/resources/assets/hbm/models/item/machine_rbmk_control_auto.json",
+      "blockstate_exists": true,
+      "block_model_exists": true,
+      "item_model_exists": true
+    }
+  },
+  {
+    "current_id": "machine_rbmk_boiler",
+    "label": "RBMK蒸汽通道",
+    "old_baseline_class": "TileEntityRBMKBoiler",
+    "old_baseline_files": [
+      "/Users/a1/Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/tileentity/machine/rbmk/TileEntityRBMKBoiler.java"
+    ],
+    "baseline_gui_texture": "gui_rbmk_boiler.png",
+    "current_resources": {
+      "blockstate": "src/main/resources/assets/hbm/blockstates/machine_rbmk_boiler.json",
+      "block_model": "src/main/resources/assets/hbm/models/block/machine_rbmk_boiler.json",
+      "item_model": "src/main/resources/assets/hbm/models/item/machine_rbmk_boiler.json",
+      "blockstate_exists": true,
+      "block_model_exists": true,
+      "item_model_exists": true
+    }
+  },
+  {
+    "current_id": "machine_rbmk_moderator",
+    "label": "RBMK石墨慢化柱",
+    "old_baseline_class": null,
+    "old_baseline_files": [],
+    "baseline_gui_texture": null,
+    "current_resources": {
+      "blockstate": "src/main/resources/assets/hbm/blockstates/machine_rbmk_moderator.json",
+      "block_model": "src/main/resources/assets/hbm/models/block/machine_rbmk_moderator.json",
+      "item_model": "src/main/resources/assets/hbm/models/item/machine_rbmk_moderator.json",
+      "blockstate_exists": true,
+      "block_model_exists": true,
+      "item_model_exists": true
+    }
+  },
+  {
+    "current_id": "machine_rbmk_absorber",
+    "label": "RBMK中子吸收柱",
+    "old_baseline_class": null,
+    "old_baseline_files": [],
+    "baseline_gui_texture": null,
+    "current_resources": {
+      "blockstate": "src/main/resources/assets/hbm/blockstates/machine_rbmk_absorber.json",
+      "block_model": "src/main/resources/assets/hbm/models/block/machine_rbmk_absorber.json",
+      "item_model": "src/main/resources/assets/hbm/models/item/machine_rbmk_absorber.json",
+      "blockstate_exists": true,
+      "block_model_exists": true,
+      "item_model_exists": true
+    }
+  },
+  {
+    "current_id": "machine_rbmk_reflector",
+    "label": "RBMK中子反射柱",
+    "old_baseline_class": null,
+    "old_baseline_files": [],
+    "baseline_gui_texture": null,
+    "current_resources": {
+      "blockstate": "src/main/resources/assets/hbm/blockstates/machine_rbmk_reflector.json",
+      "block_model": "src/main/resources/assets/hbm/models/block/machine_rbmk_reflector.json",
+      "item_model": "src/main/resources/assets/hbm/models/item/machine_rbmk_reflector.json",
+      "blockstate_exists": true,
+      "block_model_exists": true,
+      "item_model_exists": true
+    }
+  },
+  {
+    "current_id": "machine_rbmk_storage",
+    "label": "RBMK燃料存储柱",
+    "old_baseline_class": "TileEntityRBMKStorage",
+    "old_baseline_files": [
+      "/Users/a1/Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/tileentity/machine/rbmk/TileEntityRBMKStorage.java"
+    ],
+    "baseline_gui_texture": "gui_rbmk_storage.png",
+    "current_resources": {
+      "blockstate": "src/main/resources/assets/hbm/blockstates/machine_rbmk_storage.json",
+      "block_model": "src/main/resources/assets/hbm/models/block/machine_rbmk_storage.json",
+      "item_model": "src/main/resources/assets/hbm/models/item/machine_rbmk_storage.json",
+      "blockstate_exists": true,
+      "block_model_exists": true,
+      "item_model_exists": true
+    }
+  },
+  {
+    "current_id": "machine_rbmk_outgasser",
+    "label": "RBMK辐照通道",
+    "old_baseline_class": "TileEntityRBMKOutgasser",
+    "old_baseline_files": [
+      "/Users/a1/Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/tileentity/machine/rbmk/TileEntityRBMKOutgasser.java"
+    ],
+    "baseline_gui_texture": "gui_rbmk_outgasser.png",
+    "current_resources": {
+      "blockstate": "src/main/resources/assets/hbm/blockstates/machine_rbmk_outgasser.json",
+      "block_model": "src/main/resources/assets/hbm/models/block/machine_rbmk_outgasser.json",
+      "item_model": "src/main/resources/assets/hbm/models/item/machine_rbmk_outgasser.json",
+      "blockstate_exists": true,
+      "block_model_exists": true,
+      "item_model_exists": true
+    }
+  },
+  {
+    "current_id": "machine_rbmk_cooler",
+    "label": "RBMK冷却器",
+    "old_baseline_class": null,
+    "old_baseline_files": [],
+    "baseline_gui_texture": null,
+    "current_resources": {
+      "blockstate": "src/main/resources/assets/hbm/blockstates/machine_rbmk_cooler.json",
+      "block_model": "src/main/resources/assets/hbm/models/block/machine_rbmk_cooler.json",
+      "item_model": "src/main/resources/assets/hbm/models/item/machine_rbmk_cooler.json",
+      "blockstate_exists": true,
+      "block_model_exists": true,
+      "item_model_exists": true
+    }
+  },
+  {
+    "current_id": "machine_rbmk_heater",
+    "label": "RBMK流体加热器",
+    "old_baseline_class": "TileEntityRBMKHeater",
+    "old_baseline_files": [
+      "/Users/a1/Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/tileentity/machine/rbmk/TileEntityRBMKHeater.java"
+    ],
+    "baseline_gui_texture": "gui_rbmk_heater.png",
+    "current_resources": {
+      "blockstate": "src/main/resources/assets/hbm/blockstates/machine_rbmk_heater.json",
+      "block_model": "src/main/resources/assets/hbm/models/block/machine_rbmk_heater.json",
+      "item_model": "src/main/resources/assets/hbm/models/item/machine_rbmk_heater.json",
+      "blockstate_exists": true,
+      "block_model_exists": true,
+      "item_model_exists": true
+    }
+  },
+  {
+    "current_id": "machine_rbmk_console",
+    "label": "RBMK控制台",
+    "old_baseline_class": "TileEntityRBMKConsole",
+    "old_baseline_files": [
+      "/Users/a1/Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/tileentity/machine/rbmk/TileEntityRBMKConsole.java"
+    ],
+    "baseline_gui_texture": "gui_rbmk_console.png",
+    "current_resources": {
+      "blockstate": "src/main/resources/assets/hbm/blockstates/machine_rbmk_console.json",
+      "block_model": "src/main/resources/assets/hbm/models/block/machine_rbmk_console.json",
+      "item_model": "src/main/resources/assets/hbm/models/item/machine_rbmk_console.json",
+      "blockstate_exists": true,
+      "block_model_exists": true,
+      "item_model_exists": true
+    }
+  },
+  {
+    "current_id": "machine_rbmk_crane_console",
+    "label": "RBMK起重机控制台",
+    "old_baseline_class": "TileEntityRBMKConsole",
+    "old_baseline_files": [
+      "/Users/a1/Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/tileentity/machine/rbmk/TileEntityRBMKConsole.java"
+    ],
+    "baseline_gui_texture": "gui_rbmk_console.png",
+    "current_resources": {
+      "blockstate": "src/main/resources/assets/hbm/blockstates/machine_rbmk_crane_console.json",
+      "block_model": "src/main/resources/assets/hbm/models/block/machine_rbmk_crane_console.json",
+      "item_model": "src/main/resources/assets/hbm/models/item/machine_rbmk_crane_console.json",
+      "blockstate_exists": true,
+      "block_model_exists": true,
+      "item_model_exists": true
+    }
+  },
+  {
+    "current_id": "machine_rbmk_autoloader",
+    "label": "RBMK自动装填机",
+    "old_baseline_class": "TileEntityRBMKAutoloader",
+    "old_baseline_files": [
+      "/Users/a1/Hbm-s-Nuclear-Tech-GIT/src/main/java/com/hbm/tileentity/machine/rbmk/TileEntityRBMKAutoloader.java"
+    ],
+    "baseline_gui_texture": "gui_autoloader.png",
+    "current_resources": {
+      "blockstate": "src/main/resources/assets/hbm/blockstates/machine_rbmk_autoloader.json",
+      "block_model": "src/main/resources/assets/hbm/models/block/machine_rbmk_autoloader.json",
+      "item_model": "src/main/resources/assets/hbm/models/item/machine_rbmk_autoloader.json",
+      "blockstate_exists": true,
+      "block_model_exists": true,
+      "item_model_exists": true
+    }
+  },
+  {
+    "current_id": "machine_rbmk_display",
+    "label": "RBMK显示面板",
+    "old_baseline_class": null,
+    "old_baseline_files": [],
+    "baseline_gui_texture": "gui_rbmk_display.png",
+    "current_resources": {
+      "blockstate": "src/main/resources/assets/hbm/blockstates/machine_rbmk_display.json",
+      "block_model": "src/main/resources/assets/hbm/models/block/machine_rbmk_display.json",
+      "item_model": "src/main/resources/assets/hbm/models/item/machine_rbmk_display.json",
+      "blockstate_exists": true,
+      "block_model_exists": true,
+      "item_model_exists": true
+    }
+  },
+  {
+    "current_id": "machine_rbmk_graph",
+    "label": "RBMK图表面板",
+    "old_baseline_class": null,
+    "old_baseline_files": [],
+    "baseline_gui_texture": "gui_rbmk_graph.png",
+    "current_resources": {
+      "blockstate": "src/main/resources/assets/hbm/blockstates/machine_rbmk_graph.json",
+      "block_model": "src/main/resources/assets/hbm/models/block/machine_rbmk_graph.json",
+      "item_model": "src/main/resources/assets/hbm/models/item/machine_rbmk_graph.json",
+      "blockstate_exists": true,
+      "block_model_exists": true,
+      "item_model_exists": true
+    }
+  },
+  {
+    "current_id": "machine_rbmk_numitron",
+    "label": "RBMK数字显示器",
+    "old_baseline_class": null,
+    "old_baseline_files": [],
+    "baseline_gui_texture": "gui_rbmk_numitron.png",
+    "current_resources": {
+      "blockstate": "src/main/resources/assets/hbm/blockstates/machine_rbmk_numitron.json",
+      "block_model": "src/main/resources/assets/hbm/models/block/machine_rbmk_numitron.json",
+      "item_model": "src/main/resources/assets/hbm/models/item/machine_rbmk_numitron.json",
+      "blockstate_exists": true,
+      "block_model_exists": true,
+      "item_model_exists": true
+    }
+  },
+  {
+    "current_id": "machine_rbmk_keypad",
+    "label": "RBMK控制键盘",
+    "old_baseline_class": null,
+    "old_baseline_files": [],
+    "baseline_gui_texture": "gui_rbmk_keypad.png",
+    "current_resources": {
+      "blockstate": "src/main/resources/assets/hbm/blockstates/machine_rbmk_keypad.json",
+      "block_model": "src/main/resources/assets/hbm/models/block/machine_rbmk_keypad.json",
+      "item_model": "src/main/resources/assets/hbm/models/item/machine_rbmk_keypad.json",
+      "blockstate_exists": true,
+      "block_model_exists": true,
+      "item_model_exists": true
+    }
+  },
+  {
+    "current_id": "machine_rbmk_gauge",
+    "label": "RBMK四联仪表",
+    "old_baseline_class": null,
+    "old_baseline_files": [],
+    "baseline_gui_texture": "gui_rbmk_gauge.png",
+    "current_resources": {
+      "blockstate": "src/main/resources/assets/hbm/blockstates/machine_rbmk_gauge.json",
+      "block_model": "src/main/resources/assets/hbm/models/block/machine_rbmk_gauge.json",
+      "item_model": "src/main/resources/assets/hbm/models/item/machine_rbmk_gauge.json",
+      "blockstate_exists": true,
+      "block_model_exists": true,
+      "item_model_exists": true
+    }
+  },
+  {
+    "current_id": "machine_rbmk_debris",
+    "label": "RBMK碎屑堆",
+    "old_baseline_class": null,
+    "old_baseline_files": [],
+    "baseline_gui_texture": null,
+    "current_resources": {
+      "blockstate": "src/main/resources/assets/hbm/blockstates/machine_rbmk_debris.json",
+      "block_model": "src/main/resources/assets/hbm/models/block/machine_rbmk_debris.json",
+      "item_model": "src/main/resources/assets/hbm/models/item/machine_rbmk_debris.json",
+      "blockstate_exists": true,
+      "block_model_exists": true,
+      "item_model_exists": true
+    }
+  }
+]

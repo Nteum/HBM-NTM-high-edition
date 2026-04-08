@@ -10,11 +10,11 @@
       "item": "hbm:neutron_reflector"
     },
     "R": {
-      "item": "hbm:rbmk_blank"
+      "item": "hbm:machine_rbmk_base"
     }
   },
   "result": {
-    "item": "hbm:rbmk_reflector",
+    "item": "hbm:machine_rbmk_reflector",
     "count": 1
   }
 }

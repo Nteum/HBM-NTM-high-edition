@@ -62,6 +62,9 @@ public class WoodBurnerMenu extends BaseMachineMenu {
     }
 
     private static Context resolve(Inventory inventory, FriendlyByteBuf buf) {
+        if (buf == null) {
+            return new Context(null, inventory.player.blockPosition());
+        }
         BlockPos pos = buf.readBlockPos();
         WoodBurnerBlockEntity blockEntity = null;
         Level level = inventory.player.level();

@@ -36,13 +36,23 @@ public class RBMKControlRodEntity extends BaseMachineBlockEntity {
     private static final String TAG_LEVEL = "ControlLevel";
     private static final String TAG_TARGET = "TargetLevel";
     private static final String TAG_COLOR = "ControlColor";
+    private static final String TAG_FUNCTION = "Function";
+    private static final String TAG_LEVEL_LOWER = "LevelLower";
+    private static final String TAG_LEVEL_UPPER = "LevelUpper";
+    private static final String TAG_HEAT_LOWER = "HeatLower";
+    private static final String TAG_HEAT_UPPER = "HeatUpper";
 
     private final ContainerData containerData = new SimpleContainerData(DATA_LENGTH);
     private final int[] dataSlots = new int[DATA_LENGTH];
-    private float currentLevel;
-    private float targetLevel;
-    private int az5CooldownTicks;
-    private ControlGroup selectedGroup;
+    protected float currentLevel;
+    protected float targetLevel;
+    protected int az5CooldownTicks;
+    protected ControlGroup selectedGroup;
+    private AutoFunction autoFunction = AutoFunction.LINEAR;
+    private double levelLower;
+    private double levelUpper = 100.0D;
+    private double heatLower = 100.0D;
+    private double heatUpper = 600.0D;
 
     public RBMKControlRodEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntityType.RBMK_CONTROL_ROD_ENTITY.get(), pos, state);
@@ -57,6 +67,7 @@ public class RBMKControlRodEntity extends BaseMachineBlockEntity {
             return;
         }
 
+        final boolean autoColumn = isAutoColumn();
         final boolean hasRod = hasControlRod();
         if (!hasRod) {
             if (!Mth.equal(currentLevel, 0.0F)) {
@@ -68,6 +79,9 @@ public class RBMKControlRodEntity extends BaseMachineBlockEntity {
                 setTargetLevel(0.0F);
             }
         } else {
+            if (autoColumn) {
+                applyAutomaticTarget(serverLevel);
+            }
             stepTowardsTarget();
         }
 
@@ -80,7 +94,34 @@ public class RBMKControlRodEntity extends BaseMachineBlockEntity {
         updateClientData(column.orElse(null), base, context);
     }
 
-    private void updateClientData(@Nullable RBMKColumnState column, @Nullable RBMKBaseEntity base,
+    private void applyAutomaticTarget(final ServerLevel serverLevel) {
+        RBMKLevelContext context = RBMKManager.context(serverLevel);
+        RBMKColumnState column = context.column(worldPosition.below()).orElse(null);
+        if (column == null) {
+            return;
+        }
+        double computed = computeAutomaticLevel(column.heat());
+        setTargetLevel((float) (computed / 100.0D));
+        column.setTargetControlRodInsertion(targetLevel);
+    }
+
+    private double computeAutomaticLevel(final double heat) {
+        double lowerBound = Math.min(heatLower, heatUpper);
+        double upperBound = Math.max(heatLower, heatUpper);
+        if (heat <= lowerBound) {
+            return levelLower;
+        }
+        if (heat >= upperBound) {
+            return levelUpper;
+        }
+        return switch (autoFunction) {
+            case LINEAR -> (heat - heatLower) * ((levelUpper - levelLower) / (heatUpper - heatLower)) + levelLower;
+            case QUAD_UP -> Math.pow((heat - heatLower) / (heatUpper - heatLower), 2) * (levelUpper - levelLower) + levelLower;
+            case QUAD_DOWN -> Math.pow((heat - heatUpper) / (heatLower - heatUpper), 2) * (levelLower - levelUpper) + levelUpper;
+        };
+    }
+
+    protected void updateClientData(@Nullable RBMKColumnState column, @Nullable RBMKBaseEntity base,
                                   RBMKLevelContext context) {
         dataSlots[0] = column != null ? (int) Math.round(column.heat() * 10.0D) : 0;
         dataSlots[1] = column != null ? (int) Math.round(column.settings().meltdownHeat() * 10.0D) : 0;
@@ -108,7 +149,7 @@ public class RBMKControlRodEntity extends BaseMachineBlockEntity {
         }
     }
 
-    private void stepTowardsTarget() {
+    protected void stepTowardsTarget() {
         if (Mth.equal(currentLevel, targetLevel)) {
             syncBlockStateFromLevel();
             return;
@@ -155,6 +196,13 @@ public class RBMKControlRodEntity extends BaseMachineBlockEntity {
         setChanged();
     }
 
+    public void setColorGroup(@Nullable ControlGroup group) {
+        if (selectedGroup != group) {
+            selectedGroup = group;
+            setChanged();
+        }
+    }
+
     @Override
     public void onChunkUnloaded() {
         resetColumn();
@@ -193,6 +241,14 @@ public class RBMKControlRodEntity extends BaseMachineBlockEntity {
         } else {
             selectedGroup = null;
         }
+        if (tag.contains(TAG_FUNCTION)) {
+            int idx = Math.floorMod(tag.getInt(TAG_FUNCTION), AutoFunction.values().length);
+            autoFunction = AutoFunction.values()[idx];
+        }
+        levelLower = tag.getDouble(TAG_LEVEL_LOWER);
+        levelUpper = tag.contains(TAG_LEVEL_UPPER) ? tag.getDouble(TAG_LEVEL_UPPER) : 100.0D;
+        heatLower = tag.contains(TAG_HEAT_LOWER) ? tag.getDouble(TAG_HEAT_LOWER) : 100.0D;
+        heatUpper = tag.contains(TAG_HEAT_UPPER) ? tag.getDouble(TAG_HEAT_UPPER) : 600.0D;
     }
 
     @Override
@@ -206,11 +262,18 @@ public class RBMKControlRodEntity extends BaseMachineBlockEntity {
         if (selectedGroup != null) {
             tag.putInt(TAG_COLOR, selectedGroup.ordinal());
         }
+        tag.putInt(TAG_FUNCTION, autoFunction.ordinal());
+        tag.putDouble(TAG_LEVEL_LOWER, levelLower);
+        tag.putDouble(TAG_LEVEL_UPPER, levelUpper);
+        tag.putDouble(TAG_HEAT_LOWER, heatLower);
+        tag.putDouble(TAG_HEAT_UPPER, heatUpper);
     }
 
     @Override
     public Component getDefaultName() {
-        return Component.translatable("block.hbm.machine_rbmk_control_rod");
+        return Component.translatable(isAutoColumn()
+                ? "block.hbm.machine_rbmk_control_auto"
+                : "block.hbm.machine_rbmk_control_rod");
     }
 
     @Override
@@ -238,7 +301,7 @@ public class RBMKControlRodEntity extends BaseMachineBlockEntity {
         return true;
     }
 
-    private void setTargetLevel(float target) {
+    protected void setTargetLevel(float target) {
         float clamped = Mth.clamp(target, 0.0F, 1.0F);
         if (!Mth.equal(clamped, targetLevel)) {
             targetLevel = clamped;
@@ -250,17 +313,21 @@ public class RBMKControlRodEntity extends BaseMachineBlockEntity {
         return currentLevel;
     }
 
+    public float getTargetInsertionFraction() {
+        return targetLevel;
+    }
+
     public int getSelectedColorIndex() {
         return selectedGroup != null ? selectedGroup.ordinal() : -1;
     }
 
-    private void forceLevel(float levelValue) {
+    protected void forceLevel(float levelValue) {
         currentLevel = Mth.clamp(levelValue, 0.0F, 1.0F);
         targetLevel = currentLevel;
         syncBlockStateFromLevel();
     }
 
-    private void syncBlockStateFromLevel() {
+    protected void syncBlockStateFromLevel() {
         if (level == null) {
             return;
         }
@@ -298,9 +365,33 @@ public class RBMKControlRodEntity extends BaseMachineBlockEntity {
         return Mth.clamp(stage / (float) max, 0.0F, 1.0F);
     }
 
-    private boolean hasControlRod() {
+    protected boolean hasControlRod() {
         ItemStack stack = items.get(CONTROL_ROD_SLOT);
         return isControlRodItem(stack);
+    }
+
+    public boolean isAutoColumn() {
+        return level != null && net.minecraft.core.registries.BuiltInRegistries.BLOCK.getKey(getBlockState().getBlock()).getPath().contains("control_auto");
+    }
+
+    public AutoFunction getAutoFunction() {
+        return autoFunction;
+    }
+
+    public double getLevelLower() {
+        return levelLower;
+    }
+
+    public double getLevelUpper() {
+        return levelUpper;
+    }
+
+    public double getHeatLower() {
+        return heatLower;
+    }
+
+    public double getHeatUpper() {
+        return heatUpper;
     }
 
     private static boolean isControlRodItem(ItemStack stack) {
@@ -347,5 +438,11 @@ public class RBMKControlRodEntity extends BaseMachineBlockEntity {
         GREEN,
         BLUE,
         PURPLE
+    }
+
+    public enum AutoFunction {
+        LINEAR,
+        QUAD_UP,
+        QUAD_DOWN
     }
 }

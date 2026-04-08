@@ -15,15 +15,16 @@ import static com.hbm.render.RenderUtils.renderBlockModel;
 
 public class BreederReactorRenderer extends MultiPartRenderer<BreederReactorBlockEntity> {
 
-    private final BakedModel breederModel;
-
     public BreederReactorRenderer() {
-        ModelManager manager = Minecraft.getInstance().getModelManager();
-        this.breederModel = manager.getModel(Models.BREEDER_REACTOR);
     }
 
     @Override
     public void renderMultiPart(BreederReactorBlockEntity entity, float partialTick, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
+        ModelManager modelManager = Minecraft.getInstance().getModelManager();
+        BakedModel breederModel = modelManager.getModel(Models.BREEDER_REACTOR);
+        if (breederModel == modelManager.getMissingModel()) {
+            breederModel = modelManager.getModel(Models.RESEARCH_REACTOR_BASE);
+        }
         BlockRenderDispatcher dispatcher = Minecraft.getInstance().getBlockRenderer();
         ModelBlockRenderer renderer = dispatcher.getModelRenderer();
         BlockState state = entity.getBlockState();

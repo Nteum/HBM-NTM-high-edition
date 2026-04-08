@@ -1,0 +1,10 @@
+{
+  "type": "hbm:press",
+  "input": {
+    "tag": "forge:sawdust"
+  },
+  "result": {
+    "item": "hbm:briquette_wood"
+  },
+  "stamp": "FLAT"
+}

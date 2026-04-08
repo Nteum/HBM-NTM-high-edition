@@ -7,17 +7,17 @@
   ],
   "key": {
     "G": {
-      "item": "hbm:block_graphite"
+      "item": "hbm:ingot_graphite"
     },
     "R": {
-      "item": "hbm:rbmk_rod"
+      "item": "hbm:machine_rbmk_fuel_channel"
     },
     "B": {
       "item": "hbm:nugget_bismuth"
     }
   },
   "result": {
-    "item": "hbm:rbmk_rod_mod",
+    "item": "hbm:machine_rbmk_fuel_channel",
     "count": 1
   }
 }

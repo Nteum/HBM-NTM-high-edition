@@ -91,7 +91,6 @@ public class HBM {
         modEventBus.addListener(this::onClientSetup);
         modEventBus.addListener(this::onPostLoad);
         modEventBus.addListener(this::onGatherData);
-        modEventBus.addListener(ModCreativeModeTab::addCreative);
         modEventBus.addListener(ModKeyMapping::register);
         ClientEventHandler.registerEvents(MinecraftForge.EVENT_BUS, modEventBus);
         ServerEventHandler.registerEvents(MinecraftForge.EVENT_BUS, modEventBus);
@@ -100,7 +99,6 @@ public class HBM {
         ModEntityType.ENTITY_TYPES.register(modEventBus);
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
-        ModCreativeModeTab.CREATIVE_MODE_TABS.register(modEventBus);
         ModTabs.CREATIVE_MODE_TABS.register(modEventBus);
         ModBlockEntityType.REGISTER.register(modEventBus);
         ModRecipes.RECIPE_TYPE.register(modEventBus);

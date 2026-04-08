@@ -1,0 +1,10 @@
+{
+  "type": "hbm:press",
+  "input": {
+    "item": "minecraft:copper_ingot"
+  },
+  "result": {
+    "item": "hbm:plate_copper"
+  },
+  "stamp": "PLATE"
+}

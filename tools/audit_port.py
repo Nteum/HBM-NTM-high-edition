@@ -1,217 +1,311 @@
 #!/usr/bin/env python3
-"""Audit HBM-Modernized registries vs current project."""
+"""Audit legacy HBM (1.7.x) content vs current port progress.
+
+Default legacy path is `~/HBM-s-Nuclear-Tech-GIT`.
+
+Outputs are written to `/reports`:
+- `migration_report.json`
+- `migration_summary.json`
+- `migration_missing.json`
+- `migration_new_only.json`
+"""
+
 from __future__ import annotations
 
+import argparse
 import json
 import re
-from collections import defaultdict
+from dataclasses import dataclass
 from pathlib import Path
-from typing import Dict, List, Set, Tuple
+from typing import Dict, List, Sequence, Set, Tuple
 
 ROOT = Path(__file__).resolve().parents[1]
-OLD_JAVA = ROOT / 'tools' / 'HBM-Modernized' / 'src' / 'main' / 'java'
-NEW_JAVA = ROOT / 'src' / 'main' / 'java'
+DEFAULT_OLD_ROOT = Path.home() / "HBM-s-Nuclear-Tech-GIT"
+FALLBACK_OLD_ROOT = Path.home() / "Hbm-s-Nuclear-Tech-GIT"
+
+OLD_JAVA_REL = Path("src/main/java")
+NEW_JAVA_REL = Path("src/main/java")
 
 
-def read(path: Path) -> str:
-    return path.read_text(encoding='utf-8')
+@dataclass(frozen=True)
+class AuditSets:
+    items: Set[str]
+    blocks: Set[str]
+    fluids: Set[str]
 
 
-def gather_literals(java_root: Path, token: str) -> Set[str]:
-    pattern = re.compile(rf'{re.escape(token)}\.register\("([^"]+)"')
+def _read(path: Path) -> str:
+    return path.read_text(encoding="utf-8")
+
+
+def _exists(path: Path) -> bool:
+    return path.exists() and path.is_file()
+
+
+def _parse_public_statics(path: Path, type_name: str) -> Set[str]:
+    """Extract names from declarations like: `public static Item foo;`"""
+    if not _exists(path):
+        return set()
+    text = _read(path)
+    pattern = re.compile(
+        rf"\bpublic\s+static\s+{re.escape(type_name)}\s+([A-Za-z_][A-Za-z0-9_]*)\s*;"
+    )
+    return set(pattern.findall(text))
+
+
+def _parse_register_calls(java_root: Path, token: str) -> Set[str]:
+    """Extract from calls like `TOKEN.register("name", ...)` in all java files."""
     names: Set[str] = set()
-    for file in java_root.rglob('*.java'):
-        text = read(file)
+    pattern = re.compile(rf"\b{re.escape(token)}\s*\.\s*register\s*\(\s*\"([^\"]+)\"")
+    for file in java_root.rglob("*.java"):
+        try:
+            text = _read(file)
+        except Exception:
+            continue
         names.update(pattern.findall(text))
     return names
 
 
-def parse_enum_names(path: Path) -> List[str]:
-    text = read(path)
-    pattern = re.compile(r'\b[A-Z0-9_]+\("([^"]+)"', re.MULTILINE)
-    return pattern.findall(text)
-
-
-def parse_set(text: str, var_name: str) -> List[str]:
-    pattern = re.compile(rf'{re.escape(var_name)}\s*=\s*Set\.of\((.*?)\);', re.S)
-    match = pattern.search(text)
-    if not match:
-        return []
-    return re.findall(r'"([^"]+)"', match.group(1))
-
-
-def old_items() -> Set[str]:
-    names = gather_literals(OLD_JAVA, 'ITEMS')
-    mod_items = OLD_JAVA / 'com' / 'hbm_m' / 'item' / 'ModItems.java'
-    mod_ingots = OLD_JAVA / 'com' / 'hbm_m' / 'item' / 'tags_and_tiers' / 'ModIngots.java'
-    mod_powders = OLD_JAVA / 'com' / 'hbm_m' / 'item' / 'tags_and_tiers' / 'ModPowders.java'
-    text = read(mod_items)
-    ingot_names = parse_enum_names(mod_ingots)
-    powder_names = parse_enum_names(mod_powders)
-
-    names.update(f"{name}_ingot" for name in ingot_names)
-
-    enabled_modpowders = set(parse_set(text, 'ENABLED_MODPOWDERS'))
-    enabled_ingot_powders = set(parse_set(text, 'ENABLED_INGOT_POWDERS'))
-    powder_tiny = set(parse_set(text, 'POWDER_TINY_NAMES'))
-    enabled_tiny = set(parse_set(text, 'ENABLED_TINY_POWDERS'))
-
-    for name in powder_names:
-        lname = name.lower()
-        if lname in enabled_modpowders:
-            names.add(f"{lname}_powder")
-    for name in ingot_names:
-        lname = name.lower()
-        if lname in enabled_ingot_powders:
-            names.add(f"{lname}_powder")
-        if lname in powder_tiny and lname in enabled_tiny:
-            names.add(f"{lname}_powder_tiny")
-    return names
-
-
-def old_blocks() -> Set[str]:
-    names = gather_literals(OLD_JAVA, 'BLOCKS')
-    mod_blocks = OLD_JAVA / 'com' / 'hbm_m' / 'block' / 'ModBlocks.java'
-    text = read(mod_blocks)
-    enabled_blocks = set(parse_set(text, 'ENABLED_INGOT_BLOCKS'))
-    names.update(f"block_{name}" for name in enabled_blocks)
-    helper_pattern = re.compile(r'(?:registerBlock|registerBlockWithoutItem)\("([^"]+)"')
-    names.update(helper_pattern.findall(text))
-    return names
-
-
-def old_fluids() -> Set[str]:
-    names = gather_literals(OLD_JAVA, 'FLUIDS')
-    ft = gather_literals(OLD_JAVA, 'FLUID_TYPES')
-    names.update(ft)
-    return names
-
-
-def hbmitems_builder_names() -> Set[str]:
-    path = NEW_JAVA / 'com' / 'hbm' / 'item' / 'ModItems.java'
-    text = read(path)
-    pattern = re.compile(r'=\s*(?:new\s+ItemBuilder|parts|machine|missile|gun|consumable|template|control|add)\(\s*"([^"]+)"', re.S)
+def _parse_call_first_string(path: Path, call_names: Sequence[str]) -> Set[str]:
+    """Extract first string arg for listed helper calls in a file."""
+    if not _exists(path):
+        return set()
+    text = _read(path)
+    joined = "|".join(re.escape(c) for c in call_names)
+    pattern = re.compile(rf"\b(?:{joined})\s*\(\s*\"([^\"]+)\"")
     return set(pattern.findall(text))
 
 
-def hbmcomponent_register_names(file: Path) -> Set[str]:
-    text = read(file)
-    pattern = re.compile(r'register\((?:matherialList|partList|itemList|standaloneModels),\s*"([^"]+)"')
-    return set(pattern.findall(text))
+def _parse_extended_fluid_names(path: Path) -> Set[str]:
+    if not _exists(path):
+        return set()
+    text = _read(path)
+    return set(re.findall(r"\bnew\s+ExtendedFluidType\s*\(\s*\"([^\"]+)\"", text))
 
 
-def new_items() -> Set[str]:
-    names = gather_literals(NEW_JAVA, 'ITEMS')
-    names.update(hbmitems_builder_names())
-    component = NEW_JAVA / 'com' / 'hbm' / 'item' / 'HBMComponent.java'
-    combat = NEW_JAVA / 'com' / 'hbm' / 'item' / 'HBMCombat.java'
-    names.update(hbmcomponent_register_names(component))
-    names.update(hbmcomponent_register_names(combat))
-    return names
+def collect_old_sets(old_root: Path) -> AuditSets:
+    old_java = old_root / OLD_JAVA_REL
+
+    old_items = _parse_public_statics(old_java / "com/hbm/items/ModItems.java", "Item")
+
+    old_blocks = _parse_public_statics(old_java / "com/hbm/blocks/ModBlocks.java", "Block")
+
+    # Legacy fluids are static FluidType fields declared in Fluids.java
+    old_fluids_raw = _parse_public_statics(old_java / "com/hbm/inventory/fluid/Fluids.java", "FluidType")
+    old_fluids = {name.lower() for name in old_fluids_raw}
+
+    return AuditSets(items=old_items, blocks=old_blocks, fluids=old_fluids)
 
 
-def new_blocks() -> Set[str]:
-    names = gather_literals(NEW_JAVA, 'BLOCKS')
-    # capture helper usage in ModBlocks/HBMMachine
-    helpers = {
-        NEW_JAVA / 'com' / 'hbm' / 'registries' / 'ModBlocks.java',
-        NEW_JAVA / 'com' / 'hbm' / 'block' / 'HBMMachine.java',
-        NEW_JAVA / 'com' / 'hbm' / 'block' / 'HBMBlockComponent.java',
-    }
-    primary_pattern = re.compile(r'(?:registerBlockWithItem|registerBattery)\([^,]+,\s*"([^"]+)"')
-    secondary_pattern = re.compile(r'(?:add|block|machine)\(\s*"([^"]+)"')
-    for file in helpers:
-        text = read(file)
-        names.update(primary_pattern.findall(text))
-        names.update(secondary_pattern.findall(text))
-    return names
+def collect_new_sets(new_root: Path) -> AuditSets:
+    new_java = new_root / NEW_JAVA_REL
+
+    new_items: Set[str] = set()
+    new_blocks: Set[str] = set()
+    new_fluids: Set[str] = set()
+
+    # General register patterns
+    new_items.update(_parse_register_calls(new_java, "ITEMS"))
+    new_blocks.update(_parse_register_calls(new_java, "BLOCKS"))
+    new_fluids.update(_parse_register_calls(new_java, "FLUIDS"))
+    new_fluids.update(_parse_register_calls(new_java, "FLUID_TYPES"))
+
+    # New registry helpers
+    new_items_path = new_java / "com/hbm/registries/ModItems.java"
+    new_items.update(
+        _parse_call_first_string(
+            new_items_path,
+            (
+                "parts",
+                "machine",
+                "missile",
+                "gun",
+                "consumable",
+                "template",
+                "control",
+                "add",
+                "nuke",
+                "weapon",
+            ),
+        )
+    )
+
+    new_blocks_path = new_java / "com/hbm/registries/ModBlocks.java"
+    new_blocks.update(
+        _parse_call_first_string(
+            new_blocks_path,
+            (
+                "registerBlockWithItem",
+                "registerBattery",
+                "add",
+                "block",
+                "machine",
+            ),
+        )
+    )
+    if _exists(new_blocks_path):
+        text = _read(new_blocks_path)
+        new_blocks.update(re.findall(r"\bnew\s+BlockBuilder\s*\(\s*\"([^\"]+)\"", text))
+
+    # Fluids are mostly defined in ModFluids via ExtendedFluidType("name", ...)
+    mod_fluids = new_java / "com/hbm/Inventory/fluid/ModFluids.java"
+    new_fluids.update(_parse_extended_fluid_names(mod_fluids))
+
+    return AuditSets(items=new_items, blocks=new_blocks, fluids=new_fluids)
 
 
-def new_fluids() -> Set[str]:
-    names = gather_literals(NEW_JAVA, 'FLUIDS')
-    names.update(gather_literals(NEW_JAVA, 'FLUID_TYPES'))
-    mod_fluids = NEW_JAVA / 'com' / 'hbm' / 'Inventory' / 'fluid' / 'ModFluids.java'
-    if mod_fluids.exists():
-        text = read(mod_fluids)
-        for fname in re.findall(r'ExtendedFluidType\(\s*"([^"]+)"', text):
-            names.add(fname)
-            names.add(f'{fname}_flow')
-    return names
+FLUID_ALIASES: Dict[str, str] = {
+    "hotsteam": "hot_steam",
+    "superhotsteam": "superhot_steam",
+    "spentsteam": "spent_steam",
+    "carbondioxide": "carbon_dioxide",
+    "crackoil": "crack_oil",
+    "woodoil": "wood_oil",
+    "heatingoil": "heating_oil",
+    "reformgas": "reform_gas",
+}
 
 
-def canonical_key(name: str) -> str | None:
-    ignore = {'source'}
-    replacements = {'flowing': 'flow'}
-    tokens: List[str] = []
-    for token in name.lower().split('_'):
-        if not token or token in ignore:
-            continue
-        token = replacements.get(token, token)
-        tokens.append(token)
-    if not tokens:
-        return None
-    return ' '.join(sorted(tokens))
+def canonical_key(name: str) -> str:
+    lowered = name.lower().replace(".", "_").replace("-", "_")
+    lowered = FLUID_ALIASES.get(lowered, lowered)
+    tokens = [tok for tok in lowered.split("_") if tok]
+    return " ".join(sorted(tokens))
 
 
-def match_old_to_new(old_set: Set[str], new_set: Set[str]) -> tuple[Dict[str, Dict[str, str | bool]], Set[str]]:
-    canonical_map: Dict[str, Set[str]] = defaultdict(set)
-    for new_name in new_set:
-        key = canonical_key(new_name)
-        if key:
-            canonical_map[key].add(new_name)
-    unmatched_new = set(new_set)
-    report: Dict[str, Dict[str, str | bool]] = {}
+def match_sets(old_set: Set[str], new_set: Set[str]) -> Tuple[Dict[str, Dict[str, object]], Set[str], Set[str]]:
+    """Return per-old mapping + missing(old-only) + extras(new-only)."""
+    canonical_to_new: Dict[str, Set[str]] = {}
+    for n in new_set:
+        canonical_to_new.setdefault(canonical_key(n), set()).add(n)
+
+    report: Dict[str, Dict[str, object]] = {}
+    matched_new: Set[str] = set()
+    missing_old: Set[str] = set()
+
     for old_name in sorted(old_set):
-        match: str | None = None
+        mapped = None
         if old_name in new_set:
-            match = old_name
+            mapped = old_name
         else:
-            key = canonical_key(old_name)
-            if key:
-                candidates = canonical_map.get(key, set())
-                if len(candidates) == 1:
-                    match = next(iter(candidates))
-        if match:
-            unmatched_new.discard(match)
+            candidates = canonical_to_new.get(canonical_key(old_name), set())
+            if len(candidates) == 1:
+                mapped = next(iter(candidates))
+
+        if mapped is None:
+            missing_old.add(old_name)
+        else:
+            matched_new.add(mapped)
+
         report[old_name] = {
-            'old': True,
-            'new': bool(match),
-            'mapped_to': match,
+            "old": True,
+            "new": mapped is not None,
+            "mapped_to": mapped,
         }
-    return report, unmatched_new
+
+    extra_new = set(new_set) - matched_new
+    return report, missing_old, extra_new
 
 
-def build_report() -> Dict[str, Dict[str, Dict[str, str | bool]]]:
-    report: Dict[str, Dict[str, Dict[str, str | bool]]] = {}
-    extras: Dict[str, List[str]] = {}
-    datasets = [
-        ('item', old_items(), new_items()),
-        ('block', old_blocks(), new_blocks()),
-        ('fluid', old_fluids(), new_fluids()),
-    ]
-    for kind, old_set, new_set in datasets:
-        entries, unmatched_new = match_old_to_new(old_set, new_set)
-        report[kind] = entries
-        extras[kind] = sorted(unmatched_new)
-    out_dir = ROOT / 'reports'
+def write_reports(root: Path, old_sets: AuditSets, new_sets: AuditSets) -> tuple[Path, dict, dict, dict]:
+    out_dir = root / "reports"
     out_dir.mkdir(parents=True, exist_ok=True)
-    (out_dir / 'migration_new_only.json').write_text(json.dumps(extras, indent=2, sort_keys=True), encoding='utf-8')
-    return report
+
+    datasets = {
+        "item": (old_sets.items, new_sets.items),
+        "block": (old_sets.blocks, new_sets.blocks),
+        "fluid": (old_sets.fluids, new_sets.fluids),
+    }
+
+    migration_report: Dict[str, Dict[str, Dict[str, object]]] = {}
+    missing: Dict[str, List[str]] = {}
+    new_only: Dict[str, List[str]] = {}
+    summary: Dict[str, Dict[str, int]] = {}
+
+    for kind, (old_set, new_set) in datasets.items():
+        report, missing_old, extra_new = match_sets(old_set, new_set)
+        migration_report[kind] = report
+        missing[kind] = sorted(missing_old)
+        new_only[kind] = sorted(extra_new)
+        ported_count = sum(1 for entry in report.values() if bool(entry["new"]))
+        summary[kind] = {
+            "total": len(old_set),
+            "ported": ported_count,
+            "missing": len(old_set) - ported_count,
+            "new_only": len(extra_new),
+        }
+
+    (out_dir / "migration_report.json").write_text(
+        json.dumps(migration_report, indent=2, sort_keys=True, ensure_ascii=False),
+        encoding="utf-8",
+    )
+    (out_dir / "migration_summary.json").write_text(
+        json.dumps(summary, indent=2, sort_keys=True, ensure_ascii=False),
+        encoding="utf-8",
+    )
+    (out_dir / "migration_missing.json").write_text(
+        json.dumps(missing, indent=2, sort_keys=True, ensure_ascii=False),
+        encoding="utf-8",
+    )
+    (out_dir / "migration_new_only.json").write_text(
+        json.dumps(new_only, indent=2, sort_keys=True, ensure_ascii=False),
+        encoding="utf-8",
+    )
+    return out_dir, summary, missing, new_only
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="Audit migration progress from legacy HBM to current port")
+    parser.add_argument(
+        "--legacy-root",
+        type=Path,
+        default=DEFAULT_OLD_ROOT,
+        help=f"Legacy repo root (default: {DEFAULT_OLD_ROOT})",
+    )
+    parser.add_argument(
+        "--project-root",
+        type=Path,
+        default=ROOT,
+        help=f"Current project root (default: {ROOT})",
+    )
+    return parser.parse_args()
+
+
+def resolve_legacy_root(user_path: Path) -> Path:
+    candidate = user_path.expanduser().resolve()
+    if candidate.exists():
+        return candidate
+    if user_path == DEFAULT_OLD_ROOT and FALLBACK_OLD_ROOT.exists():
+        return FALLBACK_OLD_ROOT.resolve()
+    return candidate
 
 
 def main() -> None:
-    report = build_report()
-    out_dir = ROOT / 'reports'
-    summary = {
-        kind: {
-            'total': len(entries),
-            'ported': sum(1 for data in entries.values() if data['new']),
-        }
-        for kind, entries in report.items()
-    }
-    (out_dir / 'migration_report.json').write_text(json.dumps(report, indent=2, sort_keys=True), encoding='utf-8')
-    (out_dir / 'migration_summary.json').write_text(json.dumps(summary, indent=2, sort_keys=True), encoding='utf-8')
+    args = parse_args()
+    legacy_root = resolve_legacy_root(args.legacy_root)
+    project_root = args.project_root.expanduser().resolve()
+
+    if not legacy_root.exists():
+        raise SystemExit(f"Legacy root does not exist: {legacy_root}")
+
+    old_sets = collect_old_sets(legacy_root)
+    new_sets = collect_new_sets(project_root)
+    out_dir, summary, missing, new_only = write_reports(project_root, old_sets, new_sets)
+
+    print(f"Audit finished. Reports: {out_dir}")
+    for kind in ("item", "block", "fluid"):
+        data = summary[kind]
+        print(
+            f"{kind}: total={data['total']}, ported={data['ported']}, "
+            f"missing={data['missing']}, new_only={data['new_only']}"
+        )
+        if missing.get(kind):
+            preview = ", ".join(missing[kind][:8])
+            print(f"  missing sample: {preview}")
+        if new_only.get(kind):
+            preview = ", ".join(new_only[kind][:5])
+            print(f"  new-only sample: {preview}")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

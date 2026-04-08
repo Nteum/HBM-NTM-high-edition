@@ -1,0 +1,10 @@
+{
+  "type": "hbm:press",
+  "input": {
+    "tag": "forge:ingots/lead"
+  },
+  "result": {
+    "item": "hbm:plate_lead"
+  },
+  "stamp": "PLATE"
+}

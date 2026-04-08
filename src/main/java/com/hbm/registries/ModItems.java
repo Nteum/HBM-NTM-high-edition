@@ -5,6 +5,7 @@ import com.hbm.HBMKey;
 import com.hbm.HBMLang;
 import com.hbm.Inventory.material.HBMMatForm;
 import com.hbm.compat.legacy.LegacyItems;
+import com.hbm.item.HBMComponent;
 import com.hbm.config.ConfigLBSM;
 import com.hbm.datagen.LanguageProvider;
 import com.hbm.datagen.model.ItemModelGen;
@@ -32,6 +33,7 @@ import com.hbm.item.weapon.grenade.ItemGrenade;
 import com.hbm.item.zirnox.ItemZirnoxRod;
 import com.hbm.registries.WrapperRegistry.WrappedItemRegistry;
 import com.hbm.render.model.Models;
+import com.hbm.entity.weapon.missile.EntityMissileTier0;
 import com.hbm.utils.debug.GunSuicide;
 import com.hbm.reactor.rbmk.RBMKLidType;
 import com.hbm.utils.debug.ItemDebugWand;
@@ -109,7 +111,8 @@ public class ModItems {
 
     public static final RegistryObject<Item> PELLET_RTG = control("pellet_rtg", () -> new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     public static final RegistryObject<Item> ASSEMBLY_TEMPLATE = template("assembly_template", () -> new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> MISSILE_NUCLEAR = new WrapperRegistry.ItemBuilder("missile_nuclear", () -> new ItemMissile(new Item.Properties(), ItemMissile.MissileFormFactor.ATLAS, ItemMissile.MissileTier.TIER4, null).setModel(() -> Models.getEntityModel(Models.MISSILE_NUKE)))
+    public static final RegistryObject<Item> MISSILE_NUCLEAR = new WrapperRegistry.ItemBuilder("missile_nuclear", () -> new ItemMissile(new Item.Properties(), ItemMissile.MissileFormFactor.ATLAS, ItemMissile.MissileTier.TIER4,
+            (level, x, y, z, target) -> EntityMissileTier0.EntityMissileTest.create(level, x, y, z, target, EntityMissileTier0.EntityMissileTest.Payload.NUCLEAR)).setModel(() -> Models.getEntityModel(Models.MISSILE_NUKE)))
             .model(HBMKey.MODEL_EXISTING_FILE).build();
     public static final RegistryObject<Item> GUN_RIFLE = new WrapperRegistry.ItemBuilder("gun_maresleg", () -> new ItemGun(new Item.Properties())).model(HBMKey.MODEL_EXISTING_FILE).tab(ModTabs.WEAPON.getKey()).loc("Lever Action Shotgun").build();
     public static final RegistryObject<Item> BOTTLE_NUKA = consumable("bottle_nuka", () -> new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
@@ -236,6 +239,60 @@ public class ModItems {
     public static final RegistryObject<Item> grenade_fire = ITEMS.register("grenade_fire",()->new ItemGrenade(new Item.Properties(), ItemGrenade.Type.FIRE));
     public static final RegistryObject<Item> grenade_frag = ITEMS.register("grenade_frag",()->new ItemGrenade(new Item.Properties(), ItemGrenade.Type.FRAG));
     public static final RegistryObject<Item> grenade_black_hole = ITEMS.register("grenade_black_hole",()->new ItemGrenade(new Item.Properties(), ItemGrenade.Type.BLACK_HOLE));
+    // 1.7.10 兼容手榴弹全量补全
+    public static final RegistryObject<Item> GRENADE_ASCHRAB = legacyGrenade("grenade_aschrab", ItemGrenade.Type.ASCHRAB);
+    public static final RegistryObject<Item> GRENADE_BREACH = legacyGrenade("grenade_breach", ItemGrenade.Type.BREACH);
+    public static final RegistryObject<Item> GRENADE_BURST = legacyGrenade("grenade_burst", ItemGrenade.Type.BURST);
+    public static final RegistryObject<Item> GRENADE_CLOUD = legacyGrenade("grenade_cloud", ItemGrenade.Type.CLOUD);
+    public static final RegistryObject<Item> GRENADE_CLUSTER = legacyGrenade("grenade_cluster", ItemGrenade.Type.CLUSTER);
+    public static final RegistryObject<Item> GRENADE_ELECTRIC = legacyGrenade("grenade_electric", ItemGrenade.Type.ELECTRIC);
+    public static final RegistryObject<Item> GRENADE_FLARE = legacyGrenade("grenade_flare", ItemGrenade.Type.FLARE);
+    public static final RegistryObject<Item> GRENADE_GAS = legacyGrenade("grenade_gas", ItemGrenade.Type.GAS);
+    public static final RegistryObject<Item> GRENADE_GASCAN = legacyGrenade("grenade_gascan", ItemGrenade.Type.GASCAN);
+    public static final RegistryObject<Item> GRENADE_IF_BOUNCY = legacyGrenade("grenade_if_bouncy", ItemGrenade.Type.IF_BOUNCY);
+    public static final RegistryObject<Item> GRENADE_IF_BRIMSTONE = legacyGrenade("grenade_if_brimstone", ItemGrenade.Type.IF_BRIMSTONE);
+    public static final RegistryObject<Item> GRENADE_IF_CONCUSSION = legacyGrenade("grenade_if_concussion", ItemGrenade.Type.IF_CONCUSSION);
+    public static final RegistryObject<Item> GRENADE_IF_GENERIC = legacyGrenade("grenade_if_generic", ItemGrenade.Type.IF_GENERIC);
+    public static final RegistryObject<Item> GRENADE_IF_HE = legacyGrenade("grenade_if_he", ItemGrenade.Type.IF_HE);
+    public static final RegistryObject<Item> GRENADE_IF_HOPWIRE = legacyGrenade("grenade_if_hopwire", ItemGrenade.Type.IF_HOPWIRE);
+    public static final RegistryObject<Item> GRENADE_IF_IMPACT = legacyGrenade("grenade_if_impact", ItemGrenade.Type.IF_IMPACT);
+    public static final RegistryObject<Item> GRENADE_IF_INCENDIARY = legacyGrenade("grenade_if_incendiary", ItemGrenade.Type.IF_INCENDIARY);
+    public static final RegistryObject<Item> GRENADE_IF_MYSTERY = legacyGrenade("grenade_if_mystery", ItemGrenade.Type.IF_MYSTERY);
+    public static final RegistryObject<Item> GRENADE_IF_NULL = legacyGrenade("grenade_if_null", ItemGrenade.Type.IF_NULL);
+    public static final RegistryObject<Item> GRENADE_IF_SPARK = legacyGrenade("grenade_if_spark", ItemGrenade.Type.IF_SPARK);
+    public static final RegistryObject<Item> GRENADE_IF_STICKY = legacyGrenade("grenade_if_sticky", ItemGrenade.Type.IF_STICKY);
+    public static final RegistryObject<Item> GRENADE_IF_TOXIC = legacyGrenade("grenade_if_toxic", ItemGrenade.Type.IF_TOXIC);
+    public static final RegistryObject<Item> GRENADE_KIT = legacyGrenade("grenade_kit", ItemGrenade.Type.KIT);
+    public static final RegistryObject<Item> GRENADE_KYIV = legacyGrenade("grenade_kyiv", ItemGrenade.Type.KYIV);
+    public static final RegistryObject<Item> GRENADE_LEMON = legacyGrenade("grenade_lemon", ItemGrenade.Type.LEMON);
+    public static final RegistryObject<Item> GRENADE_MIRV = legacyGrenade("grenade_mirv", ItemGrenade.Type.MIRV);
+    public static final RegistryObject<Item> GRENADE_MK2 = legacyGrenade("grenade_mk2", ItemGrenade.Type.MK2);
+    public static final RegistryObject<Item> GRENADE_NUCLEAR = legacyGrenade("grenade_nuclear", ItemGrenade.Type.NUCLEAR);
+    public static final RegistryObject<Item> GRENADE_NUKE = legacyGrenade("grenade_nuke", ItemGrenade.Type.NUKE);
+    public static final RegistryObject<Item> GRENADE_PINK_CLOUD = legacyGrenade("grenade_pink_cloud", ItemGrenade.Type.PINK_CLOUD);
+    public static final RegistryObject<Item> GRENADE_PLASMA = legacyGrenade("grenade_plasma", ItemGrenade.Type.PLASMA);
+    public static final RegistryObject<Item> GRENADE_POISON = legacyGrenade("grenade_poison", ItemGrenade.Type.POISON);
+    public static final RegistryObject<Item> GRENADE_PULSE = legacyGrenade("grenade_pulse", ItemGrenade.Type.PULSE);
+    public static final RegistryObject<Item> GRENADE_SCHRABIDIUM = legacyGrenade("grenade_schrabidium", ItemGrenade.Type.SCHRABIDIUM);
+    public static final RegistryObject<Item> GRENADE_SHRAPNEL = legacyGrenade("grenade_shrapnel", ItemGrenade.Type.SHRAPNEL);
+    public static final RegistryObject<Item> GRENADE_SMART = legacyGrenade("grenade_smart", ItemGrenade.Type.SMART);
+    public static final RegistryObject<Item> GRENADE_TAU = legacyGrenade("grenade_tau", ItemGrenade.Type.TAU);
+    public static final RegistryObject<Item> GRENADE_ZOMG = legacyGrenade("grenade_zomg", ItemGrenade.Type.ZOMG);
+    // 旧版武器条目可用化
+    public static final RegistryObject<Item> GUN_B92 = gun("gun_b92", () -> new ItemGun(new Item.Properties()), HBMKey.ORDERLY_GEN);
+    public static final RegistryObject<Item> GUN_B92_AMMO = gun("gun_b92_ammo", () -> new Item(new Item.Properties()), HBMKey.ORDERLY_GEN);
+    public static final RegistryObject<Item> STICK_TNT = legacyGrenade("stick_tnt", ItemGrenade.Type.IF_HE);
+    public static final RegistryObject<Item> STICK_C4 = legacyGrenade("stick_c4", ItemGrenade.Type.BREACH);
+    public static final RegistryObject<Item> STICK_DYNAMITE = legacyGrenade("stick_dynamite", ItemGrenade.Type.BURST);
+    public static final RegistryObject<Item> STICK_DYNAMITE_FISHING = legacyGrenade("stick_dynamite_fishing", ItemGrenade.Type.BURST);
+    public static final RegistryObject<Item> STICK_SEMTEX = legacyGrenade("stick_semtex", ItemGrenade.Type.IF_STICKY);
+    public static final RegistryObject<Item> DISPERSER_CANISTER = legacyGrenade("disperser_canister", ItemGrenade.Type.GASCAN);
+    public static final RegistryObject<Item> DISPERSER_CANISTER_EMPTY = legacyGrenade("disperser_canister_empty", ItemGrenade.Type.IF_NULL);
+    public static final RegistryObject<Item> GLYPHID_GLAND = legacyGrenade("glyphid_gland", ItemGrenade.Type.IF_TOXIC);
+    public static final RegistryObject<Item> GLYPHID_GLAND_EMPTY = legacyGrenade("glyphid_gland_empty", ItemGrenade.Type.IF_NULL);
+    public static final RegistryObject<Item> NUCLEAR_WASTE_PEARL = legacyGrenade("nuclear_waste_pearl", ItemGrenade.Type.NUCLEAR);
+    public static final RegistryObject<Item> ULLAPOOL_CABER = legacyGrenade("ullapool_caber", ItemGrenade.Type.BURST);
+    public static final RegistryObject<Item> WEAPONIZED_STARBLASTER_CELL = legacyGrenade("weaponized_starblaster_cell", ItemGrenade.Type.PLASMA);
 
 
 
@@ -910,7 +967,8 @@ public class ModItems {
     public static final RegistryObject<Item> UPGRADE_BASE = ITEMS.register("upgrade_base",()->new Item(new Item.Properties()));
     //导弹
 //    public static final RegistryObject<Item> DESIGNATOR = ITEMS.register("designator",()->new ItemDesignator(new Item.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> MISSILE_GENERIC = ITEMS.register("missile_generic",()->new ItemMissilePart(new Item.Properties().stacksTo(1), ItemMissilePart.MissileTier.TIER1));
+    public static final RegistryObject<Item> MISSILE_GENERIC = ITEMS.register("missile_generic",()->new ItemMissile(new Item.Properties(), ItemMissile.MissileFormFactor.V2, ItemMissile.MissileTier.TIER1,
+            (level, x, y, z, target) -> EntityMissileTier0.EntityMissileTest.create(level, x, y, z, target, EntityMissileTier0.EntityMissileTest.Payload.GENERIC)));
     // RBMK
     public static final RegistryObject<Item> rbmk_lid = machine("rbmk_lid", () -> new ItemRBMKLid(new Item.Properties(), RBMKLidType.SOLID));
     public static final RegistryObject<Item> rbmk_lid_glass = machine("rbmk_lid_glass", () -> new ItemRBMKLid(new Item.Properties(), RBMKLidType.GLASS));
@@ -1137,6 +1195,10 @@ public class ModItems {
         // Force block registration classes to populate their BlockItems first so
         // legacy placeholders only backfill truly missing ids.
         ModBlocks.BLOCKS.getEntries();
+        try {
+            Class.forName(HBMComponent.class.getName());
+        } catch (ClassNotFoundException ignored) {
+        }
         LegacyItems.registerLegacy();
         ITEMS.register(eventBus);
     }
@@ -1152,6 +1214,9 @@ public class ModItems {
     }
     public static RegistryObject<Item> gun(final String name, final Supplier<? extends Item> sup, String genNameWay){
         return add(name, sup, ModTabs.WEAPON.getKey(), genNameWay);
+    }
+    public static RegistryObject<Item> legacyGrenade(final String name, final ItemGrenade.Type type){
+        return gun(name, () -> new ItemGrenade(new Item.Properties(), type), HBMKey.ORDERLY_GEN);
     }
     public static RegistryObject<Item> template(final String name, final Supplier<? extends Item> sup, String genNameWay){
         return add(name, sup, ModTabs.TEMPLATE.getKey(), genNameWay);

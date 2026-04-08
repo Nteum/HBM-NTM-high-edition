@@ -1,0 +1,10 @@
+{
+  "type": "hbm:press",
+  "input": {
+    "tag": "minecraft:logs"
+  },
+  "result": {
+    "item": "hbm:ball_resin"
+  },
+  "stamp": "FLAT"
+}

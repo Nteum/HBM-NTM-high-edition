@@ -51,4 +51,16 @@ public class ModRenderTypes extends RenderType {
                     .setDepthTestState(LEQUAL_DEPTH_TEST)
                     .setWriteMaskState(COLOR_WRITE)
                     .createCompositeState(false));
+
+    public static final RenderType RBMK_PANEL = RenderType.create("hbm_rbmk_panel",
+            DefaultVertexFormat.POSITION_COLOR, VertexFormat.Mode.QUADS, 256, false, false,
+            RenderType.CompositeState.builder()
+                    .setShaderState(POSITION_COLOR_SHADER)
+                    .setTransparencyState(TRANSLUCENT_TRANSPARENCY)
+                    .setLayeringState(VIEW_OFFSET_Z_LAYERING)
+                    .setCullState(NO_CULL)
+                    .setLightmapState(NO_LIGHTMAP)
+                    .setDepthTestState(LEQUAL_DEPTH_TEST)
+                    .setWriteMaskState(COLOR_DEPTH_WRITE)
+                    .createCompositeState(false));
 }

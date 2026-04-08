@@ -7,6 +7,7 @@ import com.hbm.entity.effect.EntityMeteor;
 import com.hbm.entity.effect.EntityNukeTorex;
 import com.hbm.entity.logic.EntityNukeExplosionMK5;
 import com.hbm.entity.mob.EntityGlyphid;
+import com.hbm.entity.weapon.projectile.EntityGunBullet;
 import com.hbm.entity.weapon.grenade.*;
 import com.hbm.entity.weapon.missile.EntityMissileAntiBallistic;
 import com.hbm.entity.weapon.missile.EntityMissileTier0.*;
@@ -34,6 +35,10 @@ public class ModEntityType {
             = register("grenade_frag",EntityType.Builder.<EntityGrenadeFrag>of(EntityGrenadeFrag::new, MobCategory.MISC));
     public static final RegistryObject<EntityType<EntityGrenadeBlackHole>> ENTITY_GRENADE_BLACK_HOLE
             = register("grenade_black_hole",EntityType.Builder.<EntityGrenadeBlackHole>of(EntityGrenadeBlackHole::new, MobCategory.MISC));
+    public static final RegistryObject<EntityType<EntityGrenadeLegacy>> ENTITY_GRENADE_LEGACY
+            = register("grenade_legacy", EntityType.Builder.<EntityGrenadeLegacy>of(EntityGrenadeLegacy::new, MobCategory.MISC));
+    public static final RegistryObject<EntityType<EntityGunBullet>> ENTITY_GUN_BULLET
+            = register("gun_bullet", EntityType.Builder.<EntityGunBullet>of(EntityGunBullet::new, MobCategory.MISC).sized(0.125F, 0.125F).clientTrackingRange(4).updateInterval(1));
     /** 导弹 */
     public static final RegistryObject<EntityType<EntityMissileTest>> ENTITY_MISSILE_TEST
             = register("missile_test",EntityType.Builder.<EntityMissileTest>of(EntityMissileTest::new, MobCategory.MISC));

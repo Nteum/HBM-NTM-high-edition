@@ -1,0 +1,10 @@
+{
+  "type": "hbm:press",
+  "input": {
+    "tag": "forge:dusts/diamond"
+  },
+  "result": {
+    "item": "minecraft:diamond"
+  },
+  "stamp": "FLAT"
+}

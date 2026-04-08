@@ -38,7 +38,7 @@ public class EntityGrenadeFire extends ThrownGrenade{
             if (!this.level().isClientSide) {
                 explode();
             }else {
-                this.level().playLocalSound(xo, yo, zo, SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 4.0F, (1.0F + (this.level().random.nextFloat() - this.level().random.nextFloat()) * 0.2F) * 0.7F, false);
+                this.level().playLocalSound(this.getX(), this.getY(), this.getZ(), SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 4.0F, (1.0F + (this.level().random.nextFloat() - this.level().random.nextFloat()) * 0.2F) * 0.7F, false);
             }
         }else {
             setFuse(i-1);
@@ -48,8 +48,11 @@ public class EntityGrenadeFire extends ThrownGrenade{
     @Override
     public void explode() {
         this.discard();
-        ExplosionChaos.burn(this.level(), (int)xo, (int)yo, (int)zo, 5);
-        ExplosionChaos.flameDeath(this.level(), (int)xo, (int)yo, (int)zo, 15);
-        ExplosionChaos.frag(this.level(), (int)xo, (int)yo, (int)zo, 100, true, this.getOwner());
+        int x = (int) Math.floor(this.getX());
+        int y = (int) Math.floor(this.getY());
+        int z = (int) Math.floor(this.getZ());
+        ExplosionChaos.burn(this.level(), x, y, z, 5);
+        ExplosionChaos.flameDeath(this.level(), x, y, z, 15);
+        ExplosionChaos.frag(this.level(), x, y, z, 100, true, this.getOwner());
     }
 }

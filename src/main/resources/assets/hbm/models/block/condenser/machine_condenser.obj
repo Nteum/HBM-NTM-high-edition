@@ -1,5 +1,7 @@
 # Blender v2.79 (sub 0) OBJ File: 'condenser.blend'
 # www.blender.org
+mtllib machine_condenser.mtl
+usemtl Machine_condenser
 o Fan1
 v -1.375000 1.500000 0.125000
 v -1.375000 1.608253 0.062500

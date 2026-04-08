@@ -1,0 +1,76 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "particle": "hbm:block/rbmk/rbmk_display",
+    "front": "hbm:block/rbmk/rbmk_display",
+    "side": "hbm:block/rbmk/rbmk_blank_side",
+    "back": "hbm:block/rbmk/rbmk_blank_side"
+  },
+  "elements": [
+    {
+      "from": [0, 0, 15],
+      "to": [16, 16, 16],
+      "faces": {
+        "north": { "uv": [0, 0, 16, 16], "texture": "#back" },
+        "south": { "uv": [0, 0, 16, 16], "texture": "#front" },
+        "west": { "uv": [15, 0, 16, 16], "texture": "#side" },
+        "east": { "uv": [0, 0, 1, 16], "texture": "#side" },
+        "up": { "uv": [0, 15, 16, 16], "texture": "#side" },
+        "down": { "uv": [0, 15, 16, 16], "texture": "#side" }
+      }
+    }
+  ],
+  "display": {
+    "gui": {
+      "rotation": [
+        30,
+        225,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "ground": {
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        0,
+        2,
+        0
+      ],
+      "scale": [
+        0.6,
+        0.6,
+        0.6
+      ]
+    },
+    "fixed": {
+      "rotation": [
+        0,
+        180,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    }
+  }
+}

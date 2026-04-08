@@ -1,0 +1,10 @@
+{
+  "type": "hbm:press",
+  "input": {
+    "item": "hbm:ingot_gunmetal"
+  },
+  "result": {
+    "item": "hbm:plate_gunmetal"
+  },
+  "stamp": "PLATE"
+}

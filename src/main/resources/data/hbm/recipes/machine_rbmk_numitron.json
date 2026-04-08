@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " R ",
+    "NSN",
+    " D "
+  ],
+  "key": {
+    "R": { "item": "minecraft:redstone_torch" },
+    "N": { "item": "hbm:seg_10" },
+    "S": { "item": "hbm:plate_steel" },
+    "D": { "item": "hbm:machine_rbmk_display" }
+  },
+  "result": {
+    "item": "hbm:machine_rbmk_numitron"
+  }
+}

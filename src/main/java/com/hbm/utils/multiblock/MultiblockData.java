@@ -40,7 +40,13 @@ public class MultiblockData {
         mapping.put(ModBlocks.bomb_fat_man.get(), new MultiblockData(1,0,0,1,1,1));
         mapping.put(HBMMachine.LAUNCH_PAD.get(), new MultiblockData(0, 0, 1, 1, 1, 1));
         mapping.put(ModBlocks.machine_rbmk_base.get(), new MultiblockData(0,0,0,0,0,0));
-        mapping.put(ModBlocks.machine_rbmk_console.get(), new MultiblockData(3, 0, 2, 2, 1, 1));
+        List<Vec3i> rbmkConsoleOffsets = new ArrayList<>(square(new int[]{3, 0, 0, 0, 2, 2}));
+        for (Vec3i offset : translated(square(new int[]{0, 0, 0, 1, 2, 2}), 0, 0, 1)) {
+            if (!rbmkConsoleOffsets.contains(offset)) {
+                rbmkConsoleOffsets.add(offset);
+            }
+        }
+        mapping.put(ModBlocks.machine_rbmk_console.get(), new MultiblockData(rbmkConsoleOffsets, new int[]{3, 0, 0, 2, 2, 2}));
         mapping.put(ModBlocks.machine_cracking_tower.get(), new MultiblockData(0, 0, 3, 3, 2, 3)
                 .addCap(new Vec3i(0, 0, -2), ForgeCapabilities.FLUID_HANDLER, SOUTH)
                 .addCap(new Vec3i(2, 0, 0), ForgeCapabilities.FLUID_HANDLER, EAST)
@@ -102,7 +108,13 @@ public class MultiblockData {
         mapping.put(ModBlocks.SPACE_STATION_BASE.get(), new MultiblockData(1, 0, 2, 2, 2, 2));
         mapping.put(ModBlocks.HEATER_FIREBOX.get(), new MultiblockData(0, 0, 1, 1, 1, 1));
         mapping.put(ModBlocks.machine_crucible.get(), new MultiblockData(1, 0, 1, 1, 1, 1).setInvGeneral(true));
-        mapping.put(ModBlocks.machine_rbmk_crane_console.get(), new MultiblockData(1, 0, 2, 1, 1, 1));
+        List<Vec3i> rbmkCraneConsoleOffsets = new ArrayList<>(square(new int[]{1, 0, 0, 0, 1, 1}));
+        for (Vec3i offset : translated(square(new int[]{0, 0, 0, 1, 1, 1}), 0, 0, 1)) {
+            if (!rbmkCraneConsoleOffsets.contains(offset)) {
+                rbmkCraneConsoleOffsets.add(offset);
+            }
+        }
+        mapping.put(ModBlocks.machine_rbmk_crane_console.get(), new MultiblockData(rbmkCraneConsoleOffsets, new int[]{1, 0, 0, 2, 1, 1}));
         mapping.put(ModBlocks.machine_rbmk_autoloader.get(), new MultiblockData(8, 0, 0, 0, 0, 0));
     }
 
@@ -209,6 +221,14 @@ public class MultiblockData {
             }
         }
         return offsets;
+    }
+
+    private static List<Vec3i> translated(List<Vec3i> offsets, int dx, int dy, int dz) {
+        List<Vec3i> translated = new ArrayList<>(offsets.size());
+        for (Vec3i offset : offsets) {
+            translated.add(new Vec3i(offset.getX() + dx, offset.getY() + dy, offset.getZ() + dz));
+        }
+        return translated;
     }
     //工具函数，返回一个立方体的偏移
     public static Vec3i square(int n){

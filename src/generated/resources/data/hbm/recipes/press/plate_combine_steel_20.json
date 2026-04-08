@@ -1,0 +1,10 @@
+{
+  "type": "hbm:press",
+  "input": {
+    "item": "hbm:ingot_combine_steel"
+  },
+  "result": {
+    "item": "hbm:plate_combine_steel"
+  },
+  "stamp": "PLATE"
+}

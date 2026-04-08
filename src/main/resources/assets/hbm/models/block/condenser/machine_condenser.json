@@ -1,6 +1,44 @@
 {
-  "parent": "minecraft:block/cube_all",
+  "loader": "forge:obj",
+  "flip_v": true,
+  "model": "hbm:models/block/condenser/machine_condenser.obj",
+  "ambientocclusion": false,
+  "render_type": "minecraft:cutout",
   "textures": {
-    "all": "hbm:block/machine_condenser"
+    "texture0": "hbm:block/machine_condenser",
+    "particle": "hbm:block/machine_condenser"
+  },
+  "gui_light": "side",
+  "display": {
+    "gui": {
+      "rotation": [30, 225, 0],
+      "translation": [0, -1, 0],
+      "scale": [0.13, 0.13, 0.13]
+    },
+    "ground": {
+      "rotation": [0, 0, 0],
+      "translation": [0, 2, 0],
+      "scale": [0.06, 0.06, 0.06]
+    },
+    "fixed": {
+      "rotation": [0, 0, 0],
+      "translation": [0, 0, 0],
+      "scale": [0.1, 0.1, 0.1]
+    },
+    "thirdperson_righthand": {
+      "rotation": [75, 45, 0],
+      "translation": [0, 2.5, 0],
+      "scale": [0.09, 0.09, 0.09]
+    },
+    "firstperson_righthand": {
+      "rotation": [0, 45, 0],
+      "translation": [0, 0, 0],
+      "scale": [0.09, 0.09, 0.09]
+    },
+    "firstperson_lefthand": {
+      "rotation": [0, 225, 0],
+      "translation": [0, 0, 0],
+      "scale": [0.09, 0.09, 0.09]
+    }
   }
 }

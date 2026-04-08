@@ -13,11 +13,11 @@
       "item": "hbm:motor"
     },
     "R": {
-      "item": "hbm:rbmk_absorber"
+      "item": "hbm:machine_rbmk_absorber"
     }
   },
   "result": {
-    "item": "hbm:rbmk_control",
+    "item": "hbm:machine_rbmk_control_rod",
     "count": 1
   }
 }

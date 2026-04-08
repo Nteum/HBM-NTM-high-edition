@@ -68,7 +68,6 @@ public class ModTabs {
             .title(Component.translatable(HBMLang.HBM_MACHINE.key()))
             .icon(() -> Blocks.DIRT.asItem().getDefaultInstance())
             .displayItems((parameters, output) -> {
-                addBlocksForTab(output, MACHINE_KEY);
                 output.accept(ModBlocks.machine_difurnace.get());
                 output.accept(ModBlocks.machine_press.get());
                 output.accept(ModBlocks.machine_electric_furnace.get());
@@ -94,7 +93,22 @@ public class ModTabs {
                 output.accept(ModBlocks.machine_rbmk_heater.get());
                 output.accept(ModBlocks.machine_rbmk_fuel_channel.get());
                 output.accept(ModBlocks.machine_rbmk_control_rod.get());
+                output.accept(ModBlocks.machine_rbmk_control_auto.get());
+                output.accept(ModBlocks.machine_rbmk_boiler.get());
+                output.accept(ModBlocks.machine_rbmk_moderator.get());
+                output.accept(ModBlocks.machine_rbmk_absorber.get());
+                output.accept(ModBlocks.machine_rbmk_outgasser.get());
+                output.accept(ModBlocks.machine_rbmk_storage.get());
+                output.accept(ModBlocks.machine_rbmk_cooler.get());
                 output.accept(ModBlocks.machine_rbmk_console.get());
+                output.accept(ModBlocks.machine_rbmk_display.get());
+                output.accept(ModBlocks.machine_rbmk_graph.get());
+                output.accept(ModBlocks.machine_rbmk_numitron.get());
+                output.accept(ModBlocks.machine_rbmk_keypad.get());
+                output.accept(ModBlocks.machine_rbmk_gauge.get());
+                output.accept(ModBlocks.radio_torch_controller.get());
+                output.accept(ModBlocks.rbmk_steam_inlet.get());
+                output.accept(ModBlocks.rbmk_steam_outlet.get());
                 output.accept(ModBlocks.machine_rbmk_element.get());
                 output.accept(ModBlocks.machine_rbmk_reflector.get());
                 output.accept(ModBlocks.machine_rbmk_debris.get());
@@ -135,7 +149,6 @@ public class ModTabs {
                 output.accept(ItemICFPellet.createStack(ItemICFPellet.FuelType.BERYLLIUM,
                         ItemICFPellet.FuelType.CALCIUM, true));
                 addRBMKItems(output);
-                HBMMachine.creativeTab(output);
             })
             .build());
     public static final RegistryObject<CreativeModeTab> NUKE = CREATIVE_MODE_TABS.register("hbm_nuke", () -> CreativeModeTab.builder()

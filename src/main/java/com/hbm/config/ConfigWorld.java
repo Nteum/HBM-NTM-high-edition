@@ -179,10 +179,10 @@ public class ConfigWorld {
     public static ForgeConfigSpec.ConfigValue<Integer> craterBiomeId;
     public static ForgeConfigSpec.ConfigValue<Integer> craterBiomeInnerId;
     public static ForgeConfigSpec.ConfigValue<Integer> craterBiomeOuterId;
-    public static ForgeConfigSpec.ConfigValue<Float> craterBiomeRad;
-    public static ForgeConfigSpec.ConfigValue<Float> craterBiomeInnerRad;
-    public static ForgeConfigSpec.ConfigValue<Float> craterBiomeOuterRad;
-    public static ForgeConfigSpec.ConfigValue<Float> craterBiomeWaterMult;
+    public static ForgeConfigSpec.ConfigValue<Double> craterBiomeRad;
+    public static ForgeConfigSpec.ConfigValue<Double> craterBiomeInnerRad;
+    public static ForgeConfigSpec.ConfigValue<Double> craterBiomeOuterRad;
+    public static ForgeConfigSpec.ConfigValue<Double> craterBiomeWaterMult;
 
     public static void addConfig(final ForgeConfigSpec.Builder builder) {
         builder.push(CommonConfig.CATEGORY_ORES);
@@ -363,9 +363,9 @@ public class ConfigWorld {
 
         builder.push(CommonConfig.CATEGORY_BIOMES);
         enableCraterBiomes = builder.comment("Enables the biome change caused by nuclear explosions").define("17.B_toggle", true);
-        craterBiomeRad = builder.comment("RAD/s for the crater biome").define("17.R00_craterBiomeRad", 5f);
-        craterBiomeInnerRad = builder.comment("RAD/s for the inner crater biome").define("17.R01_craterBiomeInnerRad", 25f);
-        craterBiomeOuterRad = builder.comment("RAD/s for the outer crater biome").define("17.R02_craterBiomeOuterRad", 0.5f);
-        craterBiomeWaterMult = builder.comment("Multiplier for RAD/s in crater biomes when in water").define("17.R03_craterBiomeWaterMult", 5f);
+        craterBiomeRad = builder.comment("RAD/s for the crater biome").define("17.R00_craterBiomeRad", 5.0D);
+        craterBiomeInnerRad = builder.comment("RAD/s for the inner crater biome").define("17.R01_craterBiomeInnerRad", 25.0D);
+        craterBiomeOuterRad = builder.comment("RAD/s for the outer crater biome").define("17.R02_craterBiomeOuterRad", 0.5D);
+        craterBiomeWaterMult = builder.comment("Multiplier for RAD/s in crater biomes when in water").define("17.R03_craterBiomeWaterMult", 5.0D);
     }
 }

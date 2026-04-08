@@ -7,17 +7,17 @@
   ],
   "key": {
     "C": {
-      "item": "hbm:rbmk_blank"
+      "item": "hbm:machine_rbmk_base"
     },
     "I": {
       "item": "hbm:plate_polymer"
     },
     "G": {
-      "item": "hbm:steel_grate"
+      "item": "hbm:plate_steel"
     }
   },
   "result": {
-    "item": "hbm:rbmk_cooler",
+    "item": "hbm:machine_rbmk_cooler",
     "count": 1
   }
 }

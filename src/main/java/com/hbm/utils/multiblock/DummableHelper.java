@@ -12,10 +12,17 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class DummableHelper {
     private DummableHelper(){}
+
+    private static final ThreadLocal<Set<ClearingKey>> CLEARING_GUARD = ThreadLocal.withInitial(HashSet::new);
+
+    private record ClearingKey(Level level, BlockPos corePos) {
+    }
 
     /** 检查方块是否可以放得下 */
     public static boolean checkRequirement(Level level, BlockPos blockPos, Direction dir, List<Vec3i> offsets){
@@ -53,16 +60,28 @@ public class DummableHelper {
         }
     }
     public static void clearSpace(Level level, BlockPos blockPos, BlockState blockState, Direction direction){
-        BlockEntity blockEntity = level.getBlockEntity(blockPos);
-        BlockPos corePos;
-        if (blockEntity instanceof TileProxyBase tileProxyBase){
-            corePos = tileProxyBase.cachedPos;
-        }else corePos = blockPos;
-        BlockEntity coreEntity = level.getBlockEntity(corePos);
-        if (coreEntity != null && coreEntity instanceof DummyableBlockEntity){
+        final BlockPos corePos = resolveCorePos(level, blockPos);
+        if (corePos == null) {
+            return;
+        }
+        final ClearingKey key = new ClearingKey(level, corePos.immutable());
+        final Set<ClearingKey> active = CLEARING_GUARD.get();
+        if (!active.add(key)) {
+            return;
+        }
+        try {
+            BlockEntity coreEntity = level.getBlockEntity(corePos);
+            if (!(coreEntity instanceof DummyableBlockEntity)){
+                return;
+            }
+            final MultiblockData data = MultiblockData.mapping.get(blockState.getBlock());
+            if (data == null) {
+                level.removeBlock(corePos, false);
+                return;
+            }
             // 移除填充方块
 //            List<Vec3i> offsets2 = MultipartUtils.transOffsets(MultiblockData.mapping.get(blockState.getBlock()).offsets, direction);
-            List<Vec3i> offsets2 = DirectionUtils.offsetRot(MultiblockData.mapping.get(blockState.getBlock()).offsets, Direction.SOUTH, direction);
+            List<Vec3i> offsets2 = DirectionUtils.offsetRot(data.offsets, Direction.SOUTH, direction);
             for (Vec3i offset : offsets2) {
                 BlockPos pos = corePos.offset(offset);
                 if (level.getBlockState(pos).is(blockState.getBlock())){
@@ -71,6 +90,27 @@ public class DummableHelper {
             }
             // 移除核心方块
             level.removeBlock(corePos, false);
+        } finally {
+            active.remove(key);
+            if (active.isEmpty()) {
+                CLEARING_GUARD.remove();
+            }
         }
+    }
+
+    public static boolean isClearing(Level level, BlockPos blockPos, BlockState blockState) {
+        BlockPos corePos = resolveCorePos(level, blockPos);
+        if (corePos == null) {
+            return false;
+        }
+        return CLEARING_GUARD.get().contains(new ClearingKey(level, corePos));
+    }
+
+    private static BlockPos resolveCorePos(Level level, BlockPos blockPos) {
+        BlockEntity blockEntity = level.getBlockEntity(blockPos);
+        if (blockEntity instanceof TileProxyBase tileProxyBase) {
+            return tileProxyBase.cachedPos;
+        }
+        return blockPos;
     }
 }

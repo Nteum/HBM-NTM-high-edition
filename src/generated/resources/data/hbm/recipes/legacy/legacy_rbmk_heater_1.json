@@ -13,14 +13,14 @@
       "item": "hbm:shell"
     },
     "R": {
-      "item": "hbm:rbmk_blank"
+      "item": "hbm:machine_rbmk_base"
     },
     "I": {
       "item": "hbm:ingot_polymer"
     }
   },
   "result": {
-    "item": "hbm:rbmk_heater",
+    "item": "hbm:machine_rbmk_heater",
     "count": 1
   }
 }

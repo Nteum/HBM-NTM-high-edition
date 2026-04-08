@@ -28,6 +28,11 @@ import java.util.ArrayList;
 public class EntityNukeTorex extends Entity {
     public static final EntityDataAccessor<Float> DATA_SCALE = SynchedEntityData.defineId(EntityNukeTorex.class, EntityDataSerializers.FLOAT);
     public static final EntityDataAccessor<Integer> DATA_TYPE = SynchedEntityData.defineId(EntityNukeTorex.class, EntityDataSerializers.INT);
+    /**
+     * Primary cloud visual path. We intentionally use smoke particles here to avoid
+     * custom-vertex crashes while keeping dense mushroom cloud visuals.
+     */
+    private static final boolean USE_VANILLA_SMOKE_PARTICLES = true;
     public double coreHeight = 3;
     public double convectionHeight = 3;
     public double torusWidth = 3;
@@ -367,23 +372,50 @@ public class EntityNukeTorex extends Entity {
             this.posZ += this.motionZ * mult;
 
             this.updateColor();
-            //这段是我加的，原版bob使用自己的render以便利地控制粒子颜色和深浅，绕过原版的粒子渲染，但我直接复刻代码的尝试失败了。
-            //因此我的解决方法是使用原版粒子机制，但通过修改权限来中途设置粒子的颜色、大小、透明度。
-            try {
+            if (USE_VANILLA_SMOKE_PARTICLES) {
                 ParticleEngine particleEngine = Minecraft.getInstance().particleEngine;
-                HBMSmokeParticle particle = (HBMSmokeParticle)particleEngine.makeParticle(ModParticleTypes.HBM_SMOKE.get(),posX,posY,posZ,motionX,motionY,motionZ);
-                float brightness = type == TorexType.CONDENSATION ? 0.9F : 0.75F * colorMod;
-                Vec3 vecColor = getInterpColor(0.5F).scale(brightness);
-                //这个步骤是必须的，似乎来源于低版本和高版本的差别，高版本输入的颜色值大于1.0会溢出，可能会重新从0开始计值，导致原版的黄色变成红色、蓝色等。
-                //因此使用clamp函数防止溢出
-                vecColor = new Vec3(Mth.clamp(vecColor.x,0.0,1.0),Mth.clamp(vecColor.y,0.0,1.0),Mth.clamp(vecColor.z,0.0,1.0));
-                assert particle != null;
-                particle.setColor((float) vecColor.x, (float) vecColor.y, (float) vecColor.z);
-                particle.scale(getScale());
-                particle.setAlpha(getAlpha());
-                particleEngine.add(particle);
-            }catch (Exception e){
-                e.printStackTrace();
+                float scaleFactor = Mth.clamp((float) EntityNukeTorex.this.getScale() / 1.5F, 0.75F, 2.5F);
+                int baseCount = switch (type) {
+                    case SHOCK -> 3;
+                    case CONDENSATION -> 1;
+                    default -> 2;
+                };
+                int spawnCount = Mth.clamp(Math.round(baseCount * scaleFactor), 1, 6);
+                float radius = 0.1F * scaleFactor;
+
+                for (int i = 0; i < spawnCount; i++) {
+                    double sx = posX + (random.nextDouble() - 0.5D) * radius;
+                    double sy = posY + (random.nextDouble() - 0.5D) * radius;
+                    double sz = posZ + (random.nextDouble() - 0.5D) * radius;
+                    double mx = motionX + (random.nextDouble() - 0.5D) * 0.01D;
+                    double my = motionY + (random.nextDouble() - 0.5D) * 0.01D;
+                    double mz = motionZ + (random.nextDouble() - 0.5D) * 0.01D;
+
+                    HBMSmokeParticle particle = (HBMSmokeParticle) particleEngine.makeParticle(
+                            ModParticleTypes.HBM_SMOKE.get(),
+                            sx,
+                            sy,
+                            sz,
+                            mx,
+                            my,
+                            mz
+                    );
+                    if (particle == null) {
+                        continue;
+                    }
+
+                    float brightness = type == TorexType.CONDENSATION ? 0.9F : 0.75F * colorMod;
+                    Vec3 vecColor = getInterpColor(0.5F).scale(brightness);
+                    vecColor = new Vec3(
+                            Mth.clamp(vecColor.x, 0.0, 1.0),
+                            Mth.clamp(vecColor.y, 0.0, 1.0),
+                            Mth.clamp(vecColor.z, 0.0, 1.0)
+                    );
+                    particle.setColor((float) vecColor.x, (float) vecColor.y, (float) vecColor.z);
+                    particle.scale(getScale());
+                    particle.setAlpha(getAlpha());
+                    particleEngine.add(particle);
+                }
             }
         }
         /** 冷凝云的运动（向周围轻微扩散） */

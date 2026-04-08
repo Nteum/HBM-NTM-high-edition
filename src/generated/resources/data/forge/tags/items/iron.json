@@ -1,6 +1,6 @@
 {
   "values": [
-    "#forge:nuggets/iron",
-    "#forge:ingots/iron"
+    "#forge:ingots/iron",
+    "#forge:nuggets/iron"
   ]
 }

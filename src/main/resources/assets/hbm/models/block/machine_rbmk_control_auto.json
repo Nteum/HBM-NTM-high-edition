@@ -1,0 +1,23 @@
+{
+  "loader": "forge:composite",
+  "textures": {
+    "particle": "hbm:block/rbmk/rbmk_control_auto"
+  },
+  "children": {
+    "control_auto": {
+      "loader": "forge:obj",
+      "flip_v": true,
+      "ambientocclusion": false,
+      "render_type": "minecraft:cutout",
+      "model": "hbm:models/rbmk/rbmk_rods.obj",
+      "textures": {
+        "texture0": "hbm:block/rbmk/rbmk_control_auto"
+      }
+    }
+  },
+  "transform": {
+    "translation": [0.5, 0.0, 0.5],
+    "rotation": [0.0, 0.0, 0.0],
+    "scale": 1.0
+  }
+}
