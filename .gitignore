@@ -27,11 +27,9 @@ AGENTS.md
 .DS_Store
 Thumbs.db
 # ===== IntelliJ IDEA / Gradle =====
-/.idea/                  # IDE 项目配置
-*.iml                    # IDEA 模块文件
-/.gradle/                # Gradle 本地缓存
-/build/                  # 项目构建输出
-/out/                    # 其他构建输出
+/.idea/
+/processor/build/
+/out/
 # ===== Java 产物 =====
 *.log
 *.tmp
