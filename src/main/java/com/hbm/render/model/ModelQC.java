@@ -49,6 +49,6 @@ public final class ModelQC {
     }
 
     public static ModelQC createModelQC() {
-        return new ModelQC();
+        return new ModelQC(); //新
     }
 }
