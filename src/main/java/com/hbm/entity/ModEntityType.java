@@ -51,7 +51,8 @@ public class ModEntityType {
     public static final RegistryObject<EntityType<EntityBlackHole>> ENTITY_BLACK_HOLE
             = register("black_hole",EntityType.Builder.<EntityBlackHole>of(EntityBlackHole::new, MobCategory.MISC));
     public static final RegistryObject<EntityType<EntityNukeTorex>> ENTITY_NUKE_TOREX
-            = register("torex",EntityType.Builder.<EntityNukeTorex>of(EntityNukeTorex::new, MobCategory.MISC));
+            = register("torex",EntityType.Builder.<EntityNukeTorex>of(EntityNukeTorex::new, MobCategory.MISC)
+            .noSave().fireImmune().sized(20F, 40F).clientTrackingRange(64).updateInterval(Integer.MAX_VALUE).setShouldReceiveVelocityUpdates(false));
     public static final RegistryObject<EntityType<EntityMeteor>> ENTITY_METEOR
             = register("meteor",EntityType.Builder.<EntityMeteor>of(EntityMeteor::new, MobCategory.MISC).sized(4f, 4f).fireImmune());
     /**

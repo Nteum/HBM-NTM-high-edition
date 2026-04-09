@@ -63,7 +63,6 @@ public final class InternalUnsafeWrapper {
     private static final MethodHandle GET_ADDRESS_ADDRESS, PUT_ADDRESS_ADDRESS;
     private static final MethodHandle LOAD_FENCE, STORE_FENCE, FULL_FENCE, PARK, UNPARK, THROW_EXCEPTION;
 
-    private static final Unsafe sunUnsafe;
     private static final MethodHandles.Lookup IMPL_LOOKUP;
 
     private static MethodHandles.Lookup getImplLookupUnsafe(Unsafe unsafe) {
@@ -88,8 +87,7 @@ public final class InternalUnsafeWrapper {
     }
 
     static {// @formatter:off
-        sunUnsafe = getSunUnsafe();
-        IMPL_LOOKUP = getImplLookupUnsafe(sunUnsafe);
+        IMPL_LOOKUP = getImplLookupUnsafe(getSunUnsafe());
         try {
             // - weakCompareAndSwap*Volatile -> weakCompareAndSet*
             // - weakCompareAndSwap* -> weakCompareAndSet*Plain
