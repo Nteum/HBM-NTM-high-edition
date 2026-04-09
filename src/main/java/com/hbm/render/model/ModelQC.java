@@ -8,7 +8,7 @@ import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.Resource;
 
-/* import net.minecraftforge.client.model.obj.ObjLoader; //当加入OBJ时可用 */
+import net.minecraftforge.client.model.obj.ObjLoader; //当加入OBJ时可用
 
 import org.apache.commons.io.IOUtils;
 
@@ -26,12 +26,17 @@ public final class ModelQC {
 
     public static void onClientSetup(FMLClientSetupEvent e) {
         e.enqueueWork(() -> {
-            ResourceManager rm = net.minecraft.client.Minecraft.getInstance().getResourceManager();
+            ResourceManager rm = net.minecraft.client.Minecraft.getInstance().getResourceManager(); //应用相对路径
+            // ResourceManager am = net.minecraftforge.client.model.obj.(/* 填空obj */);
             List<ResourceLocation> suspects = List.of(
+
                 // 把要检查的一批 OBJ 加进来
+
                 new ResourceLocation(MODID, "models/block/bomb/fat_man.obj"),
                 new ResourceLocation(MODID, "models/block/crucible/crucible.obj")
+
             );
+
             for (var rl : suspects) {
                 try {
                     List<Resource> res = rm.getResourceStack(rl);
