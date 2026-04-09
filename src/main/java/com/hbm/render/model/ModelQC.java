@@ -1,4 +1,4 @@
-//在客户端启动时做一次离线质检，把常见问题直接打到日志
+//在客户端启动时做一次离线质检，把常见问题直接打到日志.
 package com.hbm.render.model; //没注意package默认的，导致无法PortQC
 
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
