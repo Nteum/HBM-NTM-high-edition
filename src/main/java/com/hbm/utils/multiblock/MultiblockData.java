@@ -176,7 +176,9 @@ public class MultiblockData {
             BlockPos dummyablePos = be.getBlockPos().offset(DirectionUtils.offsetRot(offset, SOUTH, facing));
             BlockEntity dummyableTile = level.getBlockEntity(dummyablePos);
             if (dummyableTile != null && dummyableTile instanceof TileProxyBase tileProxy){
-                capMap.forEach((cap, dirSet) -> be.getCapability(cap).ifPresent(handler -> tileProxy.capabilitiesContent.addCapability(cap, handler, new HashSet<>(DirectionUtils.horizRot(SOUTH, facing, dirSet)))));
+                capMap.forEach((cap, dirSet) -> be.getCapability(cap).ifPresent(handler -> {
+                    tileProxy.capabilitiesContent.addCapability(cap, handler, new HashSet<>(DirectionUtils.horizRot(SOUTH, facing, dirSet)));
+                }));
                 be.getLevel().updateNeighborsAt(dummyableTile.getBlockPos(), dummyableTile.getBlockState().getBlock());
             }
         });

@@ -86,6 +86,8 @@ public class HBMKey {
     public static final String COUNTDOWN = "countdown";
     public static final String WATER_TIMER = "waterTimer";
     public static final String JOINED = "joined";
+    public static final String UPGRADE = "upgrade";
+    public static final String FILTER = "filter";
     // machine name
     public static final String BLAST = "blast";
     public static final String ASSEMBLER = "assembler";

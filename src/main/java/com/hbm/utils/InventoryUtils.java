@@ -13,6 +13,7 @@ import net.minecraft.world.level.block.entity.*;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
+import net.minecraftforge.items.ItemStackHandler;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 import org.jetbrains.annotations.NotNull;
@@ -313,13 +314,22 @@ public class InventoryUtils {
     public static boolean insertNoCheckSlots(IItemHandler from, IItemHandler to){
         for (int i = 0; i < from.getSlots(); i++) {
             ItemStack stackInSlot = from.getStackInSlot(i);
-            if (insertNoCheckSlots(from, to, i, stackInSlot.getCount())){
+            if (insertNoCheckSlots(from, to, i, stackInSlot.getCount()) > 0){
                 return true;
             }
         }
         return false;
     }
-    public static boolean insertNoCheckSlots(IItemHandler from, IItemHandler to, int slot, int amount){
+    public static int insertNoCheckSlots(IItemHandler from, IItemHandler to, int amount){
+        int cnt = amount;
+        for (int i = 0; i < from.getSlots(); i++) {
+            cnt -= insertNoCheckSlots(from, to, i, cnt);
+            if (cnt == 0) return amount;
+        }
+        return amount - cnt;
+    }
+    // 返回输出值
+    public static int insertNoCheckSlots(IItemHandler from, IItemHandler to, int slot, int amount){
         ItemStack itemStack = from.extractItem(slot, amount, true);
         ItemStack itemStack1 = itemStack.copy();
         for (int i = 0; i < to.getSlots() && !itemStack1.isEmpty(); i++) {
@@ -329,8 +339,8 @@ public class InventoryUtils {
         int count = itemStack.getCount();
         if (count1 < count){
             from.extractItem(slot, count - count1, false);
-            return true;
+            return count - count1;
         }
-        return false;
+        return 0;
     }
 }

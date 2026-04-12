@@ -1,0 +1,72 @@
+{
+	"format_version": "1.9.0",
+	"credit": "Made with Blockbench",
+	"textures": {
+		"pillar": "hbm:block/concrete",
+		"conveyor": "hbm:block/conveyor",
+		"particle": "hbm:block/concrete"
+	},
+	"elements": [
+		{
+			"name": "board",
+			"from": [0, 0, 0],
+			"to": [16, 16, 4],
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#pillar"},
+				"east": {"uv": [0, 0, 4, 16], "texture": "#pillar"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#pillar"},
+				"west": {"uv": [0, 0, 4, 16], "texture": "#pillar"},
+				"up": {"uv": [0, 0, 16, 4], "texture": "#pillar"},
+				"down": {"uv": [0, 0, 16, 4], "texture": "#pillar"}
+			}
+		},
+		{
+			"name": "pillar1",
+			"from": [0, 0, 12],
+			"to": [4, 16, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [0, 0, 14]},
+			"faces": {
+				"north": {"uv": [0, 0, 4, 16], "texture": "#pillar"},
+				"east": {"uv": [0, 0, 4, 16], "texture": "#pillar"},
+				"south": {"uv": [0, 0, 4, 16], "texture": "#pillar"},
+				"west": {"uv": [1, 0, 5, 16], "texture": "#pillar"},
+				"up": {"uv": [0, 1, 4, 5], "texture": "#pillar"},
+				"down": {"uv": [0, 0, 4, 4], "texture": "#pillar"}
+			}
+		},
+		{
+			"name": "pillar2",
+			"from": [12, 0, 12],
+			"to": [16, 16, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [12, 0, 14]},
+			"faces": {
+				"north": {"uv": [0, 0, 4, 16], "texture": "#pillar"},
+				"east": {"uv": [0, 0, 4, 16], "texture": "#pillar"},
+				"south": {"uv": [0, 0, 4, 16], "texture": "#pillar"},
+				"west": {"uv": [1, 0, 5, 16], "texture": "#pillar"},
+				"up": {"uv": [0, 1, 4, 5], "texture": "#pillar"},
+				"down": {"uv": [0, 0, 4, 4], "texture": "#pillar"}
+			}
+		},
+		{
+			"name": "conveyor",
+			"from": [3, 0, 4],
+			"to": [13, 16, 5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [3, 0, 3]},
+			"faces": {
+				"east": {"uv": [2, 0, 3, 16], "texture": "#conveyor"},
+				"south": {"uv": [3, 0, 13, 16], "texture": "#conveyor"},
+				"west": {"uv": [13, 0, 14, 16], "texture": "#conveyor"},
+				"up": {"uv": [3, 1, 13, 2], "texture": "#conveyor"},
+				"down": {"uv": [3, 0, 13, 1], "texture": "#conveyor"}
+			}
+		}
+	],
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [75, 167, 0],
+			"translation": [0, 2.5, 0],
+			"scale": [0.375, 0.375, 0.375]
+		}
+	}
+}

@@ -1,0 +1,16 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "in": "hbm:block/crane_in"
+  },
+  "render_type": "cutout",
+  "elements": [
+    {
+      "from": [0, 0, 0],
+      "to": [16, 16, 16],
+      "faces": {
+        "north": {"texture": "#in"}
+      }
+    }
+  ]
+}

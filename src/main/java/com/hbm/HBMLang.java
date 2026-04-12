@@ -55,6 +55,8 @@ public enum HBMLang implements ILangEntry {
     CONTAINER_SPACE_STATION_DOCKER("Space Station Docker"),
     CONTAINER_FIREBOX("Firebox"),
     CONTAINER_CRUCIBLE("Crucible"),
+    CONTAINER_CONVEYOR_EXTRACTOR("Container Extractor"),
+    CONTAINER_CONVEYOR_INSERTER("Container Inserter"),
     // GUI
     TOOLTIP_LEFT_TIME("gui","left_time.tooltip"),
     TOOLTIP_ENERGY("gui","stored_energy.tooltip"),
@@ -71,6 +73,7 @@ public enum HBMLang implements ILangEntry {
     GUI_TOOLTIP_CRUCIBLE_CAPACITY("Capacity: %s mB"),
     GUI_TOOLTIP_CRUCIBLE_BUTTON1("Click this to show Recipe book."),
     // Item description
+    TOOLTIP_SHOW_DETAIL("Hold %s to display more info"),
     ITEM_INGOT_NEPTUNIUM_DESC("That one's my favourite!"),
     ITEM_INGOT_SCHRARANIUM_NAME_ALTER("Nikonium Ingot"),
     ITEM_BILLETGH336_DESC("Seaborgium's colleague."),

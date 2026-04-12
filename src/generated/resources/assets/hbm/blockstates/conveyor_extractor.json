@@ -2,12 +2,12 @@
   "multipart": [
     {
       "apply": {
-        "model": "hbm:block/conveyor_crane_cube"
+        "model": "hbm:block/conveyor_extractor_cube"
       }
     },
     {
       "apply": {
-        "model": "hbm:block/conveyor_crane_in",
+        "model": "hbm:block/conveyor_extractor_in",
         "uvlock": true
       },
       "when": {
@@ -16,7 +16,7 @@
     },
     {
       "apply": {
-        "model": "hbm:block/conveyor_crane_arrow1"
+        "model": "hbm:block/conveyor_extractor_arrow1"
       },
       "when": {
         "facing": "north",
@@ -25,7 +25,7 @@
     },
     {
       "apply": {
-        "model": "hbm:block/conveyor_crane_arrow2",
+        "model": "hbm:block/conveyor_extractor_arrow2",
         "x": 180,
         "y": 180
       },
@@ -36,7 +36,7 @@
     },
     {
       "apply": {
-        "model": "hbm:block/conveyor_crane_arrow2"
+        "model": "hbm:block/conveyor_extractor_arrow2"
       },
       "when": {
         "facing": "north",
@@ -45,7 +45,7 @@
     },
     {
       "apply": {
-        "model": "hbm:block/conveyor_crane_arrow3",
+        "model": "hbm:block/conveyor_extractor_arrow3",
         "y": 270
       },
       "when": {
@@ -55,7 +55,7 @@
     },
     {
       "apply": {
-        "model": "hbm:block/conveyor_crane_arrow3",
+        "model": "hbm:block/conveyor_extractor_arrow3",
         "x": 180,
         "y": 270
       },
@@ -66,7 +66,7 @@
     },
     {
       "apply": {
-        "model": "hbm:block/conveyor_crane_in",
+        "model": "hbm:block/conveyor_extractor_in",
         "uvlock": true,
         "y": 90
       },
@@ -76,7 +76,7 @@
     },
     {
       "apply": {
-        "model": "hbm:block/conveyor_crane_arrow1",
+        "model": "hbm:block/conveyor_extractor_arrow1",
         "y": 90
       },
       "when": {
@@ -86,7 +86,7 @@
     },
     {
       "apply": {
-        "model": "hbm:block/conveyor_crane_arrow2",
+        "model": "hbm:block/conveyor_extractor_arrow2",
         "x": 180,
         "y": 270
       },
@@ -97,7 +97,7 @@
     },
     {
       "apply": {
-        "model": "hbm:block/conveyor_crane_arrow2",
+        "model": "hbm:block/conveyor_extractor_arrow2",
         "y": 90
       },
       "when": {
@@ -107,7 +107,7 @@
     },
     {
       "apply": {
-        "model": "hbm:block/conveyor_crane_arrow3"
+        "model": "hbm:block/conveyor_extractor_arrow3"
       },
       "when": {
         "facing": "east",
@@ -116,7 +116,7 @@
     },
     {
       "apply": {
-        "model": "hbm:block/conveyor_crane_arrow3",
+        "model": "hbm:block/conveyor_extractor_arrow3",
         "x": 180
       },
       "when": {
@@ -126,7 +126,7 @@
     },
     {
       "apply": {
-        "model": "hbm:block/conveyor_crane_in",
+        "model": "hbm:block/conveyor_extractor_in",
         "uvlock": true,
         "y": 180
       },
@@ -136,7 +136,7 @@
     },
     {
       "apply": {
-        "model": "hbm:block/conveyor_crane_arrow1",
+        "model": "hbm:block/conveyor_extractor_arrow1",
         "y": 180
       },
       "when": {
@@ -146,7 +146,7 @@
     },
     {
       "apply": {
-        "model": "hbm:block/conveyor_crane_arrow2",
+        "model": "hbm:block/conveyor_extractor_arrow2",
         "x": 180
       },
       "when": {
@@ -156,7 +156,7 @@
     },
     {
       "apply": {
-        "model": "hbm:block/conveyor_crane_arrow2",
+        "model": "hbm:block/conveyor_extractor_arrow2",
         "y": 180
       },
       "when": {
@@ -166,7 +166,7 @@
     },
     {
       "apply": {
-        "model": "hbm:block/conveyor_crane_arrow3",
+        "model": "hbm:block/conveyor_extractor_arrow3",
         "y": 90
       },
       "when": {
@@ -176,7 +176,7 @@
     },
     {
       "apply": {
-        "model": "hbm:block/conveyor_crane_arrow3",
+        "model": "hbm:block/conveyor_extractor_arrow3",
         "x": 180,
         "y": 90
       },
@@ -187,7 +187,7 @@
     },
     {
       "apply": {
-        "model": "hbm:block/conveyor_crane_in",
+        "model": "hbm:block/conveyor_extractor_in",
         "uvlock": true,
         "y": 270
       },
@@ -197,7 +197,7 @@
     },
     {
       "apply": {
-        "model": "hbm:block/conveyor_crane_arrow1",
+        "model": "hbm:block/conveyor_extractor_arrow1",
         "y": 270
       },
       "when": {
@@ -207,7 +207,7 @@
     },
     {
       "apply": {
-        "model": "hbm:block/conveyor_crane_arrow2",
+        "model": "hbm:block/conveyor_extractor_arrow2",
         "x": 180,
         "y": 90
       },
@@ -218,7 +218,7 @@
     },
     {
       "apply": {
-        "model": "hbm:block/conveyor_crane_arrow2",
+        "model": "hbm:block/conveyor_extractor_arrow2",
         "y": 270
       },
       "when": {
@@ -228,7 +228,7 @@
     },
     {
       "apply": {
-        "model": "hbm:block/conveyor_crane_arrow3",
+        "model": "hbm:block/conveyor_extractor_arrow3",
         "y": 180
       },
       "when": {
@@ -238,7 +238,7 @@
     },
     {
       "apply": {
-        "model": "hbm:block/conveyor_crane_arrow3",
+        "model": "hbm:block/conveyor_extractor_arrow3",
         "x": 180,
         "y": 180
       },
@@ -249,7 +249,7 @@
     },
     {
       "apply": {
-        "model": "hbm:block/conveyor_crane_in",
+        "model": "hbm:block/conveyor_extractor_in",
         "uvlock": true,
         "x": -90
       },
@@ -259,7 +259,7 @@
     },
     {
       "apply": {
-        "model": "hbm:block/conveyor_crane_arrow1",
+        "model": "hbm:block/conveyor_extractor_arrow1",
         "x": -90
       },
       "when": {
@@ -269,7 +269,7 @@
     },
     {
       "apply": {
-        "model": "hbm:block/conveyor_crane_arrow2",
+        "model": "hbm:block/conveyor_extractor_arrow2",
         "x": -90,
         "y": 180
       },
@@ -280,7 +280,7 @@
     },
     {
       "apply": {
-        "model": "hbm:block/conveyor_crane_arrow2",
+        "model": "hbm:block/conveyor_extractor_arrow2",
         "x": -90
       },
       "when": {
@@ -290,7 +290,7 @@
     },
     {
       "apply": {
-        "model": "hbm:block/conveyor_crane_arrow2",
+        "model": "hbm:block/conveyor_extractor_arrow2",
         "x": -90,
         "y": 90
       },
@@ -301,7 +301,7 @@
     },
     {
       "apply": {
-        "model": "hbm:block/conveyor_crane_arrow2",
+        "model": "hbm:block/conveyor_extractor_arrow2",
         "x": -90,
         "y": -90
       },
@@ -312,7 +312,7 @@
     },
     {
       "apply": {
-        "model": "hbm:block/conveyor_crane_in",
+        "model": "hbm:block/conveyor_extractor_in",
         "uvlock": true,
         "x": 90
       },
@@ -322,7 +322,7 @@
     },
     {
       "apply": {
-        "model": "hbm:block/conveyor_crane_arrow1",
+        "model": "hbm:block/conveyor_extractor_arrow1",
         "x": 90
       },
       "when": {
@@ -332,7 +332,7 @@
     },
     {
       "apply": {
-        "model": "hbm:block/conveyor_crane_arrow2",
+        "model": "hbm:block/conveyor_extractor_arrow2",
         "x": 90,
         "y": 180
       },
@@ -343,7 +343,7 @@
     },
     {
       "apply": {
-        "model": "hbm:block/conveyor_crane_arrow2",
+        "model": "hbm:block/conveyor_extractor_arrow2",
         "x": 90
       },
       "when": {
@@ -353,7 +353,7 @@
     },
     {
       "apply": {
-        "model": "hbm:block/conveyor_crane_arrow2",
+        "model": "hbm:block/conveyor_extractor_arrow2",
         "x": 90,
         "y": 90
       },
@@ -364,7 +364,7 @@
     },
     {
       "apply": {
-        "model": "hbm:block/conveyor_crane_arrow2",
+        "model": "hbm:block/conveyor_extractor_arrow2",
         "x": 90,
         "y": -90
       },

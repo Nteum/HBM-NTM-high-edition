@@ -1,0 +1,24 @@
+{
+  "textures": {
+    "grid": "hbm:block/grate_top",
+    "pillar": "hbm:block/concrete",
+    "conveyor": "hbm:block/conveyor",
+    "side": "hbm:block/conveyor_side",
+    "particle": "hbm:block/grate_top"
+  },
+
+  "elements": [
+    {
+      "name": "grid",
+      "from": [1, 0, 1],
+      "to": [15, 16, 15],
+      "rotation": {"angle": 0, "axis": "y", "origin": [1, 0, 2]},
+      "faces": {
+        "north": {"uv": [1, 0, 15, 16], "texture": "#grid"},
+        "east": {"uv": [1, 0, 15, 16], "texture": "#grid"},
+        "south": {"uv": [1, 0, 15, 16], "texture": "#grid"},
+        "west": {"uv": [1, 0, 15, 16], "texture": "#grid"}
+      }
+    }
+  ]
+}

@@ -5,6 +5,7 @@ import com.hbm.block.env.GlyphidSpawner;
 import com.hbm.blockentity.base2.TileProxyCombo;
 import com.hbm.blockentity.logistic.TileConveyor;
 import com.hbm.blockentity.logistic.TileConveyorExtractor;
+import com.hbm.blockentity.logistic.TileConveyorInserter;
 import com.hbm.blockentity.machine.*;
 import com.hbm.blockentity.machine.IronCrateBlockEntity;
 import com.hbm.blockentity.machine.SteelCrateBlockEntity;
@@ -152,7 +153,9 @@ public class ModBlockEntityType {
     public static final RegistryObject<BlockEntityType<TileFireboxBase>> TILE_FIREBOX = register("tile_firebox", TileFireBox::new, ModBlocks.HEATER_FIREBOX);
     public static final RegistryObject<BlockEntityType<TileFoundryMold>> TILE_FOUNDRY_MOLD = register("tile_foundrymold", TileFoundryMold::new, ModBlocks.FOUNDRY_MOLD);
     public static final RegistryObject<BlockEntityType<TileConveyor>> TILE_CONVEYOR = register("tile_conveyor", TileConveyor::new, ModBlocks.conveyor);
-    public static final RegistryObject<BlockEntityType<TileConveyorExtractor>> TILE_CONVEYOR_EXTRACTOR = register("tile_conveyor_extractor", TileConveyorExtractor::new, ModBlocks.CONVEYOR_EXTRACTOR);    // 注册函数
+    public static final RegistryObject<BlockEntityType<TileConveyorExtractor>> TILE_CONVEYOR_EXTRACTOR = register("tile_conveyor_extractor", TileConveyorExtractor::new, ModBlocks.CONVEYOR_EXTRACTOR);
+    public static final RegistryObject<BlockEntityType<TileConveyorInserter>> TILE_CONVEYOR_INSERTER = register("tile_conveyor_inserter", TileConveyorInserter::new, ModBlocks.CONVEYOR_INSERTER);
+    // 注册函数
     private static<T extends BlockEntity> RegistryObject<BlockEntityType<T>> register(String key, BlockEntityType.BlockEntitySupplier<T> pFactory, Supplier<Block>... pValidBlocks){
         return REGISTER.register(key, () -> BlockEntityType.Builder.of(pFactory, Arrays.stream(pValidBlocks).map(Supplier::get).toArray(Block[]::new)).build(null));
     }

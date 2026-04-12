@@ -137,7 +137,8 @@ public class BlockStateGen extends BlockStateProvider {
         addHorizontalModel(ModBlocks.machine_cracking_tower.get(),"block/cracking_tower/machine_cracking_tower");
         addHorizontalModel(ModBlocks.machine_crucible.get(), "block/crucible");
         conveyor(ModBlocks.conveyor.get(), "block/conveyor");
-        conveyorCrane(ModBlocks.CONVEYOR_EXTRACTOR.get(), "block/conveyor_crane");
+        conveyorCrane(ModBlocks.CONVEYOR_INSERTER.get(), "block/conveyor_inserter");
+        conveyorCrane(ModBlocks.CONVEYOR_EXTRACTOR.get(), "block/conveyor_extractor");
     }
     // 方块和物品：纯cube all
     public void simpleBlockWithItem(Block block){
@@ -174,9 +175,19 @@ public class BlockStateGen extends BlockStateProvider {
     private void conveyor(Block block,String name){
         ModelFile.ExistingModelFile existingFile = this.models().getExistingFile(HBM.rl(name));
         getVariantBuilder(block).forAllStates(state -> {
-            int bend = state.getValue(HBMBlockProperties.VARIANT3).intValue();
+            int variant = state.getValue(HBMBlockProperties.VARIANT8).intValue();
             return ConfiguredModel.builder()
-                    .modelFile(bend == 0 ? existingFile : bend == 1 ? this.models().getExistingFile(HBM.rl(name + "_left")) : this.models().getExistingFile(HBM.rl(name + "_right")))
+                    .modelFile(switch (variant){
+                        case 0 -> existingFile;
+                        case 1 -> this.models().getExistingFile(HBM.rl(name + "_left"));
+                        case 2 -> this.models().getExistingFile(HBM.rl(name + "_right"));
+                        case 3 -> this.models().getExistingFile(HBM.rl(name + "_up_1"));
+                        case 4 -> this.models().getExistingFile(HBM.rl(name + "_up_2"));
+                        case 5 -> this.models().getExistingFile(HBM.rl(name + "_up_3"));
+                        case 6 -> this.models().getExistingFile(HBM.rl(name + "_down_1"));
+                        case 7 -> this.models().getExistingFile(HBM.rl(name + "_down_2"));
+                        default -> throw new IllegalStateException("Unexpected value: " + variant);
+                    })
                     .rotationY(((int) state.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot() + 180) % 360)
                     .build();
         });

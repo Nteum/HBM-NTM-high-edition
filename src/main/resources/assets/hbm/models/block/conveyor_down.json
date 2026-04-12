@@ -1,0 +1,101 @@
+{
+	"format_version": "1.9.0",
+	"credit": "Made with Blockbench",
+	"textures": {
+		"grid": "hbm:block/grate_top",
+		"pillar": "hbm:block/concrete",
+		"conveyor": "hbm:block/conveyor",
+		"side": "hbm:block/conveyor_side",
+		"particle": "hbm:block/grate_top"
+	},
+	"elements": [
+		{
+			"name": "pillar",
+			"from": [12, 0, 0],
+			"to": [16, 16, 4],
+			"rotation": {"angle": 0, "axis": "y", "origin": [12, 0, 0]},
+			"faces": {
+				"north": {"uv": [0, 0, 4, 16], "texture": "#pillar"},
+				"east": {"uv": [1, 0, 5, 16], "texture": "#pillar"},
+				"south": {"uv": [0, 0, 4, 16], "texture": "#pillar"},
+				"west": {"uv": [0, 0, 4, 16], "texture": "#pillar"},
+				"up": {"uv": [0, 0, 4, 4], "texture": "#pillar"},
+				"down": {"uv": [0, 1, 4, 5], "texture": "#pillar"}
+			}
+		},
+		{
+			"name": "pillar",
+			"from": [12, 0, 12],
+			"to": [16, 16, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [12, 0, 12]},
+			"faces": {
+				"north": {"uv": [0, 0, 4, 16], "texture": "#pillar"},
+				"east": {"uv": [1, 0, 5, 16], "texture": "#pillar"},
+				"south": {"uv": [0, 0, 4, 16], "texture": "#pillar"},
+				"west": {"uv": [0, 0, 4, 16], "texture": "#pillar"},
+				"up": {"uv": [0, 0, 4, 4], "texture": "#pillar"},
+				"down": {"uv": [0, 1, 4, 5], "texture": "#pillar"}
+			}
+		},
+		{
+			"name": "pillar",
+			"from": [0, 0, 0],
+			"to": [4, 16, 4],
+			"faces": {
+				"north": {"uv": [0, 0, 4, 16], "texture": "#pillar"},
+				"east": {"uv": [1, 0, 5, 16], "texture": "#pillar"},
+				"south": {"uv": [0, 0, 4, 16], "texture": "#pillar"},
+				"west": {"uv": [0, 0, 4, 16], "texture": "#pillar"},
+				"up": {"uv": [0, 0, 4, 4], "texture": "#pillar"},
+				"down": {"uv": [0, 1, 4, 5], "texture": "#pillar"}
+			}
+		},
+		{
+			"name": "pillar",
+			"from": [0, 0, 12],
+			"to": [4, 16, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [0, 0, 12]},
+			"faces": {
+				"north": {"uv": [0, 0, 4, 16], "texture": "#pillar"},
+				"east": {"uv": [1, 0, 5, 16], "texture": "#pillar"},
+				"south": {"uv": [0, 0, 4, 16], "texture": "#pillar"},
+				"west": {"uv": [0, 0, 4, 16], "texture": "#pillar"},
+				"up": {"uv": [0, 0, 4, 4], "texture": "#pillar"},
+				"down": {"uv": [0, 1, 4, 5], "texture": "#pillar"}
+			}
+		},
+		{
+			"name": "grid",
+			"from": [1, 0, 1],
+			"to": [15, 16, 15],
+			"rotation": {"angle": 0, "axis": "y", "origin": [1, 0, 2]},
+			"faces": {
+				"north": {"uv": [1, 0, 15, 16], "texture": "#grid"},
+				"east": {"uv": [1, 0, 15, 16], "texture": "#grid"},
+				"south": {"uv": [1, 0, 15, 16], "texture": "#grid"},
+				"west": {"uv": [1, 0, 15, 16], "texture": "#grid"}
+			}
+		},
+		{
+			"from": [0, 0, 0],
+			"to": [16, 5, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [0, 0, 14]},
+			"color": 3,
+			"faces": {
+				"north": {"uv": [0, 5, 16, 0], "texture": "#conveyor"},
+				"east": {"uv": [0, 12, 16, 16], "texture": "#side"},
+				"south": {"uv": [0, 0, 16, 5], "texture": "#conveyor"},
+				"west": {"uv": [0, 12, 16, 16], "texture": "#side"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#conveyor"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#conveyor"}
+			}
+		}
+	],
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [75, 45, 0],
+			"translation": [0, 2.5, 0],
+			"scale": [0.375, 0.375, 0.375]
+		}
+	}
+}
