@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SSS",
+    " S ",
+    "SSS"
+  ],
+  "key": {
+    "S": {
+      "item": "hbm:ingot_steel"
+    }
+  },
+  "result": {
+    "item": "hbm:steel_scaffold",
+    "count": 8
+  }
+}

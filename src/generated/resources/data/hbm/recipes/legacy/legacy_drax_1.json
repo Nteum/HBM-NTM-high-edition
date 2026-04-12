@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BDS",
+    "CDC",
+    "FMF"
+  ],
+  "key": {
+    "B": {
+      "item": "hbm:starmetal_pickaxe"
+    },
+    "S": {
+      "item": "hbm:starmetal_shovel"
+    },
+    "C": {
+      "item": "hbm:ingot_cobalt"
+    },
+    "F": {
+      "item": "hbm:fusion_core"
+    },
+    "D": {
+      "item": "hbm:ingot_workers_alloy"
+    },
+    "M": {
+      "item": "hbm:motor_desh"
+    }
+  },
+  "result": {
+    "item": "hbm:drax",
+    "count": 1
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DPS",
+    " RD",
+    " D "
+  ],
+  "key": {
+    "D": {
+      "item": "hbm:ingot_dura_steel"
+    },
+    "P": {
+      "item": "hbm:part_generic"
+    },
+    "R": {
+      "item": "hbm:ingot_rubber"
+    },
+    "S": {
+      "item": "hbm:shell"
+    }
+  },
+  "result": {
+    "item": "hbm:boltgun",
+    "count": 1
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ITI",
+    " S ",
+    " S "
+  ],
+  "key": {
+    "I": {
+      "item": "hbm:plate_iron"
+    },
+    "T": {
+      "item": "minecraft:tnt"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "hbm:ullapool_caber",
+    "count": 1
+  }
+}

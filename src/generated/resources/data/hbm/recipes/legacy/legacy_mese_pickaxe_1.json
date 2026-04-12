@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " SD",
+    "APS",
+    "FA "
+  ],
+  "key": {
+    "S": {
+      "item": "hbm:blades_desh"
+    },
+    "D": {
+      "item": "hbm:powder_dineutronium"
+    },
+    "A": {
+      "item": "hbm:plate_paa"
+    },
+    "P": {
+      "item": "hbm:chlorophyte_pickaxe"
+    },
+    "F": {
+      "item": "hbm:shimmer_handle"
+    }
+  },
+  "result": {
+    "item": "hbm:mese_pickaxe",
+    "count": 1
+  }
+}

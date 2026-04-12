@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "G",
+    "A"
+  ],
+  "key": {
+    "G": {
+      "item": "hbm:grenade_if_generic"
+    },
+    "A": {
+      "item": "hbm:powder_poison"
+    }
+  },
+  "result": {
+    "item": "hbm:grenade_if_toxic",
+    "count": 1
+  }
+}

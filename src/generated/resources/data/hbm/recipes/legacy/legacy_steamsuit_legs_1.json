@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CCC",
+    "DXD",
+    "C C"
+  ],
+  "key": {
+    "D": {
+      "item": "hbm:ingot_workers_alloy"
+    },
+    "C": {
+      "item": "hbm:plate_copper"
+    },
+    "X": {
+      "item": "hbm:steel_legs"
+    }
+  },
+  "result": {
+    "item": "hbm:steamsuit_legs",
+    "count": 1
+  }
+}

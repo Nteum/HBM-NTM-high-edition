@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "R",
+    "R",
+    "S"
+  ],
+  "key": {
+    "R": {
+      "item": "hbm:block_redstone"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "hbm:redstone_sword",
+    "count": 1
+  }
+}

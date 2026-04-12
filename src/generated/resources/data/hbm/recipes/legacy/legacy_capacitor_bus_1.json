@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PIP",
+    "PIP",
+    "PIP"
+  ],
+  "key": {
+    "P": {
+      "item": "hbm:plate_polymer"
+    },
+    "I": {
+      "item": "hbm:ingot_mingrade"
+    }
+  },
+  "result": {
+    "item": "hbm:capacitor_bus",
+    "count": 1
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "W I",
+    "WCI",
+    "PPP"
+  ],
+  "key": {
+    "W": {
+      "item": "hbm:wire_fine"
+    },
+    "I": {
+      "item": "hbm:ingot_copper"
+    },
+    "C": {
+      "item": "hbm:circuit"
+    },
+    "P": {
+      "item": "hbm:plate_cast"
+    }
+  },
+  "result": {
+    "item": "hbm:oil_detector",
+    "count": 1
+  }
+}

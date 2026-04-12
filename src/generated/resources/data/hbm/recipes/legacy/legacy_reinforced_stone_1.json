@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "FBF",
+    "BFB",
+    "FBF"
+  ],
+  "key": {
+    "F": {
+      "item": "minecraft:cobblestone"
+    },
+    "B": {
+      "item": "minecraft:stone"
+    }
+  },
+  "result": {
+    "item": "hbm:reinforced_stone",
+    "count": 4
+  }
+}

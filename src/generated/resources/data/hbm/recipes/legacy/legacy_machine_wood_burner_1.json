@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PPP",
+    "CFC",
+    "I I"
+  ],
+  "key": {
+    "P": {
+      "item": "hbm:plate_cast"
+    },
+    "C": {
+      "item": "hbm:coil_copper"
+    },
+    "I": {
+      "item": "hbm:ingot_iron"
+    },
+    "F": {
+      "item": "minecraft:furnace"
+    }
+  },
+  "result": {
+    "item": "hbm:machine_wood_burner",
+    "count": 1
+  }
+}

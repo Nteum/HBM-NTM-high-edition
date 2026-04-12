@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "TST",
+    "SCS",
+    "TST"
+  ],
+  "key": {
+    "T": {
+      "item": "hbm:ingot_tc_alloy"
+    },
+    "S": {
+      "item": "hbm:dust_sulfur"
+    },
+    "C": {
+      "item": "hbm:catalyst_clay"
+    }
+  },
+  "result": {
+    "item": "hbm:deuterium_filter",
+    "count": 1
+  }
+}

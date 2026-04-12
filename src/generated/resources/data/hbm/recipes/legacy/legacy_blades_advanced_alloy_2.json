@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PIP"
+  ],
+  "key": {
+    "P": {
+      "item": "hbm:plate_advanced_alloy"
+    },
+    "I": {
+      "item": "hbm:blades_advanced_alloy"
+    }
+  },
+  "result": {
+    "item": "hbm:blades_advanced_alloy",
+    "count": 1
+  }
+}

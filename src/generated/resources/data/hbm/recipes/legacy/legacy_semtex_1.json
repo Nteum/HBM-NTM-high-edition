@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DDD",
+    "DSD",
+    "DDD"
+  ],
+  "key": {
+    "D": {
+      "item": "hbm:stick_semtex"
+    },
+    "S": {
+      "item": "hbm:safety_fuse"
+    }
+  },
+  "result": {
+    "item": "hbm:semtex",
+    "count": 1
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "NFN",
+    "TPT",
+    "ICI"
+  ],
+  "key": {
+    "N": {
+      "item": "hbm:plate_armor_lunar"
+    },
+    "F": {
+      "item": "hbm:fins_quad_titanium"
+    },
+    "T": {
+      "item": "hbm:fluid_tank_full"
+    },
+    "P": {
+      "item": "hbm:bj_plate"
+    },
+    "I": {
+      "item": "hbm:mp_thruster_10_xenon"
+    },
+    "C": {
+      "item": "hbm:crystal_phosphorus"
+    }
+  },
+  "result": {
+    "item": "hbm:bj_plate_jetpack",
+    "count": 1
+  }
+}

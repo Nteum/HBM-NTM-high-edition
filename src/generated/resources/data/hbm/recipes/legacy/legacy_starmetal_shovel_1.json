@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "I",
+    "B",
+    "I"
+  ],
+  "key": {
+    "I": {
+      "item": "hbm:ingot_starmetal"
+    },
+    "B": {
+      "item": "hbm:cobalt_decorated_shovel"
+    }
+  },
+  "result": {
+    "item": "hbm:starmetal_shovel",
+    "count": 1
+  }
+}

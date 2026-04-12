@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "MBM",
+    "PBP",
+    "MBM"
+  ],
+  "key": {
+    "M": {
+      "item": "hbm:motor"
+    },
+    "B": {
+      "item": "hbm:bolt"
+    },
+    "P": {
+      "item": "hbm:plate_iron"
+    }
+  },
+  "result": {
+    "item": "hbm:servo_set",
+    "count": 1
+  }
+}

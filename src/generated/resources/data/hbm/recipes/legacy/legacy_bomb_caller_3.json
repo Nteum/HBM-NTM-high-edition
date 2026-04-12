@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "TTT",
+    "TRT",
+    "TTT"
+  ],
+  "key": {
+    "T": {
+      "item": "hbm:pellet_gas"
+    },
+    "R": {
+      "item": "hbm:rangefinder"
+    }
+  },
+  "result": {
+    "item": "hbm:bomb_caller",
+    "count": 1
+  }
+}

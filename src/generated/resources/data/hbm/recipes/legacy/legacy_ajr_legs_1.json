@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "MPM",
+    "PBP",
+    "P P"
+  ],
+  "key": {
+    "M": {
+      "item": "hbm:motor_desh"
+    },
+    "P": {
+      "item": "hbm:plate_armor_ajr"
+    },
+    "B": {
+      "item": "hbm:alloy_legs"
+    }
+  },
+  "result": {
+    "item": "hbm:ajr_legs",
+    "count": 1
+  }
+}

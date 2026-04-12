@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:med_ipecac"
+    }
+  ],
+  "result": {
+    "item": "hbm:med_ptsd",
+    "count": 1
+  }
+}

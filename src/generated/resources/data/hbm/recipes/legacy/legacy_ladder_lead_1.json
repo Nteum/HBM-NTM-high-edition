@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "LLL",
+    "L#L",
+    "LLL"
+  ],
+  "key": {
+    "L": {
+      "item": "minecraft:ladder"
+    },
+    "#": {
+      "item": "hbm:ingot_lead"
+    }
+  },
+  "result": {
+    "item": "hbm:ladder_lead",
+    "count": 8
+  }
+}

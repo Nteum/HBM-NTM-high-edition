@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:centrifuge_element"
+    },
+    {
+      "item": "hbm:energy_core"
+    },
+    {
+      "item": "minecraft:stick"
+    }
+  ],
+  "result": {
+    "item": "hbm:centri_stick",
+    "count": 1
+  }
+}

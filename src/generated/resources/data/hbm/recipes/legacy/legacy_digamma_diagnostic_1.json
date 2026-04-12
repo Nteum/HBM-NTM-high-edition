@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:geiger_counter"
+    },
+    {
+      "item": "hbm:billet_polonium210"
+    },
+    {
+      "item": "hbm:ingot_asbestos"
+    }
+  ],
+  "result": {
+    "item": "hbm:digamma_diagnostic",
+    "count": 1
+  }
+}

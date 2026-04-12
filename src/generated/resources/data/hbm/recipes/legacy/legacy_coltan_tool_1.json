@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ACA",
+    "CXC",
+    "ACA"
+  ],
+  "key": {
+    "A": {
+      "item": "hbm:ingot_advanced_alloy"
+    },
+    "C": {
+      "item": "hbm:crystal_cinnabar"
+    },
+    "X": {
+      "item": "minecraft:compass"
+    }
+  },
+  "result": {
+    "item": "hbm:coltan_tool",
+    "count": 1
+  }
+}

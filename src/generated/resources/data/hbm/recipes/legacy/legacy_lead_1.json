@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "RSR"
+  ],
+  "key": {
+    "R": {
+      "item": "hbm:plant_item"
+    },
+    "S": {
+      "item": "minecraft:slime_ball"
+    }
+  },
+  "result": {
+    "item": "minecraft:lead",
+    "count": 4
+  }
+}

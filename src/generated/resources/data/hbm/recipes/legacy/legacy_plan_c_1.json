@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PFP"
+  ],
+  "key": {
+    "P": {
+      "item": "hbm:powder_poison"
+    },
+    "F": {
+      "item": "hbm:dust_fluorite"
+    }
+  },
+  "result": {
+    "item": "hbm:plan_c",
+    "count": 1
+  }
+}

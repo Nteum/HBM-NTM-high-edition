@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "E E",
+    "N N"
+  ],
+  "key": {
+    "E": {
+      "item": "hbm:plate_paa"
+    },
+    "N": {
+      "item": "hbm:neutron_reflector"
+    }
+  },
+  "result": {
+    "item": "hbm:paa_boots",
+    "count": 1
+  }
+}

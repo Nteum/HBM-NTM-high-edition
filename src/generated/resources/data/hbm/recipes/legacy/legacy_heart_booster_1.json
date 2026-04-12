@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GHG",
+    "MCM",
+    "GHG"
+  ],
+  "key": {
+    "G": {
+      "item": "hbm:ingot_gold"
+    },
+    "H": {
+      "item": "hbm:heart_container"
+    },
+    "M": {
+      "item": "hbm:morning_glory"
+    },
+    "C": {
+      "item": "hbm:coin_maskman"
+    }
+  },
+  "result": {
+    "item": "hbm:heart_booster",
+    "count": 1
+  }
+}

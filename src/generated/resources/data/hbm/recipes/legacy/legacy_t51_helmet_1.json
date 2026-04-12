@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PPC",
+    "PBP",
+    "IXI"
+  ],
+  "key": {
+    "P": {
+      "item": "hbm:plate_armor_titanium"
+    },
+    "C": {
+      "item": "hbm:circuit"
+    },
+    "I": {
+      "item": "hbm:ingot_latex"
+    },
+    "X": {
+      "item": "hbm:gas_mask_m65"
+    },
+    "B": {
+      "item": "hbm:titanium_helmet"
+    }
+  },
+  "result": {
+    "item": "hbm:t51_helmet",
+    "count": 1
+  }
+}

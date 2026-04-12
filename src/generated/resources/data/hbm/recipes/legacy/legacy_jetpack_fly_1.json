@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ACA",
+    "TLT",
+    "D D"
+  ],
+  "key": {
+    "A": {
+      "item": "hbm:plate_aluminium"
+    },
+    "C": {
+      "item": "hbm:circuit"
+    },
+    "T": {
+      "item": "hbm:tank_steel"
+    },
+    "L": {
+      "item": "minecraft:leather"
+    },
+    "D": {
+      "item": "hbm:thruster_small"
+    }
+  },
+  "result": {
+    "item": "hbm:jetpack_fly",
+    "count": 1
+  }
+}

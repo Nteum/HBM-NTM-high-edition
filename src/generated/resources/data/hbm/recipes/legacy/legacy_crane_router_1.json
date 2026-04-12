@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PIP",
+    "ICI",
+    "PIP"
+  ],
+  "key": {
+    "P": {
+      "item": "hbm:part_generic"
+    },
+    "I": {
+      "item": "hbm:plate_polymer"
+    },
+    "C": {
+      "item": "hbm:circuit"
+    }
+  },
+  "result": {
+    "item": "hbm:crane_router",
+    "count": 1
+  }
+}

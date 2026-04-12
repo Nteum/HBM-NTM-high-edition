@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BGB",
+    "GRG",
+    "BGB"
+  ],
+  "key": {
+    "G": {
+      "item": "hbm:block_graphite"
+    },
+    "R": {
+      "item": "hbm:rbmk_rod"
+    },
+    "B": {
+      "item": "hbm:nugget_bismuth"
+    }
+  },
+  "result": {
+    "item": "hbm:rbmk_rod_mod",
+    "count": 1
+  }
+}

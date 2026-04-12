@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "C",
+    "C"
+  ],
+  "key": {
+    "C": {
+      "item": "hbm:meteor_polished"
+    }
+  },
+  "result": {
+    "item": "hbm:meteor_pillar",
+    "count": 2
+  }
+}

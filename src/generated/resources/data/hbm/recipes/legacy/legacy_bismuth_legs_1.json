@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "FSF",
+    "   ",
+    "FSF"
+  ],
+  "key": {
+    "F": {
+      "item": "hbm:rag"
+    },
+    "S": {
+      "item": "hbm:ring_starmetal"
+    }
+  },
+  "result": {
+    "item": "hbm:bismuth_legs",
+    "count": 1
+  }
+}

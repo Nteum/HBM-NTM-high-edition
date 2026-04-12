@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:coffee"
+    },
+    {
+      "item": "hbm:nugget_radium226"
+    }
+  ],
+  "result": {
+    "item": "hbm:coffee_radium",
+    "count": 1
+  }
+}

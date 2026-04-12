@@ -2,7 +2,6 @@ package com.hbm.blockentity.logistic;
 
 import com.hbm.HBMKey;
 import com.hbm.Inventory.filter.SidedItemManager;
-import com.hbm.block.HBMBlockProperties;
 import com.hbm.block.logistic.Conveyor;
 import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.blockentity.base2.CapabilityBlockEntity;
@@ -11,7 +10,6 @@ import com.hbm.utils.InventoryUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
-import net.minecraft.core.Vec3i;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.world.Containers;
@@ -23,7 +21,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.entity.EntityTypeTest;
 import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
@@ -34,7 +31,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 
 public class TileConveyor extends CapabilityBlockEntity {
     static int DOUBLE_CLICK_TIME = 10;
@@ -215,5 +211,4 @@ public class TileConveyor extends CapabilityBlockEntity {
     public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
         return super.getCapability(cap, side);
     }
-
 }

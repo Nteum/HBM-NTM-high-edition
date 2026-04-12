@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:ams_catalyst_blank"
+    },
+    {
+      "item": "hbm:rune_hagalaz"
+    },
+    {
+      "item": "hbm:rune_hagalaz"
+    },
+    {
+      "item": "hbm:rune_thurisaz"
+    },
+    {
+      "item": "hbm:rune_thurisaz"
+    },
+    {
+      "item": "hbm:powder_dineutronium"
+    },
+    {
+      "item": "hbm:powder_dineutronium"
+    },
+    {
+      "item": "hbm:powder_dineutronium"
+    },
+    {
+      "item": "hbm:powder_dineutronium"
+    }
+  ],
+  "result": {
+    "item": "hbm:ams_catalyst_dineutronium",
+    "count": 1
+  }
+}

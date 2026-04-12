@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "P",
+    "C"
+  ],
+  "key": {
+    "P": {
+      "item": "hbm:plate_gun_metal"
+    },
+    "C": {
+      "item": "hbm:casing"
+    }
+  },
+  "result": {
+    "item": "hbm:casing",
+    "count": 2
+  }
+}

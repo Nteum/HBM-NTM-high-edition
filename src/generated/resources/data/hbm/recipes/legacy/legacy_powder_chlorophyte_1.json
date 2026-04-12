@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:hadron_coil_chlorophyte"
+    }
+  ],
+  "result": {
+    "item": "hbm:powder_chlorophyte",
+    "count": 2
+  }
+}

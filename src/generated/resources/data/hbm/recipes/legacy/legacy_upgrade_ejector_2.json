@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " C ",
+    "PUP",
+    " C "
+  ],
+  "key": {
+    "C": {
+      "item": "hbm:plate_gold"
+    },
+    "P": {
+      "item": "hbm:motor"
+    },
+    "U": {
+      "item": "hbm:upgrade_ejector"
+    }
+  },
+  "result": {
+    "item": "hbm:upgrade_ejector",
+    "count": 1
+  }
+}

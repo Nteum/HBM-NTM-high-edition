@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DD",
+    "DD"
+  ],
+  "key": {
+    "D": {
+      "item": "minecraft:yellow_flower"
+    }
+  },
+  "result": {
+    "item": "hbm:ball_resin",
+    "count": 1
+  }
+}

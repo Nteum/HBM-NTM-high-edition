@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "S",
+    "W"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:redstone"
+    },
+    "W": {
+      "item": "hbm:fluid_duct_paintable"
+    }
+  },
+  "result": {
+    "item": "hbm:fluid_switch",
+    "count": 1
+  }
+}

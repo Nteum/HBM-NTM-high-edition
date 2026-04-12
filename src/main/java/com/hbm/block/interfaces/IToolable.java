@@ -8,4 +8,5 @@ import net.minecraft.world.level.Level;
 
 public interface IToolable {
     boolean onScrew(UseOnContext context, ToolType tool);
+
 }

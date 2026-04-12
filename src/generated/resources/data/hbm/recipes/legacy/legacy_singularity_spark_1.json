@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XAX",
+    "BCB",
+    "XAX"
+  ],
+  "key": {
+    "X": {
+      "item": "hbm:plate_dineutronium"
+    },
+    "A": {
+      "item": "hbm:singularity_counter_resonant"
+    },
+    "B": {
+      "item": "hbm:singularity_super_heated"
+    },
+    "C": {
+      "item": "hbm:black_hole"
+    }
+  },
+  "result": {
+    "item": "hbm:singularity_spark",
+    "count": 1
+  }
+}

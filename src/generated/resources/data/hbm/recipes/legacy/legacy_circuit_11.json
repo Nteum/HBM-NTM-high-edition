@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ICI",
+    "CSC",
+    "ICI"
+  ],
+  "key": {
+    "I": {
+      "item": "hbm:plate_polymer"
+    },
+    "C": {
+      "item": "hbm:circuit"
+    },
+    "S": {
+      "item": "hbm:powder_strontium"
+    }
+  },
+  "result": {
+    "item": "hbm:circuit",
+    "count": 1
+  }
+}

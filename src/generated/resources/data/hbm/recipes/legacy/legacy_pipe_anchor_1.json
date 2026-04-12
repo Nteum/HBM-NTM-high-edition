@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "P",
+    "P",
+    "S"
+  ],
+  "key": {
+    "P": {
+      "item": "hbm:pipe"
+    },
+    "S": {
+      "item": "hbm:ingot_steel"
+    }
+  },
+  "result": {
+    "item": "hbm:pipe_anchor",
+    "count": 2
+  }
+}

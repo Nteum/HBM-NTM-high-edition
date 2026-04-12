@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BGB",
+    "GAG",
+    "BGB"
+  ],
+  "key": {
+    "B": {
+      "item": "hbm:egg_balefire_shard"
+    },
+    "G": {
+      "item": "hbm:ingot_gold"
+    },
+    "A": {
+      "item": "minecraft:book"
+    }
+  },
+  "result": {
+    "item": "hbm:book_of_",
+    "count": 1
+  }
+}

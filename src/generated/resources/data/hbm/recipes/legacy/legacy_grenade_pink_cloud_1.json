@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " S ",
+    "ECE",
+    " E "
+  ],
+  "key": {
+    "S": {
+      "item": "hbm:powder_spark_mix"
+    },
+    "E": {
+      "item": "hbm:powder_magic"
+    },
+    "C": {
+      "item": "hbm:grenade_cloud"
+    }
+  },
+  "result": {
+    "item": "hbm:grenade_pink_cloud",
+    "count": 1
+  }
+}

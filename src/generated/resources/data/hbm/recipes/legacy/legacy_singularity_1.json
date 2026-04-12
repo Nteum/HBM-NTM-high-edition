@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ESE",
+    "SBS",
+    "ESE"
+  ],
+  "key": {
+    "E": {
+      "item": "hbm:nugget_euphemium"
+    },
+    "S": {
+      "item": "hbm:cell_anti_schrabidium"
+    },
+    "B": {
+      "item": "hbm:block_schrabidium"
+    }
+  },
+  "result": {
+    "item": "hbm:singularity",
+    "count": 1
+  }
+}

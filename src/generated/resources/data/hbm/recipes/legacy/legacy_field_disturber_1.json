@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ICI",
+    "CAC",
+    "ICI"
+  ],
+  "key": {
+    "I": {
+      "item": "hbm:ingot_starmetal"
+    },
+    "C": {
+      "item": "hbm:circuit"
+    },
+    "A": {
+      "item": "hbm:gem_alexandrite"
+    }
+  },
+  "result": {
+    "item": "hbm:field_disturber",
+    "count": 1
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "IDI",
+    "DRD",
+    "IDI"
+  ],
+  "key": {
+    "I": {
+      "item": "hbm:ingot_iron"
+    },
+    "D": {
+      "item": "hbm:gem_diamond"
+    },
+    "R": {
+      "item": "hbm:block_redstone"
+    }
+  },
+  "result": {
+    "item": "hbm:deco_emitter",
+    "count": 1
+  }
+}

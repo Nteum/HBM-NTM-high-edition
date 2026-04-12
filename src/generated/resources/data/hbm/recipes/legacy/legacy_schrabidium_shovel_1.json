@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "B",
+    "W",
+    "P"
+  ],
+  "key": {
+    "B": {
+      "item": "hbm:block_schrabidium"
+    },
+    "W": {
+      "item": "hbm:desh_shovel"
+    },
+    "P": {
+      "item": "hbm:ingot_polymer"
+    }
+  },
+  "result": {
+    "item": "hbm:schrabidium_shovel",
+    "count": 1
+  }
+}

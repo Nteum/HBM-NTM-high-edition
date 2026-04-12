@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "STS",
+    "SPS",
+    " P "
+  ],
+  "key": {
+    "S": {
+      "item": "hbm:block_steel"
+    },
+    "T": {
+      "item": "hbm:block_tungsten"
+    },
+    "P": {
+      "item": "hbm:ingot_polymer"
+    }
+  },
+  "result": {
+    "item": "hbm:smashing_hammer",
+    "count": 1
+  }
+}

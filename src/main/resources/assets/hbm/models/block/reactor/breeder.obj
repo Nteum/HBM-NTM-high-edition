@@ -1,6 +1,6 @@
 # Blender v2.79 (sub 7) OBJ File: 'breeding_reactor.blend'
 # www.blender.org
-mtllib breeding_reactor_fixed.mtl
+mtllib breeder.mtl
 o Cube_Cube.001
 v -0.437500 0.437500 -0.437500
 v -0.437500 0.437500 -0.500000

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SSS",
+    "IGI"
+  ],
+  "key": {
+    "S": {
+      "item": "hbm:plate_steel"
+    },
+    "I": {
+      "item": "hbm:ingot_latex"
+    },
+    "G": {
+      "item": "minecraft:glass_pane"
+    }
+  },
+  "result": {
+    "item": "hbm:security_helmet",
+    "count": 1
+  }
+}

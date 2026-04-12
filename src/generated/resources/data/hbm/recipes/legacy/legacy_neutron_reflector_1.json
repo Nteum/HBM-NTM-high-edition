@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "hbm:ingot_tungsten"
+    }
+  },
+  "result": {
+    "item": "hbm:neutron_reflector",
+    "count": 4
+  }
+}

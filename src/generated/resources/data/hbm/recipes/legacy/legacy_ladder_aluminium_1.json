@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "LLL",
+    "L#L",
+    "LLL"
+  ],
+  "key": {
+    "L": {
+      "item": "minecraft:ladder"
+    },
+    "#": {
+      "item": "hbm:ingot_aluminium"
+    }
+  },
+  "result": {
+    "item": "hbm:ladder_aluminium",
+    "count": 8
+  }
+}

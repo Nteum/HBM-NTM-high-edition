@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:rod_zirnox_les_fuel_depleted"
+    }
+  ],
+  "result": {
+    "item": "hbm:waste_schrabidium",
+    "count": 2
+  }
+}

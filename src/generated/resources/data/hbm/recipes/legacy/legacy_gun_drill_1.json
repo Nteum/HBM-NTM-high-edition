@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " GL",
+    "IBP",
+    " GL"
+  ],
+  "key": {
+    "G": {
+      "item": "hbm:ingot_gun_metal"
+    },
+    "L": {
+      "item": "hbm:ingot_latex"
+    },
+    "I": {
+      "item": "hbm:ingot_titanium"
+    },
+    "B": {
+      "item": "hbm:block_steel"
+    },
+    "P": {
+      "item": "hbm:piston_selenium"
+    }
+  },
+  "result": {
+    "item": "hbm:gun_drill",
+    "count": 1
+  }
+}

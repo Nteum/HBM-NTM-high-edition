@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:ingot_gun_metal"
+    },
+    {
+      "item": "hbm:ingot_iron"
+    },
+    {
+      "item": "hbm:ducttape"
+    }
+  ],
+  "result": {
+    "item": "hbm:weapon_mod_generic",
+    "count": 1
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " C ",
+    "RFR",
+    " C "
+  ],
+  "key": {
+    "C": {
+      "item": "hbm:circuit"
+    },
+    "R": {
+      "item": "hbm:crystal_redstone"
+    },
+    "F": {
+      "item": "hbm:part_receiver_heavy"
+    }
+  },
+  "result": {
+    "item": "hbm:weapon_mod_special",
+    "count": 1
+  }
+}

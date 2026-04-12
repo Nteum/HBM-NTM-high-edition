@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:parts_legendary"
+    }
+  ],
+  "result": {
+    "item": "hbm:parts_legendary",
+    "count": 3
+  }
+}

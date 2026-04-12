@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ZCZ",
+    "ZRZ",
+    "ZCZ"
+  ],
+  "key": {
+    "C": {
+      "item": "hbm:shell"
+    },
+    "R": {
+      "item": "hbm:rbmk_blank"
+    },
+    "Z": {
+      "item": "hbm:ingot_zirconium"
+    }
+  },
+  "result": {
+    "item": "hbm:rbmk_rod_reasim",
+    "count": 1
+  }
+}

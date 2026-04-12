@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  A",
+    "#C#",
+    "#B#"
+  ],
+  "key": {
+    "#": {
+      "item": "hbm:ingot_polymer"
+    },
+    "A": {
+      "item": "hbm:plate_lead"
+    },
+    "B": {
+      "item": "hbm:circuit"
+    },
+    "C": {
+      "item": "hbm:designator"
+    }
+  },
+  "result": {
+    "item": "hbm:designator_manual",
+    "count": 1
+  }
+}

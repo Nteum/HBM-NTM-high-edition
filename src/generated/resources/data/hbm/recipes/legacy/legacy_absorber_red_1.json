@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ICI",
+    "CPC",
+    "ICI"
+  ],
+  "key": {
+    "I": {
+      "item": "hbm:ingot_titanium"
+    },
+    "C": {
+      "item": "hbm:powder_coal"
+    },
+    "P": {
+      "item": "hbm:absorber"
+    }
+  },
+  "result": {
+    "item": "hbm:absorber_red",
+    "count": 1
+  }
+}

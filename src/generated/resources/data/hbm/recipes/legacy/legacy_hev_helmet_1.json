@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PPC",
+    "PBP",
+    "IFI"
+  ],
+  "key": {
+    "P": {
+      "item": "hbm:plate_armor_hev"
+    },
+    "C": {
+      "item": "hbm:circuit"
+    },
+    "B": {
+      "item": "hbm:titanium_helmet"
+    },
+    "I": {
+      "item": "hbm:ingot_polymer"
+    },
+    "F": {
+      "item": "hbm:gas_mask_filter"
+    }
+  },
+  "result": {
+    "item": "hbm:hev_helmet",
+    "count": 1
+  }
+}

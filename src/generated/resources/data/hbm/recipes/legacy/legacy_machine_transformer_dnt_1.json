@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SDS",
+    "MCM",
+    "MCM"
+  ],
+  "key": {
+    "S": {
+      "item": "hbm:ingot_starmetal"
+    },
+    "D": {
+      "item": "hbm:ingot_workers_alloy"
+    },
+    "M": {
+      "item": "hbm:wire_dense"
+    },
+    "C": {
+      "item": "hbm:circuit"
+    }
+  },
+  "result": {
+    "item": "hbm:machine_transformer_dnt",
+    "count": 1
+  }
+}

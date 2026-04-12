@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ISI",
+    " B ",
+    " I "
+  ],
+  "key": {
+    "I": {
+      "item": "hbm:ingot_starmetal"
+    },
+    "S": {
+      "item": "hbm:ring_starmetal"
+    },
+    "B": {
+      "item": "hbm:cobalt_decorated_pickaxe"
+    }
+  },
+  "result": {
+    "item": "hbm:starmetal_pickaxe",
+    "count": 1
+  }
+}

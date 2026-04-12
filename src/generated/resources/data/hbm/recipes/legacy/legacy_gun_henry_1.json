@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BRP",
+    "BMS"
+  ],
+  "key": {
+    "B": {
+      "item": "hbm:part_barrel_light"
+    },
+    "R": {
+      "item": "hbm:part_receiver_light"
+    },
+    "M": {
+      "item": "hbm:part_mechanism"
+    },
+    "S": {
+      "item": "hbm:part_stock"
+    },
+    "P": {
+      "item": "hbm:plate_gun_metal"
+    }
+  },
+  "result": {
+    "item": "hbm:gun_henry",
+    "count": 1
+  }
+}

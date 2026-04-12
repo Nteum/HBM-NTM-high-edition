@@ -5,12 +5,15 @@ import com.hbm.HBMKey;
 import com.hbm.HBMLang;
 import com.hbm.Inventory.material.HBMMatForm;
 import com.hbm.block.interfaces.ToolType;
+import com.hbm.compat.legacy.LegacyItems;
 import com.hbm.config.ConfigLBSM;
 import com.hbm.datagen.LanguageProvider;
 import com.hbm.datagen.model.ItemModelGen;
 import com.hbm.datagen.tag.ItemTagsGen;
 import com.hbm.item.HBMCombat;
 import com.hbm.item.HBMWeapon;
+import com.hbm.item.consumable.LegacyConsumableItem;
+import com.hbm.item.consumable.TemFlakesItem;
 import com.hbm.item.env.BedrockOreItem;
 import com.hbm.item.env.ItemEggGlyphid;
 import com.hbm.item.env.ItemEggGlyphidToBirth;
@@ -30,17 +33,17 @@ import com.hbm.item.tool.*;
 import com.hbm.item.weapon.*;
 import com.hbm.item.weapon.grenade.ItemGrenade;
 import com.hbm.item.zirnox.ItemZirnoxRod;
+import com.hbm.reactor.rbmk.RBMKLidType;
 import com.hbm.registries.WrapperRegistry.WrappedItemRegistry;
 import com.hbm.render.model.Models;
 import com.hbm.utils.debug.GunSuicide;
-import com.hbm.reactor.rbmk.RBMKLidType;
 import com.hbm.utils.debug.ItemDebugWand;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.food.Foods;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.client.model.generators.ModelFile;
@@ -51,18 +54,21 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 import javax.annotation.Nullable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, HBM.MODID);
     public static final List<WrappedItemRegistry> itemList = new ArrayList<>();
+    private static boolean registeredToBus = false;
 
     public static final String[] WIRE_MAT = new String[]{HBMKey.ALUMINIUM, HBMKey.COPPER, HBMKey.RED_COPPER, HBMKey.GOLD, HBMKey.TUNGSTEN, HBMKey.ADVANCED_ALLOY, HBMKey.SCHRABIDIUM, HBMKey.ZINC, HBMKey.MAGNETIZED_TUNGSTEN};
 
     static {
-//        HBMtools.register(ITEMS);
         HBMWeapon.register(ITEMS);
         HBMCombat.register(ITEMS);
     }
@@ -112,6 +118,121 @@ public class ModItems {
             .model(HBMKey.MODEL_EXISTING_FILE).build();
     public static final RegistryObject<Item> GUN_RIFLE = new WrapperRegistry.ItemBuilder("gun_maresleg", () -> new ItemGun(new Item.Properties())).model(HBMKey.MODEL_EXISTING_FILE).tab(ModTabs.WEAPON.getKey()).loc("Lever Action Shotgun").build();
     public static final RegistryObject<Item> BOTTLE_NUKA = consumable("bottle_nuka", () -> new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> LEMON = consumable("lemon",
+            () -> LegacyConsumableItem.builder(3, 0.5F)
+                    .tooltip("item.hbm.lemon.desc")
+                    .build(),
+            HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> LOOPS = consumable("loops",
+            () -> LegacyConsumableItem.builder(4, 0.25F)
+                    .tooltip("item.hbm.loops.desc")
+                    .build(),
+            HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> LOOP_STEW = consumable("loop_stew",
+            () -> LegacyConsumableItem.builder(10, 0.5F)
+                    .stacksTo(1)
+                    .container(() -> Items.BOWL)
+                    .tooltip("item.hbm.loop_stew.desc")
+                    .effect(() -> MobEffects.REGENERATION, 20 * 20, 1, 1.0F)
+                    .effect(() -> MobEffects.DAMAGE_RESISTANCE, 60 * 20, 2, 1.0F)
+                    .effect(() -> MobEffects.MOVEMENT_SPEED, 60 * 20, 1, 1.0F)
+                    .effect(() -> MobEffects.DAMAGE_BOOST, 20 * 20, 2, 1.0F)
+                    .build(),
+            HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> TWINKIE = consumable("twinkie",
+            () -> LegacyConsumableItem.builder(3, 0.25F)
+                    .tooltip("item.hbm.twinkie.desc")
+                    .build(),
+            HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> PUDDING = consumable("pudding",
+            () -> LegacyConsumableItem.builder(6, 1.0F)
+                    .tooltip("item.hbm.pudding.desc1", "item.hbm.pudding.desc2", "item.hbm.pudding.desc3")
+                    .build(),
+            HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> NUGGET = consumable("nugget",
+            () -> LegacyConsumableItem.builder(200, 1.0F).build(),
+            HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> GLYPHID_MEAT = consumable("glyphid_meat",
+            () -> LegacyConsumableItem.builder(3, 0.5F)
+                    .meat()
+                    .build(),
+            HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> GLYPHID_MEAT_GRILLED = consumable("glyphid_meat_grilled",
+            () -> LegacyConsumableItem.builder(8, 0.75F)
+                    .meat()
+                    .effect(() -> MobEffects.DAMAGE_BOOST, 180, 1, 1.0F)
+                    .build(),
+            HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> PANCAKE = consumable("pancake",
+            () -> LegacyConsumableItem.builder(20, 20.0F).build(),
+            HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> MUCHO_MANGO = consumable("mucho_mango",
+            () -> LegacyConsumableItem.builder(10, 0.6F)
+                    .alwaysEat()
+                    .useAnimation(UseAnim.DRINK)
+                    .useDuration(200)
+                    .tooltip("item.hbm.mucho_mango.desc")
+                    .effect(() -> MobEffects.MOVEMENT_SPEED, 200, 0, 1.0F)
+                    .build(),
+            HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> DEFINITELYFOOD = consumable("definitelyfood",
+            () -> LegacyConsumableItem.builder(3, 0.5F).build(),
+            HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> SPONGEBOB_MACARONI = consumable("spongebob_macaroni",
+            () -> LegacyConsumableItem.builder(5, 1.0F).build(),
+            HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> FOODITEM = consumable("fooditem",
+            () -> LegacyConsumableItem.builder(2, 5.0F).build(),
+            HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> STATIC_SANDWICH = consumable("static_sandwich",
+            () -> LegacyConsumableItem.builder(6, 1.0F).build(),
+            HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> CHEESE = consumable("cheese",
+            () -> LegacyConsumableItem.builder(5, 0.75F).build(),
+            HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> QUESADILLA = consumable("quesadilla",
+            () -> LegacyConsumableItem.builder(8, 1.0F).build(),
+            HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> COTTON_CANDY = consumable("cotton_candy",
+            () -> LegacyConsumableItem.builder(5, 0.6F)
+                    .alwaysEat()
+                    .effect(() -> MobEffects.POISON, 15 * 20, 0, 1.0F)
+                    .effect(() -> MobEffects.WITHER, 5 * 20, 0, 1.0F)
+                    .effect(() -> MobEffects.WEAKNESS, 25 * 20, 2, 1.0F)
+                    .effect(() -> MobEffects.MOVEMENT_SPEED, 25 * 20, 2, 1.0F)
+                    .effect(() -> MobEffects.DAMAGE_RESISTANCE, 30 * 20, 4, 1.0F)
+                    .build(),
+            HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> SCHNITZEL_VEGAN = consumable("schnitzel_vegan",
+            () -> LegacyConsumableItem.builder(0, 0.6F)
+                    .effect(() -> MobEffects.BLINDNESS, 10 * 20, 0, 1.0F)
+                    .effect(() -> MobEffects.CONFUSION, 30 * 20, 0, 1.0F)
+                    .effect(() -> MobEffects.HUNGER, 3 * 60 * 20, 4, 1.0F)
+                    .effect(() -> MobEffects.WITHER, 3 * 20, 0, 1.0F)
+                    .customAction((level, entity) -> {
+                        entity.setSecondsOnFire(5);
+                        entity.push(0.0D, 2.0D, 0.0D);
+                    })
+                    .build(),
+            HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> GLOWING_STEW = consumable("glowing_stew",
+            () -> LegacyConsumableItem.builder(6, 0.6F)
+                    .container(() -> Items.BOWL)
+                    .build(),
+            HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> BALEFIRE_SCRAMBLED = consumable("balefire_scrambled",
+            () -> LegacyConsumableItem.builder(6, 0.6F)
+                    .container(() -> Items.BOWL)
+                    .build(),
+            HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> BALEFIRE_AND_HAM = consumable("balefire_and_ham",
+            () -> LegacyConsumableItem.builder(6, 0.6F)
+                    .container(() -> Items.BOWL)
+                    .build(),
+            HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> TEM_FLAKES = consumable("tem_flakes",
+            TemFlakesItem::new,
+            HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     /* weapon */
     //armor
     //grenade
@@ -776,8 +897,6 @@ public class ModItems {
     //    public static final RegistryObject<Item> detonator = ITEMS.register("detonator",()->new ItemDetonator(new Item.Properties()));
     public static final RegistryObject<Item> DETONATOR = add("detonator", ()->new ItemDetonator(new Item.Properties()), ModTabs.NUKE.getKey(), HBMKey.BASIC_MODEL, HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     public static final RegistryObject<Item> GUN_SUICIDE = add("gun_suicide", ()->new GunSuicide(new Item.Properties()), ModTabs.WEAPON.getKey(), HBMKey.BASIC_MODEL, HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> GLYPHID_MEAT_GRILLED = add("glyphid_meat_grilled", ()->new ItemLemon(new Item.Properties().food(Foods.ROTTEN_FLESH)), CreativeModeTabs.FOOD_AND_DRINKS, HBMKey.BASIC_MODEL, HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> GLYPHID_MEAT = add("glyphid_meat", ()->new ItemLemon(new Item.Properties().food(Foods.MUTTON)), CreativeModeTabs.FOOD_AND_DRINKS, HBMKey.BASIC_MODEL, HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     //    public static RegistryObject<Item> GLYPHID_SPAWN_EGG;
     //流体桶
 //    public static final RegistryObject<Item> bucket_irradiated_water = ITEMS.register("bucket_irradiated_water",()->new BucketItem(ModFluids.IRRADIATED_WATER_SOURCE_BLOCK,new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
@@ -1040,7 +1159,6 @@ public class ModItems {
     public static final RegistryObject<Item> MOLD_PLATES = parts("mold_plates", () -> new ItemMold(new Item.Properties(), HBMMatForm.PLATE, 9), HBMKey.REVERSE_GEN);
     public static final RegistryObject<Item> MOLD_WIRES_DENSE = parts("mold_wires_dense", () -> new ItemMold(new Item.Properties(), HBMMatForm.DENSEWIRE, 9), HBMKey.REVERSE_GEN);
     public static final RegistryObject<Item> MOLD_BLOCK = parts("mold_block", () -> new ItemMold(new Item.Properties(), HBMMatForm.BLOCK), HBMKey.REVERSE_GEN);
-
     // 填充物品，游戏内无法获得，用于避免物品被匹配上
     public static final RegistryObject<Item> DUMMY_ITEM = ITEMS.register("dummy_item", ()->new Item(new Item.Properties()));
     /**
@@ -1048,7 +1166,15 @@ public class ModItems {
      *
      * 以下为功能函数
      * */
-    public static void register(IEventBus eventBus){
+    public static synchronized void register(IEventBus eventBus){
+        if (registeredToBus) {
+            return;
+        }
+        registeredToBus = true;
+        // Force block registration classes to populate their BlockItems first so
+        // legacy placeholders only backfill truly missing ids.
+        ModBlocks.BLOCKS.getEntries();
+        LegacyItems.registerLegacy();
         ITEMS.register(eventBus);
     }
     public static RegistryObject<Item> machine(final String name, final Supplier<? extends Item> sup){

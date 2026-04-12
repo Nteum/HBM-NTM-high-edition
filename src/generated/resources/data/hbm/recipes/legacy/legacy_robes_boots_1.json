@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "R R",
+    "P P"
+  ],
+  "key": {
+    "R": {
+      "item": "hbm:rag"
+    },
+    "P": {
+      "item": "hbm:ingot_latex"
+    }
+  },
+  "result": {
+    "item": "hbm:robes_boots",
+    "count": 1
+  }
+}

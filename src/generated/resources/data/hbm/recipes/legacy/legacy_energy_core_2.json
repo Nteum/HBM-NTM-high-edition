@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PCW",
+    "TDR",
+    "PCW"
+  ],
+  "key": {
+    "P": {
+      "item": "hbm:plate_advanced_alloy"
+    },
+    "C": {
+      "item": "hbm:coil_advanced_alloy"
+    },
+    "W": {
+      "item": "hbm:wire_fine"
+    },
+    "R": {
+      "item": "hbm:cell_tritium"
+    },
+    "D": {
+      "item": "hbm:cell_deuterium"
+    },
+    "T": {
+      "item": "hbm:ingot_tungsten"
+    }
+  },
+  "result": {
+    "item": "hbm:energy_core",
+    "count": 1
+  }
+}

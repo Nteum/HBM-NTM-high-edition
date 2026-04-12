@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PPP",
+    "ICI",
+    "WWW"
+  ],
+  "key": {
+    "P": {
+      "item": "hbm:plate_steel"
+    },
+    "I": {
+      "item": "hbm:ingot_tc_alloy"
+    },
+    "C": {
+      "item": "hbm:block_schrabidate"
+    },
+    "W": {
+      "item": "hbm:ingot_steel"
+    }
+  },
+  "result": {
+    "item": "hbm:capacitor_schrabidate",
+    "count": 1
+  }
+}

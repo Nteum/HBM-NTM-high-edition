@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " SD",
+    "APS",
+    "FA "
+  ],
+  "key": {
+    "S": {
+      "item": "hbm:blades_steel"
+    },
+    "D": {
+      "item": "hbm:powder_chlorophyte"
+    },
+    "A": {
+      "item": "hbm:ingot_fiberglass"
+    },
+    "P": {
+      "item": "hbm:volcanic_axe"
+    },
+    "F": {
+      "item": "hbm:bolt"
+    }
+  },
+  "result": {
+    "item": "hbm:chlorophyte_axe",
+    "count": 1
+  }
+}

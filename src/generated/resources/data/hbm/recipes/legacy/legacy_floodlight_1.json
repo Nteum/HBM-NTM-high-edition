@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CSC",
+    "TST",
+    "G G"
+  ],
+  "key": {
+    "C": {
+      "item": "hbm:circuit"
+    },
+    "S": {
+      "item": "hbm:plate_steel"
+    },
+    "T": {
+      "item": "hbm:coil_tungsten"
+    },
+    "G": {
+      "item": "minecraft:glass_pane"
+    }
+  },
+  "result": {
+    "item": "hbm:floodlight",
+    "count": 2
+  }
+}

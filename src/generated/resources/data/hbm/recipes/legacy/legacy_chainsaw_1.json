@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CCH",
+    "BBP",
+    "CCE"
+  ],
+  "key": {
+    "H": {
+      "item": "hbm:shell"
+    },
+    "B": {
+      "item": "hbm:blades_steel"
+    },
+    "P": {
+      "item": "hbm:piston_selenium"
+    },
+    "C": {
+      "item": "hbm:chain"
+    },
+    "E": {
+      "item": "hbm:canister_empty"
+    }
+  },
+  "result": {
+    "item": "hbm:chainsaw",
+    "count": 1
+  }
+}

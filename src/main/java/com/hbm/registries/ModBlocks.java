@@ -112,9 +112,9 @@ public class ModBlocks {
     public static final RegistryObject<Block> pwr_heatex = add("pwr_heatex", () -> new BlockGenericPWR(Properties.of().strength(4.0F).explosionResistance(8.0F)), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, "PWR Heat Tex", HBMKey.DROP_SELF);
     public static final RegistryObject<Block> pwr_heatsink = add("pwr_heatsink", () -> new BlockGenericPWR(Properties.of().strength(4.0F).explosionResistance(8.0F)), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, "PWR Heat Sink", HBMKey.DROP_SELF);
     public static final RegistryObject<Block> pwr_neutron_source = add("pwr_neutron_source", () -> new BlockGenericPWR(Properties.of().strength(4.0F).explosionResistance(8.0F)), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, "PWR Neuron Source", HBMKey.DROP_SELF);
-    public static final RegistryObject<Block> pwr_block = add("pwr_block", () -> new BlockPWR(Properties.of().strength(5.0F).explosionResistance(10.0F).noLootTable()), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, "PWR Block", HBMKey.DROP_NO_EXIST);
+    public static final RegistryObject<Block> pwr_block = add("pwr_block", () -> new BlockPWR(Properties.of().strength(5.0F).explosionResistance(10.0F).noLootTable()), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, "PWR Block", HBMKey.DROP_NONE);
     public static final RegistryObject<Block> machine_zirnox = add("machine_zirnox", () -> new BlockZirnoxReactor(Properties.of().strength(5.0F).explosionResistance(100.0F)), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, "Zirnox Reactor", HBMKey.DROP_SELF);
-    public static final RegistryObject<Block> zirnox_destroyed = add("zirnox_destroyed", () -> new Block(Properties.of().strength(100.0F).explosionResistance(800.0F).noLootTable()), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, "Zirnox Ruins", HBMKey.DROP_NO_EXIST);
+    public static final RegistryObject<Block> zirnox_destroyed = add("zirnox_destroyed", () -> new Block(Properties.of().strength(100.0F).explosionResistance(800.0F).noLootTable()), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, "Zirnox Ruins", HBMKey.DROP_NONE);
 
     // Chicago Pile components
     public static final RegistryObject<Block> chicago_graphite_block = new BlockBuilder("chicago_graphite_block",
@@ -220,7 +220,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> ORE_METEOR_COBALT = add("ore_meteor_cobalt", () -> new BlockBase(Properties.copy(Blocks.STONE).strength(15, 360)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF);
 
     public static final RegistryObject<Block> TAINT = block("taint", () -> new Block(Properties.copy(Blocks.IRON_BLOCK)));
-    public static final RegistryObject<Block> WASTE_LEAVES = add("waste_leaves", () -> new WasteLeaves(Properties.copy(Blocks.ACACIA_LEAVES).noLootTable()), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_STANDALONE, HBMKey.ORDERLY_GEN, HBMKey.DROP_NO_EXIST);
+    public static final RegistryObject<Block> WASTE_LEAVES = add("waste_leaves", () -> new WasteLeaves(Properties.copy(Blocks.ACACIA_LEAVES).noLootTable()), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_STANDALONE, HBMKey.ORDERLY_GEN, HBMKey.DROP_NONE);
     public static final RegistryObject<Block> WASTE_GRASS = add("waste_grass", () -> new WasteEarth(Properties.copy(Blocks.DIRT)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_DIFURNACE, HBMKey.ORDERLY_GEN, HBMKey.DROP_STANDALONE);
     // casting
     public static final RegistryObject<Block> FOUNDRY_MOLD = new BlockBuilder("foundry_mold", () -> new FoundryMold(Properties.copy(Blocks.STONE)))

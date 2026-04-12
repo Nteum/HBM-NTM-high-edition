@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " C ",
+    "BGB",
+    "BGB"
+  ],
+  "key": {
+    "C": {
+      "item": "hbm:plate_copper"
+    },
+    "B": {
+      "item": "hbm:ingot_firebrick"
+    },
+    "G": {
+      "item": "hbm:steel_grate"
+    }
+  },
+  "result": {
+    "item": "hbm:machine_difurnace_extension",
+    "count": 1
+  }
+}

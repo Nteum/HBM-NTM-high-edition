@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "QDQ",
+    "NCN",
+    "QDQ"
+  ],
+  "key": {
+    "Q": {
+      "item": "hbm:glass_quartz"
+    },
+    "D": {
+      "item": "hbm:ingot_workers_alloy"
+    },
+    "N": {
+      "item": "hbm:ingot_niobium"
+    },
+    "C": {
+      "item": "hbm:fluid_tank_full"
+    }
+  },
+  "result": {
+    "item": "hbm:laser_crystal_co2",
+    "count": 1
+  }
+}

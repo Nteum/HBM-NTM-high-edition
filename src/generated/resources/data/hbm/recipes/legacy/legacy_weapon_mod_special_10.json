@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PDS",
+    "  G"
+  ],
+  "key": {
+    "P": {
+      "item": "hbm:ingot_polymer"
+    },
+    "D": {
+      "item": "minecraft:black_dye"
+    },
+    "S": {
+      "item": "hbm:part_stock"
+    },
+    "G": {
+      "item": "hbm:part_grip"
+    }
+  },
+  "result": {
+    "item": "hbm:weapon_mod_special",
+    "count": 1
+  }
+}

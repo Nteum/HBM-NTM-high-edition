@@ -82,7 +82,7 @@ public class BlockDebug extends Block {
     public void testMeteorite(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer){
         if (pState.getValue(ACTIVE)) return;
         EntityMeteor meteor = new EntityMeteor(pLevel);
-        meteor.setPos(pPos.getCenter().x, pPos.getCenter().y + 300, pPos.getCenter().z);
+        meteor.setPos(pPos.getCenter().x, pPos.getCenter().y + 2, pPos.getCenter().z);
         pLevel.addFreshEntity(meteor);
     }
 }

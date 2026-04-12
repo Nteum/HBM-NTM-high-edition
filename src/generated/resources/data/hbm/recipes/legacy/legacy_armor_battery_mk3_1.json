@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PCP",
+    "PCP",
+    "PCP"
+  ],
+  "key": {
+    "P": {
+      "item": "hbm:plate_gold"
+    },
+    "C": {
+      "item": "hbm:capacitor_tantalium"
+    }
+  },
+  "result": {
+    "item": "hbm:armor_battery_mk3",
+    "count": 1
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CRC"
+  ],
+  "key": {
+    "C": {
+      "item": "hbm:plate_cast"
+    },
+    "R": {
+      "item": "hbm:ingot_latex"
+    }
+  },
+  "result": {
+    "item": "hbm:pneumatic_tube",
+    "count": 8
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SS ",
+    " PS",
+    " T "
+  ],
+  "key": {
+    "S": {
+      "item": "hbm:plate_cast"
+    },
+    "P": {
+      "item": "hbm:ingot_polymer"
+    },
+    "T": {
+      "item": "hbm:tank_steel"
+    }
+  },
+  "result": {
+    "item": "hbm:acetylene_torch",
+    "count": 1
+  }
+}

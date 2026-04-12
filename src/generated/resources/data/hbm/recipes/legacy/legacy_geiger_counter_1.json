@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GPP",
+    "WCS",
+    "WBB"
+  ],
+  "key": {
+    "W": {
+      "item": "hbm:wire_fine"
+    },
+    "P": {
+      "item": "hbm:ingot_latex"
+    },
+    "C": {
+      "item": "hbm:circuit"
+    },
+    "G": {
+      "item": "hbm:ingot_gold"
+    },
+    "S": {
+      "item": "hbm:plate_cast"
+    },
+    "B": {
+      "item": "hbm:ingot_beryllium"
+    }
+  },
+  "result": {
+    "item": "hbm:geiger_counter",
+    "count": 1
+  }
+}

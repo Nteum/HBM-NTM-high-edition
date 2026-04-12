@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BBB",
+    "BIB",
+    "BBB"
+  ],
+  "key": {
+    "B": {
+      "item": "hbm:barbed_wire"
+    },
+    "I": {
+      "item": "hbm:powder_poison"
+    }
+  },
+  "result": {
+    "item": "hbm:barbed_wire_poison",
+    "count": 8
+  }
+}

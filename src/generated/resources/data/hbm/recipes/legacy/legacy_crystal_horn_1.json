@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:dust_neptunium237"
+    },
+    {
+      "item": "hbm:powder_iodine"
+    },
+    {
+      "item": "hbm:dust_thorium232"
+    },
+    {
+      "item": "hbm:powder_astatine"
+    },
+    {
+      "item": "hbm:powder_neodymium"
+    },
+    {
+      "item": "hbm:powder_caesium"
+    },
+    {
+      "item": "hbm:block_meteor"
+    },
+    {
+      "item": "hbm:gravel_obsidian"
+    },
+    {
+      "item": "minecraft:water_bucket"
+    }
+  ],
+  "result": {
+    "item": "hbm:crystal_horn",
+    "count": 1
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "MBM",
+    "PSP",
+    "MBM"
+  ],
+  "key": {
+    "M": {
+      "item": "hbm:motor_desh"
+    },
+    "B": {
+      "item": "hbm:bolt"
+    },
+    "P": {
+      "item": "hbm:plate_advanced_alloy"
+    },
+    "S": {
+      "item": "hbm:servo_set"
+    }
+  },
+  "result": {
+    "item": "hbm:servo_set_desh",
+    "count": 1
+  }
+}

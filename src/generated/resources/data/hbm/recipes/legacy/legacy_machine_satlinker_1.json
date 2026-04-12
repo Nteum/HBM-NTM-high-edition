@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PSP",
+    "SCS",
+    "PSP"
+  ],
+  "key": {
+    "P": {
+      "item": "hbm:plate_steel"
+    },
+    "S": {
+      "item": "hbm:ingot_starmetal"
+    },
+    "C": {
+      "item": "hbm:sat_chip"
+    }
+  },
+  "result": {
+    "item": "hbm:machine_satlinker",
+    "count": 1
+  }
+}

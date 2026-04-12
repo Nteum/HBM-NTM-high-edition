@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PIP",
+    "I I",
+    "PIP"
+  ],
+  "key": {
+    "P": {
+      "item": "hbm:plate_advanced_alloy"
+    },
+    "I": {
+      "item": "hbm:ingot_advanced_alloy"
+    }
+  },
+  "result": {
+    "item": "hbm:factory_advanced_hull",
+    "count": 8
+  }
+}

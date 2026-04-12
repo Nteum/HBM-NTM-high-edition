@@ -22,8 +22,8 @@ public class BlockCrackingTower extends BlockDummyable {
 
     public BlockCrackingTower(Properties properties) {
         super(properties);
-        SHAPE = Block.box(-48.0, 0.0D, -48.0D, 64.0D, 256.0D, 48.0D);
-        doShapeRot = true;
+        this.shape = Block.box(-48.0, 0.0D, -48.0D, 64.0D, 256.0D, 48.0D);
+        this.shapeRotates = true;
     }
 
     @Override

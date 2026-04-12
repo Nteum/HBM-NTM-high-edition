@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GGG",
+    "PMP",
+    "PTP"
+  ],
+  "key": {
+    "G": {
+      "item": "hbm:steel_grate"
+    },
+    "P": {
+      "item": "hbm:plate_steel"
+    },
+    "M": {
+      "item": "hbm:motor"
+    },
+    "T": {
+      "item": "hbm:tank_steel"
+    }
+  },
+  "result": {
+    "item": "hbm:machine_intake",
+    "count": 1
+  }
+}

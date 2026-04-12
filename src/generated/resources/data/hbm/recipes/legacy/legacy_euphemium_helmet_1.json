@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "EEE",
+    "E E"
+  ],
+  "key": {
+    "E": {
+      "item": "hbm:plate_euphemium"
+    }
+  },
+  "result": {
+    "item": "hbm:euphemium_helmet",
+    "count": 1
+  }
+}

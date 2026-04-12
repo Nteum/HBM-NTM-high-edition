@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " N ",
+    "PSP",
+    "L L"
+  ],
+  "key": {
+    "N": {
+      "item": "hbm:bottle_cherry"
+    },
+    "P": {
+      "item": "hbm:plate_steel"
+    },
+    "S": {
+      "item": "hbm:syringe_metal_stimpak"
+    },
+    "L": {
+      "item": "minecraft:leather"
+    }
+  },
+  "result": {
+    "item": "hbm:syringe_metal_super",
+    "count": 1
+  }
+}

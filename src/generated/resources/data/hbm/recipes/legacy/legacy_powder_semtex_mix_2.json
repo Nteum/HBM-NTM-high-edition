@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:solid_fuel"
+    },
+    {
+      "item": "hbm:ballistite"
+    },
+    {
+      "item": "hbm:dust_saltpeter"
+    }
+  ],
+  "result": {
+    "item": "hbm:powder_semtex_mix",
+    "count": 1
+  }
+}

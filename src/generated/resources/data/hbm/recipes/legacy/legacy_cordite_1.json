@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:ballistite"
+    },
+    {
+      "item": "minecraft:gunpowder"
+    },
+    {
+      "tag": "minecraft:wool"
+    }
+  ],
+  "result": {
+    "item": "hbm:cordite",
+    "count": 3
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CIC",
+    "C C",
+    "I I"
+  ],
+  "key": {
+    "I": {
+      "item": "hbm:ingot_chainsteel"
+    },
+    "C": {
+      "item": "hbm:chain"
+    }
+  },
+  "result": {
+    "item": "hbm:shackles",
+    "count": 1
+  }
+}

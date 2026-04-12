@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:blueprints"
+    },
+    {
+      "item": "hbm:blueprints"
+    },
+    {
+      "item": "hbm:blueprints"
+    },
+    {
+      "item": "hbm:blueprints"
+    },
+    {
+      "item": "hbm:blueprints"
+    },
+    {
+      "item": "hbm:fragment_meteorite"
+    }
+  ],
+  "result": {
+    "item": "hbm:blueprint_folder",
+    "count": 1
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "UMU"
+  ],
+  "key": {
+    "U": {
+      "item": "hbm:gun_uzi"
+    },
+    "M": {
+      "item": "hbm:part_mechanism"
+    }
+  },
+  "result": {
+    "item": "hbm:gun_uzi_akimbo",
+    "count": 1
+  }
+}

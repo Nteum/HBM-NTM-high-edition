@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "B B",
+    "SSS",
+    "W W"
+  ],
+  "key": {
+    "B": {
+      "item": "hbm:bolt_spike"
+    },
+    "S": {
+      "item": "hbm:steel_beam"
+    },
+    "W": {
+      "tag": "minecraft:wooden_slabs"
+    }
+  },
+  "result": {
+    "item": "hbm:rail_large_straight",
+    "count": 4
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PCP",
+    "PCP",
+    "PCP"
+  ],
+  "key": {
+    "P": {
+      "item": "hbm:plate_steel"
+    },
+    "C": {
+      "item": "hbm:capacitor_gold"
+    }
+  },
+  "result": {
+    "item": "hbm:armor_battery",
+    "count": 1
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " P ",
+    "HCH",
+    " B "
+  ],
+  "key": {
+    "P": {
+      "item": "hbm:ingot_polymer"
+    },
+    "H": {
+      "item": "hbm:pipe"
+    },
+    "C": {
+      "item": "hbm:circuit"
+    },
+    "B": {
+      "item": "hbm:shell"
+    }
+  },
+  "result": {
+    "item": "hbm:drone",
+    "count": 2
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "LML",
+    "LCL",
+    "LML"
+  ],
+  "key": {
+    "L": {
+      "item": "hbm:plate_lead"
+    },
+    "M": {
+      "item": "hbm:magnetron"
+    },
+    "C": {
+      "item": "hbm:circuit"
+    }
+  },
+  "result": {
+    "item": "hbm:emp_bomb",
+    "count": 1
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:sliding_blast_door_skin"
+    }
+  ],
+  "result": {
+    "item": "hbm:sliding_blast_door_skin",
+    "count": 1
+  }
+}

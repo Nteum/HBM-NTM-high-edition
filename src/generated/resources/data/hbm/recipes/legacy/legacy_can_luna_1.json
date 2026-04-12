@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:can_empty"
+    },
+    {
+      "item": "minecraft:potionitem"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "item": "hbm:powder_meteorite_tiny"
+    }
+  ],
+  "result": {
+    "item": "hbm:can_luna",
+    "count": 1
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "FBF",
+    "BFB",
+    "FBF"
+  ],
+  "key": {
+    "F": {
+      "item": "minecraft:iron_bars"
+    },
+    "B": {
+      "item": "minecraft:glass"
+    }
+  },
+  "result": {
+    "item": "hbm:reinforced_glass",
+    "count": 4
+  }
+}

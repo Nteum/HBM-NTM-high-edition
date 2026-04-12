@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "LCR"
+  ],
+  "key": {
+    "L": {
+      "item": "minecraft:carrot"
+    },
+    "C": {
+      "item": "hbm:rag"
+    },
+    "R": {
+      "item": "hbm:circuit"
+    }
+  },
+  "result": {
+    "item": "hbm:plushie",
+    "count": 1
+  }
+}

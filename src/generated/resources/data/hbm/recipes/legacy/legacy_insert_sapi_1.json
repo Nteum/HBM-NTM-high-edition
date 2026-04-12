@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PKP",
+    "DPD",
+    "PKP"
+  ],
+  "key": {
+    "P": {
+      "item": "hbm:ingot_polymer"
+    },
+    "K": {
+      "item": "hbm:insert_kevlar"
+    },
+    "D": {
+      "item": "hbm:ducttape"
+    }
+  },
+  "result": {
+    "item": "hbm:insert_sapi",
+    "count": 1
+  }
+}

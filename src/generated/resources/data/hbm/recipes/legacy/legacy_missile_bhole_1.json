@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:missile_assembly"
+    },
+    {
+      "item": "hbm:ducttape"
+    },
+    {
+      "item": "hbm:grenade_black_hole"
+    }
+  ],
+  "result": {
+    "item": "hbm:missile_bhole",
+    "count": 1
+  }
+}

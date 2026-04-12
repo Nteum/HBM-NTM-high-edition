@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "EEE",
+    "E E",
+    "E E"
+  ],
+  "key": {
+    "E": {
+      "item": "hbm:ingot_zirconium"
+    }
+  },
+  "result": {
+    "item": "hbm:zirconium_legs",
+    "count": 1
+  }
+}

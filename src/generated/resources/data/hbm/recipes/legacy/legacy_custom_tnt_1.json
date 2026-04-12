@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " C ",
+    "TIT",
+    "TIT"
+  ],
+  "key": {
+    "C": {
+      "item": "hbm:plate_copper"
+    },
+    "I": {
+      "item": "hbm:plate_iron"
+    },
+    "T": {
+      "item": "hbm:ingot_any_highexplosive"
+    }
+  },
+  "result": {
+    "item": "hbm:custom_tnt",
+    "count": 1
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ECE",
+    "CDC",
+    "SBS"
+  ],
+  "key": {
+    "E": {
+      "item": "hbm:block_euphemium_cluster"
+    },
+    "C": {
+      "item": "hbm:crystal_schrabidium"
+    },
+    "D": {
+      "item": "hbm:drax_mk2"
+    },
+    "S": {
+      "item": "hbm:circuit"
+    },
+    "B": {
+      "item": "hbm:battery_spark"
+    }
+  },
+  "result": {
+    "item": "hbm:drax_mk3",
+    "count": 1
+  }
+}

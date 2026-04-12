@@ -40,6 +40,7 @@ public class MultiblockData {
         mapping.put(ModBlocks.bomb_fat_man.get(), new MultiblockData(1,0,0,1,1,1));
         mapping.put(HBMMachine.LAUNCH_PAD.get(), new MultiblockData(0, 0, 1, 1, 1, 1));
         mapping.put(ModBlocks.machine_rbmk_base.get(), new MultiblockData(0,0,0,0,0,0));
+        mapping.put(ModBlocks.machine_rbmk_console.get(), new MultiblockData(3, 0, 2, 2, 1, 1));
         mapping.put(ModBlocks.machine_cracking_tower.get(), new MultiblockData(0, 0, 3, 3, 2, 3)
                 .addCap(new Vec3i(0, 0, -2), ForgeCapabilities.FLUID_HANDLER, SOUTH)
                 .addCap(new Vec3i(2, 0, 0), ForgeCapabilities.FLUID_HANDLER, EAST)
@@ -101,6 +102,8 @@ public class MultiblockData {
         mapping.put(ModBlocks.SPACE_STATION_BASE.get(), new MultiblockData(1, 0, 2, 2, 2, 2));
         mapping.put(ModBlocks.HEATER_FIREBOX.get(), new MultiblockData(0, 0, 1, 1, 1, 1));
         mapping.put(ModBlocks.machine_crucible.get(), new MultiblockData(1, 0, 1, 1, 1, 1).setInvGeneral(true));
+        mapping.put(ModBlocks.machine_rbmk_crane_console.get(), new MultiblockData(1, 0, 2, 1, 1, 1));
+        mapping.put(ModBlocks.machine_rbmk_autoloader.get(), new MultiblockData(8, 0, 0, 0, 0, 0));
     }
 
     MultiblockData(List<Vec3i> offsets, int[] dirOffsets){

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:missile_assembly"
+    },
+    {
+      "item": "hbm:ducttape"
+    },
+    {
+      "item": "hbm:cell_anti_schrabidium"
+    },
+    {
+      "item": "hbm:ingot_polycarbonate"
+    }
+  ],
+  "result": {
+    "item": "hbm:missile_schrabidium",
+    "count": 1
+  }
+}

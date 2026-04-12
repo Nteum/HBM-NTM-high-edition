@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "W ",
+    " W",
+    " W"
+  ],
+  "key": {
+    "W": {
+      "item": "hbm:wire_fine"
+    }
+  },
+  "result": {
+    "item": "hbm:pin",
+    "count": 1
+  }
+}

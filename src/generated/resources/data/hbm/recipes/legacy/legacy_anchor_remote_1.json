@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:gem_diamond"
+    },
+    {
+      "item": "hbm:ducttape"
+    },
+    {
+      "item": "hbm:circuit"
+    }
+  ],
+  "result": {
+    "item": "hbm:anchor_remote",
+    "count": 1
+  }
+}

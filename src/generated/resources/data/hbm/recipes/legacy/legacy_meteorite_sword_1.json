@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  B",
+    "GB ",
+    "SG "
+  ],
+  "key": {
+    "B": {
+      "item": "hbm:blade_meteorite"
+    },
+    "G": {
+      "item": "hbm:plate_gold"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "hbm:meteorite_sword",
+    "count": 1
+  }
+}

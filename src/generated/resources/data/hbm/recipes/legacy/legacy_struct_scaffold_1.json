@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SSS",
+    "DCD",
+    "SSS"
+  ],
+  "key": {
+    "S": {
+      "item": "hbm:steel_scaffold"
+    },
+    "D": {
+      "item": "hbm:fluid_duct_neo"
+    },
+    "C": {
+      "item": "hbm:red_cable"
+    }
+  },
+  "result": {
+    "item": "hbm:struct_scaffold",
+    "count": 8
+  }
+}

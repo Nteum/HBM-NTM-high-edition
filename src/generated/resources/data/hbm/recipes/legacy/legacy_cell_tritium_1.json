@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:rod"
+    },
+    {
+      "item": "hbm:cell_empty"
+    }
+  ],
+  "result": {
+    "item": "hbm:cell_tritium",
+    "count": 1
+  }
+}

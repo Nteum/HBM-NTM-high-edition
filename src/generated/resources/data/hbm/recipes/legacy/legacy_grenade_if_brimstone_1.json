@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "R",
+    "G",
+    "A"
+  ],
+  "key": {
+    "G": {
+      "item": "hbm:grenade_if_generic"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "A": {
+      "item": "hbm:dust_sulfur"
+    }
+  },
+  "result": {
+    "item": "hbm:grenade_if_brimstone",
+    "count": 1
+  }
+}

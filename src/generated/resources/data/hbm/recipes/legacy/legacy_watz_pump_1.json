@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "MPM",
+    "PCP",
+    "PSP"
+  ],
+  "key": {
+    "M": {
+      "item": "hbm:motor_desh"
+    },
+    "P": {
+      "item": "hbm:plate_cast"
+    },
+    "C": {
+      "item": "hbm:circuit"
+    },
+    "S": {
+      "item": "hbm:pipe"
+    }
+  },
+  "result": {
+    "item": "hbm:watz_pump",
+    "count": 1
+  }
+}

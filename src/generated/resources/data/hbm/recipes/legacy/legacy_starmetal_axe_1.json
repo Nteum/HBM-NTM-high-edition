@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "IS",
+    "IB",
+    " I"
+  ],
+  "key": {
+    "I": {
+      "item": "hbm:ingot_starmetal"
+    },
+    "S": {
+      "item": "hbm:ring_starmetal"
+    },
+    "B": {
+      "item": "hbm:cobalt_decorated_axe"
+    }
+  },
+  "result": {
+    "item": "hbm:starmetal_axe",
+    "count": 1
+  }
+}

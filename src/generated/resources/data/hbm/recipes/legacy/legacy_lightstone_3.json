@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:lightstone"
+    }
+  ],
+  "result": {
+    "item": "hbm:lightstone",
+    "count": 1
+  }
+}

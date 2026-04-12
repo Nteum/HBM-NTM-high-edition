@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "EE ",
+    "EEE",
+    "EEE"
+  ],
+  "key": {
+    "E": {
+      "item": "hbm:ingot_dineutronium"
+    }
+  },
+  "result": {
+    "item": "hbm:dnt_plate",
+    "count": 1
+  }
+}

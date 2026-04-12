@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "IAI",
+    "W W"
+  ],
+  "key": {
+    "I": {
+      "item": "hbm:plate_polymer"
+    },
+    "A": {
+      "item": "hbm:powder_aluminium"
+    },
+    "W": {
+      "item": "hbm:wire_fine"
+    }
+  },
+  "result": {
+    "item": "hbm:circuit",
+    "count": 2
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "E E",
+    "NEN",
+    "ENE"
+  ],
+  "key": {
+    "E": {
+      "item": "hbm:plate_paa"
+    },
+    "N": {
+      "item": "hbm:neutron_reflector"
+    }
+  },
+  "result": {
+    "item": "hbm:paa_plate",
+    "count": 1
+  }
+}

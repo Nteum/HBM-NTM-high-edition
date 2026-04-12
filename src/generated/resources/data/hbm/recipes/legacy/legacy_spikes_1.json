@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BBB",
+    "BBB",
+    "TTT"
+  ],
+  "key": {
+    "B": {
+      "item": "hbm:bolt"
+    },
+    "T": {
+      "item": "hbm:ingot_steel"
+    }
+  },
+  "result": {
+    "item": "hbm:spikes",
+    "count": 4
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DID",
+    "IGI",
+    " F "
+  ],
+  "key": {
+    "D": {
+      "item": "hbm:ducttape"
+    },
+    "I": {
+      "item": "hbm:ingot_latex"
+    },
+    "G": {
+      "item": "minecraft:glass_pane"
+    },
+    "F": {
+      "item": "hbm:plate_iron"
+    }
+  },
+  "result": {
+    "item": "hbm:attachment_mask",
+    "count": 1
+  }
+}

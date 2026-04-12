@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " R ",
+    "SSS"
+  ],
+  "key": {
+    "R": {
+      "item": "hbm:rail_large_straight"
+    },
+    "S": {
+      "tag": "minecraft:wooden_slabs"
+    }
+  },
+  "result": {
+    "item": "hbm:rail_large_ramp",
+    "count": 1
+  }
+}

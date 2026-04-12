@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "MCM",
+    "MKM",
+    "MMM"
+  ],
+  "key": {
+    "M": {
+      "item": "hbm:ingot_meteorite_forged"
+    },
+    "C": {
+      "item": "hbm:coin_maskman"
+    },
+    "K": {
+      "item": "hbm:key"
+    }
+  },
+  "result": {
+    "item": "hbm:mech_key",
+    "count": 1
+  }
+}

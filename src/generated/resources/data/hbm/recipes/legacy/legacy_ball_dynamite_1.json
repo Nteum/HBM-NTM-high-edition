@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:dust_saltpeter"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "item": "minecraft:sand"
+    },
+    {
+      "item": "hbm:chemistry_set"
+    }
+  ],
+  "result": {
+    "item": "hbm:ball_dynamite",
+    "count": 2
+  }
+}

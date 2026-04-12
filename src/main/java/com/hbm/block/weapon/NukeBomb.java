@@ -21,7 +21,7 @@ public abstract class NukeBomb extends BlockDummyable implements IBomb {
     public NukeBomb(Properties pProperties, int range) {
         super(pProperties);
         this.range = range;
-        doShapeRot = true;
+        this.shapeRotates = true;
     }
 
     /** 继承Ibomb，核弹引爆函数 */

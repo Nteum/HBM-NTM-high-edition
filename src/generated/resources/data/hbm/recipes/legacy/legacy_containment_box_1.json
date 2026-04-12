@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "LUL",
+    "UCU",
+    "LUL"
+  ],
+  "key": {
+    "L": {
+      "item": "hbm:plate_lead"
+    },
+    "U": {
+      "item": "hbm:billet_uranium238"
+    },
+    "C": {
+      "item": "hbm:crate_steel"
+    }
+  },
+  "result": {
+    "item": "hbm:containment_box",
+    "count": 1
+  }
+}

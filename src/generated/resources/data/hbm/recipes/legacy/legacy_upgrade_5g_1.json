@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:upgrade_template"
+    },
+    {
+      "item": "hbm:gem_alexandrite"
+    }
+  ],
+  "result": {
+    "item": "hbm:upgrade_5g",
+    "count": 1
+  }
+}

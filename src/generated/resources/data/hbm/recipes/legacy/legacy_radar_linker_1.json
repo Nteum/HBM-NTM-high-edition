@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "S",
+    "C",
+    "P"
+  ],
+  "key": {
+    "S": {
+      "item": "hbm:crt_display"
+    },
+    "C": {
+      "item": "hbm:circuit"
+    },
+    "P": {
+      "item": "hbm:plate_steel"
+    }
+  },
+  "result": {
+    "item": "hbm:radar_linker",
+    "count": 1
+  }
+}

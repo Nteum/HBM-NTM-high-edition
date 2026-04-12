@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "W W",
+    "WIW",
+    "WDW"
+  ],
+  "key": {
+    "W": {
+      "tag": "minecraft:wool"
+    },
+    "D": {
+      "item": "minecraft:black_dye"
+    },
+    "I": {
+      "item": "hbm:gas_mask"
+    }
+  },
+  "result": {
+    "item": "hbm:cape_gasmask",
+    "count": 1
+  }
+}

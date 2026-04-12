@@ -44,5 +44,9 @@ media
 /Ballistix/
 /Hbm-s-Nuclear-Tech-GIT/
 /.ref/Hbm-s-Nuclear-Tech-GIT/
+manim_dolby_atmos_intro.py
+__pycache__/
+*.pyc
 # ===== 临时文件 =======
 /src/main/temp/
+.gitnexus

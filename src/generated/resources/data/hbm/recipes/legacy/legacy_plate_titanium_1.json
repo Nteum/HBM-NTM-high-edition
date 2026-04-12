@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "hbm:ingot_titanium"
+    }
+  },
+  "result": {
+    "item": "hbm:plate_titanium",
+    "count": 4
+  }
+}

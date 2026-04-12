@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:detonator"
+    },
+    {
+      "item": "hbm:circuit"
+    }
+  ],
+  "result": {
+    "item": "hbm:detonator_multi",
+    "count": 1
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "T T",
+    "PHP",
+    "TFT"
+  ],
+  "key": {
+    "T": {
+      "item": "hbm:ingot_tungsten"
+    },
+    "P": {
+      "item": "hbm:board_copper"
+    },
+    "H": {
+      "item": "minecraft:hopper"
+    },
+    "F": {
+      "item": "minecraft:furnace"
+    }
+  },
+  "result": {
+    "item": "hbm:machine_difurnace_off",
+    "count": 1
+  }
+}

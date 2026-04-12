@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SWS",
+    " G ",
+    "PCP"
+  ],
+  "key": {
+    "W": {
+      "item": "hbm:wire_fine"
+    },
+    "P": {
+      "item": "hbm:ingot_polymer"
+    },
+    "C": {
+      "item": "hbm:circuit"
+    },
+    "S": {
+      "item": "hbm:plate_cast"
+    },
+    "G": {
+      "item": "hbm:ingot_gold"
+    }
+  },
+  "result": {
+    "item": "hbm:survey_scanner",
+    "count": 1
+  }
+}

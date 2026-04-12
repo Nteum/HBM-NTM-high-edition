@@ -13,7 +13,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 public class BlockSpaceStation extends BlockDummyable {
     public BlockSpaceStation(Properties pProperties) {
         super(pProperties);
-        SHAPE = Block.box(-40, 0, -40, 32, 40, 40);
+        shape = Block.box(-40, 0, -40, 32, 40, 40);
     }
 
     @Override

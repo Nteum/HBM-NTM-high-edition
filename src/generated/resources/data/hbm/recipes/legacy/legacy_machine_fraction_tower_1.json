@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "H",
+    "G",
+    "H"
+  ],
+  "key": {
+    "H": {
+      "item": "hbm:plate_welded"
+    },
+    "G": {
+      "item": "hbm:steel_grate"
+    }
+  },
+  "result": {
+    "item": "hbm:machine_fraction_tower",
+    "count": 1
+  }
+}

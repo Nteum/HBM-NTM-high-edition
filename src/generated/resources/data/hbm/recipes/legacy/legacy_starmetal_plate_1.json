@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ECE",
+    "EEE",
+    "EEE"
+  ],
+  "key": {
+    "E": {
+      "item": "hbm:ingot_starmetal"
+    },
+    "C": {
+      "item": "hbm:cobalt_plate"
+    }
+  },
+  "result": {
+    "item": "hbm:starmetal_plate",
+    "count": 1
+  }
+}

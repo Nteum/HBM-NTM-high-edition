@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "IW",
+    " S",
+    " S"
+  ],
+  "key": {
+    "I": {
+      "item": "hbm:ingot_schrabidium"
+    },
+    "W": {
+      "item": "hbm:desh_hoe"
+    },
+    "S": {
+      "item": "hbm:ingot_polymer"
+    }
+  },
+  "result": {
+    "item": "hbm:schrabidium_hoe",
+    "count": 1
+  }
+}

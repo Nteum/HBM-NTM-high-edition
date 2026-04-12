@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ASA",
+    "PSP"
+  ],
+  "key": {
+    "A": {
+      "item": "hbm:plate_aluminium"
+    },
+    "P": {
+      "item": "hbm:ingot_steel"
+    },
+    "S": {
+      "item": "hbm:steel_scaffold"
+    }
+  },
+  "result": {
+    "item": "hbm:mp_stability_10_space",
+    "count": 1
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PLP",
+    "PSP",
+    "PLP"
+  ],
+  "key": {
+    "P": {
+      "item": "hbm:plate_steel"
+    },
+    "S": {
+      "item": "hbm:ring_starmetal"
+    },
+    "C": {
+      "item": "hbm:fusion_core"
+    },
+    "L": {
+      "item": "hbm:neutron_reflector"
+    }
+  },
+  "result": {
+    "item": "hbm:radiobox",
+    "count": 1
+  }
+}

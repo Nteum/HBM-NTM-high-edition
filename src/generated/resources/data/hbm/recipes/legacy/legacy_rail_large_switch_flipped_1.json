@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:rail_large_switch"
+    }
+  ],
+  "result": {
+    "item": "hbm:rail_large_switch_flipped",
+    "count": 1
+  }
+}

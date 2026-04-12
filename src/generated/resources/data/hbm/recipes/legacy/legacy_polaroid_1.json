@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " C ",
+    "RPY",
+    " B "
+  ],
+  "key": {
+    "B": {
+      "item": "hbm:powder_lapis"
+    },
+    "C": {
+      "item": "hbm:powder_coal"
+    },
+    "R": {
+      "item": "hbm:powder_advanced_alloy"
+    },
+    "Y": {
+      "item": "hbm:powder_gold"
+    },
+    "P": {
+      "item": "minecraft:paper"
+    }
+  },
+  "result": {
+    "item": "hbm:polaroid",
+    "count": 1
+  }
+}

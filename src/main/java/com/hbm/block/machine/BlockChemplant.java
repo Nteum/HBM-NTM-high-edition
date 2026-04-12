@@ -10,7 +10,7 @@ import net.minecraft.world.level.block.state.BlockState;
 public class BlockChemplant extends BlockDummyable {
     public BlockChemplant(Properties pProperties) {
         super(pProperties);
-        SHAPE = Block.box(-24.0,0.0D,-24,24,48.0D,24);
+        this.shape = Block.box(-32.0,0.0D,-32.0D,32.0D,48.0D,32.0D);
     }
 
     @Override

@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:page_of_"
+    },
+    {
+      "item": "hbm:page_of_"
+    },
+    {
+      "item": "hbm:page_of_"
+    },
+    {
+      "item": "hbm:page_of_"
+    },
+    {
+      "item": "hbm:page_of_"
+    },
+    {
+      "item": "hbm:page_of_"
+    },
+    {
+      "item": "hbm:page_of_"
+    },
+    {
+      "item": "hbm:page_of_"
+    },
+    {
+      "item": "hbm:egg_balefire"
+    }
+  ],
+  "result": {
+    "item": "hbm:book_of_",
+    "count": 1
+  }
+}

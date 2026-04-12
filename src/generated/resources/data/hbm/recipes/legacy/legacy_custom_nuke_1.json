@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " C ",
+    "LUL",
+    "LUL"
+  ],
+  "key": {
+    "C": {
+      "item": "hbm:plate_copper"
+    },
+    "L": {
+      "item": "hbm:plate_lead"
+    },
+    "U": {
+      "item": "hbm:ingot_uranium235"
+    }
+  },
+  "result": {
+    "item": "hbm:custom_nuke",
+    "count": 1
+  }
+}

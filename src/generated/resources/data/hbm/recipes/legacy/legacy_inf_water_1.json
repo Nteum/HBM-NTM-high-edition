@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "222",
+    "131",
+    "222"
+  ],
+  "key": {
+    "1": {
+      "item": "minecraft:water_bucket"
+    },
+    "2": {
+      "item": "hbm:plate_aluminium"
+    },
+    "3": {
+      "item": "hbm:gem_diamond"
+    }
+  },
+  "result": {
+    "item": "hbm:inf_water",
+    "count": 1
+  }
+}

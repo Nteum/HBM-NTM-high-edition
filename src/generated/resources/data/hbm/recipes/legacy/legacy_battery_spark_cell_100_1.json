@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "W W",
+    "BPB",
+    "SSS"
+  ],
+  "key": {
+    "W": {
+      "item": "hbm:wire_fine"
+    },
+    "P": {
+      "item": "hbm:plate_dineutronium"
+    },
+    "S": {
+      "item": "hbm:powder_spark_mix"
+    },
+    "B": {
+      "item": "hbm:battery_spark_cell_25"
+    }
+  },
+  "result": {
+    "item": "hbm:battery_spark_cell_100",
+    "count": 1
+  }
+}

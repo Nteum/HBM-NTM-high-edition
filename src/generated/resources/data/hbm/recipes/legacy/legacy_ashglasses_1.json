@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "I I",
+    "GPG"
+  ],
+  "key": {
+    "I": {
+      "item": "hbm:ingot_latex"
+    },
+    "G": {
+      "item": "hbm:glass_ash"
+    },
+    "P": {
+      "item": "hbm:ingot_polymer"
+    }
+  },
+  "result": {
+    "item": "hbm:ashglasses",
+    "count": 1
+  }
+}

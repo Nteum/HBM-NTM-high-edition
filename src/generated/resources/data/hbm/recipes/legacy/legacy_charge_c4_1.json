@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:stick_c4"
+    },
+    {
+      "item": "hbm:stick_c4"
+    },
+    {
+      "item": "hbm:stick_c4"
+    },
+    {
+      "item": "hbm:ducttape"
+    }
+  ],
+  "result": {
+    "item": "hbm:charge_c4",
+    "count": 1
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:rbmk_fuel_empty"
+    },
+    {
+      "item": "hbm:billet_uranium235"
+    },
+    {
+      "item": "hbm:billet_uranium235"
+    },
+    {
+      "item": "hbm:billet_uranium235"
+    },
+    {
+      "item": "hbm:billet_uranium235"
+    },
+    {
+      "item": "hbm:billet_uranium235"
+    },
+    {
+      "item": "hbm:billet_uranium235"
+    },
+    {
+      "item": "hbm:billet_uranium235"
+    },
+    {
+      "item": "hbm:billet_uranium235"
+    }
+  ],
+  "result": {
+    "item": "hbm:rbmk_fuel_heu235",
+    "count": 1
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "TCT",
+    "TGT",
+    "RRR"
+  ],
+  "key": {
+    "T": {
+      "item": "hbm:plate_titanium"
+    },
+    "C": {
+      "item": "hbm:circuit"
+    },
+    "G": {
+      "item": "minecraft:glass_pane"
+    },
+    "R": {
+      "item": "hbm:ingot_rubber"
+    }
+  },
+  "result": {
+    "item": "hbm:envsuit_helmet",
+    "count": 1
+  }
+}

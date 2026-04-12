@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:bottle2_empty"
+    },
+    {
+      "item": "hbm:syringe_metal_empty"
+    },
+    {
+      "item": "hbm:ducttape"
+    },
+    {
+      "item": "hbm:powder_magic"
+    },
+    {
+      "item": "hbm:nugget_schrabidium"
+    },
+    {
+      "item": "minecraft:potionitem"
+    }
+  ],
+  "result": {
+    "item": "hbm:syringe_taint",
+    "count": 1
+  }
+}

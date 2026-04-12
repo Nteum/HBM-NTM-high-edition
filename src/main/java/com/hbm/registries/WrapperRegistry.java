@@ -1,5 +1,6 @@
 package com.hbm.registries;
 
+import com.hbm.HBM;
 import com.hbm.HBMKey;
 import com.hbm.datagen.LanguageProvider;
 import com.hbm.datagen.loot.BlockLootGen;
@@ -169,10 +170,7 @@ public class WrapperRegistry<T> implements Supplier<T>{
         }
         @Override
         public RegistryObject<Item> build() {
-            RegistryObject<Item> existing = ModItems.ITEMS.getEntries().stream()
-                    .filter(entry -> entry.getId().getPath().equals(name))
-                    .findFirst()
-                    .orElse(null);
+            RegistryObject<Item> existing = findExistingItem(name);
             if (existing != null) {
                 return existing;
             }
@@ -187,6 +185,17 @@ public class WrapperRegistry<T> implements Supplier<T>{
                 itemRegistry.localizedName = localizedName;
             ModItems.itemList.add(itemRegistry);
             return itemRegistry.registryObject;
+        }
+
+        private static RegistryObject<Item> findExistingItem(String name) {
+            ResourceLocation id = new ResourceLocation(HBM.MODID, name);
+            for (RegistryObject<Item> entry : ModItems.ITEMS.getEntries()) {
+                ResourceLocation entryId = entry.getId();
+                if (id.equals(entryId)) {
+                    return entry;
+                }
+            }
+            return null;
         }
     }
 
@@ -237,10 +246,6 @@ public class WrapperRegistry<T> implements Supplier<T>{
             switch (lootWay){
                 case HBMKey.DROP_SELF -> provider.dropSelf(registryObject.get());
                 case HBMKey.DROP_NONE -> provider.add(registryObject.get(), BlockLootSubProvider.noDrop());
-                // 没有掉落物表用这个
-                case HBMKey.DROP_NO_EXIST -> {
-                    return;
-                }
             }
         }
         public void tagSupport(BlockTagsGen blockTagsGen){

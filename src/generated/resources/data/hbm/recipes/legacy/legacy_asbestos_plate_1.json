@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "E E",
+    "EEE",
+    "EEE"
+  ],
+  "key": {
+    "E": {
+      "item": "hbm:asbestos_cloth"
+    }
+  },
+  "result": {
+    "item": "hbm:asbestos_plate",
+    "count": 1
+  }
+}

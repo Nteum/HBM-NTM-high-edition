@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " I ",
+    " M ",
+    "I I"
+  ],
+  "key": {
+    "I": {
+      "item": "hbm:ingot_weapon_steel"
+    },
+    "M": {
+      "item": "hbm:part_mechanism"
+    }
+  },
+  "result": {
+    "item": "hbm:weapon_mod_special",
+    "count": 1
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "RCR",
+    "CDC",
+    "RCR"
+  ],
+  "key": {
+    "R": {
+      "item": "hbm:ingot_latex"
+    },
+    "C": {
+      "item": "hbm:powder_coal"
+    },
+    "D": {
+      "item": "hbm:ducttape"
+    }
+  },
+  "result": {
+    "item": "hbm:cladding_rubber",
+    "count": 1
+  }
+}

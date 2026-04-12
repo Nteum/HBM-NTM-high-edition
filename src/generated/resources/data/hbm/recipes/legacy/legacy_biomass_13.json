@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "hbm:plant_flower"
+    },
+    {
+      "item": "hbm:plant_flower"
+    },
+    {
+      "item": "hbm:plant_flower"
+    },
+    {
+      "item": "hbm:plant_flower"
+    },
+    {
+      "item": "hbm:plant_flower"
+    },
+    {
+      "item": "hbm:plant_flower"
+    }
+  ],
+  "result": {
+    "item": "hbm:biomass",
+    "count": 4
+  }
+}

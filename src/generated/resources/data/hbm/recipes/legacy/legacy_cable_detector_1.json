@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "S",
+    "W"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:redstone"
+    },
+    "W": {
+      "item": "hbm:red_wire_coated"
+    }
+  },
+  "result": {
+    "item": "hbm:cable_detector",
+    "count": 1
+  }
+}
