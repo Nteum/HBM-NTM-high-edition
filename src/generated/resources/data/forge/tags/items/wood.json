@@ -1,6 +1,6 @@
 {
   "values": [
-    "#forge:barrels/wooden",
-    "#minecraft:logs"
+    "#minecraft:logs",
+    "#forge:barrels/wooden"
   ]
 }

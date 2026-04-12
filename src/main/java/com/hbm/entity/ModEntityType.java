@@ -61,6 +61,7 @@ public class ModEntityType {
             = register("entity_nuke_explosion_mk5",EntityType.Builder.<EntityNukeExplosionMK5>of(EntityNukeExplosionMK5::new, MobCategory.MISC));
 
     public static final RegistryObject<EntityType<TestEntity>> TEST_ENTITY = register("test_entity",EntityType.Builder.<TestEntity>of(TestEntity::new, MobCategory.MISC));
+    public static final RegistryObject<EntityType<EntityRubble>> ENTITY_RUBBLE = register("entity_rubble",EntityType.Builder.<EntityRubble>of(EntityRubble::new, MobCategory.MISC));
 
     /**
      * 生物实体

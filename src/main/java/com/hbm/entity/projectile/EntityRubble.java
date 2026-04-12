@@ -1,6 +1,7 @@
 package com.hbm.entity.projectile;
 
 import com.hbm.entity.ModEntityType;
+import com.hbm.entity.TestEntity;
 import com.hbm.entity.effect.EntityMeteor;
 import com.hbm.entity.projectile.EntityThrowableNT;
 import com.hbm.registries.HBMDamage;
@@ -35,14 +36,15 @@ import net.minecraft.world.phys.Vec3;
  * */
 public class EntityRubble extends EntityThrowableNT {
     public static final EntityDataAccessor<BlockState> DATA_BLOCK = SynchedEntityData.defineId(EntityRubble.class, EntityDataSerializers.BLOCK_STATE);
+    public EntityRubble(EntityType<? extends ThrowableProjectile> pEntityType, Level pLevel) {
+        super(pEntityType, pLevel);
+    }
     public EntityRubble(Level pLevel, Vec3 pos) {
         this(ModEntityType.ENTITY_RUBBLE.get(), pLevel);
         this.setPos(pos);
     }
 
-    public EntityRubble(EntityType<? extends ThrowableProjectile> pEntityType, Level pLevel) {
-        super(pEntityType, pLevel);
-    }
+
 
     @Override
     protected void defineSynchedData() {
