@@ -19,10 +19,11 @@ public class MenuConveyorExtractor extends BaseMachineMenu<TileConveyorExtractor
     public MenuConveyorExtractor(int pContainerId, Inventory playerInventory, TileConveyorExtractor blockEntity, ContainerData containerData1){
         super(ModMenuType.MENU_CONVEYOR_EXTRACTOR.get(),pContainerId, playerInventory, blockEntity, containerData1);
         ItemStackHandler items = this.be.getItems();
+        this.slotNum = 20;
         // 过滤器
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                this.addSlot(new SlotItemHandler(items, j + i * 3, 71 + j * 18, 17 + i * 18));
+                this.addSlot(new FilterSlot(items, j + i * 3, 71 + j * 18, 17 + i * 18));
             }
         }
         // 物品槽
@@ -35,10 +36,10 @@ public class MenuConveyorExtractor extends BaseMachineMenu<TileConveyorExtractor
         this.addSlot(new SlotItemHandler(items, 18, 152, 23));
         this.addSlot(new SlotItemHandler(items, 19, 152, 47));
         // 玩家
-        addPlayerSlot(playerInventory, 46, 19);
+        addPlayerSlot(playerInventory, 18, 19);
     }
     public MenuConveyorExtractor(int id, Inventory playerInventory, FriendlyByteBuf buf) {
-        this(id, playerInventory, WorldUtils.getTileEntity(TileConveyorExtractor.class, Minecraft.getInstance().level, buf.readBlockPos()), new SimpleContainerData(9));
+        this(id, playerInventory, WorldUtils.getTileEntity(TileConveyorExtractor.class, Minecraft.getInstance().level, buf.readBlockPos()), new SimpleContainerData(2));
     }
 
     @Override

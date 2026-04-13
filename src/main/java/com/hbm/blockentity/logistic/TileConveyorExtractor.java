@@ -23,6 +23,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.ItemStackHandler;
+import net.minecraftforge.items.wrapper.RangedWrapper;
+import net.minecraftforge.items.wrapper.RecipeWrapper;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
@@ -30,7 +32,7 @@ import java.util.Optional;
 public class TileConveyorExtractor extends TileConveyorMachine {
     public boolean isWhitelist = false;
     public boolean maxEject = false;
-    HBMFilter itemFilter;
+    HBMFilter.CompositeFilter itemFilter;
     protected ContainerData containerData = new ContainerData() {
         @Override
         public int get(int pIndex) {
@@ -51,11 +53,11 @@ public class TileConveyorExtractor extends TileConveyorMachine {
     };
     public TileConveyorExtractor(BlockPos pos, BlockState state) {
         super(ModBlockEntityType.TILE_CONVEYOR_EXTRACTOR.get(), pos, state);
-        this.itemFilter = HBMFilter.create();
+        this.itemFilter = HBMFilter.create(9);
         this.items = new ItemStackHandler(20){
             @Override
             protected void onContentsChanged(int slot) {
-//                itemFilter = HBMFilter.items(getItems().)
+                if (slot >= 0 && slot < 9) itemFilter.set(slot, HBMFilter.item(this.getStackInSlot(slot), !isWhitelist));
                 setChanged();
             }
 
@@ -99,16 +101,16 @@ public class TileConveyorExtractor extends TileConveyorMachine {
 
             if (be != null){
                 be.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(iItemHandler -> {
-                    InventoryUtils.insertNoCheckSlots(iItemHandler, this.items);
+                    InventoryUtils.insertNoCheckSlots(iItemHandler, new RangedWrapper(this.items, 9, 18));
                 });
             }
 
             if (beOut != null){
-                be.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(iItemHandler -> {
+                beOut.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(iItemHandler -> {
                     for (int i = 0; i < this.items.getSlots(); i++) {
                         ItemStack stackInSlot = this.items.getStackInSlot(i);
                         if ((!maxEject && !stackInSlot.isEmpty()) || (maxEject && stackInSlot.getCount() >= amount)){
-                            InventoryUtils.insertNoCheckSlots(this.items, iItemHandler, i, amount);
+                            InventoryUtils.insertNoCheckSlots(new RangedWrapper(this.items, 9, 18), iItemHandler, i, amount);
                             break;
                         }
                     }

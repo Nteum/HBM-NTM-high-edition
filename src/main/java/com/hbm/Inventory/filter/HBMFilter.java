@@ -19,6 +19,9 @@ public interface HBMFilter extends Predicate<ItemStack>, INBTSerializable<Compou
     static CompositeFilter create(){
         return new CompositeFilter();
     }
+    static CompositeFilter create(int size){
+        return new CompositeFilter(size);
+    }
 
     static ItemFilter item(ItemStack itemStack, boolean isBlackList){
         return new ItemFilter(itemStack, isBlackList);
@@ -51,6 +54,13 @@ public interface HBMFilter extends Predicate<ItemStack>, INBTSerializable<Compou
         public CompositeFilter(){
             this(true);
         }
+        public CompositeFilter(int size){
+            this();
+            this.filters = new ArrayList<>(size);
+            for (int i = 0; i < size; i++) {
+                this.filters.add(new BlankFilter(this.isBlackList));
+            }
+        }
         public CompositeFilter(CompoundTag tag){
             this();
             deserializeNBT(tag);
@@ -76,6 +86,13 @@ public interface HBMFilter extends Predicate<ItemStack>, INBTSerializable<Compou
             return this;
         }
 
+        public CompositeFilter set(int i, HBMFilter filter){
+            if (i >= 0 && i < filters.size()){
+                this.filters.set(i, filter);
+            }
+            return this;
+        }
+
         @Override
         public CompoundTag serializeNBT() {
             CompoundTag tag = new CompoundTag();
@@ -95,6 +112,7 @@ public interface HBMFilter extends Predicate<ItemStack>, INBTSerializable<Compou
                 CompoundTag tag = nbt.getCompound(i + "");
                 String type = tag.getString("type");
                 switch (type) {
+                    case "blank" -> filters.add(new BlankFilter(tag));
                     case "item" -> filters.add(new ItemFilter(tag));
                     case "tag" -> filters.add(new TagFilter(tag));
                     case "nbt" -> filters.add(new NbtFilter(tag));
@@ -108,6 +126,38 @@ public interface HBMFilter extends Predicate<ItemStack>, INBTSerializable<Compou
             for (HBMFilter filter : this.filters) {
                 filter.setBlackList(isBlackList);
             }
+        }
+    }
+    // 空白过滤器，用于占位
+    class BlankFilter implements HBMFilter{
+        private boolean isBlackList;
+        public BlankFilter(CompoundTag tag){
+            deserializeNBT(tag);
+        }
+        public BlankFilter(boolean isBlackList){
+            setBlackList(isBlackList);
+        }
+        @Override
+        public void setBlackList(boolean isBlackList) {
+            this.isBlackList = isBlackList;
+        }
+        //如果是黑名单，空过滤器输出true，白名单空过滤器输出false
+        @Override
+        public boolean test(ItemStack itemStack) {
+            return !this.isBlackList;
+        }
+
+        @Override
+        public CompoundTag serializeNBT() {
+            CompoundTag tag = new CompoundTag();
+            tag.putString("type", "blank");
+            tag.putBoolean("isBlackList", this.isBlackList);
+            return tag;
+        }
+
+        @Override
+        public void deserializeNBT(CompoundTag nbt) {
+            this.isBlackList = nbt.getBoolean("isBlackList");
         }
     }
     class ItemFilter implements HBMFilter {

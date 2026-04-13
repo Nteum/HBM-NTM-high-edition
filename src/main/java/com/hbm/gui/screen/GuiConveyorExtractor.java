@@ -31,14 +31,17 @@ public class GuiConveyorExtractor extends BaseMachineGui<MenuConveyorExtractor>{
     protected void init() {
         this.imageWidth = 212;
         this.imageHeight = 185;
+        this.inventoryLabelX += 18;
         super.init();
         //guiLeft + 187, guiTop + 34, 212, 0, 18, 18
-        this.button = new MultiStateButton(this.leftPos + 187, this.topPos + 34, 18, 18, 212, 0, 2, TEXTURE, button -> {
+        this.button = new MultiStateButton(this.leftPos + 187, this.topPos + 34, 18, 18, 212, 0, 2, menu.containerData.get(1), TEXTURE, button -> {
+            this.button.changeState();
             CompoundTag tag = new CompoundTag();
             tag.putBoolean("maxEject", this.button.stateNow != 0);
             ModMessages.sendToServer(new C2SSyncTileMessage(this.menu.getPos(), tag));
         });
         this.addRenderableWidget(this.button);
+        this.isWhitelist = menu.containerData.get(0) > 0;
     }
 
     @Override
@@ -49,6 +52,7 @@ public class GuiConveyorExtractor extends BaseMachineGui<MenuConveyorExtractor>{
     @Override
     protected void renderBg(GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY) {
         super.renderBg(pGuiGraphics, pPartialTick, pMouseX, pMouseY);
+        showBgTexture(pGuiGraphics, TEXTURE);
 
         int i = isWhitelist ? 33 : 47;
         pGuiGraphics.blit(TEXTURE, this.leftPos + 139, this.topPos + i, 212, 36 ,3, 6);

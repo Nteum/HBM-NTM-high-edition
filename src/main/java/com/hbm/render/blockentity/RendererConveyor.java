@@ -54,15 +54,11 @@ public class RendererConveyor implements BlockEntityRenderer<TileConveyor> {
                     if (!isBlock) poseStack.mulPose(Axis.XN.rotation(Mth.HALF_PI));
                 }
             }
-            if (isBlock){
-                poseStack.mulPose(Axis.XN.rotationDegrees(-30));
-                poseStack.mulPose(Axis.YN.rotationDegrees(-225));
-            }
+            if (isBlock) blockItemAdjust(poseStack);
             poseStack.scale(0.5f, 0.5f, 0.5f);
             itemRenderer.render(carriedItem, ItemDisplayContext.GUI,true,poseStack,bufferSource,light,overlay,itemRenderer.getModel(carriedItem, conveyor.getLevel(), null, 0));
 
         }else if (variant < 6){
-//            poseStack.pushPose();
             switch (facing){
                 case SOUTH -> {
                     poseStack.translate(0.5, transProgress, 0.625);
@@ -76,14 +72,15 @@ public class RendererConveyor implements BlockEntityRenderer<TileConveyor> {
                     poseStack.mulPose(Axis.YN.rotation(-Mth.HALF_PI));
                 }
             }
-            if (isBlock){
-                poseStack.mulPose(Axis.XN.rotationDegrees(-30));
-                poseStack.mulPose(Axis.YN.rotationDegrees(-225));
-            }
+            if (isBlock) blockItemAdjust(poseStack);
             poseStack.scale(0.5f, 0.5f, 0.5f);
             itemRenderer.render(carriedItem, ItemDisplayContext.GUI,true,poseStack,bufferSource,light,overlay,itemRenderer.getModel(carriedItem, conveyor.getLevel(), null, 0));
-//            poseStack.popPose();
         }
         poseStack.popPose();
+    }
+
+    private void blockItemAdjust(PoseStack poseStack){
+        poseStack.mulPose(Axis.XN.rotationDegrees(-45));
+        poseStack.mulPose(Axis.YN.rotationDegrees(-75));
     }
 }
