@@ -35,4 +35,8 @@ public class MultiStateButton extends ImageButton {
         this.stateNow = (this.stateNow + 1) % this.stateNum;
         return this.stateNow;
     }
+
+    public void setState(int state){
+        this.stateNow = state;
+    }
 }

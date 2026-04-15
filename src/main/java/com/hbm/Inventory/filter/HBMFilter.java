@@ -16,69 +16,67 @@ import java.util.List;
 import java.util.function.Predicate;
 
 public interface HBMFilter extends Predicate<ItemStack>, INBTSerializable<CompoundTag> {
-    static CompositeFilter create(){
-        return new CompositeFilter();
+    static RootFilter create(){
+        return new RootFilter(0, false);
     }
-    static CompositeFilter create(int size){
-        return new CompositeFilter(size);
+    static RootFilter create(int size){
+        return new RootFilter(size, false);
+    }
+    static ItemFilter create(ItemStack itemStack){
+        return new ItemFilter(itemStack, false);
     }
 
-    static ItemFilter item(ItemStack itemStack, boolean isBlackList){
-        return new ItemFilter(itemStack, isBlackList);
-    }
-    static ItemFilter item(ItemStack itemStack, boolean isBlackList, boolean isStrict){
-        return new ItemFilter(itemStack, isBlackList, isStrict);
-    }
-    static CompositeFilter items(ItemStack ...stacks){
-        CompositeFilter filter = new CompositeFilter();
-        for (ItemStack stack : stacks) {
-            filter.add(new ItemFilter(stack, true));
+    class RootFilter extends CompositeFilter{
+        boolean isBlackList;
+        public RootFilter(int size, boolean isBlackList){
+            super(size);
+            this.isBlackList = isBlackList;
         }
-        return filter;
-    }
-    static TagFilter tag(TagKey<Item> tag, boolean isBlackList){
-        return new TagFilter(tag, isBlackList);
-    }
-    static NbtFilter nbt(String name, Tag tag, boolean isBlackList){
-        return new NbtFilter(name, tag, isBlackList);
-    }
 
-    void setBlackList(boolean isBlackList);
+        @Override
+        public boolean test(ItemStack stack) {
+            return super.test(stack) ^ isBlackList;
+        }
 
+        public void setBlackList(boolean blackList) {
+            isBlackList = blackList;
+        }
+    }
     // 具体实现
     class CompositeFilter implements HBMFilter{
         List<HBMFilter> filters;
         boolean isOrLogic;
-        boolean isBlackList = false;
-
-        public CompositeFilter(){
-            this(true);
-        }
-        public CompositeFilter(int size){
-            this();
-            this.filters = new ArrayList<>(size);
-            for (int i = 0; i < size; i++) {
-                this.filters.add(new BlankFilter(this.isBlackList));
-            }
-        }
         public CompositeFilter(CompoundTag tag){
             this();
             deserializeNBT(tag);
         }
-        public CompositeFilter(boolean isOrLogic){
+        public CompositeFilter(){
+            this(0);
+        }
+        public CompositeFilter(int size){
+            this(size, true);
+        }
+        public CompositeFilter(int size, boolean isOrLogic){
             this.filters = new ArrayList<>();
             this.isOrLogic = isOrLogic;
+            for (int i = 0; i < size; i++) {
+                filters.add(new BlankFilter());
+            }
         }
+
+        public List<HBMFilter> getFilters() {
+            return filters;
+        }
+
         @Override
         public boolean test(ItemStack stack) {
             boolean result = !isOrLogic;
             for (HBMFilter filter : filters) {
                 boolean test = filter.test(stack);
                 result = isOrLogic ? result | test : result & test;
-                if (isOrLogic && result) return !isBlackList;
-                if (!isOrLogic && !result) return isBlackList;
+                if (result == isOrLogic) return result;
             }
-            return result ^ isBlackList;
+            return result;
         }
 
         public CompositeFilter add(HBMFilter filter){
@@ -106,6 +104,7 @@ public interface HBMFilter extends Predicate<ItemStack>, INBTSerializable<Compou
 
         @Override
         public void deserializeNBT(CompoundTag nbt) {
+            filters.clear();
             int len = nbt.getInt("len");
             this.isOrLogic = nbt.getBoolean("isOrLogic");
             for (int i = 0; i < len; i++) {
@@ -119,65 +118,43 @@ public interface HBMFilter extends Predicate<ItemStack>, INBTSerializable<Compou
                 }
             }
         }
-
-        @Override
-        public void setBlackList(boolean isBlackList) {
-            this.isBlackList = isBlackList;
-            for (HBMFilter filter : this.filters) {
-                filter.setBlackList(isBlackList);
-            }
-        }
     }
     // 空白过滤器，用于占位
     class BlankFilter implements HBMFilter{
-        private boolean isBlackList;
         public BlankFilter(CompoundTag tag){
             deserializeNBT(tag);
         }
-        public BlankFilter(boolean isBlackList){
-            setBlackList(isBlackList);
-        }
-        @Override
-        public void setBlackList(boolean isBlackList) {
-            this.isBlackList = isBlackList;
-        }
+        public BlankFilter(){}
         //如果是黑名单，空过滤器输出true，白名单空过滤器输出false
         @Override
         public boolean test(ItemStack itemStack) {
-            return !this.isBlackList;
+            return false;
         }
 
         @Override
         public CompoundTag serializeNBT() {
             CompoundTag tag = new CompoundTag();
             tag.putString("type", "blank");
-            tag.putBoolean("isBlackList", this.isBlackList);
             return tag;
         }
 
         @Override
         public void deserializeNBT(CompoundTag nbt) {
-            this.isBlackList = nbt.getBoolean("isBlackList");
         }
     }
     class ItemFilter implements HBMFilter {
-        private boolean isBlackList = false;
         private boolean isStrict = false;   //是否严格判断
         private ItemStack stack;
         public ItemFilter(CompoundTag tag){
             deserializeNBT(tag);
         }
-        public ItemFilter(ItemStack stack, boolean isBlackList){
-            this(stack, isBlackList, false);
-        }
-        public ItemFilter(ItemStack stack, boolean isBlackList, boolean isStrict){
+        public ItemFilter(ItemStack stack, boolean isStrict){
             this.stack = stack;
-            this.isBlackList = isBlackList;
             this.isStrict = isStrict;
         }
         @Override
         public boolean test(ItemStack stack) {
-            return (isStrict ? ItemHandlerHelper.canItemStacksStack(this.stack, stack) : this.stack.is(stack.getItem())) ^ isBlackList;
+            return isStrict ? ItemHandlerHelper.canItemStacksStack(this.stack, stack) : this.stack.is(stack.getItem());
         }
 
         @Override
@@ -185,34 +162,26 @@ public interface HBMFilter extends Predicate<ItemStack>, INBTSerializable<Compou
             CompoundTag tag = new CompoundTag();
             tag.putString("type", "item");
             tag.put(HBMKey.ITEM, stack.serializeNBT());
-            tag.putBoolean("isBlackList", this.isBlackList);
             return tag;
         }
 
         @Override
         public void deserializeNBT(CompoundTag nbt) {
             this.stack = ItemStack.of(nbt.getCompound(HBMKey.ITEM));
-            this.isBlackList = nbt.getBoolean("isBlackList");
-        }
-        @Override
-        public void setBlackList(boolean isBlackList) {
-            this.isBlackList = isBlackList;
         }
     }
 
     class TagFilter implements HBMFilter {
         TagKey<Item> key;
-        boolean isBlackList = false;
         public TagFilter(CompoundTag tag){
             deserializeNBT(tag);
         }
-        public TagFilter(TagKey<Item> key, boolean isBlackList){
+        public TagFilter(TagKey<Item> key){
             this.key = key;
-            this.isBlackList = isBlackList;
         }
         @Override
         public boolean test(ItemStack stack) {
-            return stack.is(key) ^ isBlackList;
+            return stack.is(key);
         }
 
         @Override
@@ -220,7 +189,6 @@ public interface HBMFilter extends Predicate<ItemStack>, INBTSerializable<Compou
             CompoundTag tag = new CompoundTag();
             tag.putString("type", "tag");
             tag.putString(HBMKey.TAG, this.key.location().toString());
-            tag.putBoolean("isBlackList", this.isBlackList);
             return tag;
         }
 
@@ -228,36 +196,32 @@ public interface HBMFilter extends Predicate<ItemStack>, INBTSerializable<Compou
         public void deserializeNBT(CompoundTag nbt) {
             ResourceLocation rl = ResourceLocation.tryParse(nbt.getString(HBMKey.TAG));
             this.key = TagKey.create(Registries.ITEM, rl);
-            this.isBlackList = nbt.getBoolean("isBlackList");
-        }
-        @Override
-        public void setBlackList(boolean isBlackList) {
-            this.isBlackList = isBlackList;
         }
     }
 
     class NbtFilter implements HBMFilter {
         String name;
         Tag tag;
-        boolean isBlackList = false;
         public NbtFilter(CompoundTag tag){
             deserializeNBT(tag);
+        }
+        public NbtFilter(String name, Tag tag){
+            this.name = name;
+            this.tag = tag;
         }
         public NbtFilter(String name, Tag tag, boolean isBlackList){
             this.name = name;
             this.tag = tag;
-            this.isBlackList = isBlackList;
         }
         @Override
         public boolean test(ItemStack stack) {
             if (stack.hasTag()){
                 Tag tag1 = stack.getTag().get(name);
                 if (tag1 != null){
-                    return tag1.equals(tag) ^ isBlackList;
+                    return tag1.equals(tag);
                 }
             }
-            return isBlackList;
-//            return stack.hasTag() && stack.getTag().get(name).equals(tag) ^ isBlackList;
+            return false;
         }
 
         @Override
@@ -266,7 +230,6 @@ public interface HBMFilter extends Predicate<ItemStack>, INBTSerializable<Compou
             tag.putString("type", "tag");
             tag.putString("name", this.name);
             tag.put("nbt", this.tag);
-            tag.putBoolean("isBlackList", this.isBlackList);
             return tag;
         }
 
@@ -274,11 +237,6 @@ public interface HBMFilter extends Predicate<ItemStack>, INBTSerializable<Compou
         public void deserializeNBT(CompoundTag nbt) {
             this.name = nbt.getString("name");
             this.tag = nbt.get("nbt");
-            this.isBlackList = nbt.getBoolean("isBlackList");
-        }
-        @Override
-        public void setBlackList(boolean isBlackList) {
-            this.isBlackList = isBlackList;
         }
     }
 }

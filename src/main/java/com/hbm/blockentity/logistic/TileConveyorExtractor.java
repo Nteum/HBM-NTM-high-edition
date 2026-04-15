@@ -4,9 +4,13 @@ import com.hbm.HBMKey;
 import com.hbm.HBMLang;
 import com.hbm.Inventory.HBMUpgrade;
 import com.hbm.Inventory.filter.HBMFilter;
+import com.hbm.Inventory.filter.ItemFilterWrapper;
+import com.hbm.block.HBMBlockProperties;
 import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.base2.BaseMenuTile;
 import com.hbm.gui.menu.MenuConveyorExtractor;
 import com.hbm.item.machine.ItemMachineUpgrade;
+import com.hbm.utils.DirectionUtils;
 import com.hbm.utils.InventoryUtils;
 import com.hbm.utils.WorldUtils;
 import net.minecraft.core.BlockPos;
@@ -32,7 +36,8 @@ import java.util.Optional;
 public class TileConveyorExtractor extends TileConveyorMachine {
     public boolean isWhitelist = false;
     public boolean maxEject = false;
-    HBMFilter.CompositeFilter itemFilter;
+    HBMFilter.RootFilter itemFilter;
+    public ItemFilterWrapper itemWrapper;
     protected ContainerData containerData = new ContainerData() {
         @Override
         public int get(int pIndex) {
@@ -57,23 +62,19 @@ public class TileConveyorExtractor extends TileConveyorMachine {
         this.items = new ItemStackHandler(20){
             @Override
             protected void onContentsChanged(int slot) {
-                if (slot >= 0 && slot < 9) itemFilter.set(slot, HBMFilter.item(this.getStackInSlot(slot), !isWhitelist));
+                if (slot >= 0 && slot < 9) itemFilter.set(slot, HBMFilter.create(this.getStackInSlot(slot)));
                 setChanged();
             }
-
-            @Override
-            public boolean isItemValid(int slot, @NotNull ItemStack stack) {
-                if (slot == 19 || slot == 20) return stack.getItem() instanceof ItemMachineUpgrade;
-                return super.isItemValid(slot, stack) && itemFilter.test(stack);
-            }
-            // 输出也需要检测是否符合条件，毕竟玩家可以自己向物品槽放入不符合条件的物品
-            @Override
-            public @NotNull ItemStack extractItem(int slot, int amount, boolean simulate) {
-                if (!itemFilter.test(getStackInSlot(slot))) return ItemStack.EMPTY;
-                return super.extractItem(slot, amount, simulate);
-            }
         };
+        itemWrapper = new ItemFilterWrapper(new RangedWrapper(this.items, 9, 18), this.itemFilter);
         renewItemCaps(state);
+    }
+
+    @Override
+    public void renewItemCaps(BlockState state){
+        Direction facing = state.getValue(BlockStateProperties.FACING);
+        Direction secondaryFacing = DirectionUtils.relativeDir2Dir(facing, state.getValue(HBMBlockProperties.RELATIVE_DIRECTION));
+        this.capabilitiesContent.addCapability(ForgeCapabilities.ITEM_HANDLER, itemWrapper, facing, secondaryFacing);
     }
 
     @Override
@@ -101,17 +102,16 @@ public class TileConveyorExtractor extends TileConveyorMachine {
 
             if (be != null){
                 be.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(iItemHandler -> {
-                    InventoryUtils.insertNoCheckSlots(iItemHandler, new RangedWrapper(this.items, 9, 18));
+                    InventoryUtils.insertNoCheckSlots(iItemHandler, itemWrapper);
                 });
             }
 
             if (beOut != null){
                 beOut.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(iItemHandler -> {
-                    for (int i = 0; i < this.items.getSlots(); i++) {
-                        ItemStack stackInSlot = this.items.getStackInSlot(i);
+                    for (int i = 0; i < this.itemWrapper.getSlots(); i++) {
+                        ItemStack stackInSlot = this.itemWrapper.getStackInSlot(i);
                         if ((!maxEject && !stackInSlot.isEmpty()) || (maxEject && stackInSlot.getCount() >= amount)){
-                            InventoryUtils.insertNoCheckSlots(new RangedWrapper(this.items, 9, 18), iItemHandler, i, amount);
-                            break;
+                            if (InventoryUtils.insertNoCheckSlots(itemWrapper, iItemHandler, i, amount) > 0) break;
                         }
                     }
                 });

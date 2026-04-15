@@ -43,6 +43,11 @@ public class MenuConveyorExtractor extends BaseMachineMenu<TileConveyorExtractor
     }
 
     @Override
+    public boolean innerMovePlayer2Container(int pIndex, ItemStack itemStack) {
+        return this.moveItemStackTo(itemStack, 9, 18, false);
+    }
+
+    @Override
     public void clicked(int slotId, int button, ClickType pClickType, Player pPlayer) {
         // 检查是否点击的是虚影槽
         if (slotId >= 0 && getSlot(slotId) instanceof FilterSlot filterSlot) {
@@ -61,4 +66,9 @@ public class MenuConveyorExtractor extends BaseMachineMenu<TileConveyorExtractor
         }
         super.clicked(slotId, button, pClickType, pPlayer);
     }
+
+    public boolean isWhitelist(){
+        return this.containerData.get(0) > 0;
+    }
+
 }

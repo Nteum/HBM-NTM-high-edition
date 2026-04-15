@@ -34,18 +34,21 @@ public class GuiConveyorExtractor extends BaseMachineGui<MenuConveyorExtractor>{
         this.inventoryLabelX += 18;
         super.init();
         //guiLeft + 187, guiTop + 34, 212, 0, 18, 18
-        this.button = new MultiStateButton(this.leftPos + 187, this.topPos + 34, 18, 18, 212, 0, 2, menu.containerData.get(1), TEXTURE, button -> {
+        this.button = new MultiStateButton(this.leftPos + 187, this.topPos + 34, 18, 18, 212, 0, 2, TEXTURE, button -> {
             this.button.changeState();
             CompoundTag tag = new CompoundTag();
             tag.putBoolean("maxEject", this.button.stateNow != 0);
             ModMessages.sendToServer(new C2SSyncTileMessage(this.menu.getPos(), tag));
         });
         this.addRenderableWidget(this.button);
-        this.isWhitelist = menu.containerData.get(0) > 0;
+//        this.isWhitelist = menu.containerData.get(0) > 0;
     }
 
     @Override
     public void render(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
+        // 更新数据的状态
+        this.isWhitelist = menu.isWhitelist();
+        this.button.setState(menu.containerData.get(1));
         super.render(pGuiGraphics, pMouseX, pMouseY, pPartialTick);
     }
 
@@ -63,10 +66,10 @@ public class GuiConveyorExtractor extends BaseMachineGui<MenuConveyorExtractor>{
         boolean oldValue = isWhitelist;
         if (isHovering(128, 30, 14, 13, pMouseX, pMouseY)){
             this.isWhitelist = true;
-        }else if (isHovering(128, 34, 14, 13, pMouseX, pMouseY)){
+        }else if (isHovering(128, 44, 14, 13, pMouseX, pMouseY)){
             this.isWhitelist = false;
         }
-
+        //247.5 75.5
         if (oldValue != this.isWhitelist){
             CompoundTag tag = new CompoundTag();
             tag.putBoolean("isWhitelist", this.isWhitelist);

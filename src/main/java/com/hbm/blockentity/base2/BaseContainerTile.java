@@ -28,6 +28,6 @@ public abstract class BaseContainerTile extends CapabilityBlockEntity{
     @Override
     public void load(@NotNull CompoundTag nbt) {
         super.load(nbt);
-        if (nbt.contains(HBMKey.ITEM)) this.items.deserializeNBT(nbt);
+        if (nbt.contains(HBMKey.ITEM)) this.items.deserializeNBT(nbt.getCompound(HBMKey.ITEM));
     }
 }
