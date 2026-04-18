@@ -3,7 +3,7 @@
   "minVersion": "0.8",
   "package": "com.hbm.mixin",
   "compatibilityLevel": "JAVA_8",
-  "refmap": "com.dalis.refmap.json",
+  "refmap": "hbm.refmap.json",
   "mixins": [
   ],
   "client": [

@@ -14,7 +14,7 @@ buildscript {
 plugins {
     id 'idea'
     id 'net.minecraftforge.gradle' version '6.0.25'
-    id 'org.parchmentmc.librarian.forgegradle' version '1.+'
+    id 'org.parchmentmc.librarian.forgegradle' version '1.2.0'
 }
 
 apply plugin: 'org.spongepowered.mixin'
@@ -365,6 +365,10 @@ tasks.named('jar', Jar).configure {
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
+}
+
+tasks.named('compileJava', JavaCompile).configure {
+    options.incremental = true
     options.compilerArgs.add('-Xplugin:suppress-checked-exceptions')
     options.fork = true
     options.forkOptions.jvmArgs.addAll([
@@ -375,10 +379,6 @@ tasks.withType(JavaCompile).configureEach {
             '--add-opens=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED',
             '--add-opens=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED',
     ])
-}
-
-tasks.named('compileJava', JavaCompile).configure {
-    options.incremental = true
 }
 
 tasks.named('compileTestJava', JavaCompile).configure {

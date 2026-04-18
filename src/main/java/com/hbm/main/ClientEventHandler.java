@@ -25,6 +25,7 @@ import com.hbm.render.entity.TestEntityRenderer;
 import com.hbm.render.entity.effect.BlackHoleRender;
 import com.hbm.render.entity.effect.EntityTorexRender;
 import com.hbm.render.entity.effect.RenderMeteor;
+import com.hbm.render.entity.missile.MissileABMRenderer;
 import com.hbm.render.entity.missile.MissileTaintRenderer;
 import com.hbm.render.entity.mob.GlyphidRender;
 import com.hbm.render.item.SpecialItemRender;
@@ -167,6 +168,7 @@ public class ClientEventHandler {
             EntityRenderers.register(ModEntityType.ENTITY_NUKE_EXPLOSION_MK5.get(), EntityBlankRender::new);
             EntityRenderers.register(ModEntityType.ENTITY_NUKE_TOREX.get(), EntityTorexRender::new);
             EntityRenderers.register(ModEntityType.ENTITY_MISSILE_TEST.get(), MissileTaintRenderer::new);
+            EntityRenderers.register(ModEntityType.ENTITY_MISSILE_ANTI_BALLISTIC.get(), MissileABMRenderer::new);
             EntityRenderers.register(ModEntityType.GLYPHID.get(), GlyphidRender::new);
             EntityRenderers.register(ModEntityType.ENTITY_METEOR.get(), RenderMeteor::new);
 

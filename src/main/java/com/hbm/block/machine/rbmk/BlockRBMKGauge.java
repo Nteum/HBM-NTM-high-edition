@@ -54,7 +54,7 @@ public class BlockRBMKGauge extends BaseSingleBlockMachine {
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        return RBMKMiniPanelGeometry.shape(state.getValue(FACING));
+        return RBMKMiniPanelGeometry.gaugeShape();
     }
 
     @Override
@@ -64,7 +64,7 @@ public class BlockRBMKGauge extends BaseSingleBlockMachine {
 
     @Override
     public VoxelShape getInteractionShape(BlockState state, BlockGetter level, BlockPos pos) {
-        return RBMKMiniPanelGeometry.shape(state.getValue(FACING));
+        return RBMKMiniPanelGeometry.gaugeShape();
     }
 
     @Override

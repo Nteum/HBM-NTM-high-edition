@@ -5,7 +5,7 @@ import com.hbm.datagen.LanguageProvider;
 import com.hbm.datagen.model.ItemModelGen;
 import com.hbm.effect.ModEffects;
 import com.hbm.item.armor.*;
-import com.hbm.registries.ModItems;;
+import com.hbm.registries.ModItems;
 import com.hbm.registries.ModSounds;
 import com.hbm.registries.RegistryHelper;
 import net.minecraft.client.model.ArmorStandModel;

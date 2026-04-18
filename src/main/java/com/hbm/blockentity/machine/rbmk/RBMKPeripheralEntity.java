@@ -67,6 +67,7 @@ public class RBMKPeripheralEntity extends DummyableBlockEntity implements RBMKLi
     private static final int TYPE_INDEX = 9;
     private static final int SCREEN_COUNT = 6;
     private static final int FLUX_BUFFER_SIZE = 60;
+    private static final int TREND_BUFFER_SIZE = 60;
     private static final int AUTOLOADER_INPUT_SLOTS = 9;
     private static final int AUTOLOADER_OUTPUT_SLOTS = 9;
     private static final int AUTOLOADER_MIN_CYCLE = 5;
@@ -93,6 +94,8 @@ public class RBMKPeripheralEntity extends DummyableBlockEntity implements RBMKLi
     private final ConsoleColumn[] consoleColumns = new ConsoleColumn[GRID_SIZE * GRID_SIZE];
     private final ConsoleScreen[] screens = new ConsoleScreen[SCREEN_COUNT];
     private final int[] fluxBuffer = new int[FLUX_BUFFER_SIZE];
+    private final int[] waterBuffer = new int[TREND_BUFFER_SIZE];
+    private final int[] controlBuffer = new int[TREND_BUFFER_SIZE];
 
     private BlockPos linkedColumn;
     private BlockPos manualLink;
@@ -157,6 +160,8 @@ public class RBMKPeripheralEntity extends DummyableBlockEntity implements RBMKLi
         tag.putInt("TControl", telemetryControl);
         tag.putInt("TFlux", telemetryFlux);
         tag.putInt("TFuelRods", telemetryFuelRods);
+        tag.putIntArray("WaterBuffer", waterBuffer);
+        tag.putIntArray("ControlBuffer", controlBuffer);
         saveScreens(tag);
     }
 
@@ -185,6 +190,8 @@ public class RBMKPeripheralEntity extends DummyableBlockEntity implements RBMKLi
         telemetryControl = tag.getInt("TControl");
         telemetryFlux = tag.getInt("TFlux");
         telemetryFuelRods = tag.getInt("TFuelRods");
+        copyTrendBuffer(tag.getIntArray("WaterBuffer"), waterBuffer);
+        copyTrendBuffer(tag.getIntArray("ControlBuffer"), controlBuffer);
         loadScreens(tag);
     }
 
@@ -199,6 +206,8 @@ public class RBMKPeripheralEntity extends DummyableBlockEntity implements RBMKLi
         }
         tag.putInt("PeripheralType", peripheralType.ordinal());
         tag.putIntArray("FluxBuffer", fluxBuffer);
+        tag.putIntArray("WaterBuffer", waterBuffer);
+        tag.putIntArray("ControlBuffer", controlBuffer);
         tag.putInt("AutoCycle", autoloaderCycle);
         tag.putBoolean("AutoWorking", autoloaderWorking);
         tag.putInt("THeat", telemetryHeat);
@@ -240,6 +249,8 @@ public class RBMKPeripheralEntity extends DummyableBlockEntity implements RBMKLi
         int[] packetFlux = tag.getIntArray("FluxBuffer");
         Arrays.fill(fluxBuffer, 0);
         System.arraycopy(packetFlux, 0, fluxBuffer, 0, Math.min(packetFlux.length, fluxBuffer.length));
+        copyTrendBuffer(tag.getIntArray("WaterBuffer"), waterBuffer);
+        copyTrendBuffer(tag.getIntArray("ControlBuffer"), controlBuffer);
         if (tag.contains("AutoCycle")) {
             autoloaderCycle = Mth.clamp(tag.getInt("AutoCycle"), AUTOLOADER_MIN_CYCLE, AUTOLOADER_MAX_CYCLE);
         }
@@ -335,6 +346,8 @@ public class RBMKPeripheralEntity extends DummyableBlockEntity implements RBMKLi
         telemetryWater = dataBacking[4];
         telemetrySteam = dataBacking[5];
         telemetryControl = dataBacking[7];
+        pushTrend(waterBuffer, telemetryWater);
+        pushTrend(controlBuffer, telemetryControl);
         prepareScreenDisplays();
         pushData();
         syncClientIfNeeded();
@@ -497,6 +510,8 @@ public class RBMKPeripheralEntity extends DummyableBlockEntity implements RBMKLi
     private void clearConsoleData() {
         Arrays.fill(consoleColumns, null);
         Arrays.fill(fluxBuffer, 0);
+        Arrays.fill(waterBuffer, 0);
+        Arrays.fill(controlBuffer, 0);
         telemetryFlux = 0;
         telemetryFuelRods = 0;
         for (ConsoleScreen screen : screens) {
@@ -828,6 +843,14 @@ public class RBMKPeripheralEntity extends DummyableBlockEntity implements RBMKLi
         return fluxBuffer;
     }
 
+    public int[] getWaterBuffer() {
+        return waterBuffer;
+    }
+
+    public int[] getControlBuffer() {
+        return controlBuffer;
+    }
+
     public int getTelemetryHeat() {
         return telemetryHeat;
     }
@@ -953,8 +976,9 @@ public class RBMKPeripheralEntity extends DummyableBlockEntity implements RBMKLi
         Direction facing = state.getValue(BlockContainerBase.FACING);
         return switch (facing) {
             case WEST -> 1;
-            case NORTH -> 2;
+            case NORTH -> 0;
             case EAST -> 3;
+            case SOUTH -> 2;
             default -> 0;
         };
     }
@@ -1009,6 +1033,24 @@ public class RBMKPeripheralEntity extends DummyableBlockEntity implements RBMKLi
             }
         }
         return selected.stream().mapToInt(Integer::intValue).toArray();
+    }
+
+    private static void copyTrendBuffer(int[] source, int[] target) {
+        Arrays.fill(target, 0);
+        if (source.length <= 0) {
+            return;
+        }
+        int offset = Math.max(0, source.length - target.length);
+        int length = Math.min(source.length, target.length);
+        System.arraycopy(source, offset, target, target.length - length, length);
+    }
+
+    private static void pushTrend(int[] buffer, int value) {
+        if (buffer.length <= 0) {
+            return;
+        }
+        System.arraycopy(buffer, 1, buffer, 0, buffer.length - 1);
+        buffer[buffer.length - 1] = value;
     }
 
     private boolean runAutoloaderCycle(RBMKFuelChannelEntity fuelChannel) {

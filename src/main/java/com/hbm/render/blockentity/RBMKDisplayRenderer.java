@@ -27,8 +27,13 @@ public class RBMKDisplayRenderer implements BlockEntityRenderer<RBMKDisplayEntit
     private static final float CELL_Z_BASE = 0.375F;
     private static final float CELL_STEP = 0.125F;
     private static final float CELL_HALF = 0.0625F * 0.75F;
+    private static final float BG_CELL_HALF = CELL_HALF * 0.88F;
     private static final float DOT_HALF = 0.03125F;
     private static final float DOT_EDGE = 0.022097F;
+    private static final int EMPTY_CELL_A = 0xFFCBCBCB;
+    private static final int EMPTY_CELL_B = 0xFFBEBEBE;
+    private static final int BG_CELL_A = 0xAA6F6F6F;
+    private static final int BG_CELL_B = 0xAA5F5F5F;
 
     public RBMKDisplayRenderer(BlockEntityRendererProvider.Context context) {
     }
@@ -49,6 +54,16 @@ public class RBMKDisplayRenderer implements BlockEntityRenderer<RBMKDisplayEntit
         Matrix4f pose = poseStack.last().pose();
         for (int row = 0; row < GRID_SIZE; row++) {
             for (int col = 0; col < GRID_SIZE; col++) {
+                float x = CELL_X - 0.0002F;
+                float y = CELL_Y_BASE - row * CELL_STEP;
+                float z = CELL_Z_BASE - col * CELL_STEP;
+                int bg = ((row + col) & 1) == 0 ? BG_CELL_A : BG_CELL_B;
+                drawYZRect(pose, buffer, x, y - BG_CELL_HALF, z - BG_CELL_HALF, y + BG_CELL_HALF, z + BG_CELL_HALF, bg);
+            }
+        }
+
+        for (int row = 0; row < GRID_SIZE; row++) {
+            for (int col = 0; col < GRID_SIZE; col++) {
                 int index = row * GRID_SIZE + col;
                 RBMKPeripheralEntity.ConsoleColumn column = blockEntity.getConsoleColumn(index);
                 renderCell(buffer, pose, index, column);
@@ -59,12 +74,15 @@ public class RBMKDisplayRenderer implements BlockEntityRenderer<RBMKDisplayEntit
 
     private static void renderCell(MultiBufferSource buffer, Matrix4f pose, int index,
                                    RBMKPeripheralEntity.ConsoleColumn column) {
-        if (column == null) {
-            return;
-        }
         float x = CELL_X;
         float y = CELL_Y_BASE - (index / GRID_SIZE) * CELL_STEP;
         float z = CELL_Z_BASE - (index % GRID_SIZE) * CELL_STEP;
+
+        if (column == null) {
+            int empty = (index & 1) == 0 ? EMPTY_CELL_A : EMPTY_CELL_B;
+            drawYZRect(pose, buffer, x, y - CELL_HALF, z - CELL_HALF, y + CELL_HALF, z + CELL_HALF, RBMKPanelRenderHelper.argb(255, empty));
+            return;
+        }
 
         int cellColor = baseColor(column, index);
         drawYZRect(pose, buffer, x, y - CELL_HALF, z - CELL_HALF, y + CELL_HALF, z + CELL_HALF,

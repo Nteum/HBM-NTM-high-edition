@@ -1,12 +1,16 @@
 package com.hbm.explosion;
 
 import com.hbm.config.ConfigBomb;
+import com.hbm.network.ModMessages;
+import com.hbm.network.packet.toclient.S2CBatchedRenderUpdatePacket;
 import com.hbm.utils.ConcurrentBitSet;
 import com.hbm.utils.SubChunkKey;
 import com.hbm.utils.SubChunkSnapshot;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.SectionPos;
+import net.minecraft.network.protocol.game.ClientboundLevelChunkWithLightPacket;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -16,9 +20,12 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.DoubleAdder;
 
 import static com.hbm.HBM.LOGGER;
@@ -44,7 +51,6 @@ public class ExplosionNukeRayParallelized implements IExplosionRay {
     private final int strength;
     private final int radius;
 
-    private final CompletableFuture<List<Vec3>> directionsFuture;
     private final ConcurrentMap<ChunkPos, ConcurrentBitSet> destructionMap;
     private final ConcurrentMap<ChunkPos, ConcurrentMap<Integer, DoubleAdder>> damageMap;
     private final ConcurrentMap<SubChunkKey, SubChunkSnapshot> snapshots;
@@ -54,9 +60,11 @@ public class ExplosionNukeRayParallelized implements IExplosionRay {
     private final CountDownLatch latch;
     private final Thread latchWatcherThread;
     private final List<ChunkPos> orderedChunks;
+    private final Map<ChunkPos, DirtyRenderBox> changedChunkRanges;
+    private final int rayCount;
+    private final AtomicInteger nextRayIndex;
     private final BlockingQueue<SubChunkKey> highPriorityReactiveQueue;
     private final Iterator<SubChunkKey> lowPriorityProactiveIterator;
-    private volatile List<Vec3> directions;
     private volatile boolean collectFinished = false;
     private volatile boolean consolidationFinished = false;
     private volatile boolean destroyFinished = false;
@@ -74,8 +82,9 @@ public class ExplosionNukeRayParallelized implements IExplosionRay {
         this.bitsetSize = 16 * this.worldHeight * 16;
         this.sectionsCount = level.getSectionsCount();
 
-        int rayCount = Math.max(0, (int) (2.5 * Math.PI * strength * strength * RESOLUTION_FACTOR));
-        this.latch = new CountDownLatch(rayCount);
+        this.rayCount = Math.max(0, (int) (2.5 * Math.PI * strength * strength * RESOLUTION_FACTOR));
+        this.nextRayIndex = new AtomicInteger();
+        this.latch = new CountDownLatch(this.rayCount);
         List<SubChunkKey> sortedSubChunks = getAllSubChunks();
         this.lowPriorityProactiveIterator = sortedSubChunks.iterator();
         this.highPriorityReactiveQueue = new LinkedBlockingQueue<>();
@@ -88,14 +97,12 @@ public class ExplosionNukeRayParallelized implements IExplosionRay {
         this.snapshots = new ConcurrentHashMap<>(subChunkCount);
         this.waitingRoom = new ConcurrentHashMap<>(subChunkCount);
         this.orderedChunks = new ArrayList<>();
+        this.changedChunkRanges = new HashMap<>(initialChunkCapacity);
 
-        List<RayTask> initialRayTasks = new ArrayList<>(rayCount);
-        for (int i = 0; i < rayCount; i++) initialRayTasks.add(new RayTask(i));
-        this.rayQueue = new LinkedBlockingQueue<>(initialRayTasks);
+        this.rayQueue = new LinkedBlockingQueue<>();
 
-        int workers = Math.max(1, Runtime.getRuntime().availableProcessors() - 1);
+        int workers = Math.max(1, Math.min(6, Runtime.getRuntime().availableProcessors() - 2));
         this.pool = Executors.newWorkStealingPool(workers);
-        this.directionsFuture = CompletableFuture.supplyAsync(() -> generateSphereRays(rayCount));
 
         for (int i = 0; i < workers; i++) pool.submit(new Worker());
 
@@ -230,8 +237,8 @@ public class ExplosionNukeRayParallelized implements IExplosionRay {
 
                     if (level.getBlockEntity(pos) != null) level.removeBlockEntity(pos);
                     section.setBlockState(xLocal, yLocal, zLocal, Blocks.AIR.defaultBlockState(), false);
+                    trackDirtyRenderRange(cp, xLocal, yGlobal, zLocal);
                     chunkModified = true;
-                    level.getChunkSource().blockChanged(pos);
                     level.getLightEngine().checkBlock(pos);
                 }
                 bs.clear(bitIndex);
@@ -249,14 +256,84 @@ public class ExplosionNukeRayParallelized implements IExplosionRay {
         }
 
         if (orderedChunks.isEmpty() && destructionMap.isEmpty()) {
+            flushClientChunkUpdates();
             destroyFinished = true;
             if (pool != null) pool.shutdown();
         }
     }
 
+    private void trackDirtyRenderRange(ChunkPos chunkPos, int localX, int globalY, int localZ) {
+        int globalX = (chunkPos.x << 4) | localX;
+        int globalZ = (chunkPos.z << 4) | localZ;
+        changedChunkRanges.compute(chunkPos, (ignored, currentBox) -> {
+            if (currentBox == null) {
+                return new DirtyRenderBox(globalX, globalY, globalZ);
+            }
+            currentBox.include(globalX, globalY, globalZ);
+            return currentBox;
+        });
+    }
+
+    private void flushClientChunkUpdates() {
+        if (changedChunkRanges.isEmpty()) {
+            return;
+        }
+
+        Map<ServerPlayer, List<S2CBatchedRenderUpdatePacket.RenderRange>> renderUpdatesByPlayer = new HashMap<>();
+
+        for (Map.Entry<ChunkPos, DirtyRenderBox> entry : changedChunkRanges.entrySet()) {
+            ChunkPos chunkPos = entry.getKey();
+            LevelChunk chunk = level.getChunk(chunkPos.x, chunkPos.z);
+            ClientboundLevelChunkWithLightPacket chunkPacket =
+                    new ClientboundLevelChunkWithLightPacket(chunk, level.getLightEngine(), null, null);
+            S2CBatchedRenderUpdatePacket.RenderRange renderRange = entry.getValue().toRenderRange();
+
+            for (ServerPlayer player : level.getChunkSource().chunkMap.getPlayers(chunkPos, false)) {
+                player.connection.send(chunkPacket);
+                renderUpdatesByPlayer.computeIfAbsent(player, ignored -> new ArrayList<>()).add(renderRange);
+            }
+        }
+
+        for (Map.Entry<ServerPlayer, List<S2CBatchedRenderUpdatePacket.RenderRange>> entry : renderUpdatesByPlayer.entrySet()) {
+            ModMessages.sendToPlayer(new S2CBatchedRenderUpdatePacket(entry.getValue()), entry.getKey());
+        }
+        changedChunkRanges.clear();
+    }
+
     @Override
     public boolean isComplete() {
         return collectFinished && consolidationFinished && destroyFinished;
+    }
+
+    private static final class DirtyRenderBox {
+        private int minX;
+        private int minY;
+        private int minZ;
+        private int maxX;
+        private int maxY;
+        private int maxZ;
+
+        private DirtyRenderBox(int x, int y, int z) {
+            this.minX = x;
+            this.minY = y;
+            this.minZ = z;
+            this.maxX = x;
+            this.maxY = y;
+            this.maxZ = z;
+        }
+
+        private void include(int x, int y, int z) {
+            if (x < minX) minX = x;
+            if (y < minY) minY = y;
+            if (z < minZ) minZ = z;
+            if (x > maxX) maxX = x;
+            if (y > maxY) maxY = y;
+            if (z > maxZ) maxZ = z;
+        }
+
+        private S2CBatchedRenderUpdatePacket.RenderRange toRenderRange() {
+            return new S2CBatchedRenderUpdatePacket.RenderRange(minX, minY, minZ, maxX, maxY, maxZ);
+        }
     }
 
     @Override
@@ -288,21 +365,15 @@ public class ExplosionNukeRayParallelized implements IExplosionRay {
         if (this.orderedChunks != null) this.orderedChunks.clear();
     }
 
-    private List<Vec3> generateSphereRays(int count) {
-        List<Vec3> list = new ArrayList<>(count);
-        if (count == 0) return list;
-        if (count == 1) {
-            list.add(new Vec3(1, 0, 0));
-            return list;
+    private Vec3 generateSphereRay(int index, int count) {
+        if (count <= 1) {
+            return new Vec3(1, 0, 0);
         }
         double phi = Math.PI * (3.0 - Math.sqrt(5.0));
-        for (int i = 0; i < count; i++) {
-            double y = 1.0 - (i / (double) (count - 1)) * 2.0;
-            double r = Math.sqrt(1.0 - y * y);
-            double t = phi * i;
-            list.add(new Vec3(Math.cos(t) * r, y, Math.sin(t) * r).normalize());
-        }
-        return list;
+        double y = 1.0 - (index / (double) (count - 1)) * 2.0;
+        double r = Math.sqrt(1.0 - y * y);
+        double t = phi * index;
+        return new Vec3(Math.cos(t) * r, y, Math.sin(t) * r).normalize();
     }
 
     private void runConsolidation() {
@@ -358,7 +429,15 @@ public class ExplosionNukeRayParallelized implements IExplosionRay {
         public void run() {
             try {
                 while (!collectFinished && !Thread.currentThread().isInterrupted()) {
-                    RayTask task = rayQueue.poll(100, TimeUnit.MILLISECONDS);
+                    RayTask task = rayQueue.poll();
+                    if (task == null) {
+                        int nextIndex = nextRayIndex.getAndIncrement();
+                        if (nextIndex < rayCount) {
+                            task = new RayTask(nextIndex);
+                        } else {
+                            task = rayQueue.poll(100, TimeUnit.MILLISECONDS);
+                        }
+                    }
                     if (task != null) task.trace();
                 }
             } catch (InterruptedException e) {
@@ -388,8 +467,7 @@ public class ExplosionNukeRayParallelized implements IExplosionRay {
         }
 
         void init() {
-            if (directions == null) directions = directionsFuture.join();
-            Vec3 dir = directions.get(this.dirIndex);
+            Vec3 dir = generateSphereRay(this.dirIndex, rayCount);
             this.energy = strength * INITIAL_ENERGY_FACTOR;
             this.x = originX;
             this.y = originY;

@@ -80,6 +80,10 @@ public abstract class EntityMissileTier0 extends EntityMissile{
             return this;
         }
 
+        public Payload getPayload() {
+            return this.payload;
+        }
+
         @Override public ItemStack getDebrisRareDrop() { return null; }
         @Override public ItemStack getMissileItemForInfo() {
             return ItemStack.EMPTY;

@@ -54,7 +54,7 @@ public class BlockRBMKKeypad extends BaseSingleBlockMachine {
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        return RBMKMiniPanelGeometry.shape(state.getValue(FACING));
+        return RBMKMiniPanelGeometry.keypadShape();
     }
 
     @Override
@@ -64,7 +64,7 @@ public class BlockRBMKKeypad extends BaseSingleBlockMachine {
 
     @Override
     public VoxelShape getInteractionShape(BlockState state, BlockGetter level, BlockPos pos) {
-        return RBMKMiniPanelGeometry.shape(state.getValue(FACING));
+        return RBMKMiniPanelGeometry.keypadShape();
     }
 
     @Override

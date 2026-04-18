@@ -1,8 +1,8 @@
 {
   "parent": "minecraft:block/block",
   "textures": {
-    "particle": "hbm:block/rbmk/rbmk_keypad",
-    "front": "hbm:block/rbmk/rbmk_keypad",
+    "particle": "hbm:block/rbmk/rbmk_display",
+    "front": "hbm:block/rbmk/rbmk_display",
     "side": "hbm:block/rbmk/rbmk_blank_side",
     "back": "hbm:block/rbmk/rbmk_blank_side"
   },
