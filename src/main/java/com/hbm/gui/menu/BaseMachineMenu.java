@@ -1,13 +1,20 @@
 package com.hbm.gui.menu;
 
+import com.hbm.blockentity.machine.CrucibleEntity;
+import com.hbm.utils.WorldUtils;
+import net.minecraft.client.Minecraft;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class BaseMachineMenu extends AbstractContainerMenu {
+public abstract  class BaseMachineMenu <T extends BlockEntity> extends AbstractContainerMenu {
+    protected T be;
     public Container container;
     public ContainerData containerData;
     public int slotNum = 0;
@@ -18,6 +25,14 @@ public abstract class BaseMachineMenu extends AbstractContainerMenu {
         containerData = containerData1;
         this.addDataSlots(containerData1);
     }
+
+    protected BaseMachineMenu(@Nullable MenuType<?> pMenuType, int pContainerId, Inventory playerInventory, T blockEntity, ContainerData containerData1) {
+        super(pMenuType, pContainerId);
+        this.be = blockEntity;
+        containerData = containerData1;
+        this.addDataSlots(containerData1);
+    }
+
     /**
      * index排序：额外加入的物品槽...玩家物品槽...
      * */
@@ -59,7 +74,7 @@ public abstract class BaseMachineMenu extends AbstractContainerMenu {
 
     @Override
     public boolean stillValid(Player pPlayer) {
-        return this.container.stillValid(pPlayer);
+        return this.be == null ? this.container.stillValid(pPlayer) : Container.stillValidBlockEntity(this.be, pPlayer);
     }
 
     void addSlotWithPos(Container container, int StartIdx, int[][] slotPos){
@@ -77,5 +92,9 @@ public abstract class BaseMachineMenu extends AbstractContainerMenu {
         for(int k = 0; k < 9; ++k) {
             this.addSlot(new Slot(pPlayerInventory, k, 8 + k * 18 + xOffset, 142 + yOffset));
         }
+    }
+
+    public BlockPos getPos(){
+        return this.be.getBlockPos();
     }
 }

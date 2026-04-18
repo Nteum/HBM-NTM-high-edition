@@ -5,6 +5,7 @@ import com.hbm.blockentity.base.BasePipeBlockEntity;
 import com.hbm.utils.transport_net.FluidNetwork;
 import com.hbm.utils.transport_net.FluidNetworkSystem;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.BarrelBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;

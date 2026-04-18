@@ -85,6 +85,7 @@ public class BlockLootGen extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.machine_icf_press.get());
         this.dropSelf(ModBlocks.machine_research_reactor.get());
         this.dropSelf(ModBlocks.machine_reactor_breeding.get());
+
         this.dropSelf(ModBlocks.pwr_controller.get());
         this.dropSelf(ModBlocks.pwr_casing.get());
         this.dropSelf(ModBlocks.pwr_port.get());
@@ -97,7 +98,7 @@ public class BlockLootGen extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.pwr_neutron_source.get());
         // Blocks with noLootTable are excluded in getKnownBlocks().
         this.dropSelf(ModBlocks.machine_zirnox.get());
-        this.dropSelf(ModBlocks.conveyor.get());
+
         this.dropSelf(ModBlocks.crate_iron.get());
         this.dropSelf(ModBlocks.crate_steel.get());
         this.dropSelf(ModBlocks.bomb_boy.get());

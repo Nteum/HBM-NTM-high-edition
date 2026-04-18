@@ -1,0 +1,86 @@
+package com.hbm.render.blockentity;
+
+import com.hbm.block.HBMBlockProperties;
+import com.hbm.block.logistic.Conveyor;
+import com.hbm.blockentity.logistic.TileConveyor;
+import com.hbm.utils.DirectionUtils;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.client.renderer.entity.ItemRenderer;
+import net.minecraft.core.Direction;
+import net.minecraft.util.Mth;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.ItemDisplayContext;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+
+public class RendererConveyor implements BlockEntityRenderer<TileConveyor> {
+    public RendererConveyor(BlockEntityRendererProvider.Context pContext){}
+    @Override
+    public void render(TileConveyor conveyor, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int light, int overlay) {
+        if (conveyor.isEmpty()) return;
+        ItemStack carriedItem = conveyor.getItems().getStackInSlot(0);
+        if (carriedItem.isEmpty()) return;
+        ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
+        Direction inDir = conveyor.inDir;
+        BlockState state = conveyor.getBlockState();
+        Direction facing = state.getValue(Conveyor.FACING);
+        int variant = state.getValue(Conveyor.VARIANT);
+        float transProgress = (float) conveyor.getTransPortProgress() / TileConveyor.MAX_TRANSPORT_PROGRESS;
+        Direction dir;
+        boolean isBlock = carriedItem.getItem() instanceof BlockItem;
+        poseStack.pushPose();
+        if (variant < 3 || variant == 7){       // 如果处在水平方向上
+            dir = transProgress > 0.5 ? DirectionUtils.leftAndRightDir(facing, variant) : (inDir == null ? facing : inDir.getOpposite());   // 输入方向和运动方向是相反的
+            switch (dir){
+                case SOUTH -> {
+                    poseStack.translate(0.5, 0.375, transProgress);
+                    if (!isBlock) poseStack.mulPose(Axis.XN.rotation(Mth.HALF_PI));
+                }case EAST -> {
+                    poseStack.translate(transProgress, 0.375, 0.5);
+                    poseStack.mulPose(Axis.YN.rotation(Mth.HALF_PI));
+                    if (!isBlock) poseStack.mulPose(Axis.XN.rotation(Mth.HALF_PI));
+                }case NORTH -> {
+                    poseStack.translate(0.5, 0.375, 1 - transProgress);
+                    if (!isBlock) poseStack.mulPose(Axis.XN.rotation(-Mth.HALF_PI));
+                }case WEST -> {
+                    poseStack.translate(1 - transProgress, 0.375, 0.5);
+                    poseStack.mulPose(Axis.YN.rotation(-Mth.HALF_PI));
+                    if (!isBlock) poseStack.mulPose(Axis.XN.rotation(Mth.HALF_PI));
+                }
+            }
+            if (isBlock) blockItemAdjust(poseStack);
+            poseStack.scale(0.5f, 0.5f, 0.5f);
+            itemRenderer.render(carriedItem, ItemDisplayContext.GUI,true,poseStack,bufferSource,light,overlay,itemRenderer.getModel(carriedItem, conveyor.getLevel(), null, 0));
+
+        }else if (variant < 6){
+            switch (facing){
+                case SOUTH -> {
+                    poseStack.translate(0.5, transProgress, 0.625);
+                }case EAST -> {
+                    poseStack.translate(0.625, transProgress, 0.5);
+                    poseStack.mulPose(Axis.YN.rotation(Mth.HALF_PI));
+                }case NORTH -> {
+                    poseStack.translate(0.5, transProgress, 0.375);
+                }case WEST -> {
+                    poseStack.translate(0.375, transProgress, 0.5);
+                    poseStack.mulPose(Axis.YN.rotation(-Mth.HALF_PI));
+                }
+            }
+            if (isBlock) blockItemAdjust(poseStack);
+            poseStack.scale(0.5f, 0.5f, 0.5f);
+            itemRenderer.render(carriedItem, ItemDisplayContext.GUI,true,poseStack,bufferSource,light,overlay,itemRenderer.getModel(carriedItem, conveyor.getLevel(), null, 0));
+        }
+        poseStack.popPose();
+    }
+
+    private void blockItemAdjust(PoseStack poseStack){
+        poseStack.mulPose(Axis.XN.rotationDegrees(-45));
+        poseStack.mulPose(Axis.YN.rotationDegrees(-75));
+    }
+}

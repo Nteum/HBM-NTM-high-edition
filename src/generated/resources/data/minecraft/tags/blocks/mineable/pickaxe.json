@@ -2,6 +2,10 @@
   "values": [
     "#forge:machine",
     "#forge:ores",
+    "hbm:conveyor",
+    "hbm:conveyor_inserter",
+    "hbm:conveyor_extractor",
+    "hbm:foundry_mold"
     "#forge:storage_blocks",
     "hbm:press_preheater",
     "hbm:connector",

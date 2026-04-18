@@ -1,20 +1,11 @@
 package com.hbm.gui;
 
-import com.google.gson.internal.reflect.ReflectionHelper;
-import com.hbm.blockentity.base2.CapabilityBlockEntity;
-import com.hbm.blockentity.machine.ElectricFurnaceEntity;
-import com.hbm.gui.menu.*;
 import com.hbm.HBM;
-import com.hbm.gui.menu.ICFMenu;
-import com.hbm.gui.menu.ICFPressMenu;
-import net.minecraft.client.Minecraft;
-import net.minecraft.core.BlockPos;
+import com.hbm.gui.menu.*;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.world.MenuProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.extensions.IForgeMenuType;
 import net.minecraftforge.network.IContainerFactory;
 import net.minecraftforge.registries.DeferredRegister;
@@ -80,6 +71,8 @@ public class ModMenuType {
             MOD_MENU_TYPES.register("breeder_reactor_menu", () -> new MenuType<>(com.hbm.gui.menu.BreederReactorMenu::new, FeatureFlags.VANILLA_SET));
     public static final RegistryObject<MenuType<MenuFirebox>> MENU_FIREBOX = register("menu_firebox", MenuFirebox::new);
     public static final RegistryObject<MenuType<MenuCrucible>> MENU_CRUCIBLE = register("menu_crucible", MenuCrucible::new);
+    public static final RegistryObject<MenuType<MenuConveyorExtractor>> MENU_CONVEYOR_EXTRACTOR = register("menu_conveyor_extractor", MenuConveyorExtractor::new);
+    public static final RegistryObject<MenuType<MenuConveyorInserter>> MENU_CONVEYOR_INSERTER = register("menu_conveyor_inserter", MenuConveyorInserter::new);
     private static <T extends AbstractContainerMenu> RegistryObject<MenuType<T>> register(String key, IContainerFactory<T> factory){
         return MOD_MENU_TYPES.register(key, () -> IForgeMenuType.create(factory));
     }

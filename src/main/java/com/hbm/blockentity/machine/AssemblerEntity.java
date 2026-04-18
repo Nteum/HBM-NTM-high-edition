@@ -105,7 +105,7 @@ public class AssemblerEntity extends DummyableBlockEntity implements IPower {
 //        items = NonNullList.withSize(17,ItemStack.EMPTY);
         this.capabilitiesContent.addCapability(HBMCaps.LONG_ENERGY, new ProxyEnergyHandler(energyContainer));
         this.capabilitiesContent.addCapability(ForgeCapabilities.ENERGY, this.forgeEnergy);
-        this.capabilitiesContent.addCapability(ForgeCapabilities.ITEM_HANDLER, this.items);
+        this.capabilitiesContent.forceAddCapability(ForgeCapabilities.ITEM_HANDLER, this.items);
         multiblockData = MultiblockData.mapping.get(ModBlocks.machine_assembler.get());
     }
     public IEnergyStorage getEnergy(){

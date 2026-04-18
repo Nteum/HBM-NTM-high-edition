@@ -3,13 +3,13 @@ package com.hbm.main;
 import com.hbm.HBM;
 import com.hbm.Inventory.fluid.ModFluids;
 import com.hbm.block.interfaces.ILookOverlay;
+import com.hbm.block.interfaces.ITooltipProvider;
 import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.config.ConfigLBSM;
 import com.hbm.dim.orbit.SpaceSpecialEffects;
 import com.hbm.entity.ModEntityType;
 import com.hbm.gui.ModMenuType;
 import com.hbm.gui.screen.*;
-
 import com.hbm.item.icf.ItemICFPellet;
 import com.hbm.item.pwr.ItemPWRFuel;
 import com.hbm.item.research.ItemBreedingRod;
@@ -17,6 +17,7 @@ import com.hbm.item.tool.FluidBucketItem;
 import com.hbm.item.weapon.ItemMissile;
 import com.hbm.item.zirnox.ItemZirnoxRod;
 import com.hbm.particle.ModParticleTypes;
+import com.hbm.registries.ModBlocks;
 import com.hbm.registries.ModItems;
 import com.hbm.registries.ModKeyMapping;
 import com.hbm.render.blockentity.*;
@@ -43,25 +44,30 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.*;
 import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -132,6 +138,8 @@ public class ClientEventHandler {
             MenuScreens.register(ModMenuType.BREEDER_REACTOR_MENU.get(), BreederReactorScreen::new);
             MenuScreens.register(ModMenuType.MENU_FIREBOX.get(), GuiFirebox::new);
             MenuScreens.register(ModMenuType.MENU_CRUCIBLE.get(), GuiCrucible::new);
+            MenuScreens.register(ModMenuType.MENU_CONVEYOR_INSERTER.get(), GuiConveyorInserter::new);
+            MenuScreens.register(ModMenuType.MENU_CONVEYOR_EXTRACTOR.get(), GuiConveyorExtractor::new);
             //方块实体渲染
             BlockEntityRenderers.register(ModBlockEntityType.PRESS_ENTITY.get(), PressRenderer::new);
             BlockEntityRenderers.register(ModBlockEntityType.ASSEMBLER_ENTITY.get(), AssemblerRenderer::new);
@@ -149,6 +157,7 @@ public class ClientEventHandler {
             BlockEntityRenderers.register(ModBlockEntityType.TILE_FIREBOX.get(), RendererFirebox::new);
             BlockEntityRenderers.register(ModBlockEntityType.CRUCIBLE_ENTITY.get(), CrucibleRenderer::new);
             BlockEntityRenderers.register(ModBlockEntityType.TILE_FOUNDRY_MOLD.get(), RenderFoundryMold::new);
+            BlockEntityRenderers.register(ModBlockEntityType.TILE_CONVEYOR.get(), RendererConveyor::new);
             BlockEntityRenderers.register(ModBlockEntityType.RBMK_PERIPHERAL_ENTITY.get(), RBMKPeripheralRenderer::new);
             BlockEntityRenderers.register(ModBlockEntityType.RBMK_DISPLAY_ENTITY.get(), RBMKDisplayRenderer::new);
             BlockEntityRenderers.register(ModBlockEntityType.RBMK_GRAPH_ENTITY.get(), RBMKGraphRenderer::new);
@@ -344,6 +353,15 @@ public class ClientEventHandler {
 
                 }
             }
+        }
+    }
+
+    @SubscribeEvent
+    public static void onItemTooltipEvent(ItemTooltipEvent event){
+        ItemStack stack = event.getItemStack();
+        Item item = stack.getItem();
+        if (item.getDescriptionId().contains(HBM.MODID) && item instanceof ITooltipProvider tooltipProvider) {
+            tooltipProvider.addInformation(event.getItemStack(), event.getEntity(), event.getToolTip(), event.getFlags());
         }
     }
 }

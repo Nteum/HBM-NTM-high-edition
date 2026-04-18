@@ -1,0 +1,377 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "hbm:block/conveyor_extractor_cube"
+      }
+    },
+    {
+      "apply": {
+        "model": "hbm:block/conveyor_extractor_in",
+        "uvlock": true
+      },
+      "when": {
+        "facing": "north"
+      }
+    },
+    {
+      "apply": {
+        "model": "hbm:block/conveyor_extractor_arrow1"
+      },
+      "when": {
+        "facing": "north",
+        "relative_dir": "0"
+      }
+    },
+    {
+      "apply": {
+        "model": "hbm:block/conveyor_extractor_arrow2",
+        "x": 180,
+        "y": 180
+      },
+      "when": {
+        "facing": "north",
+        "relative_dir": "1"
+      }
+    },
+    {
+      "apply": {
+        "model": "hbm:block/conveyor_extractor_arrow2"
+      },
+      "when": {
+        "facing": "north",
+        "relative_dir": "2"
+      }
+    },
+    {
+      "apply": {
+        "model": "hbm:block/conveyor_extractor_arrow3",
+        "y": 270
+      },
+      "when": {
+        "facing": "north",
+        "relative_dir": "3"
+      }
+    },
+    {
+      "apply": {
+        "model": "hbm:block/conveyor_extractor_arrow3",
+        "x": 180,
+        "y": 270
+      },
+      "when": {
+        "facing": "north",
+        "relative_dir": "4"
+      }
+    },
+    {
+      "apply": {
+        "model": "hbm:block/conveyor_extractor_in",
+        "uvlock": true,
+        "y": 90
+      },
+      "when": {
+        "facing": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "hbm:block/conveyor_extractor_arrow1",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "relative_dir": "0"
+      }
+    },
+    {
+      "apply": {
+        "model": "hbm:block/conveyor_extractor_arrow2",
+        "x": 180,
+        "y": 270
+      },
+      "when": {
+        "facing": "east",
+        "relative_dir": "1"
+      }
+    },
+    {
+      "apply": {
+        "model": "hbm:block/conveyor_extractor_arrow2",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "relative_dir": "2"
+      }
+    },
+    {
+      "apply": {
+        "model": "hbm:block/conveyor_extractor_arrow3"
+      },
+      "when": {
+        "facing": "east",
+        "relative_dir": "3"
+      }
+    },
+    {
+      "apply": {
+        "model": "hbm:block/conveyor_extractor_arrow3",
+        "x": 180
+      },
+      "when": {
+        "facing": "east",
+        "relative_dir": "4"
+      }
+    },
+    {
+      "apply": {
+        "model": "hbm:block/conveyor_extractor_in",
+        "uvlock": true,
+        "y": 180
+      },
+      "when": {
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "hbm:block/conveyor_extractor_arrow1",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "relative_dir": "0"
+      }
+    },
+    {
+      "apply": {
+        "model": "hbm:block/conveyor_extractor_arrow2",
+        "x": 180
+      },
+      "when": {
+        "facing": "south",
+        "relative_dir": "1"
+      }
+    },
+    {
+      "apply": {
+        "model": "hbm:block/conveyor_extractor_arrow2",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "relative_dir": "2"
+      }
+    },
+    {
+      "apply": {
+        "model": "hbm:block/conveyor_extractor_arrow3",
+        "y": 90
+      },
+      "when": {
+        "facing": "south",
+        "relative_dir": "3"
+      }
+    },
+    {
+      "apply": {
+        "model": "hbm:block/conveyor_extractor_arrow3",
+        "x": 180,
+        "y": 90
+      },
+      "when": {
+        "facing": "south",
+        "relative_dir": "4"
+      }
+    },
+    {
+      "apply": {
+        "model": "hbm:block/conveyor_extractor_in",
+        "uvlock": true,
+        "y": 270
+      },
+      "when": {
+        "facing": "west"
+      }
+    },
+    {
+      "apply": {
+        "model": "hbm:block/conveyor_extractor_arrow1",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "relative_dir": "0"
+      }
+    },
+    {
+      "apply": {
+        "model": "hbm:block/conveyor_extractor_arrow2",
+        "x": 180,
+        "y": 90
+      },
+      "when": {
+        "facing": "west",
+        "relative_dir": "1"
+      }
+    },
+    {
+      "apply": {
+        "model": "hbm:block/conveyor_extractor_arrow2",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "relative_dir": "2"
+      }
+    },
+    {
+      "apply": {
+        "model": "hbm:block/conveyor_extractor_arrow3",
+        "y": 180
+      },
+      "when": {
+        "facing": "west",
+        "relative_dir": "3"
+      }
+    },
+    {
+      "apply": {
+        "model": "hbm:block/conveyor_extractor_arrow3",
+        "x": 180,
+        "y": 180
+      },
+      "when": {
+        "facing": "west",
+        "relative_dir": "4"
+      }
+    },
+    {
+      "apply": {
+        "model": "hbm:block/conveyor_extractor_in",
+        "uvlock": true,
+        "x": -90
+      },
+      "when": {
+        "facing": "up"
+      }
+    },
+    {
+      "apply": {
+        "model": "hbm:block/conveyor_extractor_arrow1",
+        "x": -90
+      },
+      "when": {
+        "facing": "up",
+        "relative_dir": "0"
+      }
+    },
+    {
+      "apply": {
+        "model": "hbm:block/conveyor_extractor_arrow2",
+        "x": -90,
+        "y": 180
+      },
+      "when": {
+        "facing": "up",
+        "relative_dir": "1"
+      }
+    },
+    {
+      "apply": {
+        "model": "hbm:block/conveyor_extractor_arrow2",
+        "x": -90
+      },
+      "when": {
+        "facing": "up",
+        "relative_dir": "2"
+      }
+    },
+    {
+      "apply": {
+        "model": "hbm:block/conveyor_extractor_arrow2",
+        "x": -90,
+        "y": 90
+      },
+      "when": {
+        "facing": "up",
+        "relative_dir": "3"
+      }
+    },
+    {
+      "apply": {
+        "model": "hbm:block/conveyor_extractor_arrow2",
+        "x": -90,
+        "y": -90
+      },
+      "when": {
+        "facing": "up",
+        "relative_dir": "4"
+      }
+    },
+    {
+      "apply": {
+        "model": "hbm:block/conveyor_extractor_in",
+        "uvlock": true,
+        "x": 90
+      },
+      "when": {
+        "facing": "down"
+      }
+    },
+    {
+      "apply": {
+        "model": "hbm:block/conveyor_extractor_arrow1",
+        "x": 90
+      },
+      "when": {
+        "facing": "down",
+        "relative_dir": "0"
+      }
+    },
+    {
+      "apply": {
+        "model": "hbm:block/conveyor_extractor_arrow2",
+        "x": 90,
+        "y": 180
+      },
+      "when": {
+        "facing": "down",
+        "relative_dir": "1"
+      }
+    },
+    {
+      "apply": {
+        "model": "hbm:block/conveyor_extractor_arrow2",
+        "x": 90
+      },
+      "when": {
+        "facing": "down",
+        "relative_dir": "2"
+      }
+    },
+    {
+      "apply": {
+        "model": "hbm:block/conveyor_extractor_arrow2",
+        "x": 90,
+        "y": 90
+      },
+      "when": {
+        "facing": "down",
+        "relative_dir": "3"
+      }
+    },
+    {
+      "apply": {
+        "model": "hbm:block/conveyor_extractor_arrow2",
+        "x": 90,
+        "y": -90
+      },
+      "when": {
+        "facing": "down",
+        "relative_dir": "4"
+      }
+    }
+  ]
+}

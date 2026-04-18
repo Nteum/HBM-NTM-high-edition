@@ -4,6 +4,7 @@ import com.hbm.HBM;
 import com.hbm.HBMKey;
 import com.hbm.HBMLang;
 import com.hbm.Inventory.material.HBMMatForm;
+import com.hbm.block.interfaces.ToolType;
 import com.hbm.compat.legacy.LegacyItems;
 import com.hbm.item.HBMComponent;
 import com.hbm.config.ConfigLBSM;
@@ -18,6 +19,8 @@ import com.hbm.item.env.BedrockOreItem;
 import com.hbm.item.env.ItemEggGlyphid;
 import com.hbm.item.env.ItemEggGlyphidToBirth;
 import com.hbm.item.icf.ItemICFPellet;
+import com.hbm.item.machine.ItemMachineUpgrade;
+import com.hbm.item.machine.ItemMachineUpgrade.UpgradeType;
 import com.hbm.item.misc.*;
 import com.hbm.item.pwr.ItemPWRFuel;
 import com.hbm.item.rbmk.ItemRBMKControlRod;
@@ -31,11 +34,11 @@ import com.hbm.item.tool.*;
 import com.hbm.item.weapon.*;
 import com.hbm.item.weapon.grenade.ItemGrenade;
 import com.hbm.item.zirnox.ItemZirnoxRod;
+import com.hbm.reactor.rbmk.RBMKLidType;
 import com.hbm.registries.WrapperRegistry.WrappedItemRegistry;
 import com.hbm.render.model.Models;
 import com.hbm.entity.weapon.missile.EntityMissileTier0;
 import com.hbm.utils.debug.GunSuicide;
-import com.hbm.reactor.rbmk.RBMKLidType;
 import com.hbm.utils.debug.ItemDebugWand;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
@@ -43,7 +46,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.food.Foods;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.client.model.generators.ModelFile;
@@ -54,7 +56,10 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 import javax.annotation.Nullable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
@@ -962,9 +967,41 @@ public class ModItems {
     public static final RegistryObject<Item> BEDROCK_ORE = ITEMS.register("bedrock_ore_base",()->new BedrockOreItem(new Item.Properties()));
 
     public static final RegistryObject<Item> reacher = ITEMS.register("reacher",()->new Item(new Item.Properties()));
-    public static final RegistryObject<Item> SCREWDRIVER = ITEMS.register("screwdriver",()->new Item(new Item.Properties()));
+    public static final RegistryObject<Item> SCREWDRIVER = control("screwdriver", ()->new ItemTooling(new Item.Properties().stacksTo(1).durability(100).setNoRepair(), ToolType.SCREWDRIVER), "Screw");
     //升级组件
     public static final RegistryObject<Item> UPGRADE_BASE = ITEMS.register("upgrade_base",()->new Item(new Item.Properties()));
+    public static final RegistryObject<Item> UPGRADE_SPEED_1 = control("upgrade_speed_1", ()->new ItemMachineUpgrade(UpgradeType.SPEED, 1), "Speed Upgrade Tiler 1");
+    public static final RegistryObject<Item> UPGRADE_SPEED_2 = control("upgrade_speed_2", () -> new ItemMachineUpgrade(UpgradeType.SPEED, 2), "Speed Upgrade Tier 2");
+    public static final RegistryObject<Item> UPGRADE_SPEED_3 = control("upgrade_speed_3", () -> new ItemMachineUpgrade(UpgradeType.SPEED, 3), "Speed Upgrade Tier 3");
+    public static final RegistryObject<Item> UPGRADE_EFFECT_1 = control("upgrade_effect_1", () -> new ItemMachineUpgrade(UpgradeType.EFFECT, 1), "Effect Upgrade Tier 1");
+    public static final RegistryObject<Item> UPGRADE_EFFECT_2 = control("upgrade_effect_2", () -> new ItemMachineUpgrade(UpgradeType.EFFECT, 2), "Effect Upgrade Tier 2");
+    public static final RegistryObject<Item> UPGRADE_EFFECT_3 = control("upgrade_effect_3", () -> new ItemMachineUpgrade(UpgradeType.EFFECT, 3), "Effect Upgrade Tier 3");
+    public static final RegistryObject<Item> UPGRADE_POWER_1 = control("upgrade_power_1", () -> new ItemMachineUpgrade(UpgradeType.POWER, 1), "Power Upgrade Tier 1");
+    public static final RegistryObject<Item> UPGRADE_POWER_2 = control("upgrade_power_2", () -> new ItemMachineUpgrade(UpgradeType.POWER, 2), "Power Upgrade Tier 2");
+    public static final RegistryObject<Item> UPGRADE_POWER_3 = control("upgrade_power_3", () -> new ItemMachineUpgrade(UpgradeType.POWER, 3), "Power Upgrade Tier 3");
+    public static final RegistryObject<Item> UPGRADE_FORTUNE_1 = control("upgrade_fortune_1", () -> new ItemMachineUpgrade(UpgradeType.FORTUNE, 1), "Fortune Upgrade Tier 1");
+    public static final RegistryObject<Item> UPGRADE_FORTUNE_2 = control("upgrade_fortune_2", () -> new ItemMachineUpgrade(UpgradeType.FORTUNE, 2), "Fortune Upgrade Tier 2");
+    public static final RegistryObject<Item> UPGRADE_FORTUNE_3 = control("upgrade_fortune_3", () -> new ItemMachineUpgrade(UpgradeType.FORTUNE, 3), "Fortune Upgrade Tier 3");
+    public static final RegistryObject<Item> UPGRADE_AFTERBURN_1 = control("upgrade_afterburn_1", () -> new ItemMachineUpgrade(UpgradeType.AFTERBURN, 1), "Afterburn Upgrade Tier 1");
+    public static final RegistryObject<Item> UPGRADE_AFTERBURN_2 = control("upgrade_afterburn_2", () -> new ItemMachineUpgrade(UpgradeType.AFTERBURN, 2), "Afterburn Upgrade Tier 2");
+    public static final RegistryObject<Item> UPGRADE_AFTERBURN_3 = control("upgrade_afterburn_3", () -> new ItemMachineUpgrade(UpgradeType.AFTERBURN, 3), "Afterburn Upgrade Tier 3");
+    public static final RegistryObject<Item> UPGRADE_OVERDRIVE_1 = control("upgrade_overdrive_1", () -> new ItemMachineUpgrade(UpgradeType.OVERDRIVE, 1), "Overdrive Upgrade Tier 1");
+    public static final RegistryObject<Item> UPGRADE_OVERDRIVE_2 = control("upgrade_overdrive_2", () -> new ItemMachineUpgrade(UpgradeType.OVERDRIVE, 2), "Overdrive Upgrade Tier 2");
+    public static final RegistryObject<Item> UPGRADE_OVERDRIVE_3 = control("upgrade_overdrive_3", () -> new ItemMachineUpgrade(UpgradeType.OVERDRIVE, 3), "Overdrive Upgrade Tier 3");
+    public static final RegistryObject<Item> UPGRADE_RADIUS = control("upgrade_radius", () -> new ItemMachineUpgrade(new Item.Properties().stacksTo(16)), "Radius Upgrade");
+    public static final RegistryObject<Item> UPGRADE_HEALTH = control("upgrade_health", () -> new ItemMachineUpgrade(new Item.Properties().stacksTo(16)), "Health Upgrade");
+    public static final RegistryObject<Item> UPGRADE_SMELTER = control("upgrade_smelter", ItemMachineUpgrade::new, "Smelter Upgrade");
+    public static final RegistryObject<Item> UPGRADE_SHREDDER = control("upgrade_shredder", ItemMachineUpgrade::new, "Shredder Upgrade");
+    public static final RegistryObject<Item> UPGRADE_CENTRIFUGE = control("upgrade_centrifuge", ItemMachineUpgrade::new, "Centrifuge Upgrade");
+    public static final RegistryObject<Item> UPGRADE_CRYSTALLIZER = control("upgrade_crystallizer", ItemMachineUpgrade::new, "Crystallizer Upgrade");
+    public static final RegistryObject<Item> UPGRADE_NULLIFIER = control("upgrade_nullifier", ItemMachineUpgrade::new, "Nullifier Upgrade");
+    public static final RegistryObject<Item> UPGRADE_SCREM = control("upgrade_screm", ItemMachineUpgrade::new, "Screm Upgrade");
+    public static final RegistryObject<Item> UPGRADE_GC_SPEED = control("upgrade_gc_speed", ItemMachineUpgrade::new, "GC Speed Upgrade");
+    public static final RegistryObject<Item> UPGRADE_5G = control("upgrade_5g", ItemMachineUpgrade::new, "5G Upgrade");
+    // 这里tier设为0是暂时留空，通过HBMUpgrade#setUpgrade设置等级。
+    public static final RegistryObject<Item> UPGRADE_STACK = control("upgrade_stack", () -> new ItemMachineUpgrade(UpgradeType.SPECIAL, 0), "Stack Upgrade");
+    public static final RegistryObject<Item> UPGRADE_EJECTOR = control("upgrade_ejector", () -> new ItemMachineUpgrade(UpgradeType.SPECIAL, 0), "Ejector Upgrade");
+
     //导弹
 //    public static final RegistryObject<Item> DESIGNATOR = ITEMS.register("designator",()->new ItemDesignator(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> MISSILE_GENERIC = ITEMS.register("missile_generic",()->new ItemMissile(new Item.Properties(), ItemMissile.MissileFormFactor.V2, ItemMissile.MissileTier.TIER1,

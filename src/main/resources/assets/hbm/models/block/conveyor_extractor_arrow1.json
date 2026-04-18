@@ -1,0 +1,19 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "arrow": "hbm:block/crane_arrow_red1",
+    "out": "hbm:block/crane_out"
+  },
+  "render_type": "cutout",
+  "elements": [
+    {
+      "from": [0, 0, 0],
+      "to": [16, 16, 16],
+      "faces": {
+        "south": {"texture": "#out"},
+        "up": {"texture": "#arrow", "uv": [0, 16, 16, 0], "rotate": 90 },
+        "down": {"texture": "#arrow", "rotate": 90 }
+      }
+    }
+  ]
+}

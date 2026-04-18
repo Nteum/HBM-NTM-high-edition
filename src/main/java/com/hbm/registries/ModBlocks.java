@@ -11,8 +11,7 @@ import com.hbm.block.env.GlyphidBlock;
 import com.hbm.block.env.GlyphidSpawner;
 import com.hbm.block.env.WasteEarth;
 import com.hbm.block.env.WasteLeaves;
-import com.hbm.block.logistic.BlockCable;
-import com.hbm.block.logistic.BlockConnector;
+import com.hbm.block.logistic.*;
 import com.hbm.block.machine.*;
 import com.hbm.block.machine.icf.BlockICFController;
 import com.hbm.block.machine.icf.BlockICFPress;
@@ -43,7 +42,6 @@ import com.hbm.block.machine.generator.BlockPWR;
 import com.hbm.block.machine.generator.BlockPWRController;
 import com.hbm.block.machine.generator.BlockPWRPillar;
 import com.hbm.block.machine.generator.BlockGenericPWR;
-import com.hbm.block.logistic.BlockConveyor;
 import com.hbm.block.space.BlockSpaceStation;
 import com.hbm.block.tools.FoundryMold;
 import com.hbm.block.weapon.NukeBoy;
@@ -239,9 +237,11 @@ public class ModBlocks {
     //模型部分（仅仅用于加载模型渲染，而不会在游戏单独出现，名称以part开头）
 //    public static final RegistryObject<Block> part_press_head = BLOCKS.register("part_press_head",()->new Block(Properties.of().noLootTable()));
     //电力
-    public static final RegistryObject<Block> RED_CABLE = registerMachineBlockWithItem("red_cable",()->new BlockCable(Properties.copy(Blocks.STONE_BRICK_WALL)));
-    //输送带
-    public static final RegistryObject<Block> conveyor = registerMachineBlockWithItem("conveyor",()->new BlockConveyor(Properties.of()));
+    public static final RegistryObject<Block> RED_CABLE = registerBlockWithItem("red_cable",()->new BlockCable(Properties.copy(Blocks.STONE_BRICK_WALL)));
+    // 物流体系
+    public static final RegistryObject<Block> conveyor = new BlockBuilder("conveyor", ()->new Conveyor(Properties.copy(Blocks.STONE))).tab(ModTabs.CONTROL.getKey()).model(HBMKey.MODEL_STANDALONE).loc(HBMKey.ORDERLY_GEN).loot(HBMKey.DROP_SELF).tags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL).build();
+    public static final RegistryObject<Block> CONVEYOR_INSERTER = new BlockBuilder("conveyor_inserter", ()->new ConveyorInserter(Properties.copy(Blocks.STONE))).tab(ModTabs.CONTROL.getKey()).model(HBMKey.MODEL_STANDALONE).loc(HBMKey.ORDERLY_GEN).loot(HBMKey.DROP_SELF).tags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL).build();
+    public static final RegistryObject<Block> CONVEYOR_EXTRACTOR = new BlockBuilder("conveyor_extractor", ()->new ConveyorExtractor(Properties.copy(Blocks.STONE))).tab(ModTabs.CONTROL.getKey()).model(HBMKey.MODEL_STANDALONE).loc(HBMKey.ORDERLY_GEN).loot(HBMKey.DROP_SELF).tags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL).build();
     public static final RegistryObject<Block> crate_iron =
             new BlockBuilder("crate_iron", () -> new IronCrateBlock(Properties.of().strength(3.0F).sound(SoundType.WOOD)))
                     .tab(ModTabs.MACHINE.getKey()).loc(HBMKey.REVERSE_GEN)
@@ -284,7 +284,8 @@ public class ModBlocks {
     public static final RegistryObject<Block> WASTE_LEAVES = add("waste_leaves", () -> new WasteLeaves(Properties.copy(Blocks.ACACIA_LEAVES).noLootTable()), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_STANDALONE, HBMKey.ORDERLY_GEN, HBMKey.DROP_NONE);
     public static final RegistryObject<Block> WASTE_GRASS = add("waste_grass", () -> new WasteEarth(Properties.copy(Blocks.DIRT)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_DIFURNACE, HBMKey.ORDERLY_GEN, HBMKey.DROP_STANDALONE);
     // casting
-    public static final RegistryObject<Block> FOUNDRY_MOLD = new BlockBuilder("foundry_mold", () -> new FoundryMold(Properties.copy(Blocks.STONE))).tab(ModTabs.MACHINE.getKey()).model(HBMKey.MODEL_EXISTING).loc(HBMKey.ORDERLY_GEN).loot(HBMKey.DROP_SELF).tags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL).build();
+    public static final RegistryObject<Block> FOUNDRY_MOLD = new BlockBuilder("foundry_mold", () -> new FoundryMold(Properties.copy(Blocks.STONE)))
+            .tab(ModTabs.MACHINE.getKey()).model(HBMKey.MODEL_EXISTING).loc(HBMKey.ORDERLY_GEN).loot(HBMKey.DROP_SELF).tags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL).build();
     /**
      * 航天版方块
      * */

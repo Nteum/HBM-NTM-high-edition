@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
@@ -20,42 +21,30 @@ public class ItemMachineUpgrade extends Item {
     public UpgradeType type;
     public int tier = 0;
     public ItemMachineUpgrade() {
-        super(new Item.Properties().stacksTo(1));
-        this.type = UpgradeType.SPECIAL;
+        this(UpgradeType.SPECIAL);
+    }
+
+    public ItemMachineUpgrade(Properties properties){
+        this(properties, UpgradeType.SPECIAL, 1);
     }
 
     public ItemMachineUpgrade(UpgradeType type) {
-        super(new Item.Properties().stacksTo(1));
-        this.type = type;
+        this(type, 1);
     }
 
     public ItemMachineUpgrade(UpgradeType type, int tier) {
-        this(type);
+        this(new Item.Properties().stacksTo(1), type, tier);
+    }
+
+    public ItemMachineUpgrade(Properties properties, UpgradeType type, int tier) {
+        super(properties);
+        this.type = type;
         this.tier = tier;
     }
 
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
         super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
-
-//        GuiScreen open = Minecraft.getMinecraft().currentScreen;
-//
-//        if(open != null && open instanceof GuiContainer) {
-//            GuiContainer guiContainer = (GuiContainer) open;
-//            Container container = guiContainer.inventorySlots;
-//            if(container.inventorySlots.size() > 0) {
-//                Slot first = container.getSlot(0);
-//                IInventory inv = (IInventory) first.inventory;
-//                if(inv instanceof IUpgradeInfoProvider) {
-//                    IUpgradeInfoProvider provider = (IUpgradeInfoProvider) inv;
-//                    if(provider.canProvideInfo(this.type, this.tier, bool)) {
-//                        provider.provideInfo(this.type, this.tier, list, bool);
-//                        return;
-//                    }
-//                }
-//            }
-//        }
-
         Component toAdd;
         switch (this.type){
             case RADIUS -> toAdd = Component.translatable(HBMLang.UPGRADE_RADIUS.key()).withStyle(ChatFormatting.RED);
@@ -72,7 +61,7 @@ public class ItemMachineUpgrade extends Item {
         pTooltipComponents.add(toAdd);
     }
 
-    public static enum UpgradeType {
+    public enum UpgradeType {
         SPEED,
         EFFECT,
         POWER,

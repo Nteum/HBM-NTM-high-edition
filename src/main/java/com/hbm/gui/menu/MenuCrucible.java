@@ -15,7 +15,7 @@ import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
-public class MenuCrucible extends BaseMachineMenu{
+public class MenuCrucible extends BaseMachineMenu<CrucibleEntity>{
     public CrucibleEntity be;
     public MenuCrucible(int pContainerId, Inventory pPlayerInventory, CrucibleEntity tile, ContainerData containerData) {
         super(ModMenuType.MENU_CRUCIBLE.get(), pContainerId, tile, containerData);

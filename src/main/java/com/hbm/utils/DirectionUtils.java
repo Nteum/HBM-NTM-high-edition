@@ -11,6 +11,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
@@ -181,5 +182,79 @@ public class DirectionUtils {
             if (level.getBlockState(pos.relative(direction)).is(targetBlock)) return true;
         }
         return false;
+    }
+    // 从某个方向左右转后获得的方向 0 - 向前；1 - 左弯；2 - 右弯
+    public static Direction leftAndRightDir(Direction inDir, int bend){
+        return switch (bend){
+            case 1 -> Direction.from2DDataValue((inDir.get2DDataValue() - 1 + 4) % 4);
+            case 2 -> Direction.from2DDataValue((inDir.get2DDataValue() + 1 + 4) % 4);
+            default -> inDir;
+        };
+    }
+    // 0 - 对面，1 - 左面 2 - 右面 3 - 上面 4 - 下面
+//    public static Direction relativeDir2Dir(Direction refDir, int relative){
+//        Direction.Axis axis = refDir.getAxis();
+//        Direction.AxisDirection axisDirection = refDir.getAxisDirection();
+//        Direction.Axis sideAxis = axis == Direction.Axis.X || axis == Direction.Axis.Y ? Direction.Axis.Z :  Direction.Axis.X;
+//        Direction.AxisDirection rightAxisDirection = axis == Direction.Axis.X || axis == Direction.Axis.Y ? axisDirection : axisDirection.opposite();
+//        Direction.Axis verticalAxis = axis == Direction.Axis.X || axis == Direction.Axis.Z ? Direction.Axis.Y : Direction.Axis.X;
+//        Direction.AxisDirection upAxisDirection = axis == Direction.Axis.X || axis == Direction.Axis.Z ? axisDirection : axisDirection.opposite();
+//        return switch (relative){
+//            case 0 -> refDir.getOpposite();
+//            case 1 -> Direction.fromAxisAndDirection(sideAxis, rightAxisDirection.opposite());
+//            case 2 -> Direction.fromAxisAndDirection(sideAxis, rightAxisDirection);
+//            case 3 -> Direction.fromAxisAndDirection(verticalAxis, upAxisDirection);
+//            case 4 -> Direction.fromAxisAndDirection(verticalAxis, upAxisDirection.opposite());
+//            default -> refDir;
+//        };
+//    }
+    // 预定义的相对查找表（针对每种 refDir，对应的 0-4 分别是什么）
+    // 这虽然笨，但绝对不会在计算坐标轴正负号时出错
+    private static final Direction[][] RELATIVE_MAP = {
+            // 假设索引顺序：0:OPPOSITE, 1:LEFT, 2:RIGHT, 3:UP, 4:DOWN
+            { /* DOWN  */ Direction.UP,    Direction.WEST,  Direction.EAST,  Direction.NORTH, Direction.SOUTH },
+            { /* UP    */ Direction.DOWN,  Direction.WEST,  Direction.EAST,  Direction.SOUTH, Direction.NORTH },
+            { /* NORTH */ Direction.SOUTH, Direction.WEST,  Direction.EAST,  Direction.UP,    Direction.DOWN },
+            { /* SOUTH */ Direction.NORTH, Direction.EAST,  Direction.WEST,  Direction.UP,    Direction.DOWN },
+            { /* WEST  */ Direction.EAST,  Direction.SOUTH, Direction.NORTH, Direction.UP,    Direction.DOWN },
+            { /* EAST  */ Direction.WEST,  Direction.NORTH, Direction.SOUTH, Direction.UP,    Direction.DOWN }
+    };
+
+    public static Direction relativeDir2Dir(Direction ref, int relative) {
+        if (relative < 0 || relative > 4) return ref;
+        return RELATIVE_MAP[ref.get3DDataValue()][relative];
+    }
+    public static int dir2RelativeDir(Direction ref, Direction secondary){
+        if (ref == secondary) return 0;
+        for (int i = 0; i < RELATIVE_MAP[ref.get3DDataValue()].length; i++) {
+            if (RELATIVE_MAP[ref.get3DDataValue()][i] == secondary) return i;
+        }
+        return 0;
+    }
+
+    // 辅助函数：将方向向上“翻” 90 度
+    private static Direction rotateUp(Direction ref) {
+        // 如果参考方向是水平的，向上转 90 度就是指向天（有些特殊情况需要处理）
+        // 这里推荐一个万能公式：
+        return switch (ref) {
+            case UP -> Direction.NORTH;   // 已经在顶上，向上翻转到北
+            case DOWN -> Direction.SOUTH; // 已经在底下，向上翻转到南
+            default -> Direction.UP;      // 水平方向向上翻转统一指向天
+        };
+    }
+    // 一个点相对于所在方块内特点方向边的距离
+    public static double locToSideDist(Vec3 loc, Direction side){
+        return switch (side){
+            case EAST -> Math.ceil(loc.x) - loc.x;
+            case WEST -> loc.x - Math.floor(loc.x);
+            case SOUTH -> Math.ceil(loc.z) - loc.z;
+            case NORTH -> loc.z - Math.floor(loc.z);
+            case UP -> Math.ceil(loc.y) - loc.y;
+            case DOWN -> loc.y - Math.floor(loc.y);
+        };
+    }
+    // 一个点相对于两条边的角度
+    public static double locToCornerAngle(Vec3 loc, Direction inSide, Direction outSide){
+        return Math.atan(locToSideDist(loc, inSide) / locToSideDist(loc, outSide));
     }
 }

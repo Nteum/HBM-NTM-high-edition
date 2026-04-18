@@ -1,0 +1,42 @@
+{
+  "parent": "minecraft:block/block",
+  "render_type": "cutout",
+  "textures": {
+    "top": "hbm:block/crane_top",
+    "side": "hbm:block/crane_side",
+    "in": "hbm:block/crane_in",
+    "arrow": "hbm:block/crane_arrow_red1",
+    "out": "hbm:block/crane_out",
+    "particle": "hbm:block/crane_side"
+  },
+  "elements": [
+    {
+      "from": [ 0, 0, 0 ],
+      "to": [ 16, 16, 16 ],
+      "faces": {
+        "down":  { "texture": "#top", "cullface": "down" },
+        "up":    { "texture": "#top", "cullface": "up" },
+        "north": { "texture": "#side", "cullface": "north" },
+        "south": { "texture": "#side", "cullface": "south" },
+        "west":  { "texture": "#side", "cullface": "west" },
+        "east":  { "texture": "#side", "cullface": "east" }
+      }
+    },
+    {
+      "from": [0, 0, 0],
+      "to": [16, 16, 16],
+      "faces": {
+        "north": {"texture": "#in"}
+      }
+    },
+    {
+      "from": [0, 0, 0],
+      "to": [16, 16, 16],
+      "faces": {
+        "south": {"texture": "#out"},
+        "up": {"texture": "#arrow", "uv": [0, 16, 16, 0], "rotate": 90 },
+        "down": {"texture": "#arrow", "rotate": 90 }
+      }
+    }
+  ]
+}

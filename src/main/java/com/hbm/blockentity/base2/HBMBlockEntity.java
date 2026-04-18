@@ -61,11 +61,6 @@ public abstract class HBMBlockEntity extends CapabilityBlockEntity implements IE
         return null;
     }
 
-//    @Override
-//    public List<IExtendedFluidTank> getFluidTanks(@Nullable Direction side) {
-//        return List.of();
-//    }
-
     @Override
     public void onContentsChanged() {
         this.setChanged();

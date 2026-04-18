@@ -1,4 +1,3 @@
-
 # HBM-NTM High Edition-CN
 
 基于 **Minecraft Forge 1.20.1** 的 HBM / NTM 高版本移植与扩展工程。  
@@ -17,7 +16,7 @@
 3. **资源表现对齐**
    - 模型、贴图、语言、配方、掉落表、创造标签页、JEI 展示尽量对齐旧版与 MC百科认知。
 4. **现代工程化维护**
-   - 使用 Forge 1.20.1、Java 17、Gradle、数据生成、现代注册体系，保证后续继续扩展和修复时可维护。
+   - 使用 Forge 1.20.1、Java 17+、Gradle、数据生成、现代注册体系，保证后续继续扩展和修复时可维护。
 
 ---
 
@@ -27,7 +26,7 @@
 已经具备以下基础：
 
 - Forge `1.20.1`
-- Java `17`
+- Java `17+`
 - JEI 集成
 - 大量 HBM 物品、方块、机器已完成初步注册与资源接入
 - 旧版配方、模型、语言、资源正在分批迁移
@@ -48,7 +47,7 @@
 
 - **Minecraft**: `1.20.1`
 - **Forge**: `47.2.32`
-- **Java**: `17`
+- **Java**: `17+`
 - **Gradle**: `8.x`
 - **ForgeGradle**: `6.0.25`
 - **JEI**: 已接入开发依赖
@@ -59,13 +58,13 @@
 ## 开发环境要求
 
 ### 必要环境
-- JDK 17
+- JDK 17+
 - Gradle Wrapper（仓库自带）
 - 能正常下载 Forge / Mojang / Modrinth / Maven 依赖的网络环境
 
 ### 推荐环境
-- IntelliJ IDEA
-- macOS / Linux
+- IntelliJ IDEA、VS Code + Minecraft dev类插件
+- Windows/macOS/Linux
 - 至少 `4 GB` JVM 构建内存
 - 本地单独的 Gradle 用户目录，避免污染全局缓存
 
@@ -216,13 +215,13 @@ HBM-NTM-high-edition/
 本仓库默认以以下旧版仓库为主要移植基线：
 
 ```text
-~/Hbm-s-Nuclear-Tech-GIT
+Hbm-s-Nuclear-Tech-GIT
 ```
 
 也就是：
 
 ```text
-/Users/a1/Hbm-s-Nuclear-Tech-GIT
+bobcat的Hbm-s-Nuclear-Tech-GIT，1.7.10原版
 ```
 
 迁移、修复、行为对齐时，优先参考这份旧版源码中的：
@@ -239,7 +238,7 @@ HBM-NTM-high-edition/
 ## 参考基线
 
 ### 1. 旧版源码
-- `~/Hbm-s-Nuclear-Tech-GIT`
+- `Hbm-s-Nuclear-Tech-GIT`
 
 ### 2. MC百科
 本项目默认把 MC百科作为玩家可见层面的重要基线，用于统一：
@@ -291,7 +290,7 @@ HBM-NTM-high-edition/
 
 ## 代码风格
 
-- Java 17
+- 最好为Java 17
 - 四空格缩进
 - K&R 大括号风格
 - 类名使用 `UpperCamelCase`

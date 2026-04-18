@@ -8,6 +8,7 @@ import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.wrapper.CombinedInvWrapper;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
@@ -27,6 +28,7 @@ public class CapabilitiesContent {
     // 能力通过方块面访问的情况，注意：这里的方向仅仅是能否访问能力，而不代表哪个面可以访问能力内部的特殊容器
     // 方向信息需要序列化
     private final Map<Capability<?>, List<Direction>> sideMap = new IdentityHashMap<>();
+    private final Map<Capability<?>, Map<Direction, LazyOptional<?>>> sideSpecialMap = new HashMap<>();
     // 添加能力
     // 默认全部方向都可以
     public <T>void addCapability(Capability<T> capability, T handler){
@@ -36,7 +38,17 @@ public class CapabilitiesContent {
             sideMap.put(capability, List.of(Direction.values()));
         }
     }
-    // 添加能力，但可以指明方向
+    // 我希望添加capability可以覆盖原有的，但这获取会影响到他人的代码，所以单独实现一个功能。
+    public <T>void forceAddCapability(Capability<T> capability, T handler, Direction ... directions){
+        handlerMap.put(capability, handler);
+        LazyOptional<T> lazyOptional = LazyOptional.of(() -> handler);
+        lazyOptionalMap.put(capability, lazyOptional );
+        sideMap.computeIfAbsent(capability, capability1 -> new ArrayList<>()).addAll(List.of(directions.length == 0 ? Direction.values() : directions));
+        for (Direction direction : directions) {
+            sideSpecialMap.computeIfAbsent(capability, capability1 -> new HashMap<>()).put(direction, lazyOptional);
+        }
+    }
+    // 添加能力，但可以指明方向，除了用于添加能力，也用于添加方向
     public <T>void addCapability(Capability<T> capability, T handler, Direction ... sides){
         if (!lazyOptionalMap.containsKey(capability)){
             handlerMap.put(capability, handler);
@@ -65,6 +77,9 @@ public class CapabilitiesContent {
 
     public <T> LazyOptional<T> getCapability(Capability<T> capability, @Nullable Direction side){
         if (lazyOptionalMap.containsKey(capability) && (side == null || sideMap.get(capability).contains(side))){
+            if (sideSpecialMap.containsKey(capability) && sideSpecialMap.get(capability).containsKey(side)){
+                return sideSpecialMap.get(capability).get(side).cast();
+            }
             Object object;
             LazyOptional<?> lazyOptional = lazyOptionalMap.get(capability);
             if (lazyOptional.isPresent())

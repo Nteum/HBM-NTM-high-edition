@@ -1,7 +1,6 @@
 package com.hbm.entity;
 
 import com.hbm.HBM;
-import com.hbm.HBMKey;
 import com.hbm.entity.effect.EntityBlackHole;
 import com.hbm.entity.effect.EntityMeteor;
 import com.hbm.entity.effect.EntityNukeTorex;
@@ -10,7 +9,7 @@ import com.hbm.entity.mob.EntityGlyphid;
 import com.hbm.entity.weapon.projectile.EntityGunBullet;
 import com.hbm.entity.weapon.grenade.*;
 import com.hbm.entity.weapon.missile.EntityMissileAntiBallistic;
-import com.hbm.entity.weapon.missile.EntityMissileTier0.*;
+import com.hbm.entity.weapon.missile.EntityMissileTier0.EntityMissileTest;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -18,6 +17,11 @@ import net.minecraft.world.entity.MobCategory;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+
+//import com.hbm.entity.mob.EntityGlyphid;
+//import com.hbm.entity.logic.GrenadeGeneticEntity;
+//import com.hbm.entity.logic.NukeExplodeEntity;
+;
 
 /** 模型的实体种类 */
 public class ModEntityType {
@@ -62,6 +66,7 @@ public class ModEntityType {
             = register("entity_nuke_explosion_mk5",EntityType.Builder.<EntityNukeExplosionMK5>of(EntityNukeExplosionMK5::new, MobCategory.MISC));
 
     public static final RegistryObject<EntityType<TestEntity>> TEST_ENTITY = register("test_entity",EntityType.Builder.<TestEntity>of(TestEntity::new, MobCategory.MISC));
+    public static final RegistryObject<EntityType<EntityRubble>> ENTITY_RUBBLE = register("entity_rubble",EntityType.Builder.<EntityRubble>of(EntityRubble::new, MobCategory.MISC));
 
     /**
      * 生物实体

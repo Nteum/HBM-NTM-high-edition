@@ -45,6 +45,8 @@ tools/manim_dolby_atmos_intro.py
 __pycache__/
 *.pyc
 # ===== 临时文件 =======
+/src/main/temp/
+.gitnexus
 src/main/temp/
 .gitnexus
 /GT6Extend.md
