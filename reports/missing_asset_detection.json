@@ -1,0 +1,301 @@
+{
+  "current": {
+    "log_path": "/Users/a1/HBM-NTM-high-edition/run/logs/latest.log",
+    "total_events": 28,
+    "category_counts": {
+      "unable_load_model": 28
+    },
+    "resource_counts": {
+      "hbm:rbmk_blank#inventory": 1,
+      "hbm:rbmk_boiler#inventory": 1,
+      "hbm:rbmk_console#inventory": 1,
+      "hbm:rbmk_control#inventory": 1,
+      "hbm:rbmk_control_auto#inventory": 1,
+      "hbm:rbmk_control_mod#inventory": 1,
+      "hbm:rbmk_cooler#inventory": 1,
+      "hbm:rbmk_crane_console#inventory": 1,
+      "hbm:rbmk_heater#inventory": 1,
+      "hbm:rbmk_heatex#inventory": 1,
+      "hbm:rbmk_loader#inventory": 1,
+      "hbm:rbmk_moderator#inventory": 1,
+      "hbm:rbmk_absorber#inventory": 1,
+      "hbm:rbmk_outgasser#inventory": 1,
+      "hbm:rbmk_storage#inventory": 1,
+      "hbm:rbmk_reflector#inventory": 1,
+      "hbm:rbmk_element#inventory": 1,
+      "hbm:rbmk_display#inventory": 1,
+      "hbm:rbmk_graph#inventory": 1,
+      "hbm:rbmk_numitron#inventory": 1,
+      "hbm:rbmk_key_pad#inventory": 1,
+      "hbm:rbmk_gauge#inventory": 1,
+      "hbm:rbmk_rod#inventory": 1,
+      "hbm:rbmk_rod_mod#inventory": 1,
+      "hbm:rbmk_rod_reasim#inventory": 1,
+      "hbm:rbmk_rod_reasim_mod#inventory": 1,
+      "hbm:deco_rbmk#inventory": 1,
+      "hbm:deco_rbmk_smooth#inventory": 1
+    },
+    "generated_at": "2026-04-04T15:32:14"
+  },
+  "baseline": null,
+  "comparison": {
+    "has_baseline": false
+  },
+  "top_current_missing_resources": [
+    {
+      "resource": "hbm:rbmk_blank#inventory",
+      "count": 1
+    },
+    {
+      "resource": "hbm:rbmk_boiler#inventory",
+      "count": 1
+    },
+    {
+      "resource": "hbm:rbmk_console#inventory",
+      "count": 1
+    },
+    {
+      "resource": "hbm:rbmk_control#inventory",
+      "count": 1
+    },
+    {
+      "resource": "hbm:rbmk_control_auto#inventory",
+      "count": 1
+    },
+    {
+      "resource": "hbm:rbmk_control_mod#inventory",
+      "count": 1
+    },
+    {
+      "resource": "hbm:rbmk_cooler#inventory",
+      "count": 1
+    },
+    {
+      "resource": "hbm:rbmk_crane_console#inventory",
+      "count": 1
+    },
+    {
+      "resource": "hbm:rbmk_heater#inventory",
+      "count": 1
+    },
+    {
+      "resource": "hbm:rbmk_heatex#inventory",
+      "count": 1
+    },
+    {
+      "resource": "hbm:rbmk_loader#inventory",
+      "count": 1
+    },
+    {
+      "resource": "hbm:rbmk_moderator#inventory",
+      "count": 1
+    },
+    {
+      "resource": "hbm:rbmk_absorber#inventory",
+      "count": 1
+    },
+    {
+      "resource": "hbm:rbmk_outgasser#inventory",
+      "count": 1
+    },
+    {
+      "resource": "hbm:rbmk_storage#inventory",
+      "count": 1
+    },
+    {
+      "resource": "hbm:rbmk_reflector#inventory",
+      "count": 1
+    },
+    {
+      "resource": "hbm:rbmk_element#inventory",
+      "count": 1
+    },
+    {
+      "resource": "hbm:rbmk_display#inventory",
+      "count": 1
+    },
+    {
+      "resource": "hbm:rbmk_graph#inventory",
+      "count": 1
+    },
+    {
+      "resource": "hbm:rbmk_numitron#inventory",
+      "count": 1
+    },
+    {
+      "resource": "hbm:rbmk_key_pad#inventory",
+      "count": 1
+    },
+    {
+      "resource": "hbm:rbmk_gauge#inventory",
+      "count": 1
+    },
+    {
+      "resource": "hbm:rbmk_rod#inventory",
+      "count": 1
+    },
+    {
+      "resource": "hbm:rbmk_rod_mod#inventory",
+      "count": 1
+    },
+    {
+      "resource": "hbm:rbmk_rod_reasim#inventory",
+      "count": 1
+    },
+    {
+      "resource": "hbm:rbmk_rod_reasim_mod#inventory",
+      "count": 1
+    },
+    {
+      "resource": "hbm:deco_rbmk#inventory",
+      "count": 1
+    },
+    {
+      "resource": "hbm:deco_rbmk_smooth#inventory",
+      "count": 1
+    }
+  ],
+  "sample_current_events": [
+    {
+      "category": "unable_load_model",
+      "resource": "hbm:rbmk_blank#inventory",
+      "line": "[044月2026 15:17:26.219] [Worker-Main-5/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'hbm:rbmk_blank#inventory' referenced from: hbm:rbmk_blank#inventory: java.io.FileNotFoundException: hbm:models/item/rbmk_blank.json"
+    },
+    {
+      "category": "unable_load_model",
+      "resource": "hbm:rbmk_boiler#inventory",
+      "line": "[044月2026 15:17:26.223] [Worker-Main-5/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'hbm:rbmk_boiler#inventory' referenced from: hbm:rbmk_boiler#inventory: java.io.FileNotFoundException: hbm:models/item/rbmk_boiler.json"
+    },
+    {
+      "category": "unable_load_model",
+      "resource": "hbm:rbmk_console#inventory",
+      "line": "[044月2026 15:17:26.223] [Worker-Main-5/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'hbm:rbmk_console#inventory' referenced from: hbm:rbmk_console#inventory: java.io.FileNotFoundException: hbm:models/item/rbmk_console.json"
+    },
+    {
+      "category": "unable_load_model",
+      "resource": "hbm:rbmk_control#inventory",
+      "line": "[044月2026 15:17:26.223] [Worker-Main-5/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'hbm:rbmk_control#inventory' referenced from: hbm:rbmk_control#inventory: java.io.FileNotFoundException: hbm:models/item/rbmk_control.json"
+    },
+    {
+      "category": "unable_load_model",
+      "resource": "hbm:rbmk_control_auto#inventory",
+      "line": "[044月2026 15:17:26.223] [Worker-Main-5/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'hbm:rbmk_control_auto#inventory' referenced from: hbm:rbmk_control_auto#inventory: java.io.FileNotFoundException: hbm:models/item/rbmk_control_auto.json"
+    },
+    {
+      "category": "unable_load_model",
+      "resource": "hbm:rbmk_control_mod#inventory",
+      "line": "[044月2026 15:17:26.223] [Worker-Main-5/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'hbm:rbmk_control_mod#inventory' referenced from: hbm:rbmk_control_mod#inventory: java.io.FileNotFoundException: hbm:models/item/rbmk_control_mod.json"
+    },
+    {
+      "category": "unable_load_model",
+      "resource": "hbm:rbmk_cooler#inventory",
+      "line": "[044月2026 15:17:26.224] [Worker-Main-5/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'hbm:rbmk_cooler#inventory' referenced from: hbm:rbmk_cooler#inventory: java.io.FileNotFoundException: hbm:models/item/rbmk_cooler.json"
+    },
+    {
+      "category": "unable_load_model",
+      "resource": "hbm:rbmk_crane_console#inventory",
+      "line": "[044月2026 15:17:26.224] [Worker-Main-5/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'hbm:rbmk_crane_console#inventory' referenced from: hbm:rbmk_crane_console#inventory: java.io.FileNotFoundException: hbm:models/item/rbmk_crane_console.json"
+    },
+    {
+      "category": "unable_load_model",
+      "resource": "hbm:rbmk_heater#inventory",
+      "line": "[044月2026 15:17:26.224] [Worker-Main-5/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'hbm:rbmk_heater#inventory' referenced from: hbm:rbmk_heater#inventory: java.io.FileNotFoundException: hbm:models/item/rbmk_heater.json"
+    },
+    {
+      "category": "unable_load_model",
+      "resource": "hbm:rbmk_heatex#inventory",
+      "line": "[044月2026 15:17:26.224] [Worker-Main-5/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'hbm:rbmk_heatex#inventory' referenced from: hbm:rbmk_heatex#inventory: java.io.FileNotFoundException: hbm:models/item/rbmk_heatex.json"
+    },
+    {
+      "category": "unable_load_model",
+      "resource": "hbm:rbmk_loader#inventory",
+      "line": "[044月2026 15:17:26.224] [Worker-Main-5/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'hbm:rbmk_loader#inventory' referenced from: hbm:rbmk_loader#inventory: java.io.FileNotFoundException: hbm:models/item/rbmk_loader.json"
+    },
+    {
+      "category": "unable_load_model",
+      "resource": "hbm:rbmk_moderator#inventory",
+      "line": "[044月2026 15:17:26.225] [Worker-Main-5/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'hbm:rbmk_moderator#inventory' referenced from: hbm:rbmk_moderator#inventory: java.io.FileNotFoundException: hbm:models/item/rbmk_moderator.json"
+    },
+    {
+      "category": "unable_load_model",
+      "resource": "hbm:rbmk_absorber#inventory",
+      "line": "[044月2026 15:17:26.225] [Worker-Main-5/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'hbm:rbmk_absorber#inventory' referenced from: hbm:rbmk_absorber#inventory: java.io.FileNotFoundException: hbm:models/item/rbmk_absorber.json"
+    },
+    {
+      "category": "unable_load_model",
+      "resource": "hbm:rbmk_outgasser#inventory",
+      "line": "[044月2026 15:17:26.225] [Worker-Main-5/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'hbm:rbmk_outgasser#inventory' referenced from: hbm:rbmk_outgasser#inventory: java.io.FileNotFoundException: hbm:models/item/rbmk_outgasser.json"
+    },
+    {
+      "category": "unable_load_model",
+      "resource": "hbm:rbmk_storage#inventory",
+      "line": "[044月2026 15:17:26.225] [Worker-Main-5/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'hbm:rbmk_storage#inventory' referenced from: hbm:rbmk_storage#inventory: java.io.FileNotFoundException: hbm:models/item/rbmk_storage.json"
+    },
+    {
+      "category": "unable_load_model",
+      "resource": "hbm:rbmk_reflector#inventory",
+      "line": "[044月2026 15:17:26.225] [Worker-Main-5/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'hbm:rbmk_reflector#inventory' referenced from: hbm:rbmk_reflector#inventory: java.io.FileNotFoundException: hbm:models/item/rbmk_reflector.json"
+    },
+    {
+      "category": "unable_load_model",
+      "resource": "hbm:rbmk_element#inventory",
+      "line": "[044月2026 15:17:26.225] [Worker-Main-5/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'hbm:rbmk_element#inventory' referenced from: hbm:rbmk_element#inventory: java.io.FileNotFoundException: hbm:models/item/rbmk_element.json"
+    },
+    {
+      "category": "unable_load_model",
+      "resource": "hbm:rbmk_display#inventory",
+      "line": "[044月2026 15:17:26.225] [Worker-Main-5/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'hbm:rbmk_display#inventory' referenced from: hbm:rbmk_display#inventory: java.io.FileNotFoundException: hbm:models/item/rbmk_display.json"
+    },
+    {
+      "category": "unable_load_model",
+      "resource": "hbm:rbmk_graph#inventory",
+      "line": "[044月2026 15:17:26.225] [Worker-Main-5/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'hbm:rbmk_graph#inventory' referenced from: hbm:rbmk_graph#inventory: java.io.FileNotFoundException: hbm:models/item/rbmk_graph.json"
+    },
+    {
+      "category": "unable_load_model",
+      "resource": "hbm:rbmk_numitron#inventory",
+      "line": "[044月2026 15:17:26.225] [Worker-Main-5/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'hbm:rbmk_numitron#inventory' referenced from: hbm:rbmk_numitron#inventory: java.io.FileNotFoundException: hbm:models/item/rbmk_numitron.json"
+    },
+    {
+      "category": "unable_load_model",
+      "resource": "hbm:rbmk_key_pad#inventory",
+      "line": "[044月2026 15:17:26.225] [Worker-Main-5/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'hbm:rbmk_key_pad#inventory' referenced from: hbm:rbmk_key_pad#inventory: java.io.FileNotFoundException: hbm:models/item/rbmk_key_pad.json"
+    },
+    {
+      "category": "unable_load_model",
+      "resource": "hbm:rbmk_gauge#inventory",
+      "line": "[044月2026 15:17:26.225] [Worker-Main-5/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'hbm:rbmk_gauge#inventory' referenced from: hbm:rbmk_gauge#inventory: java.io.FileNotFoundException: hbm:models/item/rbmk_gauge.json"
+    },
+    {
+      "category": "unable_load_model",
+      "resource": "hbm:rbmk_rod#inventory",
+      "line": "[044月2026 15:17:26.225] [Worker-Main-5/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'hbm:rbmk_rod#inventory' referenced from: hbm:rbmk_rod#inventory: java.io.FileNotFoundException: hbm:models/item/rbmk_rod.json"
+    },
+    {
+      "category": "unable_load_model",
+      "resource": "hbm:rbmk_rod_mod#inventory",
+      "line": "[044月2026 15:17:26.225] [Worker-Main-5/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'hbm:rbmk_rod_mod#inventory' referenced from: hbm:rbmk_rod_mod#inventory: java.io.FileNotFoundException: hbm:models/item/rbmk_rod_mod.json"
+    },
+    {
+      "category": "unable_load_model",
+      "resource": "hbm:rbmk_rod_reasim#inventory",
+      "line": "[044月2026 15:17:26.226] [Worker-Main-5/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'hbm:rbmk_rod_reasim#inventory' referenced from: hbm:rbmk_rod_reasim#inventory: java.io.FileNotFoundException: hbm:models/item/rbmk_rod_reasim.json"
+    },
+    {
+      "category": "unable_load_model",
+      "resource": "hbm:rbmk_rod_reasim_mod#inventory",
+      "line": "[044月2026 15:17:26.226] [Worker-Main-5/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'hbm:rbmk_rod_reasim_mod#inventory' referenced from: hbm:rbmk_rod_reasim_mod#inventory: java.io.FileNotFoundException: hbm:models/item/rbmk_rod_reasim_mod.json"
+    },
+    {
+      "category": "unable_load_model",
+      "resource": "hbm:deco_rbmk#inventory",
+      "line": "[044月2026 15:17:26.226] [Worker-Main-5/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'hbm:deco_rbmk#inventory' referenced from: hbm:deco_rbmk#inventory: java.io.FileNotFoundException: hbm:models/item/deco_rbmk.json"
+    },
+    {
+      "category": "unable_load_model",
+      "resource": "hbm:deco_rbmk_smooth#inventory",
+      "line": "[044月2026 15:17:26.226] [Worker-Main-5/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'hbm:deco_rbmk_smooth#inventory' referenced from: hbm:deco_rbmk_smooth#inventory: java.io.FileNotFoundException: hbm:models/item/deco_rbmk_smooth.json"
+    }
+  ],
+  "sample_baseline_events": []
+}

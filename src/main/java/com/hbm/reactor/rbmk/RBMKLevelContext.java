@@ -51,6 +51,7 @@ public final class RBMKLevelContext {
     public RBMKColumnState registerColumn(final BlockPos corePos, final RBMKSettings settings) {
         final BlockPos key = corePos.immutable();
         RBMKColumnState state = new RBMKColumnState(key, settings, RBMKLidType.NONE);
+        RBMKColumns.populateState(level, state);
         columns.put(key, state);
         return state;
     }
@@ -96,13 +97,24 @@ public final class RBMKLevelContext {
             return;
         }
 
-        double controlSum = 0.0D;
-        for (RBMKColumnState state : columns.values()) {
-            controlSum += state.controlRodInsertion();
-        }
-        cachedControlRodInsertion = controlSum / columns.size();
-
         final List<BlockPos> positions = new ArrayList<>(columns.keySet());
+
+        int controlCount = 0;
+        double controlSum = 0.0D;
+        for (BlockPos pos : positions) {
+            final RBMKColumnState state = columns.get(pos);
+            if (state == null) {
+                continue;
+            }
+            RBMKColumns.populateState(level, state);
+            if (state.columnType() == RBMKColumnType.CONTROL || state.columnType() == RBMKColumnType.CONTROL_AUTO) {
+                controlSum += state.controlRodInsertion();
+                controlCount++;
+            }
+        }
+        cachedControlRodInsertion = controlCount > 0 ? controlSum / controlCount : 0.0D;
+
+        propagateFlux(positions);
         final Map<BlockPos, Double> transferDeltas = new HashMap<>();
 
         for (BlockPos pos : positions) {
@@ -155,6 +167,71 @@ public final class RBMKLevelContext {
         }
 
         handleMeltdowns(positions);
+    }
+
+    private void propagateFlux(final List<BlockPos> positions) {
+        for (BlockPos pos : positions) {
+            final RBMKColumnState source = columns.get(pos);
+            if (source == null) {
+                continue;
+            }
+            final double outgoingFast = source.fastFlux();
+            final double outgoingSlow = source.slowFlux();
+            if (outgoingFast <= 0.0D && outgoingSlow <= 0.0D) {
+                continue;
+            }
+
+            for (Direction direction : Direction.Plane.HORIZONTAL) {
+                final BlockPos neighborPos = pos.relative(direction);
+                final RBMKColumnState neighbor = columns.get(neighborPos);
+                if (neighbor == null) {
+                    continue;
+                }
+                applyFluxTransfer(source, neighbor, outgoingFast, outgoingSlow);
+            }
+        }
+
+        for (RBMKColumnState state : columns.values()) {
+            if (!state.moderated()) {
+                continue;
+            }
+            final double fast = state.fastFlux();
+            final double slow = state.slowFlux();
+            if (fast <= 0.0D) {
+                continue;
+            }
+            state.resetFlux();
+            state.addFastFlux(fast * 0.30D);
+            state.addSlowFlux((fast * 0.70D) + slow);
+        }
+    }
+
+    private static void applyFluxTransfer(final RBMKColumnState source,
+                                          final RBMKColumnState neighbor,
+                                          final double outgoingFast,
+                                          final double outgoingSlow) {
+        final RBMKColumnType type = neighbor.columnType();
+        if (type == RBMKColumnType.ABSORBER) {
+            neighbor.addSlowFlux((outgoingFast + outgoingSlow) * 0.05D);
+            return;
+        }
+        if (type == RBMKColumnType.REFLECTOR) {
+            neighbor.addSlowFlux((outgoingFast + outgoingSlow) * 0.25D);
+            source.addSlowFlux((outgoingFast + outgoingSlow) * 0.20D);
+            return;
+        }
+        if (type == RBMKColumnType.MODERATOR) {
+            neighbor.addSlowFlux(outgoingFast * 0.80D + outgoingSlow * 0.50D);
+            neighbor.setModerated(true);
+            return;
+        }
+        if (type == RBMKColumnType.BLANK || type == RBMKColumnType.BOILER || type == RBMKColumnType.OUTGASSER
+                || type == RBMKColumnType.STORAGE || type == RBMKColumnType.COOLER || type == RBMKColumnType.HEATEX
+                || type == RBMKColumnType.CONTROL || type == RBMKColumnType.CONTROL_AUTO || type == RBMKColumnType.FUEL
+                || type == RBMKColumnType.FUEL_SIM || type == RBMKColumnType.BREEDER) {
+            neighbor.addFastFlux(outgoingFast * 0.45D);
+            neighbor.addSlowFlux(outgoingSlow * 0.45D);
+        }
     }
 
     private void handleMeltdowns(final List<BlockPos> positions) {

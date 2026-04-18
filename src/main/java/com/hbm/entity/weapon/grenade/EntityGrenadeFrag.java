@@ -13,11 +13,11 @@ public class EntityGrenadeFrag extends ThrownGrenade{
         super(pEntityType, pLevel);
     }
     public EntityGrenadeFrag(double pX, double pY, double pZ, Level pLevel) {
-        super(ModEntityType.ENTITY_GRENADE_FIRE.get(), pX, pY, pZ, pLevel);
+        super(ModEntityType.ENTITY_GRENADE_FRAG.get(), pX, pY, pZ, pLevel);
     }
 
     public EntityGrenadeFrag(LivingEntity pShooter, Level pLevel) {
-        super(ModEntityType.ENTITY_GRENADE_FIRE.get(), pShooter, pLevel);
+        super(ModEntityType.ENTITY_GRENADE_FRAG.get(), pShooter, pLevel);
     }
 
     @Override
@@ -37,7 +37,7 @@ public class EntityGrenadeFrag extends ThrownGrenade{
             if (!this.level().isClientSide) {
                 explode();
             }else {
-                this.level().playLocalSound(xo, yo, zo, SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 4.0F, (1.0F + (this.level().random.nextFloat() - this.level().random.nextFloat()) * 0.2F) * 0.7F, false);
+                this.level().playLocalSound(this.getX(), this.getY(), this.getZ(), SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 4.0F, (1.0F + (this.level().random.nextFloat() - this.level().random.nextFloat()) * 0.2F) * 0.7F, false);
             }
         }else {
             setFuse(i-1);
@@ -47,6 +47,9 @@ public class EntityGrenadeFrag extends ThrownGrenade{
     @Override
     public void explode() {
         this.discard();
-        ExplosionChaos.frag(this.level(), (int)xo, (int)yo, (int)zo, 100, false, this.getOwner());
+        int x = (int) Math.floor(this.getX());
+        int y = (int) Math.floor(this.getY());
+        int z = (int) Math.floor(this.getZ());
+        ExplosionChaos.frag(this.level(), x, y, z, 100, false, this.getOwner());
     }
 }

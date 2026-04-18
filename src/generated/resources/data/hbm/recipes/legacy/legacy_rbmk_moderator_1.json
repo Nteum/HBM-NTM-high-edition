@@ -7,14 +7,14 @@
   ],
   "key": {
     "G": {
-      "item": "hbm:block_graphite"
+      "item": "hbm:ingot_graphite"
     },
     "R": {
-      "item": "hbm:rbmk_blank"
+      "item": "hbm:machine_rbmk_base"
     }
   },
   "result": {
-    "item": "hbm:rbmk_moderator",
+    "item": "hbm:machine_rbmk_moderator",
     "count": 1
   }
 }

@@ -36,7 +36,7 @@ public class TileProxyBase extends CapabilityBlockEntity implements ICustomLookT
     @Override
     public void load(@NotNull CompoundTag nbt) {
         super.load(nbt);
-        cachedPos = NbtUtils.readBlockPos(nbt.getCompound(HBMKey.CORE_POS));
+        cachedPos = nbt.contains(HBMKey.CORE_POS) ? NbtUtils.readBlockPos(nbt.getCompound(HBMKey.CORE_POS)) : null;
     }
 
     @Override
@@ -44,6 +44,7 @@ public class TileProxyBase extends CapabilityBlockEntity implements ICustomLookT
         super.saveAdditional(pTag);
         if (cachedPos == null){
             HBM.LOGGER.info("Proxy entity core pos is null, in pos {}",this.worldPosition);
+            return;
         }
         pTag.put(HBMKey.CORE_POS, NbtUtils.writeBlockPos(cachedPos));
     }

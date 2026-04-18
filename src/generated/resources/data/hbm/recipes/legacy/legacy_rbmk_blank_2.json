@@ -7,11 +7,11 @@
   ],
   "key": {
     "R": {
-      "item": "hbm:deco_rbmk_smooth"
+      "item": "hbm:machine_rbmk_base"
     }
   },
   "result": {
-    "item": "hbm:rbmk_blank",
+    "item": "hbm:machine_rbmk_base",
     "count": 1
   }
 }

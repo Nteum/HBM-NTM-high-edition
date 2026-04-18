@@ -3,6 +3,7 @@ package com.hbm.blockentity.weapon;
 import com.hbm.block.weapon.NukeBomb;
 import com.hbm.blockentity.base2.DummyableBlockEntity;
 import com.hbm.registries.ModBlocks;
+import com.hbm.utils.multiblock.MultiblockData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
@@ -20,6 +21,7 @@ public abstract class EntityNukeBomb extends DummyableBlockEntity {
 
     public EntityNukeBomb(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState) {
         super(pType, pPos, pBlockState);
+        this.multiblockData = MultiblockData.mapping.get(pBlockState.getBlock());
     }
 
     public static void tick(Level level, BlockPos pPos, BlockState pState, BlockEntity pBlockEntity) {

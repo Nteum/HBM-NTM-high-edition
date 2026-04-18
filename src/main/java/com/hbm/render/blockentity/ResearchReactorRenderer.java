@@ -16,17 +16,20 @@ import static com.hbm.render.RenderUtils.renderBlockModel;
 
 public class ResearchReactorRenderer extends MultiPartRenderer<ResearchReactorBlockEntity> {
 
-    private final BakedModel baseModel;
-    private final BakedModel rodModel;
-
     public ResearchReactorRenderer(BlockEntityRendererProvider.Context context) {
-        ModelManager modelManager = Minecraft.getInstance().getModelManager();
-        this.baseModel = modelManager.getModel(Models.RESEARCH_REACTOR_BASE);
-        this.rodModel = modelManager.getModel(Models.RESEARCH_REACTOR_RODS);
     }
 
     @Override
     public void renderMultiPart(ResearchReactorBlockEntity entity, float partialTick, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
+        ModelManager modelManager = Minecraft.getInstance().getModelManager();
+        BakedModel baseModel = modelManager.getModel(Models.RESEARCH_REACTOR_BASE);
+        BakedModel rodModel = modelManager.getModel(Models.RESEARCH_REACTOR_RODS);
+        if (baseModel == modelManager.getMissingModel()) {
+            return;
+        }
+        if (rodModel == modelManager.getMissingModel()) {
+            rodModel = baseModel;
+        }
         BlockRenderDispatcher dispatcher = Minecraft.getInstance().getBlockRenderer();
         ModelBlockRenderer modelRenderer = dispatcher.getModelRenderer();
         BlockState state = entity.getBlockState();

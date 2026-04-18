@@ -10,11 +10,11 @@
       "item": "hbm:ingot_boron"
     },
     "R": {
-      "item": "hbm:rbmk_blank"
+      "item": "hbm:machine_rbmk_base"
     }
   },
   "result": {
-    "item": "hbm:rbmk_absorber",
+    "item": "hbm:machine_rbmk_absorber",
     "count": 1
   }
 }

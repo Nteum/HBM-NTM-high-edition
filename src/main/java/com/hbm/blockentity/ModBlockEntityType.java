@@ -16,10 +16,21 @@ import com.hbm.blockentity.machine.pile.ChicagoDetectorBlockEntity;
 import com.hbm.blockentity.machine.pile.ChicagoFuelBlockEntity;
 import com.hbm.blockentity.machine.pile.ChicagoSourceBlockEntity;
 import com.hbm.blockentity.machine.rbmk.RBMKBaseEntity;
+import com.hbm.blockentity.machine.rbmk.RBMKBoilerEntity;
 import com.hbm.blockentity.machine.rbmk.RBMKControlRodEntity;
+import com.hbm.blockentity.machine.rbmk.RBMKCoolerEntity;
+import com.hbm.blockentity.machine.rbmk.RBMKDisplayEntity;
 import com.hbm.blockentity.machine.rbmk.RBMKFuelChannelEntity;
+import com.hbm.blockentity.machine.rbmk.RBMKGaugeEntity;
+import com.hbm.blockentity.machine.rbmk.RBMKGraphEntity;
 import com.hbm.blockentity.machine.rbmk.RBMKHeaterEntity;
+import com.hbm.blockentity.machine.rbmk.RBMKKeypadEntity;
+import com.hbm.blockentity.machine.rbmk.RBMKNumitronEntity;
+import com.hbm.blockentity.machine.rbmk.RBMKOutgasserEntity;
 import com.hbm.blockentity.machine.rbmk.RBMKPeripheralEntity;
+import com.hbm.blockentity.machine.rbmk.RBMKRadioControllerEntity;
+import com.hbm.blockentity.machine.rbmk.RBMKStorageEntity;
+import com.hbm.blockentity.machine.rbmk.RBMKSteamPortEntity;
 import com.hbm.blockentity.tools.TileFoundryMold;
 import com.hbm.blockentity.weapon.*;
 import com.hbm.registries.ModBlocks;
@@ -114,16 +125,46 @@ public class ModBlockEntityType {
     public static final RegistryObject<BlockEntityType<RBMKFuelChannelEntity>> RBMK_FUEL_CHANNEL_ENTITY =
             REGISTER.register("rbmk_fuel_channel_entity", () -> BlockEntityType.Builder.of(RBMKFuelChannelEntity::new, ModBlocks.machine_rbmk_fuel_channel.get()).build(null));
     public static final RegistryObject<BlockEntityType<RBMKControlRodEntity>> RBMK_CONTROL_ROD_ENTITY =
-            REGISTER.register("rbmk_control_rod_entity", () -> BlockEntityType.Builder.of(RBMKControlRodEntity::new, ModBlocks.machine_rbmk_control_rod.get()).build(null));
+            REGISTER.register("rbmk_control_rod_entity", () -> BlockEntityType.Builder.of(RBMKControlRodEntity::new,
+                    ModBlocks.machine_rbmk_control_rod.get(),
+                    ModBlocks.machine_rbmk_control_auto.get()).build(null));
+    public static final RegistryObject<BlockEntityType<RBMKBoilerEntity>> RBMK_BOILER_ENTITY =
+            REGISTER.register("rbmk_boiler_entity", () -> BlockEntityType.Builder.of(RBMKBoilerEntity::new, ModBlocks.machine_rbmk_boiler.get()).build(null));
+    public static final RegistryObject<BlockEntityType<RBMKOutgasserEntity>> RBMK_OUTGASSER_ENTITY =
+            REGISTER.register("rbmk_outgasser_entity", () -> BlockEntityType.Builder.of(RBMKOutgasserEntity::new, ModBlocks.machine_rbmk_outgasser.get()).build(null));
+    public static final RegistryObject<BlockEntityType<RBMKStorageEntity>> RBMK_STORAGE_ENTITY =
+            REGISTER.register("rbmk_storage_entity", () -> BlockEntityType.Builder.of(RBMKStorageEntity::new, ModBlocks.machine_rbmk_storage.get()).build(null));
+    public static final RegistryObject<BlockEntityType<RBMKCoolerEntity>> RBMK_COOLER_ENTITY =
+            REGISTER.register("rbmk_cooler_entity", () -> BlockEntityType.Builder.of(RBMKCoolerEntity::new, ModBlocks.machine_rbmk_cooler.get()).build(null));
     public static final RegistryObject<BlockEntityType<RBMKPeripheralEntity>> RBMK_PERIPHERAL_ENTITY =
             REGISTER.register("rbmk_peripheral_entity", () -> BlockEntityType.Builder.of(RBMKPeripheralEntity::new,
                     ModBlocks.machine_rbmk_console.get(),
-                    ModBlocks.machine_rbmk_element.get(),
-                    ModBlocks.machine_rbmk_reflector.get(),
                     ModBlocks.machine_rbmk_debris.get(),
                     ModBlocks.machine_rbmk_crane_console.get(),
                     ModBlocks.machine_rbmk_autoloader.get()
             ).build(null));
+    public static final RegistryObject<BlockEntityType<RBMKDisplayEntity>> RBMK_DISPLAY_ENTITY =
+            REGISTER.register("rbmk_display_entity", () -> BlockEntityType.Builder.of(RBMKDisplayEntity::new,
+                    ModBlocks.machine_rbmk_display.get()).build(null));
+    public static final RegistryObject<BlockEntityType<RBMKGraphEntity>> RBMK_GRAPH_ENTITY =
+            REGISTER.register("rbmk_graph_entity", () -> BlockEntityType.Builder.of(RBMKGraphEntity::new,
+                    ModBlocks.machine_rbmk_graph.get()).build(null));
+    public static final RegistryObject<BlockEntityType<RBMKNumitronEntity>> RBMK_NUMITRON_ENTITY =
+            REGISTER.register("rbmk_numitron_entity", () -> BlockEntityType.Builder.of(RBMKNumitronEntity::new,
+                    ModBlocks.machine_rbmk_numitron.get()).build(null));
+    public static final RegistryObject<BlockEntityType<RBMKKeypadEntity>> RBMK_KEYPAD_ENTITY =
+            REGISTER.register("rbmk_keypad_entity", () -> BlockEntityType.Builder.of(RBMKKeypadEntity::new,
+                    ModBlocks.machine_rbmk_keypad.get()).build(null));
+    public static final RegistryObject<BlockEntityType<RBMKGaugeEntity>> RBMK_GAUGE_ENTITY =
+            REGISTER.register("rbmk_gauge_entity", () -> BlockEntityType.Builder.of(RBMKGaugeEntity::new,
+                    ModBlocks.machine_rbmk_gauge.get()).build(null));
+    public static final RegistryObject<BlockEntityType<RBMKRadioControllerEntity>> RBMK_RADIO_CONTROLLER_ENTITY =
+            REGISTER.register("rbmk_radio_controller_entity", () -> BlockEntityType.Builder.of(RBMKRadioControllerEntity::new,
+                    ModBlocks.radio_torch_controller.get()).build(null));
+    public static final RegistryObject<BlockEntityType<RBMKSteamPortEntity>> RBMK_STEAM_PORT_ENTITY =
+            REGISTER.register("rbmk_steam_port_entity", () -> BlockEntityType.Builder.of(RBMKSteamPortEntity::new,
+                    ModBlocks.rbmk_steam_inlet.get(),
+                    ModBlocks.rbmk_steam_outlet.get()).build(null));
     public static final RegistryObject<BlockEntityType<com.hbm.blockentity.machine.tokamak.TokamakControllerBlockEntity>> TOKAMAK_CONTROLLER =
             REGISTER.register("tokamak_controller", () -> BlockEntityType.Builder.of(com.hbm.blockentity.machine.tokamak.TokamakControllerBlockEntity::new, ModBlocks.tokamak_controller.get()).build(null));
     public static final RegistryObject<BlockEntityType<PWRControllerBlockEntity>> PWR_CONTROLLER_ENTITY =

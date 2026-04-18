@@ -1,10 +1,23 @@
 {
-  "loader": "forge:obj",
-  "flip_v": true,
-  "ambientocclusion": false,
-  "render_type": "minecraft:cutout",
-  "model": "hbm:models/rbmk/rbmk_reflector.obj",
+  "loader": "forge:composite",
   "textures": {
-    "texture0": "hbm:block/rbmk/rbmk_reflector"
+    "particle": "hbm:block/rbmk/rbmk_reflector"
+  },
+  "children": {
+    "reflector": {
+      "loader": "forge:obj",
+      "flip_v": true,
+      "ambientocclusion": false,
+      "render_type": "minecraft:cutout",
+      "model": "hbm:models/rbmk/rbmk_reflector.obj",
+      "textures": {
+        "texture0": "hbm:block/rbmk/rbmk_reflector"
+      }
+    }
+  },
+  "transform": {
+    "translation": [0.5, 0.0, 0.5],
+    "rotation": [0.0, 0.0, 0.0],
+    "scale": 1.0
   }
 }

@@ -17,7 +17,7 @@
     }
   },
   "result": {
-    "item": "hbm:rbmk_loader",
+    "item": "hbm:machine_rbmk_autoloader",
     "count": 1
   }
 }

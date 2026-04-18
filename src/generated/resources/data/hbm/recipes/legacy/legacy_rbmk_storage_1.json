@@ -10,11 +10,11 @@
       "item": "hbm:crate_steel"
     },
     "R": {
-      "item": "hbm:rbmk_blank"
+      "item": "hbm:machine_rbmk_base"
     }
   },
   "result": {
-    "item": "hbm:rbmk_storage",
+    "item": "hbm:machine_rbmk_storage",
     "count": 1
   }
 }

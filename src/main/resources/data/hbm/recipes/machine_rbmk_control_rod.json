@@ -10,7 +10,7 @@
     "L": { "item": "hbm:ingot_lead" },
     "R": { "item": "minecraft:redstone" },
     "C": { "item": "minecraft:iron_bars" },
-    "B": { "item": "hbm:circuit" }
+    "B": { "item": "hbm:circuit_basic" }
   },
   "result": {
     "item": "hbm:machine_rbmk_control_rod"

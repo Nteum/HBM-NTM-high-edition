@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "side": "hbm:block/rbmk/rbmk_boiler_side",
+    "end": "hbm:block/rbmk/rbmk_boiler_top"
+  }
+}

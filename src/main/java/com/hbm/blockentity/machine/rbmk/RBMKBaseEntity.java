@@ -247,8 +247,60 @@ public class RBMKBaseEntity extends DummyableBlockEntity {
         return fluidHandler.getFluidTanks().get(0).getFluidAmount();
     }
 
+    public int getWaterCapacity() {
+        return fluidHandler.getFluidTanks().get(0).getCapacity();
+    }
+
     public int getSteamAmount() {
         return fluidHandler.getFluidTanks().get(1).getFluidAmount();
+    }
+
+    public int getSteamCapacity() {
+        return fluidHandler.getFluidTanks().get(1).getCapacity();
+    }
+
+    public int receiveWaterFromPort(final int amount, final FluidStack fluidStack) {
+        if (amount <= 0 || fluidStack.isEmpty()) {
+            return 0;
+        }
+        final FluidStack insert = fluidStack.copy();
+        insert.setAmount(amount);
+        final int accepted = fluidHandler.getFluidTanks().get(0).fill(insert,
+                net.minecraftforge.fluids.capability.IFluidHandler.FluidAction.EXECUTE);
+        if (accepted > 0) {
+            setChanged();
+        }
+        return accepted;
+    }
+
+    public FluidStack extractSteamForPort(final int amount) {
+        if (amount <= 0) {
+            return FluidStack.EMPTY;
+        }
+        final FluidStack drained = fluidHandler.getFluidTanks().get(1).drain(amount,
+                net.minecraftforge.fluids.capability.IFluidHandler.FluidAction.EXECUTE);
+        if (!drained.isEmpty()) {
+            setChanged();
+        }
+        return drained;
+    }
+
+    public void consumeWaterForBoiler(final int amount) {
+        if (amount <= 0) {
+            return;
+        }
+        fluidHandler.getFluidTanks().get(0).drain(amount, net.minecraftforge.fluids.capability.IFluidHandler.FluidAction.EXECUTE);
+        setChanged();
+    }
+
+    public void produceSteamForBoiler(final int amount) {
+        if (amount <= 0) {
+            return;
+        }
+        fluidHandler.getFluidTanks().get(1).fill(
+                new FluidStack(ModFluids.STEAM.source().get(), amount),
+                net.minecraftforge.fluids.capability.IFluidHandler.FluidAction.EXECUTE);
+        setChanged();
     }
 
     public void triggerAz5() {

@@ -14,6 +14,7 @@ import com.hbm.item.icf.ItemICFPellet;
 import com.hbm.item.pwr.ItemPWRFuel;
 import com.hbm.item.research.ItemBreedingRod;
 import com.hbm.item.tool.FluidBucketItem;
+import com.hbm.item.weapon.ItemMissile;
 import com.hbm.item.zirnox.ItemZirnoxRod;
 import com.hbm.particle.ModParticleTypes;
 import com.hbm.registries.ModBlocks;
@@ -25,6 +26,7 @@ import com.hbm.render.entity.TestEntityRenderer;
 import com.hbm.render.entity.effect.BlackHoleRender;
 import com.hbm.render.entity.effect.EntityTorexRender;
 import com.hbm.render.entity.effect.RenderMeteor;
+import com.hbm.render.entity.missile.MissileABMRenderer;
 import com.hbm.render.entity.missile.MissileTaintRenderer;
 import com.hbm.render.entity.mob.GlyphidRender;
 import com.hbm.render.item.SpecialItemRender;
@@ -36,8 +38,11 @@ import com.hbm.render.overlay.DebugTagOverlay;
 import com.hbm.render.pipeline.GeoRenderPipeline;
 import com.hbm.settings.tooltip.TooltipRegistries;
 import com.hbm.utils.WorldUtils;
+import com.mojang.blaze3d.platform.InputConstants;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -67,6 +72,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
+import org.lwjgl.glfw.GLFW;
 
 import java.util.List;
 
@@ -89,6 +95,7 @@ public class ClientEventHandler {
         modBus.addListener(ClientEventHandler::registerGeometryLoaders);
         // forge总线事件
         forgeBus.addListener(ClientEventHandler::onKeyPressed);
+        forgeBus.addListener(ClientEventHandler::onMouseScroll);
         forgeBus.addListener(AtomicFlashOverlay::onClientTick);
         forgeBus.addListener(AtomicFlashOverlay::onGuiRender);
         forgeBus.addListener(DebugTagOverlay::onGuiRender);
@@ -118,6 +125,10 @@ public class ClientEventHandler {
             MenuScreens.register(ModMenuType.RBMK_FUEL_CHANNEL_MENU.get(), RBMKFuelChannelScreen::new);
             MenuScreens.register(ModMenuType.RBMK_CONTROL_ROD_MENU.get(), RBMKControlRodScreen::new);
             MenuScreens.register(ModMenuType.RBMK_PERIPHERAL_MENU.get(), RBMKPeripheralScreen::new);
+            MenuScreens.register(ModMenuType.RBMK_AUTOLOADER_MENU.get(), RBMKAutoloaderScreen::new);
+            MenuScreens.register(ModMenuType.RBMK_KEYPAD_CONFIG_MENU.get(), RBMKKeypadConfigScreen::new);
+            MenuScreens.register(ModMenuType.RBMK_GAUGE_CONFIG_MENU.get(), RBMKGaugeConfigScreen::new);
+            MenuScreens.register(ModMenuType.RBMK_RADIO_CONTROLLER_MENU.get(), RBMKRadioControllerScreen::new);
             MenuScreens.register(ModMenuType.IRON_CRATE_MENU.get(), IronCrateScreen::new);
             MenuScreens.register(ModMenuType.STEEL_CRATE_MENU.get(), SteelCrateScreen::new);
             MenuScreens.register(ModMenuType.WOOD_BURNER_MENU.get(), WoodBurnerScreen::new);
@@ -147,6 +158,12 @@ public class ClientEventHandler {
             BlockEntityRenderers.register(ModBlockEntityType.CRUCIBLE_ENTITY.get(), CrucibleRenderer::new);
             BlockEntityRenderers.register(ModBlockEntityType.TILE_FOUNDRY_MOLD.get(), RenderFoundryMold::new);
             BlockEntityRenderers.register(ModBlockEntityType.TILE_CONVEYOR.get(), RendererConveyor::new);
+            BlockEntityRenderers.register(ModBlockEntityType.RBMK_PERIPHERAL_ENTITY.get(), RBMKPeripheralRenderer::new);
+            BlockEntityRenderers.register(ModBlockEntityType.RBMK_DISPLAY_ENTITY.get(), RBMKDisplayRenderer::new);
+            BlockEntityRenderers.register(ModBlockEntityType.RBMK_GRAPH_ENTITY.get(), RBMKGraphRenderer::new);
+            BlockEntityRenderers.register(ModBlockEntityType.RBMK_NUMITRON_ENTITY.get(), RBMKNumitronRenderer::new);
+            BlockEntityRenderers.register(ModBlockEntityType.RBMK_KEYPAD_ENTITY.get(), RBMKKeypadRenderer::new);
+            BlockEntityRenderers.register(ModBlockEntityType.RBMK_GAUGE_ENTITY.get(), RBMKGaugeRenderer::new);
             //实体渲染
             EntityRenderers.register(ModEntityType.TEST_ENTITY.get(), TestEntityRenderer::new);
             EntityRenderers.register(ModEntityType.ENTITY_GRENADE_GENETIC.get(), ThrownItemRenderer::new);
@@ -154,10 +171,13 @@ public class ClientEventHandler {
             EntityRenderers.register(ModEntityType.ENTITY_GRENADE_FIRE.get(), ThrownItemRenderer::new);
             EntityRenderers.register(ModEntityType.ENTITY_GRENADE_FRAG.get(), ThrownItemRenderer::new);
             EntityRenderers.register(ModEntityType.ENTITY_GRENADE_BLACK_HOLE.get(), ThrownItemRenderer::new);
+            EntityRenderers.register(ModEntityType.ENTITY_GRENADE_LEGACY.get(), ThrownItemRenderer::new);
+            EntityRenderers.register(ModEntityType.ENTITY_GUN_BULLET.get(), EntityBlankRender::new);
             EntityRenderers.register(ModEntityType.ENTITY_BLACK_HOLE.get(), BlackHoleRender::new);
             EntityRenderers.register(ModEntityType.ENTITY_NUKE_EXPLOSION_MK5.get(), EntityBlankRender::new);
             EntityRenderers.register(ModEntityType.ENTITY_NUKE_TOREX.get(), EntityTorexRender::new);
             EntityRenderers.register(ModEntityType.ENTITY_MISSILE_TEST.get(), MissileTaintRenderer::new);
+            EntityRenderers.register(ModEntityType.ENTITY_MISSILE_ANTI_BALLISTIC.get(), MissileABMRenderer::new);
             EntityRenderers.register(ModEntityType.GLYPHID.get(), GlyphidRender::new);
             EntityRenderers.register(ModEntityType.ENTITY_METEOR.get(), RenderMeteor::new);
 
@@ -200,6 +220,33 @@ public class ClientEventHandler {
     @SubscribeEvent
     public static void onKeyPressed(InputEvent.Key event){
         ModKeyMapping.preCheck(event);
+    }
+
+    @SubscribeEvent
+    public static void onMouseScroll(InputEvent.MouseScrollingEvent event) {
+        Minecraft minecraft = Minecraft.getInstance();
+        if (minecraft.isPaused() || minecraft.player == null || minecraft.screen != null) {
+            return;
+        }
+        long window = minecraft.getWindow().getWindow();
+        boolean commandDown = InputConstants.isKeyDown(window, GLFW.GLFW_KEY_LEFT_SUPER)
+                || InputConstants.isKeyDown(window, GLFW.GLFW_KEY_RIGHT_SUPER);
+        if ((!Screen.hasControlDown() && !commandDown) || event.getScrollDelta() == 0.0D) {
+            return;
+        }
+
+        ItemStack missileStack = minecraft.player.getMainHandItem();
+        if (!(missileStack.getItem() instanceof ItemMissile)) {
+            missileStack = minecraft.player.getOffhandItem();
+            if (!(missileStack.getItem() instanceof ItemMissile)) {
+                return;
+            }
+        }
+
+        int dir = event.getScrollDelta() > 0.0D ? 1 : -1;
+        ItemMissile.LaunchMode mode = ItemMissile.cycleLaunchMode(missileStack, dir);
+        minecraft.player.displayClientMessage(Component.literal("导弹模式: " + mode.display()), true);
+        event.setCanceled(true);
     }
 
     @SubscribeEvent
@@ -280,25 +327,31 @@ public class ClientEventHandler {
                     // 准星正中心是 (screenWidth / 2, screenHeight / 2)
                     // 我们向右下方偏移 12 像素
 
-                    BlockPos blockPos = WorldUtils.blockPos(hitResult.getLocation());
+                    BlockPos blockPos = ((net.minecraft.world.phys.BlockHitResult) hitResult).getBlockPos();
                     if (!(itemInHand = player.getMainHandItem()).isEmpty() && itemInHand.getItem() instanceof ILookOverlay lookOverlay){
                         lookOverlay.printHook(level, blockPos);
                     }else if ((aimBlockState = level.getBlockState(blockPos)).getBlock() instanceof ILookOverlay lookOverlay){
                         GuiGraphics graphics = event.getGuiGraphics();
                         List<Component> desc = lookOverlay.getDesc(level, blockPos);
+                        if (desc == null || desc.isEmpty()) {
+                            return;
+                        }
 //                        graphics.renderComponentTooltip(mc.font, desc, renderX, renderY);
                         int fontHeight = mc.font.lineHeight;
                         int lineSpace = 2;  // 暂时把间距设为固定值
                         int renderX = screenWidth / 2 + 12;
                         int renderY = screenHeight / 2 - desc.size() / 2 * (lineSpace + fontHeight);
                         for (Component component : desc) {
+                            if (component == null) {
+                                continue;
+                            }
                             graphics.drawString(mc.font, component.getVisualOrderText(), renderX, renderY, 0xFFFFFF);
                             renderY += fontHeight + lineSpace;
                         }
                     }
-                }
-            }else if (hitResult.getType() == HitResult.Type.ENTITY){
+                } else if (hitResult.getType() == HitResult.Type.ENTITY){
 
+                }
             }
         }
     }

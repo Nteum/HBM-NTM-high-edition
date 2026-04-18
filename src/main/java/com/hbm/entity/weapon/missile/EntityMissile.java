@@ -43,6 +43,11 @@ public abstract class EntityMissile extends EntityThrowableNT implements IRadarD
     // 我也不知道这个是什么，反正办过来就行了
     public static final EntityDataAccessor<Byte> DATA_MISSILE_1 = SynchedEntityData.defineId(EntityMissile.class, EntityDataSerializers.BYTE);
     public int health = 50;
+    private static final int FLIGHT_MODE_BALLISTIC = 0;
+    private static final int FLIGHT_MODE_DIRECT = 1;
+    private static final int FLIGHT_MODE_THROWN = 2;
+    private int flightMode = FLIGHT_MODE_BALLISTIC;
+    private double directSpeed = 3.4D;
 
     public EntityMissile(EntityType<? extends ThrowableProjectile> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -103,33 +108,18 @@ public abstract class EntityMissile extends EntityThrowableNT implements IRadarD
 
     @Override
     public void tick() {
-        if (velocity < 4 && !startAcc)velocity += Mth.clamp(tickCount / 60D * 0.05d,0,0.05);
+        if (velocity < 4 && !startAcc && this.flightMode == FLIGHT_MODE_BALLISTIC) velocity += Mth.clamp(tickCount / 60D * 0.05d,0,0.05);
 
         if (!level().isClientSide){
-            double motionX = this.getDeltaMovement().x;
-            double motionY = this.getDeltaMovement().y;
-            double motionZ = this.getDeltaMovement().z;
-            if (hasPropulsion()){
-                if (startAcc){
-                    // 一开始火箭从0开始加速
-                    motionY += 0.05;
-                    if (motionY >= yV0) startAcc = false;
-                }else {
-                    motionY -= decelY * velocity;
-                    double f = 2 * accelXZ * velocity;
-                    motionX = (target.getCenter().x - getX()) * f;
-                    motionZ = (target.getCenter().z - getZ()) * f;
+            switch (this.flightMode) {
+                case FLIGHT_MODE_DIRECT -> tickDirectFlight();
+                case FLIGHT_MODE_THROWN -> tickThrownFlight();
+                default -> {
+                    if (!tickBallisticFlight()) {
+                        return;
+                    }
                 }
-            }else {
-                if (motionY > -1.5) motionY -= 0.2;
             }
-
-            if(motionY < -velocity && this.isCluster) {
-                cluster();
-                this.setDead();
-                return;
-            }
-            this.setDeltaMovement(motionX, motionY, motionZ);
         }
 
         super.tick();
@@ -139,6 +129,71 @@ public abstract class EntityMissile extends EntityThrowableNT implements IRadarD
         }
 
         loadNeighboringChunks((int) Math.floor(getX() / 16), (int) Math.floor(getZ() / 16));
+    }
+
+    private boolean tickBallisticFlight() {
+        double motionX = this.getDeltaMovement().x;
+        double motionY = this.getDeltaMovement().y;
+        double motionZ = this.getDeltaMovement().z;
+        if (hasPropulsion()){
+            if (startAcc){
+                // 一开始火箭从0开始加速
+                motionY += 0.05;
+                if (motionY >= yV0) startAcc = false;
+            }else {
+                motionY -= decelY * velocity;
+                double f = 2 * accelXZ * velocity;
+                motionX = (target.getCenter().x - getX()) * f;
+                motionZ = (target.getCenter().z - getZ()) * f;
+            }
+        }else {
+            if (motionY > -1.5) motionY -= 0.2;
+        }
+
+        if(motionY < -velocity && this.isCluster) {
+            cluster();
+            this.setDead();
+            return false;
+        }
+        this.setDeltaMovement(motionX, motionY, motionZ);
+        return true;
+    }
+
+    private void tickDirectFlight() {
+        Vec3 toTarget = this.target.getCenter().subtract(this.position());
+        if (toTarget.lengthSqr() < 1.0E-4D) {
+            return;
+        }
+        Vec3 direction = toTarget.normalize();
+        this.setDeltaMovement(direction.scale(this.directSpeed));
+    }
+
+    private void tickThrownFlight() {
+        Vec3 motion = this.getDeltaMovement().scale(0.985D);
+        if (motion.y > -1.5D) {
+            motion = motion.add(0.0D, -0.045D, 0.0D);
+        }
+        this.setDeltaMovement(motion);
+    }
+
+    public void configureDirectFlight(BlockPos target, double speed) {
+        this.target = target;
+        this.flightMode = FLIGHT_MODE_DIRECT;
+        this.directSpeed = Math.max(0.8D, speed);
+        this.startAcc = false;
+        this.velocity = this.directSpeed;
+    }
+
+    public void configureThrownFlight() {
+        this.flightMode = FLIGHT_MODE_THROWN;
+        this.startAcc = false;
+        this.velocity = 0.0D;
+    }
+
+    public void configureBallisticFlight(BlockPos target) {
+        this.target = target;
+        this.flightMode = FLIGHT_MODE_BALLISTIC;
+        this.startAcc = true;
     }
 
     public boolean hasPropulsion() {
@@ -178,6 +233,8 @@ public abstract class EntityMissile extends EntityThrowableNT implements IRadarD
         this.target = new BlockPos(nbt.getInt("tX"), 0, nbt.getInt("tZ"));
         this.start = new BlockPos(nbt.getInt("sX"), 0, nbt.getInt("sZ"));
         velocity = nbt.getDouble("veloc");
+        this.flightMode = nbt.contains("flightMode") ? nbt.getInt("flightMode") : FLIGHT_MODE_BALLISTIC;
+        this.directSpeed = nbt.contains("directSpeed") ? nbt.getDouble("directSpeed") : 3.4D;
     }
 
     @Override
@@ -190,6 +247,8 @@ public abstract class EntityMissile extends EntityThrowableNT implements IRadarD
         nbt.putInt("sX", start.getX());
         nbt.putInt("sZ", start.getZ());
         nbt.putDouble("veloc", velocity);
+        nbt.putInt("flightMode", this.flightMode);
+        nbt.putDouble("directSpeed", this.directSpeed);
     }
 
     protected float getContrailScale() {

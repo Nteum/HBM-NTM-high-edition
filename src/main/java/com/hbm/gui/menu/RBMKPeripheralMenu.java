@@ -4,6 +4,7 @@ import com.hbm.blockentity.machine.rbmk.RBMKPeripheralEntity;
 import com.hbm.gui.ModMenuType;
 import com.hbm.reactor.rbmk.RBMKPeripheralType;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.util.Mth;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
@@ -11,6 +12,8 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.SimpleContainerData;
+
+import java.util.Objects;
 
 public class RBMKPeripheralMenu extends BaseMachineMenu {
 
@@ -20,6 +23,16 @@ public class RBMKPeripheralMenu extends BaseMachineMenu {
     public static final int GRID_COLUMN = 1;
     public static final int GRID_FUEL = 2;
     public static final int GRID_CONTROL = 3;
+    public static final int GRID_CONTROL_AUTO = 4;
+    public static final int GRID_BOILER = 5;
+    public static final int GRID_MODERATOR = 6;
+    public static final int GRID_ABSORBER = 7;
+    public static final int GRID_REFLECTOR = 8;
+    public static final int GRID_OUTGASSER = 9;
+    public static final int GRID_BREEDER = 10;
+    public static final int GRID_STORAGE = 11;
+    public static final int GRID_COOLER = 12;
+    public static final int GRID_HEATEX = 13;
 
     public static final int LINK_CLEAR_BUTTON = 1;
     public static final int LINK_APPLY_BUTTON = 2;
@@ -34,26 +47,46 @@ public class RBMKPeripheralMenu extends BaseMachineMenu {
 
     private static final int TELEMETRY_SLOTS = 10;
     private static final int GRID_DATA_START = TELEMETRY_SLOTS;
-    private static final int DATA_SLOTS = TELEMETRY_SLOTS + GRID_SIZE;
+    private static final int DATA_SLOTS = TELEMETRY_SLOTS + GRID_SIZE * GRID_SIZE;
 
+    private final BlockPos pos;
+    private final RBMKPeripheralEntity peripheral;
     private int pendingLinkX;
     private int pendingLinkY;
     private int pendingLinkZ;
 
     public RBMKPeripheralMenu(int containerId, Inventory playerInventory) {
-        this(containerId, playerInventory, new SimpleContainer(0), new SimpleContainerData(DATA_SLOTS));
+        this(containerId, playerInventory, null, null, new SimpleContainer(0), new SimpleContainerData(DATA_SLOTS));
+    }
+
+    public RBMKPeripheralMenu(int containerId, Inventory playerInventory, FriendlyByteBuf buf) {
+        this(containerId, playerInventory, resolvePeripheral(playerInventory, buf));
+    }
+
+    public RBMKPeripheralMenu(int containerId, Inventory playerInventory, RBMKPeripheralEntity peripheral) {
+        this(containerId, playerInventory, peripheral,
+                peripheral != null ? peripheral.getBlockPos() : null,
+                peripheral != null ? peripheral : new SimpleContainer(0),
+                peripheral != null ? peripheral.getContainerData() : new SimpleContainerData(DATA_SLOTS));
     }
 
     public RBMKPeripheralMenu(int containerId, Inventory playerInventory, Container container, ContainerData data) {
+        this(containerId, playerInventory, container instanceof RBMKPeripheralEntity peripheral ? peripheral : null,
+                container instanceof RBMKPeripheralEntity peripheral ? peripheral.getBlockPos() : null,
+                container, data);
+    }
+
+    private RBMKPeripheralMenu(int containerId, Inventory playerInventory, RBMKPeripheralEntity peripheral, BlockPos pos, Container container, ContainerData data) {
         super(ModMenuType.RBMK_PERIPHERAL_MENU.get(), containerId, container, data);
         this.slotNum = 0;
+        this.peripheral = peripheral;
+        this.pos = pos;
         // 原版 RBMK 外设控制台不显示玩家物品栏
-        this.addDataSlots(data);
     }
 
     @Override
     public boolean clickMenuButton(Player player, int id) {
-        if (this.container instanceof RBMKPeripheralEntity peripheral) {
+        if (peripheral != null) {
             if (id == 0) {
                 return peripheral.triggerAz5();
             }
@@ -136,12 +169,11 @@ public class RBMKPeripheralMenu extends BaseMachineMenu {
         if (col < 0 || col >= GRID_SIZE || row < 0 || row >= GRID_SIZE) {
             return GRID_EMPTY;
         }
-        int index = GRID_DATA_START + row;
+        int index = GRID_DATA_START + row * GRID_SIZE + col;
         if (index < 0 || index >= containerData.getCount()) {
             return GRID_EMPTY;
         }
-        int rowMask = containerData.get(index);
-        return (rowMask >>> (col * 2)) & 0x3;
+        return containerData.get(index);
     }
 
     public static int coordButtonId(int axis, int value) {
@@ -160,5 +192,22 @@ public class RBMKPeripheralMenu extends BaseMachineMenu {
     private static int decodeCoord(int id) {
         int offset = (id - COORD_BUTTON_BASE) % COORD_RANGE;
         return offset - COORD_OFFSET;
+    }
+
+    public BlockPos getPos() {
+        return pos;
+    }
+
+    public RBMKPeripheralEntity getPeripheral() {
+        return peripheral;
+    }
+
+    private static RBMKPeripheralEntity resolvePeripheral(Inventory playerInventory, FriendlyByteBuf buf) {
+        Objects.requireNonNull(buf, "buffer missing block position");
+        BlockPos pos = buf.readBlockPos();
+        if (playerInventory.player.level().getBlockEntity(pos) instanceof RBMKPeripheralEntity entity) {
+            return entity;
+        }
+        return null;
     }
 }

@@ -9,6 +9,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
+import org.lwjgl.glfw.GLFW;
 
 import java.util.Locale;
 
@@ -90,7 +91,12 @@ public class ResearchReactorScreen extends BaseMachineGui<ResearchReactorMenu> {
 
     @Override
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
-        if (controlField.keyPressed(keyCode, scanCode, modifiers) || controlField.canConsumeInput()) {
+        if (minecraft != null) {
+            if (keyCode == GLFW.GLFW_KEY_ESCAPE || minecraft.options.keyInventory.matches(keyCode, scanCode)) {
+                return super.keyPressed(keyCode, scanCode, modifiers);
+            }
+        }
+        if (controlField != null && controlField.isFocused() && controlField.keyPressed(keyCode, scanCode, modifiers)) {
             return true;
         }
         return super.keyPressed(keyCode, scanCode, modifiers);
@@ -98,7 +104,7 @@ public class ResearchReactorScreen extends BaseMachineGui<ResearchReactorMenu> {
 
     @Override
     public boolean charTyped(char codePoint, int modifiers) {
-        if (controlField.charTyped(codePoint, modifiers)) {
+        if (controlField != null && controlField.isFocused() && controlField.charTyped(codePoint, modifiers)) {
             return true;
         }
         return super.charTyped(codePoint, modifiers);

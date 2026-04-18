@@ -9,7 +9,7 @@
   "key": {
     "P": { "item": "hbm:plate_advanced_alloy" },
     "L": { "item": "hbm:ingot_lead" },
-    "C": { "item": "hbm:circuit" },
+    "C": { "item": "hbm:circuit_basic" },
     "M": { "item": "minecraft:blast_furnace" }
   },
   "result": {

@@ -2,7 +2,6 @@ package com.hbm.datagen.tag;
 
 import com.hbm.api.resource.OreType;
 import com.hbm.block.HBMBlockComponent;
-import com.hbm.block.HBMMachine;
 import com.hbm.registries.ModTags;
 import com.hbm.registries.ModBlocks;
 import com.hbm.registries.OreDictManager;
@@ -75,13 +74,19 @@ public class BlockTagsGen extends BlockTagsProvider {
         //机器
         this.tag(ModTags.Blocks.BATTERY).add(ModBlocks.machine_battery.get(),ModBlocks.machine_lithium_battery.get(),ModBlocks.machine_dineutronium_battery.get(),ModBlocks.machine_schrabidium_battery.get());
         this.tag(ModTags.Blocks.ANVIL).add(ModBlocks.anvil_iron.get(),ModBlocks.anvil_desh.get(),ModBlocks.anvil_bismuth.get());
-        this.tag(ModTags.Blocks.MACHINE).add(ModBlocks.machine_assembler.get(),ModBlocks.RED_CABLE.get(),HBMMachine.CHEMPLANT.get(), ModBlocks.machine_shredder.get());
-//                .addTag(ModTags.Blocks.BATTERY);
         this.tag(ModTags.Blocks.ENERGY_TRANSMITTER).add(ModBlocks.CONNECTOR.get(), ModBlocks.RED_CABLE.get());
+        this.tag(ModTags.Blocks.MACHINE)
+                .addTag(ModTags.Blocks.BATTERY)
+                .addTag(ModTags.Blocks.ANVIL)
+                .addTag(ModTags.Blocks.ENERGY_TRANSMITTER);
 
         /** 原版tag */
-        this.tag(BlockTags.MINEABLE_WITH_PICKAXE).addTag(ModTags.Blocks.MACHINE).addTag(Tags.Blocks.ORES);
+        this.tag(BlockTags.MINEABLE_WITH_PICKAXE)
+                .addTag(ModTags.Blocks.MACHINE)
+                .addTag(Tags.Blocks.ORES)
+                .addTag(Tags.Blocks.STORAGE_BLOCKS);
 
+        ModBlocks.machineTagSupport(this);
         // 注册物品批量添加tag
         ModBlocks.tagSupport(this);
     }

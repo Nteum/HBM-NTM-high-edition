@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "SGS",
+    "RPR",
+    "SGS"
+  ],
+  "key": {
+    "S": { "item": "hbm:plate_steel" },
+    "G": { "item": "minecraft:glass_pane" },
+    "R": { "item": "minecraft:redstone" },
+    "P": { "item": "hbm:machine_rbmk_base" }
+  },
+  "result": {
+    "item": "hbm:machine_rbmk_display"
+  }
+}

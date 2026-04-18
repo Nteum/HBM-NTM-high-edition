@@ -30,6 +30,9 @@ import java.util.Optional;
 import java.util.Random;
 
 public class EntityEffectHandler {
+    private static final float RADIATION_DECAY_FLOOR = 0.00001F;
+    private static final float RADIATION_DECAY_RATIO = 0.001F;
+
     public static void onUpdate(LivingEntity entity) {
         if (!entity.isAlive() || entity.level().isClientSide || (entity instanceof Player player && player.isCreative()))
             return;
@@ -40,6 +43,7 @@ public class EntityEffectHandler {
         Level level = entity.level();
         handleContamination(entity);
         handleEnvRadiation(entity, entityData);
+        decayRadiation(entity, entityData);
         handleRadiationEffect(entity, entityData);
     }
     /**
@@ -67,6 +71,7 @@ public class EntityEffectHandler {
         float rad = RadiationManager.getRadiation(level, entity.blockPosition());
         if (level.dimension().equals(Level.NETHER) && rad <= RadiationConfig.hellRad)
             rad = (float) RadiationConfig.hellRad;
+        AdditionalDataManager.setEntityData(entity, DataEntry.RADIATION_BUF, rad);
         // 环境对玩家的污染
         if (rad > 0) ContaminationUtil.contaminate(entity, HazardType.RADIATION, ContaminationType.CREATIVE, rad / 20f);
 
@@ -122,6 +127,24 @@ public class EntityEffectHandler {
         }
     }
 
+    private static void decayRadiation(LivingEntity entity, IEntityAdditionalData entityData) {
+        if (!entityData.contains(DataEntry.RADIATION)) {
+            return;
+        }
+        float rad = entityData.getData(DataEntry.RADIATION, Float.class).orElse(0F);
+        if (rad <= 0F) {
+            entityData.setData(DataEntry.RADIATION, 0F);
+            return;
+        }
+        float decay = Math.max(rad * RADIATION_DECAY_RATIO, RADIATION_DECAY_FLOOR);
+        float next = Math.max(0F, rad - decay);
+        if (next <= RADIATION_DECAY_FLOOR) {
+            entityData.setData(DataEntry.RADIATION, 0F);
+        } else if (next != rad) {
+            entityData.setData(DataEntry.RADIATION, next);
+        }
+    }
+
     /**
      * 辐射值在生物上产生的效果
      * */
@@ -140,8 +163,6 @@ public class EntityEffectHandler {
                 if (amplifier < 2) entity.addEffect(new MobEffectInstance(ModEffects.RADIATION.get(), 3600, 2));
             } else if(rad >= 200) {
                 if (amplifier < 1) entity.addEffect(new MobEffectInstance(ModEffects.RADIATION.get(), 3600, 1));
-            } else if (rad > 0){
-                if (amplifier < 0) entity.addEffect(new MobEffectInstance(ModEffects.RADIATION.get(), 1200, 0));
             }
         }
     }

@@ -1,5 +1,7 @@
 # Blender v2.79 (sub 0) OBJ File: 'tower_large.blend'
 # www.blender.org
+mtllib machine_cooling_tower.mtl
+usemtl Machine_cooling_tower
 o Cube_Cube.001
 v -4.500000 0.000000 4.500000
 v -4.500000 1.000000 4.500000

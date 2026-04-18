@@ -9,14 +9,14 @@
       "item": "hbm:ingot_boron"
     },
     "D": {
-      "item": "hbm:deco_rbmk"
+      "item": "hbm:machine_rbmk_base"
     },
     "C": {
-      "item": "hbm:circuit"
+      "item": "hbm:circuit_basic"
     }
   },
   "result": {
-    "item": "hbm:rbmk_crane_console",
+    "item": "hbm:machine_rbmk_crane_console",
     "count": 1
   }
 }

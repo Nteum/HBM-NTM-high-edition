@@ -7,7 +7,7 @@
   ],
   "key": {
     "G": {
-      "item": "hbm:steel_grate"
+      "item": "hbm:plate_steel"
     },
     "H": {
       "item": "minecraft:hopper"
@@ -16,11 +16,11 @@
       "item": "hbm:tank_steel"
     },
     "R": {
-      "item": "hbm:rbmk_blank"
+      "item": "hbm:machine_rbmk_base"
     }
   },
   "result": {
-    "item": "hbm:rbmk_outgasser",
+    "item": "hbm:machine_rbmk_outgasser",
     "count": 1
   }
 }

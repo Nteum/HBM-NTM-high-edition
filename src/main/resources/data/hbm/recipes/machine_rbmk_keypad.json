@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " B ",
+    "RDR",
+    " S "
+  ],
+  "key": {
+    "B": { "item": "minecraft:stone_button" },
+    "R": { "item": "minecraft:redstone" },
+    "D": { "item": "hbm:machine_rbmk_display" },
+    "S": { "item": "hbm:plate_steel" }
+  },
+  "result": {
+    "item": "hbm:machine_rbmk_keypad"
+  }
+}

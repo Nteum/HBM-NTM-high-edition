@@ -1,10 +1,16 @@
 package com.hbm.compat.ballistix;
 
+import com.hbm.entity.effect.EntityNukeTorex;
+import com.hbm.particle.ModParticleTypes;
+import com.hbm.registries.ModSounds;
 import java.util.List;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -18,12 +24,14 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
-final class BallistixExplosionHandlers {
+public final class BallistixExplosionHandlers {
 
     private BallistixExplosionHandlers() {
     }
 
-    static void detonate(BallistixExplosiveType type, Level level, Vec3 pos, Entity owner) {
+    public static void detonate(BallistixExplosiveType type, Level level, Vec3 pos, Entity owner) {
+        playSignatureSound(type, level, pos);
+        spawnSignatureParticles(type, level, pos);
         switch (type) {
             case OBSIDIAN -> blast(level, pos, type.baseRadius(), false);
             case CONDENSIVE -> blast(level, pos, type.baseRadius(), false);
@@ -115,15 +123,13 @@ final class BallistixExplosionHandlers {
     }
 
     private static void chemicalCloud(Level level, Vec3 pos, float radius) {
-        if (level.isClientSide) {
-            for (int i = 0; i < 120; i++) {
-                double rx = pos.x + (level.random.nextDouble() - 0.5D) * radius * 2;
-                double rz = pos.z + (level.random.nextDouble() - 0.5D) * radius * 2;
-                level.addParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE, rx, pos.y + 0.5D, rz, 0.0D, 0.01D, 0.0D);
-            }
+        if (!(level instanceof ServerLevel server)) {
             return;
         }
-        ServerLevel server = (ServerLevel) level;
+        for (int i = 0; i < 6; i++) {
+            server.sendParticles(ParticleTypes.CAMPFIRE_COSY_SMOKE, pos.x, pos.y + 0.4D, pos.z, 30, radius, 0.45D, radius, 0.01D);
+            server.sendParticles(ParticleTypes.SPORE_BLOSSOM_AIR, pos.x, pos.y + 0.8D, pos.z, 14, radius * 0.7D, 0.5D, radius * 0.7D, 0.0D);
+        }
         List<LivingEntity> victims = server.getEntitiesOfClass(LivingEntity.class,
                 new AABB(pos, pos).inflate(radius));
         for (LivingEntity living : victims) {
@@ -131,6 +137,7 @@ final class BallistixExplosionHandlers {
             living.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 360, 1));
             living.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 360, 0));
             living.addEffect(new MobEffectInstance(MobEffects.POISON, 200, 0));
+            living.hurt(level.damageSources().magic(), 2.0F);
         }
     }
 
@@ -175,6 +182,10 @@ final class BallistixExplosionHandlers {
 
     private static void contagious(Level level, Vec3 pos, float radius) {
         if (level.isClientSide) return;
+        if (level instanceof ServerLevel server) {
+            server.sendParticles(ParticleTypes.DRAGON_BREATH, pos.x, pos.y + 0.5D, pos.z, 80, radius * 0.8D, 0.6D, radius * 0.8D, 0.01D);
+            server.sendParticles(ParticleTypes.MYCELIUM, pos.x, pos.y + 0.5D, pos.z, 60, radius, 0.75D, radius, 0.01D);
+        }
         List<LivingEntity> victims = level.getEntitiesOfClass(LivingEntity.class,
                 new AABB(pos, pos).inflate(radius),
                 LivingEntity::isAlive);
@@ -183,6 +194,7 @@ final class BallistixExplosionHandlers {
             living.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 300, 1));
             living.addEffect(new MobEffectInstance(MobEffects.HUNGER, 300, 1));
             living.addEffect(new MobEffectInstance(MobEffects.POISON, 140, 0));
+            living.hurt(level.damageSources().magic(), 3.0F);
         }
     }
 
@@ -234,12 +246,19 @@ final class BallistixExplosionHandlers {
     private static void nuclear(Level level, Vec3 pos, float radius) {
         blast(level, pos, radius, true);
         if (!level.isClientSide) {
+            if (level instanceof ServerLevel server) {
+                server.sendParticles(ParticleTypes.FLASH, pos.x, pos.y + 1.0D, pos.z, 4, 0.2D, 0.2D, 0.2D, 0.0D);
+                server.sendParticles(ParticleTypes.EXPLOSION_EMITTER, pos.x, pos.y + 1.5D, pos.z, 6, 0.8D, 0.5D, 0.8D, 0.0D);
+                server.sendParticles(ModParticleTypes.HBM_SMOKE.get(), pos.x, pos.y + 0.5D, pos.z, 220, radius * 0.15D, radius * 0.07D, radius * 0.15D, 0.03D);
+            }
+            level.addFreshEntity(new EntityNukeTorex(level, pos.add(0.0D, 4.5D, 0.0D), Math.max(18.0F, radius)));
             List<LivingEntity> victims = level.getEntitiesOfClass(LivingEntity.class,
                     new AABB(pos, pos).inflate(radius + 10),
                     LivingEntity::isAlive);
             for (LivingEntity living : victims) {
                 living.addEffect(new MobEffectInstance(MobEffects.POISON, 600, 2));
                 living.addEffect(new MobEffectInstance(MobEffects.WITHER, 200, 1));
+                living.hurt(level.damageSources().explosion(null), 16.0F);
             }
         }
     }
@@ -326,5 +345,125 @@ final class BallistixExplosionHandlers {
                 living.hurt(level.damageSources().generic(), 6.0F);
             }
         }
+    }
+
+    private static void spawnSignatureParticles(BallistixExplosiveType type, Level level, Vec3 pos) {
+        if (!(level instanceof ServerLevel server)) {
+            return;
+        }
+        switch (type) {
+            case CONDENSIVE, LANDMINE, OBSIDIAN -> {
+                burst(server, ParticleTypes.EXPLOSION, pos, 22, 0.9D, 0.0D);
+                burst(server, ParticleTypes.SMOKE, pos, 45, 1.3D, 0.01D);
+            }
+            case INCENDIARY, EXOTHERMIC -> {
+                burst(server, ParticleTypes.FLAME, pos, 80, 1.8D, 0.04D);
+                burst(server, ParticleTypes.LAVA, pos, 20, 1.2D, 0.04D);
+                burst(server, ParticleTypes.LARGE_SMOKE, pos, 50, 1.6D, 0.01D);
+            }
+            case CHEMICAL -> {
+                burst(server, ParticleTypes.SPORE_BLOSSOM_AIR, pos, 75, 2.0D, 0.0D);
+                burst(server, ParticleTypes.CAMPFIRE_COSY_SMOKE, pos, 70, 2.2D, 0.01D);
+            }
+            case CONTAGIOUS -> {
+                burst(server, ParticleTypes.DRAGON_BREATH, pos, 60, 2.0D, 0.01D);
+                burst(server, ParticleTypes.MYCELIUM, pos, 60, 2.2D, 0.01D);
+            }
+            case BREACHING -> {
+                burst(server, ParticleTypes.CLOUD, pos, 45, 1.2D, 0.02D);
+                burst(server, ParticleTypes.CRIT, pos, 40, 1.0D, 0.2D);
+            }
+            case THERMOBARIC -> {
+                burst(server, ParticleTypes.EXPLOSION_EMITTER, pos, 3, 1.4D, 0.0D);
+                burst(server, ParticleTypes.FLAME, pos, 120, 2.7D, 0.06D);
+                burst(server, ParticleTypes.CAMPFIRE_SIGNAL_SMOKE, pos, 65, 2.4D, 0.03D);
+            }
+            case SONIC, HYPERSONIC -> {
+                burst(server, ParticleTypes.SONIC_BOOM, pos, 1, 0.1D, 0.0D);
+                burst(server, ParticleTypes.CLOUD, pos, 70, 2.5D, 0.04D);
+            }
+            case ANTIGRAVITY -> {
+                burst(server, ParticleTypes.REVERSE_PORTAL, pos, 90, 2.3D, 0.4D);
+                burst(server, ParticleTypes.END_ROD, pos, 40, 1.8D, 0.03D);
+            }
+            case EMP -> {
+                burst(server, ParticleTypes.ELECTRIC_SPARK, pos, 120, 2.8D, 0.08D);
+                burst(server, ParticleTypes.END_ROD, pos, 40, 1.5D, 0.03D);
+            }
+            case NUCLEAR -> {
+                burst(server, ParticleTypes.FLASH, pos, 5, 0.2D, 0.0D);
+                burst(server, ParticleTypes.EXPLOSION_EMITTER, pos, 8, 1.0D, 0.0D);
+                burst(server, ModParticleTypes.HBM_SMOKE.get(), pos, 260, 3.0D, 0.04D);
+            }
+            case ENDOTHERMIC -> {
+                burst(server, ParticleTypes.SNOWFLAKE, pos, 90, 2.0D, 0.01D);
+                burst(server, ParticleTypes.CLOUD, pos, 60, 1.8D, 0.02D);
+            }
+            case ENDER -> {
+                burst(server, ParticleTypes.PORTAL, pos, 110, 2.2D, 0.15D);
+                burst(server, ParticleTypes.REVERSE_PORTAL, pos, 40, 1.7D, 0.1D);
+            }
+            case ANTIMATTER, LARGE_ANTIMATTER -> {
+                burst(server, ParticleTypes.REVERSE_PORTAL, pos, 200, 3.4D, 0.2D);
+                burst(server, ParticleTypes.FLASH, pos, 8, 0.3D, 0.0D);
+                burst(server, ParticleTypes.EXPLOSION_EMITTER, pos, 12, 1.6D, 0.0D);
+            }
+            case DARKMATTER -> {
+                burst(server, ParticleTypes.PORTAL, pos, 130, 2.6D, 0.2D);
+                burst(server, ParticleTypes.ASH, pos, 80, 2.2D, 0.01D);
+            }
+            case SHRAPNEL, FRAGMENTATION -> {
+                burst(server, ParticleTypes.CRIT, pos, 120, 2.1D, 0.7D);
+                burst(server, ParticleTypes.SMOKE, pos, 50, 1.4D, 0.01D);
+            }
+            case ATTRACTIVE, REPULSIVE -> {
+                burst(server, ParticleTypes.CLOUD, pos, 70, 2.0D, 0.02D);
+                burst(server, ParticleTypes.END_ROD, pos, 35, 1.6D, 0.03D);
+            }
+            case ANVIL, INFESTIVE, DEBILITATION, REJUVINATION -> {
+                burst(server, ParticleTypes.EXPLOSION, pos, 15, 0.8D, 0.0D);
+                burst(server, ParticleTypes.CLOUD, pos, 36, 1.2D, 0.01D);
+            }
+            default -> burst(server, ParticleTypes.EXPLOSION, pos, 12, 0.8D, 0.0D);
+        }
+    }
+
+    private static void burst(ServerLevel server, ParticleOptions particle, Vec3 pos, int count, double spread, double speed) {
+        server.sendParticles(particle, pos.x, pos.y, pos.z, count, spread, spread * 0.45D, spread, speed);
+    }
+
+    private static void playSignatureSound(BallistixExplosiveType type, Level level, Vec3 pos) {
+        if (level.isClientSide) {
+            return;
+        }
+        SoundEvent sound = switch (type) {
+            case NUCLEAR -> ModSounds.WEAPON_NUCLEAR_EXPLOSION.get();
+            case ANTIMATTER, LARGE_ANTIMATTER, DARKMATTER -> ModSounds.WEAPON_MUKE_EXPLOSION.get();
+            case THERMOBARIC, EXOTHERMIC -> ModSounds.WEAPON_EXPLOSION_LARGE_NEAR.get();
+            case ENDOTHERMIC -> ModSounds.WEAPON_EXPLOSION_SMALL_FAR.get();
+            case EMP -> ModSounds.WEAPON_TESLA_SHOOT.get();
+            case CHEMICAL, CONTAGIOUS -> ModSounds.ITEM_SPRAY.get();
+            case SONIC, HYPERSONIC -> ModSounds.BLOCK_SONAR_PING.get();
+            case ANTIGRAVITY, ATTRACTIVE, REPULSIVE, ENDER -> ModSounds.WEAPON_SING_FLYBY.get();
+            case SHRAPNEL, FRAGMENTATION -> ModSounds.WEAPON_EXPLOSION_MEDIUM.get();
+            case BREACHING, CONDENSIVE, LANDMINE, OBSIDIAN, ANVIL, INFESTIVE, DEBILITATION -> ModSounds.WEAPON_EXPLOSION_SMALL_NEAR.get();
+            case INCENDIARY -> ModSounds.WEAPON_FLAMETHROWER_IGNITE.get();
+            case REJUVINATION -> ModSounds.ITEM_RADAWAY.get();
+        };
+
+        float volume = switch (type) {
+            case NUCLEAR, LARGE_ANTIMATTER, DARKMATTER -> 6.0F;
+            case THERMOBARIC, ANTIMATTER -> 4.5F;
+            case SONIC, HYPERSONIC -> 3.0F;
+            default -> 2.2F;
+        };
+        float pitch = switch (type) {
+            case CHEMICAL, CONTAGIOUS, REJUVINATION -> 1.15F;
+            case NUCLEAR, LARGE_ANTIMATTER, DARKMATTER -> 0.8F;
+            case EMP -> 1.25F;
+            default -> 1.0F;
+        };
+
+        level.playSound(null, pos.x, pos.y, pos.z, sound, SoundSource.HOSTILE, volume, pitch);
     }
 }

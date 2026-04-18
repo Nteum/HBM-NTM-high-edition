@@ -39,6 +39,10 @@ public class RBMKHeaterEntity extends BaseMachineBlockEntity {
         setChanged();
     }
 
+    public boolean isActive() {
+        return active;
+    }
+
     public void serverTick() {
         if (!active || !(level instanceof ServerLevel serverLevel)) {
             return;

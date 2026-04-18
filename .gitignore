@@ -16,7 +16,7 @@ gen
 .gitignore
 /src/generated/resources/.cache/
 .vscode
-HBM-NTM-high-edition.code-workspace!/HBM-NTM-high-edition.code-workspace
+HBM-NTM-high-edition.code-workspace
 /gradle.properties
 /gradle/wrapper/gradle-wrapper.jar
 /gradle/wrapper/gradle-wrapper.properties
@@ -27,26 +27,28 @@ AGENTS.md
 .DS_Store
 Thumbs.db
 # ===== IntelliJ IDEA / Gradle =====
-/.idea/                  # IDE 项目配置
-*.iml                    # IDEA 模块文件
-/.gradle/                # Gradle 本地缓存
-/build/                  # 项目构建输出
-/out/                    # 其他构建输出
+/.idea/
+/processor/build/
+/out/
 # ===== Java 产物 =====
 *.log
 *.tmp
-manim_latest_commit.py
+tools/manim_latest_commit.py
 .venv-manim
 bin
 media
-/manim_datagen_overview.py
-/crash-2025-11-11_02.04.22-client.txt
-/Ballistix/
-/Hbm-s-Nuclear-Tech-GIT/
-/.ref/Hbm-s-Nuclear-Tech-GIT/
-manim_dolby_atmos_intro.py
+tools/manim_datagen_overview.py
+Ballistix/
+Hbm-s-Nuclear-Tech-GIT/
+.ref/*
+tools/manim_dolby_atmos_intro.py
 __pycache__/
 *.pyc
 # ===== 临时文件 =======
 /src/main/temp/
 .gitnexus
+src/main/temp/
+.gitnexus
+/GT6Extend.md
+/datagen.log
+.claude

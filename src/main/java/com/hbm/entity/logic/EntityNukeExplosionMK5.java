@@ -8,6 +8,7 @@ import com.hbm.explosion.ExplosionNukeRayBatched;
 import com.hbm.explosion.ExplosionNukeRayParallelized;
 import com.hbm.explosion.IExplosionRay;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -55,9 +56,17 @@ public class EntityNukeExplosionMK5 extends EntityExplosionChunkLoading{
         }
         if (!this.level().isClientSide){
 //            if (tickCount % 100 == 0) HBM.LOGGER.info("mk5 exist tick: " + this.tickCount);
-            loadChunk((int) Math.floor(position().x / 16D), (int) Math.floor(position().y / 16D));
-            radiate(2_500_000F / (this.tickCount * 5 + 1), this.getRadius() * 2);
-            ExplosionNukeGeneric.dealDamage(level(),position(),getRadius());
+            loadChunk((int) Math.floor(position().x / 16D), (int) Math.floor(position().z / 16D));
+            int damageInterval = getDamageInterval();
+            if (tickCount % damageInterval == 0) {
+                ExplosionNukeGeneric.dealDamage(level(), position(), getRadius());
+            }
+
+            int radiationInterval = getRadiationInterval();
+            if (tickCount % radiationInterval == radiationInterval / 2) {
+                radiate((2_500_000F / (this.tickCount * 5 + 1)) * radiationInterval, this.getRadius() * 2, getRadiationSampleStep());
+            }
+
             if(explosion == null) {
                 if (ConfigBomb.explosionAlgorithm == 1) {
                     explosion = new ExplosionNukeRayParallelized((ServerLevel) level(), blockPosition(),
@@ -68,8 +77,11 @@ public class EntityNukeExplosionMK5 extends EntityExplosionChunkLoading{
                 }
             }
             if(!explosion.isComplete()) {
-                explosion.cacheChunksTick(ConfigBomb.mk5);
-                explosion.destructionTick(ConfigBomb.mk5);
+                int tickBudget = Math.max(1, ConfigBomb.mk5);
+                int cacheBudget = Math.max(1, tickBudget / 2);
+                int destructionBudget = Math.max(1, tickBudget - cacheBudget);
+                explosion.cacheChunksTick(cacheBudget);
+                explosion.destructionTick(destructionBudget);
             }
 //            else if(fallout) {
 //
@@ -91,24 +103,32 @@ public class EntityNukeExplosionMK5 extends EntityExplosionChunkLoading{
         }
     }
     //爆炸产生的辐射
-    private void radiate(float rads, double range){
+    private void radiate(float rads, double range, int sampleStep){
         List<LivingEntity> entities = level().getEntitiesOfClass(LivingEntity.class, new AABB(position().x, position().y, position().z, position().x, position().y, position().z).inflate(range, range, range));
+        if (entities.isEmpty()) {
+            return;
+        }
 
+        MutableBlockPos cursor = new MutableBlockPos();
         for(LivingEntity e : entities) {
 
             Vec3 vec = new Vec3(e.position().x - position().x, (e.position().y + e.getEyeHeight()) - position().y, e.position().z - position().z);
             double len = vec.length();
+            if (len < 1.0E-3D) {
+                continue;
+            }
             vec = vec.normalize();
 
             float res = 0;
 
-            for(int i = 1; i < len; i++) {
+            for(int i = 1; i < len; i += sampleStep) {
 
                 int ix = (int)Math.floor(position().x + vec.x * i);
                 int iy = (int)Math.floor(position().y + vec.y * i);
                 int iz = (int)Math.floor(position().z + vec.z * i);
 
-                res += level().getBlockState(new BlockPos(ix, iy, iz)).getBlock().getExplosionResistance();
+                cursor.set(ix, iy, iz);
+                res += level().getBlockState(cursor).getBlock().getExplosionResistance() * sampleStep;
             }
 
             if(res < 1)
@@ -120,6 +140,33 @@ public class EntityNukeExplosionMK5 extends EntityExplosionChunkLoading{
 
             ContaminationUtil.contaminate(e, ContaminationUtil.HazardType.RADIATION, ContaminationUtil.ContaminationType.RAD_BYPASS, eRads);
         }
+    }
+
+    private int getDamageInterval() {
+        int radius = getRadius();
+        if (radius >= 384) return 8;
+        if (radius >= 256) return 6;
+        if (radius >= 160) return 4;
+        if (radius >= 96) return 2;
+        return 1;
+    }
+
+    private int getRadiationInterval() {
+        int radius = getRadius();
+        if (radius >= 384) return 16;
+        if (radius >= 256) return 12;
+        if (radius >= 160) return 8;
+        if (radius >= 96) return 4;
+        return 2;
+    }
+
+    private int getRadiationSampleStep() {
+        int radius = getRadius();
+        if (radius >= 384) return 6;
+        if (radius >= 256) return 4;
+        if (radius >= 160) return 3;
+        if (radius >= 96) return 2;
+        return 1;
     }
 
     public static EntityNukeExplosionMK5 statFac(Level level, int r, Vec3 location) {

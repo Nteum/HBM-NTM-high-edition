@@ -1,7 +1,7 @@
 package com.hbm.item.tool;
 
 import com.hbm.block.machine.rbmk.BlockRBMKBase;
-import com.hbm.blockentity.machine.rbmk.RBMKPeripheralEntity;
+import com.hbm.reactor.rbmk.RBMKLinkable;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -19,7 +19,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 /**
- * Allows RBMK peripherals (console, crane, etc.) to link to a specific RBMK column.
+ * Allows RBMK peripherals and external display panels to link to a specific
+ * RBMK column.
  */
 public class ItemRBMKTool extends Item {
 
@@ -39,6 +40,9 @@ public class ItemRBMKTool extends Item {
         if (player == null) {
             return InteractionResult.PASS;
         }
+        if (!player.isCrouching()) {
+            return InteractionResult.PASS;
+        }
 
         if (state.getBlock() instanceof BlockRBMKBase baseBlock) {
             BlockPos corePos = baseBlock.getCore(state, level, clickedPos);
@@ -54,19 +58,19 @@ public class ItemRBMKTool extends Item {
         }
 
         BlockEntity entity = level.getBlockEntity(clickedPos);
-        if (entity instanceof RBMKPeripheralEntity peripheral) {
+        if (entity instanceof RBMKLinkable linkable) {
             BlockPos target = getTarget(stack);
             if (!level.isClientSide) {
                 if (target == null) {
                     player.displayClientMessage(Component.translatable("item.hbm.rbmk_tool.target_missing")
                             .withStyle(ChatFormatting.RED), true);
-                } else if (peripheral.linkToColumn(target)) {
+                } else if (linkable.linkToColumn(target)) {
                     player.displayClientMessage(Component.translatable(
                             "item.hbm.rbmk_tool.set",
                             target.getX(),
                             target.getY(),
                             target.getZ(),
-                            peripheral.getPeripheralType().displayName()).withStyle(ChatFormatting.GREEN), true);
+                            linkable.getLinkDisplayName()).withStyle(ChatFormatting.GREEN), true);
                 } else {
                     player.displayClientMessage(Component.translatable(
                             "item.hbm.rbmk_tool.invalid",

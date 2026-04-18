@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "hbm:block/machine_rbmk_gauge", "y": 180 },
+    "facing=east": { "model": "hbm:block/machine_rbmk_gauge", "y": 270 },
+    "facing=south": { "model": "hbm:block/machine_rbmk_gauge" },
+    "facing=west": { "model": "hbm:block/machine_rbmk_gauge", "y": 90 }
+  }
+}

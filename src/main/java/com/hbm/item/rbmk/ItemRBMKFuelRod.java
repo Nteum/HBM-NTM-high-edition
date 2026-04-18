@@ -23,5 +23,16 @@ public class ItemRBMKFuelRod extends Item {
     public int burnTimeTicks() {
         return burnTimeTicks;
     }
-}
 
+    public double fastFluxPerSecond() {
+        return Math.max(1.0D, heatPerSecond * 0.55D);
+    }
+
+    public double slowFluxPerSecond() {
+        return Math.max(0.0D, heatPerSecond * 0.15D);
+    }
+
+    public double coreMaxHeat() {
+        return Math.max(1_200.0D, heatPerSecond * 80.0D);
+    }
+}

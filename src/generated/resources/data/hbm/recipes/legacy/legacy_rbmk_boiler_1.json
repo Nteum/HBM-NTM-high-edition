@@ -13,11 +13,11 @@
       "item": "hbm:shell"
     },
     "R": {
-      "item": "hbm:rbmk_blank"
+      "item": "hbm:machine_rbmk_base"
     }
   },
   "result": {
-    "item": "hbm:rbmk_boiler",
+    "item": "hbm:machine_rbmk_boiler",
     "count": 1
   }
 }

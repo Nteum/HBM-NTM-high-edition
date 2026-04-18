@@ -46,7 +46,15 @@ public class ModMenuType {
     public static final RegistryObject<MenuType<RBMKControlRodMenu>> RBMK_CONTROL_ROD_MENU =
             MOD_MENU_TYPES.register("rbmk_control_rod_menu", () -> new MenuType<>(RBMKControlRodMenu::new, FeatureFlags.VANILLA_SET));
     public static final RegistryObject<MenuType<RBMKPeripheralMenu>> RBMK_PERIPHERAL_MENU =
-            MOD_MENU_TYPES.register("rbmk_peripheral_menu", () -> new MenuType<>(RBMKPeripheralMenu::new, FeatureFlags.VANILLA_SET));
+            MOD_MENU_TYPES.register("rbmk_peripheral_menu", () -> IForgeMenuType.create(RBMKPeripheralMenu::new));
+    public static final RegistryObject<MenuType<RBMKAutoloaderMenu>> RBMK_AUTOLOADER_MENU =
+            MOD_MENU_TYPES.register("rbmk_autoloader_menu", () -> IForgeMenuType.create(RBMKAutoloaderMenu::new));
+    public static final RegistryObject<MenuType<RBMKKeypadConfigMenu>> RBMK_KEYPAD_CONFIG_MENU =
+            MOD_MENU_TYPES.register("rbmk_keypad_config_menu", () -> IForgeMenuType.create(RBMKKeypadConfigMenu::new));
+    public static final RegistryObject<MenuType<RBMKGaugeConfigMenu>> RBMK_GAUGE_CONFIG_MENU =
+            MOD_MENU_TYPES.register("rbmk_gauge_config_menu", () -> IForgeMenuType.create(RBMKGaugeConfigMenu::new));
+    public static final RegistryObject<MenuType<RBMKRadioControllerMenu>> RBMK_RADIO_CONTROLLER_MENU =
+            MOD_MENU_TYPES.register("rbmk_radio_controller_menu", () -> IForgeMenuType.create(RBMKRadioControllerMenu::new));
     public static final RegistryObject<MenuType<IronCrateMenu>> IRON_CRATE_MENU =
             MOD_MENU_TYPES.register("iron_crate_menu", () -> IForgeMenuType.create(IronCrateMenu::new));
     public static final RegistryObject<MenuType<SteelCrateMenu>> STEEL_CRATE_MENU =

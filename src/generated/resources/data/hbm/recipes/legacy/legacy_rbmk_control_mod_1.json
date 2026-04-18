@@ -7,17 +7,17 @@
   ],
   "key": {
     "G": {
-      "item": "hbm:block_graphite"
+      "item": "hbm:ingot_graphite"
     },
     "R": {
-      "item": "hbm:rbmk_control"
+      "item": "hbm:machine_rbmk_control_rod"
     },
     "B": {
       "item": "hbm:nugget_bismuth"
     }
   },
   "result": {
-    "item": "hbm:rbmk_control_mod",
+    "item": "hbm:machine_rbmk_control_rod",
     "count": 1
   }
 }
