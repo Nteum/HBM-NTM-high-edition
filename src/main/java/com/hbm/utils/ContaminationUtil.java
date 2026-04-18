@@ -152,8 +152,8 @@ public class ContaminationUtil {
         player.sendSystemMessage(Component.literal("===== ☢ ").append(Component.translatable(HBMLang.TOOLTIP_GEIGER0.key())).append(Component.literal(" ☢ =====")).withStyle(ChatFormatting.GOLD));
         player.sendSystemMessage(Component.translatable(HBMLang.TOOLTIP_GEIGER1.key()).append(Component.literal(" " + rads + " RAD/s").withStyle(chunkFormat)).withStyle(ChatFormatting.YELLOW));
         player.sendSystemMessage(Component.translatable(HBMLang.TOOLTIP_GEIGER2.key()).append(Component.literal(" " + env + " RAD/s").withStyle(envFormat)).withStyle(ChatFormatting.YELLOW));
-        player.sendSystemMessage(Component.translatable(HBMLang.TOOLTIP_GEIGER3.key()).append(Component.literal(" " + eRad + " RAD/s").withStyle(radPrefix)).withStyle(ChatFormatting.YELLOW));
-        player.sendSystemMessage(Component.translatable(HBMLang.TOOLTIP_GEIGER4.key()).append(Component.literal(" " + res + " RAD/s").withStyle(resPrefix)).withStyle(ChatFormatting.YELLOW));
+        player.sendSystemMessage(Component.translatable(HBMLang.TOOLTIP_GEIGER3.key()).append(Component.literal(" " + eRad + " RAD").withStyle(radPrefix)).withStyle(ChatFormatting.YELLOW));
+        player.sendSystemMessage(Component.translatable(HBMLang.TOOLTIP_GEIGER4.key()).append(Component.literal(" " + res + " %").withStyle(resPrefix)).withStyle(ChatFormatting.YELLOW));
     }
     public static ChatFormatting getPreffixFromRad(double rads) {
         if(rads == 0)

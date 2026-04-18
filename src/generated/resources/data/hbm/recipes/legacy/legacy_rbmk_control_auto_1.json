@@ -7,17 +7,17 @@
   ],
   "key": {
     "C": {
-      "item": "hbm:circuit"
+      "item": "hbm:circuit_basic"
     },
     "R": {
-      "item": "hbm:rbmk_control"
+      "item": "hbm:machine_rbmk_control_rod"
     },
     "D": {
       "item": "hbm:crt_display"
     }
   },
   "result": {
-    "item": "hbm:rbmk_control_auto",
+    "item": "hbm:machine_rbmk_control_auto",
     "count": 1
   }
 }

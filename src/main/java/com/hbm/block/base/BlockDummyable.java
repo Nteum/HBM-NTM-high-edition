@@ -31,6 +31,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -91,7 +92,9 @@ public abstract class BlockDummyable extends BlockMachineBase implements ICustom
     public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pMovedByPiston) {
         if (!pState.is(pNewState.getBlock())){
             //核心方块被移除时联动移除填充方块
-            DummableHelper.clearSpace(pLevel,pPos,pState,pState.getValue(FACING));
+            if (!DummableHelper.isClearing(pLevel, pPos, pState)) {
+                DummableHelper.clearSpace(pLevel,pPos,pState,pState.getValue(FACING));
+            }
             super.onRemove(pState, pLevel, pPos, pNewState, pMovedByPiston);
         }
     }
@@ -100,10 +103,36 @@ public abstract class BlockDummyable extends BlockMachineBase implements ICustom
         if (!pState.getValue(IS_CORE)){
             BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
             if (blockEntity instanceof TileProxyBase tileProxy){
-                return tileProxy.cachedPos;
+                if (tileProxy.cachedPos != null) {
+                    return tileProxy.cachedPos;
+                }
+                BlockPos recovered = recoverCorePos(pState, pLevel, pPos);
+                if (recovered != null) {
+                    tileProxy.cachedPos = recovered;
+                    return recovered;
+                }
             }
         }
         return pPos;
+    }
+
+    @Nullable
+    private BlockPos recoverCorePos(BlockState state, LevelReader level, BlockPos proxyPos) {
+        MultiblockData data = MultiblockData.mapping.get(state.getBlock());
+        if (data == null || !state.hasProperty(FACING)) {
+            return null;
+        }
+        Direction direction = state.getValue(FACING);
+        for (Vec3i rotatedOffset : DirectionUtils.offsetRot(data.offsets, Direction.SOUTH, direction)) {
+            BlockPos candidate = proxyPos.offset(-rotatedOffset.getX(), -rotatedOffset.getY(), -rotatedOffset.getZ());
+            BlockState candidateState = level.getBlockState(candidate);
+            if (candidateState.is(state.getBlock())
+                    && candidateState.hasProperty(IS_CORE)
+                    && candidateState.getValue(IS_CORE)) {
+                return candidate.immutable();
+            }
+        }
+        return null;
     }
 
     @Override
@@ -160,6 +189,12 @@ public abstract class BlockDummyable extends BlockMachineBase implements ICustom
     }
 
     @Override
+    public PushReaction getPistonPushReaction(BlockState pState) {
+        // Dummy/proxy multiblocks do not implement safe relocation semantics.
+        return PushReaction.BLOCK;
+    }
+
+    @Override
     public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
         if (!pState.getValue(IS_CORE)) {
             return null;
@@ -178,11 +213,36 @@ public abstract class BlockDummyable extends BlockMachineBase implements ICustom
     /** 获得核心方块的方块实体 */
     protected BlockEntity mainBlockEntity(BlockPos pPos, BlockState pState){return null;};
 
+    protected VoxelShape getCoreShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return shapeRotates ? DirectionUtils.voxelShapeRot(shape, state.getValue(FACING)) : shape;
+    }
+
+    protected VoxelShape getProxyShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return Shapes.block();
+    }
+
+    protected VoxelShape getMultiblockShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return state.getValue(IS_CORE) ? getCoreShape(state, level, pos, context) : getProxyShape(state, level, pos, context);
+    }
+
     @Override
     public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
-        return pState.getValue(IS_CORE)
-                ? (shapeRotates ? DirectionUtils.voxelShapeRot(shape, pState.getValue(FACING)) : shape)
-                : Shapes.block();
+        return getMultiblockShape(pState, pLevel, pPos, pContext);
+    }
+
+    @Override
+    public VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return getMultiblockShape(state, level, pos, context);
+    }
+
+    @Override
+    public VoxelShape getInteractionShape(BlockState state, BlockGetter level, BlockPos pos) {
+        return getMultiblockShape(state, level, pos, CollisionContext.empty());
+    }
+
+    @Override
+    public VoxelShape getOcclusionShape(BlockState state, BlockGetter level, BlockPos pos) {
+        return getMultiblockShape(state, level, pos, CollisionContext.empty());
     }
 
     @Override

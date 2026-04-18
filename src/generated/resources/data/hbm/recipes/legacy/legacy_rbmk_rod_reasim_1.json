@@ -10,14 +10,14 @@
       "item": "hbm:shell"
     },
     "R": {
-      "item": "hbm:rbmk_blank"
+      "item": "hbm:machine_rbmk_base"
     },
     "Z": {
       "item": "hbm:ingot_zirconium"
     }
   },
   "result": {
-    "item": "hbm:rbmk_rod_reasim",
+    "item": "hbm:machine_rbmk_fuel_channel",
     "count": 1
   }
 }

@@ -15,6 +15,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.common.capabilities.Capability;
 import org.jetbrains.annotations.NotNull;
@@ -44,10 +45,26 @@ public abstract class DummyableBlockEntity extends BaseMachineBlockEntity {
     }
 
     public boolean checkProxy(){
+        if (this.level == null || this.multiblockData == null) {
+            return false;
+        }
         for (Vec3i offset : DirectionUtils.offsetRot(multiblockData.offsets, Direction.SOUTH, this.getBlockState().getValue(BlockStateProperties.HORIZONTAL_FACING))) {
             if (!(this.level.getBlockEntity(this.getBlockPos().offset(offset)) instanceof TileProxyBase)) return false;
         }
         return true;
+    }
+
+    @Override
+    public @NotNull AABB getRenderBoundingBox() {
+        if (this.multiblockData == null) {
+            return super.getRenderBoundingBox();
+        }
+        AABB box = new AABB(this.worldPosition, this.worldPosition.offset(1, 1, 1));
+        for (Vec3i offset : DirectionUtils.offsetRot(multiblockData.offsets, Direction.SOUTH, this.getBlockState().getValue(BlockStateProperties.HORIZONTAL_FACING))) {
+            BlockPos offsetPos = this.worldPosition.offset(offset);
+            box = box.minmax(new AABB(offsetPos, offsetPos.offset(1, 1, 1)));
+        }
+        return box;
     }
     public void distributeCapabilities(){}
 

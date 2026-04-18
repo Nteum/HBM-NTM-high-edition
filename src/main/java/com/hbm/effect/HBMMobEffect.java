@@ -53,8 +53,6 @@ public class HBMMobEffect extends MobEffect {
                 }else if (amplifier == 1){
                     if(level.random.nextInt(300 / 12) == 0) entity.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 5 * 20, 0));
                     if(level.random.nextInt(500 / 12) == 0) entity.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 5 * 20, 0));
-                }else if (amplifier == 0){
-                    if(level.random.nextInt(500 / 25) == 0) entity.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 5 * 20, 0));
                 }
             }
         }

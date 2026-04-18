@@ -10,17 +10,17 @@
       "item": "hbm:ingot_boron"
     },
     "D": {
-      "item": "hbm:deco_rbmk"
+      "item": "hbm:machine_rbmk_base"
     },
     "G": {
       "item": "minecraft:glass_pane"
     },
     "C": {
-      "item": "hbm:circuit"
+      "item": "hbm:circuit_basic"
     }
   },
   "result": {
-    "item": "hbm:rbmk_console",
+    "item": "hbm:machine_rbmk_console",
     "count": 1
   }
 }

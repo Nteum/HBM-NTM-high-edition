@@ -33,7 +33,7 @@ public class EntityGrenadeBlackHole extends ThrownGrenade{
         if (!this.level().isClientSide)
         {
             this.discard();
-            this.level().explode(this, this.getX() , 0.0625D, this.getZ() , 1.5F, Level.ExplosionInteraction.TNT);
+            this.level().explode(this, this.getX(), this.getY(0.0625D), this.getZ(), 1.5F, Level.ExplosionInteraction.TNT);
 
             EntityBlackHole bl = new EntityBlackHole(this.level(), 1.5F);
             bl.setPos(this.getX(),this.getY(),this.getZ());

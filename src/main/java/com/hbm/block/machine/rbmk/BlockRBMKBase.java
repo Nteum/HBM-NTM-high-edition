@@ -1,10 +1,12 @@
 package com.hbm.block.machine.rbmk;
 
 import com.hbm.block.base.BlockDummyable;
+import com.hbm.block.interfaces.ILookOverlay;
 import com.hbm.blockentity.machine.rbmk.RBMKFuelChannelEntity;
 import com.hbm.blockentity.machine.rbmk.RBMKBaseEntity;
 import com.hbm.registries.ModItems;
 import com.hbm.reactor.rbmk.RBMKColumnState;
+import com.hbm.reactor.rbmk.RBMKDoddOverlay;
 import com.hbm.reactor.rbmk.RBMKLevelContext;
 import com.hbm.reactor.rbmk.RBMKManager;
 import com.hbm.reactor.rbmk.RBMKLidType;
@@ -12,11 +14,14 @@ import com.hbm.reactor.rbmk.RBMKLidType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RenderShape;
@@ -25,17 +30,20 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.network.NetworkHooks;
 
 import java.util.Locale;
+import java.util.List;
 import java.util.Optional;
 
 /**
  * 最基础的 RBMK 反应堆柱体。当前仅用于测试服务端注册流程，后续会继续扩展盖板、控制棒等逻辑。
  */
-public class BlockRBMKBase extends BlockDummyable {
+public class BlockRBMKBase extends BlockDummyable implements ILookOverlay {
 
     public static final EnumProperty<RBMKLidType> LID = EnumProperty.create("lid", RBMKLidType.class);
-
     public BlockRBMKBase(Properties properties) {
         super(properties);
         this.shape = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D);
@@ -59,6 +67,11 @@ public class BlockRBMKBase extends BlockDummyable {
     }
 
     @Override
+    protected VoxelShape getCoreShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return super.getCoreShape(state, level, pos, context);
+    }
+
+    @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         if (level.isClientSide) {
             return InteractionResult.SUCCESS;
@@ -75,7 +88,17 @@ public class BlockRBMKBase extends BlockDummyable {
         }
 
         if (!player.isShiftKeyDown()) {
-            player.openMenu(baseEntity);
+            BlockPos columnTop = corePos.above();
+            BlockState stateAbove = level.getBlockState(columnTop);
+            Block aboveBlock = stateAbove.getBlock();
+            if (aboveBlock instanceof BlockRBMKFuelChannel || aboveBlock instanceof BlockRBMKControlRod) {
+                BlockHitResult redirectedHit = new BlockHitResult(hit.getLocation(), hit.getDirection(), columnTop, hit.isInside());
+                return aboveBlock.use(stateAbove, level, columnTop, player, hand, redirectedHit);
+            }
+
+            if (player instanceof ServerPlayer serverPlayer && blockEntity instanceof MenuProvider provider) {
+                NetworkHooks.openScreen(serverPlayer, provider, corePos);
+            }
             return InteractionResult.CONSUME;
         }
 
@@ -141,5 +164,10 @@ public class BlockRBMKBase extends BlockDummyable {
         if (!stack.isEmpty()) {
             Containers.dropItemStack(level, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, stack);
         }
+    }
+
+    @Override
+    public List<Component> getDesc(Level level, BlockPos pos) {
+        return RBMKDoddOverlay.describe(level, pos);
     }
 }

@@ -8,6 +8,7 @@ import com.hbm.block.weapon.LaunchPad;
 import com.hbm.datagen.LanguageProvider;
 import com.hbm.datagen.loot.BlockLootGen;
 import com.hbm.datagen.model.BlockStateGen;
+import com.hbm.registries.ModBlocks;
 import com.hbm.registries.ModItems;
 import com.hbm.utils.debug.BlockDebug;
 import net.minecraft.world.item.BlockItem;
@@ -35,22 +36,28 @@ public class HBMMachine {
     public static RegistryObject<Block> GEIGER_COUNTER;
     public static RegistryObject<Block> LAUNCH_PAD;
     public static void register(DeferredRegister<Block> BLOCKS){
-        CHEMPLANT = registerBlockWithItem(BLOCKS, "chemplant", ()->new BlockChemplant(BlockBehaviour.Properties.of().strength(5.0F).explosionResistance(30.0F)));
-        PLASTIC_BARREL = registerBlockWithItem(BLOCKS, "barrel_plastic", ()->new BlockFluidBarrel(BlockBehaviour.Properties.of().strength(2.0F).explosionResistance(5.0F).requiresCorrectToolForDrops().sound(SoundType.STONE), BlockFluidBarrel.BarrelProperties.of().capacity(12000)));
-        CORRODED_BARREL = registerBlockWithItem(BLOCKS, "barrel_corroded", ()->new BlockFluidBarrel(BlockBehaviour.Properties.of().strength(2.0F).explosionResistance(5.0F).requiresCorrectToolForDrops().sound(SoundType.METAL),BlockFluidBarrel.BarrelProperties.of().capacity(6000).hotResist().corrosiveResistance().highCorroResist().leaky()));
-        IRON_BARREL = registerBlockWithItem(BLOCKS, "barrel_iron", ()->new BlockFluidBarrel(BlockBehaviour.Properties.of().strength(2.0F).explosionResistance(5.0F).requiresCorrectToolForDrops().sound(SoundType.METAL),BlockFluidBarrel.BarrelProperties.of().capacity(8000).hotResist()));
-        STEEL_BARREL = registerBlockWithItem(BLOCKS, "barrel_steel", ()->new BlockFluidBarrel(BlockBehaviour.Properties.of().strength(2.0F).explosionResistance(5.0F).requiresCorrectToolForDrops().sound(SoundType.METAL),BlockFluidBarrel.BarrelProperties.of().capacity(16000).hotResist().corrosiveResistance()));
-        TCALLOY_BARREL = registerBlockWithItem(BLOCKS, "barrel_tcalloy", ()->new BlockFluidBarrel(BlockBehaviour.Properties.of().strength(2.0F).explosionResistance(5.0F).requiresCorrectToolForDrops().sound(SoundType.METAL),BlockFluidBarrel.BarrelProperties.of().capacity(24000).hotResist().highCorroResist()));
-        ANTIMATTER_BARREL = registerBlockWithItem(BLOCKS, "barrel_antimatter", ()->new BlockFluidBarrel(BlockBehaviour.Properties.of().strength(2.0F).explosionResistance(5.0F).requiresCorrectToolForDrops().sound(SoundType.METAL),BlockFluidBarrel.BarrelProperties.of().capacity(16000).hotResist().highCorroResist().antimatter()));
-        FLUID_PIPE = registerBlockWithItem(BLOCKS, "fluid_pipe", ()->new BlockFluidPipe(BlockBehaviour.Properties.of().strength(5.0F).explosionResistance(10.0F)));
-        GEIGER_COUNTER = registerBlockWithItem(BLOCKS, "geiger", ()->new GeigerCounter(BlockBehaviour.Properties.of().strength(5.0F).explosionResistance(10.0F)));
-        LAUNCH_PAD = registerBlockWithItem(BLOCKS, "launch_pad", ()->new LaunchPad(BlockBehaviour.Properties.of().strength(5.0F).explosionResistance(10.0F)));
+        CHEMPLANT = registerMachineBlockWithItem(BLOCKS, "chemplant", ()->new BlockChemplant(BlockBehaviour.Properties.of().strength(5.0F).explosionResistance(30.0F)));
+        PLASTIC_BARREL = registerMachineBlockWithItem(BLOCKS, "barrel_plastic", ()->new BlockFluidBarrel(BlockBehaviour.Properties.of().strength(2.0F).explosionResistance(5.0F).requiresCorrectToolForDrops().sound(SoundType.STONE), BlockFluidBarrel.BarrelProperties.of().capacity(12000)));
+        CORRODED_BARREL = registerMachineBlockWithItem(BLOCKS, "barrel_corroded", ()->new BlockFluidBarrel(BlockBehaviour.Properties.of().strength(2.0F).explosionResistance(5.0F).requiresCorrectToolForDrops().sound(SoundType.METAL),BlockFluidBarrel.BarrelProperties.of().capacity(6000).hotResist().corrosiveResistance().highCorroResist().leaky()));
+        IRON_BARREL = registerMachineBlockWithItem(BLOCKS, "barrel_iron", ()->new BlockFluidBarrel(BlockBehaviour.Properties.of().strength(2.0F).explosionResistance(5.0F).requiresCorrectToolForDrops().sound(SoundType.METAL),BlockFluidBarrel.BarrelProperties.of().capacity(8000).hotResist()));
+        STEEL_BARREL = registerMachineBlockWithItem(BLOCKS, "barrel_steel", ()->new BlockFluidBarrel(BlockBehaviour.Properties.of().strength(2.0F).explosionResistance(5.0F).requiresCorrectToolForDrops().sound(SoundType.METAL),BlockFluidBarrel.BarrelProperties.of().capacity(16000).hotResist().corrosiveResistance()));
+        TCALLOY_BARREL = registerMachineBlockWithItem(BLOCKS, "barrel_tcalloy", ()->new BlockFluidBarrel(BlockBehaviour.Properties.of().strength(2.0F).explosionResistance(5.0F).requiresCorrectToolForDrops().sound(SoundType.METAL),BlockFluidBarrel.BarrelProperties.of().capacity(24000).hotResist().highCorroResist()));
+        ANTIMATTER_BARREL = registerMachineBlockWithItem(BLOCKS, "barrel_antimatter", ()->new BlockFluidBarrel(BlockBehaviour.Properties.of().strength(2.0F).explosionResistance(5.0F).requiresCorrectToolForDrops().sound(SoundType.METAL),BlockFluidBarrel.BarrelProperties.of().capacity(16000).hotResist().highCorroResist().antimatter()));
+        FLUID_PIPE = registerMachineBlockWithItem(BLOCKS, "fluid_pipe", ()->new BlockFluidPipe(BlockBehaviour.Properties.of().strength(5.0F).explosionResistance(10.0F)));
+        GEIGER_COUNTER = registerMachineBlockWithItem(BLOCKS, "geiger", ()->new GeigerCounter(BlockBehaviour.Properties.of().strength(5.0F).explosionResistance(10.0F)));
+        LAUNCH_PAD = registerMachineBlockWithItem(BLOCKS, "launch_pad", ()->new LaunchPad(BlockBehaviour.Properties.of().strength(5.0F).explosionResistance(10.0F)));
 
 //        DEBUG_BLOCK = registerBlockWithItem(BLOCKS, "debug_block", ()->new BlockDebug(BlockBehaviour.Properties.copy(Blocks.STONE)));
     }
     public static RegistryObject<Block> registerBlockWithItem(DeferredRegister<Block> BLOCKS, final String name, final Supplier<? extends Block> blocksup){
         RegistryObject<Block> block = BLOCKS.register(name,blocksup);
         ModItems.ITEMS.register(name,()->new BlockItem(block.get(),new Item.Properties()));
+        return block;
+    }
+
+    private static RegistryObject<Block> registerMachineBlockWithItem(DeferredRegister<Block> BLOCKS, final String name, final Supplier<? extends Block> blocksup){
+        RegistryObject<Block> block = registerBlockWithItem(BLOCKS, name, blocksup);
+        ModBlocks.trackLegacyMachineTagBlock(block);
         return block;
     }
 

@@ -15,6 +15,13 @@ public class ResearchReactorMenu extends BaseMachineMenu {
 
     private static final int PLAYER_INV_X_OFFSET = 0;
     private static final int PLAYER_INV_Y_OFFSET = 56; // gui height 222px -> shift player inventory down
+    private static final int[][] SLOT_POSITIONS = {
+            {95, 22}, {131, 22},
+            {77, 40}, {113, 40}, {149, 40},
+            {95, 58}, {131, 58},
+            {77, 76}, {113, 76}, {149, 76},
+            {95, 94}, {131, 94}
+    };
 
     public ResearchReactorMenu(int containerId, Inventory inventory) {
         this(containerId, inventory, new SimpleContainer(ResearchReactorBlockEntity.SLOT_COUNT), new SimpleContainerData(5));
@@ -24,13 +31,9 @@ public class ResearchReactorMenu extends BaseMachineMenu {
         super(ModMenuType.RESEARCH_REACTOR_MENU.get(), containerId, container, data);
         this.slotNum = ResearchReactorBlockEntity.SLOT_COUNT;
 
-        for (int row = 0; row < 4; row++) {
-            for (int col = 0; col < 3; col++) {
-                int index = col + row * 3;
-                int x = 53 + col * 18;
-                int y = 17 + row * 18;
-                this.addSlot(new Slot(container, index, x, y));
-            }
+        for (int i = 0; i < SLOT_POSITIONS.length; i++) {
+            int[] pos = SLOT_POSITIONS[i];
+            this.addSlot(new Slot(container, i, pos[0], pos[1]));
         }
 
         addPlayerSlot(inventory, PLAYER_INV_X_OFFSET, PLAYER_INV_Y_OFFSET);

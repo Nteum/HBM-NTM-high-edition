@@ -11,7 +11,6 @@ import com.hbm.blockentity.IRadarCommandReceiver;
 import com.hbm.blockentity.base2.DummyableBlockEntity;
 import com.hbm.entity.weapon.missile.EntityMissile;
 import com.hbm.entity.weapon.missile.EntityMissileAntiBallistic;
-import com.hbm.item.HBMWeapon;
 import com.hbm.item.weapon.ItemDesignator;
 import com.hbm.item.weapon.ItemMissile;
 import com.hbm.registries.ModSounds;
@@ -242,7 +241,10 @@ public abstract class EntityLaunchPadBase extends DummyableBlockEntity implement
 	}
 	
 	public boolean isMissileValid(ItemStack stack) {
-		return stack.getItem() instanceof ItemMissile && ((ItemMissile) stack.getItem()).launchable;
+		if (!(stack.getItem() instanceof ItemMissile missile) || !missile.launchable) {
+			return false;
+		}
+		return missile.formFactor == ItemMissile.MissileFormFactor.ABM || missile.missileCreator != null;
 	}
 	
 	public boolean hasFuel() {
@@ -261,14 +263,16 @@ public abstract class EntityLaunchPadBase extends DummyableBlockEntity implement
 		ItemStack item = this.getItem(0);
 		if (item.getItem() instanceof ItemMissile itemMissile){
 			Vec3 posCenter = this.worldPosition.getCenter();
-			if (itemMissile == HBMWeapon.MISSILE_ANTI_BALLISTIC.get()) {
+			if (itemMissile.formFactor == ItemMissile.MissileFormFactor.ABM) {
 				EntityMissileAntiBallistic missile = new EntityMissileAntiBallistic(level);
 				missile.setPos(posCenter.x, this.worldPosition.getY() + getLaunchOffset(), posCenter.z);
 				return missile;
-			}else {
-				EntityMissile entityMissile = itemMissile.missileCreator.create(level, (float) posCenter.x, (float) (this.worldPosition.getY() + getLaunchOffset()), (float) posCenter.z, new BlockPos(targetX, this.worldPosition.getY(), targetZ));
-				return entityMissile;
 			}
+			if (itemMissile.missileCreator == null) {
+				return null;
+			}
+			EntityMissile entityMissile = itemMissile.missileCreator.create(level, (float) posCenter.x, (float) (this.worldPosition.getY() + getLaunchOffset()), (float) posCenter.z, new BlockPos(targetX, this.worldPosition.getY(), targetZ));
+			return entityMissile;
 		}
 
 //		Class<? extends EntityMissileBaseNT> clazz = TileEntityLaunchPadBase.missiles.get(new ComparableStack(slots[0]).makeSingular());
@@ -383,7 +387,10 @@ public abstract class EntityLaunchPadBase extends DummyableBlockEntity implement
 	}
 	
 	public boolean needsDesignator(Item item) {
-		return item != HBMWeapon.MISSILE_ANTI_BALLISTIC.get();
+		if (item instanceof ItemMissile missile) {
+			return missile.formFactor != ItemMissile.MissileFormFactor.ABM;
+		}
+		return true;
 	}
 	
 	/** Full launch condition, checks if the item is launchable, fuel and power are present and any additional checks based on launch pad type */

@@ -1,7 +1,10 @@
 package com.hbm.block.machine.rbmk;
 
+import com.hbm.block.interfaces.ILookOverlay;
 import com.hbm.blockentity.machine.rbmk.RBMKControlRodEntity;
+import com.hbm.reactor.rbmk.RBMKDoddOverlay;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -16,18 +19,23 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkHooks;
+import java.util.List;
 
 /**
  * Minimal RBMK control rod column. Stores a simple insertion level (0-4) and
  * pushes it into the RBMK column directly below.
  */
-public class BlockRBMKControlRod extends Block implements EntityBlock {
+public class BlockRBMKControlRod extends Block implements EntityBlock, ILookOverlay {
 
     public static final int MAX_INSERTION = 4;
     public static final IntegerProperty INSERTION = IntegerProperty.create("insertion", 0, MAX_INSERTION);
+    private static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 20.0D, 16.0D);
 
     public BlockRBMKControlRod(Properties properties) {
         super(properties);
@@ -42,6 +50,26 @@ public class BlockRBMKControlRod extends Block implements EntityBlock {
     @Override
     public RenderShape getRenderShape(BlockState state) {
         return RenderShape.MODEL;
+    }
+
+    @Override
+    public VoxelShape getShape(BlockState state, net.minecraft.world.level.BlockGetter level, BlockPos pos, CollisionContext context) {
+        return SHAPE;
+    }
+
+    @Override
+    public VoxelShape getCollisionShape(BlockState state, net.minecraft.world.level.BlockGetter level, BlockPos pos, CollisionContext context) {
+        return SHAPE;
+    }
+
+    @Override
+    public VoxelShape getInteractionShape(BlockState state, net.minecraft.world.level.BlockGetter level, BlockPos pos) {
+        return SHAPE;
+    }
+
+    @Override
+    public VoxelShape getOcclusionShape(BlockState state, net.minecraft.world.level.BlockGetter level, BlockPos pos) {
+        return Shapes.empty();
     }
 
     @Override
@@ -76,5 +104,10 @@ public class BlockRBMKControlRod extends Block implements EntityBlock {
                 controlRod.serverTick();
             }
         };
+    }
+
+    @Override
+    public List<Component> getDesc(Level level, BlockPos pos) {
+        return RBMKDoddOverlay.describe(level, pos);
     }
 }

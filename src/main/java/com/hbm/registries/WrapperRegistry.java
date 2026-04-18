@@ -12,6 +12,7 @@ import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
@@ -270,6 +271,9 @@ public class WrapperRegistry<T> implements Supplier<T>{
 
         public BlockBuilder tab(ResourceKey<CreativeModeTab> tabKey){
             creativeKey = tabKey;
+            if (ModBlocks.isMachineTab(tabKey)) {
+                tags(BlockTags.MINEABLE_WITH_PICKAXE, ModTags.Blocks.MACHINE);
+            }
             return this;
         }
 
@@ -303,7 +307,11 @@ public class WrapperRegistry<T> implements Supplier<T>{
         public final BlockBuilder tags(TagKey<Block>... blockTags){
             if (blockTags.length > 0){
                 if (this.tags == null) this.tags = new ArrayList<>();
-                this.tags.addAll(Arrays.stream(blockTags).toList());
+                for (TagKey<Block> blockTag : blockTags) {
+                    if (!this.tags.contains(blockTag)) {
+                        this.tags.add(blockTag);
+                    }
+                }
             }
             return this;
         }
