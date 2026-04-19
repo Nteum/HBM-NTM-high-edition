@@ -1,0 +1,6 @@
+{
+  "loader": "forge:obj",
+  "flip_v": true,
+  "model": "hbm:models/entity/missile/missile_huge.obj",
+  "texture0": "hbm:models/missile/missile_huge_inc"
+}

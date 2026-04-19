@@ -1,0 +1,7 @@
+{
+  "loader": "forge:obj",
+  "flip_v": true,
+  "model": "hbm:models/entity/missile/missile_micro.obj",
+  "mtl_override": "hbm:models/entity/missile/missile_micro.mtl",
+  "texture0": "hbm:models/missile/missile_micro_schrab"
+}
