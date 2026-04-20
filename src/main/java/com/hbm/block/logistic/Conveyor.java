@@ -1,6 +1,7 @@
 package com.hbm.block.logistic;
 
 import com.hbm.block.HBMBlockProperties;
+import com.hbm.block.interfaces.IConveyorAccess;
 import com.hbm.block.interfaces.IToolable;
 import com.hbm.block.interfaces.ToolType;
 import com.hbm.blockentity.base2.UpdateableBlockEntity;
@@ -15,6 +16,8 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.BlockGetter;
@@ -34,6 +37,9 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
 import org.jetbrains.annotations.Nullable;
 
@@ -76,8 +82,21 @@ public class Conveyor extends Block implements EntityBlock, IToolable {
                         if (facing.equals(opposite)) return this.defaultBlockState().setValue(FACING, opposite);
                     }
                 }else {
+                    BlockEntity be;
                     boolean upWithConveyor = level.getBlockState(pos.relative(Direction.UP)).getBlock() instanceof Conveyor;
                     boolean downWithConveyor = level.getBlockState(pos.relative(Direction.DOWN)).getBlock() instanceof Conveyor;
+                    if (!upWithConveyor && (be = level.getBlockEntity(pos.relative(Direction.UP))) != null){
+                        LazyOptional<IItemHandler> lazyOptional = be.getCapability(ForgeCapabilities.ITEM_HANDLER, Direction.DOWN);
+                        if (lazyOptional.isPresent() && lazyOptional.resolve().isPresent()){
+                            upWithConveyor = InventoryUtils.insertNoCheckSlots(new ItemStack(Items.REDSTONE), lazyOptional.resolve().get(), true) > 0;
+                        }
+                    }
+                    if (!downWithConveyor && (be = level.getBlockEntity(pos.relative(Direction.DOWN))) != null){
+                        LazyOptional<IItemHandler> lazyOptional = be.getCapability(ForgeCapabilities.ITEM_HANDLER, Direction.UP);
+                        if (lazyOptional.isPresent() && lazyOptional.resolve().isPresent()){
+                            downWithConveyor = InventoryUtils.insertNoCheckSlots(new ItemStack(Items.REDSTONE), lazyOptional.resolve().get(), true) > 0;
+                        }
+                    }
                     if (variant == 3 || variant == 4 || variant == 5){
                         return this.defaultBlockState().setValue(FACING, facing).setValue(VARIANT, downWithConveyor ? (upWithConveyor ? 3 : 5) : 4);
                     }else if (variant == 6 || variant == 7){
@@ -147,6 +166,10 @@ public class Conveyor extends Block implements EntityBlock, IToolable {
             case 7 -> facing;
             default -> facing;
         };
+    }
+
+    public static boolean isOrthogonal(BlockState state, Direction in){
+        return in != null && (state.getValue(VARIANT) < 3 && in.getAxis().isVertical() || state.getValue(VARIANT) >= 3 && in.getAxis().isHorizontal());
     }
 
     @Override

@@ -1,6 +1,6 @@
 {
   "values": [
     "hbm:ore_oil",
-    "hbm:oil_ore_empty"
+    "hbm:ore_oil_empty"
   ]
 }

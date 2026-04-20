@@ -1,6 +1,7 @@
 package com.hbm.gui.menu;
 
 import com.hbm.blockentity.machine.CrucibleEntity;
+import com.hbm.gui.menu.slot.FilterSlot;
 import com.hbm.utils.WorldUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;

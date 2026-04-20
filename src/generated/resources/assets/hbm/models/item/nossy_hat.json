@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "hbm:item/hat"
+    "layer0": "hbm:item/nossy_hat"
   }
 }

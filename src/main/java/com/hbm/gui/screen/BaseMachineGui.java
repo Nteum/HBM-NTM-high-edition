@@ -1,11 +1,14 @@
 package com.hbm.gui.screen;
 
+import com.hbm.gui.menu.slot.FilterSlot;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.Slot;
 
 import java.util.List;
 
@@ -41,5 +44,22 @@ public abstract class BaseMachineGui<T extends AbstractContainerMenu> extends Ab
         if(x <= mouseX && x + width > mouseX && y < mouseY && y + height >= mouseY)
             pGuiGraphics.renderComponentTooltip(this.font, tooltips, mouseX, mouseY);
 //        if (isHovering(x, y, width, height, mouseX, mouseY)) pGuiGraphics.renderComponentTooltip(this.font, tooltips, mouseX, mouseY);
+    }
+
+    @Override
+    protected void renderLabels(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY) {
+        super.renderLabels(pGuiGraphics, pMouseX, pMouseY);
+        // 遍历所有槽位，找到你的 FilterSlot
+        for (Slot slot : this.menu.slots) {
+            if (slot instanceof FilterSlot && slot.hasItem()) {
+                // 此时原版已经画了一个 100% 不透明的物品
+                // 我们在这里画一个半透明的白色方块覆盖在上面，制造“虚化”感
+                int x = slot.x;
+                int y = slot.y;
+
+                // 渲染一个半透明层 (ARGB: 0x88FFFFFF)
+                pGuiGraphics.fillGradient(RenderType.guiOverlay(), x, y, x + 16, y + 16, 0x88FFFFFF, 0x88FFFFFF, 0);
+            }
+        }
     }
 }

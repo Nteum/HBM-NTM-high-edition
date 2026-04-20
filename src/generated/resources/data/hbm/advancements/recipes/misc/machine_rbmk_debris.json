@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_machine_rbmk_element": {
+    "has_rbmk_element": {
       "conditions": {
         "items": [
           {
             "items": [
-              "hbm:machine_rbmk_element"
+              "hbm:rbmk_element"
             ]
           }
         ]
@@ -22,7 +22,7 @@
   },
   "requirements": [
     [
-      "has_machine_rbmk_element",
+      "has_rbmk_element",
       "has_the_recipe"
     ]
   ],

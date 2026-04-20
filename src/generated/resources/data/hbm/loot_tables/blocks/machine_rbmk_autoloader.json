@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "hbm:machine_rbmk_autoloader"
+          "name": "hbm:rbmk_loader"
         }
       ],
       "rolls": 1.0

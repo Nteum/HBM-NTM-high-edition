@@ -73,6 +73,7 @@ public class ModMenuType {
     public static final RegistryObject<MenuType<MenuCrucible>> MENU_CRUCIBLE = register("menu_crucible", MenuCrucible::new);
     public static final RegistryObject<MenuType<MenuConveyorExtractor>> MENU_CONVEYOR_EXTRACTOR = register("menu_conveyor_extractor", MenuConveyorExtractor::new);
     public static final RegistryObject<MenuType<MenuConveyorInserter>> MENU_CONVEYOR_INSERTER = register("menu_conveyor_inserter", MenuConveyorInserter::new);
+    public static final RegistryObject<MenuType<MenuConveyorRouter>> MENU_CONVEYOR_ROUTER = register("menu_conveyor_router", MenuConveyorRouter::new);
     private static <T extends AbstractContainerMenu> RegistryObject<MenuType<T>> register(String key, IContainerFactory<T> factory){
         return MOD_MENU_TYPES.register(key, () -> IForgeMenuType.create(factory));
     }

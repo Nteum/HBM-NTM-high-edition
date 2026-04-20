@@ -1,0 +1,48 @@
+{
+  "parent": "minecraft:block/block",
+  "render_type": "cutout",
+  "textures": {
+    "top": "hbm:block/crane_top",
+    "all": "hbm:block/crane_in",
+    "side": "hbm:block/crane_router_overlay",
+    "particle": "hbm:block/crane_top"
+  },
+  "elements": [
+    {
+      "from": [ 0, 0, 0 ],
+      "to": [ 16, 16, 16 ],
+      "faces": {
+        "north": {"uv": [0, 0, 16, 16], "texture": "#top"},
+        "east": {"uv": [0, 0, 16, 16], "texture": "#top"},
+        "south": {"uv": [0, 0, 16, 16], "texture": "#top"},
+        "west": {"uv": [0, 0, 16, 16], "texture": "#top"},
+        "up": {"uv": [0, 0, 16, 16], "texture": "#top"},
+        "down": {"uv": [0, 0, 16, 16], "texture": "#top"}
+      }
+    },
+    {
+      "from": [ 0, 0, 0 ],
+      "to": [ 16, 16, 16 ],
+      "faces": {
+        "north": {"uv": [0, 0, 16, 16], "texture": "#all"},
+        "east": {"uv": [0, 0, 16, 16], "texture": "#all"},
+        "south": {"uv": [0, 0, 16, 16], "texture": "#all"},
+        "west": {"uv": [0, 0, 16, 16], "texture": "#all"},
+        "up": {"uv": [0, 0, 16, 16], "texture": "#all"},
+        "down": {"uv": [0, 0, 16, 16], "texture": "#all"}
+      }
+    },
+    {
+      "from": [ 0, 0, 0 ],
+      "to": [ 16, 16, 16 ],
+      "faces": {
+        "north": {"uv": [0, 0, 16, 16], "texture": "#side", "tintindex": 2},
+        "east": {"uv": [0, 0, 16, 16], "texture": "#side", "tintindex": 5},
+        "south": {"uv": [0, 0, 16, 16], "texture": "#side", "tintindex": 3},
+        "west": {"uv": [0, 0, 16, 16], "texture": "#side", "tintindex": 4},
+        "up": {"uv": [0, 0, 16, 16], "texture": "#side", "tintindex": 1},
+        "down": {"uv": [0, 0, 16, 16], "texture": "#side", "tintindex": 0}
+      }
+    }
+  ]
+}

@@ -17,29 +17,50 @@ import java.util.function.Predicate;
 
 public interface HBMFilter extends Predicate<ItemStack>, INBTSerializable<CompoundTag> {
     static RootFilter create(){
-        return new RootFilter(0, false);
+        return new RootFilter(0, 0);
     }
     static RootFilter create(int size){
-        return new RootFilter(size, false);
+        return new RootFilter(size, 0);
     }
     static ItemFilter create(ItemStack itemStack){
         return new ItemFilter(itemStack, false);
     }
 
     class RootFilter extends CompositeFilter{
-        boolean isBlackList;
-        public RootFilter(int size, boolean isBlackList){
+        // 0 - OFF 禁止, 1 - WHITELIST, 2 - BLACKLIST, 3 - WILDCARD 默认出口
+        int mode = 0;
+        public RootFilter(int size, int mode){
             super(size);
-            this.isBlackList = isBlackList;
+            this.mode = mode;
         }
 
         @Override
         public boolean test(ItemStack stack) {
-            return super.test(stack) ^ isBlackList;
+            return mode == 0 ? false : mode == 1 ? super.test(stack) : mode == 2 ? !super.test(stack) : true;
         }
 
         public void setBlackList(boolean blackList) {
-            isBlackList = blackList;
+            mode = blackList ? 2 : 1;
+        }
+
+        public int getMode(){
+            return mode;
+        }
+        public void setMode(int mode){
+            this.mode = mode;
+        }
+
+        @Override
+        public CompoundTag serializeNBT() {
+            CompoundTag tag = super.serializeNBT();
+            tag.putInt(HBMKey.MODE, mode);
+            return tag;
+        }
+
+        @Override
+        public void deserializeNBT(CompoundTag nbt) {
+            super.deserializeNBT(nbt);
+            this.mode = nbt.getInt(HBMKey.MODE);
         }
     }
     // 具体实现

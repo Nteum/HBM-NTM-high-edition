@@ -20,13 +20,14 @@ import com.hbm.particle.ModParticleTypes;
 import com.hbm.registries.ModBlocks;
 import com.hbm.registries.ModItems;
 import com.hbm.registries.ModKeyMapping;
+import com.hbm.registries.ModTabs;
 import com.hbm.render.blockentity.*;
 import com.hbm.render.entity.EntityBlankRender;
 import com.hbm.render.entity.TestEntityRenderer;
 import com.hbm.render.entity.effect.BlackHoleRender;
 import com.hbm.render.entity.effect.EntityTorexRender;
 import com.hbm.render.entity.effect.RenderMeteor;
-import com.hbm.render.entity.missile.MissileABMRenderer;
+//import com.hbm.render.entity.missile.MissileABMRenderer;
 import com.hbm.render.entity.missile.MissileTaintRenderer;
 import com.hbm.render.entity.mob.GlyphidRender;
 import com.hbm.render.item.SpecialItemRender;
@@ -84,6 +85,7 @@ public class ClientEventHandler {
     public static void registerEvents(IEventBus forgeBus, IEventBus modBus){
         // mod总线事件
         modBus.addListener(ClientEventHandler::onClientSetup);
+        modBus.addListener(ClientEventHandler::onRegisterBlockColorHandlerEvent);
         modBus.addListener(ClientEventHandler::registerEntityLayers);
         modBus.addListener(ClientEventHandler::registerAdditional);
         modBus.addListener(ClientEventHandler::modifyBakingResult);
@@ -93,6 +95,7 @@ public class ClientEventHandler {
         modBus.addListener(ClientEventHandler::registerColorHandlerItem);
         modBus.addListener(ClientEventHandler::registerDimensionsSpecialEffects);
         modBus.addListener(ClientEventHandler::registerGeometryLoaders);
+        modBus.addListener(ModTabs::addCreative);
         // forge总线事件
         forgeBus.addListener(ClientEventHandler::onKeyPressed);
         forgeBus.addListener(ClientEventHandler::onMouseScroll);
@@ -140,6 +143,7 @@ public class ClientEventHandler {
             MenuScreens.register(ModMenuType.MENU_CRUCIBLE.get(), GuiCrucible::new);
             MenuScreens.register(ModMenuType.MENU_CONVEYOR_INSERTER.get(), GuiConveyorInserter::new);
             MenuScreens.register(ModMenuType.MENU_CONVEYOR_EXTRACTOR.get(), GuiConveyorExtractor::new);
+            MenuScreens.register(ModMenuType.MENU_CONVEYOR_ROUTER.get(), GuiConveyorRouter::new);
             //方块实体渲染
             BlockEntityRenderers.register(ModBlockEntityType.PRESS_ENTITY.get(), PressRenderer::new);
             BlockEntityRenderers.register(ModBlockEntityType.ASSEMBLER_ENTITY.get(), AssemblerRenderer::new);
@@ -177,7 +181,7 @@ public class ClientEventHandler {
             EntityRenderers.register(ModEntityType.ENTITY_NUKE_EXPLOSION_MK5.get(), EntityBlankRender::new);
             EntityRenderers.register(ModEntityType.ENTITY_NUKE_TOREX.get(), EntityTorexRender::new);
             EntityRenderers.register(ModEntityType.ENTITY_MISSILE_TEST.get(), MissileTaintRenderer::new);
-            EntityRenderers.register(ModEntityType.ENTITY_MISSILE_ANTI_BALLISTIC.get(), MissileABMRenderer::new);
+//            EntityRenderers.register(ModEntityType.ENTITY_MISSILE_ANTI_BALLISTIC.get(), MissileABMRenderer::new);
             EntityRenderers.register(ModEntityType.GLYPHID.get(), GlyphidRender::new);
             EntityRenderers.register(ModEntityType.ENTITY_METEOR.get(), RenderMeteor::new);
 
@@ -198,8 +202,22 @@ public class ClientEventHandler {
                     (stack, level, entity, seed) -> ItemBreedingRod.getType(stack).ordinal());
             ItemProperties.register(ModItems.rod_breeder_quad.get(), HBM.rl("breeder_type"),
                     (stack, level, entity, seed) -> ItemBreedingRod.getType(stack).ordinal());
-            // 世界渲染特效
+
         });
+    }
+
+    @SubscribeEvent
+    public static void onRegisterBlockColorHandlerEvent(RegisterColorHandlersEvent.Block event){
+        // 方块的颜色
+        event.register((state, level, pos, tintIndex) -> switch (tintIndex){
+            case 0 -> 0xff0000;
+            case 1 -> 0xff8000;
+            case 2 -> 0xffff00;
+            case 3 -> 0x00ff00;
+            case 4 -> 0x0080ff;
+            case 5 -> 0x8000ff;
+            default -> -1;
+        }, ModBlocks.CONVEYOR_ROUTER.get());
     }
 
     @SubscribeEvent

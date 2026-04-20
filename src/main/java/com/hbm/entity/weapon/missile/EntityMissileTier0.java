@@ -1,7 +1,7 @@
 package com.hbm.entity.weapon.missile;
 
 import com.hbm.api.badthing.ContaminationUtil;
-import com.hbm.block.HBMBlockComponent;
+
 import com.hbm.compat.ballistix.BallistixExplosiveType;
 import com.hbm.compat.ballistix.BallistixExplosionHandlers;
 import com.hbm.config.ConfigBomb;
@@ -318,7 +318,7 @@ public abstract class EntityMissileTier0 extends EntityMissile{
 
         private void legacyTestContamination(Vec3 loc) {
             level().explode(this, loc.x, loc.y, loc.z, 6.0F, false, Level.ExplosionInteraction.BLOCK);
-            if (HBMBlockComponent.SELLAFIELD_SLAKED == null) {
+            if (ModBlocks.SELLAFIELD_SLAKED == null) {
                 return;
             }
             BlockPos center = BlockPos.containing(loc);
@@ -336,7 +336,7 @@ public abstract class EntityMissileTier0 extends EntityMissile{
                 if (level().random.nextFloat() > 0.35F) {
                     continue;
                 }
-                level().setBlock(pos, HBMBlockComponent.SELLAFIELD_SLAKED.get().defaultBlockState(), 11);
+                level().setBlock(pos, ModBlocks.SELLAFIELD_SLAKED.get().defaultBlockState(), 11);
             }
         }
 

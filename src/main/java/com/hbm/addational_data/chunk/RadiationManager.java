@@ -2,7 +2,6 @@ package com.hbm.addational_data.chunk;
 
 import com.hbm.addational_data.AdditionalDataManager;
 import com.hbm.addational_data.DataEntry;
-import com.hbm.block.HBMBlockComponent;
 import com.hbm.config.RadiationConfig;
 import com.hbm.registries.ModBlocks;
 import net.minecraft.core.BlockPos;
@@ -75,12 +74,12 @@ public class RadiationManager {
                     BlockState blockState = level.getBlockState(new BlockPos(x, y, z));
                     if (blockState.isAir())continue;
                     else if(blockState.is(Blocks.GRASS_BLOCK)) {
-                        level.setBlock(new BlockPos(x,y,z), HBMBlockComponent.WAST_EARTH.get().defaultBlockState(),3);
+                        level.setBlock(new BlockPos(x,y,z), ModBlocks.WASTE_EARTH.get().defaultBlockState(),3);
                     } else if(blockState.is(Blocks.TALL_GRASS)) {
                         level.setBlock(new BlockPos(x,y,z), Blocks.AIR.defaultBlockState(),11);
-                    } else if(blockState.is(BlockTags.LEAVES) && !(blockState.is(HBMBlockComponent.WAST_LEAVES.get()))) {
+                    } else if(blockState.is(BlockTags.LEAVES) && !(blockState.is(ModBlocks.WASTE_LEAVES.get()))) {
                         if(level.random.nextInt(7) <= 5) {
-                            level.setBlock(new BlockPos(x,y,z), HBMBlockComponent.WAST_LEAVES.get().defaultBlockState(),3);
+                            level.setBlock(new BlockPos(x,y,z), ModBlocks.WASTE_LEAVES.get().defaultBlockState(),3);
                         } else {
                             level.setBlock(new BlockPos(x,y,z), Blocks.AIR.defaultBlockState(),11);
                         }

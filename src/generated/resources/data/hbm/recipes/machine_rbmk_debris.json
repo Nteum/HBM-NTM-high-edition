@@ -3,7 +3,7 @@
   "category": "misc",
   "key": {
     "F": {
-      "item": "hbm:machine_rbmk_element"
+      "item": "hbm:rbmk_element"
     },
     "G": {
       "item": "hbm:ingot_graphite"

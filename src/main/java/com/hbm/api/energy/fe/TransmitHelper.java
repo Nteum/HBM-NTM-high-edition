@@ -1,6 +1,6 @@
 package com.hbm.api.energy.fe;
 
-import com.hbm.utils.MthHelper;
+import com.hbm.utils.math.MthHelper;
 import com.hbm.registries.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

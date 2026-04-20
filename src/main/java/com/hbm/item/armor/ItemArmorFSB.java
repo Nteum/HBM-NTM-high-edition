@@ -2,9 +2,10 @@ package com.hbm.item.armor;
 
 import com.hbm.HBM;
 import com.hbm.HBMLang;
-import com.hbm.block.HBMMachine;
+
 import com.hbm.blockentity.tools.TileEntityGeiger;
 import com.hbm.item.HBMCombat;
+import com.hbm.registries.ModBlocks;
 import com.hbm.registries.ModItems;
 import com.hbm.render.model.armor.ModelArmorBase;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -204,7 +205,7 @@ public class ItemArmorFSB extends ArmorItem implements IArmorDisableModel {
                 for (MobEffectInstance effect : chestplate.effects) {
                     player.addEffect(effect);
                 }
-                if (chestplate.geigerSound && !player.getInventory().hasAnyOf(Set.of(ModItems.GEIGER_COUNTER.get(), HBMMachine.GEIGER_COUNTER.get().asItem()))){
+                if (chestplate.geigerSound && !player.getInventory().hasAnyOf(Set.of(ModItems.GEIGER_COUNTER.get(), ModBlocks.GEIGER_COUNTER.get().asItem()))){
                     TileEntityGeiger.show(level, null, player, player.tickCount, TileEntityGeiger.check(level, player.getOnPos()));
                 }
             } else if (step && chestplate.step != null && player.onGround()){

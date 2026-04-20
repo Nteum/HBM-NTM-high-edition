@@ -2,6 +2,7 @@ package com.hbm.gui.screen;
 
 import com.hbm.HBM;
 import com.hbm.HBMKey;
+import com.hbm.HBMLang;
 import com.hbm.gui.menu.MenuConveyorExtractor;
 import com.hbm.gui.menu.slot.FilterSlot;
 import com.hbm.gui.screen.widget.MultiStateButton;
@@ -50,6 +51,7 @@ public class GuiConveyorExtractor extends BaseMachineGui<MenuConveyorExtractor>{
         this.isWhitelist = menu.isWhitelist();
         this.button.setState(menu.containerData.get(1));
         super.render(pGuiGraphics, pMouseX, pMouseY, pPartialTick);
+
     }
 
     @Override
@@ -76,22 +78,5 @@ public class GuiConveyorExtractor extends BaseMachineGui<MenuConveyorExtractor>{
             ModMessages.sendToServer(new C2SSyncTileMessage(this.menu.getPos(), tag));
         }
         return super.mouseClicked(pMouseX, pMouseY, pButton);
-    }
-
-    @Override
-    protected void renderLabels(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY) {
-        super.renderLabels(pGuiGraphics, pMouseX, pMouseY);
-        // 遍历所有槽位，找到你的 FilterSlot
-        for (Slot slot : this.menu.slots) {
-            if (slot instanceof FilterSlot && slot.hasItem()) {
-                // 此时原版已经画了一个 100% 不透明的物品
-                // 我们在这里画一个半透明的白色方块覆盖在上面，制造“虚化”感
-                int x = slot.x;
-                int y = slot.y;
-
-                // 渲染一个半透明层 (ARGB: 0x88FFFFFF)
-                pGuiGraphics.fillGradient(RenderType.guiOverlay(), x, y, x + 16, y + 16, 0x88FFFFFF, 0x88FFFFFF, 0);
-            }
-        }
     }
 }

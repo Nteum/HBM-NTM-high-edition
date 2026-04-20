@@ -15,6 +15,8 @@ public class HBMKey {
     public static final String MODEL_ENTITY = "entity_model";
     public static final String MODEL_DYNAMIC = "model_dynamic";
     public static final String MODEL_CUBE_ALL = "model_cube_all";
+    public static final String MODEL_CUBE_TOP = "cube_top";
+    public static final String MODEL_CUBE_BOTTOM_TOP = "model_cube_bottom_top";
     public static final String MODEL_FRONT_SIDE = "model_front_side";
     public static final String MODEL_FRONT_SIDE_TOP = "model_front_side_top";
     public static final String MODEL_PILLAR = "model_pillar";
@@ -22,6 +24,7 @@ public class HBMKey {
     public static final String MODEL_STANDALONE = "model_standalone";
     public static final String MODEL_DIFURNACE = "model_difurnace";
     public static final String MODEL_HORIZONTAL_WITH_FILE = "model_horizontal_with_file";
+    public static final String MODEL_LEAVES = "model_leaves";
     public static final String MODEL_EXISTING = "model_existing";
 
     public static final String LITERALLY = "literally";
@@ -87,6 +90,7 @@ public class HBMKey {
     public static final String JOINED = "joined";
     public static final String UPGRADE = "upgrade";
     public static final String FILTER = "filter";
+    public static final String ORDER = "order";
     // machine name
     public static final String BLAST = "blast";
     public static final String ASSEMBLER = "assembler";

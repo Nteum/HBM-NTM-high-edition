@@ -2,12 +2,8 @@ package com.hbm.datagen.model;
 
 import com.hbm.HBM;
 import com.hbm.block.HBMBlockProperties;
-import com.hbm.block.base.BlockDummyable;
 import com.hbm.block.env.BedRockOre;
-import com.hbm.block.logistic.ConveyorMachineBase;
-import com.hbm.gui.recipebook.HBMRecipeBooks;
 import com.hbm.registries.ModBlocks;
-import com.hbm.render.model.Models;
 import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
@@ -18,13 +14,10 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
-import net.minecraftforge.client.model.CompositeModel;
 import net.minecraftforge.client.model.generators.*;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
-import org.jetbrains.annotations.Nullable;
 
-import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
@@ -33,8 +26,6 @@ public class BlockStateGen extends BlockStateProvider {
     private List<ICategoryStateProvider> categoryStateProviders = new ArrayList<>();
     public BlockStateGen(PackOutput output, String modid, ExistingFileHelper exFileHelper) {
         super(output, modid, exFileHelper);
-        categoryStateProviders.add(new DecorateBlockStateProvider(this));
-        categoryStateProviders.add(new ObjMachineBlockStateProvider(this));
     }
 
     @Override
@@ -124,8 +115,7 @@ public class BlockStateGen extends BlockStateProvider {
         //线缆
         cableBlockWithItem();
         // 新体系添加的物品
-        simpleBlockWithItem(ModBlocks.WASTE_LEAVES.get(), genBuiltInModelFile(ModBlocks.WASTE_LEAVES.get(), "leaves"));
-        simpleBlockWithItem(ModBlocks.WASTE_GRASS.get(), genBuiltInModelFile(ModBlocks.WASTE_GRASS.get(), "cube_bottom_top"));
+        horizontalBlockWithItem(ModBlocks.TEST12.get(),"block/test12/test12");
         addHorizontalModel(ModBlocks.SPACE_STATION_BASE.get(), "block/space_station_base");
         simpleBlockWithItem(ModBlocks.CONNECTOR.get(), genBuiltInModelFile(ModBlocks.CONNECTOR.get(), "existing"));
         addHorizontalModel(ModBlocks.machine_assembler.get(), "block/assembler_body");
@@ -139,6 +129,16 @@ public class BlockStateGen extends BlockStateProvider {
         conveyor(ModBlocks.conveyor.get(), "block/conveyor");
         conveyorCrane(ModBlocks.CONVEYOR_INSERTER.get(), "block/conveyor_inserter");
         conveyorCrane(ModBlocks.CONVEYOR_EXTRACTOR.get(), "block/conveyor_extractor");
+        addHorizontalModel(ModBlocks.CHEMPLANT.get(), "block/chemplant/chemplant_new_body");
+        addHorizontalModel(ModBlocks.PLASTIC_BARREL.get(), "block/barrel/barrel_plastic");
+        addHorizontalModel(ModBlocks.CORRODED_BARREL.get(), "block/barrel/barrel_corroded");
+        addHorizontalModel(ModBlocks.IRON_BARREL.get(), "block/barrel/barrel_iron");
+        addHorizontalModel(ModBlocks.STEEL_BARREL.get(), "block/barrel/barrel_steel");
+        addHorizontalModel(ModBlocks.TCALLOY_BARREL.get(), "block/barrel/barrel_tcalloy");
+        addHorizontalModel(ModBlocks.ANTIMATTER_BARREL.get(), "block/barrel/barrel_antimatter");
+        addHorizontalModel(ModBlocks.GEIGER_COUNTER.get(), "block/geiger");
+        addHorizontalModel(ModBlocks.LAUNCH_PAD.get(), "block/launch_pad");
+        pipeBlockWithItem(ModBlocks.FLUID_PIPE.get());
     }
     // 方块和物品：纯cube all
     public void simpleBlockWithItem(Block block){
@@ -269,9 +269,9 @@ public class BlockStateGen extends BlockStateProvider {
         ResourceLocation blockTexture = blockTexture(block);
         return switch (type){
             case "cube_all" -> cubeAll(block);
-            case "cube_top" -> models().cubeTop(name, blockTexture.withSuffix("side"), blockTexture.withSuffix("top"));
-            case "cube_bottom_top" -> models().cubeBottomTop(name, blockTexture.withSuffix("side"), blockTexture.withSuffix("bottom"), blockTexture.withSuffix("top"));
-            case "cube_column" -> models().cubeColumn(name, blockTexture.withSuffix("side"), blockTexture.withSuffix("end"));
+            case "cube_top" -> models().cubeTop(name, blockTexture.withSuffix("_side"), blockTexture.withSuffix("_top"));
+            case "cube_bottom_top" -> models().cubeBottomTop(name, blockTexture.withSuffix("_side"), blockTexture.withSuffix("_bottom"), blockTexture.withSuffix("_top"));
+            case "cube_column" -> models().cubeColumn(name, blockTexture.withSuffix("_side"), blockTexture.withSuffix("_end"));
             case "leaves" -> models().leaves(name, blockTexture);
             // 使用给定的model文件，这里假定只有
             case "existing" -> models().getExistingFile(HBM.rl(name));
@@ -338,5 +338,24 @@ public class BlockStateGen extends BlockStateProvider {
             }
         }
         this.simpleBlockItem(block, this.models().getExistingFile(HBM.rl(name + "_item")));
+    }
+
+    private void pipeBlockWithItem(Block block){
+        ModelFile.ExistingModelFile inventory = models().getExistingFile(HBM.rl("block/pipes/pipe_inv"));
+        ModelFile.ExistingModelFile core = models().getExistingFile(HBM.rl("block/pipes/pipe_core"));
+        ModelFile.ExistingModelFile north = models().getExistingFile(HBM.rl("block/pipes/pipe_north"));
+        ModelFile.ExistingModelFile south = models().getExistingFile(HBM.rl("block/pipes/pipe_south"));
+        ModelFile.ExistingModelFile east = models().getExistingFile(HBM.rl("block/pipes/pipe_east"));
+        ModelFile.ExistingModelFile west = models().getExistingFile(HBM.rl("block/pipes/pipe_west"));
+        ModelFile.ExistingModelFile up = models().getExistingFile(HBM.rl("block/pipes/pipe_up"));
+        ModelFile.ExistingModelFile down = models().getExistingFile(HBM.rl("block/pipes/pipe_down"));
+        MultiPartBlockStateBuilder builder = getMultipartBuilder(block).part().modelFile(core).addModel().end();
+        builder.part().modelFile(east).addModel().condition(PipeBlock.EAST,true);
+        builder.part().modelFile(west).addModel().condition(PipeBlock.WEST,true);
+        builder.part().modelFile(north).addModel().condition(PipeBlock.NORTH,true);
+        builder.part().modelFile(south).addModel().condition(PipeBlock.SOUTH,true);
+        builder.part().modelFile(up).addModel().condition(PipeBlock.UP,true);
+        builder.part().modelFile(down).addModel().condition(PipeBlock.DOWN,true);
+        simpleBlockItem(block, inventory);
     }
 }

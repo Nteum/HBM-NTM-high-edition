@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "hbm:item/waste_uranium"
+    "layer0": "hbm:item/waste_natural_uranium"
   }
 }

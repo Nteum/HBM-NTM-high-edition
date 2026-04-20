@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "hbm:machine_rbmk_crane_console"
+          "name": "hbm:rbmk_crane_console"
         }
       ],
       "rolls": 1.0

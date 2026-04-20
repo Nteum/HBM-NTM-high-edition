@@ -31,7 +31,7 @@ import java.util.*;
  * */
 public class Meteorite extends Feature<Meteorite.Configuration> {
     public static Set<Block> replacables;
-    public static List<Block> meteorOres = List.of(ModBlocks.ORE_METEOR_IRON.get(), ModBlocks.ORE_METEOR_ALUMINUM.get(), ModBlocks.ORE_METEOR_COPPER.get(), ModBlocks.ORE_METEOR_RAREEARTH.get(), ModBlocks.ORE_METEOR_COBALT.get());
+    public static List<Block> meteorOres = List.of(ModBlocks.ORE_METEOR_IRON.get(), ModBlocks.ORE_METEOR_ALUMINIUM.get(), ModBlocks.ORE_METEOR_COPPER.get(), ModBlocks.ORE_METEOR_RAREEARTH.get(), ModBlocks.ORE_METEOR_COBALT.get());
     public Meteorite(Codec<Meteorite.Configuration> pCodec) {
         super(pCodec);
     }
@@ -280,7 +280,7 @@ public class Meteorite extends Feature<Meteorite.Configuration> {
         replacables.add(ModBlocks.BLOCK_METEOR_MOLTEN.get());
         replacables.add(ModBlocks.BLOCK_METEOR_TREASURE.get());
         replacables.add(ModBlocks.ORE_METEOR_IRON.get());
-        replacables.add(ModBlocks.ORE_METEOR_ALUMINUM.get());
+        replacables.add(ModBlocks.ORE_METEOR_ALUMINIUM.get());
         replacables.add(ModBlocks.ORE_METEOR_COPPER.get());
         replacables.add(ModBlocks.ORE_METEOR_RAREEARTH.get());
         replacables.add(ModBlocks.ORE_METEOR_COBALT.get());

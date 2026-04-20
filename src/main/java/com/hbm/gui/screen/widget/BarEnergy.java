@@ -1,7 +1,7 @@
 package com.hbm.gui.screen.widget;
 
 import com.hbm.HBMLang;
-import com.hbm.utils.BobMth;
+import com.hbm.utils.math.BobMth;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;

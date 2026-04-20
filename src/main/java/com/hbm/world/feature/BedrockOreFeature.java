@@ -1,6 +1,5 @@
 package com.hbm.world.feature;
 
-import com.hbm.block.HBMBlockComponent;
 import com.hbm.block.env.BedRockOre;
 import com.hbm.registries.ModBlocks;
 import com.mojang.serialization.Codec;
@@ -8,7 +7,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Vec3i;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
@@ -34,7 +32,7 @@ public class BedrockOreFeature extends Feature<NoneFeatureConfiguration> {
         //生成基岩矿
         for (int i = 0; i < num; i++) {
             BlockPos bedrock_pos = blockPos.offset(random.nextInt(2), 0, random.nextInt(2));
-            BlockState blockState = HBMBlockComponent.BEDROCK_ORE.get().defaultBlockState();
+            BlockState blockState = ModBlocks.BEDROCK_ORE.get().defaultBlockState();
             blockState = blockState.setValue(BedRockOre.TYPE, BedRockOre.BedRockOreType.IRON);
             level.setBlock(bedrock_pos,blockState,11);
         }
@@ -44,7 +42,7 @@ public class BedrockOreFeature extends Feature<NoneFeatureConfiguration> {
                 for (int k = blockPos.getZ() - 3; k < blockPos.getZ() + 4; k++) {
                     if (blockPos.distSqr(new Vec3i(j,i,k)) < 4){
                         BlockPos cover_pos = new BlockPos(j, i, k);
-                        this.setBlock(level,cover_pos,HBMBlockComponent.DEPTH_STONE.get().defaultBlockState());
+                        this.setBlock(level,cover_pos,ModBlocks.DEPTH_STONE.get().defaultBlockState());
                     }
                 }
             }

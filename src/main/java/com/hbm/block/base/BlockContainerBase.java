@@ -1,8 +1,14 @@
 package com.hbm.block.base;
 
+import com.hbm.blockentity.base2.UpdateableBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.Pose;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
@@ -16,6 +22,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraftforge.network.NetworkHooks;
 
 import javax.annotation.Nullable;
 
@@ -53,6 +61,19 @@ public abstract class BlockContainerBase extends BlockBase implements EntityBloc
     public MenuProvider getMenuProvider(BlockState pState, Level pLevel, BlockPos pPos) {
         BlockEntity blockentity = pLevel.getBlockEntity(pPos);
         return blockentity instanceof MenuProvider ? (MenuProvider)blockentity : null;
+    }
+
+    @Override
+    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
+        if (!pLevel.isClientSide() && !pPlayer.getPose().equals(Pose.CROUCHING)){
+            BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
+            if (blockEntity instanceof MenuProvider){   //如果有界面则打开界面
+                NetworkHooks.openScreen((ServerPlayer) pPlayer, (MenuProvider) blockEntity, buf -> buf.writeBlockPos(pPos));
+            }
+            return InteractionResult.CONSUME;
+        }else {
+            return InteractionResult.SUCCESS;
+        }
     }
 
     @Nullable

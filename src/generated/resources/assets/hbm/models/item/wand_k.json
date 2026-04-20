@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "hbm:item/wand"
+    "layer0": "hbm:item/wand_k"
   }
 }

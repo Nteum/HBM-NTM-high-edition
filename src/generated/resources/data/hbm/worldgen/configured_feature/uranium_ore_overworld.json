@@ -15,7 +15,7 @@
       },
       {
         "state": {
-          "Name": "hbm:ore_deepslate_uranium"
+          "Name": "hbm:ore_uranium_deepslate"
         },
         "target": {
           "predicate_type": "minecraft:tag_match",

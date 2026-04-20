@@ -3,6 +3,7 @@ package com.hbm.block.machine;
 import com.hbm.HBMLang;
 import com.hbm.block.base.BaseMachineBlock;
 import com.hbm.block.base.BlockMachineBase;
+import com.hbm.block.interfaces.ILookOverlay;
 import com.hbm.blockentity.machine.BarrelEntity;
 import com.hbm.utils.InventoryUtils;
 import net.minecraft.ChatFormatting;
@@ -32,7 +33,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class BlockFluidBarrel extends BlockMachineBase {
+public class BlockFluidBarrel extends BlockMachineBase implements ILookOverlay {
     public static final VoxelShape SHAPE = Block.box(2,0.0D,2,14,16,14);
     public BarrelProperties barrelProperties;
     public BlockFluidBarrel(Properties pProperties, BarrelProperties barrelProperties) {
@@ -56,6 +57,12 @@ public class BlockFluidBarrel extends BlockMachineBase {
         super.appendHoverText(pStack, pLevel, pTooltip, pFlag);
         pTooltip.add(Component.translatable(HBMLang.FLUID_CAPACITY.key(),this.barrelProperties.capacity).withStyle(ChatFormatting.AQUA));
     }
+
+    @Override
+    public List<Component> getDesc(Level level, BlockPos pos) {
+        return List.of(Component.translatable(HBMLang.FLUID_CAPACITY.key(),this.barrelProperties.capacity).withStyle(ChatFormatting.AQUA));
+    }
+
     public static class BarrelProperties{
         public int capacity;
         public boolean hotResistance = false;

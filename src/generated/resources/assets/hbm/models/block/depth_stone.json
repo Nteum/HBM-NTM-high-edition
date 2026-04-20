@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "hbm:block/env/stone_depth"
+    "all": "hbm:block/depth_stone"
   }
 }

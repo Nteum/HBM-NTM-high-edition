@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "hbm:item/man_explosive8"
+    "layer0": "hbm:item/explosive_lenses"
   }
 }

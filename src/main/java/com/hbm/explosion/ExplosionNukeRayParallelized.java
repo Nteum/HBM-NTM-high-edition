@@ -2,7 +2,7 @@ package com.hbm.explosion;
 
 import com.hbm.config.ConfigBomb;
 import com.hbm.network.ModMessages;
-import com.hbm.network.packet.toclient.S2CBatchedRenderUpdatePacket;
+//import com.hbm.network.packet.toclient.S2CBatchedRenderUpdatePacket;
 import com.hbm.utils.ConcurrentBitSet;
 import com.hbm.utils.SubChunkKey;
 import com.hbm.utils.SubChunkSnapshot;
@@ -279,24 +279,24 @@ public class ExplosionNukeRayParallelized implements IExplosionRay {
             return;
         }
 
-        Map<ServerPlayer, List<S2CBatchedRenderUpdatePacket.RenderRange>> renderUpdatesByPlayer = new HashMap<>();
-
-        for (Map.Entry<ChunkPos, DirtyRenderBox> entry : changedChunkRanges.entrySet()) {
-            ChunkPos chunkPos = entry.getKey();
-            LevelChunk chunk = level.getChunk(chunkPos.x, chunkPos.z);
-            ClientboundLevelChunkWithLightPacket chunkPacket =
-                    new ClientboundLevelChunkWithLightPacket(chunk, level.getLightEngine(), null, null);
-            S2CBatchedRenderUpdatePacket.RenderRange renderRange = entry.getValue().toRenderRange();
-
-            for (ServerPlayer player : level.getChunkSource().chunkMap.getPlayers(chunkPos, false)) {
-                player.connection.send(chunkPacket);
-                renderUpdatesByPlayer.computeIfAbsent(player, ignored -> new ArrayList<>()).add(renderRange);
-            }
-        }
-
-        for (Map.Entry<ServerPlayer, List<S2CBatchedRenderUpdatePacket.RenderRange>> entry : renderUpdatesByPlayer.entrySet()) {
-            ModMessages.sendToPlayer(new S2CBatchedRenderUpdatePacket(entry.getValue()), entry.getKey());
-        }
+//        Map<ServerPlayer, List<S2CBatchedRenderUpdatePacket.RenderRange>> renderUpdatesByPlayer = new HashMap<>();
+//
+//        for (Map.Entry<ChunkPos, DirtyRenderBox> entry : changedChunkRanges.entrySet()) {
+//            ChunkPos chunkPos = entry.getKey();
+//            LevelChunk chunk = level.getChunk(chunkPos.x, chunkPos.z);
+//            ClientboundLevelChunkWithLightPacket chunkPacket =
+//                    new ClientboundLevelChunkWithLightPacket(chunk, level.getLightEngine(), null, null);
+//            S2CBatchedRenderUpdatePacket.RenderRange renderRange = entry.getValue().toRenderRange();
+//
+//            for (ServerPlayer player : level.getChunkSource().chunkMap.getPlayers(chunkPos, false)) {
+//                player.connection.send(chunkPacket);
+//                renderUpdatesByPlayer.computeIfAbsent(player, ignored -> new ArrayList<>()).add(renderRange);
+//            }
+//        }
+//
+//        for (Map.Entry<ServerPlayer, List<S2CBatchedRenderUpdatePacket.RenderRange>> entry : renderUpdatesByPlayer.entrySet()) {
+//            ModMessages.sendToPlayer(new S2CBatchedRenderUpdatePacket(entry.getValue()), entry.getKey());
+//        }
         changedChunkRanges.clear();
     }
 
@@ -331,9 +331,9 @@ public class ExplosionNukeRayParallelized implements IExplosionRay {
             if (z > maxZ) maxZ = z;
         }
 
-        private S2CBatchedRenderUpdatePacket.RenderRange toRenderRange() {
-            return new S2CBatchedRenderUpdatePacket.RenderRange(minX, minY, minZ, maxX, maxY, maxZ);
-        }
+//        private S2CBatchedRenderUpdatePacket.RenderRange toRenderRange() {
+//            return new S2CBatchedRenderUpdatePacket.RenderRange(minX, minY, minZ, maxX, maxY, maxZ);
+//        }
     }
 
     @Override

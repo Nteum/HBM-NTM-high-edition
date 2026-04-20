@@ -1,17 +1,12 @@
 package com.hbm.particle;
 
-import com.google.gson.internal.reflect.ReflectionHelper;
 import com.hbm.HBMKey;
-import com.hbm.addational_data.Pollution;
 import com.hbm.particle.type.ParticleExSmoke;
 import com.hbm.particle.type.ParticleLetter;
 import com.hbm.particle.type.ParticleRocketFlame;
-import com.hbm.utils.BobMth;
-import com.sun.jna.internal.ReflectionUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.ParticleStatus;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.particle.FireworkParticles;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleEngine;
 import net.minecraft.client.particle.SmokeParticle;
@@ -27,9 +22,6 @@ import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.level.ClipBlockStateContext;
-import net.minecraft.world.level.Explosion;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
@@ -43,8 +35,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.BiConsumer;
-import java.util.function.Consumer;
-import java.util.logging.XMLFormatter;
 
 /**
  * 粒子系统，其实只是和粒子相关的东西的大杂烩。

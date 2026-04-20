@@ -1,16 +1,13 @@
 package com.hbm.registries;
 
 import com.hbm.HBMKey;
-import com.hbm.block.HBMBlockComponent;
+
 import com.hbm.block.HBMBlockProperties;
-import com.hbm.block.HBMMachine;
 import com.hbm.block.base.BlockBase;
 import com.hbm.block.decoriate.BlockMolten;
+import com.hbm.block.decoriate.BlockOre;
 import com.hbm.block.decoriate.BlockTest12;
-import com.hbm.block.env.GlyphidBlock;
-import com.hbm.block.env.GlyphidSpawner;
-import com.hbm.block.env.WasteEarth;
-import com.hbm.block.env.WasteLeaves;
+import com.hbm.block.env.*;
 import com.hbm.block.logistic.*;
 import com.hbm.block.machine.*;
 import com.hbm.block.machine.icf.BlockICFController;
@@ -33,6 +30,8 @@ import com.hbm.block.machine.rbmk.BlockRBMKPeripheral;
 import com.hbm.block.machine.rbmk.BlockRBMKPeripheralLarge;
 import com.hbm.block.machine.rbmk.BlockRBMKRadioController;
 import com.hbm.block.machine.rbmk.BlockRBMKSteamPort;
+import com.hbm.block.tools.GeigerCounter;
+import com.hbm.block.weapon.LaunchPad;
 import com.hbm.blockentity.machine.rbmk.RBMKBoilerEntity;
 import com.hbm.blockentity.machine.rbmk.RBMKCoolerEntity;
 import com.hbm.blockentity.machine.rbmk.RBMKOutgasserEntity;
@@ -60,6 +59,7 @@ import com.hbm.registries.WrapperRegistry.WrappedBlockRegistry;
 import com.hbm.utils.debug.BlockDebug;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -89,10 +89,20 @@ public class ModBlocks {
     public static final List<WrappedBlockRegistry> blockList = new ArrayList<>();
     private static final List<RegistryObject<Block>> legacyMachineTagBlocks = new ArrayList<>();
     static {
-        HBMMachine.register(BLOCKS);
-        HBMBlockComponent.register(BLOCKS);
+//        HBMMachine.register(BLOCKS);
+//        HBMBlockComponent.register(BLOCKS);
     }
     //机械
+    public static final RegistryObject<Block> CHEMPLANT = add("chemplant", ()->new BlockChemplant(BlockBehaviour.Properties.of().strength(5.0F).explosionResistance(30.0F)), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, "Chemical Plant", HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+    public static final RegistryObject<Block> PLASTIC_BARREL = add("barrel_plastic", ()->new BlockFluidBarrel(BlockBehaviour.Properties.of().strength(2.0F).explosionResistance(5.0F).requiresCorrectToolForDrops().sound(SoundType.STONE), BlockFluidBarrel.BarrelProperties.of().capacity(12000)), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, "Safe Barrel™", HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+    public static final RegistryObject<Block> CORRODED_BARREL = add("barrel_corroded", ()->new BlockFluidBarrel(BlockBehaviour.Properties.of().strength(2.0F).explosionResistance(5.0F).requiresCorrectToolForDrops().sound(SoundType.METAL),BlockFluidBarrel.BarrelProperties.of().capacity(6000).hotResist().corrosiveResistance().highCorroResist().leaky()), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, "Corroded Barrel", HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+    public static final RegistryObject<Block> IRON_BARREL = add("barrel_iron", ()->new BlockFluidBarrel(BlockBehaviour.Properties.of().strength(2.0F).explosionResistance(5.0F).requiresCorrectToolForDrops().sound(SoundType.METAL),BlockFluidBarrel.BarrelProperties.of().capacity(8000).hotResist()), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, "Iron Barrel", HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+    public static final RegistryObject<Block> STEEL_BARREL = add("barrel_steel", ()->new BlockFluidBarrel(BlockBehaviour.Properties.of().strength(2.0F).explosionResistance(5.0F).requiresCorrectToolForDrops().sound(SoundType.METAL),BlockFluidBarrel.BarrelProperties.of().capacity(16000).hotResist().corrosiveResistance()), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, "Steel Barrel", HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+    public static final RegistryObject<Block> TCALLOY_BARREL = add("barrel_tcalloy", ()->new BlockFluidBarrel(BlockBehaviour.Properties.of().strength(2.0F).explosionResistance(5.0F).requiresCorrectToolForDrops().sound(SoundType.METAL),BlockFluidBarrel.BarrelProperties.of().capacity(24000).hotResist().highCorroResist()), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, "Technetium Steel Barrel", HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+    public static final RegistryObject<Block> ANTIMATTER_BARREL = add("barrel_antimatter", ()->new BlockFluidBarrel(BlockBehaviour.Properties.of().strength(2.0F).explosionResistance(5.0F).requiresCorrectToolForDrops().sound(SoundType.METAL),BlockFluidBarrel.BarrelProperties.of().capacity(16000).hotResist().highCorroResist().antimatter()), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, "Magnetic Antimatter Container", HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+    public static final RegistryObject<Block> FLUID_PIPE = add("fluid_pipe", ()->new BlockFluidPipe(BlockBehaviour.Properties.of().strength(5.0F).explosionResistance(10.0F)), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, "Fluid Pipe", HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+    public static final RegistryObject<Block> GEIGER_COUNTER = add("geiger", ()->new GeigerCounter(BlockBehaviour.Properties.of().strength(5.0F).explosionResistance(10.0F)), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, "Geiger Counter", HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+    public static final RegistryObject<Block> LAUNCH_PAD = add("launch_pad", ()->new LaunchPad(BlockBehaviour.Properties.of().strength(5.0F).explosionResistance(10.0F)), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, "Launch Pad", HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
     public static final RegistryObject<Block> machine_difurnace = registerMachineBlockWithItem("machine_difurnace", ()->new BlockDifurnace(Properties.of().lightLevel(litEmission(13))));
     public static final RegistryObject<Block> machine_electric_furnace = registerMachineBlockWithItem("machine_electric_furnace", ()->new BlockElectricFurnace(Properties.of().lightLevel(litEmission(13))));
     public static final RegistryObject<Block> machine_boiler = registerMachineBlockWithItem("machine_boiler", ()->new BlockBoiler(Properties.of().lightLevel(litEmission(13))));
@@ -242,6 +252,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> conveyor = new BlockBuilder("conveyor", ()->new Conveyor(Properties.copy(Blocks.STONE))).tab(ModTabs.CONTROL.getKey()).model(HBMKey.MODEL_STANDALONE).loc(HBMKey.ORDERLY_GEN).loot(HBMKey.DROP_SELF).tags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL).build();
     public static final RegistryObject<Block> CONVEYOR_INSERTER = new BlockBuilder("conveyor_inserter", ()->new ConveyorInserter(Properties.copy(Blocks.STONE))).tab(ModTabs.CONTROL.getKey()).model(HBMKey.MODEL_STANDALONE).loc(HBMKey.ORDERLY_GEN).loot(HBMKey.DROP_SELF).tags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL).build();
     public static final RegistryObject<Block> CONVEYOR_EXTRACTOR = new BlockBuilder("conveyor_extractor", ()->new ConveyorExtractor(Properties.copy(Blocks.STONE))).tab(ModTabs.CONTROL.getKey()).model(HBMKey.MODEL_STANDALONE).loc(HBMKey.ORDERLY_GEN).loot(HBMKey.DROP_SELF).tags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL).build();
+    public static final RegistryObject<Block> CONVEYOR_ROUTER = new BlockBuilder("conveyor_router", ()->new ConveyorRouter(Properties.copy(Blocks.STONE))).tab(ModTabs.CONTROL.getKey()).model(HBMKey.MODEL_EXISTING).loc(HBMKey.ORDERLY_GEN).loot(HBMKey.DROP_SELF).tags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL).build();
     public static final RegistryObject<Block> crate_iron =
             new BlockBuilder("crate_iron", () -> new IronCrateBlock(Properties.of().strength(3.0F).sound(SoundType.WOOD)))
                     .tab(ModTabs.MACHINE.getKey()).loc(HBMKey.REVERSE_GEN)
@@ -276,16 +287,50 @@ public class ModBlocks {
     public static final RegistryObject<Block> METEOR_PILLAR = add("meteor_pillar", () -> new RotatedPillarBlock(Properties.copy(Blocks.STONE).strength(15, 360)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_PILLAR, HBMKey.ORDERLY_GEN, HBMKey.DROP_SELF);
     public static final RegistryObject<Block> ORE_METEOR_IRON = add("ore_meteor_iron", () -> new BlockBase(Properties.copy(Blocks.STONE).strength(15, 360)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF);
     public static final RegistryObject<Block> ORE_METEOR_COPPER = add("ore_meteor_copper", () -> new BlockBase(Properties.copy(Blocks.STONE).strength(15, 360)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF);
-    public static final RegistryObject<Block> ORE_METEOR_ALUMINUM = add("ore_meteor_aluminum", () -> new BlockBase(Properties.copy(Blocks.STONE).strength(15, 360)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF);
+    public static final RegistryObject<Block> ORE_METEOR_ALUMINIUM = add("ore_meteor_aluminium", () -> new BlockBase(Properties.copy(Blocks.STONE).strength(15, 360)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF);
     public static final RegistryObject<Block> ORE_METEOR_RAREEARTH = add("ore_meteor_rareearth", () -> new BlockBase(Properties.copy(Blocks.STONE).strength(15, 360)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF);
     public static final RegistryObject<Block> ORE_METEOR_COBALT = add("ore_meteor_cobalt", () -> new BlockBase(Properties.copy(Blocks.STONE).strength(15, 360)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF);
 
     public static final RegistryObject<Block> TAINT = block("taint", () -> new Block(Properties.copy(Blocks.IRON_BLOCK)));
-    public static final RegistryObject<Block> WASTE_LEAVES = add("waste_leaves", () -> new WasteLeaves(Properties.copy(Blocks.ACACIA_LEAVES).noLootTable()), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_STANDALONE, HBMKey.ORDERLY_GEN, HBMKey.DROP_NONE);
-    public static final RegistryObject<Block> WASTE_GRASS = add("waste_grass", () -> new WasteEarth(Properties.copy(Blocks.DIRT)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_DIFURNACE, HBMKey.ORDERLY_GEN, HBMKey.DROP_STANDALONE);
+//    public static final RegistryObject<Block> WASTE_GRASS = add("waste_grass", () -> new WasteEarth(Properties.copy(Blocks.DIRT)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_DIFURNACE, HBMKey.ORDERLY_GEN, HBMKey.DROP_STANDALONE);
     // casting
     public static final RegistryObject<Block> FOUNDRY_MOLD = new BlockBuilder("foundry_mold", () -> new FoundryMold(Properties.copy(Blocks.STONE)))
             .tab(ModTabs.MACHINE.getKey()).model(HBMKey.MODEL_EXISTING).loc(HBMKey.ORDERLY_GEN).loot(HBMKey.DROP_SELF).tags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL).build();
+    // 方块
+    public static final RegistryObject<Block> STEEL_BLOCK = block("block_steel", ()->new Block(BlockBehaviour.Properties.of()), BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+    public static final RegistryObject<Block> SELLAFIELD_SLAKED = block("sellafield_slaked", ()->new Block(BlockBehaviour.Properties.of().explosionResistance(5.0f)), BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+    public static final RegistryObject<Block> WASTE_LEAVES = add("waste_leaves",()->new WasteLeaves(BlockBehaviour.Properties.copy(Blocks.ACACIA_LEAVES).noLootTable()), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_LEAVES, HBMKey.ORDERLY_GEN, HBMKey.DROP_NONE);
+    public static final RegistryObject<Block> WASTE_EARTH = add("waste_earth",()->new WasteEarth(BlockBehaviour.Properties.copy(Blocks.DIRT)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_BOTTOM_TOP, HBMKey.ORDERLY_GEN, HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+    public static final RegistryObject<Block> URANIUM_ORE = add("ore_uranium",()->new BlockOre(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.ORDERLY_GEN, HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+    public static final RegistryObject<Block> DEEPSLATE_URANIUM_ORE = add("ore_uranium_deepslate",()->new BlockOre(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_IRON_ORE)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+    public static final RegistryObject<Block> SCORCHED_URANIUM_ORE = add("ore_uranium_scorched",()->new BlockOre(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+    public static final RegistryObject<Block> TITANIUM_ORE = add("ore_titanium",()->new BlockOre(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+    public static final RegistryObject<Block> THORIUM_ORE = add("ore_thorium",()->new BlockOre(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+    public static final RegistryObject<Block> NITER_ORE = add("ore_niter",()->new BlockOre(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+    public static final RegistryObject<Block> TUNGSTEN_ORE = add("ore_tungsten",()->new BlockOre(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+    public static final RegistryObject<Block> ALUMINIUM_ORE = add("ore_aluminium",()->new BlockOre(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+    public static final RegistryObject<Block> FLUORITE_ORE = add("ore_fluorite",()->new BlockOre(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+    public static final RegistryObject<Block> LEAD_ORE = add("ore_lead",()->new BlockOre(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+    public static final RegistryObject<Block> BERYLLIUM_ORE = add("ore_beryllium",()->new BlockOre(BlockBehaviour.Properties.copy(Blocks.STONE)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+    public static final RegistryObject<Block> SA326_ORE = add("ore_schrabidium",()->new BlockOre(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_DIAMOND_ORE), 0.1f), ModTabs.BLOCKS.getKey(),HBMKey.MODEL_CUBE_ALL, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+    public static final RegistryObject<Block> ASBESTOS_BLOCK = add("block_asbestos",()->new BlockOre(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+    public static final RegistryObject<Block> ASBESTOS_ORE = add("ore_asbestos",()->new BlockOre(BlockBehaviour.Properties.copy(Blocks.STONE)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+    public static final RegistryObject<Block> BASALT_ASBESTOS_ORE = add("ore_basalt_asbestos",()->new BlockOre(BlockBehaviour.Properties.copy(Blocks.BASALT)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+    public static final RegistryObject<Block> OIL_ORE = add("ore_oil",()->new BlockOre(BlockBehaviour.Properties.copy(Blocks.GOLD_ORE)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+    public static final RegistryObject<Block> OIL_ORE_EMPTY = add("ore_oil_empty",()->new BlockOre(BlockBehaviour.Properties.copy(Blocks.GOLD_ORE)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+    public static final RegistryObject<Block> OIL_ORE_SAND = add("ore_oil_sand",()->new BlockOre(BlockBehaviour.Properties.copy(Blocks.SAND)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+    public static final RegistryObject<Block> RARE_EARTH_ORE = add("ore_rare",()->new BlockOre(BlockBehaviour.Properties.copy(Blocks.GOLD_ORE)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+    public static final RegistryObject<Block> DEEPSLATE_RARE_EARTH_ORE = add("ore_rare_deepslate",()->new BlockOre(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_GOLD_ORE)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+    public static final RegistryObject<Block> LITHIUM_ORE = add("ore_lithium",()->new BlockOre(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+    public static final RegistryObject<Block> COBALT_ORE = add("ore_cobalt",()->new BlockOre(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+    public static final RegistryObject<Block> COLTAN_ORE = add("ore_coltan",()->new BlockOre(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+    public static final RegistryObject<Block> GENISS_GAS_ORE = add("ore_gneiss_gas",()->new BlockOre(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+    public static final RegistryObject<Block> SMOLDER_ORE_NETHER = add("ore_nether_smoldering",()->new BlockOre(BlockBehaviour.Properties.copy(Blocks.NETHER_QUARTZ_ORE)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+    public static final RegistryObject<Block> PLUTONIUM_ORE_NETHER = add("ore_nether_plutonium",()->new BlockOre(BlockBehaviour.Properties.copy(Blocks.NETHER_QUARTZ_ORE)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+    public static final RegistryObject<Block> FIRE_ORE_NETHER = add("ore_nether_fire",()->new BlockOre(BlockBehaviour.Properties.copy(Blocks.NETHER_BRICK_WALL)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+    public static final RegistryObject<Block> TIKITE_ORE_END = add("ore_tikite",()->new BlockOre(BlockBehaviour.Properties.copy(Blocks.END_STONE)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+    public static final RegistryObject<Block> BEDROCK_ORE = add("ore_bedrock",()->new BedRockOre(BlockBehaviour.Properties.copy(Blocks.BEDROCK)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+    public static final RegistryObject<Block> DEPTH_STONE = add("depth_stone",()->new BlockOre(BlockBehaviour.Properties.copy(Blocks.REINFORCED_DEEPSLATE)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.ORDERLY_GEN, HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
     /**
      * 航天版方块
      * */
@@ -296,10 +341,14 @@ public class ModBlocks {
      * 调试方块
      * */
     public static final RegistryObject<Block> DEBUG_BLOCK = block("debug_block", ()->new BlockDebug(BlockBehaviour.Properties.copy(Blocks.STONE)));
+
+
+    /**
+     * ===========================以下是注册函数部分=============================
+     *
+     * */
     public static ToIntFunction<BlockState> litEmission(int value){
-        return state -> {
-            return state.getValue(BlockStateProperties.LIT)?value:0;
-        };
+        return state -> state.getValue(BlockStateProperties.LIT)?value:0;
     }
 
     public static RegistryObject<Block> registerBattery(final String name, final Supplier<? extends Block> blocksup){
@@ -345,21 +394,27 @@ public class ModBlocks {
         BLOCKS.register(modEventBus);
     }
 
-    protected static RegistryObject<Block> block(final String name, final Supplier<? extends Block> sup){
-        return ModBlocks.add(name, sup, ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.ORDERLY_GEN, HBMKey.DROP_SELF);
+    @SafeVarargs
+    protected static RegistryObject<Block> block(final String name, final Supplier<? extends Block> sup, TagKey<Block> ... keys){
+        return ModBlocks.add(name, sup, ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.ORDERLY_GEN, HBMKey.DROP_SELF, keys);
     }
 
-    protected static RegistryObject<Block> machine(final String name, final Supplier<? extends Block> sup){
-        return ModBlocks.add(name, sup, ModTabs.MACHINE.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.ORDERLY_GEN, HBMKey.DROP_SELF);
+    @SafeVarargs
+    protected static RegistryObject<Block> machine(final String name, final Supplier<? extends Block> sup, TagKey<Block> ... keys){
+        return ModBlocks.add(name, sup, ModTabs.MACHINE.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.ORDERLY_GEN, HBMKey.DROP_SELF, keys);
     }
 
     protected static RegistryObject<Block> add(final String name, final Supplier<? extends Block> sup, ResourceKey<CreativeModeTab> tabKey, String genNameWay){
         return add(name, sup, tabKey, HBMKey.MODEL_CUBE_ALL, genNameWay, HBMKey.DROP_SELF);
     }
-    protected static RegistryObject<Block> add(final String name, final Supplier<? extends Block> sup, ResourceKey<CreativeModeTab> tabKey, String genModelWay, String genNameWay, String lootWay){
-        return new BlockBuilder(name, sup).tab(tabKey).model(genModelWay).loc(genNameWay).loot(lootWay).build();
+    @SafeVarargs
+    protected static RegistryObject<Block> add(final String name, final Supplier<? extends Block> sup, ResourceKey<CreativeModeTab> tabKey, String genModelWay, String genNameWay, String lootWay, TagKey<Block> ... keys){
+        return new BlockBuilder(name, sup).tab(tabKey).model(genModelWay).loc(genNameWay).loot(lootWay).tags(keys).build();
     }
 
+    /**
+     * 其他属性注册的钩子
+     * */
     public static void creativeTab(BuildCreativeModeTabContentsEvent event){
         for (WrappedBlockRegistry blockRegistry : blockList) {
             blockRegistry.creativeTabSupport(event);

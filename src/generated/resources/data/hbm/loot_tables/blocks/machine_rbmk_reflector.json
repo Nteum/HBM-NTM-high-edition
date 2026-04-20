@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "hbm:machine_rbmk_reflector"
+          "name": "hbm:rbmk_reflector"
         }
       ],
       "rolls": 1.0

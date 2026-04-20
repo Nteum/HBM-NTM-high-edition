@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_ingot_graphite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "hbm:ingot_graphite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "hbm:rbmk_element"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_ingot_graphite",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "hbm:rbmk_element"
+    ]
+  },
+  "sends_telemetry_event": false
+}

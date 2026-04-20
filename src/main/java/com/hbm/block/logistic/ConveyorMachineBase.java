@@ -1,10 +1,7 @@
 package com.hbm.block.logistic;
 
 import com.hbm.block.HBMBlockProperties;
-import com.hbm.block.interfaces.ICustomLookTooltip;
-import com.hbm.block.interfaces.ILookOverlay;
-import com.hbm.block.interfaces.IToolable;
-import com.hbm.block.interfaces.ToolType;
+import com.hbm.block.interfaces.*;
 import com.hbm.blockentity.base2.UpdateableBlockEntity;
 import com.hbm.blockentity.logistic.TileConveyorExtractor;
 import com.hbm.blockentity.logistic.TileConveyorMachine;
@@ -45,7 +42,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public abstract class ConveyorMachineBase extends Block implements EntityBlock, IToolable {
+public abstract class ConveyorMachineBase extends Block implements EntityBlock, IToolable, IConveyorAccess {
     // 放置时面向玩家的一面是主端口
     public static final DirectionProperty MAIN_PORT_SIDE = BlockStateProperties.FACING;
     public static final IntegerProperty SECONDARY_PORT_SIDE = HBMBlockProperties.RELATIVE_DIRECTION;

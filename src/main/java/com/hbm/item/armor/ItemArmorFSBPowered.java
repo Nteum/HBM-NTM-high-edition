@@ -7,7 +7,7 @@ import com.hbm.api.energy.ItemStackEnergyHandler;
 import com.hbm.registries.HBMCaps;
 import com.hbm.capabilities.ItemCapabilityWrapper;
 import com.hbm.item.tool.BatteryItem;
-import com.hbm.utils.BobMth;
+import com.hbm.utils.math.BobMth;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;

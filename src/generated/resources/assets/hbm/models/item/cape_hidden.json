@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "hbm:item/cape_unknown"
+    "layer0": "hbm:item/cape_hidden"
   }
 }

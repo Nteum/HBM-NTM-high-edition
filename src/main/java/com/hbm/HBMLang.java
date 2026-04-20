@@ -15,12 +15,12 @@ import java.util.List;
 
 public enum HBMLang implements ILangEntry {
     // 创造模式物品栏
-    ITEMGROUP_ITEM("itemGroup","hbm_item","HBM 物品"),
-    ITEMGROUP_BLOCK("itemGroup","hbm_block","HBM 方块"),
-    ITEMGROUP_MACHINE("itemGroup","hbm_machine","HBM 机器"),
-    ITEMGROUP_TOOL("itemGroup","hbm_tool","HBM 工具"),
-    ITEMGROUP_WEAPON("itemGroup","hbm_weapon","HBM 武器"),
-    ITEMGROUP_EQUIPMENT("itemGroup","hbm_equipment","HBM 装备"),
+//    ITEMGROUP_ITEM("itemGroup","hbm_item","HBM 物品"),
+//    ITEMGROUP_BLOCK("itemGroup","hbm_block","HBM 方块"),
+//    ITEMGROUP_MACHINE("itemGroup","hbm_machine","HBM 机器"),
+//    ITEMGROUP_TOOL("itemGroup","hbm_tool","HBM 工具"),
+//    ITEMGROUP_WEAPON("itemGroup","hbm_weapon","HBM 武器"),
+//    ITEMGROUP_EQUIPMENT("itemGroup","hbm_equipment","HBM 装备"),
     HBM_PARTS("itemGroup","hbm_parts", "NTM Resources and Parts"),
     HBM_CONTROL("itemGroup","hbm_control", "NTM Machine Items and Fuel"),
     HBM_TEMPLATE("itemGroup","hbm_template", "NTM Templates"),
@@ -55,8 +55,9 @@ public enum HBMLang implements ILangEntry {
     CONTAINER_SPACE_STATION_DOCKER("Space Station Docker"),
     CONTAINER_FIREBOX("Firebox"),
     CONTAINER_CRUCIBLE("Crucible"),
-    CONTAINER_CONVEYOR_EXTRACTOR("Container Extractor"),
-    CONTAINER_CONVEYOR_INSERTER("Container Inserter"),
+    CONTAINER_CONVEYOR_EXTRACTOR("Conveyor Extractor"),
+    CONTAINER_CONVEYOR_INSERTER("Conveyor Inserter"),
+    CONTAINER_CONVEYOR_ROUTER("Conveyor Router"),
     // GUI
     TOOLTIP_LEFT_TIME("gui","left_time.tooltip"),
     TOOLTIP_ENERGY("gui","stored_energy.tooltip"),
@@ -72,6 +73,10 @@ public enum HBMLang implements ILangEntry {
     GUI_TOOLTIP_PARTIAL("%s / %s"),
     GUI_TOOLTIP_CRUCIBLE_CAPACITY("Capacity: %s mB"),
     GUI_TOOLTIP_CRUCIBLE_BUTTON1("Click this to show Recipe book."),
+    GUI_TOOLTIP_CONVEYOR_ROUTER_BUTTON1("WHITELIST: Route if filter matches"),
+    GUI_TOOLTIP_CONVEYOR_ROUTER_BUTTON2("BLACKLIST: Route if filter doesn't match"),
+    GUI_TOOLTIP_CONVEYOR_ROUTER_BUTTON3("WILDCARD: Route if no other route is valid"),
+    GUI_TOOLTIP_CONVEYOR_ROUTER_WARNING("FULL! Please set one side to WILDCARD!"),
     // Item description
     TOOLTIP_SHOW_DETAIL("Hold %s to display more info"),
     ITEM_INGOT_NEPTUNIUM_DESC("That one's my favourite!"),

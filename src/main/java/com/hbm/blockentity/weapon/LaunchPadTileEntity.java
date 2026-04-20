@@ -7,12 +7,12 @@ import com.hbm.api.energy.BasicEnergyContainer;
 import com.hbm.api.energy.HybridEnergyStorage;
 import com.hbm.api.energy.ProxyEnergyHandler;
 import com.hbm.api.inventory.ModeBuilder;
-import com.hbm.block.HBMMachine;
 import com.hbm.block.weapon.LaunchPad;
 import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.registries.HBMCaps;
 import com.hbm.entity.projectile.EntityThrowableNT;
 import com.hbm.gui.menu.LaunchPadMenu;
+import com.hbm.registries.ModBlocks;
 import com.hbm.utils.multiblock.MultiblockData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -55,7 +55,7 @@ public class LaunchPadTileEntity extends EntityLaunchPadBase {
 		this.capabilitiesContent.addCapability(HBMCaps.LONG_ENERGY, new ProxyEnergyHandler(energyContainer));
 		this.capabilitiesContent.addCapability(ForgeCapabilities.ENERGY, this.forgeEnergy);
 		this.capabilitiesContent.addCapability(ForgeCapabilities.FLUID_HANDLER, this.fluidHandler);
-		this.multiblockData = MultiblockData.mapping.get(HBMMachine.LAUNCH_PAD.get());
+		this.multiblockData = MultiblockData.mapping.get(ModBlocks.LAUNCH_PAD.get());
 	}
 
 	@Override public boolean isReadyForLaunch() { return delay <= 0; }

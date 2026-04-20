@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "hbm:circuit_basic"
+    },
+    "M": {
+      "item": "hbm:motor"
+    },
+    "P": {
+      "item": "hbm:piston_set"
+    },
+    "R": {
+      "item": "minecraft:redstone_block"
+    },
+    "S": {
+      "item": "hbm:plate_steel"
+    }
+  },
+  "pattern": [
+    "SPS",
+    "CMC",
+    "SRS"
+  ],
+  "result": {
+    "item": "hbm:rbmk_loader"
+  },
+  "show_notification": true
+}

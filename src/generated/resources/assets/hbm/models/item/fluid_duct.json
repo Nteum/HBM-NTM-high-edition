@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "hbm:item/duct"
+    "layer0": "hbm:item/fluid_duct"
   }
 }

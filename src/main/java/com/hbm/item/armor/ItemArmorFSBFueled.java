@@ -5,7 +5,7 @@ import com.hbm.api.fluid.ItemStackFluidHandler;
 import com.hbm.capabilities.ItemCapabilityWrapper;
 import com.hbm.item.HBMCombat;
 import com.hbm.item.tool.BatteryItem;
-import com.hbm.utils.BobMth;
+import com.hbm.utils.math.BobMth;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;

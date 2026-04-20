@@ -1,6 +1,6 @@
 {
   "values": [
-    "hbm:rare_earth",
-    "hbm:ore_deepslate_rare"
+    "hbm:ore_rare",
+    "hbm:ore_rare_deepslate"
   ]
 }

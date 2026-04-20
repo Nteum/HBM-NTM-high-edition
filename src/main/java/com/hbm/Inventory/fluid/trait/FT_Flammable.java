@@ -3,7 +3,7 @@ package com.hbm.Inventory.fluid.trait;
 import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonWriter;
 import com.hbm.HBMLang;
-import com.hbm.utils.BobMth;
+import com.hbm.utils.math.BobMth;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 

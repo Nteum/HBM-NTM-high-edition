@@ -2,8 +2,7 @@ package com.hbm.datagen;
 
 import com.hbm.HBMLang;
 import com.hbm.Inventory.fluid.ModFluids;
-import com.hbm.block.HBMBlockComponent;
-import com.hbm.block.HBMMachine;
+
 import com.hbm.blockentity.interfaces.IUpgradeInfoProvider;
 import com.hbm.item.HBMCombat;
 import com.hbm.registries.HBMDamage;
@@ -92,8 +91,8 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
     }
 
     private void addBlocks() {
-        HBMMachine.languageSupport(this);
-        HBMBlockComponent.languageSupport(this);
+//        HBMMachine.languageSupport(this);
+//        HBMBlockComponent.languageSupport(this);
     }
 
     private void addTooltip(){

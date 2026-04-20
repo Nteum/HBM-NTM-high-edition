@@ -14,7 +14,6 @@ import com.hbm.api.energy.TransmitUtils;
 import com.hbm.api.fluid.*;
 import com.hbm.api.inventory.ModeBuilder;
 import com.hbm.api.math.MathUtils;
-import com.hbm.block.HBMMachine;
 import com.hbm.block.machine.BlockChemplant;
 import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.blockentity.base2.DummyableBlockEntity;
@@ -22,6 +21,7 @@ import com.hbm.blockentity.base2.TileProxyBase;
 import com.hbm.registries.HBMCaps;
 import com.hbm.gui.menu.ChemplantMenu;
 import com.hbm.item.machine.ItemMachineUpgrade.UpgradeType;
+import com.hbm.registries.ModBlocks;
 import com.hbm.registries.ModSounds;
 import com.hbm.utils.DirectionUtils;
 import com.hbm.utils.InventoryUtils;
@@ -45,6 +45,7 @@ import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
@@ -95,7 +96,7 @@ public class ChemplantEntity extends DummyableBlockEntity {
         this.capabilitiesContent.addCapability(ForgeCapabilities.FLUID_HANDLER, this.fluidHandler);
         this.capabilitiesContent.addCapability(HBMCaps.LONG_ENERGY, new ProxyEnergyHandler(this.energyContainer));
         this.capabilitiesContent.addCapability(ForgeCapabilities.ENERGY, this.forgeEnergy);
-        this.multiblockData = MultiblockData.mapping.get(HBMMachine.CHEMPLANT.get());
+        this.multiblockData = MultiblockData.mapping.get(ModBlocks.CHEMPLANT.get());
     }
 
     @Override
@@ -204,6 +205,11 @@ public class ChemplantEntity extends DummyableBlockEntity {
         super.handleUpdatePacket(tag);
         this.fluidHandler.deserializeNBT(tag.getCompound(HBMKey.FLUIDS));
         this.progress = tag.getInt(HBMKey.PROGRESS);
+    }
+
+    @Override
+    public void distributeCapabilities() {
+        this.multiblockData.assignCapabilities(this, this.getBlockState().getValue(BlockStateProperties.HORIZONTAL_FACING));
     }
 
     @Override

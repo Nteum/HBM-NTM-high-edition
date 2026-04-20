@@ -1,7 +1,6 @@
 {
-  "parent": "minecraft:block/cube_top",
+  "parent": "minecraft:block/cube_all",
   "textures": {
-    "side": "hbm:block/env/ore_asbestos_basalt",
-    "top": "hbm:block/env/ore_asbestos_basalt_top"
+    "all": "hbm:block/ore_basalt_asbestos"
   }
 }

@@ -12,7 +12,7 @@
       "filling_provider": {
         "type": "minecraft:simple_state_provider",
         "state": {
-          "Name": "hbm:rare_earth"
+          "Name": "hbm:ore_rare"
         }
       },
       "inner_layer_provider": {
@@ -23,7 +23,7 @@
       },
       "inner_placements": [
         {
-          "Name": "hbm:ore_sa326"
+          "Name": "hbm:ore_schrabidium"
         }
       ],
       "invalid_blocks": "#minecraft:geode_invalid_blocks",

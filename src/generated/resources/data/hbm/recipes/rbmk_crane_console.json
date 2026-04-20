@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:iron_bars"
+    },
+    "C": {
+      "item": "hbm:circuit_basic"
+    },
+    "M": {
+      "item": "hbm:motor"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "S": {
+      "item": "hbm:plate_steel"
+    }
+  },
+  "pattern": [
+    "SBS",
+    "MCM",
+    "SRS"
+  ],
+  "result": {
+    "item": "hbm:rbmk_crane_console"
+  },
+  "show_notification": true
+}

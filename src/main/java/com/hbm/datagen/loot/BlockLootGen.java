@@ -1,23 +1,18 @@
 package com.hbm.datagen.loot;
 
 import com.google.common.collect.Iterables;
-import com.hbm.block.HBMBlockComponent;
-import com.hbm.block.HBMMachine;
+
 import com.hbm.registries.ModBlocks;
 import com.hbm.registries.ModItems;
 import net.minecraft.data.loot.BlockLootSubProvider;
-import net.minecraft.data.loot.packs.VanillaBlockLoot;
-import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.flag.FeatureFlags;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
-import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.Collections;
@@ -40,8 +35,8 @@ public class BlockLootGen extends BlockLootSubProvider {
     protected void generate() {
 //        generateMachineLoot();
         ModBlocks.lootSupport(this);
-        HBMMachine.lootable(this);
-        HBMBlockComponent.lootable(this);
+//        HBMMachine.lootable(this);
+//        HBMBlockComponent.lootable(this);
         //机器
         this.dropSelf(ModBlocks.machine_difurnace.get());
         this.dropSelf(ModBlocks.machine_electric_furnace.get());
@@ -62,18 +57,18 @@ public class BlockLootGen extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.machine_condenser.get());
         this.dropSelf(ModBlocks.machine_cooling_tower.get());
         this.dropSelf(ModBlocks.machine_assembler.get());
-            this.dropSelf(ModBlocks.machine_crucible.get());
-            this.dropSelf(ModBlocks.machine_rbmk_base.get());
-            this.dropSelf(ModBlocks.machine_rbmk_heater.get());
-            this.dropSelf(ModBlocks.machine_rbmk_fuel_channel.get());
-            this.dropSelf(ModBlocks.machine_rbmk_control_rod.get());
-            this.dropSelf(ModBlocks.machine_rbmk_console.get());
-            this.dropSelf(ModBlocks.machine_rbmk_element.get());
-            this.dropSelf(ModBlocks.machine_rbmk_reflector.get());
-            this.dropSelf(ModBlocks.machine_rbmk_debris.get());
-            this.dropSelf(ModBlocks.machine_rbmk_crane_console.get());
-            this.dropSelf(ModBlocks.machine_rbmk_autoloader.get());
-            this.dropSelf(ModBlocks.RED_CABLE.get());
+        this.dropSelf(ModBlocks.machine_crucible.get());
+        this.dropSelf(ModBlocks.machine_rbmk_base.get());
+        this.dropSelf(ModBlocks.machine_rbmk_heater.get());
+        this.dropSelf(ModBlocks.machine_rbmk_fuel_channel.get());
+        this.dropSelf(ModBlocks.machine_rbmk_control_rod.get());
+        this.dropSelf(ModBlocks.machine_rbmk_console.get());
+        this.dropSelf(ModBlocks.machine_rbmk_element.get());
+        this.dropSelf(ModBlocks.machine_rbmk_reflector.get());
+        this.dropSelf(ModBlocks.machine_rbmk_debris.get());
+        this.dropSelf(ModBlocks.machine_rbmk_crane_console.get());
+        this.dropSelf(ModBlocks.machine_rbmk_autoloader.get());
+        this.dropSelf(ModBlocks.RED_CABLE.get());
         this.dropSelf(ModBlocks.tokamak_controller.get());
         this.dropSelf(ModBlocks.tokamak_casing.get());
         this.dropSelf(ModBlocks.tokamak_coil.get());
@@ -111,6 +106,8 @@ public class BlockLootGen extends BlockLootSubProvider {
         // 单独定义凋落物的方块
         dropStandalone();
         fillMissingLootTables();
+
+        this.map.remove(BuiltInLootTables.EMPTY);   // 删除为空的键，为了避免后续处理报错
     }
 
     public void dropStandalone(){

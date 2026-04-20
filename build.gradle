@@ -14,7 +14,8 @@ buildscript {
 plugins {
     id 'idea'
     id 'net.minecraftforge.gradle' version '6.0.25'
-    id 'org.parchmentmc.librarian.forgegradle' version '1.2.0'
+    id 'org.parchmentmc.librarian.forgegradle' version '1.+'
+//    id 'org.parchmentmc.librarian.forgegradle' version '1.2.0'
 }
 
 apply plugin: 'org.spongepowered.mixin'

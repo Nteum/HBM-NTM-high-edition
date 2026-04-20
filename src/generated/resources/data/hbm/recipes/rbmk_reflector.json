@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "hbm:ingot_boron"
+    },
+    "C": {
+      "item": "hbm:circuit_basic"
+    },
+    "G": {
+      "item": "hbm:ingot_graphite"
+    }
+  },
+  "pattern": [
+    "BBB",
+    "GCG",
+    "BBB"
+  ],
+  "result": {
+    "item": "hbm:rbmk_reflector"
+  },
+  "show_notification": true
+}

@@ -1,11 +1,11 @@
 package com.hbm.blockentity;
 
-import com.hbm.block.HBMMachine;
 import com.hbm.block.env.GlyphidSpawner;
 import com.hbm.blockentity.base2.TileProxyCombo;
 import com.hbm.blockentity.logistic.TileConveyor;
 import com.hbm.blockentity.logistic.TileConveyorExtractor;
 import com.hbm.blockentity.logistic.TileConveyorInserter;
+import com.hbm.blockentity.logistic.TileConveyorRouter;
 import com.hbm.blockentity.machine.*;
 import com.hbm.blockentity.machine.IronCrateBlockEntity;
 import com.hbm.blockentity.machine.SteelCrateBlockEntity;
@@ -66,11 +66,11 @@ public class ModBlockEntityType {
     public static final RegistryObject<BlockEntityType<CableEntity>> CABLE_ENTITY =
             REGISTER.register("cable_entity",()-> BlockEntityType.Builder.of(CableEntity::new, ModBlocks.RED_CABLE.get()).build(null));
     public static final RegistryObject<BlockEntityType<PipeEntity>> PIPE_ENTITY =
-            REGISTER.register("pipe_entity",()-> BlockEntityType.Builder.of(PipeEntity::new, HBMMachine.FLUID_PIPE.get()).build(null));
+            REGISTER.register("pipe_entity",()-> BlockEntityType.Builder.of(PipeEntity::new, ModBlocks.FLUID_PIPE.get()).build(null));
     public static final RegistryObject<BlockEntityType<BatteryEntity>> BATTERY_ENTITY =
             REGISTER.register("battery_entity",()-> BlockEntityType.Builder.of(BatteryEntity::new, ModBlocks.machine_battery.get(),ModBlocks.machine_lithium_battery.get(),ModBlocks.machine_dineutronium_battery.get(),ModBlocks.machine_schrabidium_battery.get()).build(null));
     public static final RegistryObject<BlockEntityType<LaunchPadTileEntity>> LAUNCHPAD_ENTITY =
-            REGISTER.register("launchpad_entity",()-> BlockEntityType.Builder.of(LaunchPadTileEntity::new, HBMMachine.LAUNCH_PAD.get()).build(null));
+            REGISTER.register("launchpad_entity",()-> BlockEntityType.Builder.of(LaunchPadTileEntity::new, ModBlocks.LAUNCH_PAD.get()).build(null));
 
     public static final RegistryObject<BlockEntityType<ElectricFurnaceEntity>> ELECTRIC_FURNACE_ENTITY =
             REGISTER.register("electric_furnace_entity",()-> BlockEntityType.Builder.of(ElectricFurnaceEntity::new, ModBlocks.machine_electric_furnace.get()).build(null));
@@ -81,9 +81,9 @@ public class ModBlockEntityType {
     public static final RegistryObject<BlockEntityType<NuclearBoilerEntity>> NUCLEAR_BOILER_ENTITY =
             REGISTER.register("nuclear_boiler_entity",()-> BlockEntityType.Builder.of(NuclearBoilerEntity::new, ModBlocks.machine_nuclear_boiler.get()).build(null));
     public static final RegistryObject<BlockEntityType<ChemplantEntity>> CHEMPLANT_ENTITY =
-            REGISTER.register("chemplant_entity",()-> BlockEntityType.Builder.of(ChemplantEntity::new, HBMMachine.CHEMPLANT.get()).build(null));
+            REGISTER.register("chemplant_entity",()-> BlockEntityType.Builder.of(ChemplantEntity::new, ModBlocks.CHEMPLANT.get()).build(null));
     public static final RegistryObject<BlockEntityType<BarrelEntity>> BARREL_ENTITY =
-            REGISTER.register("barrel_entity",()-> BlockEntityType.Builder.of(BarrelEntity::new, HBMMachine.PLASTIC_BARREL.get(),HBMMachine.CORRODED_BARREL.get(),HBMMachine.IRON_BARREL.get(),HBMMachine.STEEL_BARREL.get(),HBMMachine.TCALLOY_BARREL.get(),HBMMachine.ANTIMATTER_BARREL.get()).build(null));
+            REGISTER.register("barrel_entity",()-> BlockEntityType.Builder.of(BarrelEntity::new, ModBlocks.PLASTIC_BARREL.get(),ModBlocks.CORRODED_BARREL.get(),ModBlocks.IRON_BARREL.get(),ModBlocks.STEEL_BARREL.get(),ModBlocks.TCALLOY_BARREL.get(),ModBlocks.ANTIMATTER_BARREL.get()).build(null));
     public static final RegistryObject<BlockEntityType<CondenserBlockEntity>> CONDENSER_ENTITY =
             REGISTER.register("condenser_entity", () -> BlockEntityType.Builder.of(CondenserBlockEntity::new, ModBlocks.machine_condenser.get()).build(null));
     public static final RegistryObject<BlockEntityType<CoolingTowerBlockEntity>> COOLING_TOWER_ENTITY =
@@ -110,12 +110,12 @@ public class ModBlockEntityType {
             REGISTER.register("steel_crate_entity", () -> BlockEntityType.Builder.of(SteelCrateBlockEntity::new, ModBlocks.crate_steel.get()).build(null));
     public static final RegistryObject<BlockEntityType<TileProxyCombo>> PROXY_ENTITY =
             REGISTER.register("proxy_entity",()-> BlockEntityType.Builder.of(TileProxyCombo::new,
-                    ModBlocks.machine_crucible.get(), ModBlocks.machine_assembler.get(), ModBlocks.machine_cracking_tower.get(), HBMMachine.CHEMPLANT.get(),
-                    HBMMachine.LAUNCH_PAD.get(), ModBlocks.bomb_boy.get(), ModBlocks.bomb_custom.get(), ModBlocks.bomb_fat_man.get(), ModBlocks.machine_zirnox.get(),
+                    ModBlocks.machine_crucible.get(), ModBlocks.machine_assembler.get(), ModBlocks.machine_cracking_tower.get(), ModBlocks.CHEMPLANT.get(),
+                    ModBlocks.LAUNCH_PAD.get(), ModBlocks.bomb_boy.get(), ModBlocks.bomb_custom.get(), ModBlocks.bomb_fat_man.get(), ModBlocks.machine_zirnox.get(),
                     ModBlocks.SPACE_STATION_BASE.get(), ModBlocks.HEATER_FIREBOX.get()
             ).build(null));
     public static final RegistryObject<BlockEntityType<TileEntityGeiger>> GEIGER_COUNTER =
-            REGISTER.register("geiger_counter",()-> BlockEntityType.Builder.of(TileEntityGeiger::new, HBMMachine.GEIGER_COUNTER.get()).build(null));
+            REGISTER.register("geiger_counter",()-> BlockEntityType.Builder.of(TileEntityGeiger::new, ModBlocks.GEIGER_COUNTER.get()).build(null));
     public static final RegistryObject<BlockEntityType<GlyphidSpawner.GlyphidSpawnerEntity>> GLYPHID_SPAWNER =
             REGISTER.register("glyphid_spawner",()-> BlockEntityType.Builder.of(GlyphidSpawner.GlyphidSpawnerEntity::new, ModBlocks.GLYPHID_SPAWNER.get()).build(null));
     public static final RegistryObject<BlockEntityType<RBMKBaseEntity>> RBMK_BASE_ENTITY =
@@ -196,6 +196,7 @@ public class ModBlockEntityType {
     public static final RegistryObject<BlockEntityType<TileConveyor>> TILE_CONVEYOR = register("tile_conveyor", TileConveyor::new, ModBlocks.conveyor);
     public static final RegistryObject<BlockEntityType<TileConveyorExtractor>> TILE_CONVEYOR_EXTRACTOR = register("tile_conveyor_extractor", TileConveyorExtractor::new, ModBlocks.CONVEYOR_EXTRACTOR);
     public static final RegistryObject<BlockEntityType<TileConveyorInserter>> TILE_CONVEYOR_INSERTER = register("tile_conveyor_inserter", TileConveyorInserter::new, ModBlocks.CONVEYOR_INSERTER);
+    public static final RegistryObject<BlockEntityType<TileConveyorRouter>> TILE_CONVEYOR_ROUTER = register("tile_conveyor_router", TileConveyorRouter::new, ModBlocks.CONVEYOR_ROUTER);
     // 注册函数
     private static<T extends BlockEntity> RegistryObject<BlockEntityType<T>> register(String key, BlockEntityType.BlockEntitySupplier<T> pFactory, Supplier<Block>... pValidBlocks){
         return REGISTER.register(key, () -> BlockEntityType.Builder.of(pFactory, Arrays.stream(pValidBlocks).map(Supplier::get).toArray(Block[]::new)).build(null));

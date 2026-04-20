@@ -1,23 +1,18 @@
 package com.hbm.render.model.entity;
 
 import com.hbm.entity.mob.EntityGlyphid;
-import com.hbm.main.ResourceManager;
 import com.hbm.render.model.BaseObjModel;
 import com.hbm.render.model.IObjModel;
-import com.hbm.utils.BobMth;
+import com.hbm.utils.math.BobMth;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import net.minecraft.client.model.EntityModel;
-import net.minecraft.client.model.HorseModel;
-import net.minecraft.client.model.SpiderModel;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.lwjgl.opengl.GL11;
 
 import java.util.Arrays;
 import java.util.List;

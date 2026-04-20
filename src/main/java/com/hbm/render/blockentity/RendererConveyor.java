@@ -18,6 +18,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
@@ -34,10 +35,11 @@ public class RendererConveyor implements BlockEntityRenderer<TileConveyor> {
         BlockState state = conveyor.getBlockState();
         Direction facing = state.getValue(Conveyor.FACING);
         int variant = state.getValue(Conveyor.VARIANT);
-        float transProgress = (float) conveyor.getTransPortProgress() / TileConveyor.MAX_TRANSPORT_PROGRESS;
-        Direction dir;
-        boolean isBlock = carriedItem.getItem() instanceof BlockItem;
-        float hoOffset = 0.5f;
+        float transProgress = (float) conveyor.getTransPortProgress() / conveyor.getMaxTransportProgress();
+        Direction dir;  // 仅用于表示水平方向
+        // 方块单独渲染，需要物品是方块
+        boolean isBlock = carriedItem.getItem() instanceof BlockItem blockItem && blockItem.getBlock().getRenderShape(blockItem.getBlock().defaultBlockState()) == RenderShape.MODEL;
+        float hoOffset = isBlock ? 0.375f : 0.5f;
         float scale = isBlock ? 0.25f : 0.5f;
         poseStack.pushPose();
         if (variant < 3 || variant == 7){       // 如果处在水平方向上
@@ -48,22 +50,26 @@ public class RendererConveyor implements BlockEntityRenderer<TileConveyor> {
                     if (!isBlock) poseStack.mulPose(Axis.XN.rotation(Mth.HALF_PI));
                 }case EAST -> {
                     poseStack.translate(transProgress, 0.375, hoOffset);
-                    poseStack.mulPose(Axis.YN.rotation(Mth.HALF_PI));
-                    if (!isBlock) poseStack.mulPose(Axis.XN.rotation(Mth.HALF_PI));
+                    if (!isBlock) {
+                        poseStack.mulPose(Axis.YN.rotation(Mth.HALF_PI));
+                        poseStack.mulPose(Axis.XN.rotation(Mth.HALF_PI));
+                    }
                 }case NORTH -> {
                     poseStack.translate(hoOffset, 0.375, 1 - transProgress);
                     if (!isBlock) poseStack.mulPose(Axis.XN.rotation(-Mth.HALF_PI));
                 }case WEST -> {
                     poseStack.translate(1 - transProgress, 0.375, hoOffset);
-                    poseStack.mulPose(Axis.YN.rotation(-Mth.HALF_PI));
-                    if (!isBlock) poseStack.mulPose(Axis.XN.rotation(Mth.HALF_PI));
+                    if (!isBlock) {
+                        poseStack.mulPose(Axis.YN.rotation(-Mth.HALF_PI));
+                        poseStack.mulPose(Axis.XN.rotation(Mth.HALF_PI));
+                    }
                 }
             }
             poseStack.scale(scale, scale, scale);
             if (isBlock){
                 blockRenderer.renderSingleBlock(((BlockItem) carriedItem.getItem()).getBlock().defaultBlockState(), poseStack, bufferSource, light, overlay);
             }else {
-                itemRenderer.render(carriedItem, ItemDisplayContext.GUI,true,poseStack,bufferSource,light,overlay,itemRenderer.getModel(carriedItem, conveyor.getLevel(), null, 0));
+                itemRenderer.renderStatic(carriedItem, ItemDisplayContext.FIXED,light,overlay, poseStack, bufferSource,conveyor.getLevel(), 0);
             }
         }else if (variant < 6){
             switch (facing){
@@ -76,14 +82,14 @@ public class RendererConveyor implements BlockEntityRenderer<TileConveyor> {
                     poseStack.translate(hoOffset, transProgress, 0.375);
                 }case WEST -> {
                     poseStack.translate(0.375, transProgress, hoOffset);
-                    poseStack.mulPose(Axis.YN.rotation(-Mth.HALF_PI));
+                    poseStack.mulPose(Axis.YN.rotation(Mth.HALF_PI));
                 }
             }
             poseStack.scale(scale, scale, scale);
             if (isBlock){
                 blockRenderer.renderSingleBlock(((BlockItem) carriedItem.getItem()).getBlock().defaultBlockState(), poseStack, bufferSource, light, overlay);
             }else {
-                itemRenderer.render(carriedItem, ItemDisplayContext.GUI,true,poseStack,bufferSource,light,overlay,itemRenderer.getModel(carriedItem, conveyor.getLevel(), null, 0));
+                itemRenderer.renderStatic(carriedItem, ItemDisplayContext.FIXED,light,overlay, poseStack, bufferSource,conveyor.getLevel(), 0);
             }
         }
         poseStack.popPose();

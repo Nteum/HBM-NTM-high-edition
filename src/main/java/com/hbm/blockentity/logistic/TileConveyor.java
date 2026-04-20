@@ -81,10 +81,10 @@ public class TileConveyor extends CapabilityBlockEntity {
         int oldValue = this.transPortProgress;
         if (!this.isEmpty()){
             if (oldValue == -1) {                               // 检测到有物品传入，放在传送带初始位置
-                // 如果是从上面或下面进来的，就默认放在中间了
-                if (inDir == Direction.UP || inDir == Direction.DOWN) this.transPortProgress = MAX_TRANSPORT_PROGRESS / 2;
+                // 如果放置方向和输送带方向是正交的，则视为放置在正中间了
+                if (Conveyor.isOrthogonal(this.getBlockState(), inDir)) this.transPortProgress = getMaxTransportProgress() / 2;
                 else this.transPortProgress = 0;
-            }else if (this.transPortProgress < MAX_TRANSPORT_PROGRESS - 2){ // 尚未到终点，在传送带上移动
+            }else if (this.transPortProgress < getMaxTransportProgress() - 2){ // 尚未到终点，在传送带上移动
                 this.transPortProgress += 2;
             }else{                                              // 到达传送带出口，尝试将物品传递给目标方向
                 Direction outDir = Conveyor.getOutputDir(this.getBlockState());                 // 输出口的方向
@@ -94,17 +94,12 @@ public class TileConveyor extends CapabilityBlockEntity {
                         || (blockEntity != null && blockEntity.getBlockState().getBlock() instanceof Conveyor && blockEntity.getBlockState().getValue(Conveyor.VARIANT) == 6)){
                     ItemStack stackInSlot = this.items.extractItem(0, 1, false);
                     Vec3 center = outNeighbour.getCenter();
-                    this.getLevel().addFreshEntity(new ItemEntity(this.getLevel(), center.x, center.y, center.z, stackInSlot));
-                }else {
+                    ItemEntity itemEntity = new ItemEntity(this.getLevel(), center.x, center.y, center.z, stackInSlot);
+                    itemEntity.setDeltaMovement(0,0,0);
+                    this.getLevel().addFreshEntity(itemEntity);
+                }else if (blockEntity != null){
                     blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER, outDir.getOpposite()).ifPresent(iItemHandler -> InventoryUtils.insertNoCheckSlots(this.items, iItemHandler, 0, 1));
                 }
-//                if (blockEntity != null) {                      // 如果输出口对方可以接收物品，则接收物品
-//                    blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER, outDir.getOpposite()).ifPresent(iItemHandler -> InventoryUtils.insertNoCheckSlots(this.items, iItemHandler, 0, 1));
-//                }else if (this.getLevel().getBlockState(outNeighbour).getCollisionShape(this.getLevel(), outNeighbour).isEmpty()){  // 如果输出口没有方块实体并且没有碰撞箱，就生成掉落物。
-//                    ItemStack stackInSlot = this.items.extractItem(0, 1, false);
-//                    Vec3 center = outNeighbour.getCenter();
-//                    this.getLevel().addFreshEntity(new ItemEntity(this.getLevel(), center.x, center.y, center.z, stackInSlot));
-//                }
             }
         }
         // 传送后再判断一次，确保不漏tick
@@ -137,20 +132,18 @@ public class TileConveyor extends CapabilityBlockEntity {
         int variant = this.getBlockState().getValue(Conveyor.VARIANT);
         switch (variant){
             case 0,7 -> {
-                return (int) (DirectionUtils.locToSideDist(itemPos, facing.getOpposite()) * MAX_TRANSPORT_PROGRESS);
+                return (int) (DirectionUtils.locToSideDist(itemPos, facing.getOpposite()) * getMaxTransportProgress());
             }
             case 1,2 -> {
-                return (int) (DirectionUtils.locToCornerAngle(itemPos, facing.getOpposite(), DirectionUtils.leftAndRightDir(facing, variant).getOpposite()) * 2 / Math.PI * MAX_TRANSPORT_PROGRESS);
+                return (int) (DirectionUtils.locToCornerAngle(itemPos, facing.getOpposite(), DirectionUtils.leftAndRightDir(facing, variant).getOpposite()) * 2 / Math.PI * getMaxTransportProgress());
             }
         }
-//        Direction outDir = DirectionUtils.leftAndRightDir(facing, bend);    // 输出口的方向
-//        Vec3i facingNormal = facing.getNormal();
-//        if (bend == 0){
-//            return (int) (DirectionUtils.locToSideDist(itemPos, facing.getOpposite()) * MAX_TRANSPORT_PROGRESS);
-//        }else {
-//            return (int) (DirectionUtils.locToCornerAngle(itemPos, facing.getOpposite(), outDir.getOpposite()) * 2 / Math.PI * MAX_TRANSPORT_PROGRESS);
-//        }
         return -1;
+    }
+
+    public int getMaxTransportProgress(){
+        int variant = this.getBlockState().getValue(Conveyor.VARIANT);
+        return variant == 4 ? MAX_TRANSPORT_PROGRESS * 2 : variant == 5 ? MAX_TRANSPORT_PROGRESS * 2 / 3 : MAX_TRANSPORT_PROGRESS;
     }
 
     @Override
