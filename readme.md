@@ -74,7 +74,7 @@
 
 ### 1. 克隆仓库
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/Nteum/HBM-NTM-high-edition.git
 cd HBM-NTM-high-edition
 ```
 
