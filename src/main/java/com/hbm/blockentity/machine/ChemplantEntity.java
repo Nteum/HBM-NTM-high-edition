@@ -16,8 +16,7 @@ import com.hbm.api.inventory.ModeBuilder;
 import com.hbm.api.math.MathUtils;
 import com.hbm.block.machine.BlockChemplant;
 import com.hbm.blockentity.ModBlockEntityType;
-import com.hbm.blockentity.base2.DummyableBlockEntity;
-import com.hbm.blockentity.base2.TileProxyBase;
+import com.hbm.blockentity.base.DummyableBlockEntity;
 import com.hbm.registries.HBMCaps;
 import com.hbm.gui.menu.ChemplantMenu;
 import com.hbm.item.machine.ItemMachineUpgrade.UpgradeType;
@@ -32,7 +31,6 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
-import net.minecraft.core.Vec3i;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -46,7 +44,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import org.jetbrains.annotations.NotNull;
@@ -212,26 +209,26 @@ public class ChemplantEntity extends DummyableBlockEntity {
         this.multiblockData.assignCapabilities(this, this.getBlockState().getValue(BlockStateProperties.HORIZONTAL_FACING));
     }
 
-    @Override
-    public void giveProxyCapabilities(Vec3i offset, TileProxyBase proxy, Capability<?> cap, Set<Direction> directions) {
-        if (offset.equals(new Vec3i(-1,0,1)) || offset.equals(new Vec3i(-1,0,-2))){
-            if (cap == ForgeCapabilities.FLUID_HANDLER){
-                proxy.capabilitiesContent.addCapability(cap, new VisitRestrictWrapper(this.fluidHandler,2), directions);
-                proxy.lookTooltip = Component.translatable(HBMLang.LOOKTOOLTIP_CHEMPLANT.key(), 2);
-                proxy.sendUpdatePacket();
-            }else if (cap == HBMCaps.LONG_ENERGY)
-                proxy.capabilitiesContent.addCapability(cap, this.energyContainer, directions);
-        }else if (offset.equals(new Vec3i(0,0,1)) || offset.equals(new Vec3i(0,0,-2))){
-            if (cap == ForgeCapabilities.FLUID_HANDLER){
-                proxy.capabilitiesContent.addCapability(cap, new VisitRestrictWrapper(this.fluidHandler,3), directions);
-                proxy.lookTooltip = Component.translatable(HBMLang.LOOKTOOLTIP_CHEMPLANT.key(), 2);
-                proxy.sendUpdatePacket();
-            }else if (cap == HBMCaps.LONG_ENERGY)
-                proxy.capabilitiesContent.addCapability(cap, this.energyContainer, directions);
-        }else {
-            this.getCapability(cap).ifPresent(handler -> proxy.capabilitiesContent.addCapability(cap, handler, directions));
-        }
-    }
+//    @Override
+//    public void giveProxyCapabilities(Vec3i offset, TileProxyBase proxy, Capability<?> cap, Set<Direction> directions) {
+//        if (offset.equals(new Vec3i(-1,0,1)) || offset.equals(new Vec3i(-1,0,-2))){
+//            if (cap == ForgeCapabilities.FLUID_HANDLER){
+//                proxy.capabilitiesContent.addCapability(cap, new VisitRestrictWrapper(this.fluidHandler,2), directions);
+//                proxy.lookTooltip = Component.translatable(HBMLang.LOOKTOOLTIP_CHEMPLANT.key(), 2);
+//                proxy.sendUpdatePacket();
+//            }else if (cap == HBMCaps.LONG_ENERGY)
+//                proxy.capabilitiesContent.addCapability(cap, this.energyContainer, directions);
+//        }else if (offset.equals(new Vec3i(0,0,1)) || offset.equals(new Vec3i(0,0,-2))){
+//            if (cap == ForgeCapabilities.FLUID_HANDLER){
+//                proxy.capabilitiesContent.addCapability(cap, new VisitRestrictWrapper(this.fluidHandler,3), directions);
+//                proxy.lookTooltip = Component.translatable(HBMLang.LOOKTOOLTIP_CHEMPLANT.key(), 2);
+//                proxy.sendUpdatePacket();
+//            }else if (cap == HBMCaps.LONG_ENERGY)
+//                proxy.capabilitiesContent.addCapability(cap, this.energyContainer, directions);
+//        }else {
+//            this.getCapability(cap).ifPresent(handler -> proxy.capabilitiesContent.addCapability(cap, handler, directions));
+//        }
+//    }
 
 //    @Override
 //    public void distributeCapabilities() {

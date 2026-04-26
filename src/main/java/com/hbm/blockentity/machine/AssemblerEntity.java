@@ -1,6 +1,5 @@
 package com.hbm.blockentity.machine;
 
-import com.hbm.HBM;
 import com.hbm.HBMKey;
 import com.hbm.HBMLang;
 import com.hbm.Inventory.recipe.ModRecipes;
@@ -8,12 +7,10 @@ import com.hbm.api.energy.BasicEnergyContainer;
 import com.hbm.api.energy.HybridEnergyStorage;
 import com.hbm.api.energy.ProxyEnergyHandler;
 import com.hbm.api.energy.TransmitUtils;
-import com.hbm.api.energy.fe.TransmitHelper;
 import com.hbm.block.base.BlockContainerBase;
 import com.hbm.blockentity.ModBlockEntityType;
-import com.hbm.blockentity.base2.DummyableBlockEntity;
+import com.hbm.blockentity.base.DummyableBlockEntity;
 import com.hbm.blockentity.interfaces.IPower;
-import com.hbm.item.tool.ItemStamp;
 import com.hbm.registries.HBMCaps;
 import com.hbm.gui.menu.AssemblerMenu;
 import com.hbm.Inventory.recipe.AssemblerRecipe;
@@ -23,7 +20,6 @@ import com.hbm.utils.InventoryUtils;
 import com.hbm.utils.multiblock.MultiblockData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;

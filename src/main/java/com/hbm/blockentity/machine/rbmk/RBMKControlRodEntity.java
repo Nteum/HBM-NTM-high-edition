@@ -3,7 +3,7 @@ package com.hbm.blockentity.machine.rbmk;
 import com.hbm.api.Mode;
 import com.hbm.block.machine.rbmk.BlockRBMKControlRod;
 import com.hbm.blockentity.ModBlockEntityType;
-import com.hbm.blockentity.base2.BaseMachineBlockEntity;
+import com.hbm.blockentity.base.BaseMachineBlockEntity;
 import com.hbm.gui.menu.RBMKControlRodMenu;
 import com.hbm.item.rbmk.ItemRBMKControlRod;
 import com.hbm.reactor.rbmk.RBMKColumnState;

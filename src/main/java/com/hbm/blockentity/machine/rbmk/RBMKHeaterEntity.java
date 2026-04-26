@@ -2,7 +2,7 @@ package com.hbm.blockentity.machine.rbmk;
 
 import com.hbm.HBM;
 import com.hbm.blockentity.ModBlockEntityType;
-import com.hbm.blockentity.base2.BaseMachineBlockEntity;
+import com.hbm.blockentity.base.BaseMachineBlockEntity;
 import com.hbm.reactor.rbmk.RBMKColumnState;
 import com.hbm.reactor.rbmk.RBMKLevelContext;
 import com.hbm.reactor.rbmk.RBMKManager;

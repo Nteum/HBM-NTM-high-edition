@@ -2,7 +2,7 @@ package com.hbm.blockentity.machine.rbmk;
 
 import com.hbm.api.Mode;
 import com.hbm.blockentity.ModBlockEntityType;
-import com.hbm.blockentity.base2.BaseMachineBlockEntity;
+import com.hbm.blockentity.base.BaseMachineBlockEntity;
 import com.hbm.item.rbmk.ItemRBMKFuelRod;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;

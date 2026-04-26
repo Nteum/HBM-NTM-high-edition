@@ -1,32 +1,18 @@
-package com.hbm.blockentity.base2;
+package com.hbm.blockentity.base;
 
 
 import com.hbm.api.energy.IEnergyContainer;
 import com.hbm.api.energy.IEnergyHandler;
-import com.hbm.api.fluid.IExtendedFluidTank;
-import com.hbm.api.fluid.ISidedFluidHandler;
 import com.hbm.api.inventory.IExtendedItemHandler;
-import com.hbm.api.inventory.ISidedItemHandler;
-import com.hbm.api.inventory.SlotAccCtl;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.Container;
-import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.Nameable;
 import net.minecraft.world.WorldlyContainer;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
 
 public abstract class HBMBlockEntity extends CapabilityBlockEntity implements IExtendedItemHandler, IEnergyHandler, WorldlyContainer, Nameable {
 

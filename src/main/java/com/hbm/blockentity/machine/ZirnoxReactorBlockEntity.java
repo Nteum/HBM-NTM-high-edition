@@ -6,7 +6,7 @@ import com.hbm.api.Mode;
 import com.hbm.api.fluid.BasicFluidHandler;
 import com.hbm.block.machine.BlockZirnoxReactor;
 import com.hbm.blockentity.ModBlockEntityType;
-import com.hbm.blockentity.base2.DummyableBlockEntity;
+import com.hbm.blockentity.base.DummyableBlockEntity;
 import com.hbm.gui.menu.ZirnoxMenu;
 
 import com.hbm.item.zirnox.ItemZirnoxRod;

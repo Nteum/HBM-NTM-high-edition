@@ -3,7 +3,7 @@ package com.hbm.blockentity.machine;
 import com.hbm.HBMKey;
 import com.hbm.block.logistic.BlockConnector;
 import com.hbm.blockentity.ModBlockEntityType;
-import com.hbm.blockentity.base2.CapabilityBlockEntity;
+import com.hbm.blockentity.base.CapabilityBlockEntity;
 import com.hbm.blockentity.interfaces.IConnector;
 import com.hbm.utils.NBTUtils;
 import com.hbm.utils.transport_net.EnergyNetwork;
@@ -139,6 +139,4 @@ public class TileConnector extends CapabilityBlockEntity implements IConnector {
         super.saveAdditional(pTag);
         NBTUtils.savePositions(pTag, connectedPos);
     }
-
-
 }

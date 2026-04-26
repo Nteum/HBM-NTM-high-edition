@@ -2,7 +2,7 @@ package com.hbm.blockentity.machine;
 
 import com.hbm.HBMLang;
 import com.hbm.blockentity.ModBlockEntityType;
-import com.hbm.blockentity.base2.BaseMachineBlockEntity;
+import com.hbm.blockentity.base.BaseMachineBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;

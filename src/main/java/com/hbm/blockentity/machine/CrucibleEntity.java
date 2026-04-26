@@ -6,7 +6,7 @@ import com.hbm.Inventory.fluid.CrucibleFluidHandler;
 import com.hbm.Inventory.material.BasicHeatHandler;
 import com.hbm.Inventory.recipe.alloy.CrucibleRecipe;
 import com.hbm.blockentity.ModBlockEntityType;
-import com.hbm.blockentity.base2.DummyableBlockEntity;
+import com.hbm.blockentity.base.DummyableBlockEntity;
 import com.hbm.blockentity.tools.TileFoundryBase;
 import com.hbm.datagen.recipe.ingredient.FluidStackIngredient;
 import com.hbm.gui.menu.MenuCrucible;

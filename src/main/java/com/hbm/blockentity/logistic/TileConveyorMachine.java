@@ -1,7 +1,7 @@
 package com.hbm.blockentity.logistic;
 
 import com.hbm.block.HBMBlockProperties;
-import com.hbm.blockentity.base2.BaseMenuTile;
+import com.hbm.blockentity.base.BaseMenuTile;
 import com.hbm.utils.DirectionUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

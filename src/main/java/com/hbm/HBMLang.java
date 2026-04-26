@@ -15,12 +15,6 @@ import java.util.List;
 
 public enum HBMLang implements ILangEntry {
     // 创造模式物品栏
-//    ITEMGROUP_ITEM("itemGroup","hbm_item","HBM 物品"),
-//    ITEMGROUP_BLOCK("itemGroup","hbm_block","HBM 方块"),
-//    ITEMGROUP_MACHINE("itemGroup","hbm_machine","HBM 机器"),
-//    ITEMGROUP_TOOL("itemGroup","hbm_tool","HBM 工具"),
-//    ITEMGROUP_WEAPON("itemGroup","hbm_weapon","HBM 武器"),
-//    ITEMGROUP_EQUIPMENT("itemGroup","hbm_equipment","HBM 装备"),
     HBM_PARTS("itemGroup","hbm_parts", "NTM Resources and Parts"),
     HBM_CONTROL("itemGroup","hbm_control", "NTM Machine Items and Fuel"),
     HBM_TEMPLATE("itemGroup","hbm_template", "NTM Templates"),
@@ -161,6 +155,7 @@ public enum HBMLang implements ILangEntry {
     RECIPE("general","recipe"),
     FUEL("Fuel"),
     FUEL_CAPACITY("Fuel Capacity: %s mB"),
+    EMPTY("Empty"),
     // effect
     EFFECT_RADIATION("effect","radiation"),
     // armor tooltip

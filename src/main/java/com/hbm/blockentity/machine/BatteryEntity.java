@@ -5,7 +5,7 @@ import com.hbm.HBMLang;
 import com.hbm.api.energy.*;
 import com.hbm.block.machine.BlockBattery;
 import com.hbm.blockentity.ModBlockEntityType;
-import com.hbm.blockentity.base2.BaseMachineBlockEntity;
+import com.hbm.blockentity.base.BaseMachineBlockEntity;
 import com.hbm.registries.HBMCaps;
 import com.hbm.gui.menu.BatteryMenu;
 import com.hbm.registries.ModTags;

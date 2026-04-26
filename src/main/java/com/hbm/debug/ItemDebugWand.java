@@ -54,14 +54,14 @@ public class ItemDebugWand extends Item {
     @Override
     public InteractionResult useOn(UseOnContext pContext) {
         if (!pContext.getLevel().isClientSide && pContext.getPlayer().hasPose(Pose.CROUCHING)){
-            Player player = pContext.getPlayer();
-            BlockPos clickedPos = pContext.getClickedPos();
-            ItemStack itemInHand = pContext.getItemInHand();
-            itemInHand.addTagElement(HBMKey.POSITION, NbtUtils.writeBlockPos(clickedPos));
-            ChunkPos chunkPos = new ChunkPos(clickedPos);
-            ((ServerLevel) pContext.getLevel()).getChunkSource().addRegionTicket(TicketType.FORCED, chunkPos, 0, chunkPos, true);
-//            ForgeChunkManager.forceChunk((ServerLevel) pContext.getLevel(), HBM.MODID, clickedPos, SectionPos.blockToSectionCoord(clickedPos.getX()), SectionPos.blockToSectionCoord(clickedPos.getY()),true,true);
-            player.sendSystemMessage(Component.translatable("msg.hbm.mark_pos", clickedPos.getX(), clickedPos.getY(), clickedPos.getZ()));
+//            Player player = pContext.getPlayer();
+//            BlockPos clickedPos = pContext.getClickedPos();
+//            ItemStack itemInHand = pContext.getItemInHand();
+//            itemInHand.addTagElement(HBMKey.POSITION, NbtUtils.writeBlockPos(clickedPos));
+//            ChunkPos chunkPos = new ChunkPos(clickedPos);
+//            ((ServerLevel) pContext.getLevel()).getChunkSource().addRegionTicket(TicketType.FORCED, chunkPos, 0, chunkPos, true);
+////            ForgeChunkManager.forceChunk((ServerLevel) pContext.getLevel(), HBM.MODID, clickedPos, SectionPos.blockToSectionCoord(clickedPos.getX()), SectionPos.blockToSectionCoord(clickedPos.getY()),true,true);
+//            player.sendSystemMessage(Component.translatable("msg.hbm.mark_pos", clickedPos.getX(), clickedPos.getY(), clickedPos.getZ()));
         }
         return super.useOn(pContext);
     }
@@ -69,23 +69,23 @@ public class ItemDebugWand extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
         if (!pLevel.isClientSide && !pPlayer.hasPose(Pose.CROUCHING)){
-            ItemStack itemInHand = pPlayer.getItemInHand(pUsedHand);
-            CompoundTag posElement = itemInHand.getTagElement(HBMKey.POSITION);
-            if (!itemInHand.hasTag() || posElement == null){
-                pPlayer.sendSystemMessage(Component.translatable("msg.hbm.no_pos"));
-            }else {
-                BlockPos storedPos = NbtUtils.readBlockPos(posElement);
-                // 注意，getBlockState是会加载区块的，因此这里用了一个安全加载的函数
-                BlockState markedBlock = WorldUtils.getBlockState(pLevel, storedPos).orElse(Blocks.AIR.defaultBlockState());
-                if (markedBlock.is(Blocks.AIR) || markedBlock.is(Blocks.VOID_AIR)){
-                    pPlayer.sendSystemMessage(Component.translatable(HBMLang.BLOCK_STATE_LOSE.key(), storedPos.toShortString()));
-                }else {
-                    createMissle(pLevel, pPlayer, pUsedHand, storedPos);
-//                    addEffects(pLevel, pPlayer, storedPos);
-                }
-                itemInHand.removeTagKey(HBMKey.POSITION);
-            }
-            showRadData(pLevel, pPlayer);
+//            ItemStack itemInHand = pPlayer.getItemInHand(pUsedHand);
+//            CompoundTag posElement = itemInHand.getTagElement(HBMKey.POSITION);
+//            if (!itemInHand.hasTag() || posElement == null){
+//                pPlayer.sendSystemMessage(Component.translatable("msg.hbm.no_pos"));
+//            }else {
+//                BlockPos storedPos = NbtUtils.readBlockPos(posElement);
+//                // 注意，getBlockState是会加载区块的，因此这里用了一个安全加载的函数
+//                BlockState markedBlock = WorldUtils.getBlockState(pLevel, storedPos).orElse(Blocks.AIR.defaultBlockState());
+//                if (markedBlock.is(Blocks.AIR) || markedBlock.is(Blocks.VOID_AIR)){
+//                    pPlayer.sendSystemMessage(Component.translatable(HBMLang.BLOCK_STATE_LOSE.key(), storedPos.toShortString()));
+//                }else {
+//                    createMissle(pLevel, pPlayer, pUsedHand, storedPos);
+////                    addEffects(pLevel, pPlayer, storedPos);
+//                }
+//                itemInHand.removeTagKey(HBMKey.POSITION);
+//            }
+//            showRadData(pLevel, pPlayer);
         }
         return super.use(pLevel, pPlayer, pUsedHand);
     }

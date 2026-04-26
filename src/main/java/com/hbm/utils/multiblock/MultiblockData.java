@@ -1,8 +1,8 @@
 package com.hbm.utils.multiblock;
 
 import com.hbm.blockentity.ModBlockEntityType;
-import com.hbm.blockentity.base2.DummyableBlockEntity;
-import com.hbm.blockentity.base2.TileProxyBase;
+import com.hbm.blockentity.base.DummyableBlockEntity;
+import com.hbm.blockentity.base.TileProxyBase;
 import com.hbm.registries.HBMCaps;
 import com.hbm.registries.ModBlocks;
 import com.hbm.utils.DirectionUtils;

@@ -2,7 +2,7 @@ package com.hbm.block.machine.rbmk;
 
 import com.hbm.block.machine.BaseSingleBlockMachine;
 import com.hbm.blockentity.ModBlockEntityType;
-import com.hbm.blockentity.base2.UpdateableBlockEntity;
+import com.hbm.blockentity.base.UpdateableBlockEntity;
 import com.hbm.blockentity.machine.rbmk.RBMKDisplayEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;

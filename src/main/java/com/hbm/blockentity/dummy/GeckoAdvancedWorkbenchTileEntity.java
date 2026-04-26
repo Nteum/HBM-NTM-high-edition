@@ -1,6 +1,6 @@
 package com.hbm.blockentity.dummy;
 
-import com.hbm.blockentity.base2.TileProxyCombo;
+import com.hbm.blockentity.base.TileProxyCombo;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.state.BlockState;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;

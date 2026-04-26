@@ -2,7 +2,7 @@ package com.hbm.reactor.rbmk;
 
 import com.hbm.block.base.BlockDummyable;
 import com.hbm.block.machine.rbmk.BlockRBMKBase;
-import com.hbm.blockentity.base2.TileProxyBase;
+import com.hbm.blockentity.base.TileProxyBase;
 import com.hbm.blockentity.machine.rbmk.RBMKBaseEntity;
 import com.hbm.blockentity.machine.rbmk.RBMKBoilerEntity;
 import com.hbm.blockentity.machine.rbmk.RBMKControlRodEntity;

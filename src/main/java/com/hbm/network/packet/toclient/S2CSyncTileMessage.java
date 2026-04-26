@@ -1,8 +1,7 @@
 package com.hbm.network.packet.toclient;
 
 import com.hbm.HBM;
-import com.hbm.blockentity.base2.BaseMachineBlockEntity;
-import com.hbm.blockentity.base2.UpdateableBlockEntity;
+import com.hbm.blockentity.base.UpdateableBlockEntity;
 import com.hbm.network.IHBMMessage;
 import com.hbm.network.ModMessages;
 import com.hbm.network.packet.toserver.S2CSyncFailMessage;

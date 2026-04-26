@@ -6,7 +6,7 @@ import com.hbm.api.fluid.BasicFluidHandler;
 import com.hbm.api.inventory.ModeBuilder;
 import com.hbm.api.math.MathUtils;
 import com.hbm.blockentity.ModBlockEntityType;
-import com.hbm.blockentity.base2.BaseMachineBlockEntity;
+import com.hbm.blockentity.base.BaseMachineBlockEntity;
 import com.hbm.gui.menu.PWRMenu;
 import com.hbm.item.pwr.ItemPWRFuel;
 import com.hbm.reactor.pwr.PWRFuelType;

@@ -4,7 +4,7 @@ import com.hbm.HBMKey;
 import com.hbm.api.Mode;
 import com.hbm.api.inventory.ModeBuilder;
 import com.hbm.blockentity.ModBlockEntityType;
-import com.hbm.blockentity.base2.DummyableBlockEntity;
+import com.hbm.blockentity.base.DummyableBlockEntity;
 import com.hbm.gui.menu.ResearchReactorMenu;
 import com.hbm.handler.radiation.ChunkRadiationManager;
 
@@ -33,9 +33,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
-import java.util.Locale;
 import java.util.Map;
 import java.util.function.Supplier;
 

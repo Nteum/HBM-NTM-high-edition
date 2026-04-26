@@ -5,7 +5,7 @@ import com.hbm.HBMLang;
 import com.hbm.Inventory.recipe.ModRecipes;
 import com.hbm.Inventory.recipe.RecipePress;
 import com.hbm.blockentity.ModBlockEntityType;
-import com.hbm.blockentity.base2.BaseMachineBlockEntity;
+import com.hbm.blockentity.base.BaseMachineBlockEntity;
 import com.hbm.gui.menu.PressMenu;
 import com.hbm.item.tool.ItemStamp;
 import com.hbm.registries.ModBlocks;

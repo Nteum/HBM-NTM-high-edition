@@ -1,10 +1,9 @@
 package com.hbm.utils.multiblock;
 
 import com.hbm.block.HBMBlockProperties;
-import com.hbm.blockentity.base2.DummyableBlockEntity;
-import com.hbm.blockentity.base2.TileProxyBase;
+import com.hbm.blockentity.base.DummyableBlockEntity;
+import com.hbm.blockentity.base.TileProxyBase;
 import com.hbm.utils.DirectionUtils;
-import com.hbm.utils.MultipartUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;

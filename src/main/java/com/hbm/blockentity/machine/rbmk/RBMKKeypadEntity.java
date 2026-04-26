@@ -2,7 +2,7 @@ package com.hbm.blockentity.machine.rbmk;
 
 import com.hbm.block.machine.rbmk.BlockRBMKBase;
 import com.hbm.blockentity.ModBlockEntityType;
-import com.hbm.blockentity.base2.UpdateableBlockEntity;
+import com.hbm.blockentity.base.UpdateableBlockEntity;
 import com.hbm.gui.menu.RBMKKeypadConfigMenu;
 import com.hbm.reactor.rbmk.RBMKColumnState;
 import com.hbm.reactor.rbmk.RBMKLinkable;

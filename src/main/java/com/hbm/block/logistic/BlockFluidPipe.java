@@ -14,12 +14,14 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.PipeBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import net.minecraftforge.fluids.capability.IFluidHandler;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -39,13 +41,13 @@ public class BlockFluidPipe extends AbstractPipeBlock implements EntityBlock, IL
     public boolean connectsTo(BlockPos clickedPos, LevelAccessor pLevel, Direction direction) {
         BlockPos neighbourPos = clickedPos.relative(direction);
         PipeEntity clickPipe = WorldUtils.getTileEntity(PipeEntity.class, pLevel, clickedPos);
-        if (clickPipe != null && clickPipe.connLimit[direction.ordinal()] != Mode.BOTH) {
+        if (clickPipe != null && !clickPipe.isDirAllow(direction)) {
             return false;
         }
         BlockEntity neighbourEntity = pLevel.getBlockEntity(neighbourPos);
         if (neighbourEntity instanceof PipeEntity pipe){
             // 既需要检查管道模式，也需要检查流体类型
-            if (pipe.connLimit[direction.getOpposite().ordinal()] != Mode.BOTH) {
+            if (!pipe.isDirAllow(direction.getOpposite())) {
                 return false;
             }
             Fluid selfFluid = clickPipe != null ? clickPipe.getFluid() : Fluids.EMPTY;

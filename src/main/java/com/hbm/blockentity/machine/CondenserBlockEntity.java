@@ -2,7 +2,7 @@ package com.hbm.blockentity.machine;
 
 import com.hbm.HBMKey;
 import com.hbm.blockentity.ModBlockEntityType;
-import com.hbm.blockentity.base2.BaseMachineBlockEntity;
+import com.hbm.blockentity.base.BaseMachineBlockEntity;
 import com.hbm.blockentity.machine.component.CondenserLogic;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;

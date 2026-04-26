@@ -1,11 +1,15 @@
 package com.hbm.block.logistic;
 
 import com.hbm.api.Mode;
+import com.hbm.block.interfaces.IToolable;
+import com.hbm.block.interfaces.ToolType;
+import com.hbm.blockentity.machine.PipeEntity;
 import com.hbm.capabilities.network.ConnType;
 import com.hbm.blockentity.base.BasePipeBlockEntity;
 import com.hbm.registries.ModItems;
 import com.hbm.registries.ModBlocks;
 import com.hbm.registries.ModItems;;
+import com.hbm.utils.WorldUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -13,6 +17,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -24,15 +29,17 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Objects;
 
-public abstract class AbstractPipeBlock extends PipeBlock implements EntityBlock {
+public abstract class AbstractPipeBlock extends PipeBlock implements EntityBlock, IToolable {
     // 管道半径
     public float apothem;
     public AbstractPipeBlock(Properties pProperties, float apothem) {
@@ -81,19 +88,15 @@ public abstract class AbstractPipeBlock extends PipeBlock implements EntityBlock
     /** 判断相邻的线缆是否可连通 */
     public boolean connectsTo(BlockPos clickedPos, LevelAccessor pLevel,Direction direction) {
         BlockPos neighbourPos = clickedPos.relative(direction);
-        BlockState state = pLevel.getBlockState(neighbourPos);
+        BlockState neighbourState = pLevel.getBlockState(neighbourPos);
         return pLevel.getBlockState(clickedPos).getBlock() instanceof AbstractPipeBlock ?
-                ((BasePipeBlockEntity) Objects.requireNonNull(pLevel.getBlockEntity(clickedPos))).connLimit[direction.ordinal()]== Mode.BOTH
-                        && (state.getBlock() instanceof AbstractPipeBlock && (((BasePipeBlockEntity) Objects.requireNonNull(pLevel.getBlockEntity(neighbourPos))).connLimit[direction.ordinal()]== Mode.BOTH)
-                        || connBlockEntityCond(pLevel,state,clickedPos,neighbourPos))
-                : connBlockEntityCond(pLevel,state,clickedPos,neighbourPos);
+                ((BasePipeBlockEntity) Objects.requireNonNull(pLevel.getBlockEntity(clickedPos))).isDirAllow(direction)
+                        && ((neighbourState.getBlock() instanceof AbstractPipeBlock && ((BasePipeBlockEntity) Objects.requireNonNull(pLevel.getBlockEntity(neighbourPos))).isDirAllow(direction.getOpposite())) || connBlockEntityCond(pLevel,neighbourState,clickedPos,neighbourPos))
+                : connBlockEntityCond(pLevel,neighbourState,clickedPos,neighbourPos);
     }
     /** 子类自定义的管道连接限制 */
     protected boolean connBlockEntityCond(LevelAccessor pLevel, BlockState state, BlockPos blockPos, BlockPos neighbourPos){return true;}
 
-//    public List<Direction> getConnection(){
-//
-//    }
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
@@ -101,50 +104,39 @@ public abstract class AbstractPipeBlock extends PipeBlock implements EntityBlock
     }
 
     @Override
-    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-        if (!pLevel.isClientSide()){
-            // 螺丝刀点击对应方向使导线可连接/不连接
-            if (pPlayer.getItemInHand(pHand).is(ModItems.SCREWDRIVER.get())){
-                Direction hitDir = cableHitDirection(pHit.getBlockPos().getCenter(),pHit.getLocation());
-                hitDir = hitDir==null?pHit.getDirection():hitDir;
-                if (pLevel.getBlockEntity(pPos) instanceof BasePipeBlockEntity pipeEntity){
-                    BlockState neighbourState = pLevel.getBlockState(pPos.relative(hitDir));
-                    BlockEntity neighbourEntity = pLevel.getBlockEntity(pPos.relative(hitDir));
-                    //更新本方块状态
-                    boolean flag2 = false;
-                    if (pipeEntity.connLimit[hitDir.ordinal()] == Mode.BOTH){
-                        pipeEntity.connLimit[hitDir.ordinal()] = Mode.NONE;
-                        pState = pState.setValue(PROPERTY_BY_DIRECTION.get(hitDir),false);
-                        flag2 = true;
-                    }else {
-                        pipeEntity.connLimit[hitDir.ordinal()] = Mode.BOTH;
-                        pState = pState.setValue(PROPERTY_BY_DIRECTION.get(hitDir),true);
-                    }
-                    pLevel.setBlock(pPos, pState, 10);
-//                    BasePipeBlockEntity.updateConnCaps(pipeEntity);
-                    //如果临近方块是线缆，则同时更新线缆状态
-                    boolean flag1 = neighbourState.getBlock() instanceof AbstractPipeBlock;
-                    if (flag1 && neighbourEntity instanceof BasePipeBlockEntity neighbourPipeEntity){
-                        if (flag2){
-                            neighbourState = neighbourState.setValue(PROPERTY_BY_DIRECTION.get(hitDir.getOpposite()),false);
-                            neighbourPipeEntity.connLimit[hitDir.ordinal()] = Mode.NONE;
-                        }else {
-                            neighbourState = neighbourState.setValue(PROPERTY_BY_DIRECTION.get(hitDir.getOpposite()),true);
-                            neighbourPipeEntity.connLimit[hitDir.ordinal()] = Mode.BOTH;
-                        }
-                        pLevel.setBlock(pPos.relative(hitDir),neighbourState,10);
-                    }
-                }
+    public boolean onScrew(UseOnContext context, ToolType tool) {
+        Level level = context.getLevel();
+        BlockPos pos = context.getClickedPos();
+        if (context.getHand() == InteractionHand.MAIN_HAND && level.getBlockEntity(pos) instanceof BasePipeBlockEntity pipeEntity){
+            Direction hitDir = cableHitDirection(pos.getCenter(),context.getClickLocation());
+            hitDir = hitDir==null ? context.getClickedFace() : hitDir;
+            //更新本方块状态
+            boolean newDirAllowState = !pipeEntity.isDirAllow(hitDir);
+            pipeEntity.setDirAllow(hitDir, newDirAllowState);
+            pipeEntity.setChanged();
+            BlockState blockState = level.getBlockState(pos);
+            // 更新邻居状态
+            BlockPos neighbourPos = pos.relative(hitDir);
+            BlockState neighbourState = level.getBlockState(neighbourPos);
+            BlockEntity neighbourEntity = level.getBlockEntity(neighbourPos);
+            BlockState oldState;
+            if (neighbourEntity instanceof BasePipeBlockEntity neighbourPipeEntity){
+                neighbourPipeEntity.setDirAllow(hitDir.getOpposite(), newDirAllowState);
+                neighbourPipeEntity.setChanged();
+                oldState = level.getBlockState(neighbourPos);
+                if (!newDirAllowState) neighbourState = neighbourState.setValue(PipeBlock.PROPERTY_BY_DIRECTION.get(hitDir.getOpposite()), false);
+                else neighbourState = neighbourState.updateShape(hitDir.getOpposite(), blockState, level, neighbourPos, pos);
+                level.setBlock(neighbourPos, neighbourState, 3);
+                level.sendBlockUpdated(neighbourPos, oldState, neighbourState, 3);
             }
-//            else if (pHand.equals(InteractionHand.MAIN_HAND)&&!pPlayer.getItemInHand(pHand).is(ModBlocks.RED_CABLE.get().asItem())){
-//                //右键显示连接
-//                List<BlockPos> connection = ((BasePipeBlockEntity) pLevel.getBlockEntity(pPos)).getConnection();
-//                pPlayer.sendSystemMessage(Component.literal(connection.toString()));
-//            }
-            //只有返回pass才能正常放置物品
-            return InteractionResult.PASS;
+            oldState = level.getBlockState(pos);
+            if (!newDirAllowState) blockState = blockState.setValue(PipeBlock.PROPERTY_BY_DIRECTION.get(hitDir), false);
+            else blockState = blockState.updateShape(hitDir, neighbourState, level, pos, neighbourPos);
+            level.setBlock(pos, blockState, 3);
+            level.sendBlockUpdated(pos, oldState, blockState, 3);
+            return true;
         }
-        return super.use(pState, pLevel, pPos, pPlayer, pHand, pHit);
+        return false;
     }
     private Direction cableHitDirection(Vec3 center, Vec3 hitPos){
         Vec3 diff = hitPos.subtract(center);

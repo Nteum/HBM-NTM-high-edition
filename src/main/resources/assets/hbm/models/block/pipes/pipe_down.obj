@@ -1,6 +1,6 @@
 # Blender v3.6.0 OBJ File: ''
 # www.blender.org
-mtllib pipe_down.mtl
+mtllib ../../general2.mtl
 o nY
 v 0.367417 0.000000 0.632582
 v 0.312500 0.000000 0.500000
@@ -59,7 +59,7 @@ vn 0.3827 0.0000 0.9239
 vn -0.9239 0.0000 0.3827
 vn -0.3827 -0.0000 -0.9239
 vn 0.3827 -0.0000 -0.9239
-usemtl pipe_down
+usemtl Texture
 s 1
 f 1/1/1 2/2/1 3/3/1
 f 4/4/2 5/5/2 3/6/2

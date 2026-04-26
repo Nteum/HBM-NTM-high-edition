@@ -16,7 +16,7 @@ import com.hbm.block.machine.tokamak.TokamakHeaterBlock;
 import com.hbm.block.machine.tokamak.TokamakInjectorBlock;
 import com.hbm.block.machine.tokamak.TokamakPortBlock;
 import com.hbm.blockentity.ModBlockEntityType;
-import com.hbm.blockentity.base2.BaseMachineBlockEntity;
+import com.hbm.blockentity.base.BaseMachineBlockEntity;
 import com.hbm.registries.HBMCaps;
 import com.hbm.gui.menu.TokamakMenu;
 import com.hbm.registries.ModItems;

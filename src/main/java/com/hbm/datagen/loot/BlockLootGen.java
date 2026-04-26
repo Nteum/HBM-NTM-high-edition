@@ -68,7 +68,6 @@ public class BlockLootGen extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.machine_rbmk_debris.get());
         this.dropSelf(ModBlocks.machine_rbmk_crane_console.get());
         this.dropSelf(ModBlocks.machine_rbmk_autoloader.get());
-        this.dropSelf(ModBlocks.RED_CABLE.get());
         this.dropSelf(ModBlocks.tokamak_controller.get());
         this.dropSelf(ModBlocks.tokamak_casing.get());
         this.dropSelf(ModBlocks.tokamak_coil.get());

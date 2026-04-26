@@ -1,11 +1,16 @@
 package com.hbm.block.logistic;
 
 import com.hbm.blockentity.machine.CableEntity;
+import com.hbm.blockentity.machine.PipeEntity;
+import com.hbm.registries.HBMCaps;
+import com.hbm.utils.WorldUtils;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.client.model.obj.ObjLoader;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import org.jetbrains.annotations.Nullable;
 
@@ -23,6 +28,7 @@ public class BlockCable extends AbstractPipeBlock implements EntityBlock{
 
     @Override
     protected boolean connBlockEntityCond(LevelAccessor pLevel, BlockState state, BlockPos blockPos, BlockPos neighbourPos) {
-        return state.hasBlockEntity() && pLevel.getBlockEntity(neighbourPos).getCapability(ForgeCapabilities.ENERGY).isPresent();
+        BlockEntity blockEntity = pLevel.getBlockEntity(neighbourPos);
+        return state.hasBlockEntity() && (blockEntity.getCapability(ForgeCapabilities.ENERGY).isPresent() || blockEntity.getCapability(HBMCaps.LONG_ENERGY).isPresent());
     }
 }

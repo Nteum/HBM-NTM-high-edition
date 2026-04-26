@@ -9,10 +9,7 @@ public class BitUtil {
      * @return 对应的状态值
      */
     public static int get(int data, int offset, int length) {
-        // 创建掩码，例如 length=2 得到二进制 11 (十进制3)
-        int mask = (1 << length) - 1;
-        // 右移并取模
-        return (data >> offset) & mask;
+        return (data >> offset) & ((1 << length) - 1);
     }
 
     /**

@@ -11,7 +11,7 @@ import com.hbm.api.energy.TransmitUtils;
 import com.hbm.api.inventory.ModeBuilder;
 import com.hbm.Inventory.recipe.ModRecipes;
 import com.hbm.blockentity.ModBlockEntityType;
-import com.hbm.blockentity.base2.BaseMachineBlockEntity;
+import com.hbm.blockentity.base.BaseMachineBlockEntity;
 import com.hbm.registries.HBMCaps;
 import com.hbm.gui.menu.ShredderMenu;
 import net.minecraft.core.BlockPos;

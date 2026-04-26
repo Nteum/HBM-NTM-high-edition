@@ -1,6 +1,6 @@
 # Blender v3.6.0 OBJ File: ''
 # www.blender.org
-mtllib cable_core.mtl
+mtllib ../../general.mtl
 o Core
 v 0.406250 0.343750 0.656250
 v 0.343750 0.406250 0.656250
@@ -96,7 +96,7 @@ vn -1.0000 0.0000 0.0000
 vn 1.0000 0.0000 0.0000
 vn 0.0000 1.0000 0.0000
 vn 0.0000 0.0000 1.0000
-usemtl Cable_neo
+usemtl Texture
 s 1
 f 1/1/1 2/2/1 3/3/1
 f 4/4/2 5/5/2 6/6/2

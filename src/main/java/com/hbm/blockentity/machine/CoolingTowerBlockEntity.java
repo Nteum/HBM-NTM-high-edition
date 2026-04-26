@@ -2,8 +2,8 @@ package com.hbm.blockentity.machine;
 
 import com.hbm.HBMKey;
 import com.hbm.blockentity.ModBlockEntityType;
-import com.hbm.blockentity.base2.DummyableBlockEntity;
-import com.hbm.blockentity.base2.TileProxyBase;
+import com.hbm.blockentity.base.DummyableBlockEntity;
+import com.hbm.blockentity.base.TileProxyBase;
 import com.hbm.blockentity.machine.component.CondenserLogic;
 import com.hbm.registries.ModBlocks;
 import com.hbm.utils.multiblock.MultiblockData;
@@ -16,7 +16,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Fluids;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;

@@ -6,6 +6,7 @@ import com.hbm.block.base.BlockMachineBase;
 import com.hbm.block.interfaces.ILookOverlay;
 import com.hbm.blockentity.machine.BarrelEntity;
 import com.hbm.utils.InventoryUtils;
+import com.hbm.utils.WorldUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -29,6 +30,7 @@ import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.fluids.capability.templates.FluidTank;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -60,7 +62,13 @@ public class BlockFluidBarrel extends BlockMachineBase implements ILookOverlay {
 
     @Override
     public List<Component> getDesc(Level level, BlockPos pos) {
-        return List.of(Component.translatable(HBMLang.FLUID_CAPACITY.key(),this.barrelProperties.capacity).withStyle(ChatFormatting.AQUA));
+        BarrelEntity tileEntity = WorldUtils.getTileEntity(BarrelEntity.class, level, pos);
+        if (tileEntity == null) return List.of();
+        FluidTank tank = tileEntity.getFluidTanks().get(0);
+        return List.of(
+                Component.translatable(this.getDescriptionId()),
+                tank.isEmpty() ? HBMLang.EMPTY.translate() : Component.translatable(HBMLang.GUI_TOOLTIP_FLUID.key(), tank.getFluidInTank(0).getFluid().getFluidType().getDescriptionId(), this.barrelProperties.capacity).withStyle(ChatFormatting.AQUA)
+        );
     }
 
     public static class BarrelProperties{

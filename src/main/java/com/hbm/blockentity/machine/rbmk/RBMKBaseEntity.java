@@ -10,7 +10,7 @@ import com.hbm.api.fluid.BasicFluidHandler;
 import com.hbm.block.machine.rbmk.BlockRBMKBase;
 import com.hbm.block.machine.rbmk.BlockRBMKControlRod;
 import com.hbm.blockentity.ModBlockEntityType;
-import com.hbm.blockentity.base2.DummyableBlockEntity;
+import com.hbm.blockentity.base.DummyableBlockEntity;
 import com.hbm.registries.HBMCaps;
 import com.hbm.gui.menu.RBMKBaseMenu;
 import com.hbm.reactor.rbmk.RBMKColumnState;

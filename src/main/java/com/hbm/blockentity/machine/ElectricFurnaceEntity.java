@@ -10,7 +10,7 @@ import com.hbm.api.energy.TransmitUtils;
 import com.hbm.api.math.MathUtils;
 import com.hbm.block.machine.BlockElectricFurnace;
 import com.hbm.blockentity.ModBlockEntityType;
-import com.hbm.blockentity.base2.BaseMachineBlockEntity;
+import com.hbm.blockentity.base.BaseMachineBlockEntity;
 import com.hbm.blockentity.interfaces.IUpgradeInfoProvider;
 import com.hbm.registries.HBMCaps;
 import com.hbm.gui.menu.ElectricFurnaceMenu;

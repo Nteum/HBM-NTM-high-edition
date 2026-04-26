@@ -1,9 +1,8 @@
 package com.hbm.block.base;
 
-import com.hbm.blockentity.base2.BaseMachineBlockEntity;
-import com.hbm.blockentity.base2.UpdateableBlockEntity;
+import com.hbm.blockentity.base.BaseMachineBlockEntity;
+import com.hbm.blockentity.base.UpdateableBlockEntity;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.*;

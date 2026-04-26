@@ -89,10 +89,7 @@ public class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
     public static final List<WrappedBlockRegistry> blockList = new ArrayList<>();
     private static final List<RegistryObject<Block>> legacyMachineTagBlocks = new ArrayList<>();
-    static {
-//        HBMMachine.register(BLOCKS);
-//        HBMBlockComponent.register(BLOCKS);
-    }
+
     //机械
     public static final RegistryObject<Block> CHEMPLANT = add("chemplant", ()->new BlockChemplant(BlockBehaviour.Properties.of().strength(5.0F).explosionResistance(30.0F)), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, "Chemical Plant", HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
     public static final RegistryObject<Block> PLASTIC_BARREL = add("barrel_plastic", ()->new BlockFluidBarrel(BlockBehaviour.Properties.of().strength(2.0F).explosionResistance(5.0F).requiresCorrectToolForDrops().sound(SoundType.STONE), BlockFluidBarrel.BarrelProperties.of().capacity(12000)), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, "Safe Barrel™", HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
@@ -116,7 +113,6 @@ public class ModBlocks {
     public static final RegistryObject<Block> machine_wood_burner = registerMachineBlockWithItem("machine_wood_burner",
             () -> new WoodBurnerBlock(Properties.of().strength(3.0F).sound(SoundType.METAL)
                     .lightLevel(state -> state.getValue(WoodBurnerBlock.LIT) ? 13 : 0)));
-    public static final RegistryObject<Block> CONNECTOR = add("connector", ()->new BlockConnector(Properties.of()), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, HBMKey.ORDERLY_GEN, HBMKey.DROP_SELF);
     // Tokamak 聚变堆组件
     public static final RegistryObject<Block> tokamak_controller = registerMachineBlockWithItem("tokamak_controller", ()->new TokamakControllerBlock(Properties.of().strength(5.0F).lightLevel(state -> 8)));
     public static final RegistryObject<Block> tokamak_casing = registerMachineBlockWithItem("tokamak_casing", ()->new TokamakCasingBlock(Properties.of().strength(6.0F).explosionResistance(18.0F)));
@@ -251,10 +247,9 @@ public class ModBlocks {
         registerLegacyBlockItemAlias("deco_rbmk_smooth", machine_rbmk_base);
     }
     public static final RegistryObject<Block> HEATER_FIREBOX = add("firebox", ()->new BlockFireBox(Properties.copy(Blocks.IRON_BLOCK)), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, HBMKey.ORDERLY_GEN, HBMKey.DROP_SELF);
-    //模型部分（仅仅用于加载模型渲染，而不会在游戏单独出现，名称以part开头）
-//    public static final RegistryObject<Block> part_press_head = BLOCKS.register("part_press_head",()->new Block(Properties.of().noLootTable()));
     //电力
-    public static final RegistryObject<Block> RED_CABLE = registerBlockWithItem("red_cable",()->new BlockCable(Properties.copy(Blocks.STONE_BRICK_WALL)));
+    public static final RegistryObject<Block> RED_CABLE = add("red_cable", ()->new BlockCable(Properties.copy(Blocks.STONE_BRICK_WALL)), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, HBMKey.ORDERLY_GEN, HBMKey.DROP_SELF);
+    public static final RegistryObject<Block> CONNECTOR = add("connector", ()->new BlockConnector(Properties.of()), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, HBMKey.ORDERLY_GEN, HBMKey.DROP_SELF);
     // 物流体系
     public static final RegistryObject<Block> conveyor = new BlockBuilder("conveyor", ()->new Conveyor(Properties.copy(Blocks.STONE))).tab(ModTabs.CONTROL.getKey()).model(HBMKey.MODEL_STANDALONE).loc(HBMKey.ORDERLY_GEN).loot(HBMKey.DROP_SELF).tags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL).build();
     public static final RegistryObject<Block> CONVEYOR_INSERTER = new BlockBuilder("conveyor_inserter", ()->new ConveyorInserter(Properties.copy(Blocks.STONE))).tab(ModTabs.CONTROL.getKey()).model(HBMKey.MODEL_STANDALONE).loc(HBMKey.ORDERLY_GEN).loot(HBMKey.DROP_SELF).tags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL).build();

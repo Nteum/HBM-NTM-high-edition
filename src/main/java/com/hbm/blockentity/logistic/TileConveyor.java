@@ -4,7 +4,7 @@ import com.hbm.HBMKey;
 import com.hbm.Inventory.filter.SidedItemManager;
 import com.hbm.block.logistic.Conveyor;
 import com.hbm.blockentity.ModBlockEntityType;
-import com.hbm.blockentity.base2.CapabilityBlockEntity;
+import com.hbm.blockentity.base.CapabilityBlockEntity;
 import com.hbm.utils.DirectionUtils;
 import com.hbm.utils.InventoryUtils;
 import net.minecraft.core.BlockPos;

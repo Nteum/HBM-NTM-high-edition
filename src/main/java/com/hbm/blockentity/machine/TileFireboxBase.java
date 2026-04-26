@@ -1,16 +1,14 @@
 package com.hbm.blockentity.machine;
 
 import com.hbm.HBMKey;
-import com.hbm.HBMLang;
 import com.hbm.Inventory.material.BasicHeatHandler;
 import com.hbm.addational_data.Pollution;
 import com.hbm.api.fluid.BasicFluidHandler;
 import com.hbm.blockentity.ModBlockEntityType;
-import com.hbm.blockentity.base2.DummyableBlockEntity;
+import com.hbm.blockentity.base.DummyableBlockEntity;
 import com.hbm.blockentity.interfaces.IBurnFuel;
 import com.hbm.blockentity.interfaces.IMachinePolluting;
 import com.hbm.blockentity.interfaces.ITakeAir;
-import com.hbm.gui.menu.MenuFirebox;
 import com.hbm.registries.HBMCaps;
 import com.hbm.registries.ModBlocks;
 import com.hbm.utils.multiblock.MultiblockData;
@@ -19,15 +17,11 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
-import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.Vec3;
@@ -35,8 +29,6 @@ import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.List;
 
 public abstract class TileFireboxBase extends DummyableBlockEntity implements IBurnFuel, IMachinePolluting {
     public int maxBurnTime;

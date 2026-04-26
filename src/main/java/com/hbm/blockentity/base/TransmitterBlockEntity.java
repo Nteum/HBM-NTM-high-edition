@@ -1,6 +1,5 @@
 package com.hbm.blockentity.base;
 
-import com.hbm.blockentity.base2.CapabilityBlockEntity;
 import com.hbm.capabilities.network.TransmitterNetworkRegistry;
 import com.hbm.api.providers.IBlockProvider;
 import com.hbm.block.interfaces.IHasTileEntity;

@@ -1,4 +1,4 @@
-package com.hbm.blockentity.base2;
+package com.hbm.blockentity.base;
 
 import com.hbm.HBM;
 import com.hbm.HBMKey;

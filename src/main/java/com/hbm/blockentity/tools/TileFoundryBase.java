@@ -1,7 +1,7 @@
 package com.hbm.blockentity.tools;
 
 import com.hbm.HBMKey;
-import com.hbm.blockentity.base2.CapabilityBlockEntity;
+import com.hbm.blockentity.base.CapabilityBlockEntity;
 import com.hbm.item.tool.ItemMold;
 import com.hbm.registries.HBMMatters;
 import net.minecraft.core.BlockPos;

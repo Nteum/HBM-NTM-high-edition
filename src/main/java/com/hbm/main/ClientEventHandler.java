@@ -5,6 +5,7 @@ import com.hbm.Inventory.fluid.ModFluids;
 import com.hbm.block.interfaces.ILookOverlay;
 import com.hbm.block.interfaces.ITooltipProvider;
 import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.machine.PipeEntity;
 import com.hbm.config.ConfigLBSM;
 import com.hbm.dim.orbit.SpaceSpecialEffects;
 import com.hbm.entity.ModEntityType;
@@ -61,6 +62,7 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.api.distmarker.Dist;
@@ -218,6 +220,15 @@ public class ClientEventHandler {
             case 5 -> 0x8000ff;
             default -> -1;
         }, ModBlocks.CONVEYOR_ROUTER.get());
+        event.register((state, level, pos, tintIndex) -> {
+            if (tintIndex == 1 && level != null && pos != null) {
+                PipeEntity be = WorldUtils.getTileEntity(PipeEntity.class, level, pos);
+                if (be != null) {
+                    return be.getFluidColor();
+                }
+            }
+            return -1;
+        }, ModBlocks.FLUID_PIPE.get());
     }
 
     @SubscribeEvent

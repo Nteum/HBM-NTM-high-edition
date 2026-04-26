@@ -7,7 +7,7 @@ import com.hbm.api.fluid.BasicFluidHandler;
 import com.hbm.block.machine.rbmk.BlockRBMKBase;
 import com.hbm.block.machine.rbmk.BlockRBMKSteamPort;
 import com.hbm.blockentity.ModBlockEntityType;
-import com.hbm.blockentity.base2.BaseMachineBlockEntity;
+import com.hbm.blockentity.base.BaseMachineBlockEntity;
 import com.hbm.utils.EnumUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

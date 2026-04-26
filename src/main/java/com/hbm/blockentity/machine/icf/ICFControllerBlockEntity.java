@@ -9,7 +9,7 @@ import com.hbm.api.energy.TransmitUtils;
 import com.hbm.block.base.BaseMachineBlock;
 import com.hbm.block.machine.icf.BlockICFReactor;
 import com.hbm.blockentity.ModBlockEntityType;
-import com.hbm.blockentity.base2.BaseMachineBlockEntity;
+import com.hbm.blockentity.base.BaseMachineBlockEntity;
 import com.hbm.registries.HBMCaps;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

@@ -7,16 +7,13 @@ import com.hbm.Inventory.filter.HBMFilter;
 import com.hbm.Inventory.filter.ItemFilterWrapper;
 import com.hbm.block.HBMBlockProperties;
 import com.hbm.blockentity.ModBlockEntityType;
-import com.hbm.blockentity.base2.BaseMenuTile;
 import com.hbm.gui.menu.MenuConveyorExtractor;
-import com.hbm.item.machine.ItemMachineUpgrade;
 import com.hbm.utils.DirectionUtils;
 import com.hbm.utils.InventoryUtils;
 import com.hbm.utils.WorldUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -28,10 +25,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.wrapper.RangedWrapper;
-import net.minecraftforge.items.wrapper.RecipeWrapper;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.Optional;
 
 public class TileConveyorExtractor extends TileConveyorMachine {
     public boolean isWhitelist = false;

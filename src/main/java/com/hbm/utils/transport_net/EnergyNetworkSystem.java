@@ -36,7 +36,6 @@ import java.util.*;
 public class EnergyNetworkSystem {
     public static Map<Level, EnergyNetworkSystem> INSTANCES = new HashMap<>();
     public static MutablePair<Integer, LongSet> EMPTY_NODE_DATA = new MutablePair<>(-1, new LongOpenHashSet());
-    // 所在维度的ID，之所以不用Level实例。是为了便于同步
     protected final Level level;
     // 所有需要的网络
     protected final Int2ObjectMap<EnergyNetwork> nets = new Int2ObjectOpenHashMap<>();

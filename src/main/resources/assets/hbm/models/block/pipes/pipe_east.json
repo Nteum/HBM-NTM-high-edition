@@ -6,5 +6,5 @@
     "texture0": "hbm:block/pipes/pipe_colored_overlay",
     "particle": "hbm:block/pipes/pipe_colored_overlay"
   },
-  "ambientocclusion": true
+  "ambientocclusion": false
 }

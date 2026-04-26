@@ -1,10 +1,9 @@
 package com.hbm.block.logistic;
 
 import com.hbm.block.HBMBlockProperties;
-import com.hbm.block.interfaces.IConveyorAccess;
 import com.hbm.block.interfaces.IToolable;
 import com.hbm.block.interfaces.ToolType;
-import com.hbm.blockentity.base2.UpdateableBlockEntity;
+import com.hbm.blockentity.base.UpdateableBlockEntity;
 import com.hbm.blockentity.logistic.TileConveyor;
 import com.hbm.utils.DirectionUtils;
 import com.hbm.utils.InventoryUtils;

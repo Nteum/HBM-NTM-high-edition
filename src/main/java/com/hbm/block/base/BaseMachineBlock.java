@@ -1,6 +1,6 @@
 package com.hbm.block.base;
 
-import com.hbm.blockentity.base2.BaseMachineBlockEntity;
+import com.hbm.blockentity.base.BaseMachineBlockEntity;
 //import com.hbm.handler.MoltiblockHandler;
 import com.hbm.blockentity.machine.PressEntity;
 import net.minecraft.core.BlockPos;
