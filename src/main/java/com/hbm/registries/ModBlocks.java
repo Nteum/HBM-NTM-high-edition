@@ -56,7 +56,7 @@ import com.hbm.item.tool.BatteryBlockItem;
 import com.hbm.reactor.rbmk.RBMKPeripheralType;
 import com.hbm.registries.WrapperRegistry.BlockBuilder;
 import com.hbm.registries.WrapperRegistry.WrappedBlockRegistry;
-import com.hbm.utils.debug.BlockDebug;
+import com.hbm.debug.BlockDebug;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
@@ -105,6 +105,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> LAUNCH_PAD = add("launch_pad", ()->new LaunchPad(BlockBehaviour.Properties.of().strength(5.0F).explosionResistance(10.0F)), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, "Launch Pad", HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
     public static final RegistryObject<Block> machine_difurnace = registerMachineBlockWithItem("machine_difurnace", ()->new BlockDifurnace(Properties.of().lightLevel(litEmission(13))));
     public static final RegistryObject<Block> machine_electric_furnace = registerMachineBlockWithItem("machine_electric_furnace", ()->new BlockElectricFurnace(Properties.of().lightLevel(litEmission(13))));
+    public static final RegistryObject<Block> FURNACE_ELECTRIC = machine_electric_furnace;
     public static final RegistryObject<Block> machine_boiler = registerMachineBlockWithItem("machine_boiler", ()->new BlockBoiler(Properties.of().lightLevel(litEmission(13))));
     public static final RegistryObject<Block> machine_electric_boiler = registerMachineBlockWithItem("machine_electric_boiler", ()->new BlockElectricBoiler(Properties.of().lightLevel(litEmission(14))));
     public static final RegistryObject<Block> machine_nuclear_boiler = registerMachineBlockWithItem("machine_nuclear_boiler", ()->new BlockNuclearBoiler(Properties.of().lightLevel(litEmission(15))));
@@ -178,6 +179,10 @@ public class ModBlocks {
     public static final RegistryObject<Block> machine_lithium_battery = registerMachineBattery("machine_lithium_battery",()->new BlockBattery(Properties.of(), BlockBattery.BatteryType.LITHIUM));
     public static final RegistryObject<Block> machine_schrabidium_battery = registerMachineBattery("machine_schrabidium_battery",()->new BlockBattery(Properties.of(), BlockBattery.BatteryType.SCHRABIDIUM));
     public static final RegistryObject<Block> machine_dineutronium_battery = registerMachineBattery("machine_dineutronium_battery",()->new BlockBattery(Properties.of(), BlockBattery.BatteryType.DINEUTRONIUM));
+    public static final RegistryObject<Block> BATTERY = machine_battery;
+    public static final RegistryObject<Block> BATTERY_LITHIUM = machine_lithium_battery;
+    public static final RegistryObject<Block> BATTERY_SCHRABIDIUM = machine_schrabidium_battery;
+    public static final RegistryObject<Block> BATTERY_DINEUTRONIUM = machine_dineutronium_battery;
     public static final RegistryObject<Block> anvil_iron = registerMachineBlockWithItem("anvil_iron",()->new BlockAnvil(Properties.of()));
     public static final RegistryObject<Block> anvil_desh = registerMachineBlockWithItem("anvil_desh",()->new BlockAnvil(Properties.of()));
     public static final RegistryObject<Block> anvil_bismuth = registerMachineBlockWithItem("anvil_bismuth",()->new BlockAnvil(Properties.of()));
@@ -186,6 +191,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> machine_cooling_tower = registerMachineBlockWithItem("machine_cooling_tower", () -> new CoolingTowerBlock(Properties.of().strength(5.0F).sound(SoundType.METAL)));
     public static final RegistryObject<Block> machine_turbine_gas = machine("machine_turbine_gas", () -> new BlockTurbineGas(Properties.of().strength(6.0F).sound(SoundType.METAL)));
     public static final RegistryObject<Block> machine_assembler = registerMachineBlockWithItem("machine_assembler",()->new BlockAssembler(Properties.of()));
+    public static final RegistryObject<Block> ASSEMBLER = machine_assembler;
     public static final RegistryObject<Block> machine_crucible = registerMachineBlockWithItem("machine_crucible",()->new BlockCrucible(Properties.of()));
     public static final RegistryObject<Block> machine_rbmk_base = registerMachineBlockWithItem("machine_rbmk_base", () -> new BlockRBMKBase(Properties.of().strength(6.0F).explosionResistance(30.0F)));
     public static final RegistryObject<Block> machine_rbmk_heater = registerMachineBlockWithItem("machine_rbmk_heater", () -> new BlockRBMKHeater(Properties.of().strength(4.0F).explosionResistance(12.0F).lightLevel(state -> state.getValue(BlockRBMKHeater.LIT) ? 8 : 0)));
@@ -267,6 +273,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> bomb_boy = registerBlockWithItem("bomb_boy",()->new NukeBoy(Properties.of(),120));
     public static final RegistryObject<Block> bomb_fat_man = registerBlockWithItem("bomb_fat_man",()->new NukeFat(Properties.of(),200));
     public static final RegistryObject<Block> bomb_custom = registerBlockWithItem("bomb_custom",()->new NukeCustom(Properties.of(),350));
+    public static final RegistryObject<Block> BOMB_FAT_MAN = bomb_fat_man;
     //发射台
     //装饰
     public static final RegistryObject<Block> TEST12 = registerBlockWithItem("test12",()->new BlockTest12(Properties.of()));
@@ -331,6 +338,10 @@ public class ModBlocks {
     public static final RegistryObject<Block> TIKITE_ORE_END = add("ore_tikite",()->new BlockOre(BlockBehaviour.Properties.copy(Blocks.END_STONE)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
     public static final RegistryObject<Block> BEDROCK_ORE = add("ore_bedrock",()->new BedRockOre(BlockBehaviour.Properties.copy(Blocks.BEDROCK)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
     public static final RegistryObject<Block> DEPTH_STONE = add("depth_stone",()->new BlockOre(BlockBehaviour.Properties.copy(Blocks.REINFORCED_DEEPSLATE)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.ORDERLY_GEN, HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+    public static final RegistryObject<Block> BLOCK_COKE_COAL = registerBlockWithItem("block_coke_coal", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COAL_BLOCK)));
+    public static final RegistryObject<Block> BLOCK_COKE_LIGNITE = registerBlockWithItem("block_coke_lignite", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COAL_BLOCK)));
+    public static final RegistryObject<Block> BLOCK_COKE_PETROLEUM = registerBlockWithItem("block_coke_petroleum", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COAL_BLOCK)));
+    public static final RegistryObject<Block> BLOCK_SCRAP = registerBlockWithItem("block_scrap", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
     /**
      * 航天版方块
      * */

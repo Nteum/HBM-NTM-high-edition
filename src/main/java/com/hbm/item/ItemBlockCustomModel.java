@@ -1,7 +1,7 @@
 package com.hbm.item;
 
 import com.hbm.block.interfaces.ICustomBlockItemModel;
-import com.hbm.main.ClientEventHanler;
+import com.hbm.main.ClientEventHandler;
 import com.hbm.render.RenderUtils;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -41,7 +41,7 @@ public class ItemBlockCustomModel extends BlockItemHBM {
         consumer.accept(new IClientItemExtensions() {
             @Override
             public BlockEntityWithoutLevelRenderer getCustomRenderer() {
-                return ClientEventHanler.getLazyItemRender();
+                return ClientEventHandler.getLazyItemRender();
             }
         });
     }

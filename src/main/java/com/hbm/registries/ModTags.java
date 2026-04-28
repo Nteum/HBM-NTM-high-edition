@@ -51,6 +51,7 @@ public class ModTags {
                 Tags.Blocks.ORES_IN_GROUND_DEEPSLATE,DEEPSLATE_ORES,  Tags.Blocks.ORES_IN_GROUND_NETHERRACK,NETHER_ORES, STORAGE_BLOCK,STORAGE_BLOCKS);
 
         public static final TagKey<Block> BATTERY = forgeTag("battery");
+        public static final TagKey<Block> BLOCK_COKE = forgeTag("block_coke");
         public static final TagKey<Block> ANVIL = tag("anvil");
         public static final TagKey<Block> MACHINE = forgeTag("machine");
         public static final TagKey<Block> ENERGY_TRANSMITTER = tag("energy_transmitter");
