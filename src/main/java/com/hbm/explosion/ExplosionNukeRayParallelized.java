@@ -2,7 +2,7 @@ package com.hbm.explosion;
 
 import com.hbm.config.ConfigBomb;
 import com.hbm.network.ModMessages;
-//import com.hbm.network.packet.toclient.S2CBatchedRenderUpdatePacket;
+import com.hbm.network.packet.toclient.S2CBatchedRenderUpdatePacket;
 import com.hbm.utils.ConcurrentBitSet;
 import com.hbm.utils.SubChunkKey;
 import com.hbm.utils.SubChunkSnapshot;
@@ -40,6 +40,8 @@ public class ExplosionNukeRayParallelized implements IExplosionRay {
     private static final float NUKE_RESISTANCE_CUTOFF = 2_000_000F;
     private static final float INITIAL_ENERGY_FACTOR = 0.3F; // Scales the initial energy of the explosion, affects crater size
     private static final double RESOLUTION_FACTOR = 1.0; // Scales ray density, affects performance and fidelity
+    private static final int BLOCK_TIME_CHECK_INTERVAL = 256;
+    private static final int CLIENT_CHUNK_UPDATES_PER_TICK = 8;
 
     private final int minY;
     private final int worldHeight;
@@ -60,11 +62,14 @@ public class ExplosionNukeRayParallelized implements IExplosionRay {
     private final CountDownLatch latch;
     private final Thread latchWatcherThread;
     private final List<ChunkPos> orderedChunks;
+    private final Map<ChunkPos, Integer> destructionBitCursors;
     private final Map<ChunkPos, DirtyRenderBox> changedChunkRanges;
+    private final Map<ChunkPos, DirtyRenderBox> pendingClientChunkRanges;
     private final int rayCount;
     private final AtomicInteger nextRayIndex;
     private final BlockingQueue<SubChunkKey> highPriorityReactiveQueue;
     private final Iterator<SubChunkKey> lowPriorityProactiveIterator;
+    private int orderedChunkCursor = 0;
     private volatile boolean collectFinished = false;
     private volatile boolean consolidationFinished = false;
     private volatile boolean destroyFinished = false;
@@ -97,7 +102,9 @@ public class ExplosionNukeRayParallelized implements IExplosionRay {
         this.snapshots = new ConcurrentHashMap<>(subChunkCount);
         this.waitingRoom = new ConcurrentHashMap<>(subChunkCount);
         this.orderedChunks = new ArrayList<>();
+        this.destructionBitCursors = new HashMap<>(initialChunkCapacity);
         this.changedChunkRanges = new HashMap<>(initialChunkCapacity);
+        this.pendingClientChunkRanges = new HashMap<>(initialChunkCapacity);
 
         this.rayQueue = new LinkedBlockingQueue<>();
 
@@ -197,6 +204,8 @@ public class ExplosionNukeRayParallelized implements IExplosionRay {
         if (!collectFinished || !consolidationFinished || destroyFinished) return;
 
         final long deadline = System.nanoTime() + timeBudgetMs * 1_000_000L;
+        int remainingBlocks = Math.max(1, ConfigBomb.blastSpeed);
+        int blocksSinceTimeCheck = 0;
 
         if (orderedChunks.isEmpty() && !destructionMap.isEmpty()) {
             orderedChunks.addAll(destructionMap.keySet());
@@ -205,12 +214,11 @@ public class ExplosionNukeRayParallelized implements IExplosionRay {
             orderedChunks.sort(Comparator.comparingInt(c -> Math.abs(originCX - c.x) + Math.abs(originCZ - c.z)));
         }
 
-        Iterator<ChunkPos> it = orderedChunks.iterator();
-        while (it.hasNext() && System.nanoTime() < deadline) {
-            ChunkPos cp = it.next();
+        while (orderedChunkCursor < orderedChunks.size() && remainingBlocks > 0) {
+            ChunkPos cp = orderedChunks.get(orderedChunkCursor);
             ConcurrentBitSet bs = destructionMap.get(cp);
             if (bs == null) {
-                it.remove();
+                orderedChunkCursor++;
                 continue;
             }
 
@@ -218,45 +226,65 @@ public class ExplosionNukeRayParallelized implements IExplosionRay {
             LevelChunkSection[] sections = chunk.getSections();
             boolean chunkModified = false;
 
-            for (int bitIndex = bs.nextSetBit(0); bitIndex >= 0 && System.nanoTime() < deadline; bitIndex = bs.nextSetBit(bitIndex + 1)) {
+            int bitIndex = bs.nextSetBit(destructionBitCursors.getOrDefault(cp, 0));
+            while (bitIndex >= 0 && remainingBlocks > 0) {
+                if ((blocksSinceTimeCheck++ & (BLOCK_TIME_CHECK_INTERVAL - 1)) == 0 && System.nanoTime() >= deadline) {
+                    destructionBitCursors.put(cp, bitIndex);
+                    if (chunkModified) chunk.setUnsaved(true);
+                    flushClientChunkUpdates(CLIENT_CHUNK_UPDATES_PER_TICK);
+                    return;
+                }
+
                 int xLocal = bitIndex & 0xF;
                 int zLocal = (bitIndex >> 4) & 0xF;
                 int yNorm = bitIndex >> 8;
                 int yGlobal = yNorm + this.minY;
+                int nextBitIndex = bs.nextSetBit(bitIndex + 1);
 
                 int sectionY = level.getSectionIndex(yGlobal);
-                if (sectionY < 0 || sectionY >= sections.length) continue;
+                if (sectionY >= 0 && sectionY < sections.length) {
+                    LevelChunkSection section = sections[sectionY];
+                    if (section != null) {
+                        int yLocal = SectionPos.sectionRelative(yGlobal);
 
-                LevelChunkSection section = sections[sectionY];
-                if (section == null) continue;
+                        if (!section.getBlockState(xLocal, yLocal, zLocal).isAir()) {
+                            BlockPos pos = new BlockPos((cp.x << 4) | xLocal, yGlobal, (cp.z << 4) | zLocal);
 
-                int yLocal = SectionPos.sectionRelative(yGlobal);
-
-                if (!section.getBlockState(xLocal, yLocal, zLocal).isAir()) {
-                    BlockPos pos = new BlockPos((cp.x << 4) | xLocal, yGlobal, (cp.z << 4) | zLocal);
-
-                    if (level.getBlockEntity(pos) != null) level.removeBlockEntity(pos);
-                    section.setBlockState(xLocal, yLocal, zLocal, Blocks.AIR.defaultBlockState(), false);
-                    trackDirtyRenderRange(cp, xLocal, yGlobal, zLocal);
-                    chunkModified = true;
-                    level.getLightEngine().checkBlock(pos);
+                            if (level.getBlockEntity(pos) != null) level.removeBlockEntity(pos);
+                            section.setBlockState(xLocal, yLocal, zLocal, Blocks.AIR.defaultBlockState(), false);
+                            trackDirtyRenderRange(cp, xLocal, yGlobal, zLocal);
+                            chunkModified = true;
+                        }
+                    }
                 }
                 bs.clear(bitIndex);
+                remainingBlocks--;
+                bitIndex = nextBitIndex;
             }
 
             if (chunkModified) {
                 chunk.setUnsaved(true);
             }
-            if (bs.isEmpty()) {
+            if (bitIndex >= 0) {
+                destructionBitCursors.put(cp, bitIndex);
+                break;
+            } else {
                 destructionMap.remove(cp);
-                for (int sectionY = 0; sectionY < this.sectionsCount; sectionY++)
+                for (int sectionY = 0; sectionY < this.sectionsCount; sectionY++) {
                     snapshots.remove(new SubChunkKey(cp, sectionY));
-                it.remove();
+                }
+                destructionBitCursors.remove(cp);
+                markChunkReadyForClientUpdate(cp);
+                orderedChunkCursor++;
             }
         }
 
-        if (orderedChunks.isEmpty() && destructionMap.isEmpty()) {
-            flushClientChunkUpdates();
+        flushClientChunkUpdates(CLIENT_CHUNK_UPDATES_PER_TICK);
+
+        if (orderedChunkCursor >= orderedChunks.size()
+                && destructionMap.isEmpty()
+                && changedChunkRanges.isEmpty()
+                && pendingClientChunkRanges.isEmpty()) {
             destroyFinished = true;
             if (pool != null) pool.shutdown();
         }
@@ -274,30 +302,44 @@ public class ExplosionNukeRayParallelized implements IExplosionRay {
         });
     }
 
-    private void flushClientChunkUpdates() {
-        if (changedChunkRanges.isEmpty()) {
+    private void markChunkReadyForClientUpdate(ChunkPos chunkPos) {
+        DirtyRenderBox dirtyBox = changedChunkRanges.remove(chunkPos);
+        if (dirtyBox != null) {
+            pendingClientChunkRanges.put(chunkPos, dirtyBox);
+        }
+    }
+
+    private void flushClientChunkUpdates(int maxChunks) {
+        if (pendingClientChunkRanges.isEmpty() || maxChunks <= 0) {
             return;
         }
 
-//        Map<ServerPlayer, List<S2CBatchedRenderUpdatePacket.RenderRange>> renderUpdatesByPlayer = new HashMap<>();
-//
-//        for (Map.Entry<ChunkPos, DirtyRenderBox> entry : changedChunkRanges.entrySet()) {
-//            ChunkPos chunkPos = entry.getKey();
-//            LevelChunk chunk = level.getChunk(chunkPos.x, chunkPos.z);
-//            ClientboundLevelChunkWithLightPacket chunkPacket =
-//                    new ClientboundLevelChunkWithLightPacket(chunk, level.getLightEngine(), null, null);
-//            S2CBatchedRenderUpdatePacket.RenderRange renderRange = entry.getValue().toRenderRange();
-//
-//            for (ServerPlayer player : level.getChunkSource().chunkMap.getPlayers(chunkPos, false)) {
-//                player.connection.send(chunkPacket);
-//                renderUpdatesByPlayer.computeIfAbsent(player, ignored -> new ArrayList<>()).add(renderRange);
-//            }
-//        }
-//
-//        for (Map.Entry<ServerPlayer, List<S2CBatchedRenderUpdatePacket.RenderRange>> entry : renderUpdatesByPlayer.entrySet()) {
-//            ModMessages.sendToPlayer(new S2CBatchedRenderUpdatePacket(entry.getValue()), entry.getKey());
-//        }
-        changedChunkRanges.clear();
+        Map<ServerPlayer, List<S2CBatchedRenderUpdatePacket.RenderRange>> renderUpdatesByPlayer = new HashMap<>();
+        Iterator<Map.Entry<ChunkPos, DirtyRenderBox>> iterator = pendingClientChunkRanges.entrySet().iterator();
+        int sentChunks = 0;
+
+        while (iterator.hasNext() && sentChunks < maxChunks) {
+            Map.Entry<ChunkPos, DirtyRenderBox> entry = iterator.next();
+            ChunkPos chunkPos = entry.getKey();
+            LevelChunk chunk = level.getChunk(chunkPos.x, chunkPos.z);
+            chunk.initializeLightSources();
+
+            ClientboundLevelChunkWithLightPacket chunkPacket =
+                    new ClientboundLevelChunkWithLightPacket(chunk, level.getLightEngine(), null, null);
+            S2CBatchedRenderUpdatePacket.RenderRange renderRange = entry.getValue().toRenderRange();
+
+            for (ServerPlayer player : level.getChunkSource().chunkMap.getPlayers(chunkPos, false)) {
+                player.connection.send(chunkPacket);
+                renderUpdatesByPlayer.computeIfAbsent(player, ignored -> new ArrayList<>()).add(renderRange);
+            }
+
+            iterator.remove();
+            sentChunks++;
+        }
+
+        for (Map.Entry<ServerPlayer, List<S2CBatchedRenderUpdatePacket.RenderRange>> entry : renderUpdatesByPlayer.entrySet()) {
+            ModMessages.sendToPlayer(new S2CBatchedRenderUpdatePacket(entry.getValue()), entry.getKey());
+        }
     }
 
     @Override
@@ -331,9 +373,9 @@ public class ExplosionNukeRayParallelized implements IExplosionRay {
             if (z > maxZ) maxZ = z;
         }
 
-//        private S2CBatchedRenderUpdatePacket.RenderRange toRenderRange() {
-//            return new S2CBatchedRenderUpdatePacket.RenderRange(minX, minY, minZ, maxX, maxY, maxZ);
-//        }
+        private S2CBatchedRenderUpdatePacket.RenderRange toRenderRange() {
+            return new S2CBatchedRenderUpdatePacket.RenderRange(minX, minY, minZ, maxX, maxY, maxZ);
+        }
     }
 
     @Override
@@ -363,6 +405,9 @@ public class ExplosionNukeRayParallelized implements IExplosionRay {
         if (this.damageMap != null) this.damageMap.clear();
         if (this.snapshots != null) this.snapshots.clear();
         if (this.orderedChunks != null) this.orderedChunks.clear();
+        if (this.destructionBitCursors != null) this.destructionBitCursors.clear();
+        if (this.changedChunkRanges != null) this.changedChunkRanges.clear();
+        if (this.pendingClientChunkRanges != null) this.pendingClientChunkRanges.clear();
     }
 
     private Vec3 generateSphereRay(int index, int count) {

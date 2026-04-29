@@ -16,9 +16,28 @@ import static com.hbm.render.RenderUtils.renderBlockModel;
 
 public class NukeCustomRender extends MultiPartRenderer<NukeBombCustomEntity> {
     public static BakedModel bomb_model;
+    public static BakedModel boy_model;
+    public static BakedModel fat_man_model;
+    public static BakedModel gadget_model;
+    public static BakedModel mike_model;
+    public static BakedModel tsar_model;
+    public static BakedModel fleija_model;
+    public static BakedModel solinium_model;
+    public static BakedModel prototype_model;
+    public static BakedModel multi_model;
+
     public NukeCustomRender(BlockEntityRendererProvider.Context pContext){
         ModelManager modelManager = Minecraft.getInstance().getModelManager();
         bomb_model = modelManager.getModel(Models.CUSTOM_NUKE);
+        boy_model = modelManager.getModel(Models.BOY);
+        fat_man_model = modelManager.getModel(Models.FAT_MAN);
+        gadget_model = modelManager.getModel(Models.CUSTOM_NUKE_GADGET);
+        mike_model = modelManager.getModel(Models.CUSTOM_NUKE_MIKE);
+        tsar_model = modelManager.getModel(Models.CUSTOM_NUKE_TSAR);
+        fleija_model = modelManager.getModel(Models.CUSTOM_NUKE_FLEIJA);
+        solinium_model = modelManager.getModel(Models.CUSTOM_NUKE_SOLINIUM);
+        prototype_model = modelManager.getModel(Models.CUSTOM_NUKE_PROTOTYPE);
+        multi_model = modelManager.getModel(Models.CUSTOM_NUKE_MULTI);
     }
 //    @Override
 //    public void render(NukeBombCustomEntity pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, int pPackedOverlay) {
@@ -47,6 +66,21 @@ public class NukeCustomRender extends MultiPartRenderer<NukeBombCustomEntity> {
         BlockState blockState = pBlockEntity.getBlockState();
         BlockRenderDispatcher blockDispatcher = Minecraft.getInstance().getBlockRenderer();
         ModelBlockRenderer blockRenderer = blockDispatcher.getModelRenderer();
-        renderBlockModel(bomb_model,blockState,blockRenderer,pPoseStack,pBuffer,pPackedLight,pPackedOverlay,null);
+        renderBlockModel(modelFor(pBlockEntity.getProfile()),blockState,blockRenderer,pPoseStack,pBuffer,pPackedLight,pPackedOverlay,null);
+    }
+
+    private BakedModel modelFor(NukeBombCustomEntity.CustomNukeProfile profile) {
+        return switch (profile) {
+            case BOY -> boy_model;
+            case FAT_MAN -> fat_man_model;
+            case GADGET -> gadget_model;
+            case MIKE -> mike_model;
+            case TSAR -> tsar_model;
+            case FLEIJA -> fleija_model;
+            case SOLINIUM -> solinium_model;
+            case PROTOTYPE -> prototype_model;
+            case MULTI -> multi_model;
+            case DEFAULT -> bomb_model;
+        };
     }
 }

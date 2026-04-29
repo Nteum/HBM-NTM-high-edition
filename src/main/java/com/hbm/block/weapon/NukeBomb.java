@@ -44,7 +44,6 @@ public abstract class NukeBomb extends BlockDummyable implements IBomb {
             // 先判断core状态的行为，再判断不是core状态的行为，否则程序会陷入死循环。
             if (pState.getValue(IS_CORE)){
                 if (pLevel.getBlockEntity(pPos) instanceof EntityNukeBomb bomb && pLevel.hasNeighborSignal(pPos)){
-                    pLevel.removeBlock(pPos, false);
                     explode(pLevel, pPos);
                 }
             }else {
@@ -58,11 +57,15 @@ public abstract class NukeBomb extends BlockDummyable implements IBomb {
     }
 
     protected void triggerExplosionVisual(Level level, BlockPos pos) {
+        triggerExplosionVisual(level, pos, getExplosionVisual());
+    }
+
+    protected void triggerExplosionVisual(Level level, BlockPos pos, ExplosionVisual visual) {
         if (level.isClientSide()) {
             return;
         }
         Vec3 center = pos.getCenter();
-        switch (getExplosionVisual()) {
+        switch (visual) {
             case ATOMIC -> AtomicExplosionHelper.triggerEffects(level, center);
             case THERMOBARIC -> ThermobaricExplosionHelper.triggerEffects(level, center);
             case NONE -> { }

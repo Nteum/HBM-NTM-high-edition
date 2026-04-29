@@ -1,5 +1,6 @@
 # Blender v3.2.0 OBJ File: 'titan.blend'
 # www.blender.org
+mtllib missile_atlas.mtl
 o Circle.002_Circle.003
 v -0.883883 0.687500 -0.883883
 v -1.154849 0.687500 -0.478354

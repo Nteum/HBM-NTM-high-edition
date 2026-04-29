@@ -22,7 +22,7 @@
   },
   "textures": {
     "particle": "hbm:block/press/press_body",
-    "default": "hbm:block/press/press_body",
+    "default": "hbm:block/press/press_body"
   },
   "transform": {
     "translation": [0.0, 0.0, 0.0],

@@ -35,7 +35,7 @@ public class ModMessages {
 
     public static void register(){
         registerServerToClient(AuxParticlePacket.class, AuxParticlePacket::decode, AuxParticlePacket::encode, AuxParticlePacket::handle);
-//        registerServerToClient(S2CBatchedRenderUpdatePacket.class, S2CBatchedRenderUpdatePacket::decode, S2CBatchedRenderUpdatePacket::encode, S2CBatchedRenderUpdatePacket::handle);
+        registerServerToClient(S2CBatchedRenderUpdatePacket.class, S2CBatchedRenderUpdatePacket::decode, S2CBatchedRenderUpdatePacket::encode, S2CBatchedRenderUpdatePacket::handle);
         registerServerToClient(S2CSyncTileMessage.class, S2CSyncTileMessage::decode, S2CSyncTileMessage::encode, S2CSyncTileMessage::handle);
         registerServerToClient(S2CEntitySyncPacket.class, S2CEntitySyncPacket::decode, S2CEntitySyncPacket::encode, S2CEntitySyncPacket::handle);
         registerServerToClient(S2CAtomicFlashPacket.class, S2CAtomicFlashPacket::decode, S2CAtomicFlashPacket::encode, S2CAtomicFlashPacket::handle);

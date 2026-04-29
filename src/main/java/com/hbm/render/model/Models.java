@@ -49,6 +49,13 @@ public class Models {
     public static final ResourceLocation FAT_MAN = add(HBM.rl("block/bomb/fat_man"));
     public static final ResourceLocation BOY = add(HBM.rl("block/bomb/boy"));
     public static final ResourceLocation CUSTOM_NUKE = add(HBM.rl("block/bomb/custom"));
+    public static final ResourceLocation CUSTOM_NUKE_GADGET = add(HBM.rl("block/bomb/custom_gadget"));
+    public static final ResourceLocation CUSTOM_NUKE_MIKE = add(HBM.rl("block/bomb/custom_mike"));
+    public static final ResourceLocation CUSTOM_NUKE_TSAR = add(HBM.rl("block/bomb/custom_tsar"));
+    public static final ResourceLocation CUSTOM_NUKE_FLEIJA = add(HBM.rl("block/bomb/custom_fleija"));
+    public static final ResourceLocation CUSTOM_NUKE_SOLINIUM = add(HBM.rl("block/bomb/custom_solinium"));
+    public static final ResourceLocation CUSTOM_NUKE_PROTOTYPE = add(HBM.rl("block/bomb/custom_prototype"));
+    public static final ResourceLocation CUSTOM_NUKE_MULTI = add(HBM.rl("block/bomb/custom_multi"));
     public static final ResourceLocation BLACK_HOLE = add(HBM.rl("block/effect/sphere"));
     public static final ResourceLocation CHEMPLANT_BODY = add(HBM.rl("block/chemplant/chemplant_new_body"));
     public static final ResourceLocation CHEMPLANT_PISTON = add(HBM.rl("block/chemplant/chemplant_new_piston"));

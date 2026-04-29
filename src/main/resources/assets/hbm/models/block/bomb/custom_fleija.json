@@ -1,0 +1,10 @@
+{
+  "loader": "forge:obj",
+  "flip_v": true,
+  "model": "hbm:models/block/bomb/boy.obj",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "texture0": "hbm:block/fleija",
+    "particle": "hbm:block/fleija"
+  }
+}

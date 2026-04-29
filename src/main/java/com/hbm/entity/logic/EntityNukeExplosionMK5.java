@@ -68,12 +68,12 @@ public class EntityNukeExplosionMK5 extends EntityExplosionChunkLoading{
             }
 
             if(explosion == null) {
-                if (ConfigBomb.explosionAlgorithm == 1) {
-                    explosion = new ExplosionNukeRayParallelized((ServerLevel) level(), blockPosition(),
-                            getStrength(),getRadius());
-                } else {
+                if (ConfigBomb.explosionAlgorithm == 0) {
                     explosion = new ExplosionNukeRayBatched(level(), blockPosition(),
                             getStrength(), getSpeed(),getRadius());
+                } else {
+                    explosion = new ExplosionNukeRayParallelized((ServerLevel) level(), blockPosition(),
+                            getStrength(),getRadius());
                 }
             }
             if(!explosion.isComplete()) {
