@@ -123,7 +123,7 @@ public class NukeBombCustomEntity extends EntityNukeBomb {
 //    }
 
     public enum CustomNukeProfile {
-        DEFAULT("custom", "custom_kit", () -> 350, "block/bomb/custom", false),
+        DEFAULT("custom", "custom_kit", () -> ConfigBomb.manRadius, "block/bomb/custom", false),
         BOY("boy", "boy_kit", () -> ConfigBomb.boyRadius, "block/bomb/boy", true),
         FAT_MAN("fat_man", "man_kit", () -> ConfigBomb.manRadius, "block/bomb/fat_man", false),
         GADGET("gadget", "gadget_kit", () -> ConfigBomb.gadgetRadius, "block/bomb/custom_gadget", false),

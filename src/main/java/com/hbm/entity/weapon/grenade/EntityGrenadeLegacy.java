@@ -1,7 +1,9 @@
 package com.hbm.entity.weapon.grenade;
 
+import com.hbm.config.ConfigBomb;
 import com.hbm.entity.ModEntityType;
 import com.hbm.entity.effect.EntityNukeTorex;
+import com.hbm.entity.logic.EntityNukeExplosionMK5;
 import com.hbm.explosion.ExplosionChaos;
 import com.hbm.item.weapon.grenade.ItemGrenade;
 import com.hbm.registries.HBMDamage;
@@ -370,15 +372,19 @@ public class EntityGrenadeLegacy extends ThrownGrenade {
     }
 
     private void explodeNuclear(Vec3 pos, boolean large) {
-        float power = large ? 10.0F : 6.5F;
-        double radius = large ? 12.0D : 8.0D;
+        int nukeRadius = large ? Math.max(ConfigBomb.fatmanRadius, ConfigBomb.nukaRadius) : ConfigBomb.nukaRadius;
+        double radius = large ? Math.max(12.0D, nukeRadius * 0.55D) : Math.max(8.0D, nukeRadius * 0.45D);
         float maxDamage = large ? 28.0F : 18.0F;
         playSound(ModSounds.WEAPON_NUCLEAR_EXPLOSION.get(), pos, large ? 5.0F : 3.6F, large ? 0.78F : 0.88F);
         particleBurst(ParticleTypes.FLASH, pos, large ? 6 : 4, 0.2D, 0.0D);
         particleBurst(ParticleTypes.EXPLOSION_EMITTER, pos, large ? 8 : 5, 0.8D, 0.0D);
         particleBurst(ParticleTypes.CAMPFIRE_SIGNAL_SMOKE, pos, large ? 180 : 120, large ? 3.2D : 2.1D, 0.03D);
-        this.level().explode(this, pos.x, pos.y, pos.z, power, true, ExplosionInteraction.TNT);
-        this.level().addFreshEntity(new EntityNukeTorex(this.level(), pos.add(0.0D, 4.5D, 0.0D), large ? 28.0F : 18.0F));
+        if (ConfigBomb.allowNukes) {
+            this.level().addFreshEntity(EntityNukeExplosionMK5.statFac(this.level(), nukeRadius, pos));
+            this.level().addFreshEntity(new EntityNukeTorex(this.level(), pos.add(0.0D, 4.5D, 0.0D), nukeRadius));
+        } else {
+            this.level().explode(this, pos.x, pos.y, pos.z, large ? 6.0F : 4.0F, true, ExplosionInteraction.TNT);
+        }
         damageAndPush(pos, radius, maxDamage, damageSource(HBMDamage.NUKE, this), 1.15D, 0.25D, 10,
                 living -> {
                     living.addEffect(new MobEffectInstance(MobEffects.POISON, large ? 320 : 220, large ? 1 : 0));

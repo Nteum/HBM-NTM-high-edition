@@ -269,7 +269,7 @@ public class BaseObjModel extends Model {
             for (String name : names) {
                 BaseObjModel child = getChildSafe(name, "visible");
                 if (child != null) {
-                    child.visible(visible, names);
+                    child.visible(visible);
                 }
             }
         }

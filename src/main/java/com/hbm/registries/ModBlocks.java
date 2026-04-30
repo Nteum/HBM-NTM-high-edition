@@ -46,6 +46,7 @@ import com.hbm.block.tools.FoundryMold;
 import com.hbm.block.weapon.NukeBoy;
 import com.hbm.block.weapon.NukeCustom;
 import com.hbm.block.weapon.NukeFat;
+import com.hbm.config.ConfigBomb;
 import com.hbm.datagen.LanguageProvider;
 import com.hbm.datagen.loot.BlockLootGen;
 import com.hbm.datagen.model.BlockStateGen;
@@ -270,9 +271,9 @@ public class ModBlocks {
                     .item(block -> new SteelCrateItem(block, new Item.Properties().stacksTo(1))).loc(HBMKey.REVERSE_GEN)
                     .build();
     //炸弹
-    public static final RegistryObject<Block> bomb_boy = registerBlockWithItem("bomb_boy",()->new NukeBoy(Properties.of(),120));
-    public static final RegistryObject<Block> bomb_fat_man = registerBlockWithItem("bomb_fat_man",()->new NukeFat(Properties.of(),200));
-    public static final RegistryObject<Block> bomb_custom = registerBlockWithItem("bomb_custom",()->new NukeCustom(Properties.of(),350));
+    public static final RegistryObject<Block> bomb_boy = registerBlockWithItem("bomb_boy",()->new NukeBoy(Properties.of(), ConfigBomb.boyRadius));
+    public static final RegistryObject<Block> bomb_fat_man = registerBlockWithItem("bomb_fat_man",()->new NukeFat(Properties.of(), ConfigBomb.manRadius));
+    public static final RegistryObject<Block> bomb_custom = registerBlockWithItem("bomb_custom",()->new NukeCustom(Properties.of(), ConfigBomb.manRadius));
     public static final RegistryObject<Block> BOMB_FAT_MAN = bomb_fat_man;
     //发射台
     //装饰

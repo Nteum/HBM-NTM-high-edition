@@ -1,29 +1,30 @@
 package com.hbm.explosion;
 
 import com.hbm.config.ConfigBomb;
-import com.hbm.network.ModMessages;
-import com.hbm.network.packet.toclient.S2CBatchedRenderUpdatePacket;
 import com.hbm.utils.ConcurrentBitSet;
 import com.hbm.utils.SubChunkKey;
 import com.hbm.utils.SubChunkSnapshot;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.SectionPos;
-import net.minecraft.network.protocol.game.ClientboundLevelChunkWithLightPacket;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.chunk.LevelChunkSection;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.EnumSet;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.DoubleAdder;
@@ -63,8 +64,8 @@ public class ExplosionNukeRayParallelized implements IExplosionRay {
     private final Thread latchWatcherThread;
     private final List<ChunkPos> orderedChunks;
     private final Map<ChunkPos, Integer> destructionBitCursors;
-    private final Map<ChunkPos, DirtyRenderBox> changedChunkRanges;
-    private final Map<ChunkPos, DirtyRenderBox> pendingClientChunkRanges;
+    private final Map<ChunkPos, Set<Integer>> changedChunkSections;
+    private final Map<ChunkPos, Set<Integer>> pendingClientChunkSections;
     private final int rayCount;
     private final AtomicInteger nextRayIndex;
     private final BlockingQueue<SubChunkKey> highPriorityReactiveQueue;
@@ -103,8 +104,8 @@ public class ExplosionNukeRayParallelized implements IExplosionRay {
         this.waitingRoom = new ConcurrentHashMap<>(subChunkCount);
         this.orderedChunks = new ArrayList<>();
         this.destructionBitCursors = new HashMap<>(initialChunkCapacity);
-        this.changedChunkRanges = new HashMap<>(initialChunkCapacity);
-        this.pendingClientChunkRanges = new HashMap<>(initialChunkCapacity);
+        this.changedChunkSections = new HashMap<>(initialChunkCapacity);
+        this.pendingClientChunkSections = new HashMap<>(initialChunkCapacity);
 
         this.rayQueue = new LinkedBlockingQueue<>();
 
@@ -252,7 +253,9 @@ public class ExplosionNukeRayParallelized implements IExplosionRay {
 
                             if (level.getBlockEntity(pos) != null) level.removeBlockEntity(pos);
                             section.setBlockState(xLocal, yLocal, zLocal, Blocks.AIR.defaultBlockState(), false);
-                            trackDirtyRenderRange(cp, xLocal, yGlobal, zLocal);
+                            level.getLightEngine().checkBlock(pos);
+                            level.getChunkSource().blockChanged(pos);
+                            trackDirtySection(cp, sectionY);
                             chunkModified = true;
                         }
                     }
@@ -283,99 +286,60 @@ public class ExplosionNukeRayParallelized implements IExplosionRay {
 
         if (orderedChunkCursor >= orderedChunks.size()
                 && destructionMap.isEmpty()
-                && changedChunkRanges.isEmpty()
-                && pendingClientChunkRanges.isEmpty()) {
+                && changedChunkSections.isEmpty()
+                && pendingClientChunkSections.isEmpty()) {
             destroyFinished = true;
             if (pool != null) pool.shutdown();
         }
     }
 
-    private void trackDirtyRenderRange(ChunkPos chunkPos, int localX, int globalY, int localZ) {
-        int globalX = (chunkPos.x << 4) | localX;
-        int globalZ = (chunkPos.z << 4) | localZ;
-        changedChunkRanges.compute(chunkPos, (ignored, currentBox) -> {
-            if (currentBox == null) {
-                return new DirtyRenderBox(globalX, globalY, globalZ);
-            }
-            currentBox.include(globalX, globalY, globalZ);
-            return currentBox;
-        });
+    private void trackDirtySection(ChunkPos chunkPos, int sectionIndex) {
+        changedChunkSections.computeIfAbsent(chunkPos, ignored -> new HashSet<>()).add(sectionIndex);
     }
 
     private void markChunkReadyForClientUpdate(ChunkPos chunkPos) {
-        DirtyRenderBox dirtyBox = changedChunkRanges.remove(chunkPos);
-        if (dirtyBox != null) {
-            pendingClientChunkRanges.put(chunkPos, dirtyBox);
+        Set<Integer> dirtySections = changedChunkSections.remove(chunkPos);
+        if (dirtySections != null && !dirtySections.isEmpty()) {
+            pendingClientChunkSections.put(chunkPos, dirtySections);
         }
     }
 
     private void flushClientChunkUpdates(int maxChunks) {
-        if (pendingClientChunkRanges.isEmpty() || maxChunks <= 0) {
+        if (pendingClientChunkSections.isEmpty() || maxChunks <= 0) {
             return;
         }
 
-        Map<ServerPlayer, List<S2CBatchedRenderUpdatePacket.RenderRange>> renderUpdatesByPlayer = new HashMap<>();
-        Iterator<Map.Entry<ChunkPos, DirtyRenderBox>> iterator = pendingClientChunkRanges.entrySet().iterator();
+        Iterator<Map.Entry<ChunkPos, Set<Integer>>> iterator = pendingClientChunkSections.entrySet().iterator();
         int sentChunks = 0;
 
         while (iterator.hasNext() && sentChunks < maxChunks) {
-            Map.Entry<ChunkPos, DirtyRenderBox> entry = iterator.next();
+            Map.Entry<ChunkPos, Set<Integer>> entry = iterator.next();
             ChunkPos chunkPos = entry.getKey();
             LevelChunk chunk = level.getChunk(chunkPos.x, chunkPos.z);
+            Heightmap.primeHeightmaps(chunk, EnumSet.of(
+                    Heightmap.Types.MOTION_BLOCKING,
+                    Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                    Heightmap.Types.OCEAN_FLOOR,
+                    Heightmap.Types.WORLD_SURFACE
+            ));
             chunk.initializeLightSources();
+            level.getChunkSource().getLightEngine().lightChunk(chunk, false);
 
-            ClientboundLevelChunkWithLightPacket chunkPacket =
-                    new ClientboundLevelChunkWithLightPacket(chunk, level.getLightEngine(), null, null);
-            S2CBatchedRenderUpdatePacket.RenderRange renderRange = entry.getValue().toRenderRange();
-
-            for (ServerPlayer player : level.getChunkSource().chunkMap.getPlayers(chunkPos, false)) {
-                player.connection.send(chunkPacket);
-                renderUpdatesByPlayer.computeIfAbsent(player, ignored -> new ArrayList<>()).add(renderRange);
+            for (int sectionIndex : entry.getValue()) {
+                int sectionY = level.getSectionYFromSectionIndex(sectionIndex);
+                SectionPos sectionPos = SectionPos.of(chunkPos, sectionY);
+                level.getChunkSource().onLightUpdate(LightLayer.SKY, sectionPos);
+                level.getChunkSource().onLightUpdate(LightLayer.BLOCK, sectionPos);
             }
 
             iterator.remove();
             sentChunks++;
-        }
-
-        for (Map.Entry<ServerPlayer, List<S2CBatchedRenderUpdatePacket.RenderRange>> entry : renderUpdatesByPlayer.entrySet()) {
-            ModMessages.sendToPlayer(new S2CBatchedRenderUpdatePacket(entry.getValue()), entry.getKey());
         }
     }
 
     @Override
     public boolean isComplete() {
         return collectFinished && consolidationFinished && destroyFinished;
-    }
-
-    private static final class DirtyRenderBox {
-        private int minX;
-        private int minY;
-        private int minZ;
-        private int maxX;
-        private int maxY;
-        private int maxZ;
-
-        private DirtyRenderBox(int x, int y, int z) {
-            this.minX = x;
-            this.minY = y;
-            this.minZ = z;
-            this.maxX = x;
-            this.maxY = y;
-            this.maxZ = z;
-        }
-
-        private void include(int x, int y, int z) {
-            if (x < minX) minX = x;
-            if (y < minY) minY = y;
-            if (z < minZ) minZ = z;
-            if (x > maxX) maxX = x;
-            if (y > maxY) maxY = y;
-            if (z > maxZ) maxZ = z;
-        }
-
-        private S2CBatchedRenderUpdatePacket.RenderRange toRenderRange() {
-            return new S2CBatchedRenderUpdatePacket.RenderRange(minX, minY, minZ, maxX, maxY, maxZ);
-        }
     }
 
     @Override
@@ -406,8 +370,8 @@ public class ExplosionNukeRayParallelized implements IExplosionRay {
         if (this.snapshots != null) this.snapshots.clear();
         if (this.orderedChunks != null) this.orderedChunks.clear();
         if (this.destructionBitCursors != null) this.destructionBitCursors.clear();
-        if (this.changedChunkRanges != null) this.changedChunkRanges.clear();
-        if (this.pendingClientChunkRanges != null) this.pendingClientChunkRanges.clear();
+        if (this.changedChunkSections != null) this.changedChunkSections.clear();
+        if (this.pendingClientChunkSections != null) this.pendingClientChunkSections.clear();
     }
 
     private Vec3 generateSphereRay(int index, int count) {
@@ -500,6 +464,7 @@ public class ExplosionNukeRayParallelized implements IExplosionRay {
         int x, y, z;
         float energy;
         double tMaxX, tMaxY, tMaxZ, tDeltaX, tDeltaY, tDeltaZ;
+        double dirX, dirY, dirZ;
         int stepX, stepY, stepZ;
         boolean initialised = false;
         double currentRayPosition;
@@ -520,9 +485,9 @@ public class ExplosionNukeRayParallelized implements IExplosionRay {
 
             this.currentRayPosition = 0.0;
 
-            double dirX = dir.x();
-            double dirY = dir.y();
-            double dirZ = dir.z();
+            this.dirX = dir.x();
+            this.dirY = dir.y();
+            this.dirZ = dir.z();
 
             this.stepX = (Math.abs(dirX) < RAY_DIRECTION_EPSILON) ? 0 : (dirX > 0 ? 1 : -1);
             this.tDeltaX = (stepX == 0) ? Double.POSITIVE_INFINITY : 1.0 / Math.abs(dirX);
@@ -570,6 +535,12 @@ public class ExplosionNukeRayParallelized implements IExplosionRay {
                         waiters.add(this);
                         return;
                     }
+                    if (snap == SubChunkSnapshot.EMPTY) {
+                        if (skipEmptySubChunk()) {
+                            break;
+                        }
+                        continue;
+                    }
                     double t_exit_voxel = Math.min(tMaxX, Math.min(tMaxY, tMaxZ));
                     double segmentLenInVoxel = t_exit_voxel - this.currentRayPosition;
                     double segmentLenForProcessing;
@@ -580,7 +551,7 @@ public class ExplosionNukeRayParallelized implements IExplosionRay {
                         stopAfterThisSegment = true;
                     } else segmentLenForProcessing = segmentLenInVoxel;
 
-                    if (snap != SubChunkSnapshot.EMPTY && segmentLenForProcessing > PROCESSING_EPSILON) {
+                    if (segmentLenForProcessing > PROCESSING_EPSILON) {
                         Block block = snap.getBlock(SectionPos.sectionRelative(x), SectionPos.sectionRelative(y), SectionPos.sectionRelative(z));
                         if (block != Blocks.AIR) {
                             float resistance = getNukeResistance(block);
@@ -631,6 +602,89 @@ public class ExplosionNukeRayParallelized implements IExplosionRay {
             } finally {
                 if (!isPaused) latch.countDown();
             }
+        }
+
+        private boolean skipEmptySubChunk() {
+            double tExit = radius;
+
+            if (stepX > 0) {
+                int sectionMaxX = ((x >> 4) << 4) + 16;
+                tExit = Math.min(tExit, (sectionMaxX - originX) * tDeltaX);
+            } else if (stepX < 0) {
+                int sectionMinX = (x >> 4) << 4;
+                tExit = Math.min(tExit, (originX - sectionMinX) * tDeltaX);
+            }
+
+            if (stepY > 0) {
+                int sectionMaxY = ((y >> 4) << 4) + 16;
+                tExit = Math.min(tExit, (sectionMaxY - originY) * tDeltaY);
+            } else if (stepY < 0) {
+                int sectionMinY = (y >> 4) << 4;
+                tExit = Math.min(tExit, (originY - sectionMinY) * tDeltaY);
+            }
+
+            if (stepZ > 0) {
+                int sectionMaxZ = ((z >> 4) << 4) + 16;
+                tExit = Math.min(tExit, (sectionMaxZ - originZ) * tDeltaZ);
+            } else if (stepZ < 0) {
+                int sectionMinZ = (z >> 4) << 4;
+                tExit = Math.min(tExit, (originZ - sectionMinZ) * tDeltaZ);
+            }
+
+            if (!Double.isFinite(tExit) || tExit <= currentRayPosition + PROCESSING_EPSILON) {
+                double nextVoxelExit = Math.min(tMaxX, Math.min(tMaxY, tMaxZ));
+                if (!Double.isFinite(nextVoxelExit) || nextVoxelExit >= radius - PROCESSING_EPSILON) {
+                    currentRayPosition = radius;
+                    return true;
+                }
+                currentRayPosition = nextVoxelExit;
+                advanceToNextVoxel();
+                return false;
+            }
+
+            currentRayPosition = Math.min(tExit, radius);
+            if (currentRayPosition >= radius - PROCESSING_EPSILON) {
+                return true;
+            }
+
+            double advancedPosition = currentRayPosition + PROCESSING_EPSILON;
+            x = (int) Math.floor(originX + dirX * advancedPosition);
+            y = (int) Math.floor(originY + dirY * advancedPosition);
+            z = (int) Math.floor(originZ + dirZ * advancedPosition);
+
+            tMaxX = stepX == 0 ? Double.POSITIVE_INFINITY : (stepX > 0 ? (x + 1 - originX) : (originX - x)) * tDeltaX;
+            tMaxY = stepY == 0 ? Double.POSITIVE_INFINITY : (stepY > 0 ? (y + 1 - originY) : (originY - y)) * tDeltaY;
+            tMaxZ = stepZ == 0 ? Double.POSITIVE_INFINITY : (stepZ > 0 ? (z + 1 - originZ) : (originZ - z)) * tDeltaZ;
+
+            lastCX = Integer.MIN_VALUE;
+            lastCZ = Integer.MIN_VALUE;
+            lastSectionY = Integer.MIN_VALUE;
+            currentSubChunkKey = null;
+            return false;
+        }
+
+        private void advanceToNextVoxel() {
+            if (tMaxX < tMaxY) {
+                if (tMaxX < tMaxZ) {
+                    x += stepX;
+                    tMaxX += tDeltaX;
+                } else {
+                    z += stepZ;
+                    tMaxZ += tDeltaZ;
+                }
+            } else {
+                if (tMaxY < tMaxZ) {
+                    y += stepY;
+                    tMaxY += tDeltaY;
+                } else {
+                    z += stepZ;
+                    tMaxZ += tDeltaZ;
+                }
+            }
+            lastCX = Integer.MIN_VALUE;
+            lastCZ = Integer.MIN_VALUE;
+            lastSectionY = Integer.MIN_VALUE;
+            currentSubChunkKey = null;
         }
 
         private double getEnergyLossFactor(float resistance) {

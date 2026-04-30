@@ -11,27 +11,21 @@ import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.levelgen.Heightmap;
-
-import java.util.Optional;
 
 // 控制环境辐射的更新
 public class RadiationManager {
     public static final float worldDestructionThreshold = 10;
     public static float getRadiation(Level level, BlockPos blockPos){
         ChunkPos chunkPos = new ChunkPos(blockPos);
-        if (!level.hasChunk(chunkPos.x, chunkPos.z)) return 0f;
-        ChunkAccess chunk = level.getChunk(blockPos);
-        if (chunk instanceof LevelChunk levelChunk){
-            return AdditionalDataManager.getChunkData(levelChunk, DataEntry.RADIATION).map(o -> (float) o).orElse(0f);
-        }
-        return 0;
+        LevelChunk chunk = getLoadedChunk(level, chunkPos.x, chunkPos.z);
+        return chunk == null ? 0f : AdditionalDataManager.getChunkData(chunk, DataEntry.RADIATION).map(o -> (float) o).orElse(0f);
     }
 
     public static void incrementRadiation(Level level, BlockPos blockPos, float rad){
-        if (level.hasChunk(blockPos.getX() >> 4, blockPos.getZ() >> 4) && (level.getChunk(blockPos) instanceof LevelChunk chunk)){
+        LevelChunk chunk = getLoadedChunk(level, blockPos.getX() >> 4, blockPos.getZ() >> 4);
+        if (chunk != null){
             Float radOld = AdditionalDataManager.getChunkData(chunk, DataEntry.RADIATION).map(o -> (float) o).orElse(0f);
             AdditionalDataManager.setChunkData(chunk, DataEntry.RADIATION, radOld + rad);
         }
@@ -45,9 +39,12 @@ public class RadiationManager {
         float rad_add = 0f;
         for (int i = -1; i <= 1; i++) {
             for (int j = -1; j <= 1; j++) {
-                if (level.hasChunk(pos.x + i, pos.z + j) && i + j != 0){
-                    int dist = i + j;
-                    LevelChunk neighbourChunk = level.getChunk(pos.x + i, pos.z + j);
+                if (i == 0 && j == 0) {
+                    continue;
+                }
+                LevelChunk neighbourChunk = getLoadedChunk(level, pos.x + i, pos.z + j);
+                if (neighbourChunk != null){
+                    int dist = Math.abs(i) + Math.abs(j);
                     Float rad = AdditionalDataManager.getChunkData(neighbourChunk, DataEntry.RADIATION).map(o -> (float) o).orElse(0f);
                     rad_add += rad * (dist == 1 ? 0.075F : 0.025F);
                 }
@@ -88,5 +85,15 @@ public class RadiationManager {
                 }
             }
         }
+    }
+
+    private static LevelChunk getLoadedChunk(Level level, int chunkX, int chunkZ) {
+        if (!level.hasChunk(chunkX, chunkZ)) {
+            return null;
+        }
+        if (level instanceof ServerLevel server) {
+            return server.getChunkSource().getChunkNow(chunkX, chunkZ);
+        }
+        return level.getChunk(chunkX, chunkZ);
     }
 }

@@ -1,6 +1,8 @@
 package com.hbm.compat.ballistix;
 
+import com.hbm.config.ConfigBomb;
 import com.hbm.entity.effect.EntityNukeTorex;
+import com.hbm.entity.logic.EntityNukeExplosionMK5;
 import com.hbm.particle.ModParticleTypes;
 import com.hbm.registries.ModSounds;
 import java.util.List;
@@ -244,14 +246,19 @@ public final class BallistixExplosionHandlers {
     }
 
     private static void nuclear(Level level, Vec3 pos, float radius) {
-        blast(level, pos, radius, true);
         if (!level.isClientSide) {
+            int nukeRadius = Math.max(25, Math.round(radius));
+            if (ConfigBomb.allowNukes) {
+                level.addFreshEntity(EntityNukeExplosionMK5.statFac(level, nukeRadius, pos));
+            } else {
+                blast(level, pos, Math.min(8.0F, nukeRadius / 12.0F), true);
+            }
             if (level instanceof ServerLevel server) {
                 server.sendParticles(ParticleTypes.FLASH, pos.x, pos.y + 1.0D, pos.z, 4, 0.2D, 0.2D, 0.2D, 0.0D);
                 server.sendParticles(ParticleTypes.EXPLOSION_EMITTER, pos.x, pos.y + 1.5D, pos.z, 6, 0.8D, 0.5D, 0.8D, 0.0D);
                 server.sendParticles(ModParticleTypes.HBM_SMOKE.get(), pos.x, pos.y + 0.5D, pos.z, 220, radius * 0.15D, radius * 0.07D, radius * 0.15D, 0.03D);
             }
-            level.addFreshEntity(new EntityNukeTorex(level, pos.add(0.0D, 4.5D, 0.0D), Math.max(18.0F, radius)));
+            level.addFreshEntity(new EntityNukeTorex(level, pos.add(0.0D, 4.5D, 0.0D), Math.max(18.0F, nukeRadius)));
             List<LivingEntity> victims = level.getEntitiesOfClass(LivingEntity.class,
                     new AABB(pos, pos).inflate(radius + 10),
                     LivingEntity::isAlive);

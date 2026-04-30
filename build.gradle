@@ -137,6 +137,7 @@ minecraft {
         // applies to all the run configs below
         configureEach {
             workingDirectory project.file('run')
+            jvmArgs "-Xms2G", "-Xmx8G"
             jvmArgs "-Djava.io.tmpdir=${projectDir}/run/tmp_secure"
             if (org.gradle.internal.os.OperatingSystem.current().isMacOsX()) {
                 jvmArgs "-XstartOnFirstThread"

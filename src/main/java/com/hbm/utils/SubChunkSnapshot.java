@@ -40,8 +40,9 @@ public class SubChunkSnapshot {
      * @return A SubChunkSnapshot containing the palette and block data for the section, or {@link SubChunkSnapshot#EMPTY} if the region contains only air.
      */
     public static SubChunkSnapshot getSnapshot(ServerLevel level, SubChunkKey key, boolean allowGeneration) {
-        ChunkStatus status = allowGeneration ? ChunkStatus.FULL : ChunkStatus.EMPTY;
-        LevelChunk chunk = (LevelChunk) level.getChunk(key.getChunkX(), key.getChunkZ(), status, allowGeneration);
+        LevelChunk chunk = allowGeneration
+                ? (LevelChunk) level.getChunk(key.getChunkX(), key.getChunkZ(), ChunkStatus.FULL, true)
+                : level.getChunkSource().getChunkNow(key.getChunkX(), key.getChunkZ());
         if (chunk == null) return SubChunkSnapshot.EMPTY;
         int lowestSectionIndex = level.getSectionIndex(level.getMinBuildHeight());
         int arrayIndex = key.getSectionY() - lowestSectionIndex;

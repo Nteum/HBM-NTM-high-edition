@@ -30,7 +30,7 @@ public class ConfigBomb {
     public static int fDelay = 4;
     public static int limitExplosionLifespan = 0;
     // whether to generate new chunks
-    public static boolean chunkloading = true;
+    public static boolean chunkloading = false;
     // 0 = legacy, 1 = threaded DDA, 2 = 1 = threaded DDA with damage accumulation
     public static int explosionAlgorithm = 2;
 
@@ -58,7 +58,7 @@ public class ConfigBomb {
         addInt(builder, "mk5BlastTime", 50, "Minimum amount of milliseconds per tick allocated for mk5 chunk processing");
         addInt(builder, "falloutRange", 100, "Radius of fallout area (base radius * value in percent)");
         addInt(builder, "falloutDelay", 4, "How many ticks to wait for the next fallout chunk computation");
-        addBoolean(builder, "enableChunkLoading", true, "Allows all types of procedural explosions to keep the central chunk loaded and to generate new chunks.");
+        addBoolean(builder, "enableChunkLoading", false, "Allows procedural explosions to generate new chunks. Keep this disabled to avoid large nukes blocking chunk loading.");
         addInt(builder, "explosionAlgorithm", 2, 0, 2, "Configures the algorithm of mk5 explosion. \n0 = Legacy, 1 = Threaded DDA, 2 = Threaded DDA with damage accumulation.");
         
         builder.pop();

@@ -104,13 +104,7 @@ public class BlockStateGen extends BlockStateProvider {
                 new ResourceLocation(HBM.MODID, "block/machine_boiler_nuclear_front_lit"),
                 new ResourceLocation(HBM.MODID, "block/machine_boiler_top"));
         addBooleanStateWithFace(ModBlocks.machine_nuclear_boiler.get(), BlockStateProperties.LIT, machine_nuclear_boiler_off, machine_nuclear_boiler_on);
-        //obj机器
-        ModelFile.ExistingModelFile bomb_model_fatman = this.models().getExistingFile(new ResourceLocation(HBM.MODID, "block/bomb/fat_man"));
-        this.simpleBlockItem(ModBlocks.bomb_fat_man.get(),bomb_model_fatman);
-        ModelFile.ExistingModelFile bomb_model_boy = this.models().getExistingFile(HBM.rl("block/bomb/boy"));
-        this.simpleBlockItem(ModBlocks.bomb_boy.get(),bomb_model_boy);
-        ModelFile.ExistingModelFile bomb_model_custom = this.models().getExistingFile(HBM.rl("block/bomb/custom"));
-        this.simpleBlockItem(ModBlocks.bomb_custom.get(),bomb_model_custom);
+        // Nuclear bomb blockstates and item models are hand-authored so OBJ block models do not leak into GUI slots.
 
         //线缆
         cableBlockWithItem();

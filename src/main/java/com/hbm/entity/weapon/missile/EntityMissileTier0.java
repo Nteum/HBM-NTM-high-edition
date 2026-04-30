@@ -151,17 +151,16 @@ public abstract class EntityMissileTier0 extends EntityMissile{
                 }
                 case VOLCANO -> volcanoImpact(loc);
                 case NUCLEAR -> spawnNuclearPayload(loc, ConfigBomb.missileRadius, false, 1.0F);
-                case NUCLEAR_CLUSTER -> {
-                    int mirvRadius = Math.max(ConfigBomb.missileRadius * 2, ConfigBomb.mirvRadius * 2);
-                    spawnNuclearPayload(loc, mirvRadius, false, 1.2F);
-                    clusterImpact(loc, 14, 22.0D, false);
-                }
+                case NUCLEAR_CLUSTER -> spawnNuclearPayload(loc,
+                        Math.max(ConfigBomb.mikeRadius, Math.max(ConfigBomb.missileRadius * 2, ConfigBomb.mirvRadius * 2)),
+                        false,
+                        1.0F);
                 case DOOMSDAY -> {
-                    spawnNuclearPayload(loc, ConfigBomb.missileRadius * 2, true, 1.6F);
+                    spawnNuclearPayload(loc, Math.max(ConfigBomb.tsarRadius, ConfigBomb.missileRadius * 2), true, 1.0F);
                     applyFallout(loc, 96, 1800.0F, 14.0F);
                 }
                 case DOOMSDAY_RUSTED -> {
-                    spawnNuclearPayload(loc, ConfigBomb.missileRadius, true, 1.0F);
+                    spawnNuclearPayload(loc, Math.max(ConfigBomb.missileRadius, ConfigBomb.manRadius), true, 1.0F);
                     applyFallout(loc, 60, 900.0F, 7.0F);
                 }
                 case REJUVENATION -> detonate(BallistixExplosiveType.REJUVINATION, loc);
@@ -286,16 +285,16 @@ public abstract class EntityMissileTier0 extends EntityMissile{
 
         private void spawnNuclearPayload(Vec3 loc, int configuredRadius, boolean antimatterShock, float torexScaleMul) {
             int radius = Math.max(25, configuredRadius);
-            detonate(BallistixExplosiveType.NUCLEAR, loc);
-            if (antimatterShock) {
-                detonate(BallistixExplosiveType.ANTIMATTER, loc);
-            }
+            level().playSound(null, loc.x, loc.y, loc.z, ModSounds.WEAPON_NUCLEAR_EXPLOSION.get(), SoundSource.HOSTILE,
+                    antimatterShock ? 6.0F : 5.0F,
+                    antimatterShock ? 0.78F : 1.0F);
             if (!ConfigBomb.allowNukes) {
+                level().explode(this, loc.x, loc.y, loc.z, Math.min(8.0F, radius / 12.0F), true, Level.ExplosionInteraction.TNT);
                 return;
             }
             EntityNukeExplosionMK5 nuke = EntityNukeExplosionMK5.statFac(level(), radius, loc);
             level().addFreshEntity(nuke);
-            float cloudScale = Math.max(18.0F, radius * torexScaleMul);
+            float cloudScale = Math.max(18.0F, radius * (antimatterShock ? Math.max(torexScaleMul, 1.0F) : torexScaleMul));
             level().addFreshEntity(new EntityNukeTorex(level(), loc.add(0.0D, 4.5D, 0.0D), cloudScale));
         }
 

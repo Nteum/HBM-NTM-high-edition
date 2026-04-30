@@ -55,8 +55,9 @@ public class Pollution implements INBTSerializable<CompoundTag> {
     }
 
     public static Pollution getPollution(Level level, ChunkPos pos){
-        if (level.hasChunk(pos.x, pos.z)){
-            return AdditionalDataManager.getChunkData(level.getChunk(pos.x, pos.z), DataEntry.POLLUTION).map(o -> o instanceof Pollution ? (Pollution) o : null).orElse(new Pollution());
+        LevelChunk chunk = getLoadedChunk(level, pos);
+        if (chunk != null){
+            return AdditionalDataManager.getChunkData(chunk, DataEntry.POLLUTION).map(o -> o instanceof Pollution ? (Pollution) o : null).orElse(new Pollution());
         }
         // 我认为，如果一个区块本身没加载，那它不应当被视为0污染，而是暂时返回null
         return null;
@@ -72,12 +73,14 @@ public class Pollution implements INBTSerializable<CompoundTag> {
     }
 
     public static float getPollution(Level level, BlockPos pos, Type type) {
-        return RadiationConfig.enablePollution ? getPollution(level, pos).pollution[type.ordinal()] : 0;
+        Pollution pollution = getPollution(level, pos);
+        return RadiationConfig.enablePollution && pollution != null ? pollution.pollution[type.ordinal()] : 0;
     }
 
     public static void setPollution(Level level, ChunkPos pos, Pollution pollution){
-        if (RadiationConfig.enablePollution && level.hasChunk(pos.x, pos.z)){
-            AdditionalDataManager.setChunkData(level.getChunk(pos.x, pos.z), DataEntry.POLLUTION, pollution);
+        LevelChunk chunk = getLoadedChunk(level, pos);
+        if (RadiationConfig.enablePollution && chunk != null){
+            AdditionalDataManager.setChunkData(chunk, DataEntry.POLLUTION, pollution);
         }
     }
 
@@ -183,6 +186,9 @@ public class Pollution implements INBTSerializable<CompoundTag> {
         Mob mob = event.getEntity();
         BlockPos onPos = mob.getOnPos();
         Pollution pollution = getPollution(mob.level(), onPos);
+        if (pollution == null) {
+            return;
+        }
         if (!(mob instanceof EntityGlyphid)){
             float S = pollution.pollution[Type.SOOT.ordinal()];
             if (S > RadiationConfig.buffMobThreshold) {
@@ -195,6 +201,16 @@ public class Pollution implements INBTSerializable<CompoundTag> {
                 mob.heal(mob.getMaxHealth());
             }
         }
+    }
+
+    private static LevelChunk getLoadedChunk(Level level, ChunkPos pos) {
+        if (!level.hasChunk(pos.x, pos.z)) {
+            return null;
+        }
+        if (level instanceof ServerLevel server) {
+            return server.getChunkSource().getChunkNow(pos.x, pos.z);
+        }
+        return level.getChunk(pos.x, pos.z);
     }
 
 //    @SubscribeEvent

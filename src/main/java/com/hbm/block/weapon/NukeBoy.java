@@ -30,9 +30,4 @@ public class NukeBoy extends NukeBomb{
     protected BlockEntity mainBlockEntity(BlockPos pPos, BlockState pState) {
         return new NukeBombBoyEntity(pPos,pState);
     }
-
-    @Override
-    protected ExplosionVisual getExplosionVisual() {
-        return ExplosionVisual.THERMOBARIC;
-    }
 }
