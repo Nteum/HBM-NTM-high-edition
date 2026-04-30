@@ -13,12 +13,13 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * 基础的管道类，仅需存储管道的连接和模式
  * 暂时不需要考虑能力
  * */
-public abstract class BasePipeBlockEntity extends UpdateableBlockEntity {
+public abstract class BasePipeBlockEntity extends UpdateableBlockEntity implements IConnector {
     // 仅代表是否限制连接，禁止连接的面不会自动连接，但允许连接的面未必实际上连接了。
     // 0代表允许连接，1代表禁止连接
     private byte connLimit = 0;
@@ -47,11 +48,16 @@ public abstract class BasePipeBlockEntity extends UpdateableBlockEntity {
         this.connLimit = pTag.getByte(HBMKey.CONN_LIMIT);
     }
     // 所有连接的方向
+    @Override
     public Set<BlockPos> getConnected(){
-        Set<BlockPos> result = new HashSet<>();
+        return getAttached().stream().map(this.worldPosition::relative).collect(Collectors.toSet());
+    }
+
+    @Override
+    public List<Direction> getAttached() {
+        List<Direction> result = new ArrayList<>();
         for (Direction dir : Direction.values()) {
-            if (this.getBlockState().getValue(PipeBlock.PROPERTY_BY_DIRECTION.get(dir)))
-                result.add(this.worldPosition.relative(dir));
+            if (this.getBlockState().getValue(PipeBlock.PROPERTY_BY_DIRECTION.get(dir))) result.add(dir);
         }
         return result;
     }
