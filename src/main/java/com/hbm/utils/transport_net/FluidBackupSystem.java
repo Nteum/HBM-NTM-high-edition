@@ -1,6 +1,8 @@
 package com.hbm.utils.transport_net;
 
+import com.hbm.api.fluid.FluidUtils;
 import com.hbm.blockentity.base.BasePipeBlockEntity;
+import com.hbm.blockentity.machine.PipeEntity;
 import com.hbm.utils.WorldUtils;
 import it.unimi.dsi.fastutil.ints.*;
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
@@ -11,9 +13,13 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.common.util.NonNullConsumer;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import org.apache.commons.lang3.tuple.Pair;
 import org.jetbrains.annotations.Nullable;
@@ -116,11 +122,11 @@ public class FluidBackupSystem {
         NetWork netWork;
         MachineAttachment[] machineAttachments;
         Queue<Pair<BlockPos, Direction>> queue;
-        Queue<Integer> netQueue;
-        Queue<Long> nodeQueue;
         long loc;
         IntSet netsToMerge;
         Int2ObjectMap<IntSet> splitState = new Int2ObjectOpenHashMap<>();
+        IntSet netsToUpdatePipe = new IntOpenHashSet();
+        LongSet pipesToInit = new LongOpenHashSet(tobeJoin);
         int neoNetId, netId;
         // 1. 节点离开
         for (long l : tobeLeave) {
@@ -158,7 +164,9 @@ public class FluidBackupSystem {
             Iterator<LongSet> iterator = parts.iterator();
             netWork.nodes = iterator.next();
             while (iterator.hasNext()){
-                splitState.get(id).add(createNet(iterator.next()));
+                int code = createNet(iterator.next());
+                netsToUpdatePipe.add(code);
+                splitState.get(id).add(code);
             }
         }
         // 3. 节点加入
@@ -171,16 +179,6 @@ public class FluidBackupSystem {
             queue = new ArrayDeque<>();
             queue.add(Pair.of(blockPos, null));
             neoNetId = createNetID();   // 先赋予一个新的id，以便和其他有待加入的网络区分
-//            nodeMap.put(l, new NodeInfo(-1, new LongOpenHashSet()));
-//            for (Direction direction : pipeEntity.getAttached()) {
-//                pos = blockPos.relative(direction);
-//                if (nodeMap.containsKey(pos.asLong())) {
-//                    netsToMerge.add(nodeMap.get(pos.asLong()).netId);
-//                    continue;
-//                }
-//                queue.add(Pair.of(pos, direction));
-//                posCache.add(pos.asLong());
-//            }
             while (!queue.isEmpty()) {
                 Pair<BlockPos, Direction> poll = queue.poll();
                 pos = poll.getLeft();
@@ -218,17 +216,10 @@ public class FluidBackupSystem {
 
             if (netsToMerge.size() == 1 && nets.containsKey(netsToMerge.iterator().nextInt())){
                 nets.get(netsToMerge.iterator().nextInt()).addNodes(posCache);
+                pipesToInit.addAll(posCache);
             }else {
-                createNet(posCache, neoNetId);
+                netsToUpdatePipe.add(createNet(posCache, neoNetId));
             }
-//            if (netsToMerge.size() > 1){
-//                netsToMerge.add(createNet(posCache));
-//                readyToMerge.add(netsToMerge.toIntArray());
-//            }else if (netsToMerge.size() == 1 && nets.containsKey(netsToMerge.iterator().nextInt())){
-//                nets.get(netsToMerge.iterator().nextInt()).addNodes(posCache);
-//            }else{
-//                createNet(posCache);
-//            }
         }
         // 4. 网络合并
         netsToMerge = new IntOpenHashSet();
@@ -245,49 +236,18 @@ public class FluidBackupSystem {
                 netWork.merge(nets.get(iterator.nextInt()));
             }
         }
-//        for (int[] mergeNets : readyToMerge) {
-//            if (mergeNets.length <= 1) continue;
-//            boolean shouldIterate = false;
-//            IntSet split = new IntOpenHashSet();
-//            for (int mergeNet : mergeNets) {
-//                if (readyToSplit.contains(mergeNet)) {
-//                    split.addAll(splitState.get(mergeNet));
-//                    shouldIterate = true;
-//                }else {
-//                    split.add(mergeNet);
-//                }
-//            }
-//            if (shouldIterate){
-//                netQueue = new ArrayDeque<>(split);
-//                while (!netQueue.isEmpty()){
-//                    int poll = netQueue.poll();
-//                    if (!nets.containsKey(poll)) continue;
-//                    if ((netWork = nets.get(poll)).isEmpty()) {
-//                        nets.remove(poll);
-//                        continue;
-//                    }
-//                    nodeQueue = new ArrayDeque<>(netWork.nodes);
-//                    while (!nodeQueue.isEmpty()){
-//                        long nodePoll = nodeQueue.poll();
-//                        if (!nodeMap.containsKey(nodePoll)) continue;
-//                        for (long conn : nodeMap.get(poll).connPos) {
-//                            netId = nodeMap.get(conn).netId;
-//                            if (netId != poll){
-//                                NetWork netWork1 = nets.get(netId);
-//                                nodeQueue.addAll(netWork1.nodes);
-//                                netWork.merge(netWork1);
-//                                nets.remove(netId);
-//                            }
-//                        }
-//                    }
-//                }
-//            }else {
-//                NetWork net1 = nets.get(mergeNets[0]);
-//                for (int i = 1; i < mergeNets.length; i++) {
-//                    net1.merge(nets.get(mergeNets[i]));
-//                }
-//            }
-//        }
+        // 更新管道的网络标记
+        for (int id : netsToUpdatePipe) {
+            if (nets.containsKey(id)) nets.get(id).assignNet();
+        }
+        for (long pipePos : pipesToInit) {
+            if (!nodeMap.containsKey(pipePos)) continue;
+            NetWork net = nets.get(nodeMap.get(pipePos).netId);
+            if (net == null) continue;
+            PipeEntity pipe = WorldUtils.getTileEntity(PipeEntity.class, level, BlockPos.of(pipePos));
+            if (pipe == null) continue;
+            pipe.network = net;
+        }
         // 收尾工作
         tobeJoin.clear();
         tobeLeave.clear();
@@ -346,11 +306,22 @@ public class FluidBackupSystem {
         int id;
         LongSet nodes;
         Set<LazyOptional<IFluidHandler>> endpoints;
+        private Fluid fluid = Fluids.EMPTY;
         public NetWork(FluidBackupSystem parent, int id, LongSet nodes, Set<LazyOptional<IFluidHandler>> endpoints){
             this.parent = parent;
             this.id = id;
             this.nodes = nodes;
             this.endpoints = endpoints;
+
+        }
+        public Fluid getFluid(){
+            return fluid;
+        }
+        public FluidBackupSystem getParent(){
+            return this.parent;
+        }
+        public void setFluid(final Fluid fluid) {
+            this.fluid = fluid == null ? Fluids.EMPTY : fluid;
         }
         public boolean isEmpty(){
             return nodes.isEmpty() && endpoints.isEmpty();
@@ -361,17 +332,141 @@ public class FluidBackupSystem {
                 if (!parent.node2Machines.containsKey(l)) continue;
                 endpoints.addAll(Arrays.stream(parent.node2Machines.get(l)).filter(Objects::nonNull).map(MachineAttachment::handler).toList());
             }
+//            assignNet(joins);
         }
         public void merge(NetWork other){
-            if (other == null || other == this) return;
+            if (other == null || other == this || (this.fluid != Fluids.EMPTY && other.fluid != Fluids.EMPTY && this.fluid != other.fluid)) return;
+            if (this.fluid == Fluids.EMPTY) this.fluid = other.fluid;
             this.nodes.addAll(other.nodes);
             for (long node : other.nodes) {
                 parent.nodeMap.get(node).netId = this.id;
             }
             this.endpoints.addAll(other.endpoints);
+            assignNet(other.nodes);
         }
-        public void tick(){
-            // 还没来得及写，暂时留空
+        public void assignNet(){
+            this.assignNet(this.nodes);
+        }
+        public void assignNet(LongSet nodes){
+            for (Long node : nodes) {
+                PipeEntity pipeEntity = WorldUtils.getTileEntity(PipeEntity.class, this.parent.level, BlockPos.of(node));
+                if (pipeEntity != null) pipeEntity.network = this;
+            }
+        }
+        public void tick() {
+            // 1. 类型仲裁 (保持你的设计)
+            if (this.fluid == Fluids.EMPTY) {
+                for (LazyOptional<IFluidHandler> endpoint : this.endpoints) {
+                    if (endpoint.isPresent()) {
+                        FluidStack fluidStack = endpoint.resolve().get().drain(1000, IFluidHandler.FluidAction.SIMULATE);
+                        if (!fluidStack.isEmpty()) {
+                            this.fluid = fluidStack.getFluid();
+                            break;
+                        }
+                    }
+                }
+            }
+
+            if (this.fluid != Fluids.EMPTY) {
+                int size = this.endpoints.size();
+                int[] maxDrained = new int[size];
+                int[] maxFilled = new int[size];
+                boolean[] isTwoWay = new boolean[size];
+
+                long totalPureSupply = 0;  // 纯生产者的最大供应
+                long totalPureDemand = 0;  // 纯消费者的最大需求
+                long totalTwoWaySupply = 0; // 储罐能拿出来的最大量
+                long totalTwoWayDemand = 0; // 储罐能装下的最大量
+
+                // === 1. 统计阶段 ===
+                int index = 0;
+                for (LazyOptional<IFluidHandler> lazyOptional : this.endpoints) {
+                    if (lazyOptional.isPresent()) {
+                        IFluidHandler handler = lazyOptional.orElse(null);
+                        if (handler != null) {
+                            int drained = handler.drain(new FluidStack(this.fluid, Integer.MAX_VALUE), IFluidHandler.FluidAction.SIMULATE).getAmount();
+                            int filled = handler.fill(new FluidStack(this.fluid, Integer.MAX_VALUE), IFluidHandler.FluidAction.SIMULATE);
+
+                            maxDrained[index] = drained;
+                            maxFilled[index] = filled;
+
+                            if (drained > 0 && filled > 0) {
+                                isTwoWay[index] = true;
+                                totalTwoWaySupply += drained;
+                                totalTwoWayDemand += filled;
+                            } else {
+                                totalPureSupply += drained;
+                                totalPureDemand += filled;
+                            }
+                        }
+                    }
+                    index++;
+                }
+
+                // === 2. 仲裁与守恒计算 (核心数学模型) ===
+                long actualDrainTwoWay = 0;
+                long actualFillTwoWay = 0;
+                long finalGlobalTraffic = 0; // 本次 tick 网络决定传输的总流体量
+
+                // 判断刚性供需关系
+                if (totalPureSupply >= totalPureDemand) {
+                    // 供大于求：纯生产就能喂饱纯消费，多余的塞给双向储罐
+                    long surplus = totalPureSupply - totalPureDemand;
+                    actualFillTwoWay = Math.min(surplus, totalTwoWayDemand); // 储罐尽力吸收
+                    finalGlobalTraffic = totalPureDemand + actualFillTwoWay; // 纯消费需要的 + 储罐吃掉的
+                } else {
+                    // 供不应求：纯生产不够，需要让双向储罐吐出来一部分补齐
+                    long deficit = totalPureDemand - totalPureSupply;
+                    actualDrainTwoWay = Math.min(deficit, totalTwoWaySupply); // 储罐尽力贡献
+                    finalGlobalTraffic = totalPureSupply + actualDrainTwoWay; // 纯生产提供的 + 储罐吐出来的
+                }
+
+                // === 3. 分配与执行阶段 (安全防止除零) ===
+                index = 0;
+                long executedFill = 0; // 用于重置网络的空闲状态
+
+                for (LazyOptional<IFluidHandler> lazyOptional : this.endpoints) {
+                    if (lazyOptional.isPresent()) {
+                        IFluidHandler handler = lazyOptional.orElse(null);
+                        if (handler != null) {
+                            if (isTwoWay[index]) {
+                                // 双向储罐处理
+                                if (actualDrainTwoWay > 0 && totalTwoWaySupply > 0) {
+                                    int toDrain = (int) (maxDrained[index] * actualDrainTwoWay / totalTwoWaySupply);
+                                    handler.drain(new FluidStack(this.fluid, toDrain), IFluidHandler.FluidAction.EXECUTE);
+                                }
+                                if (actualFillTwoWay > 0 && totalTwoWayDemand > 0) {
+                                    int toFill = (int) (maxFilled[index] * actualFillTwoWay / totalTwoWayDemand);
+                                    handler.fill(new FluidStack(this.fluid, toFill), IFluidHandler.FluidAction.EXECUTE);
+                                    executedFill += toFill;
+                                }
+                            } else {
+                                // 纯单向机器处理
+                                if (maxDrained[index] > 0 && totalPureSupply > 0) {
+                                    // 纯生产者分摊：如果总传输量小于总供应（储罐没装满），按比例减少输出
+                                    int toDrain = (int) (maxDrained[index] * finalGlobalTraffic / totalPureSupply);
+                                    // 安全兜底：不能超过其原本的 drained
+                                    toDrain = Math.min(toDrain, maxDrained[index]);
+                                    handler.drain(new FluidStack(this.fluid, toDrain), IFluidHandler.FluidAction.EXECUTE);
+                                }
+                                if (maxFilled[index] > 0 && totalPureDemand > 0) {
+                                    // 纯消费者分摊：如果总传输量小于总需求（供应不足），按比例减少输入
+                                    int toFill = (int) (maxFilled[index] * finalGlobalTraffic / totalPureDemand);
+                                    toFill = Math.min(toFill, maxFilled[index]);
+                                    handler.fill(new FluidStack(this.fluid, toFill), IFluidHandler.FluidAction.EXECUTE);
+                                    executedFill += toFill;
+                                }
+                            }
+                        }
+                    }
+                    index++;
+                }
+
+                // 4. 自动释放锁：如果本 tick 没有任何流体被成功灌注，且网络已经干涸，重置为空闲网络
+                if (finalGlobalTraffic == 0 && executedFill == 0) {
+                    this.fluid = Fluids.EMPTY;
+                }
+            }
         }
     }
 

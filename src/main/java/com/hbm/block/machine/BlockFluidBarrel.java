@@ -67,7 +67,7 @@ public class BlockFluidBarrel extends BlockMachineBase implements ILookOverlay {
         FluidTank tank = tileEntity.getFluidTanks().get(0);
         return List.of(
                 Component.translatable(this.getDescriptionId()),
-                tank.isEmpty() ? HBMLang.EMPTY.translate() : Component.translatable(HBMLang.GUI_TOOLTIP_FLUID.key(), tank.getFluidInTank(0).getFluid().getFluidType().getDescriptionId(), this.barrelProperties.capacity).withStyle(ChatFormatting.AQUA)
+                tank.isEmpty() ? HBMLang.EMPTY.translate() : Component.translatable(HBMLang.GUI_TOOLTIP_FLUID.key(), Component.translatable(tank.getFluidInTank(0).getFluid().getFluidType().getDescriptionId()), this.barrelProperties.capacity).withStyle(ChatFormatting.AQUA)
         );
     }
 

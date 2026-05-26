@@ -5,6 +5,7 @@ import com.hbm.api.Mode;
 import com.hbm.blockentity.interfaces.IConnector;
 import com.hbm.blockentity.machine.PipeEntity;
 import com.hbm.utils.math.BitUtil;
+import com.hbm.utils.transport_net.EnergyNetwork;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -60,5 +61,15 @@ public abstract class BasePipeBlockEntity extends UpdateableBlockEntity implemen
             if (this.getBlockState().getValue(PipeBlock.PROPERTY_BY_DIRECTION.get(dir))) result.add(dir);
         }
         return result;
+    }
+
+    @Override
+    public EnergyNetwork getNetwork() {
+        return null;
+    }
+
+    @Override
+    public void setNetwork(EnergyNetwork network) {
+
     }
 }

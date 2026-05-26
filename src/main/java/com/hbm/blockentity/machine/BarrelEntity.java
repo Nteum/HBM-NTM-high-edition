@@ -59,7 +59,8 @@ public class BarrelEntity extends BaseMachineBlockEntity implements IPacketUpdat
         super(ModBlockEntityType.BARREL_ENTITY.get(), pPos, pBlockState);
         this.items = NonNullList.withSize(4,ItemStack.EMPTY);
         this.properties = ((BlockFluidBarrel)pBlockState.getBlock()).barrelProperties;
-        this.fluidHandler = new SingleFluidHandler(properties.capacity, Mode.OUTPUT);
+        this.fluidHandler = new SingleFluidHandler(properties.capacity, Mode.BOTH);
+        this.fluidHandler.setLimit(50, 50);
         this.capabilitiesContent.addCapability(ForgeCapabilities.FLUID_HANDLER, this.fluidHandler);
     }
 
@@ -92,6 +93,18 @@ public class BarrelEntity extends BaseMachineBlockEntity implements IPacketUpdat
         else if (item1.isEmpty() || item2.getCount()==item2.getMaxStackSize())return false;
         else if (item1.getItem() instanceof BucketItem && item2.is(Items.BUCKET))return true;
         else return true;
+    }
+
+    @Override
+    public void load(CompoundTag pTag) {
+        super.load(pTag);
+        this.fluidHandler.deserializeNBT(pTag.getCompound(HBMKey.FLUIDS));
+    }
+
+    @Override
+    protected void saveAdditional(CompoundTag pTag) {
+        super.saveAdditional(pTag);
+        pTag.put(HBMKey.FLUIDS, this.fluidHandler.serializeNBT());
     }
 
     @Override

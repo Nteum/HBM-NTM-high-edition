@@ -16,6 +16,7 @@ import com.hbm.network.ServerMsgHandler;
 import com.hbm.registries.HBMDamage;
 import com.hbm.registries.ModCommands;
 import com.hbm.utils.transport_net.EnergyNetworkSystem;
+import com.hbm.utils.transport_net.FluidBackupSystem;
 import com.hbm.utils.transport_net.FluidNetworkSystem;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -85,6 +86,7 @@ public class ServerEventHandler {
             }
             // 能量系统
             if (EnergyNetworkSystem.has(level)) EnergyNetworkSystem.getOrCreate(level).tick();
+            if (FluidBackupSystem.has(level)) FluidBackupSystem.getOrCreate(level).tick();
         }
     }
 

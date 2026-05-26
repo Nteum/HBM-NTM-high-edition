@@ -1,6 +1,6 @@
 {
   "values": [
-    "#forge:storage_blocks/coal",
-    "#minecraft:coals"
+    "#minecraft:coals",
+    "#forge:storage_blocks/coal"
   ]
 }

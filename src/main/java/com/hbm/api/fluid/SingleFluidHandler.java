@@ -16,6 +16,8 @@ import java.util.List;
 public class SingleFluidHandler implements IExtendedFluidHandler, INBTSerializable<CompoundTag> {
     FluidTank tank;
     Mode mode;
+    int inputLimit = Integer.MAX_VALUE;
+    int outputLimit = Integer.MAX_VALUE;
     public SingleFluidHandler(int capacity){
         this(capacity, Mode.BOTH);
     }
@@ -25,6 +27,10 @@ public class SingleFluidHandler implements IExtendedFluidHandler, INBTSerializab
     public SingleFluidHandler(FluidTank tank, Mode mode){
         this.tank = tank;
         this.mode = mode;
+    }
+    public void setLimit(int inputLimit, int outputLimit){
+        this.inputLimit = inputLimit;
+        this.outputLimit = outputLimit;
     }
     @Override
     public List<FluidTank> getFluidTanks() {

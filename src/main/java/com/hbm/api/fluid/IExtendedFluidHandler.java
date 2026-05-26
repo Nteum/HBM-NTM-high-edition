@@ -37,6 +37,12 @@ public interface IExtendedFluidHandler extends IFluidHandler {
 
     List<FluidTank> getFluidTanks();
     Mode getMode(int tank);
+    default int getInputLimit(){
+        return Integer.MAX_VALUE;
+    }
+    default int getOutputLimit(){
+        return Integer.MAX_VALUE;
+    }
     /** 仅考虑tank本身是否允许输入，未考虑流体本身是否适合输入，要和isFluidValid结合使用 */
     default boolean allowInput(int tank){
         Mode mode = getMode(tank);
@@ -74,7 +80,9 @@ public interface IExtendedFluidHandler extends IFluidHandler {
      * */
     @Override
     default int fill(FluidStack resource, FluidAction action){
-        int amount = resource.getAmount();
+//        int amount = resource.getAmount();
+        int amount = Math.min(resource.getAmount(), getInputLimit());
+        resource.setAmount(amount);
         List<FluidTank> tanks = getFluidTanks();
         IntList typeMatchedTanks = new IntArrayList();
         IntList emptyTanks = new IntArrayList();
@@ -96,6 +104,7 @@ public interface IExtendedFluidHandler extends IFluidHandler {
      * */
     @Override
     default @NotNull FluidStack drain(FluidStack resource, FluidAction action){
+        if (resource.getAmount() > getOutputLimit()) resource.setAmount(getOutputLimit());
         if (resource.isEmpty()) return FluidStack.EMPTY;
         int drainAmount = 0;
         List<FluidTank> tanks = getFluidTanks();
@@ -113,6 +122,7 @@ public interface IExtendedFluidHandler extends IFluidHandler {
 
     @Override
     default @NotNull FluidStack drain(int maxDrain, FluidAction action){
+        maxDrain = Math.min(maxDrain, getOutputLimit());
         FluidStack resultStack = FluidStack.EMPTY;
         List<FluidTank> tanks = getFluidTanks();
         for (int i = 0; i < tanks.size(); i++) {

@@ -234,7 +234,7 @@ public class FluidNetworkSystem {
         if (!(level.getBlockEntity(pos) instanceof PipeEntity pipeEntity)) {
             return;
         }
-        pipeEntity.network = network;
+//        pipeEntity.network = network;
     }
 
     private void bindAll(final Set<BlockPos> positions, final FluidNetwork network) {

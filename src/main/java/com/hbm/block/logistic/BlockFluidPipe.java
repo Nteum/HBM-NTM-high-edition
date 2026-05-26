@@ -5,6 +5,7 @@ import com.hbm.block.interfaces.ILookOverlay;
 import com.hbm.blockentity.machine.PipeEntity;
 import com.hbm.utils.EnumUtils;
 import com.hbm.utils.WorldUtils;
+import com.hbm.utils.transport_net.FluidBackupSystem;
 import com.hbm.utils.transport_net.FluidNetworkSystem;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -63,7 +64,7 @@ public class BlockFluidPipe extends AbstractPipeBlock implements EntityBlock, IL
         if (pLevel.isClientSide) {
             return;
         }
-        FluidNetworkSystem.getOrCreate(pLevel).rebuildNetwork(pPos);
+//        FluidNetworkSystem.getOrCreate(pLevel).rebuildNetwork(pPos);
     }
 
     @Override
@@ -79,11 +80,16 @@ public class BlockFluidPipe extends AbstractPipeBlock implements EntityBlock, IL
             BooleanProperty property = PROPERTY_BY_DIRECTION.get(direction);
             boolean oldValue = oldState.hasProperty(property) && oldState.getValue(property);
             boolean newValue = newState.hasProperty(property) && newState.getValue(property);
-            if (!oldValue && newValue){
-                fluidNetworkSystem.rebuildNetwork(pos);
-            }else if (oldValue && !newValue){
-                if (pipe1.network != null) {
-                    fluidNetworkSystem.split(pipe1.network);
+            if (pipe1.network != null && pipe1.network.getParent() != null){
+                FluidBackupSystem system = pipe1.network.getParent();
+                if (!oldValue && newValue){
+                    system.link(pos, pos.relative(direction));
+//                fluidNetworkSystem.rebuildNetwork(pos);
+                }else if (oldValue && !newValue){
+                    system.cut(pos, pos.relative(direction));
+//                    if (pipe1.network != null) {
+//                        fluidNetworkSystem.split(pipe1.network);
+//                    }
                 }
             }
         }
@@ -92,8 +98,12 @@ public class BlockFluidPipe extends AbstractPipeBlock implements EntityBlock, IL
     @Override
     public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pMovedByPiston) {
         if (!pLevel.isClientSide) {
-            FluidNetworkSystem fluidNetworkSystem = FluidNetworkSystem.getOrCreate(pLevel);
-            fluidNetworkSystem.leave(pPos);
+//            FluidNetworkSystem fluidNetworkSystem = FluidNetworkSystem.getOrCreate(pLevel);
+//            fluidNetworkSystem.leave(pPos);
+            PipeEntity pipeEntity = WorldUtils.getTileEntity(PipeEntity.class, pLevel, pPos);
+            if (pipeEntity != null && pipeEntity.network != null && pipeEntity.network.getParent() != null){
+                pipeEntity.network.getParent().leave(pipeEntity);
+            }
         }
         super.onRemove(pState, pLevel, pPos, pNewState, pMovedByPiston);
     }
