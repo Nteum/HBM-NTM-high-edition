@@ -1,7 +1,7 @@
 package com.hbm.utils.transport_net;
 
 import com.hbm.block.logistic.AbstractPipeBlock;
-import com.hbm.blockentity.machine.PipeEntity;
+import com.hbm.blockentity.logistic.PipeEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.ChunkPos;

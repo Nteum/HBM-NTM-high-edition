@@ -1,8 +1,8 @@
 package com.hbm.utils.transport_net;
 
-import com.hbm.api.fluid.FluidUtils;
 import com.hbm.blockentity.base.BasePipeBlockEntity;
-import com.hbm.blockentity.machine.PipeEntity;
+import com.hbm.blockentity.logistic.PipeEntity;
+import com.hbm.utils.DirectionUtils;
 import com.hbm.utils.WorldUtils;
 import it.unimi.dsi.fastutil.ints.*;
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
@@ -19,7 +19,6 @@ import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.common.util.NonNullConsumer;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import org.apache.commons.lang3.tuple.Pair;
 import org.jetbrains.annotations.Nullable;
@@ -33,7 +32,7 @@ public class FluidBackupSystem {
     protected final Level level;
     // 所有需要的网络
     protected final Int2ObjectMap<NetWork> nets = new Int2ObjectOpenHashMap<>();
-    // 所有节点的连接关系
+    // 所有节点的连接关系，连接节点包括其他管道，以及连接的机器
     protected final Long2ObjectMap<NodeInfo> nodeMap = new Long2ObjectOpenHashMap<>();
     // 所有机器的数据，数据结构（标识符、机器所属网络集合，机器的电能handler）
     /**
@@ -53,9 +52,10 @@ public class FluidBackupSystem {
     protected final LongSet tobeJoin = new LongOpenHashSet();
     // 待离开网络的节点
     protected final LongSet tobeLeave = new LongOpenHashSet();
-    protected Set<int[]> readyToMerge = new HashSet<>();        //即将合并的网络
     protected Set<long[]> readyToLink = new HashSet<>();        //即将合并的网络合并处的节点表
     protected IntSet readyToSplit = new IntOpenHashSet();       //即将切分的网络
+    // 记录待注销的监听器绑定信息
+    protected final Queue<MachineAttachment> listenersToUnregister = new ArrayDeque<>();
 
     public static boolean has(final Level level){
         return INSTANCES.containsKey(level);
@@ -85,6 +85,13 @@ public class FluidBackupSystem {
         long pos = be.getBlockPos().asLong();
         if (nodeMap.containsKey(pos)) tobeLeave.add(pos);
     }
+    // 更新节点的状态
+    public void refresh(@Nullable final BlockEntity be){
+        if (be == null) return;
+        long pos = be.getBlockPos().asLong();
+        nodeMap.remove(pos);
+        tobeJoin.add(pos);
+    }
 
     //连接连上
     public void link(final BlockPos pos1, final BlockPos pos2){
@@ -96,7 +103,6 @@ public class FluidBackupSystem {
             int net1 = nodeMap.get(l1).netId;
             int net2 = nodeMap.get(l2).netId;
             if (net1 != net2) readyToLink.add(new long[]{l1, l2});
-//            if (net1 != net2) readyToMerge.add(new int[]{net1, net2});
         }else {
             if (!nodeMap.containsKey(l1)) join(level.getBlockEntity(pos1));
             if (!nodeMap.containsKey(l2)) join(level.getBlockEntity(pos2));
@@ -106,154 +112,234 @@ public class FluidBackupSystem {
     public void cut(final BlockPos pos1, final BlockPos pos2){
         long l1 = pos1.asLong();
         long l2 = pos2.asLong();
-        if (!(nodeMap.containsKey(l1) && nodeMap.containsKey(l2))) return;
-        nodeMap.get(l1).connPos.remove(l2);
-        nodeMap.get(l2).connPos.remove(l1);
-        readyToSplit.add(nodeMap.get(l1).netId);
+        int netId = -1;
+        if (nodeMap.containsKey(l1)){
+            nodeMap.get(l1).connPos.remove(l2);
+            netId = nodeMap.get(l1).netId;
+        }
+        if (nodeMap.containsKey(l2)){
+            nodeMap.get(l2).connPos.remove(l1);
+            netId = nodeMap.get(l2).netId;
+        }
+        if (netId >= 0) readyToSplit.add(netId);
     }
 
     // 从更新队列中加入网络
-    private void updateStructure(){
+    // 从更新队列中加入网络
+    private void updateStructure() {
         LongSet posCache;
         BlockPos blockPos, pos, pos1;
         BlockEntity be;
-        BasePipeBlockEntity pipeEntity;
         NodeInfo nodeInfo;
         NetWork netWork;
-        MachineAttachment[] machineAttachments;
         Queue<Pair<BlockPos, Direction>> queue;
-        long loc;
         IntSet netsToMerge;
-        Int2ObjectMap<IntSet> splitState = new Int2ObjectOpenHashMap<>();
         IntSet netsToUpdatePipe = new IntOpenHashSet();
         LongSet pipesToInit = new LongOpenHashSet(tobeJoin);
-        int neoNetId, netId;
-        // 1. 节点离开
+        int netId;
+        LazyOptional<IFluidHandler> fluidHandlerLazyOptional;
+
+        // 1. 节点离开 (保持原样，安全)
         for (long l : tobeLeave) {
-            nodeInfo = nodeMap.remove(l);
-            machineAttachments = node2Machines.remove(l);
-            if (nodeInfo == null) continue;
-            if ((netWork = nets.get(nodeInfo.netId)) != null) netWork.nodes.remove(l);
-            for (long conn : nodeInfo.connPos) {
-                if (nodeMap.containsKey(conn)) nodeMap.get(conn).connPos.remove(l);
-            }
-            if (machineAttachments != null){
-                for (MachineAttachment machineAttachment : machineAttachments) {
-                    if (netWork != null && machineAttachment != null) netWork.endpoints.remove(machineAttachment.handler);
+            nodeInfo = nodeMap.get(l);
+            if (nodeInfo != null){
+                // 将对应节点从网络中去除。
+                if ((netWork = nets.get(nodeInfo.netId)) != null) netWork.removeNode(l);
+                // 删除相连节点的连接记录
+                for (long conn : nodeInfo.connPos) {
+                    if (nodeMap.containsKey(conn)) nodeMap.get(conn).connPos.remove(l);
                 }
+                // 如果连接的节点不止一个，则需要考虑网络切断
+                if (nodeInfo.connPos.size() > 1) readyToSplit.add(nodeInfo.netId);
             }
-            if (nodeInfo.connPos.size() > 1) readyToSplit.add(nodeInfo.netId);
+            nodeMap.remove(l);
         }
-        // 2. 网络拆分
+
+        // 2. 网络拆分 (保持原样，安全)
         for (int id : readyToSplit) {
             if (!nets.containsKey(id)) {
-                splitState.put(id, IntSet.of());
                 continue;
             }
             if ((netWork = nets.get(id)) == null || netWork.isEmpty()) {
                 nets.remove(id);
-                splitState.put(id, IntSet.of());
                 continue;
             }
-            List<LongSet> parts = findParts(netWork);
+            List<LongSet> parts = findParts(netWork);   // 返回的坐标既包括管道也包括机器
             if (parts.size() == 1) {
-                splitState.put(id, IntSet.of(id));
                 continue;
             }
-            splitState.put(id, new IntOpenHashSet());
             Iterator<LongSet> iterator = parts.iterator();
-            netWork.nodes = iterator.next();
+            netWork.rebuild(iterator.next());
             while (iterator.hasNext()){
                 int code = createNet(iterator.next());
                 netsToUpdatePipe.add(code);
-                splitState.get(id).add(code);
             }
         }
-        // 3. 节点加入
+
+        // 3. 节点加入 (重构：物理连通双向建立 + 统一借用 ID 策略)
         for (long l : tobeJoin) {
+            if (nodeMap.containsKey(l)) continue;
+
             blockPos = BlockPos.of(l);
-            if (nodeMap.containsKey(l) || (pipeEntity = WorldUtils.getTileEntity(BasePipeBlockEntity.class, level, blockPos)) == null) continue;
-            posCache = new LongOpenHashSet();
-            posCache.add(l);
-            netsToMerge = new IntOpenHashSet();
-            queue = new ArrayDeque<>();
-            queue.add(Pair.of(blockPos, null));
-            neoNetId = createNetID();   // 先赋予一个新的id，以便和其他有待加入的网络区分
-            while (!queue.isEmpty()) {
-                Pair<BlockPos, Direction> poll = queue.poll();
-                pos = poll.getLeft();
-                Direction dir = poll.getRight();
-                be = WorldUtils.getTileEntity(level, pos);
-                if (be == null) continue;
-                loc = pos.asLong();
-                long l1 = dir == null ? loc : pos.relative(dir.getOpposite()).asLong();
-                if (be instanceof BasePipeBlockEntity basePipeBlockEntity){
-                    nodeMap.put(loc, new NodeInfo(neoNetId, new LongOpenHashSet()));
-                    if (dir != null) nodeMap.get(l1).connPos.add(loc);
-                    for (Direction direction : basePipeBlockEntity.getAttached()) {
-                        if (dir != null && direction == dir.getOpposite()) continue;
-                        pos1 = pos.relative(direction);
-                        long l2 = pos1.asLong();
-                        if (nodeMap.containsKey(l2)){
-                            if ((netId = nodeMap.get(l2).netId) != neoNetId){
-                                netsToMerge.add(netId);
-                                readyToLink.add(new long[]{l2, loc});
+            be = WorldUtils.getTileEntity(level, blockPos);
+
+            if (be instanceof BasePipeBlockEntity pipe) {
+                // 初始化起始点的 NodeInfo，先挂一个缺省占位 ID -1
+                nodeMap.put(l, new NodeInfo(-1, new LongOpenHashSet()));
+                posCache = new LongOpenHashSet(List.of(l));     // 所有新加入的节点
+                netsToMerge = new IntOpenHashSet();             // 需要合并的网络
+                if (!pipe.getAttached().isEmpty()){
+                    queue = new ArrayDeque<>();
+                    queue.add(Pair.of(blockPos, null));
+                    BlockPos checkPos, neighbourPos;
+                    long checkPosL, fromPosL, neighbourPosL;
+                    Direction fromDir;
+                    while (!queue.isEmpty()) {
+                        Pair<BlockPos, Direction> poll = queue.poll();
+                        checkPos = poll.getLeft();
+                        fromDir = poll.getRight();
+                        checkPosL = checkPos.asLong();
+                        fromPosL = fromDir == null ? checkPosL : checkPos.relative(fromDir.getOpposite()).asLong();
+                        if ((be = WorldUtils.getTileEntity(level, checkPos)) instanceof BasePipeBlockEntity pipeTile){
+                            // 如果不是起始点，需要初始化 NodeInfo
+                            if (fromDir != null) {
+                                if (!nodeMap.containsKey(checkPosL)) {
+                                    nodeMap.put(checkPosL, new NodeInfo(-1, new LongOpenHashSet()));
+                                }
+                                // 【修复 3】: 建立完整的双向物理连接
+                                nodeMap.get(fromPosL).connPos.add(checkPosL);
+                                nodeMap.get(checkPosL).connPos.add(fromPosL);
                             }
-                            continue;
+                            for (Direction toDir : pipeTile.getAttached()) {
+                                if (toDir == null || fromDir != null && toDir == fromDir.getOpposite()) continue;
+                                neighbourPos = checkPos.relative(toDir);
+                                neighbourPosL = neighbourPos.asLong();
+                                if (posCache.contains(neighbourPosL)) continue;
+                                else if (nodeMap.containsKey(neighbourPosL)) {
+                                    // 探测到了老管道或已处理管道
+                                    netId = nodeMap.get(neighbourPosL).netId;
+                                    if (netId != -1) {
+                                        netsToMerge.add(netId);
+                                        readyToLink.add(new long[]{checkPosL, neighbourPosL});
+                                        continue;
+                                    }
+                                    // 【修复 3】：哪怕遇到了老管道，物理上的双向连通图也必须在当下接起来
+                                    nodeMap.get(checkPosL).connPos.add(neighbourPosL);
+                                    nodeMap.get(neighbourPosL).connPos.add(checkPosL);
+                                }
+                                queue.add(Pair.of(neighbourPos, toDir));
+                                posCache.add(neighbourPosL);
+                            }
+                        }else {
+                            posCache.remove(checkPosL); //从posCache中删除非管道的方块
+                            if (fromDir != null){
+                                nodeMap.get(fromPosL).connPos.add(checkPosL);
+                                // 外部机器连接逻辑 (保持原样)
+                                LazyOptional<IFluidHandler> lazyOptional = be.getCapability(ForgeCapabilities.FLUID_HANDLER, fromDir.getOpposite());
+                                if (lazyOptional.isPresent()) {
+                                    if (!node2Machines.containsKey(checkPosL)) node2Machines.put(checkPosL, new MachineAttachment[6]);
+                                    InvalidationHandler listener = new InvalidationHandler(this, checkPos, fromDir.getOpposite());
+                                    lazyOptional.addListener(listener);
+                                    // 需要把listener单独记录以便在将机器移出网络的事后删掉监听器，否则机器反复进出网络会导致监听器越来越多
+                                    node2Machines.get(checkPosL)[fromDir.getOpposite().get3DDataValue()] = new MachineAttachment(fromDir.getOpposite(), lazyOptional, listener);
+                                }
+                            }
                         }
-                        queue.add(Pair.of(pos1, direction));
-                        posCache.add(l2);
                     }
-                }else if (dir != null){
-                    LazyOptional<IFluidHandler> lazyOptional = be.getCapability(ForgeCapabilities.FLUID_HANDLER, dir.getOpposite());
-                    if (lazyOptional.isPresent()){
-                        if (!node2Machines.containsKey(l1)) node2Machines.put(l1, new MachineAttachment[6]);
-                        lazyOptional.addListener(new InvalidationHandler(this, pos.relative(dir.getOpposite()), dir.getOpposite()));
-                        node2Machines.get(l1)[dir.getOpposite().get3DDataValue()] = new MachineAttachment(dir.getOpposite(), lazyOptional);
+                }
+
+                // 决定如何挂载网络 Map
+                int finalNetId;
+                if (netsToMerge.isEmpty()) {
+                    // 四面八方完全是一个孤立新放的网络，直接完全新建
+                    finalNetId = createNet(posCache);
+                    netsToUpdatePipe.add(finalNetId);
+                } else {
+                    // 至少靠着一个老网。我们捡起第一个老网的 ID 作为基础
+                    finalNetId = netsToMerge.iterator().nextInt();
+                    if (nets.containsKey(finalNetId)) {
+                        nets.get(finalNetId).addNodes(posCache);
+                        // 【修复 2】：必须同步回写到 nodeMap，纠正刚才占位的 -1
+                        for (long cachedPos : posCache) {
+                            if (nodeMap.containsKey(cachedPos)) {
+                                nodeMap.get(cachedPos).netId = finalNetId;
+                            }
+                        }
+                        pipesToInit.addAll(posCache);
+                    }
+                }
+            }else if (be != null){
+                // 如果添加的是机器，则搜索邻接管道并注册。
+                for (Direction direction : Direction.values()) {
+                    fluidHandlerLazyOptional = be.getCapability(ForgeCapabilities.FLUID_HANDLER, direction);
+                    if (fluidHandlerLazyOptional.isPresent()){
+                        if (!node2Machines.containsKey(l)) node2Machines.put(l, new MachineAttachment[6]);
+                        long neighbourPosL = blockPos.relative(direction.getOpposite()).asLong();
+                        if (nodeMap.containsKey(neighbourPosL)){
+                            nodeMap.get(neighbourPosL).connPos.add(l);
+                            InvalidationHandler listener = new InvalidationHandler(this, blockPos, direction);
+                            fluidHandlerLazyOptional.addListener(listener);
+                            // 需要把listener单独记录以便在将机器移出网络的事后删掉监听器，否则机器反复进出网络会导致监听器越来越多
+                            node2Machines.get(l)[direction.get3DDataValue()] = new MachineAttachment(direction, fluidHandlerLazyOptional, listener);
+                        }
                     }
                 }
             }
-
-            if (netsToMerge.size() == 1 && nets.containsKey(netsToMerge.iterator().nextInt())){
-                nets.get(netsToMerge.iterator().nextInt()).addNodes(posCache);
-                pipesToInit.addAll(posCache);
-            }else {
-                netsToUpdatePipe.add(createNet(posCache, neoNetId));
-            }
         }
-        // 4. 网络合并
+
+        // 4. 网络合并 (重构：真正踢掉死去的网络)
         netsToMerge = new IntOpenHashSet();
         for (long[] mergeNodes : readyToLink) {
             netsToMerge.clear();
             for (long mergeNode : mergeNodes) {
-                netId = nodeMap.get(mergeNode).netId;
-                if (nets.containsKey(netId)) netsToMerge.add(netId);
+                if (nodeMap.containsKey(mergeNode) && nets.containsKey(netId = nodeMap.get(mergeNode).netId)) netsToMerge.add(netId);
             }
             if (netsToMerge.size() < 2) continue;
+
             IntIterator iterator = netsToMerge.iterator();
-            netWork = nets.get(iterator.nextInt());
-            while (iterator.hasNext()){
-                netWork.merge(nets.get(iterator.nextInt()));
+            int mainNetId = iterator.nextInt();
+            netWork = nets.get(mainNetId);
+
+            while (iterator.hasNext()) {
+                int deadNetId = iterator.nextInt();
+
+                NetWork deadNet = nets.get(deadNetId);
+                if (deadNet != null) {
+                    netWork.merge(deadNet);
+                    // 【修复 1】：致命伤修复，把被合并死掉的网络彻底从大表摘除！
+                    nets.remove(deadNetId);
+                }
             }
         }
-        // 更新管道的网络标记
+
+        // 5. 更新管道的网络标记 (后续收尾保持完整)
         for (int id : netsToUpdatePipe) {
             if (nets.containsKey(id)) nets.get(id).assignNet();
         }
         for (long pipePos : pipesToInit) {
             if (!nodeMap.containsKey(pipePos)) continue;
-            NetWork net = nets.get(nodeMap.get(pipePos).netId);
+            NodeInfo nodeinfo = nodeMap.get(pipePos);
+            NetWork net = nets.get(nodeinfo.netId);
             if (net == null) continue;
             PipeEntity pipe = WorldUtils.getTileEntity(PipeEntity.class, level, BlockPos.of(pipePos));
             if (pipe == null) continue;
             pipe.network = net;
         }
-        // 收尾工作
+
+        // 6. 安全注销监听器，规避并发修改异常
+        while (!listenersToUnregister.isEmpty()) {
+            MachineAttachment attachment = listenersToUnregister.poll();
+            if (attachment != null && attachment.handler != null && attachment.listener != null) {
+                attachment.handler.removeListener(attachment.listener);
+            }
+        }
+
+        // 清理缓存队列
         tobeJoin.clear();
         tobeLeave.clear();
         readyToSplit.clear();
-        readyToMerge.clear();
         readyToLink.clear();
+        listenersToUnregister.clear();
     }
 
     protected List<LongSet> findParts(final NetWork network){
@@ -263,13 +349,15 @@ public class FluidBackupSystem {
             long start = remain.iterator().nextLong();
             LongSet component = new LongOpenHashSet();
             ArrayDeque<Long> queue = new ArrayDeque<>();
-            queue.add(start);
+            queue.offerFirst(start);
             while (!queue.isEmpty()){
-                long poll = queue.poll();
+                long poll = queue.pollFirst();
                 component.add(poll);
                 remain.remove(poll);
-                for (long l : nodeMap.get(poll).connPos) {
-                    if (!component.contains(l)) queue.add(l);
+                NodeInfo nodeInfo = nodeMap.get(poll);
+                if (nodeInfo == null) continue;
+                for (long l : nodeInfo.connPos) {
+                    if (!component.contains(l) && nodeMap.containsKey(l)) queue.add(l);
                 }
             }
             result.add(component);
@@ -289,15 +377,9 @@ public class FluidBackupSystem {
     private int createNet(LongSet longSet, int id){
         if (longSet.isEmpty()) return -1;
         int netID = id < 0 ? createNetID() : id;
-        Set<LazyOptional<IFluidHandler>> endpoints = new HashSet<>();
-        for (long l : longSet) {
-            if (!node2Machines.containsKey(l)) continue;
-            for (MachineAttachment machineAttachment : node2Machines.get(l)) {
-                if (machineAttachment != null) endpoints.add(machineAttachment.handler);
-            }
-            nodeMap.get(l).netId = netID;
-        }
-        nets.put(netID, new NetWork(this, netID, longSet, endpoints));
+        NetWork netWork = new NetWork(this, netID, new LongOpenHashSet(), new HashSet<>());
+        netWork.rebuild(longSet);
+        nets.put(netID, netWork);
         return netID;
     }
 
@@ -326,20 +408,54 @@ public class FluidBackupSystem {
         public boolean isEmpty(){
             return nodes.isEmpty() && endpoints.isEmpty();
         }
-        public void addNodes(LongSet joins){
-            nodes.addAll(joins);
-            for (long l : joins) {
-                if (!parent.node2Machines.containsKey(l)) continue;
-                endpoints.addAll(Arrays.stream(parent.node2Machines.get(l)).filter(Objects::nonNull).map(MachineAttachment::handler).toList());
+        public void addNodes(LongSet points){
+            for (long point : points) {
+                if (!this.parent.nodeMap.containsKey(point)) continue;
+                this.nodes.add(point);
+                NodeInfo nodeInfo = this.parent.nodeMap.get(point);
+                for (long conn : nodeInfo.connPos) {
+                    if (this.parent.node2Machines.containsKey(conn)){
+                        Direction direction = DirectionUtils.posToDirection(BlockPos.of(point), BlockPos.of(conn));
+                        if (direction != null){
+                            MachineAttachment machineAttachment = this.parent.node2Machines.get(conn)[direction.getOpposite().get3DDataValue()];
+                            if (machineAttachment != null && machineAttachment.handler != null) this.endpoints.add(machineAttachment.handler);
+                        }
+                    }
+                }
+                nodeInfo.netId = this.id;
             }
-//            assignNet(joins);
+        }
+        public void rebuild(LongSet points){
+            this.nodes.clear();
+            this.endpoints.clear();
+            addNodes(points);
+        }
+        public void removeNode(long node){
+            this.nodes.remove(node);
+            NodeInfo nodeInfo = this.parent.nodeMap.get(node);
+            if (nodeInfo != null){
+                for (long conn : nodeInfo.connPos) {
+                    if (this.parent.node2Machines.containsKey(conn)){
+                        Direction direction = DirectionUtils.posToDirection(BlockPos.of(node), BlockPos.of(conn));
+                        if (direction != null){
+                            MachineAttachment machineAttachment = this.parent.node2Machines.get(conn)[direction.getOpposite().get3DDataValue()];
+                            this.endpoints.remove(machineAttachment.handler);
+                            this.parent.removeMachineSide(conn, direction.getOpposite());
+                        }
+                    }
+                }
+            }
+            // 如果网络已经空了，则移除网络。
+            if (this.nodes.isEmpty()){
+                this.parent.nets.remove(this.id);
+            }
         }
         public void merge(NetWork other){
             if (other == null || other == this || (this.fluid != Fluids.EMPTY && other.fluid != Fluids.EMPTY && this.fluid != other.fluid)) return;
             if (this.fluid == Fluids.EMPTY) this.fluid = other.fluid;
             this.nodes.addAll(other.nodes);
             for (long node : other.nodes) {
-                parent.nodeMap.get(node).netId = this.id;
+                if (parent.nodeMap.containsKey(node)) parent.nodeMap.get(node).netId = this.id;
             }
             this.endpoints.addAll(other.endpoints);
             assignNet(other.nodes);
@@ -351,6 +467,7 @@ public class FluidBackupSystem {
             for (Long node : nodes) {
                 PipeEntity pipeEntity = WorldUtils.getTileEntity(PipeEntity.class, this.parent.level, BlockPos.of(node));
                 if (pipeEntity != null) pipeEntity.network = this;
+                if (parent.nodeMap.containsKey(node)) parent.nodeMap.get(node).netId = this.id;
             }
         }
         public void tick() {
@@ -479,7 +596,17 @@ public class FluidBackupSystem {
         }
     }
 
-    protected record MachineAttachment(Direction side, LazyOptional<IFluidHandler> handler) {}
+    protected record MachineAttachment(Direction side, LazyOptional<IFluidHandler> handler, InvalidationHandler listener) {}
+    protected void removeMachineSide(long pos, Direction face){
+        if (!node2Machines.containsKey(pos) || face == null) return;
+        MachineAttachment machineAttachment = node2Machines.get(pos)[face.get3DDataValue()];
+        node2Machines.get(pos)[face.get3DDataValue()] = null;
+
+        if (machineAttachment != null && machineAttachment.listener != null) {
+            // 挂起，不当场注销，扔进队列
+            listenersToUnregister.add(machineAttachment);
+        }
+    }
 
     public class InvalidationHandler implements NonNullConsumer<LazyOptional<IFluidHandler>> {
         private final FluidBackupSystem parent;
@@ -494,7 +621,6 @@ public class FluidBackupSystem {
 
         @Override
         public void accept(@Nonnull LazyOptional<IFluidHandler> handle) {
-            parent.node2Machines.get(nodePos.asLong())[side.get3DDataValue()] = null;
             NetWork netWork = nets.get(parent.nodeMap.get(this.nodePos.relative(this.side).asLong()).netId);
             if (netWork != null) netWork.endpoints.remove(handle);
             else {
@@ -502,6 +628,7 @@ public class FluidBackupSystem {
                     netWork1.endpoints.remove(handle);
                 }
             }
+            parent.removeMachineSide(nodePos.asLong(), side);
         }
     }
 }

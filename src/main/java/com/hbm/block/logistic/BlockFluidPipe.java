@@ -1,9 +1,10 @@
 package com.hbm.block.logistic;
 
-import com.hbm.api.Mode;
 import com.hbm.block.interfaces.ILookOverlay;
-import com.hbm.blockentity.machine.PipeEntity;
+import com.hbm.blockentity.logistic.PipeEntity;
+import com.hbm.utils.DirectionUtils;
 import com.hbm.utils.EnumUtils;
+import com.hbm.utils.NBTUtils;
 import com.hbm.utils.WorldUtils;
 import com.hbm.utils.transport_net.FluidBackupSystem;
 import com.hbm.utils.transport_net.FluidNetworkSystem;
@@ -14,15 +15,14 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
-import net.minecraft.world.level.block.PipeBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.fluids.capability.IFluidHandler;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -97,6 +97,11 @@ public class BlockFluidPipe extends AbstractPipeBlock implements EntityBlock, IL
 
     @Override
     public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pMovedByPiston) {
+        // 核心防御 1：如果是同一个方块（只是 BlockState 的属性/连接状态变了），绝对不能触发网络 leave！
+        if (pState.is(pNewState.getBlock())) {
+            super.onRemove(pState, pLevel, pPos, pNewState, pMovedByPiston);
+            return;
+        }
         if (!pLevel.isClientSide) {
 //            FluidNetworkSystem fluidNetworkSystem = FluidNetworkSystem.getOrCreate(pLevel);
 //            fluidNetworkSystem.leave(pPos);
@@ -106,6 +111,20 @@ public class BlockFluidPipe extends AbstractPipeBlock implements EntityBlock, IL
             }
         }
         super.onRemove(pState, pLevel, pPos, pNewState, pMovedByPiston);
+    }
+
+    @Override
+    public void neighborChanged(BlockState pState, Level pLevel, BlockPos pPos, Block pNeighborBlock, BlockPos pNeighborPos, boolean pMovedByPiston) {
+        super.neighborChanged(pState, pLevel, pPos, pNeighborBlock, pNeighborPos, pMovedByPiston);
+        if (!pLevel.isClientSide && pLevel.getBlockState(pNeighborPos).hasBlockEntity()){
+            PipeEntity pipeTile = WorldUtils.getTileEntity(PipeEntity.class, pLevel, pPos);
+            BlockEntity neighbourTile = WorldUtils.getTileEntity(pLevel, pNeighborPos);
+            if (pipeTile != null && neighbourTile != null && neighbourTile.getCapability(ForgeCapabilities.FLUID_HANDLER).isPresent()){
+                Direction facing = DirectionUtils.posToDirection(pPos, pNeighborPos);
+                if (facing != null) pLevel.setBlock(pPos, pState.updateShape(facing, pLevel.getBlockState(pNeighborPos), pLevel, pPos, pNeighborPos), 3);
+                FluidBackupSystem.getOrCreate(pLevel).refresh(pipeTile);
+            }
+        }
     }
 
     @Override

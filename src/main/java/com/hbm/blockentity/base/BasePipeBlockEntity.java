@@ -1,9 +1,7 @@
 package com.hbm.blockentity.base;
 
 import com.hbm.HBMKey;
-import com.hbm.api.Mode;
 import com.hbm.blockentity.interfaces.IConnector;
-import com.hbm.blockentity.machine.PipeEntity;
 import com.hbm.utils.math.BitUtil;
 import com.hbm.utils.transport_net.EnergyNetwork;
 import net.minecraft.core.BlockPos;

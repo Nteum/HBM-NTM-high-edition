@@ -40,11 +40,12 @@ public class CapabilitiesContent {
     }
     // 我希望添加capability可以覆盖原有的，但这获取会影响到他人的代码，所以单独实现一个功能。
     public <T>void forceAddCapability(Capability<T> capability, T handler, Direction ... directions){
+        List<Direction> directionList = List.of(directions.length == 0 ? Direction.values() : directions);
         handlerMap.put(capability, handler);
         LazyOptional<T> lazyOptional = LazyOptional.of(() -> handler);
         lazyOptionalMap.put(capability, lazyOptional );
-        sideMap.computeIfAbsent(capability, capability1 -> new ArrayList<>()).addAll(List.of(directions.length == 0 ? Direction.values() : directions));
-        for (Direction direction : directions) {
+        sideMap.computeIfAbsent(capability, capability1 -> new ArrayList<>()).addAll(directionList);
+        for (Direction direction : directionList) {
             sideSpecialMap.computeIfAbsent(capability, capability1 -> new HashMap<>()).put(direction, lazyOptional);
         }
     }

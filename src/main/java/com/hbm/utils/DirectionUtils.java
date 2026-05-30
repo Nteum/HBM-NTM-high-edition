@@ -14,6 +14,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -256,5 +257,12 @@ public class DirectionUtils {
     // 一个点相对于两条边的角度
     public static double locToCornerAngle(Vec3 loc, Direction inSide, Direction outSide){
         return Math.atan(locToSideDist(loc, inSide) / locToSideDist(loc, outSide));
+    }
+    // 从两个方块位置还原方向
+    public static @Nullable Direction posToDirection(BlockPos pos, BlockPos neighbourPos){
+        for (Direction direction : Direction.values()) {
+            if (pos.relative(direction).equals(neighbourPos)) return direction;
+        }
+        return null;
     }
 }

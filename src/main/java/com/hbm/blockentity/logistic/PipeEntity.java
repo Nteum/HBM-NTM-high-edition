@@ -1,4 +1,4 @@
-package com.hbm.blockentity.machine;
+package com.hbm.blockentity.logistic;
 
 import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.blockentity.base.BasePipeBlockEntity;

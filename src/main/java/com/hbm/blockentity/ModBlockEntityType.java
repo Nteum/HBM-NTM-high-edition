@@ -2,10 +2,7 @@ package com.hbm.blockentity;
 
 import com.hbm.block.env.GlyphidSpawner;
 import com.hbm.blockentity.base.TileProxyCombo;
-import com.hbm.blockentity.logistic.TileConveyor;
-import com.hbm.blockentity.logistic.TileConveyorExtractor;
-import com.hbm.blockentity.logistic.TileConveyorInserter;
-import com.hbm.blockentity.logistic.TileConveyorRouter;
+import com.hbm.blockentity.logistic.*;
 import com.hbm.blockentity.machine.*;
 import com.hbm.blockentity.machine.IronCrateBlockEntity;
 import com.hbm.blockentity.machine.SteelCrateBlockEntity;
