@@ -1,9 +1,0 @@
-{
-  "multipart": [
-    {
-      "apply": {
-        "model": "hbm:block/waste_leaves"
-      }
-    }
-  ]
-}

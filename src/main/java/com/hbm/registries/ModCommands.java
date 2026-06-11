@@ -7,6 +7,7 @@ import com.hbm.commands.RadiationCommand;
 import com.hbm.commands.TestCommand;
 import com.hbm.commands.WandCommand;
 import com.hbm.handler.radiation.ChunkRadiationManager;
+import com.hbm.render.util.DebugBoundsRenderer;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.FloatArgumentType;
 import net.minecraft.commands.CommandBuildContext;
@@ -67,6 +68,10 @@ public class ModCommands {
                 context.getSource().sendSuccess(() -> Component.translatable(HBMLang.COMMAND_DEBUG.key(),HBM.debug), true);
                 return 0;
             }))
+        .then(Commands.literal("line").executes(context -> {
+            DebugBoundsRenderer.SHOW_DEBUG_BOUNDS = !DebugBoundsRenderer.SHOW_DEBUG_BOUNDS;
+            return 0;
+        }))
         );
     }
 }

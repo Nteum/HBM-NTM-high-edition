@@ -1,5 +1,6 @@
 package com.hbm.blockentity;
 
+import com.hbm.block.env.BedRockOre;
 import com.hbm.block.env.GlyphidSpawner;
 import com.hbm.blockentity.base.TileProxyCombo;
 import com.hbm.blockentity.logistic.*;
@@ -194,6 +195,8 @@ public class ModBlockEntityType {
     public static final RegistryObject<BlockEntityType<TileConveyorExtractor>> TILE_CONVEYOR_EXTRACTOR = register("tile_conveyor_extractor", TileConveyorExtractor::new, ModBlocks.CONVEYOR_EXTRACTOR);
     public static final RegistryObject<BlockEntityType<TileConveyorInserter>> TILE_CONVEYOR_INSERTER = register("tile_conveyor_inserter", TileConveyorInserter::new, ModBlocks.CONVEYOR_INSERTER);
     public static final RegistryObject<BlockEntityType<TileConveyorRouter>> TILE_CONVEYOR_ROUTER = register("tile_conveyor_router", TileConveyorRouter::new, ModBlocks.CONVEYOR_ROUTER);
+    public static final RegistryObject<BlockEntityType<TileMinerLarge>> TILE_MINER_LARGE = register("tile_miner_large", TileMinerLarge::new, ModBlocks.MINER_LARGE);
+    public static final RegistryObject<BlockEntityType<BedRockOre.TileBedrockOre>> TILE_BEDROCK_ORE = register("tile_bedrock_ore", BedRockOre.TileBedrockOre::new, ModBlocks.BEDROCK_ORE);
     // 注册函数
     private static<T extends BlockEntity> RegistryObject<BlockEntityType<T>> register(String key, BlockEntityType.BlockEntitySupplier<T> pFactory, Supplier<Block>... pValidBlocks){
         return REGISTER.register(key, () -> BlockEntityType.Builder.of(pFactory, Arrays.stream(pValidBlocks).map(Supplier::get).toArray(Block[]::new)).build(null));

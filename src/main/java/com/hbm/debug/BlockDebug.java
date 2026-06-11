@@ -1,5 +1,6 @@
 package com.hbm.debug;
 
+import com.hbm.HBM;
 import com.hbm.entity.effect.EntityMeteor;
 import com.hbm.explosion.temp.ExplosionOneOff;
 import com.hbm.registries.ModItems;
@@ -7,6 +8,7 @@ import com.hbm.particle.ModParticleTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
@@ -40,13 +42,14 @@ public class BlockDebug extends Block {
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
         ItemStack itemInHand = pPlayer.getItemInHand(pHand);
         if (!pLevel.isClientSide()){
-            if (itemInHand.is(ModItems.DEBUG_WAND.get())) {
-                dropParticle(ModParticleTypes.DEAD_LEAF.get(), pLevel, pPos, pPlayer);
-            } else if (itemInHand.is(ModItems.METEOR_REMOTE.get())) {
-                testMeteorite(pState, pLevel, pPos, pPlayer);
-            } else if (itemInHand.is(Items.FLINT_AND_STEEL)){
-                return explode(pState, pLevel, pPos, pPlayer);
-            }
+            checkTag(pLevel, new ResourceLocation("forge", "battery"));
+//            if (itemInHand.is(ModItems.DEBUG_WAND.get())) {
+//                dropParticle(ModParticleTypes.DEAD_LEAF.get(), pLevel, pPos, pPlayer);
+//            } else if (itemInHand.is(ModItems.METEOR_REMOTE.get())) {
+//                testMeteorite(pState, pLevel, pPos, pPlayer);
+//            } else if (itemInHand.is(Items.FLINT_AND_STEEL)){
+//                return explode(pState, pLevel, pPos, pPlayer);
+//            }
         }
         return super.use(pState, pLevel, pPos, pPlayer, pHand, pHit);
     }
@@ -54,17 +57,9 @@ public class BlockDebug extends Block {
     @Override
     public void animateTick(BlockState pState, Level pLevel, BlockPos pPos, RandomSource pRandom) {
         super.animateTick(pState, pLevel, pPos, pRandom);
-//        if (pLevel.getBlockState(pPos.below()).isAir()){
-//            addParticle(ModParticleTypes.DEAD_LEAF.get(), pLevel, pPos, Minecraft.getInstance().player);
-//        }
-//        if (pState.getValue(ACTIVE)){
-//            if (pLevel.getRandom().nextFloat() > 0){
-//                Vec3 center = pPos.getCenter().add(0, 0.5, 0);
-//                ParticleSystem.addRocketFlame(center.x, center.y, center.z, 0, 0.1, 0, null, 60 + pRandom.nextInt(20));
-//            }
-//        }
     }
 
+    //======================以下均为测试函数================================
     public void dropParticle(ParticleOptions type, Level pLevel, BlockPos pPos, Player pPlayer){
         if (pLevel instanceof ServerLevel serverLevel){
             serverLevel.sendParticles(type,pPos.getX() + pLevel.random.nextFloat(), pPos.getY(), pPos.getZ() + pLevel.random.nextFloat(), 1, 0, 0, 0, 0);
@@ -100,5 +95,9 @@ public class BlockDebug extends Block {
             explode.explode();
         }
         return InteractionResult.CONSUME;
+    }
+
+    public void checkTag(Level level, ResourceLocation tag){
+        TagDebugUtils.checkItemTagLoading(level, tag);
     }
 }

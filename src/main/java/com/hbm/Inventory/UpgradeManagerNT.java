@@ -40,50 +40,50 @@ public class UpgradeManagerNT {
 	}
 
 	private void checkSlotsInternal(BlockEntity te, ItemStack[] slots, int start, int end) {
-
-		if(!(te instanceof IUpgradeInfoProvider) || slots == null)
-			return;
-
-		ItemStack[] upgradeSlots = Arrays.copyOfRange(slots, start, end + 1);
-
-		if(Arrays.equals(upgradeSlots, cachedSlots))
-			return;
-
-		cachedSlots = upgradeSlots.clone();
-
-		upgrades.clear();
-
-		for (int i = 0; i <= end - start; i++) {
-
-			if(upgradeSlots[i] != null && upgradeSlots[i].getItem() instanceof ItemMachineUpgrade) {
-
-				ItemMachineUpgrade item = (ItemMachineUpgrade) upgradeSlots[i].getItem();
-				IUpgradeInfoProvider upgradable = (IUpgradeInfoProvider) te;
-
-				if(upgradable.getValidUpgrades() == null)
-					return;
-
-				if (upgradable.getValidUpgrades().containsKey(item.type)) { // Check if upgrade can even be accepted by the machine.
-					if (item.type.mutex) {
-						if (mutexType == null) {
-							upgrades.put(item.type, 1);
-							mutexType = item.type;
-						} else if(item.type.ordinal() > mutexType.ordinal()) {
-							upgrades.remove(mutexType);
-							upgrades.put(item.type, 1);
-							mutexType = item.type;
-						}
-					} else {
-
-						Integer levelBefore = upgrades.get(item.type);
-						int upgradeLevel = (levelBefore == null ? 0 : levelBefore);
-						upgradeLevel += item.tier;
-						// Add additional check to make sure it doesn't go over the max.
-						upgrades.put(item.type, Math.min(upgradeLevel, upgradable.getValidUpgrades().get(item.type)));
-					}
-				}
-			}
-		}
+//
+//		if(!(te instanceof IUpgradeInfoProvider) || slots == null)
+//			return;
+//
+//		ItemStack[] upgradeSlots = Arrays.copyOfRange(slots, start, end + 1);
+//
+//		if(Arrays.equals(upgradeSlots, cachedSlots))
+//			return;
+//
+//		cachedSlots = upgradeSlots.clone();
+//
+//		upgrades.clear();
+//
+//		for (int i = 0; i <= end - start; i++) {
+//
+//			if(upgradeSlots[i] != null && upgradeSlots[i].getItem() instanceof ItemMachineUpgrade) {
+//
+//				ItemMachineUpgrade item = (ItemMachineUpgrade) upgradeSlots[i].getItem();
+//				IUpgradeInfoProvider upgradable = (IUpgradeInfoProvider) te;
+//
+//				if(upgradable.getValidUpgrades() == null)
+//					return;
+//
+//				if (upgradable.getValidUpgrades().containsKey(item.type)) { // Check if upgrade can even be accepted by the machine.
+//					if (item.type.mutex) {
+//						if (mutexType == null) {
+//							upgrades.put(item.type, 1);
+//							mutexType = item.type;
+//						} else if(item.type.ordinal() > mutexType.ordinal()) {
+//							upgrades.remove(mutexType);
+//							upgrades.put(item.type, 1);
+//							mutexType = item.type;
+//						}
+//					} else {
+//
+//						Integer levelBefore = upgrades.get(item.type);
+//						int upgradeLevel = (levelBefore == null ? 0 : levelBefore);
+//						upgradeLevel += item.tier;
+//						// Add additional check to make sure it doesn't go over the max.
+//						upgrades.put(item.type, Math.min(upgradeLevel, upgradable.getValidUpgrades().get(item.type)));
+//					}
+//				}
+//			}
+//		}
 	}
 
 	public Integer getLevel(UpgradeType type) {

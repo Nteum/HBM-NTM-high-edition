@@ -58,13 +58,9 @@ public class S2CSyncTileMessage implements IHBMMessage {
 
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof S2CSyncTileMessage))
+        if (!(obj instanceof S2CSyncTileMessage msg))
             return false;
-        S2CSyncTileMessage msg = (S2CSyncTileMessage) obj;
-        if (msg.pos != null && msg.pos.equals(this.pos) && msg.updateTag != null && msg.updateTag.equals(this.updateTag))
-            return true;
-        else
-            return false;
+        return msg.pos != null && msg.pos.equals(this.pos) && msg.updateTag != null && msg.updateTag.equals(this.updateTag);
     }
 
     public S2CSyncTileMessage copy(){

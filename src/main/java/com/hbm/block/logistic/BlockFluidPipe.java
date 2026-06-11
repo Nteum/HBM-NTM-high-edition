@@ -59,15 +59,6 @@ public class BlockFluidPipe extends AbstractPipeBlock implements EntityBlock, IL
     }
 
     @Override
-    public void onPlace(BlockState pState, Level pLevel, BlockPos pPos, BlockState pOldState, boolean pMovedByPiston) {
-        super.onPlace(pState, pLevel, pPos, pOldState, pMovedByPiston);
-        if (pLevel.isClientSide) {
-            return;
-        }
-//        FluidNetworkSystem.getOrCreate(pLevel).rebuildNetwork(pPos);
-    }
-
-    @Override
     public void onBlockStateChange(LevelReader level, BlockPos pos, BlockState oldState, BlockState newState) {
         super.onBlockStateChange(level, pos, oldState, newState);
         if (!(level instanceof Level serverLevel) || serverLevel.isClientSide) {
@@ -84,12 +75,8 @@ public class BlockFluidPipe extends AbstractPipeBlock implements EntityBlock, IL
                 FluidBackupSystem system = pipe1.network.getParent();
                 if (!oldValue && newValue){
                     system.link(pos, pos.relative(direction));
-//                fluidNetworkSystem.rebuildNetwork(pos);
                 }else if (oldValue && !newValue){
                     system.cut(pos, pos.relative(direction));
-//                    if (pipe1.network != null) {
-//                        fluidNetworkSystem.split(pipe1.network);
-//                    }
                 }
             }
         }
@@ -103,8 +90,6 @@ public class BlockFluidPipe extends AbstractPipeBlock implements EntityBlock, IL
             return;
         }
         if (!pLevel.isClientSide) {
-//            FluidNetworkSystem fluidNetworkSystem = FluidNetworkSystem.getOrCreate(pLevel);
-//            fluidNetworkSystem.leave(pPos);
             PipeEntity pipeEntity = WorldUtils.getTileEntity(PipeEntity.class, pLevel, pPos);
             if (pipeEntity != null && pipeEntity.network != null && pipeEntity.network.getParent() != null){
                 pipeEntity.network.getParent().leave(pipeEntity);
@@ -131,7 +116,7 @@ public class BlockFluidPipe extends AbstractPipeBlock implements EntityBlock, IL
     public List<Component> getDesc(Level level, BlockPos pos) {
         PipeEntity pipeEntity = WorldUtils.getTileEntity(PipeEntity.class, level, pos);
         Fluid fluid = Fluids.EMPTY;
-        if (pipeEntity != null) fluid = pipeEntity.getFluid();
+        if (pipeEntity != null) fluid = pipeEntity.getClientFluid();
         return List.of(
                 Component.translatable(this.getDescriptionId()).withStyle(ChatFormatting.YELLOW),
                 Component.translatable(fluid.getFluidType().getDescriptionId()).withStyle(ChatFormatting.WHITE)

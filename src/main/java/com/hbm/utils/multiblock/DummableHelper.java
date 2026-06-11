@@ -41,20 +41,20 @@ public class DummableHelper {
         return true;
     }
     /** 填充实体的方块 */
-    public static void fillSpace(Level level, BlockPos blockPos, BlockState blockState, Direction dir, List<Vec3i> offsets){
+    public static void fillSpace(Level level, BlockPos corePos, BlockState blockState, Direction dir, List<Vec3i> offsets){
 //        List<Vec3i> offsets2 = MultiblockData.transOffsets(offsets, dir);
         List<Vec3i> offsets2 = DirectionUtils.offsetRot(offsets, Direction.SOUTH, dir);
         BlockState newSate = blockState.setValue(HBMBlockProperties.IS_CORE, Boolean.FALSE);
         for (Vec3i offset : offsets2) {
             if (offset.getX()==0&&offset.getY()==0&&offset.getZ()==0)continue;
-            level.setBlock(blockPos.offset(offset),newSate,3);
-            BlockEntity blockEntity = level.getBlockEntity(blockPos.offset(offset));
+            level.setBlock(corePos.offset(offset),newSate,3);
+            BlockEntity blockEntity = level.getBlockEntity(corePos.offset(offset));
             if (blockEntity instanceof TileProxyBase tileProxyBase){
-                tileProxyBase.cachedPos = new BlockPos(blockPos);
+                tileProxyBase.cachedPos = new BlockPos(corePos);
             }
         }
         //中心方块实体设为core
-        if (level.getBlockEntity(blockPos) instanceof DummyableBlockEntity entity){
+        if (level.getBlockEntity(corePos) instanceof DummyableBlockEntity entity){
             entity.isFormed = true;
         }
     }

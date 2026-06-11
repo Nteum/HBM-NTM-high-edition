@@ -1,0 +1,7 @@
+{
+  "parent": "hbm:block/abstract/cube_all_with_tint_overlay",
+  "textures": {
+    "base": "minecraft:block/bedrock",
+    "overlay": "hbm:block/ore_random_8"
+  }
+}

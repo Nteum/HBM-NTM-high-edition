@@ -58,6 +58,10 @@ public abstract class BlockDummyable extends BlockMachineBase implements ICustom
     protected int placementOffset() {
         return 0;
     }
+    // 用于特殊情况下调整核心位置
+    protected Vec3i adjustCorePos(){
+        return new Vec3i(0,0,0);
+    }
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
         super.createBlockStateDefinition(pBuilder);
@@ -71,6 +75,7 @@ public abstract class BlockDummyable extends BlockMachineBase implements ICustom
             Direction direction = pState.getValue(FACING);
             int offset = placementOffset();
             BlockPos corePos = offset == 0 ? pPos : pPos.relative(direction, offset);
+            corePos = corePos.offset(adjustCorePos());
             //判断多方块结构是被会被阻挡
             if (!DummableHelper.checkRequirement(pLevel, corePos, direction, offsets, pPos)){
                 //方块掉落

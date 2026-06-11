@@ -60,7 +60,7 @@ public class BarrelEntity extends BaseMachineBlockEntity implements IPacketUpdat
         this.items = NonNullList.withSize(4,ItemStack.EMPTY);
         this.properties = ((BlockFluidBarrel)pBlockState.getBlock()).barrelProperties;
         this.fluidHandler = new SingleFluidHandler(properties.capacity, Mode.BOTH);
-        this.fluidHandler.setLimit(50, 50);
+        this.fluidHandler.setLimit(5, 5);
         this.capabilitiesContent.addCapability(ForgeCapabilities.FLUID_HANDLER, this.fluidHandler);
     }
 

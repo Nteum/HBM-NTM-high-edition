@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "hbm:boiler_electric"
+    },
+    "G": {
+      "item": "hbm:ingot_graphite"
+    },
+    "H": {
+      "item": "hbm:circuit_basic"
+    },
+    "P": {
+      "item": "hbm:pellet_rtg"
+    },
+    "U": {
+      "item": "hbm:ingot_u235"
+    }
+  },
+  "pattern": [
+    "GPG",
+    "BHB",
+    "GUG"
+  ],
+  "result": {
+    "item": "hbm:boiler_nuclear"
+  },
+  "show_notification": true
+}

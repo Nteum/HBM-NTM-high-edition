@@ -38,10 +38,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class ElectricFurnaceEntity extends BaseMachineBlockEntity implements MenuProvider, IUpgradeInfoProvider {
     public int progress;
@@ -224,21 +221,21 @@ public class ElectricFurnaceEntity extends BaseMachineBlockEntity implements Men
         List<Component> tooltips = new ArrayList<>();
         if (!(stack.getItem() instanceof ItemMachineUpgrade))return;
         ItemMachineUpgrade machineUpgrade = (ItemMachineUpgrade) stack.getItem();
-        if (!canProvideInfo(machineUpgrade.type, machineUpgrade.tier, true))return;
+        if (!canProvideInfo(machineUpgrade.type, machineUpgrade.tier))return;
 
-        provideInfo(machineUpgrade.type,machineUpgrade.tier, tooltips, true);
+        provideInfo(machineUpgrade.type,machineUpgrade.tier, tooltips);
 //        Component.Serializer.toJson()
 //        stack.addTagElement("elementData", );
     }
 
     @Override
-    public boolean canProvideInfo(UpgradeType type, int level, boolean extendedInfo) {
+    public boolean canProvideInfo(UpgradeType type, int level) {
         return type == UpgradeType.SPEED || type == UpgradeType.POWER;
     }
 
     @Override
-    public void provideInfo(UpgradeType type, int level, List<Component> tooltips, boolean extendedInfo) {
-        tooltips.add(IUpgradeInfoProvider.getStandardLabel(ModBlocks.FURNACE_ELECTRIC.get()));
+    public void provideInfo(UpgradeType type, int level, List<Component> tooltips) {
+        tooltips.add(IUpgradeInfoProvider.getStandardLabel(ModBlocks.machine_electric_furnace.get()));
         if(type == UpgradeType.SPEED) {
             tooltips.add(Component.translatable(this.KEY_DELAY, "-" + (level * 25) + "%").withStyle(ChatFormatting.GREEN));
             tooltips.add(Component.translatable(this.KEY_CONSUMPTION, "-" + (level * 100) + "%").withStyle(ChatFormatting.RED));
@@ -249,7 +246,7 @@ public class ElectricFurnaceEntity extends BaseMachineBlockEntity implements Men
     }
 
     @Override
-    public HashMap<UpgradeType, Integer> getValidUpgrades() {
+    public Map<UpgradeType, Integer> getValidUpgrades() {
         HashMap<UpgradeType, Integer> upgrades = new HashMap<>();
         upgrades.put(UpgradeType.SPEED, 3);
         upgrades.put(UpgradeType.POWER, 3);

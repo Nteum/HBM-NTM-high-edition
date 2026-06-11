@@ -4,9 +4,9 @@
     "hbm:battery_generic",
     "hbm:battery_advanced",
     "hbm:battery_lithium",
-    "hbm:battery",
+    "hbm:machine_battery",
     "hbm:battery_block_lithium",
-    "hbm:battery_schrabidium",
-    "hbm:battery_dineutronium"
+    "hbm:battery_block_schrabidium",
+    "hbm:battery_block_dineutronium"
   ]
 }

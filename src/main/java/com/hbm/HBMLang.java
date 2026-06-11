@@ -52,6 +52,7 @@ public enum HBMLang implements ILangEntry {
     CONTAINER_CONVEYOR_EXTRACTOR("Conveyor Extractor"),
     CONTAINER_CONVEYOR_INSERTER("Conveyor Inserter"),
     CONTAINER_CONVEYOR_ROUTER("Conveyor Router"),
+    CONTAINER_MINER_LARGE("Large Miner"),
     // GUI
     TOOLTIP_LEFT_TIME("gui","left_time.tooltip"),
     TOOLTIP_ENERGY("gui","stored_energy.tooltip"),
@@ -71,6 +72,11 @@ public enum HBMLang implements ILangEntry {
     GUI_TOOLTIP_CONVEYOR_ROUTER_BUTTON2("BLACKLIST: Route if filter doesn't match"),
     GUI_TOOLTIP_CONVEYOR_ROUTER_BUTTON3("WILDCARD: Route if no other route is valid"),
     GUI_TOOLTIP_CONVEYOR_ROUTER_WARNING("FULL! Please set one side to WILDCARD!"),
+    GUI_MINER_LARGE_DRILL("Toggle Drill"),
+    GUI_MINER_LARGE_SILK_TOUCH("Toggle Silk Touch"),
+    GUI_MINER_LARGE_VEIN_MINER("Toggle Vein Miner"),
+    GUI_MINER_LARGE_WALLING("Toggle Walling"),
+    GUI_MINER_LARGE_CRUSHER("Toggle Crusher"),
     // Item description
     TOOLTIP_SHOW_DETAIL("Hold %s to display more info"),
     ITEM_INGOT_NEPTUNIUM_DESC("That one's my favourite!"),
@@ -86,6 +92,9 @@ public enum HBMLang implements ILangEntry {
     // handoverTexts
     ENERGY("item","battery.tooltip"),
     FLUID_CAPACITY("item","fluid_capacity"),
+    SPEED("item","Speed: %"),
+    TIER("item","Tier: "),
+    VEIN_MINER("item","Vein Miner"),
     // command
     COMMAND_DEBUG("command","debug"),
     //Redstone Control
@@ -94,6 +103,16 @@ public enum HBMLang implements ILangEntry {
     REDSTONE_CONTROL_LOW("redstone_control", "low"),
     REDSTONE_CONTROL_PULSE("redstone_control", "pulse"),
     // upgrade
+    UPGRADE_ACID("Acid required %s"),
+    UPGRADE_BURN("Burn %smb/t for %sHE"),
+    UPGRADE_CONSUMPTION("Consumption %s"),
+    UPGRADE_COOLANT_CONSUMPTION("Coolant Consumption %s"),
+    UPGRADE_DELAY("Process time %s"),
+    UPGRADE_SPEED("Process speed %s"),
+    UPGRADE_EFFICIENCY("Efficiency %s"),
+    UPGRADE_PRODUCTIVITY("Productivity %s"),
+    UPGRADE_FORTUNE("Fortune %s"),
+    UPGRADE_RANGE("Range %s"),
     UPGRADE_RADIUS("upgrade","radius.tooltip"),
     UPGRADE_HEALTH("upgrade","health.tooltip"),
     UPGRADE_SMELTER("upgrade","smelter.tooltip"),

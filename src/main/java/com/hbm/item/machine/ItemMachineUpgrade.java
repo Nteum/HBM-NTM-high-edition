@@ -49,10 +49,10 @@ public class ItemMachineUpgrade extends Item {
         switch (this.type){
             case RADIUS -> toAdd = Component.translatable(HBMLang.UPGRADE_RADIUS.key()).withStyle(ChatFormatting.RED);
             case HEALTH -> toAdd = Component.translatable(HBMLang.UPGRADE_HEALTH.key()).withStyle(ChatFormatting.RED);
-            case LM_SMELTER -> toAdd = Component.translatable(HBMLang.UPGRADE_SMELTER.key()).withStyle(ChatFormatting.RED);
-            case LM_SHREDDER -> toAdd = Component.translatable(HBMLang.UPGRADE_SHREDDER.key()).withStyle(ChatFormatting.RED);
-            case LM_CENTRIFUGE -> toAdd = Component.translatable(HBMLang.UPGRADE_CENTRIFUGE.key()).withStyle(ChatFormatting.RED);
-            case LM_CRYSTALLIZER -> toAdd = Component.translatable(HBMLang.UPGRADE_CRYSTALLIZER.key()).withStyle(ChatFormatting.RED);
+//            case LM_SMELTER -> toAdd = Component.translatable(HBMLang.UPGRADE_SMELTER.key()).withStyle(ChatFormatting.RED);
+//            case LM_SHREDDER -> toAdd = Component.translatable(HBMLang.UPGRADE_SHREDDER.key()).withStyle(ChatFormatting.RED);
+//            case LM_CENTRIFUGE -> toAdd = Component.translatable(HBMLang.UPGRADE_CENTRIFUGE.key()).withStyle(ChatFormatting.RED);
+//            case LM_CRYSTALLIZER -> toAdd = Component.translatable(HBMLang.UPGRADE_CRYSTALLIZER.key()).withStyle(ChatFormatting.RED);
             case LM_SCREM -> toAdd = Component.translatable(HBMLang.UPGRADE_SCREAM.key()).withStyle(ChatFormatting.RED);
             case NULLIFIER -> toAdd = Component.translatable(HBMLang.UPGRADE_NULLIFIER.key()).withStyle(ChatFormatting.RED);
             case GC_SPEED -> toAdd = Component.translatable(HBMLang.UPGRADE_GC_SPEED.key()).withStyle(ChatFormatting.RED);
@@ -71,20 +71,21 @@ public class ItemMachineUpgrade extends Item {
         SPECIAL,
         LM_DESROYER,
         LM_SCREM,
-        LM_SMELTER(true),
-        LM_SHREDDER(true),
-        LM_CENTRIFUGE(true),
-        LM_CRYSTALLIZER(true),
+        MUTEX,  // 1 - smelter;2 - shredder; 3 - centrifuge; 4 - crystallizer
+//        LM_SMELTER(true),
+//        LM_SHREDDER(true),
+//        LM_CENTRIFUGE(true),
+//        LM_CRYSTALLIZER(true),
         GS_SPEED,
         //
         RADIUS,HEALTH,NULLIFIER,GC_SPEED;
 
-        public boolean mutex = false;
-
-        private UpgradeType() { }
-
-        private UpgradeType(boolean mutex) {
-            this.mutex = mutex;
-        }
+//        public boolean mutex = false;
+//
+//        private UpgradeType() { }
+//
+//        private UpgradeType(boolean mutex) {
+//            this.mutex = mutex;
+//        }
     }
 }

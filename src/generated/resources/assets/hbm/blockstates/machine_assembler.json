@@ -1,18 +1,18 @@
 {
   "variants": {
     "facing=east": {
-      "model": "hbm:block/assembler_body",
+      "model": "hbm:block/machine_assembler",
       "y": 90
     },
     "facing=north": {
-      "model": "hbm:block/assembler_body"
+      "model": "hbm:block/machine_assembler"
     },
     "facing=south": {
-      "model": "hbm:block/assembler_body",
+      "model": "hbm:block/machine_assembler",
       "y": 180
     },
     "facing=west": {
-      "model": "hbm:block/assembler_body",
+      "model": "hbm:block/machine_assembler",
       "y": 270
     }
   }

@@ -39,10 +39,10 @@ public class BlockLootGen extends BlockLootSubProvider {
 //        HBMBlockComponent.lootable(this);
         //机器
         this.dropSelf(ModBlocks.machine_difurnace.get());
-        this.dropSelf(ModBlocks.machine_electric_furnace.get());
-        this.dropSelf(ModBlocks.machine_boiler.get());
-        this.dropSelf(ModBlocks.machine_electric_boiler.get());
-        this.dropSelf(ModBlocks.machine_nuclear_boiler.get());
+//        this.dropSelf(ModBlocks.machine_electric_furnace.get());
+//        this.dropSelf(ModBlocks.machine_boiler.get());
+//        this.dropSelf(ModBlocks.machine_electric_boiler.get());
+//        this.dropSelf(ModBlocks.machine_nuclear_boiler.get());
         this.dropSelf(ModBlocks.machine_press.get());
         this.dropSelf(ModBlocks.machine_shredder.get());
         this.dropSelf(ModBlocks.machine_wood_burner.get());
@@ -98,7 +98,6 @@ public class BlockLootGen extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.bomb_boy.get());
         this.dropSelf(ModBlocks.bomb_fat_man.get());
         this.dropSelf(ModBlocks.bomb_custom.get());
-        this.dropSelf(ModBlocks.machine_nuclear_boiler.get());
 
         //饰品
         this.dropSelf(ModBlocks.TEST12.get());

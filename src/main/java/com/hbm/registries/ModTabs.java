@@ -107,10 +107,10 @@ public class ModTabs {
             .displayItems((parameters, output) -> {
                 output.accept(ModBlocks.machine_difurnace.get());
                 output.accept(ModBlocks.machine_press.get());
-                output.accept(ModBlocks.machine_electric_furnace.get());
-                output.accept(ModBlocks.machine_boiler.get());
-                output.accept(ModBlocks.machine_electric_boiler.get());
-                output.accept(ModBlocks.machine_nuclear_boiler.get());
+//                output.accept(ModBlocks.machine_electric_furnace.get());
+//                output.accept(ModBlocks.machine_boiler.get());
+//                output.accept(ModBlocks.machine_electric_boiler.get());
+//                output.accept(ModBlocks.machine_nuclear_boiler.get());
                 output.accept(ModBlocks.machine_battery.get());
                 output.accept(ModBlocks.machine_lithium_battery.get());
                 output.accept(ModBlocks.machine_schrabidium_battery.get());

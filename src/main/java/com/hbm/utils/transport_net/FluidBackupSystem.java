@@ -478,6 +478,11 @@ public class FluidBackupSystem {
                         FluidStack fluidStack = endpoint.resolve().get().drain(1000, IFluidHandler.FluidAction.SIMULATE);
                         if (!fluidStack.isEmpty()) {
                             this.fluid = fluidStack.getFluid();
+                            // 流体一旦更新则更新管道流体到客户端去。
+                            for (long node : this.nodes) {
+                                PipeEntity pipeEntity = WorldUtils.getTileEntity(PipeEntity.class, parent.level, BlockPos.of(node));
+                                if (pipeEntity != null) pipeEntity.syncToClient();
+                            }
                             break;
                         }
                     }

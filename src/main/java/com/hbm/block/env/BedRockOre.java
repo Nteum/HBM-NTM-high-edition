@@ -1,6 +1,13 @@
 package com.hbm.block.env;
 
+import com.hbm.HBMKey;
+import com.hbm.block.HBMBlockProperties;
+import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.utils.WorldUtils;
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtUtils;
+import net.minecraft.nbt.Tag;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -9,119 +16,126 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.fluids.FluidStack;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.security.interfaces.ECKey;
 import java.util.Arrays;
 import java.util.List;
 
 /** 基岩矿石 */
-public class BedRockOre extends Block {
-    public static final EnumProperty<BedRockOreType> TYPE = EnumProperty.create("bedrock_ore_type", BedRockOreType.class);
-
+public class BedRockOre extends Block implements EntityBlock {
+    public static final IntegerProperty VARIANT = HBMBlockProperties.BEDROCK_ORE_VARIANT;
     public BedRockOre(Properties pProperties) {
         super(pProperties);
-        this.registerDefaultState(this.getStateDefinition().any().setValue(TYPE,BedRockOreType.IRON));
+        this.registerDefaultState(this.getStateDefinition().any().setValue(VARIANT, 1));
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
         super.createBlockStateDefinition(pBuilder);
-        pBuilder.add(TYPE);
+        pBuilder.add(VARIANT);
     }
-    //设置方块格式
-    public void setType(BedRockOreType type){
-        this.defaultBlockState().setValue(TYPE,type);
+
+    @Nullable
+    @Override
+    public BlockState getStateForPlacement(BlockPlaceContext pContext) {
+        int variant = pContext.getLevel().random.nextInt(1, 10);
+        return super.getStateForPlacement(pContext).setValue(VARIANT, variant);
+    }
+
+    @Nullable
+    @Override
+    public BlockEntity newBlockEntity(@NotNull BlockPos pPos, @NotNull BlockState pState) {
+        return new TileBedrockOre(pPos, pState);
     }
 
     @Override
-    public void onPlace(BlockState pState, Level pLevel, BlockPos pPos, BlockState pOldState, boolean pMovedByPiston) {
-        super.onPlace(pState, pLevel, pPos, pOldState, pMovedByPiston);
-        pLevel.setBlockAndUpdate(pPos,pState);
+    public RenderShape getRenderShape(BlockState pState) {
+        return RenderShape.MODEL;
     }
 
+    // 测试修改颜色
     @Override
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-        //创造模式下右键获取基岩矿石对应的物品。
-        if (!pLevel.isClientSide() && pPlayer.isCreative()){
-            BedRockOreType value = pState.getValue(TYPE);
-            if (pPlayer.hasPose(Pose.CROUCHING)) {
-                //1. blockstate.setvalue返回的才是新值
-                BlockState state2 = pState.setValue(TYPE, BedRockOreType.COPPER);
-                //2. 更新blockstate之后需要用level重置方块
-                pLevel.setBlock(pPos,state2,2);
-            } else {
-                if (!pPlayer.addItem(value.main_product)) {
-                    ItemEntity itemEntity = new ItemEntity(pLevel, pPos.getX(), pPos.getY() + 1, pPos.getZ(), new ItemStack(value.main_product.getItem()));
-                    pLevel.addFreshEntity(itemEntity);
-                }
-                return InteractionResult.SUCCESS;
-            }
-        }
+//        if (!pLevel.isClientSide && pHand == InteractionHand.MAIN_HAND){
+//            TileBedrockOre tileEntity = WorldUtils.getTileEntity(TileBedrockOre.class, pLevel, pPos);
+//            if (tileEntity != null){
+//                tileEntity.setColor(0xFF00FF00);
+//            }
+//            return InteractionResult.CONSUME;
+//        }
         return super.use(pState, pLevel, pPos, pPlayer, pHand, pHit);
     }
 
+    /**
+     * 方块实体，主要用于记录信息
+     * */
+    public static class TileBedrockOre extends BlockEntity {
 
-    public enum BedRockOreType implements StringRepresentable {
-        IRON("iron",Items.RAW_IRON.getDefaultInstance(),FluidStack.EMPTY, 1),
-        COPPER("copper",Items.RAW_COPPER.getDefaultInstance(),FluidStack.EMPTY, 1),
-//        BORAX("borax",Items.RAW_COPPER.getDefaultInstance(),FluidStack.EMPTY, 1),
-//        ASBESTOS("asbestos",Items.RAW_COPPER.getDefaultInstance(),FluidStack.EMPTY, 1),
-//        NIOBIUM("niobium",Items.RAW_COPPER.getDefaultInstance(),FluidStack.EMPTY, 1),
-//        TITANIUM("titanium",Items.RAW_COPPER.getDefaultInstance(),FluidStack.EMPTY, 1),
-//        TUNGSTEN("tungsten",Items.RAW_COPPER.getDefaultInstance(),FluidStack.EMPTY, 1),
-//        GOLD("gold",Items.RAW_COPPER.getDefaultInstance(),FluidStack.EMPTY, 1),
-//        URANIUM("uranium",Items.RAW_COPPER.getDefaultInstance(),FluidStack.EMPTY, 1),
-//        THORIUM("thorium",Items.RAW_COPPER.getDefaultInstance(),FluidStack.EMPTY, 1),
-//        CHLOROCALCITE("chlorocalcite",Items.RAW_COPPER.getDefaultInstance(),FluidStack.EMPTY, 1),
-//        FLUORITE("fluorite",Items.RAW_COPPER.getDefaultInstance(),FluidStack.EMPTY, 1),
-//        HEMATITE("hematite",Items.RAW_COPPER.getDefaultInstance(),FluidStack.EMPTY, 1),
-//        MALACHITE("malachite",Items.RAW_COPPER.getDefaultInstance(),FluidStack.EMPTY, 1),
-//        NEODYMIUM("neodymium",Items.RAW_COPPER.getDefaultInstance(),FluidStack.EMPTY, 1),
-//        COAL("coal",Items.RAW_COPPER.getDefaultInstance(),FluidStack.EMPTY, 1),
-//        NITER("niter",Items.RAW_COPPER.getDefaultInstance(),FluidStack.EMPTY, 1),
-//        REDSTONE("redstone",Items.RAW_COPPER.getDefaultInstance(),FluidStack.EMPTY, 1),
-//        EMERALD("emerald",Items.RAW_COPPER.getDefaultInstance(),FluidStack.EMPTY, 1),
-//        RARE("rare",Items.RAW_COPPER.getDefaultInstance(),FluidStack.EMPTY, 1),
-//        GLOW_STONE("glow_stone",Items.RAW_COPPER.getDefaultInstance(),FluidStack.EMPTY, 1),
-//        POWER_FIRE("power_fire",Items.RAW_COPPER.getDefaultInstance(),FluidStack.EMPTY, 1),
-//        QUARTZ("quartz",Items.RAW_COPPER.getDefaultInstance(),FluidStack.EMPTY, 1),
-        ;
-
-
-        public String key;
-        public ItemStack main_product;
-        public List<ItemStack> by_product;
-        public List<Integer> probilities;
-        public FluidStack acid;
+        public ItemStack resource;
+        public FluidStack acidRequirement;
         public int tier;
         public int color;
-        private static final int DEFAULT_COLOR = 0x8F9999;
-        private BedRockOreType(String key, ItemStack main_product, Integer tier){
-            this(key, main_product,null, null, tier, DEFAULT_COLOR);
+        public int shape;
+
+        public TileBedrockOre(BlockPos pPos, BlockState pBlockState) {
+            super(ModBlockEntityType.TILE_BEDROCK_ORE.get(), pPos, pBlockState);
+            this.tier = 1;
+            this.color = 0xFFFFFFFF;
+            this.shape = 3;
         }
-        private BedRockOreType(String key, ItemStack main_product, FluidStack acid, Integer tier){
-            this(key, main_product,null, acid, tier, DEFAULT_COLOR);
-        }
-        private BedRockOreType(String key, ItemStack main_product, List<ItemStack> by_product,  FluidStack acid, int tier, int color){
-            this.key = key;
-            this.main_product = main_product;
-            this.by_product = by_product;
-            this.acid = acid;
+
+        public TileBedrockOre setStyle(int color, int shape) {
             this.color = color;
-            this.tier = tier;
+            this.shape = shape;
+            return this;
+        }
+        public int getColor(){
+            return this.color;
+        }
+        public void setColor(int color) {
+            this.color = color;
+
+            setChanged();
+            // 设置颜色需要更新到客户端
+            if(level != null) {
+                level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_CLIENTS);
+            }
         }
 
         @Override
-        public @NotNull String getSerializedName() {
-            return this.key;
+        protected void saveAdditional(CompoundTag pTag) {
+            super.saveAdditional(pTag);
+            if (resource != null) pTag.put(HBMKey.ITEM, this.resource.serializeNBT());
+            if (acidRequirement != null) pTag.put(HBMKey.FLUIDS, acidRequirement.writeToNBT(new CompoundTag()));
+            pTag.putInt(HBMKey.TIER, this.tier);
+            pTag.putInt(HBMKey.COLOR, this.color);
+            pTag.putInt(HBMKey.SHAPE, this.shape);
+        }
+
+        @Override
+        public void load(CompoundTag pTag) {
+            super.load(pTag);
+            if (pTag.contains(HBMKey.ITEM, Tag.TAG_COMPOUND)) this.resource = ItemStack.of(pTag.getCompound(HBMKey.ITEM));
+            if (pTag.contains(HBMKey.FLUIDS, Tag.TAG_COMPOUND)) this.acidRequirement = FluidStack.loadFluidStackFromNBT(pTag.getCompound(HBMKey.FLUIDS));
+            this.tier = pTag.getInt(HBMKey.TIER);
+            this.color = pTag.getInt(HBMKey.COLOR);
+            this.shape = pTag.getInt(HBMKey.SHAPE);
         }
     }
 }

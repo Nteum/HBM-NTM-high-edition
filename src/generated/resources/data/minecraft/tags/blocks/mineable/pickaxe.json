@@ -13,7 +13,12 @@
     "hbm:fluid_pipe",
     "hbm:geiger",
     "hbm:launch_pad",
+    "hbm:furnace_electric",
+    "hbm:boiler",
+    "hbm:boiler_electric",
+    "hbm:boiler_nuclear",
     "hbm:press_preheater",
+    "hbm:miner_large",
     "hbm:pwr_controller",
     "hbm:pwr_casing",
     "hbm:pwr_port",
@@ -77,8 +82,6 @@
     "hbm:ore_nether_plutonium",
     "hbm:ore_nether_fire",
     "hbm:ore_tikite",
-    "hbm:ore_bedrock",
-    "hbm:depth_stone",
     "hbm:space_station_base"
   ]
 }

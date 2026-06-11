@@ -1,5 +1,6 @@
 package com.hbm.block.machine;
 
+import com.hbm.block.HBMBlockProperties;
 import com.hbm.block.base.BaseMachineBlock;
 import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.blockentity.machine.DifurnaceEntity;
@@ -32,12 +33,12 @@ import java.util.List;
 
 public class BlockDifurnace extends BaseMachineBlock {
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
+    public static final BooleanProperty HAT = HBMBlockProperties.WITH_HAT;
     public BlockDifurnace(Properties pProperties) {
         super(pProperties);
         //设置状态的初始值
         this.registerDefaultState(
-                this.getStateDefinition().any()
-                        .setValue(LIT,Boolean.FALSE)
+                this.getStateDefinition().any().setValue(LIT,Boolean.FALSE).setValue(HAT, Boolean.FALSE)
         );
     }
 
@@ -47,7 +48,7 @@ public class BlockDifurnace extends BaseMachineBlock {
     @Override
     public void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
         super.createBlockStateDefinition(pBuilder);
-        pBuilder.add(LIT);
+        pBuilder.add(LIT).add(HAT);
     }
 
     //继承自baseblockentity

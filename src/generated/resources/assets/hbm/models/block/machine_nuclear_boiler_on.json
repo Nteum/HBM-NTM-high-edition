@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/orientable",
-  "textures": {
-    "front": "hbm:block/machine_boiler_nuclear_front_lit",
-    "side": "hbm:block/machine_boiler_nuclear_side",
-    "top": "hbm:block/machine_boiler_top"
-  }
-}

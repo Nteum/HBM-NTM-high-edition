@@ -10,10 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.PipeBlock;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.block.state.properties.*;
 import net.minecraftforge.client.model.generators.*;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -58,53 +55,53 @@ public class BlockStateGen extends BlockStateProvider {
         simpleBlockWithItem(ModBlocks.tokamak_port.get(), this.models().cubeAll("tokamak_port", tokamakSide));
 
         //多状态的方块和物品
-        //1. 高炉
-        BlockModelBuilder machineDifurnace_off = this.models().orientableWithBottom("machine_difurnace_off", new ResourceLocation(HBM.MODID, "block/difurnace_side"), new ResourceLocation(HBM.MODID, "block/difurnace_front_off"), new ResourceLocation(HBM.MODID, "block/difurnace_bottom"), new ResourceLocation(HBM.MODID, "block/difurnace_top_off"));
-        BlockModelBuilder machineDifurnace_on = this.models().orientableWithBottom("machine_difurnace_on", new ResourceLocation(HBM.MODID, "block/difurnace_side"), new ResourceLocation(HBM.MODID, "block/difurnace_front_on"),new ResourceLocation(HBM.MODID, "block/difurnace_bottom"), new ResourceLocation(HBM.MODID, "block/difurnace_top_on"));
-        addBooleanStateWithFace(ModBlocks.machine_difurnace.get(), BlockStateProperties.LIT, machineDifurnace_off, machineDifurnace_on);
-        //2. 电炉
-        BlockModelBuilder machineElectricFurnaceOff = this.models().orientableWithBottom("machine_electric_furnace_off",
-            new ResourceLocation(HBM.MODID, "block/machine_electric_furnace_side"),
-            new ResourceLocation(HBM.MODID, "block/machine_electric_furnace_front_off"),
-            new ResourceLocation(HBM.MODID, "block/machine_electric_furnace_bottom"),
-            new ResourceLocation(HBM.MODID,"block/machine_electric_furnace_top"));
-        BlockModelBuilder machineElectricFurnaceOn = this.models().orientableWithBottom("machine_electric_furnace_on",
-            new ResourceLocation(HBM.MODID, "block/machine_electric_furnace_side"),
-            new ResourceLocation(HBM.MODID, "block/machine_electric_furnace_front_on"),
-            new ResourceLocation(HBM.MODID, "block/machine_electric_furnace_bottom"),
-            new ResourceLocation(HBM.MODID,"block/machine_electric_furnace_top"));
-        addBooleanStateWithFace(ModBlocks.machine_electric_furnace.get(), BlockStateProperties.LIT, machineElectricFurnaceOff, machineElectricFurnaceOn);
-        //3. 加热器
-        BlockModelBuilder machine_boiler_off = this.models().orientable("machine_boiler_off",
-                new ResourceLocation(HBM.MODID, "block/machine_boiler_side"),
-                new ResourceLocation(HBM.MODID, "block/machine_boiler_front"),
-                new ResourceLocation(HBM.MODID, "block/machine_boiler_top"));
-        BlockModelBuilder machine_boiler_on = this.models().orientable("machine_boiler_on",
-                new ResourceLocation(HBM.MODID, "block/machine_boiler_side"),
-                new ResourceLocation(HBM.MODID, "block/machine_boiler_front_lit"),
-                new ResourceLocation(HBM.MODID, "block/machine_boiler_top"));
-        addBooleanStateWithFace(ModBlocks.machine_boiler.get(), BlockStateProperties.LIT, machine_boiler_off, machine_boiler_on);
-        //4. 电加热器
-        BlockModelBuilder machine_electric_boiler_off = this.models().orientable("machine_electric_boiler_off",
-                new ResourceLocation(HBM.MODID, "block/machine_boiler_side"),
-                new ResourceLocation(HBM.MODID, "block/machine_boiler_electric_front"),
-                new ResourceLocation(HBM.MODID, "block/machine_boiler_electric_top"));
-        BlockModelBuilder machine_electric_boiler_on = this.models().orientable("machine_electric_boiler_on",
-                new ResourceLocation(HBM.MODID, "block/machine_boiler_side"),
-                new ResourceLocation(HBM.MODID, "block/machine_boiler_electric_front_lit"),
-                new ResourceLocation(HBM.MODID, "block/machine_boiler_electric_top"));
-        addBooleanStateWithFace(ModBlocks.machine_electric_boiler.get(), BlockStateProperties.LIT, machine_electric_boiler_off, machine_electric_boiler_on);
-        //5. 核加热器
-        BlockModelBuilder machine_nuclear_boiler_off = this.models().orientable("machine_nuclear_boiler_off",
-                new ResourceLocation(HBM.MODID, "block/machine_boiler_nuclear_side"),
-                new ResourceLocation(HBM.MODID, "block/machine_boiler_nuclear_front"),
-                new ResourceLocation(HBM.MODID, "block/machine_boiler_top"));
-        BlockModelBuilder machine_nuclear_boiler_on = this.models().orientable("machine_nuclear_boiler_on",
-                new ResourceLocation(HBM.MODID, "block/machine_boiler_nuclear_side"),
-                new ResourceLocation(HBM.MODID, "block/machine_boiler_nuclear_front_lit"),
-                new ResourceLocation(HBM.MODID, "block/machine_boiler_top"));
-        addBooleanStateWithFace(ModBlocks.machine_nuclear_boiler.get(), BlockStateProperties.LIT, machine_nuclear_boiler_off, machine_nuclear_boiler_on);
-        // Nuclear bomb blockstates and item models are hand-authored so OBJ block models do not leak into GUI slots.
+//        //1. 高炉
+//        BlockModelBuilder machineDifurnace_off = this.models().orientableWithBottom("machine_difurnace_off", new ResourceLocation(HBM.MODID, "block/difurnace_side"), new ResourceLocation(HBM.MODID, "block/difurnace_front_off"), new ResourceLocation(HBM.MODID, "block/difurnace_bottom"), new ResourceLocation(HBM.MODID, "block/difurnace_top_off"));
+//        BlockModelBuilder machineDifurnace_on = this.models().orientableWithBottom("machine_difurnace_on", new ResourceLocation(HBM.MODID, "block/difurnace_side"), new ResourceLocation(HBM.MODID, "block/difurnace_front_on"),new ResourceLocation(HBM.MODID, "block/difurnace_bottom"), new ResourceLocation(HBM.MODID, "block/difurnace_top_on"));
+//        addBooleanStateWithFace(ModBlocks.machine_difurnace.get(), BlockStateProperties.LIT, machineDifurnace_off, machineDifurnace_on);
+//        //2. 电炉
+//        BlockModelBuilder machineElectricFurnaceOff = this.models().orientableWithBottom("machine_electric_furnace_off",
+//            new ResourceLocation(HBM.MODID, "block/furnace_electric_side"),
+//            new ResourceLocation(HBM.MODID, "block/furnace_electric_front"),
+//            new ResourceLocation(HBM.MODID, "block/furnace_electric_bottom"),
+//            new ResourceLocation(HBM.MODID,"block/furnace_electric_top"));
+//        BlockModelBuilder machineElectricFurnaceOn = this.models().orientableWithBottom("machine_electric_furnace_on",
+//            new ResourceLocation(HBM.MODID, "block/furnace_electric_side"),
+//            new ResourceLocation(HBM.MODID, "block/furnace_electric_front_alter"),
+//            new ResourceLocation(HBM.MODID, "block/furnace_electric_bottom"),
+//            new ResourceLocation(HBM.MODID,"block/furnace_electric_top"));
+//        addBooleanStateWithFace(ModBlocks.machine_electric_furnace.get(), BlockStateProperties.LIT, machineElectricFurnaceOff, machineElectricFurnaceOn);
+//        //3. 加热器
+//        BlockModelBuilder machine_boiler_off = this.models().orientable("machine_boiler_off",
+//                new ResourceLocation(HBM.MODID, "block/machine_boiler_side"),
+//                new ResourceLocation(HBM.MODID, "block/machine_boiler_front"),
+//                new ResourceLocation(HBM.MODID, "block/machine_boiler_top"));
+//        BlockModelBuilder machine_boiler_on = this.models().orientable("machine_boiler_on",
+//                new ResourceLocation(HBM.MODID, "block/machine_boiler_side"),
+//                new ResourceLocation(HBM.MODID, "block/machine_boiler_front_lit"),
+//                new ResourceLocation(HBM.MODID, "block/machine_boiler_top"));
+//        addBooleanStateWithFace(ModBlocks.machine_boiler.get(), BlockStateProperties.LIT, machine_boiler_off, machine_boiler_on);
+//        //4. 电加热器
+//        BlockModelBuilder machine_electric_boiler_off = this.models().orientable("machine_electric_boiler_off",
+//                new ResourceLocation(HBM.MODID, "block/machine_boiler_side"),
+//                new ResourceLocation(HBM.MODID, "block/machine_boiler_electric_front"),
+//                new ResourceLocation(HBM.MODID, "block/machine_boiler_electric_top"));
+//        BlockModelBuilder machine_electric_boiler_on = this.models().orientable("machine_electric_boiler_on",
+//                new ResourceLocation(HBM.MODID, "block/machine_boiler_side"),
+//                new ResourceLocation(HBM.MODID, "block/machine_boiler_electric_front_lit"),
+//                new ResourceLocation(HBM.MODID, "block/machine_boiler_electric_top"));
+//        addBooleanStateWithFace(ModBlocks.machine_electric_boiler.get(), BlockStateProperties.LIT, machine_electric_boiler_off, machine_electric_boiler_on);
+//        //5. 核加热器
+//        BlockModelBuilder machine_nuclear_boiler_off = this.models().orientable("machine_nuclear_boiler_off",
+//                new ResourceLocation(HBM.MODID, "block/machine_boiler_nuclear_side"),
+//                new ResourceLocation(HBM.MODID, "block/machine_boiler_nuclear_front"),
+//                new ResourceLocation(HBM.MODID, "block/machine_boiler_top"));
+//        BlockModelBuilder machine_nuclear_boiler_on = this.models().orientable("machine_nuclear_boiler_on",
+//                new ResourceLocation(HBM.MODID, "block/machine_boiler_nuclear_side"),
+//                new ResourceLocation(HBM.MODID, "block/machine_boiler_nuclear_front_lit"),
+//                new ResourceLocation(HBM.MODID, "block/machine_boiler_top"));
+//        addBooleanStateWithFace(ModBlocks.machine_nuclear_boiler.get(), BlockStateProperties.LIT, machine_nuclear_boiler_off, machine_nuclear_boiler_on);
+//        // Nuclear bomb blockstates and item models are hand-authored so OBJ block models do not leak into GUI slots.
 
         //线缆
         cableBlockWithItem();
@@ -112,13 +109,13 @@ public class BlockStateGen extends BlockStateProvider {
         horizontalBlockWithItem(ModBlocks.TEST12.get(),"block/test12/test12");
         addHorizontalModel(ModBlocks.SPACE_STATION_BASE.get(), "block/space_station_base");
         simpleBlockWithItem(ModBlocks.CONNECTOR.get(), genBuiltInModelFile(ModBlocks.CONNECTOR.get(), "existing"));
-        addHorizontalModel(ModBlocks.machine_assembler.get(), "block/assembler_body");
+        addHorizontalModel(ModBlocks.machine_assembler.get(), "block/machine_assembler");
         addHorizontalModel(ModBlocks.machine_press.get(), "block/press");
         addHorizontalModel(ModBlocks.HEATER_FIREBOX.get(), "block/firebox");
-        addHorizontalModel(ModBlocks.anvil_iron.get(),"block/anvil/anvil_iron");
-        addHorizontalModel(ModBlocks.anvil_bismuth.get(),"block/anvil/anvil_bismuth");
-        addHorizontalModel(ModBlocks.anvil_desh.get(),"block/anvil/anvil_desh");
-        addHorizontalModel(ModBlocks.machine_cracking_tower.get(),"block/cracking_tower/machine_cracking_tower");
+        addHorizontalModel(ModBlocks.anvil_iron.get(),"block/anvil_iron");
+        addHorizontalModel(ModBlocks.anvil_bismuth.get(),"block/anvil_bismuth");
+        addHorizontalModel(ModBlocks.anvil_desh.get(),"block/anvil_desh");
+        addHorizontalModel(ModBlocks.machine_cracking_tower.get(),"block/cracking_tower");
         addHorizontalModel(ModBlocks.machine_crucible.get(), "block/crucible");
         conveyor(ModBlocks.conveyor.get(), "block/conveyor");
         conveyorCrane(ModBlocks.CONVEYOR_INSERTER.get(), "block/conveyor_inserter");
@@ -133,6 +130,13 @@ public class BlockStateGen extends BlockStateProvider {
         addHorizontalModel(ModBlocks.GEIGER_COUNTER.get(), "block/geiger");
         addHorizontalModel(ModBlocks.LAUNCH_PAD.get(), "block/launch_pad");
         pipeBlockWithItem(ModBlocks.FLUID_PIPE.get());
+        addHorizontalModel(ModBlocks.MINER_LARGE.get(), "block/miner_large");
+        cubeWithOverlay(ModBlocks.BEDROCK_ORE.get(), ResourceLocation.tryParse("block/bedrock"), HBM.rl("block/ore_random_"), HBMBlockProperties.BEDROCK_ORE_VARIANT);
+        addBooleanStateWithOrientableModel(ModBlocks.machine_electric_furnace.get(), BlockStateProperties.LIT);
+        addBooleanStateWithOrientableModel(ModBlocks.machine_boiler.get(), BlockStateProperties.LIT);
+        addBooleanStateWithOrientableModel(ModBlocks.machine_electric_boiler.get(), BlockStateProperties.LIT);
+        addBooleanStateWithOrientableModel(ModBlocks.machine_nuclear_boiler.get(), BlockStateProperties.LIT);
+        addDifurnace(ModBlocks.machine_difurnace.get(), BlockStateProperties.LIT, HBMBlockProperties.WITH_HAT);
     }
     // 方块和物品：纯cube all
     public void simpleBlockWithItem(Block block){
@@ -165,6 +169,13 @@ public class BlockStateGen extends BlockStateProvider {
                         .build(), HBMBlockProperties.IS_CORE);
         this.simpleBlockItem(block,existingFile);
     }
+    private void cubeWithOverlay(Block block, ResourceLocation base, ResourceLocation overlay, Property property){
+        String name = name(block);
+        getVariantBuilder(block).forAllStates(state -> ConfiguredModel.builder().modelFile(models()
+                .withExistingParent(name + "_" + state.getValue(property), HBM.rl("block/abstract/cube_all_with_tint_overlay"))
+                .texture("base", base).texture("overlay", overlay.withSuffix(state.getValue(property).toString()))).build());
+        this.simpleBlockItem(block, models().cubeAll(name, base));
+    }
     // 专用于传送带模型
     private void conveyor(Block block,String name){
         ModelFile.ExistingModelFile existingFile = this.models().getExistingFile(HBM.rl(name));
@@ -187,6 +198,9 @@ public class BlockStateGen extends BlockStateProvider {
         });
         this.simpleBlockItem(block,existingFile);
     }
+    private void addBooleanStateWithOrientableModel(Block block, BooleanProperty booleanProperty){
+        addBooleanStateWithFace(block, booleanProperty, genBuiltInModelFile(block, "orientable"), genBuiltInModelFile(block, "orientable", "_alter", "", "_alter", ""));
+    }
     /** 添加有两个状态，并带有水平方向的方块（HBM的方块机器大部分属于此列） */
     private void addBooleanStateWithFace(Block block, BooleanProperty booleanProperty, ModelFile model1, ModelFile model2){
         this.getVariantBuilder(block)
@@ -194,6 +208,26 @@ public class BlockStateGen extends BlockStateProvider {
                     Boolean value = state.getValue(booleanProperty);
                     return ConfiguredModel.builder()
                             .modelFile(value == Boolean.FALSE ? model1 : model2)
+                            .rotationY(((int) state.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot() + 180) % 360)
+                            .build();
+                });
+        this.simpleBlockItem(block,model1);
+    }
+    private void addDifurnace(Block block, BooleanProperty booleanProperty, BooleanProperty booleanProperty2){
+        addTwoBooleanState(block, booleanProperty, booleanProperty2,
+                genBuiltInModelFile(block, "orientable", "_off", "_alt", "_off_alt", "_off_alt"),
+                genBuiltInModelFile(block, "orientable", "_off_tall", "_tall", "_off_tall", "_off_alt"),
+                genBuiltInModelFile(block, "orientable", "_on", "_alt", "_on_alt", "_on_alt"),
+                genBuiltInModelFile(block, "orientable", "_on_tall", "_tall", "_on_tall", "_on_alt")
+        );
+    }
+    private void addTwoBooleanState(Block block, BooleanProperty booleanProperty, BooleanProperty booleanProperty2, ModelFile model1, ModelFile model2, ModelFile model3, ModelFile model4){
+        this.getVariantBuilder(block)
+                .forAllStates(state -> {
+                    Boolean value = state.getValue(booleanProperty);
+                    boolean value2 = state.getValue(booleanProperty2);
+                    return ConfiguredModel.builder()
+                            .modelFile(value == Boolean.FALSE ? (value2 == Boolean.FALSE ? model1 : model2) : value2 == Boolean.FALSE ? model3 : model4)
                             .rotationY(((int) state.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot() + 180) % 360)
                             .build();
                 });
@@ -217,14 +251,6 @@ public class BlockStateGen extends BlockStateProvider {
         for (Integer value : integerProperty.getPossibleValues()) {
             partialState.with(integerProperty, value).addModels(ConfiguredModel.builder().modelFile(models().cubeAll(name(block) + "_" + value, blockTexture.withSuffix("_" + value))).buildLast());
         }
-    }
-
-    public ModelFile enumModelFileFunction_BedRockOreType(BedRockOre.BedRockOreType value) {
-        return switch (value){
-            case IRON -> models().getExistingFile(HBM.rl("block/env/bedrock_ore_iron"));
-            case COPPER -> models().getExistingFile(HBM.rl("block/env/bedrock_ore_copper"));
-            default -> null;
-        };
     }
 
     private void cableBlockWithItem(){
@@ -258,19 +284,23 @@ public class BlockStateGen extends BlockStateProvider {
         return key(block).getPath();
     }
 
-    public ModelFile genBuiltInModelFile(Block block, String type){
+    public ModelFile genBuiltInModelFile(Block block, String type, String ... nicknames){
         String name = name(block);
         ResourceLocation blockTexture = blockTexture(block);
         return switch (type){
-            case "cube_all" -> cubeAll(block);
+            case "cube_all" -> models().cubeAll(name, blockTexture);
             case "cube_top" -> models().cubeTop(name, blockTexture.withSuffix("_side"), blockTexture.withSuffix("_top"));
             case "cube_bottom_top" -> models().cubeBottomTop(name, blockTexture.withSuffix("_side"), blockTexture.withSuffix("_bottom"), blockTexture.withSuffix("_top"));
             case "cube_column" -> models().cubeColumn(name, blockTexture.withSuffix("_side"), blockTexture.withSuffix("_end"));
             case "leaves" -> models().leaves(name, blockTexture);
             // 使用给定的model文件，这里假定只有
             case "existing" -> models().getExistingFile(HBM.rl(name));
+            case "orientable" -> models().orientable(name + getOrBlank(nicknames, 0), blockTexture.withSuffix("_side" + getOrBlank(nicknames, 1)), blockTexture.withSuffix("_front" + getOrBlank(nicknames, 2)), blockTexture.withSuffix("_top" + getOrBlank(nicknames, 3)));
             default -> throw new IllegalStateException("Unexpected value: " + type);
         };
+    }
+    private static String getOrBlank(String[] array, int i){
+        return array.length > i ? array[i] : "";
     }
     // 输送带控制器，鬼知道为什么bob用了crane这个词
     // 就是纯纯的屎山，我都不知道该说什么，摊上这玩意算我倒霉，硬着头皮搞了三个晚上，

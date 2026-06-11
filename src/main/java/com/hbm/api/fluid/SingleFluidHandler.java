@@ -44,6 +44,17 @@ public class SingleFluidHandler implements IExtendedFluidHandler, INBTSerializab
     public void setMode(Mode mode){
         this.mode = mode;
     }
+
+    @Override
+    public int getInputLimit() {
+        return inputLimit;
+    }
+
+    @Override
+    public int getOutputLimit() {
+        return outputLimit;
+    }
+
     @Override
     public CompoundTag serializeNBT() {
         CompoundTag tag = tank.writeToNBT(new CompoundTag());

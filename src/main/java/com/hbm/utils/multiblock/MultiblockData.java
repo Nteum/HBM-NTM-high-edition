@@ -115,6 +115,12 @@ public class MultiblockData {
         }
         mapping.put(ModBlocks.machine_rbmk_crane_console.get(), new MultiblockData(rbmkCraneConsoleOffsets, new int[]{1, 0, 0, 2, 1, 1}));
         mapping.put(ModBlocks.machine_rbmk_autoloader.get(), new MultiblockData(8, 0, 0, 0, 0, 0));
+        mapping.put(ModBlocks.MINER_LARGE.get(), new MultiblockData(1,1,3,3,3,3, -2,4,3,-2,3,-2, -2,4,3,-2,-2,3, -2,4,-2,3,3,3)       //以四格高度为中心
+                .addCap(new Vec3i(0, -4, 3), ForgeCapabilities.ITEM_HANDLER, SOUTH)
+                .addCaps(new Vec3i(1, 1, 3), new Direction[]{SOUTH}, ForgeCapabilities.FLUID_HANDLER, HBMCaps.LONG_ENERGY)
+                .addCaps(new Vec3i(-1, 1, 3), new Direction[]{SOUTH}, ForgeCapabilities.FLUID_HANDLER, HBMCaps.LONG_ENERGY)
+                .addCaps(new Vec3i(3, 1, 0), new Direction[]{EAST}, ForgeCapabilities.FLUID_HANDLER, HBMCaps.LONG_ENERGY)
+                .addCaps(new Vec3i(-3, 1, 0), new Direction[]{WEST}, ForgeCapabilities.FLUID_HANDLER, HBMCaps.LONG_ENERGY));
     }
 
     MultiblockData(List<Vec3i> offsets, int[] dirOffsets){
@@ -135,17 +141,17 @@ public class MultiblockData {
 
     public MultiblockData addCap(Vec3i offset, Capability<?> cap, @Nullable Direction ... directions){
         capsMap.computeIfAbsent(offset, pos -> new HashMap<>()).computeIfAbsent(cap, capability -> new HashSet<>());
-        capsMap.get(offset).get(cap).addAll(List.of(directions));
+        if (directions.length > 0) capsMap.get(offset).get(cap).addAll(Arrays.stream(directions).toList());
         if (capsMap.get(offset).get(cap).contains(null) && directions.length > 1)
             capsMap.get(offset).get(cap).remove(null);
         return this;
     }
-    public MultiblockData addCap(Vec3i offset, Capability<?> cap){
-        return addCap(offset, cap, new Direction[]{null});
-    }
-    public MultiblockData addCaps(Vec3i offset, Capability<?> ... caps){
+//    public MultiblockData addCap(Vec3i offset, Capability<?> cap){
+//        return addCap(offset, cap, new Direction[]{null});
+//    }
+    public MultiblockData addCaps(Vec3i offset, Direction[] directions, Capability<?> ... caps){
         for (Capability<?> cap : caps) {
-            addCap(offset, cap);
+            addCap(offset, cap, directions);
         }
         return this;
     }
@@ -213,11 +219,13 @@ public class MultiblockData {
      * */
     public static List<Vec3i> square(int[] dim){
         List<Vec3i> offsets = new ArrayList<>();
-        for (int i = -dim[4]; i <= dim[5]; i++) {
-            for (int j = -dim[1]; j <= dim[0]; j++) {
-                for (int k = -dim[2]; k <= dim[3]; k++) {
-                    if (!(i==0&&j==0&&k==0))
-                        offsets.add(new Vec3i(i,j,k));
+        for (int l = 0; l < dim.length; l = l + 6) {
+            for (int i = -dim[l + 4]; i <= dim[l + 5]; i++) {
+                for (int j = -dim[l + 1]; j <= dim[l + 0]; j++) {
+                    for (int k = -dim[l + 2]; k <= dim[l + 3]; k++) {
+                        if (!(i==0&&j==0&&k==0))
+                            offsets.add(new Vec3i(i,j,k));
+                    }
                 }
             }
         }

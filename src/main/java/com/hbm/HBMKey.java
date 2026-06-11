@@ -6,6 +6,32 @@ import net.minecraftforge.registries.ForgeRegistries;
 //mod使用的key，仅用于mod内使用，不用于翻译
 public class HBMKey {
     public static final String MODID = "hbm";
+    //generic
+    public static final String ITEM = "item";
+    public static final String TAG = "tag";
+    public static final String NUM = "nums";
+    public static final String COUNT = "count";
+    public static final String VOLUME = "volume";
+    public static final String SIDE = "side";
+    public static final String REDSTONE = "redstone";
+    public static final String CONNECTION = "connection";
+    public static final String POSITION = "position";
+    public static final String POSITIONS = "positions";
+    public static final String X = "x";
+    public static final String Y = "y";
+    public static final String Z = "z";
+    public static final String DIMENSION = "dimension";
+    public static final String TOOLTIP = "tooltip";
+    public static final String COUNTDOWN = "countdown";
+    public static final String WATER_TIMER = "waterTimer";
+    public static final String JOINED = "joined";
+    public static final String UPGRADE = "upgrade";
+    public static final String FILTER = "filter";
+    public static final String ORDER = "order";
+    public static final String STATE = "state";
+    public static final String TIER = "tier";
+    public static final String COLOR = "color";
+    public static final String SHAPE = "shape";
     // block state
     public static final String IS_CORE = "is_core";
     public static final String VARIANT = "variant";
@@ -69,28 +95,7 @@ public class HBMKey {
     public static final String CURRENT_CONNECTIONS = "connections";
     public static final String NETWORK = "network";
     public static final String VALVE = "valve";
-    //generic
-    public static final String ITEM = "item";
-    public static final String TAG = "tag";
-    public static final String NUM = "nums";
-    public static final String COUNT = "count";
-    public static final String VOLUME = "volume";
-    public static final String SIDE = "side";
-    public static final String REDSTONE = "redstone";
-    public static final String CONNECTION = "connection";
-    public static final String POSITION = "position";
-    public static final String POSITIONS = "positions";
-    public static final String X = "x";
-    public static final String Y = "y";
-    public static final String Z = "z";
-    public static final String DIMENSION = "dimension";
-    public static final String TOOLTIP = "tooltip";
-    public static final String COUNTDOWN = "countdown";
-    public static final String WATER_TIMER = "waterTimer";
-    public static final String JOINED = "joined";
-    public static final String UPGRADE = "upgrade";
-    public static final String FILTER = "filter";
-    public static final String ORDER = "order";
+
     // machine name
     public static final String BLAST = "blast";
     public static final String ASSEMBLER = "assembler";

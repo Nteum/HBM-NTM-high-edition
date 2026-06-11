@@ -7,7 +7,7 @@ import com.hbm.gui.menu.PWRMenu;
 import com.hbm.item.pwr.ItemPWRFuel;
 import com.hbm.reactor.pwr.PWRFuelType;
 import com.hbm.registries.ModItems;
-import com.hbm.render.utils.GaugeUtil;
+import com.hbm.render.util.GaugeUtil;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.EditBox;

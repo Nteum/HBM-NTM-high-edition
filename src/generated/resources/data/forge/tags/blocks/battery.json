@@ -1,8 +1,8 @@
 {
   "values": [
-    "hbm:battery",
+    "hbm:machine_battery",
     "hbm:battery_block_lithium",
-    "hbm:battery_dineutronium",
-    "hbm:battery_dineutronium"
+    "hbm:battery_block_dineutronium",
+    "hbm:battery_block_schrabidium"
   ]
 }

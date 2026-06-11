@@ -391,3 +391,67 @@ tasks.named('compileTestJava', JavaCompile).configure {
 tasks.withType(JavaExec).configureEach {
     doFirst { file("${projectDir}/run/tmp_secure").mkdirs() }
 }
+
+
+tasks.register('cleanDuplicateBlockstates') {
+    group = 'hbm'
+    description = '自动检测并删除 main/resources 中与 generated/resources 重复的 blockstate 文件'
+
+    doLast {
+        // 1. 定义两个文件夹的相对路径（根据你的项目结构调整，这里通常是标准 Forge 结构）
+        def generatedDir = file('src/generated/resources/assets/hbm/blockstates')
+        def mainResourcesDir = file('src/main/resources/assets/hbm/blockstates')
+
+        // 2. 安全检查，确保两个目录都存在
+        if (!generatedDir.exists()) {
+            logger.lifecycle("偏好提示: 自动生成目录不存在 [${generatedDir.path}]，跳过查重。")
+            return
+        }
+        if (!mainResourcesDir.exists()) {
+            logger.lifecycle("提示: 主资源目录不存在 [${mainResourcesDir.path}]，无需清理。")
+            return
+        }
+
+        int deleteCount = 0
+
+        // 3. 遍历你自动生成的所有 blockstate 文件
+        generatedDir.eachFile { genFile ->
+            if (genFile.isFile() && genFile.name.endsWith('.json')) {
+                // 在你朋友的 main 目录下寻找同名文件
+                def duplicateFile = new File(mainResourcesDir, genFile.name)
+
+                if (duplicateFile.exists()) {
+                    logger.lifecycle("🚨 发现冲突: 外部生成的 [main] 资源 '${genFile.name}' 与你的 DataGen 冲突！")
+                    try {
+                        if (duplicateFile.delete()) {
+                            logger.lifecycle("   └─ 🧹 已成功强制删除: ${duplicateFile.path}")
+                            deleteCount++
+                        } else {
+                            logger.warn("   └─ ❌ 删除失败，文件可能被占用: ${duplicateFile.path}")
+                        }
+                    } catch (Exception e) {
+                        logger.error("   └─ 💥 尝试删除文件时发生异常: ${e.message}")
+                    }
+                }
+            }
+        }
+
+        if (deleteCount > 0) {
+            logger.lifecycle("✨ 清理完成！共自动移除了 ${deleteCount} 个冲突的重复 Blockstate 文件。")
+        } else {
+            logger.lifecycle("✅ 检查完毕，没有发现重复的冲突文件。")
+        }
+    }
+}
+
+// 4. 【核心时序控制】：让你自动生成文件的任务（比如 compileJava 或 runData）结束后，自动触发这个清理任务
+// 根据你的 Forge 版本，数据生成的 task 名可能是 'runData' 或 'compileJava'
+if (tasks.findByName('runData')) {
+    tasks.named('runData').configure {
+        finalizedBy 'cleanDuplicateBlockstates'
+    }
+}
+// 同样挂载到编译任务前，确保万无一失
+tasks.named('compileJava').configure {
+    dependsOn 'cleanDuplicateBlockstates'
+}

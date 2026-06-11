@@ -2,6 +2,7 @@ package com.hbm.main;
 
 import com.hbm.HBM;
 import com.hbm.Inventory.fluid.ModFluids;
+import com.hbm.block.env.BedRockOre;
 import com.hbm.block.interfaces.ILookOverlay;
 import com.hbm.block.interfaces.ITooltipProvider;
 import com.hbm.blockentity.ModBlockEntityType;
@@ -38,6 +39,7 @@ import com.hbm.render.model.entity.TestEntityModel;
 import com.hbm.render.overlay.AtomicFlashOverlay;
 import com.hbm.render.overlay.DebugTagOverlay;
 import com.hbm.render.pipeline.GeoRenderPipeline;
+import com.hbm.render.util.DebugBoundsRenderer;
 import com.hbm.settings.tooltip.TooltipRegistries;
 import com.hbm.utils.WorldUtils;
 import com.mojang.blaze3d.platform.InputConstants;
@@ -57,6 +59,7 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.api.distmarker.Dist;
@@ -100,6 +103,7 @@ public class ClientEventHandler {
         forgeBus.addListener(DebugTagOverlay::onGuiRender);
         forgeBus.addListener(TooltipRegistries::onTooltip);
         forgeBus.addListener(ClientEventHandler::onRenderGUIOverlay);
+        forgeBus.addListener(DebugBoundsRenderer::onRenderLevelStage);
     }
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event)
@@ -140,6 +144,7 @@ public class ClientEventHandler {
             MenuScreens.register(ModMenuType.MENU_CONVEYOR_INSERTER.get(), GuiConveyorInserter::new);
             MenuScreens.register(ModMenuType.MENU_CONVEYOR_EXTRACTOR.get(), GuiConveyorExtractor::new);
             MenuScreens.register(ModMenuType.MENU_CONVEYOR_ROUTER.get(), GuiConveyorRouter::new);
+            MenuScreens.register(ModMenuType.MENU_MINER_LARGE.get(), GuiMinerLarge::new);
             //方块实体渲染
             BlockEntityRenderers.register(ModBlockEntityType.PRESS_ENTITY.get(), PressRenderer::new);
             BlockEntityRenderers.register(ModBlockEntityType.ASSEMBLER_ENTITY.get(), AssemblerRenderer::new);
@@ -164,6 +169,7 @@ public class ClientEventHandler {
             BlockEntityRenderers.register(ModBlockEntityType.RBMK_NUMITRON_ENTITY.get(), RBMKNumitronRenderer::new);
             BlockEntityRenderers.register(ModBlockEntityType.RBMK_KEYPAD_ENTITY.get(), RBMKKeypadRenderer::new);
             BlockEntityRenderers.register(ModBlockEntityType.RBMK_GAUGE_ENTITY.get(), RBMKGaugeRenderer::new);
+            BlockEntityRenderers.register(ModBlockEntityType.TILE_MINER_LARGE.get(), RendererMinerLarge::new);
             //实体渲染
             EntityRenderers.register(ModEntityType.TEST_ENTITY.get(), TestEntityRenderer::new);
             EntityRenderers.register(ModEntityType.ENTITY_GRENADE_GENETIC.get(), ThrownItemRenderer::new);
@@ -223,6 +229,15 @@ public class ClientEventHandler {
             }
             return -1;
         }, ModBlocks.FLUID_PIPE.get());
+        event.register(
+                (state, level, pos, tintIndex) -> {;
+                    if (tintIndex != 0 || level == null || pos == null) return 0xFFFFFFFF;
+                    BlockEntity be = level.getBlockEntity(pos);
+                    if (be instanceof BedRockOre.TileBedrockOre pattern) return pattern.getColor();
+                    return 0xFFFFFFFF;
+                },
+                ModBlocks.BEDROCK_ORE.get()
+        );
     }
 
     @SubscribeEvent
@@ -359,7 +374,6 @@ public class ClientEventHandler {
                         if (desc == null || desc.isEmpty()) {
                             return;
                         }
-//                        graphics.renderComponentTooltip(mc.font, desc, renderX, renderY);
                         int fontHeight = mc.font.lineHeight;
                         int lineSpace = 2;  // 暂时把间距设为固定值
                         int renderX = screenWidth / 2 + 12;

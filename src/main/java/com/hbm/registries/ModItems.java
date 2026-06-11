@@ -1217,6 +1217,17 @@ public class ModItems {
     public static final RegistryObject<Item> MOLD_PLATES = parts("mold_plates", () -> new ItemMold(new Item.Properties(), HBMMatForm.PLATE, 9), HBMKey.REVERSE_GEN);
     public static final RegistryObject<Item> MOLD_WIRES_DENSE = parts("mold_wires_dense", () -> new ItemMold(new Item.Properties(), HBMMatForm.DENSEWIRE, 9), HBMKey.REVERSE_GEN);
     public static final RegistryObject<Item> MOLD_BLOCK = parts("mold_block", () -> new ItemMold(new Item.Properties(), HBMMatForm.BLOCK), HBMKey.REVERSE_GEN);
+    // 大型采矿机钻头
+    public static final RegistryObject<Item> DRILLBIT_STEEL = parts("drillbit_steel", () -> new ItemDrillbit(ItemDrillbit.EnumDrillType.STEEL, new Item.Properties().stacksTo(1)), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> DRILLBIT_STEEL_DIAMOND = parts("drillbit_steel_diamond", () -> new ItemDrillbit(ItemDrillbit.EnumDrillType.STEEL_DIAMOND, new Item.Properties().stacksTo(1)), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> DRILLBIT_HSS = parts("drillbit_hss", () -> new ItemDrillbit(ItemDrillbit.EnumDrillType.HSS, new Item.Properties().stacksTo(1)), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> DRILLBIT_HSS_DIAMOND = parts("drillbit_hss_diamond", () -> new ItemDrillbit(ItemDrillbit.EnumDrillType.HSS_DIAMOND, new Item.Properties().stacksTo(1)), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> DRILLBIT_DESH = parts("drillbit_desh", () -> new ItemDrillbit(ItemDrillbit.EnumDrillType.DESH, new Item.Properties().stacksTo(1)), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> DRILLBIT_DESH_DIAMOND = parts("drillbit_desh_diamond", () -> new ItemDrillbit(ItemDrillbit.EnumDrillType.DESH_DIAMOND, new Item.Properties().stacksTo(1)), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> DRILLBIT_TCALLOY = parts("drillbit_tcalloy", () -> new ItemDrillbit(ItemDrillbit.EnumDrillType.TCALLOY, new Item.Properties().stacksTo(1)), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> DRILLBIT_TCALLOY_DIAMOND = parts("drillbit_tcalloy_diamond", () -> new ItemDrillbit(ItemDrillbit.EnumDrillType.TCALLOY_DIAMOND, new Item.Properties().stacksTo(1)), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> DRILLBIT_FERRO = parts("drillbit_ferro", () -> new ItemDrillbit(ItemDrillbit.EnumDrillType.FERRO, new Item.Properties().stacksTo(1)), HBMKey.REVERSE_GEN);
+    public static final RegistryObject<Item> DRILLBIT_FERRO_DIAMOND = parts("drillbit_ferro_diamond", () -> new ItemDrillbit(ItemDrillbit.EnumDrillType.FERRO_DIAMOND, new Item.Properties().stacksTo(1)), HBMKey.REVERSE_GEN);
     // 填充物品，游戏内无法获得，用于避免物品被匹配上
     public static final RegistryObject<Item> DUMMY_ITEM = ITEMS.register("dummy_item", ()->new Item(new Item.Properties()));
     /**
@@ -1232,10 +1243,10 @@ public class ModItems {
         // Force block registration classes to populate their BlockItems first so
         // legacy placeholders only backfill truly missing ids.
         ModBlocks.BLOCKS.getEntries();
-        try {
-            Class.forName(HBMComponent.class.getName());
-        } catch (ClassNotFoundException ignored) {
-        }
+//        try {
+//            Class.forName(HBMComponent.class.getName());
+//        } catch (ClassNotFoundException ignored) {
+//        }
         LegacyItems.registerLegacy();
         ITEMS.register(eventBus);
     }

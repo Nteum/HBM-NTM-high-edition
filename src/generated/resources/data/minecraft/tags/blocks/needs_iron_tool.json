@@ -11,6 +11,11 @@
     "hbm:fluid_pipe",
     "hbm:geiger",
     "hbm:launch_pad",
+    "hbm:furnace_electric",
+    "hbm:boiler",
+    "hbm:boiler_electric",
+    "hbm:boiler_nuclear",
+    "hbm:miner_large",
     "hbm:conveyor",
     "hbm:conveyor_inserter",
     "hbm:conveyor_extractor",
@@ -46,8 +51,6 @@
     "hbm:ore_nether_smoldering",
     "hbm:ore_nether_plutonium",
     "hbm:ore_nether_fire",
-    "hbm:ore_tikite",
-    "hbm:ore_bedrock",
-    "hbm:depth_stone"
+    "hbm:ore_tikite"
   ]
 }
