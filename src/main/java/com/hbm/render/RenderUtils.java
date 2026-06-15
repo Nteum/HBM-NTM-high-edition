@@ -165,8 +165,12 @@ public class RenderUtils {
             bufferSource.endBatch();
         }
     }
-    // 渲染一个柱状物，主要是用于渲染流动的液体
+
     public static void renderRectPillar(PoseStack poseStack, VertexConsumer consumer, int color, Vec3 start, Vec3 end, float width, int light, int overlay){
+        renderRectPillar(poseStack, consumer, color, start, end, width, width, light, overlay);
+    }
+    // 渲染一个柱状物，主要是用于渲染流动的液体
+    public static void renderRectPillar(PoseStack poseStack, VertexConsumer consumer, int color, Vec3 start, Vec3 end, float widthX, float widthZ, int light, int overlay){
         Vec3 dir = end.subtract(start);
         if (dir.length() == 0) return;
         float fullLength = (float) dir.length();
@@ -180,7 +184,7 @@ public class RenderUtils {
         Quaternionf rotation = getRotationBetween(new Vector3f(0, 1, 0), new Vector3f((float) dir.x, (float) dir.y, (float) dir.z));
         poseStack.mulPose(rotation);
         // 3. 缩放：X/Z 方向为 width，Y 方向为 fullLength
-        poseStack.scale(width, fullLength, width);
+        poseStack.scale(widthX, fullLength, widthZ);
 
         // 四个侧面：每个面都是矩形，尺寸为 1x1（在局部坐标中覆盖整个面）
         float rectWidth = 1.0f;   // 沿 n1 方向（例如 Z 轴）

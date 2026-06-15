@@ -99,6 +99,10 @@
     "hbm:crate_iron",
     "hbm:crate_steel",
     "hbm:foundry_mold",
+    "hbm:gas_radon",
+    "hbm:gas_radon_dense",
+    "hbm:gas_radon_asbestos",
+    "hbm:gas_radon_tomb",
     "hbm:space_station_base"
   ]
 }

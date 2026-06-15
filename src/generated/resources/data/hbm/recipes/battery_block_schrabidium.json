@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "hbm:battery_advanced"
+    },
+    "B": {
+      "item": "hbm:battery_block_lithium"
+    },
+    "P": {
+      "item": "hbm:plate_schrabidium"
+    }
+  },
+  "pattern": [
+    "PPP",
+    "ABA",
+    "PPP"
+  ],
+  "result": {
+    "item": "hbm:battery_block_schrabidium"
+  },
+  "show_notification": true
+}

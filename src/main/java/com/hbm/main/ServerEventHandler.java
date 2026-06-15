@@ -9,12 +9,9 @@ import com.hbm.dim.orbit.CelestialBodies;
 import com.hbm.dim.orbit.Space;
 import com.hbm.entity.ModEntityType;
 import com.hbm.entity.mob.EntityGlyphid;
-import com.hbm.registries.HBMMatters;
-import com.hbm.registries.ModItems;
+import com.hbm.registries.*;
 import com.hbm.item.env.ItemEggGlyphid;
 import com.hbm.network.ServerMsgHandler;
-import com.hbm.registries.HBMDamage;
-import com.hbm.registries.ModCommands;
 import com.hbm.utils.transport_net.EnergyNetworkSystem;
 import com.hbm.utils.transport_net.FluidBackupSystem;
 import com.hbm.utils.transport_net.FluidNetworkSystem;
@@ -22,6 +19,9 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.FireBlock;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.event.ItemStackedOnOtherEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
@@ -35,12 +35,13 @@ import net.minecraftforge.event.entity.living.MobSpawnEvent;
 import net.minecraftforge.event.level.LevelEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 
 public class ServerEventHandler {
-
     public static void registerEvents(IEventBus forgeBus, IEventBus modBus){
+        modBus.addListener(ServerEventHandler::onCommonSetup);
         modBus.addListener(ServerEventHandler::onServerSetup);
         modBus.addListener(ServerEventHandler::onLoadComplete);
         modBus.addListener(ServerEventHandler::createEntityAttribute);
@@ -55,7 +56,9 @@ public class ServerEventHandler {
         forgeBus.addListener(ServerEventHandler::onEntityJoin);
         forgeBus.addListener(ServerEventHandler::onFinialSpawn);
     }
-
+    @SubscribeEvent
+    public static void onCommonSetup(FMLCommonSetupEvent event){
+    }
 
     @SubscribeEvent
     public static void onServerSetup(FMLDedicatedServerSetupEvent event) {

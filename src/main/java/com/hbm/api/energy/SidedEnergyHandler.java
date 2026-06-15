@@ -31,6 +31,10 @@ public class SidedEnergyHandler extends ProxyEnergyHandler{
     }
 
     public boolean checkNeighbourIfLoad(LevelReader level, BlockPos pos){
+        int x = pos.getX() % 16;
+        int z = pos.getZ() % 16;
+//        return (x > 0 && x < 15) || x == 0 && sideHandlers[Direction.WEST.ordinal()] != null && level.hasChunkAt(pos.relative(Direction.WEST)) || x % 16 == 15 && sideHandlers[Direction.EAST.ordinal()] != null && level.hasChunkAt(pos.relative(Direction.EAST))
+//                || (z > 0 && z < 15) ||
         return pos.getX() % 16 == 0 && sideHandlers[Direction.WEST.ordinal()] != null && level.hasChunkAt(pos.relative(Direction.WEST))
                 || pos.getX() % 16 == 15 && sideHandlers[Direction.EAST.ordinal()] != null && level.hasChunkAt(pos.relative(Direction.EAST))
                 || pos.getZ() % 16 == 0 && sideHandlers[Direction.NORTH.ordinal()] != null && level.hasChunkAt(pos.relative(Direction.NORTH))

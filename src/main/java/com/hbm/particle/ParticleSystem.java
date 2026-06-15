@@ -18,6 +18,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.FastColor;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Pose;
@@ -59,7 +60,7 @@ public class ParticleSystem {
         PARTICLE_COMBOS.put("vanillaExt", ParticleSystem::vanillaExt);
         PARTICLE_COMBOS.put("vanilla", ParticleSystem::vanilla);
         PARTICLE_COMBOS.put("jetpack", ParticleSystem::jetpack);
-
+        PARTICLE_COMBOS.put("schrabfog", ParticleSystem::jetpack);
     }
 
     public static void handleParticleCombo(CompoundTag tag){
@@ -68,6 +69,20 @@ public class ParticleSystem {
             String type = tag.getString(HBMKey.TYPE);
             PARTICLE_COMBOS.getOrDefault(type, (tag1, pos) -> {}).accept(tag, new Vec3(tag.getDouble(HBMKey.X), tag.getDouble(HBMKey.Y), tag.getDouble(HBMKey.Z)));
         }
+    }
+
+    public static void vanillaCustom(ParticleOptions pParticleData, double pX, double pY, double pZ, double movX, double movY, double movZ, CompoundTag customData){
+        ParticleRocketFlame particle = (ParticleRocketFlame)Minecraft.getInstance().particleEngine.makeParticle(ModParticleTypes.ROCKET_FLAME.get(), pX, pY, pZ, movX, movY, movZ);
+        if (particle == null) return;
+        if (customData.contains(HBMKey.COLOR, Tag.TAG_INT_ARRAY)) {
+            // 说明：至少在低版本，粒子颜色int值的解码都是RGB顺序
+            int[] arr = customData.getIntArray(HBMKey.COLOR);
+            if (arr.length >= 3){
+                particle.setColor(Float.intBitsToFloat(arr[0]),Float.intBitsToFloat(arr[1]), Float.intBitsToFloat(arr[2]) );
+            }
+
+        }
+        Minecraft.getInstance().particleEngine.add(particle);
     }
 
     public static void addRocketFlame(double pX, double pY, double pZ, double movX, double movY, double movZ, @Nullable Float scale, @Nullable Integer lifetime){
@@ -501,5 +516,4 @@ public class ParticleSystem {
         }
 
     }
-
 }

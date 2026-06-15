@@ -9,6 +9,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.PipeBlock;
 import net.minecraft.world.level.block.state.properties.*;
 import net.minecraftforge.client.model.generators.*;
@@ -137,6 +138,9 @@ public class BlockStateGen extends BlockStateProvider {
         addBooleanStateWithOrientableModel(ModBlocks.machine_electric_boiler.get(), BlockStateProperties.LIT);
         addBooleanStateWithOrientableModel(ModBlocks.machine_nuclear_boiler.get(), BlockStateProperties.LIT);
         addDifurnace(ModBlocks.machine_difurnace.get(), BlockStateProperties.LIT, HBMBlockProperties.WITH_HAT);
+        addBooleanStateWithFace(ModBlocks.BLOCK_SLAG.get(), HBMBlockProperties.VARIANT, genBuiltInModelFile(ModBlocks.BLOCK_SLAG.get(), "cube_all"), genBuiltInModelFile(ModBlocks.BLOCK_SLAG.get(), "cube_all", "_alter", "_alter"));
+        horizontalBlockWithItem(ModBlocks.BLOCK_C4.get(), genBuiltInModelFile(ModBlocks.BLOCK_C4.get(), "orientable_vertical"));
+        horizontalBlockWithItem(ModBlocks.BLOCK_SEMTEX.get(), genBuiltInModelFile(ModBlocks.BLOCK_SEMTEX.get(), "orientable_vertical"));
     }
     // 方块和物品：纯cube all
     public void simpleBlockWithItem(Block block){
@@ -169,6 +173,7 @@ public class BlockStateGen extends BlockStateProvider {
                         .build(), HBMBlockProperties.IS_CORE);
         this.simpleBlockItem(block,existingFile);
     }
+
     private void cubeWithOverlay(Block block, ResourceLocation base, ResourceLocation overlay, Property property){
         String name = name(block);
         getVariantBuilder(block).forAllStates(state -> ConfiguredModel.builder().modelFile(models()
@@ -208,7 +213,7 @@ public class BlockStateGen extends BlockStateProvider {
                     Boolean value = state.getValue(booleanProperty);
                     return ConfiguredModel.builder()
                             .modelFile(value == Boolean.FALSE ? model1 : model2)
-                            .rotationY(((int) state.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot() + 180) % 360)
+                            .rotationY(state.hasProperty(BlockStateProperties.HORIZONTAL_FACING) ? ((int) state.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot() + 180) % 360 : 0)
                             .build();
                 });
         this.simpleBlockItem(block,model1);
@@ -288,7 +293,7 @@ public class BlockStateGen extends BlockStateProvider {
         String name = name(block);
         ResourceLocation blockTexture = blockTexture(block);
         return switch (type){
-            case "cube_all" -> models().cubeAll(name, blockTexture);
+            case "cube_all" -> models().cubeAll(name + getOrBlank(nicknames, 0), blockTexture.withSuffix(getOrBlank(nicknames, 1)));
             case "cube_top" -> models().cubeTop(name, blockTexture.withSuffix("_side"), blockTexture.withSuffix("_top"));
             case "cube_bottom_top" -> models().cubeBottomTop(name, blockTexture.withSuffix("_side"), blockTexture.withSuffix("_bottom"), blockTexture.withSuffix("_top"));
             case "cube_column" -> models().cubeColumn(name, blockTexture.withSuffix("_side"), blockTexture.withSuffix("_end"));
@@ -296,6 +301,7 @@ public class BlockStateGen extends BlockStateProvider {
             // 使用给定的model文件，这里假定只有
             case "existing" -> models().getExistingFile(HBM.rl(name));
             case "orientable" -> models().orientable(name + getOrBlank(nicknames, 0), blockTexture.withSuffix("_side" + getOrBlank(nicknames, 1)), blockTexture.withSuffix("_front" + getOrBlank(nicknames, 2)), blockTexture.withSuffix("_top" + getOrBlank(nicknames, 3)));
+            case "orientable_vertical" -> models().orientableVertical(name, blockTexture.withSuffix("_side"), blockTexture.withSuffix("_front"));
             default -> throw new IllegalStateException("Unexpected value: " + type);
         };
     }

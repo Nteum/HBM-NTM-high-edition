@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "hbm:battery_block_schrabidium"
+    },
+    "D": {
+      "item": "hbm:pellet_rtg"
+    },
+    "L": {
+      "item": "hbm:battery_advanced"
+    },
+    "N": {
+      "item": "hbm:plate_dineutronium"
+    }
+  },
+  "pattern": [
+    "NDN",
+    "LBL",
+    "NDN"
+  ],
+  "result": {
+    "item": "hbm:battery_block_dineutronium"
+  },
+  "show_notification": true
+}

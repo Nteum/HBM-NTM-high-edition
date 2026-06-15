@@ -1,4 +1,4 @@
-package com.hbm.block.states;
+package com.hbm.block.enums;
 
 
 import com.hbm.api.math.MathUtils;

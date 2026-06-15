@@ -46,6 +46,8 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.DispenserBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.entity.EntityTypeTest;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
@@ -54,6 +56,7 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
+import net.minecraftforge.items.wrapper.RangedWrapper;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -92,9 +95,7 @@ public class TileMinerLarge extends DummyableBlockEntity implements IUpgradeInfo
     protected int drillHeight;      // 钻头所在的纵坐标
     private int ring = 0;
     private BlockPos bedrockOrePos;
-
-    protected int targetDepth = 0; //0 is the first block below null position
-
+    // 客户端变量
     public float drillRotation = 0F;
     public float prevDrillRotation = 0F;
     public float drillExtension = 0F;
@@ -157,15 +158,13 @@ public class TileMinerLarge extends DummyableBlockEntity implements IUpgradeInfo
 
         if (this.level != null && this.level.getGameTime() % 20 == 0){
             // 试图向临近的箱子中输出物品
-            IItemHandler handler;
-            Direction facing = this.getBlockState().getValue(BlockStateProperties.HORIZONTAL_FACING);
-            Vec3i outputOffset = DirectionUtils.offsetRot(new Vec3i(0, -4, 3), Direction.SOUTH, facing);
-            Direction outFacing = DirectionUtils.horizRot(Direction.SOUTH, Direction.SOUTH, facing);
-            BlockEntity tileEntity = WorldUtils.getTileEntity(this.level, this.worldPosition.offset(outputOffset));
-            if (tileEntity != null && (handler = tileEntity.getCapability(ForgeCapabilities.ITEM_HANDLER, outFacing.getOpposite()).orElse(null)) != null){
-                InventoryUtils.insertNoCheckSlots(this.itemStackHandler, handler, 5);
+            IItemHandler outputItemHandler = getOutputItemHandler();
+            if (outputItemHandler != null){
+                InventoryUtils.insertNoCheckSlots(new RangedWrapper(this.itemStackHandler, 5, 14), outputItemHandler, 5);
             }
         }
+
+        if(chuteTimer > 0) chuteTimer--;
 
         int maxDrillHeight = this.worldPosition.getY() - 4;     // 钻头默认位置
         int minHeight = this.level.dimensionType().minY();          // 世界最低位置
@@ -184,12 +183,14 @@ public class TileMinerLarge extends DummyableBlockEntity implements IUpgradeInfo
             float combinedHardness = 0F;
             boolean isBedrockOreDrilling = BitUtil.getBool(this.machineState, KEY_BEDROCK_DRILLING) && bedrockOrePos != null && level.getBlockState(bedrockOrePos).getBlock() instanceof BedRockOre;
             BlockPos dirllPos = new BlockPos(xCoord, y, zCoord);
+            boolean shouldCollectDrops = false;
             if (isBedrockOreDrilling){
                 combinedHardness = 60 * 20;
                 if (ConfigWorld.newBedrockOres.get()) combinedHardness *= 5;
                 int ticksToWork = (int) Math.ceil(combinedHardness / this.speed);
                 ticksWorked++;
                 if (ticksWorked >= ticksToWork){
+                    shouldCollectDrops = true;
                     List<ItemStack> itemStacks = drillBedrock();
                     List<ItemStack> remains = insertItemsAndOutput(itemStacks);
                     if (!remains.isEmpty()){
@@ -230,6 +231,7 @@ public class TileMinerLarge extends DummyableBlockEntity implements IUpgradeInfo
                         ticksWorked++;
                         int ticksToWork = (int) Math.ceil(combinedHardness / this.speed);
                         if(ticksWorked >= ticksToWork) {
+                            shouldCollectDrops = true;
                             // 破坏方块
                             for(int x = xCoord - ring; x <= xCoord + ring; x++) {
                                 for(int z = zCoord - ring; z <= zCoord + ring; z++) {
@@ -284,9 +286,20 @@ public class TileMinerLarge extends DummyableBlockEntity implements IUpgradeInfo
                         }
                     }
                 }
-
             }
-
+            if (shouldCollectDrops){
+                this.chuteTimer = 40;
+                // 收集掉落物
+                List<ItemEntity> entities = this.level.getEntities(EntityTypeTest.forClass(ItemEntity.class), new AABB(dirllPos).inflate(ring + 1, 0, ring + 1), entity -> true);
+                IItemHandler itemHandler = getOutputItemHandler();
+                for (ItemEntity itemEntity : entities) {
+                    ItemStack itemStack = itemEntity.getItem();
+                    ItemStack insertResult = ItemHandlerHelper.insertItemStacked(this.itemStackHandler, itemStack.copy(), false);
+                    if (!insertResult.isEmpty() && itemHandler != null) insertResult = ItemHandlerHelper.insertItemStacked(itemHandler, insertResult.copy(), false);
+                    if (insertResult.isEmpty()) itemEntity.discard();
+                    else itemEntity.setItem(insertResult);
+                }
+            }
             sendUpdatePacket();
         }else {
             // 收回钻头。
@@ -294,6 +307,14 @@ public class TileMinerLarge extends DummyableBlockEntity implements IUpgradeInfo
                 this.drillHeight ++;
             }
         }
+    }
+
+
+    private IItemHandler getOutputItemHandler(){
+        Direction facing = this.getBlockState().getValue(BlockStateProperties.HORIZONTAL_FACING);
+        Vec3i vec3i = DirectionUtils.offsetRot(new Vec3i(0, -4, 4), Direction.SOUTH, facing);
+        BlockEntity blockEntity = WorldUtils.getTileEntity(this.level, this.worldPosition.offset(vec3i));
+        return blockEntity == null ? null : blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER, facing.getOpposite()).orElse(null);
     }
 
     private List<ItemStack> drillBedrock(){
@@ -318,10 +339,7 @@ public class TileMinerLarge extends DummyableBlockEntity implements IUpgradeInfo
 
     private List<ItemStack> insertItemsAndOutput(List<ItemStack> itemsToCollect){
         if (itemsToCollect.isEmpty()) return itemsToCollect;
-        Direction facing = this.getBlockState().getValue(BlockStateProperties.HORIZONTAL_FACING);
-        Vec3i vec3i = DirectionUtils.offsetRot(new Vec3i(0, -4, 4), Direction.SOUTH, facing);
-        BlockEntity tileEntity = WorldUtils.getTileEntity(this.level, this.worldPosition.offset(vec3i));
-        IItemHandler itemHandler = tileEntity.getCapability(ForgeCapabilities.ITEM_HANDLER, facing.getOpposite()).orElse(null);
+        IItemHandler itemHandler = getOutputItemHandler();
         if (itemHandler != null){
             InventoryUtils.insertNoCheckSlots(this.itemStackHandler, itemHandler);
         }
@@ -341,12 +359,50 @@ public class TileMinerLarge extends DummyableBlockEntity implements IUpgradeInfo
     @Override
     protected void onUpdateClient() {
         super.onUpdateClient();
+        int targetDepth = this.worldPosition.getY() - this.drillHeight - 4;
+        boolean enableCrusher = BitUtil.getBool(this.machineState, KEY_ENABLE_CRUSHER);
+        //
+        this.prevDrillExtension = this.drillExtension;
+
+        if(this.drillExtension != targetDepth) {
+            float diff = Math.abs(this.drillExtension - targetDepth);
+            float speed = Math.max(0.15F, diff / 10F);
+
+            if(diff <= speed) {
+                this.drillExtension = targetDepth;
+            } else {
+                float sig = Math.signum(this.drillExtension - targetDepth);
+                this.drillExtension -= sig * speed;
+            }
+        }
+
+        this.prevDrillRotation = this.drillRotation;
+        this.prevCrusherRotation = this.crusherRotation;
+
+        if(this.running) {
+            this.drillRotation += 15F;
+
+            if(enableCrusher) {
+                this.crusherRotation += 15F;
+            }
+        }
+
+        if(this.drillRotation >= 360F) {
+            this.drillRotation -= 360F;
+            this.prevDrillRotation -= 360F;
+        }
+
+        if(this.crusherRotation >= 360F) {
+            this.crusherRotation -= 360F;
+            this.prevCrusherRotation -= 360F;
+        }
     }
 
     @Override
     public @NotNull CompoundTag getReducedUpdateTag() {
         CompoundTag tag = super.getReducedUpdateTag();
         tag.put(HBMKey.FLUIDS, this.fluidHandler.serializeNBT());
+        tag.putInt("chute", this.chuteTimer);
         return tag;
     }
 
@@ -354,6 +410,7 @@ public class TileMinerLarge extends DummyableBlockEntity implements IUpgradeInfo
     public void handleUpdatePacket(@NotNull CompoundTag tag) {
         super.handleUpdatePacket(tag);
         this.fluidHandler.deserializeNBT(tag.getCompound(HBMKey.FLUIDS));
+        this.chuteTimer = tag.getInt("chute");
     }
 
     @Override
@@ -381,11 +438,6 @@ public class TileMinerLarge extends DummyableBlockEntity implements IUpgradeInfo
         this.fluidHandler.deserializeNBT(nbt.getCompound(HBMKey.FLUIDS));
         this.energyContainer.deserializeNBT(nbt.getCompound(HBMKey.ENERGY));
     }
-
-    protected int getY() {
-        return this.worldPosition.getY() - targetDepth - 4;
-    }
-
     @Override
     public boolean canProvideInfo(UpgradeType type, int level) {
         return VALID_UPGRADES.containsKey(type) && level <= VALID_UPGRADES.get(type);
@@ -424,5 +476,9 @@ public class TileMinerLarge extends DummyableBlockEntity implements IUpgradeInfo
 
     public long getPowerConsumption(){
         return consumption;
+    }
+
+    public boolean isEnableCrusher(){
+        return BitUtil.getBool(this.machineState, KEY_ENABLE_CRUSHER);
     }
 }

@@ -4,7 +4,7 @@ import com.hbm.capabilities.network.TransmitterNetworkRegistry;
 import com.hbm.api.providers.IBlockProvider;
 import com.hbm.block.interfaces.IHasTileEntity;
 import com.hbm.capabilities.network.ConnType;
-import com.hbm.block.states.TransmitterType;
+import com.hbm.block.enums.TransmitterType;
 import com.hbm.capabilities.network.transmitter.Transmitter;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

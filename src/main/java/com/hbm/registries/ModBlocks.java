@@ -7,6 +7,7 @@ import com.hbm.block.base.BlockBase;
 import com.hbm.block.decoriate.BlockMolten;
 import com.hbm.block.decoriate.BlockOre;
 import com.hbm.block.decoriate.BlockTest12;
+import com.hbm.block.enums.EnumCapBlock;
 import com.hbm.block.env.*;
 import com.hbm.block.logistic.*;
 import com.hbm.block.machine.*;
@@ -64,10 +65,7 @@ import net.minecraft.core.Vec3i;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.RecordItem;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
@@ -75,6 +73,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -305,7 +304,6 @@ public class ModBlocks {
     public static final RegistryObject<Block> FOUNDRY_MOLD = new BlockBuilder("foundry_mold", () -> new FoundryMold(Properties.copy(Blocks.STONE)))
             .tab(ModTabs.MACHINE.getKey()).model(HBMKey.MODEL_EXISTING).loc(HBMKey.ORDERLY_GEN).loot(HBMKey.DROP_SELF).tags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL).build();
     // 方块
-    public static final RegistryObject<Block> STEEL_BLOCK = block("block_steel", ()->new Block(BlockBehaviour.Properties.of()), BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
     public static final RegistryObject<Block> SELLAFIELD_SLAKED = block("sellafield_slaked", ()->new Block(BlockBehaviour.Properties.of().explosionResistance(5.0f)), BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
     public static final RegistryObject<Block> WASTE_LEAVES = add("waste_leaves",()->new WasteLeaves(BlockBehaviour.Properties.copy(Blocks.ACACIA_LEAVES).noLootTable()), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_LEAVES, HBMKey.ORDERLY_GEN, HBMKey.DROP_NONE);
     public static final RegistryObject<Block> WASTE_EARTH = add("waste_earth",()->new WasteEarth(BlockBehaviour.Properties.copy(Blocks.DIRT)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_BOTTOM_TOP, HBMKey.ORDERLY_GEN, HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
@@ -321,7 +319,6 @@ public class ModBlocks {
     public static final RegistryObject<Block> LEAD_ORE = add("ore_lead",()->new BlockOre(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
     public static final RegistryObject<Block> BERYLLIUM_ORE = add("ore_beryllium",()->new BlockOre(BlockBehaviour.Properties.copy(Blocks.STONE)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
     public static final RegistryObject<Block> SA326_ORE = add("ore_schrabidium",()->new BlockOre(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_DIAMOND_ORE), 0.1f), ModTabs.BLOCKS.getKey(),HBMKey.MODEL_CUBE_ALL, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
-    public static final RegistryObject<Block> ASBESTOS_BLOCK = add("block_asbestos",()->new BlockOre(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
     public static final RegistryObject<Block> ASBESTOS_ORE = add("ore_asbestos",()->new BlockOre(BlockBehaviour.Properties.copy(Blocks.STONE)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
     public static final RegistryObject<Block> BASALT_ASBESTOS_ORE = add("ore_basalt_asbestos",()->new BlockOre(BlockBehaviour.Properties.copy(Blocks.BASALT)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
     public static final RegistryObject<Block> OIL_ORE = add("ore_oil",()->new BlockOre(BlockBehaviour.Properties.copy(Blocks.GOLD_ORE)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
@@ -337,11 +334,416 @@ public class ModBlocks {
     public static final RegistryObject<Block> PLUTONIUM_ORE_NETHER = add("ore_nether_plutonium",()->new BlockOre(BlockBehaviour.Properties.copy(Blocks.NETHER_QUARTZ_ORE)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
     public static final RegistryObject<Block> FIRE_ORE_NETHER = add("ore_nether_fire",()->new BlockOre(BlockBehaviour.Properties.copy(Blocks.NETHER_BRICK_WALL)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
     public static final RegistryObject<Block> TIKITE_ORE_END = add("ore_tikite",()->new BlockOre(BlockBehaviour.Properties.copy(Blocks.END_STONE)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
-    public static final RegistryObject<Block> BLOCK_COKE_COAL = block("block_coke_coal", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COAL_BLOCK)));
-    public static final RegistryObject<Block> BLOCK_COKE_LIGNITE = block("block_coke_lignite", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COAL_BLOCK)));
-    public static final RegistryObject<Block> BLOCK_COKE_PETROLEUM = block("block_coke_petroleum", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COAL_BLOCK)));
-    public static final RegistryObject<Block> BLOCK_SCRAP = block("block_scrap", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
     public static final RegistryObject<Block> SAND_BAG = add("sand_bag", ()->new BlockSandBag(BlockBehaviour.Properties.of().strength(1, 2.5f).lightLevel(litEmission(11))), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.ORDERLY_GEN, HBMKey.DROP_NONE);
+    // 气体
+    public static final RegistryObject<Block> GAS_RADON = add("gas_radon", ()->new BlockGasRadon(Properties.copy(Blocks.AIR)), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, HBMKey.REVERSE_GEN, HBMKey.DROP_NONE);
+    public static final RegistryObject<Block> GAS_RADON_DENSE = add("gas_radon_dense", ()->new BlockGasRadon(Properties.copy(Blocks.AIR)), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, HBMKey.REVERSE_GEN, HBMKey.DROP_NONE);
+    public static final RegistryObject<Block> GAS_RADON_ASBESTOS = add("gas_radon_asbestos", ()->new BlockGasRadon(Properties.copy(Blocks.AIR)), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, HBMKey.REVERSE_GEN, HBMKey.DROP_NONE);
+    public static final RegistryObject<Block> GAS_RADON_TOMB = add("gas_radon_tomb", ()->new BlockGasRadon(Properties.copy(Blocks.AIR)), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, HBMKey.REVERSE_GEN, HBMKey.DROP_NONE);
+    // 资源方块
+    // ==========================================
+    // 铀、钍、镎、钋 系列核材料方块 (BlockHazard & BlockHotHazard)
+    // ==========================================
+    public static final RegistryObject<Block> BLOCK_URANIUM = block("block_uranium", () -> new BlockHazard(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(5, 50)), BlockTags.BEACON_BASE_BLOCKS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+    public static final RegistryObject<Block> BLOCK_U233 = block("block_u233", () -> new BlockHazard(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(5, 50)), BlockTags.BEACON_BASE_BLOCKS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+    public static final RegistryObject<Block> BLOCK_U235 = block("block_u235",
+            () -> new BlockHazard(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(5.0F, 50.0F).sound(SoundType.METAL)).setDisplayEffect(BlockHazard.ExtDisplayEffect.RADFOG),
+            BlockTags.BEACON_BASE_BLOCKS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+
+    public static final RegistryObject<Block> BLOCK_U238 = block("block_u238",
+            () -> new BlockHazard(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(5.0F, 50.0F).sound(SoundType.METAL)).setDisplayEffect(BlockHazard.ExtDisplayEffect.RADFOG),
+            BlockTags.BEACON_BASE_BLOCKS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+
+    public static final RegistryObject<Block> BLOCK_URANIUM_FUEL = block("block_uranium_fuel",
+            () -> new BlockHazard(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(5.0F, 50.0F).sound(SoundType.METAL)),
+            BlockTags.BEACON_BASE_BLOCKS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+
+    public static final RegistryObject<Block> BLOCK_THORIUM = block("block_thorium",
+            () -> new BlockHazard(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(5.0F, 50.0F).sound(SoundType.METAL)),
+            BlockTags.BEACON_BASE_BLOCKS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+
+    public static final RegistryObject<Block> BLOCK_THORIUM_FUEL = block("block_thorium_fuel",
+            () -> new BlockHazard(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(5.0F, 50.0F).sound(SoundType.METAL)),
+            BlockTags.BEACON_BASE_BLOCKS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+
+    public static final RegistryObject<Block> BLOCK_NEPTUNIUM = block("block_neptunium",
+            () -> new BlockHazard(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(5.0F, 60.0F).sound(SoundType.METAL)).setDisplayEffect(BlockHazard.ExtDisplayEffect.RADFOG),
+            BlockTags.BEACON_BASE_BLOCKS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+
+    public static final RegistryObject<Block> BLOCK_POLONIUM = block("block_polonium",
+            () -> new BlockHazardHot(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(5.0F, 50.0F).sound(SoundType.METAL)).setDisplayEffect(BlockHazard.ExtDisplayEffect.RADFOG),
+            BlockTags.BEACON_BASE_BLOCKS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+
+    public static final RegistryObject<Block> BLOCK_MOX_FUEL = block("block_mox_fuel",
+            () -> new BlockHazard(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(5.0F, 50.0F).sound(SoundType.METAL)).setDisplayEffect(BlockHazard.ExtDisplayEffect.RADFOG),
+            BlockTags.BEACON_BASE_BLOCKS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+
+    public static final RegistryObject<Block> BLOCK_PLUTONIUM = block("block_plutonium",
+            () -> new BlockHazard(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(5.0F, 50.0F).sound(SoundType.METAL)).setDisplayEffect(BlockHazard.ExtDisplayEffect.RADFOG),
+            BlockTags.BEACON_BASE_BLOCKS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+
+    public static final RegistryObject<Block> BLOCK_PU238 = block("block_pu238",
+            () -> new BlockHazardHot(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(5.0F, 50.0F).sound(SoundType.METAL).lightLevel(state -> 5)).setDisplayEffect(BlockHazard.ExtDisplayEffect.RADFOG),
+            BlockTags.BEACON_BASE_BLOCKS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+
+    public static final RegistryObject<Block> BLOCK_PU239 = block("block_pu239",
+            () -> new BlockHazard(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(5.0F, 50.0F).sound(SoundType.METAL)).setDisplayEffect(BlockHazard.ExtDisplayEffect.RADFOG),
+            BlockTags.BEACON_BASE_BLOCKS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+
+    public static final RegistryObject<Block> BLOCK_PU240 = block("block_pu240",
+            () -> new BlockHazard(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(5.0F, 50.0F).sound(SoundType.METAL)).setDisplayEffect(BlockHazard.ExtDisplayEffect.RADFOG),
+            BlockTags.BEACON_BASE_BLOCKS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+
+    public static final RegistryObject<Block> BLOCK_PU_MIX = block("block_pu_mix",
+            () -> new BlockHazard(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(5.0F, 50.0F).sound(SoundType.METAL)).setDisplayEffect(BlockHazard.ExtDisplayEffect.RADFOG),
+            BlockTags.BEACON_BASE_BLOCKS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+
+    public static final RegistryObject<Block> BLOCK_PLUTONIUM_FUEL = block("block_plutonium_fuel",
+            () -> new BlockHazard(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(5.0F, 50.0F).sound(SoundType.METAL)).setDisplayEffect(BlockHazard.ExtDisplayEffect.RADFOG),
+            BlockTags.BEACON_BASE_BLOCKS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+
+    // ==========================================
+    // 基础工业金属与合金方块 (Block)
+    // ==========================================
+    public static final RegistryObject<Block> BLOCK_TITANIUM = block("block_titanium",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(5.0F, 50.0F).sound(SoundType.METAL)),
+            BlockTags.BEACON_BASE_BLOCKS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+
+    public static final RegistryObject<Block> BLOCK_SULFUR = block("block_sulfur",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(5.0F, 10.0F)),
+            BlockTags.BEACON_BASE_BLOCKS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+
+    public static final RegistryObject<Block> BLOCK_NITER = block("block_niter",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(5.0F, 10.0F)),
+            BlockTags.BEACON_BASE_BLOCKS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+
+    public static final RegistryObject<Block> BLOCK_COPPER = block("block_copper",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(5.0F, 20.0F).sound(SoundType.METAL)),
+            BlockTags.BEACON_BASE_BLOCKS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+
+    public static final RegistryObject<Block> BLOCK_NICKEL = block("block_nickel",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(5.0F, 10.0F).sound(SoundType.METAL)),
+            BlockTags.BEACON_BASE_BLOCKS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+
+    public static final RegistryObject<Block> BLOCK_RED_COPPER = block("block_red_copper",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(5.0F, 25.0F).sound(SoundType.METAL)),
+            BlockTags.BEACON_BASE_BLOCKS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+
+    public static final RegistryObject<Block> BLOCK_OSMIRIDIUM = block("block_osmiridium",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(5.0F, 10.0F).sound(SoundType.METAL)),
+            BlockTags.BEACON_BASE_BLOCKS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+
+    public static final RegistryObject<Block> BLOCK_TUNGSTEN = block("block_tungsten",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(5.0F, 20.0F).sound(SoundType.METAL)),
+            BlockTags.BEACON_BASE_BLOCKS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+
+    public static final RegistryObject<Block> BLOCK_ALUMINIUM = block("block_aluminium",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(5.0F, 20.0F).sound(SoundType.METAL)),
+            BlockTags.BEACON_BASE_BLOCKS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+
+    public static final RegistryObject<Block> BLOCK_FLUORITE = block("block_fluorite",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(5.0F, 10.0F)),
+            BlockTags.BEACON_BASE_BLOCKS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+
+    public static final RegistryObject<Block> BLOCK_STEEL = block("block_steel",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(5.0F, 50.0F).sound(SoundType.METAL)),
+            BlockTags.BEACON_BASE_BLOCKS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+
+    public static final RegistryObject<Block> BLOCK_TCALLOY = block("block_tcalloy",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(5.0F, 70.0F).sound(SoundType.METAL)),
+            BlockTags.BEACON_BASE_BLOCKS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+
+    public static final RegistryObject<Block> BLOCK_CDALLOY = block("block_cdalloy",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(5.0F, 70.0F).sound(SoundType.METAL)),
+            BlockTags.BEACON_BASE_BLOCKS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+
+    public static final RegistryObject<Block> BLOCK_LEAD = block("block_lead",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(5.0F, 50.0F).sound(SoundType.METAL)),
+            BlockTags.BEACON_BASE_BLOCKS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+
+    public static final RegistryObject<Block> BLOCK_BISMUTH = block("block_bismuth",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(5.0F, 90.0F).sound(SoundType.METAL)),
+            BlockTags.BEACON_BASE_BLOCKS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+
+    public static final RegistryObject<Block> BLOCK_CADMIUM = block("block_cadmium",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(5.0F, 90.0F).sound(SoundType.METAL)),
+            BlockTags.BEACON_BASE_BLOCKS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+
+    public static final RegistryObject<Block> BLOCK_COLTAN = block("block_coltan",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(5.0F, 50.0F).sound(SoundType.METAL)),
+            BlockTags.BEACON_BASE_BLOCKS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+
+    public static final RegistryObject<Block> BLOCK_TANTALIUM = block("block_tantalium",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(5.0F, 50.0F).sound(SoundType.METAL)),
+            BlockTags.BEACON_BASE_BLOCKS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+
+    public static final RegistryObject<Block> BLOCK_NIOBIUM = block("block_niobium",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(5.0F, 50.0F).sound(SoundType.METAL)),
+            BlockTags.BEACON_BASE_BLOCKS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+
+    // ==========================================
+    // 核废料与特殊产物系列 (BlockNuclearWaste, BlockOutgas)
+    // ==========================================
+    public static final RegistryObject<Block> BLOCK_TRINITITE = block("block_trinitite",
+            () -> new BlockHazard(BlockBehaviour.Properties.copy(Blocks.STONE).strength(5.0F, 10.0F)),
+            BlockTags.BEACON_BASE_BLOCKS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+
+    public static final RegistryObject<Block> BLOCK_WASTE = block("block_waste",
+            () -> new BlockHazardNuke(BlockBehaviour.Properties.copy(Blocks.STONE).strength(5.0F, 10.0F)),
+            BlockTags.BEACON_BASE_BLOCKS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+
+    public static final RegistryObject<Block> BLOCK_WASTE_PAINTED = block("block_waste_painted",
+            () -> new BlockHazardNuke(BlockBehaviour.Properties.copy(Blocks.STONE).strength(5.0F, 10.0F)),
+            BlockTags.BEACON_BASE_BLOCKS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+
+    public static final RegistryObject<Block> BLOCK_WASTE_VITRIFIED = block("block_waste_vitrified",
+            () -> new BlockHazardNuke(BlockBehaviour.Properties.copy(Blocks.STONE).strength(5.0F, 10.0F)),
+            BlockTags.BEACON_BASE_BLOCKS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+
+    public static final RegistryObject<Block> ANCIENT_SCRAP = block("ancient_scrap",
+            () -> new BlockOutGas(true, 1, 1, BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(100.0F, 6000.0F)),
+            BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_DIAMOND_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+
+    public static final RegistryObject<Block> BLOCK_CORIUM = block("block_corium",
+            () -> new BlockHazard(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(100.0F, 6000.0F)),
+            BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_DIAMOND_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+
+    public static final RegistryObject<Block> BLOCK_CORIUM_COBBLE = block("block_corium_cobble",
+            () -> new BlockOutGas(true, 1, 1, BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(100.0F, 6000.0F)),
+            BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_DIAMOND_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+
+    // ==========================================
+    // 重力受控下落方块 (BlockFalling & BlockHazardFalling)
+    // ==========================================
+    public static final RegistryObject<Block> BLOCK_SCRAP = block("block_scrap",
+            () -> new FallingBlock(BlockBehaviour.Properties.copy(Blocks.GRAVEL).strength(2.5F, 5.0F).sound(SoundType.GRAVEL)),
+            BlockTags.MINEABLE_WITH_SHOVEL, Tags.Blocks.STORAGE_BLOCKS);
+
+    public static final RegistryObject<Block> BLOCK_ELECTRICAL_SCRAP = block("block_electrical_scrap",
+            () -> new FallingBlock(BlockBehaviour.Properties.copy(Blocks.ANVIL).strength(2.5F, 5.0F).sound(SoundType.METAL)),
+            BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+
+    public static final RegistryObject<Block> BLOCK_YELLOWCAKE = block("block_yellowcake",
+            () -> new BlockHazard(BlockBehaviour.Properties.copy(Blocks.SAND).strength(5.0F, 10.0F).sound(SoundType.SAND)),
+            BlockTags.BEACON_BASE_BLOCKS, BlockTags.MINEABLE_WITH_SHOVEL, Tags.Blocks.STORAGE_BLOCKS);
+
+    public static final RegistryObject<Block> BLOCK_RED_PHOSPHORUS = block("block_red_phosphorus",
+            () -> new BlockHazard(BlockBehaviour.Properties.copy(Blocks.SAND).strength(5.0F, 10.0F).sound(SoundType.SAND)),
+            BlockTags.BEACON_BASE_BLOCKS, BlockTags.MINEABLE_WITH_SHOVEL, Tags.Blocks.STORAGE_BLOCKS);
+
+    public static final RegistryObject<Block> BLOCK_FALLOUT = block("block_fallout",
+            () -> new BlockHazard(BlockBehaviour.Properties.copy(Blocks.SAND).strength(0.2F, 0.2F).sound(SoundType.GRAVEL)),
+            BlockTags.MINEABLE_WITH_SHOVEL, Tags.Blocks.STORAGE_BLOCKS);
+
+    // ==========================================
+    // 超限/高级无序工业材料
+    // ==========================================
+    public static final RegistryObject<Block> BLOCK_BERYLLIUM = block("block_beryllium",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(5.0F, 20.0F).sound(SoundType.METAL)),
+            BlockTags.BEACON_BASE_BLOCKS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+
+    public static final RegistryObject<Block> BLOCK_SCHRARANIUM = block("block_schraranium",
+            () -> new BlockHazard(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(5.0F, 250.0F).sound(SoundType.METAL)),
+            BlockTags.BEACON_BASE_BLOCKS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_DIAMOND_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+
+    public static final RegistryObject<Block> BLOCK_SCHRABIDIUM = block("block_schrabidium",
+            () -> new BlockHazard(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(5.0F, 600.0F).sound(SoundType.METAL)),
+            BlockTags.BEACON_BASE_BLOCKS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_DIAMOND_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+
+    public static final RegistryObject<Block> BLOCK_SCHRABIDATE = block("block_schrabidate",
+            () -> new BlockHazard(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(5.0F, 600.0F).sound(SoundType.METAL)),
+            BlockTags.BEACON_BASE_BLOCKS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_DIAMOND_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+
+    public static final RegistryObject<Block> BLOCK_SOLINIUM = block("block_solinium",
+            () -> new BlockHazard(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(5.0F, 600.0F).sound(SoundType.METAL)),
+            BlockTags.BEACON_BASE_BLOCKS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_DIAMOND_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+
+    public static final RegistryObject<Block> BLOCK_SCHRABIDIUM_FUEL = block("block_schrabidium_fuel",
+            () -> new BlockHazard(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(5.0F, 600.0F).sound(SoundType.METAL)),
+            BlockTags.BEACON_BASE_BLOCKS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_DIAMOND_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+
+    public static final RegistryObject<Block> BLOCK_EUPHEMIUM = block("block_euphemium",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(5.0F, 60000.0F).sound(SoundType.METAL)),
+            BlockTags.BEACON_BASE_BLOCKS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_DIAMOND_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+
+    public static final RegistryObject<Block> BLOCK_DINEUTRONIUM = block("block_dineutronium",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(5.0F, 60000.0F).sound(SoundType.METAL)),
+            BlockTags.BEACON_BASE_BLOCKS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_DIAMOND_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+
+    public static final RegistryObject<Block> BLOCK_MAGNETIZED_TUNGSTEN = block("block_magnetized_tungsten",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(5.0F, 75.0F).sound(SoundType.METAL)),
+            BlockTags.BEACON_BASE_BLOCKS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+
+    public static final RegistryObject<Block> BLOCK_COMBINE_STEEL = block("block_combine_steel",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(5.0F, 600.0F).sound(SoundType.METAL)),
+            BlockTags.BEACON_BASE_BLOCKS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_DIAMOND_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+
+    public static final RegistryObject<Block> BLOCK_DESH = block("block_desh",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(5.0F, 300.0F).sound(SoundType.METAL)),
+            BlockTags.BEACON_BASE_BLOCKS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+
+    public static final RegistryObject<Block> BLOCK_DURA_STEEL = block("block_dura_steel",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(5.0F, 200.0F).sound(SoundType.METAL)),
+            BlockTags.BEACON_BASE_BLOCKS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+
+    public static final RegistryObject<Block> BLOCK_STARMETAL = block("block_starmetal",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(5.0F, 400.0F).sound(SoundType.METAL)),
+            BlockTags.BEACON_BASE_BLOCKS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_DIAMOND_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+
+    public static final RegistryObject<Block> BLOCK_COBALT = block("block_cobalt",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(5.0F, 50.0F)),
+            BlockTags.BEACON_BASE_BLOCKS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+
+    public static final RegistryObject<Block> BLOCK_LITHIUM = block("block_lithium",
+            () -> new BlockLithium(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(5.0F, 10.0F).sound(SoundType.METAL)),
+            BlockTags.BEACON_BASE_BLOCKS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+
+    public static final RegistryObject<Block> BLOCK_ZIRCONIUM = block("block_zirconium",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(5.0F, 30.0F).sound(SoundType.METAL)),
+            BlockTags.BEACON_BASE_BLOCKS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+
+    public static final RegistryObject<Block> BLOCK_WHITE_PHOSPHORUS = block("block_white_phosphorus",
+            () -> new BlockHazard(BlockBehaviour.Properties.copy(Blocks.STONE).strength(5.0F, 10.0F)),
+            BlockTags.BEACON_BASE_BLOCKS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+
+    public static final RegistryObject<Block> BLOCK_AUSTRALIUM = block("block_australium",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(5.0F, 10.0F)),
+            BlockTags.BEACON_BASE_BLOCKS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+
+    // ==========================================
+    // 聚合物、绝缘体与特殊石质/布质轴向方块 (BlockRotatablePillar / BlockPillar)
+    // ==========================================
+    public static final RegistryObject<Block> BLOCK_POLYMER = block("block_polymer",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE).strength(3.0F, 10.0F).sound(SoundType.NETHERITE_BLOCK)),
+            BlockTags.MINEABLE_WITH_PICKAXE, Tags.Blocks.STORAGE_BLOCKS);
+
+    public static final RegistryObject<Block> BLOCK_BAKELITE = block("block_bakelite",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE).strength(3.0F, 5.0F).sound(SoundType.NETHERITE_BLOCK)),
+            BlockTags.MINEABLE_WITH_PICKAXE, Tags.Blocks.STORAGE_BLOCKS);
+
+    public static final RegistryObject<Block> BLOCK_RUBBER = block("block_rubber",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE).strength(3.0F, 15.0F).sound(SoundType.NETHERITE_BLOCK)),
+            BlockTags.MINEABLE_WITH_PICKAXE, Tags.Blocks.STORAGE_BLOCKS);
+
+    public static final RegistryObject<Block> BLOCK_INSULATOR = add("block_insulator",
+            () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).strength(5.0F, 10.0F).sound(SoundType.WOOL)),
+            ModTabs.BLOCKS.getKey(), HBMKey.MODEL_PILLAR, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF,
+            BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_STONE_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+
+    public static final RegistryObject<Block> BLOCK_FIBERGLASS = add("block_fiberglass",
+            () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).strength(5.0F, 15.0F).sound(SoundType.WOOL)),
+            ModTabs.BLOCKS.getKey(), HBMKey.MODEL_PILLAR, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF,
+            BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_STONE_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+
+    public static final RegistryObject<Block> BLOCK_ASBESTOS = block("block_asbestos",
+            () -> new BlockOutGas(true, 5, 1, BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).strength(5.0F, 15.0F).sound(SoundType.WOOL)),
+            BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_STONE_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+
+    public static final RegistryObject<Block> BLOCK_SCHRABIDIUM_CLUSTER = new BlockBuilder("block_schrabidium_cluster",
+            () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STONE).strength(5.0F, 60000.0F)))
+            .tab(ModTabs.BLOCKS.getKey()).model(HBMKey.MODEL_PILLAR).loc(HBMKey.ORDERLY_GEN_EXCEPT_FIRST).loot(HBMKey.DROP_SELF).tags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_STONE_TOOL, Tags.Blocks.STORAGE_BLOCKS)
+            .item(block -> new BlockItem(block, new Item.Properties().rarity(Rarity.RARE))).build();
+
+    public static final RegistryObject<Block> BLOCK_EUPHEMIUM_CLUSTER = add("block_euphemium_cluster",
+            () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STONE).strength(5.0F, 60000.0F)),
+            ModTabs.BLOCKS.getKey(), HBMKey.MODEL_PILLAR, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF,
+            BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_DIAMOND_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+
+    public static final RegistryObject<Block> BLOCK_SMORE = add("block_smore",
+            () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STONE).strength(15.0F, 600.0F)),
+            ModTabs.BLOCKS.getKey(), HBMKey.MODEL_PILLAR, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF,
+            BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+
+    // ==========================================
+    // 反应堆石墨群与低硬度杂项方块
+    // ==========================================
+    public static final RegistryObject<Block> BLOCK_FOAM = block("block_foam",
+            () -> new BlockBase(BlockBehaviour.Properties.copy(Blocks.SNOW_BLOCK).strength(0.5F, 0.0F).sound(SoundType.SNOW)),
+            BlockTags.MINEABLE_WITH_SHOVEL);
+
+    public static final RegistryObject<Block> BLOCK_COKE_COAL = block("block_coke_coal", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COAL_BLOCK)), BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+    public static final RegistryObject<Block> BLOCK_COKE_LIGNITE = block("block_coke_lignite", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COAL_BLOCK)), BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+    public static final RegistryObject<Block> BLOCK_COKE_PETROLEUM = block("block_coke_petroleum", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COAL_BLOCK)), BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+
+    public static final RegistryObject<Block> BLOCK_GRAPHITE = block("block_graphite",
+            () -> new BlockGraphite(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(5.0F, 10.0F).sound(SoundType.METAL), 30, 5),
+            BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+
+    public static final RegistryObject<Block> BLOCK_GRAPHITE_DRILLED = block("block_graphite_drilled",
+            BlockGraphiteDrilled::new,
+            BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+
+    public static final RegistryObject<Block> BLOCK_GRAPHITE_FUEL = block("block_graphite_fuel",
+            BlockGraphiteFuel::new,
+            BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+
+    public static final RegistryObject<Block> BLOCK_GRAPHITE_PLUTONIUM = block("block_graphite_plutonium",
+            BlockGraphiteSource::new,
+            BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+
+    public static final RegistryObject<Block> BLOCK_GRAPHITE_ROD = block("block_graphite_rod",
+            BlockGraphiteRod::new,
+            BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+
+    public static final RegistryObject<Block> BLOCK_GRAPHITE_SOURCE = block("block_graphite_source",
+            BlockGraphiteSource::new,
+            BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+
+    public static final RegistryObject<Block> BLOCK_GRAPHITE_LITHIUM = block("block_graphite_lithium",
+            BlockGraphiteBreedingFuel::new,
+            BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+
+    public static final RegistryObject<Block> BLOCK_GRAPHITE_TRITIUM = block("block_graphite_tritium",
+            BlockGraphiteBreedingProduct::new,
+            BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+
+    public static final RegistryObject<Block> BLOCK_GRAPHITE_DETECTOR = block("block_graphite_detector",
+            BlockGraphiteNeutronDetector::new,
+            BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+
+    public static final RegistryObject<Block> BLOCK_BORON = block("block_boron",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(5.0F, 10.0F).sound(SoundType.METAL)),
+            BlockTags.BEACON_BASE_BLOCKS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+
+    public static final RegistryObject<Block> BLOCK_LANTHANIUM = block("block_lanthanium",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(5.0F, 10.0F).sound(SoundType.METAL)),
+            BlockTags.BEACON_BASE_BLOCKS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+
+    public static final RegistryObject<Block> BLOCK_RA226 = block("block_ra226",
+            () -> new BlockHazard(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(5.0F, 10.0F).sound(SoundType.METAL)),
+            BlockTags.BEACON_BASE_BLOCKS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+
+    public static final RegistryObject<Block> BLOCK_ACTINIUM = block("block_actinium",
+            () -> new BlockHazard(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(5.0F, 10.0F).sound(SoundType.METAL)),
+            BlockTags.BEACON_BASE_BLOCKS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+
+    public static final RegistryObject<Block> BLOCK_TRITIUM = add("block_tritium",
+            () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.GLASS).strength(3.0F, 2.0F).sound(SoundType.GLASS)),
+            ModTabs.BLOCKS.getKey(), HBMKey.MODEL_PILLAR, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF,
+            BlockTags.MINEABLE_WITH_PICKAXE);
+
+    public static final RegistryObject<Block> BLOCK_SEMTEX = add("block_semtex",
+            () -> new BlockPlasticExplosive(BlockBehaviour.Properties.copy(Blocks.TNT).strength(2.0F, 2.0F).sound(SoundType.METAL)),
+            ModTabs.BLOCKS.getKey(), HBMKey.MODEL_STANDALONE, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF,
+            BlockTags.MINEABLE_WITH_PICKAXE);
+
+    public static final RegistryObject<Block> BLOCK_C4 = add("block_c4",
+            () -> new BlockPlasticExplosive(BlockBehaviour.Properties.copy(Blocks.TNT).strength(2.0F, 2.0F).sound(SoundType.METAL)),
+            ModTabs.BLOCKS.getKey(), HBMKey.MODEL_STANDALONE, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF,
+            BlockTags.MINEABLE_WITH_PICKAXE);
+
+    public static final RegistryObject<Block> BLOCK_SLAG = add("block_slag",
+            () -> new BlockSlag(BlockBehaviour.Properties.copy(Blocks.STONE).strength(2.0F, 2.0F).sound(SoundType.STONE)),
+            ModTabs.BLOCKS.getKey(), HBMKey.MODEL_STANDALONE, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF,
+            BlockTags.MINEABLE_WITH_PICKAXE);
+
+//    public static final RegistryObject<Block> BLOCK_CAP = block("block_cap",
+//            () -> new BlockCap(BlockBehaviour.Properties.copy(Blocks.STONE).strength(5.0F, 10.0F)),
+//            BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+    public static final WrapperRegistry.EnumBlockCollection<Block, EnumCapBlock> BLOCK_CAP = new WrapperRegistry.EnumBlockCollection<>(EnumCapBlock.class,
+                type -> add("block_cap_" + type.name().toLowerCase(), ()->new RotatedPillarBlock(Properties.copy(Blocks.STONE).strength(5.0F, 10.0F)),
+                        ModTabs.BLOCKS.getKey(), HBMKey.MODEL_PILLAR, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF,
+                        BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL));
     // 基岩矿
     public static final RegistryObject<Block> BEDROCK_ORE = add("ore_bedrock",()->new BedRockOre(BlockBehaviour.Properties.copy(Blocks.BEDROCK)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_STANDALONE, HBMKey.REVERSE_GEN, HBMKey.DROP_NONE);
     public static final RegistryObject<Block> DEPTH_STONE = add("depth_stone",()->new BlockOre(BlockBehaviour.Properties.copy(Blocks.REINFORCED_DEEPSLATE)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.ORDERLY_GEN, HBMKey.DROP_SELF);

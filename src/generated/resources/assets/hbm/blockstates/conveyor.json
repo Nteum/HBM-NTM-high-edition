@@ -1,122 +1,122 @@
 {
   "variants": {
-    "facing=east,variant3=0": {
+    "facing=east,variant8=0": {
       "model": "hbm:block/conveyor",
       "y": 90
     },
-    "facing=east,variant3=1": {
+    "facing=east,variant8=1": {
       "model": "hbm:block/conveyor_left",
       "y": 90
     },
-    "facing=east,variant3=2": {
+    "facing=east,variant8=2": {
       "model": "hbm:block/conveyor_right",
       "y": 90
     },
-    "facing=east,variant3=3": {
+    "facing=east,variant8=3": {
       "model": "hbm:block/conveyor_up_1",
       "y": 90
     },
-    "facing=east,variant3=4": {
+    "facing=east,variant8=4": {
       "model": "hbm:block/conveyor_up_2",
       "y": 90
     },
-    "facing=east,variant3=5": {
+    "facing=east,variant8=5": {
       "model": "hbm:block/conveyor_up_3",
       "y": 90
     },
-    "facing=east,variant3=6": {
+    "facing=east,variant8=6": {
       "model": "hbm:block/conveyor_down_1",
       "y": 90
     },
-    "facing=east,variant3=7": {
+    "facing=east,variant8=7": {
       "model": "hbm:block/conveyor_down_2",
       "y": 90
     },
-    "facing=north,variant3=0": {
+    "facing=north,variant8=0": {
       "model": "hbm:block/conveyor"
     },
-    "facing=north,variant3=1": {
+    "facing=north,variant8=1": {
       "model": "hbm:block/conveyor_left"
     },
-    "facing=north,variant3=2": {
+    "facing=north,variant8=2": {
       "model": "hbm:block/conveyor_right"
     },
-    "facing=north,variant3=3": {
+    "facing=north,variant8=3": {
       "model": "hbm:block/conveyor_up_1"
     },
-    "facing=north,variant3=4": {
+    "facing=north,variant8=4": {
       "model": "hbm:block/conveyor_up_2"
     },
-    "facing=north,variant3=5": {
+    "facing=north,variant8=5": {
       "model": "hbm:block/conveyor_up_3"
     },
-    "facing=north,variant3=6": {
+    "facing=north,variant8=6": {
       "model": "hbm:block/conveyor_down_1"
     },
-    "facing=north,variant3=7": {
+    "facing=north,variant8=7": {
       "model": "hbm:block/conveyor_down_2"
     },
-    "facing=south,variant3=0": {
+    "facing=south,variant8=0": {
       "model": "hbm:block/conveyor",
       "y": 180
     },
-    "facing=south,variant3=1": {
+    "facing=south,variant8=1": {
       "model": "hbm:block/conveyor_left",
       "y": 180
     },
-    "facing=south,variant3=2": {
+    "facing=south,variant8=2": {
       "model": "hbm:block/conveyor_right",
       "y": 180
     },
-    "facing=south,variant3=3": {
+    "facing=south,variant8=3": {
       "model": "hbm:block/conveyor_up_1",
       "y": 180
     },
-    "facing=south,variant3=4": {
+    "facing=south,variant8=4": {
       "model": "hbm:block/conveyor_up_2",
       "y": 180
     },
-    "facing=south,variant3=5": {
+    "facing=south,variant8=5": {
       "model": "hbm:block/conveyor_up_3",
       "y": 180
     },
-    "facing=south,variant3=6": {
+    "facing=south,variant8=6": {
       "model": "hbm:block/conveyor_down_1",
       "y": 180
     },
-    "facing=south,variant3=7": {
+    "facing=south,variant8=7": {
       "model": "hbm:block/conveyor_down_2",
       "y": 180
     },
-    "facing=west,variant3=0": {
+    "facing=west,variant8=0": {
       "model": "hbm:block/conveyor",
       "y": 270
     },
-    "facing=west,variant3=1": {
+    "facing=west,variant8=1": {
       "model": "hbm:block/conveyor_left",
       "y": 270
     },
-    "facing=west,variant3=2": {
+    "facing=west,variant8=2": {
       "model": "hbm:block/conveyor_right",
       "y": 270
     },
-    "facing=west,variant3=3": {
+    "facing=west,variant8=3": {
       "model": "hbm:block/conveyor_up_1",
       "y": 270
     },
-    "facing=west,variant3=4": {
+    "facing=west,variant8=4": {
       "model": "hbm:block/conveyor_up_2",
       "y": 270
     },
-    "facing=west,variant3=5": {
+    "facing=west,variant8=5": {
       "model": "hbm:block/conveyor_up_3",
       "y": 270
     },
-    "facing=west,variant3=6": {
+    "facing=west,variant8=6": {
       "model": "hbm:block/conveyor_down_1",
       "y": 270
     },
-    "facing=west,variant3=7": {
+    "facing=west,variant8=7": {
       "model": "hbm:block/conveyor_down_2",
       "y": 270
     }

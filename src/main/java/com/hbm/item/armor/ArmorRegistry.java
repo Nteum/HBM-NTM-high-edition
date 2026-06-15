@@ -12,7 +12,7 @@ public class ArmorRegistry {
     public static HashMap<Item, ArrayList<HazardClass>> hazardClasses = new HashMap();
 
     public static void registerHazard(Item item, HazardClass... hazards) {
-        hazardClasses.put(item, new ArrayList<HazardClass>(Arrays.asList(hazards)));
+        hazardClasses.put(item, new ArrayList<>(Arrays.asList(hazards)));
     }
     public static ItemStack getArmor(LivingEntity entity, int slot){
         Iterable<ItemStack> armorSlots = entity.getArmorSlots();

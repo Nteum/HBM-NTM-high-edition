@@ -1,5 +1,35 @@
 {
   "values": [
-    "hbm:upgrade_base"
+    "hbm:upgrade_base",
+    "hbm:upgrade_speed_1",
+    "hbm:upgrade_speed_2",
+    "hbm:upgrade_speed_3",
+    "hbm:upgrade_effect_1",
+    "hbm:upgrade_effect_2",
+    "hbm:upgrade_effect_3",
+    "hbm:upgrade_power_1",
+    "hbm:upgrade_power_2",
+    "hbm:upgrade_power_3",
+    "hbm:upgrade_fortune_1",
+    "hbm:upgrade_fortune_2",
+    "hbm:upgrade_fortune_3",
+    "hbm:upgrade_afterburn_1",
+    "hbm:upgrade_afterburn_2",
+    "hbm:upgrade_afterburn_3",
+    "hbm:upgrade_overdrive_1",
+    "hbm:upgrade_overdrive_2",
+    "hbm:upgrade_overdrive_3",
+    "hbm:upgrade_radius",
+    "hbm:upgrade_health",
+    "hbm:upgrade_smelter",
+    "hbm:upgrade_shredder",
+    "hbm:upgrade_centrifuge",
+    "hbm:upgrade_crystallizer",
+    "hbm:upgrade_nullifier",
+    "hbm:upgrade_screm",
+    "hbm:upgrade_gc_speed",
+    "hbm:upgrade_5g",
+    "hbm:upgrade_stack",
+    "hbm:upgrade_ejector"
   ]
 }

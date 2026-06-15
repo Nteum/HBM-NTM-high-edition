@@ -27,9 +27,7 @@ import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -334,6 +332,20 @@ public class WrapperRegistry<T> implements Supplier<T>{
                 blockRegistry.localizedName = localizedName;
             ModBlocks.blockList.add(blockRegistry);
             return blockRegistry.registryObject;
+        }
+    }
+
+    public static class EnumBlockCollection<T, R extends Enum>{
+        Map<R, RegistryObject<T>> registryObjectMap;
+        public EnumBlockCollection(Class<R> theEnum, Function<R, RegistryObject<T>> func){
+            this.registryObjectMap = new HashMap<>();
+            for (R enumConstant : theEnum.getEnumConstants()) {
+                registryObjectMap.put(enumConstant, func.apply(enumConstant));
+            }
+        }
+
+        public RegistryObject<T> get(R key){
+            return registryObjectMap.get(key);
         }
     }
 }

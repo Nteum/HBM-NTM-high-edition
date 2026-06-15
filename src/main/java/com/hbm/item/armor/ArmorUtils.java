@@ -1,5 +1,6 @@
 package com.hbm.item.armor;
 
+import com.hbm.api.item.IGasMask;
 import com.hbm.compat.Compat;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
@@ -36,6 +37,43 @@ public class ArmorUtils {
             armor.setCount(0);
         }
     }
+//    // 消耗防毒面具耐久
+//    public static void damageGasMaskFilter(LivingEntity entity, int damage) {
+//        ItemStack mask = ArmorRegistry.getArmor(entity, 3);
+//        if(mask == null || mask.isEmpty()) return;
+//        if (!(mask.getItem() instanceof IGasMask)){
+//            if(ArmorModHandler.hasMods(mask)) {
+//                ItemStack mods[] = ArmorModHandler.pryMods(mask);
+//                if(mods[ArmorModHandler.helmet_only] != null && mods[ArmorModHandler.helmet_only].getItem() instanceof IGasMask)
+//                    mask = mods[ArmorModHandler.helmet_only];
+//            }
+//        }
+//        if (mask.getItem() instanceof IGasMask){
+//            damageGasMaskFilter(mask, damage);
+//        }
+//    }
+//    public static void damageGasMaskFilter(ItemStack mask, int damage) {
+//        ItemStack filter = getGasMaskFilter(mask);
+//
+//        if(filter == null) {
+//            if(ArmorModHandler.hasMods(mask)) {
+//                ItemStack mods[] = ArmorModHandler.pryMods(mask);
+//
+//                if(mods[ArmorModHandler.helmet_only] != null && mods[ArmorModHandler.helmet_only].getItem() instanceof IGasMask)
+//                    filter = getGasMaskFilter(mods[ArmorModHandler.helmet_only]);
+//            }
+//        }
+//
+//        if(filter == null || filter.getMaxDamage() == 0)
+//            return;
+//
+//        filter.setItemDamage(filter.getItemDamage() + damage);
+//
+//        if(filter.getItemDamage() > filter.getMaxDamage())
+//            removeFilter(mask);
+//        else
+//            installGasMaskFilter(mask, filter);
+//    }
     // 修改飞行时间
     // 暂时不清楚其具体对应高版本什么设定
     public static void resetFlightTime(Player player) {
