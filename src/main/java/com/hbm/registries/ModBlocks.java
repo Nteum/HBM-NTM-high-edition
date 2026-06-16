@@ -143,39 +143,6 @@ public class ModBlocks {
     public static final RegistryObject<Block> machine_zirnox = add("machine_zirnox", () -> new BlockZirnoxReactor(Properties.of().strength(5.0F).explosionResistance(100.0F)), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, "Zirnox Reactor", HBMKey.DROP_SELF);
     public static final RegistryObject<Block> zirnox_destroyed = add("zirnox_destroyed", () -> new Block(Properties.of().strength(100.0F).explosionResistance(800.0F).noLootTable()), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, "Zirnox Ruins", HBMKey.DROP_NONE);
 
-    // Chicago Pile components
-    public static final RegistryObject<Block> chicago_graphite_block = new BlockBuilder("chicago_graphite_block",
-            () -> new ChicagoGraphiteBlock(BlockBehaviour.Properties.of().strength(4.0F).explosionResistance(10.0F).sound(SoundType.STONE).requiresCorrectToolForDrops()))
-            .tab(ModTabs.MACHINE.getKey())
-            .build();
-    public static final RegistryObject<Block> chicago_graphite_drilled = new BlockBuilder("chicago_graphite_drilled",
-            () -> new ChicagoGraphiteDrilledBlock(BlockBehaviour.Properties.of().strength(4.0F).explosionResistance(10.0F).sound(SoundType.METAL).requiresCorrectToolForDrops()))
-            .tab(ModTabs.MACHINE.getKey())
-            .build();
-    public static final RegistryObject<Block> chicago_graphite_rod = new BlockBuilder("chicago_graphite_rod",
-            () -> new ChicagoGraphiteRodBlock(BlockBehaviour.Properties.of().strength(4.0F).explosionResistance(10.0F).sound(SoundType.METAL).requiresCorrectToolForDrops()))
-            .tab(ModTabs.MACHINE.getKey())
-            .build();
-    public static final RegistryObject<Block> chicago_graphite_fuel = new BlockBuilder("chicago_graphite_fuel",
-            () -> new ChicagoGraphiteFuelBlock(BlockBehaviour.Properties.of().strength(4.0F).explosionResistance(10.0F).sound(SoundType.METAL).requiresCorrectToolForDrops()))
-            .tab(ModTabs.MACHINE.getKey())
-            .build();
-    public static final RegistryObject<Block> chicago_graphite_source = new BlockBuilder("chicago_graphite_source",
-            () -> new ChicagoGraphiteSourceBlock(BlockBehaviour.Properties.of().strength(4.0F).explosionResistance(10.0F).sound(SoundType.METAL).requiresCorrectToolForDrops()))
-            .tab(ModTabs.MACHINE.getKey())
-            .build();
-    public static final RegistryObject<Block> chicago_graphite_breeder = new BlockBuilder("chicago_graphite_breeder",
-            () -> new ChicagoGraphiteBreederBlock(BlockBehaviour.Properties.of().strength(4.0F).explosionResistance(10.0F).sound(SoundType.METAL).requiresCorrectToolForDrops()))
-            .tab(ModTabs.MACHINE.getKey())
-            .build();
-    public static final RegistryObject<Block> chicago_graphite_detector = new BlockBuilder("chicago_graphite_detector",
-            () -> new ChicagoGraphiteDetectorBlock(BlockBehaviour.Properties.of().strength(4.0F).explosionResistance(10.0F).sound(SoundType.METAL).requiresCorrectToolForDrops().lightLevel(state -> state.getValue(ChicagoPileStateProperties.TRIGGERED) ? 4 : 0)))
-            .tab(ModTabs.MACHINE.getKey())
-            .build();
-    public static final RegistryObject<Block> chicago_graphite_tritium = new BlockBuilder("chicago_graphite_tritium",
-            () -> new ChicagoGraphiteTritiumBlock(BlockBehaviour.Properties.of().strength(4.0F).explosionResistance(10.0F).sound(SoundType.METAL).requiresCorrectToolForDrops()))
-            .tab(ModTabs.MACHINE.getKey())
-            .build();
     public static final RegistryObject<Block> machine_battery = registerMachineBattery("machine_battery",()->new BlockBattery(Properties.of(), BlockBattery.BatteryType.BASIC));
     public static final RegistryObject<Block> machine_lithium_battery = registerMachineBattery("battery_block_lithium",()->new BlockBattery(Properties.of(), BlockBattery.BatteryType.LITHIUM));
     public static final RegistryObject<Block> machine_schrabidium_battery = registerMachineBattery("battery_block_schrabidium",()->new BlockBattery(Properties.of(), BlockBattery.BatteryType.SCHRABIDIUM));
@@ -661,45 +628,43 @@ public class ModBlocks {
             () -> new BlockBase(BlockBehaviour.Properties.copy(Blocks.SNOW_BLOCK).strength(0.5F, 0.0F).sound(SoundType.SNOW)),
             BlockTags.MINEABLE_WITH_SHOVEL);
 
-    public static final RegistryObject<Block> BLOCK_COKE_COAL = block("block_coke_coal", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COAL_BLOCK)), BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
-    public static final RegistryObject<Block> BLOCK_COKE_LIGNITE = block("block_coke_lignite", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COAL_BLOCK)), BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
-    public static final RegistryObject<Block> BLOCK_COKE_PETROLEUM = block("block_coke_petroleum", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COAL_BLOCK)), BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+    public static final RegistryObject<Block> BLOCK_COKE_COAL = block("block_coke_coal", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COAL_BLOCK)), BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+    public static final RegistryObject<Block> BLOCK_COKE_LIGNITE = block("block_coke_lignite", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COAL_BLOCK)), BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL, Tags.Blocks.STORAGE_BLOCKS);
+    public static final RegistryObject<Block> BLOCK_COKE_PETROLEUM = block("block_coke_petroleum", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COAL_BLOCK)), BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL, Tags.Blocks.STORAGE_BLOCKS);
 
-    public static final RegistryObject<Block> BLOCK_GRAPHITE = block("block_graphite",
-            () -> new BlockGraphite(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(5.0F, 10.0F).sound(SoundType.METAL), 30, 5),
-            BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
-
-    public static final RegistryObject<Block> BLOCK_GRAPHITE_DRILLED = block("block_graphite_drilled",
-            BlockGraphiteDrilled::new,
-            BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
-
-    public static final RegistryObject<Block> BLOCK_GRAPHITE_FUEL = block("block_graphite_fuel",
-            BlockGraphiteFuel::new,
-            BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
-
-    public static final RegistryObject<Block> BLOCK_GRAPHITE_PLUTONIUM = block("block_graphite_plutonium",
-            BlockGraphiteSource::new,
-            BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
-
-    public static final RegistryObject<Block> BLOCK_GRAPHITE_ROD = block("block_graphite_rod",
-            BlockGraphiteRod::new,
-            BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
-
-    public static final RegistryObject<Block> BLOCK_GRAPHITE_SOURCE = block("block_graphite_source",
-            BlockGraphiteSource::new,
-            BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
-
-    public static final RegistryObject<Block> BLOCK_GRAPHITE_LITHIUM = block("block_graphite_lithium",
-            BlockGraphiteBreedingFuel::new,
-            BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
-
-    public static final RegistryObject<Block> BLOCK_GRAPHITE_TRITIUM = block("block_graphite_tritium",
-            BlockGraphiteBreedingProduct::new,
-            BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
-
-    public static final RegistryObject<Block> BLOCK_GRAPHITE_DETECTOR = block("block_graphite_detector",
-            BlockGraphiteNeutronDetector::new,
-            BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+    // Chicago Pile components
+    public static final RegistryObject<Block> chicago_graphite_block = new BlockBuilder("chicago_graphite_block",
+            () -> new ChicagoGraphiteBlock(BlockBehaviour.Properties.of().strength(4.0F).explosionResistance(10.0F).sound(SoundType.STONE).requiresCorrectToolForDrops()))
+            .tab(ModTabs.MACHINE.getKey()).tags(Tags.Blocks.STORAGE_BLOCKS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL)
+            .build();
+    public static final RegistryObject<Block> chicago_graphite_drilled = new BlockBuilder("chicago_graphite_drilled",
+            () -> new ChicagoGraphiteDrilledBlock(BlockBehaviour.Properties.of().strength(4.0F).explosionResistance(10.0F).sound(SoundType.METAL).requiresCorrectToolForDrops()))
+            .tab(ModTabs.MACHINE.getKey()).tags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL)
+            .build();
+    public static final RegistryObject<Block> chicago_graphite_rod = new BlockBuilder("chicago_graphite_rod",
+            () -> new ChicagoGraphiteRodBlock(BlockBehaviour.Properties.of().strength(4.0F).explosionResistance(10.0F).sound(SoundType.METAL).requiresCorrectToolForDrops()))
+            .tab(ModTabs.MACHINE.getKey()).tags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL)
+            .build();
+    public static final RegistryObject<Block> chicago_graphite_fuel = new BlockBuilder("chicago_graphite_fuel",
+            () -> new ChicagoGraphiteFuelBlock(BlockBehaviour.Properties.of().strength(4.0F).explosionResistance(10.0F).sound(SoundType.METAL).requiresCorrectToolForDrops()))
+            .tab(ModTabs.MACHINE.getKey()).tags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL)
+            .build();
+    public static final RegistryObject<Block> chicago_graphite_source = new BlockBuilder("chicago_graphite_source",
+            () -> new ChicagoGraphiteSourceBlock(BlockBehaviour.Properties.of().strength(4.0F).explosionResistance(10.0F).sound(SoundType.METAL).requiresCorrectToolForDrops()))
+            .tab(ModTabs.MACHINE.getKey()).tags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL)
+            .build();
+    public static final RegistryObject<Block> chicago_graphite_breeder = new BlockBuilder("chicago_graphite_breeder",
+            () -> new ChicagoGraphiteBreederBlock(BlockBehaviour.Properties.of().strength(4.0F).explosionResistance(10.0F).sound(SoundType.METAL).requiresCorrectToolForDrops()))
+            .tab(ModTabs.MACHINE.getKey()).tags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL)
+            .build();
+    public static final RegistryObject<Block> chicago_graphite_detector = new BlockBuilder("chicago_graphite_detector",
+            () -> new ChicagoGraphiteDetectorBlock(BlockBehaviour.Properties.of().strength(4.0F).explosionResistance(10.0F).sound(SoundType.METAL).requiresCorrectToolForDrops().lightLevel(state -> state.getValue(ChicagoPileStateProperties.TRIGGERED) ? 4 : 0)))
+            .tab(ModTabs.MACHINE.getKey()).tags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL)
+            .build();
+    public static final RegistryObject<Block> chicago_graphite_tritium = new BlockBuilder("chicago_graphite_tritium",
+            () -> new ChicagoGraphiteTritiumBlock(BlockBehaviour.Properties.of().strength(4.0F).explosionResistance(10.0F).sound(SoundType.METAL).requiresCorrectToolForDrops()))
+            .tab(ModTabs.MACHINE.getKey()).tags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL)
+            .build();
 
     public static final RegistryObject<Block> BLOCK_BORON = block("block_boron",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(5.0F, 10.0F).sound(SoundType.METAL)),

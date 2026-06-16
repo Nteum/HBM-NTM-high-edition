@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "hbm:block/block_semtex",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "hbm:block/block_semtex"
+    },
+    "facing=south": {
+      "model": "hbm:block/block_semtex",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "hbm:block/block_semtex",
+      "y": 270
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/orientable_vertical",
+  "textures": {
+    "front": "hbm:block/block_c4_front",
+    "side": "hbm:block/block_c4_side"
+  }
+}

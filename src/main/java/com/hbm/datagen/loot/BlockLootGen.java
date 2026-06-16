@@ -6,12 +6,16 @@ import com.hbm.registries.ModBlocks;
 import com.hbm.registries.ModItems;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
+import net.minecraft.world.level.storage.loot.providers.number.NumberProvider;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.minecraftforge.registries.RegistryObject;
 
@@ -108,7 +112,7 @@ public class BlockLootGen extends BlockLootSubProvider {
         this.map.remove(BuiltInLootTables.EMPTY);   // 删除为空的键，为了避免后续处理报错
     }
 
-    public void dropStandalone(){
+    protected void dropStandalone(){
         this.dropOther(ModBlocks.BLOCK_METEOR_COBBLE.get(), ModItems.FRAGMENT_METEORITE.get());
         this.dropOther(ModBlocks.BLOCK_METEOR_BROKEN.get(), ModItems.FRAGMENT_METEORITE.get());
         this.add(ModBlocks.BLOCK_METEOR_TREASURE.get(), LootTable.lootTable().withPool(LootPool.lootPool()
@@ -122,6 +126,11 @@ public class BlockLootGen extends BlockLootSubProvider {
                 .add(LootItem.lootTableItem(ModItems.CIRCUIT_BASIC.get()).setWeight(10))
                 .add(LootItem.lootTableItem(ModItems.EGG_GLYPHID.get()).setWeight(1))
         ));
+    }
+    // 生成固定数量的掉落物
+    private void createExactlyDropCount(Block block, ItemLike dropItem, int count ){
+        handledBlocks.add(block);
+        this.add(block, LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(dropItem).apply(SetItemCountFunction.setCount(ConstantValue.exactly(count))))));
     }
 //    public void generateMachineLoot(){
 //        this.dropSelf(HBMMachine.CHEMPLANT.get());

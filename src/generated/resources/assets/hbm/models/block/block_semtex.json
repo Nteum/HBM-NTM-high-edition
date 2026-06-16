@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/orientable_vertical",
+  "textures": {
+    "front": "hbm:block/block_semtex_front",
+    "side": "hbm:block/block_semtex_side"
+  }
+}

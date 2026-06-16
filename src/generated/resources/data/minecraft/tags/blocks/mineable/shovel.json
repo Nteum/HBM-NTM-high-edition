@@ -1,0 +1,9 @@
+{
+  "values": [
+    "hbm:block_scrap",
+    "hbm:block_yellowcake",
+    "hbm:block_red_phosphorus",
+    "hbm:block_fallout",
+    "hbm:block_foam"
+  ]
+}

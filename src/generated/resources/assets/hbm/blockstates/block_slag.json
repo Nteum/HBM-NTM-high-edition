@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "variant=false": {
+      "model": "hbm:block/block_slag"
+    },
+    "variant=true": {
+      "model": "hbm:block/block_slag_alter"
+    }
+  }
+}
