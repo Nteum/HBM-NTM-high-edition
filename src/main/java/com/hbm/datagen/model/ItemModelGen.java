@@ -81,6 +81,11 @@ public class ItemModelGen extends ItemModelProvider {
         return builder;
     }
 
+    public ItemModelBuilder basicItem(String name, ResourceLocation location) {
+        return getBuilder(name).parent(new ModelFile.UncheckedModelFile("item/generated"))
+                .texture("layer0", new ResourceLocation(location.getNamespace(), "item/" + location.getPath()));
+    }
+
     @Override
     public ItemModelBuilder withExistingParent(String name, ResourceLocation parent) {
         ItemModelBuilder builder = super.withExistingParent(name, parent);

@@ -24,6 +24,10 @@ public class BlockTagsGen extends BlockTagsProvider {
     }
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
+        ModBlocks.machineTagSupport(this);
+        // 注册物品批量添加tag
+        ModBlocks.tagSupport(this);
+        // matter对应的tag
         for (ModTags.TagGenEntry<Block> tagGenEntry : ModTags.Blocks.LIST_TAG_GEN_REQ) {
             TagKey<Block> key = tagGenEntry.key;
             if (tagGenEntry.keyOut != null)
@@ -84,10 +88,6 @@ public class BlockTagsGen extends BlockTagsProvider {
                 .addTag(ModTags.Blocks.MACHINE)
                 .addTag(Tags.Blocks.ORES)
                 .addTag(Tags.Blocks.STORAGE_BLOCKS);
-
-        ModBlocks.machineTagSupport(this);
-        // 注册物品批量添加tag
-        ModBlocks.tagSupport(this);
     }
 
     @Override

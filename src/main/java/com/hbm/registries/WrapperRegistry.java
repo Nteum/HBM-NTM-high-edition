@@ -9,7 +9,6 @@ import com.hbm.datagen.model.ItemModelGen;
 import com.hbm.datagen.tag.BlockTagsGen;
 import com.hbm.datagen.tag.ItemTagsGen;
 import net.minecraft.data.loot.BlockLootSubProvider;
-import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
@@ -19,19 +18,14 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.RotatedPillarBlock;
-import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
-import java.util.function.BiConsumer;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Supplier;
+import java.util.function.*;
 
 public class WrapperRegistry<T> implements Supplier<T>{
     RegistryObject<T> registryObject;
@@ -55,6 +49,7 @@ public class WrapperRegistry<T> implements Supplier<T>{
         ResourceKey<CreativeModeTab> creativeKey;
         String genModelWay = HBMKey.BASIC_MODEL;
         Consumer<ItemModelGen> modelFactory;
+        String[] descriptions;
         List<TagKey<Item>> tags;
         public void languageSupport(LanguageProvider provider){
             switch (genNameWay){
@@ -67,6 +62,11 @@ public class WrapperRegistry<T> implements Supplier<T>{
                 }
                 // 如何无法匹配上，则视为直接输入的翻译内容
                 default -> provider.add(get(), genNameWay);
+            }
+            if (descriptions != null && descriptions.length > 0){
+                for (int i = 0; i < descriptions.length; i++) {
+                    provider.add(get().getDescriptionId() + ".desc" + i, descriptions[i]);
+                }
             }
         }
 
@@ -89,16 +89,15 @@ public class WrapperRegistry<T> implements Supplier<T>{
                 case HBMKey.MODEL_STANDALONE -> {
                     if (modelFactory != null) modelFactory.accept(provider);
                 }
-                case HBMKey.MODEL_DYNAMIC -> {
+                case HBMKey.MODEL_DYNAMIC -> {}
 
-                }
             }
         }
 
         public void tagSupport(ItemTagsGen provider){
             if (this.tags == null || this.tags.isEmpty()) return;
             for (TagKey<Item> tag : this.tags) {
-                provider.tag(tag).add(registryObject.get());
+                if (tag != null) provider.tag(tag).add(registryObject.get());
             }
         }
     }
@@ -123,6 +122,8 @@ public class WrapperRegistry<T> implements Supplier<T>{
         Consumer<ItemModelGen> modelGen;
         // 动态物品模型参数
         String propertyName;
+        // 自动生成的描述文昌
+        String[] descriptions;
         Supplier<Boolean> condition;
         List<TagKey<Item>> tags;
         public ItemBuilder(String name, Supplier<? extends Item> sup) {
@@ -156,8 +157,9 @@ public class WrapperRegistry<T> implements Supplier<T>{
             this.genModelWay = HBMKey.MODEL_DYNAMIC;
             return this;
         }
-        public ItemBuilder loc(String genNameWay){
+        public ItemBuilder loc(String genNameWay, String ... desc){
             this.genNameWay = genNameWay;
+            if (desc != null && desc.length > 0) this.descriptions = desc;
             return this;
         }
         @SafeVarargs
@@ -180,6 +182,7 @@ public class WrapperRegistry<T> implements Supplier<T>{
             itemRegistry.genNameWay = genNameWay;
             itemRegistry.modelFactory = modelGen;
             itemRegistry.tags = tags;
+            itemRegistry.descriptions = descriptions;
             if (itemRegistry.genNameWay!= null && itemRegistry.genNameWay.equals(HBMKey.LITERALLY) && localizedName!=null)
                 itemRegistry.localizedName = localizedName;
             ModItems.itemList.add(itemRegistry);
@@ -335,12 +338,27 @@ public class WrapperRegistry<T> implements Supplier<T>{
         }
     }
 
-    public static class EnumBlockCollection<T, R extends Enum>{
+    public static class RegisterObjectCollection<T, R>{
         Map<R, RegistryObject<T>> registryObjectMap;
-        public EnumBlockCollection(Class<R> theEnum, Function<R, RegistryObject<T>> func){
+//        public EnumRegisterObjectCollection(Class<R> theEnum, Function<R, RegistryObject<T>> func){
+//            this.registryObjectMap = new HashMap<>();
+//            for (R enumConstant : theEnum.getEnumConstants()) {
+//                registryObjectMap.put(enumConstant, func.apply(enumConstant));
+//            }
+//        }
+        public RegisterObjectCollection(Class<R> theEnum, Function<R, RegistryObject<T>> func){
+            this(List.of(theEnum.getEnumConstants()), func);
+        }
+
+        public RegisterObjectCollection(Collection<R> collection, Function<R, RegistryObject<T>> func){
+            this(collection, func, o -> true);
+        }
+
+        public RegisterObjectCollection(Collection<R> collection, Function<R, RegistryObject<T>> func, Predicate<R> filter){
             this.registryObjectMap = new HashMap<>();
-            for (R enumConstant : theEnum.getEnumConstants()) {
-                registryObjectMap.put(enumConstant, func.apply(enumConstant));
+            for (R key : collection) {
+                if (filter.test(key))
+                    registryObjectMap.put(key, func.apply(key));
             }
         }
 

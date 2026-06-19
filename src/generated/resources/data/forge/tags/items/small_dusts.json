@@ -1,7 +1,10 @@
 {
   "values": [
+    "hbm:powder_meteorite_tiny",
+    "hbm:powder_paleogenite_tiny",
     "#forge:small_dusts/neodymium",
     "#forge:small_dusts/niobium",
+    "#forge:small_dusts/cerium",
     "#forge:small_dusts/cobalt",
     "#forge:small_dusts/boron",
     "#forge:small_dusts/zirconium",

@@ -1,6 +1,5 @@
 {
   "values": [
-    "hbm:ore_uranium",
     "hbm:chemplant",
     "hbm:barrel_plastic",
     "hbm:barrel_corroded",
@@ -69,7 +68,6 @@
     "hbm:block_titanium",
     "hbm:block_sulfur",
     "hbm:block_niter",
-    "hbm:block_copper",
     "hbm:block_nickel",
     "hbm:block_red_copper",
     "hbm:block_osmiridium",
@@ -103,15 +101,14 @@
     "hbm:block_coke_coal",
     "hbm:block_coke_lignite",
     "hbm:block_coke_petroleum",
-    "hbm:block_graphite",
-    "hbm:block_graphite_drilled",
-    "hbm:block_graphite_fuel",
-    "hbm:block_graphite_plutonium",
-    "hbm:block_graphite_rod",
-    "hbm:block_graphite_source",
-    "hbm:block_graphite_lithium",
-    "hbm:block_graphite_tritium",
-    "hbm:block_graphite_detector",
+    "hbm:chicago_graphite_block",
+    "hbm:chicago_graphite_drilled",
+    "hbm:chicago_graphite_rod",
+    "hbm:chicago_graphite_fuel",
+    "hbm:chicago_graphite_source",
+    "hbm:chicago_graphite_breeder",
+    "hbm:chicago_graphite_detector",
+    "hbm:chicago_graphite_tritium",
     "hbm:block_boron",
     "hbm:block_lanthanium",
     "hbm:block_ra226",
@@ -121,6 +118,7 @@
     "hbm:block_cap_sparkle",
     "hbm:block_cap_rad",
     "hbm:block_cap_korl",
-    "hbm:block_cap_fritz"
+    "hbm:block_cap_fritz",
+    "hbm:ore_uranium"
   ]
 }

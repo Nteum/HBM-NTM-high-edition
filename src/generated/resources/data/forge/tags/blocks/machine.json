@@ -1,8 +1,5 @@
 {
   "values": [
-    "#forge:battery",
-    "#hbm:anvil",
-    "#hbm:energy_transmitter",
     "hbm:difurnace",
     "hbm:machine_press",
     "hbm:machine_shredder",
@@ -84,14 +81,6 @@
     "hbm:pwr_block",
     "hbm:machine_zirnox",
     "hbm:zirnox_destroyed",
-    "hbm:chicago_graphite_block",
-    "hbm:chicago_graphite_drilled",
-    "hbm:chicago_graphite_rod",
-    "hbm:chicago_graphite_fuel",
-    "hbm:chicago_graphite_source",
-    "hbm:chicago_graphite_breeder",
-    "hbm:chicago_graphite_detector",
-    "hbm:chicago_graphite_tritium",
     "hbm:machine_turbine_gas",
     "hbm:firebox",
     "hbm:red_cable",
@@ -103,6 +92,17 @@
     "hbm:gas_radon_dense",
     "hbm:gas_radon_asbestos",
     "hbm:gas_radon_tomb",
-    "hbm:space_station_base"
+    "hbm:chicago_graphite_block",
+    "hbm:chicago_graphite_drilled",
+    "hbm:chicago_graphite_rod",
+    "hbm:chicago_graphite_fuel",
+    "hbm:chicago_graphite_source",
+    "hbm:chicago_graphite_breeder",
+    "hbm:chicago_graphite_detector",
+    "hbm:chicago_graphite_tritium",
+    "hbm:space_station_base",
+    "#forge:battery",
+    "#hbm:anvil",
+    "#hbm:energy_transmitter"
   ]
 }

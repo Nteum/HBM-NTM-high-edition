@@ -132,7 +132,7 @@ public class HBMMatter{
         return this.convertMat;
     }
     public TagKey<Item> getShape(TagKey<Item> shape){
-        return this.shapes.get(shape);
+        return this.shapes == null ? null : this.shapes.get(shape);
     }
     public Fluid fluid(){
         return this.source == null ? null : this.source.get();
@@ -157,5 +157,17 @@ public class HBMMatter{
     // 板
     public TagKey<Item> plate(){
         return getShape(ModTags.Items.PLATE);
+    }
+    // 微粉
+    public TagKey<Item> small_dust(){
+        return getShape(ModTags.Items.SMALL_DUST);
+    }
+    //
+    public TagKey<Item> bolt(){
+        return getShape(ModTags.Items.BOLT);
+    }
+    // 方块
+    public TagKey<Block> storage_block(){
+        return this.blockShapes.get(Tags.Blocks.STORAGE_BLOCKS);
     }
 }
