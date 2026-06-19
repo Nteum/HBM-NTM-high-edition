@@ -7,7 +7,6 @@ import com.hbm.Inventory.material.HBMMatForm;
 import com.hbm.Inventory.material.HBMMatter;
 import com.hbm.block.interfaces.ToolType;
 import com.hbm.compat.legacy.LegacyItems;
-import com.hbm.item.HBMComponent;
 import com.hbm.config.ConfigLBSM;
 import com.hbm.datagen.LanguageProvider;
 import com.hbm.datagen.model.ItemModelGen;
@@ -38,11 +37,12 @@ import com.hbm.item.weapon.*;
 import com.hbm.item.weapon.grenade.ItemGrenade;
 import com.hbm.item.zirnox.ItemZirnoxRod;
 import com.hbm.reactor.rbmk.RBMKLidType;
-import com.hbm.registries.WrapperRegistry.*;
+import com.hbm.registries.WrappedRegistryBuilder.*;
 import com.hbm.render.model.Models;
 import com.hbm.entity.weapon.missile.EntityMissileTier0;
 import com.hbm.debug.GunSuicide;
 import com.hbm.debug.ItemDebugWand;
+import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -51,6 +51,7 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
@@ -69,7 +70,7 @@ import java.util.stream.Collectors;
 
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, HBM.MODID);
-    public static final List<WrappedItemRegistry> itemList = new ArrayList<>();
+    public static final List<WrappedItemRegistryBuilder> itemList = new ArrayList<>();
     private static boolean registeredToBus = false;
 
     public static final String[] WIRE_MAT = new String[]{HBMKey.ALUMINIUM, HBMKey.COPPER, HBMKey.RED_COPPER, HBMKey.GOLD, HBMKey.TUNGSTEN, HBMKey.ADVANCED_ALLOY, HBMKey.SCHRABIDIUM, HBMKey.ZINC, HBMKey.MAGNETIZED_TUNGSTEN};
@@ -81,10 +82,10 @@ public class ModItems {
 
     public static final RegistryObject<Item> INGOT_DURA_STEEL = parts("ingot_dura_steel", ()->new Item(new Item.Properties()), "High-Speed Steel Ingot");
     // HBM物品
-    public static final RegistryObject<Item> REDSTONE_SWORD = new WrapperRegistry.ItemBuilder("redstone_sword", ()->new RedstoneSword(Tiers.STONE, 3, -2.4F, new Item.Properties())).tab(CreativeModeTabs.COMBAT).build();
-    public static final RegistryObject<Item> BIG_SWORD = new WrapperRegistry.ItemBuilder("big_sword", ()->new BigSword(Tiers.GOLD, 3, -2.4F, new Item.Properties())).tab(CreativeModeTabs.COMBAT).build();
+    public static final RegistryObject<Item> REDSTONE_SWORD = new WrappedItemRegistryBuilder("redstone_sword", ()->new RedstoneSword(Tiers.STONE, 3, -2.4F, new Item.Properties())).tab(CreativeModeTabs.COMBAT).build();
+    public static final RegistryObject<Item> BIG_SWORD = new WrappedItemRegistryBuilder("big_sword", ()->new BigSword(Tiers.GOLD, 3, -2.4F, new Item.Properties())).tab(CreativeModeTabs.COMBAT).build();
     /* material */
-    public static final RegistryObject<Item> INGOT_TH232 = new WrapperRegistry.ItemBuilder("ingot_th232", ()->new Item(new Item.Properties())).tab(ModTabs.PARTS.getKey()).loc(HBMKey.ORDERLY_GEN_EXCEPT_FIRST).build();
+    public static final RegistryObject<Item> INGOT_TH232 = new WrappedItemRegistryBuilder("ingot_th232", ()->new Item(new Item.Properties())).tab(ModTabs.PARTS.getKey()).loc(HBMKey.ORDERLY_GEN_EXCEPT_FIRST).build();
     public static final RegistryObject<Item> INGOT_URANIUM = parts("ingot_uranium", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, ModTags.Items.INGOT_URANIUM);
     public static final RegistryObject<Item> INGOT_U233 = parts("ingot_u233", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     public static final RegistryObject<Item> INGOT_U235 = parts("ingot_u235", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
@@ -120,10 +121,10 @@ public class ModItems {
 
     public static final RegistryObject<Item> PELLET_RTG = control("pellet_rtg", () -> new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     public static final RegistryObject<Item> ASSEMBLY_TEMPLATE = template("assembly_template", () -> new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> MISSILE_NUCLEAR = new WrapperRegistry.ItemBuilder("missile_nuclear", () -> new ItemMissile(new Item.Properties(), ItemMissile.MissileFormFactor.ATLAS, ItemMissile.MissileTier.TIER4,
+    public static final RegistryObject<Item> MISSILE_NUCLEAR = new WrappedItemRegistryBuilder("missile_nuclear", () -> new ItemMissile(new Item.Properties(), ItemMissile.MissileFormFactor.ATLAS, ItemMissile.MissileTier.TIER4,
             (level, x, y, z, target) -> EntityMissileTier0.EntityMissileTest.create(level, x, y, z, target, EntityMissileTier0.EntityMissileTest.Payload.NUCLEAR)).setModel(() -> Models.getEntityModel(Models.MISSILE_NUKE)))
             .model(HBMKey.MODEL_EXISTING_FILE).build();
-    public static final RegistryObject<Item> GUN_RIFLE = new WrapperRegistry.ItemBuilder("gun_maresleg", () -> new ItemGun(new Item.Properties())).model(HBMKey.MODEL_EXISTING_FILE).tab(ModTabs.WEAPON.getKey()).loc("Lever Action Shotgun").build();
+    public static final RegistryObject<Item> GUN_RIFLE = new WrappedItemRegistryBuilder("gun_maresleg", () -> new ItemGun(new Item.Properties())).model(HBMKey.MODEL_EXISTING_FILE).tab(ModTabs.WEAPON.getKey()).loc("Lever Action Shotgun").build();
     public static final RegistryObject<Item> BOTTLE_NUKA = consumable("bottle_nuka", () -> new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     public static final RegistryObject<Item> LEMON = consumable("lemon",
             () -> LegacyConsumableItem.builder(3, 0.5F)
@@ -341,7 +342,7 @@ public class ModItems {
     public static final RegistryObject<Item> INGOT_LEAD = parts("ingot_lead", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, ModTags.Items.INGOT_LEAD);
     public static final RegistryObject<Item> PLATE_LEAD = parts("plate_lead", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.LEAD.plate());
     public static final RegistryObject<Item> PLATE_DURA_STEEL = parts("plate_dura_steel", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.DURA.plate());
-    public static final RegistryObject<Item> INGOT_SCHRARANIUM = new WrapperRegistry.ItemBuilder("ingot_schraranium", ()->new Item(new Item.Properties()){
+    public static final RegistryObject<Item> INGOT_SCHRARANIUM = new WrappedItemRegistryBuilder("ingot_schraranium", ()->new Item(new Item.Properties()){
         @Override
         public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
             super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
@@ -384,9 +385,9 @@ public class ModItems {
     public static final RegistryObject<Item> PLATE_DALEKANIUM = parts("plate_dalekanium", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     public static final RegistryObject<Item> PLATE_EUPHEMIUM = parts("plate_euphemium", ()->new ItemCustomInfo(new Item.Properties().rarity(Rarity.EPIC)), "Euphemium Compound Plate");
     //    bolt = new ItemAutogen(MaterialShapes.BOLT).oun("boltntm").setUnlocalizedName("bolt").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":bolt");
-    public static final RegisterObjectCollection<Item, HBMMatter> BOLTS = new RegisterObjectCollection<>(HBMMatters.ALL_MATTERS, matter -> new ItemBuilder("bolt_" + matter.name(), ()->new Item(new Item.Properties()))
+    public static final RegisterObjectCollection<Item, HBMMatter> BOLTS = new RegisterObjectCollection<>(HBMMatters.ALL_MATTERS, matter -> new WrappedItemRegistryBuilder("bolt_" + matter.name(), ()->new Item(new Item.Properties()))
             .tab(ModTabs.PARTS.getKey()).loc(HBMKey.ORDERLY_GEN_EXCEPT_FIRST).model(itemModelGen -> itemModelGen.basicItem("bolt_" + matter.name(), HBM.rl("bolt"))).tags(matter.bolt())
-            .build(), matter -> matter.bolt() != null);
+            .color((stack, idx) -> matter.solidColorLight).build(), matter -> matter.bolt() != null);
 //    bolt_spike = new ItemCustomLore().setUnlocalizedName("bolt_spike").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":bolt_spike");
     public static final RegistryObject<Item> PLATE_POLYMER = parts("plate_polymer", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     public static final RegistryObject<Item> PLATE_KEVLAR = parts("plate_kevlar", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
@@ -469,7 +470,7 @@ public class ModItems {
 //    ingot_pc = new ItemCustomLore().setUnlocalizedName("ingot_pc").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":ingot_pc");
 //    ingot_pvc = new ItemCustomLore().setUnlocalizedName("ingot_pvc").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":ingot_pvc");
     public static final RegistryObject<Item> INGOT_DESH = parts("ingot_desh", ()->new ItemCustomInfo(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> NUGGET_DESH = parts("ingot_desh", ()->new ItemCustomLore(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.DESH.nugget());
+    public static final RegistryObject<Item> NUGGET_DESH = parts("nugget_desh", ()->new ItemCustomLore(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.DESH.nugget());
     public static final RegistryObject<Item> INGOT_DINEUTRONIUM = parts("ingot_dineutronium", ()->new ItemCustomInfo(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     public static final RegistryObject<Item> NUGGET_DINEUTRONIUM = parts("nugget_dineutronium", ()->new ItemCustomLore(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, Tags.Items.NUGGETS);
 //    powder_dineutronium = new ItemCustomLore().setUnlocalizedName("powder_dineutronium").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":powder_dineutronium");
@@ -560,7 +561,7 @@ public class ModItems {
 //    powder_cement = new ItemLemon(2, 0.5F, false).setUnlocalizedName("powder_cement").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":powder_cement");
 //
 //    ingot_gh336 = new ItemCustomLore().setRarity(EnumRarity.epic).setUnlocalizedName("ingot_gh336").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":ingot_gh336");
-    public static final RegistryObject<Item> NUGGET_GH336 = new ItemBuilder("nugget_gh336", ()->new Item(new Item.Properties().rarity(Rarity.EPIC)))
+    public static final RegistryObject<Item> NUGGET_GH336 = new WrappedItemRegistryBuilder("nugget_gh336", ()->new Item(new Item.Properties().rarity(Rarity.EPIC)))
         .tab(ModTabs.PARTS.getKey()).loc(HBMKey.REVERSE_GEN, "Seaborgium's colleague.").tags(HBMMatters.GHIORSIUM.nugget()).build();
 
     public static final RegistryObject<Item> INGOT_AUSTRALIUM = parts("ingot_australium", ()->new ItemCustomInfo(new Item.Properties().rarity(Rarity.UNCOMMON)), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
@@ -886,38 +887,38 @@ public class ModItems {
 //    pellet_rtg_lead = new ItemRTGPellet(VersatileConfig.rtgDecay() ? 600 : 200).setDecays(DepletedRTGMaterial.BISMUTH, (long) (RTGUtil.getLifespan(0.3F, HalfLifeType.SHORT, false) * 1.5)).setUnlocalizedName("pellet_rtg_lead").setCreativeTab(MainRegistry.controlTab).setTextureName(RefStrings.MODID + ":pellet_rtg_lead");
 
     // 锻压机压印版
-    public static final RegistryObject<Item> STAMP_STONE_FLAT = new WrapperRegistry.ItemBuilder("stamp_stone_flat", ()->new ItemStamp(new Item.Properties().stacksTo(1).durability(32), ItemStamp.StampType.FLAT)).tab(ModTabs.CONTROL.getKey()).loc("Flat Stamp (Stone)").build();
-    public static final RegistryObject<Item> STAMP_STONE_PLATE = new WrapperRegistry.ItemBuilder("stamp_stone_plate", ()->new ItemStamp(new Item.Properties().stacksTo(1).durability(32), ItemStamp.StampType.PLATE)).tab(ModTabs.CONTROL.getKey()).loc("Plate Stamp (Stone)").build();
-    public static final RegistryObject<Item> STAMP_STONE_WIRE = new WrapperRegistry.ItemBuilder("stamp_stone_wire", ()->new ItemStamp(new Item.Properties().stacksTo(1).durability(32), ItemStamp.StampType.WIRE)).tab(ModTabs.CONTROL.getKey()).loc("Wire Stamp (Stone)").build();
-    public static final RegistryObject<Item> STAMP_STONE_CIRCUIT = new WrapperRegistry.ItemBuilder("stamp_stone_circuit", ()->new ItemStamp(new Item.Properties().stacksTo(1).durability(32), ItemStamp.StampType.CIRCUIT)).tab(ModTabs.CONTROL.getKey()).loc("Circuit Stamp (Stone)").build();
-    public static final RegistryObject<Item> STAMP_IRON_FLAT = new WrapperRegistry.ItemBuilder("stamp_iron_flat", ()->new ItemStamp(new Item.Properties().stacksTo(1).durability(64), ItemStamp.StampType.FLAT)).tab(ModTabs.CONTROL.getKey()).loc("Flat Stamp (Iron)").build();
-    public static final RegistryObject<Item> STAMP_IRON_PLATE = new WrapperRegistry.ItemBuilder("stamp_iron_plate", ()->new ItemStamp(new Item.Properties().stacksTo(1).durability(64), ItemStamp.StampType.PLATE)).tab(ModTabs.CONTROL.getKey()).loc("Plate Stamp (Iron)").build();
-    public static final RegistryObject<Item> STAMP_IRON_WIRE = new WrapperRegistry.ItemBuilder("stamp_iron_wire", ()->new ItemStamp(new Item.Properties().stacksTo(1).durability(64), ItemStamp.StampType.WIRE)).tab(ModTabs.CONTROL.getKey()).loc("Wire Stamp (Iron)").build();
-    public static final RegistryObject<Item> STAMP_IRON_CIRCUIT = new WrapperRegistry.ItemBuilder("stamp_iron_circuit", ()->new ItemStamp(new Item.Properties().stacksTo(1).durability(64), ItemStamp.StampType.CIRCUIT)).tab(ModTabs.CONTROL.getKey()).loc("Circuit Stamp (Iron)").build();
-    public static final RegistryObject<Item> STAMP_STEEL_FLAT = new WrapperRegistry.ItemBuilder("stamp_steel_flat", ()->new ItemStamp(new Item.Properties().stacksTo(1).durability(192), ItemStamp.StampType.FLAT)).tab(ModTabs.CONTROL.getKey()).loc("Flat Stamp (Steel)").build();
-    public static final RegistryObject<Item> STAMP_STEEL_PLATE = new WrapperRegistry.ItemBuilder("stamp_steel_plate", ()->new ItemStamp(new Item.Properties().stacksTo(1).durability(192), ItemStamp.StampType.PLATE)).tab(ModTabs.CONTROL.getKey()).loc("Plate Stamp (Steel)").build();
-    public static final RegistryObject<Item> STAMP_STEEL_WIRE = new WrapperRegistry.ItemBuilder("stamp_steel_wire", ()->new ItemStamp(new Item.Properties().stacksTo(1).durability(192), ItemStamp.StampType.WIRE)).tab(ModTabs.CONTROL.getKey()).loc("Wire Stamp (Steel)").build();
-    public static final RegistryObject<Item> STAMP_STEEL_CIRCUIT = new WrapperRegistry.ItemBuilder("stamp_steel_circuit", ()->new ItemStamp(new Item.Properties().stacksTo(1).durability(192), ItemStamp.StampType.CIRCUIT)).tab(ModTabs.CONTROL.getKey()).loc("Circuit Stamp (Steel)").build();
-    public static final RegistryObject<Item> STAMP_TITANIUM_FLAT = new WrapperRegistry.ItemBuilder("stamp_titanium_flat", ()->new ItemStamp(new Item.Properties().stacksTo(1).durability(256), ItemStamp.StampType.FLAT)).tab(ModTabs.CONTROL.getKey()).loc("Flat Stamp (Titanium)").build();
-    public static final RegistryObject<Item> STAMP_TITANIUM_PLATE = new WrapperRegistry.ItemBuilder("stamp_titanium_plate", ()->new ItemStamp(new Item.Properties().stacksTo(1).durability(256), ItemStamp.StampType.PLATE)).tab(ModTabs.CONTROL.getKey()).loc("Plate Stamp (Titanium)").build();
-    public static final RegistryObject<Item> STAMP_TITANIUM_WIRE = new WrapperRegistry.ItemBuilder("stamp_titanium_wire", ()->new ItemStamp(new Item.Properties().stacksTo(1).durability(256), ItemStamp.StampType.WIRE)).tab(ModTabs.CONTROL.getKey()).loc("Wire Stamp (Titanium)").build();
-    public static final RegistryObject<Item> STAMP_TITANIUM_CIRCUIT = new WrapperRegistry.ItemBuilder("stamp_titanium_circuit", ()->new ItemStamp(new Item.Properties().stacksTo(1).durability(256), ItemStamp.StampType.CIRCUIT)).tab(ModTabs.CONTROL.getKey()).loc("Circuit Stamp (Titanium)").build();
-    public static final RegistryObject<Item> STAMP_OBSIDIAN_FLAT = new WrapperRegistry.ItemBuilder("stamp_obsidian_flat", ()->new ItemStamp(new Item.Properties().stacksTo(1).durability(512), ItemStamp.StampType.FLAT)).tab(ModTabs.CONTROL.getKey()).loc("Flat Stamp (Obsidian)").build();
-    public static final RegistryObject<Item> STAMP_OBSIDIAN_PLATE = new WrapperRegistry.ItemBuilder("stamp_obsidian_plate", ()->new ItemStamp(new Item.Properties().stacksTo(1).durability(512), ItemStamp.StampType.PLATE)).tab(ModTabs.CONTROL.getKey()).loc("Plate Stamp (Obsidian)").build();
-    public static final RegistryObject<Item> STAMP_OBSIDIAN_WIRE = new WrapperRegistry.ItemBuilder("stamp_obsidian_wire", ()->new ItemStamp(new Item.Properties().stacksTo(1).durability(512), ItemStamp.StampType.WIRE)).tab(ModTabs.CONTROL.getKey()).loc("Wire Stamp (Obsidian)").build();
-    public static final RegistryObject<Item> STAMP_OBSIDIAN_CIRCUIT = new WrapperRegistry.ItemBuilder("stamp_obsidian_circuit", ()->new ItemStamp(new Item.Properties().stacksTo(1).durability(512), ItemStamp.StampType.CIRCUIT)).tab(ModTabs.CONTROL.getKey()).loc("Circuit Stamp (Obsidian)").build();
-    public static final RegistryObject<Item> STAMP_DESH_FLAT = new WrapperRegistry.ItemBuilder("stamp_desh_flat", ()->new ItemStamp(new Item.Properties().stacksTo(1).durability(0), ItemStamp.StampType.FLAT)).tab(ModTabs.CONTROL.getKey()).loc("Flat Stamp (Desh)").build();
-    public static final RegistryObject<Item> STAMP_DESH_PLATE = new WrapperRegistry.ItemBuilder("stamp_desh_plate", ()->new ItemStamp(new Item.Properties().stacksTo(1).durability(0), ItemStamp.StampType.PLATE)).tab(ModTabs.CONTROL.getKey()).loc("Plate Stamp (Desh)").build();
-    public static final RegistryObject<Item> STAMP_DESH_WIRE = new WrapperRegistry.ItemBuilder("stamp_desh_wire", ()->new ItemStamp(new Item.Properties().stacksTo(1).durability(0), ItemStamp.StampType.WIRE)).tab(ModTabs.CONTROL.getKey()).loc("Wire Stamp (Desh)").build();
-    public static final RegistryObject<Item> STAMP_DESH_CIRCUIT = new WrapperRegistry.ItemBuilder("stamp_desh_circuit", ()->new ItemStamp(new Item.Properties().stacksTo(1).durability(0), ItemStamp.StampType.CIRCUIT)).tab(ModTabs.CONTROL.getKey()).loc("Circuit Stamp (Desh)").build();
-    public static final RegistryObject<Item> STAMP_357 = new WrapperRegistry.ItemBuilder("stamp_357", ()->new ItemStamp(new Item.Properties().stacksTo(1).durability(1000), ItemStamp.StampType.C357)).tab(ModTabs.CONTROL.getKey()).loc(".357 Magnum Stamp").build();
-    public static final RegistryObject<Item> STAMP_44 = new WrapperRegistry.ItemBuilder("stamp_44", ()->new ItemStamp(new Item.Properties().stacksTo(1).durability(1000), ItemStamp.StampType.C44)).tab(ModTabs.CONTROL.getKey()).loc(".44 Magnum Stamp").build();
-    public static final RegistryObject<Item> STAMP_9 = new WrapperRegistry.ItemBuilder("stamp_9", ()->new ItemStamp(new Item.Properties().stacksTo(1).durability(1000), ItemStamp.StampType.C9)).tab(ModTabs.CONTROL.getKey()).loc("Small Caliber Stamp").build();
-    public static final RegistryObject<Item> STAMP_50 = new WrapperRegistry.ItemBuilder("stamp_50", ()->new ItemStamp(new Item.Properties().stacksTo(1).durability(1000), ItemStamp.StampType.C50)).tab(ModTabs.CONTROL.getKey()).loc("Large Caliber Stamp").build();
-    public static final RegistryObject<Item> STAMP_DESH_357 = new WrapperRegistry.ItemBuilder("stamp_357_desh", ()->new ItemStamp(new Item.Properties().stacksTo(1).durability(0), ItemStamp.StampType.C357)).tab(ModTabs.CONTROL.getKey()).loc(".357 Magnum Stamp (Desh)").build();
-    public static final RegistryObject<Item> STAMP_DESH_44 = new WrapperRegistry.ItemBuilder("stamp_44_desh", ()->new ItemStamp(new Item.Properties().stacksTo(1).durability(0), ItemStamp.StampType.C44)).tab(ModTabs.CONTROL.getKey()).loc(".44 Magnum Stamp (Desh)").build();
-    public static final RegistryObject<Item> STAMP_DESH_9 = new WrapperRegistry.ItemBuilder("stamp_9_desh", ()->new ItemStamp(new Item.Properties().stacksTo(1).durability(0), ItemStamp.StampType.C9)).tab(ModTabs.CONTROL.getKey()).loc("Small Caliber Stamp (Desh)").build();
-    public static final RegistryObject<Item> STAMP_DESH_50 = new WrapperRegistry.ItemBuilder("stamp_50_desh", ()->new ItemStamp(new Item.Properties().stacksTo(1).durability(0), ItemStamp.StampType.C50)).tab(ModTabs.CONTROL.getKey()).loc("Large Caliber Stamp (Desh)").build();
+    public static final RegistryObject<Item> STAMP_STONE_FLAT = new WrappedItemRegistryBuilder("stamp_stone_flat", ()->new ItemStamp(new Item.Properties().stacksTo(1).durability(32), ItemStamp.StampType.FLAT)).tab(ModTabs.CONTROL.getKey()).loc("Flat Stamp (Stone)").build();
+    public static final RegistryObject<Item> STAMP_STONE_PLATE = new WrappedItemRegistryBuilder("stamp_stone_plate", ()->new ItemStamp(new Item.Properties().stacksTo(1).durability(32), ItemStamp.StampType.PLATE)).tab(ModTabs.CONTROL.getKey()).loc("Plate Stamp (Stone)").build();
+    public static final RegistryObject<Item> STAMP_STONE_WIRE = new WrappedItemRegistryBuilder("stamp_stone_wire", ()->new ItemStamp(new Item.Properties().stacksTo(1).durability(32), ItemStamp.StampType.WIRE)).tab(ModTabs.CONTROL.getKey()).loc("Wire Stamp (Stone)").build();
+    public static final RegistryObject<Item> STAMP_STONE_CIRCUIT = new WrappedItemRegistryBuilder("stamp_stone_circuit", ()->new ItemStamp(new Item.Properties().stacksTo(1).durability(32), ItemStamp.StampType.CIRCUIT)).tab(ModTabs.CONTROL.getKey()).loc("Circuit Stamp (Stone)").build();
+    public static final RegistryObject<Item> STAMP_IRON_FLAT = new WrappedItemRegistryBuilder("stamp_iron_flat", ()->new ItemStamp(new Item.Properties().stacksTo(1).durability(64), ItemStamp.StampType.FLAT)).tab(ModTabs.CONTROL.getKey()).loc("Flat Stamp (Iron)").build();
+    public static final RegistryObject<Item> STAMP_IRON_PLATE = new WrappedItemRegistryBuilder("stamp_iron_plate", ()->new ItemStamp(new Item.Properties().stacksTo(1).durability(64), ItemStamp.StampType.PLATE)).tab(ModTabs.CONTROL.getKey()).loc("Plate Stamp (Iron)").build();
+    public static final RegistryObject<Item> STAMP_IRON_WIRE = new WrappedItemRegistryBuilder("stamp_iron_wire", ()->new ItemStamp(new Item.Properties().stacksTo(1).durability(64), ItemStamp.StampType.WIRE)).tab(ModTabs.CONTROL.getKey()).loc("Wire Stamp (Iron)").build();
+    public static final RegistryObject<Item> STAMP_IRON_CIRCUIT = new WrappedItemRegistryBuilder("stamp_iron_circuit", ()->new ItemStamp(new Item.Properties().stacksTo(1).durability(64), ItemStamp.StampType.CIRCUIT)).tab(ModTabs.CONTROL.getKey()).loc("Circuit Stamp (Iron)").build();
+    public static final RegistryObject<Item> STAMP_STEEL_FLAT = new WrappedItemRegistryBuilder("stamp_steel_flat", ()->new ItemStamp(new Item.Properties().stacksTo(1).durability(192), ItemStamp.StampType.FLAT)).tab(ModTabs.CONTROL.getKey()).loc("Flat Stamp (Steel)").build();
+    public static final RegistryObject<Item> STAMP_STEEL_PLATE = new WrappedItemRegistryBuilder("stamp_steel_plate", ()->new ItemStamp(new Item.Properties().stacksTo(1).durability(192), ItemStamp.StampType.PLATE)).tab(ModTabs.CONTROL.getKey()).loc("Plate Stamp (Steel)").build();
+    public static final RegistryObject<Item> STAMP_STEEL_WIRE = new WrappedItemRegistryBuilder("stamp_steel_wire", ()->new ItemStamp(new Item.Properties().stacksTo(1).durability(192), ItemStamp.StampType.WIRE)).tab(ModTabs.CONTROL.getKey()).loc("Wire Stamp (Steel)").build();
+    public static final RegistryObject<Item> STAMP_STEEL_CIRCUIT = new WrappedItemRegistryBuilder("stamp_steel_circuit", ()->new ItemStamp(new Item.Properties().stacksTo(1).durability(192), ItemStamp.StampType.CIRCUIT)).tab(ModTabs.CONTROL.getKey()).loc("Circuit Stamp (Steel)").build();
+    public static final RegistryObject<Item> STAMP_TITANIUM_FLAT = new WrappedItemRegistryBuilder("stamp_titanium_flat", ()->new ItemStamp(new Item.Properties().stacksTo(1).durability(256), ItemStamp.StampType.FLAT)).tab(ModTabs.CONTROL.getKey()).loc("Flat Stamp (Titanium)").build();
+    public static final RegistryObject<Item> STAMP_TITANIUM_PLATE = new WrappedItemRegistryBuilder("stamp_titanium_plate", ()->new ItemStamp(new Item.Properties().stacksTo(1).durability(256), ItemStamp.StampType.PLATE)).tab(ModTabs.CONTROL.getKey()).loc("Plate Stamp (Titanium)").build();
+    public static final RegistryObject<Item> STAMP_TITANIUM_WIRE = new WrappedItemRegistryBuilder("stamp_titanium_wire", ()->new ItemStamp(new Item.Properties().stacksTo(1).durability(256), ItemStamp.StampType.WIRE)).tab(ModTabs.CONTROL.getKey()).loc("Wire Stamp (Titanium)").build();
+    public static final RegistryObject<Item> STAMP_TITANIUM_CIRCUIT = new WrappedItemRegistryBuilder("stamp_titanium_circuit", ()->new ItemStamp(new Item.Properties().stacksTo(1).durability(256), ItemStamp.StampType.CIRCUIT)).tab(ModTabs.CONTROL.getKey()).loc("Circuit Stamp (Titanium)").build();
+    public static final RegistryObject<Item> STAMP_OBSIDIAN_FLAT = new WrappedItemRegistryBuilder("stamp_obsidian_flat", ()->new ItemStamp(new Item.Properties().stacksTo(1).durability(512), ItemStamp.StampType.FLAT)).tab(ModTabs.CONTROL.getKey()).loc("Flat Stamp (Obsidian)").build();
+    public static final RegistryObject<Item> STAMP_OBSIDIAN_PLATE = new WrappedItemRegistryBuilder("stamp_obsidian_plate", ()->new ItemStamp(new Item.Properties().stacksTo(1).durability(512), ItemStamp.StampType.PLATE)).tab(ModTabs.CONTROL.getKey()).loc("Plate Stamp (Obsidian)").build();
+    public static final RegistryObject<Item> STAMP_OBSIDIAN_WIRE = new WrappedItemRegistryBuilder("stamp_obsidian_wire", ()->new ItemStamp(new Item.Properties().stacksTo(1).durability(512), ItemStamp.StampType.WIRE)).tab(ModTabs.CONTROL.getKey()).loc("Wire Stamp (Obsidian)").build();
+    public static final RegistryObject<Item> STAMP_OBSIDIAN_CIRCUIT = new WrappedItemRegistryBuilder("stamp_obsidian_circuit", ()->new ItemStamp(new Item.Properties().stacksTo(1).durability(512), ItemStamp.StampType.CIRCUIT)).tab(ModTabs.CONTROL.getKey()).loc("Circuit Stamp (Obsidian)").build();
+    public static final RegistryObject<Item> STAMP_DESH_FLAT = new WrappedItemRegistryBuilder("stamp_desh_flat", ()->new ItemStamp(new Item.Properties().stacksTo(1).durability(0), ItemStamp.StampType.FLAT)).tab(ModTabs.CONTROL.getKey()).loc("Flat Stamp (Desh)").build();
+    public static final RegistryObject<Item> STAMP_DESH_PLATE = new WrappedItemRegistryBuilder("stamp_desh_plate", ()->new ItemStamp(new Item.Properties().stacksTo(1).durability(0), ItemStamp.StampType.PLATE)).tab(ModTabs.CONTROL.getKey()).loc("Plate Stamp (Desh)").build();
+    public static final RegistryObject<Item> STAMP_DESH_WIRE = new WrappedItemRegistryBuilder("stamp_desh_wire", ()->new ItemStamp(new Item.Properties().stacksTo(1).durability(0), ItemStamp.StampType.WIRE)).tab(ModTabs.CONTROL.getKey()).loc("Wire Stamp (Desh)").build();
+    public static final RegistryObject<Item> STAMP_DESH_CIRCUIT = new WrappedItemRegistryBuilder("stamp_desh_circuit", ()->new ItemStamp(new Item.Properties().stacksTo(1).durability(0), ItemStamp.StampType.CIRCUIT)).tab(ModTabs.CONTROL.getKey()).loc("Circuit Stamp (Desh)").build();
+    public static final RegistryObject<Item> STAMP_357 = new WrappedItemRegistryBuilder("stamp_357", ()->new ItemStamp(new Item.Properties().stacksTo(1).durability(1000), ItemStamp.StampType.C357)).tab(ModTabs.CONTROL.getKey()).loc(".357 Magnum Stamp").build();
+    public static final RegistryObject<Item> STAMP_44 = new WrappedItemRegistryBuilder("stamp_44", ()->new ItemStamp(new Item.Properties().stacksTo(1).durability(1000), ItemStamp.StampType.C44)).tab(ModTabs.CONTROL.getKey()).loc(".44 Magnum Stamp").build();
+    public static final RegistryObject<Item> STAMP_9 = new WrappedItemRegistryBuilder("stamp_9", ()->new ItemStamp(new Item.Properties().stacksTo(1).durability(1000), ItemStamp.StampType.C9)).tab(ModTabs.CONTROL.getKey()).loc("Small Caliber Stamp").build();
+    public static final RegistryObject<Item> STAMP_50 = new WrappedItemRegistryBuilder("stamp_50", ()->new ItemStamp(new Item.Properties().stacksTo(1).durability(1000), ItemStamp.StampType.C50)).tab(ModTabs.CONTROL.getKey()).loc("Large Caliber Stamp").build();
+    public static final RegistryObject<Item> STAMP_DESH_357 = new WrappedItemRegistryBuilder("stamp_357_desh", ()->new ItemStamp(new Item.Properties().stacksTo(1).durability(0), ItemStamp.StampType.C357)).tab(ModTabs.CONTROL.getKey()).loc(".357 Magnum Stamp (Desh)").build();
+    public static final RegistryObject<Item> STAMP_DESH_44 = new WrappedItemRegistryBuilder("stamp_44_desh", ()->new ItemStamp(new Item.Properties().stacksTo(1).durability(0), ItemStamp.StampType.C44)).tab(ModTabs.CONTROL.getKey()).loc(".44 Magnum Stamp (Desh)").build();
+    public static final RegistryObject<Item> STAMP_DESH_9 = new WrappedItemRegistryBuilder("stamp_9_desh", ()->new ItemStamp(new Item.Properties().stacksTo(1).durability(0), ItemStamp.StampType.C9)).tab(ModTabs.CONTROL.getKey()).loc("Small Caliber Stamp (Desh)").build();
+    public static final RegistryObject<Item> STAMP_DESH_50 = new WrappedItemRegistryBuilder("stamp_50_desh", ()->new ItemStamp(new Item.Properties().stacksTo(1).durability(0), ItemStamp.StampType.C50)).tab(ModTabs.CONTROL.getKey()).loc("Large Caliber Stamp (Desh)").build();
 
     // 电池
     public static final RegistryObject<Item> BATTERY_CREATIVE = control("battery_creative",()->new BatteryItem(-1, 1_000_000L, new Item.Properties().stacksTo(1)), HBMKey.REVERSE_GEN);
@@ -1280,29 +1281,39 @@ public class ModItems {
 //        return new WrapperRegistry.ItemBuilder(name, sup).tab(tabKey).model(genModelWay).loc(genNameWay).build();
 //    }
     public static RegistryObject<Item> add(final String name, final Supplier<? extends Item> sup, ResourceKey<CreativeModeTab> tabKey, String genModelWay, String genNameWay, TagKey<Item> ... tag){
-        return new WrapperRegistry.ItemBuilder(name, sup).tab(tabKey).tags(tag).model(genModelWay).loc(genNameWay).build();
+        return new WrappedItemRegistryBuilder(name, sup).tab(tabKey).tags(tag).model(genModelWay).loc(genNameWay).build();
     }
 
     public static void creativeTab(BuildCreativeModeTabContentsEvent event){
-        for (WrappedItemRegistry itemRegistry : itemList) {
+        for (WrappedItemRegistryBuilder itemRegistry : itemList) {
             itemRegistry.creativeTabSupport(event);
         }
     }
 
     public static void genModel(ItemModelGen provider){
-        for (WrappedItemRegistry itemRegistry : itemList) {
+        for (WrappedItemRegistryBuilder itemRegistry : itemList) {
             itemRegistry.modelSupport(provider);
         }
     }
     public static void languageSupport(LanguageProvider provider){
-        for (WrappedItemRegistry itemRegistry : itemList) {
+        for (WrappedItemRegistryBuilder itemRegistry : itemList) {
             itemRegistry.languageSupport(provider);
         }
     }
     public static void tagSupport(ItemTagsGen provider){
-        for (WrappedItemRegistry itemRegistry : itemList) {
+        for (WrappedItemRegistryBuilder itemRegistry : itemList) {
             itemRegistry.tagSupport(provider);
         }
     }
+    public static void itemPropertiesSupport(){
+        for (WrappedItemRegistryBuilder itemRegistry : itemList) {
+            itemRegistry.itemPropertiesSupport();
+        }
+    }
 
+    public static void itemColorSupport(RegisterColorHandlersEvent.Item event){
+        for (WrappedItemRegistryBuilder itemRegistry : itemList) {
+            itemRegistry.itemColorSupport(event);
+        }
+    }
 }

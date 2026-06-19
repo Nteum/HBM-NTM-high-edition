@@ -1,10 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-<<<<<<<< HEAD:src/generated/resources/assets/hbm/models/item/alloy_axe.json
     "layer0": "hbm:item/alloy_axe"
-========
-    "layer0": "hbm:item/detonator"
->>>>>>>> 4fe1c2fd (temp):src/generated/resources/assets/hbm/models/item/detonator.json
   }
 }

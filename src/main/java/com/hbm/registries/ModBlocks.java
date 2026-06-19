@@ -57,8 +57,7 @@ import com.hbm.item.blockitem.ItemPosModify;
 import com.hbm.item.blockitem.SteelCrateItem;
 import com.hbm.item.tool.BatteryBlockItem;
 import com.hbm.reactor.rbmk.RBMKPeripheralType;
-import com.hbm.registries.WrapperRegistry.BlockBuilder;
-import com.hbm.registries.WrapperRegistry.WrappedBlockRegistry;
+import com.hbm.registries.WrappedRegistryBuilder.WrappedBlockRegistryBuilder;
 import com.hbm.debug.BlockDebug;
 import net.minecraft.core.Vec3i;
 import net.minecraft.resources.ResourceKey;
@@ -72,6 +71,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -89,7 +89,7 @@ import static com.hbm.HBM.MODID;
 public class ModBlocks {
     //方块注册表
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
-    public static final List<WrappedBlockRegistry> blockList = new ArrayList<>();
+    public static final List<WrappedBlockRegistryBuilder> blockList = new ArrayList<>();
     private static final List<RegistryObject<Block>> legacyMachineTagBlocks = new ArrayList<>();
 
     //机械
@@ -114,7 +114,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> machine_wood_burner = registerMachineBlockWithItem("machine_wood_burner",
             () -> new WoodBurnerBlock(Properties.of().strength(3.0F).sound(SoundType.METAL)
                     .lightLevel(state -> state.getValue(WoodBurnerBlock.LIT) ? 13 : 0)));
-    public static final RegistryObject<Block> MINER_LARGE = new BlockBuilder("miner_large", ()->new BlockMinerLarge(Properties.of().strength(5).explosionResistance(100)))
+    public static final RegistryObject<Block> MINER_LARGE = new WrappedBlockRegistryBuilder("miner_large", ()->new BlockMinerLarge(Properties.of().strength(5).explosionResistance(100)))
             .tab(ModTabs.MACHINE.getKey()).model(HBMKey.MODEL_STANDALONE).loc(HBMKey.REVERSE_GEN).loot(HBMKey.DROP_SELF).tags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL).item(block -> new ItemPosModify(block, new Vec3i(0, 4, 0), new Item.Properties())).build();
     // Tokamak 聚变堆组件
     public static final RegistryObject<Block> tokamak_controller = registerMachineBlockWithItem("tokamak_controller", ()->new TokamakControllerBlock(Properties.of().strength(5.0F).lightLevel(state -> 8)));
@@ -221,17 +221,17 @@ public class ModBlocks {
     public static final RegistryObject<Block> RED_CABLE = add("red_cable", ()->new BlockCable(Properties.copy(Blocks.STONE_BRICK_WALL)), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, HBMKey.ORDERLY_GEN, HBMKey.DROP_SELF);
     public static final RegistryObject<Block> CONNECTOR = add("connector", ()->new BlockConnector(Properties.of()), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, HBMKey.ORDERLY_GEN, HBMKey.DROP_SELF);
     // 物流体系
-    public static final RegistryObject<Block> conveyor = new BlockBuilder("conveyor", ()->new Conveyor(Properties.copy(Blocks.STONE))).tab(ModTabs.CONTROL.getKey()).model(HBMKey.MODEL_STANDALONE).loc(HBMKey.ORDERLY_GEN).loot(HBMKey.DROP_SELF).tags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL).build();
-    public static final RegistryObject<Block> CONVEYOR_INSERTER = new BlockBuilder("conveyor_inserter", ()->new ConveyorInserter(Properties.copy(Blocks.STONE))).tab(ModTabs.CONTROL.getKey()).model(HBMKey.MODEL_STANDALONE).loc(HBMKey.ORDERLY_GEN).loot(HBMKey.DROP_SELF).tags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL).build();
-    public static final RegistryObject<Block> CONVEYOR_EXTRACTOR = new BlockBuilder("conveyor_extractor", ()->new ConveyorExtractor(Properties.copy(Blocks.STONE))).tab(ModTabs.CONTROL.getKey()).model(HBMKey.MODEL_STANDALONE).loc(HBMKey.ORDERLY_GEN).loot(HBMKey.DROP_SELF).tags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL).build();
-    public static final RegistryObject<Block> CONVEYOR_ROUTER = new BlockBuilder("conveyor_router", ()->new ConveyorRouter(Properties.copy(Blocks.STONE))).tab(ModTabs.CONTROL.getKey()).model(HBMKey.MODEL_EXISTING).loc(HBMKey.ORDERLY_GEN).loot(HBMKey.DROP_SELF).tags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL).build();
+    public static final RegistryObject<Block> conveyor = new WrappedBlockRegistryBuilder("conveyor", ()->new Conveyor(Properties.copy(Blocks.STONE))).tab(ModTabs.CONTROL.getKey()).model(HBMKey.MODEL_STANDALONE).loc(HBMKey.ORDERLY_GEN).loot(HBMKey.DROP_SELF).tags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL).build();
+    public static final RegistryObject<Block> CONVEYOR_INSERTER = new WrappedBlockRegistryBuilder("conveyor_inserter", ()->new ConveyorInserter(Properties.copy(Blocks.STONE))).tab(ModTabs.CONTROL.getKey()).model(HBMKey.MODEL_STANDALONE).loc(HBMKey.ORDERLY_GEN).loot(HBMKey.DROP_SELF).tags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL).build();
+    public static final RegistryObject<Block> CONVEYOR_EXTRACTOR = new WrappedBlockRegistryBuilder("conveyor_extractor", ()->new ConveyorExtractor(Properties.copy(Blocks.STONE))).tab(ModTabs.CONTROL.getKey()).model(HBMKey.MODEL_STANDALONE).loc(HBMKey.ORDERLY_GEN).loot(HBMKey.DROP_SELF).tags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL).build();
+    public static final RegistryObject<Block> CONVEYOR_ROUTER = new WrappedBlockRegistryBuilder("conveyor_router", ()->new ConveyorRouter(Properties.copy(Blocks.STONE))).tab(ModTabs.CONTROL.getKey()).model(HBMKey.MODEL_EXISTING).loc(HBMKey.ORDERLY_GEN).loot(HBMKey.DROP_SELF).tags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL).build();
     public static final RegistryObject<Block> crate_iron =
-            new BlockBuilder("crate_iron", () -> new IronCrateBlock(Properties.of().strength(3.0F).sound(SoundType.WOOD)))
+            new WrappedBlockRegistryBuilder("crate_iron", () -> new IronCrateBlock(Properties.of().strength(3.0F).sound(SoundType.WOOD)))
                     .tab(ModTabs.MACHINE.getKey()).loc(HBMKey.REVERSE_GEN)
                     .item(block -> new IronCrateItem(block, new Item.Properties().stacksTo(1)))
                     .build();
     public static final RegistryObject<Block> crate_steel =
-            new BlockBuilder("crate_steel", () -> new SteelCrateBlock(Properties.of().strength(4.0F).sound(SoundType.METAL)))
+            new WrappedBlockRegistryBuilder("crate_steel", () -> new SteelCrateBlock(Properties.of().strength(4.0F).sound(SoundType.METAL)))
                     .tab(ModTabs.MACHINE.getKey()).loc(HBMKey.REVERSE_GEN)
                     .item(block -> new SteelCrateItem(block, new Item.Properties().stacksTo(1))).loc(HBMKey.REVERSE_GEN)
                     .build();
@@ -267,7 +267,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> TAINT = block("taint", () -> new Block(Properties.copy(Blocks.IRON_BLOCK)));
 //    public static final RegistryObject<Block> WASTE_GRASS = add("waste_grass", () -> new WasteEarth(Properties.copy(Blocks.DIRT)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_DIFURNACE, HBMKey.ORDERLY_GEN, HBMKey.DROP_STANDALONE);
     // casting
-    public static final RegistryObject<Block> FOUNDRY_MOLD = new BlockBuilder("foundry_mold", () -> new FoundryMold(Properties.copy(Blocks.STONE)))
+    public static final RegistryObject<Block> FOUNDRY_MOLD = new WrappedBlockRegistryBuilder("foundry_mold", () -> new FoundryMold(Properties.copy(Blocks.STONE)))
             .tab(ModTabs.MACHINE.getKey()).model(HBMKey.MODEL_EXISTING).loc(HBMKey.ORDERLY_GEN).loot(HBMKey.DROP_SELF).tags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL).build();
     // 方块
     public static final RegistryObject<Block> SELLAFIELD_SLAKED = block("sellafield_slaked", ()->new Block(BlockBehaviour.Properties.of().explosionResistance(5.0f)), BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
@@ -601,7 +601,7 @@ public class ModBlocks {
             () -> new BlockOutGas(true, 5, 1, BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).strength(5.0F, 15.0F).sound(SoundType.WOOL)),
             BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_STONE_TOOL, HBMMatters.ASBESTOS.storage_block());
 
-    public static final RegistryObject<Block> BLOCK_SCHRABIDIUM_CLUSTER = new BlockBuilder("block_schrabidium_cluster",
+    public static final RegistryObject<Block> BLOCK_SCHRABIDIUM_CLUSTER = new WrappedBlockRegistryBuilder("block_schrabidium_cluster",
             () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STONE).strength(5.0F, 60000.0F)))
             .tab(ModTabs.BLOCKS.getKey()).model(HBMKey.MODEL_PILLAR).loc(HBMKey.ORDERLY_GEN_EXCEPT_FIRST).loot(HBMKey.DROP_SELF).tags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_STONE_TOOL, Tags.Blocks.STORAGE_BLOCKS)
             .item(block -> new BlockItem(block, new Item.Properties().rarity(Rarity.RARE))).build();
@@ -628,35 +628,35 @@ public class ModBlocks {
     public static final RegistryObject<Block> BLOCK_COKE_PETROLEUM = block("block_coke_petroleum", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COAL_BLOCK)), BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL, HBMMatters.CARBON.storage_block());
 
     // Chicago Pile components
-    public static final RegistryObject<Block> chicago_graphite_block = new BlockBuilder("chicago_graphite_block",
+    public static final RegistryObject<Block> chicago_graphite_block = new WrappedBlockRegistryBuilder("chicago_graphite_block",
             () -> new ChicagoGraphiteBlock(BlockBehaviour.Properties.of().strength(4.0F).explosionResistance(10.0F).sound(SoundType.STONE).requiresCorrectToolForDrops()))
             .tab(ModTabs.MACHINE.getKey()).tags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL)
             .build();
-    public static final RegistryObject<Block> chicago_graphite_drilled = new BlockBuilder("chicago_graphite_drilled",
+    public static final RegistryObject<Block> chicago_graphite_drilled = new WrappedBlockRegistryBuilder("chicago_graphite_drilled",
             () -> new ChicagoGraphiteDrilledBlock(BlockBehaviour.Properties.of().strength(4.0F).explosionResistance(10.0F).sound(SoundType.METAL).requiresCorrectToolForDrops()))
             .tab(ModTabs.MACHINE.getKey()).tags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL)
             .build();
-    public static final RegistryObject<Block> chicago_graphite_rod = new BlockBuilder("chicago_graphite_rod",
+    public static final RegistryObject<Block> chicago_graphite_rod = new WrappedBlockRegistryBuilder("chicago_graphite_rod",
             () -> new ChicagoGraphiteRodBlock(BlockBehaviour.Properties.of().strength(4.0F).explosionResistance(10.0F).sound(SoundType.METAL).requiresCorrectToolForDrops()))
             .tab(ModTabs.MACHINE.getKey()).tags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL)
             .build();
-    public static final RegistryObject<Block> chicago_graphite_fuel = new BlockBuilder("chicago_graphite_fuel",
+    public static final RegistryObject<Block> chicago_graphite_fuel = new WrappedBlockRegistryBuilder("chicago_graphite_fuel",
             () -> new ChicagoGraphiteFuelBlock(BlockBehaviour.Properties.of().strength(4.0F).explosionResistance(10.0F).sound(SoundType.METAL).requiresCorrectToolForDrops()))
             .tab(ModTabs.MACHINE.getKey()).tags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL)
             .build();
-    public static final RegistryObject<Block> chicago_graphite_source = new BlockBuilder("chicago_graphite_source",
+    public static final RegistryObject<Block> chicago_graphite_source = new WrappedBlockRegistryBuilder("chicago_graphite_source",
             () -> new ChicagoGraphiteSourceBlock(BlockBehaviour.Properties.of().strength(4.0F).explosionResistance(10.0F).sound(SoundType.METAL).requiresCorrectToolForDrops()))
             .tab(ModTabs.MACHINE.getKey()).tags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL)
             .build();
-    public static final RegistryObject<Block> chicago_graphite_breeder = new BlockBuilder("chicago_graphite_breeder",
+    public static final RegistryObject<Block> chicago_graphite_breeder = new WrappedBlockRegistryBuilder("chicago_graphite_breeder",
             () -> new ChicagoGraphiteBreederBlock(BlockBehaviour.Properties.of().strength(4.0F).explosionResistance(10.0F).sound(SoundType.METAL).requiresCorrectToolForDrops()))
             .tab(ModTabs.MACHINE.getKey()).tags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL)
             .build();
-    public static final RegistryObject<Block> chicago_graphite_detector = new BlockBuilder("chicago_graphite_detector",
+    public static final RegistryObject<Block> chicago_graphite_detector = new WrappedBlockRegistryBuilder("chicago_graphite_detector",
             () -> new ChicagoGraphiteDetectorBlock(BlockBehaviour.Properties.of().strength(4.0F).explosionResistance(10.0F).sound(SoundType.METAL).requiresCorrectToolForDrops().lightLevel(state -> state.getValue(ChicagoPileStateProperties.TRIGGERED) ? 4 : 0)))
             .tab(ModTabs.MACHINE.getKey()).tags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL)
             .build();
-    public static final RegistryObject<Block> chicago_graphite_tritium = new BlockBuilder("chicago_graphite_tritium",
+    public static final RegistryObject<Block> chicago_graphite_tritium = new WrappedBlockRegistryBuilder("chicago_graphite_tritium",
             () -> new ChicagoGraphiteTritiumBlock(BlockBehaviour.Properties.of().strength(4.0F).explosionResistance(10.0F).sound(SoundType.METAL).requiresCorrectToolForDrops()))
             .tab(ModTabs.MACHINE.getKey()).tags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL)
             .build();
@@ -700,7 +700,7 @@ public class ModBlocks {
 //    public static final RegistryObject<Block> BLOCK_CAP = block("block_cap",
 //            () -> new BlockCap(BlockBehaviour.Properties.copy(Blocks.STONE).strength(5.0F, 10.0F)),
 //            BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
-    public static final WrapperRegistry.RegisterObjectCollection<Block, EnumCapBlock> BLOCK_CAP = new WrapperRegistry.RegisterObjectCollection<>(EnumCapBlock.class,
+    public static final WrappedRegistryBuilder.RegisterObjectCollection<Block, EnumCapBlock> BLOCK_CAP = new WrappedRegistryBuilder.RegisterObjectCollection<>(EnumCapBlock.class,
                 type -> add("block_cap_" + type.name().toLowerCase(), ()->new RotatedPillarBlock(Properties.copy(Blocks.STONE).strength(5.0F, 10.0F)),
                         ModTabs.BLOCKS.getKey(), HBMKey.MODEL_PILLAR, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF,
                         BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL));
@@ -786,40 +786,45 @@ public class ModBlocks {
     }
     @SafeVarargs
     protected static RegistryObject<Block> add(final String name, final Supplier<? extends Block> sup, ResourceKey<CreativeModeTab> tabKey, String genModelWay, String genNameWay, String lootWay, TagKey<Block> ... keys){
-        return new BlockBuilder(name, sup).tab(tabKey).model(genModelWay).loc(genNameWay).loot(lootWay).tags(keys).build();
+        return new WrappedBlockRegistryBuilder(name, sup).tab(tabKey).model(genModelWay).loc(genNameWay).loot(lootWay).tags(keys).build();
     }
 
     /**
      * 其他属性注册的钩子
      * */
     public static void creativeTab(BuildCreativeModeTabContentsEvent event){
-        for (WrappedBlockRegistry blockRegistry : blockList) {
+        for (WrappedBlockRegistryBuilder blockRegistry : blockList) {
             blockRegistry.creativeTabSupport(event);
         }
     }
 
     public static void genModel(BlockStateGen provider){
-        for (WrappedBlockRegistry blockRegistry : blockList) {
+        for (WrappedBlockRegistryBuilder blockRegistry : blockList) {
             blockRegistry.modelSupport(provider);
         }
         provider.addIntStateCubeAllBlock(ModBlocks.GLYPHID_BLOCK.get(), HBMBlockProperties.VARIANT3);
         provider.addIntStateCubeAllBlock(ModBlocks.GLYPHID_SPAWNER.get(), HBMBlockProperties.VARIANT3);
     }
     public static void languageSupport(LanguageProvider provider){
-        for (WrappedBlockRegistry blockRegistry : blockList) {
+        for (WrappedBlockRegistryBuilder blockRegistry : blockList) {
             blockRegistry.languageSupport(provider);
         }
     }
 
     public static void lootSupport(BlockLootGen provider){
-        for (WrappedBlockRegistry blockRegistry : blockList) {
+        for (WrappedBlockRegistryBuilder blockRegistry : blockList) {
             blockRegistry.lootSupport(provider);
         }
     }
 
     public static void tagSupport(BlockTagsGen provider){
-        for (WrappedBlockRegistry wrappedBlockRegistry : blockList) {
+        for (WrappedBlockRegistryBuilder wrappedBlockRegistry : blockList) {
             wrappedBlockRegistry.tagSupport(provider);
+        }
+    }
+    public static void blockColorSupport(RegisterColorHandlersEvent.Block event){
+        for (WrappedBlockRegistryBuilder wrappedBlockRegistry : blockList) {
+            wrappedBlockRegistry.blockColorSupport(event);
         }
     }
 }

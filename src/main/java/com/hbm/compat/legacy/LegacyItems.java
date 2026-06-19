@@ -7,7 +7,7 @@ import com.hbm.HBMKey;
 import com.hbm.entity.weapon.missile.EntityMissileTier0;
 import com.hbm.item.weapon.ItemMissile;
 import com.hbm.registries.ModTabs;
-import com.hbm.registries.WrapperRegistry;
+import com.hbm.registries.WrappedRegistryBuilder;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -52,7 +52,7 @@ public final class LegacyItems {
 
     private static void registerLegacyItem(String name, @Nullable LegacyItemInfo info) {
         ResourceKey<CreativeModeTab> tab = resolveTab(info != null ? info.tab() : null);
-        new WrapperRegistry.ItemBuilder(name, createLegacyItem(name, info))
+        new WrappedRegistryBuilder.WrappedItemRegistryBuilder(name, createLegacyItem(name, info))
                 .tab(tab)
                 .model(HBMKey.BASIC_MODEL)
                 .loc(HBMKey.ORDERLY_GEN)

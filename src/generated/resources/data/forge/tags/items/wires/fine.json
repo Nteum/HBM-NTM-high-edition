@@ -1,5 +1,6 @@
 {
   "values": [
+    "hbm:wire_aluminium",
     "hbm:wire_copper",
     "hbm:wire_red_copper",
     "hbm:wire_gold",

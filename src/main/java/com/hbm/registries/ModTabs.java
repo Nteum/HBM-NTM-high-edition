@@ -6,8 +6,8 @@ import com.hbm.item.HBMCombat;
 import com.hbm.item.HBMWeapon;
 import com.hbm.item.icf.ItemICFPellet;
 import com.hbm.item.zirnox.ItemZirnoxRod;
-import com.hbm.registries.WrapperRegistry.WrappedBlockRegistry;
-import com.hbm.registries.WrapperRegistry.WrappedItemRegistry;
+import com.hbm.registries.WrappedRegistryBuilder.WrappedBlockRegistryBuilder;
+import com.hbm.registries.WrappedRegistryBuilder.WrappedItemRegistryBuilder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
@@ -233,7 +233,7 @@ public class ModTabs {
             .build());
 
     private static void addItemsForTab(CreativeModeTab.Output output, ResourceKey<CreativeModeTab> tabKey) {
-        for (WrappedItemRegistry itemRegistry : ModItems.itemList) {
+        for (WrappedItemRegistryBuilder itemRegistry : ModItems.itemList) {
             if (tabKey.equals(itemRegistry.creativeKey)) {
                 output.accept(itemRegistry.get());
             }
@@ -241,7 +241,7 @@ public class ModTabs {
     }
 
     private static void addBlocksForTab(CreativeModeTab.Output output, ResourceKey<CreativeModeTab> tabKey) {
-        for (WrappedBlockRegistry blockRegistry : ModBlocks.blockList) {
+        for (WrappedBlockRegistryBuilder blockRegistry : ModBlocks.blockList) {
             if (tabKey.equals(blockRegistry.creativeKey)) {
                 output.accept(blockRegistry.get());
             }

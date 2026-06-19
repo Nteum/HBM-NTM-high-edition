@@ -85,6 +85,7 @@ public class ClientEventHandler {
         // mod总线事件
         modBus.addListener(ClientEventHandler::onClientSetup);
         modBus.addListener(ClientEventHandler::onRegisterBlockColorHandlerEvent);
+        modBus.addListener(ClientEventHandler::onRegisterItemColorHandlerEvent);
         modBus.addListener(ClientEventHandler::registerEntityLayers);
         modBus.addListener(ClientEventHandler::registerAdditional);
         modBus.addListener(ClientEventHandler::modifyBakingResult);
@@ -204,7 +205,7 @@ public class ClientEventHandler {
                     (stack, level, entity, seed) -> ItemBreedingRod.getType(stack).ordinal());
             ItemProperties.register(ModItems.rod_breeder_quad.get(), HBM.rl("breeder_type"),
                     (stack, level, entity, seed) -> ItemBreedingRod.getType(stack).ordinal());
-
+            ModItems.itemPropertiesSupport();
         });
     }
 
@@ -238,6 +239,11 @@ public class ClientEventHandler {
                 },
                 ModBlocks.BEDROCK_ORE.get()
         );
+        ModBlocks.blockColorSupport(event);
+    }
+    @SubscribeEvent
+    public static void onRegisterItemColorHandlerEvent(RegisterColorHandlersEvent.Item event){
+        ModItems.itemColorSupport(event);
     }
 
     @SubscribeEvent
