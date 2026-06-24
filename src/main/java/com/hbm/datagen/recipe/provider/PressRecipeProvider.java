@@ -1,11 +1,14 @@
 package com.hbm.datagen.recipe.provider;
 
+import com.hbm.Inventory.material.HBMMatForm;
+import com.hbm.Inventory.material.HBMMatter;
 import com.hbm.datagen.recipe.ISubRecipeProvider;
 import com.hbm.datagen.recipe.builder.RecipePressBuilder;
 import com.hbm.item.tool.ItemStamp.*;
 import com.hbm.registries.HBMMatters;
 import com.hbm.registries.ModItems;
 import com.hbm.registries.ModTags;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.ItemStack;
@@ -51,10 +54,14 @@ public class PressRecipeProvider implements ISubRecipeProvider {
         new RecipePressBuilder(StampType.PLATE, Ingredient.of(ModItems.PLATE_WEAPONSTEEL.get()), new ItemStack(ModItems.CASING_SMALL_STEEL.get(), 4)).save(consumer);
         new RecipePressBuilder(StampType.PLATE, Ingredient.of(ModItems.PLATE_WEAPONSTEEL.get()), new ItemStack(ModItems.CASING_LARGE_STEEL.get(), 2)).save(consumer);
         // 金属线
-        for (String mat : ModItems.WIRE_MAT) {
-            if (ModItems.MAP_INGOT.containsKey(mat))
-                new RecipePressBuilder(StampType.WIRE, Ingredient.of(ModItems.MAP_INGOT.get(mat).get()), new ItemStack(ModItems.WIRE_FINE.get(mat).get(), 8)).save(consumer);
+        for (HBMMatter matter : HBMMatters.ALL_MATTERS) {
+            if (matter.getShape(ModTags.Items.WIRE) != null && matter.ingot() != null)
+                new RecipePressBuilder(StampType.WIRE, Ingredient.of(matter.ingot()), new ItemStack(ModItems.WIRE_FINE.get(matter).get(), 8)).save(consumer);
         }
+//        for (String mat : ModItems.WIRE_MAT) {
+//            if (ModItems.MAP_INGOT.containsKey(mat))
+//                new RecipePressBuilder(StampType.WIRE, Ingredient.of(ModItems.MAP_INGOT.get(mat).get()), new ItemStack(ModItems.WIRE_FINE.get(mat).get(), 8)).save(consumer);
+//        }
 
 //        makeRecipe(StampType.CIRCUIT, new OreDictStack(SI.billet()),						DictFrame.fromOne(ModItems.circuit, EnumCircuitType.SILICON));
 //        makeRecipe(StampType.CIRCUIT, new OreDictStack(GAAS.billet()),						DictFrame.fromOne(ModItems.circuit, EnumCircuitType.GAAS));

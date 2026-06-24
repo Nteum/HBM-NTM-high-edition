@@ -133,4 +133,29 @@ public class ItemModelGen extends ItemModelProvider {
             this.basicItem(item);
         });
     }
+
+    private ResourceLocation getPath(Item item){
+        return Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(item));
+    }
+    public ItemModelGen basicItemWithProperty(Item item, ResourceLocation property, ResourceLocation alterTexture){
+        ResourceLocation path = getPath(item);
+        this.getBuilder(path.toString()).parent(new ModelFile.UncheckedModelFile("item/generated"))
+                .texture("layer0", new ResourceLocation(path.getNamespace(), "item/" + path.getPath()))
+                .override()
+                .predicate(property, 1.0f).model(this.basicItem(alterTexture))
+                .end();
+        return this;
+    }
+    public ItemModelGen multiLayerItem(Item item, ResourceLocation ... layers){
+        if (layers.length == 0) this.basicItem(item);
+        else {
+            ResourceLocation path = getPath(item);
+            ItemModelBuilder builder = this.getBuilder(path.toString()).parent(new ModelFile.UncheckedModelFile("item/generated"))
+                    .texture("layer0", new ResourceLocation(path.getNamespace(), "item/" + path.getPath()));
+            for (int i = 0; i < layers.length; i++) {
+                builder.texture("layer" + (i + 1), new ResourceLocation(path.getNamespace(), "item/" + layers[i].getPath()));
+            }
+        }
+        return this;
+    }
 }

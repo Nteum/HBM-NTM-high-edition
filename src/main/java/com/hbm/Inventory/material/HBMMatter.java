@@ -159,15 +159,43 @@ public class HBMMatter{
         return getShape(ModTags.Items.PLATE);
     }
     // 微粉
+    public TagKey<Item> dust(){
+        return getShape(ModTags.Items.DUST);
+    }
+    // 微粉
     public TagKey<Item> small_dust(){
         return getShape(ModTags.Items.SMALL_DUST);
-    }
-    //
-    public TagKey<Item> bolt(){
-        return getShape(ModTags.Items.BOLT);
     }
     // 方块
     public TagKey<Block> storage_block(){
         return this.blockShapes.get(Tags.Blocks.STORAGE_BLOCKS);
+    }
+    // 螺栓
+    public TagKey<Item> bolt(){
+        return getShape(ModTags.Items.BOLT);
+    }
+    public TagKey<Item> barrel_light(){
+        return getShape(ModTags.Items.LIGHTBARREL);
+    }
+    public TagKey<Item> barrel_heavy(){
+        return getShape(ModTags.Items.HEAVYBARREL);
+    }
+    public TagKey<Item> receiver_heavy(){
+        return getShape(ModTags.Items.HEAVYRECEIVER);
+    }
+    public TagKey<Item> receiver_light(){
+        return getShape(ModTags.Items.LIGHTRECEIVER);
+    }
+    public TagKey<Item> grip(){
+        return getShape(ModTags.Items.GRIP);
+    }
+    public TagKey<Item> stock(){
+        return getShape(ModTags.Items.STOCK);
+    }
+    public TagKey<Item> mechanism(){
+        return getShape(ModTags.Items.MECHANISM);
+    }
+    public TagKey<Item> wire(){
+        return getShape(ModTags.Items.WIRE);
     }
 }

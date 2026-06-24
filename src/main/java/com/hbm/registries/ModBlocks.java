@@ -148,7 +148,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> machine_dineutronium_battery = registerMachineBattery("battery_block_dineutronium",()->new BlockBattery(Properties.of(), BlockBattery.BatteryType.DINEUTRONIUM));
     public static final RegistryObject<Block> BATTERY = machine_battery;
     public static final RegistryObject<Block> BATTERY_LITHIUM = machine_lithium_battery;
-    public static final RegistryObject<Block> BATTERY_SCHRABIDIUM = machine_schrabidium_battery;
+//    public static final RegistryObject<Block> BATTERY_SCHRABIDIUM = machine_schrabidium_battery;
     public static final RegistryObject<Block> BATTERY_DINEUTRONIUM = machine_dineutronium_battery;
     public static final RegistryObject<Block> anvil_iron = registerMachineBlockWithItem("anvil_iron",()->new BlockAnvil(Properties.of()));
     public static final RegistryObject<Block> anvil_desh = registerMachineBlockWithItem("anvil_desh",()->new BlockAnvil(Properties.of()));

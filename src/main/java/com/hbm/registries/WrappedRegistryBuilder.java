@@ -69,10 +69,13 @@ public abstract class WrappedRegistryBuilder<T> implements Supplier<T>{
         ResourceLocation itemProperty;
         ItemPropertyFunction itemPropertyFunction;
         ItemColor itemColor;
+        ResourceLocation alterTexture;
         // 本地化
         String[] descriptions;
         // tag
         List<TagKey<Item>> tags;
+        // tab
+
 
         public WrappedItemRegistryBuilder(String name, Supplier<? extends Item> sup) {
             super(name, sup);
@@ -97,15 +100,22 @@ public abstract class WrappedRegistryBuilder<T> implements Supplier<T>{
             return this;
         }
 
+        public WrappedItemRegistryBuilder model(String genModelWay, ResourceLocation alterTexture){
+            this.genModelWay = genModelWay;
+            this.alterTexture = alterTexture;
+            return this;
+        }
+
         public WrappedItemRegistryBuilder model(Consumer<ItemModelGen> modelGen){
             this.genModelWay = HBMKey.MODEL_STANDALONE;
             this.modelFactory = modelGen;
             return this;
         }
 
-        public WrappedItemRegistryBuilder itemProperties(ResourceLocation property, ItemPropertyFunction itemPropertyFunction){
+        public WrappedItemRegistryBuilder itemProperties(ResourceLocation property, ItemPropertyFunction itemPropertyFunction, ResourceLocation alterTexture){
             this.itemProperty = property;
             this.itemPropertyFunction = itemPropertyFunction;
+            this.alterTexture = alterTexture;
             return this;
         }
 
@@ -199,8 +209,13 @@ public abstract class WrappedRegistryBuilder<T> implements Supplier<T>{
                 case HBMKey.MODEL_STANDALONE -> {
                     if (modelFactory != null) modelFactory.accept(provider);
                 }
+                case HBMKey.MODEL_ITEM_PROPERTY -> {
+                    if (itemProperty != null && alterTexture != null) provider.basicItemWithProperty(get(), itemProperty, alterTexture);
+                }
+                case HBMKey.MODEL_ITEM_OVERLAY -> {
+                    if (alterTexture != null) provider.multiLayerItem(get(), alterTexture);
+                }
                 case HBMKey.MODEL_DYNAMIC -> {}
-
             }
         }
 

@@ -1,0 +1,11 @@
+{
+  "type": "hbm:press",
+  "input": {
+    "tag": "forge:ingots/copper"
+  },
+  "result": {
+    "count": 8,
+    "item": "hbm:wire_copper"
+  },
+  "stamp": "WIRE"
+}

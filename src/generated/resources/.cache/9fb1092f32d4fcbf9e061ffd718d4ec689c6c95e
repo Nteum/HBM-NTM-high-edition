@@ -1,4 +1,4 @@
-// 1.20.1	2026-06-11T23:14:11.5061205	Recipes
+// 1.20.1	2026-06-22T17:23:19.1533934	Recipes
 9fcaaa02c3f0fd1139d3e1ca7d4cb9bcf11859c2 data/hbm/advancements/recipes/misc/battery_block_dineutronium.json
 97e7b35243fe53d5f4536356211d1358dbaa6caa data/hbm/advancements/recipes/misc/battery_block_lithium.json
 0bcfc45fc2d2a2d29c7e201404cc34201b092da7 data/hbm/advancements/recipes/misc/battery_block_schrabidium.json
@@ -105,15 +105,12 @@ c33650bab6c255bf83e6bc8589b20a6433af7eea data/hbm/recipes/press/plate_schrabidiu
 502f526ec848e2663e0a6486236f71c71a81ce22 data/hbm/recipes/press/plate_steel_15.json
 7cf054c7741d84fbb60293362f8c246aaed079da data/hbm/recipes/press/plate_titanium_13.json
 97515f64519219eab78d8e123ea571e9c8ee161b data/hbm/recipes/press/plate_weaponsteel_22.json
-c31a3ab1c0a94ccbddb97f3e621ccc5b8e36250d data/hbm/recipes/press/wire_advanced_alloy_34.json
-e64c857bd5dfb42ba61f2774b5c6aae89d90ca16 data/hbm/recipes/press/wire_aluminium_29.json
-28368305414bd94e0daceb9fa8a78e6de052e584 data/hbm/recipes/press/wire_copper_30.json
-cca2335bcc91e0381358e6598983ddd734fbcc54 data/hbm/recipes/press/wire_gold_32.json
-f1bf481f7c88615b17d62701198c502677f420e6 data/hbm/recipes/press/wire_magnetized_tungsten_37.json
-a0c64cb1a630abf673b4b6a3175ba2e6b9c2a581 data/hbm/recipes/press/wire_red_copper_31.json
-aef721d715843b4c7e0d9d188dee69eeeb780df3 data/hbm/recipes/press/wire_schrabidium_35.json
-13b9f12aa2ab8abe4e64ff0303d0eb95bb7086d5 data/hbm/recipes/press/wire_tungsten_33.json
-5ed9d4a27be5864721248074a67d119dab9c6031 data/hbm/recipes/press/wire_zinc_36.json
+e73742b04ba4c4e5943b7f6f0d2db9b2bcfa249b data/hbm/recipes/press/wire_aluminium_31.json
+4b84370197ef8e2fee80ba1ef97e2a576aff431f data/hbm/recipes/press/wire_copper_29.json
+3d38c3a5642ab37c9e1501936e595f526031d71e data/hbm/recipes/press/wire_lead_32.json
+ecc22b4668bb5156ccc3310e1d82efdd67bd36bd data/hbm/recipes/press/wire_tungsten_30.json
+510f3f71dd99a04bc1531bbd703e057d6d6f2b20 data/hbm/recipes/press/wire_zinc_34.json
+4bd1e5aad7933e3578247f72b04a68a79861d652 data/hbm/recipes/press/wire_zirconium_33.json
 09bf44b316977808b71e0258e56eeae1da41426e data/hbm/recipes/pwr_casing.json
 bd46e23d56cf34ed90eb9c3c20dbb55b7640cbcd data/hbm/recipes/pwr_channel.json
 6e90157ea9002d77024c3c821bdfca3b8a06d728 data/hbm/recipes/pwr_control.json

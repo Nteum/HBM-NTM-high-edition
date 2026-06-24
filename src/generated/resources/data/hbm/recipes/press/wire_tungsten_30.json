@@ -1,0 +1,11 @@
+{
+  "type": "hbm:press",
+  "input": {
+    "tag": "forge:ingots/tungsten"
+  },
+  "result": {
+    "count": 8,
+    "item": "hbm:wire_tungsten"
+  },
+  "stamp": "WIRE"
+}

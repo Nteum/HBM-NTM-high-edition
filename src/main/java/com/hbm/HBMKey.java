@@ -53,6 +53,8 @@ public class HBMKey {
     public static final String MODEL_LEAVES = "model_leaves";
     public static final String MODEL_EXISTING = "model_existing";
     public static final String MODEL_ORIENTABLE_VERTICAL = "orientable_vertical";
+    public static final String MODEL_ITEM_PROPERTY = "model_item_property";
+    public static final String MODEL_ITEM_OVERLAY = "model_item_overlay";
 
     public static final String LITERALLY = "literally";
     public static final String ORDERLY_GEN = "orderly_gen";

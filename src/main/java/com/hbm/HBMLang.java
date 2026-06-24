@@ -77,7 +77,7 @@ public enum HBMLang implements ILangEntry {
     GUI_MINER_LARGE_VEIN_MINER("Toggle Vein Miner"),
     GUI_MINER_LARGE_WALLING("Toggle Walling"),
     GUI_MINER_LARGE_CRUSHER("Toggle Crusher"),
-    // Item description
+    // 物品
     TOOLTIP_SHOW_DETAIL("Hold %s to display more info"),
     ITEM_INGOT_NEPTUNIUM_DESC("That one's my favourite!"),
     ITEM_INGOT_SCHRARANIUM_NAME_ALTER("Nikonium Ingot"),
@@ -89,6 +89,7 @@ public enum HBMLang implements ILangEntry {
     ITEM_POWDER_FIRE_DESC("Used in multi purpose bombs:$Incendiary bombs are fun!"),
     ITEM_METEOR_REMOTE_DESC("Right click to summon a meteorite!"),
     BLOCK_FIREBOX_DESC("Burns solid fuel to produce heat."),
+    ITEM_UNSTABLE("Decay : %s"),
     // handoverTexts
     ENERGY("item","battery.tooltip"),
     FLUID_CAPACITY("item","fluid_capacity"),

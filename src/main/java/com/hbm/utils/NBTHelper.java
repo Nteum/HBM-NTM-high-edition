@@ -108,4 +108,11 @@ public class NBTHelper {
     public static void writeEnum(CompoundTag nbt, String key, Enum<?> e) {
         nbt.putInt(key, e.ordinal());
     }
+
+    public static int getInt(ItemStack itemStack, String key, int defaultValue){
+        return itemStack.hasTag() ? getInt(itemStack.getTag(), key, defaultValue) : defaultValue;
+    }
+    public static int getInt(CompoundTag tag, String key, int defaultValue){
+        return tag.contains(key, Tag.TAG_INT) ? tag.getInt(key) : defaultValue;
+    }
 }

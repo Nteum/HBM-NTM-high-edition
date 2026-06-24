@@ -1,14 +1,5 @@
 {
   "values": [
-    "hbm:wire_aluminium",
-    "hbm:wire_copper",
-    "hbm:wire_red_copper",
-    "hbm:wire_gold",
-    "hbm:wire_tungsten",
-    "hbm:wire_advanced_alloy",
-    "hbm:wire_schrabidium",
-    "hbm:wire_zinc",
-    "hbm:wire_magnetized_tungsten",
     "#forge:wires/fine/carbon",
     "#forge:wires/fine/gold",
     "#forge:wires/fine/schrabidium",

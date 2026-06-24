@@ -32,7 +32,7 @@ public class ItemTagsGen extends ItemTagsProvider {
         //电池
         this.tag(ModTags.Items.BATTERY).add(ModItems.BATTERY_CREATIVE.get(),ModItems.BATTERY_GENERIC.get(),ModItems.BATTERY_ADVANCED.get(),ModItems.BATTERY_LITHIUM.get(),
                 ModBlocks.BATTERY.get().asItem(),ModBlocks.BATTERY_LITHIUM.get().asItem(),
-                ModBlocks.BATTERY_SCHRABIDIUM.get().asItem(),ModBlocks.BATTERY_DINEUTRONIUM.get().asItem());
+                ModBlocks.machine_schrabidium_battery.get().asItem(),ModBlocks.BATTERY_DINEUTRONIUM.get().asItem());
         //可以被充电的
         this.tag(ModTags.Items.CHARGEABLE).addTag(ModTags.Items.BATTERY);
         this.tag(ModTags.Items.UPGRADE).add(ModItems.UPGRADE_BASE.get());

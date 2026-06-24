@@ -42,6 +42,7 @@ import com.hbm.render.model.Models;
 import com.hbm.entity.weapon.missile.EntityMissileTier0;
 import com.hbm.debug.GunSuicide;
 import com.hbm.debug.ItemDebugWand;
+import com.hbm.utils.NBTHelper;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
@@ -80,41 +81,39 @@ public class ModItems {
         HBMCombat.register(ITEMS);
     }
 
-    public static final RegistryObject<Item> INGOT_DURA_STEEL = parts("ingot_dura_steel", ()->new Item(new Item.Properties()), "High-Speed Steel Ingot");
     // HBM物品
     public static final RegistryObject<Item> REDSTONE_SWORD = new WrappedItemRegistryBuilder("redstone_sword", ()->new RedstoneSword(Tiers.STONE, 3, -2.4F, new Item.Properties())).tab(CreativeModeTabs.COMBAT).build();
     public static final RegistryObject<Item> BIG_SWORD = new WrappedItemRegistryBuilder("big_sword", ()->new BigSword(Tiers.GOLD, 3, -2.4F, new Item.Properties())).tab(CreativeModeTabs.COMBAT).build();
     /* material */
-    public static final RegistryObject<Item> INGOT_TH232 = new WrappedItemRegistryBuilder("ingot_th232", ()->new Item(new Item.Properties())).tab(ModTabs.PARTS.getKey()).loc(HBMKey.ORDERLY_GEN_EXCEPT_FIRST).build();
-    public static final RegistryObject<Item> INGOT_URANIUM = parts("ingot_uranium", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, ModTags.Items.INGOT_URANIUM);
-    public static final RegistryObject<Item> INGOT_U233 = parts("ingot_u233", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> INGOT_U235 = parts("ingot_u235", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> INGOT_U238 = parts("ingot_u238", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> INGOT_U238M2 = parts("ingot_u238m2", ()->new ItemUnstable(350, 200, new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    //    ingot_u238m2 = new ItemUnstable(350, 200).setUnlocalizedName("ingot_u238m2").setCreativeTab(null).setTextureName(RefStrings.MODID + ":ingot_u238m2");
-    public static final RegistryObject<Item> INGOT_PLUTONIUM = parts("ingot_plutonium", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> INGOT_PU238 = parts("ingot_pu238", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> INGOT_PU239 = parts("ingot_pu239", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> INGOT_PU240 = parts("ingot_pu240", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> INGOT_PU241 = parts("ingot_pu241", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> INGOT_PU_MIX = parts("ingot_pu_mix", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> INGOT_AM241 = parts("ingot_am241", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> INGOT_AM242 = parts("ingot_am242", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> INGOT_AM_MIX = parts("ingot_am_mix", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> INGOT_NEPTUNIUM = parts("ingot_neptunium", ()->new Item(new Item.Properties()),HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> INGOT_POLONIUM = parts("ingot_polonium", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> INGOT_TECHNETIUM = parts("ingot_technetium", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> INGOT_CO60 = parts("ingot_co60", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> INGOT_SR90 = parts("ingot_sr90", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> INGOT_AU198 = parts("ingot_au198", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> INGOT_PB209 = parts("ingot_pb209", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> INGOT_RA226 = parts("ingot_ra226", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> INGOT_TH232 = new WrappedItemRegistryBuilder("ingot_th232", ()->new Item(new Item.Properties())).tab(ModTabs.PARTS.getKey()).loc(HBMKey.ORDERLY_GEN_EXCEPT_FIRST).tags(HBMMatters.THORIUM.ingot()).build();
+    public static final RegistryObject<Item> INGOT_URANIUM = parts("ingot_uranium", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.URANIUM.ingot());
+    public static final RegistryObject<Item> INGOT_U233 = parts("ingot_u233", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.U233.ingot());
+    public static final RegistryObject<Item> INGOT_U235 = parts("ingot_u235", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.U235.ingot());
+    public static final RegistryObject<Item> INGOT_U238 = parts("ingot_u238", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.U238.ingot());
+    public static final RegistryObject<Item> INGOT_U238M2 = parts("ingot_u238m2", ()->new ItemUnstable(350, 200, new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.U238.ingot());
+    public static final RegistryObject<Item> INGOT_PLUTONIUM = parts("ingot_plutonium", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.PLUTONIUM.ingot());
+    public static final RegistryObject<Item> INGOT_PU238 = parts("ingot_pu238", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.PU238.ingot());
+    public static final RegistryObject<Item> INGOT_PU239 = parts("ingot_pu239", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.PU239.ingot());
+    public static final RegistryObject<Item> INGOT_PU240 = parts("ingot_pu240", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.PU240.ingot());
+    public static final RegistryObject<Item> INGOT_PU241 = parts("ingot_pu241", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.PU241.ingot());
+    public static final RegistryObject<Item> INGOT_PU_MIX = parts("ingot_pu_mix", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.PLUTONIUM.ingot());
+    public static final RegistryObject<Item> INGOT_AM241 = parts("ingot_am241", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.AM241.ingot());
+    public static final RegistryObject<Item> INGOT_AM242 = parts("ingot_am242", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.AM242.ingot());
+    public static final RegistryObject<Item> INGOT_AM_MIX = parts("ingot_am_mix", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, Tags.Items.INGOTS);
+    public static final RegistryObject<Item> INGOT_NEPTUNIUM = parts("ingot_neptunium", ()->new Item(new Item.Properties()),HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.NEPTUNIUM.ingot());
+    public static final RegistryObject<Item> INGOT_POLONIUM = parts("ingot_polonium", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.POLONIUM.ingot());
+    public static final RegistryObject<Item> INGOT_TECHNETIUM = parts("ingot_technetium", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.TECHNETIUM.ingot());
+    public static final RegistryObject<Item> INGOT_CO60 = parts("ingot_co60", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.CO60.ingot());
+    public static final RegistryObject<Item> INGOT_SR90 = parts("ingot_sr90", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, Tags.Items.INGOTS);
+    public static final RegistryObject<Item> INGOT_AU198 = parts("ingot_au198", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.AU198.ingot());
+    public static final RegistryObject<Item> INGOT_PB209 = parts("ingot_pb209", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.PB209.ingot());
+    public static final RegistryObject<Item> INGOT_RA226 = parts("ingot_ra226", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.RADIUM.ingot());
     public static final RegistryObject<Item> INGOT_TITANIUM = parts("ingot_titanium", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.TITANIUM.ingot());
-    public static final RegistryObject<Item> INGOT_COBALT = parts("ingot_cobalt", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> INGOT_BORON = parts("ingot_boron", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> INGOT_GRAPHITE = parts("ingot_graphite", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> INGOT_FIREBRICK = parts("ingot_firebrick", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> ingot_smore = parts("ingot_smore", ()->new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(10).saturationMod(20f).build())), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> INGOT_COBALT = parts("ingot_cobalt", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.COBALT.ingot());
+    public static final RegistryObject<Item> INGOT_BORON = parts("ingot_boron", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.BORON.ingot());
+    public static final RegistryObject<Item> INGOT_GRAPHITE = parts("ingot_graphite", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.GRAPHITE.ingot());
+    public static final RegistryObject<Item> INGOT_FIREBRICK = parts("ingot_firebrick", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, Tags.Items.INGOTS);
+    public static final RegistryObject<Item> ingot_smore = parts("ingot_smore", ()->new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(10).saturationMod(20f).build())), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, Tags.Items.INGOTS);
     public static final RegistryObject<Item> SULFUR = parts("sulfur", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     public static final RegistryObject<Item> NITRA = parts("nitra", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     public static final RegistryObject<Item> NITRA_SMALL = parts("nitra_small", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
@@ -304,15 +303,13 @@ public class ModItems {
     public static final RegistryObject<Item> ULLAPOOL_CABER = legacyGrenade("ullapool_caber", ItemGrenade.Type.BURST);
     public static final RegistryObject<Item> WEAPONIZED_STARBLASTER_CELL = legacyGrenade("weaponized_starblaster_cell", ItemGrenade.Type.PLASMA);
 
-
-
-    public static final RegistryObject<Item> INGOT_URANIUM_FUEL = parts("ingot_uranium_fuel", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> INGOT_PLUTONIUM_FUEL = parts("ingot_plutonium_fuel", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> INGOT_NEPTUNIUM_FUEL = parts("ingot_neptunium_fuel", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> INGOT_MOX_FUEL = parts("ingot_mox_fuel", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> INGOT_AMERICIUM_FUEL = parts("ingot_americium_fuel", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> INGOT_SCHRABIDIUM_FUEL = parts("ingot_schrabidium_fuel", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> INGOT_THORIUM_FUEL = parts("ingot_thorium_fuel", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> INGOT_URANIUM_FUEL = parts("ingot_uranium_fuel", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, Tags.Items.INGOTS);
+    public static final RegistryObject<Item> INGOT_PLUTONIUM_FUEL = parts("ingot_plutonium_fuel", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, Tags.Items.INGOTS);
+    public static final RegistryObject<Item> INGOT_NEPTUNIUM_FUEL = parts("ingot_neptunium_fuel", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, Tags.Items.INGOTS);
+    public static final RegistryObject<Item> INGOT_MOX_FUEL = parts("ingot_mox_fuel", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, Tags.Items.INGOTS);
+    public static final RegistryObject<Item> INGOT_AMERICIUM_FUEL = parts("ingot_americium_fuel", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, Tags.Items.INGOTS);
+    public static final RegistryObject<Item> INGOT_SCHRABIDIUM_FUEL = parts("ingot_schrabidium_fuel", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, Tags.Items.INGOTS);
+    public static final RegistryObject<Item> INGOT_THORIUM_FUEL = parts("ingot_thorium_fuel", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, Tags.Items.INGOTS);
     public static final RegistryObject<Item> NUGGET_URANIUM_FUEL = parts("nugget_uranium_fuel", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, Tags.Items.NUGGETS);
     public static final RegistryObject<Item> NUGGET_THORIUM_FUEL = parts("nugget_thorium_fuel", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, Tags.Items.NUGGETS);
     public static final RegistryObject<Item> NUGGET_PLUTONIUM_FUEL = parts("nugget_plutonium_fuel", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, Tags.Items.NUGGETS);
@@ -320,26 +317,26 @@ public class ModItems {
     public static final RegistryObject<Item> NUGGET_MOX_FUEL = parts("nugget_mox_fuel", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, Tags.Items.NUGGETS);
     public static final RegistryObject<Item> NUGGET_AMERICIUM_FUEL = parts("nugget_americium_fuel", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, Tags.Items.NUGGETS);
     public static final RegistryObject<Item> NUGGET_SCHRABIDIUM_FUEL = parts("nugget_schrabidium_fuel", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, Tags.Items.NUGGETS);
-    public static final RegistryObject<Item> INGOT_ADVANCED_ALLOY = parts("ingot_advanced_alloy", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> INGOT_TCALLOY = parts("ingot_tcalloy", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> INGOT_CDALLOY = parts("ingot_cdalloy", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> INGOT_BISMUTH_BRONZE = parts("ingot_bismuth_bronze", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> INGOT_ARSENIC_BRONZE = parts("ingot_arsenic_bronze", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> INGOT_BSCCO = parts("ingot_bscco", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> INGOT_ADVANCED_ALLOY = parts("ingot_advanced_alloy", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.ALLOY.ingot());
+    public static final RegistryObject<Item> INGOT_TCALLOY = parts("ingot_tcalloy", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.TCALLOY.ingot());
+    public static final RegistryObject<Item> INGOT_CDALLOY = parts("ingot_cdalloy", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.CDALLOY.ingot());
+    public static final RegistryObject<Item> INGOT_BISMUTH_BRONZE = parts("ingot_bismuth_bronze", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.BISMUTH.ingot());
+    public static final RegistryObject<Item> INGOT_ARSENIC_BRONZE = parts("ingot_arsenic_bronze", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.ARSENIC.ingot());
+    public static final RegistryObject<Item> INGOT_BSCCO = parts("ingot_bscco", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.BSCCO.ingot());
 
     public static final RegistryObject<Item> NITER = parts("salpeter", ()->new Item(new Item.Properties()), "Niter");
-    public static final RegistryObject<Item> INGOT_COPPER = parts("ingot_copper", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> INGOT_RED_COPPER = parts("ingot_red_copper", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> INGOT_TUNGSTEN = parts("ingot_tungsten", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> INGOT_ALUMINIUM = parts("ingot_aluminium", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, ModTags.Items.INGOT_ALUMINIUM);
+    public static final RegistryObject<Item> INGOT_COPPER = parts("ingot_copper", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.COPPER.ingot());
+    public static final RegistryObject<Item> INGOT_RED_COPPER = parts("ingot_red_copper", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, Tags.Items.INGOTS);
+    public static final RegistryObject<Item> INGOT_TUNGSTEN = parts("ingot_tungsten", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.TUNGSTEN.ingot());
+    public static final RegistryObject<Item> INGOT_ALUMINIUM = parts("ingot_aluminium", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.ALUMINIUM.ingot());
     public static final RegistryObject<Item> FLUORITE = parts("fluorite", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> INGOT_BERYLLIUM = parts("ingot_beryllium", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> INGOT_STEEL = parts("ingot_steel", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, ModTags.Items.INGOT_STEEL);
+    public static final RegistryObject<Item> INGOT_BERYLLIUM = parts("ingot_beryllium", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.BERYLLIUM.ingot());
+    public static final RegistryObject<Item> INGOT_STEEL = parts("ingot_steel", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.STEEL.ingot());
     public static final RegistryObject<Item> PLATE_STEEL = parts("plate_steel", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, ModTags.Items.PLATE_STEEL);
     public static final RegistryObject<Item> INGOT_STAINLESS = parts("ingot_stainless", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.STAINLESS.ingot());
     public static final RegistryObject<Item> PLATE_STAINLESS = parts("plate_stainless", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.STAINLESS.plate());
     public static final RegistryObject<Item> PLATE_IRON = parts("plate_iron", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.IRON.plate());
-    public static final RegistryObject<Item> INGOT_LEAD = parts("ingot_lead", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, ModTags.Items.INGOT_LEAD);
+    public static final RegistryObject<Item> INGOT_LEAD = parts("ingot_lead", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.LEAD.ingot());
     public static final RegistryObject<Item> PLATE_LEAD = parts("plate_lead", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.LEAD.plate());
     public static final RegistryObject<Item> PLATE_DURA_STEEL = parts("plate_dura_steel", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.DURA.plate());
     public static final RegistryObject<Item> INGOT_SCHRARANIUM = new WrappedItemRegistryBuilder("ingot_schraranium", ()->new Item(new Item.Properties()){
@@ -353,7 +350,7 @@ public class ModItems {
             if (ConfigLBSM.enableLBSM && ConfigLBSM.enableLBSMFullSchrab) return HBMLang.ITEM_INGOT_SCHRARANIUM_NAME_ALTER.translate();
             else return super.getName(pStack);
         }
-    }).tab(ModTabs.PARTS.getKey()).loc(HBMKey.REVERSE_GEN)
+    }).tab(ModTabs.PARTS.getKey()).loc(HBMKey.REVERSE_GEN).tags(HBMMatters.SCHRARANIUM.ingot())
             .withConfigTexture("condition_state", () -> ConfigLBSM.enableLBSM && ConfigLBSM.enableLBSMFullSchrab).model(itemModelGen -> {
                 // 我的评价是没办法，需要的参数太多了，一个一个传非常麻烦，只能手动了。
                 ResourceLocation rl = HBM.rl("ingot_schraranium");
@@ -361,22 +358,22 @@ public class ModItems {
                         .texture("layer0", new ResourceLocation(rl.getNamespace(), "item/" + rl.getPath()))
                         .override().predicate(new ResourceLocation("condition_state"), 1.0f).model(itemModelGen.basicItem(HBM.rl("ingot_nikonium"))).end();
             }).build();
-    public static final RegistryObject<Item> INGOT_SCHRABIDIUM = parts("ingot_schrabidium", ()->new Item(new Item.Properties().rarity(Rarity.RARE)), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> INGOT_SCHRABIDATE = parts("ingot_schrabidate", ()->new Item(new Item.Properties().rarity(Rarity.RARE)), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> INGOT_SCHRABIDIUM = parts("ingot_schrabidium", ()->new Item(new Item.Properties().rarity(Rarity.RARE)), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.SCHRABIDATE.ingot());
+    public static final RegistryObject<Item> INGOT_SCHRABIDATE = parts("ingot_schrabidate", ()->new Item(new Item.Properties().rarity(Rarity.RARE)), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.SCHRABIDATE.ingot());
     public static final RegistryObject<Item> PLATE_SCHRABIDIUM = parts("plate_schrabidium", ()->new Item(new Item.Properties().rarity(Rarity.RARE)), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     public static final RegistryObject<Item> PLATE_COPPER = parts("plate_copper", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.COPPER.plate());
     public static final RegistryObject<Item> PLATE_GOLD = parts("plate_gold", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     public static final RegistryObject<Item> PLATE_ADVANCED_ALLOY = parts("plate_advanced_alloy", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.ALLOY.plate());
     public static final RegistryObject<Item> LITHIUM = parts("lithium", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> INGOT_ZIRCONIUM = parts("ingot_zirconium", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> INGOT_ZIRCONIUM = parts("ingot_zirconium", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.ZIRCONIUM.ingot());
 
     //    ingot_semtex = new ItemLemon(4, 5, true).setUnlocalizedName("ingot_semtex").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":ingot_semtex");
-    public static final RegistryObject<Item> INGOT_C4 = parts("ingot_c4", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> INGOT_PHOSPHORUS = parts("ingot_phosphorus", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> INGOT_C4 = parts("ingot_c4", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, Tags.Items.INGOTS);
+    public static final RegistryObject<Item> INGOT_PHOSPHORUS = parts("ingot_phosphorus", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.PHOSPHORUS.ingot());
     public static final RegistryObject<Item> COIL_ADVANCED_ALLOY = parts("coil_advanced_alloy", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     public static final RegistryObject<Item> COIL_ADVANCED_TORUS = parts("coil_advanced_torus", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> INGOT_MAGNETIZED_TUNGSTEN = parts("ingot_magnetized_tungsten", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> INGOT_COMBINE_STEEL = parts("ingot_combine_steel", ()->new ItemCustomInfo(new Item.Properties(), HBMLang.ITEM_INGOTCOMBINE_STEEL_DESC.translate()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> INGOT_MAGNETIZED_TUNGSTEN = parts("ingot_magnetized_tungsten", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.MAGTUNG.ingot());
+    public static final RegistryObject<Item> INGOT_COMBINE_STEEL = parts("ingot_combine_steel", ()->new ItemCustomInfo(new Item.Properties(), HBMLang.ITEM_INGOTCOMBINE_STEEL_DESC.translate()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.CMB.ingot());
     public static final RegistryObject<Item> PLATE_MIXED = parts("plate_mixed", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
 
     public static final RegistryObject<Item> PLATE_PAA = parts("plate_paa", ()->new ItemCustomInfo(new Item.Properties().rarity(Rarity.UNCOMMON)), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
@@ -384,7 +381,6 @@ public class ModItems {
     public static final RegistryObject<Item> DRILL_TITANIUM = parts("drill_titanium", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     public static final RegistryObject<Item> PLATE_DALEKANIUM = parts("plate_dalekanium", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     public static final RegistryObject<Item> PLATE_EUPHEMIUM = parts("plate_euphemium", ()->new ItemCustomInfo(new Item.Properties().rarity(Rarity.EPIC)), "Euphemium Compound Plate");
-    //    bolt = new ItemAutogen(MaterialShapes.BOLT).oun("boltntm").setUnlocalizedName("bolt").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":bolt");
     public static final RegisterObjectCollection<Item, HBMMatter> BOLTS = new RegisterObjectCollection<>(HBMMatters.ALL_MATTERS, matter -> new WrappedItemRegistryBuilder("bolt_" + matter.name(), ()->new Item(new Item.Properties()))
             .tab(ModTabs.PARTS.getKey()).loc(HBMKey.ORDERLY_GEN_EXCEPT_FIRST).model(itemModelGen -> itemModelGen.basicItem("bolt_" + matter.name(), HBM.rl("bolt"))).tags(matter.bolt())
             .color((stack, idx) -> matter.solidColorLight).build(), matter -> matter.bolt() != null);
@@ -394,7 +390,7 @@ public class ModItems {
     public static final RegistryObject<Item> PLATE_DINEUTRONIUM = parts("plate_dineutronium", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     public static final RegistryObject<Item> PLATE_DESH = parts("plate_desh", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     //    plate_bismuth = new ItemCustomLore().setUnlocalizedName("plate_bismuth").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":plate_bismuth");
-    public static final RegistryObject<Item> INGOT_SOLINIUM = parts("ingot_solinium", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> INGOT_SOLINIUM = parts("ingot_solinium", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.SOLINIUM.ingot());
     public static final RegistryObject<Item> NUGGET_SOLINIUM = parts("nugget_solinium", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.SOLINIUM.nugget());
     public static final RegistryObject<Item> PHOTO_PANEL = parts("photo_panel", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     public static final RegistryObject<Item> SAT_BASE = parts("sat_base", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
@@ -405,9 +401,12 @@ public class ModItems {
 //    item_secret = new ItemEnumMulti(EnumSecretType.class, true, true).setUnlocalizedName("item_secret").setCreativeTab(null).setTextureName(RefStrings.MODID + ":item_secret");
 //    ingot_metal = new ItemEnumMulti(EnumIngotMetal.class, true, true).setUnlocalizedName("ingot_metal").setCreativeTab(null).setTextureName(RefStrings.MODID + ":ingot_metal");
 //    chemical_dye = new ItemChemicalDye().setUnlocalizedName("chemical_dye").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":chemical_dye");
-//    crayon = new ItemCrayon().setUnlocalizedName("crayon").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":crayon");
 
-//    undefined = new ItemCustomLore().setUnlocalizedName("undefined").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":undefined");
+    public static final RegistryObject<Item> CRAYON = new WrappedItemRegistryBuilder("crayon", ()->new ItemCrayon(new Item.Properties().food(new FoodProperties.Builder().nutrition(3).build())))
+            .tab(ModTabs.PARTS.getKey()).loc(HBMKey.REVERSE_GEN).tags(Tags.Items.INGOTS).model(HBMKey.MODEL_ITEM_OVERLAY, HBM.rl("crayon_overlay"))
+            .color((ItemStack stack, int tintIndex) -> tintIndex == 1 ? NBTHelper.getInt(stack, HBMKey.COLOR, -1) : -1)
+            .build();
+    public static final RegistryObject<Item> UNDEFINED = new WrappedItemRegistryBuilder("undefined", ()->new Item(new Item.Properties())).tab(ModTabs.PARTS.getKey()).build();
 
     public static final RegistryObject<Item> BILLET_URANIUM = parts("billet_uranium", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     public static final RegistryObject<Item> BILLET_U233 = parts("billet_u233", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
@@ -462,41 +461,42 @@ public class ModItems {
     public static final RegistryObject<Item> BILLET_ZFB_AM_MIX = parts("billet_zfb_am_mix", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     public static final RegistryObject<Item> BILLET_NUCLEAR_WASTE = parts("billet_nuclear_waste", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     public static final RegistryObject<Item> BALL_RESIN = parts("ball_resin", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-//    ingot_dura_steel = new ItemCustomLore().setUnlocalizedName("ingot_dura_steel").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":ingot_dura_steel");
-//    ingot_polymer = new ItemCustomLore().setUnlocalizedName("ingot_polymer").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":ingot_polymer");
-//    ingot_bakelite = new ItemCustomLore().setUnlocalizedName("ingot_bakelite").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":ingot_bakelite");
-//    ingot_biorubber = new ItemCustomLore().setUnlocalizedName("ingot_biorubber").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":ingot_biorubber");
-//    ingot_rubber = new ItemCustomLore().setUnlocalizedName("ingot_rubber").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":ingot_rubber");
-//    ingot_pc = new ItemCustomLore().setUnlocalizedName("ingot_pc").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":ingot_pc");
-//    ingot_pvc = new ItemCustomLore().setUnlocalizedName("ingot_pvc").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":ingot_pvc");
-    public static final RegistryObject<Item> INGOT_DESH = parts("ingot_desh", ()->new ItemCustomInfo(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> INGOT_DURA_STEEL = parts("ingot_dura_steel", ()->new Item(new Item.Properties()), "High-Speed Steel Ingot", HBMMatters.DURA.ingot());
+    public static final RegistryObject<Item> INGOT_POLYMER = parts("ingot_polymer", ()->new Item(new Item.Properties()), "Polymer Bar", HBMMatters.POLYMER.ingot());
+    public static final RegistryObject<Item> INGOT_BAKELITE = parts("ingot_bakelite", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.BAKELITE.ingot());
+    public static final RegistryObject<Item> INGOT_BIORUBBER = parts("ingot_biorubber", ()->new Item(new Item.Properties()), "Latex Bar", Tags.Items.INGOTS);
+    public static final RegistryObject<Item> INGOT_RUBBER = parts("ingot_rubber", ()->new Item(new Item.Properties()), "Rubber Bar", HBMMatters.RUBBER.ingot());
+    public static final RegistryObject<Item> INGOT_PC = parts("ingot_pc", ()->new Item(new Item.Properties()), "Hard Plastic Bar", Tags.Items.INGOTS);
+    public static final RegistryObject<Item> INGOT_PVC = parts("ingot_pvc", ()->new Item(new Item.Properties()), "PVC Bar", HBMMatters.PVC.ingot());
+    public static final RegistryObject<Item> INGOT_DESH = parts("ingot_desh", ()->new ItemCustomInfo(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.DESH.ingot());
     public static final RegistryObject<Item> NUGGET_DESH = parts("nugget_desh", ()->new ItemCustomLore(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.DESH.nugget());
-    public static final RegistryObject<Item> INGOT_DINEUTRONIUM = parts("ingot_dineutronium", ()->new ItemCustomInfo(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> INGOT_DINEUTRONIUM = parts("ingot_dineutronium", ()->new ItemCustomInfo(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, Tags.Items.INGOTS);
     public static final RegistryObject<Item> NUGGET_DINEUTRONIUM = parts("nugget_dineutronium", ()->new ItemCustomLore(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, Tags.Items.NUGGETS);
-//    powder_dineutronium = new ItemCustomLore().setUnlocalizedName("powder_dineutronium").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":powder_dineutronium");
-    public static final RegistryObject<Item> INGOT_STARMETAL = parts("ingot_starmetal", ()->new ItemStarmetal(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> INGOT_GUNMETAL = parts("ingot_gunmetal", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> POWDER_DINEUTRONIUM = parts("powder_dineutronium", ()->new ItemStarmetal(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, Tags.Items.DUSTS);
+    public static final RegistryObject<Item> INGOT_STARMETAL = parts("ingot_starmetal", ()->new ItemStarmetal(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.STAR.ingot());
+    public static final RegistryObject<Item> INGOT_GUNMETAL = parts("ingot_gunmetal", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.GUNMETAL.ingot());
     public static final RegistryObject<Item> PLATE_GUNMETAL = parts("plate_gunmetal", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> INGOT_WEAPONSTEEL = parts("ingot_weaponsteel", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> INGOT_WEAPONSTEEL = parts("ingot_weaponsteel", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.WEAPONSTEEL.ingot());
     public static final RegistryObject<Item> PLATE_WEAPONSTEEL = parts("plate_weaponsteel", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> INGOT_SATURNITE = parts("ingot_saturnite", ()->new Item(new Item.Properties().rarity(Rarity.RARE)), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> INGOT_SATURNITE = parts("ingot_saturnite", ()->new Item(new Item.Properties().rarity(Rarity.RARE)), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.SATURN.ingot());
     public static final RegistryObject<Item> PLATE_SATURNITE = parts("plate_saturnite", ()->new Item(new Item.Properties().rarity(Rarity.RARE)), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.SATURN.plate());
-//    ingot_ferrouranium = new ItemCustomLore().setUnlocalizedName("ingot_ferrouranium").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":ingot_ferrouranium");
-//    ingot_fiberglass = new ItemCustomLore().setUnlocalizedName("ingot_fiberglass").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":ingot_fiberglass");
-    public static final RegistryObject<Item> INGOT_ASBESTOS = parts("ingot_asbestos", ()->new ItemCustomInfo(new Item.Properties(), HBMLang.ITEM_INGOTASBESTOS_DESC.translate()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    //    powder_asbestos = new ItemCustomLore().setUnlocalizedName("powder_asbestos").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":powder_asbestos");
-//    ingot_electronium = new ItemCustomLore().setUnlocalizedName("ingot_electronium").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":ingot_electronium");
+    public static final RegistryObject<Item> INGOT_FERROURANIUM = parts("ingot_ferrouranium", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN, HBMMatters.FERRO.ingot());
+    public static final RegistryObject<Item> INGOT_FIBERGLASS = new WrappedItemRegistryBuilder("ingot_fiberglass", ()->new Item(new Item.Properties())).tab(ModTabs.PARTS.getKey())
+        .loc("Fiberglass Bar", "High in fiber, high in glass. Everything the body needs.").tags(Tags.Items.INGOTS).build();
+    public static final RegistryObject<Item> INGOT_ASBESTOS = parts("ingot_asbestos", ()->new ItemCustomInfo(new Item.Properties(), HBMLang.ITEM_INGOTASBESTOS_DESC.translate()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.ASBESTOS.ingot());
+    public static final RegistryObject<Item> POWDER_ASBESTOS = parts("powder_asbestos", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN, HBMMatters.ASBESTOS.dust());
+    public static final RegistryObject<Item> INGOT_ELECTRONIUM = parts("ingot_electronium", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN, Tags.Items.INGOTS);
     public static final RegistryObject<Item> NUGGET_ZIRCONIUM = add("nugget_zirconium", ()->new Item(new Item.Properties()), ModTabs.PARTS.getKey(), "Zirconium Splinter", HBMMatters.ZIRCONIUM.nugget());
-    public static final RegistryObject<Item> NUGGET_MERCURY = parts("nugget_mercury_tiny", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, Tags.Items.NUGGETS);
-    //    ingot_mercury = new ItemCustomLore().setUnlocalizedName("nugget_mercury").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":nugget_mercury");
-//    bottle_mercury = new ItemCustomLore().setUnlocalizedName("bottle_mercury").setContainerItem(Items.glass_bottle).setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":bottle_mercury");
-    public static final RegistryObject<Item> INGOT_CALCIUM = parts("ingot_calcium", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> NUGGET_MERCURY = parts("nugget_mercury_tiny", ()->new Item(new Item.Properties()), "Tiny Drop of Mercury", Tags.Items.NUGGETS);
+    public static final RegistryObject<Item> INGOT_MERCURY = parts("nugget_mercury", ()->new Item(new Item.Properties()), "Drop of Mercury");
+    public static final RegistryObject<Item> BOTTLE_MERCURY = parts("bottle_mercury", ()->new Item(new Item.Properties()), "Drop of Mercury");
+    public static final RegistryObject<Item> INGOT_CALCIUM = parts("ingot_calcium", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.CALCIUM.ingot());
     public static final RegistryObject<Item> POWDER_CALCIUM = parts("powder_calcium", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> INGOT_CADMIUM = parts("ingot_cadmium", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> POWDER_CADMIUM = parts("powder_cadmium", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> INGOT_CADMIUM = parts("ingot_cadmium", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.CADMIUM.ingot());
+    public static final RegistryObject<Item> POWDER_CADMIUM = parts("powder_cadmium", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.CALCIUM.dust());
     public static final RegistryObject<Item> POWDER_BISMUTH = parts("powder_bismuth", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> INGOT_MUD = parts("ingot_mud", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    public static final RegistryObject<Item> INGOT_CFT = parts("ingot_cft", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> INGOT_MUD = parts("ingot_mud", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.MUD.ingot());
+    public static final RegistryObject<Item> INGOT_CFT = parts("ingot_cft", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, Tags.Items.INGOTS);
 
 //    ore_byproduct = new ItemByproduct().setUnlocalizedName("ore_byproduct").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":byproduct");
 //
@@ -513,17 +513,21 @@ public class ModItems {
 //    bedrock_ore_base = new ItemBedrockOreBase().setUnlocalizedName("bedrock_ore_base").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":bedrock_ore_new");
 //    bedrock_ore = new ItemBedrockOreNew().setUnlocalizedName("bedrock_ore").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":bedrock_ore_new");
 //    bedrock_ore_fragment = new ItemAutogen(MaterialShapes.FRAGMENT).aot(Mats.MAT_BISMUTH, "bedrock_ore_fragment_bismuth").setUnlocalizedName("bedrock_ore_fragment").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":bedrock_ore_fragment");
-//
-//    ingot_lanthanium = new ItemCustomLore().setUnlocalizedName("ingot_lanthanium").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":ingot_lanthanium");
-//    ingot_actinium = new ItemCustomLore().setUnlocalizedName("ingot_actinium").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":ingot_actinium");
-//
-//    ingot_meteorite = new ItemHot(200).setUnlocalizedName("ingot_meteorite").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":ingot_meteorite");
-//    ingot_meteorite_forged = new ItemHot(200).setUnlocalizedName("ingot_meteorite_forged").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":ingot_meteorite_forged");
-//    blade_meteorite = new ItemHot(200).setUnlocalizedName("blade_meteorite").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":blade_meteorite");
-//    ingot_steel_dusted = new ItemHotDusted(200).setUnlocalizedName("ingot_steel_dusted").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":ingot_steel_dusted");
-//    ingot_chainsteel = new ItemHot(100).setUnlocalizedName("ingot_chainsteel").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":ingot_chainsteel");
 
-    public static final RegistryObject<Item> BLADE_METEORITE = parts("blade_meteorite", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> INGOT_LANTHANIUM = parts("ingot_lanthanium", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.LANTHANIUM.ingot());
+    public static final RegistryObject<Item> INGOT_ACTINIUM = parts("ingot_actinium", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.ACTINIUM.ingot());
+
+    public static final RegistryObject<Item> INGOT_METEORITE = parts("ingot_meteorite", ()->new ItemHot(200, new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.METEORIC_IRON.ingot());
+    public static final RegistryObject<Item> INGOT_METEORITE_FORGED = parts("ingot_meteorite_forged", ()->new ItemHot(200, new Item.Properties()), HBMKey.REVERSE_GEN, HBMMatters.METEORIC_IRON.ingot());
+    public static final RegistryObject<Item> BLADE_METEORITE = parts("blade_meteorite", ()->new ItemHot(200, new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> INGOT_STEEL_DUSTED = new WrappedItemRegistryBuilder("ingot_steel_dusted", ()->new ItemHot(100, new Item.Properties()))
+        .tab(ModTabs.PARTS.getKey()).loc(HBMKey.REVERSE_GEN).tags(Tags.Items.INGOTS).model(HBMKey.MODEL_ITEM_PROPERTY)
+        .itemProperties(HBM.rl("state"), (stack, level, entity, seed) -> ItemHot.isCoolDown(stack) ? 1 : 0, HBM.rl("ingot_steel_dusted_hot"))
+        .build();
+    public static final RegistryObject<Item> INGOT_CHAINSTEEL = new WrappedItemRegistryBuilder("ingot_chainsteel", ()->new ItemHot(100, new Item.Properties()))
+        .tab(ModTabs.PARTS.getKey()).loc(HBMKey.REVERSE_GEN).tags(Tags.Items.INGOTS).model(HBMKey.MODEL_ITEM_PROPERTY)
+        .itemProperties(HBM.rl("state"), (stack, level, entity, seed) -> ItemHot.isCoolDown(stack) ? 1 : 0, HBM.rl("ingot_chainsteel_hot"))
+        .build();
 
     public static final RegistryObject<Item> PLATE_ARMOR_TITANIUM = parts("plate_armor_titanium", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     public static final RegistryObject<Item> PLATE_ARMOR_AJR = parts("plate_armor_ajr", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
@@ -560,11 +564,12 @@ public class ModItems {
 //    powder_limestone = new Item().setUnlocalizedName("powder_limestone").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":powder_limestone");
 //    powder_cement = new ItemLemon(2, 0.5F, false).setUnlocalizedName("powder_cement").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":powder_cement");
 //
-//    ingot_gh336 = new ItemCustomLore().setRarity(EnumRarity.epic).setUnlocalizedName("ingot_gh336").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":ingot_gh336");
+    public static final RegistryObject<Item> INGOT_GH336 = new WrappedItemRegistryBuilder("ingot_gh336", ()->new Item(new Item.Properties())).tab(ModTabs.PARTS.getKey())
+        .loc(HBMKey.ORDERLY_GEN_EXCEPT_FIRST, "Seaborgium's colleague.").tags(HBMMatters.GHIORSIUM.nugget()).build();
     public static final RegistryObject<Item> NUGGET_GH336 = new WrappedItemRegistryBuilder("nugget_gh336", ()->new Item(new Item.Properties().rarity(Rarity.EPIC)))
         .tab(ModTabs.PARTS.getKey()).loc(HBMKey.REVERSE_GEN, "Seaborgium's colleague.").tags(HBMMatters.GHIORSIUM.nugget()).build();
 
-    public static final RegistryObject<Item> INGOT_AUSTRALIUM = parts("ingot_australium", ()->new ItemCustomInfo(new Item.Properties().rarity(Rarity.UNCOMMON)), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> INGOT_AUSTRALIUM = parts("ingot_australium", ()->new ItemCustomInfo(new Item.Properties().rarity(Rarity.UNCOMMON)), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.AUSTRALIUM.ingot());
     public static final RegistryObject<Item> NUGGET_AUSTRALIUM = parts("nugget_australium", ()->new ItemCustomInfo(new Item.Properties().rarity(Rarity.UNCOMMON)), HBMKey.REVERSE_GEN, HBMMatters.AUSTRALIUM.nugget());
     public static final RegistryObject<Item> NUGGET_AUSTRALIUM_LESSER = parts("nugget_australium_lesser", ()->new ItemCustomInfo(new Item.Properties().rarity(Rarity.UNCOMMON)), HBMKey.REVERSE_GEN, HBMMatters.AUSTRALIUM.nugget());
     public static final RegistryObject<Item> NUGGET_AUSTRALIUM_GREATER = parts("nugget_australium_greater", ()->new ItemCustomInfo(new Item.Properties().rarity(Rarity.UNCOMMON)), HBMKey.REVERSE_GEN, HBMMatters.AUSTRALIUM.nugget());
@@ -596,19 +601,20 @@ public class ModItems {
     public static final RegistryObject<Item> PLATE_ALUMINIUM = parts("plate_aluminium", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.ALUMINIUM.plate());
     public static final RegistryObject<Item> NEUTRON_REFLECTOR = parts("neutron_reflector", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     public static final RegistryObject<Item> NUGGET_LEAD = parts("nugget_lead", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.LEAD.nugget());
-    public static final RegistryObject<Item> INGOT_BISMUTH = parts("ingot_bismuth", ()->new ItemCustomInfo(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> INGOT_BISMUTH = parts("ingot_bismuth", ()->new ItemCustomInfo(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.BISMUTH.ingot());
     public static final RegistryObject<Item> NUGGET_BISMUTH = parts("nugget_bismuth", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.BISMUTH.nugget());
-    //    ingot_arsenic = new ItemCustomLore().setUnlocalizedName("ingot_arsenic").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":ingot_arsenic");
     public static final RegistryObject<Item> NUGGET_ARSENIC = parts("nugget_arsenic", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.ARSENIC.nugget());
 
-    //    ingot_tantalium = new ItemCustomLore().setUnlocalizedName("ingot_tantalium").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":ingot_tantalium");
-    public static final RegistryObject<Item> NUGGET_TANTALIUM = parts("nugget_tantalium", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.TANTALIUM.nugget());
-    public static final RegistryObject<Item> INGOT_SILICON = parts("ingot_silicon", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> INGOT_TANTALIUM = new WrappedItemRegistryBuilder("ingot_tantalium", ()->new Item(new Item.Properties())).tab(ModTabs.PARTS.getKey())
+            .loc(HBMKey.ORDERLY_GEN_EXCEPT_FIRST, "'Tantalum'", "AKA Tantalum.").tags(HBMMatters.TANTALIUM.ingot()).build();
+    public static final RegistryObject<Item> NUGGET_TANTALIUM = new WrappedItemRegistryBuilder("nugget_tantalium", ()->new Item(new Item.Properties())).tab(ModTabs.PARTS.getKey())
+                    .loc(HBMKey.ORDERLY_GEN_EXCEPT_FIRST).tags(HBMMatters.TANTALIUM.nugget()).build();
+    public static final RegistryObject<Item> INGOT_SILICON = parts("ingot_silicon", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.SILICON.ingot());
     public static final RegistryObject<Item> BILLET_SILICON = parts("billet_silicon", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     public static final RegistryObject<Item> NUGGET_SILICON = parts("nugget_silicon", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.SILICON.nugget());
-    public static final RegistryObject<Item> INGOT_NIOBIUM = parts("ingot_niobium", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> INGOT_NIOBIUM = parts("ingot_niobium", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.NIOBIUM.ingot());
     public static final RegistryObject<Item> NUGGET_NIOBIUM = parts("nugget_niobium", ()->new Item(new Item.Properties().rarity(Rarity.RARE)), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.NIOBIUM.nugget());
-    public static final RegistryObject<Item> INGOT_OSMIRIDIUM = parts("ingot_osmiridium", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegistryObject<Item> INGOT_OSMIRIDIUM = parts("ingot_osmiridium", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.OSMIRIDIUM.ingot());
     public static final RegistryObject<Item> NUGGET_OSMIRIDIUM = parts("nugget_osmiridium", ()->new Item(new Item.Properties().rarity(Rarity.RARE)), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.OSMIRIDIUM.nugget());
     public static final RegistryObject<Item> NUGGET_SCHRABIDIUM = parts("nugget_schrabidium", ()->new Item(new Item.Properties().rarity(Rarity.RARE)), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.SCHRABIDIUM.nugget());
     public static final RegistryObject<Item> NUGGET_BERYLLIUM = parts("nugget_beryllium", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.BERYLLIUM.nugget());
@@ -920,6 +926,31 @@ public class ModItems {
     public static final RegistryObject<Item> STAMP_DESH_9 = new WrappedItemRegistryBuilder("stamp_9_desh", ()->new ItemStamp(new Item.Properties().stacksTo(1).durability(0), ItemStamp.StampType.C9)).tab(ModTabs.CONTROL.getKey()).loc("Small Caliber Stamp (Desh)").build();
     public static final RegistryObject<Item> STAMP_DESH_50 = new WrappedItemRegistryBuilder("stamp_50_desh", ()->new ItemStamp(new Item.Properties().stacksTo(1).durability(0), ItemStamp.StampType.C50)).tab(ModTabs.CONTROL.getKey()).loc("Large Caliber Stamp (Desh)").build();
 
+    public static final RegisterObjectCollection<Item, HBMMatter> PART_BARREL_LIGHT = new RegisterObjectCollection<>(HBMMatters.ALL_MATTERS, matter -> new WrappedItemRegistryBuilder("part_barrel_light_" + matter.name(), ()->new Item(new Item.Properties()))
+            .tab(ModTabs.PARTS.getKey()).loc(HBMKey.ORDERLY_GEN_EXCEPT_FIRST).model(itemModelGen -> itemModelGen.basicItem("part_barrel_light_" + matter.name(), HBM.rl("part_barrel_light"))).tags(matter.barrel_light())
+            .color((stack, idx) -> matter.solidColorLight).build(), matter -> matter.barrel_light() != null);
+    public static final RegisterObjectCollection<Item, HBMMatter> PART_BARREL_HEAVY = new RegisterObjectCollection<>(HBMMatters.ALL_MATTERS, matter -> new WrappedItemRegistryBuilder("part_barrel_heavy_" + matter.name(), ()->new Item(new Item.Properties()))
+            .tab(ModTabs.PARTS.getKey()).loc(HBMKey.ORDERLY_GEN_EXCEPT_FIRST).model(itemModelGen -> itemModelGen.basicItem("part_barrel_heavy_" + matter.name(), HBM.rl("part_barrel_heavy"))).tags(matter.barrel_heavy())
+            .color((stack, idx) -> matter.solidColorLight).build(), matter -> matter.barrel_heavy() != null);
+    public static final RegisterObjectCollection<Item, HBMMatter> PART_RECEIVER_HEAVY = new RegisterObjectCollection<>(HBMMatters.ALL_MATTERS, matter -> new WrappedItemRegistryBuilder("part_receiver_heavy_" + matter.name(), ()->new Item(new Item.Properties()))
+            .tab(ModTabs.PARTS.getKey()).loc(HBMKey.ORDERLY_GEN_EXCEPT_FIRST).model(itemModelGen -> itemModelGen.basicItem("part_receiver_heavy_" + matter.name(), HBM.rl("part_receiver_heavy"))).tags(matter.receiver_heavy())
+            .color((stack, idx) -> matter.solidColorLight).build(), matter -> matter.receiver_heavy() != null);
+    public static final RegisterObjectCollection<Item, HBMMatter> PART_RECEIVER_LIGHT = new RegisterObjectCollection<>(HBMMatters.ALL_MATTERS, matter -> new WrappedItemRegistryBuilder("part_receiver_light_" + matter.name(), ()->new Item(new Item.Properties()))
+            .tab(ModTabs.PARTS.getKey()).loc(HBMKey.ORDERLY_GEN_EXCEPT_FIRST).model(itemModelGen -> itemModelGen.basicItem("part_receiver_light_" + matter.name(), HBM.rl("part_receiver_light"))).tags(matter.receiver_light())
+            .color((stack, idx) -> matter.solidColorLight).build(), matter -> matter.receiver_light() != null);
+    public static final RegisterObjectCollection<Item, HBMMatter> PART_MECHANISM = new RegisterObjectCollection<>(HBMMatters.ALL_MATTERS, matter -> new WrappedItemRegistryBuilder("part_mechanism_" + matter.name(), ()->new Item(new Item.Properties()))
+            .tab(ModTabs.PARTS.getKey()).loc(HBMKey.ORDERLY_GEN_EXCEPT_FIRST).model(itemModelGen -> itemModelGen.basicItem("part_mechanism_" + matter.name(), HBM.rl("part_mechanism"))).tags(matter.mechanism())
+            .color((stack, idx) -> matter.solidColorLight).build(), matter -> matter.mechanism() != null);
+    public static final RegisterObjectCollection<Item, HBMMatter> PART_STOCK = new RegisterObjectCollection<>(HBMMatters.ALL_MATTERS, matter -> new WrappedItemRegistryBuilder("part_stock_" + matter.name(), ()->new Item(new Item.Properties()))
+            .tab(ModTabs.PARTS.getKey()).loc(HBMKey.ORDERLY_GEN_EXCEPT_FIRST).model(itemModelGen -> itemModelGen.basicItem("part_stock_" + matter.name(), HBM.rl("part_stock"))).tags(matter.stock())
+            .color((stack, idx) -> matter.solidColorLight).build(), matter -> matter.stock() != null);
+    public static final RegisterObjectCollection<Item, HBMMatter> PART_GRIP = new RegisterObjectCollection<>(HBMMatters.ALL_MATTERS, matter -> new WrappedItemRegistryBuilder("part_grip_" + matter.name(), ()->new Item(new Item.Properties()))
+            .tab(ModTabs.PARTS.getKey()).loc(HBMKey.ORDERLY_GEN_EXCEPT_FIRST).model(itemModelGen -> itemModelGen.basicItem("part_grip_" + matter.name(), HBM.rl("part_grip"))).tags(matter.grip())
+            .color((stack, idx) -> matter.solidColorLight).build(), matter -> matter.grip() != null);
+    public static final RegisterObjectCollection<Item, HBMMatter> WIRE_FINE = new RegisterObjectCollection<>(HBMMatters.ALL_MATTERS, matter -> new WrappedItemRegistryBuilder("wire_" + matter.name(), ()->new Item(new Item.Properties()))
+            .tab(ModTabs.PARTS.getKey()).loc(HBMKey.ORDERLY_GEN_EXCEPT_FIRST).model(itemModelGen -> itemModelGen.basicItem("wire_" + matter.name(), HBM.rl("wire_" + matter.name()))).tags(matter.grip())
+            .color((stack, idx) -> matter.solidColorLight).build(), matter -> matter.wire() != null);
+
     // 电池
     public static final RegistryObject<Item> BATTERY_CREATIVE = control("battery_creative",()->new BatteryItem(-1, 1_000_000L, new Item.Properties().stacksTo(1)), HBMKey.REVERSE_GEN);
     public static final RegistryObject<Item> BATTERY_GENERIC = control("battery_generic",()->new BatteryItem(false,5_000, 100, new Item.Properties().stacksTo(1)), HBMKey.REVERSE_GEN);
@@ -1185,11 +1216,6 @@ public class ModItems {
     public static final RegistryObject<Item> CASING_SHOTSHELL = parts("casing.shotshell", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
     public static final RegistryObject<Item> CASING_BUCKSHOT = parts("casing.buckshot", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
     public static final RegistryObject<Item> CASING_BUCKSHOT_ADVANCED = parts("casing.buckshot_advanced", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN);
-    public static final Map<String, RegistryObject<Item>> WIRE_FINE = Arrays.stream(WIRE_MAT).collect(Collectors.toMap(key -> key, value -> parts("wire_"+value, ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN, ModTags.Items.WIRE)));
-    public static final Map<String, Supplier<Item>> MAP_INGOT = Map.of(
-            HBMKey.ALUMINIUM,INGOT_ALUMINIUM, HBMKey.COPPER, () -> Items.COPPER_INGOT, HBMKey.RED_COPPER, INGOT_RED_COPPER, HBMKey.GOLD, () -> Items.GOLD_INGOT, HBMKey.TUNGSTEN, INGOT_TUNGSTEN,
-            HBMKey.ADVANCED_ALLOY, INGOT_ADVANCED_ALLOY, HBMKey.SCHRABIDIUM, INGOT_SCHRABIDIUM, HBMKey.ZINC,INGOT_ZIRCONIUM, HBMKey.MAGNETIZED_TUNGSTEN, INGOT_MAGNETIZED_TUNGSTEN
-    );
 
     public static final RegistryObject<Item> MOLD_NUGGET = parts("mold_nugget", () -> new ItemMold(new Item.Properties(), HBMMatForm.NUGGET), HBMKey.REVERSE_GEN);
     public static final RegistryObject<Item> MOLD_BILLET = parts("mold_billet", () -> new ItemMold(new Item.Properties(), HBMMatForm.BILLET), HBMKey.REVERSE_GEN);

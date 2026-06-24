@@ -1,0 +1,11 @@
+{
+  "type": "hbm:press",
+  "input": {
+    "tag": "forge:ingots/zirconium"
+  },
+  "result": {
+    "count": 8,
+    "item": "hbm:wire_zirconium"
+  },
+  "stamp": "WIRE"
+}
