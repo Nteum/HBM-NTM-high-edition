@@ -1,14 +1,44 @@
 {
   "values": [
-    "#forge:barrels/light/steel",
-    "#forge:barrels/light/dura",
-    "#forge:barrels/light/desh",
-    "#forge:barrels/light/tcalloy",
-    "#forge:barrels/light/cdalloy",
-    "#forge:barrels/light/bbronze",
-    "#forge:barrels/light/abronze",
-    "#forge:barrels/light/gunmetal",
-    "#forge:barrels/light/weaponsteel",
-    "#forge:barrels/light/saturn"
+    {
+      "id": "#forge:barrels/light/steel",
+      "required": false
+    },
+    {
+      "id": "#forge:barrels/light/dura",
+      "required": false
+    },
+    {
+      "id": "#forge:barrels/light/desh",
+      "required": false
+    },
+    {
+      "id": "#forge:barrels/light/tcalloy",
+      "required": false
+    },
+    {
+      "id": "#forge:barrels/light/cdalloy",
+      "required": false
+    },
+    {
+      "id": "#forge:barrels/light/bbronze",
+      "required": false
+    },
+    {
+      "id": "#forge:barrels/light/abronze",
+      "required": false
+    },
+    {
+      "id": "#forge:barrels/light/gunmetal",
+      "required": false
+    },
+    {
+      "id": "#forge:barrels/light/weaponsteel",
+      "required": false
+    },
+    {
+      "id": "#forge:barrels/light/saturn",
+      "required": false
+    }
   ]
 }

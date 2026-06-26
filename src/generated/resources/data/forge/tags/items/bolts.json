@@ -1,8 +1,20 @@
 {
   "values": [
-    "#forge:bolts/tungsten",
-    "#forge:bolts/lead",
-    "#forge:bolts/steel",
-    "#forge:bolts/dura"
+    {
+      "id": "#forge:bolts/tungsten",
+      "required": false
+    },
+    {
+      "id": "#forge:bolts/lead",
+      "required": false
+    },
+    {
+      "id": "#forge:bolts/steel",
+      "required": false
+    },
+    {
+      "id": "#forge:bolts/dura",
+      "required": false
+    }
   ]
 }

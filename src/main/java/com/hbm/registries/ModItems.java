@@ -13,6 +13,7 @@ import com.hbm.datagen.model.ItemModelGen;
 import com.hbm.datagen.tag.ItemTagsGen;
 import com.hbm.item.HBMCombat;
 import com.hbm.item.HBMWeapon;
+import com.hbm.item.ItemEnums;
 import com.hbm.item.armor.ItemAshGlass;
 import com.hbm.item.consumable.LegacyConsumableItem;
 import com.hbm.item.consumable.TemFlakesItem;
@@ -31,7 +32,7 @@ import com.hbm.item.rbmk.ItemRBMKLid;
 import com.hbm.item.research.ItemBreedingRod;
 import com.hbm.item.research.ItemPileRod;
 import com.hbm.item.research.ItemResearchFuelPlate;
-import com.hbm.item.special.ItemUnstable;
+import com.hbm.item.misc.ItemUnstable;
 import com.hbm.item.tool.*;
 import com.hbm.item.weapon.*;
 import com.hbm.item.weapon.grenade.ItemGrenade;
@@ -43,7 +44,6 @@ import com.hbm.entity.weapon.missile.EntityMissileTier0;
 import com.hbm.debug.GunSuicide;
 import com.hbm.debug.ItemDebugWand;
 import com.hbm.utils.NBTHelper;
-import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -63,11 +63,8 @@ import net.minecraftforge.registries.RegistryObject;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
 
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, HBM.MODID);
@@ -366,8 +363,8 @@ public class ModItems {
     public static final RegistryObject<Item> PLATE_ADVANCED_ALLOY = parts("plate_advanced_alloy", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.ALLOY.plate());
     public static final RegistryObject<Item> LITHIUM = parts("lithium", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     public static final RegistryObject<Item> INGOT_ZIRCONIUM = parts("ingot_zirconium", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.ZIRCONIUM.ingot());
-
-    //    ingot_semtex = new ItemLemon(4, 5, true).setUnlocalizedName("ingot_semtex").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":ingot_semtex");
+    public static final RegistryObject<Item> INGOT_SEMTEX = new WrappedItemRegistryBuilder("ingot_semtex", ()->new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(4).saturationMod(5).build())))
+            .tab(ModTabs.PARTS.getKey()).loc("Bar of Semtex", "Semtex H Plastic Explosive$Performant explosive for many applications.$Edible").build();
     public static final RegistryObject<Item> INGOT_C4 = parts("ingot_c4", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, Tags.Items.INGOTS);
     public static final RegistryObject<Item> INGOT_PHOSPHORUS = parts("ingot_phosphorus", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.PHOSPHORUS.ingot());
     public static final RegistryObject<Item> COIL_ADVANCED_ALLOY = parts("coil_advanced_alloy", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
@@ -384,12 +381,14 @@ public class ModItems {
     public static final RegisterObjectCollection<Item, HBMMatter> BOLTS = new RegisterObjectCollection<>(HBMMatters.ALL_MATTERS, matter -> new WrappedItemRegistryBuilder("bolt_" + matter.name(), ()->new Item(new Item.Properties()))
             .tab(ModTabs.PARTS.getKey()).loc(HBMKey.ORDERLY_GEN_EXCEPT_FIRST).model(itemModelGen -> itemModelGen.basicItem("bolt_" + matter.name(), HBM.rl("bolt"))).tags(matter.bolt())
             .color((stack, idx) -> matter.solidColorLight).build(), matter -> matter.bolt() != null);
-//    bolt_spike = new ItemCustomLore().setUnlocalizedName("bolt_spike").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":bolt_spike");
+    public static final RegistryObject<Item> BOLT_SPIKE = new WrappedItemRegistryBuilder("bolt_spike", ()->new Item(new Item.Properties()))
+            .tab(ModTabs.PARTS.getKey()).loc(HBMKey.REVERSE_GEN).loc("Railroad Spike", "Radiates a threatening aura, somehow").build();
     public static final RegistryObject<Item> PLATE_POLYMER = parts("plate_polymer", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     public static final RegistryObject<Item> PLATE_KEVLAR = parts("plate_kevlar", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     public static final RegistryObject<Item> PLATE_DINEUTRONIUM = parts("plate_dineutronium", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     public static final RegistryObject<Item> PLATE_DESH = parts("plate_desh", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
-    //    plate_bismuth = new ItemCustomLore().setUnlocalizedName("plate_bismuth").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":plate_bismuth");
+    public static final RegistryObject<Item> PLATE_BISMUTH = new WrappedItemRegistryBuilder("plate_bismuth", ()->new Item(new Item.Properties()))
+            .tab(ModTabs.PARTS.getKey()).loc(HBMKey.ORDERLY_GEN_EXCEPT_FIRST).loc("Bismuth Compound Plate", "Guys, It's Bismuth's alchemical symbol, I swear.").build();
     public static final RegistryObject<Item> INGOT_SOLINIUM = parts("ingot_solinium", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.SOLINIUM.ingot());
     public static final RegistryObject<Item> NUGGET_SOLINIUM = parts("nugget_solinium", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.SOLINIUM.nugget());
     public static final RegistryObject<Item> PHOTO_PANEL = parts("photo_panel", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
@@ -397,12 +396,21 @@ public class ModItems {
     public static final RegistryObject<Item> THRUSTER_NUCLEAR = parts("thruster_nuclear", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     public static final RegistryObject<Item> SAFETY_FUSE = parts("safety_fuse", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
 //    part_generic = new ItemGenericPart().setUnlocalizedName("part_generic").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":part_generic");
-//    item_expensive = new ItemExpensive().setUnlocalizedName("item_expensive").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":item_expensive");
-//    item_secret = new ItemEnumMulti(EnumSecretType.class, true, true).setUnlocalizedName("item_secret").setCreativeTab(null).setTextureName(RefStrings.MODID + ":item_secret");
-//    ingot_metal = new ItemEnumMulti(EnumIngotMetal.class, true, true).setUnlocalizedName("ingot_metal").setCreativeTab(null).setTextureName(RefStrings.MODID + ":ingot_metal");
-//    chemical_dye = new ItemChemicalDye().setUnlocalizedName("chemical_dye").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":chemical_dye");
-
-    public static final RegistryObject<Item> CRAYON = new WrappedItemRegistryBuilder("crayon", ()->new ItemCrayon(new Item.Properties().food(new FoodProperties.Builder().nutrition(3).build())))
+    public static final RegistryObject<Item> PART_GENERIC = parts("part_generic", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
+    public static final RegisterObjectCollection<Item, ItemEnums.EnumExpensiveType> ITEM_EXPENSIVE = new RegisterObjectCollection<>(ItemEnums.EnumExpensiveType.class,
+        type -> new WrappedItemRegistryBuilder("item_expensive." + type.name().toLowerCase(), ()->new Item(new Item.Properties()))
+                .tab(ModTabs.PARTS.getKey()).loc(HBMKey.ORDERLY_GEN_EXCEPT_FIRST).loc(HBMKey.REVERSE_GEN, "Expensive mode item")
+                .build());
+    public static final RegisterObjectCollection<Item, ItemEnums.EnumSecretType> ITEM_SECRET = new RegisterObjectCollection<>(ItemEnums.EnumSecretType.class,
+        type -> parts("item_secret." + type.name().toLowerCase(), ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN));
+    // 这个ingot何意味？我觉得不用把它放进普通的ingot tag里
+    public static final RegisterObjectCollection<Item, ItemEnums.EnumIngotMetal> INGOT_METAL = new RegisterObjectCollection<>(ItemEnums.EnumIngotMetal.class,
+        type -> parts("ingot_metal." + type.name().toLowerCase(), ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN));
+    public static final RegistryObject<Item> CHEMICAL_DYE = new WrappedItemRegistryBuilder("chemical_dye", ()->new ItemColorEnum(new Item.Properties()))
+            .tab(ModTabs.PARTS.getKey()).loc(HBMKey.REVERSE_GEN).model(HBMKey.MODEL_ITEM_OVERLAY, HBM.rl("chemical_dye_overlay"))
+            .color((ItemStack stack, int tintIndex) -> tintIndex == 1 ? NBTHelper.getInt(stack, HBMKey.COLOR, -1) : -1)
+            .build();
+    public static final RegistryObject<Item> CRAYON = new WrappedItemRegistryBuilder("crayon", ()->new ItemColorEnum(new Item.Properties().food(new FoodProperties.Builder().nutrition(3).build())))
             .tab(ModTabs.PARTS.getKey()).loc(HBMKey.REVERSE_GEN).tags(Tags.Items.INGOTS).model(HBMKey.MODEL_ITEM_OVERLAY, HBM.rl("crayon_overlay"))
             .color((ItemStack stack, int tintIndex) -> tintIndex == 1 ? NBTHelper.getInt(stack, HBMKey.COLOR, -1) : -1)
             .build();
@@ -1231,6 +1239,12 @@ public class ModItems {
     public static final RegistryObject<Item> MOLD_PLATES = parts("mold_plates", () -> new ItemMold(new Item.Properties(), HBMMatForm.PLATE, 9), HBMKey.REVERSE_GEN);
     public static final RegistryObject<Item> MOLD_WIRES_DENSE = parts("mold_wires_dense", () -> new ItemMold(new Item.Properties(), HBMMatForm.DENSEWIRE, 9), HBMKey.REVERSE_GEN);
     public static final RegistryObject<Item> MOLD_BLOCK = parts("mold_block", () -> new ItemMold(new Item.Properties(), HBMMatForm.BLOCK), HBMKey.REVERSE_GEN);
+
+    public static final RegistryObject<Item> INGOT_GALLIUM = parts("ingot_gallium", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN, HBMMatters.GALLIUM.ingot());
+    public static final RegistryObject<Item> NUGGET_GALLIUM = parts("nugget_gallium", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN, HBMMatters.GALLIUM.nugget());
+    public static final RegistryObject<Item> POWDER_GALLIUM = parts("powder_gallium", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN, HBMMatters.GALLIUM.dust());
+    public static final RegistryObject<Item> POWDER_GALLIUM_TINY = parts("powder_gallium_tiny", ()->new Item(new Item.Properties()), HBMKey.REVERSE_GEN, HBMMatters.GALLIUM.small_dust());
+
     // 大型采矿机钻头
     public static final RegistryObject<Item> DRILLBIT_STEEL = parts("drillbit_steel", () -> new ItemDrillbit(ItemDrillbit.EnumDrillType.STEEL, new Item.Properties().stacksTo(1)), HBMKey.REVERSE_GEN);
     public static final RegistryObject<Item> DRILLBIT_STEEL_DIAMOND = parts("drillbit_steel_diamond", () -> new ItemDrillbit(ItemDrillbit.EnumDrillType.STEEL_DIAMOND, new Item.Properties().stacksTo(1)), HBMKey.REVERSE_GEN);

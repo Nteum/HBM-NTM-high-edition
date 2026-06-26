@@ -24,58 +24,217 @@
     "hbm:block_schrabidium_cluster",
     "hbm:block_euphemium_cluster",
     "hbm:block_smore",
-    "#forge:storage_blocks/carbon",
-    "#forge:storage_blocks/iron",
-    "#forge:storage_blocks/gold",
-    "#forge:storage_blocks/uranium",
-    "#forge:storage_blocks/u233",
-    "#forge:storage_blocks/u235",
-    "#forge:storage_blocks/u238",
-    "#forge:storage_blocks/thorium",
-    "#forge:storage_blocks/plutonium",
-    "#forge:storage_blocks/pu238",
-    "#forge:storage_blocks/pu239",
-    "#forge:storage_blocks/pu240",
-    "#forge:storage_blocks/neptunium",
-    "#forge:storage_blocks/polonium",
-    "#forge:storage_blocks/schrabidium",
-    "#forge:storage_blocks/solinium",
-    "#forge:storage_blocks/schrabidate",
-    "#forge:storage_blocks/schraranium",
-    "#forge:storage_blocks/australium",
-    "#forge:storage_blocks/titanium",
-    "#forge:storage_blocks/copper",
-    "#forge:storage_blocks/tungsten",
-    "#forge:storage_blocks/aluminium",
-    "#forge:storage_blocks/lead",
-    "#forge:storage_blocks/bismuth",
-    "#forge:storage_blocks/tantalium",
-    "#forge:storage_blocks/niobium",
-    "#forge:storage_blocks/beryllium",
-    "#forge:storage_blocks/emerald",
-    "#forge:storage_blocks/cobalt",
-    "#forge:storage_blocks/boron",
-    "#forge:storage_blocks/lanthanium",
-    "#forge:storage_blocks/zirconium",
-    "#forge:storage_blocks/lithium",
-    "#forge:storage_blocks/sulfur",
-    "#forge:storage_blocks/fluorite",
-    "#forge:storage_blocks/phosphorus",
-    "#forge:storage_blocks/cadmium",
-    "#forge:storage_blocks/asbestos",
-    "#forge:storage_blocks/osmiridium",
-    "#forge:storage_blocks/nickel",
-    "#forge:storage_blocks/steel",
-    "#forge:storage_blocks/dura",
-    "#forge:storage_blocks/desh",
-    "#forge:storage_blocks/star",
-    "#forge:storage_blocks/tcalloy",
-    "#forge:storage_blocks/cdalloy",
-    "#forge:storage_blocks/magtung",
-    "#forge:storage_blocks/cmb",
-    "#forge:storage_blocks/dnt",
-    "#forge:storage_blocks/slag",
-    "#forge:storage_blocks/bakelite",
-    "#forge:storage_blocks/rubber"
+    {
+      "id": "#forge:storage_blocks/carbon",
+      "required": false
+    },
+    {
+      "id": "#forge:storage_blocks/iron",
+      "required": false
+    },
+    {
+      "id": "#forge:storage_blocks/gold",
+      "required": false
+    },
+    {
+      "id": "#forge:storage_blocks/uranium",
+      "required": false
+    },
+    {
+      "id": "#forge:storage_blocks/u233",
+      "required": false
+    },
+    {
+      "id": "#forge:storage_blocks/u235",
+      "required": false
+    },
+    {
+      "id": "#forge:storage_blocks/u238",
+      "required": false
+    },
+    {
+      "id": "#forge:storage_blocks/thorium",
+      "required": false
+    },
+    {
+      "id": "#forge:storage_blocks/plutonium",
+      "required": false
+    },
+    {
+      "id": "#forge:storage_blocks/pu238",
+      "required": false
+    },
+    {
+      "id": "#forge:storage_blocks/pu239",
+      "required": false
+    },
+    {
+      "id": "#forge:storage_blocks/pu240",
+      "required": false
+    },
+    {
+      "id": "#forge:storage_blocks/neptunium",
+      "required": false
+    },
+    {
+      "id": "#forge:storage_blocks/polonium",
+      "required": false
+    },
+    {
+      "id": "#forge:storage_blocks/schrabidium",
+      "required": false
+    },
+    {
+      "id": "#forge:storage_blocks/solinium",
+      "required": false
+    },
+    {
+      "id": "#forge:storage_blocks/schrabidate",
+      "required": false
+    },
+    {
+      "id": "#forge:storage_blocks/schraranium",
+      "required": false
+    },
+    {
+      "id": "#forge:storage_blocks/australium",
+      "required": false
+    },
+    {
+      "id": "#forge:storage_blocks/titanium",
+      "required": false
+    },
+    {
+      "id": "#forge:storage_blocks/copper",
+      "required": false
+    },
+    {
+      "id": "#forge:storage_blocks/tungsten",
+      "required": false
+    },
+    {
+      "id": "#forge:storage_blocks/aluminium",
+      "required": false
+    },
+    {
+      "id": "#forge:storage_blocks/lead",
+      "required": false
+    },
+    {
+      "id": "#forge:storage_blocks/bismuth",
+      "required": false
+    },
+    {
+      "id": "#forge:storage_blocks/tantalium",
+      "required": false
+    },
+    {
+      "id": "#forge:storage_blocks/niobium",
+      "required": false
+    },
+    {
+      "id": "#forge:storage_blocks/beryllium",
+      "required": false
+    },
+    {
+      "id": "#forge:storage_blocks/emerald",
+      "required": false
+    },
+    {
+      "id": "#forge:storage_blocks/cobalt",
+      "required": false
+    },
+    {
+      "id": "#forge:storage_blocks/boron",
+      "required": false
+    },
+    {
+      "id": "#forge:storage_blocks/lanthanium",
+      "required": false
+    },
+    {
+      "id": "#forge:storage_blocks/zirconium",
+      "required": false
+    },
+    {
+      "id": "#forge:storage_blocks/lithium",
+      "required": false
+    },
+    {
+      "id": "#forge:storage_blocks/sulfur",
+      "required": false
+    },
+    {
+      "id": "#forge:storage_blocks/fluorite",
+      "required": false
+    },
+    {
+      "id": "#forge:storage_blocks/phosphorus",
+      "required": false
+    },
+    {
+      "id": "#forge:storage_blocks/cadmium",
+      "required": false
+    },
+    {
+      "id": "#forge:storage_blocks/asbestos",
+      "required": false
+    },
+    {
+      "id": "#forge:storage_blocks/osmiridium",
+      "required": false
+    },
+    {
+      "id": "#forge:storage_blocks/nickel",
+      "required": false
+    },
+    {
+      "id": "#forge:storage_blocks/steel",
+      "required": false
+    },
+    {
+      "id": "#forge:storage_blocks/dura",
+      "required": false
+    },
+    {
+      "id": "#forge:storage_blocks/desh",
+      "required": false
+    },
+    {
+      "id": "#forge:storage_blocks/star",
+      "required": false
+    },
+    {
+      "id": "#forge:storage_blocks/tcalloy",
+      "required": false
+    },
+    {
+      "id": "#forge:storage_blocks/cdalloy",
+      "required": false
+    },
+    {
+      "id": "#forge:storage_blocks/magtung",
+      "required": false
+    },
+    {
+      "id": "#forge:storage_blocks/cmb",
+      "required": false
+    },
+    {
+      "id": "#forge:storage_blocks/dnt",
+      "required": false
+    },
+    {
+      "id": "#forge:storage_blocks/slag",
+      "required": false
+    },
+    {
+      "id": "#forge:storage_blocks/bakelite",
+      "required": false
+    },
+    {
+      "id": "#forge:storage_blocks/rubber",
+      "required": false
+    }
   ]
 }

@@ -49,15 +49,15 @@ public class ItemTagsGen extends ItemTagsProvider {
             TagKey<Item> key = tagGenEntry.key;
             if (tagGenEntry.keyOut != null)
                 for (TagKey<Item> keyToJoin : tagGenEntry.keyOut) {
-                    this.tag(keyToJoin).addTag(key);
+                    this.tag(keyToJoin).addOptionalTag(key);
                 }
             if (tagGenEntry.keyIn != null)
                 for (TagKey<Item> keyToContain : tagGenEntry.keyIn) {
-                    this.tag(key).addTag(keyToContain);
+                    this.tag(key).addOptionalTag(keyToContain);
                 }
             if (tagGenEntry.keyAutoGen != null)
                 for (TagKey<Item> keyToJoin : tagGenEntry.keyAutoGen) {
-                    this.tag(keyToJoin).addTag(TagKey.create(Registries.ITEM, keyToJoin.location().withSuffix("/" + key.location().getPath())));
+                    this.tag(keyToJoin).addOptionalTag(TagKey.create(Registries.ITEM, keyToJoin.location().withSuffix("/" + key.location().getPath())));
                 }
         }
         ModTags.Items.LIST_TAG_GEN_REQ.clear();

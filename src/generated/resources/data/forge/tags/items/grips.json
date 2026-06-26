@@ -1,17 +1,56 @@
 {
   "values": [
-    "#forge:grips/wood",
-    "#forge:grips/bone",
-    "#forge:grips/steel",
-    "#forge:grips/dura",
-    "#forge:grips/desh",
-    "#forge:grips/gunmetal",
-    "#forge:grips/weaponsteel",
-    "#forge:grips/saturn",
-    "#forge:grips/polymer",
-    "#forge:grips/bakelite",
-    "#forge:grips/rubber",
-    "#forge:grips/hardplastic",
-    "#forge:grips/pvc"
+    {
+      "id": "#forge:grips/wood",
+      "required": false
+    },
+    {
+      "id": "#forge:grips/bone",
+      "required": false
+    },
+    {
+      "id": "#forge:grips/steel",
+      "required": false
+    },
+    {
+      "id": "#forge:grips/dura",
+      "required": false
+    },
+    {
+      "id": "#forge:grips/desh",
+      "required": false
+    },
+    {
+      "id": "#forge:grips/gunmetal",
+      "required": false
+    },
+    {
+      "id": "#forge:grips/weaponsteel",
+      "required": false
+    },
+    {
+      "id": "#forge:grips/saturn",
+      "required": false
+    },
+    {
+      "id": "#forge:grips/polymer",
+      "required": false
+    },
+    {
+      "id": "#forge:grips/bakelite",
+      "required": false
+    },
+    {
+      "id": "#forge:grips/rubber",
+      "required": false
+    },
+    {
+      "id": "#forge:grips/hardplastic",
+      "required": false
+    },
+    {
+      "id": "#forge:grips/pvc",
+      "required": false
+    }
   ]
 }

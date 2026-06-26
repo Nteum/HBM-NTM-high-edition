@@ -1,11 +1,32 @@
 {
   "values": [
-    "#forge:pipes/iron",
-    "#forge:pipes/copper",
-    "#forge:pipes/aluminium",
-    "#forge:pipes/lead",
-    "#forge:pipes/steel",
-    "#forge:pipes/dura",
-    "#forge:pipes/rubber"
+    {
+      "id": "#forge:pipes/iron",
+      "required": false
+    },
+    {
+      "id": "#forge:pipes/copper",
+      "required": false
+    },
+    {
+      "id": "#forge:pipes/aluminium",
+      "required": false
+    },
+    {
+      "id": "#forge:pipes/lead",
+      "required": false
+    },
+    {
+      "id": "#forge:pipes/steel",
+      "required": false
+    },
+    {
+      "id": "#forge:pipes/dura",
+      "required": false
+    },
+    {
+      "id": "#forge:pipes/rubber",
+      "required": false
+    }
   ]
 }

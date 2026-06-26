@@ -1,64 +1,244 @@
 {
   "values": [
-    "#forge:dust/iron",
-    "#forge:dust/gold",
-    "#forge:dust/uranium",
-    "#forge:dust/u233",
-    "#forge:dust/u235",
-    "#forge:dust/u238",
-    "#forge:dust/thorium",
-    "#forge:dust/plutonium",
-    "#forge:dust/neptunium",
-    "#forge:dust/polonium",
-    "#forge:dust/radium",
-    "#forge:dust/co60",
-    "#forge:dust/au198",
-    "#forge:dust/pb209",
-    "#forge:dust/schrabidium",
-    "#forge:dust/schrabidate",
-    "#forge:dust/titanium",
-    "#forge:dust/copper",
-    "#forge:dust/tungsten",
-    "#forge:dust/aluminium",
-    "#forge:dust/lead",
-    "#forge:dust/bismuth",
-    "#forge:dust/tantalium",
-    "#forge:dust/neodymium",
-    "#forge:dust/niobium",
-    "#forge:dust/beryllium",
-    "#forge:dust/emerald",
-    "#forge:dust/cobalt",
-    "#forge:dust/boron",
-    "#forge:dust/borax",
-    "#forge:dust/zirconium",
-    "#forge:dust/sodium",
-    "#forge:dust/strontium",
-    "#forge:dust/calcium",
-    "#forge:dust/lithium",
-    "#forge:dust/sulfur",
-    "#forge:dust/kno",
-    "#forge:dust/fluorite",
-    "#forge:dust/phosphorus",
-    "#forge:dust/phosphorus_w",
-    "#forge:dust/chlorocalcite",
-    "#forge:dust/molysite",
-    "#forge:dust/cadmium",
-    "#forge:dust/nickel",
-    "#forge:dust/gallium",
-    "#forge:dust/zinc",
-    "#forge:dust/hafnium",
-    "#forge:dust/steel",
-    "#forge:dust/mingrade",
-    "#forge:dust/alloy",
-    "#forge:dust/dura",
-    "#forge:dust/desh",
-    "#forge:dust/star",
-    "#forge:dust/tcalloy",
-    "#forge:dust/magtung",
-    "#forge:dust/cmb",
-    "#forge:dust/dnt",
-    "#forge:dust/flux",
-    "#forge:dust/rubber",
-    "#forge:dust/pvc"
+    {
+      "id": "#forge:dust/iron",
+      "required": false
+    },
+    {
+      "id": "#forge:dust/gold",
+      "required": false
+    },
+    {
+      "id": "#forge:dust/uranium",
+      "required": false
+    },
+    {
+      "id": "#forge:dust/u233",
+      "required": false
+    },
+    {
+      "id": "#forge:dust/u235",
+      "required": false
+    },
+    {
+      "id": "#forge:dust/u238",
+      "required": false
+    },
+    {
+      "id": "#forge:dust/thorium",
+      "required": false
+    },
+    {
+      "id": "#forge:dust/plutonium",
+      "required": false
+    },
+    {
+      "id": "#forge:dust/neptunium",
+      "required": false
+    },
+    {
+      "id": "#forge:dust/polonium",
+      "required": false
+    },
+    {
+      "id": "#forge:dust/radium",
+      "required": false
+    },
+    {
+      "id": "#forge:dust/co60",
+      "required": false
+    },
+    {
+      "id": "#forge:dust/au198",
+      "required": false
+    },
+    {
+      "id": "#forge:dust/pb209",
+      "required": false
+    },
+    {
+      "id": "#forge:dust/schrabidium",
+      "required": false
+    },
+    {
+      "id": "#forge:dust/schrabidate",
+      "required": false
+    },
+    {
+      "id": "#forge:dust/titanium",
+      "required": false
+    },
+    {
+      "id": "#forge:dust/copper",
+      "required": false
+    },
+    {
+      "id": "#forge:dust/tungsten",
+      "required": false
+    },
+    {
+      "id": "#forge:dust/aluminium",
+      "required": false
+    },
+    {
+      "id": "#forge:dust/lead",
+      "required": false
+    },
+    {
+      "id": "#forge:dust/bismuth",
+      "required": false
+    },
+    {
+      "id": "#forge:dust/tantalium",
+      "required": false
+    },
+    {
+      "id": "#forge:dust/neodymium",
+      "required": false
+    },
+    {
+      "id": "#forge:dust/niobium",
+      "required": false
+    },
+    {
+      "id": "#forge:dust/beryllium",
+      "required": false
+    },
+    {
+      "id": "#forge:dust/emerald",
+      "required": false
+    },
+    {
+      "id": "#forge:dust/cobalt",
+      "required": false
+    },
+    {
+      "id": "#forge:dust/boron",
+      "required": false
+    },
+    {
+      "id": "#forge:dust/borax",
+      "required": false
+    },
+    {
+      "id": "#forge:dust/zirconium",
+      "required": false
+    },
+    {
+      "id": "#forge:dust/sodium",
+      "required": false
+    },
+    {
+      "id": "#forge:dust/strontium",
+      "required": false
+    },
+    {
+      "id": "#forge:dust/calcium",
+      "required": false
+    },
+    {
+      "id": "#forge:dust/lithium",
+      "required": false
+    },
+    {
+      "id": "#forge:dust/sulfur",
+      "required": false
+    },
+    {
+      "id": "#forge:dust/kno",
+      "required": false
+    },
+    {
+      "id": "#forge:dust/fluorite",
+      "required": false
+    },
+    {
+      "id": "#forge:dust/phosphorus",
+      "required": false
+    },
+    {
+      "id": "#forge:dust/phosphorus_w",
+      "required": false
+    },
+    {
+      "id": "#forge:dust/chlorocalcite",
+      "required": false
+    },
+    {
+      "id": "#forge:dust/molysite",
+      "required": false
+    },
+    {
+      "id": "#forge:dust/cadmium",
+      "required": false
+    },
+    {
+      "id": "#forge:dust/nickel",
+      "required": false
+    },
+    {
+      "id": "#forge:dust/gallium",
+      "required": false
+    },
+    {
+      "id": "#forge:dust/zinc",
+      "required": false
+    },
+    {
+      "id": "#forge:dust/hafnium",
+      "required": false
+    },
+    {
+      "id": "#forge:dust/steel",
+      "required": false
+    },
+    {
+      "id": "#forge:dust/mingrade",
+      "required": false
+    },
+    {
+      "id": "#forge:dust/alloy",
+      "required": false
+    },
+    {
+      "id": "#forge:dust/dura",
+      "required": false
+    },
+    {
+      "id": "#forge:dust/desh",
+      "required": false
+    },
+    {
+      "id": "#forge:dust/star",
+      "required": false
+    },
+    {
+      "id": "#forge:dust/tcalloy",
+      "required": false
+    },
+    {
+      "id": "#forge:dust/magtung",
+      "required": false
+    },
+    {
+      "id": "#forge:dust/cmb",
+      "required": false
+    },
+    {
+      "id": "#forge:dust/dnt",
+      "required": false
+    },
+    {
+      "id": "#forge:dust/flux",
+      "required": false
+    },
+    {
+      "id": "#forge:dust/rubber",
+      "required": false
+    },
+    {
+      "id": "#forge:dust/pvc",
+      "required": false
+    }
   ]
 }

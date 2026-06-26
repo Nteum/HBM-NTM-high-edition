@@ -34,8 +34,8 @@ public class GuiMinerLarge extends BaseMachineGui<MenuMinerLarge> {
     protected void init() {
         this.imageWidth = 242;
         this.imageHeight = 204;
-        this.titleLabelX += 33;
         super.init();
+        this.titleLabelX += 33;
         titleLabelY -= 16;
     }
 

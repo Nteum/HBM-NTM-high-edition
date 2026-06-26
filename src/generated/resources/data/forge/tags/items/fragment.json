@@ -1,78 +1,300 @@
 {
   "values": [
-    "#forge:fragment/coal",
-    "#forge:fragment/lignite",
-    "#forge:fragment/diamond",
-    "#forge:fragment/iron",
-    "#forge:fragment/gold",
-    "#forge:fragment/redstone",
-    "#forge:fragment/glowstone",
-    "#forge:fragment/bauxite",
-    "#forge:fragment/cryolite",
-    "#forge:fragment/conglomerate",
-    "#forge:fragment/uranium",
-    "#forge:fragment/u233",
-    "#forge:fragment/u235",
-    "#forge:fragment/u238",
-    "#forge:fragment/thorium",
-    "#forge:fragment/plutonium",
-    "#forge:fragment/pu239",
-    "#forge:fragment/neptunium",
-    "#forge:fragment/polonium",
-    "#forge:fragment/technetium",
-    "#forge:fragment/radium",
-    "#forge:fragment/co60",
-    "#forge:fragment/au198",
-    "#forge:fragment/pb209",
-    "#forge:fragment/schrabidium",
-    "#forge:fragment/solinium",
-    "#forge:fragment/ghiorsium",
-    "#forge:fragment/australium",
-    "#forge:fragment/tasmanite",
-    "#forge:fragment/ayerite",
-    "#forge:fragment/titanium",
-    "#forge:fragment/copper",
-    "#forge:fragment/tungsten",
-    "#forge:fragment/aluminium",
-    "#forge:fragment/lead",
-    "#forge:fragment/bismuth",
-    "#forge:fragment/arsenic",
-    "#forge:fragment/tantalium",
-    "#forge:fragment/neodymium",
-    "#forge:fragment/niobium",
-    "#forge:fragment/beryllium",
-    "#forge:fragment/emerald",
-    "#forge:fragment/cobalt",
-    "#forge:fragment/boron",
-    "#forge:fragment/borax",
-    "#forge:fragment/lanthanium",
-    "#forge:fragment/zirconium",
-    "#forge:fragment/sodium",
-    "#forge:fragment/sodalite",
-    "#forge:fragment/strontium",
-    "#forge:fragment/lithium",
-    "#forge:fragment/sulfur",
-    "#forge:fragment/kno",
-    "#forge:fragment/fluorite",
-    "#forge:fragment/phosphorus",
-    "#forge:fragment/phosphorus_w",
-    "#forge:fragment/chlorocalcite",
-    "#forge:fragment/molysite",
-    "#forge:fragment/cinnabar",
-    "#forge:fragment/cadmium",
-    "#forge:fragment/silicon",
-    "#forge:fragment/asbestos",
-    "#forge:fragment/quartz",
-    "#forge:fragment/nickel",
-    "#forge:fragment/gallium",
-    "#forge:fragment/zinc",
-    "#forge:fragment/bromine",
-    "#forge:fragment/iodine",
-    "#forge:fragment/hafnium",
-    "#forge:fragment/semtex",
-    "#forge:fragment/rareearth",
-    "#forge:fragment/polymer",
-    "#forge:fragment/rubber",
-    "#forge:fragment/pvc"
+    {
+      "id": "#forge:fragment/coal",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/lignite",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/diamond",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/iron",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/gold",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/redstone",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/glowstone",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/bauxite",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/cryolite",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/conglomerate",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/uranium",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/u233",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/u235",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/u238",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/thorium",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/plutonium",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/pu239",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/neptunium",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/polonium",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/technetium",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/radium",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/co60",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/au198",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/pb209",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/schrabidium",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/solinium",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/ghiorsium",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/australium",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/tasmanite",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/ayerite",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/titanium",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/copper",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/tungsten",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/aluminium",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/lead",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/bismuth",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/arsenic",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/tantalium",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/neodymium",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/niobium",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/beryllium",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/emerald",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/cobalt",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/boron",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/borax",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/lanthanium",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/zirconium",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/sodium",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/sodalite",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/strontium",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/lithium",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/sulfur",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/kno",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/fluorite",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/phosphorus",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/phosphorus_w",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/chlorocalcite",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/molysite",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/cinnabar",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/cadmium",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/silicon",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/asbestos",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/quartz",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/nickel",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/gallium",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/zinc",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/bromine",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/iodine",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/hafnium",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/semtex",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/rareearth",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/polymer",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/rubber",
+      "required": false
+    },
+    {
+      "id": "#forge:fragment/pvc",
+      "required": false
+    }
   ]
 }

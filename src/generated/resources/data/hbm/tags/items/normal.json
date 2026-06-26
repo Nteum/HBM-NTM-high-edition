@@ -1,45 +1,168 @@
 {
   "values": [
-    "#forge:wood",
-    "#forge:stone",
-    "#forge:coal",
-    "#forge:lignite",
-    "#forge:coal_coke",
-    "#forge:pet_coke",
-    "#forge:lig_coke",
-    "#forge:graphite",
-    "#forge:diamond",
-    "#forge:redstone",
-    "#forge:obsidain",
-    "#forge:glowstone",
-    "#forge:bauxite",
-    "#forge:cryolite",
-    "#forge:conglomerate",
-    "#forge:emerald",
-    "#forge:borax",
-    "#forge:sodalite",
-    "#forge:sulfur",
-    "#forge:kno",
-    "#forge:fluorite",
-    "#forge:phosphorus",
-    "#forge:phosphorus_w",
-    "#forge:chlorocalcite",
-    "#forge:molysite",
-    "#forge:cinnabar",
-    "#forge:asbestos",
-    "#forge:quartz",
-    "#forge:flux",
-    "#forge:slag",
-    "#forge:mud",
-    "#forge:gunmetal",
-    "#forge:weaponsteel",
-    "#forge:rich_magma",
-    "#forge:semtex",
-    "#forge:rareearth",
-    "#forge:polymer",
-    "#forge:bakelite",
-    "#forge:rubber",
-    "#forge:hardplastic",
-    "#forge:pvc"
+    {
+      "id": "#forge:wood",
+      "required": false
+    },
+    {
+      "id": "#forge:stone",
+      "required": false
+    },
+    {
+      "id": "#forge:coal",
+      "required": false
+    },
+    {
+      "id": "#forge:lignite",
+      "required": false
+    },
+    {
+      "id": "#forge:coal_coke",
+      "required": false
+    },
+    {
+      "id": "#forge:pet_coke",
+      "required": false
+    },
+    {
+      "id": "#forge:lig_coke",
+      "required": false
+    },
+    {
+      "id": "#forge:graphite",
+      "required": false
+    },
+    {
+      "id": "#forge:diamond",
+      "required": false
+    },
+    {
+      "id": "#forge:redstone",
+      "required": false
+    },
+    {
+      "id": "#forge:obsidain",
+      "required": false
+    },
+    {
+      "id": "#forge:glowstone",
+      "required": false
+    },
+    {
+      "id": "#forge:bauxite",
+      "required": false
+    },
+    {
+      "id": "#forge:cryolite",
+      "required": false
+    },
+    {
+      "id": "#forge:conglomerate",
+      "required": false
+    },
+    {
+      "id": "#forge:emerald",
+      "required": false
+    },
+    {
+      "id": "#forge:borax",
+      "required": false
+    },
+    {
+      "id": "#forge:sodalite",
+      "required": false
+    },
+    {
+      "id": "#forge:sulfur",
+      "required": false
+    },
+    {
+      "id": "#forge:kno",
+      "required": false
+    },
+    {
+      "id": "#forge:fluorite",
+      "required": false
+    },
+    {
+      "id": "#forge:phosphorus",
+      "required": false
+    },
+    {
+      "id": "#forge:phosphorus_w",
+      "required": false
+    },
+    {
+      "id": "#forge:chlorocalcite",
+      "required": false
+    },
+    {
+      "id": "#forge:molysite",
+      "required": false
+    },
+    {
+      "id": "#forge:cinnabar",
+      "required": false
+    },
+    {
+      "id": "#forge:asbestos",
+      "required": false
+    },
+    {
+      "id": "#forge:quartz",
+      "required": false
+    },
+    {
+      "id": "#forge:flux",
+      "required": false
+    },
+    {
+      "id": "#forge:slag",
+      "required": false
+    },
+    {
+      "id": "#forge:mud",
+      "required": false
+    },
+    {
+      "id": "#forge:gunmetal",
+      "required": false
+    },
+    {
+      "id": "#forge:weaponsteel",
+      "required": false
+    },
+    {
+      "id": "#forge:rich_magma",
+      "required": false
+    },
+    {
+      "id": "#forge:semtex",
+      "required": false
+    },
+    {
+      "id": "#forge:rareearth",
+      "required": false
+    },
+    {
+      "id": "#forge:polymer",
+      "required": false
+    },
+    {
+      "id": "#forge:bakelite",
+      "required": false
+    },
+    {
+      "id": "#forge:rubber",
+      "required": false
+    },
+    {
+      "id": "#forge:hardplastic",
+      "required": false
+    },
+    {
+      "id": "#forge:pvc",
+      "required": false
+    }
   ]
 }

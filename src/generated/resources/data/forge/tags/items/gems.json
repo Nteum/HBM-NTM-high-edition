@@ -1,7 +1,16 @@
 {
   "values": [
-    "#forge:gems/emerald",
-    "#forge:gems/sodalite",
-    "#forge:gems/cinnabar"
+    {
+      "id": "#forge:gems/emerald",
+      "required": false
+    },
+    {
+      "id": "#forge:gems/sodalite",
+      "required": false
+    },
+    {
+      "id": "#forge:gems/cinnabar",
+      "required": false
+    }
   ]
 }

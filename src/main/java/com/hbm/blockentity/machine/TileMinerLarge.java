@@ -146,6 +146,7 @@ public class TileMinerLarge extends DummyableBlockEntity implements IUpgradeInfo
 
     @Override
     protected void onUpdateServer() {
+        boolean shouldSync = false;
         super.onUpdateServer();
         upgrades = IUpgradeInfoProvider.getUpgradeNow(upgrades, this, itemStackHandler, 2,3);
         int speedLevel = upgrades.getOrDefault(UpgradeType.SPEED, 0);
@@ -164,7 +165,10 @@ public class TileMinerLarge extends DummyableBlockEntity implements IUpgradeInfo
             }
         }
 
-        if(chuteTimer > 0) chuteTimer--;
+        if(chuteTimer > 0) {
+            chuteTimer--;
+            shouldSync = true;
+        }
 
         int maxDrillHeight = this.worldPosition.getY() - 4;     // 钻头默认位置
         int minHeight = this.level.dimensionType().minY();          // 世界最低位置
@@ -300,13 +304,16 @@ public class TileMinerLarge extends DummyableBlockEntity implements IUpgradeInfo
                     else itemEntity.setItem(insertResult);
                 }
             }
-            sendUpdatePacket();
+            shouldSync = true;
         }else {
             // 收回钻头。
             if (this.drillHeight < maxDrillHeight){
                 this.drillHeight ++;
+                shouldSync = true;
             }
         }
+        if (shouldSync)
+            sendUpdatePacket();
     }
 
 
@@ -403,6 +410,7 @@ public class TileMinerLarge extends DummyableBlockEntity implements IUpgradeInfo
         CompoundTag tag = super.getReducedUpdateTag();
         tag.put(HBMKey.FLUIDS, this.fluidHandler.serializeNBT());
         tag.putInt("chute", this.chuteTimer);
+        tag.putInt("drill_height", this.drillHeight);
         return tag;
     }
 
@@ -411,6 +419,7 @@ public class TileMinerLarge extends DummyableBlockEntity implements IUpgradeInfo
         super.handleUpdatePacket(tag);
         this.fluidHandler.deserializeNBT(tag.getCompound(HBMKey.FLUIDS));
         this.chuteTimer = tag.getInt("chute");
+        this.drillHeight = tag.getInt("drill_height");
     }
 
     @Override

@@ -1,91 +1,352 @@
 {
   "values": [
-    "#forge:bone",
-    "#forge:carbon",
-    "#forge:iron",
-    "#forge:wrought_iron",
-    "#forge:pig_iron",
-    "#forge:meteoric_iron",
-    "#forge:gold",
-    "#forge:hematite",
-    "#forge:malachite",
-    "#forge:uranium",
-    "#forge:u233",
-    "#forge:u235",
-    "#forge:u238",
-    "#forge:thorium",
-    "#forge:plutonium",
-    "#forge:rgp",
-    "#forge:pu238",
-    "#forge:pu239",
-    "#forge:pu240",
-    "#forge:pu241",
-    "#forge:rga",
-    "#forge:am241",
-    "#forge:am242",
-    "#forge:neptunium",
-    "#forge:polonium",
-    "#forge:technetium",
-    "#forge:radium",
-    "#forge:actinium",
-    "#forge:co60",
-    "#forge:au198",
-    "#forge:pb209",
-    "#forge:schrabidium",
-    "#forge:solinium",
-    "#forge:schrabidate",
-    "#forge:schraranium",
-    "#forge:ghiorsium",
-    "#forge:australium",
-    "#forge:tasmanite",
-    "#forge:ayerite",
-    "#forge:titanium",
-    "#forge:copper",
-    "#forge:tungsten",
-    "#forge:aluminium",
-    "#forge:lead",
-    "#forge:bismuth",
-    "#forge:arsenic",
-    "#forge:tantalium",
-    "#forge:neodymium",
-    "#forge:niobium",
-    "#forge:cerium",
-    "#forge:beryllium",
-    "#forge:cobalt",
-    "#forge:boron",
-    "#forge:lanthanium",
-    "#forge:zirconium",
-    "#forge:sodium",
-    "#forge:strontium",
-    "#forge:calcium",
-    "#forge:lithium",
-    "#forge:cadmium",
-    "#forge:silicon",
-    "#forge:osmiridium",
-    "#forge:nickel",
-    "#forge:gallium",
-    "#forge:zinc",
-    "#forge:bromine",
-    "#forge:iodine",
-    "#forge:hafnium",
-    "#forge:iridium",
-    "#forge:steel",
-    "#forge:mingrade",
-    "#forge:alloy",
-    "#forge:dura",
-    "#forge:desh",
-    "#forge:star",
-    "#forge:ferro",
-    "#forge:tcalloy",
-    "#forge:cdalloy",
-    "#forge:bbronze",
-    "#forge:abronze",
-    "#forge:bscco",
-    "#forge:magtung",
-    "#forge:cmb",
-    "#forge:dnt",
-    "#forge:saturn",
-    "#forge:gaas",
-    "#forge:stainless"
+    {
+      "id": "#forge:bone",
+      "required": false
+    },
+    {
+      "id": "#forge:carbon",
+      "required": false
+    },
+    {
+      "id": "#forge:iron",
+      "required": false
+    },
+    {
+      "id": "#forge:wrought_iron",
+      "required": false
+    },
+    {
+      "id": "#forge:pig_iron",
+      "required": false
+    },
+    {
+      "id": "#forge:meteoric_iron",
+      "required": false
+    },
+    {
+      "id": "#forge:gold",
+      "required": false
+    },
+    {
+      "id": "#forge:hematite",
+      "required": false
+    },
+    {
+      "id": "#forge:malachite",
+      "required": false
+    },
+    {
+      "id": "#forge:uranium",
+      "required": false
+    },
+    {
+      "id": "#forge:u233",
+      "required": false
+    },
+    {
+      "id": "#forge:u235",
+      "required": false
+    },
+    {
+      "id": "#forge:u238",
+      "required": false
+    },
+    {
+      "id": "#forge:thorium",
+      "required": false
+    },
+    {
+      "id": "#forge:plutonium",
+      "required": false
+    },
+    {
+      "id": "#forge:rgp",
+      "required": false
+    },
+    {
+      "id": "#forge:pu238",
+      "required": false
+    },
+    {
+      "id": "#forge:pu239",
+      "required": false
+    },
+    {
+      "id": "#forge:pu240",
+      "required": false
+    },
+    {
+      "id": "#forge:pu241",
+      "required": false
+    },
+    {
+      "id": "#forge:rga",
+      "required": false
+    },
+    {
+      "id": "#forge:am241",
+      "required": false
+    },
+    {
+      "id": "#forge:am242",
+      "required": false
+    },
+    {
+      "id": "#forge:neptunium",
+      "required": false
+    },
+    {
+      "id": "#forge:polonium",
+      "required": false
+    },
+    {
+      "id": "#forge:technetium",
+      "required": false
+    },
+    {
+      "id": "#forge:radium",
+      "required": false
+    },
+    {
+      "id": "#forge:actinium",
+      "required": false
+    },
+    {
+      "id": "#forge:co60",
+      "required": false
+    },
+    {
+      "id": "#forge:au198",
+      "required": false
+    },
+    {
+      "id": "#forge:pb209",
+      "required": false
+    },
+    {
+      "id": "#forge:schrabidium",
+      "required": false
+    },
+    {
+      "id": "#forge:solinium",
+      "required": false
+    },
+    {
+      "id": "#forge:schrabidate",
+      "required": false
+    },
+    {
+      "id": "#forge:schraranium",
+      "required": false
+    },
+    {
+      "id": "#forge:ghiorsium",
+      "required": false
+    },
+    {
+      "id": "#forge:australium",
+      "required": false
+    },
+    {
+      "id": "#forge:tasmanite",
+      "required": false
+    },
+    {
+      "id": "#forge:ayerite",
+      "required": false
+    },
+    {
+      "id": "#forge:titanium",
+      "required": false
+    },
+    {
+      "id": "#forge:copper",
+      "required": false
+    },
+    {
+      "id": "#forge:tungsten",
+      "required": false
+    },
+    {
+      "id": "#forge:aluminium",
+      "required": false
+    },
+    {
+      "id": "#forge:lead",
+      "required": false
+    },
+    {
+      "id": "#forge:bismuth",
+      "required": false
+    },
+    {
+      "id": "#forge:arsenic",
+      "required": false
+    },
+    {
+      "id": "#forge:tantalium",
+      "required": false
+    },
+    {
+      "id": "#forge:neodymium",
+      "required": false
+    },
+    {
+      "id": "#forge:niobium",
+      "required": false
+    },
+    {
+      "id": "#forge:cerium",
+      "required": false
+    },
+    {
+      "id": "#forge:beryllium",
+      "required": false
+    },
+    {
+      "id": "#forge:cobalt",
+      "required": false
+    },
+    {
+      "id": "#forge:boron",
+      "required": false
+    },
+    {
+      "id": "#forge:lanthanium",
+      "required": false
+    },
+    {
+      "id": "#forge:zirconium",
+      "required": false
+    },
+    {
+      "id": "#forge:sodium",
+      "required": false
+    },
+    {
+      "id": "#forge:strontium",
+      "required": false
+    },
+    {
+      "id": "#forge:calcium",
+      "required": false
+    },
+    {
+      "id": "#forge:lithium",
+      "required": false
+    },
+    {
+      "id": "#forge:cadmium",
+      "required": false
+    },
+    {
+      "id": "#forge:silicon",
+      "required": false
+    },
+    {
+      "id": "#forge:osmiridium",
+      "required": false
+    },
+    {
+      "id": "#forge:nickel",
+      "required": false
+    },
+    {
+      "id": "#forge:gallium",
+      "required": false
+    },
+    {
+      "id": "#forge:zinc",
+      "required": false
+    },
+    {
+      "id": "#forge:bromine",
+      "required": false
+    },
+    {
+      "id": "#forge:iodine",
+      "required": false
+    },
+    {
+      "id": "#forge:hafnium",
+      "required": false
+    },
+    {
+      "id": "#forge:iridium",
+      "required": false
+    },
+    {
+      "id": "#forge:steel",
+      "required": false
+    },
+    {
+      "id": "#forge:mingrade",
+      "required": false
+    },
+    {
+      "id": "#forge:alloy",
+      "required": false
+    },
+    {
+      "id": "#forge:dura",
+      "required": false
+    },
+    {
+      "id": "#forge:desh",
+      "required": false
+    },
+    {
+      "id": "#forge:star",
+      "required": false
+    },
+    {
+      "id": "#forge:ferro",
+      "required": false
+    },
+    {
+      "id": "#forge:tcalloy",
+      "required": false
+    },
+    {
+      "id": "#forge:cdalloy",
+      "required": false
+    },
+    {
+      "id": "#forge:bbronze",
+      "required": false
+    },
+    {
+      "id": "#forge:abronze",
+      "required": false
+    },
+    {
+      "id": "#forge:bscco",
+      "required": false
+    },
+    {
+      "id": "#forge:magtung",
+      "required": false
+    },
+    {
+      "id": "#forge:cmb",
+      "required": false
+    },
+    {
+      "id": "#forge:dnt",
+      "required": false
+    },
+    {
+      "id": "#forge:saturn",
+      "required": false
+    },
+    {
+      "id": "#forge:gaas",
+      "required": false
+    },
+    {
+      "id": "#forge:stainless",
+      "required": false
+    }
   ]
 }

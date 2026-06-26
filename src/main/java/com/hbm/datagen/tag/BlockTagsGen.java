@@ -32,15 +32,15 @@ public class BlockTagsGen extends BlockTagsProvider {
             TagKey<Block> key = tagGenEntry.key;
             if (tagGenEntry.keyOut != null)
                 for (TagKey<Block> keyToJoin : tagGenEntry.keyOut) {
-                    this.tag(keyToJoin).addTag(key);
+                    this.tag(keyToJoin).addOptionalTag(key);
                 }
             if (tagGenEntry.keyIn != null)
                 for (TagKey<Block> keyToContain : tagGenEntry.keyIn) {
-                    this.tag(key).addTag(keyToContain);
+                    this.tag(key).addOptionalTag(keyToContain);
                 }
             if (tagGenEntry.keyAutoGen != null)
                 for (TagKey<Block> keyToJoin : tagGenEntry.keyAutoGen) {
-                    this.tag(keyToJoin).addTag(TagKey.create(Registries.BLOCK, keyToJoin.location().withSuffix("/" + key.location().getPath())));
+                    this.tag(keyToJoin).addOptionalTag(TagKey.create(Registries.BLOCK, keyToJoin.location().withSuffix("/" + key.location().getPath())));
                 }
         }
         ModTags.Blocks.LIST_TAG_GEN_REQ.clear();

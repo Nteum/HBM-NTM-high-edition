@@ -1,6 +1,12 @@
 {
   "values": [
-    "#minecraft:coals",
-    "#forge:storage_blocks/coal"
+    {
+      "id": "#forge:storage_blocks/coal",
+      "required": false
+    },
+    {
+      "id": "#minecraft:coals",
+      "required": false
+    }
   ]
 }

@@ -707,7 +707,11 @@ public class ModBlocks {
     // 基岩矿
     public static final RegistryObject<Block> BEDROCK_ORE = add("ore_bedrock",()->new BedRockOre(BlockBehaviour.Properties.copy(Blocks.BEDROCK)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_STANDALONE, HBMKey.REVERSE_GEN, HBMKey.DROP_NONE);
     public static final RegistryObject<Block> DEPTH_STONE = add("depth_stone",()->new BlockOre(BlockBehaviour.Properties.copy(Blocks.REINFORCED_DEEPSLATE)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.ORDERLY_GEN, HBMKey.DROP_SELF);
-
+    public static final RegistryObject<Block> DEPTH_BRICK = new WrappedBlockRegistryBuilder("depth_brick",()->new BlockOre(BlockBehaviour.Properties.of().destroyTime(-1.0F).explosionResistance(10))).tab(ModTabs.BLOCKS.getKey()).loc("Depth Bricks").build();
+    public static final RegistryObject<Block> DEPTH_TILES = new WrappedBlockRegistryBuilder("depth_tiles",()->new BlockOre(BlockBehaviour.Properties.of().destroyTime(-1.0F).explosionResistance(10))).tab(ModTabs.BLOCKS.getKey()).loc("Depth Tiles").build();
+    public static final RegistryObject<Block> DEPTH_NETHER_BRICK = new WrappedBlockRegistryBuilder("depth_nether_brick",()->new BlockOre(BlockBehaviour.Properties.of().destroyTime(-1.0F).explosionResistance(10))).tab(ModTabs.BLOCKS.getKey()).loc("Nether Depth Bricks").build();
+    public static final RegistryObject<Block> DEPTH_NETHER_TILES = new WrappedBlockRegistryBuilder("depth_nether_tiles",()->new BlockOre(BlockBehaviour.Properties.of().destroyTime(-1.0F).explosionResistance(10))).tab(ModTabs.BLOCKS.getKey()).loc("Nether Depth Tiles").build();
+    public static final RegistryObject<Block> DEPTH_DNT = new WrappedBlockRegistryBuilder("depth_dnt",()->new BlockOre(BlockBehaviour.Properties.of().destroyTime(-1.0F).explosionResistance(60000))).tab(ModTabs.BLOCKS.getKey()).loc("DNT-Reinforced Depth Bricks").tags(HBMMatters.DNT.storage_block()).build();
     /**
      * 航天版方块
      * */

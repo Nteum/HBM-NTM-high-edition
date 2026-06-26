@@ -1,18 +1,11 @@
-package com.hbm.item.special;
+package com.hbm.item.misc;
 
-import com.hbm.HBMKey;
 import com.hbm.HBMLang;
 import com.hbm.entity.logic.EntityNukeExplosionMK5;
 import com.hbm.registries.HBMDamage;
 import com.hbm.registries.ModSounds;
-import net.minecraft.core.RegistryAccess;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;

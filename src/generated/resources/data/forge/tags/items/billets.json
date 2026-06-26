@@ -1,30 +1,108 @@
 {
   "values": [
-    "#forge:billets/uranium",
-    "#forge:billets/u233",
-    "#forge:billets/u235",
-    "#forge:billets/u238",
-    "#forge:billets/thorium",
-    "#forge:billets/plutonium",
-    "#forge:billets/rgp",
-    "#forge:billets/pu238",
-    "#forge:billets/pu239",
-    "#forge:billets/pu240",
-    "#forge:billets/pu241",
-    "#forge:billets/rga",
-    "#forge:billets/am241",
-    "#forge:billets/am242",
-    "#forge:billets/neptunium",
-    "#forge:billets/polonium",
-    "#forge:billets/technetium",
-    "#forge:billets/radium",
-    "#forge:billets/actinium",
-    "#forge:billets/co60",
-    "#forge:billets/au198",
-    "#forge:billets/pb209",
-    "#forge:billets/schrabidium",
-    "#forge:billets/solinium",
-    "#forge:billets/ghiorsium",
-    "#forge:billets/gaas"
+    {
+      "id": "#forge:billets/uranium",
+      "required": false
+    },
+    {
+      "id": "#forge:billets/u233",
+      "required": false
+    },
+    {
+      "id": "#forge:billets/u235",
+      "required": false
+    },
+    {
+      "id": "#forge:billets/u238",
+      "required": false
+    },
+    {
+      "id": "#forge:billets/thorium",
+      "required": false
+    },
+    {
+      "id": "#forge:billets/plutonium",
+      "required": false
+    },
+    {
+      "id": "#forge:billets/rgp",
+      "required": false
+    },
+    {
+      "id": "#forge:billets/pu238",
+      "required": false
+    },
+    {
+      "id": "#forge:billets/pu239",
+      "required": false
+    },
+    {
+      "id": "#forge:billets/pu240",
+      "required": false
+    },
+    {
+      "id": "#forge:billets/pu241",
+      "required": false
+    },
+    {
+      "id": "#forge:billets/rga",
+      "required": false
+    },
+    {
+      "id": "#forge:billets/am241",
+      "required": false
+    },
+    {
+      "id": "#forge:billets/am242",
+      "required": false
+    },
+    {
+      "id": "#forge:billets/neptunium",
+      "required": false
+    },
+    {
+      "id": "#forge:billets/polonium",
+      "required": false
+    },
+    {
+      "id": "#forge:billets/technetium",
+      "required": false
+    },
+    {
+      "id": "#forge:billets/radium",
+      "required": false
+    },
+    {
+      "id": "#forge:billets/actinium",
+      "required": false
+    },
+    {
+      "id": "#forge:billets/co60",
+      "required": false
+    },
+    {
+      "id": "#forge:billets/au198",
+      "required": false
+    },
+    {
+      "id": "#forge:billets/pb209",
+      "required": false
+    },
+    {
+      "id": "#forge:billets/schrabidium",
+      "required": false
+    },
+    {
+      "id": "#forge:billets/solinium",
+      "required": false
+    },
+    {
+      "id": "#forge:billets/ghiorsium",
+      "required": false
+    },
+    {
+      "id": "#forge:billets/gaas",
+      "required": false
+    }
   ]
 }

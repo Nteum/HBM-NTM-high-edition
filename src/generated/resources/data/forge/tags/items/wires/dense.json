@@ -1,18 +1,60 @@
 {
   "values": [
-    "#forge:wires/dense/gold",
-    "#forge:wires/dense/schrabidium",
-    "#forge:wires/dense/schrabidate",
-    "#forge:wires/dense/titanium",
-    "#forge:wires/dense/copper",
-    "#forge:wires/dense/tungsten",
-    "#forge:wires/dense/neodymium",
-    "#forge:wires/dense/niobium",
-    "#forge:wires/dense/mingrade",
-    "#forge:wires/dense/alloy",
-    "#forge:wires/dense/star",
-    "#forge:wires/dense/bscco",
-    "#forge:wires/dense/magtung",
-    "#forge:wires/dense/dnt"
+    {
+      "id": "#forge:wires/dense/gold",
+      "required": false
+    },
+    {
+      "id": "#forge:wires/dense/schrabidium",
+      "required": false
+    },
+    {
+      "id": "#forge:wires/dense/schrabidate",
+      "required": false
+    },
+    {
+      "id": "#forge:wires/dense/titanium",
+      "required": false
+    },
+    {
+      "id": "#forge:wires/dense/copper",
+      "required": false
+    },
+    {
+      "id": "#forge:wires/dense/tungsten",
+      "required": false
+    },
+    {
+      "id": "#forge:wires/dense/neodymium",
+      "required": false
+    },
+    {
+      "id": "#forge:wires/dense/niobium",
+      "required": false
+    },
+    {
+      "id": "#forge:wires/dense/mingrade",
+      "required": false
+    },
+    {
+      "id": "#forge:wires/dense/alloy",
+      "required": false
+    },
+    {
+      "id": "#forge:wires/dense/star",
+      "required": false
+    },
+    {
+      "id": "#forge:wires/dense/bscco",
+      "required": false
+    },
+    {
+      "id": "#forge:wires/dense/magtung",
+      "required": false
+    },
+    {
+      "id": "#forge:wires/dense/dnt",
+      "required": false
+    }
   ]
 }

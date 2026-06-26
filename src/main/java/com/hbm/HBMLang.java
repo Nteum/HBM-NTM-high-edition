@@ -90,6 +90,7 @@ public enum HBMLang implements ILangEntry {
     ITEM_METEOR_REMOTE_DESC("Right click to summon a meteorite!"),
     BLOCK_FIREBOX_DESC("Burns solid fuel to produce heat."),
     ITEM_UNSTABLE("Decay : %s"),
+    BLOCK_DEPTH_DESC("Can only be destroyed by explosions"),
     // handoverTexts
     ENERGY("item","battery.tooltip"),
     FLUID_CAPACITY("item","fluid_capacity"),

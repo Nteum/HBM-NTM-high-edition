@@ -1,13 +1,40 @@
 {
   "values": [
-    "#forge:receivers/heavy/dura",
-    "#forge:receivers/heavy/ferro",
-    "#forge:receivers/heavy/tcalloy",
-    "#forge:receivers/heavy/cdalloy",
-    "#forge:receivers/heavy/bbronze",
-    "#forge:receivers/heavy/abronze",
-    "#forge:receivers/heavy/gunmetal",
-    "#forge:receivers/heavy/weaponsteel",
-    "#forge:receivers/heavy/saturn"
+    {
+      "id": "#forge:receivers/heavy/dura",
+      "required": false
+    },
+    {
+      "id": "#forge:receivers/heavy/ferro",
+      "required": false
+    },
+    {
+      "id": "#forge:receivers/heavy/tcalloy",
+      "required": false
+    },
+    {
+      "id": "#forge:receivers/heavy/cdalloy",
+      "required": false
+    },
+    {
+      "id": "#forge:receivers/heavy/bbronze",
+      "required": false
+    },
+    {
+      "id": "#forge:receivers/heavy/abronze",
+      "required": false
+    },
+    {
+      "id": "#forge:receivers/heavy/gunmetal",
+      "required": false
+    },
+    {
+      "id": "#forge:receivers/heavy/weaponsteel",
+      "required": false
+    },
+    {
+      "id": "#forge:receivers/heavy/saturn",
+      "required": false
+    }
   ]
 }

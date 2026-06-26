@@ -1,10 +1,28 @@
 {
   "values": [
-    "#forge:shells/titanium",
-    "#forge:shells/copper",
-    "#forge:shells/aluminium",
-    "#forge:shells/steel",
-    "#forge:shells/weaponsteel",
-    "#forge:shells/saturn"
+    {
+      "id": "#forge:shells/titanium",
+      "required": false
+    },
+    {
+      "id": "#forge:shells/copper",
+      "required": false
+    },
+    {
+      "id": "#forge:shells/aluminium",
+      "required": false
+    },
+    {
+      "id": "#forge:shells/steel",
+      "required": false
+    },
+    {
+      "id": "#forge:shells/weaponsteel",
+      "required": false
+    },
+    {
+      "id": "#forge:shells/saturn",
+      "required": false
+    }
   ]
 }

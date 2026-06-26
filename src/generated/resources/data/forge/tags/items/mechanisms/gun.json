@@ -1,7 +1,16 @@
 {
   "values": [
-    "#forge:mechanisms/gun/gunmetal",
-    "#forge:mechanisms/gun/weaponsteel",
-    "#forge:mechanisms/gun/saturn"
+    {
+      "id": "#forge:mechanisms/gun/gunmetal",
+      "required": false
+    },
+    {
+      "id": "#forge:mechanisms/gun/weaponsteel",
+      "required": false
+    },
+    {
+      "id": "#forge:mechanisms/gun/saturn",
+      "required": false
+    }
   ]
 }

@@ -1,14 +1,44 @@
 {
   "values": [
-    "#forge:receivers/light/steel",
-    "#forge:receivers/light/dura",
-    "#forge:receivers/light/desh",
-    "#forge:receivers/light/tcalloy",
-    "#forge:receivers/light/cdalloy",
-    "#forge:receivers/light/bbronze",
-    "#forge:receivers/light/abronze",
-    "#forge:receivers/light/gunmetal",
-    "#forge:receivers/light/weaponsteel",
-    "#forge:receivers/light/saturn"
+    {
+      "id": "#forge:receivers/light/steel",
+      "required": false
+    },
+    {
+      "id": "#forge:receivers/light/dura",
+      "required": false
+    },
+    {
+      "id": "#forge:receivers/light/desh",
+      "required": false
+    },
+    {
+      "id": "#forge:receivers/light/tcalloy",
+      "required": false
+    },
+    {
+      "id": "#forge:receivers/light/cdalloy",
+      "required": false
+    },
+    {
+      "id": "#forge:receivers/light/bbronze",
+      "required": false
+    },
+    {
+      "id": "#forge:receivers/light/abronze",
+      "required": false
+    },
+    {
+      "id": "#forge:receivers/light/gunmetal",
+      "required": false
+    },
+    {
+      "id": "#forge:receivers/light/weaponsteel",
+      "required": false
+    },
+    {
+      "id": "#forge:receivers/light/saturn",
+      "required": false
+    }
   ]
 }

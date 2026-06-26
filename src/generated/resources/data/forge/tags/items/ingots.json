@@ -22,48 +22,177 @@
     "hbm:ingot_cft",
     "hbm:ingot_steel_dusted",
     "hbm:ingot_chainsteel",
-    "#forge:ingots/titanium",
-    "#forge:ingots/copper",
-    "#forge:ingots/tungsten",
-    "#forge:ingots/aluminium",
-    "#forge:ingots/lead",
-    "#forge:ingots/bismuth",
-    "#forge:ingots/arsenic",
-    "#forge:ingots/tantalium",
-    "#forge:ingots/neodymium",
-    "#forge:ingots/niobium",
-    "#forge:ingots/beryllium",
-    "#forge:ingots/emerald",
-    "#forge:ingots/cobalt",
-    "#forge:ingots/boron",
-    "#forge:ingots/borax",
-    "#forge:ingots/lanthanium",
-    "#forge:ingots/zirconium",
-    "#forge:ingots/sodium",
-    "#forge:ingots/sodalite",
-    "#forge:ingots/strontium",
-    "#forge:ingots/calcium",
-    "#forge:ingots/lithium",
-    "#forge:ingots/sulfur",
-    "#forge:ingots/kno",
-    "#forge:ingots/fluorite",
-    "#forge:ingots/phosphorus",
-    "#forge:ingots/phosphorus_w",
-    "#forge:ingots/chlorocalcite",
-    "#forge:ingots/molysite",
-    "#forge:ingots/cinnabar",
-    "#forge:ingots/cadmium",
-    "#forge:ingots/silicon",
-    "#forge:ingots/asbestos",
-    "#forge:ingots/quartz",
-    "#forge:ingots/osmiridium",
-    "#forge:ingots/nickel",
-    "#forge:ingots/gallium",
-    "#forge:ingots/zinc",
-    "#forge:ingots/bromine",
-    "#forge:ingots/iodine",
-    "#forge:ingots/hafnium",
-    "#forge:ingots/iridium",
-    "#forge:ingots/slag"
+    {
+      "id": "#forge:ingots/titanium",
+      "required": false
+    },
+    {
+      "id": "#forge:ingots/copper",
+      "required": false
+    },
+    {
+      "id": "#forge:ingots/tungsten",
+      "required": false
+    },
+    {
+      "id": "#forge:ingots/aluminium",
+      "required": false
+    },
+    {
+      "id": "#forge:ingots/lead",
+      "required": false
+    },
+    {
+      "id": "#forge:ingots/bismuth",
+      "required": false
+    },
+    {
+      "id": "#forge:ingots/arsenic",
+      "required": false
+    },
+    {
+      "id": "#forge:ingots/tantalium",
+      "required": false
+    },
+    {
+      "id": "#forge:ingots/neodymium",
+      "required": false
+    },
+    {
+      "id": "#forge:ingots/niobium",
+      "required": false
+    },
+    {
+      "id": "#forge:ingots/beryllium",
+      "required": false
+    },
+    {
+      "id": "#forge:ingots/emerald",
+      "required": false
+    },
+    {
+      "id": "#forge:ingots/cobalt",
+      "required": false
+    },
+    {
+      "id": "#forge:ingots/boron",
+      "required": false
+    },
+    {
+      "id": "#forge:ingots/borax",
+      "required": false
+    },
+    {
+      "id": "#forge:ingots/lanthanium",
+      "required": false
+    },
+    {
+      "id": "#forge:ingots/zirconium",
+      "required": false
+    },
+    {
+      "id": "#forge:ingots/sodium",
+      "required": false
+    },
+    {
+      "id": "#forge:ingots/sodalite",
+      "required": false
+    },
+    {
+      "id": "#forge:ingots/strontium",
+      "required": false
+    },
+    {
+      "id": "#forge:ingots/calcium",
+      "required": false
+    },
+    {
+      "id": "#forge:ingots/lithium",
+      "required": false
+    },
+    {
+      "id": "#forge:ingots/sulfur",
+      "required": false
+    },
+    {
+      "id": "#forge:ingots/kno",
+      "required": false
+    },
+    {
+      "id": "#forge:ingots/fluorite",
+      "required": false
+    },
+    {
+      "id": "#forge:ingots/phosphorus",
+      "required": false
+    },
+    {
+      "id": "#forge:ingots/phosphorus_w",
+      "required": false
+    },
+    {
+      "id": "#forge:ingots/chlorocalcite",
+      "required": false
+    },
+    {
+      "id": "#forge:ingots/molysite",
+      "required": false
+    },
+    {
+      "id": "#forge:ingots/cinnabar",
+      "required": false
+    },
+    {
+      "id": "#forge:ingots/cadmium",
+      "required": false
+    },
+    {
+      "id": "#forge:ingots/silicon",
+      "required": false
+    },
+    {
+      "id": "#forge:ingots/asbestos",
+      "required": false
+    },
+    {
+      "id": "#forge:ingots/quartz",
+      "required": false
+    },
+    {
+      "id": "#forge:ingots/osmiridium",
+      "required": false
+    },
+    {
+      "id": "#forge:ingots/nickel",
+      "required": false
+    },
+    {
+      "id": "#forge:ingots/gallium",
+      "required": false
+    },
+    {
+      "id": "#forge:ingots/zinc",
+      "required": false
+    },
+    {
+      "id": "#forge:ingots/bromine",
+      "required": false
+    },
+    {
+      "id": "#forge:ingots/iodine",
+      "required": false
+    },
+    {
+      "id": "#forge:ingots/hafnium",
+      "required": false
+    },
+    {
+      "id": "#forge:ingots/iridium",
+      "required": false
+    },
+    {
+      "id": "#forge:ingots/slag",
+      "required": false
+    }
   ]
 }

@@ -1,13 +1,40 @@
 {
   "values": [
-    "#forge:stocks/wood",
-    "#forge:stocks/desh",
-    "#forge:stocks/gunmetal",
-    "#forge:stocks/weaponsteel",
-    "#forge:stocks/saturn",
-    "#forge:stocks/polymer",
-    "#forge:stocks/bakelite",
-    "#forge:stocks/hardplastic",
-    "#forge:stocks/pvc"
+    {
+      "id": "#forge:stocks/wood",
+      "required": false
+    },
+    {
+      "id": "#forge:stocks/desh",
+      "required": false
+    },
+    {
+      "id": "#forge:stocks/gunmetal",
+      "required": false
+    },
+    {
+      "id": "#forge:stocks/weaponsteel",
+      "required": false
+    },
+    {
+      "id": "#forge:stocks/saturn",
+      "required": false
+    },
+    {
+      "id": "#forge:stocks/polymer",
+      "required": false
+    },
+    {
+      "id": "#forge:stocks/bakelite",
+      "required": false
+    },
+    {
+      "id": "#forge:stocks/hardplastic",
+      "required": false
+    },
+    {
+      "id": "#forge:stocks/pvc",
+      "required": false
+    }
   ]
 }
