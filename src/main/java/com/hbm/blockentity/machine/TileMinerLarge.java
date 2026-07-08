@@ -328,15 +328,15 @@ public class TileMinerLarge extends DummyableBlockEntity implements IUpgradeInfo
         EnumDrillType type = this.getInstalledDrill();
         List<ItemStack> stacks = new ArrayList<>();
         // 挖掘基岩矿
-        BedRockOre.TileBedrockOre ore = WorldUtils.getTileEntity(BedRockOre.TileBedrockOre.class, this.level, bedrockOrePos);
-        if (ore == null || ore.resource != null && ore.tier <= type.tier) return stacks;
-        FluidStack fluidInTank = this.fluidHandler.getFluidInTank(0);
-        if (ore.acidRequirement != null){
-            if (this.fluidHandler.drain(ore.acidRequirement, IFluidHandler.FluidAction.SIMULATE).getAmount() < ore.acidRequirement.getAmount()) return stacks;
-            this.fluidHandler.drain(ore.acidRequirement, IFluidHandler.FluidAction.EXECUTE);
-        }
-        ItemStack stack = ore.resource.copy();
-        stacks.add(stack);
+//        BedRockOre.TileBedrockOre ore = WorldUtils.getTileEntity(BedRockOre.TileBedrockOre.class, this.level, bedrockOrePos);
+//        if (ore == null || ore.resource != null && ore.tier <= type.tier) return stacks;
+//        FluidStack fluidInTank = this.fluidHandler.getFluidInTank(0);
+//        if (ore.acidRequirement != null){
+//            if (this.fluidHandler.drain(ore.acidRequirement, IFluidHandler.FluidAction.SIMULATE).getAmount() < ore.acidRequirement.getAmount()) return stacks;
+//            this.fluidHandler.drain(ore.acidRequirement, IFluidHandler.FluidAction.EXECUTE);
+//        }
+//        ItemStack stack = ore.resource.copy();
+//        stacks.add(stack);
 
 //        if(stack.getItem() == ModItems.bedrock_ore_base) {
 //            ItemBedrockOreBase.setOreAmount(worldObj, stack, pos.getX(), pos.getZ(), 1D + this.getInstalledDrill().fortune * 0.1D);

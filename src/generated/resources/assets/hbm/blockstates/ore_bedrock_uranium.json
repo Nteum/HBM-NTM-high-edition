@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "bedrock_ore_variant=1": {
+      "model": "hbm:block/ore_bedrock_1"
+    },
+    "bedrock_ore_variant=10": {
+      "model": "hbm:block/ore_bedrock_10"
+    },
+    "bedrock_ore_variant=2": {
+      "model": "hbm:block/ore_bedrock_2"
+    },
+    "bedrock_ore_variant=3": {
+      "model": "hbm:block/ore_bedrock_3"
+    },
+    "bedrock_ore_variant=4": {
+      "model": "hbm:block/ore_bedrock_4"
+    },
+    "bedrock_ore_variant=5": {
+      "model": "hbm:block/ore_bedrock_5"
+    },
+    "bedrock_ore_variant=6": {
+      "model": "hbm:block/ore_bedrock_6"
+    },
+    "bedrock_ore_variant=7": {
+      "model": "hbm:block/ore_bedrock_7"
+    },
+    "bedrock_ore_variant=8": {
+      "model": "hbm:block/ore_bedrock_8"
+    },
+    "bedrock_ore_variant=9": {
+      "model": "hbm:block/ore_bedrock_9"
+    }
+  }
+}

@@ -9,14 +9,18 @@ import com.hbm.dim.orbit.CelestialBodies;
 import com.hbm.dim.orbit.Space;
 import com.hbm.entity.ModEntityType;
 import com.hbm.entity.mob.EntityGlyphid;
+import com.hbm.item.interfaces.IUpdateInHand;
 import com.hbm.registries.*;
 import com.hbm.item.env.ItemEggGlyphid;
 import com.hbm.network.ServerMsgHandler;
 import com.hbm.utils.transport_net.EnergyNetworkSystem;
 import com.hbm.utils.transport_net.FluidBackupSystem;
 import com.hbm.utils.transport_net.FluidNetworkSystem;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
@@ -35,6 +39,7 @@ import net.minecraftforge.event.entity.living.MobSpawnEvent;
 import net.minecraftforge.event.level.LevelEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
@@ -134,6 +139,22 @@ public class ServerEventHandler {
         if (itemStack.is(ModItems.EGG_GLYPHID.get()) || itemStack.is(ModItems.EGG_GLYPHID_TO_BIRTH.get())){
             event.getPlayer().addItem(itemStack);
             event.setCanceled(true);
+        }
+    }
+
+    @SubscribeEvent
+    public static void onPlayerTickEvent(TickEvent.PlayerTickEvent event){
+        if (event.phase != TickEvent.Phase.END) return;
+        if (event.side == LogicalSide.SERVER){
+            ServerPlayer player = (ServerPlayer) event.player;
+//            ItemStack itemMainHand = player.getItemInHand(InteractionHand.MAIN_HAND);
+//            ItemStack itemOffHand = player.getItemInHand(InteractionHand.OFF_HAND);
+            for (InteractionHand hand : InteractionHand.values()) {
+                ItemStack itemInHand = player.getItemInHand(hand);
+                if (itemInHand.getItem() instanceof IUpdateInHand iUpdateInHand){
+                    iUpdateInHand.onUpdate(itemInHand, event.player.level(), player);
+                }
+            }
         }
     }
 

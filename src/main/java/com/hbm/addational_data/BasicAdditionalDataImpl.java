@@ -1,7 +1,7 @@
 package com.hbm.addational_data;
 
 import com.hbm.HBM;
-import com.hbm.utils.NBTHelper;
+import com.hbm.utils.data.NBTHelper;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraftforge.common.util.INBTSerializable;
 import org.jetbrains.annotations.Nullable;

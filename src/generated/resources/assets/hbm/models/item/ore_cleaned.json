@@ -1,6 +1,7 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "hbm:item/ore_cleaned"
+    "layer0": "hbm:item/ore_cleaned",
+    "layer1": "hbm:item/ore_overlay"
   }
 }

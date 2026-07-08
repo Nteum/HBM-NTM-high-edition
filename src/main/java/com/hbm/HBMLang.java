@@ -1,17 +1,9 @@
 package com.hbm;
 
 import com.hbm.api.text.ILangEntry;
-import com.hbm.datagen.LanguageProvider;
 import joptsimple.internal.Strings;
 import net.minecraft.Util;
-import net.minecraft.client.gui.screens.inventory.FurnaceScreen;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.level.block.SlabBlock;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public enum HBMLang implements ILangEntry {
     // 创造模式物品栏
@@ -91,11 +83,33 @@ public enum HBMLang implements ILangEntry {
     BLOCK_FIREBOX_DESC("Burns solid fuel to produce heat."),
     ITEM_UNSTABLE("Decay : %s"),
     BLOCK_DEPTH_DESC("Can only be destroyed by explosions"),
+    ITEM_BECROCK_ORE_RAW("Mined on: %s"),
+    ITEM_BECROCK_ORE_LIGHT("Light"),
+    ITEM_BEDROCK_ORE_HEAVY("Heavy"),
+    ITEM_BEDROCK_ORE_NONMETAL("Nonmetal"),
+    ITEM_BEDROCK_ORE_CRYSTAL("Crystal"),
+    ITEM_BEDROCK_ORE_RARE("Rare"),
+    ITEM_BEDROCK_ORE_ACTINIDE("Actinide"),
+    ITEM_BEDROCK_ORE_SCHRABIDIC("Schrabidic"),
+    ITEM_BEDROCK_ORE_HAZARD("Hazard"),
+    ITEM_BEDROCK_ORE_PLASTIC("Plastic"),
+    ITEM_ORE_DENSITY_SCANNER_VERYPOOR("Very Poor"),
+    ITEM_ORE_DENSITY_SCANNER_POOR("Poor"),
+    ITEM_ORE_DENSITY_SCANNER_LOW("Low"),
+    ITEM_ORE_DENSITY_SCANNER_EXCELLENT("Excellent"),
+    ITEM_ORE_DENSITY_SCANNER_VERYHEIGH("Very High"),
+    ITEM_ORE_DENSITY_SCANNER_HIGH("High"),
+    ITEM_ORE_DENSITY_SCANNER_MODERATE("Moderate"),
+    ITEM_ORE_BEDROCK_DESC1("Processing outputs"),
+    ITEM_ORE_BEDROCK_DESC2("Main: %s"),
+    ITEM_ORE_BEDROCK_DESC3("Sulfuric: %s"),
+    ITEM_ORE_BEDROCK_DESC4("Solvent: %s"),
+    ITEM_ORE_BEDROCK_DESC5("HPS: %s"),
     // handoverTexts
     ENERGY("item","battery.tooltip"),
     FLUID_CAPACITY("item","fluid_capacity"),
     SPEED("item","Speed: %"),
-    TIER("item","Tier: "),
+    TIER("item","Tier: %"),
     VEIN_MINER("item","Vein Miner"),
     // command
     COMMAND_DEBUG("command","debug"),
@@ -190,6 +204,40 @@ public enum HBMLang implements ILangEntry {
     ARMOR_DASH("Grants %s dashes"),
     ARMOR_FSB("Full Set Bonus:"),
     TOOLTIP_CHARGERATE("Charge: %s / %s"),
+    // 维度
+    DIMENSION_MUN("Moon"),
+    DIMENSION_KERBIN("kerbin"),
+    DIMENSION_MINMUS("Minmus"),
+    DIMENSION_DUNA("Duna"),
+    DIMENSION_MOHO("Moho"),
+    DIMENSION_DRES("Dres"),
+    DIMENSION_EVE("Eve"),
+    DIMENSION_IKE("Ike"),
+    DIMENSION_LAYTHE("Laythe"),
+    DIMENSION_TEKTO("Tekto"),
+    // 基础元素
+    iron("Iron"),
+    copper("Copper"),
+    gold("Gold"),
+    base("Base"),
+    primary("Primary"),
+    crumbs("Crumbs"),
+    sulfuric("Sulfuric"),
+    solvent("Solvent"),
+    rad("Rad"),
+    light("Light"),
+    heavy("Heavy"),
+    nonmetal("Nonmetal"),
+    crystal("Crystal"),
+    rare("Rare"),
+    actinide("Actinide"),
+    schrabidic("Schrabidic"),
+    hazard("Hazard"),
+    plastic("Plastic"),
+    roasted("roasted"),
+    arc("arc"),
+    washed("washed"),
+    centrifuged("centrifuged"),
     ;
 
     private final String key;
@@ -216,5 +264,9 @@ public enum HBMLang implements ILangEntry {
     }
     public String content(){
         return content;
+    }
+
+    public static String descId(String head, String tail){
+        return head + "."+ HBM.MODID + "." + tail;
     }
 }

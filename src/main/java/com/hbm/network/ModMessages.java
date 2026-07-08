@@ -40,6 +40,7 @@ public class ModMessages {
         registerServerToClient(S2CEntitySyncPacket.class, S2CEntitySyncPacket::decode, S2CEntitySyncPacket::encode, S2CEntitySyncPacket::handle);
         registerServerToClient(S2CAtomicFlashPacket.class, S2CAtomicFlashPacket::decode, S2CAtomicFlashPacket::encode, S2CAtomicFlashPacket::handle);
         registerServerToClient(S2CExplosionPacket.class, S2CExplosionPacket::new, S2CExplosionPacket::encode, S2CExplosionPacket::handle);
+        registerServerToClient(S2CHUDPacket.class, S2CHUDPacket::decode, S2CHUDPacket::encode, S2CHUDPacket::handle);
 
         registerClientToServer(C2SSyncTileMessage.class, C2SSyncTileMessage::decode, C2SSyncTileMessage::encode, C2SSyncTileMessage::handle);
         registerClientToServer(S2CSyncFailMessage.class, S2CSyncFailMessage::decode, S2CSyncFailMessage::encode, S2CSyncFailMessage::handle);

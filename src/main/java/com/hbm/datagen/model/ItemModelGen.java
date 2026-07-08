@@ -4,6 +4,7 @@ import com.hbm.HBM;
 import com.hbm.Inventory.fluid.ModFluids;
 import com.hbm.item.*;
 import com.hbm.registries.ModItems;;
+import com.hbm.registries.WrappedRegistryBuilder;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
@@ -12,18 +13,19 @@ import net.minecraft.world.item.Items;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
+import net.minecraftforge.client.model.generators.ModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 public class ItemModelGen extends ItemModelProvider {
     private final Set<ResourceLocation> generatedModels = new HashSet<>();
+    public static ResourceLocation property_stage = HBM.rl("stage");
+    public static ResourceLocation property_type = HBM.rl("type");
 
     public ItemModelGen(PackOutput output, String modid, ExistingFileHelper existingFileHelper) {
         super(output, modid, existingFileHelper);
@@ -35,17 +37,9 @@ public class ItemModelGen extends ItemModelProvider {
         HBMWeapon.genModel(this);
         HBMCombat.genModel(this);
         ModFluids.bucketModel(this);
-
-//        this.basicItem(ModItems.overlay_my_fluid.get());
-//        this.basicItem(ModItems.BEDROCK_ORE.get());
-//        /* tool */
-//        this.basicItem(ModItems.SCREWDRIVER.get());
-
         generateMissingSimpleItemModels();
 
         ResourceLocation item_path;
-        ResourceLocation property_stage = HBM.rl("stage");
-        ResourceLocation property_broken = new ResourceLocation("broken");
         item_path = Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(ModItems.INGOT_U238M2.get()));
         this.getBuilder(item_path.toString()).parent(new ModelFile.UncheckedModelFile("item/generated"))
                 .texture("layer0", new ResourceLocation(item_path.getNamespace(), "item/ingot_u238m2"))
@@ -65,13 +59,6 @@ public class ItemModelGen extends ItemModelProvider {
     public void registerOrdinaryItemModel(String key){
         this.singleTexture(key,new ResourceLocation("item/generated"),"layer0"
                 ,new ResourceLocation(HBM.MODID, "item/" + key));
-    }
-    /**
-     * 产生默认的实体模型，在游戏内自主渲染。
-     * */
-    public void builtinModel(Item item){
-        ResourceLocation resourceLocation = Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(item));
-        this.withExistingParent(resourceLocation.toString(), "builtin/entity");
     }
 
     @Override
@@ -134,7 +121,7 @@ public class ItemModelGen extends ItemModelProvider {
         });
     }
 
-    private ResourceLocation getPath(Item item){
+    public static ResourceLocation getPath(Item item){
         return Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(item));
     }
     public ItemModelGen basicItemWithProperty(Item item, ResourceLocation property, ResourceLocation alterTexture){
@@ -146,16 +133,67 @@ public class ItemModelGen extends ItemModelProvider {
                 .end();
         return this;
     }
-    public ItemModelGen multiLayerItem(Item item, ResourceLocation ... layers){
-        if (layers.length == 0) this.basicItem(item);
-        else {
-            ResourceLocation path = getPath(item);
-            ItemModelBuilder builder = this.getBuilder(path.toString()).parent(new ModelFile.UncheckedModelFile("item/generated"))
-                    .texture("layer0", new ResourceLocation(path.getNamespace(), "item/" + path.getPath()));
-            for (int i = 0; i < layers.length; i++) {
-                builder.texture("layer" + (i + 1), new ResourceLocation(path.getNamespace(), "item/" + layers[i].getPath()));
-            }
+
+    public ItemModelGen basicItemWithProperty(Item item, boolean withBaseTexture, ResourceLocation property, Map<Float, ResourceLocation> alterTextures){
+        ResourceLocation path = getPath(item);
+        ItemModelBuilder builder = this.getBuilder(path.toString()).parent(new ModelFile.UncheckedModelFile("item/generated"));
+        if (withBaseTexture) builder.texture("layer0", decorateRL(path));
+        for (Map.Entry<Float, ResourceLocation> entry : alterTextures.entrySet()) {
+            builder.override().predicate(property, entry.getKey()).model(this.basicItem(decorateRL(entry.getValue()))).end();
         }
         return this;
+    }
+    // 这里涉及复杂的嵌套，还是
+    public ItemModelGen basicItemWith2Properties(Item item, List<WrappedRegistryBuilder.ItemPropertyInfo> infos){
+        if (infos == null || infos.size() != 2) return this;
+        ResourceLocation path = getPath(item);
+        ItemModelBuilder builder = this.getBuilder(path.toString()).parent(new ModelFile.UncheckedModelFile("item/generated"));
+        WrappedRegistryBuilder.ItemPropertyInfo info1 = infos.get(0);
+        WrappedRegistryBuilder.ItemPropertyInfo info2 = infos.get(1);
+        for (Map.Entry<Float, ResourceLocation> entry1 : info1.propertyTextures().entrySet()) {
+            for (Map.Entry<Float, ResourceLocation> entry2 : info2.propertyTextures().entrySet()) {
+                builder.override().predicate(info1.itemProperty(), entry1.getKey()).predicate(info2.itemProperty(), entry2.getKey())
+                        .model(this.multiLayerItem(item, info1.withBaseTexture(), entry1.getValue(), entry2.getValue()))
+                        .end();
+            }
+        }
+
+        return this;
+    }
+    public ModelFile multiLayerItem(Item item, boolean specifiedBaseTexture, ResourceLocation ... layers){
+        return multiLayerItem(getPath(item), specifiedBaseTexture, layers);
+//        if (layers.length == 0) return this.basicItem(item);
+//        else {
+//            ResourceLocation path = getPath(item);
+//            ResourceLocation baseTexture = new ResourceLocation(path.getNamespace(), "item/" +( specifiedBaseTexture ? layers[0].getPath() : path.getPath()));
+//            ItemModelBuilder builder = this.getBuilder(path.toString()).parent(getExistingFile(ResourceLocation.tryParse("item/generated")))
+//                    .texture("layer0", baseTexture);
+//            for (int i = specifiedBaseTexture ? 1 : 0; i < layers.length; i++) {
+//                builder.texture("layer" + (specifiedBaseTexture ? i : i + 1), new ResourceLocation(path.getNamespace(), "item/" + layers[i].getPath()));
+//            }
+//            return builder;
+//        }
+    }
+
+    public ModelFile multiLayerItem(ResourceLocation path, boolean specifiedBaseTexture, ResourceLocation ... layers){
+        if (layers.length == 0) return this.basicItem(path);
+        else {
+            ResourceLocation baseTexture = new ResourceLocation(path.getNamespace(), "item/" +( specifiedBaseTexture ? layers[0].getPath() : path.getPath()));
+            ItemModelBuilder builder = this.getBuilder(path.toString()).parent(getExistingFile(ResourceLocation.tryParse("item/generated")))
+                    .texture("layer0", baseTexture);
+            for (int i = specifiedBaseTexture ? 1 : 0; i < layers.length; i++) {
+                builder.texture("layer" + (specifiedBaseTexture ? i : i + 1), new ResourceLocation(path.getNamespace(), "item/" + layers[i].getPath()));
+            }
+            return builder;
+        }
+    }
+
+    public ItemModelGen singleTexture(Item item, ResourceLocation texture){
+        getBuilder(getPath(item).toString()).parent(new ModelFile.UncheckedModelFile("item/generated")).texture("layer0", texture);
+        return this;
+    }
+
+    private ResourceLocation decorateRL(ResourceLocation resourceLocation){
+        return resourceLocation.withPrefix(ModelProvider.ITEM_FOLDER + "/");
     }
 }

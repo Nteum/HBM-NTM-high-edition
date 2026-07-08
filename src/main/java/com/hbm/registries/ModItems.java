@@ -17,9 +17,7 @@ import com.hbm.item.ItemEnums;
 import com.hbm.item.armor.ItemAshGlass;
 import com.hbm.item.consumable.LegacyConsumableItem;
 import com.hbm.item.consumable.TemFlakesItem;
-import com.hbm.item.env.BedrockOreItem;
-import com.hbm.item.env.ItemEggGlyphid;
-import com.hbm.item.env.ItemEggGlyphidToBirth;
+import com.hbm.item.env.*;
 import com.hbm.item.icf.ItemICFPellet;
 import com.hbm.item.machine.ItemMachineUpgrade;
 import com.hbm.item.machine.ItemMachineUpgrade.UpgradeType;
@@ -37,13 +35,15 @@ import com.hbm.item.tool.*;
 import com.hbm.item.weapon.*;
 import com.hbm.item.weapon.grenade.ItemGrenade;
 import com.hbm.item.zirnox.ItemZirnoxRod;
+import com.hbm.main.ClientEventHandler;
 import com.hbm.reactor.rbmk.RBMKLidType;
 import com.hbm.registries.WrappedRegistryBuilder.*;
+import com.hbm.render.hud.HUDBedrockOreScanner;
 import com.hbm.render.model.Models;
 import com.hbm.entity.weapon.missile.EntityMissileTier0;
 import com.hbm.debug.GunSuicide;
 import com.hbm.debug.ItemDebugWand;
-import com.hbm.utils.NBTHelper;
+import com.hbm.utils.data.NBTHelper;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -53,6 +53,8 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.client.event.RegisterColorHandlersEvent;
+import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
+import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
@@ -506,8 +508,53 @@ public class ModItems {
     public static final RegistryObject<Item> INGOT_MUD = parts("ingot_mud", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.MUD.ingot());
     public static final RegistryObject<Item> INGOT_CFT = parts("ingot_cft", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, Tags.Items.INGOTS);
 
+    public static final RegistryObject<Item> BYPRODUCT = new WrappedItemRegistryBuilder("byproduct", ()->new ItemBedrockOre(new Item.Properties()))
+            .tab(ModTabs.PARTS.getKey()).color((ItemStack stack, int tintIndex) -> tintIndex == 1 ? ItemBedrockOre.getColor(stack) : -1).build();
+    public static final RegistryObject<Item> BEDROCK_ORE = new WrappedItemRegistryBuilder("piece_ore_bedrock", ()->new ItemBedrockOre(new Item.Properties()))
+            .tab(ModTabs.PARTS.getKey()).loc(HBMKey.REVERSE_GEN).model(HBMKey.MODEL_ITEM_OVERLAY, HBM.rl("ore_overlay"))
+            .color((ItemStack stack, int tintIndex) -> tintIndex == 1 ? ItemBedrockOre.getColor(stack) : -1).build();
+    public static final RegistryObject<Item> ORE_CENTRIFUGED = new WrappedItemRegistryBuilder("ore_centrifuged", ()->new ItemBedrockOre(new Item.Properties()))
+            .tab(ModTabs.PARTS.getKey()).loc(HBMKey.REVERSE_GEN).model(HBMKey.MODEL_ITEM_OVERLAY, HBM.rl("ore_overlay"))
+            .color((ItemStack stack, int tintIndex) -> tintIndex == 1 ? ItemBedrockOre.getColor(stack) : -1).build();
+    public static final RegistryObject<Item> ORE_CLEANED = new WrappedItemRegistryBuilder("ore_cleaned", ()->new ItemBedrockOre(new Item.Properties()))
+            .tab(ModTabs.PARTS.getKey()).loc(HBMKey.REVERSE_GEN).model(HBMKey.MODEL_ITEM_OVERLAY, HBM.rl("ore_overlay"))
+            .color((ItemStack stack, int tintIndex) -> tintIndex == 1 ? ItemBedrockOre.getColor(stack) : -1).build();
+    public static final RegistryObject<Item> ORE_SEPARATED = new WrappedItemRegistryBuilder("ore_separated", ()->new ItemBedrockOre(new Item.Properties()))
+            .tab(ModTabs.PARTS.getKey()).loc(HBMKey.REVERSE_GEN).model(HBMKey.MODEL_ITEM_OVERLAY, HBM.rl("ore_overlay"))
+            .color((ItemStack stack, int tintIndex) -> tintIndex == 1 ? ItemBedrockOre.getColor(stack) : -1).build();
+    public static final RegistryObject<Item> ORE_PURIFIED = new WrappedItemRegistryBuilder("ore_purified", ()->new ItemBedrockOre(new Item.Properties()))
+            .tab(ModTabs.PARTS.getKey()).loc(HBMKey.REVERSE_GEN).model(HBMKey.MODEL_ITEM_OVERLAY, HBM.rl("ore_overlay"))
+            .color((ItemStack stack, int tintIndex) -> tintIndex == 1 ? ItemBedrockOre.getColor(stack) : -1).build();
+    public static final RegistryObject<Item> ORE_NITRATED = new WrappedItemRegistryBuilder("ore_nitrated", ()->new ItemBedrockOre(new Item.Properties()))
+            .tab(ModTabs.PARTS.getKey()).loc(HBMKey.REVERSE_GEN).model(HBMKey.MODEL_ITEM_OVERLAY, HBM.rl("ore_overlay"))
+            .color((ItemStack stack, int tintIndex) -> tintIndex == 1 ? ItemBedrockOre.getColor(stack) : -1).build();
+    public static final RegistryObject<Item> ORE_NITROCRYSTALLINE = new WrappedItemRegistryBuilder("ore_nitrocrystalline", ()->new ItemBedrockOre(new Item.Properties()))
+            .tab(ModTabs.PARTS.getKey()).loc(HBMKey.REVERSE_GEN).model(HBMKey.MODEL_ITEM_OVERLAY, HBM.rl("ore_overlay"))
+            .color((ItemStack stack, int tintIndex) -> tintIndex == 1 ? ItemBedrockOre.getColor(stack) : -1).build();
+    public static final RegistryObject<Item> ORE_DEEPCLEANED = new WrappedItemRegistryBuilder("ore_deepcleaned", ()->new ItemBedrockOre(new Item.Properties()))
+            .tab(ModTabs.PARTS.getKey()).loc(HBMKey.REVERSE_GEN).model(HBMKey.MODEL_ITEM_OVERLAY, HBM.rl("ore_overlay"))
+            .color((ItemStack stack, int tintIndex) -> tintIndex == 1 ? ItemBedrockOre.getColor(stack) : -1).build();
+    public static final RegistryObject<Item> ORE_SEARED = new WrappedItemRegistryBuilder("ore_seared", ()->new ItemBedrockOre(new Item.Properties()))
+            .tab(ModTabs.PARTS.getKey()).loc(HBMKey.REVERSE_GEN).model(HBMKey.MODEL_ITEM_OVERLAY, HBM.rl("ore_overlay"))
+            .color((ItemStack stack, int tintIndex) -> tintIndex == 1 ? ItemBedrockOre.getColor(stack) : -1).build();
+    public static final RegistryObject<Item> ORE_ENRICHED = new WrappedItemRegistryBuilder("ore_enriched", ()->new ItemBedrockOre(new Item.Properties()))
+            .tab(ModTabs.PARTS.getKey()).loc(HBMKey.REVERSE_GEN).model(HBMKey.MODEL_ITEM_OVERLAY, HBM.rl("ore_overlay"))
+            .color((ItemStack stack, int tintIndex) -> tintIndex == 1 ? ItemBedrockOre.getColor(stack) : -1).build();
+    // 基岩原矿
+    public static final RegistryObject<Item> ORE_BEDROCK_RAW = new WrappedItemRegistryBuilder("ore_bedrock_raw", ()->new ItemBedrockOreRaw(new Item.Properties()))
+            .tab(ModTabs.PARTS.getKey()).model(HBMKey.MODEL_ITEM_SINGLE, HBM.rl("item/bedrock_ore_new")).loc(HBMKey.REVERSE_GEN).build();
+    public static final RegistryObject<Item> ORE_BEDROCK_SCANNER = new WrappedItemRegistryBuilder("bedrock_ore_scanner", ()->new ItemBedrockOreScanner(new Item.Properties()))
+            .tab(ModTabs.PARTS.getKey()).model(HBMKey.MODEL_ITEM_SINGLE, HBM.rl("item/ore_density_scanner"))
+            .hud(event -> event.registerAbove(VanillaGuiOverlay.HOTBAR.id(), ItemBedrockOreScanner.id.getPath(), new HUDBedrockOreScanner())).build();
+    public static final RegistryObject<Item> BEDROCK_ORE_COMPLEX = new WrappedItemRegistryBuilder("bedrock_ore", ()->new ItemBedrockOreCombine(new Item.Properties()))
+            .tab(ModTabs.PARTS.getKey())
+            .itemProperties(ItemModelGen.property_stage, false, ItemBedrockOreCombine::getGradeProperty, null)
+            .itemProperties(ItemModelGen.property_type, false, ItemBedrockOreCombine::getTypeProperty, null)
+            .model(ItemBedrockOreCombine::genModel) // 单独生成模型，不根据物品属性自动生成模型
+            .color((ItemStack stack, int tintIndex) -> tintIndex == 1 ? ItemBedrockOreCombine.getColor(stack) : -1)
+            .build();
+
 //    ore_byproduct = new ItemByproduct().setUnlocalizedName("ore_byproduct").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":byproduct");
-//
 //    ore_bedrock = new ItemBedrockOre().setUnlocalizedName("ore_bedrock").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":ore_bedrock");
 //    ore_centrifuged = new ItemBedrockOre().setUnlocalizedName("ore_centrifuged").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":ore_centrifuged");
 //    ore_cleaned = new ItemBedrockOre().setUnlocalizedName("ore_cleaned").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":ore_cleaned");
@@ -785,6 +832,8 @@ public class ModItems {
     public static final RegistryObject<Item> FRAGMENT_METEORITE = parts("fragment_meteorite", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     public static final RegistryObject<Item> FRAGMENT_COLTAN = parts("fragment_coltan", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
 //    chunk_ore = new ItemEnumMulti(EnumChunkType.class, true, true).setUnlocalizedName("chunk_ore").setCreativeTab(MainRegistry.partsTab);
+    public static final RegisterObjectCollection<Item, ItemEnums.EnumChunkType> CHUNK_ORE = new RegisterObjectCollection<>(ItemEnums.EnumChunkType.class, type -> new WrappedItemRegistryBuilder("chunk_ore." + type.toString().toLowerCase(), ()->new Item(new Item.Properties()))
+        .tab(ModTabs.PARTS.getKey()).loc(HBMKey.REVERSE_GEN).tags(Tags.Items.ORES).build());
 
     public static final RegistryObject<Item> BIOMASS = parts("biomass", ()->new ItemFuel(new Item.Properties(), 200 * 2), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, ModTags.Items.BIOMASS);
     public static final RegistryObject<Item> BIOMASS_COMPRESSED = parts("biomass_compressed", ()->new ItemFuel(new Item.Properties(), 200 * 4), HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
@@ -991,7 +1040,7 @@ public class ModItems {
     public static final RegistryObject<Item> crucible_template = ITEMS.register("crucible_template",()->new Item(new Item.Properties()));
 
     //矿物
-    public static final RegistryObject<Item> BEDROCK_ORE = ITEMS.register("bedrock_ore_base",()->new BedrockOreItem(new Item.Properties()));
+//    public static final RegistryObject<Item> BEDROCK_ORE = ITEMS.register("bedrock_ore_base",()->new BedrockOreItem(new Item.Properties()));
 
     public static final RegistryObject<Item> reacher = ITEMS.register("reacher",()->new Item(new Item.Properties()));
     public static final RegistryObject<Item> SCREWDRIVER = control("screwdriver", ()->new ItemTooling(new Item.Properties().stacksTo(1).durability(100).setNoRepair(), ToolType.SCREWDRIVER), "Screw");
@@ -1256,6 +1305,16 @@ public class ModItems {
     public static final RegistryObject<Item> DRILLBIT_TCALLOY_DIAMOND = parts("drillbit_tcalloy_diamond", () -> new ItemDrillbit(ItemDrillbit.EnumDrillType.TCALLOY_DIAMOND, new Item.Properties().stacksTo(1)), HBMKey.REVERSE_GEN);
     public static final RegistryObject<Item> DRILLBIT_FERRO = parts("drillbit_ferro", () -> new ItemDrillbit(ItemDrillbit.EnumDrillType.FERRO, new Item.Properties().stacksTo(1)), HBMKey.REVERSE_GEN);
     public static final RegistryObject<Item> DRILLBIT_FERRO_DIAMOND = parts("drillbit_ferro_diamond", () -> new ItemDrillbit(ItemDrillbit.EnumDrillType.FERRO_DIAMOND, new Item.Properties().stacksTo(1)), HBMKey.REVERSE_GEN);
+
+//    biomass = new Item().setUnlocalizedName("biomass").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":biomass");
+//    biomass_compressed = new Item().setUnlocalizedName("biomass_compressed").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":biomass_compressed");
+//    bio_wafer = new ItemLemon(4, 0.6F, false).setUnlocalizedName("bio_wafer").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":bio_wafer");
+    public static final RegistryObject<Item> FLESH = parts("flesh", ()->new Item(new Item.Properties()), HBMKey.ORDERLY_GEN);
+//    flesh = new Item().setUnlocalizedName("flesh").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":flesh");
+//    flesh_wafer = new ItemLemon(5, 0.6F, false).setUnlocalizedName("flesh_wafer").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":blood_wafer");
+//    grilled_flesh = new ItemLemon(6, 0.8F, false).setUnlocalizedName("grilled_flesh").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":blood_patty");
+//    flesh_burger = new ItemLemon(7, 1.0F, false).setUnlocalizedName("flesh_burger").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":blood_burger");
+//    plant_item = new ItemEnumMulti(EnumPlantType.class, true, true).setUnlocalizedName("plant_item").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":plant_item");
     // 填充物品，游戏内无法获得，用于避免物品被匹配上
     public static final RegistryObject<Item> DUMMY_ITEM = ITEMS.register("dummy_item", ()->new Item(new Item.Properties()));
     // 武器配件
@@ -1279,6 +1338,7 @@ public class ModItems {
 //        }
         LegacyItems.registerLegacy();
         ITEMS.register(eventBus);
+
     }
     public static RegistryObject<Item> machine(final String name, final Supplier<? extends Item> sup){
         return machine(name, sup, HBMKey.REVERSE_GEN);
@@ -1354,6 +1414,12 @@ public class ModItems {
     public static void itemColorSupport(RegisterColorHandlersEvent.Item event){
         for (WrappedItemRegistryBuilder itemRegistry : itemList) {
             itemRegistry.itemColorSupport(event);
+        }
+    }
+
+    public static void hudSupport(RegisterGuiOverlaysEvent event){
+        for (WrappedItemRegistryBuilder itemRegistry : itemList) {
+            itemRegistry.hudSupport(event);
         }
     }
 }

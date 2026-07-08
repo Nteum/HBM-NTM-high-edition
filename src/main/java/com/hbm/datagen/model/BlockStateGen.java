@@ -15,6 +15,7 @@ import net.minecraft.world.level.block.state.properties.*;
 import net.minecraftforge.client.model.generators.*;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -132,7 +133,9 @@ public class BlockStateGen extends BlockStateProvider {
         addHorizontalModel(ModBlocks.LAUNCH_PAD.get(), "block/launch_pad");
         pipeBlockWithItem(ModBlocks.FLUID_PIPE.get());
         addHorizontalModel(ModBlocks.MINER_LARGE.get(), "block/miner_large");
-        cubeWithOverlay(ModBlocks.BEDROCK_ORE.get(), ResourceLocation.tryParse("block/bedrock"), HBM.rl("block/ore_random_"), HBMBlockProperties.BEDROCK_ORE_VARIANT);
+        for (RegistryObject<Block> block : ModBlocks.BEDROCK_ORE.registryObjectMap.values()) {
+            cubeWithOverlay(block.get(), ResourceLocation.tryParse("block/bedrock"), HBM.rl("block/ore_random_"), HBMBlockProperties.BEDROCK_ORE_VARIANT, "hbm:block/ore_bedrock");
+        }
         addBooleanStateWithOrientableModel(ModBlocks.machine_electric_furnace.get(), BlockStateProperties.LIT);
         addBooleanStateWithOrientableModel(ModBlocks.machine_boiler.get(), BlockStateProperties.LIT);
         addBooleanStateWithOrientableModel(ModBlocks.machine_electric_boiler.get(), BlockStateProperties.LIT);
@@ -141,6 +144,7 @@ public class BlockStateGen extends BlockStateProvider {
         addBooleanStateWithFace(ModBlocks.BLOCK_SLAG.get(), HBMBlockProperties.VARIANT, genBuiltInModelFile(ModBlocks.BLOCK_SLAG.get(), "cube_all"), genBuiltInModelFile(ModBlocks.BLOCK_SLAG.get(), "cube_all", "_alter", "_alter"));
         horizontalBlockWithItem(ModBlocks.BLOCK_C4.get(), genBuiltInModelFile(ModBlocks.BLOCK_C4.get(), "orientable_vertical"));
         horizontalBlockWithItem(ModBlocks.BLOCK_SEMTEX.get(), genBuiltInModelFile(ModBlocks.BLOCK_SEMTEX.get(), "orientable_vertical"));
+        simpleBlockWithItem(ModBlocks.STONE_POROUS.get(), models().getExistingFile(ResourceLocation.tryParse("block/stone")));
     }
     // 方块和物品：纯cube all
     public void simpleBlockWithItem(Block block){
@@ -175,9 +179,12 @@ public class BlockStateGen extends BlockStateProvider {
     }
 
     private void cubeWithOverlay(Block block, ResourceLocation base, ResourceLocation overlay, Property property){
+        cubeWithOverlay(block, base, overlay, property, "");
+    }
+    private void cubeWithOverlay(Block block, ResourceLocation base, ResourceLocation overlay, Property property, String specifiedModelName){
         String name = name(block);
         getVariantBuilder(block).forAllStates(state -> ConfiguredModel.builder().modelFile(models()
-                .withExistingParent(name + "_" + state.getValue(property), HBM.rl("block/abstract/cube_all_with_tint_overlay"))
+                .withExistingParent(specifiedModelName.isEmpty() ? name : specifiedModelName + "_" + state.getValue(property), HBM.rl("block/abstract/cube_all_with_tint_overlay"))
                 .texture("base", base).texture("overlay", overlay.withSuffix(state.getValue(property).toString()))).build());
         this.simpleBlockItem(block, models().cubeAll(name, base));
     }

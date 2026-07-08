@@ -8,6 +8,7 @@ import com.hbm.datagen.model.BlockStateGen;
 import com.hbm.datagen.model.ItemModelGen;
 import com.hbm.datagen.tag.BlockTagsGen;
 import com.hbm.datagen.tag.ItemTagsGen;
+import com.hbm.item.interfaces.CreativeTabVariantItem;
 import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.client.color.item.ItemColor;
 import net.minecraft.client.renderer.item.ItemProperties;
@@ -24,6 +25,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraftforge.client.event.RegisterColorHandlersEvent;
+import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.registries.RegistryObject;
@@ -60,22 +62,27 @@ public abstract class WrappedRegistryBuilder<T> implements Supplier<T>{
 
     public abstract RegistryObject<T> build();
 
+    public record ItemPropertyInfo(ResourceLocation itemProperty, boolean withBaseTexture, ItemPropertyFunction itemPropertyFunction, Map<Float, ResourceLocation> propertyTextures){}
+
     public static class WrappedItemRegistryBuilder extends WrappedRegistryBuilder<Item> {
         // 创造模式物品栏
         ResourceKey<CreativeModeTab> creativeKey;
         // 模型
         String genModelWay = HBMKey.BASIC_MODEL;
         Consumer<ItemModelGen> modelFactory;
-        ResourceLocation itemProperty;
-        ItemPropertyFunction itemPropertyFunction;
         ItemColor itemColor;
-        ResourceLocation alterTexture;
+        ResourceLocation[] layerTextures;
+//        ResourceLocation itemProperty;
+//        ItemPropertyFunction itemPropertyFunction;
+//        boolean withBaseTexture;
+//        Map<Float, ResourceLocation> propertyTextures;
+        List<ItemPropertyInfo> itemPropertyInfos;
         // 本地化
         String[] descriptions;
         // tag
         List<TagKey<Item>> tags;
-        // tab
-
+        // hud
+        Consumer<RegisterGuiOverlaysEvent> hudRegister;
 
         public WrappedItemRegistryBuilder(String name, Supplier<? extends Item> sup) {
             super(name, sup);
@@ -100,9 +107,9 @@ public abstract class WrappedRegistryBuilder<T> implements Supplier<T>{
             return this;
         }
 
-        public WrappedItemRegistryBuilder model(String genModelWay, ResourceLocation alterTexture){
+        public WrappedItemRegistryBuilder model(String genModelWay, ResourceLocation... alterTexture){
             this.genModelWay = genModelWay;
-            this.alterTexture = alterTexture;
+            this.layerTextures = alterTexture;
             return this;
         }
 
@@ -112,10 +119,13 @@ public abstract class WrappedRegistryBuilder<T> implements Supplier<T>{
             return this;
         }
 
-        public WrappedItemRegistryBuilder itemProperties(ResourceLocation property, ItemPropertyFunction itemPropertyFunction, ResourceLocation alterTexture){
-            this.itemProperty = property;
-            this.itemPropertyFunction = itemPropertyFunction;
-            this.alterTexture = alterTexture;
+        public WrappedItemRegistryBuilder itemProperties(ResourceLocation property, ItemPropertyFunction itemPropertyFunction, ResourceLocation texture){
+            return itemProperties(property, true, itemPropertyFunction, Map.of(1f, texture));
+        }
+        public WrappedItemRegistryBuilder itemProperties(ResourceLocation property, boolean withBaseTexture, ItemPropertyFunction itemPropertyFunction, Map<Float, ResourceLocation> propertyTextures){
+            this.genModelWay = HBMKey.MODEL_ITEM_PROPERTY;
+            if (itemPropertyInfos == null) itemPropertyInfos = new ArrayList<>();
+            itemPropertyInfos.add(new ItemPropertyInfo(property, withBaseTexture, itemPropertyFunction, propertyTextures));
             return this;
         }
 
@@ -138,16 +148,22 @@ public abstract class WrappedRegistryBuilder<T> implements Supplier<T>{
             return this;
         }
 
+        public WrappedItemRegistryBuilder hud(Consumer<RegisterGuiOverlaysEvent> hudRegister){
+            this.hudRegister = hudRegister;
+            return this;
+        }
+
         /**
          * 新增方法：配置文件控制贴图
          * @param propertyName 客户端 property 名称，对应模型 overrides 的 predicate 名
          * @param condition 返回 true 或 false，根据配置切换贴图
          */
         public WrappedItemRegistryBuilder withConfigTexture(String propertyName, Supplier<Boolean> condition) {
-            this.itemProperty = HBM.rl(propertyName);
-            this.itemPropertyFunction = (stack, level, entity, seed) -> condition.get() ? 1 : 0;
             this.genModelWay = HBMKey.MODEL_DYNAMIC;
-            return this;
+            return itemProperties(HBM.rl(propertyName), true, (stack, level, entity, seed) -> condition.get() ? 1 : 0, null);
+//            this.itemProperty = HBM.rl(propertyName);
+//            this.itemPropertyFunction = (stack, level, entity, seed) -> condition.get() ? 1 : 0
+//            return this;
         }
 
 
@@ -193,7 +209,7 @@ public abstract class WrappedRegistryBuilder<T> implements Supplier<T>{
         public void creativeTabSupport(BuildCreativeModeTabContentsEvent event){
             if (event.getTabKey() == this.creativeKey){
                 Item item = get();
-                if (item instanceof com.hbm.item.CreativeTabVariantItem variantItem) {
+                if (item instanceof CreativeTabVariantItem variantItem) {
                     variantItem.fillCreativeTab(event);
                 } else {
                     event.getEntries().put(new ItemStack(item), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
@@ -203,19 +219,34 @@ public abstract class WrappedRegistryBuilder<T> implements Supplier<T>{
 
         public void modelSupport(ItemModelGen provider){
             switch (genModelWay) {
+                // 基础贴图
                 case HBMKey.BASIC_MODEL -> provider.basicItem(get());
-                case HBMKey.SPAWN_EGG_MODEL ->
-                        provider.withExistingParent(name, "minecraft:item/template_spawn_egg");
+                case HBMKey.SPAWN_EGG_MODEL -> provider.withExistingParent(name, "minecraft:item/template_spawn_egg");
+                // 单层贴图，但不依据物品key生成
+                case HBMKey.MODEL_ITEM_SINGLE -> {
+                    if (layerTextures.length > 0) provider.singleTexture(get(), layerTextures[0]);
+                }
+                // 依据物品属性设置贴图
+                case HBMKey.MODEL_ITEM_PROPERTY -> {
+                    if (this.itemPropertyInfos != null && !this.itemPropertyInfos.isEmpty()){
+                        if (itemPropertyInfos.size() == 1) {
+                            ItemPropertyInfo info = itemPropertyInfos.get(0);
+                            provider.basicItemWithProperty(get(), info.withBaseTexture, info.itemProperty, info.propertyTextures);
+                        }else if (itemPropertyInfos.size() == 2){
+                            provider.basicItemWith2Properties(get(), itemPropertyInfos);
+                        }
+                    }
+                }
+                // 多层贴图
+                case HBMKey.MODEL_ITEM_OVERLAY -> {
+                    if (layerTextures != null && layerTextures.length > 0) provider.multiLayerItem(get(), false, layerTextures);
+                }case HBMKey.MODEL_ITEM_MULTI_LAYER -> {
+                    if (layerTextures != null && layerTextures.length > 0) provider.multiLayerItem(get(), true, layerTextures);
+                }
+                // 单独设置模型
                 case HBMKey.MODEL_STANDALONE -> {
                     if (modelFactory != null) modelFactory.accept(provider);
-                }
-                case HBMKey.MODEL_ITEM_PROPERTY -> {
-                    if (itemProperty != null && alterTexture != null) provider.basicItemWithProperty(get(), itemProperty, alterTexture);
-                }
-                case HBMKey.MODEL_ITEM_OVERLAY -> {
-                    if (alterTexture != null) provider.multiLayerItem(get(), alterTexture);
-                }
-                case HBMKey.MODEL_DYNAMIC -> {}
+                }case HBMKey.MODEL_DYNAMIC -> {}
             }
         }
 
@@ -227,13 +258,19 @@ public abstract class WrappedRegistryBuilder<T> implements Supplier<T>{
         }
 
         public void itemPropertiesSupport(){
-            if (this.itemProperty != null && this.itemPropertyFunction != null)
-                ItemProperties.register(get(), this.itemProperty, this.itemPropertyFunction);
+            if (this.itemPropertyInfos != null && !this.itemPropertyInfos.isEmpty())
+                for (ItemPropertyInfo itemPropertyInfo : this.itemPropertyInfos) {
+                    ItemProperties.register(get(), itemPropertyInfo.itemProperty, itemPropertyInfo.itemPropertyFunction);
+                }
         }
 
         public void itemColorSupport(RegisterColorHandlersEvent.Item event){
             if (this.itemColor != null)
                 event.register(this.itemColor, get());
+        }
+
+        public void hudSupport(RegisterGuiOverlaysEvent event){
+            if (this.hudRegister != null) this.hudRegister.accept(event);
         }
     }
 
@@ -547,7 +584,7 @@ public abstract class WrappedRegistryBuilder<T> implements Supplier<T>{
 //    }
 
     public static class RegisterObjectCollection<T, R>{
-        Map<R, RegistryObject<T>> registryObjectMap;
+        public final Map<R, RegistryObject<T>> registryObjectMap;
 //        public EnumRegisterObjectCollection(Class<R> theEnum, Function<R, RegistryObject<T>> func){
 //            this.registryObjectMap = new HashMap<>();
 //            for (R enumConstant : theEnum.getEnumConstants()) {

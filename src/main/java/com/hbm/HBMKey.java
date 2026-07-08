@@ -53,8 +53,11 @@ public class HBMKey {
     public static final String MODEL_LEAVES = "model_leaves";
     public static final String MODEL_EXISTING = "model_existing";
     public static final String MODEL_ORIENTABLE_VERTICAL = "orientable_vertical";
+    public static final String MODEL_ITEM_SINGLE = "model_item_single";
     public static final String MODEL_ITEM_PROPERTY = "model_item_property";
     public static final String MODEL_ITEM_OVERLAY = "model_item_overlay";
+    public static final String MODEL_ITEM_MULTI_LAYER = "model_item_multi_layer";
+    public static final String MODEL_BUILTIN = "model_builtin";
 
     public static final String LITERALLY = "literally";
     public static final String ORDERLY_GEN = "orderly_gen";
@@ -84,6 +87,7 @@ public class HBMKey {
     public static final String TICK_POWER = "tick_power";
     public static final String POLLUTION_TYPE = "pollution_type";
     public static final String TYPE = "type";
+    public static final String GRADE = "grade";
     public static final String POLLUTION = "pollution";
     public static final String RADIATION = "radiation";
     public static final String FLUX = "flux";

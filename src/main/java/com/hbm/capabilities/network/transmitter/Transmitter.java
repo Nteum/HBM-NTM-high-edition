@@ -13,7 +13,7 @@ import com.hbm.api.interferences.ITileWrapper;
 import com.hbm.capabilities.network.ConnType;
 import com.hbm.capabilities.network.validator.CompatibleTransmitterValidator;
 import com.hbm.utils.EnumUtils;
-import com.hbm.utils.NBTHelper;
+import com.hbm.utils.data.NBTHelper;
 import com.hbm.utils.WorldUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

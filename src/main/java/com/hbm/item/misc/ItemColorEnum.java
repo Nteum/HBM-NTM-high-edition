@@ -1,7 +1,7 @@
 package com.hbm.item.misc;
 
 import com.hbm.HBMKey;
-import com.hbm.item.CreativeTabVariantItem;
+import com.hbm.item.interfaces.CreativeTabVariantItem;
 import com.hbm.registries.ModItems;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;

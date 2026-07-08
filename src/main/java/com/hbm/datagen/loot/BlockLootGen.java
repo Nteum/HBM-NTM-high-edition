@@ -2,13 +2,19 @@ package com.hbm.datagen.loot;
 
 import com.google.common.collect.Iterables;
 
+import com.hbm.block.BlockEnums;
+import com.hbm.item.ItemEnums;
 import com.hbm.registries.ModBlocks;
 import com.hbm.registries.ModItems;
 import net.minecraft.data.loot.BlockLootSubProvider;
+import net.minecraft.data.loot.packs.VanillaBlockLoot;
+import net.minecraft.data.loot.packs.VanillaLootTableProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
@@ -126,6 +132,15 @@ public class BlockLootGen extends BlockLootSubProvider {
                 .add(LootItem.lootTableItem(ModItems.CIRCUIT_BASIC.get()).setWeight(10))
                 .add(LootItem.lootTableItem(ModItems.EGG_GLYPHID.get()).setWeight(1))
         ));
+        this.add(ModBlocks.STONE_POROUS.get(), (p_251015_) -> this.createSingleItemTableWithSilkTouch(p_251015_, Blocks.COBBLESTONE));
+        this.add(ModBlocks.STONE_RESOURCE.get(BlockEnums.EnumStoneType.MALACHITE).get(), (p_250898_) -> this.createOreDrop(p_250898_, ModItems.CHUNK_ORE.get(ItemEnums.EnumChunkType.MALACHITE).get()));
+        this.add(ModBlocks.STALAGMITE.get(BlockEnums.EnumStalagmiteType.SULFUR).get(), (p_250898_) -> this.createOreDrop(p_250898_, ModItems.SULFUR.get()));
+        this.add(ModBlocks.STALAGMITE.get(BlockEnums.EnumStalagmiteType.ASBESTOS).get(), (p_250898_) -> this.createOreDrop(p_250898_, ModItems.POWDER_ASBESTOS.get()));
+        this.add(ModBlocks.STALAGMITE.get(BlockEnums.EnumStalagmiteType.FLESH).get(), (p_250898_) -> this.createOreDrop(p_250898_, ModItems.FLESH.get()));
+        this.add(ModBlocks.STALACTITE.get(BlockEnums.EnumStalagmiteType.SULFUR).get(), (p_250898_) -> this.createOreDrop(p_250898_, ModItems.SULFUR.get()));
+        this.add(ModBlocks.STALACTITE.get(BlockEnums.EnumStalagmiteType.ASBESTOS).get(), (p_250898_) -> this.createOreDrop(p_250898_, ModItems.POWDER_ASBESTOS.get()));
+        this.add(ModBlocks.STALACTITE.get(BlockEnums.EnumStalagmiteType.FLESH).get(), (p_250898_) -> this.createOreDrop(p_250898_, ModItems.FLESH.get()));
+        //        VanillaBlockLoot
     }
     // 生成固定数量的掉落物
     private void createExactlyDropCount(Block block, ItemLike dropItem, int count ){

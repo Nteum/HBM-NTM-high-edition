@@ -92,10 +92,10 @@ public class ClientEventHandler {
         modBus.addListener(ClientEventHandler::registerParticleProvidersEvent);
         modBus.addListener(ClientEventHandler::registerClientReloadListeners);
         modBus.addListener(ClientEventHandler::onClientSetupFinished);
-        modBus.addListener(ClientEventHandler::registerColorHandlerItem);
         modBus.addListener(ClientEventHandler::registerDimensionsSpecialEffects);
         modBus.addListener(ClientEventHandler::registerGeometryLoaders);
         modBus.addListener(ModTabs::addCreative);
+        modBus.addListener(ClientEventHandler::registerGuiOverlayEvent);
         // forge总线事件
         forgeBus.addListener(ClientEventHandler::onKeyPressed);
         forgeBus.addListener(ClientEventHandler::onMouseScroll);
@@ -230,19 +230,15 @@ public class ClientEventHandler {
             }
             return -1;
         }, ModBlocks.FLUID_PIPE.get());
-        event.register(
-                (state, level, pos, tintIndex) -> {;
-                    if (tintIndex != 0 || level == null || pos == null) return 0xFFFFFFFF;
-                    BlockEntity be = level.getBlockEntity(pos);
-                    if (be instanceof BedRockOre.TileBedrockOre pattern) return pattern.getColor();
-                    return 0xFFFFFFFF;
-                },
-                ModBlocks.BEDROCK_ORE.get()
-        );
         ModBlocks.blockColorSupport(event);
     }
     @SubscribeEvent
     public static void onRegisterItemColorHandlerEvent(RegisterColorHandlersEvent.Item event){
+        /** 给物品添加颜色 */
+        // 流体桶的染色
+        FluidBucketItem[] fluidBucketItems = ModFluids.fluidList.stream().map(holder -> holder.bucket().get()).filter(bucket -> bucket instanceof FluidBucketItem).toArray(FluidBucketItem[]::new);
+        event.register(FluidBucketItem::getColor, fluidBucketItems);
+        event.register((stack, tintIndex) -> tintIndex == 0 ? ItemICFPellet.getFuelColor(stack) : 0xFFFFFF, ModItems.icf_pellet.get());
         ModItems.itemColorSupport(event);
     }
 
@@ -329,16 +325,6 @@ public class ClientEventHandler {
         }
         return specialItemRender;
     }
-
-    @SubscribeEvent
-    public static void registerColorHandlerItem(RegisterColorHandlersEvent.Item event){
-        /** 给物品添加颜色 */
-        // 流体桶的染色
-        FluidBucketItem[] fluidBucketItems = ModFluids.fluidList.stream().map(holder -> holder.bucket().get()).filter(bucket -> bucket instanceof FluidBucketItem).toArray(FluidBucketItem[]::new);
-        event.register(FluidBucketItem::getColor, fluidBucketItems);
-        event.register((itemstack,color)->0xEC9A63, ModItems.BEDROCK_ORE.get());
-        event.register((stack, tintIndex) -> tintIndex == 0 ? ItemICFPellet.getFuelColor(stack) : 0xFFFFFF, ModItems.icf_pellet.get());
-    }
     // 注册各维度天空渲染
     @SubscribeEvent
     public static void registerDimensionsSpecialEffects(RegisterDimensionSpecialEffectsEvent event){
@@ -406,5 +392,10 @@ public class ClientEventHandler {
         if (item.getDescriptionId().contains(HBM.MODID) && item instanceof ITooltipProvider tooltipProvider) {
             tooltipProvider.addInformation(event.getItemStack(), event.getEntity(), event.getToolTip(), event.getFlags());
         }
+    }
+
+    @SubscribeEvent
+    public static void registerGuiOverlayEvent(RegisterGuiOverlaysEvent event){
+        ModItems.hudSupport(event);
     }
 }

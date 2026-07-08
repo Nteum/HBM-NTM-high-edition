@@ -1,6 +1,7 @@
 package com.hbm.render.item;
 
 import com.hbm.HBM;
+import com.hbm.HBMKey;
 import com.hbm.item.HBMCombat;
 import com.hbm.item.HBMWeapon;
 import com.hbm.item.ItemBlockCustomModel;
@@ -20,6 +21,8 @@ import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
+import net.minecraft.client.renderer.entity.ItemRenderer;
+import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelManager;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.resources.ResourceLocation;
@@ -29,6 +32,8 @@ import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+
+import java.util.List;
 
 @OnlyIn(Dist.CLIENT)
 public class SpecialItemRender extends BlockEntityWithoutLevelRenderer {
@@ -53,6 +58,7 @@ public class SpecialItemRender extends BlockEntityWithoutLevelRenderer {
         super.renderByItem(pStack, pDisplayContext, pPoseStack, pBuffer, pPackedLight, pPackedOverlay);
         pPoseStack.pushPose();
 
+        if (pStack.getItem() instanceof IMultiLayerItem iMultiLayerItem) renderMultiLayers(iMultiLayerItem.getLayers(pStack), pPoseStack, pBuffer, pPackedLight, pPackedOverlay, pStack);
         if (pStack.is(HBMWeapon.MP_WARHEAD_15_BALEFIRE.get())){
             if (missileHeadModel == null) missileHeadModel = (SimpleBakedModelWrapper) Minecraft.getInstance().getModelManager().getModel(new ModelResourceLocation(HBMWeapon.MP_WARHEAD_15_BALEFIRE.getId(), "inventory"));
 
@@ -74,5 +80,23 @@ public class SpecialItemRender extends BlockEntityWithoutLevelRenderer {
         }
 
         pPoseStack.popPose();
+    }
+
+    private void renderMultiLayers(List<ResourceLocation> layers, PoseStack poseStack, MultiBufferSource buffer, int light, int overlay, ItemStack stack) {
+        if (layers == null || layers.isEmpty()) return;
+        // 这一步负责把对应的贴图包装成一个扁平的 BakedModel 并叠加到当前的 PoseStack 矩阵上
+        ItemRenderer ir = Minecraft.getInstance().getItemRenderer();
+        BakedModel layerModel;
+        poseStack.pushPose();
+        for (int i = 0; i < layers.size(); i++) {
+            ResourceLocation location = layers.get(i);
+            if (location == null) continue;
+            ModelResourceLocation modelIdentifier = new ModelResourceLocation(location, "inventory");
+            layerModel = ir.getItemModelShaper().getModelManager().getModel(modelIdentifier);
+            ir.renderModelLists(layerModel, stack, light, overlay, poseStack, buffer.getBuffer(RenderType.cutout()));
+            // 每个贴图z轴有一定距离
+            poseStack.translate(0, 0, 0.001);
+        }
+        poseStack.popPose();
     }
 }

@@ -2,6 +2,7 @@ package com.hbm.registries;
 
 import com.hbm.HBMKey;
 
+import com.hbm.block.BlockEnums;
 import com.hbm.block.HBMBlockProperties;
 import com.hbm.block.base.BlockBase;
 import com.hbm.block.decoriate.BlockMolten;
@@ -59,6 +60,7 @@ import com.hbm.item.tool.BatteryBlockItem;
 import com.hbm.reactor.rbmk.RBMKPeripheralType;
 import com.hbm.registries.WrappedRegistryBuilder.WrappedBlockRegistryBuilder;
 import com.hbm.debug.BlockDebug;
+import com.hbm.world.feature.BedrockOreDefinition;
 import net.minecraft.core.Vec3i;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
@@ -705,13 +707,31 @@ public class ModBlocks {
                         ModTabs.BLOCKS.getKey(), HBMKey.MODEL_PILLAR, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF,
                         BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL));
     // 基岩矿
-    public static final RegistryObject<Block> BEDROCK_ORE = add("ore_bedrock",()->new BedRockOre(BlockBehaviour.Properties.copy(Blocks.BEDROCK)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_STANDALONE, HBMKey.REVERSE_GEN, HBMKey.DROP_NONE);
+    public static final RegistryObject<Block> STONE_POROUS = new WrappedBlockRegistryBuilder("stone_porous",()->new Block(BlockBehaviour.Properties.copy(Blocks.STONE))).model(HBMKey.MODEL_STANDALONE).loc(HBMKey.REVERSE_GEN).loot(HBMKey.DROP_STANDALONE).tags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL, BlockTags.STONE_ORE_REPLACEABLES).build();
+    public static final WrappedRegistryBuilder.RegisterObjectCollection<Block, BlockEnums.EnumStoneType> STONE_RESOURCE = new WrappedRegistryBuilder.RegisterObjectCollection<>(BlockEnums.EnumStoneType.class,
+            type -> add("stone_resource." + type.name().toLowerCase(), ()->new Block(Properties.of().strength(5, 10)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.REVERSE_GEN, type == BlockEnums.EnumStoneType.MALACHITE ? HBMKey.DROP_STANDALONE : HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL));
+    public static final WrappedRegistryBuilder.RegisterObjectCollection<Block, BlockEnums.EnumStalagmiteType> STALAGMITE = new WrappedRegistryBuilder.RegisterObjectCollection<>(BlockEnums.EnumStalagmiteType.class,
+            type -> new WrappedBlockRegistryBuilder("stalagmite." + type.name().toLowerCase(), ()->new BlockStalagmite(Properties.of().strength(0.5f, 2))).model(HBMKey.MODEL_STANDALONE).loot(HBMKey.DROP_STANDALONE).loc(HBMKey.REVERSE_GEN).build());
+    public static final WrappedRegistryBuilder.RegisterObjectCollection<Block, BlockEnums.EnumStalagmiteType> STALACTITE = new WrappedRegistryBuilder.RegisterObjectCollection<>(BlockEnums.EnumStalagmiteType.class,
+            type -> new WrappedBlockRegistryBuilder("stalactite." + type.name().toLowerCase(), ()->new BlockStalagmite(Properties.of().strength(0.5f, 2))).model(HBMKey.MODEL_STANDALONE).loot(HBMKey.DROP_STANDALONE).loc(HBMKey.REVERSE_GEN).build());
+    //    stalagmite = new BlockStalagmite().setBlockName("stalagmite").setCreativeTab(MainRegistry.blockTab).setHardness(0.5F).setResistance(2.0F);
+//    stalactite = new BlockStalagmite().setBlockName("stalactite").setCreativeTab(MainRegistry.blockTab).setHardness(0.5F).setResistance(2.0F);
+//    stone_biome = new BlockBiomeStone().setBlockName("stone_biome").setCreativeTab(MainRegistry.blockTab).setHardness(5.0F).setResistance(10.0F);
+
+//    public static final RegistryObject<Block> BEDROCK_ORE = add("ore_bedrock",()->new BedRockOre(BlockBehaviour.Properties.copy(Blocks.BEDROCK)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_STANDALONE, HBMKey.REVERSE_GEN, HBMKey.DROP_NONE);
     public static final RegistryObject<Block> DEPTH_STONE = add("depth_stone",()->new BlockOre(BlockBehaviour.Properties.copy(Blocks.REINFORCED_DEEPSLATE)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.ORDERLY_GEN, HBMKey.DROP_SELF);
     public static final RegistryObject<Block> DEPTH_BRICK = new WrappedBlockRegistryBuilder("depth_brick",()->new BlockOre(BlockBehaviour.Properties.of().destroyTime(-1.0F).explosionResistance(10))).tab(ModTabs.BLOCKS.getKey()).loc("Depth Bricks").build();
     public static final RegistryObject<Block> DEPTH_TILES = new WrappedBlockRegistryBuilder("depth_tiles",()->new BlockOre(BlockBehaviour.Properties.of().destroyTime(-1.0F).explosionResistance(10))).tab(ModTabs.BLOCKS.getKey()).loc("Depth Tiles").build();
     public static final RegistryObject<Block> DEPTH_NETHER_BRICK = new WrappedBlockRegistryBuilder("depth_nether_brick",()->new BlockOre(BlockBehaviour.Properties.of().destroyTime(-1.0F).explosionResistance(10))).tab(ModTabs.BLOCKS.getKey()).loc("Nether Depth Bricks").build();
     public static final RegistryObject<Block> DEPTH_NETHER_TILES = new WrappedBlockRegistryBuilder("depth_nether_tiles",()->new BlockOre(BlockBehaviour.Properties.of().destroyTime(-1.0F).explosionResistance(10))).tab(ModTabs.BLOCKS.getKey()).loc("Nether Depth Tiles").build();
     public static final RegistryObject<Block> DEPTH_DNT = new WrappedBlockRegistryBuilder("depth_dnt",()->new BlockOre(BlockBehaviour.Properties.of().destroyTime(-1.0F).explosionResistance(60000))).tab(ModTabs.BLOCKS.getKey()).loc("DNT-Reinforced Depth Bricks").tags(HBMMatters.DNT.storage_block()).build();
+    public static final WrappedRegistryBuilder.RegisterObjectCollection<Block, BedrockOreDefinition> BEDROCK_ORE = new WrappedRegistryBuilder.RegisterObjectCollection<>(BedrockOreDefinition.DEFINITIONS.values(),
+            definition -> new WrappedBlockRegistryBuilder("ore_bedrock_" + definition.id.toLowerCase(), ()->new BedRockOre(definition, Properties.copy(Blocks.BEDROCK)))
+                    .model(HBMKey.MODEL_STANDALONE).color((state, level, pos, tintIndex) -> tintIndex != 0 ? 0xFFFFFFFF : definition.color).loc(HBMKey.REVERSE_GEN).loot(HBMKey.DROP_NONE).build());
+//            definition -> add("ore_bedrock_" + definition.id.toLowerCase(), ()->new BedRockOre(definition, Properties.copy(Blocks.BEDROCK)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_STANDALONE, HBMKey.REVERSE_GEN, HBMKey.DROP_NONE));
+
+
+
     /**
      * 航天版方块
      * */

@@ -1,5 +1,1645 @@
 {
   "parent": "minecraft:item/generated",
+  "overrides": [
+    {
+      "model": "hbm:item/bedrock_ore_base_light",
+      "predicate": {
+        "hbm:stage": 0.0,
+        "hbm:type": 1.02970648E8
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_base_heavy",
+      "predicate": {
+        "hbm:stage": 0.0,
+        "hbm:type": 9.9152072E7
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_base_nonmetal",
+      "predicate": {
+        "hbm:stage": 0.0,
+        "hbm:type": 1.41726323E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_base_crystal",
+      "predicate": {
+        "hbm:stage": 0.0,
+        "hbm:type": 1.04756102E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_base_rare",
+      "predicate": {
+        "hbm:stage": 0.0,
+        "hbm:type": 3493026.0
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_base_actinide",
+      "predicate": {
+        "hbm:stage": 0.0,
+        "hbm:type": 1.65620582E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_base_schrabidic",
+      "predicate": {
+        "hbm:stage": 0.0,
+        "hbm:type": 2.13793613E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_base_hazard",
+      "predicate": {
+        "hbm:stage": 0.0,
+        "hbm:type": 1.22422272E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_base_plastic",
+      "predicate": {
+        "hbm:stage": 0.0,
+        "hbm:type": 4.93732192E8
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_base_roasted_light",
+      "predicate": {
+        "hbm:stage": 1.0,
+        "hbm:type": 1.02970648E8
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_base_roasted_heavy",
+      "predicate": {
+        "hbm:stage": 1.0,
+        "hbm:type": 9.9152072E7
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_base_roasted_nonmetal",
+      "predicate": {
+        "hbm:stage": 1.0,
+        "hbm:type": 1.41726323E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_base_roasted_crystal",
+      "predicate": {
+        "hbm:stage": 1.0,
+        "hbm:type": 1.04756102E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_base_roasted_rare",
+      "predicate": {
+        "hbm:stage": 1.0,
+        "hbm:type": 3493026.0
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_base_roasted_actinide",
+      "predicate": {
+        "hbm:stage": 1.0,
+        "hbm:type": 1.65620582E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_base_roasted_schrabidic",
+      "predicate": {
+        "hbm:stage": 1.0,
+        "hbm:type": 2.13793613E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_base_roasted_hazard",
+      "predicate": {
+        "hbm:stage": 1.0,
+        "hbm:type": 1.22422272E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_base_roasted_plastic",
+      "predicate": {
+        "hbm:stage": 1.0,
+        "hbm:type": 4.93732192E8
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_base_washed_light",
+      "predicate": {
+        "hbm:stage": 2.0,
+        "hbm:type": 1.02970648E8
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_base_washed_heavy",
+      "predicate": {
+        "hbm:stage": 2.0,
+        "hbm:type": 9.9152072E7
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_base_washed_nonmetal",
+      "predicate": {
+        "hbm:stage": 2.0,
+        "hbm:type": 1.41726323E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_base_washed_crystal",
+      "predicate": {
+        "hbm:stage": 2.0,
+        "hbm:type": 1.04756102E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_base_washed_rare",
+      "predicate": {
+        "hbm:stage": 2.0,
+        "hbm:type": 3493026.0
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_base_washed_actinide",
+      "predicate": {
+        "hbm:stage": 2.0,
+        "hbm:type": 1.65620582E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_base_washed_schrabidic",
+      "predicate": {
+        "hbm:stage": 2.0,
+        "hbm:type": 2.13793613E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_base_washed_hazard",
+      "predicate": {
+        "hbm:stage": 2.0,
+        "hbm:type": 1.22422272E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_base_washed_plastic",
+      "predicate": {
+        "hbm:stage": 2.0,
+        "hbm:type": 4.93732192E8
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_light",
+      "predicate": {
+        "hbm:stage": 3.0,
+        "hbm:type": 1.02970648E8
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_heavy",
+      "predicate": {
+        "hbm:stage": 3.0,
+        "hbm:type": 9.9152072E7
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_nonmetal",
+      "predicate": {
+        "hbm:stage": 3.0,
+        "hbm:type": 1.41726323E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_crystal",
+      "predicate": {
+        "hbm:stage": 3.0,
+        "hbm:type": 1.04756102E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_rare",
+      "predicate": {
+        "hbm:stage": 3.0,
+        "hbm:type": 3493026.0
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_actinide",
+      "predicate": {
+        "hbm:stage": 3.0,
+        "hbm:type": 1.65620582E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_schrabidic",
+      "predicate": {
+        "hbm:stage": 3.0,
+        "hbm:type": 2.13793613E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_hazard",
+      "predicate": {
+        "hbm:stage": 3.0,
+        "hbm:type": 1.22422272E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_plastic",
+      "predicate": {
+        "hbm:stage": 3.0,
+        "hbm:type": 4.93732192E8
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_roasted_light",
+      "predicate": {
+        "hbm:stage": 4.0,
+        "hbm:type": 1.02970648E8
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_roasted_heavy",
+      "predicate": {
+        "hbm:stage": 4.0,
+        "hbm:type": 9.9152072E7
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_roasted_nonmetal",
+      "predicate": {
+        "hbm:stage": 4.0,
+        "hbm:type": 1.41726323E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_roasted_crystal",
+      "predicate": {
+        "hbm:stage": 4.0,
+        "hbm:type": 1.04756102E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_roasted_rare",
+      "predicate": {
+        "hbm:stage": 4.0,
+        "hbm:type": 3493026.0
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_roasted_actinide",
+      "predicate": {
+        "hbm:stage": 4.0,
+        "hbm:type": 1.65620582E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_roasted_schrabidic",
+      "predicate": {
+        "hbm:stage": 4.0,
+        "hbm:type": 2.13793613E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_roasted_hazard",
+      "predicate": {
+        "hbm:stage": 4.0,
+        "hbm:type": 1.22422272E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_roasted_plastic",
+      "predicate": {
+        "hbm:stage": 4.0,
+        "hbm:type": 4.93732192E8
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_sulfuric_light",
+      "predicate": {
+        "hbm:stage": 5.0,
+        "hbm:type": 1.02970648E8
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_sulfuric_heavy",
+      "predicate": {
+        "hbm:stage": 5.0,
+        "hbm:type": 9.9152072E7
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_sulfuric_nonmetal",
+      "predicate": {
+        "hbm:stage": 5.0,
+        "hbm:type": 1.41726323E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_sulfuric_crystal",
+      "predicate": {
+        "hbm:stage": 5.0,
+        "hbm:type": 1.04756102E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_sulfuric_rare",
+      "predicate": {
+        "hbm:stage": 5.0,
+        "hbm:type": 3493026.0
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_sulfuric_actinide",
+      "predicate": {
+        "hbm:stage": 5.0,
+        "hbm:type": 1.65620582E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_sulfuric_schrabidic",
+      "predicate": {
+        "hbm:stage": 5.0,
+        "hbm:type": 2.13793613E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_sulfuric_hazard",
+      "predicate": {
+        "hbm:stage": 5.0,
+        "hbm:type": 1.22422272E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_sulfuric_plastic",
+      "predicate": {
+        "hbm:stage": 5.0,
+        "hbm:type": 4.93732192E8
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_nosulfuric_light",
+      "predicate": {
+        "hbm:stage": 6.0,
+        "hbm:type": 1.02970648E8
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_nosulfuric_heavy",
+      "predicate": {
+        "hbm:stage": 6.0,
+        "hbm:type": 9.9152072E7
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_nosulfuric_nonmetal",
+      "predicate": {
+        "hbm:stage": 6.0,
+        "hbm:type": 1.41726323E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_nosulfuric_crystal",
+      "predicate": {
+        "hbm:stage": 6.0,
+        "hbm:type": 1.04756102E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_nosulfuric_rare",
+      "predicate": {
+        "hbm:stage": 6.0,
+        "hbm:type": 3493026.0
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_nosulfuric_actinide",
+      "predicate": {
+        "hbm:stage": 6.0,
+        "hbm:type": 1.65620582E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_nosulfuric_schrabidic",
+      "predicate": {
+        "hbm:stage": 6.0,
+        "hbm:type": 2.13793613E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_nosulfuric_hazard",
+      "predicate": {
+        "hbm:stage": 6.0,
+        "hbm:type": 1.22422272E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_nosulfuric_plastic",
+      "predicate": {
+        "hbm:stage": 6.0,
+        "hbm:type": 4.93732192E8
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_solvent_light",
+      "predicate": {
+        "hbm:stage": 7.0,
+        "hbm:type": 1.02970648E8
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_solvent_heavy",
+      "predicate": {
+        "hbm:stage": 7.0,
+        "hbm:type": 9.9152072E7
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_solvent_nonmetal",
+      "predicate": {
+        "hbm:stage": 7.0,
+        "hbm:type": 1.41726323E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_solvent_crystal",
+      "predicate": {
+        "hbm:stage": 7.0,
+        "hbm:type": 1.04756102E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_solvent_rare",
+      "predicate": {
+        "hbm:stage": 7.0,
+        "hbm:type": 3493026.0
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_solvent_actinide",
+      "predicate": {
+        "hbm:stage": 7.0,
+        "hbm:type": 1.65620582E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_solvent_schrabidic",
+      "predicate": {
+        "hbm:stage": 7.0,
+        "hbm:type": 2.13793613E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_solvent_hazard",
+      "predicate": {
+        "hbm:stage": 7.0,
+        "hbm:type": 1.22422272E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_solvent_plastic",
+      "predicate": {
+        "hbm:stage": 7.0,
+        "hbm:type": 4.93732192E8
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_nosolvent_light",
+      "predicate": {
+        "hbm:stage": 8.0,
+        "hbm:type": 1.02970648E8
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_nosolvent_heavy",
+      "predicate": {
+        "hbm:stage": 8.0,
+        "hbm:type": 9.9152072E7
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_nosolvent_nonmetal",
+      "predicate": {
+        "hbm:stage": 8.0,
+        "hbm:type": 1.41726323E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_nosolvent_crystal",
+      "predicate": {
+        "hbm:stage": 8.0,
+        "hbm:type": 1.04756102E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_nosolvent_rare",
+      "predicate": {
+        "hbm:stage": 8.0,
+        "hbm:type": 3493026.0
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_nosolvent_actinide",
+      "predicate": {
+        "hbm:stage": 8.0,
+        "hbm:type": 1.65620582E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_nosolvent_schrabidic",
+      "predicate": {
+        "hbm:stage": 8.0,
+        "hbm:type": 2.13793613E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_nosolvent_hazard",
+      "predicate": {
+        "hbm:stage": 8.0,
+        "hbm:type": 1.22422272E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_nosolvent_plastic",
+      "predicate": {
+        "hbm:stage": 8.0,
+        "hbm:type": 4.93732192E8
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_rad_light",
+      "predicate": {
+        "hbm:stage": 9.0,
+        "hbm:type": 1.02970648E8
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_rad_heavy",
+      "predicate": {
+        "hbm:stage": 9.0,
+        "hbm:type": 9.9152072E7
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_rad_nonmetal",
+      "predicate": {
+        "hbm:stage": 9.0,
+        "hbm:type": 1.41726323E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_rad_crystal",
+      "predicate": {
+        "hbm:stage": 9.0,
+        "hbm:type": 1.04756102E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_rad_rare",
+      "predicate": {
+        "hbm:stage": 9.0,
+        "hbm:type": 3493026.0
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_rad_actinide",
+      "predicate": {
+        "hbm:stage": 9.0,
+        "hbm:type": 1.65620582E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_rad_schrabidic",
+      "predicate": {
+        "hbm:stage": 9.0,
+        "hbm:type": 2.13793613E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_rad_hazard",
+      "predicate": {
+        "hbm:stage": 9.0,
+        "hbm:type": 1.22422272E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_rad_plastic",
+      "predicate": {
+        "hbm:stage": 9.0,
+        "hbm:type": 4.93732192E8
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_norad_light",
+      "predicate": {
+        "hbm:stage": 10.0,
+        "hbm:type": 1.02970648E8
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_norad_heavy",
+      "predicate": {
+        "hbm:stage": 10.0,
+        "hbm:type": 9.9152072E7
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_norad_nonmetal",
+      "predicate": {
+        "hbm:stage": 10.0,
+        "hbm:type": 1.41726323E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_norad_crystal",
+      "predicate": {
+        "hbm:stage": 10.0,
+        "hbm:type": 1.04756102E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_norad_rare",
+      "predicate": {
+        "hbm:stage": 10.0,
+        "hbm:type": 3493026.0
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_norad_actinide",
+      "predicate": {
+        "hbm:stage": 10.0,
+        "hbm:type": 1.65620582E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_norad_schrabidic",
+      "predicate": {
+        "hbm:stage": 10.0,
+        "hbm:type": 2.13793613E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_norad_hazard",
+      "predicate": {
+        "hbm:stage": 10.0,
+        "hbm:type": 1.22422272E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_norad_plastic",
+      "predicate": {
+        "hbm:stage": 10.0,
+        "hbm:type": 4.93732192E8
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_first_light",
+      "predicate": {
+        "hbm:stage": 11.0,
+        "hbm:type": 1.02970648E8
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_first_heavy",
+      "predicate": {
+        "hbm:stage": 11.0,
+        "hbm:type": 9.9152072E7
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_first_nonmetal",
+      "predicate": {
+        "hbm:stage": 11.0,
+        "hbm:type": 1.41726323E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_first_crystal",
+      "predicate": {
+        "hbm:stage": 11.0,
+        "hbm:type": 1.04756102E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_first_rare",
+      "predicate": {
+        "hbm:stage": 11.0,
+        "hbm:type": 3493026.0
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_first_actinide",
+      "predicate": {
+        "hbm:stage": 11.0,
+        "hbm:type": 1.65620582E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_first_schrabidic",
+      "predicate": {
+        "hbm:stage": 11.0,
+        "hbm:type": 2.13793613E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_first_hazard",
+      "predicate": {
+        "hbm:stage": 11.0,
+        "hbm:type": 1.22422272E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_first_plastic",
+      "predicate": {
+        "hbm:stage": 11.0,
+        "hbm:type": 4.93732192E8
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_second_light",
+      "predicate": {
+        "hbm:stage": 12.0,
+        "hbm:type": 1.02970648E8
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_second_heavy",
+      "predicate": {
+        "hbm:stage": 12.0,
+        "hbm:type": 9.9152072E7
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_second_nonmetal",
+      "predicate": {
+        "hbm:stage": 12.0,
+        "hbm:type": 1.41726323E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_second_crystal",
+      "predicate": {
+        "hbm:stage": 12.0,
+        "hbm:type": 1.04756102E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_second_rare",
+      "predicate": {
+        "hbm:stage": 12.0,
+        "hbm:type": 3493026.0
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_second_actinide",
+      "predicate": {
+        "hbm:stage": 12.0,
+        "hbm:type": 1.65620582E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_second_schrabidic",
+      "predicate": {
+        "hbm:stage": 12.0,
+        "hbm:type": 2.13793613E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_second_hazard",
+      "predicate": {
+        "hbm:stage": 12.0,
+        "hbm:type": 1.22422272E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_primary_second_plastic",
+      "predicate": {
+        "hbm:stage": 12.0,
+        "hbm:type": 4.93732192E8
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_crumbs_light",
+      "predicate": {
+        "hbm:stage": 13.0,
+        "hbm:type": 1.02970648E8
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_crumbs_heavy",
+      "predicate": {
+        "hbm:stage": 13.0,
+        "hbm:type": 9.9152072E7
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_crumbs_nonmetal",
+      "predicate": {
+        "hbm:stage": 13.0,
+        "hbm:type": 1.41726323E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_crumbs_crystal",
+      "predicate": {
+        "hbm:stage": 13.0,
+        "hbm:type": 1.04756102E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_crumbs_rare",
+      "predicate": {
+        "hbm:stage": 13.0,
+        "hbm:type": 3493026.0
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_crumbs_actinide",
+      "predicate": {
+        "hbm:stage": 13.0,
+        "hbm:type": 1.65620582E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_crumbs_schrabidic",
+      "predicate": {
+        "hbm:stage": 13.0,
+        "hbm:type": 2.13793613E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_crumbs_hazard",
+      "predicate": {
+        "hbm:stage": 13.0,
+        "hbm:type": 1.22422272E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_crumbs_plastic",
+      "predicate": {
+        "hbm:stage": 13.0,
+        "hbm:type": 4.93732192E8
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_sulfuric_byproduct_light",
+      "predicate": {
+        "hbm:stage": 14.0,
+        "hbm:type": 1.02970648E8
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_sulfuric_byproduct_heavy",
+      "predicate": {
+        "hbm:stage": 14.0,
+        "hbm:type": 9.9152072E7
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_sulfuric_byproduct_nonmetal",
+      "predicate": {
+        "hbm:stage": 14.0,
+        "hbm:type": 1.41726323E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_sulfuric_byproduct_crystal",
+      "predicate": {
+        "hbm:stage": 14.0,
+        "hbm:type": 1.04756102E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_sulfuric_byproduct_rare",
+      "predicate": {
+        "hbm:stage": 14.0,
+        "hbm:type": 3493026.0
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_sulfuric_byproduct_actinide",
+      "predicate": {
+        "hbm:stage": 14.0,
+        "hbm:type": 1.65620582E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_sulfuric_byproduct_schrabidic",
+      "predicate": {
+        "hbm:stage": 14.0,
+        "hbm:type": 2.13793613E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_sulfuric_byproduct_hazard",
+      "predicate": {
+        "hbm:stage": 14.0,
+        "hbm:type": 1.22422272E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_sulfuric_byproduct_plastic",
+      "predicate": {
+        "hbm:stage": 14.0,
+        "hbm:type": 4.93732192E8
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_sulfuric_roasted_light",
+      "predicate": {
+        "hbm:stage": 15.0,
+        "hbm:type": 1.02970648E8
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_sulfuric_roasted_heavy",
+      "predicate": {
+        "hbm:stage": 15.0,
+        "hbm:type": 9.9152072E7
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_sulfuric_roasted_nonmetal",
+      "predicate": {
+        "hbm:stage": 15.0,
+        "hbm:type": 1.41726323E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_sulfuric_roasted_crystal",
+      "predicate": {
+        "hbm:stage": 15.0,
+        "hbm:type": 1.04756102E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_sulfuric_roasted_rare",
+      "predicate": {
+        "hbm:stage": 15.0,
+        "hbm:type": 3493026.0
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_sulfuric_roasted_actinide",
+      "predicate": {
+        "hbm:stage": 15.0,
+        "hbm:type": 1.65620582E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_sulfuric_roasted_schrabidic",
+      "predicate": {
+        "hbm:stage": 15.0,
+        "hbm:type": 2.13793613E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_sulfuric_roasted_hazard",
+      "predicate": {
+        "hbm:stage": 15.0,
+        "hbm:type": 1.22422272E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_sulfuric_roasted_plastic",
+      "predicate": {
+        "hbm:stage": 15.0,
+        "hbm:type": 4.93732192E8
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_sulfuric_arc_light",
+      "predicate": {
+        "hbm:stage": 16.0,
+        "hbm:type": 1.02970648E8
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_sulfuric_arc_heavy",
+      "predicate": {
+        "hbm:stage": 16.0,
+        "hbm:type": 9.9152072E7
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_sulfuric_arc_nonmetal",
+      "predicate": {
+        "hbm:stage": 16.0,
+        "hbm:type": 1.41726323E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_sulfuric_arc_crystal",
+      "predicate": {
+        "hbm:stage": 16.0,
+        "hbm:type": 1.04756102E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_sulfuric_arc_rare",
+      "predicate": {
+        "hbm:stage": 16.0,
+        "hbm:type": 3493026.0
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_sulfuric_arc_actinide",
+      "predicate": {
+        "hbm:stage": 16.0,
+        "hbm:type": 1.65620582E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_sulfuric_arc_schrabidic",
+      "predicate": {
+        "hbm:stage": 16.0,
+        "hbm:type": 2.13793613E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_sulfuric_arc_hazard",
+      "predicate": {
+        "hbm:stage": 16.0,
+        "hbm:type": 1.22422272E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_sulfuric_arc_plastic",
+      "predicate": {
+        "hbm:stage": 16.0,
+        "hbm:type": 4.93732192E8
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_sulfuric_washed_light",
+      "predicate": {
+        "hbm:stage": 17.0,
+        "hbm:type": 1.02970648E8
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_sulfuric_washed_heavy",
+      "predicate": {
+        "hbm:stage": 17.0,
+        "hbm:type": 9.9152072E7
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_sulfuric_washed_nonmetal",
+      "predicate": {
+        "hbm:stage": 17.0,
+        "hbm:type": 1.41726323E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_sulfuric_washed_crystal",
+      "predicate": {
+        "hbm:stage": 17.0,
+        "hbm:type": 1.04756102E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_sulfuric_washed_rare",
+      "predicate": {
+        "hbm:stage": 17.0,
+        "hbm:type": 3493026.0
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_sulfuric_washed_actinide",
+      "predicate": {
+        "hbm:stage": 17.0,
+        "hbm:type": 1.65620582E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_sulfuric_washed_schrabidic",
+      "predicate": {
+        "hbm:stage": 17.0,
+        "hbm:type": 2.13793613E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_sulfuric_washed_hazard",
+      "predicate": {
+        "hbm:stage": 17.0,
+        "hbm:type": 1.22422272E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_sulfuric_washed_plastic",
+      "predicate": {
+        "hbm:stage": 17.0,
+        "hbm:type": 4.93732192E8
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_solvent_byproduct_light",
+      "predicate": {
+        "hbm:stage": 18.0,
+        "hbm:type": 1.02970648E8
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_solvent_byproduct_heavy",
+      "predicate": {
+        "hbm:stage": 18.0,
+        "hbm:type": 9.9152072E7
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_solvent_byproduct_nonmetal",
+      "predicate": {
+        "hbm:stage": 18.0,
+        "hbm:type": 1.41726323E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_solvent_byproduct_crystal",
+      "predicate": {
+        "hbm:stage": 18.0,
+        "hbm:type": 1.04756102E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_solvent_byproduct_rare",
+      "predicate": {
+        "hbm:stage": 18.0,
+        "hbm:type": 3493026.0
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_solvent_byproduct_actinide",
+      "predicate": {
+        "hbm:stage": 18.0,
+        "hbm:type": 1.65620582E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_solvent_byproduct_schrabidic",
+      "predicate": {
+        "hbm:stage": 18.0,
+        "hbm:type": 2.13793613E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_solvent_byproduct_hazard",
+      "predicate": {
+        "hbm:stage": 18.0,
+        "hbm:type": 1.22422272E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_solvent_byproduct_plastic",
+      "predicate": {
+        "hbm:stage": 18.0,
+        "hbm:type": 4.93732192E8
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_solvent_roasted_light",
+      "predicate": {
+        "hbm:stage": 19.0,
+        "hbm:type": 1.02970648E8
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_solvent_roasted_heavy",
+      "predicate": {
+        "hbm:stage": 19.0,
+        "hbm:type": 9.9152072E7
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_solvent_roasted_nonmetal",
+      "predicate": {
+        "hbm:stage": 19.0,
+        "hbm:type": 1.41726323E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_solvent_roasted_crystal",
+      "predicate": {
+        "hbm:stage": 19.0,
+        "hbm:type": 1.04756102E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_solvent_roasted_rare",
+      "predicate": {
+        "hbm:stage": 19.0,
+        "hbm:type": 3493026.0
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_solvent_roasted_actinide",
+      "predicate": {
+        "hbm:stage": 19.0,
+        "hbm:type": 1.65620582E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_solvent_roasted_schrabidic",
+      "predicate": {
+        "hbm:stage": 19.0,
+        "hbm:type": 2.13793613E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_solvent_roasted_hazard",
+      "predicate": {
+        "hbm:stage": 19.0,
+        "hbm:type": 1.22422272E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_solvent_roasted_plastic",
+      "predicate": {
+        "hbm:stage": 19.0,
+        "hbm:type": 4.93732192E8
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_solvent_arc_light",
+      "predicate": {
+        "hbm:stage": 20.0,
+        "hbm:type": 1.02970648E8
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_solvent_arc_heavy",
+      "predicate": {
+        "hbm:stage": 20.0,
+        "hbm:type": 9.9152072E7
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_solvent_arc_nonmetal",
+      "predicate": {
+        "hbm:stage": 20.0,
+        "hbm:type": 1.41726323E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_solvent_arc_crystal",
+      "predicate": {
+        "hbm:stage": 20.0,
+        "hbm:type": 1.04756102E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_solvent_arc_rare",
+      "predicate": {
+        "hbm:stage": 20.0,
+        "hbm:type": 3493026.0
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_solvent_arc_actinide",
+      "predicate": {
+        "hbm:stage": 20.0,
+        "hbm:type": 1.65620582E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_solvent_arc_schrabidic",
+      "predicate": {
+        "hbm:stage": 20.0,
+        "hbm:type": 2.13793613E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_solvent_arc_hazard",
+      "predicate": {
+        "hbm:stage": 20.0,
+        "hbm:type": 1.22422272E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_solvent_arc_plastic",
+      "predicate": {
+        "hbm:stage": 20.0,
+        "hbm:type": 4.93732192E8
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_solvent_washed_light",
+      "predicate": {
+        "hbm:stage": 21.0,
+        "hbm:type": 1.02970648E8
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_solvent_washed_heavy",
+      "predicate": {
+        "hbm:stage": 21.0,
+        "hbm:type": 9.9152072E7
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_solvent_washed_nonmetal",
+      "predicate": {
+        "hbm:stage": 21.0,
+        "hbm:type": 1.41726323E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_solvent_washed_crystal",
+      "predicate": {
+        "hbm:stage": 21.0,
+        "hbm:type": 1.04756102E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_solvent_washed_rare",
+      "predicate": {
+        "hbm:stage": 21.0,
+        "hbm:type": 3493026.0
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_solvent_washed_actinide",
+      "predicate": {
+        "hbm:stage": 21.0,
+        "hbm:type": 1.65620582E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_solvent_washed_schrabidic",
+      "predicate": {
+        "hbm:stage": 21.0,
+        "hbm:type": 2.13793613E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_solvent_washed_hazard",
+      "predicate": {
+        "hbm:stage": 21.0,
+        "hbm:type": 1.22422272E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_solvent_washed_plastic",
+      "predicate": {
+        "hbm:stage": 21.0,
+        "hbm:type": 4.93732192E8
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_rad_byproduct_light",
+      "predicate": {
+        "hbm:stage": 22.0,
+        "hbm:type": 1.02970648E8
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_rad_byproduct_heavy",
+      "predicate": {
+        "hbm:stage": 22.0,
+        "hbm:type": 9.9152072E7
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_rad_byproduct_nonmetal",
+      "predicate": {
+        "hbm:stage": 22.0,
+        "hbm:type": 1.41726323E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_rad_byproduct_crystal",
+      "predicate": {
+        "hbm:stage": 22.0,
+        "hbm:type": 1.04756102E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_rad_byproduct_rare",
+      "predicate": {
+        "hbm:stage": 22.0,
+        "hbm:type": 3493026.0
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_rad_byproduct_actinide",
+      "predicate": {
+        "hbm:stage": 22.0,
+        "hbm:type": 1.65620582E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_rad_byproduct_schrabidic",
+      "predicate": {
+        "hbm:stage": 22.0,
+        "hbm:type": 2.13793613E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_rad_byproduct_hazard",
+      "predicate": {
+        "hbm:stage": 22.0,
+        "hbm:type": 1.22422272E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_rad_byproduct_plastic",
+      "predicate": {
+        "hbm:stage": 22.0,
+        "hbm:type": 4.93732192E8
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_rad_roasted_light",
+      "predicate": {
+        "hbm:stage": 23.0,
+        "hbm:type": 1.02970648E8
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_rad_roasted_heavy",
+      "predicate": {
+        "hbm:stage": 23.0,
+        "hbm:type": 9.9152072E7
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_rad_roasted_nonmetal",
+      "predicate": {
+        "hbm:stage": 23.0,
+        "hbm:type": 1.41726323E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_rad_roasted_crystal",
+      "predicate": {
+        "hbm:stage": 23.0,
+        "hbm:type": 1.04756102E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_rad_roasted_rare",
+      "predicate": {
+        "hbm:stage": 23.0,
+        "hbm:type": 3493026.0
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_rad_roasted_actinide",
+      "predicate": {
+        "hbm:stage": 23.0,
+        "hbm:type": 1.65620582E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_rad_roasted_schrabidic",
+      "predicate": {
+        "hbm:stage": 23.0,
+        "hbm:type": 2.13793613E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_rad_roasted_hazard",
+      "predicate": {
+        "hbm:stage": 23.0,
+        "hbm:type": 1.22422272E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_rad_roasted_plastic",
+      "predicate": {
+        "hbm:stage": 23.0,
+        "hbm:type": 4.93732192E8
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_rad_arc_light",
+      "predicate": {
+        "hbm:stage": 24.0,
+        "hbm:type": 1.02970648E8
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_rad_arc_heavy",
+      "predicate": {
+        "hbm:stage": 24.0,
+        "hbm:type": 9.9152072E7
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_rad_arc_nonmetal",
+      "predicate": {
+        "hbm:stage": 24.0,
+        "hbm:type": 1.41726323E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_rad_arc_crystal",
+      "predicate": {
+        "hbm:stage": 24.0,
+        "hbm:type": 1.04756102E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_rad_arc_rare",
+      "predicate": {
+        "hbm:stage": 24.0,
+        "hbm:type": 3493026.0
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_rad_arc_actinide",
+      "predicate": {
+        "hbm:stage": 24.0,
+        "hbm:type": 1.65620582E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_rad_arc_schrabidic",
+      "predicate": {
+        "hbm:stage": 24.0,
+        "hbm:type": 2.13793613E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_rad_arc_hazard",
+      "predicate": {
+        "hbm:stage": 24.0,
+        "hbm:type": 1.22422272E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_rad_arc_plastic",
+      "predicate": {
+        "hbm:stage": 24.0,
+        "hbm:type": 4.93732192E8
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_rad_washed_light",
+      "predicate": {
+        "hbm:stage": 25.0,
+        "hbm:type": 1.02970648E8
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_rad_washed_heavy",
+      "predicate": {
+        "hbm:stage": 25.0,
+        "hbm:type": 9.9152072E7
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_rad_washed_nonmetal",
+      "predicate": {
+        "hbm:stage": 25.0,
+        "hbm:type": 1.41726323E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_rad_washed_crystal",
+      "predicate": {
+        "hbm:stage": 25.0,
+        "hbm:type": 1.04756102E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_rad_washed_rare",
+      "predicate": {
+        "hbm:stage": 25.0,
+        "hbm:type": 3493026.0
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_rad_washed_actinide",
+      "predicate": {
+        "hbm:stage": 25.0,
+        "hbm:type": 1.65620582E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_rad_washed_schrabidic",
+      "predicate": {
+        "hbm:stage": 25.0,
+        "hbm:type": 2.13793613E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_rad_washed_hazard",
+      "predicate": {
+        "hbm:stage": 25.0,
+        "hbm:type": 1.22422272E9
+      }
+    },
+    {
+      "model": "hbm:item/bedrock_ore_rad_washed_plastic",
+      "predicate": {
+        "hbm:stage": 25.0,
+        "hbm:type": 4.93732192E8
+      }
+    }
+  ],
   "textures": {
     "layer0": "hbm:item/bedrock_ore"
   }

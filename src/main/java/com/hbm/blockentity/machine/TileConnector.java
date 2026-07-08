@@ -5,7 +5,7 @@ import com.hbm.block.logistic.BlockConnector;
 import com.hbm.blockentity.ModBlockEntityType;
 import com.hbm.blockentity.base.CapabilityBlockEntity;
 import com.hbm.blockentity.interfaces.IConnector;
-import com.hbm.utils.NBTUtils;
+import com.hbm.utils.data.NBTUtils;
 import com.hbm.utils.transport_net.EnergyNetwork;
 import com.hbm.utils.transport_net.EnergyNetworkSystem;
 import net.minecraft.core.BlockPos;

@@ -6,7 +6,7 @@ import com.hbm.config.MobConfig;
 import com.hbm.config.RadiationConfig;
 import com.hbm.entity.ModEntityType;
 import com.hbm.entity.mob.EntityGlyphid;
-import com.hbm.utils.DataTypeHelper;
+import com.hbm.utils.data.DataTypeHelper;
 import com.hbm.utils.EnumUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;

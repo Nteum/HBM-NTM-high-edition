@@ -1,12 +1,11 @@
 package com.hbm.item.consumable;
 
-import com.hbm.item.CreativeTabVariantItem;
+import com.hbm.item.interfaces.CreativeTabVariantItem;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
