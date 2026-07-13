@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 //基础流体系统，里面包含多个FluidTank
-public class BasicFluidHandler implements IExtendedFluidHandler, INBTSerializable<CompoundTag> {
+public class BasicFluidHandler implements IExtendedFluidHandler {
     List<FluidTank> tanks;
     List<Mode> tankModes;
     public BasicFluidHandler(){

@@ -38,6 +38,7 @@ public class ModParticleTypes {
     public static final RegistryObject<SimpleParticleType> FOAM = addSimple("foam", "particle_base", ParticleFoam::new);
     public static final RegistryObject<SimpleParticleType> LETTER = addSimple("letter", "particle_base", ParticleLetter::new);
     public static final RegistryObject<SimpleParticleType> MUKEWAVE = addSimple("mukewave", "shockwave", ParticleMukeWave::new);
+    public static final RegistryObject<SimpleParticleType> GIBLETS = addSimple("giblets", "meat-slime-metal", ParticleMukeWave::new);
 
     public static RegistryObject<SimpleParticleType> addSimple(String name, SimpleParticleConstructor<? extends Particle> constructor){
         return addSimple(name, name, constructor);
@@ -61,8 +62,8 @@ public class ModParticleTypes {
 
     public static void generateJson(HBMJsonProvider provider){
 //        simpleParticles.forEach((k,v) -> provider.simpleParticle(k.getId().getPath()));
-        // 由于hbm中多种粒子复用同一个贴图，因此这里直接把名称分为两部分
-        simpleParticles.forEach((k,v) -> provider.simpleParticle2Name(k.getId().getPath(), texMap.get(k.getId().getPath())));
+        // 由于hbm中多种粒子复用同一个贴图，因此这里直接把名称分为两部分。用短横分割不同的贴图
+        simpleParticles.forEach((k,v) -> provider.simpleParticle2Name(k.getId().getPath(), texMap.get(k.getId().getPath()).split("-")));
 //        texMap = null;
     }
 

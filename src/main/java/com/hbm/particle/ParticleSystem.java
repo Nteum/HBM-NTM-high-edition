@@ -2,6 +2,7 @@ package com.hbm.particle;
 
 import com.hbm.HBMKey;
 import com.hbm.particle.type.ParticleExSmoke;
+import com.hbm.particle.type.ParticleGiblets;
 import com.hbm.particle.type.ParticleLetter;
 import com.hbm.particle.type.ParticleRocketFlame;
 import net.minecraft.client.Minecraft;
@@ -21,6 +22,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FastColor;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.level.ClipBlockStateContext;
 import net.minecraft.world.level.block.Blocks;
@@ -33,6 +35,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import org.apache.logging.log4j.core.util.ReflectionUtil;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.BiConsumer;
@@ -514,6 +517,48 @@ public class ParticleSystem {
                 level.addParticle(ParticleTypes.SMOKE, ix - ox, iy, iz - oz, mX3, mY3, mZ3);
             }
         }
-
     }
+
+    public static void giblets(CompoundTag data, Vec3 position){
+        int ent = data.getInt("ent");
+        int gibType = data.getInt("gibType");
+        vanish(ent);
+        Entity e = Minecraft.getInstance().level.getEntity(ent);
+        RandomSource rand = Minecraft.getInstance().level.random;
+        if(e == null)
+            return;
+
+        float width = e.getBbWidth();
+        float height = e.getBbHeight();
+        int gW = (int)(width / 0.25F);
+        int gH = (int)(height / 0.25F);
+
+        int count = (int) (gW * 1.5 * gH);
+
+        if(data.contains("cDiv", Tag.TAG_INT))
+            count = (int) Math.ceil(count / (double)data.getInt("cDiv"));
+
+        boolean blowMeIntoTheGodDamnStratosphere = rand.nextInt(15) == 0;
+        double mult = 1D;
+
+        if(blowMeIntoTheGodDamnStratosphere)
+            mult *= 10;
+
+        for(int i = 0; i < count; i++) {
+            ParticleGiblets particleGiblets = (ParticleGiblets) Minecraft.getInstance().particleEngine.makeParticle(ModParticleTypes.GIBLETS.get(), position.x, position.y, position.z,  rand.nextGaussian() * 0.25 * mult, rand.nextDouble() * mult, rand.nextGaussian() * 0.25 * mult);
+            particleGiblets.setGibType(gibType);
+            Minecraft.getInstance().particleEngine.add(particleGiblets);
+        }
+    }
+    //============================原版有一个map记录了一些实体的信息，可能是用于计算实体是否死亡的，暂时放在这里==============================
+    private static HashMap<Integer, Long> vanished = new HashMap();
+    public static void vanish(int ent) { vanished.put(ent, System.currentTimeMillis() + 2000); }
+    public static void vanish(int ent, int duration) { vanished.put(ent, System.currentTimeMillis() + duration); }
+
+    public boolean isVanished(Entity e) {
+        if(e == null) return false;
+        if(!this.vanished.containsKey(e.getId())) return false;
+        return this.vanished.get(e.getId()) > System.currentTimeMillis();
+    }
+    //==============================================================
 }

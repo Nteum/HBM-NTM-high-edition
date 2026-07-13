@@ -143,7 +143,7 @@ public class ItemBedrockOreCombine extends ItemBedrockOre {
 
     public static class CelestialBedrockOreType {
         ResourceKey<Level> dim;
-        int index; int light; int dark;
+        public int index; int light; int dark;
         public String suffix;
         BedrockOreOutput primary;
         BedrockOreOutput byproductAcid;
@@ -268,7 +268,7 @@ public class ItemBedrockOreCombine extends ItemBedrockOre {
         }
 
         private static HashMap<ResourceKey<Level>, CelestialBedrockOre> oreMap;
-        private static List<CelestialBedrockOreType> oreTypes;
+        public static List<CelestialBedrockOreType> oreTypes;
         private static Set<Integer> hashes;
 
         private static void register(ResourceKey<Level> body, CelestialBedrockOreType... types) {

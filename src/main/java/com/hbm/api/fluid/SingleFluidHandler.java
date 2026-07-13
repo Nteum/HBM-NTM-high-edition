@@ -13,7 +13,7 @@ import net.minecraftforge.fluids.capability.templates.FluidTank;
 
 import java.util.List;
 
-public class SingleFluidHandler implements IExtendedFluidHandler, INBTSerializable<CompoundTag> {
+public class SingleFluidHandler implements IExtendedFluidHandler {
     FluidTank tank;
     Mode mode;
     int inputLimit = Integer.MAX_VALUE;

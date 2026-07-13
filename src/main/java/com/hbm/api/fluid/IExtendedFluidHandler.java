@@ -3,6 +3,8 @@ package com.hbm.api.fluid;
 import com.hbm.api.Mode;
 import it.unimi.dsi.fastutil.ints.IntArrayList;
 import it.unimi.dsi.fastutil.ints.IntList;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
@@ -33,7 +35,7 @@ import java.util.List;
  * 2. 第二个限制是方向的限制，是否可以通过方块的某个面访问内部流体。这个由capabilitiesCache的方向实现，不在内部实现。
  * 3. 为了简化访问
  * */
-public interface IExtendedFluidHandler extends IFluidHandler {
+public interface IExtendedFluidHandler extends IFluidHandler, INBTSerializable<CompoundTag> {
 
     List<FluidTank> getFluidTanks();
     Mode getMode(int tank);

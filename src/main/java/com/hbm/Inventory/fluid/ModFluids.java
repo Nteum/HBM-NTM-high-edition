@@ -91,8 +91,8 @@ public class ModFluids {
     private static final ExtendedFluidType smoke_leaded = new ExtendedFluidType("smoke_leaded", 0x808080, solution.descriptionId("Leaded Smoke"), ExtendedProperties.of().pfr(0,0,0).traits(GASEOUS, NOID, NOCON));
     private static final ExtendedFluidType smoke_poison = new ExtendedFluidType("smoke_poison", 0x808080, solution.descriptionId("Poison Somke"), ExtendedProperties.of().pfr(0,0,0).traits(GASEOUS, NOID, NOCON));
     private static final ExtendedFluidType peroxide = new ExtendedFluidType("peroxide", 0xfff7aa, solution.descriptionId("Poison Somke"), ExtendedProperties.of().pfr(3, 0, 3).traits(LIQUID, new FT_Corrosive(40)));
-    private static final ExtendedFluidType solvent = new ExtendedFluidType("solvent", 0xE4E3EF, solution.descriptionId(""), ExtendedProperties.of().pfr(2, 3, 0).traits(LIQUID, new FT_Corrosive(30)));
-
+    private static final ExtendedFluidType solvent = new ExtendedFluidType("solvent", 0xE4E3EF, solution.descriptionId("Solvent"), ExtendedProperties.of().pfr(2, 3, 0).traits(LIQUID, new FT_Corrosive(30)));
+    private static final ExtendedFluidType slop = new ExtendedFluidType("slop", 0x929D45, solution.descriptionId("Slop"), ExtendedProperties.of().pfr(0,0,0).traits(LIQUID, VISCOUS));
     static {
         FT_Heatable coolantHeatable = new FT_Heatable()
                 .setEff(FT_Heatable.HeatingType.HEATEXCHANGER, 1.0D)
@@ -145,6 +145,7 @@ public class ModFluids {
     public static FluidRegistryHolder<ExtendedFluidType, ForgeFlowingFluid.Source, ForgeFlowingFluid.Flowing,LiquidBlock, BucketItem> SMOKE_POISON = register(smoke_poison);
     public static FluidRegistryHolder<ExtendedFluidType, ForgeFlowingFluid.Source, ForgeFlowingFluid.Flowing,LiquidBlock, BucketItem> PEROXIDE = register(peroxide);
     public static FluidRegistryHolder<ExtendedFluidType, ForgeFlowingFluid.Source, ForgeFlowingFluid.Flowing,LiquidBlock, BucketItem> SOLVENT = register(solvent);
+    public static FluidRegistryHolder<ExtendedFluidType, ForgeFlowingFluid.Source, ForgeFlowingFluid.Flowing,LiquidBlock, BucketItem> SLOP = register(slop);
 
     public static FluidRegistryHolder register(ExtendedFluidType fluidType){
         String name = fluidType.name;

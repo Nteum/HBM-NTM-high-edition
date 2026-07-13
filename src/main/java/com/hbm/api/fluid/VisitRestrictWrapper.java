@@ -1,6 +1,7 @@
 package com.hbm.api.fluid;
 
 import com.hbm.api.Mode;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 
 import java.util.Arrays;
@@ -42,5 +43,15 @@ public class VisitRestrictWrapper implements IExtendedFluidHandler{
     @Override
     public Mode getMode(int tank) {
         return accessibleTanks.contains(tank) ? this.fluidHandler.getMode(tank) : Mode.NONE;
+    }
+
+    @Override
+    public CompoundTag serializeNBT() {
+        return fluidHandler.serializeNBT();
+    }
+
+    @Override
+    public void deserializeNBT(CompoundTag nbt) {
+        fluidHandler.deserializeNBT(nbt);
     }
 }
