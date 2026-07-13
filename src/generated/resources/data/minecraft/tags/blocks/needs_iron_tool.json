@@ -15,6 +15,7 @@
     "hbm:boiler_electric",
     "hbm:boiler_nuclear",
     "hbm:miner_large",
+    "hbm:machine_ore_slopper",
     "hbm:conveyor",
     "hbm:conveyor_inserter",
     "hbm:conveyor_extractor",

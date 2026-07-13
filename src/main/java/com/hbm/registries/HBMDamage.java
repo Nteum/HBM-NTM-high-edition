@@ -1,7 +1,7 @@
 package com.hbm.registries;
 
 import com.hbm.HBM;
-import com.hbm.datagen.HBMJsonProvider;
+import com.hbm.datagen.json.HBMJsonProvider;
 import com.hbm.datagen.LanguageProvider;
 import net.minecraft.core.Holder;
 import net.minecraft.core.RegistryAccess;

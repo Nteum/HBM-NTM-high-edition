@@ -2,15 +2,25 @@ package com.hbm.registries;
 
 import com.hbm.HBM;
 import com.hbm.HBMKey;
+import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.datagen.json.HBMJsonProvider;
 import com.hbm.datagen.LanguageProvider;
 import com.hbm.datagen.loot.BlockLootGen;
 import com.hbm.datagen.model.BlockStateGen;
 import com.hbm.datagen.model.ItemModelGen;
 import com.hbm.datagen.tag.BlockTagsGen;
 import com.hbm.datagen.tag.ItemTagsGen;
+import com.hbm.gui.ModMenuType;
+import com.hbm.gui.screen.ICFScreen;
 import com.hbm.item.interfaces.CreativeTabVariantItem;
+import com.hbm.render.blockentity.NukeBoyRender;
 import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.client.color.item.ItemColor;
+import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.client.renderer.item.ItemPropertyFunction;
 import net.minecraft.data.loot.BlockLootSubProvider;
@@ -18,16 +28,20 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RotatedPillarBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
+import net.minecraftforge.network.IContainerFactory;
 import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.Nullable;
 
@@ -272,6 +286,10 @@ public abstract class WrappedRegistryBuilder<T> implements Supplier<T>{
         public void hudSupport(RegisterGuiOverlaysEvent event){
             if (this.hudRegister != null) this.hudRegister.accept(event);
         }
+
+        public void customJsonSupport(HBMJsonProvider provider){
+
+        }
     }
 
 //    private static abstract class Builder<T>{
@@ -373,6 +391,12 @@ public abstract class WrappedRegistryBuilder<T> implements Supplier<T>{
 //        }
 //    }
 
+    public static class tileData<T extends BlockEntity, M extends AbstractContainerMenu, G extends AbstractContainerScreen<M>, R extends BlockEntityRenderer<T>>{
+        public BlockEntityType.BlockEntitySupplier<T> tileFactory;
+        public IContainerFactory<M> menuFactory;
+        public MenuScreens.ScreenConstructor<M, G> guiFactory;
+        public BlockEntityRendererProvider<T> rendererFactory;
+    }
     public static class WrappedBlockRegistryBuilder extends WrappedRegistryBuilder<Block> {
         ResourceKey<CreativeModeTab> creativeKey;
         String genModelWay = HBMKey.MODEL_CUBE_ALL;
@@ -381,6 +405,9 @@ public abstract class WrappedRegistryBuilder<T> implements Supplier<T>{
         String lootWay = HBMKey.DROP_SELF;
         List<TagKey<Block>> tags;
         Function<Block, BlockItem> blockItem;
+        //
+        tileData tileData;
+
         public WrappedBlockRegistryBuilder(String name, Supplier<? extends Block> sup) {
             super(name, sup);
         }
@@ -440,6 +467,30 @@ public abstract class WrappedRegistryBuilder<T> implements Supplier<T>{
                     }
                 }
             }
+            return this;
+        }
+
+        public WrappedBlockRegistryBuilder tile(BlockEntityType.BlockEntitySupplier<? extends BlockEntity> tileFactory){
+            if (this.tileData == null) this.tileData = new tileData();
+            this.tileData.tileFactory = tileFactory;
+            return this;
+        }
+
+        public WrappedBlockRegistryBuilder tile(IContainerFactory menuFactory){
+            if (this.tileData == null) this.tileData = new tileData();
+            this.tileData.menuFactory = menuFactory;
+            return this;
+        }
+
+        public WrappedBlockRegistryBuilder tile(MenuScreens.ScreenConstructor guiFactory){
+            if (this.tileData == null) this.tileData = new tileData();
+            this.tileData.guiFactory = guiFactory;
+            return this;
+        }
+
+        public WrappedBlockRegistryBuilder tile(BlockEntityRendererProvider rendererFactory){
+            if (this.tileData == null) this.tileData = new tileData();
+            this.tileData.rendererFactory = rendererFactory;
             return this;
         }
 
@@ -503,6 +554,32 @@ public abstract class WrappedRegistryBuilder<T> implements Supplier<T>{
         public void blockColorSupport(RegisterColorHandlersEvent.Block event){
             if (this.blockColor != null)
                 event.register(this.blockColor, get());
+        }
+
+        public void customJsonSupport(HBMJsonProvider provider){
+        }
+
+        public void tileSupport(){
+            if (this.tileData != null && this.tileData.tileFactory != null){
+                ModBlockEntityType.register("tile_" + name, this.tileData.tileFactory);
+            }
+        }
+
+        public void menuSupport(){
+            if (this.tileData != null && this.tileData.tileFactory != null && this.tileData.menuFactory != null){
+                ModMenuType.register("menu_" + name, this.tileData.menuFactory);
+            }
+        }
+
+        public void guiSupport(){
+            if (this.tileData != null && this.tileData.menuFactory != null && this.tileData.guiFactory != null){
+                MenuScreens.register(ModMenuType.typesMaps.get("menu_" + name).get(), this.tileData.guiFactory);
+            }
+        }
+
+        public void rendererSupport(){
+            if (this.tileData != null && this.tileData.tileFactory != null && this.tileData.rendererFactory != null)
+                BlockEntityRenderers.register(ModBlockEntityType.tileTypes.get("tile_" + name).get(), this.tileData.rendererFactory);
         }
     }
 

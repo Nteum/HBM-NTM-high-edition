@@ -37,14 +37,18 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Supplier;
 
 public class ModBlockEntityType {
     public static final DeferredRegister<BlockEntityType<?>> REGISTER = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, HBM.MODID);
+    public static final Map<String, RegistryObject<? extends BlockEntityType>> tileTypes = new HashMap<>();
 
     public static final RegistryObject<BlockEntityType<DifurnaceEntity>> DIFURNACE_ENTITY =
             REGISTER.register("difurnace_entity",()-> BlockEntityType.Builder.of(DifurnaceEntity::new, ModBlocks.machine_difurnace.get()).build(null));
@@ -200,7 +204,14 @@ public class ModBlockEntityType {
     @Deprecated
     public static final RegistryObject<BlockEntityType<BedRockOreTE.TileBedrockOre>> TILE_BEDROCK_ORE = register("tile_bedrock_ore", BedRockOreTE.TileBedrockOre::new, ModBlocks.DEPTH_STONE);
     // 注册函数
-    private static<T extends BlockEntity> RegistryObject<BlockEntityType<T>> register(String key, BlockEntityType.BlockEntitySupplier<T> pFactory, Supplier<Block>... pValidBlocks){
-        return REGISTER.register(key, () -> BlockEntityType.Builder.of(pFactory, Arrays.stream(pValidBlocks).map(Supplier::get).toArray(Block[]::new)).build(null));
+    public static<T extends BlockEntity> RegistryObject<BlockEntityType<T>> register(String key, BlockEntityType.BlockEntitySupplier<T> pFactory, Supplier<Block>... pValidBlocks){
+        var registerObj = REGISTER.register(key, () -> BlockEntityType.Builder.of(pFactory, Arrays.stream(pValidBlocks).map(Supplier::get).toArray(Block[]::new)).build(null));
+        tileTypes.put(key, registerObj);
+        return registerObj;
+    }
+
+    public static void registerBus(IEventBus bus){
+        ModBlocks.tileSupport();
+        REGISTER.register(bus);
     }
 }

@@ -1,16 +1,13 @@
 package com.hbm;
 
 import com.hbm.capabilities.network.TransmitterNetworkRegistry;
-import com.hbm.config.ClientConfig;
 import com.hbm.config.CommonConfig;
-import com.hbm.config.ServerConfig;
 import com.hbm.compat.bigexplosives.BigExplosivesMod;
 import com.hbm.compat.ballistix.BallistixCompat;
 import com.hbm.datagen.damageSource.HBMDamageTagProvider;
+import com.hbm.datagen.json.HBMJsonProvider;
 import com.hbm.datagen.levelgen.HBMWorldGenProvider;
 import com.hbm.datagen.tag.FluidTagsGen;
-import com.hbm.dev.AssetConsistencyChecker;
-import com.hbm.dev.ModelValidator;
 import com.hbm.datagen.loot.BlockLootGen;
 import com.hbm.datagen.loot.ChestLootGen;
 import com.hbm.datagen.loot.EntityLootGen;
@@ -100,7 +97,8 @@ public class HBM {
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
         ModTabs.CREATIVE_MODE_TABS.register(modEventBus);
-        ModBlockEntityType.REGISTER.register(modEventBus);
+//        ModBlockEntityType.REGISTER.register(modEventBus);
+        ModBlockEntityType.registerBus(modEventBus);
         ModRecipes.RECIPE_TYPE.register(modEventBus);
         ModRecipes.SERIALIZER.register(modEventBus);
         ModFluids.register(modEventBus);
@@ -108,7 +106,8 @@ public class HBM {
         ModSounds.SOUNDS.register(modEventBus);
         ModFeatures.register(modEventBus);
         ModStructureProcessors.STRUCTURE_PROCESSORS.register(modEventBus);
-        ModMenuType.MOD_MENU_TYPES.register(modEventBus);
+//        ModMenuType.MOD_MENU_TYPES.register(modEventBus);
+        ModMenuType.registerBus(modEventBus);
         ModEffects.register(modEventBus);
         BigExplosivesMod.register(modEventBus);
         BallistixCompat.register(modEventBus);

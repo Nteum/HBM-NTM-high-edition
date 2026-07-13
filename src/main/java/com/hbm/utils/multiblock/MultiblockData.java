@@ -121,6 +121,7 @@ public class MultiblockData {
                 .addCaps(new Vec3i(-1, 1, 3), new Direction[]{SOUTH}, ForgeCapabilities.FLUID_HANDLER, HBMCaps.LONG_ENERGY)
                 .addCaps(new Vec3i(3, 1, 0), new Direction[]{EAST}, ForgeCapabilities.FLUID_HANDLER, HBMCaps.LONG_ENERGY)
                 .addCaps(new Vec3i(-3, 1, 0), new Direction[]{WEST}, ForgeCapabilities.FLUID_HANDLER, HBMCaps.LONG_ENERGY));
+        mapping.put(ModBlocks.MACHINE_ORE_SLOPPER.get(), new MultiblockData(3, 0, 3, 3, 1, 1));
     }
 
     MultiblockData(List<Vec3i> offsets, int[] dirOffsets){

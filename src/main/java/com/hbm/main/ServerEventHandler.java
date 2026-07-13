@@ -60,6 +60,7 @@ public class ServerEventHandler {
         forgeBus.addListener(ServerEventHandler::onPlayerTossItem);
         forgeBus.addListener(ServerEventHandler::onEntityJoin);
         forgeBus.addListener(ServerEventHandler::onFinialSpawn);
+        forgeBus.addListener(ServerEventHandler::onPlayerTickEvent);
     }
     @SubscribeEvent
     public static void onCommonSetup(FMLCommonSetupEvent event){

@@ -1,9 +1,10 @@
-package com.hbm.datagen;
+package com.hbm.datagen.json;
 
 import com.google.gson.*;
 import com.hbm.HBM;
 import com.hbm.particle.ModParticleTypes;
 import com.hbm.registries.HBMDamage;
+import com.hbm.registries.ModBlocks;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
@@ -27,7 +28,7 @@ public class HBMJsonProvider implements DataProvider {
     protected final String modid;
     public final boolean isClient;
     @VisibleForTesting
-    public final Map<ResourceLocation, JsonElement> dataToGenerate = new HashMap<>();
+    public static final Map<ResourceLocation, JsonElement> dataToGenerate = new HashMap<>();
     @VisibleForTesting
     public final ExistingFileHelper existingFileHelper;
     // 常用地址
@@ -44,6 +45,7 @@ public class HBMJsonProvider implements DataProvider {
     private void registerData(){
         particleFile();
         damageType();
+        ModBlocks.customJsonSupport(this);
     }
 
     private void particleFile(){
@@ -94,10 +96,10 @@ public class HBMJsonProvider implements DataProvider {
         // 输入注册数据
         registerData();
         // 输出生成文件
-        CompletableFuture<?>[] futures = new CompletableFuture<?>[this.dataToGenerate.size()];
+        CompletableFuture<?>[] futures = new CompletableFuture<?>[dataToGenerate.size()];
         int i = 0;
 
-        for (Map.Entry<ResourceLocation, JsonElement> entry : this.dataToGenerate.entrySet()) {
+        for (Map.Entry<ResourceLocation, JsonElement> entry : dataToGenerate.entrySet()) {
             Path target = getPath(entry.getKey());
             futures[i++] = DataProvider.saveStable(pOutput, entry.getValue(), target);
         }

@@ -23,6 +23,7 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.dimension.BuiltinDimensionTypes;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ModelFile;
@@ -155,7 +156,8 @@ public class ItemBedrockOreCombine extends ItemBedrockOre {
         static {
             //					primary						sulfuric					solvent						dcm
             register(
-                    HBMDimensions.KERBIN,
+//                    HBMDimensions.KERBIN,
+                    Level.OVERWORLD,    // 航天版里写的是KERBIN，根据代码分析和游戏测试，感觉这个应该指的是主世界
                     T("light", o(HBMMatters.IRON, 18), o(HBMMatters.COPPER, 9), o(HBMMatters.CRYOLITE, 6), o(HBMMatters.SODIUM, 3)),
                     T("heavy", o(HBMMatters.TUNGSTEN, 18), o(HBMMatters.TUNGSTEN, 9), o(HBMMatters.ZINC, 6), o(HBMMatters.ZINC, 3)),
                     T("nonmetal", o(HBMMatters.COAL, 18), o(HBMMatters.LIGNITE, 9), o(HBMMatters.SULFUR, 6), o(HBMMatters.KNO, 3)),

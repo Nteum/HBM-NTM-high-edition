@@ -22,7 +22,8 @@ public abstract class BaseContainerTile extends CapabilityBlockEntity{
     @Override
     protected void saveAdditional(CompoundTag tag) {
         super.saveAdditional(tag);
-        tag.put(HBMKey.ITEM, this.items.serializeNBT());
+        if (items != null)
+            tag.put(HBMKey.ITEM, this.items.serializeNBT());
     }
 
     @Override

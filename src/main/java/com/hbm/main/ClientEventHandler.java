@@ -146,6 +146,7 @@ public class ClientEventHandler {
             MenuScreens.register(ModMenuType.MENU_CONVEYOR_EXTRACTOR.get(), GuiConveyorExtractor::new);
             MenuScreens.register(ModMenuType.MENU_CONVEYOR_ROUTER.get(), GuiConveyorRouter::new);
             MenuScreens.register(ModMenuType.MENU_MINER_LARGE.get(), GuiMinerLarge::new);
+            ModBlocks.guiSupport();
             //方块实体渲染
             BlockEntityRenderers.register(ModBlockEntityType.PRESS_ENTITY.get(), PressRenderer::new);
             BlockEntityRenderers.register(ModBlockEntityType.ASSEMBLER_ENTITY.get(), AssemblerRenderer::new);
@@ -171,6 +172,7 @@ public class ClientEventHandler {
             BlockEntityRenderers.register(ModBlockEntityType.RBMK_KEYPAD_ENTITY.get(), RBMKKeypadRenderer::new);
             BlockEntityRenderers.register(ModBlockEntityType.RBMK_GAUGE_ENTITY.get(), RBMKGaugeRenderer::new);
             BlockEntityRenderers.register(ModBlockEntityType.TILE_MINER_LARGE.get(), RendererMinerLarge::new);
+            ModBlocks.rendererSupport();
             //实体渲染
             EntityRenderers.register(ModEntityType.TEST_ENTITY.get(), TestEntityRenderer::new);
             EntityRenderers.register(ModEntityType.ENTITY_GRENADE_GENETIC.get(), ThrownItemRenderer::new);
@@ -333,7 +335,7 @@ public class ClientEventHandler {
     // 注册单独加入的模型加载器
     @SubscribeEvent
     public static void registerGeometryLoaders(ModelEvent.RegisterGeometryLoaders event){
-        event.register("multi_parts_obj", CustomPartsModel.Loader.INSTANCE);
+        event.register(CustomPartsModel.Loader.LOADER_NAME, CustomPartsModel.Loader.INSTANCE);
         event.register("door", CustomPartsModel.Loader.INSTANCE);
         event.register("advanced_assembly_machine_loader", CustomPartsModel.Loader.INSTANCE);
     }

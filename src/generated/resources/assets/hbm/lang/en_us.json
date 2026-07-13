@@ -188,6 +188,7 @@
   "block.hbm.machine_icf": "ICF Reactor",
   "block.hbm.machine_icf_controller": "ICF Laser Controller",
   "block.hbm.machine_icf_press": "ICF Fuel Press",
+  "block.hbm.machine_ore_slopper": "Bedrock Ore Processor",
   "block.hbm.machine_reactor_breeding": "Breeder Reactor",
   "block.hbm.machine_research_reactor": "Research Reactor",
   "block.hbm.machine_shredder": "Shredder",

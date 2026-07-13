@@ -4,10 +4,12 @@ import com.hbm.HBM;
 import com.hbm.block.HBMBlockProperties;
 import com.hbm.block.env.BedRockOre;
 import com.hbm.registries.ModBlocks;
+import com.hbm.render.model.engine.CustomPartsModel;
 import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.StringRepresentable;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.PipeBlock;
@@ -394,5 +396,17 @@ public class BlockStateGen extends BlockStateProvider {
         builder.part().modelFile(up).addModel().condition(PipeBlock.UP,true);
         builder.part().modelFile(down).addModel().condition(PipeBlock.DOWN,true);
         simpleBlockItem(block, inventory);
+    }
+
+    private BlockModelBuilder genSimpleModel(Block block, float scale){
+        return genSimpleModel(block, key(block), key(block), scale);
+    }
+
+    public BlockModelBuilder genSimpleModel(Block block, ResourceLocation model, ResourceLocation texture, float size){
+        BlockModelBuilder builder = models().getBuilder(path(block)).parent(models().getExistingFile(new ResourceLocation("minecraft", "block/block")));
+        builder.customLoader(CustomPartsModel.LoaderBuilder::new).setModel(model);
+        builder.renderType("cutout").texture("texture0", texture).texture("particle", texture);
+        builder.rootTransforms().scale(1 / size).translation(size / 2, 0, size / 2);
+        return builder;
     }
 }

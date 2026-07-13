@@ -2,17 +2,23 @@ package com.hbm.gui;
 
 import com.hbm.HBM;
 import com.hbm.gui.menu.*;
+import com.hbm.registries.ModBlocks;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraftforge.common.extensions.IForgeMenuType;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.network.IContainerFactory;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class ModMenuType {
     public static final DeferredRegister<MenuType<?>> MOD_MENU_TYPES = DeferredRegister.create(Registries.MENU, HBM.MODID);
+    public static final Map<String, RegistryObject<? extends MenuType>> typesMaps = new HashMap<>();
     public static final RegistryObject<MenuType<DifurnaceMenu>> DIFURNACE_MENU =
             MOD_MENU_TYPES.register("difurnace_menu",()->new MenuType<>(DifurnaceMenu::new, FeatureFlags.VANILLA_SET));
     public static final RegistryObject<MenuType<PressMenu>> PRESS_MENU =
@@ -75,7 +81,14 @@ public class ModMenuType {
     public static final RegistryObject<MenuType<MenuConveyorInserter>> MENU_CONVEYOR_INSERTER = register("menu_conveyor_inserter", MenuConveyorInserter::new);
     public static final RegistryObject<MenuType<MenuConveyorRouter>> MENU_CONVEYOR_ROUTER = register("menu_conveyor_router", MenuConveyorRouter::new);
     public static final RegistryObject<MenuType<MenuMinerLarge>> MENU_MINER_LARGE = register("menu_miner_large", MenuMinerLarge::new);
-    private static <T extends AbstractContainerMenu> RegistryObject<MenuType<T>> register(String key, IContainerFactory<T> factory){
-        return MOD_MENU_TYPES.register(key, () -> IForgeMenuType.create(factory));
+    public static <T extends AbstractContainerMenu> RegistryObject<MenuType<T>> register(String key, IContainerFactory<T> factory){
+        RegistryObject<MenuType<T>> register = MOD_MENU_TYPES.register(key, () -> IForgeMenuType.create(factory));
+        typesMaps.put(key, register);
+        return register;
+    }
+
+    public static void registerBus(IEventBus bus){
+        ModBlocks.menuSupport();
+        MOD_MENU_TYPES.register(bus);
     }
 }

@@ -1,5 +1,6 @@
 package com.hbm.registries;
 
+import com.hbm.HBM;
 import com.hbm.HBMKey;
 
 import com.hbm.block.BlockEnums;
@@ -34,6 +35,8 @@ import com.hbm.block.machine.rbmk.BlockRBMKRadioController;
 import com.hbm.block.machine.rbmk.BlockRBMKSteamPort;
 import com.hbm.block.tools.GeigerCounter;
 import com.hbm.block.weapon.LaunchPad;
+import com.hbm.blockentity.machine.TileConnector;
+import com.hbm.blockentity.machine.TileOreSloppper;
 import com.hbm.blockentity.machine.rbmk.RBMKBoilerEntity;
 import com.hbm.blockentity.machine.rbmk.RBMKCoolerEntity;
 import com.hbm.blockentity.machine.rbmk.RBMKOutgasserEntity;
@@ -49,6 +52,7 @@ import com.hbm.block.weapon.NukeBoy;
 import com.hbm.block.weapon.NukeCustom;
 import com.hbm.block.weapon.NukeFat;
 import com.hbm.config.ConfigBomb;
+import com.hbm.datagen.json.HBMJsonProvider;
 import com.hbm.datagen.LanguageProvider;
 import com.hbm.datagen.loot.BlockLootGen;
 import com.hbm.datagen.model.BlockStateGen;
@@ -118,6 +122,12 @@ public class ModBlocks {
                     .lightLevel(state -> state.getValue(WoodBurnerBlock.LIT) ? 13 : 0)));
     public static final RegistryObject<Block> MINER_LARGE = new WrappedBlockRegistryBuilder("miner_large", ()->new BlockMinerLarge(Properties.of().strength(5).explosionResistance(100)))
             .tab(ModTabs.MACHINE.getKey()).model(HBMKey.MODEL_STANDALONE).loc(HBMKey.REVERSE_GEN).loot(HBMKey.DROP_SELF).tags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL).item(block -> new ItemPosModify(block, new Vec3i(0, 4, 0), new Item.Properties())).build();
+    public static final RegistryObject<Block> MACHINE_ORE_SLOPPER = new WrappedBlockRegistryBuilder("machine_ore_slopper", () -> new MachineOreSlopper(Properties.of().strength(5.0f, 10.0f)))
+            .tab(ModTabs.MACHINE.getKey()).loc("Bedrock Ore Processor")
+            .model((block, provider) -> provider.horizontalBlockWithItem(block, provider.genSimpleModel(block, HBM.rl("block/machines/ore_slopper.obj"), HBM.rl("block/machine/ore_slopper"), 7)))
+            .tile(TileOreSloppper::new)
+            .tags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL).build();
+
     // Tokamak 聚变堆组件
     public static final RegistryObject<Block> tokamak_controller = registerMachineBlockWithItem("tokamak_controller", ()->new TokamakControllerBlock(Properties.of().strength(5.0F).lightLevel(state -> 8)));
     public static final RegistryObject<Block> tokamak_casing = registerMachineBlockWithItem("tokamak_casing", ()->new TokamakCasingBlock(Properties.of().strength(6.0F).explosionResistance(18.0F)));
@@ -730,8 +740,6 @@ public class ModBlocks {
                     .model(HBMKey.MODEL_STANDALONE).color((state, level, pos, tintIndex) -> tintIndex != 0 ? 0xFFFFFFFF : definition.color).loc(HBMKey.REVERSE_GEN).loot(HBMKey.DROP_NONE).build());
 //            definition -> add("ore_bedrock_" + definition.id.toLowerCase(), ()->new BedRockOre(definition, Properties.copy(Blocks.BEDROCK)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_STANDALONE, HBMKey.REVERSE_GEN, HBMKey.DROP_NONE));
 
-
-
     /**
      * 航天版方块
      * */
@@ -849,6 +857,36 @@ public class ModBlocks {
     public static void blockColorSupport(RegisterColorHandlersEvent.Block event){
         for (WrappedBlockRegistryBuilder wrappedBlockRegistry : blockList) {
             wrappedBlockRegistry.blockColorSupport(event);
+        }
+    }
+
+    public static void customJsonSupport(HBMJsonProvider provider){
+        for (WrappedBlockRegistryBuilder wrappedBlockRegistry : blockList) {
+            wrappedBlockRegistry.customJsonSupport(provider);
+        }
+    }
+
+    public static void tileSupport(){
+        for (WrappedBlockRegistryBuilder wrappedBlockRegistry : blockList) {
+            wrappedBlockRegistry.tileSupport();
+        }
+    }
+
+    public static void menuSupport(){
+        for (WrappedBlockRegistryBuilder wrappedBlockRegistry : blockList) {
+            wrappedBlockRegistry.menuSupport();
+        }
+    }
+
+    public static void guiSupport(){
+        for (WrappedBlockRegistryBuilder wrappedBlockRegistry : blockList) {
+            wrappedBlockRegistry.guiSupport();
+        }
+    }
+
+    public static void rendererSupport(){
+        for (WrappedBlockRegistryBuilder wrappedBlockRegistry : blockList) {
+            wrappedBlockRegistry.rendererSupport();
         }
     }
 }

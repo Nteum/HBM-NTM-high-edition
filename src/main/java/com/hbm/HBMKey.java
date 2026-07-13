@@ -58,6 +58,7 @@ public class HBMKey {
     public static final String MODEL_ITEM_OVERLAY = "model_item_overlay";
     public static final String MODEL_ITEM_MULTI_LAYER = "model_item_multi_layer";
     public static final String MODEL_BUILTIN = "model_builtin";
+    public static final String MODEL_OBJ = "model_obj";
 
     public static final String LITERALLY = "literally";
     public static final String ORDERLY_GEN = "orderly_gen";

@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.gson.*;
+import com.hbm.HBM;
 import com.mojang.math.Transformation;
 import joptsimple.internal.Strings;
 import net.minecraft.client.Minecraft;
@@ -36,6 +37,8 @@ import net.minecraftforge.client.model.CompositeModel;
 import net.minecraftforge.client.model.IDynamicBakedModel;
 import net.minecraftforge.client.model.IModelBuilder;
 import net.minecraftforge.client.model.data.ModelData;
+import net.minecraftforge.client.model.generators.CustomLoaderBuilder;
+import net.minecraftforge.client.model.generators.ModelBuilder;
 import net.minecraftforge.client.model.geometry.IGeometryBakingContext;
 import net.minecraftforge.client.model.geometry.IGeometryLoader;
 import net.minecraftforge.client.model.geometry.IUnbakedGeometry;
@@ -44,6 +47,7 @@ import net.minecraftforge.client.model.obj.ObjLoader;
 import net.minecraftforge.client.model.obj.ObjMaterialLibrary;
 import net.minecraftforge.client.model.obj.ObjTokenizer;
 import net.minecraftforge.client.model.pipeline.QuadBakingVertexConsumer;
+import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.common.util.ConcatenatedListView;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.logging.log4j.LogManager;
@@ -370,6 +374,7 @@ public class CustomPartsModel implements IUnbakedGeometry<CustomPartsModel> {
     }
 
     public static class Loader implements IGeometryLoader<CustomPartsModel>, ResourceManagerReloadListener {
+        public static final String LOADER_NAME = "multi_parts_obj";
         public static final Loader INSTANCE = new Loader();
         private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
         private static final Logger LOGGER = LogManager.getLogger("HBM-CustomModelLoader");
@@ -437,6 +442,35 @@ public class CustomPartsModel implements IUnbakedGeometry<CustomPartsModel> {
                     throw new RuntimeException("Exception unknown", e);
                 }
             });
+        }
+    }
+    // 用于数据生成
+    public static class LoaderBuilder<T extends ModelBuilder<T>> extends CustomLoaderBuilder<T> {
+        ResourceLocation model;
+        // 💡 核心：这个构造器的参数顺序，完美对应了你要传给 customLoader 的那个 BiFunction！
+        public LoaderBuilder(T modelBuilder, ExistingFileHelper existingFileHelper) {
+            // 必须通过显式指定你自定义 Loader 的“注册ID”（比如 "your_mod:my_obj_loader"）
+            super(HBM.rl(Loader.LOADER_NAME), modelBuilder, existingFileHelper);
+        }
+
+        public LoaderBuilder<T> setModel(ResourceLocation resourceLocation){
+            this.model = resourceLocation;
+            if (!this.model.getPath().endsWith(".obj")) {
+                this.model = this.model.withSuffix(".obj");
+            }
+            if (!this.model.getPath().startsWith("models/")) {
+                this.model = this.model.withPrefix("models/");
+            }
+            return this;
+        }
+
+        // 💡 当 DataGen 最终写盘时，这个方法会被自动调用，把你的 Java 变量变成 JSON
+        @Override
+        public JsonObject toJson(JsonObject json) {
+            json = super.toJson(json); // 这一步会自动把 "loader": "your_mod:my_obj_loader" 塞进去
+            json.addProperty("model", this.model.toString());
+            // 如果你有其他操控子模型的参数，在这里塞进 JsonObject 即可
+            return json;
         }
     }
 

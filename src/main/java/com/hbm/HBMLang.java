@@ -45,6 +45,7 @@ public enum HBMLang implements ILangEntry {
     CONTAINER_CONVEYOR_INSERTER("Conveyor Inserter"),
     CONTAINER_CONVEYOR_ROUTER("Conveyor Router"),
     CONTAINER_MINER_LARGE("Large Miner"),
+    CONTAINER_ORE_SLOPPER("Bedrock Ore Processor"),
     // GUI
     TOOLTIP_LEFT_TIME("gui","left_time.tooltip"),
     TOOLTIP_ENERGY("gui","stored_energy.tooltip"),

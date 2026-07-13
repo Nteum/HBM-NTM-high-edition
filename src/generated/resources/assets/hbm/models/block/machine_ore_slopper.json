@@ -1,0 +1,17 @@
+{
+  "parent": "minecraft:block/block",
+  "loader": "hbm:multi_parts_obj",
+  "model": "hbm:models/block/machines/ore_slopper.obj",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "particle": "hbm:block/machine/ore_slopper",
+    "texture0": "hbm:block/machine/ore_slopper"
+  },
+  "transform": {
+    "scale": [
+      0.14285715,
+      0.14285715,
+      0.14285715
+    ]
+  }
+}
