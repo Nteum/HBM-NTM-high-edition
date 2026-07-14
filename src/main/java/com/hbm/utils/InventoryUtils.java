@@ -346,6 +346,7 @@ public class InventoryUtils {
     public static int insertNoCheckSlots(ItemStack from, IItemHandler to){
         return insertNoCheckSlots(from,to,false);
     }
+    // 返回值：成功输入的数量
     public static int insertNoCheckSlots(ItemStack from, IItemHandler to, boolean simulate){
         ItemStack itemStack1 = from.copy();
         for (int i = 0; i < to.getSlots() && !itemStack1.isEmpty(); i++) {

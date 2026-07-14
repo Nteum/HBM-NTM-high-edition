@@ -20,12 +20,16 @@ import com.hbm.item.env.ItemBedrockOreRaw;
 import com.hbm.item.machine.ItemMachineUpgrade;
 import com.hbm.network.ModMessages;
 import com.hbm.network.packet.toclient.S2CParticlePacket;
-import com.hbm.registries.HBMDamage;
-import com.hbm.registries.ModItems;
-import com.hbm.registries.ModSounds;
+import com.hbm.particle.ParticleSystem;
+import com.hbm.registries.*;
+import com.hbm.utils.InventoryUtils;
+import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtUtils;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvents;
@@ -37,18 +41,25 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
+import net.minecraftforge.items.wrapper.RangedWrapper;
+import net.minecraftforge.items.wrapper.RecipeWrapper;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -65,29 +76,18 @@ public class TileOreSloppper extends DefaultMachineBE implements IUpgradeInfoPro
 
     public double[] ores = new double[ItemBedrockOreCombine.CelestialBedrockOre.oreTypes.size()];
 
-//    public SlopperAnimation animation = SlopperAnimation.LOWERING;
-//    public float slider;
-//    public float prevSlider;
-//    public float bucket;
-//    public float prevBucket;
-//    public float blades;
-//    public float prevBlades;
-//    public float fan;
-//    public float prevFan;
-//    public int delay;
-//
-//    BasicFluidHandler fluidHandler;
-//    public double[] ores = new double[CelestialBedrockOre.getAllTypes().size()];
-//    private SolarSystem.Body fromBody;
-//
-//    public UpgradeManagerNT upgradeManager = new UpgradeManagerNT();
-//
-//    public TileOreSloppper() {
-//        super(11);
-//        tanks = new FluidTank[2];
-//        tanks[0] = new FluidTank(Fluids.WATER, 16_000);
-//        tanks[1] = new FluidTank(Fluids.SLOP, 16_000);
-//    }
+    // 客户端动画变量
+    @OnlyIn(Dist.CLIENT) public SlopperAnimation animation = SlopperAnimation.LOWERING;
+    @OnlyIn(Dist.CLIENT) public float slider;
+    @OnlyIn(Dist.CLIENT) public float prevSlider;
+    @OnlyIn(Dist.CLIENT) public float bucket;
+    @OnlyIn(Dist.CLIENT) public float prevBucket;
+    @OnlyIn(Dist.CLIENT) public float blades;
+    @OnlyIn(Dist.CLIENT) public float prevBlades;
+    @OnlyIn(Dist.CLIENT) public float fan;
+    @OnlyIn(Dist.CLIENT) public float prevFan;
+    @OnlyIn(Dist.CLIENT) public int delay;
+
 
     private ContainerData containerData = new ContainerData() {
         @Override
@@ -112,7 +112,11 @@ public class TileOreSloppper extends DefaultMachineBE implements IUpgradeInfoPro
         this.items = new ItemStackHandler(11){
             @Override
             public boolean isItemValid(int slot, @NotNull ItemStack stack) {
-                return super.isItemValid(slot, stack);
+                return switch (slot){
+                    case 0 -> stack.is(ModTags.Items.CHARGEABLE);
+                    case 2 -> stack.is(ModItems.ORE_BEDROCK_RAW.get());
+                    default -> false;
+                } && super.isItemValid(slot, stack);
             }
         };
         this.fluidHandler = new BasicFluidHandler(2, 16_000);
@@ -186,82 +190,12 @@ public class TileOreSloppper extends DefaultMachineBE implements IUpgradeInfoPro
 
     @Override
     protected void afterWork() {
-        for(CelestialBedrockOreType type : CelestialBedrockOre.getAllTypes()) {
-            ItemStack output = ItemBedrockOreNew.make(BedrockOreGrade.BASE, type);
-            outer: while(ores[type.index] >= 1) {
-                for(int i = 3; i <= 8; i++) if(slots[i] != null && slots[i].getItem() == output.getItem() && slots[i].getItemDamage() == output.getItemDamage() && slots[i].stackSize < output.getMaxStackSize()) {
-                    slots[i].stackSize++; ores[type.index] -= 1F; continue outer;
-                }
-                for(int i = 3; i <= 8; i++) if(slots[i] == null) {
-                    slots[i] = output; ores[type.index] -= 1F; continue outer;
-                }
-                break outer;
-            }
+        // 对应的矿物转换成物品
+        for (ItemBedrockOreCombine.CelestialBedrockOreType type : ItemBedrockOreCombine.CelestialBedrockOre.oreTypes) {
+            ItemStack output = ItemBedrockOreCombine.make(ItemBedrockOreCombine.BedrockOreGrade.BASE, type, (int) ores[type.index]);
+            ores[type.index] -= InventoryUtils.insertNoCheckSlots(output, new RangedWrapper(this.items, 3, 9));
         }
-
-        this.networkPackNT(150);
-    }
-
-    @Override
-    protected void onUpdateServer() {
-        super.onUpdateServer();
-
-        if(canSlop()) {
-            this.power -= this.consumption;
-            this.progress += 1F / (600 - speed * 150);
-            this.processing = true;
-            boolean markDirty = false;
-
-            while(progress >= 1F && canSlop()) {
-                progress -= 1F;
-
-                fromBody = ItemBedrockOreBase.getOreBody(slots[2]);
-
-                for(CelestialBedrockOreType type : CelestialBedrockOre.get(fromBody).types) {
-                    ores[type.index] += (ItemBedrockOreBase.getOreAmount(slots[2], type) * (1D + efficiency * 0.1));
-                }
-
-                this.decrStackSize(2, 1);
-                this.tanks[0].setFill(this.tanks[0].getFill() - waterUsed);
-                this.tanks[1].setFill(this.tanks[1].getFill() + waterUsed);
-                markDirty = true;
-            }
-
-            if(markDirty) this.markDirty();
-
-            List<Entity> entities = worldObj.getEntitiesWithinAABB(Entity.class, AxisAlignedBB.getBoundingBox(xCoord - 0.5, yCoord + 1, zCoord - 0.5, xCoord + 1.5, yCoord + 3, zCoord + 1.5).offset(dir.offsetX, 0, dir.offsetZ));
-
-            for(Entity e : entities) {
-                e.attackEntityFrom(ModDamageSource.turbofan, 1000F);
-
-                if(!e.isEntityAlive() && e instanceof EntityLivingBase) {
-                    NBTTagCompound vdat = new NBTTagCompound();
-                    vdat.setString("type", "giblets");
-                    vdat.setInteger("ent", e.getEntityId());
-                    vdat.setInteger("cDiv", 5);
-                    PacketThreading.createAllAroundThreadedPacket(new AuxParticlePacketNT(vdat, e.posX, e.posY + e.height * 0.5, e.posZ), new TargetPoint(e.dimension, e.posX, e.posY + e.height * 0.5, e.posZ, 150));
-
-                    worldObj.playSoundEffect(e.posX, e.posY, e.posZ, NTMSounds.VANILLA_GIB, 2.0F, 0.95F + worldObj.rand.nextFloat() * 0.2F);
-                }
-            }
-        } else {
-            this.progress = 0;
-        }
-
-        for(CelestialBedrockOreType type : CelestialBedrockOre.getAllTypes()) {
-            ItemStack output = ItemBedrockOreNew.make(BedrockOreGrade.BASE, type);
-            outer: while(ores[type.index] >= 1) {
-                for(int i = 3; i <= 8; i++) if(slots[i] != null && slots[i].getItem() == output.getItem() && slots[i].getItemDamage() == output.getItemDamage() && slots[i].stackSize < output.getMaxStackSize()) {
-                    slots[i].stackSize++; ores[type.index] -= 1F; continue outer;
-                }
-                for(int i = 3; i <= 8; i++) if(slots[i] == null) {
-                    slots[i] = output; ores[type.index] -= 1F; continue outer;
-                }
-                break outer;
-            }
-        }
-
-        this.networkPackNT(150);
+        sendUpdatePacket();
     }
 
     public FluidType getFluidOutput(FluidType input) {
@@ -270,7 +204,78 @@ public class TileOreSloppper extends DefaultMachineBE implements IUpgradeInfoPro
     }
     @Override
     protected void onUpdateClient() {
-        super.onUpdateClient();
+        this.prevSlider = this.slider;
+        this.prevBucket = this.bucket;
+        this.prevBlades = this.blades;
+        this.prevFan = this.fan;
+
+        if(this.processing) {
+
+            this.blades += 15F;
+            this.fan += 35F;
+
+            if(blades >= 360) {
+                blades -= 360;
+                prevBlades -= 360;
+            }
+
+            if(fan >= 360) {
+                fan -= 360;
+                prevFan -= 360;
+            }
+
+            if(animation == SlopperAnimation.DUMPING && Minecraft.getInstance().player.distanceToSqr(this.worldPosition.getCenter().add(0, 3.5f, 0)) <= 2500) {
+                CompoundTag data = new CompoundTag();
+                data.putString("type", "vanillaExt");
+                data.putString("mode", "blockdust");
+                data.put("block", NbtUtils.writeBlockState(Blocks.IRON_BLOCK.defaultBlockState()));
+                data.putDouble("mY", -0.2D);
+                Direction facing = this.getBlockState().getValue(BlockStateProperties.HORIZONTAL_FACING);
+                ParticleSystem.vanillaExt(data, this.worldPosition.getCenter().add(facing.getStepX() + level.random.nextGaussian() * 0.25, 3.75, facing.getStepZ() + level.random.nextGaussian() * 0.25));
+            }
+
+            if(delay > 0) {
+                delay--;
+                return;
+            }
+
+            switch(animation) {
+                case LOWERING:
+                    this.bucket += 1F/40F;
+                    if(bucket >= 1F) {
+                        bucket = 1F;
+                        animation = SlopperAnimation.LIFTING;
+                        delay = 20;
+                    }
+                    break;
+                case LIFTING:
+                    this.bucket -= 1F/40F;
+                    if(bucket <= 0) {
+                        bucket = 0F;
+                        animation = SlopperAnimation.MOVE_SHREDDER;
+                        delay = 10;
+                    }
+                    break;
+                case MOVE_SHREDDER:
+                    this.slider += 1/50F;
+                    if(slider >= 1F) {
+                        slider = 1F;
+                        animation = SlopperAnimation.DUMPING;
+                        delay = 60;
+                    }
+                    break;
+                case DUMPING:
+                    animation = SlopperAnimation.MOVE_BUCKET;
+                    break;
+                case MOVE_BUCKET:
+                    this.slider -= 1/50F;
+                    if(slider <= 0F) {
+                        animation = SlopperAnimation.LOWERING;
+                        delay = 10;
+                    }
+                    break;
+            }
+        }
     }
 
     @Override
@@ -283,7 +288,61 @@ public class TileOreSloppper extends DefaultMachineBE implements IUpgradeInfoPro
         return HBMLang.CONTAINER_ORE_SLOPPER.translate();
     }
 
+    @Override
+    public boolean canProvideInfo(ItemMachineUpgrade.UpgradeType type, int level) {
+        return true;
+    }
+
+    @Override
+    public @NotNull CompoundTag getReducedUpdateTag() {
+        CompoundTag tag = super.getReducedUpdateTag();
+        tag.putFloat(HBMKey.PROGRESS, progress);
+        tag.putBoolean(HBMKey.RUNNING, processing);
+        return tag;
+    }
+
+    @Override
+    public void handleClientPacket(@NotNull CompoundTag tag) {
+        super.handleClientPacket(tag);
+        this.progress = tag.getFloat(HBMKey.PROGRESS);
+        this.processing = tag.getBoolean(HBMKey.RUNNING);
+    }
+
+    @Override
+    public void provideInfo(ItemMachineUpgrade.UpgradeType type, int level, List<Component> info) {
+        info.add(IUpgradeInfoProvider.getStandardLabel(ModBlocks.MACHINE_ORE_SLOPPER.get()));
+        if(type == ItemMachineUpgrade.UpgradeType.SPEED) {
+            info.add(HBMLang.UPGRADE_DELAY.translate("-" + (level * 25) + "%").withStyle(ChatFormatting.GREEN));
+            info.add(HBMLang.UPGRADE_CONSUMPTION.translate("+" + (level * 50) + "%").withStyle(ChatFormatting.RED));
+        }
+        if(type == ItemMachineUpgrade.UpgradeType.EFFECT) {
+            info.add(HBMLang.UPGRADE_EFFICIENCY.translate("+" + (level * 10) + "%").withStyle(ChatFormatting.GREEN));
+            info.add(HBMLang.UPGRADE_CONSUMPTION.translate("+" + (level * 100) + "%").withStyle(ChatFormatting.RED));
+        }
+    }
+
+    @Override
+    public Map<ItemMachineUpgrade.UpgradeType, Integer> getValidUpgrades() {
+        HashMap<ItemMachineUpgrade.UpgradeType, Integer> upgrades = new HashMap<>();
+        upgrades.put(ItemMachineUpgrade.UpgradeType.SPEED, 3);
+        upgrades.put(ItemMachineUpgrade.UpgradeType.EFFECT, 3);
+        return upgrades;
+    }
+
     public enum SlopperAnimation {
         LOWERING, LIFTING, MOVE_SHREDDER, DUMPING, MOVE_BUCKET
+    }
+
+    @Override
+    protected void saveAdditional(CompoundTag pTag) {
+        super.saveAdditional(pTag);
+        pTag.putFloat(HBMKey.PROGRESS, this.progress);
+    }
+
+    @Override
+    public void load(@NotNull CompoundTag nbt) {
+        super.load(nbt);
+        if (nbt.contains(HBMKey.PROGRESS, Tag.TAG_FLOAT))
+            this.progress = nbt.getFloat(HBMKey.PROGRESS);
     }
 }
