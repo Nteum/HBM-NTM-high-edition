@@ -125,7 +125,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> MACHINE_ORE_SLOPPER = new WrappedBlockRegistryBuilder("machine_ore_slopper", () -> new MachineOreSlopper(Properties.of().strength(5.0f, 10.0f)))
             .tab(ModTabs.MACHINE.getKey()).loc("Bedrock Ore Processor")
             .model((block, provider) -> provider.horizontalBlockWithItem(block, provider.genSimpleModel(block, HBM.rl("block/machines/ore_slopper.obj"), HBM.rl("block/machine/ore_slopper"), 7)))
-            .tile(TileOreSloppper::new)
+            .tile(TileOreSloppper::new).renderer()
             .tags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL).build();
 
     // Tokamak 聚变堆组件

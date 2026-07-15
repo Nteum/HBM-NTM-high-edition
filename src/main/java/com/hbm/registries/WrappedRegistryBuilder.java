@@ -476,19 +476,19 @@ public abstract class WrappedRegistryBuilder<T> implements Supplier<T>{
             return this;
         }
 
-        public WrappedBlockRegistryBuilder tile(IContainerFactory menuFactory){
+        public WrappedBlockRegistryBuilder menu(IContainerFactory menuFactory){
             if (this.tileData == null) this.tileData = new tileData();
             this.tileData.menuFactory = menuFactory;
             return this;
         }
 
-        public WrappedBlockRegistryBuilder tile(MenuScreens.ScreenConstructor guiFactory){
+        public WrappedBlockRegistryBuilder gui(MenuScreens.ScreenConstructor guiFactory){
             if (this.tileData == null) this.tileData = new tileData();
             this.tileData.guiFactory = guiFactory;
             return this;
         }
 
-        public WrappedBlockRegistryBuilder tile(BlockEntityRendererProvider rendererFactory){
+        public WrappedBlockRegistryBuilder renderer(BlockEntityRendererProvider rendererFactory){
             if (this.tileData == null) this.tileData = new tileData();
             this.tileData.rendererFactory = rendererFactory;
             return this;
