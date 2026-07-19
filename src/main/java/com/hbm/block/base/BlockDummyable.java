@@ -71,7 +71,7 @@ public abstract class BlockDummyable extends BlockMachineBase implements ICustom
     @Override
     public void setPlacedBy(Level pLevel, BlockPos pPos, BlockState pState, @Nullable LivingEntity pPlacer, ItemStack pStack) {
         if (!pLevel.isClientSide){
-            List<Vec3i> offsets = MultiblockData.mapping.get(this).offsets;
+            List<Vec3i> offsets = getMultiblockData().offsets;
             Direction direction = pState.getValue(FACING);
             int offset = placementOffset();
             BlockPos corePos = offset == 0 ? pPos : pPos.relative(direction, offset);
@@ -123,7 +123,7 @@ public abstract class BlockDummyable extends BlockMachineBase implements ICustom
 
     @Nullable
     private BlockPos recoverCorePos(BlockState state, LevelReader level, BlockPos proxyPos) {
-        MultiblockData data = MultiblockData.mapping.get(state.getBlock());
+        MultiblockData data = getMultiblockData();
         if (data == null || !state.hasProperty(FACING)) {
             return null;
         }
@@ -208,7 +208,7 @@ public abstract class BlockDummyable extends BlockMachineBase implements ICustom
     }
 
     public int[] getDimensions(){
-        return MultiblockData.mapping.get(this).dirOffsets;
+        return getMultiblockData().dirOffsets;
     }
     @Nullable
     @Override
@@ -274,5 +274,9 @@ public abstract class BlockDummyable extends BlockMachineBase implements ICustom
     @Override
     public float getShadeBrightness(BlockState pState, BlockGetter pLevel, BlockPos pPos) {
         return 1.0f;
+    }
+
+    public MultiblockData getMultiblockData(){
+        return MultiblockData.mapping.get(this);
     }
 }

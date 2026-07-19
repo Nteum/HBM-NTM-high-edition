@@ -65,7 +65,7 @@ import java.util.Map;
 
 public class TileOreSloppper extends DefaultMachineBE implements IUpgradeInfoProvider {
     public static final long maxPower = 100_000;
-
+    public static final int TANK_CAPACITY = 16_000;
     public static final int waterUsedBase = 1_000;
     public int waterUsed = waterUsedBase;
     public static final long consumptionBase = 200;
@@ -92,7 +92,12 @@ public class TileOreSloppper extends DefaultMachineBE implements IUpgradeInfoPro
     private ContainerData containerData = new ContainerData() {
         @Override
         public int get(int pIndex) {
-            return 0;
+            return switch (pIndex){
+                case 0 -> (int) energyContainer.getEnergy();
+                case 1 -> Float.floatToIntBits(progress);
+                case 2 -> (int) consumption;
+                default -> 0;
+            };
         }
 
         @Override
@@ -100,7 +105,7 @@ public class TileOreSloppper extends DefaultMachineBE implements IUpgradeInfoPro
 
         @Override
         public int getCount() {
-            return 0;
+            return 3;
         }
     };
     public TileOreSloppper(BlockPos pos, BlockState state) {
@@ -115,11 +120,12 @@ public class TileOreSloppper extends DefaultMachineBE implements IUpgradeInfoPro
                 return switch (slot){
                     case 0 -> stack.is(ModTags.Items.CHARGEABLE);
                     case 2 -> stack.is(ModItems.ORE_BEDROCK_RAW.get());
+                    case 9,10 -> stack.is(ModTags.Items.UPGRADE);
                     default -> false;
                 } && super.isItemValid(slot, stack);
             }
         };
-        this.fluidHandler = new BasicFluidHandler(2, 16_000);
+        this.fluidHandler = new BasicFluidHandler(2, TANK_CAPACITY);
         this.energyContainer = new BasicEnergyContainer(maxPower);
         super.initCapabilities();
     }
@@ -344,5 +350,9 @@ public class TileOreSloppper extends DefaultMachineBE implements IUpgradeInfoPro
         super.load(nbt);
         if (nbt.contains(HBMKey.PROGRESS, Tag.TAG_FLOAT))
             this.progress = nbt.getFloat(HBMKey.PROGRESS);
+    }
+
+    public IFluidHandler getFluidHandler(){
+        return this.fluidHandler;
     }
 }

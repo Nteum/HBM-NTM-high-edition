@@ -57,6 +57,8 @@ import com.hbm.datagen.LanguageProvider;
 import com.hbm.datagen.loot.BlockLootGen;
 import com.hbm.datagen.model.BlockStateGen;
 import com.hbm.datagen.tag.BlockTagsGen;
+import com.hbm.gui.menu.MenuOreSlopper;
+import com.hbm.gui.screen.GuiOreSlopper;
 import com.hbm.item.blockitem.IronCrateItem;
 import com.hbm.item.blockitem.ItemPosModify;
 import com.hbm.item.blockitem.SteelCrateItem;
@@ -64,6 +66,7 @@ import com.hbm.item.tool.BatteryBlockItem;
 import com.hbm.reactor.rbmk.RBMKPeripheralType;
 import com.hbm.registries.WrappedRegistryBuilder.WrappedBlockRegistryBuilder;
 import com.hbm.debug.BlockDebug;
+import com.hbm.render.blockentity.RendererOreSlopper;
 import com.hbm.world.feature.BedrockOreDefinition;
 import net.minecraft.core.Vec3i;
 import net.minecraft.resources.ResourceKey;
@@ -125,7 +128,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> MACHINE_ORE_SLOPPER = new WrappedBlockRegistryBuilder("machine_ore_slopper", () -> new MachineOreSlopper(Properties.of().strength(5.0f, 10.0f)))
             .tab(ModTabs.MACHINE.getKey()).loc("Bedrock Ore Processor")
             .model((block, provider) -> provider.horizontalBlockWithItem(block, provider.genSimpleModel(block, HBM.rl("block/machines/ore_slopper.obj"), HBM.rl("block/machine/ore_slopper"), 7)))
-            .tile(TileOreSloppper::new).renderer()
+            .tile(TileOreSloppper::new, true).renderer(RendererOreSlopper::new).menu(MenuOreSlopper::new).gui(GuiOreSlopper::new)
             .tags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL).build();
 
     // Tokamak 聚变堆组件

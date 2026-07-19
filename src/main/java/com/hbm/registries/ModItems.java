@@ -551,7 +551,7 @@ public class ModItems {
             .itemProperties(ItemModelGen.property_stage, false, ItemBedrockOreCombine::getGradeProperty, null)
             .itemProperties(ItemModelGen.property_type, false, ItemBedrockOreCombine::getTypeProperty, null)
             .model(ItemBedrockOreCombine::genModel) // 单独生成模型，不根据物品属性自动生成模型
-            .color((ItemStack stack, int tintIndex) -> tintIndex == 1 ? ItemBedrockOreCombine.getColor(stack) : -1)
+            .color((ItemStack stack, int tintIndex) -> tintIndex == 0 ? ItemBedrockOreCombine.getColor(stack) : -1)
             .build();
 
 //    ore_byproduct = new ItemByproduct().setUnlocalizedName("ore_byproduct").setCreativeTab(MainRegistry.partsTab).setTextureName(RefStrings.MODID + ":byproduct");

@@ -1,6 +1,7 @@
 package com.hbm.utils.multiblock;
 
 import com.hbm.block.HBMBlockProperties;
+import com.hbm.block.base.BlockDummyable;
 import com.hbm.blockentity.base.DummyableBlockEntity;
 import com.hbm.blockentity.base.TileProxyBase;
 import com.hbm.utils.DirectionUtils;
@@ -8,6 +9,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -73,7 +75,8 @@ public class DummableHelper {
             if (!(coreEntity instanceof DummyableBlockEntity)){
                 return;
             }
-            final MultiblockData data = MultiblockData.mapping.get(blockState.getBlock());
+            Block block = blockState.getBlock();
+            final MultiblockData data = block instanceof BlockDummyable dummyable ? dummyable.getMultiblockData() : MultiblockData.mapping.get(block);
             if (data == null) {
                 level.removeBlock(corePos, false);
                 return;
@@ -83,7 +86,7 @@ public class DummableHelper {
             List<Vec3i> offsets2 = DirectionUtils.offsetRot(data.offsets, Direction.SOUTH, direction);
             for (Vec3i offset : offsets2) {
                 BlockPos pos = corePos.offset(offset);
-                if (level.getBlockState(pos).is(blockState.getBlock())){
+                if (level.getBlockState(pos).is(block)){
                     level.removeBlock(pos,false);
                 }
             }

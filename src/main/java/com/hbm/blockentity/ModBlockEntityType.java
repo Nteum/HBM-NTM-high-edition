@@ -41,14 +41,14 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 public class ModBlockEntityType {
     public static final DeferredRegister<BlockEntityType<?>> REGISTER = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, HBM.MODID);
     public static final Map<String, RegistryObject<? extends BlockEntityType>> tileTypes = new HashMap<>();
+    public static final Set<Supplier<Block>> dummyableBlocks = new HashSet<>();
 
     public static final RegistryObject<BlockEntityType<DifurnaceEntity>> DIFURNACE_ENTITY =
             REGISTER.register("difurnace_entity",()-> BlockEntityType.Builder.of(DifurnaceEntity::new, ModBlocks.machine_difurnace.get()).build(null));
@@ -111,12 +111,13 @@ public class ModBlockEntityType {
             REGISTER.register("iron_crate_entity", () -> BlockEntityType.Builder.of(IronCrateBlockEntity::new, ModBlocks.crate_iron.get()).build(null));
     public static final RegistryObject<BlockEntityType<SteelCrateBlockEntity>> STEEL_CRATE_ENTITY =
             REGISTER.register("steel_crate_entity", () -> BlockEntityType.Builder.of(SteelCrateBlockEntity::new, ModBlocks.crate_steel.get()).build(null));
-    public static final RegistryObject<BlockEntityType<TileProxyCombo>> PROXY_ENTITY =
-            REGISTER.register("proxy_entity",()-> BlockEntityType.Builder.of(TileProxyCombo::new,
-                    ModBlocks.machine_crucible.get(), ModBlocks.machine_assembler.get(), ModBlocks.machine_cracking_tower.get(), ModBlocks.CHEMPLANT.get(),
-                    ModBlocks.LAUNCH_PAD.get(), ModBlocks.bomb_boy.get(), ModBlocks.bomb_custom.get(), ModBlocks.bomb_fat_man.get(), ModBlocks.machine_zirnox.get(),
-                    ModBlocks.SPACE_STATION_BASE.get(), ModBlocks.HEATER_FIREBOX.get()
-            ).build(null));
+    public static RegistryObject<BlockEntityType<TileProxyCombo>> PROXY_ENTITY;
+//            =
+//            REGISTER.register("proxy_entity",()-> BlockEntityType.Builder.of(TileProxyCombo::new,
+//                    ModBlocks.machine_crucible.get(), ModBlocks.machine_assembler.get(), ModBlocks.machine_cracking_tower.get(), ModBlocks.CHEMPLANT.get(),
+//                    ModBlocks.LAUNCH_PAD.get(), ModBlocks.bomb_boy.get(), ModBlocks.bomb_custom.get(), ModBlocks.bomb_fat_man.get(), ModBlocks.machine_zirnox.get(),
+//                    ModBlocks.SPACE_STATION_BASE.get(), ModBlocks.HEATER_FIREBOX.get()
+//            ).build(null));
     public static final RegistryObject<BlockEntityType<TileEntityGeiger>> GEIGER_COUNTER =
             REGISTER.register("geiger_counter",()-> BlockEntityType.Builder.of(TileEntityGeiger::new, ModBlocks.GEIGER_COUNTER.get()).build(null));
     public static final RegistryObject<BlockEntityType<GlyphidSpawner.GlyphidSpawnerEntity>> GLYPHID_SPAWNER =
@@ -212,6 +213,18 @@ public class ModBlockEntityType {
 
     public static void registerBus(IEventBus bus){
         ModBlocks.tileSupport();
+        PROXY_ENTITY = REGISTER.register("proxy_entity",()-> BlockEntityType.Builder.of(TileProxyCombo::new,
+                combine(new ArrayList<>(dummyableBlocks.stream().map(Supplier::get).toList()),
+                        ModBlocks.machine_crucible.get(), ModBlocks.machine_assembler.get(), ModBlocks.machine_cracking_tower.get(), ModBlocks.CHEMPLANT.get(),
+                        ModBlocks.LAUNCH_PAD.get(), ModBlocks.bomb_boy.get(), ModBlocks.bomb_custom.get(), ModBlocks.bomb_fat_man.get(), ModBlocks.machine_zirnox.get(),
+                        ModBlocks.SPACE_STATION_BASE.get(), ModBlocks.HEATER_FIREBOX.get())
+        ).build(null));
         REGISTER.register(bus);
+    }
+
+    // 工具
+    private static Block[] combine(List<Block> blocks, Block ... blockList){
+        blocks.addAll(List.of(blockList));
+        return blocks.toArray(Block[]::new);
     }
 }

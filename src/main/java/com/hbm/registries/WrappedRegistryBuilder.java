@@ -17,7 +17,9 @@ import com.hbm.render.blockentity.NukeBoyRender;
 import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.client.color.item.ItemColor;
 import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.gui.screens.inventory.MenuAccess;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
@@ -407,6 +409,7 @@ public abstract class WrappedRegistryBuilder<T> implements Supplier<T>{
         Function<Block, BlockItem> blockItem;
         //
         tileData tileData;
+        boolean dummyable = false;
 
         public WrappedBlockRegistryBuilder(String name, Supplier<? extends Block> sup) {
             super(name, sup);
@@ -476,13 +479,18 @@ public abstract class WrappedRegistryBuilder<T> implements Supplier<T>{
             return this;
         }
 
+        public WrappedBlockRegistryBuilder tile(BlockEntityType.BlockEntitySupplier<? extends BlockEntity> tileFactory, boolean dummyable){
+            this.dummyable = dummyable;
+            return tile(tileFactory);
+        }
+
         public WrappedBlockRegistryBuilder menu(IContainerFactory menuFactory){
             if (this.tileData == null) this.tileData = new tileData();
             this.tileData.menuFactory = menuFactory;
             return this;
         }
 
-        public WrappedBlockRegistryBuilder gui(MenuScreens.ScreenConstructor guiFactory){
+        public <M extends AbstractContainerMenu, U extends Screen & MenuAccess<M>> WrappedBlockRegistryBuilder gui(MenuScreens.ScreenConstructor<M,U> guiFactory){
             if (this.tileData == null) this.tileData = new tileData();
             this.tileData.guiFactory = guiFactory;
             return this;
@@ -562,6 +570,7 @@ public abstract class WrappedRegistryBuilder<T> implements Supplier<T>{
         public void tileSupport(){
             if (this.tileData != null && this.tileData.tileFactory != null){
                 ModBlockEntityType.register("tile_" + name, this.tileData.tileFactory);
+                if (this.dummyable) ModBlockEntityType.dummyableBlocks.add(registryObject);
             }
         }
 

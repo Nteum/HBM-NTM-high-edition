@@ -406,7 +406,7 @@ public class BlockStateGen extends BlockStateProvider {
         BlockModelBuilder builder = models().getBuilder(path(block)).parent(models().getExistingFile(new ResourceLocation("minecraft", "block/block")));
         builder.customLoader(CustomPartsModel.LoaderBuilder::new).setModel(model);
         builder.renderType("cutout").texture("texture0", texture).texture("particle", texture);
-        builder.rootTransforms().scale(1 / size).translation(size / 2, 0, size / 2);
+        builder.rootTransforms().scale(1 / size).translation(0.5f, 0, 0.5f);
         return builder;
     }
 }

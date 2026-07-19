@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Set;
 
 public class HBMDimensions {
-    public static final Set<ResourceKey<Level>> LEVELS = new HashSet<>();
+    public static final Set<ResourceKey<Level>> LEVELS = new HashSet<>(List.of(Level.OVERWORLD, Level.NETHER, Level.END));
     public static final ResourceKey<Level> MOON_KEY = register(ResourceKey.create(Registries.DIMENSION, HBM.rl("mun")));
     // 维度的 Key
     public static final ResourceKey<LevelStem> MOON_LEVEL_KEY = ResourceKey.create(Registries.LEVEL_STEM, HBM.rl("hbm_moon"));

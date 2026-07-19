@@ -24,7 +24,7 @@ public class HUDHelper {
     /*
     * 绘制可以显示文字的方形框
     * */
-    public void drawInfoBoard(List<Component> infos, ForgeGui gui, GuiGraphics guiGraphics, float partialTick, int screenWidth, int screenHeight){
+    public static void drawInfoBoard(List<Component> infos, ForgeGui gui, GuiGraphics guiGraphics, float partialTick, int screenWidth, int screenHeight){
         int longest = 0;
         for (Component info : infos) {
             int width = Minecraft.getInstance().font.width(info);
@@ -43,7 +43,7 @@ public class HUDHelper {
         drawText(infos, pX, pZ, gui, guiGraphics, screenWidth, screenHeight);
     }
 
-    public void drawText(List<Component> desc, int pX, int pY, ForgeGui gui, GuiGraphics graphics, int screenWidth, int screenHeight){
+    public static void drawText(List<Component> desc, int pX, int pY, ForgeGui gui, GuiGraphics graphics, int screenWidth, int screenHeight){
         if (desc == null || desc.isEmpty()) {
             return;
         }
