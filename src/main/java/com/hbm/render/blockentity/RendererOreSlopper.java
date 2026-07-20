@@ -21,6 +21,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class RendererOreSlopper implements BlockEntityRenderer<TileOreSloppper> {
+    private BakedModel blockModel;
     public RendererOreSlopper(BlockEntityRendererProvider.Context pContext){
 
     }
@@ -32,7 +33,8 @@ public class RendererOreSlopper implements BlockEntityRenderer<TileOreSloppper> 
         poseStack.pushPose();
         DirectionUtils.generalMachineRotate(poseStack, blockState);
         poseStack.translate(0.5, 0, 0.5);
-        BakedModel blockModel = blockRenderer.getBlockModel(slopper.getBlockState());
+        if (blockModel == null) blockModel = blockRenderer.getBlockModel(slopper.getBlockState());
+//        BakedModel blockModel = blockRenderer.getBlockModel(slopper.getBlockState());
         if (blockModel instanceof CustomPartsModel.Baked model){
             RenderUtils.renderModel(model.getPart("Base"), poseStack, pBuffer, pPackedLight, pPackedOverlay, RenderType.cutout());
             poseStack.pushPose();
@@ -78,8 +80,6 @@ public class RendererOreSlopper implements BlockEntityRenderer<TileOreSloppper> 
             poseStack.mulPose(Axis.XP.rotation((float) -fan));
             poseStack.translate(0, -1.875, 1);
             RenderUtils.renderModel(model.getPart("Fan"), poseStack, pBuffer, pPackedLight, pPackedOverlay, RenderType.cutout());
-            poseStack.popPose();
-
             poseStack.popPose();
         }
         poseStack.popPose();

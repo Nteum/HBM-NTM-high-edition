@@ -15,4 +15,8 @@ public class MultiblockModule extends MultiblockData{
     public MultiblockModule(int... dirOffsets){
         super(dirOffsets);
     }
+
+    public MultiblockModule(MultiblockData data){
+        super(data);
+    }
 }

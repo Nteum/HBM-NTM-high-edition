@@ -47,7 +47,7 @@ public class HUDBedrockOreScanner extends  HUDTimeCounter{
         }
         for (ItemBedrockOreCombine.CelestialBedrockOreType type : celestialBedrockOre.types) {
             int anInt = data.getInt(type.suffix);
-            infos.add(Component.translatable("item." + HBM.MODID + ".bedrock.ore." + type.suffix).append(": " + (int)(anInt * 100 / 100D) + "(").append(ItemBedrockOreScanner.translateDensity(anInt).withStyle(ItemBedrockOreScanner.getColor(anInt))).append(")").withStyle(ChatFormatting.RESET));
+            infos.add(Component.translatable("item." + HBM.MODID + ".bedrock_ore_" + type.suffix).append(": " + (int)(anInt * 100 / 100D) + "(").append(ItemBedrockOreScanner.translateDensity(anInt).withStyle(ItemBedrockOreScanner.getColor(anInt))).append(")").withStyle(ChatFormatting.RESET));
         }
         HUDHelper.drawInfoBoard(infos, gui, guiGraphics, partialTick, screenWidth, screenHeight);
     }

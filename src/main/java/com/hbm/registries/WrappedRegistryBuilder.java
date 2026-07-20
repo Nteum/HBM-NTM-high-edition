@@ -569,7 +569,7 @@ public abstract class WrappedRegistryBuilder<T> implements Supplier<T>{
 
         public void tileSupport(){
             if (this.tileData != null && this.tileData.tileFactory != null){
-                ModBlockEntityType.register("tile_" + name, this.tileData.tileFactory);
+                ModBlockEntityType.register("tile_" + name, this.tileData.tileFactory, this.registryObject);
                 if (this.dummyable) ModBlockEntityType.dummyableBlocks.add(registryObject);
             }
         }

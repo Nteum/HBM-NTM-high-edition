@@ -121,16 +121,21 @@ public class MultiblockData {
                 .addCaps(new Vec3i(-1, 1, 3), new Direction[]{SOUTH}, ForgeCapabilities.FLUID_HANDLER, HBMCaps.LONG_ENERGY)
                 .addCaps(new Vec3i(3, 1, 0), new Direction[]{EAST}, ForgeCapabilities.FLUID_HANDLER, HBMCaps.LONG_ENERGY)
                 .addCaps(new Vec3i(-3, 1, 0), new Direction[]{WEST}, ForgeCapabilities.FLUID_HANDLER, HBMCaps.LONG_ENERGY));
-        mapping.put(ModBlocks.MACHINE_ORE_SLOPPER.get(), new MultiblockData(3, 0, 3, 3, 1, 1));
     }
 
     MultiblockData(List<Vec3i> offsets, int[] dirOffsets){
         this.offsets = offsets;
         this.dirOffsets = dirOffsets;
     }
-    MultiblockData(int ... dirOffsets){
+    public MultiblockData(int... dirOffsets){
         this.dirOffsets = dirOffsets;
         this.offsets = square(dirOffsets);
+    }
+    MultiblockData(MultiblockData other){
+        this.offsets = other.offsets;
+        this.dirOffsets = other.dirOffsets;
+        this.capsMap = other.capsMap;
+        this.inventoryGeneral = other.inventoryGeneral;
     }
     /**
      * 注意：offset不包括核心方块，它记录的是所有填充方块的位置。

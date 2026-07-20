@@ -23,6 +23,7 @@ import com.hbm.network.packet.toclient.S2CParticlePacket;
 import com.hbm.particle.ParticleSystem;
 import com.hbm.registries.*;
 import com.hbm.utils.InventoryUtils;
+import com.hbm.utils.multiblock.MultiblockModule;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
@@ -127,6 +128,7 @@ public class TileOreSloppper extends DefaultMachineBE implements IUpgradeInfoPro
         };
         this.fluidHandler = new BasicFluidHandler(2, TANK_CAPACITY);
         this.energyContainer = new BasicEnergyContainer(maxPower);
+        this.multiblockModule = new MultiblockModule(((MachineOreSlopper) this.getBlockState().getBlock()).getMultiblockData());
         super.initCapabilities();
     }
 

@@ -406,7 +406,44 @@ public class BlockStateGen extends BlockStateProvider {
         BlockModelBuilder builder = models().getBuilder(path(block)).parent(models().getExistingFile(new ResourceLocation("minecraft", "block/block")));
         builder.customLoader(CustomPartsModel.LoaderBuilder::new).setModel(model);
         builder.renderType("cutout").texture("texture0", texture).texture("particle", texture);
-        builder.rootTransforms().scale(1 / size).translation(0.5f, 0, 0.5f);
+        // 由于模型还需要在renderer中复用，
+        builder.rootTransforms().translation(0.5f, 0, 0.5f);
+        float baseScale = 1 / size;
+        float offsetX = size / 4;
+        float offsetY = size / 2;
+        float offsetZ = 0;
+        // 1. GUI 界面（原版：旋转 30, 135, 0 | 缩放 0.625f）
+        // 💡 我们将原版缩放乘以你的基础缩放，位移加上你的基础位移
+        builder.transforms()
+                .transform(ItemDisplayContext.GUI)
+                .rotation(30, 135, 0)
+                .translation(offsetX, - offsetY, offsetZ)
+                .scale(0.625f * baseScale).end()
+
+                // 2. 第三人称右手（原版：旋转 75, 45, 0 | 缩放 0.375f）
+                .transform(ItemDisplayContext.THIRD_PERSON_RIGHT_HAND)
+                .rotation(75, 45, 0)
+                .translation(0 + offsetX, 2.5f , 0 + offsetZ)
+                .scale(0.375f * baseScale).end()
+
+                // 3. 第一人称右手（原版：旋转 0, 45, 0 | 缩放 0.4f）
+                .transform(ItemDisplayContext.FIRST_PERSON_RIGHT_HAND)
+                .rotation(0, 45, 0)
+                .translation(offsetX, - offsetY, offsetZ)
+                .scale(0.4f * baseScale).end()
+
+                // 4. 地面掉落物（原版：缩放 0.25f）
+                .transform(ItemDisplayContext.GROUND)
+                .rotation(0, 0, 0)
+                .translation(offsetX, 3.0f , offsetZ)
+                .scale(0.25f * baseScale).end()
+
+                // 5. 物品展示框（原版：缩放 0.5f）
+                .transform(ItemDisplayContext.FIXED)
+                .rotation(0, 0, 0)
+                .translation(offsetX, - offsetY, offsetZ)
+                .scale(0.5f * baseScale).end()
+                .end();
         return builder;
     }
 }

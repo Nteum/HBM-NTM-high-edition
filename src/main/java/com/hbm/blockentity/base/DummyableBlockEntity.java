@@ -1,6 +1,7 @@
 package com.hbm.blockentity.base;
 
 import com.hbm.HBMKey;
+import com.hbm.blockentity.interfaces.IDummyable;
 import com.hbm.utils.DirectionUtils;
 import com.hbm.utils.multiblock.MultiblockData;
 import net.minecraft.core.BlockPos;
@@ -22,7 +23,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Set;
 
-public abstract class DummyableBlockEntity extends BaseMachineBlockEntity {
+public abstract class DummyableBlockEntity extends BaseMachineBlockEntity implements IDummyable {
     private boolean isJoined = false;
     public boolean isFormed = false;
     // 不需要序列化，每次重载都需要重新分配

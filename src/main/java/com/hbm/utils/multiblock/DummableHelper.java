@@ -2,8 +2,10 @@ package com.hbm.utils.multiblock;
 
 import com.hbm.block.HBMBlockProperties;
 import com.hbm.block.base.BlockDummyable;
+import com.hbm.blockentity.base.DefaultMachineBE;
 import com.hbm.blockentity.base.DummyableBlockEntity;
 import com.hbm.blockentity.base.TileProxyBase;
+import com.hbm.blockentity.interfaces.IDummyable;
 import com.hbm.utils.DirectionUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -56,8 +58,11 @@ public class DummableHelper {
             }
         }
         //中心方块实体设为core
-        if (level.getBlockEntity(corePos) instanceof DummyableBlockEntity entity){
+        BlockEntity blockEntity = level.getBlockEntity(corePos);
+        if (blockEntity instanceof DummyableBlockEntity entity){
             entity.isFormed = true;
+        }else if (blockEntity instanceof DefaultMachineBE entity){
+            entity.setFormed(true);
         }
     }
     public static void clearSpace(Level level, BlockPos blockPos, BlockState blockState, Direction direction){
@@ -72,7 +77,7 @@ public class DummableHelper {
         }
         try {
             BlockEntity coreEntity = level.getBlockEntity(corePos);
-            if (!(coreEntity instanceof DummyableBlockEntity)){
+            if (!(coreEntity instanceof IDummyable)){
                 return;
             }
             Block block = blockState.getBlock();

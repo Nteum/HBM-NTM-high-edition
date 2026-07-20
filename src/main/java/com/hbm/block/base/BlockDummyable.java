@@ -3,10 +3,8 @@ package com.hbm.block.base;
 import com.hbm.HBM;
 import com.hbm.block.HBMBlockProperties;
 import com.hbm.block.interfaces.ICustomBlockHighlight;
-import com.hbm.blockentity.base.BaseMachineBlockEntity;
-import com.hbm.blockentity.base.DummyableBlockEntity;
-import com.hbm.blockentity.base.TileProxyBase;
-import com.hbm.blockentity.base.TileProxyCombo;
+import com.hbm.blockentity.base.*;
+import com.hbm.blockentity.interfaces.IDummyable;
 import com.hbm.utils.DirectionUtils;
 import com.hbm.utils.multiblock.DummableHelper;
 import com.hbm.utils.multiblock.MultiblockData;
@@ -146,10 +144,11 @@ public abstract class BlockDummyable extends BlockMachineBase implements ICustom
             BlockState coreState = pState;
             BlockPos core = getCore(pState, pLevel, pPos);
             // 右键相当于直接对核心点位右键
-            if (pLevel.getBlockEntity(core) instanceof DummyableBlockEntity entity){
+            if (pLevel.getBlockEntity(core) instanceof IDummyable){
                 coreState = pLevel.getBlockState(core);
                 // 但我还是觉得保留原本的触发位置可能是有必要的，因此在DummyableBlockEntity留了一个对应接口
-                entity.onLeftClick(pState, pLevel, pPos, pPlayer, pHand, pHit);
+                if (pLevel.getBlockEntity(core) instanceof DummyableBlockEntity entity)
+                    entity.onLeftClick(pState, pLevel, pPos, pPlayer, pHand, pHit);
                 super.use(coreState,pLevel,core,pPlayer,pHand,pHit);
             }else {
                 if (coreState.getValue(IS_CORE))
@@ -204,7 +203,7 @@ public abstract class BlockDummyable extends BlockMachineBase implements ICustom
         if (!pState.getValue(IS_CORE)) {
             return null;
         }
-        return pLevel.isClientSide() ? BaseMachineBlockEntity::clientTicker : BaseMachineBlockEntity::serverTicker;
+        return pLevel.isClientSide() ? UpdateableBlockEntity::clientTicker : UpdateableBlockEntity::serverTicker;
     }
 
     public int[] getDimensions(){

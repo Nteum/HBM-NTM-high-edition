@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GuiOreSlopper extends BaseMachineGui<MenuOreSlopper> {
-    private static final ResourceLocation TEXTURE = HBM.rl("texutres/gui/processing/gui_ore_slopper.png");
+    private static final ResourceLocation TEXTURE = HBM.rl("textures/gui/processing/gui_ore_slopper.png");
     public GuiOreSlopper(MenuOreSlopper pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
     }

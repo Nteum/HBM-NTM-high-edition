@@ -9,16 +9,21 @@ import com.hbm.utils.multiblock.MultiblockModule;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
 public class MachineOreSlopper extends BlockDummyable {
     public static String name = "machine_ore_slopper";
+    public static MultiblockData MULTIBLOCK_DATA;
     public MachineOreSlopper(Properties pProperties) {
         super(pProperties);
         shape = Shapes.or(
@@ -34,14 +39,13 @@ public class MachineOreSlopper extends BlockDummyable {
 
     @Override
     public MultiblockData getMultiblockData() {
-        MultiblockModule multiblockModule = new MultiblockModule(3, 0, 3, 3, 1, 1);
-        multiblockModule.addCaps(
+        if (MULTIBLOCK_DATA == null) MULTIBLOCK_DATA = new MultiblockData(3, 0, 3, 3, 1, 1).addCaps(
                 HBMCaps.LONG_ENERGY, ForgeCapabilities.FLUID_HANDLER,
-                    0, 0, 4, Direction.SOUTH, 0, 0, -3, Direction.NORTH,
-                    2, 0, 2, Direction.EAST, -1, 0, 1, Direction.WEST,
-                    2, 0, 0, Direction.EAST, -1, 0, 0, Direction.WEST,
-                    2, 0, -2, Direction.EAST, -1, 0, -1, Direction.WEST
-                );
-        return super.getMultiblockData();
+                0, 0, 4, Direction.SOUTH, 0, 0, -3, Direction.NORTH,
+                2, 0, 2, Direction.EAST, -1, 0, 1, Direction.WEST,
+                2, 0, 0, Direction.EAST, -1, 0, 0, Direction.WEST,
+                2, 0, -2, Direction.EAST, -1, 0, -1, Direction.WEST
+        );
+        return MULTIBLOCK_DATA;
     }
 }
