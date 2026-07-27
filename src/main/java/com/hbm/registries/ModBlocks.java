@@ -36,6 +36,7 @@ import com.hbm.block.machine.rbmk.BlockRBMKSteamPort;
 import com.hbm.block.tools.GeigerCounter;
 import com.hbm.block.weapon.LaunchPad;
 import com.hbm.blockentity.machine.TileConnector;
+import com.hbm.blockentity.machine.TileMachineCentrifuge;
 import com.hbm.blockentity.machine.TileOreSloppper;
 import com.hbm.blockentity.machine.rbmk.RBMKBoilerEntity;
 import com.hbm.blockentity.machine.rbmk.RBMKCoolerEntity;
@@ -57,7 +58,9 @@ import com.hbm.datagen.LanguageProvider;
 import com.hbm.datagen.loot.BlockLootGen;
 import com.hbm.datagen.model.BlockStateGen;
 import com.hbm.datagen.tag.BlockTagsGen;
+import com.hbm.gui.menu.MenuCentrifuge;
 import com.hbm.gui.menu.MenuOreSlopper;
+import com.hbm.gui.screen.GuiCentrifuge;
 import com.hbm.gui.screen.GuiOreSlopper;
 import com.hbm.item.blockitem.IronCrateItem;
 import com.hbm.item.blockitem.ItemPosModify;
@@ -67,6 +70,7 @@ import com.hbm.reactor.rbmk.RBMKPeripheralType;
 import com.hbm.registries.WrappedRegistryBuilder.WrappedBlockRegistryBuilder;
 import com.hbm.debug.BlockDebug;
 import com.hbm.render.blockentity.RendererOreSlopper;
+import com.hbm.render.blockentity.RenderrerCentrifuge;
 import com.hbm.world.feature.BedrockOreDefinition;
 import net.minecraft.core.Vec3i;
 import net.minecraft.resources.ResourceKey;
@@ -123,12 +127,17 @@ public class ModBlocks {
     public static final RegistryObject<Block> machine_wood_burner = registerMachineBlockWithItem("machine_wood_burner",
             () -> new WoodBurnerBlock(Properties.of().strength(3.0F).sound(SoundType.METAL)
                     .lightLevel(state -> state.getValue(WoodBurnerBlock.LIT) ? 13 : 0)));
-    public static final RegistryObject<Block> MINER_LARGE = new WrappedBlockRegistryBuilder("miner_large", ()->new BlockMinerLarge(Properties.of().strength(5).explosionResistance(100)))
+    public static final RegistryObject<Block> MINER_LARGE = new WrappedBlockRegistryBuilder("miner_large", ()->new BlockMinerLarge(Properties.copy(Blocks.IRON_BLOCK).strength(5).explosionResistance(100)))
             .tab(ModTabs.MACHINE.getKey()).model(HBMKey.MODEL_STANDALONE).loc(HBMKey.REVERSE_GEN).loot(HBMKey.DROP_SELF).tags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL).item(block -> new ItemPosModify(block, new Vec3i(0, 4, 0), new Item.Properties())).build();
     public static final RegistryObject<Block> MACHINE_ORE_SLOPPER = new WrappedBlockRegistryBuilder("machine_ore_slopper", () -> new MachineOreSlopper(Properties.of().strength(5.0f, 10.0f)))
             .tab(ModTabs.MACHINE.getKey()).loc("Bedrock Ore Processor")
             .model((block, provider) -> provider.horizontalBlockWithItem(block, provider.genSimpleModel(block, HBM.rl("block/machines/ore_slopper.obj"), HBM.rl("block/machine/ore_slopper"), 7)))
             .tile(TileOreSloppper::new, true).renderer(RendererOreSlopper::new).menu(MenuOreSlopper::new).gui(GuiOreSlopper::new)
+            .tags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL).build();
+    public static final RegistryObject<Block> MACHINE_CENTRIFUGE = new WrappedBlockRegistryBuilder(MachineCentrifuge.id, () -> new MachineCentrifuge(Properties.copy(Blocks.IRON_BLOCK).strength(5.0f, 10.0f)))
+            .tab(ModTabs.MACHINE.getKey()).loc("Centrifuge")
+            .model((block, provider) -> provider.horizontalBlockWithItem(block, provider.genSimpleModel(block, HBM.rl("block/machines/centrifuge.obj"), HBM.rl("block/machine/centrifuge"), 3)))
+            .tile(TileMachineCentrifuge::new, true).renderer(RenderrerCentrifuge::new).menu(MenuCentrifuge::new).gui(GuiCentrifuge::new)
             .tags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL).build();
 
     // Tokamak 聚变堆组件

@@ -23,6 +23,7 @@ import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.FarmlandWaterManager;
 import net.minecraftforge.common.crafting.AbstractIngredient;
+import net.minecraftforge.common.crafting.CompoundIngredient;
 import net.minecraftforge.common.crafting.IIngredientSerializer;
 import net.minecraftforge.common.crafting.StrictNBTIngredient;
 import org.jetbrains.annotations.Nullable;
@@ -46,6 +47,9 @@ public class CountableIngredient extends AbstractIngredient {
     public static final CountableIngredient EMPTY = new CountableIngredient(new Value());
     public static CountableIngredient of(ItemStack itemStack){
         return new CountableIngredient(Value.item(itemStack));
+    }
+    public static CountableIngredient of(ItemLike itemLike){
+        return of(itemLike, 1);
     }
     public static CountableIngredient of(ItemLike itemLike, int count){
         return new CountableIngredient(Value.item(new ItemStack(itemLike, count)));
@@ -144,6 +148,16 @@ public class CountableIngredient extends AbstractIngredient {
                 throw new JsonParseException("An ingredient entry needs either a tag or an item");
             }
         }
+//
+//        public void write(JsonObject json, CountableIngredient ingredient) {
+//            if (!ingredient.value.flagTag){
+//                json.addProperty("item", BuiltInRegistries.ITEM.getKey(ingredient.value.itemStack.getItem()).toString());
+//                json.addProperty("count", ingredient.value.count);
+//            }else {
+//                json.addProperty("tag", ingredient.value.tagKey.location().toString());
+//                json.addProperty("count", ingredient.value.count);
+//            }
+//        }
 
         @Override
         public void write(FriendlyByteBuf buffer, CountableIngredient ingredient) {

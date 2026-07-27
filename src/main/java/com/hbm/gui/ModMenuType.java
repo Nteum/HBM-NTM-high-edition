@@ -12,6 +12,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.network.IContainerFactory;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -90,5 +91,9 @@ public class ModMenuType {
     public static void registerBus(IEventBus bus){
         ModBlocks.menuSupport();
         MOD_MENU_TYPES.register(bus);
+    }
+
+    public static MenuType<?> getById(String id){
+        return typesMaps.get("menu_" + id).get();
     }
 }

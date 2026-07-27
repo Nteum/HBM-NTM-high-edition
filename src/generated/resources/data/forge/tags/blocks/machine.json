@@ -69,6 +69,7 @@
     "hbm:press_preheater",
     "hbm:miner_large",
     "hbm:machine_ore_slopper",
+    "hbm:machine_centrifuge",
     "hbm:pwr_controller",
     "hbm:pwr_casing",
     "hbm:pwr_port",

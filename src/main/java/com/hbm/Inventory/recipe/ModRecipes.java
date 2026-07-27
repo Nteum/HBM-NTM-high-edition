@@ -2,6 +2,8 @@ package com.hbm.Inventory.recipe;
 
 import com.hbm.HBM;
 import com.hbm.HBMKey;
+import com.hbm.Inventory.recipe.base.RecipeSerializerBuilder;
+import com.hbm.block.machine.MachineCentrifuge;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -10,6 +12,8 @@ import net.minecraft.world.item.crafting.SimpleCraftingRecipeSerializer;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+
+import java.util.function.Function;
 
 public class ModRecipes {
     public static final DeferredRegister<RecipeType<?>> RECIPE_TYPE = DeferredRegister.create(ForgeRegistries.RECIPE_TYPES, HBM.MODID);
@@ -22,6 +26,7 @@ public class ModRecipes {
     public static final RecipeHolder<ShredderRecipe> SHREDDER = register(HBMKey.SHREDDER, ShredderRecipe.Serializer.INSTANCE);
     public static final RegistryObject<RecipeSerializer<PWRFuelPrinterRecipe>> PWR_FUEL_PRINTER =
             SERIALIZER.register("pwr_fuel_printer", () -> new SimpleCraftingRecipeSerializer<>(PWRFuelPrinterRecipe::new));
+    public static final RecipeHolder<RecipeCentrifuge> CENTRIFUGE = register(MachineCentrifuge.id, RecipeCentrifuge.factory);
 //    public static final RegistryObject<RecipeSerializer<BlastFurnaceRecipe>> ALLOY_SERIALIZER =
 //            SERIALIZER.register(HBMKey.BLAST,()-> BlastFurnaceRecipe.Serializer.INSTANCE);
 //    public static final RegistryObject<RecipeSerializer<AssemblerRecipe>> ASSEMBLER_SERIALIZER =
@@ -41,6 +46,12 @@ public class ModRecipes {
     static <T extends Recipe<Container>> RecipeHolder<T> register(final String pIdentifier, final RecipeSerializer<T> serializer) {
         RegistryObject<RecipeType<T>> recipeType = RECIPE_TYPE.register(pIdentifier, () -> register(pIdentifier));
         RegistryObject<RecipeSerializer<T>> recipeSerializer = SERIALIZER.register(pIdentifier, () -> serializer);
+        return new RecipeHolder<>(recipeType, recipeSerializer);
+    }
+    static <T extends Recipe<Container>> RecipeHolder<T> register(final String pIdentifier, final Function<RecipeType<T>, RecipeSerializer<T>> serializerFactory) {
+        RecipeType<T> type = register(pIdentifier);
+        RegistryObject<RecipeType<T>> recipeType = RECIPE_TYPE.register(pIdentifier, () -> type);
+        RegistryObject<RecipeSerializer<T>> recipeSerializer = SERIALIZER.register(pIdentifier, () -> serializerFactory.apply(type));
         return new RecipeHolder<>(recipeType, recipeSerializer);
     }
     public record RecipeHolder<T extends Recipe<?>>(RegistryObject<RecipeType<T>> type, RegistryObject<RecipeSerializer<T>> serializer){}

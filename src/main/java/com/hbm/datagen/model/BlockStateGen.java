@@ -404,12 +404,12 @@ public class BlockStateGen extends BlockStateProvider {
 
     public BlockModelBuilder genSimpleModel(Block block, ResourceLocation model, ResourceLocation texture, float size){
         BlockModelBuilder builder = models().getBuilder(path(block)).parent(models().getExistingFile(new ResourceLocation("minecraft", "block/block")));
-        builder.customLoader(CustomPartsModel.LoaderBuilder::new).setModel(model);
+        builder.customLoader(CustomPartsModel.LoaderBuilder::new).setModel(model).autoCull(false).flipV(true);
         builder.renderType("cutout").texture("texture0", texture).texture("particle", texture);
         // 由于模型还需要在renderer中复用，
         builder.rootTransforms().translation(0.5f, 0, 0.5f);
         float baseScale = 1 / size;
-        float offsetX = size / 4;
+        float offsetX = size / 6;
         float offsetY = size / 2;
         float offsetZ = 0;
         // 1. GUI 界面（原版：旋转 30, 135, 0 | 缩放 0.625f）

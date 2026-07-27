@@ -71,6 +71,7 @@ public class Models {
     public static final ResourceLocation PRESS_HEAD = add(HBM.rl("block/press/press_head"));
     public static final ResourceLocation FIREBOX = add(HBM.rl("block/firebox"));
     public static final ResourceLocation MINER_LARGE = add(HBM.rl("block/miner_large"));
+//    public static final ResourceLocation CENTRIFUGE = add(HBM.rl("block/machine_centrifuge"));
 
     public static final ResourceLocation MP_W_15_BALEFIRE = addItem(HBM.rl("item/mp_warhead_15_balefire"), HBMWeapon.MP_WARHEAD_15_BALEFIRE);
 //    public static final ResourceLocation GUN_RIFLE = addItem(HBM.rl("item/gun_marseleg"), ModItems.GUN_RIFLE.getId());

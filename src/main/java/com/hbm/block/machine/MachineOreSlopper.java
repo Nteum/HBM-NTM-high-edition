@@ -26,10 +26,6 @@ public class MachineOreSlopper extends BlockDummyable {
     public static MultiblockData MULTIBLOCK_DATA;
     public MachineOreSlopper(Properties pProperties) {
         super(pProperties);
-        shape = Shapes.or(
-                Shapes.box(-1, 0, -3, 2, 3, 4),
-                Shapes.box(-1, 3, 2, 2, 6.5, 4)
-        );
     }
 
     @Override

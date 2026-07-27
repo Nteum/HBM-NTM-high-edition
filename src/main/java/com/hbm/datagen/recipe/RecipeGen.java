@@ -49,7 +49,8 @@ public class RecipeGen extends RecipeProvider {
                 new ChemplantRecipeProvider(),
                 new ShredderRecipeProvider(),
                 new MachineBlockRecipeProvider(),
-                new PressRecipeProvider()
+                new PressRecipeProvider(),
+                new RecipeProviderCentrifuge()
         );
     }
     //添加有序配方（默认加入MISC组，并使用获得物品来解锁，通过输入物品来区分）

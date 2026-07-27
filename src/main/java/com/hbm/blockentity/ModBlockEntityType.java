@@ -3,6 +3,7 @@ package com.hbm.blockentity;
 import com.hbm.block.env.BedRockOre;
 import com.hbm.block.env.BedRockOreTE;
 import com.hbm.block.env.GlyphidSpawner;
+import com.hbm.block.machine.MachineCentrifuge;
 import com.hbm.blockentity.base.TileProxyCombo;
 import com.hbm.blockentity.logistic.*;
 import com.hbm.blockentity.machine.*;
@@ -226,5 +227,9 @@ public class ModBlockEntityType {
     private static Block[] combine(List<Block> blocks, Block ... blockList){
         blocks.addAll(List.of(blockList));
         return blocks.toArray(Block[]::new);
+    }
+
+    public static BlockEntityType<?> getTypeById(String id){
+        return tileTypes.get("tile_" + id).get();
     }
 }

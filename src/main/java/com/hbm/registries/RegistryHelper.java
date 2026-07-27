@@ -1,5 +1,8 @@
 package com.hbm.registries;
 
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 
 import java.util.Arrays;
@@ -20,5 +23,9 @@ public class RegistryHelper {
     public static String generateOrderlyExceptFirstName(String name){
         List<String> strings = Arrays.stream(name.split("_|\\.")).map(s -> s.substring(0, 1).toUpperCase() + s.substring(1)).toList();
         return strings.subList(1, strings.size()).stream().reduce("",(r, id) -> r + (r.isEmpty() ? "": " ") + id) + " " + strings.get(0);
+    }
+
+    public static ResourceLocation itemRL(Item item){
+        return BuiltInRegistries.ITEM.getKey(item);
     }
 }

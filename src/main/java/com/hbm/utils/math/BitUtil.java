@@ -38,4 +38,9 @@ public class BitUtil {
     public static int setBool(int data, int offset, boolean value) {
         return set(data, offset, 1, value ? 1 : 0);
     }
+    // 对半混合两个颜色
+    public static int blendColor(int c1, int c2) {
+        // 0xFEFEFEFE 掩码用于消除低位进位，防止 R/G/B/A 通道相加时互相穿帮
+        return ((c1 & 0xFEFEFEFE) >>> 1) + ((c2 & 0xFEFEFEFE) >>> 1);
+    }
 }

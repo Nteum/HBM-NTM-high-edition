@@ -1,0 +1,24 @@
+{
+  "type": "hbm:machine_centrifuge",
+  "input": {
+    "count": 1,
+    "tag": "minecraft:coal_ores"
+  },
+  "output": [
+    {
+      "count": 2,
+      "item": "hbm:powder_coal"
+    },
+    {
+      "count": 2,
+      "item": "hbm:powder_coal"
+    },
+    {
+      "count": 2,
+      "item": "hbm:powder_coal"
+    },
+    {
+      "item": "minecraft:gravel"
+    }
+  ]
+}

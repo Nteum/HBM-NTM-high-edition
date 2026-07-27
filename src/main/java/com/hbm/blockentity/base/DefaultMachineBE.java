@@ -1,5 +1,6 @@
 package com.hbm.blockentity.base;
 
+import com.hbm.HBM;
 import com.hbm.HBMKey;
 import com.hbm.api.energy.IEnergyContainer;
 import com.hbm.api.energy.IEnergyHandler;
@@ -115,6 +116,7 @@ public abstract class DefaultMachineBE extends BaseMenuTile implements IDummyabl
         if (nbt.contains(HBMKey.ENERGY, Tag.TAG_COMPOUND))
             this.energyContainer.deserializeNBT(nbt.getCompound(HBMKey.ENERGY));
         if (nbt.contains(HBMKey.FLUIDS, Tag.TAG_COMPOUND))
-            this.fluidHandler.deserializeNBT(nbt);
+            this.fluidHandler.deserializeNBT(nbt.getCompound(HBMKey.FLUIDS));
     }
+
 }

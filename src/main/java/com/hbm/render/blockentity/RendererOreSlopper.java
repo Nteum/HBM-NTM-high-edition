@@ -31,8 +31,9 @@ public class RendererOreSlopper implements BlockEntityRenderer<TileOreSloppper> 
         BlockRenderDispatcher blockRenderer = Minecraft.getInstance().getBlockRenderer();
 
         poseStack.pushPose();
+        poseStack.mulPose(Axis.YN.rotationDegrees(90));
         DirectionUtils.generalMachineRotate(poseStack, blockState);
-        poseStack.translate(0.5, 0, 0.5);
+//        poseStack.translate(0.5, 0, 0.5);
         if (blockModel == null) blockModel = blockRenderer.getBlockModel(slopper.getBlockState());
 //        BakedModel blockModel = blockRenderer.getBlockModel(slopper.getBlockState());
         if (blockModel instanceof CustomPartsModel.Baked model){

@@ -15,6 +15,11 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.IItemHandlerModifiable;
+import net.minecraftforge.items.wrapper.InvWrapper;
+import net.minecraftforge.items.wrapper.RecipeWrapper;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 
@@ -49,10 +54,19 @@ public abstract class BlockMachineBase extends BlockContainerBase{
     public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pMovedByPiston) {
         if (!pState.is(pNewState.getBlock())){
             BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
-            if (blockEntity instanceof BaseMachineBlockEntity){
+            if (blockEntity instanceof Container){
                 if (pLevel instanceof ServerLevel){
                     /** 掉落方块中的物品 */
-                    Containers.dropContents(pLevel,pPos,(BaseMachineBlockEntity) blockEntity);
+                    Containers.dropContents(pLevel,pPos,(Container) blockEntity);
+                }
+                pLevel.updateNeighbourForOutputSignal(pPos,this);
+            }else {
+                IItemHandler handler = blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).orElse(null);
+                if (handler != null && handler instanceof IItemHandlerModifiable handlerModifiable){
+                    if (pLevel instanceof ServerLevel){
+                        /** 掉落方块中的物品 */
+                        Containers.dropContents(pLevel,pPos,new RecipeWrapper(handlerModifiable));
+                    }
                 }
                 pLevel.updateNeighbourForOutputSignal(pPos,this);
             }

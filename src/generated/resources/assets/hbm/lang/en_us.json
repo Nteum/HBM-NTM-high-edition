@@ -183,6 +183,7 @@
   "block.hbm.kerosene": " Kerosene",
   "block.hbm.launch_pad": "Launch Pad",
   "block.hbm.machine_battery": "Energy Storage Block",
+  "block.hbm.machine_centrifuge": "Centrifuge",
   "block.hbm.machine_condenser": "Condenser",
   "block.hbm.machine_cooling_tower": "Auxiliary Cooling Tower",
   "block.hbm.machine_icf": "ICF Reactor",

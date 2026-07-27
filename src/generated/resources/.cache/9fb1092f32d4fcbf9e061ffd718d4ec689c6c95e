@@ -1,4 +1,4 @@
-// 1.20.1	2026-06-22T17:23:19.1533934	Recipes
+// 1.20.1	2026-07-27T10:49:57.2458258	Recipes
 9fcaaa02c3f0fd1139d3e1ca7d4cb9bcf11859c2 data/hbm/advancements/recipes/misc/battery_block_dineutronium.json
 97e7b35243fe53d5f4536356211d1358dbaa6caa data/hbm/advancements/recipes/misc/battery_block_lithium.json
 0bcfc45fc2d2a2d29c7e201404cc34201b092da7 data/hbm/advancements/recipes/misc/battery_block_schrabidium.json
@@ -54,6 +54,10 @@ ef837915b0a4a84a2d21b2243d7de1f17d915706 data/hbm/recipes/blast_3.json
 c37bda97594947f5b6892341666935c658d5f03c data/hbm/recipes/boiler.json
 9ebb81b8a232933dbec6555301486f75024cbe7a data/hbm/recipes/boiler_electric.json
 6c9d3370c4dfca6b7a4451737db941df3f362a67 data/hbm/recipes/boiler_nuclear.json
+459b716c1d87eb8b4788e7982df2176af6fad6a1 data/hbm/recipes/centrifuge/chunk_ore.rare.json
+dcff24ac341aa7e85fb3c84bb0d03de1c69b4dd9 data/hbm/recipes/centrifuge/coal_ore.json
+763a5f73f8a848fcc4b31895bf54fce1b4404587 data/hbm/recipes/centrifuge/iron_ore.json
+955e737e686f7175e7bf0a718724849aa09176b8 data/hbm/recipes/centrifuge/lignite.json
 268f22ad4b5b41ffb1df2d8b9cbb994c99b5a84c data/hbm/recipes/chemplant/chlorine.json
 1227d6372ab25b7c86ca0d83c7b770fd26e0e05c data/hbm/recipes/chemplant/deuterium.json
 2cd4c874849bba34ebe611507fd32b33caa8e30d data/hbm/recipes/chemplant/helium3.json

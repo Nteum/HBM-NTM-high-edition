@@ -32,6 +32,8 @@ public class HBMKey {
     public static final String TIER = "tier";
     public static final String COLOR = "color";
     public static final String SHAPE = "shape";
+    public static final String INPUT = "input";
+    public static final String OUTPUT = "output";
     // block state
     public static final String IS_CORE = "is_core";
     public static final String VARIANT = "variant";

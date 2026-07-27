@@ -13,13 +13,21 @@ import net.minecraft.world.inventory.Slot;
 import java.util.List;
 
 public abstract class BaseMachineGui<T extends AbstractContainerMenu> extends AbstractContainerScreen<T> {
+    boolean firstInit = true;
     public BaseMachineGui(T pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
     }
 
     @Override
     protected void init() {
+        if (firstInit){
+            firstInit();
+            firstInit = false;
+        }
         super.init();
+    }
+
+    protected void firstInit(){
         titleLabelX = (imageWidth - font.width(title)) / 2;  //标题居中
         inventoryLabelY += imageHeight - 166;   // 修改“物品栏”三字位置
     }

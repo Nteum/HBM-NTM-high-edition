@@ -447,6 +447,8 @@ public class CustomPartsModel implements IUnbakedGeometry<CustomPartsModel> {
     // 用于数据生成
     public static class LoaderBuilder<T extends ModelBuilder<T>> extends CustomLoaderBuilder<T> {
         ResourceLocation model;
+        boolean automatic_culling = false;
+        boolean flip_v = false;
         // 💡 核心：这个构造器的参数顺序，完美对应了你要传给 customLoader 的那个 BiFunction！
         public LoaderBuilder(T modelBuilder, ExistingFileHelper existingFileHelper) {
             // 必须通过显式指定你自定义 Loader 的“注册ID”（比如 "your_mod:my_obj_loader"）
@@ -464,11 +466,23 @@ public class CustomPartsModel implements IUnbakedGeometry<CustomPartsModel> {
             return this;
         }
 
+        public LoaderBuilder<T> autoCull(boolean automatic_culling){
+            this.automatic_culling = automatic_culling;
+            return this;
+        }
+
+        public LoaderBuilder<T> flipV(boolean flip_v){
+            this.flip_v = flip_v;
+            return this;
+        }
+
         // 💡 当 DataGen 最终写盘时，这个方法会被自动调用，把你的 Java 变量变成 JSON
         @Override
         public JsonObject toJson(JsonObject json) {
             json = super.toJson(json); // 这一步会自动把 "loader": "your_mod:my_obj_loader" 塞进去
             json.addProperty("model", this.model.toString());
+            json.addProperty("automatic_culling", automatic_culling);
+            json.addProperty("flip_v", flip_v);
             // 如果你有其他操控子模型的参数，在这里塞进 JsonObject 即可
             return json;
         }

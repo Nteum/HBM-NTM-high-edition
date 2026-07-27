@@ -11,6 +11,7 @@ import com.hbm.registries.HBMMatters;
 import com.hbm.registries.ModItems;
 import com.hbm.render.item.IMultiLayerItem;
 import com.hbm.utils.data.NBTHelper;
+import com.hbm.utils.math.BitUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
@@ -78,7 +79,8 @@ public class ItemBedrockOreCombine extends ItemBedrockOre {
     // BEDROCK_ORE_COMPLEX 对应颜色
     public static int getColor(ItemStack stack){
         BedrockOreGrade grade = getGrade(stack);
-        return grade == null ? 0xFFFFFF : grade.tint;
+        CelestialBedrockOreType type = getType(stack);
+        return grade == null ? 0xFFFFFF : type == null ? grade.tint : BitUtil.blendColor(grade.tint, type.light);
     }
 
     @Override
