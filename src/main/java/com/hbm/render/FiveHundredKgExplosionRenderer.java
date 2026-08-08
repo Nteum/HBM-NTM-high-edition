@@ -19,7 +19,7 @@ public class FiveHundredKgExplosionRenderer extends EntityRenderer<FiveHundredKg
 
     private static final int BEAM_COUNT = 8;
     private static final float BEAM_HEIGHT = 250.0F;
-    private static final ResourceLocation FALLBACK_TEXTURE = new ResourceLocation(HBM.MODID, "textures/entity/duck.png");
+    private static final ResourceLocation FALLBACK_TEXTURE = HBM.rl( "textures/entity/duck.png");
 
     public FiveHundredKgExplosionRenderer(EntityRendererProvider.Context context) {
         super(context);

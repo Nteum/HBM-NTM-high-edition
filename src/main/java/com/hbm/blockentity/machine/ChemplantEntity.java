@@ -266,7 +266,7 @@ public class ChemplantEntity extends DummyableBlockEntity {
     public void load(@NotNull CompoundTag nbt) {
         super.load(nbt);
         if (nbt.contains(HBMKey.RECIPE_NOW)){
-            ResourceLocation resourceLocation = new ResourceLocation(nbt.getString(HBMKey.RECIPE_NOW));
+            ResourceLocation resourceLocation = ResourceLocation.parse(nbt.getString(HBMKey.RECIPE_NOW));
             this.recipeNow = (ChemplantRecipe) this.level.getRecipeManager().byKey(resourceLocation).orElse(null);
         }
         this.energyContainer.deserializeNBT(nbt.getCompound(HBMKey.ENERGY));

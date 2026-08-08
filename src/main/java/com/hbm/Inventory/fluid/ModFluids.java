@@ -36,6 +36,7 @@ import java.util.List;
 import static com.hbm.HBM.MODID;
 import static com.hbm.Inventory.fluid.ExtendedFluidType.*;
 
+@Deprecated
 //在这个类里面注册流体
 public class ModFluids {
     //流体注册器

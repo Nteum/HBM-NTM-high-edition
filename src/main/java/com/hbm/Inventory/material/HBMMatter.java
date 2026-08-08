@@ -1,7 +1,7 @@
 package com.hbm.Inventory.material;
 
 import com.hbm.HBM;
-import com.hbm.Inventory.fluid.ModFluids;
+import com.hbm.core.contents.fluid.HBMFluids;
 import com.hbm.datagen.LanguageProvider;
 import com.hbm.datagen.recipe.ingredient.FluidStackIngredient;
 import com.hbm.datagen.tag.FluidTagsGen;
@@ -107,8 +107,8 @@ public class HBMMatter{
         // 为每种金属生成唯一的 FluidType（用于区分颜色）
         // 这里可以巧妙地把颜色作为温度参考
         String descriptionId = "fluid." + HBM.MODID + "." + name;
-        this.fluidType = ModFluids.FLUID_TYPES.register(name + "_type", () -> new FluidType(FluidType.Properties.create().temperature(moltenColor).descriptionId(descriptionId)));
-        this.source = ModFluids.FLUIDS.register("molten_" + name, () -> new ForgeFlowingFluid.Source(new ForgeFlowingFluid.Properties(fluidType, this.source, this.source)));
+        this.fluidType = HBMFluids.FLUID_TYPES.register(name + "_type", () -> new FluidType(FluidType.Properties.create().temperature(moltenColor).descriptionId(descriptionId)));
+        this.source = HBMFluids.FLUIDS.register("molten_" + name, () -> new ForgeFlowingFluid.Source(new ForgeFlowingFluid.Properties(fluidType, this.source, this.source)));
         this.smeltProperty = (byte) smeltProperty;
         if (HBM.isDataGen()){
             FluidTagsGen.register(ModTags.Fluids.forgeTag(this.source.getId().getPath()), this.source);

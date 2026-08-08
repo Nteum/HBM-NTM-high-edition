@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
-
+@Deprecated
 public class FT_Heatable extends FluidTrait {
 	
 	protected List<HeatingStep> steps = new ArrayList();

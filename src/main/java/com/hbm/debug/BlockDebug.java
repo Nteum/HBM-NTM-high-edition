@@ -42,7 +42,7 @@ public class BlockDebug extends Block {
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
         ItemStack itemInHand = pPlayer.getItemInHand(pHand);
         if (!pLevel.isClientSide()){
-            checkTag(pLevel, new ResourceLocation("forge", "battery"));
+            checkTag(pLevel, ResourceLocation.fromNamespaceAndPath("forge", "battery"));
 //            if (itemInHand.is(ModItems.DEBUG_WAND.get())) {
 //                dropParticle(ModParticleTypes.DEAD_LEAF.get(), pLevel, pPos, pPlayer);
 //            } else if (itemInHand.is(ModItems.METEOR_REMOTE.get())) {

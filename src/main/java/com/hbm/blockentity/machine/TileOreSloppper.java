@@ -2,7 +2,7 @@ package com.hbm.blockentity.machine;
 
 import com.hbm.HBMKey;
 import com.hbm.HBMLang;
-import com.hbm.Inventory.fluid.ModFluids;
+import com.hbm.core.contents.fluid.HBMFluids;
 import com.hbm.api.energy.BasicEnergyContainer;
 import com.hbm.api.energy.TransmitUtils;
 import com.hbm.api.fluid.BasicFluidHandler;
@@ -162,7 +162,7 @@ public class TileOreSloppper extends DefaultMachineBE implements IUpgradeInfoPro
                 ores[type.index] += ItemBedrockOreRaw.getOreAmount(this.items.getStackInSlot(2), type) * (1d + efficiency * 0.1);
             this.items.extractItem(2, 1, false);
             this.fluidHandler.getFluidTanks().get(0).drain(waterUsed, IFluidHandler.FluidAction.EXECUTE);
-            this.fluidHandler.getFluidTanks().get(1).fill(new FluidStack(ModFluids.SLOP.source().get(), waterUsed), IFluidHandler.FluidAction.EXECUTE);
+            this.fluidHandler.getFluidTanks().get(1).fill(new FluidStack(HBMFluids.SLOP.source().get(), waterUsed), IFluidHandler.FluidAction.EXECUTE);
             markDirty = true;
         }
         if(markDirty) this.setChanged();
@@ -200,7 +200,7 @@ public class TileOreSloppper extends DefaultMachineBE implements IUpgradeInfoPro
     }
 
     public FluidType getFluidOutput(FluidType input) {
-        if (input == Fluids.WATER.getFluidType()) return ModFluids.SLOP.type().get();
+        if (input == Fluids.WATER.getFluidType()) return HBMFluids.SLOP.type().get();
         return null;
     }
     @Override

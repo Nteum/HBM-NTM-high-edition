@@ -32,7 +32,7 @@ import java.util.function.Predicate;
  * */
 @OnlyIn(Dist.CLIENT)
 public class RecipePage <T> implements Renderable, GuiEventListener {
-    private static final ResourceLocation RECIPE_BOOK_LOCATION = new ResourceLocation("textures/gui/recipe_book.png");
+    private static final ResourceLocation RECIPE_BOOK_LOCATION = ResourceLocation.parse("textures/gui/recipe_book.png");
     private static final Component SEARCH_HINT = Component.translatable("gui.recipebook.search_hint").withStyle(ChatFormatting.ITALIC).withStyle(ChatFormatting.GRAY);
     private ResourceLocation BACKGROUND;
     private int backgroundWidth;

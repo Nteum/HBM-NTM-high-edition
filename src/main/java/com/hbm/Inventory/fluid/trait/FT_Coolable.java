@@ -4,7 +4,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonWriter;
 import com.hbm.HBMLang;
 import com.hbm.Inventory.fluid.ExtendedFluidType;
-import com.hbm.Inventory.fluid.ModFluids;
+import com.hbm.core.contents.fluid.HBMFluids;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
-
+@Deprecated
 public class FT_Coolable extends FluidTrait {
 	
 	protected HashMap<CoolingType, Double> efficiency = new HashMap();

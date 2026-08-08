@@ -1,6 +1,7 @@
 //在客户端启动时做一次离线质检，把常见问题直接打到日志.
 package com.hbm.render.model; //没注意package默认的，导致无法PortQC
 
+import com.hbm.HBM;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.common.Mod;
@@ -32,8 +33,8 @@ public final class ModelQC {
 
                 // 把要检查的一批 OBJ 加进来
 
-                new ResourceLocation(MODID, "models/block/bomb/fat_man.obj"),
-                new ResourceLocation(MODID, "models/block/crucible/crucible.obj")
+                HBM.rl("models/block/bomb/fat_man.obj"),
+                HBM.rl("models/block/crucible/crucible.obj")
 
             );
 

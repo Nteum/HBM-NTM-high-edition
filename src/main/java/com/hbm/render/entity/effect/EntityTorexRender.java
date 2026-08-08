@@ -33,8 +33,8 @@ import static com.hbm.lib.internal.UnsafeHolder.U;
 
 public class EntityTorexRender extends EntityRenderer<EntityNukeTorex> {
 
-    public static final ResourceLocation TEXTURE_PARTICLE = new ResourceLocation(HBM.MODID, "textures/particle/particle_base.png");
-    public static final ResourceLocation TEXTURE_FLARE = new ResourceLocation(HBM.MODID, "textures/particle/flare.png");
+    public static final ResourceLocation TEXTURE_PARTICLE = HBM.rl( "textures/particle/particle_base.png");
+    public static final ResourceLocation TEXTURE_FLARE = HBM.rl( "textures/particle/flare.png");
 
     public static final int FLASH_BASE_DURATION = 30;
     public static final int FLARE_BASE_DURATION = 100;

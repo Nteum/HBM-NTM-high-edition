@@ -20,7 +20,7 @@ import org.joml.Matrix4f;
  */
 public class AtomicBombExplosionRenderer extends EntityRenderer<AtomicBombExplosionEntity> {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(HBM.MODID, "textures/models/explosion/tomblast.png");
+    private static final ResourceLocation TEXTURE = HBM.rl( "textures/models/explosion/tomblast.png");
     private static final int SEGMENTS = 16;
     private static final int LAYERS = 5;
     private static final float HEIGHT_BASE = 20.0F;

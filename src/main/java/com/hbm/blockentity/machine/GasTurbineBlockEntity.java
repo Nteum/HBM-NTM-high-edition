@@ -1,7 +1,7 @@
 package com.hbm.blockentity.machine;
 
 import com.hbm.HBMKey;
-import com.hbm.Inventory.fluid.ModFluids;
+import com.hbm.core.contents.fluid.HBMFluids;
 import com.hbm.Inventory.fluid.trait.FT_Combustible;
 import com.hbm.api.Mode;
 import com.hbm.api.energy.BasicEnergyContainer;
@@ -64,10 +64,10 @@ public class GasTurbineBlockEntity extends DummyableBlockEntity {
     private static final Map<String, Double> FUEL_MULTIPLIER = new HashMap<>();
 
     static {
-        FUEL_MULTIPLIER.put(ModFluids.REFINERY_GAS.source().getId().toString(), 50D);
-        FUEL_MULTIPLIER.put(ModFluids.BIOGAS.source().getId().toString(), 15D);
-        FUEL_MULTIPLIER.put(ModFluids.REFORM_GAS.source().getId().toString(), 5D);
-        FUEL_MULTIPLIER.put(ModFluids.DEUTERIUM.source().getId().toString(), 30D);
+        FUEL_MULTIPLIER.put(HBMFluids.GAS.source().getId().toString(), 50D);
+        FUEL_MULTIPLIER.put(HBMFluids.BIOGAS.source().getId().toString(), 15D);
+        FUEL_MULTIPLIER.put(HBMFluids.REFORMGAS.source().getId().toString(), 5D);
+        FUEL_MULTIPLIER.put(HBMFluids.DEUTERIUM.source().getId().toString(), 30D);
     }
 
     private final BasicEnergyContainer energy = new BasicEnergyContainer(CAPACITY, 0, MAX_EXTRACT);
@@ -110,9 +110,9 @@ public class GasTurbineBlockEntity extends DummyableBlockEntity {
                 .addTank(16_000, Mode.INPUT)
                 .addTank(160_000, Mode.OUTPUT);
         handler.getFluidTanks().get(FUEL_TANK).setValidator(stack -> hasGasTrait(stack));
-        handler.getFluidTanks().get(LUBE_TANK).setValidator(stack -> stack.getFluid() == ModFluids.OIL.source().get());
+        handler.getFluidTanks().get(LUBE_TANK).setValidator(stack -> stack.getFluid() == HBMFluids.OIL.source().get());
         handler.getFluidTanks().get(WATER_TANK).setValidator(stack -> stack.getFluid().isSame(net.minecraft.world.level.material.Fluids.WATER));
-        handler.getFluidTanks().get(STEAM_TANK).setValidator(stack -> stack.getFluid() == ModFluids.HOT_STEAM.source().get());
+        handler.getFluidTanks().get(STEAM_TANK).setValidator(stack -> stack.getFluid() == HBMFluids.HOTSTEAM.source().get());
         return handler;
     }
 
@@ -304,7 +304,7 @@ public class GasTurbineBlockEntity extends DummyableBlockEntity {
         int cycles = Math.min(Math.min(heatCycles, waterCycles), 100);
         if (cycles > 0) {
             water.drain(cycles, IFluidHandler.FluidAction.EXECUTE);
-            steam.fill(new FluidStack(ModFluids.HOT_STEAM.source().get(), cycles * 10), IFluidHandler.FluidAction.EXECUTE);
+            steam.fill(new FluidStack(HBMFluids.HOTSTEAM.source().get(), cycles * 10), IFluidHandler.FluidAction.EXECUTE);
             waterToBoil = cycles;
         } else {
             waterToBoil = 0;

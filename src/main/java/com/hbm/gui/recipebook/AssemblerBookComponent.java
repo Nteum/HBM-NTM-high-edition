@@ -22,7 +22,7 @@ import java.util.Set;
 
 @OnlyIn(Dist.CLIENT)
 public class AssemblerBookComponent  {
-    protected static final ResourceLocation RECIPE_BOOK_LOCATION = new ResourceLocation("textures/gui/recipe_book.png");
+    protected static final ResourceLocation RECIPE_BOOK_LOCATION = ResourceLocation.parse("textures/gui/recipe_book.png");
     private int xOffset;
     private int width;
     private int height;

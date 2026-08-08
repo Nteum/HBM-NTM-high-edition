@@ -15,8 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PressGui extends BaseMachineGui<PressMenu> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(HBM.MODID , "textures/gui/gui_press.png");
-    private static final ResourceLocation GAUGE = new ResourceLocation(HBM.MODID , "textures/gui/gauges/small_bow.png");
+    private static final ResourceLocation TEXTURE = HBM.rl("textures/gui/gui_press.png");
+    private static final ResourceLocation GAUGE = HBM.rl("textures/gui/gauges/small_bow.png");
 
     public PressGui(PressMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);

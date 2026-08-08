@@ -34,7 +34,7 @@ public class AssemblerGui extends BaseMachineGui<AssemblerMenu> {
     protected void init() {
         super.init();
         this.widthTooNarrow = this.width < 379;
-        this.recipePage.init(this.minecraft, new ResourceLocation("textures/gui/recipe_book.png"), 147, 166, this.width, this.height, this.imageWidth / 2, ModRecipes.ASSEMBLER.type().get());
+        this.recipePage.init(this.minecraft, ResourceLocation.parse("textures/gui/recipe_book.png"), 147, 166, this.width, this.height, this.imageWidth / 2, ModRecipes.ASSEMBLER.type().get());
         this.addRenderableWidget(new ImageButton(this.leftPos + 78, this.topPos + 53, 20, 18, 0, 0, 19, TEMPLATE_BUTTON_TEXTURE, (button) -> {
             this.recipePage.toggleVisible();
             this.leftPos = this.recipePage.updateScreenPosition(this.width, this.imageWidth);

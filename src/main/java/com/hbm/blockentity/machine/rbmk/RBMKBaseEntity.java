@@ -20,7 +20,7 @@ import com.hbm.reactor.rbmk.RBMKLidType;
 import com.hbm.reactor.rbmk.RBMKSettings;
 import com.hbm.registries.ModBlocks;
 import com.hbm.registries.ModSounds;
-import com.hbm.Inventory.fluid.ModFluids;
+import com.hbm.core.contents.fluid.HBMFluids;
 import com.hbm.core.contents.multiblock.MultiblockData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
@@ -90,7 +90,7 @@ public class RBMKBaseEntity extends DummyableBlockEntity {
         this.fluidHandler.getFluidTanks().set(0, new FluidTank(WATER_TANK_CAPACITY) {
             @Override
             public boolean isFluidValid(final FluidStack stack) {
-                return stack.getFluid().isSame(Fluids.WATER) || stack.getFluid().isSame(ModFluids.IRRADIATED_WATER.source().get());
+                return stack.getFluid().isSame(Fluids.WATER) || stack.getFluid().isSame(HBMFluids.IRRADIATED_WATER.source().get());
             }
         });
         this.energy.setListener(this);
@@ -163,7 +163,7 @@ public class RBMKBaseEntity extends DummyableBlockEntity {
         }
 
         water.drain(mbToConvert, net.minecraftforge.fluids.capability.IFluidHandler.FluidAction.EXECUTE);
-        steam.fill(new FluidStack(ModFluids.STEAM.source().get(), mbToConvert), net.minecraftforge.fluids.capability.IFluidHandler.FluidAction.EXECUTE);
+        steam.fill(new FluidStack(HBMFluids.STEAM.source().get(), mbToConvert), net.minecraftforge.fluids.capability.IFluidHandler.FluidAction.EXECUTE);
         context.addHeat(worldPosition, -mbToConvert * HEAT_PER_MB);
         setChanged();
     }
@@ -298,7 +298,7 @@ public class RBMKBaseEntity extends DummyableBlockEntity {
             return;
         }
         fluidHandler.getFluidTanks().get(1).fill(
-                new FluidStack(ModFluids.STEAM.source().get(), amount),
+                new FluidStack(HBMFluids.STEAM.source().get(), amount),
                 net.minecraftforge.fluids.capability.IFluidHandler.FluidAction.EXECUTE);
         setChanged();
     }

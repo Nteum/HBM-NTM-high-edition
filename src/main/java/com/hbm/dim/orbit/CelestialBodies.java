@@ -27,7 +27,7 @@ public class CelestialBodies {
 
     protected static void init(){
         BODIES = new HashSet<>();
-        BODIES.add(new CelestialBody(new Vec3(0, 64, 0), 30, null, new ResourceLocation("minecraft", "textures/environment/sun.png")));
+        BODIES.add(new CelestialBody(new Vec3(0, 64, 0), 30, null, ResourceLocation.fromNamespaceAndPath("minecraft", "textures/environment/sun.png")));
         BODIES.add(new CelestialBody(new Vec3(2000, 64, 0), 15, Level.OVERWORLD, HBM.rl("textures/env/space/earth.png")));
         BODIES.add(new CelestialBody(new Vec3(3000, 64, 0), 10, HBMDimensions.MOON_KEY, HBM.rl("textures/env/space/moon.png")));
     }

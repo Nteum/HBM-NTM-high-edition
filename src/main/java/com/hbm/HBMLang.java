@@ -77,6 +77,7 @@ public enum HBMLang implements ILangEntry {
     GUI_DESC_UPGRADE_OVERDRIVE("* §7Overdrive§r: Stacks to level 3"),
     GUI_DESC_UPGRADE_POWER("* §1Power-Saving§r: Stacks to level 3"),
     GUI_DESC_UPGRADE_SPEED("* §4Speed§r: Stacks to level 3"),
+    GUI_SHOW_HIDDEN_INFO("Hold <%s> to display more info"),
     // 物品
     TOOLTIP_SHOW_DETAIL("Hold %s to display more info"),
     ITEM_INGOT_NEPTUNIUM_DESC("That one's my favourite!"),

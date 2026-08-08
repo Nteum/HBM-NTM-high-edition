@@ -6,7 +6,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 
 import java.util.List;
-
+@Deprecated
 public class FluidTraitSimple {
 
 	public static class FT_Gaseous extends FluidTrait {

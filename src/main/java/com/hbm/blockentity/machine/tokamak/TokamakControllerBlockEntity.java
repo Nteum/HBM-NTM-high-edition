@@ -2,7 +2,7 @@ package com.hbm.blockentity.machine.tokamak;
 
 import com.hbm.HBMKey;
 import com.hbm.HBMLang;
-import com.hbm.Inventory.fluid.ModFluids;
+import com.hbm.core.contents.fluid.HBMFluids;
 import com.hbm.api.Mode;
 import com.hbm.api.energy.BasicEnergyContainer;
 import com.hbm.api.energy.HybridEnergyStorage;
@@ -121,13 +121,13 @@ public class TokamakControllerBlockEntity extends BaseMachineBlockEntity impleme
         this.fluids.getFluidTanks().set(0, new FluidTank(16_000) {
             @Override
             public boolean isFluidValid(final FluidStack stack) {
-                return stack.getFluid().isSame(ModFluids.COOLANT.source().get()) || stack.getFluid().isSame(ModFluids.IRRADIATED_WATER.source().get()) || stack.getFluid().isSame(net.minecraft.world.level.material.Fluids.WATER);
+                return stack.getFluid().isSame(HBMFluids.COOLANT.source().get()) || stack.getFluid().isSame(HBMFluids.IRRADIATED_WATER.source().get()) || stack.getFluid().isSame(net.minecraft.world.level.material.Fluids.WATER);
             }
         });
         this.fluids.getFluidTanks().set(1, new FluidTank(16_000) {
             @Override
             public boolean isFluidValid(final FluidStack stack) {
-                return stack.getFluid().isSame(ModFluids.SPENT_STEAM.source().get());
+                return stack.getFluid().isSame(HBMFluids.SPENTSTEAM.source().get());
             }
         });
     }
@@ -332,7 +332,7 @@ public class TokamakControllerBlockEntity extends BaseMachineBlockEntity impleme
             return 0.0D;
         }
         coolant.drain(mb, net.minecraftforge.fluids.capability.IFluidHandler.FluidAction.EXECUTE);
-        steam.fill(new FluidStack(ModFluids.SPENT_STEAM.source().get(), mb), net.minecraftforge.fluids.capability.IFluidHandler.FluidAction.EXECUTE);
+        steam.fill(new FluidStack(HBMFluids.SPENTSTEAM.source().get(), mb), net.minecraftforge.fluids.capability.IFluidHandler.FluidAction.EXECUTE);
         return mb * COOLING_PER_MB;
     }
 

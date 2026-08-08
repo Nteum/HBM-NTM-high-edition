@@ -10,7 +10,7 @@ public class ModelArmorAJR extends ModelArmorBase{
         super("Head","Body","LeftArm","RightArm","LeftLeg","RightLeg","LeftBoot","RightBoot"
 //                ,"RocketBox"
         );
-        this.armTexExtra = new ResourceLocation("hbm:textures/models/armor/ajr_arm.png");
+        this.armTexExtra = ResourceLocation.parse("hbm:textures/models/armor/ajr_arm.png");
     }
 
     @Override

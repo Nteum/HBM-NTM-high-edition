@@ -2,6 +2,7 @@ package com.hbm.main;
 
 import com.hbm.HBM;
 import com.hbm.Inventory.fluid.ModFluids;
+import com.hbm.core.contents.fluid.HBMFluids;
 import com.hbm.block.interfaces.ILookOverlay;
 import com.hbm.block.interfaces.ITooltipProvider;
 import com.hbm.blockentity.HBMTiles;
@@ -236,8 +237,8 @@ public class ClientEventHandler {
     public static void onRegisterItemColorHandlerEvent(RegisterColorHandlersEvent.Item event){
         /** 给物品添加颜色 */
         // 流体桶的染色
-        FluidBucketItem[] fluidBucketItems = ModFluids.fluidList.stream().map(holder -> holder.bucket().get()).filter(bucket -> bucket instanceof FluidBucketItem).toArray(FluidBucketItem[]::new);
-        event.register(FluidBucketItem::getColor, fluidBucketItems);
+//        FluidBucketItem[] fluidBucketItems = ModFluids.fluidList.stream().map(holder -> holder.bucket().get()).filter(bucket -> bucket instanceof FluidBucketItem).toArray(FluidBucketItem[]::new);
+//        event.register(FluidBucketItem::getColor, fluidBucketItems);
         event.register((stack, tintIndex) -> tintIndex == 0 ? ItemICFPellet.getFuelColor(stack) : 0xFFFFFF, ModItems.icf_pellet.get());
         ModItems.itemColorSupport(event);
     }

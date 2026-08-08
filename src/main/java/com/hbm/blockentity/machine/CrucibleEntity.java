@@ -291,7 +291,7 @@ public class CrucibleEntity extends DummyableBlockEntity {
             }
         }
         if (tag.contains(HBMKey.RECIPE_NOW, Tag.TAG_STRING)){
-            this.recipeNow = CrucibleRecipe.getRecipe(new ResourceLocation(tag.getString(HBMKey.RECIPE_NOW)));
+            this.recipeNow = CrucibleRecipe.getRecipe(ResourceLocation.parse(tag.getString(HBMKey.RECIPE_NOW)));
         }
         if (tag.contains(HBMKey.CLICK, Tag.TAG_INT)){
             int slotId = tag.getInt(HBMKey.CLICK);

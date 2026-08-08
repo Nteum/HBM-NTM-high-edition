@@ -1,6 +1,6 @@
 package com.hbm.world.feature;
 
-import com.hbm.Inventory.fluid.ModFluids;
+import com.hbm.core.contents.fluid.HBMFluids;
 import com.hbm.block.BlockEnums;
 import com.hbm.item.ItemEnums;
 import com.hbm.item.env.ItemBedrockOre;
@@ -31,23 +31,23 @@ public class BedrockOreDefinition {
     // 可用的矿物定义
     public static final BedrockOreDefinition IRON = new BedrockOreDefinition("iron", new PseudoItemStack(ModItems.BEDROCK_ORE), 0xE2C0AA, 1);
     public static final BedrockOreDefinition COPPER = new BedrockOreDefinition("copper", new PseudoItemStack(ModItems.BEDROCK_ORE), 0xEC9A63, 1);
-    public static final BedrockOreDefinition BORAX = new BedrockOreDefinition("borax", new PseudoItemStack(ModItems.BEDROCK_ORE), 0xE4BE74, 3, new PseudoFluidStack(ModFluids.SULFURIC_ACID.source(), 500));
-    public static final BedrockOreDefinition CHLOROCALCITE = new BedrockOreDefinition("chlorocalcite", new PseudoItemStack(ModItems.BEDROCK_ORE), 0xCDE036, 3, new PseudoFluidStack(ModFluids.SULFURIC_ACID.source(), 500));
+    public static final BedrockOreDefinition BORAX = new BedrockOreDefinition("borax", new PseudoItemStack(ModItems.BEDROCK_ORE), 0xE4BE74, 3, new PseudoFluidStack(HBMFluids.SULFURIC_ACID.source(), 500));
+    public static final BedrockOreDefinition CHLOROCALCITE = new BedrockOreDefinition("chlorocalcite", new PseudoItemStack(ModItems.BEDROCK_ORE), 0xCDE036, 3, new PseudoFluidStack(HBMFluids.SULFURIC_ACID.source(), 500));
     public static final BedrockOreDefinition ASBESTOS = new BedrockOreDefinition("asbestos", new PseudoItemStack(ModItems.BEDROCK_ORE), 0xBFBFB9, 2);
-    public static final BedrockOreDefinition NIOBIUM = new BedrockOreDefinition("niobium", new PseudoItemStack(ModItems.BEDROCK_ORE), 0xAF58D8, 2, new PseudoFluidStack(ModFluids.PEROXIDE.source(), 500));
-    public static final BedrockOreDefinition NEODYMIUM = new BedrockOreDefinition("neodymium", new PseudoItemStack(ModItems.BEDROCK_ORE), 0x8F8F5F, 3, new PseudoFluidStack(ModFluids.PEROXIDE.source(), 500));
-    public static final BedrockOreDefinition TITANIUM = new BedrockOreDefinition("titanium", new PseudoItemStack(ModItems.BEDROCK_ORE), 0xF2EFE2, 2, new PseudoFluidStack(ModFluids.SULFURIC_ACID.source(), 500));
-    public static final BedrockOreDefinition TUNGSTEN = new BedrockOreDefinition("tungsten", new PseudoItemStack(ModItems.BEDROCK_ORE), 0x2C293C, 2, new PseudoFluidStack(ModFluids.PEROXIDE.source(), 500));
+    public static final BedrockOreDefinition NIOBIUM = new BedrockOreDefinition("niobium", new PseudoItemStack(ModItems.BEDROCK_ORE), 0xAF58D8, 2, new PseudoFluidStack(HBMFluids.PEROXIDE.source(), 500));
+    public static final BedrockOreDefinition NEODYMIUM = new BedrockOreDefinition("neodymium", new PseudoItemStack(ModItems.BEDROCK_ORE), 0x8F8F5F, 3, new PseudoFluidStack(HBMFluids.PEROXIDE.source(), 500));
+    public static final BedrockOreDefinition TITANIUM = new BedrockOreDefinition("titanium", new PseudoItemStack(ModItems.BEDROCK_ORE), 0xF2EFE2, 2, new PseudoFluidStack(HBMFluids.SULFURIC_ACID.source(), 500));
+    public static final BedrockOreDefinition TUNGSTEN = new BedrockOreDefinition("tungsten", new PseudoItemStack(ModItems.BEDROCK_ORE), 0x2C293C, 2, new PseudoFluidStack(HBMFluids.PEROXIDE.source(), 500));
     public static final BedrockOreDefinition GOLD = new BedrockOreDefinition("gold", new PseudoItemStack(ModItems.BEDROCK_ORE), 0xF9D738, 1);
-    public static final BedrockOreDefinition URANIUM = new BedrockOreDefinition("uranium", new PseudoItemStack(ModItems.BEDROCK_ORE), 0x868D82, 4, new PseudoFluidStack(ModFluids.SULFURIC_ACID.source(), 500));
-    public static final BedrockOreDefinition THORIUM = new BedrockOreDefinition("thorium", new PseudoItemStack(ModItems.BEDROCK_ORE), 0x7D401D, 4, new PseudoFluidStack(ModFluids.SULFURIC_ACID.source(), 500));
+    public static final BedrockOreDefinition URANIUM = new BedrockOreDefinition("uranium", new PseudoItemStack(ModItems.BEDROCK_ORE), 0x868D82, 4, new PseudoFluidStack(HBMFluids.SULFURIC_ACID.source(), 500));
+    public static final BedrockOreDefinition THORIUM = new BedrockOreDefinition("thorium", new PseudoItemStack(ModItems.BEDROCK_ORE), 0x7D401D, 4, new PseudoFluidStack(HBMFluids.SULFURIC_ACID.source(), 500));
     public static final BedrockOreDefinition FLUORITE = new BedrockOreDefinition("fluorite", new PseudoItemStack(ModItems.BEDROCK_ORE), 0xF6F3E7, 1);
 
     public static final BedrockOreDefinition COAL = new BedrockOreDefinition("coal", new PseudoItemStack(()->Items.COAL, 8), 0x202020, 1);
-    public static final BedrockOreDefinition NITER = new BedrockOreDefinition("niter", new PseudoItemStack(ModItems.NITER, 4), 0x202020, 2, new PseudoFluidStack(ModFluids.PEROXIDE.source(), 500));
+    public static final BedrockOreDefinition NITER = new BedrockOreDefinition("niter", new PseudoItemStack(ModItems.NITER, 4), 0x202020, 2, new PseudoFluidStack(HBMFluids.PEROXIDE.source(), 500));
     public static final BedrockOreDefinition REDSTONE = new BedrockOreDefinition("redstone", new PseudoItemStack(()->Items.REDSTONE, 4), 0xd01010, 1);
     public static final BedrockOreDefinition EMERALD = new BedrockOreDefinition("emerald", new PseudoItemStack(()->Items.EMERALD, 4), 0x3FDD85, 1);
-    public static final BedrockOreDefinition RARE = new BedrockOreDefinition("rare", new PseudoItemStack(ModItems.CHUNK_ORE.get(ItemEnums.EnumChunkType.RARE), 2), 0x8F9999, 2, new PseudoFluidStack(ModFluids.PEROXIDE.source(), 500));
+    public static final BedrockOreDefinition RARE = new BedrockOreDefinition("rare", new PseudoItemStack(ModItems.CHUNK_ORE.get(ItemEnums.EnumChunkType.RARE), 2), 0x8F9999, 2, new PseudoFluidStack(HBMFluids.PEROXIDE.source(), 500));
     public static final BedrockOreDefinition BAUXITE = new BedrockOreDefinition("bauxite", new PseudoItemStack(ModBlocks.STONE_RESOURCE.get(BlockEnums.EnumStoneType.BAUXITE), 2), 0xEF7213, 1);
     public static final BedrockOreDefinition GLOWSTONE = new BedrockOreDefinition("glowstone", new PseudoItemStack(()->Items.GLOWSTONE, 4), 0xF9FF4D, 1);
     public static final BedrockOreDefinition PHOSPOROUS = new BedrockOreDefinition("phosporous", new PseudoItemStack(ModItems.POWDER_FIRE, 4), 0xD7341F, 1);
@@ -111,8 +111,8 @@ public class BedrockOreDefinition {
 
     public static final PseudoFluidStack BORE_TIER_1 = null;
     public static final PseudoFluidStack BORE_TIER_2 = new PseudoFluidStack(()->Fluids.WATER, 1_000);
-    public static final PseudoFluidStack BORE_TIER_3 = new PseudoFluidStack(ModFluids.SULFURIC_ACID.source(), 1_000);
-    public static final PseudoFluidStack BORE_TIER_4 = new PseudoFluidStack(ModFluids.SOLVENT.source(), 2_000);
+    public static final PseudoFluidStack BORE_TIER_3 = new PseudoFluidStack(HBMFluids.SULFURIC_ACID.source(), 1_000);
+    public static final PseudoFluidStack BORE_TIER_4 = new PseudoFluidStack(HBMFluids.SOLVENT.source(), 2_000);
 
     public static FluidStack getBoreFluid(double density) {
         if(density > 1.5) return BORE_TIER_4.get();

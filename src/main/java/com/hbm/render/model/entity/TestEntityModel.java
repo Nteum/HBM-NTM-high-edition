@@ -18,7 +18,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class TestEntityModel extends EntityModel<TestEntity> {
     // This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(HBM.MODID, "test_entity"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(HBM.rl( "test_entity"), "main");
     private final ModelPart bb_main;
 
     public TestEntityModel(ModelPart root) {

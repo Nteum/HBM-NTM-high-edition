@@ -20,7 +20,7 @@ public class BlockStoneResource extends Block {
             if (!level.isClientSide && state.is(ModBlocks.STONE_RESOURCE.get(BlockEnums.EnumStoneType.ASBESTOS).get())) {
 
                 // 💡 替换为你模组的气体方块（这里假设你的气体也是一种 Block）
-                // 如果你的气体是流体（Fluid），可以使用 ModFluids.GAS.get().defaultFluidState().createLegacyBlock()
+                // 如果你的气体是流体（Fluid），可以使用 HBMFluids.GAS.get().defaultFluidState().createLegacyBlock()
                 BlockState gasState = ModBlocks.GAS_RADON_ASBESTOS.get().defaultBlockState();
 
                 // 在原地放置气体方块

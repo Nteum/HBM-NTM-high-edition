@@ -140,7 +140,7 @@ public class CountableIngredient extends AbstractIngredient {
                 int count = json.get("count").getAsInt();
                 return CountableIngredient.of(new ItemStack(item,count));
             } else if (json.has("tag")) {
-                ResourceLocation resourcelocation = new ResourceLocation(GsonHelper.getAsString(json, "tag"));
+                ResourceLocation resourcelocation = ResourceLocation.parse(GsonHelper.getAsString(json, "tag"));
                 TagKey<Item> tagkey = TagKey.create(Registries.ITEM, resourcelocation);
                 int count = json.get("count").getAsInt();
                 return CountableIngredient.of(tagkey,count);
@@ -173,7 +173,7 @@ public class CountableIngredient extends AbstractIngredient {
         }
     }
     static TagKey<Item> parseTagKey(String s){
-        return TagKey.create(Registries.ITEM,new ResourceLocation(s.substring(s.indexOf(" / ") + 3, s.length() - 1)));
+        return TagKey.create(Registries.ITEM,ResourceLocation.parse(s.substring(s.indexOf(" / ") + 3, s.length() - 1)));
     }
 
     public static class Value implements Ingredient.Value{
@@ -265,7 +265,7 @@ public class CountableIngredient extends AbstractIngredient {
                 itemStack.setDamageValue(meta);
                 return CountableIngredient.of(itemStack);
             }else if("tag".equals(type)) {
-                ResourceLocation resourcelocation = new ResourceLocation(array.get(1).getAsString());
+                ResourceLocation resourcelocation = ResourceLocation.parse(array.get(1).getAsString());
                 TagKey<Item> tagkey = TagKey.create(Registries.ITEM, resourcelocation);
                 return CountableIngredient.of(tagkey, stacksize);
             }

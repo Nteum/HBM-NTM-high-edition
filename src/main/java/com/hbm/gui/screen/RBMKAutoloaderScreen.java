@@ -11,7 +11,7 @@ import net.minecraft.world.entity.player.Inventory;
 
 public class RBMKAutoloaderScreen extends AbstractContainerScreen<RBMKAutoloaderMenu> {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(HBM.MODID, "textures/gui/machine/gui_autoloader.png");
+    private static final ResourceLocation TEXTURE = HBM.rl( "textures/gui/machine/gui_autoloader.png");
     private static final int BUTTON_Y = 36;
     private static final int MINUS_X = 74;
     private static final int PLUS_X = 90;

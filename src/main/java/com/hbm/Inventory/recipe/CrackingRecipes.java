@@ -1,6 +1,6 @@
 package com.hbm.Inventory.recipe;
 
-import com.hbm.Inventory.fluid.ModFluids;
+import com.hbm.core.contents.fluid.HBMFluids;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -26,18 +26,18 @@ public final class CrackingRecipes {
 
     public static void registerDefaults() {
         RECIPES.clear();
-        put(ModFluids.OIL.source().get(), stack(ModFluids.CRACK_OIL.source().get(), 80), stack(ModFluids.PETROLEUM.source().get(), 20));
-        put(ModFluids.BITUMEN.source().get(), stack(ModFluids.OIL.source().get(), 80), stack(ModFluids.AROMATICS.source().get(), 20));
-        put(ModFluids.SMEAR.source().get(), stack(ModFluids.NAPHTHA.source().get(), 60), stack(ModFluids.PETROLEUM.source().get(), 40));
-        put(ModFluids.REFINERY_GAS.source().get(), stack(ModFluids.PETROLEUM.source().get(), 30), stack(ModFluids.UNSATURATEDS.source().get(), 20));
-        put(ModFluids.DIESEL.source().get(), stack(ModFluids.KEROSENE.source().get(), 40), stack(ModFluids.PETROLEUM.source().get(), 30));
-        put(ModFluids.DIESEL_CRACK.source().get(), stack(ModFluids.KEROSENE.source().get(), 40), stack(ModFluids.PETROLEUM.source().get(), 30));
-        put(ModFluids.KEROSENE.source().get(), stack(ModFluids.PETROLEUM.source().get(), 60), FluidStack.EMPTY);
-        put(ModFluids.WOOD_OIL.source().get(), stack(ModFluids.HEATING_OIL.source().get(), 40), stack(ModFluids.AROMATICS.source().get(), 10));
-        put(ModFluids.NAPHTHA.source().get(), stack(ModFluids.AROMATICS.source().get(), 80), stack(ModFluids.PETROLEUM.source().get(), 20));
-        put(ModFluids.HEATING_OIL_VACUUM.source().get(), stack(ModFluids.HEATING_OIL.source().get(), 80), stack(ModFluids.REFORM_GAS.source().get(), 20));
-        put(ModFluids.REFORMATE.source().get(), stack(ModFluids.UNSATURATEDS.source().get(), 40), stack(ModFluids.REFORM_GAS.source().get(), 60));
-        put(ModFluids.BIOGAS.source().get(), stack(ModFluids.PETROLEUM.source().get(), 20), stack(ModFluids.AROMATICS.source().get(), 20));
+        put(HBMFluids.OIL.source().get(), stack(HBMFluids.CRACKOIL.source().get(), 80), stack(HBMFluids.PETROLEUM.source().get(), 20));
+        put(HBMFluids.BITUMEN.source().get(), stack(HBMFluids.OIL.source().get(), 80), stack(HBMFluids.AROMATICS.source().get(), 20));
+        put(HBMFluids.SMEAR.source().get(), stack(HBMFluids.NAPHTHA.source().get(), 60), stack(HBMFluids.PETROLEUM.source().get(), 40));
+        put(HBMFluids.GAS.source().get(), stack(HBMFluids.PETROLEUM.source().get(), 30), stack(HBMFluids.UNSATURATEDS.source().get(), 20));
+        put(HBMFluids.DIESEL.source().get(), stack(HBMFluids.KEROSENE.source().get(), 40), stack(HBMFluids.PETROLEUM.source().get(), 30));
+        put(HBMFluids.DIESEL_CRACK.source().get(), stack(HBMFluids.KEROSENE.source().get(), 40), stack(HBMFluids.PETROLEUM.source().get(), 30));
+        put(HBMFluids.KEROSENE.source().get(), stack(HBMFluids.PETROLEUM.source().get(), 60), FluidStack.EMPTY);
+        put(HBMFluids.WOODOIL.source().get(), stack(HBMFluids.HEATINGOIL.source().get(), 40), stack(HBMFluids.AROMATICS.source().get(), 10));
+        put(HBMFluids.NAPHTHA.source().get(), stack(HBMFluids.AROMATICS.source().get(), 80), stack(HBMFluids.PETROLEUM.source().get(), 20));
+        put(HBMFluids.HEAVYOIL_VACUUM.source().get(), stack(HBMFluids.HEAVYOIL.source().get(), 80), stack(HBMFluids.GAS.source().get(), 20));
+        put(HBMFluids.REFORMATE.source().get(), stack(HBMFluids.UNSATURATEDS.source().get(), 40), stack(HBMFluids.GAS.source().get(), 60));
+        put(HBMFluids.BIOGAS.source().get(), stack(HBMFluids.PETROLEUM.source().get(), 20), stack(HBMFluids.AROMATICS.source().get(), 20));
     }
 
     private static FluidStack stack(Fluid fluid, int amount) {

@@ -15,7 +15,7 @@ import net.minecraft.world.entity.player.Inventory;
  */
 public class RBMKBaseScreen extends AbstractRBMKScreen<RBMKBaseMenu> {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(HBM.MODID, "textures/gui/reactors/gui_rbmk_console.png");
+    private static final ResourceLocation TEXTURE = HBM.rl( "textures/gui/reactors/gui_rbmk_console.png");
     private static final int AZ5_BUTTON_X = 26;
     private static final int AZ5_BUTTON_Y = 143;
     private static final int AZ5_BUTTON_WIDTH = 28;

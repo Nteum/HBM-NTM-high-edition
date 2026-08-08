@@ -13,6 +13,7 @@ import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
 
 import java.util.function.Consumer;
+@Deprecated
 //基础的流体类型
 //其实就是在FluidType的基础上添加了一些渲染中需要使用，而Properties没有的属性
 public class BaseFluidType extends FluidType {

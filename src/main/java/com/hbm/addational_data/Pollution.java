@@ -1,7 +1,7 @@
 package com.hbm.addational_data;
 
 import com.hbm.HBMKey;
-import com.hbm.Inventory.fluid.ModFluids;
+import com.hbm.core.contents.fluid.HBMFluids;
 import com.hbm.config.MobConfig;
 import com.hbm.config.RadiationConfig;
 import com.hbm.entity.ModEntityType;
@@ -276,9 +276,9 @@ public class Pollution implements INBTSerializable<CompoundTag> {
 
     public static Fluid getPollutingFluid(Type type){
         return switch (type){
-            case SOOT -> ModFluids.SMOKE.source().get();
-            case HEAVYMETAL -> ModFluids.SMOKE_LEADED.source().get();
-            case POISON, FALLOUT -> ModFluids.SMOKE_POISON.source().get();
+            case SOOT -> HBMFluids.SMOKE.source().get();
+            case HEAVYMETAL -> HBMFluids.SMOKE_LEADED.source().get();
+            case POISON, FALLOUT -> HBMFluids.SMOKE_POISON.source().get();
             default -> null;
         };
     }

@@ -48,7 +48,7 @@ public interface IRecipeProcess<R extends Recipe<Container>> {
 
     default void loadData(CompoundTag pTag){
         if (pTag.contains(HBMKey.RECIPE_NOW, Tag.TAG_STRING)){
-            ResourceLocation resourceLocation = new ResourceLocation(pTag.getString(HBMKey.RECIPE_NOW));
+            ResourceLocation resourceLocation = ResourceLocation.parse(pTag.getString(HBMKey.RECIPE_NOW));
             setRecipeNow((R) getLevel().getRecipeManager().byKey(resourceLocation).orElse(null));
         }
         setProgress(pTag.getInt(HBMKey.PROGRESS));

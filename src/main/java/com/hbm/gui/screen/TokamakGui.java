@@ -18,7 +18,7 @@ import net.minecraft.world.inventory.ContainerData;
  */
 public class TokamakGui extends AbstractContainerScreen<TokamakMenu> {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(HBM.MODID, "textures/gui/gui_tokamak.png");
+    private static final ResourceLocation TEXTURE = HBM.rl( "textures/gui/gui_tokamak.png");
     private Button startButton;
     private Button stopButton;
 

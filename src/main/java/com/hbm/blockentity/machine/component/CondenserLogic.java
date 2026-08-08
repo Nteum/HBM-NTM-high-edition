@@ -1,7 +1,7 @@
 package com.hbm.blockentity.machine.component;
 
 import com.hbm.HBMKey;
-import com.hbm.Inventory.fluid.ModFluids;
+import com.hbm.core.contents.fluid.HBMFluids;
 import com.hbm.api.Mode;
 import com.hbm.api.fluid.BasicFluidHandler;
 import net.minecraft.nbt.CompoundTag;
@@ -38,8 +38,8 @@ public final class CondenserLogic {
 
     private void configureTanks() {
         FluidTank steamTank = fluidHandler.getFluidTanks().get(steamTankIndex);
-        steamTank.setValidator(stack -> stack.getFluid() == ModFluids.SPENT_STEAM.source().get());
-        steamTank.setFluid(new FluidStack(ModFluids.SPENT_STEAM.source().get(), 0));
+        steamTank.setValidator(stack -> stack.getFluid() == HBMFluids.SPENTSTEAM.source().get());
+        steamTank.setFluid(new FluidStack(HBMFluids.SPENTSTEAM.source().get(), 0));
 
         FluidTank waterTank = fluidHandler.getFluidTanks().get(waterTankIndex);
         waterTank.setValidator(stack -> stack.getFluid().isSame(net.minecraft.world.level.material.Fluids.WATER));

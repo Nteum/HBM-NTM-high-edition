@@ -1,7 +1,7 @@
 package com.hbm.datagen;
 
 import com.hbm.HBMLang;
-import com.hbm.Inventory.fluid.ModFluids;
+import com.hbm.core.contents.fluid.HBMFluids;
 
 import com.hbm.blockentity.interfaces.IUpgradeInfoProvider;
 import com.hbm.item.HBMCombat;
@@ -28,7 +28,7 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
         autoAdd();
         ModItems.languageSupport(this);
         HBMDamage.languageSupport(this);
-        ModFluids.localName(this);
+//        HBMFluids.localName(this);
         ModKeyMapping.localName(this);
 
         // ModItems.languageSupport(this);

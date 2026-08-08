@@ -13,7 +13,7 @@ import net.minecraftforge.fluids.capability.templates.FluidTank;
 
 import java.io.IOException;
 import java.util.List;
-
+@Deprecated
 public class FT_VentRadiation extends FluidTrait {
 	
 	float radPerMB = 0;

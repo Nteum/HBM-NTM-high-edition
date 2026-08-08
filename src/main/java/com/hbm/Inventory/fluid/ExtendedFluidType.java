@@ -40,6 +40,7 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
+@Deprecated
 /**
  * 流体类型，模仿HBM的流体类型
  * */
@@ -207,7 +208,7 @@ public class ExtendedFluidType extends FluidType {
     }
 
     public static FluidType getFTFromJson(JsonObject json, String key){
-        return ForgeRegistries.FLUID_TYPES.get().getValue(new ResourceLocation(GsonHelper.convertToString(json, key)));
+        return ForgeRegistries.FLUID_TYPES.get().getValue(ResourceLocation.parse(GsonHelper.convertToString(json, key)));
     }
 
     public static class PropertiesHolder extends ForgeFlowingFluid.Properties{

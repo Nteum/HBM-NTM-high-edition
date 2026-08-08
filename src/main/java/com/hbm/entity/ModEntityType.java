@@ -81,11 +81,11 @@ public class ModEntityType {
             .sized(1.75F, 1F));
 
     private static <T extends Entity> RegistryObject<EntityType<T>> register(String pKey, EntityType.Builder<T> pBuilder) {
-        return ENTITY_TYPES.register(pKey,()->pBuilder.build(new ResourceLocation(HBM.MODID,pKey).toString()));
+        return ENTITY_TYPES.register(pKey,()->pBuilder.build(HBM.rl(pKey).toString()));
     }
 //    // 我需要在实体注册类里面注册相应的刷怪蛋，否则数据生成时似乎无法找到对应的实体类型
 //    private static <T extends Mob> RegistryObject<EntityType<T>> registerGlyphid(String pKey, EntityType.Builder<T> pBuilder) {
-//        RegistryObject<EntityType<T>> registerEntity = ENTITY_TYPES.register(pKey, () -> pBuilder.build(new ResourceLocation(HBM.MODID, pKey).toString()));
+//        RegistryObject<EntityType<T>> registerEntity = ENTITY_TYPES.register(pKey, () -> pBuilder.build(HBM.rl( pKey).toString()));
 //        ModItems.GLYPHID_SPAWN_EGG = ModItems.add("glyphid_spawn_egg", ()->new SpawnEggItem(registerEntity.get(), 0, 0xffffffff, new Item.Properties()), CreativeModeTabs.SPAWN_EGGS, HBMKey.SPAWN_EGG_MODEL, HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
 //        return registerEntity;
 //    }

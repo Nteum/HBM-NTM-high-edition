@@ -1,7 +1,7 @@
 package com.hbm.blockentity.machine;
 
 import com.hbm.HBMKey;
-import com.hbm.Inventory.fluid.ModFluids;
+import com.hbm.core.contents.fluid.HBMFluids;
 import com.hbm.Inventory.recipe.CrackingRecipes;
 import com.hbm.api.Mode;
 import com.hbm.api.fluid.BasicFluidHandler;
@@ -97,13 +97,13 @@ public class CrackingTowerEntity extends DummyableBlockEntity {
         steam.drain(CrackingRecipes.STEAM_CONSUMPTION, IFluidHandler.FluidAction.EXECUTE);
         fillTank(OUTPUT_PRIMARY, recipe.left());
         fillTank(OUTPUT_SECONDARY, recipe.right());
-        fillTank(OUTPUT_SPENT, new FluidStack(ModFluids.SPENT_STEAM.source().get(), CrackingRecipes.SPENT_STEAM_OUTPUT));
+        fillTank(OUTPUT_SPENT, new FluidStack(HBMFluids.SPENTSTEAM.source().get(), CrackingRecipes.SPENT_STEAM_OUTPUT));
     }
 
     private boolean hasSpace(CrackingRecipes.RecipeOutput recipe) {
         return canAccept(OUTPUT_PRIMARY, recipe.left()) &&
                 canAccept(OUTPUT_SECONDARY, recipe.right()) &&
-                canAccept(OUTPUT_SPENT, new FluidStack(ModFluids.SPENT_STEAM.source().get(), CrackingRecipes.SPENT_STEAM_OUTPUT));
+                canAccept(OUTPUT_SPENT, new FluidStack(HBMFluids.SPENTSTEAM.source().get(), CrackingRecipes.SPENT_STEAM_OUTPUT));
     }
 
     private boolean canAccept(int tankIndex, FluidStack stack) {

@@ -68,12 +68,12 @@ public class BlockStateGen extends BlockStateProvider {
 //            HBM.rl("block/furnace_electric_side"),
 //            HBM.rl("block/furnace_electric_front"),
 //            HBM.rl("block/furnace_electric_bottom"),
-//            new ResourceLocation(HBM.MODID,"block/furnace_electric_top"));
+//            HBM.rl("block/furnace_electric_top"));
 //        BlockModelBuilder machineElectricFurnaceOn = this.models().orientableWithBottom("machine_electric_furnace_on",
 //            HBM.rl("block/furnace_electric_side"),
 //            HBM.rl("block/furnace_electric_front_alter"),
 //            HBM.rl("block/furnace_electric_bottom"),
-//            new ResourceLocation(HBM.MODID,"block/furnace_electric_top"));
+//            HBM.rl("block/furnace_electric_top"));
 //        addBooleanStateWithFace(ModBlocks.machine_electric_furnace.get(), BlockStateProperties.LIT, machineElectricFurnaceOff, machineElectricFurnaceOn);
 //        //3. 加热器
 //        BlockModelBuilder machine_boiler_off = this.models().orientable("machine_boiler_off",

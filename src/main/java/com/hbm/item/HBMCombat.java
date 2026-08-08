@@ -1,6 +1,7 @@
 package com.hbm.item;
 
-import com.hbm.Inventory.fluid.ModFluids;
+import com.hbm.core.contents.fluid.HBMFluids;
+import com.hbm.core.contents.fluid.HBMFluids;
 import com.hbm.datagen.LanguageProvider;
 import com.hbm.datagen.model.ItemModelGen;
 import com.hbm.effect.ModEffects;
@@ -138,20 +139,20 @@ public class HBMCombat{
                 register(standaloneModels, "bismuth_plate", () -> new ItemArmorBismuth(HBMArmorMats.BISMUTH, ArmorItem.Type.CHESTPLATE, new Item.Properties(), ()->BISMUTH).cloneStats((ItemArmorFSB) BISMUTH.HELMET.get())),
                 register(standaloneModels, "bismuth_legs", () -> new ItemArmorBismuth(HBMArmorMats.BISMUTH, ArmorItem.Type.LEGGINGS, new Item.Properties()).cloneStats((ItemArmorFSB) BISMUTH.HELMET.get())),
                 register(standaloneModels, "bismuth_boots", () -> new ItemArmorBismuth(HBMArmorMats.BISMUTH, ArmorItem.Type.BOOTS, new Item.Properties()).cloneStats((ItemArmorFSB) BISMUTH.HELMET.get())));
-        STEAMSUIT = new Suit(register(itemList, "steamsuit_helmet", () -> new ItemArmorDesh(HBMArmorMats.DESH, ArmorItem.Type.HELMET, new Item.Properties(), ModFluids.STEAM.source().get(), 64_000, 500, 50, 1)
+        STEAMSUIT = new Suit(register(itemList, "steamsuit_helmet", () -> new ItemArmorDesh(HBMArmorMats.DESH, ArmorItem.Type.HELMET, new Item.Properties(), HBMFluids.STEAM.source().get(), 64_000, 500, 50, 1)
                     .setHasHardLanding(true)
                     .addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 20, 4))
                     .hides(IArmorDisableModel.EnumPlayerPart.HAT)),
-                register(itemList, "steamsuit_plate", () -> new ItemArmorDesh(HBMArmorMats.DESH, ArmorItem.Type.CHESTPLATE, new Item.Properties(),ModFluids.STEAM.source().get(), 64_000, 500, 50, 1, ()->STEAMSUIT).cloneStats((ItemArmorFSB) STEAMSUIT.HELMET.get())),
-                register(itemList, "steamsuit_legs", () -> new ItemArmorDesh(HBMArmorMats.DESH, ArmorItem.Type.LEGGINGS, new Item.Properties(),ModFluids.STEAM.source().get(), 64_000, 500, 50, 1).cloneStats((ItemArmorFSB) STEAMSUIT.HELMET.get())),
-                register(itemList, "steamsuit_boots", () -> new ItemArmorDesh(HBMArmorMats.DESH, ArmorItem.Type.BOOTS, new Item.Properties(),ModFluids.STEAM.source().get(), 64_000, 500, 50, 1).cloneStats((ItemArmorFSB) STEAMSUIT.HELMET.get())));
-        DIESEL = new Suit(register(itemList, "dieselsuit_helmet", () -> new ItemArmorDiesel(HBMArmorMats.DIESEL, ArmorItem.Type.HELMET, new Item.Properties(), ModFluids.DIESEL.source().get(), 64_000, 500, 50, 1)
+                register(itemList, "steamsuit_plate", () -> new ItemArmorDesh(HBMArmorMats.DESH, ArmorItem.Type.CHESTPLATE, new Item.Properties(),HBMFluids.STEAM.source().get(), 64_000, 500, 50, 1, ()->STEAMSUIT).cloneStats((ItemArmorFSB) STEAMSUIT.HELMET.get())),
+                register(itemList, "steamsuit_legs", () -> new ItemArmorDesh(HBMArmorMats.DESH, ArmorItem.Type.LEGGINGS, new Item.Properties(),HBMFluids.STEAM.source().get(), 64_000, 500, 50, 1).cloneStats((ItemArmorFSB) STEAMSUIT.HELMET.get())),
+                register(itemList, "steamsuit_boots", () -> new ItemArmorDesh(HBMArmorMats.DESH, ArmorItem.Type.BOOTS, new Item.Properties(),HBMFluids.STEAM.source().get(), 64_000, 500, 50, 1).cloneStats((ItemArmorFSB) STEAMSUIT.HELMET.get())));
+        DIESEL = new Suit(register(itemList, "dieselsuit_helmet", () -> new ItemArmorDiesel(HBMArmorMats.DIESEL, ArmorItem.Type.HELMET, new Item.Properties(), HBMFluids.DIESEL.source().get(), 64_000, 500, 50, 1)
                     .setHasHardLanding(true)
                     .addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 20, 4))
                     .hides(IArmorDisableModel.EnumPlayerPart.HAT)),
-                register(itemList, "dieselsuit_plate", () -> new ItemArmorDiesel(HBMArmorMats.DIESEL, ArmorItem.Type.CHESTPLATE, new Item.Properties(), ModFluids.DIESEL.source().get(), 64_000, 500, 50, 1, ()->DIESEL).cloneStats((ItemArmorFSB) DIESEL.HELMET.get())),
-                register(itemList, "dieselsuit_legs", () -> new ItemArmorDiesel(HBMArmorMats.DIESEL, ArmorItem.Type.LEGGINGS, new Item.Properties(), ModFluids.DIESEL.source().get(), 64_000, 500, 50, 1).cloneStats((ItemArmorFSB) DIESEL.HELMET.get())),
-                register(itemList, "dieselsuit_boots", () -> new ItemArmorDiesel(HBMArmorMats.DIESEL, ArmorItem.Type.BOOTS, new Item.Properties(), ModFluids.DIESEL.source().get(), 64_000, 500, 50, 1).cloneStats((ItemArmorFSB) DIESEL.HELMET.get())));
+                register(itemList, "dieselsuit_plate", () -> new ItemArmorDiesel(HBMArmorMats.DIESEL, ArmorItem.Type.CHESTPLATE, new Item.Properties(), HBMFluids.DIESEL.source().get(), 64_000, 500, 50, 1, ()->DIESEL).cloneStats((ItemArmorFSB) DIESEL.HELMET.get())),
+                register(itemList, "dieselsuit_legs", () -> new ItemArmorDiesel(HBMArmorMats.DIESEL, ArmorItem.Type.LEGGINGS, new Item.Properties(), HBMFluids.DIESEL.source().get(), 64_000, 500, 50, 1).cloneStats((ItemArmorFSB) DIESEL.HELMET.get())),
+                register(itemList, "dieselsuit_boots", () -> new ItemArmorDiesel(HBMArmorMats.DIESEL, ArmorItem.Type.BOOTS, new Item.Properties(), HBMFluids.DIESEL.source().get(), 64_000, 500, 50, 1).cloneStats((ItemArmorFSB) DIESEL.HELMET.get())));
         AJR = new Suit(register(standaloneModels, "ajr_helmet", () -> new ItemArmorAJR(HBMArmorMats.AJR, ArmorItem.Type.HELMET, new Item.Properties(),2500000, 10000, 2000, 25)
                     .enableVATS(true)
                     .setHasGeigerSound(true)

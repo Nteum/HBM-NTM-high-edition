@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Deprecated
 public abstract class FluidTrait {
 	
 	public static List<Class<? extends FluidTrait>> traitList = new ArrayList();

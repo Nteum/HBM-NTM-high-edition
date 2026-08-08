@@ -2,7 +2,7 @@ package com.hbm.blockentity.machine.icf;
 
 import com.hbm.HBMLang;
 import com.hbm.HBMKey;
-import com.hbm.Inventory.fluid.ModFluids;
+import com.hbm.core.contents.fluid.HBMFluids;
 import com.hbm.api.Mode;
 import com.hbm.api.fluid.BasicFluidHandler;
 import com.hbm.api.inventory.ModeBuilder;
@@ -91,14 +91,14 @@ public class ICFReactorBlockEntity extends DummyableBlockEntity implements MenuP
         this.fluids.getFluidTanks().set(0, new FluidTank(COOLANT_CAPACITY) {
             @Override
             public boolean isFluidValid(FluidStack stack) {
-                return stack.getFluid().isSame(ModFluids.COOLANT.source().get())
+                return stack.getFluid().isSame(HBMFluids.COOLANT.source().get())
                         || stack.getFluid().isSame(net.minecraft.world.level.material.Fluids.WATER);
             }
         });
         this.fluids.getFluidTanks().set(1, new FluidTank(COOLANT_CAPACITY) {
             @Override
             public boolean isFluidValid(FluidStack stack) {
-                return stack.getFluid().isSame(ModFluids.COOLANT_HOT.source().get());
+                return stack.getFluid().isSame(HBMFluids.COOLANT_HOT.source().get());
             }
         });
     }
@@ -148,13 +148,13 @@ public class ICFReactorBlockEntity extends DummyableBlockEntity implements MenuP
         FluidTank coldTank = fluids.getFluidTanks().get(0);
         FluidTank hotTank = fluids.getFluidTanks().get(1);
         if (stack.getItem() instanceof BucketItem bucket) {
-            if (bucket.getFluid().isSame(ModFluids.COOLANT.source().get())) {
+            if (bucket.getFluid().isSame(HBMFluids.COOLANT.source().get())) {
                 if (coldTank.fill(new FluidStack(bucket.getFluid(), 1000), IFluidHandler.FluidAction.SIMULATE) == 1000) {
                     coldTank.fill(new FluidStack(bucket.getFluid(), 1000), IFluidHandler.FluidAction.EXECUTE);
                     items.set(SLOT_COOLANT, Items.BUCKET.getDefaultInstance());
                     setChanged();
                 }
-            } else if (bucket.getFluid().isSame(ModFluids.COOLANT_HOT.source().get())) {
+            } else if (bucket.getFluid().isSame(HBMFluids.COOLANT_HOT.source().get())) {
                 if (hotTank.fill(new FluidStack(bucket.getFluid(), 1000), IFluidHandler.FluidAction.SIMULATE) == 1000) {
                     hotTank.fill(new FluidStack(bucket.getFluid(), 1000), IFluidHandler.FluidAction.EXECUTE);
                     items.set(SLOT_COOLANT, Items.BUCKET.getDefaultInstance());
@@ -246,7 +246,7 @@ public class ICFReactorBlockEntity extends DummyableBlockEntity implements MenuP
         if (drained.isEmpty()) {
             return;
         }
-        hot.fill(new FluidStack(ModFluids.COOLANT_HOT.source().get(), drained.getAmount()), IFluidHandler.FluidAction.EXECUTE);
+        hot.fill(new FluidStack(HBMFluids.COOLANT_HOT.source().get(), drained.getAmount()), IFluidHandler.FluidAction.EXECUTE);
         heat = Math.max(0L, heat - transferable * HEAT_PER_MB);
         setChanged();
     }

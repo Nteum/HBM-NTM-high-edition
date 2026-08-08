@@ -2,7 +2,7 @@ package com.hbm.blockentity.machine;
 
 import com.hbm.HBMKey;
 import com.hbm.HBMLang;
-import com.hbm.Inventory.fluid.ModFluids;
+import com.hbm.core.contents.fluid.HBMFluids;
 import com.hbm.api.Mode;
 import com.hbm.api.energy.BasicEnergyContainer;
 import com.hbm.api.energy.HybridEnergyStorage;
@@ -61,7 +61,7 @@ public class ElectricBoilerEntity extends BaseMachineBlockEntity {
                 .addTank(8_000, Mode.INPUT)
                 .addTank(16_000, Mode.OUTPUT);
         handler.getFluidTanks().get(WATER_TANK).setValidator(stack -> stack.getFluid().isSame(Fluids.WATER));
-        handler.getFluidTanks().get(STEAM_TANK).setValidator(stack -> stack.getFluid() == ModFluids.STEAM.source().get());
+        handler.getFluidTanks().get(STEAM_TANK).setValidator(stack -> stack.getFluid() == HBMFluids.STEAM.source().get());
         return handler;
     }
 
@@ -95,7 +95,7 @@ public class ElectricBoilerEntity extends BaseMachineBlockEntity {
         }
         energy.extract(toBoil * ENERGY_PER_WATER, false);
         water.drain(toBoil, IFluidHandler.FluidAction.EXECUTE);
-        steam.fill(new FluidStack(ModFluids.STEAM.source().get(), toBoil * WATER_TO_STEAM_RATIO),
+        steam.fill(new FluidStack(HBMFluids.STEAM.source().get(), toBoil * WATER_TO_STEAM_RATIO),
                 IFluidHandler.FluidAction.EXECUTE);
         running = true;
         return true;

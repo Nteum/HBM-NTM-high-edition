@@ -29,10 +29,10 @@ import org.joml.Matrix4f;
 @OnlyIn(Dist.CLIENT)
 public class BlackHoleRender extends EntityRenderer<EntityBlackHole> {
     public static BakedModel model_sphere;
-    public static final ResourceLocation BLACK_HOLE_TEXTURE = new ResourceLocation(HBM.MODID,"textures/models/black_hole.png");
-    public static final ResourceLocation SWIRL_TEXTURE = new ResourceLocation(HBM.MODID,"textures/entity/bhole.png");
-    public static final ResourceLocation DISC_TEXTURE = new ResourceLocation(HBM.MODID,"textures/entity/bhole_d.png");
-    public static final ResourceLocation DEFAULT_TEXTURE = new ResourceLocation(HBM.MODID,"textures/models/white_default_texture.png");
+    public static final ResourceLocation BLACK_HOLE_TEXTURE = HBM.rl("textures/models/black_hole.png");
+    public static final ResourceLocation SWIRL_TEXTURE = HBM.rl("textures/entity/bhole.png");
+    public static final ResourceLocation DISC_TEXTURE = HBM.rl("textures/entity/bhole_d.png");
+    public static final ResourceLocation DEFAULT_TEXTURE = HBM.rl("textures/models/white_default_texture.png");
     public BlackHoleRender(EntityRendererProvider.Context pContext) {
         super(pContext);
         ModelManager modelManager = Minecraft.getInstance().getModelManager();

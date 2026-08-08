@@ -2,6 +2,7 @@ package com.hbm.registries;
 
 import com.hbm.HBMLang;
 import com.hbm.Inventory.fluid.ModFluids;
+import com.hbm.core.contents.fluid.HBMFluids;
 import com.hbm.item.HBMCombat;
 import com.hbm.item.HBMWeapon;
 import com.hbm.item.icf.ItemICFPellet;
@@ -82,9 +83,9 @@ public class ModTabs {
                 addToolItems(output);
                 output.accept(ModBlocks.crate_iron.get());
                 output.accept(ModBlocks.crate_steel.get());
-                for (ModFluids.FluidRegistryHolder registryHolder : ModFluids.fluidList) {
-                    output.accept((BucketItem)registryHolder.bucket().get());
-                }
+//                for (ModFluids.FluidRegistryHolder registryHolder : ModFluids.fluidList) {
+//                    output.accept((BucketItem)registryHolder.bucket().get());
+//                }
             })
             .build());
     public static final RegistryObject<CreativeModeTab> TEMPLATE = CREATIVE_MODE_TABS.register("hbm_template", () -> CreativeModeTab.builder()

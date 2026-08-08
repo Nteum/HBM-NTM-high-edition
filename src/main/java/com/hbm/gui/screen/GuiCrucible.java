@@ -62,7 +62,7 @@ public class GuiCrucible extends BaseMachineGui<MenuCrucible> {
             this.btnAlloy2Store.setPosition(leftPos + 52, topPos + 30);
         });
         this.addRenderableWidget(this.btnRecipe);
-        this.recipePage.init(this.minecraft == null ? Minecraft.getInstance() : this.minecraft, new ResourceLocation("textures/gui/recipe_book.png"),
+        this.recipePage.init(this.minecraft == null ? Minecraft.getInstance() : this.minecraft, ResourceLocation.parse("textures/gui/recipe_book.png"),
                 147, 166, this.width, this.height, this.imageWidth / 2, CrucibleRecipe.recipes.values().stream().toList(), recipe -> true);
     }
 

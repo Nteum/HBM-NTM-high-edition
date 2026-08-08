@@ -8,6 +8,7 @@ import com.hbm.Inventory.material.HBMMatter;
 import com.hbm.block.interfaces.ToolType;
 import com.hbm.compat.legacy.LegacyItems;
 import com.hbm.config.ConfigLBSM;
+import com.hbm.core.contents.fluid.HBMFluids;
 import com.hbm.datagen.LanguageProvider;
 import com.hbm.datagen.model.ItemModelGen;
 import com.hbm.datagen.tag.ItemTagsGen;
@@ -76,6 +77,7 @@ public class ModItems {
     public static final String[] WIRE_MAT = new String[]{HBMKey.ALUMINIUM, HBMKey.COPPER, HBMKey.RED_COPPER, HBMKey.GOLD, HBMKey.TUNGSTEN, HBMKey.ADVANCED_ALLOY, HBMKey.SCHRABIDIUM, HBMKey.ZINC, HBMKey.MAGNETIZED_TUNGSTEN};
 
     static {
+        HBMFluids.registerItem(ITEMS);
         HBMWeapon.register(ITEMS);
         HBMCombat.register(ITEMS);
     }
@@ -354,8 +356,8 @@ public class ModItems {
                 // 我的评价是没办法，需要的参数太多了，一个一个传非常麻烦，只能手动了。
                 ResourceLocation rl = HBM.rl("ingot_schraranium");
                 itemModelGen.getBuilder(rl.toString()).parent(new ModelFile.UncheckedModelFile("item/generated"))
-                        .texture("layer0", new ResourceLocation(rl.getNamespace(), "item/" + rl.getPath()))
-                        .override().predicate(new ResourceLocation("condition_state"), 1.0f).model(itemModelGen.basicItem(HBM.rl("ingot_nikonium"))).end();
+                        .texture("layer0", ResourceLocation.fromNamespaceAndPath(rl.getNamespace(), "item/" + rl.getPath()))
+                        .override().predicate(ResourceLocation.parse("condition_state"), 1.0f).model(itemModelGen.basicItem(HBM.rl("ingot_nikonium"))).end();
             }).build();
     public static final RegistryObject<Item> INGOT_SCHRABIDIUM = parts("ingot_schrabidium", ()->new Item(new Item.Properties().rarity(Rarity.RARE)), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.SCHRABIDATE.ingot());
     public static final RegistryObject<Item> INGOT_SCHRABIDATE = parts("ingot_schrabidate", ()->new Item(new Item.Properties().rarity(Rarity.RARE)), HBMKey.ORDERLY_GEN_EXCEPT_FIRST, HBMMatters.SCHRABIDATE.ingot());
@@ -1035,9 +1037,9 @@ public class ModItems {
     public static final RegistryObject<Item> GUN_SUICIDE = add("gun_suicide", ()->new GunSuicide(new Item.Properties()), ModTabs.WEAPON.getKey(), HBMKey.BASIC_MODEL, HBMKey.ORDERLY_GEN_EXCEPT_FIRST);
     //    public static RegistryObject<Item> GLYPHID_SPAWN_EGG;
     //流体桶
-//    public static final RegistryObject<Item> bucket_irradiated_water = ITEMS.register("bucket_irradiated_water",()->new BucketItem(ModFluids.IRRADIATED_WATER_SOURCE_BLOCK,new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
-//    public static final RegistryObject<Item> bucket_irradiated_polluted = ITEMS.register("bucket_irradiated_polluted",()->new BucketItem(ModFluids.IRRADIATED_POLLUTED_SOURCE_BLOCK,new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
-//    public static final RegistryObject<Item> bucket_sulfuric_acid = ITEMS.register("bucket_sulfuric_acid",()->new BucketItem(ModFluids.SULFURIC_ACID_SOURCE_BLOCK,new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
+//    public static final RegistryObject<Item> bucket_irradiated_water = ITEMS.register("bucket_irradiated_water",()->new BucketItem(HBMFluids.IRRADIATED_WATER_SOURCE_BLOCK,new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
+//    public static final RegistryObject<Item> bucket_irradiated_polluted = ITEMS.register("bucket_irradiated_polluted",()->new BucketItem(HBMFluids.IRRADIATED_POLLUTED_SOURCE_BLOCK,new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
+//    public static final RegistryObject<Item> bucket_sulfuric_acid = ITEMS.register("bucket_sulfuric_acid",()->new BucketItem(HBMFluids.SULFURIC_ACID_SOURCE_BLOCK,new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
     //part
     public static final RegistryObject<Item> overlay_my_fluid = ITEMS.register("overlay_my_fluid",()->new Item(new Item.Properties()));
     public static final RegistryObject<Item> crucible_template = ITEMS.register("crucible_template",()->new Item(new Item.Properties()));

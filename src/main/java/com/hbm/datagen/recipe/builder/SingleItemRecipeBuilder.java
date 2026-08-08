@@ -85,7 +85,7 @@ public class SingleItemRecipeBuilder implements RecipeBuilder {
     }
 
     public void save(Consumer<FinishedRecipe> consumer, String path) {
-        save(consumer, new ResourceLocation(HBM.MODID, path));
+        save(consumer, HBM.rl( path));
     }
 
     @Override

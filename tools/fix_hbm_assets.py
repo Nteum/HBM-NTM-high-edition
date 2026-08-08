@@ -27,7 +27,7 @@ RESOURCE_ROOTS = [
 ASSET_SUBPATH = Path("assets") / "hbm"
 TEXTURE_ROOT = PROJECT_ROOT / "src" / "main" / "resources" / ASSET_SUBPATH / "textures"
 GENERATED_ITEM_MODEL_ROOT = PROJECT_ROOT / "src" / "generated" / "resources" / ASSET_SUBPATH / "models" / "item"
-MOD_FLUIDS_SRC = PROJECT_ROOT / "src" / "main" / "java" / "com" / "hbm" / "Inventory" / "fluid" / "ModFluids.java"
+MOD_FLUIDS_SRC = PROJECT_ROOT / "src" / "main" / "java" / "com" / "hbm" / "Inventory" / "fluid" / "HBMFluids.java"
 
 
 @dataclass

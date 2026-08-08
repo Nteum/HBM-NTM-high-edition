@@ -8,7 +8,7 @@ import net.minecraft.network.chat.Component;
 
 import java.io.IOException;
 import java.util.List;
-
+@Deprecated
 public class FT_Corrosive extends FluidTrait {
 	
 	/* 0-100 */

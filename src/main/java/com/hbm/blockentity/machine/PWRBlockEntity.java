@@ -126,7 +126,7 @@ public class PWRBlockEntity extends BlockEntity {
         super.load(tag);
         storedBlock = null;
         if (tag.contains(KEY_BLOCK)) {
-            ResourceLocation id = new ResourceLocation(tag.getString(KEY_BLOCK));
+            ResourceLocation id = ResourceLocation.parse(tag.getString(KEY_BLOCK));
             Block block = BuiltInRegistries.BLOCK.get(id);
             if (block != Blocks.AIR) {
                 storedBlock = block;

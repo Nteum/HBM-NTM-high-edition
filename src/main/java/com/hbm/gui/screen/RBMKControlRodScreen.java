@@ -11,7 +11,7 @@ import net.minecraft.world.entity.player.Inventory;
 
 public class RBMKControlRodScreen extends AbstractContainerScreen<RBMKControlRodMenu> {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(HBM.MODID, "textures/gui/reactors/gui_rbmk_control.png");
+    private static final ResourceLocation TEXTURE = HBM.rl( "textures/gui/reactors/gui_rbmk_control.png");
     private static final int GAUGE_X = 75;
     private static final int GAUGE_Y = 29;
     private static final int GAUGE_WIDTH = 8;

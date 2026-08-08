@@ -10,7 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
 public class DifurnaceGui extends AbstractContainerScreen<DifurnaceMenu> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(HBM.MODID , "textures/gui/difurnace_gui.png");
+    private static final ResourceLocation TEXTURE = HBM.rl( "textures/gui/difurnace_gui.png");
 
     public DifurnaceGui(DifurnaceMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);

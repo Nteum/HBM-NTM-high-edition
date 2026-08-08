@@ -26,6 +26,6 @@ public class Compat {
     }
 
     private static ResourceLocation rl(String domain, String name) {
-        return new ResourceLocation(domain, name);
+        return ResourceLocation.fromNamespaceAndPath(domain, name);
     }
 }

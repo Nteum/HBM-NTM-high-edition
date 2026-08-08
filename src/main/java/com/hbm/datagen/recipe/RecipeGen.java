@@ -75,7 +75,7 @@ public class RecipeGen extends RecipeProvider {
             builder = builder.define(tuple.a,tuple.b);
         }
         builder = builder.unlockedBy(RecipeProvider.getHasName(crit), RecipeProvider.has(crit));
-        builder.save(pwriter,new ResourceLocation(HBM.MODID, itemName(output)+"_"+recipeCnt++));
+        builder.save(pwriter,HBM.rl( itemName(output)+"_"+recipeCnt++));
     }
     //添加默认的无序配方（默认加入MISC组，并使用获得物品来解锁，通过输入物品来区分）
     private static void addShapelessRecipe(ItemLike output,int outnum,ItemLike crit,Object... input){
@@ -96,7 +96,7 @@ public class RecipeGen extends RecipeProvider {
             builder = builder.requires(tuple.a,tuple.b);
         }
         builder = builder.unlockedBy(RecipeProvider.getHasName(crit), RecipeProvider.has(crit));
-        builder.save(pwriter,new ResourceLocation(HBM.MODID, itemName(output)+"_"+recipeCnt++));
+        builder.save(pwriter,HBM.rl( itemName(output)+"_"+recipeCnt++));
     }
     private static class TwoTuple<A,B>{
         A a;

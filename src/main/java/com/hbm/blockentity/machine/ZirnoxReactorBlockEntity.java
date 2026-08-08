@@ -1,7 +1,7 @@
 package com.hbm.blockentity.machine;
 
 import com.hbm.HBMKey;
-import com.hbm.Inventory.fluid.ModFluids;
+import com.hbm.core.contents.fluid.HBMFluids;
 import com.hbm.api.Mode;
 import com.hbm.api.fluid.BasicFluidHandler;
 import com.hbm.block.machine.BlockZirnoxReactor;
@@ -81,13 +81,13 @@ public class ZirnoxReactorBlockEntity extends DummyableBlockEntity {
         this.fluidHandler.getFluidTanks().set(0, new FluidTank(STEAM_CAPACITY) {
             @Override
             public boolean isFluidValid(FluidStack stack) {
-                return stack.getFluid().isSame(ModFluids.SUPERHOT_STEAM.source().get());
+                return stack.getFluid().isSame(HBMFluids.SUPERHOTSTEAM.source().get());
             }
         });
         this.fluidHandler.getFluidTanks().set(1, new FluidTank(CO2_CAPACITY) {
             @Override
             public boolean isFluidValid(FluidStack stack) {
-                return stack.getFluid().isSame(ModFluids.CARBON_DIOXIDE.source().get());
+                return stack.getFluid().isSame(HBMFluids.CARBONDIOXIDE.source().get());
             }
         });
         this.fluidHandler.getFluidTanks().set(2, new FluidTank(WATER_CAPACITY) {
@@ -104,7 +104,7 @@ public class ZirnoxReactorBlockEntity extends DummyableBlockEntity {
             return stack.getItem() instanceof ItemZirnoxRod;
         }
         if (slot == SLOT_CO2_IN) {
-            return isFluidContainer(stack, ModFluids.CARBON_DIOXIDE.source().get());
+            return isFluidContainer(stack, HBMFluids.CARBONDIOXIDE.source().get());
         }
         if (slot == SLOT_WATER_IN) {
             return isFluidContainer(stack, Fluids.WATER);
@@ -172,7 +172,7 @@ public class ZirnoxReactorBlockEntity extends DummyableBlockEntity {
         int produced = Math.min(drained, space);
 
         fluidHandler.getFluidTanks().get(2).drain(produced, net.minecraftforge.fluids.capability.IFluidHandler.FluidAction.EXECUTE);
-        fluidHandler.getFluidTanks().get(0).fill(new FluidStack(ModFluids.SUPERHOT_STEAM.source().get(), produced),
+        fluidHandler.getFluidTanks().get(0).fill(new FluidStack(HBMFluids.SUPERHOTSTEAM.source().get(), produced),
                 net.minecraftforge.fluids.capability.IFluidHandler.FluidAction.EXECUTE);
     }
 

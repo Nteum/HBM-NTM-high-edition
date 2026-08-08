@@ -1,6 +1,6 @@
 package com.hbm.block.decoriate;
 
-import com.hbm.Inventory.fluid.ModFluids;
+import com.hbm.core.contents.fluid.HBMFluids;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -30,7 +30,7 @@ public class BlockOilOre extends BlockOre {
             return super.use(state, level, pos, player, hand, hit);
         }
         if (!level.isClientSide) {
-            ItemStack filled = new ItemStack(ModFluids.OIL.bucket().get());
+            ItemStack filled = new ItemStack(HBMFluids.OIL.bucket().get());
             if (!player.getAbilities().instabuild) {
                 if (held.getCount() == 1) {
                     player.setItemInHand(hand, filled);

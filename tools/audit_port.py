@@ -148,7 +148,7 @@ def collect_new_sets(new_root: Path) -> AuditSets:
         new_blocks.update(re.findall(r"\bnew\s+BlockBuilder\s*\(\s*\"([^\"]+)\"", text))
 
     # Fluids are mostly defined in ModFluids via ExtendedFluidType("name", ...)
-    mod_fluids = new_java / "com/hbm/Inventory/fluid/ModFluids.java"
+    mod_fluids = new_java / "com/hbm/Inventory/fluid/HBMFluids.java"
     new_fluids.update(_parse_extended_fluid_names(mod_fluids))
 
     return AuditSets(items=new_items, blocks=new_blocks, fluids=new_fluids)

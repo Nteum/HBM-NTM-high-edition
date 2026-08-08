@@ -12,7 +12,7 @@ import net.minecraft.world.entity.player.Inventory;
 
 public class WoodBurnerScreen extends AbstractContainerScreen<WoodBurnerMenu> {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(HBM.MODID, "textures/gui/wood_burner.png");
+    private static final ResourceLocation TEXTURE = HBM.rl( "textures/gui/wood_burner.png");
 
     public WoodBurnerScreen(WoodBurnerMenu menu, Inventory inventory, Component title) {
         super(menu, inventory, title);

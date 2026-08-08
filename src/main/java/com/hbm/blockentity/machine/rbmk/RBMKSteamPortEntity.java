@@ -1,7 +1,7 @@
 package com.hbm.blockentity.machine.rbmk;
 
 import com.hbm.HBMKey;
-import com.hbm.Inventory.fluid.ModFluids;
+import com.hbm.core.contents.fluid.HBMFluids;
 import com.hbm.api.Mode;
 import com.hbm.api.fluid.BasicFluidHandler;
 import com.hbm.block.machine.rbmk.BlockRBMKBase;
@@ -40,7 +40,7 @@ public class RBMKSteamPortEntity extends BaseMachineBlockEntity {
         this.slotModes = java.util.List.of();
         this.capabilitiesContent.addCapability(ForgeCapabilities.FLUID_HANDLER, fluids);
         final FluidTank tank = this.fluids.getFluidTanks().get(0);
-        tank.setValidator(stack -> isInlet() ? isAcceptedInput(stack) : stack.getFluid().isSame(ModFluids.STEAM.source().get()));
+        tank.setValidator(stack -> isInlet() ? isAcceptedInput(stack) : stack.getFluid().isSame(HBMFluids.STEAM.source().get()));
     }
 
     public void serverTick() {
@@ -185,7 +185,7 @@ public class RBMKSteamPortEntity extends BaseMachineBlockEntity {
     }
 
     private boolean isAcceptedInput(final FluidStack stack) {
-        return stack.getFluid().isSame(Fluids.WATER) || stack.getFluid().isSame(ModFluids.IRRADIATED_WATER.source().get());
+        return stack.getFluid().isSame(Fluids.WATER) || stack.getFluid().isSame(HBMFluids.IRRADIATED_WATER.source().get());
     }
 
     private boolean isInlet() {

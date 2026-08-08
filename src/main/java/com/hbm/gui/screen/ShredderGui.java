@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ShredderGui extends AbstractContainerScreen<ShredderMenu> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(HBM.MODID, "textures/gui/gui_shredder.png");
+    private static final ResourceLocation TEXTURE = HBM.rl( "textures/gui/gui_shredder.png");
     private static final int ENERGY_BAR_HEIGHT = 88;
 
     public ShredderGui(ShredderMenu menu, Inventory playerInventory, Component title) {

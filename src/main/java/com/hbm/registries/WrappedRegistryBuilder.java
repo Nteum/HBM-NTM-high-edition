@@ -192,7 +192,7 @@ public abstract class WrappedRegistryBuilder<T> implements Supplier<T>{
         }
 
         private static RegistryObject<Item> findExistingItem(String name) {
-            ResourceLocation id = new ResourceLocation(HBM.MODID, name);
+            ResourceLocation id = HBM.rl( name);
             for (RegistryObject<Item> entry : ModItems.ITEMS.getEntries()) {
                 ResourceLocation entryId = entry.getId();
                 if (id.equals(entryId)) {
@@ -380,7 +380,7 @@ public abstract class WrappedRegistryBuilder<T> implements Supplier<T>{
 //        }
 //
 //        private static RegistryObject<Item> findExistingItem(String name) {
-//            ResourceLocation id = new ResourceLocation(HBM.MODID, name);
+//            ResourceLocation id = HBM.rl( name);
 //            for (RegistryObject<Item> entry : ModItems.ITEMS.getEntries()) {
 //                ResourceLocation entryId = entry.getId();
 //                if (id.equals(entryId)) {

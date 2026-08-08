@@ -23,7 +23,7 @@ import org.joml.Matrix4f;
  */
 public class TokamakRenderer implements BlockEntityRenderer<TokamakControllerBlockEntity> {
 
-    private static final ResourceLocation PLASMA_TEX = new ResourceLocation(HBM.MODID, "textures/effects/tokamak_plasma.png");
+    private static final ResourceLocation PLASMA_TEX = HBM.rl( "textures/effects/tokamak_plasma.png");
 
     public TokamakRenderer(BlockEntityRendererProvider.Context ctx) {}
 

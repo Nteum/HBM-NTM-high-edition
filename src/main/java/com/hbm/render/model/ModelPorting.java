@@ -2,6 +2,7 @@
 // 放在 client-only 包里
 package com.hbm.render.model;
 
+import com.hbm.HBM;
 import net.minecraftforge.client.event.ModelEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.api.distmarker.Dist;
@@ -25,16 +26,16 @@ public final class ModelPorting {
     // 旧->新模型 ID 映射（OBJ/JSON 都可用）
     private static final Map<ResourceLocation, ResourceLocation> MODEL_ID_REMAP = Map.ofEntries(
         // 例：旧 obj 名迁到新路径
-        Map.entry(new ResourceLocation(MODID, "block/old_crucible"),
-                  new ResourceLocation(MODID, "block/crucible/crucible")),
-        Map.entry(new ResourceLocation(MODID, "item/old_fatman"),
-                  new ResourceLocation(MODID, "block/bomb/fat_man"))
+        Map.entry(HBM.rl("block/old_crucible"),
+                  HBM.rl("block/crucible/crucible")),
+        Map.entry(HBM.rl("item/old_fatman"),
+                  HBM.rl("block/bomb/fat_man"))
     );
 
     // 道具“烘焙后”替换为 inventory 变体（把 OBJ 的 baked 放到物品模型位）
     private static final Map<ResourceLocation, ResourceLocation> ITEM_INVENTORY_BIND = Map.ofEntries(
-        Map.entry(new ResourceLocation(MODID, "item/mp_warhead_15_balefire"),
-                  new ResourceLocation(MODID, "item/mp_warhead_15_balefire"))
+        Map.entry(HBM.rl("item/mp_warhead_15_balefire"),
+                  HBM.rl("item/mp_warhead_15_balefire"))
     );
 
     private ModelPorting() {}

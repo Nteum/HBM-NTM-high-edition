@@ -251,7 +251,7 @@ public class BlastFurnaceRecipe implements Recipe<Container> {
     public static void registerRecipe(Consumer<FinishedRecipe> pwriter, ItemLike input1,ItemLike input2,ItemStack output){
         BlastFurnaceRecipe.BlastFurnaceRecipeBuilder.blast(output.getItem(),output.getCount())
                 .input(input1,1).input(input2,1)
-                .save(pwriter,new ResourceLocation(HBM.MODID,HBMKey.BLAST + "_" + recipeCnt++));
+                .save(pwriter,ResourceLocation.fromNamespaceAndPath(HBM.MODID,HBMKey.BLAST + "_" + recipeCnt++));
     }
 
 }

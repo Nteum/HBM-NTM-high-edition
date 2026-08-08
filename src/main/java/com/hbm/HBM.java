@@ -4,6 +4,7 @@ import com.hbm.capabilities.network.TransmitterNetworkRegistry;
 import com.hbm.config.CommonConfig;
 import com.hbm.compat.bigexplosives.BigExplosivesMod;
 import com.hbm.compat.ballistix.BallistixCompat;
+import com.hbm.core.contents.fluid.HBMFluids;
 import com.hbm.datagen.damageSource.HBMDamageTagProvider;
 import com.hbm.datagen.json.HBMJsonProvider;
 import com.hbm.datagen.levelgen.HBMWorldGenProvider;
@@ -22,7 +23,7 @@ import com.hbm.effect.ModEffects;
 import com.hbm.main.ClientEventHandler;
 import com.hbm.main.ServerEventHandler;
 import com.hbm.registries.*;
-import com.hbm.Inventory.fluid.ModFluids;
+import com.hbm.core.contents.fluid.HBMFluids;
 import com.hbm.core.network.HBMNetwork;
 import com.hbm.particle.ModParticleTypes;
 import com.hbm.blockentity.HBMTiles;
@@ -78,12 +79,12 @@ public class HBM {
     public static final Path    CONFIG_PATH = FMLPaths.CONFIGDIR.get().resolve(MODID + "Configs");
     public static final Path    RECIPE_PATH = FMLPaths.CONFIGDIR.get().resolve(MODID + "Recipes");
 
-    public HBM() {
+    public HBM(FMLJavaModLoadingContext context) {
         //forge事件总线
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.addListener(this::onServerStopped);
         //模组事件总线
-        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        IEventBus modEventBus = context.getModEventBus();
         modEventBus.addListener(this::commonSetup);
         modEventBus.addListener(this::onClientSetup);
         modEventBus.addListener(this::onPostLoad);
@@ -93,15 +94,17 @@ public class HBM {
         ServerEventHandler.registerEvents(MinecraftForge.EVENT_BUS, modEventBus);
 
         //模组内容的注册
+        HBMFluids.register(modEventBus);
         ModEntityType.ENTITY_TYPES.register(modEventBus);
-        ModItems.register(modEventBus);
+//        HBMFluids.registerFluid(modEventBus);
         ModBlocks.register(modEventBus);
+        ModItems.register(modEventBus);
         ModTabs.CREATIVE_MODE_TABS.register(modEventBus);
 //        ModBlockEntityType.REGISTER.register(modEventBus);
         HBMTiles.registerBus(modEventBus);
         ModRecipes.RECIPE_TYPE.register(modEventBus);
         ModRecipes.SERIALIZER.register(modEventBus);
-        ModFluids.register(modEventBus);
+//        HBMFluids.register(modEventBus);
         ModParticleTypes.PARTICLE_TYPES.register(modEventBus);
         ModSounds.SOUNDS.register(modEventBus);
         ModFeatures.register(modEventBus);
@@ -113,7 +116,7 @@ public class HBM {
         BallistixCompat.register(modEventBus);
         HBMChunkGenerators.register(modEventBus);
 
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CommonConfig.CONFIG_SPEC, "hbm-common.toml");
+        context.registerConfig(ModConfig.Type.COMMON, CommonConfig.CONFIG_SPEC, "hbm-common.toml");
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {

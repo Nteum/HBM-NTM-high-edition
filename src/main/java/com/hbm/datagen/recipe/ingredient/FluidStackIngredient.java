@@ -101,7 +101,7 @@ public class FluidStackIngredient {
             int count = json.get(HBMKey.VOLUME).getAsInt();
             return FluidStackIngredient.of(new FluidStack(fluid,count));
         } else if (json.has(HBMKey.TAG)) {
-            ResourceLocation resourcelocation = new ResourceLocation(GsonHelper.getAsString(json, HBMKey.TAG));
+            ResourceLocation resourcelocation = ResourceLocation.parse(GsonHelper.getAsString(json, HBMKey.TAG));
             TagKey<Fluid> tagkey = TagKey.create(Registries.FLUID, resourcelocation);
             int count = json.get(HBMKey.VOLUME).getAsInt();
             return FluidStackIngredient.of(tagkey,count);

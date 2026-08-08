@@ -15,7 +15,7 @@ import java.util.Optional;
 
 public class RBMKFuelChannelScreen extends AbstractContainerScreen<RBMKFuelChannelMenu> {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(HBM.MODID, "textures/gui/reactors/gui_rbmk_element.png");
+    private static final ResourceLocation TEXTURE = HBM.rl( "textures/gui/reactors/gui_rbmk_element.png");
 
     private static final int COOLANT_BAR_X = 36;
     private static final int COOLANT_BAR_Y = 21;

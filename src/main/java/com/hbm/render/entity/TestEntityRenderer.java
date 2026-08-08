@@ -26,7 +26,7 @@ public class TestEntityRenderer extends EntityRenderer {
     //这个方法返回一个ResourceLocation对象，指明了飞行剑实体的纹理文件位置。
     @Override
     public ResourceLocation getTextureLocation(Entity pEntity) {
-        return new ResourceLocation(HBM.MODID, "textures/entity/test_entity_texture.png");
+        return HBM.rl( "textures/entity/test_entity_texture.png");
     }
     //重写了render方法，这个方法定义了实体在游戏中的渲染逻辑。
     @Override

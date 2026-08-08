@@ -1,6 +1,6 @@
 package com.hbm.item.icf;
 
-import com.hbm.Inventory.fluid.ModFluids;
+import com.hbm.core.contents.fluid.HBMFluids;
 
 import com.hbm.registries.ModItems;
 import net.minecraft.ChatFormatting;
@@ -42,13 +42,13 @@ public class ItemICFPellet extends Item {
     static {
         registerFuel(FuelType.DEUTERIUM, ModItems.CELL_DEUTERIUM);
         registerFuel(FuelType.TRITIUM, ModItems.CELL_TRITIUM);
-        registerFluid(FuelType.HYDROGEN, ModFluids.HYDROGEN.source());
-        registerFluid(FuelType.DEUTERIUM, ModFluids.DEUTERIUM.source());
-        registerFluid(FuelType.TRITIUM, ModFluids.TRITIUM.source());
-        registerFluid(FuelType.HELIUM3, ModFluids.HELIUM3.source());
-        registerFluid(FuelType.HELIUM4, ModFluids.HELIUM4.source());
-        registerFluid(FuelType.OXYGEN, ModFluids.OXYGEN.source());
-        registerFluid(FuelType.CHLORINE, ModFluids.CHLORINE.source());
+        registerFluid(FuelType.HYDROGEN, HBMFluids.HYDROGEN.source());
+        registerFluid(FuelType.DEUTERIUM, HBMFluids.DEUTERIUM.source());
+        registerFluid(FuelType.TRITIUM, HBMFluids.TRITIUM.source());
+        registerFluid(FuelType.HELIUM3, HBMFluids.HELIUM3.source());
+        registerFluid(FuelType.HELIUM4, HBMFluids.HELIUM4.source());
+        registerFluid(FuelType.OXYGEN, HBMFluids.OXYGEN.source());
+        registerFluid(FuelType.CHLORINE, HBMFluids.CHLORINE.source());
         registerFuel(FuelType.LITHIUM, ModItems.LITHIUM);
         registerFuel(FuelType.BERYLLIUM, ModItems.INGOT_BERYLLIUM);
         registerFuel(FuelType.BORON, ModItems.INGOT_BORON);

@@ -2,7 +2,7 @@ package com.hbm.gui.screen.widget;
 
 import com.hbm.HBMLang;
 import com.hbm.Inventory.fluid.ExtendedFluidType;
-import com.hbm.Inventory.fluid.ModFluids;
+import com.hbm.core.contents.fluid.HBMFluids;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.network.chat.Component;
@@ -84,10 +84,10 @@ public class BarFluid extends BarProgress{
         if (fluid.getFluidType() instanceof ExtendedFluidType fluidType)
             return fluidType.tintColor;
         else if (fluid.isSame(Fluids.WATER))
-            return ModFluids.water.tintColor;
+            return HBMFluids.WATER.type().get().getTint();
         else if (fluid.isSame(Fluids.LAVA))
-            return ModFluids.lava.tintColor;
+            return HBMFluids.LAVA.type().get().getTint();
         else
-            return ModFluids.milk.tintColor;
+            return HBMFluids.MILK.type().get().getTint();
     }
 }

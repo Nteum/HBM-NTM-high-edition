@@ -87711,7 +87711,7 @@
                     "charOffset": 15977,
                     "charLength": 344,
                     "snippet": {
-                      "text": "    @SubscribeEvent\n    public static void registerColorHandlerItem(RegisterColorHandlersEvent.Item event){\n        /** 给物品添加颜色 */\n        // 流体桶的染色\n        FluidBucketItem[] fluidBucketItems = ModFluids.fluidList.stream().map(holder -> holder.bucket().get()).filter(bucket -> bucket instanceof FluidBucketItem).toArray(FluidBucketItem[]::new);"
+                      "text": "    @SubscribeEvent\n    public static void registerColorHandlerItem(RegisterColorHandlersEvent.Item event){\n        /** 给物品添加颜色 */\n        // 流体桶的染色\n        FluidBucketItem[] fluidBucketItems = HBMFluids.fluidList.stream().map(holder -> holder.bucket().get()).filter(bucket -> bucket instanceof FluidBucketItem).toArray(FluidBucketItem[]::new);"
                     },
                     "sourceLanguage": "JAVA"
                   }

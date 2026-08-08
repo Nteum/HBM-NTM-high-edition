@@ -4,7 +4,7 @@ import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
 import com.hbm.HBM;
 import com.hbm.HBMKey;
-import com.hbm.Inventory.fluid.ModFluids;
+import com.hbm.core.contents.fluid.HBMFluids;
 import com.hbm.Inventory.material.HBMMatForm;
 import com.hbm.api.resource.OreType;
 import com.hbm.registries.OreDictManager.DictFrame;

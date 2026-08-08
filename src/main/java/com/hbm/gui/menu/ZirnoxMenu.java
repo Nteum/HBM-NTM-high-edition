@@ -3,7 +3,7 @@ package com.hbm.gui.menu;
 import com.hbm.gui.HBMMenus;
 import com.hbm.gui.menu.slot.OutputSlot;
 import com.hbm.item.zirnox.ItemZirnoxRod;
-import com.hbm.Inventory.fluid.ModFluids;
+import com.hbm.core.contents.fluid.HBMFluids;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -88,7 +88,7 @@ public class ZirnoxMenu extends BaseMachineMenu {
                     if (!moveItemStackTo(current, SLOT_ROD_START, SLOT_ROD_END, false)) {
                         return ItemStack.EMPTY;
                     }
-                } else if (isFluidContainer(current, ModFluids.CARBON_DIOXIDE.source().get())) {
+                } else if (isFluidContainer(current, HBMFluids.CARBONDIOXIDE.source().get())) {
                     if (!moveItemStackTo(current, SLOT_CO2_IN, SLOT_CO2_IN + 1, false)) {
                         return ItemStack.EMPTY;
                     }

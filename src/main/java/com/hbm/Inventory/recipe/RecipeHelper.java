@@ -156,7 +156,7 @@ public class RecipeHelper {
 
         // 1. 获取流体种类
         String fluidId = GsonHelper.getAsString(json, "fluid");
-        Fluid fluid = ForgeRegistries.FLUIDS.getValue(new ResourceLocation(fluidId));
+        Fluid fluid = ForgeRegistries.FLUIDS.getValue(ResourceLocation.parse(fluidId));
         if (fluid == null || fluid == Fluids.EMPTY) {
             throw new JsonSyntaxException("Unknown fluid '" + fluidId + "'");
         }

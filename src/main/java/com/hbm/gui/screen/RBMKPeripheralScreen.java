@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 public class RBMKPeripheralScreen extends AbstractRBMKScreen<RBMKPeripheralMenu> {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(HBM.MODID, "textures/gui/reactors/gui_rbmk_console.png");
+    private static final ResourceLocation TEXTURE = HBM.rl( "textures/gui/reactors/gui_rbmk_console.png");
     private static final int CONSOLE_WIDTH = 244;
     private static final int CONSOLE_HEIGHT = 172;
     private static final int GRID_ORIGIN_X = 86;

@@ -81,8 +81,8 @@ public class BaseObjModel extends Model {
                 JsonObject jsonObject = gson.fromJson(reader, JsonObject.class);
                 ObjModel objModel = ObjLoader.INSTANCE.read(jsonObject, null);
                 Map<String, ResourceLocation> textureMap = new HashMap<>();
-                if (jsonObject.has("texture0")) textureMap.put("#texture0", new ResourceLocation(jsonObject.get("texture0").getAsString()));
-                if (jsonObject.has("#layer0")) textureMap.put("#layer0", new ResourceLocation(jsonObject.get("layer0").getAsString()));
+                if (jsonObject.has("texture0")) textureMap.put("#texture0", ResourceLocation.parse(jsonObject.get("texture0").getAsString()));
+                if (jsonObject.has("#layer0")) textureMap.put("#layer0", ResourceLocation.parse(jsonObject.get("layer0").getAsString()));
                 CompositeRenderable renderable = objModel.bakeRenderable(StandaloneGeometryBakingContext.create(textureMap));
                 BaseObjModel model = create(renderable, renderType);
                 model.setModelIdentifier(jsonPath.toString());

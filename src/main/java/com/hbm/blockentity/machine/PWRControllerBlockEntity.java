@@ -11,7 +11,7 @@ import com.hbm.gui.menu.PWRMenu;
 import com.hbm.item.pwr.ItemPWRFuel;
 import com.hbm.reactor.pwr.PWRFuelType;
 import com.hbm.registries.ModBlocks;
-import com.hbm.Inventory.fluid.ModFluids;
+import com.hbm.core.contents.fluid.HBMFluids;
 import com.hbm.Inventory.fluid.ExtendedFluidType;
 import com.hbm.Inventory.fluid.trait.FT_Heatable;
 import com.hbm.Inventory.fluid.trait.FT_Heatable.HeatingStep;
@@ -127,13 +127,13 @@ public class PWRControllerBlockEntity extends BaseMachineBlockEntity {
         this.fluidHandler.getFluidTanks().set(0, new FluidTank(COOLANT_CAPACITY) {
             @Override
             public boolean isFluidValid(final FluidStack stack) {
-                return stack.getFluid().isSame(ModFluids.COOLANT.source().get());
+                return stack.getFluid().isSame(HBMFluids.COOLANT.source().get());
             }
         });
         this.fluidHandler.getFluidTanks().set(1, new FluidTank(COOLANT_CAPACITY) {
             @Override
             public boolean isFluidValid(final FluidStack stack) {
-                return stack.getFluid().isSame(ModFluids.COOLANT_HOT.source().get());
+                return stack.getFluid().isSame(HBMFluids.COOLANT_HOT.source().get());
             }
         });
         recalcCoreCapacity();
@@ -291,7 +291,7 @@ public class PWRControllerBlockEntity extends BaseMachineBlockEntity {
 
         hullHeat -= (long) step.heatReq * cycles;
         fluidHandler.getFluidTanks().get(0).drain(step.amountReq * cycles, net.minecraftforge.fluids.capability.IFluidHandler.FluidAction.EXECUTE);
-        hotTank.fill(new FluidStack(ModFluids.COOLANT_HOT.source().get(), step.amountProduced * cycles), net.minecraftforge.fluids.capability.IFluidHandler.FluidAction.EXECUTE);
+        hotTank.fill(new FluidStack(HBMFluids.COOLANT_HOT.source().get(), step.amountProduced * cycles), net.minecraftforge.fluids.capability.IFluidHandler.FluidAction.EXECUTE);
     }
 
     private int getRodCountForCoolant() {

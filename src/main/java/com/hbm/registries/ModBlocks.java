@@ -51,6 +51,7 @@ import com.hbm.block.weapon.NukeBoy;
 import com.hbm.block.weapon.NukeCustom;
 import com.hbm.block.weapon.NukeFat;
 import com.hbm.config.ConfigBomb;
+import com.hbm.core.contents.fluid.HBMFluids;
 import com.hbm.datagen.json.HBMJsonProvider;
 import com.hbm.datagen.LanguageProvider;
 import com.hbm.datagen.loot.BlockLootGen;
@@ -109,6 +110,9 @@ public class ModBlocks {
     public static final List<WrappedBlockRegistryBuilder> blockList = new ArrayList<>();
     private static final List<RegistryObject<Block>> legacyMachineTagBlocks = new ArrayList<>();
 
+    static {
+        HBMFluids.registerBlock(BLOCKS);
+    }
     //机械
     public static final RegistryObject<Block> CHEMPLANT = add("chemplant", ()->new BlockChemplant(BlockBehaviour.Properties.of().strength(5.0F).explosionResistance(30.0F)), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, "Chemical Plant", HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
     public static final RegistryObject<Block> PLASTIC_BARREL = add("barrel_plastic", ()->new BlockFluidBarrel(BlockBehaviour.Properties.of().strength(2.0F).explosionResistance(5.0F).requiresCorrectToolForDrops().sound(SoundType.STONE), BlockFluidBarrel.BarrelProperties.of().capacity(12000)), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, "Safe Barrel™", HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);

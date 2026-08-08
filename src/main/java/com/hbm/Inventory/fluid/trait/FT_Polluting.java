@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
-
+@Deprecated
 public class FT_Polluting extends FluidTrait {
 
 	//original draft had both of them inside a hashmap for the release type but honestly handling hash maps in hash maps adds more complexity than it removes
