@@ -1,0 +1,9 @@
+{
+  "feature": "hbm:meteorite",
+  "placement": [
+    {
+      "type": "minecraft:rarity_filter",
+      "chance": 50
+    }
+  ]
+}
