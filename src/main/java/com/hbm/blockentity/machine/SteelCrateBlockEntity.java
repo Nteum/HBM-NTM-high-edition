@@ -1,6 +1,6 @@
 package com.hbm.blockentity.machine;
 
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.gui.menu.SteelCrateMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -16,7 +16,7 @@ public class SteelCrateBlockEntity extends IronCrateBlockEntity {
     private static final int SLOT_COUNT = 54;
 
     public SteelCrateBlockEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntityType.STEEL_CRATE_ENTITY.get(), pos, state, SLOT_COUNT);
+        super(HBMTiles.STEEL_CRATE_ENTITY.get(), pos, state, SLOT_COUNT);
     }
 
     @Override

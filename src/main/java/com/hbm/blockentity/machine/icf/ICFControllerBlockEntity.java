@@ -8,7 +8,7 @@ import com.hbm.api.energy.ProxyEnergyHandler;
 import com.hbm.api.energy.TransmitUtils;
 import com.hbm.block.base.BaseMachineBlock;
 import com.hbm.block.machine.icf.BlockICFReactor;
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.blockentity.base.BaseMachineBlockEntity;
 import com.hbm.registries.HBMCaps;
 import net.minecraft.core.BlockPos;
@@ -43,7 +43,7 @@ public class ICFControllerBlockEntity extends BaseMachineBlockEntity {
     private int scanCooldown = 10;
 
     public ICFControllerBlockEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntityType.ICF_CONTROLLER_ENTITY.get(), pos, state);
+        super(HBMTiles.ICF_CONTROLLER_ENTITY.get(), pos, state);
         this.items = NonNullList.withSize(1, ItemStack.EMPTY);
         this.capabilitiesContent.addCapability(ForgeCapabilities.ITEM_HANDLER, this);
         this.capabilitiesContent.addCapability(HBMCaps.LONG_ENERGY, new ProxyEnergyHandler(this.energy));

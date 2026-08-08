@@ -1,7 +1,7 @@
 package com.hbm.gui.menu;
 
 import com.hbm.blockentity.logistic.TileConveyorExtractor;
-import com.hbm.gui.ModMenuType;
+import com.hbm.gui.HBMMenus;
 import com.hbm.gui.menu.slot.FilterSlot;
 import com.hbm.utils.WorldUtils;
 import net.minecraft.client.Minecraft;
@@ -17,7 +17,7 @@ import net.minecraftforge.items.SlotItemHandler;
 
 public class MenuConveyorExtractor extends BaseMachineMenu<TileConveyorExtractor>{
     public MenuConveyorExtractor(int pContainerId, Inventory playerInventory, TileConveyorExtractor blockEntity, ContainerData containerData1){
-        super(ModMenuType.MENU_CONVEYOR_EXTRACTOR.get(),pContainerId, playerInventory, blockEntity, containerData1);
+        super(HBMMenus.MENU_CONVEYOR_EXTRACTOR.get(),pContainerId, playerInventory, blockEntity, containerData1);
         ItemStackHandler items = this.be.getItems();
         this.slotNum = 20;
         // 过滤器

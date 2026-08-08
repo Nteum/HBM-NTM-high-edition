@@ -1,7 +1,7 @@
 package com.hbm.gui.menu;
 
 import com.hbm.blockentity.machine.GasTurbineBlockEntity;
-import com.hbm.gui.ModMenuType;
+import com.hbm.gui.HBMMenus;
 import com.hbm.gui.menu.slot.BatterySlot;
 import com.hbm.registries.ModTags;
 import net.minecraft.world.Container;
@@ -35,7 +35,7 @@ public class GasTurbineMenu extends BaseMachineMenu implements ITileAccess {
     }
 
     public GasTurbineMenu(int containerId, Inventory inventory, Container container, ContainerData data) {
-        super(ModMenuType.GAS_TURBINE_MENU.get(), containerId, container, data);
+        super(HBMMenus.GAS_TURBINE_MENU.get(), containerId, container, data);
         if (container instanceof GasTurbineBlockEntity turbine) {
             this.blockEntity = turbine;
         }

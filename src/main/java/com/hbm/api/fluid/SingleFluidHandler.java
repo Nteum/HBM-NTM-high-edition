@@ -1,6 +1,7 @@
 package com.hbm.api.fluid;
 
 import com.hbm.HBMKey;
+import com.hbm.api.IContentsListener;
 import com.hbm.api.Mode;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.BucketItem;
@@ -100,5 +101,10 @@ public class SingleFluidHandler implements IExtendedFluidHandler {
             }
         }
         return itemStack;
+    }
+
+    @Override
+    public void onContentsChanged() {
+
     }
 }

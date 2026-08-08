@@ -1,6 +1,6 @@
 package com.hbm.gui.menu;
 
-import com.hbm.gui.ModMenuType;
+import com.hbm.gui.HBMMenus;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -16,7 +16,7 @@ public class DifurnaceMenu  extends AbstractContainerMenu {
         this(pContainerId,pPlayerInventory,new SimpleContainer(4),new SimpleContainerData(2));
     }
     public DifurnaceMenu(int pContainerId, Inventory pPlayerInventory,Container inContainer, ContainerData containerData1){
-        super(ModMenuType.DIFURNACE_MENU.get(), pContainerId);
+        super(HBMMenus.DIFURNACE_MENU.get(), pContainerId);
         container = inContainer;
         containerData = containerData1;
         this.addSlot(new Slot(container,0,8,36));

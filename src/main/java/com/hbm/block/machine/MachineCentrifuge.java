@@ -2,7 +2,7 @@ package com.hbm.block.machine;
 
 import com.hbm.block.base.BlockDummyable;
 import com.hbm.blockentity.machine.TileMachineCentrifuge;
-import com.hbm.utils.multiblock.MultiblockData;
+import com.hbm.core.contents.multiblock.MultiblockData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;

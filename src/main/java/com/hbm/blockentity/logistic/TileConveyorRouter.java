@@ -3,7 +3,7 @@ package com.hbm.blockentity.logistic;
 import com.hbm.HBMKey;
 import com.hbm.HBMLang;
 import com.hbm.Inventory.filter.HBMFilter;
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.blockentity.base.BaseMenuTile;
 import com.hbm.gui.menu.MenuConveyorRouter;
 import com.hbm.utils.InventoryUtils;
@@ -56,7 +56,7 @@ public class TileConveyorRouter extends BaseMenuTile {
         }
     };
     public TileConveyorRouter(BlockPos pos, BlockState state) {
-        super(ModBlockEntityType.TILE_CONVEYOR_ROUTER.get(), pos, state);
+        super(HBMTiles.TILE_CONVEYOR_ROUTER.get(), pos, state);
         for (int i = 0; i < 6; i++) {
             filters[i] = HBMFilter.create(5);
         }

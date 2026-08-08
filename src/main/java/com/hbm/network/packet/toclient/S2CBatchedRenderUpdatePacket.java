@@ -1,6 +1,6 @@
 package com.hbm.network.packet.toclient;
 
-import com.hbm.network.IHBMMessage;
+import com.hbm.core.network.IHBMMessage;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.network.NetworkEvent;

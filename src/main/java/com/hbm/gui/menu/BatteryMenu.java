@@ -1,6 +1,6 @@
 package com.hbm.gui.menu;
 
-import com.hbm.gui.ModMenuType;
+import com.hbm.gui.HBMMenus;
 import com.hbm.gui.menu.slot.BatterySlot;
 import com.hbm.registries.ModTags;
 import net.minecraft.world.Container;
@@ -18,7 +18,7 @@ public class BatteryMenu extends AbstractContainerMenu {
     }
 
     public BatteryMenu(int pContainerId, Inventory pPlayerInventory, Container inContainer, ContainerData containerData) {
-        super(ModMenuType.BATTERY_MENU.get(), pContainerId);
+        super(HBMMenus.BATTERY_MENU.get(), pContainerId);
         this.container = inContainer;
         this.data = containerData;
         this.addSlot(new BatterySlot(container, 0, 26,17));

@@ -33,6 +33,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec2;
 import net.minecraftforge.client.ChunkRenderTypeSet;
 import net.minecraftforge.client.RenderTypeGroup;
+import net.minecraftforge.client.event.ModelEvent;
 import net.minecraftforge.client.model.CompositeModel;
 import net.minecraftforge.client.model.IDynamicBakedModel;
 import net.minecraftforge.client.model.IModelBuilder;
@@ -149,8 +150,7 @@ public class CustomPartsModel implements IUnbakedGeometry<CustomPartsModel> {
                     String lib = line[1];
                     if (lib.contains(":"))
                         mtllib = ObjLoader.INSTANCE.loadMaterialLibrary(new ResourceLocation(lib));
-                    else
-                        mtllib = ObjLoader.INSTANCE.loadMaterialLibrary(new ResourceLocation(modelDomain, modelPath + lib));
+                    else mtllib = ObjLoader.INSTANCE.loadMaterialLibrary(new ResourceLocation(modelDomain, modelPath + lib));
                     break;
                 }
 
@@ -191,6 +191,11 @@ public class CustomPartsModel implements IUnbakedGeometry<CustomPartsModel> {
                 {
                     if (currentMesh == null)
                     {
+                        // 默认mat
+                        if (currentMat == null) {
+                            currentMat = new ObjMaterialLibrary.Material("Texture");
+                            currentMat.diffuseColorMap = "#texture0";
+                        }
                         currentMesh = model.new ModelMesh(currentMat, currentSmoothingGroup);
                         if (currentObject != null)
                         {
@@ -366,12 +371,6 @@ public class CustomPartsModel implements IUnbakedGeometry<CustomPartsModel> {
 
         return new Baked(context.isGui3d(), context.useBlockLight(), context.useAmbientOcclusion(), particle, context.getTransforms(), overrides, bakedParts);
     }
-    /**
-     * 生成可用于实体的模型
-     * */
-    public Model bakeModel(){
-        return null;
-    }
 
     public static class Loader implements IGeometryLoader<CustomPartsModel>, ResourceManagerReloadListener {
         public static final String LOADER_NAME = "multi_parts_obj";
@@ -383,6 +382,10 @@ public class CustomPartsModel implements IUnbakedGeometry<CustomPartsModel> {
 
         private final Map<ModelSettings, CustomPartsModel> modelCache = Maps.newConcurrentMap();
         private final Map<ResourceLocation, ObjMaterialLibrary> materialCache = Maps.newConcurrentMap();
+        // 注册client作为模组加载器
+        public static void register(ModelEvent.RegisterGeometryLoaders event){
+            event.register(CustomPartsModel.Loader.LOADER_NAME, CustomPartsModel.Loader.INSTANCE);
+        }
         @Override
         public void onResourceManagerReload(ResourceManager resourceManager) {
             modelCache.clear();
@@ -435,9 +438,11 @@ public class CustomPartsModel implements IUnbakedGeometry<CustomPartsModel> {
                     throw new RuntimeException("Could not find OBJ material library", e);
                 } catch (IOException e)
                 {
+                    LOGGER.error("Could not read OBJ material library", e);
                     e.printStackTrace();
                     throw new RuntimeException("Could not read OBJ material library", e);
                 } catch (Exception e){
+                    LOGGER.error("Could not read OBJ material library", e);
                     e.printStackTrace();
                     throw new RuntimeException("Exception unknown", e);
                 }
@@ -449,6 +454,9 @@ public class CustomPartsModel implements IUnbakedGeometry<CustomPartsModel> {
         ResourceLocation model;
         boolean automatic_culling = false;
         boolean flip_v = false;
+        boolean shadeQuads = true;
+        boolean emissiveAmbient = true;
+        String mtlOverride = null;
         // 💡 核心：这个构造器的参数顺序，完美对应了你要传给 customLoader 的那个 BiFunction！
         public LoaderBuilder(T modelBuilder, ExistingFileHelper existingFileHelper) {
             // 必须通过显式指定你自定义 Loader 的“注册ID”（比如 "your_mod:my_obj_loader"）
@@ -481,8 +489,11 @@ public class CustomPartsModel implements IUnbakedGeometry<CustomPartsModel> {
         public JsonObject toJson(JsonObject json) {
             json = super.toJson(json); // 这一步会自动把 "loader": "your_mod:my_obj_loader" 塞进去
             json.addProperty("model", this.model.toString());
-            json.addProperty("automatic_culling", automatic_culling);
-            json.addProperty("flip_v", flip_v);
+            if (!automatic_culling) json.addProperty("automatic_culling", automatic_culling);
+            if (flip_v) json.addProperty("flip_v", flip_v);
+            if (!shadeQuads) json.addProperty("shade_quads", shadeQuads);
+            if (!emissiveAmbient) json.addProperty("emissive_ambient", emissiveAmbient);
+            if (mtlOverride != null && !mtlOverride.isEmpty()) json.addProperty("mtl_override", mtlOverride);
             // 如果你有其他操控子模型的参数，在这里塞进 JsonObject 即可
             return json;
         }
@@ -687,9 +698,17 @@ public class CustomPartsModel implements IUnbakedGeometry<CustomPartsModel> {
             abs.sub(a);
             Vector3f acs = new Vector3f(ac);
             acs.sub(a);
+//            abs.cross(acs);
+//            abs.normalize();
+//            faceNormal = abs;
             abs.cross(acs);
-            abs.normalize();
-            faceNormal = abs;
+            // 零向量检查
+            if (abs.lengthSquared() > 1e-8f) {
+                abs.normalize();
+                faceNormal = abs;
+            } else {
+                faceNormal = new Vector3f(0, 1, 0); // fallback for degenerate face
+            }
         }
 
         var quadBaker = new QuadBakingVertexConsumer.Buffered();
@@ -737,6 +756,7 @@ public class CustomPartsModel implements IUnbakedGeometry<CustomPartsModel> {
                     color.w() * colorTint.w());
             quadBaker.vertex(position.x(), position.y(), position.z());
             quadBaker.color(tintedColor.x(), tintedColor.y(), tintedColor.z(), tintedColor.w());
+            // 潜在问题：位于 [0,1] 范围之外的 UV 坐标会越界采样地图集
             quadBaker.uv(
                     texture.getU(texCoord.x * 16),
                     texture.getV((flipV ? 1 - texCoord.y : texCoord.y) * 16)

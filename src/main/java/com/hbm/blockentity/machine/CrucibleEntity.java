@@ -5,7 +5,7 @@ import com.hbm.HBMLang;
 import com.hbm.Inventory.fluid.CrucibleFluidHandler;
 import com.hbm.Inventory.material.BasicHeatHandler;
 import com.hbm.Inventory.recipe.alloy.CrucibleRecipe;
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.blockentity.base.DummyableBlockEntity;
 import com.hbm.blockentity.tools.TileFoundryBase;
 import com.hbm.datagen.recipe.ingredient.FluidStackIngredient;
@@ -14,7 +14,7 @@ import com.hbm.registries.HBMCaps;
 import com.hbm.registries.HBMMatters;
 import com.hbm.registries.ModBlocks;
 import com.hbm.utils.DirectionUtils;
-import com.hbm.utils.multiblock.MultiblockData;
+import com.hbm.core.contents.multiblock.MultiblockData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -90,7 +90,7 @@ public class CrucibleEntity extends DummyableBlockEntity {
     };
 
     public CrucibleEntity(BlockPos pPos, BlockState pBlockState) {
-        super(ModBlockEntityType.CRUCIBLE_ENTITY.get(), pPos, pBlockState);
+        super(HBMTiles.CRUCIBLE_ENTITY.get(), pPos, pBlockState);
         this.capabilitiesContent.addCapability(ForgeCapabilities.ITEM_HANDLER, items);
         this.capabilitiesContent.addCapability(HBMCaps.HEAT, heatHandler);
         multiblockData = MultiblockData.mapping.get(ModBlocks.machine_crucible.get());

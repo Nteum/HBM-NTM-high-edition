@@ -2,7 +2,7 @@ package com.hbm.blockentity.machine;
 
 import com.hbm.HBMKey;
 import com.hbm.block.logistic.BlockConnector;
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.blockentity.base.CapabilityBlockEntity;
 import com.hbm.blockentity.interfaces.IConnector;
 import com.hbm.utils.data.NBTUtils;
@@ -27,7 +27,7 @@ public class TileConnector extends CapabilityBlockEntity implements IConnector {
     private BlockPos tempPos = null;
     private boolean isAdd = true;
     public TileConnector(BlockPos pPos, BlockState pBlockState) {
-        super(ModBlockEntityType.TILE_CONNECTOR.get(), pPos, pBlockState);
+        super(HBMTiles.TILE_CONNECTOR.get(), pPos, pBlockState);
         connectedPos = new HashSet<>();
     }
 
@@ -47,7 +47,7 @@ public class TileConnector extends CapabilityBlockEntity implements IConnector {
         if (this.hasLevel() && !this.getLevel().isClientSide){
             for (BlockPos connPos : this.connectedPos) {
                 // 通知客户端
-                this.level.getBlockEntity(connPos, ModBlockEntityType.TILE_CONNECTOR.get()).ifPresent(connector -> connector.removeConnected(this.getBlockPos(), false));
+                this.level.getBlockEntity(connPos, HBMTiles.TILE_CONNECTOR.get()).ifPresent(connector -> connector.removeConnected(this.getBlockPos(), false));
             }
             EnergyNetworkSystem.getOrCreate(this.level).leave(this);
         }

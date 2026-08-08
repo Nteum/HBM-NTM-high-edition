@@ -1,7 +1,7 @@
 package com.hbm.block.machine.rbmk;
 
 import com.hbm.block.machine.BaseSingleBlockMachine;
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.blockentity.base.UpdateableBlockEntity;
 import com.hbm.blockentity.machine.rbmk.RBMKDisplayEntity;
 import net.minecraft.core.BlockPos;
@@ -35,7 +35,7 @@ public class BlockRBMKDisplay extends BaseSingleBlockMachine {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
-        return blockEntityType == ModBlockEntityType.RBMK_DISPLAY_ENTITY.get()
+        return blockEntityType == HBMTiles.RBMK_DISPLAY_ENTITY.get()
                 ? (level.isClientSide ? UpdateableBlockEntity::clientTicker : UpdateableBlockEntity::serverTicker)
                 : null;
     }

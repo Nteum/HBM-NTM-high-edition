@@ -1,6 +1,6 @@
 package com.hbm.blockentity.weapon;
 
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
@@ -16,7 +16,7 @@ import org.jetbrains.annotations.Nullable;
 public class NukeBombFatEntity extends EntityNukeBomb {
     public static final AABB BOX = AABB.of(new BoundingBox(-1,0,-1,2,1,1));
     public NukeBombFatEntity(BlockPos pPos, BlockState pBlockState) {
-        super(ModBlockEntityType.NUKE_BOMB_FAT_ENTITY.get(),pPos, pBlockState);
+        super(HBMTiles.NUKE_BOMB_FAT_ENTITY.get(),pPos, pBlockState);
         this.items = NonNullList.withSize(4, ItemStack.EMPTY);
     }
 

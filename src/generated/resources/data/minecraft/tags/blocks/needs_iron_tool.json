@@ -17,6 +17,8 @@
     "hbm:miner_large",
     "hbm:machine_ore_slopper",
     "hbm:machine_centrifuge",
+    "hbm:machine_crystallizer",
+    "hbm:machine_arc_furnace",
     "hbm:conveyor",
     "hbm:conveyor_inserter",
     "hbm:conveyor_extractor",

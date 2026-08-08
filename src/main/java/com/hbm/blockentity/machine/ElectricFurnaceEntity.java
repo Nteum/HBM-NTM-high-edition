@@ -9,7 +9,7 @@ import com.hbm.api.energy.ProxyEnergyHandler;
 import com.hbm.api.energy.TransmitUtils;
 import com.hbm.api.math.MathUtils;
 import com.hbm.block.machine.BlockElectricFurnace;
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.blockentity.base.BaseMachineBlockEntity;
 import com.hbm.blockentity.interfaces.IUpgradeInfoProvider;
 import com.hbm.registries.HBMCaps;
@@ -72,7 +72,7 @@ public class ElectricFurnaceEntity extends BaseMachineBlockEntity implements Men
     };
 
     public ElectricFurnaceEntity(BlockPos pPos, BlockState pBlockState) {
-        super(ModBlockEntityType.ELECTRIC_FURNACE_ENTITY.get(), pPos, pBlockState);
+        super(HBMTiles.ELECTRIC_FURNACE_ENTITY.get(), pPos, pBlockState);
         this.quickCheck = RecipeManager.createCheck(RecipeType.SMELTING);
         // 0:raw material slot, 1:Battery slot ,原本电池是0号槽，但由于熔炉配方只检查0号槽，所以把0号槽改成输入材料槽了。
         items = NonNullList.withSize(4, ItemStack.EMPTY);

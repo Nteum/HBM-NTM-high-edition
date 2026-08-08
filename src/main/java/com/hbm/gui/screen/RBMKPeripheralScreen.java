@@ -3,7 +3,7 @@ package com.hbm.gui.screen;
 import com.hbm.HBM;
 import com.hbm.blockentity.machine.rbmk.RBMKPeripheralEntity;
 import com.hbm.gui.menu.RBMKPeripheralMenu;
-import com.hbm.network.ModMessages;
+import com.hbm.core.network.HBMNetwork;
 import com.hbm.network.packet.toserver.C2SSyncTileMessage;
 import com.hbm.reactor.rbmk.RBMKColumnType;
 import com.hbm.reactor.rbmk.RBMKPeripheralType;
@@ -551,7 +551,7 @@ public class RBMKPeripheralScreen extends AbstractRBMKScreen<RBMKPeripheralMenu>
         if (menu.getPos() == null) {
             return;
         }
-        ModMessages.sendToServer(new C2SSyncTileMessage(menu.getPos(), tag));
+        HBMNetwork.sendToServer(new C2SSyncTileMessage(menu.getPos(), tag));
     }
 
     private void selectAllControlRods() {

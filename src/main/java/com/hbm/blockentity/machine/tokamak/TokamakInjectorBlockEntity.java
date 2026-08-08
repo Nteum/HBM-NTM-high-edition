@@ -1,6 +1,6 @@
 package com.hbm.blockentity.machine.tokamak;
 
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -14,7 +14,7 @@ import org.jetbrains.annotations.Nullable;
 public class TokamakInjectorBlockEntity extends TokamakPeripheralBlockEntity {
 
     public TokamakInjectorBlockEntity(BlockPos pos, BlockState state) {
-        this(ModBlockEntityType.TOKAMAK_INJECTOR_ENTITY.get(), pos, state);
+        this(HBMTiles.TOKAMAK_INJECTOR_ENTITY.get(), pos, state);
     }
 
     private TokamakInjectorBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {

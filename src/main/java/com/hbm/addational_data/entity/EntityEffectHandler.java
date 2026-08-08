@@ -7,7 +7,7 @@ import com.hbm.addational_data.entity.living.ContaminationEffectLists;
 import com.hbm.addational_data.entity.living.ContaminationEffectLists.ContaminationEffect;
 import com.hbm.config.RadiationConfig;
 import com.hbm.effect.ModEffects;
-import com.hbm.network.ModMessages;
+import com.hbm.core.network.HBMNetwork;
 import com.hbm.network.packet.toclient.S2CParticlePacket;
 import com.hbm.registries.ModSounds;
 import com.hbm.utils.ContaminationUtil;
@@ -92,7 +92,7 @@ public class EntityEffectHandler {
                 tag.putString("mode", "blood");
                 tag.putInt("count", 25);
                 tag.putInt("entity", entity.getId());
-                ModMessages.sendToAllAround(new S2CParticlePacket(tag, 0, 0, 0), new TargetPoint(entity.getX(), entity.getY(), entity.getZ(), 25, entity.level().dimension()));
+                HBMNetwork.sendToAllAround(new S2CParticlePacket(tag, 0, 0, 0), new TargetPoint(entity.getX(), entity.getY(), entity.getZ(), 25, entity.level().dimension()));
                 if ((level.getGameTime() + r600) % 600 == 1){
                     entity.playSound(ModSounds.PLAYER_VOMIT.get(), 1f, 1f);
                     entity.addEffect(new MobEffectInstance(MobEffects.HUNGER, 60, 19));
@@ -104,7 +104,7 @@ public class EntityEffectHandler {
             tag.putString("mode", "normal");
             tag.putInt("count", 15);
             tag.putInt("entity", entity.getId());
-            ModMessages.sendToAllAround(new S2CParticlePacket(tag, 0, 0, 0), new TargetPoint(entity.getX(), entity.getY(), entity.getZ(), 25, entity.level().dimension()));
+            HBMNetwork.sendToAllAround(new S2CParticlePacket(tag, 0, 0, 0), new TargetPoint(entity.getX(), entity.getY(), entity.getZ(), 25, entity.level().dimension()));
             if ((level.getGameTime() + r1200) % 1200 == 1){
                 entity.playSound(ModSounds.PLAYER_VOMIT.get(), 1f, 1f);
                 entity.addEffect(new MobEffectInstance(MobEffects.HUNGER, 60, 19));
@@ -117,13 +117,13 @@ public class EntityEffectHandler {
             tag.putInt("count", 1);
             tag.putInt("block", BuiltInRegistries.BLOCK.getId(Blocks.REDSTONE_BLOCK));
             tag.putInt("entity", entity.getId());
-            ModMessages.sendToAllAround(new S2CParticlePacket(tag, 0, 0, 0), new TargetPoint(entity.getX(), entity.getY(), entity.getZ(), 25, entity.level().dimension()));
+            HBMNetwork.sendToAllAround(new S2CParticlePacket(tag, 0, 0, 0), new TargetPoint(entity.getX(), entity.getY(), entity.getZ(), 25, entity.level().dimension()));
         } else if (entity instanceof ServerPlayer player && entityRad > 600){
             // 玩家看到的辐射烟雾，应该仅限于玩家主观视角
             CompoundTag tag = new CompoundTag();
             tag.putString("type", "radiation");
             tag.putInt("count", entityRad > 900 ? 4 : entityRad > 800 ? 2 : 1);
-            ModMessages.sendToPlayer(new S2CParticlePacket(tag, 0, 0, 0), player);
+            HBMNetwork.sendToPlayer(new S2CParticlePacket(tag, 0, 0, 0), player);
         }
     }
 

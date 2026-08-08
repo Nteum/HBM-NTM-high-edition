@@ -5,7 +5,7 @@ import com.google.gson.JsonParser;
 import com.hbm.compat.bigexplosives.BigExplosivesMod;
 import com.hbm.init.BigExplosivesModEntities;
 import com.hbm.init.BigExplosivesModSounds;
-import com.hbm.network.ModMessages;
+import com.hbm.core.network.HBMNetwork;
 import com.hbm.network.packet.toclient.S2CAtomicFlashPacket;
 import com.hbm.render.entity.AtomicBombExplosionEntity;
 import net.minecraft.core.BlockPos;
@@ -128,7 +128,7 @@ public final class AtomicExplosionHelper {
             if (target instanceof ServerPlayer serverPlayer) {
                 float alpha = Mth.clamp(0.35F + 0.65F * (float) factor, 0.2F, 1.0F);
                 int flashDuration = (int) Mth.clamp(60 + (200 * factor), 60, 260);
-                ModMessages.sendToPlayer(new S2CAtomicFlashPacket(alpha, flashDuration), serverPlayer);
+                HBMNetwork.sendToPlayer(new S2CAtomicFlashPacket(alpha, flashDuration), serverPlayer);
             }
         }
     }

@@ -6,11 +6,11 @@ import com.hbm.Inventory.recipe.CrackingRecipes;
 import com.hbm.api.Mode;
 import com.hbm.api.fluid.BasicFluidHandler;
 import com.hbm.api.fluid.VisitRestrictWrapper;
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.blockentity.base.DummyableBlockEntity;
 import com.hbm.blockentity.base.TileProxyBase;
 import com.hbm.registries.ModBlocks;
-import com.hbm.utils.multiblock.MultiblockData;
+import com.hbm.core.contents.multiblock.MultiblockData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.Vec3i;
@@ -51,7 +51,7 @@ public class CrackingTowerEntity extends DummyableBlockEntity {
     private int tickCounter;
 
     public CrackingTowerEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntityType.CRACKING_TOWER_ENTITY.get(), pos, state);
+        super(HBMTiles.CRACKING_TOWER_ENTITY.get(), pos, state);
         this.items = NonNullList.withSize(0, ItemStack.EMPTY);
         this.slotModes = List.of();
         this.fluidHandler = new BasicFluidHandler()

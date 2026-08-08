@@ -15,7 +15,7 @@ import com.hbm.block.machine.tokamak.TokamakCoilBlock;
 import com.hbm.block.machine.tokamak.TokamakHeaterBlock;
 import com.hbm.block.machine.tokamak.TokamakInjectorBlock;
 import com.hbm.block.machine.tokamak.TokamakPortBlock;
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.blockentity.base.BaseMachineBlockEntity;
 import com.hbm.registries.HBMCaps;
 import com.hbm.gui.menu.TokamakMenu;
@@ -103,7 +103,7 @@ public class TokamakControllerBlockEntity extends BaseMachineBlockEntity impleme
     private final LazyOptional<BasicFluidHandler> fluidOptional = LazyOptional.of(() -> fluids);
 
     public TokamakControllerBlockEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntityType.TOKAMAK_CONTROLLER.get(), pos, state);
+        super(HBMTiles.TOKAMAK_CONTROLLER.get(), pos, state);
         // 0:D槽 1:T槽 2:冷却剂 3:预留控制槽 4:副产物输出 5:电池充电槽
         this.items = NonNullList.withSize(6, ItemStack.EMPTY);
         this.capabilitiesContent.addCapability(ForgeCapabilities.ITEM_HANDLER, this);

@@ -1,7 +1,7 @@
 package com.hbm.blockentity.machine.rbmk;
 
 import com.hbm.block.machine.rbmk.BlockRBMKBase;
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.blockentity.base.UpdateableBlockEntity;
 import com.hbm.gui.menu.RBMKGaugeConfigMenu;
 import com.hbm.reactor.rbmk.RBMKColumnState;
@@ -56,7 +56,7 @@ public class RBMKGaugeEntity extends UpdateableBlockEntity implements RBMKLinkab
     private final String[] lastSignals = new String[CHANNELS];
 
     public RBMKGaugeEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntityType.RBMK_GAUGE_ENTITY.get(), pos, state);
+        super(HBMTiles.RBMK_GAUGE_ENTITY.get(), pos, state);
         for (int i = 0; i < CHANNELS; i++) {
             labels[i] = "Gauge " + (i + 1);
             channels[i] = "";

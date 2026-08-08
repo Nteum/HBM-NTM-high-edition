@@ -1,7 +1,7 @@
 package com.hbm.blockentity.machine;
 
 import com.hbm.HBMLang;
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.blockentity.base.BaseMachineBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -14,7 +14,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class BoilerEntity extends BaseMachineBlockEntity {
     public BoilerEntity(BlockPos pPos, BlockState pBlockState) {
-        super(ModBlockEntityType.BOILER_ENTITY.get(), pPos, pBlockState);
+        super(HBMTiles.BOILER_ENTITY.get(), pPos, pBlockState);
     }
 
     @Override

@@ -1,6 +1,6 @@
 package com.hbm.gui.menu;
 
-import com.hbm.gui.ModMenuType;
+import com.hbm.gui.HBMMenus;
 import com.hbm.gui.menu.slot.OutputSlot;
 import com.hbm.blockentity.machine.PWRControllerBlockEntity;
 import com.hbm.item.pwr.ItemPWRFuel;
@@ -25,7 +25,7 @@ public class PWRMenu extends BaseMachineMenu {
     }
 
     public PWRMenu(int containerId, Inventory playerInventory, Container container, ContainerData data) {
-        super(ModMenuType.PWR_MENU.get(), containerId, container, data);
+        super(HBMMenus.PWR_MENU.get(), containerId, container, data);
         slotNum = 3;
         this.addSlot(new Slot(container, SLOT_INPUT, 53, 5));
         this.addSlot(new OutputSlot(container, SLOT_OUTPUT, 89, 32));

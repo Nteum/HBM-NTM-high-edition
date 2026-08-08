@@ -16,6 +16,7 @@ public enum HBMLang implements ILangEntry {
     HBM_MISSILE("itemGroup","hbm_missile", "NTM Missiles and Satellites"),
     HBM_WEAPON("itemGroup","hbm_weapons", "NTM Weapons and Turrets"),
     HBM_CONSUMABLE("itemGroup","hbm_consumable", "NTM Consumables and Gear"),
+    TAB_SPACE("Space"),
     // 机器
     CONTAINER_PRESS("Burner Press"),
     DIFURNACE("container","difurnace"),
@@ -70,6 +71,12 @@ public enum HBMLang implements ILangEntry {
     GUI_MINER_LARGE_VEIN_MINER("Toggle Vein Miner"),
     GUI_MINER_LARGE_WALLING("Toggle Walling"),
     GUI_MINER_LARGE_CRUSHER("Toggle Crusher"),
+    GUI_DESC_UPGRADE("§lAcceptable Upgrades:§r"),
+    GUI_DESC_UPGRADE_AFTERBURNER("* §dAfterburner§r: Stacks to level 3"),
+    GUI_DESC_UPGRADE_EFFECTIVENESS("* §aEffectiveness§r: Stacks to level 3"),
+    GUI_DESC_UPGRADE_OVERDRIVE("* §7Overdrive§r: Stacks to level 3"),
+    GUI_DESC_UPGRADE_POWER("* §1Power-Saving§r: Stacks to level 3"),
+    GUI_DESC_UPGRADE_SPEED("* §4Speed§r: Stacks to level 3"),
     // 物品
     TOOLTIP_SHOW_DETAIL("Hold %s to display more info"),
     ITEM_INGOT_NEPTUNIUM_DESC("That one's my favourite!"),

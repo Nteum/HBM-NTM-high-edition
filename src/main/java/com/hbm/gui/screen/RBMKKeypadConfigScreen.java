@@ -2,7 +2,7 @@ package com.hbm.gui.screen;
 
 import com.hbm.HBM;
 import com.hbm.gui.menu.RBMKKeypadConfigMenu;
-import com.hbm.network.ModMessages;
+import com.hbm.core.network.HBMNetwork;
 import com.hbm.network.packet.toserver.C2SSyncTileMessage;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
@@ -140,7 +140,7 @@ public class RBMKKeypadConfigScreen extends AbstractContainerScreen<RBMKKeypadCo
             tag.putString("CfgCommand" + i, trimText(commandFields[i].getValue(), 48));
         }
 
-        ModMessages.sendToServer(new C2SSyncTileMessage(menu.getPos(), tag));
+        HBMNetwork.sendToServer(new C2SSyncTileMessage(menu.getPos(), tag));
     }
 
     private boolean isWithinLocal(double mouseX, double mouseY, int localX, int localY, int width, int height) {

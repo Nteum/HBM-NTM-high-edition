@@ -1,24 +1,15 @@
 package com.hbm.gui.screen;
 
 import com.hbm.HBM;
-import com.hbm.HBMKey;
-import com.hbm.HBMLang;
 import com.hbm.gui.menu.MenuConveyorExtractor;
-import com.hbm.gui.menu.slot.FilterSlot;
 import com.hbm.gui.screen.widget.MultiStateButton;
-import com.hbm.network.ModMessages;
+import com.hbm.core.network.HBMNetwork;
 import com.hbm.network.packet.toserver.C2SSyncTileMessage;
-import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.components.Button;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.inventory.ClickType;
-import net.minecraft.world.inventory.Slot;
-import net.minecraft.world.item.ItemStack;
 
 public class GuiConveyorExtractor extends BaseMachineGui<MenuConveyorExtractor>{
     public static final ResourceLocation TEXTURE = HBM.rl("textures/gui/storage/gui_crane_ejector.png");
@@ -39,7 +30,7 @@ public class GuiConveyorExtractor extends BaseMachineGui<MenuConveyorExtractor>{
             this.button.changeState();
             CompoundTag tag = new CompoundTag();
             tag.putBoolean("maxEject", this.button.stateNow != 0);
-            ModMessages.sendToServer(new C2SSyncTileMessage(this.menu.getPos(), tag));
+            HBMNetwork.sendToServer(new C2SSyncTileMessage(this.menu.getPos(), tag));
         });
         this.addRenderableWidget(this.button);
 //        this.isWhitelist = menu.containerData.get(0) > 0;
@@ -75,7 +66,7 @@ public class GuiConveyorExtractor extends BaseMachineGui<MenuConveyorExtractor>{
         if (oldValue != this.isWhitelist){
             CompoundTag tag = new CompoundTag();
             tag.putBoolean("isWhitelist", this.isWhitelist);
-            ModMessages.sendToServer(new C2SSyncTileMessage(this.menu.getPos(), tag));
+            HBMNetwork.sendToServer(new C2SSyncTileMessage(this.menu.getPos(), tag));
         }
         return super.mouseClicked(pMouseX, pMouseY, pButton);
     }

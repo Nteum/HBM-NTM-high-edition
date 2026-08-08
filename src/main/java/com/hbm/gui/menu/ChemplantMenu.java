@@ -1,12 +1,10 @@
 package com.hbm.gui.menu;
 
-import com.hbm.blockentity.machine.ChemplantEntity;
-import com.hbm.gui.ModMenuType;
+import com.hbm.gui.HBMMenus;
 import com.hbm.gui.menu.slot.BatterySlot;
 import com.hbm.gui.menu.slot.OutputSlot;
 import com.hbm.gui.menu.slot.UpgradeSlot;
 import com.hbm.registries.ModTags;
-import net.minecraft.core.NonNullList;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -16,8 +14,6 @@ import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.common.Tags;
-import org.jetbrains.annotations.Nullable;
 
 public class ChemplantMenu extends BaseMachineMenu implements ITileAccess{
     public BlockEntity be;
@@ -26,7 +22,7 @@ public class ChemplantMenu extends BaseMachineMenu implements ITileAccess{
     }
 
     public ChemplantMenu(int pContainerId, Inventory pInventory, Container inContainer, ContainerData containerData) {
-        super(ModMenuType.CHEMPLANT_MENU.get(), pContainerId, inContainer, containerData);
+        super(HBMMenus.CHEMPLANT_MENU.get(), pContainerId, inContainer, containerData);
         slotNum = 20;
         Player player = pInventory.player;
 //        TransientCraftingContainer craftingContainer = new TransientCraftingContainer(this, 2, 2, NonNullList.of(container.getItem(13), container.getItem(14), container.getItem(15), container.getItem(16)));

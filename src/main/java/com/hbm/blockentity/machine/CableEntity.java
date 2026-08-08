@@ -1,9 +1,7 @@
 package com.hbm.blockentity.machine;
 
-import com.hbm.api.energy.fe.HBMEnergyStorage;
-import com.hbm.api.energy.fe.SidedEnergyWrapper;
 import com.hbm.api.energy.fe.TransmitHelper;
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.blockentity.base.BasePipeBlockEntity;
 import com.hbm.blockentity.interfaces.IConnector;
 import com.hbm.utils.transport_net.EnergyNetwork;
@@ -15,7 +13,7 @@ import java.util.List;
 
 public class CableEntity extends BasePipeBlockEntity implements IConnector {
     public CableEntity(BlockPos pPos, BlockState pBlockState) {
-        super(ModBlockEntityType.CABLE_ENTITY.get(), pPos, pBlockState);
+        super(HBMTiles.CABLE_ENTITY.get(), pPos, pBlockState);
 //        capabilitiesCache.addCapabilityResolver(new SidedEnergyWrapper(new HBMEnergyStorage(10_000)));
     }
 

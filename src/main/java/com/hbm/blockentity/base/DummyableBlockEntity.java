@@ -3,7 +3,7 @@ package com.hbm.blockentity.base;
 import com.hbm.HBMKey;
 import com.hbm.blockentity.interfaces.IDummyable;
 import com.hbm.utils.DirectionUtils;
-import com.hbm.utils.multiblock.MultiblockData;
+import com.hbm.core.contents.multiblock.MultiblockData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;

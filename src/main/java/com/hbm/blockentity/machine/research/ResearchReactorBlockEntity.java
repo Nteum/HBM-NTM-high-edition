@@ -3,7 +3,7 @@ package com.hbm.blockentity.machine.research;
 import com.hbm.HBMKey;
 import com.hbm.api.Mode;
 import com.hbm.api.inventory.ModeBuilder;
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.blockentity.base.DummyableBlockEntity;
 import com.hbm.gui.menu.ResearchReactorMenu;
 import com.hbm.handler.radiation.ChunkRadiationManager;
@@ -11,7 +11,7 @@ import com.hbm.handler.radiation.ChunkRadiationManager;
 import com.hbm.item.research.ItemResearchFuelPlate;
 import com.hbm.registries.ModBlocks;
 import com.hbm.registries.ModItems;
-import com.hbm.utils.multiblock.MultiblockData;
+import com.hbm.core.contents.multiblock.MultiblockData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
@@ -90,7 +90,7 @@ public class ResearchReactorBlockEntity extends DummyableBlockEntity implements 
     private byte waterLevel;
 
     public ResearchReactorBlockEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntityType.RESEARCH_REACTOR_ENTITY.get(), pos, state);
+        super(HBMTiles.RESEARCH_REACTOR_ENTITY.get(), pos, state);
         this.items = NonNullList.withSize(SLOT_COUNT, ItemStack.EMPTY);
         this.multiblockData = MultiblockData.mapping.get(ModBlocks.machine_research_reactor.get());
         this.slotModes = new ModeBuilder().addModes(SLOT_COUNT, Mode.BOTH).get();

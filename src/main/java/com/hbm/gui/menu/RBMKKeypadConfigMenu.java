@@ -1,7 +1,7 @@
 package com.hbm.gui.menu;
 
 import com.hbm.blockentity.machine.rbmk.RBMKKeypadEntity;
-import com.hbm.gui.ModMenuType;
+import com.hbm.gui.HBMMenus;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.Container;
@@ -42,7 +42,7 @@ public class RBMKKeypadConfigMenu extends BaseMachineMenu {
     }
 
     private RBMKKeypadConfigMenu(int containerId, Inventory playerInventory, RBMKKeypadEntity keypad, BlockPos pos, Container container, ContainerData data) {
-        super(ModMenuType.RBMK_KEYPAD_CONFIG_MENU.get(), containerId, container, data);
+        super(HBMMenus.RBMK_KEYPAD_CONFIG_MENU.get(), containerId, container, data);
         this.slotNum = 0;
         this.keypad = keypad;
         this.pos = pos;

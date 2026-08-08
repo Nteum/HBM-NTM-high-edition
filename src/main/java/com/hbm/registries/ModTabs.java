@@ -27,15 +27,15 @@ public class ModTabs {
     //创造模式物品栏注册表
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
 
-    public static final ResourceKey<CreativeModeTab> PARTS_KEY = ResourceKey.create(Registries.CREATIVE_MODE_TAB, new ResourceLocation(MODID, "hbm_parts"));
-    public static final ResourceKey<CreativeModeTab> CONTROL_KEY = ResourceKey.create(Registries.CREATIVE_MODE_TAB, new ResourceLocation(MODID, "hbm_control"));
-    public static final ResourceKey<CreativeModeTab> TEMPLATE_KEY = ResourceKey.create(Registries.CREATIVE_MODE_TAB, new ResourceLocation(MODID, "hbm_template"));
-    public static final ResourceKey<CreativeModeTab> BLOCKS_KEY = ResourceKey.create(Registries.CREATIVE_MODE_TAB, new ResourceLocation(MODID, "hbm_blocks"));
-    public static final ResourceKey<CreativeModeTab> MACHINE_KEY = ResourceKey.create(Registries.CREATIVE_MODE_TAB, new ResourceLocation(MODID, "hbm_machines"));
-    public static final ResourceKey<CreativeModeTab> NUKE_KEY = ResourceKey.create(Registries.CREATIVE_MODE_TAB, new ResourceLocation(MODID, "hbm_nuke"));
-    public static final ResourceKey<CreativeModeTab> MISSILE_KEY = ResourceKey.create(Registries.CREATIVE_MODE_TAB, new ResourceLocation(MODID, "hbm_missiles"));
-    public static final ResourceKey<CreativeModeTab> WEAPON_KEY = ResourceKey.create(Registries.CREATIVE_MODE_TAB, new ResourceLocation(MODID, "hbm_weapons"));
-    public static final ResourceKey<CreativeModeTab> CONSUMABLE_KEY = ResourceKey.create(Registries.CREATIVE_MODE_TAB, new ResourceLocation(MODID, "hbm_consumable"));
+    public static final ResourceKey<CreativeModeTab> PARTS_KEY = ResourceKey.create(Registries.CREATIVE_MODE_TAB, ResourceLocation.fromNamespaceAndPath(MODID, "hbm_parts"));
+    public static final ResourceKey<CreativeModeTab> CONTROL_KEY = ResourceKey.create(Registries.CREATIVE_MODE_TAB, ResourceLocation.fromNamespaceAndPath(MODID, "hbm_control"));
+    public static final ResourceKey<CreativeModeTab> TEMPLATE_KEY = ResourceKey.create(Registries.CREATIVE_MODE_TAB, ResourceLocation.fromNamespaceAndPath(MODID, "hbm_template"));
+    public static final ResourceKey<CreativeModeTab> BLOCKS_KEY = ResourceKey.create(Registries.CREATIVE_MODE_TAB, ResourceLocation.fromNamespaceAndPath(MODID, "hbm_blocks"));
+    public static final ResourceKey<CreativeModeTab> MACHINE_KEY = ResourceKey.create(Registries.CREATIVE_MODE_TAB, ResourceLocation.fromNamespaceAndPath(MODID, "hbm_machines"));
+    public static final ResourceKey<CreativeModeTab> NUKE_KEY = ResourceKey.create(Registries.CREATIVE_MODE_TAB, ResourceLocation.fromNamespaceAndPath(MODID, "hbm_nuke"));
+    public static final ResourceKey<CreativeModeTab> MISSILE_KEY = ResourceKey.create(Registries.CREATIVE_MODE_TAB, ResourceLocation.fromNamespaceAndPath(MODID, "hbm_missiles"));
+    public static final ResourceKey<CreativeModeTab> WEAPON_KEY = ResourceKey.create(Registries.CREATIVE_MODE_TAB, ResourceLocation.fromNamespaceAndPath(MODID, "hbm_weapons"));
+    public static final ResourceKey<CreativeModeTab> CONSUMABLE_KEY = ResourceKey.create(Registries.CREATIVE_MODE_TAB, ResourceLocation.fromNamespaceAndPath(MODID, "hbm_consumable"));
 
     public static final RegistryObject<CreativeModeTab> PARTS = CREATIVE_MODE_TABS.register("hbm_parts", () -> CreativeModeTab.builder()
             .title(Component.translatable(HBMLang.HBM_PARTS.key()))

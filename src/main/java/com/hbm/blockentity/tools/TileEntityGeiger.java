@@ -1,7 +1,7 @@
 package com.hbm.blockentity.tools;
 
 import com.hbm.addational_data.chunk.RadiationManager;
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.blockentity.base.CapabilityBlockEntity;
 import com.hbm.registries.ModSounds;
 import net.minecraft.core.BlockPos;
@@ -21,7 +21,7 @@ public class TileEntityGeiger extends CapabilityBlockEntity {
     int timer = 0;
     float ticker = 0;
     public TileEntityGeiger(BlockPos pPos, BlockState pBlockState) {
-        super(ModBlockEntityType.GEIGER_COUNTER.get(), pPos, pBlockState);
+        super(HBMTiles.GEIGER_COUNTER.get(), pPos, pBlockState);
     }
 
     public static void ticker(Level level, BlockPos pPos, BlockState pState, BlockEntity pBlockEntity) {

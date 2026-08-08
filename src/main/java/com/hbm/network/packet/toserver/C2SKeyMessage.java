@@ -1,6 +1,6 @@
 package com.hbm.network.packet.toserver;
 
-import com.hbm.network.IHBMMessage;
+import com.hbm.core.network.IHBMMessage;
 import com.hbm.network.ServerMsgHandler;
 import com.hbm.registries.ModKeyMapping;
 import net.minecraft.network.FriendlyByteBuf;

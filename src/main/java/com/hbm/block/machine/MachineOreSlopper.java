@@ -3,23 +3,12 @@ package com.hbm.block.machine;
 import com.hbm.block.base.BlockDummyable;
 import com.hbm.blockentity.machine.TileOreSloppper;
 import com.hbm.registries.HBMCaps;
-import com.hbm.utils.multiblock.DummableHelper;
-import com.hbm.utils.multiblock.MultiblockData;
-import com.hbm.utils.multiblock.MultiblockModule;
+import com.hbm.core.contents.multiblock.MultiblockData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.Vec3i;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
 
 public class MachineOreSlopper extends BlockDummyable {
     public static String name = "machine_ore_slopper";

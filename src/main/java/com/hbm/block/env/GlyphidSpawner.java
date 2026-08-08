@@ -2,7 +2,7 @@ package com.hbm.block.env;
 
 import com.hbm.addational_data.Pollution;
 import com.hbm.block.HBMBlockProperties;
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.config.MobConfig;
 import com.hbm.entity.mob.EntityGlyphid;
 import com.mojang.datafixers.util.Pair;
@@ -20,12 +20,10 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
-import net.minecraft.world.level.entity.LevelEntityGetter;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 import java.util.function.Function;
 
@@ -83,7 +81,7 @@ public class GlyphidSpawner extends BaseEntityBlock {
         boolean initialSpawn = true;
 
         public GlyphidSpawnerEntity(BlockPos pPos, BlockState pBlockState) {
-            super(ModBlockEntityType.GLYPHID_SPAWNER.get(), pPos, pBlockState);
+            super(HBMTiles.GLYPHID_SPAWNER.get(), pPos, pBlockState);
         }
 
         public static <T extends Entity> void tick(Level level, BlockPos pPos, BlockState pState, BlockEntity pBlockEntity){

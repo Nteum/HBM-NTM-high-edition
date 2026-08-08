@@ -93,7 +93,7 @@ public class Coord4D {//TODO - V11: Continue working on replacing uses of this w
      */
     public static Coord4D read(CompoundTag tag) {
         return new Coord4D(tag.getInt(HBMKey.X), tag.getInt(HBMKey.Y), tag.getInt(HBMKey.Z),
-              ResourceKey.create(Registries.DIMENSION, new ResourceLocation(tag.getString(HBMKey.DIMENSION))));
+              ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse(tag.getString(HBMKey.DIMENSION))));
     }
 
     /**

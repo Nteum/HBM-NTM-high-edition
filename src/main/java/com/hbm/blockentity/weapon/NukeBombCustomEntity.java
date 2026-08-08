@@ -1,7 +1,7 @@
 package com.hbm.blockentity.weapon;
 
 import com.hbm.HBM;
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.config.ConfigBomb;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -28,7 +28,7 @@ public class NukeBombCustomEntity extends EntityNukeBomb {
     private CustomNukeProfile profile = CustomNukeProfile.DEFAULT;
 
     public NukeBombCustomEntity(BlockPos pPos, BlockState pBlockState) {
-        super(ModBlockEntityType.NUKE_BOMB_CUSTOM_ENTITY.get(),pPos, pBlockState);
+        super(HBMTiles.NUKE_BOMB_CUSTOM_ENTITY.get(),pPos, pBlockState);
         this.items = NonNullList.withSize(4, ItemStack.EMPTY);
     }
 

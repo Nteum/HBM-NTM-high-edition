@@ -7,7 +7,7 @@ import com.hbm.block.machine.rbmk.BlockRBMKBase;
 import com.hbm.block.machine.rbmk.BlockRBMKControlRod;
 import com.hbm.block.machine.rbmk.BlockRBMKPeripheral;
 import com.hbm.block.machine.rbmk.BlockRBMKPeripheralLarge;
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.blockentity.base.DummyableBlockEntity;
 import com.hbm.item.rbmk.ItemRBMKFuelRod;
 import com.hbm.reactor.rbmk.RBMKColumnState;
@@ -19,7 +19,7 @@ import com.hbm.reactor.rbmk.RBMKManager;
 import com.hbm.reactor.rbmk.RBMKPeripheralType;
 import com.hbm.reactor.rbmk.RBMKScreenType;
 import com.hbm.registries.ModSounds;
-import com.hbm.utils.multiblock.MultiblockData;
+import com.hbm.core.contents.multiblock.MultiblockData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
@@ -110,7 +110,7 @@ public class RBMKPeripheralEntity extends DummyableBlockEntity implements RBMKLi
     private int telemetryFuelRods;
 
     public RBMKPeripheralEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntityType.RBMK_PERIPHERAL_ENTITY.get(), pos, state);
+        super(HBMTiles.RBMK_PERIPHERAL_ENTITY.get(), pos, state);
         this.peripheralType = resolvePeripheralType(state.getBlock());
         if (peripheralType == RBMKPeripheralType.AUTOLOADER) {
             this.items = NonNullList.withSize(AUTOLOADER_INPUT_SLOTS + AUTOLOADER_OUTPUT_SLOTS, ItemStack.EMPTY);

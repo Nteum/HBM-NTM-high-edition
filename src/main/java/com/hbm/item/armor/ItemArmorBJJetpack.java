@@ -1,7 +1,7 @@
 package com.hbm.item.armor;
 
 import com.hbm.addational_data.entity.player.PlayerDataUtil;
-import com.hbm.network.ModMessages;
+import com.hbm.core.network.HBMNetwork;
 import com.hbm.network.packet.toclient.S2CParticlePacket;
 import com.hbm.registries.ModSounds;
 import com.hbm.render.model.Models;
@@ -54,7 +54,7 @@ public class ItemArmorBJJetpack extends ItemArmorBJ{
                     CompoundTag data = new CompoundTag();
                     data.putString("type", "jetpack_bj");
                     data.putInt("player", player.getId());
-                    ModMessages.sendToAllAround(new S2CParticlePacket(data, player.getX(), player.getY(), player.getZ()), player, 100);
+                    HBMNetwork.sendToAllAround(new S2CParticlePacket(data, player.getX(), player.getY(), player.getZ()), player, 100);
                 } else if (player.hasPose(Pose.CROUCHING)){
                     double yMotion = player.getDeltaMovement().y;
                     if (yMotion < -0.08){

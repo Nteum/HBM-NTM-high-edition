@@ -2,7 +2,7 @@ package com.hbm.gui.screen;
 
 import com.hbm.HBM;
 import com.hbm.gui.menu.RBMKRadioControllerMenu;
-import com.hbm.network.ModMessages;
+import com.hbm.core.network.HBMNetwork;
 import com.hbm.network.packet.toserver.C2SSyncTileMessage;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
@@ -100,7 +100,7 @@ public class RBMKRadioControllerScreen extends AbstractContainerScreen<RBMKRadio
         CompoundTag tag = new CompoundTag();
         tag.putString("Channel", channelField.getValue() == null ? "" : channelField.getValue().trim());
         tag.putBoolean("Polling", polling);
-        ModMessages.sendToServer(new C2SSyncTileMessage(menu.getPos(), tag));
+        HBMNetwork.sendToServer(new C2SSyncTileMessage(menu.getPos(), tag));
     }
 
     private boolean isWithinLocal(double mouseX, double mouseY, int localX, int localY, int width, int height) {

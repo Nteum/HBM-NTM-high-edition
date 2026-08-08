@@ -1,7 +1,7 @@
 package com.hbm.gui.menu;
 
 import com.hbm.blockentity.machine.rbmk.RBMKPeripheralEntity;
-import com.hbm.gui.ModMenuType;
+import com.hbm.gui.HBMMenus;
 import com.hbm.item.rbmk.ItemRBMKFuelRod;
 import com.hbm.reactor.rbmk.RBMKPeripheralType;
 import net.minecraft.core.BlockPos;
@@ -48,7 +48,7 @@ public class RBMKAutoloaderMenu extends BaseMachineMenu {
     }
 
     private RBMKAutoloaderMenu(int containerId, Inventory playerInventory, RBMKPeripheralEntity peripheral, Container container, ContainerData data) {
-        super(ModMenuType.RBMK_AUTOLOADER_MENU.get(), containerId, container, data);
+        super(HBMMenus.RBMK_AUTOLOADER_MENU.get(), containerId, container, data);
         this.peripheral = peripheral;
         this.slotNum = SLOT_COUNT;
 

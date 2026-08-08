@@ -1,7 +1,7 @@
 package com.hbm.explosion.temp;
 
 import com.google.common.collect.Sets;
-import com.hbm.network.ModMessages;
+import com.hbm.core.network.HBMNetwork;
 import com.hbm.network.packet.toclient.S2CExplosionPacket;
 import com.hbm.registries.ModBlocks;
 import com.hbm.registries.ModSounds;
@@ -10,7 +10,6 @@ import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.network.protocol.game.ClientboundLevelParticlesPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -476,7 +475,7 @@ public class ExplosionOneOff extends Explosion {
             for(ServerPlayer serverplayer : ((ServerLevel)level).players()) {
                 // 我猜是由于服务端无法预计客户端渲染距离，所以直接用4096这个最大的渲染距离计算了。
                 if (serverplayer.distanceToSqr(position) < 4096.0D) {
-                    ModMessages.sendToPlayer(new S2CExplosionPacket(position.x, position.y, position.z, size, explosion.getToBlow(), explosion.getHitPlayers().get(serverplayer)), serverplayer);
+                    HBMNetwork.sendToPlayer(new S2CExplosionPacket(position.x, position.y, position.z, size, explosion.getToBlow(), explosion.getHitPlayers().get(serverplayer)), serverplayer);
                 }
             }
         }

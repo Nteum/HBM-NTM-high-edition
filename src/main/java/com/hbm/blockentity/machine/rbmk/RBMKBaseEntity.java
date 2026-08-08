@@ -9,7 +9,7 @@ import com.hbm.api.energy.TransmitUtils;
 import com.hbm.api.fluid.BasicFluidHandler;
 import com.hbm.block.machine.rbmk.BlockRBMKBase;
 import com.hbm.block.machine.rbmk.BlockRBMKControlRod;
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.blockentity.base.DummyableBlockEntity;
 import com.hbm.registries.HBMCaps;
 import com.hbm.gui.menu.RBMKBaseMenu;
@@ -21,7 +21,7 @@ import com.hbm.reactor.rbmk.RBMKSettings;
 import com.hbm.registries.ModBlocks;
 import com.hbm.registries.ModSounds;
 import com.hbm.Inventory.fluid.ModFluids;
-import com.hbm.utils.multiblock.MultiblockData;
+import com.hbm.core.contents.multiblock.MultiblockData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
@@ -78,7 +78,7 @@ public class RBMKBaseEntity extends DummyableBlockEntity {
     };
 
     public RBMKBaseEntity(BlockPos pPos, BlockState pState) {
-        super(ModBlockEntityType.RBMK_BASE_ENTITY.get(), pPos, pState);
+        super(HBMTiles.RBMK_BASE_ENTITY.get(), pPos, pState);
         this.items = NonNullList.withSize(0, ItemStack.EMPTY);
         this.slotModes = java.util.List.of();
         this.multiblockData = MultiblockData.mapping.get(ModBlocks.machine_rbmk_base.get());

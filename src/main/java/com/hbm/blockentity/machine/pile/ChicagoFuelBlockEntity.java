@@ -1,5 +1,6 @@
 package com.hbm.blockentity.machine.pile;
 
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.item.research.ItemPileRod;
 import com.hbm.registries.ModBlocks;
 import com.hbm.registries.ModItems;
@@ -23,7 +24,7 @@ public class ChicagoFuelBlockEntity extends ChicagoPileBlockEntity {
     private double heat;
 
     public ChicagoFuelBlockEntity(BlockPos pos, BlockState state) {
-        super(com.hbm.blockentity.ModBlockEntityType.CHICAGO_FUEL.get(), pos, state);
+        super(HBMTiles.CHICAGO_FUEL.get(), pos, state);
     }
 
     public void loadFromItem(FuelVariant variant, ItemStack stack) {

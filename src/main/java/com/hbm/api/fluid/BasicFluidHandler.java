@@ -115,4 +115,9 @@ public class BasicFluidHandler implements IExtendedFluidHandler {
         }
         return itemStack;
     }
+
+    @Override
+    public void onContentsChanged() {
+
+    }
 }

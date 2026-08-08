@@ -1,7 +1,7 @@
 package com.hbm.gui.menu;
 
 import com.hbm.blockentity.machine.research.ResearchReactorBlockEntity;
-import com.hbm.gui.ModMenuType;
+import com.hbm.gui.HBMMenus;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -28,7 +28,7 @@ public class ResearchReactorMenu extends BaseMachineMenu {
     }
 
     public ResearchReactorMenu(int containerId, Inventory inventory, Container container, ContainerData data) {
-        super(ModMenuType.RESEARCH_REACTOR_MENU.get(), containerId, container, data);
+        super(HBMMenus.RESEARCH_REACTOR_MENU.get(), containerId, container, data);
         this.slotNum = ResearchReactorBlockEntity.SLOT_COUNT;
 
         for (int i = 0; i < SLOT_POSITIONS.length; i++) {

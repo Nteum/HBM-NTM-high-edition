@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=east,is_core=false": {
+      "model": "hbm:block/machine_arc_furnace",
+      "y": 90
+    },
+    "facing=east,is_core=true": {
+      "model": "hbm:block/machine_arc_furnace",
+      "y": 90
+    },
+    "facing=north,is_core=false": {
+      "model": "hbm:block/machine_arc_furnace"
+    },
+    "facing=north,is_core=true": {
+      "model": "hbm:block/machine_arc_furnace"
+    },
+    "facing=south,is_core=false": {
+      "model": "hbm:block/machine_arc_furnace",
+      "y": 180
+    },
+    "facing=south,is_core=true": {
+      "model": "hbm:block/machine_arc_furnace",
+      "y": 180
+    },
+    "facing=west,is_core=false": {
+      "model": "hbm:block/machine_arc_furnace",
+      "y": 270
+    },
+    "facing=west,is_core=true": {
+      "model": "hbm:block/machine_arc_furnace",
+      "y": 270
+    }
+  }
+}

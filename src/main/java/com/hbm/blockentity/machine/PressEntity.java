@@ -4,7 +4,7 @@ import com.hbm.HBM;
 import com.hbm.HBMLang;
 import com.hbm.Inventory.recipe.ModRecipes;
 import com.hbm.Inventory.recipe.RecipePress;
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.blockentity.base.BaseMachineBlockEntity;
 import com.hbm.gui.menu.PressMenu;
 import com.hbm.item.tool.ItemStamp;
@@ -91,7 +91,7 @@ public class PressEntity extends BaseMachineBlockEntity {
         }
     };
     public PressEntity( BlockPos pPos, BlockState pBlockState) {
-        super(ModBlockEntityType.PRESS_ENTITY.get(), pPos, pBlockState);
+        super(HBMTiles.PRESS_ENTITY.get(), pPos, pBlockState);
         this.capabilitiesContent.addCapability(ForgeCapabilities.ITEM_HANDLER, items);
     }
 

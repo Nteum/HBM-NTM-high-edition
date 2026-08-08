@@ -10,7 +10,7 @@ import com.hbm.api.energy.ProxyEnergyHandler;
 import com.hbm.api.energy.TransmitUtils;
 import com.hbm.api.inventory.ModeBuilder;
 import com.hbm.Inventory.recipe.ModRecipes;
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.blockentity.base.BaseMachineBlockEntity;
 import com.hbm.registries.HBMCaps;
 import com.hbm.gui.menu.ShredderMenu;
@@ -72,7 +72,7 @@ public class ShredderEntity extends BaseMachineBlockEntity {
     };
 
     public ShredderEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntityType.SHREDDER_ENTITY.get(), pos, state);
+        super(HBMTiles.SHREDDER_ENTITY.get(), pos, state);
         this.items = NonNullList.withSize(30, ItemStack.EMPTY);
         this.slotModes = new ModeBuilder()
                 .addModes(INPUT_SLOTS, Mode.BOTH)

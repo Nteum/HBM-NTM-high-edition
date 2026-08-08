@@ -1,7 +1,7 @@
 package com.hbm.blockentity.logistic;
 
 import com.hbm.HBMLang;
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.gui.menu.MenuConveyorInserter;
 import com.hbm.utils.InventoryUtils;
 import com.hbm.utils.WorldUtils;
@@ -42,7 +42,7 @@ public class TileConveyorInserter extends TileConveyorMachine{
         }
     };
     public TileConveyorInserter(BlockPos pos, BlockState state) {
-        super(ModBlockEntityType.TILE_CONVEYOR_INSERTER.get(), pos, state);
+        super(HBMTiles.TILE_CONVEYOR_INSERTER.get(), pos, state);
         items = new ItemStackHandler(SLOT_NUM + 1){
             @Override
             protected void onContentsChanged(int slot) {

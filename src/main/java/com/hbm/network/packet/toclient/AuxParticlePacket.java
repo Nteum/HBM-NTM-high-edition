@@ -1,8 +1,7 @@
 package com.hbm.network.packet.toclient;
 
-import com.hbm.network.IHBMMessage;
+import com.hbm.core.network.IHBMMessage;
 import com.hbm.particle.handler.AuxParticleHandler;
-import io.netty.buffer.ByteBuf;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.network.NetworkEvent;
 

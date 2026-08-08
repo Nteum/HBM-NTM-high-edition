@@ -15,7 +15,7 @@ import com.hbm.api.fluid.*;
 import com.hbm.api.inventory.ModeBuilder;
 import com.hbm.api.math.MathUtils;
 import com.hbm.block.machine.BlockChemplant;
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.blockentity.base.DummyableBlockEntity;
 import com.hbm.registries.HBMCaps;
 import com.hbm.gui.menu.ChemplantMenu;
@@ -24,7 +24,7 @@ import com.hbm.registries.ModBlocks;
 import com.hbm.registries.ModSounds;
 import com.hbm.utils.DirectionUtils;
 import com.hbm.utils.InventoryUtils;
-import com.hbm.utils.multiblock.MultiblockData;
+import com.hbm.core.contents.multiblock.MultiblockData;
 import com.hbm.utils.sound.AudioWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
@@ -86,7 +86,7 @@ public class ChemplantEntity extends DummyableBlockEntity {
         }
     };
     public ChemplantEntity(BlockPos pPos, BlockState pBlockState) {
-        super(ModBlockEntityType.CHEMPLANT_ENTITY.get(), pPos, pBlockState);
+        super(HBMTiles.CHEMPLANT_ENTITY.get(), pPos, pBlockState);
         this.items = NonNullList.withSize(20, ItemStack.EMPTY);
         this.slotModes = new ModeBuilder().addModes(4,Mode.BOTH,4,Mode.OUTPUT,2,Mode.INPUT,2,Mode.OUTPUT,6,Mode.INPUT,2,Mode.OUTPUT).get();
         this.fluidHandler = new BasicFluidHandler().addTanks(2, maxFluid, Mode.INPUT).addTanks(2, maxFluid, Mode.OUTPUT);
@@ -168,7 +168,8 @@ public class ChemplantEntity extends DummyableBlockEntity {
         }
     }
 
-    protected AudioWrapper createAudioLoop(){
+    @Override
+    public AudioWrapper createAudioLoop(){
         return new AudioWrapper(ModSounds.BLOCK_CHEMPLANT_OPERATE.get(), SoundSource.BLOCKS);
     }
 

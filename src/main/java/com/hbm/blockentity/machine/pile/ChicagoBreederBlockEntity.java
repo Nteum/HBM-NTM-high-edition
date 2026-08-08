@@ -1,7 +1,7 @@
 package com.hbm.blockentity.machine.pile;
 
 import com.hbm.block.machine.pile.ChicagoPileStateProperties;
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.item.research.ItemPileRod;
 import com.hbm.registries.ModBlocks;
 import net.minecraft.core.BlockPos;
@@ -26,7 +26,7 @@ public class ChicagoBreederBlockEntity extends ChicagoPileBlockEntity {
     private int lastNeutrons;
 
     public ChicagoBreederBlockEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntityType.CHICAGO_BREEDER.get(), pos, state);
+        super(HBMTiles.CHICAGO_BREEDER.get(), pos, state);
     }
 
     public void setBaseItem(ItemStack stack) {

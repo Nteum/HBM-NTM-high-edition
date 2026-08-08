@@ -1,7 +1,7 @@
 package com.hbm.blockentity.machine;
 
 import com.hbm.block.machine.generator.BlockPWR;
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -11,7 +11,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
@@ -30,7 +29,7 @@ public class PWRBlockEntity extends BlockEntity {
     private PWRControllerBlockEntity cachedCore;
 
     public PWRBlockEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntityType.PWR_BLOCK_ENTITY.get(), pos, state);
+        super(HBMTiles.PWR_BLOCK_ENTITY.get(), pos, state);
     }
 
     public void setStoredBlock(@Nullable Block block) {

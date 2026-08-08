@@ -1,6 +1,6 @@
 package com.hbm.gui.menu;
 
-import com.hbm.gui.ModMenuType;
+import com.hbm.gui.HBMMenus;
 import com.hbm.item.rbmk.ItemRBMKFuelRod;
 import com.hbm.blockentity.machine.rbmk.RBMKFuelChannelEntity;
 import com.hbm.registries.ModBlocks;
@@ -55,7 +55,7 @@ public class RBMKFuelChannelMenu extends BaseMachineMenu {
     }
 
     public RBMKFuelChannelMenu(int containerId, Inventory playerInventory, RBMKFuelChannelEntity channel, ContainerData data) {
-        super(ModMenuType.RBMK_FUEL_CHANNEL_MENU.get(), containerId, channel != null ? channel : new SimpleContainer(SLOT_COUNT), data);
+        super(HBMMenus.RBMK_FUEL_CHANNEL_MENU.get(), containerId, channel != null ? channel : new SimpleContainer(SLOT_COUNT), data);
         this.access = channel != null && channel.getLevel() != null
                 ? ContainerLevelAccess.create(channel.getLevel(), channel.getBlockPos())
                 : ContainerLevelAccess.NULL;

@@ -1,7 +1,7 @@
 package com.hbm.blockentity.machine.rbmk;
 
 import com.hbm.api.Mode;
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.blockentity.base.BaseMachineBlockEntity;
 import com.hbm.item.rbmk.ItemRBMKFuelRod;
 import net.minecraft.core.BlockPos;
@@ -15,7 +15,7 @@ import net.minecraft.world.level.block.state.BlockState;
 public class RBMKStorageEntity extends BaseMachineBlockEntity {
 
     public RBMKStorageEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntityType.RBMK_STORAGE_ENTITY.get(), pos, state);
+        super(HBMTiles.RBMK_STORAGE_ENTITY.get(), pos, state);
         this.items = NonNullList.withSize(12, ItemStack.EMPTY);
         this.slotModes = java.util.Collections.nCopies(12, Mode.BOTH);
     }

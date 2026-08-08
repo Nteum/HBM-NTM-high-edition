@@ -1,6 +1,6 @@
 package com.hbm.gui.menu;
 
-import com.hbm.gui.ModMenuType;
+import com.hbm.gui.HBMMenus;
 import com.hbm.blockentity.machine.icf.ICFPressBlockEntity;
 
 import com.hbm.item.icf.ItemICFPellet;
@@ -25,7 +25,7 @@ public class ICFPressMenu extends BaseMachineMenu {
     }
 
     public ICFPressMenu(int containerId, Inventory inventory, Container container, ContainerData data) {
-        super(ModMenuType.ICF_PRESS_MENU.get(), containerId, container, data);
+        super(HBMMenus.ICF_PRESS_MENU.get(), containerId, container, data);
         this.slotNum = SLOT_COUNT;
         this.addSlot(new Slot(container, ICFPressBlockEntity.SLOT_EMPTY, 98, 17));
         this.addSlot(new Slot(container, ICFPressBlockEntity.SLOT_OUTPUT, 98, 53));

@@ -23,12 +23,12 @@ import com.hbm.main.ClientEventHandler;
 import com.hbm.main.ServerEventHandler;
 import com.hbm.registries.*;
 import com.hbm.Inventory.fluid.ModFluids;
-import com.hbm.network.ModMessages;
+import com.hbm.core.network.HBMNetwork;
 import com.hbm.particle.ModParticleTypes;
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.datagen.*;
 import com.hbm.entity.ModEntityType;
-import com.hbm.gui.ModMenuType;
+import com.hbm.gui.HBMMenus;
 import com.hbm.Inventory.recipe.CrackingRecipes;
 import com.hbm.Inventory.recipe.ModRecipes;
 import com.hbm.reactor.rbmk.RBMKManager;
@@ -98,7 +98,7 @@ public class HBM {
         ModBlocks.register(modEventBus);
         ModTabs.CREATIVE_MODE_TABS.register(modEventBus);
 //        ModBlockEntityType.REGISTER.register(modEventBus);
-        ModBlockEntityType.registerBus(modEventBus);
+        HBMTiles.registerBus(modEventBus);
         ModRecipes.RECIPE_TYPE.register(modEventBus);
         ModRecipes.SERIALIZER.register(modEventBus);
         ModFluids.register(modEventBus);
@@ -107,7 +107,7 @@ public class HBM {
         ModFeatures.register(modEventBus);
         ModStructureProcessors.STRUCTURE_PROCESSORS.register(modEventBus);
 //        ModMenuType.MOD_MENU_TYPES.register(modEventBus);
-        ModMenuType.registerBus(modEventBus);
+        HBMMenus.registerBus(modEventBus);
         ModEffects.register(modEventBus);
         BigExplosivesMod.register(modEventBus);
         BallistixCompat.register(modEventBus);
@@ -118,7 +118,7 @@ public class HBM {
 
     private void commonSetup(final FMLCommonSetupEvent event) {
         if (!CONFIG_PATH.toFile().exists()) CONFIG_PATH.toFile().mkdir();
-        ModMessages.register(); //注册所有的消息
+        HBMNetwork.register(); //注册所有的消息
         TransmitterNetworkRegistry.initiate(); //注册传输网络系统
         RBMKManager.init();
         PileNeutronTicker.init();

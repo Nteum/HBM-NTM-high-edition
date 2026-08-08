@@ -2,7 +2,7 @@ package com.hbm.gui.menu;
 
 import com.hbm.blockentity.machine.IronCrateBlockEntity;
 import com.hbm.blockentity.machine.SteelCrateBlockEntity;
-import com.hbm.gui.ModMenuType;
+import com.hbm.gui.HBMMenus;
 import com.hbm.registries.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
@@ -38,7 +38,7 @@ public class SteelCrateMenu extends AbstractContainerMenu {
     }
 
     public SteelCrateMenu(int containerId, Inventory inventory, BlockEntity entity) {
-        super(ModMenuType.STEEL_CRATE_MENU.get(), containerId);
+        super(HBMMenus.STEEL_CRATE_MENU.get(), containerId);
         if (entity instanceof IronCrateBlockEntity crate) {
             this.blockEntity = crate;
         } else {

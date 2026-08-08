@@ -4,7 +4,7 @@ import com.hbm.HBMLang;
 import com.hbm.api.energy.fe.HBMEnergyStorage;
 import com.hbm.api.energy.ItemStackEnergyHandler;
 import com.hbm.block.machine.BlockBattery;
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.capabilities.ItemCapabilityWrapper;
 import com.hbm.item.BlockItemHBM;
 import com.hbm.utils.ItemDataUtils;
@@ -70,7 +70,7 @@ public class BatteryBlockItem extends BlockItemHBM {
         ItemStack itemInHand = pContext.getItemInHand();
         CompoundTag dataMapIfPresent = ItemDataUtils.getDataMapIfPresent(itemInHand);
         if (dataMapIfPresent != null){
-            setBlockEntityData(itemInHand, ModBlockEntityType.BATTERY_ENTITY.get(), dataMapIfPresent);
+            setBlockEntityData(itemInHand, HBMTiles.BATTERY_ENTITY.get(), dataMapIfPresent);
         }
         return super.place(pContext);
     }

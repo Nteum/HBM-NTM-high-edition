@@ -1,7 +1,7 @@
 package com.hbm.gui.menu;
 
 import com.hbm.blockentity.machine.rbmk.RBMKPeripheralEntity;
-import com.hbm.gui.ModMenuType;
+import com.hbm.gui.HBMMenus;
 import com.hbm.reactor.rbmk.RBMKPeripheralType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
@@ -77,7 +77,7 @@ public class RBMKPeripheralMenu extends BaseMachineMenu {
     }
 
     private RBMKPeripheralMenu(int containerId, Inventory playerInventory, RBMKPeripheralEntity peripheral, BlockPos pos, Container container, ContainerData data) {
-        super(ModMenuType.RBMK_PERIPHERAL_MENU.get(), containerId, container, data);
+        super(HBMMenus.RBMK_PERIPHERAL_MENU.get(), containerId, container, data);
         this.slotNum = 0;
         this.peripheral = peripheral;
         this.pos = pos;

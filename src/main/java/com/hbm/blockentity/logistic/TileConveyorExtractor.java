@@ -6,7 +6,7 @@ import com.hbm.Inventory.HBMUpgrade;
 import com.hbm.Inventory.filter.HBMFilter;
 import com.hbm.Inventory.filter.ItemFilterWrapper;
 import com.hbm.block.HBMBlockProperties;
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.gui.menu.MenuConveyorExtractor;
 import com.hbm.utils.DirectionUtils;
 import com.hbm.utils.InventoryUtils;
@@ -51,7 +51,7 @@ public class TileConveyorExtractor extends TileConveyorMachine {
         }
     };
     public TileConveyorExtractor(BlockPos pos, BlockState state) {
-        super(ModBlockEntityType.TILE_CONVEYOR_EXTRACTOR.get(), pos, state);
+        super(HBMTiles.TILE_CONVEYOR_EXTRACTOR.get(), pos, state);
         this.itemFilter = HBMFilter.create(9);
         this.items = new ItemStackHandler(20){
             @Override

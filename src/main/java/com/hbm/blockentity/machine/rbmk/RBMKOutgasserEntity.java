@@ -1,7 +1,7 @@
 package com.hbm.blockentity.machine.rbmk;
 
 import com.hbm.api.Mode;
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.blockentity.base.BaseMachineBlockEntity;
 import com.hbm.reactor.rbmk.RBMKColumnState;
 import com.hbm.reactor.rbmk.RBMKLevelContext;
@@ -22,7 +22,7 @@ public class RBMKOutgasserEntity extends BaseMachineBlockEntity implements RBMKT
     private double progress;
 
     public RBMKOutgasserEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntityType.RBMK_OUTGASSER_ENTITY.get(), pos, state);
+        super(HBMTiles.RBMK_OUTGASSER_ENTITY.get(), pos, state);
         this.items = NonNullList.withSize(2, ItemStack.EMPTY);
         this.slotModes = java.util.List.of(Mode.INPUT, Mode.OUTPUT);
     }

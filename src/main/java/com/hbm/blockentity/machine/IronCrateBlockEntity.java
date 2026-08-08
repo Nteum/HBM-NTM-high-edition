@@ -1,6 +1,6 @@
 package com.hbm.blockentity.machine;
 
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.blockentity.base.BaseMachineBlockEntity;
 import com.hbm.gui.menu.IronCrateMenu;
 import net.minecraft.core.BlockPos;
@@ -25,7 +25,7 @@ public class IronCrateBlockEntity extends BaseMachineBlockEntity {
     private final int slotCount;
 
     public IronCrateBlockEntity(BlockPos pos, BlockState state) {
-        this(ModBlockEntityType.IRON_CRATE_ENTITY.get(), pos, state, DEFAULT_SLOT_COUNT);
+        this(HBMTiles.IRON_CRATE_ENTITY.get(), pos, state, DEFAULT_SLOT_COUNT);
     }
 
     protected IronCrateBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state, int slotCount) {

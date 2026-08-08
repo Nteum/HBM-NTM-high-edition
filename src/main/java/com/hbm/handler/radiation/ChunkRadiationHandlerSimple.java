@@ -2,7 +2,7 @@ package com.hbm.handler.radiation;
 
 
 import com.hbm.config.RadiationConfig;
-import com.hbm.network.ModMessages;
+import com.hbm.core.network.HBMNetwork;
 import com.hbm.network.packet.toclient.AuxParticlePacket;
 import com.hbm.registries.ModBlocks;
 import net.minecraft.core.BlockPos;
@@ -117,7 +117,7 @@ public class ChunkRadiationHandlerSimple extends ChunkRadiationHandler {
 
 							//向附近玩家的客户端广播消息。
 							if (level instanceof ServerLevel serverLevel) {
-								Packet<?> packet = ModMessages.netHandler.toVanillaPacket(new AuxParticlePacket(x, y, z, 3), NetworkDirection.PLAY_TO_CLIENT);
+								Packet<?> packet = HBMNetwork.netHandler.toVanillaPacket(new AuxParticlePacket(x, y, z, 3), NetworkDirection.PLAY_TO_CLIENT);
 								serverLevel.getServer().getPlayerList().broadcast(null,x,y,z,100,serverLevel.dimension(),packet);
 							}
 						}

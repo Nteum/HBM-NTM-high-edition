@@ -10,13 +10,13 @@ import com.hbm.api.energy.TransmitUtils;
 import com.hbm.api.fluid.BasicFluidHandler;
 import com.hbm.api.fluid.VisitRestrictWrapper;
 import com.hbm.api.inventory.ModeBuilder;
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.blockentity.base.DummyableBlockEntity;
 import com.hbm.blockentity.base.TileProxyBase;
 import com.hbm.gui.menu.GasTurbineMenu;
 import com.hbm.registries.HBMCaps;
 import com.hbm.registries.ModBlocks;
-import com.hbm.utils.multiblock.MultiblockData;
+import com.hbm.core.contents.multiblock.MultiblockData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
@@ -87,7 +87,7 @@ public class GasTurbineBlockEntity extends DummyableBlockEntity {
     private double waterToBoil;
 
     public GasTurbineBlockEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntityType.GAS_TURBINE_ENTITY.get(), pos, state);
+        super(HBMTiles.GAS_TURBINE_ENTITY.get(), pos, state);
         this.items = NonNullList.withSize(2, ItemStack.EMPTY);
         this.slotModes = new ModeBuilder()
                 .addMode(Mode.OUTPUT)

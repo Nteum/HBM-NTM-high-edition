@@ -1,7 +1,7 @@
 package com.hbm.gui.menu;
 
 import com.hbm.blockentity.machine.rbmk.RBMKControlRodEntity;
-import com.hbm.gui.ModMenuType;
+import com.hbm.gui.HBMMenus;
 import com.hbm.item.rbmk.ItemRBMKControlRod;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
@@ -38,7 +38,7 @@ public class RBMKControlRodMenu extends BaseMachineMenu {
     }
 
     public RBMKControlRodMenu(int containerId, Inventory playerInventory, Container container, ContainerData data) {
-        super(ModMenuType.RBMK_CONTROL_ROD_MENU.get(), containerId, container, data);
+        super(HBMMenus.RBMK_CONTROL_ROD_MENU.get(), containerId, container, data);
         this.slotNum = 1;
         this.addSlot(new Slot(container, 0, 80, 45) {
             @Override

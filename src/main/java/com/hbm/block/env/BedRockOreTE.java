@@ -1,7 +1,7 @@
 package com.hbm.block.env;
 
 import com.hbm.HBMKey;
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.world.feature.BedrockOreDefinition;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -38,7 +38,7 @@ public class BedRockOreTE extends BedRockOre implements EntityBlock {
         public int shape;
 
         public TileBedrockOre(BlockPos pPos, BlockState pBlockState) {
-            super(ModBlockEntityType.TILE_BEDROCK_ORE.get(), pPos, pBlockState);
+            super(HBMTiles.TILE_BEDROCK_ORE.get(), pPos, pBlockState);
             this.tier = 1;
             this.color = 0xFFFFFFFF;
             this.shape = 3;

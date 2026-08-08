@@ -1,7 +1,7 @@
 package com.hbm.blockentity.machine.rbmk;
 
 import com.hbm.block.machine.BaseSingleBlockMachine;
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.blockentity.base.UpdateableBlockEntity;
 import com.hbm.gui.menu.RBMKRadioControllerMenu;
 import com.hbm.reactor.rbmk.RBMKRadioNetwork;
@@ -32,7 +32,7 @@ public class RBMKRadioControllerEntity extends UpdateableBlockEntity implements 
     private boolean polling;
 
     public RBMKRadioControllerEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntityType.RBMK_RADIO_CONTROLLER_ENTITY.get(), pos, state);
+        super(HBMTiles.RBMK_RADIO_CONTROLLER_ENTITY.get(), pos, state);
     }
 
     @Override

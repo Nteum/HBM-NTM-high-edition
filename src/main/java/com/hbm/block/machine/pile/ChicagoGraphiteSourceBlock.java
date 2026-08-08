@@ -1,9 +1,8 @@
 package com.hbm.block.machine.pile;
 
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.blockentity.machine.pile.ChicagoPileBlockEntity;
 import com.hbm.blockentity.machine.pile.ChicagoSourceBlockEntity;
-import com.hbm.blockentity.machine.pile.ChicagoSourceBlockEntity.SourceType;
 import com.hbm.registries.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
@@ -30,7 +29,7 @@ public class ChicagoGraphiteSourceBlock extends ChicagoMachineBlock {
 
     @Override
     protected <T extends BlockEntity> BlockEntityTicker<T> createTicker(Level level, BlockEntityType<T> type) {
-        return createTickerHelper(type, ModBlockEntityType.CHICAGO_SOURCE.get(), ChicagoPileBlockEntity::serverTick);
+        return createTickerHelper(type, HBMTiles.CHICAGO_SOURCE.get(), ChicagoPileBlockEntity::serverTick);
     }
 
     @Override

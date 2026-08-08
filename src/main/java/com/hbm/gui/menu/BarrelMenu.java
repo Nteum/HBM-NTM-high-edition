@@ -1,21 +1,16 @@
 package com.hbm.gui.menu;
 
 import com.hbm.HBMKey;
-import com.hbm.api.Mode;
-import com.hbm.blockentity.machine.BarrelEntity;
-import com.hbm.gui.ModMenuType;
+import com.hbm.gui.HBMMenus;
 import com.hbm.gui.menu.slot.OutputSlot;
-import com.hbm.gui.menu.slot.UpgradeSlot;
-import com.hbm.network.ModMessages;
+import com.hbm.core.network.HBMNetwork;
 import com.hbm.network.packet.toserver.C2SSyncTileMessage;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import org.jetbrains.annotations.Nullable;
 
 public class BarrelMenu extends BaseMachineMenu implements ITileAccess{
     public BlockEntity be;
@@ -23,7 +18,7 @@ public class BarrelMenu extends BaseMachineMenu implements ITileAccess{
         this( pContainerId, pPlayerInventory, new SimpleContainer(4), new SimpleContainerData(1));
     }
     public BarrelMenu(int pContainerId, Inventory pPlayerInventory,Container inContainer, ContainerData containerData1) {
-        super(ModMenuType.BARREL_MENU.get(), pContainerId, inContainer, containerData1);
+        super(HBMMenus.BARREL_MENU.get(), pContainerId, inContainer, containerData1);
         this.slotNum = 4;
         this.addSlot(new Slot(container, 0, 53 - 18, 17));
         this.addSlot(new OutputSlot(container, 1, 53 - 18, 53));
@@ -49,6 +44,6 @@ public class BarrelMenu extends BaseMachineMenu implements ITileAccess{
     public void syncTile(){
         CompoundTag tag = new CompoundTag();
         tag.putInt(HBMKey.MODE, getMode());
-        ModMessages.sendToServer(new C2SSyncTileMessage(be.getBlockPos(), tag));
+        HBMNetwork.sendToServer(new C2SSyncTileMessage(be.getBlockPos(), tag));
     }
 }

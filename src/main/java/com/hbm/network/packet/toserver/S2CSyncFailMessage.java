@@ -1,7 +1,7 @@
 package com.hbm.network.packet.toserver;
 
 import com.hbm.blockentity.base.UpdateableBlockEntity;
-import com.hbm.network.IHBMMessage;
+import com.hbm.core.network.IHBMMessage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.level.Level;

@@ -5,11 +5,11 @@
   },
   "children": {
     "anvil_model": {
-      "loader": "forge:obj",
+      "loader": "hbm:multi_parts_obj",
       "model": "hbm:models/block/anvil_block.obj",
       "flip_v": true,
       "textures": {
-        "default": "hbm:block/anvil_desh"
+        "texture0": "hbm:block/anvil_desh"
       }
     }
   },

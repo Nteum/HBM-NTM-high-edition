@@ -58,9 +58,9 @@ public class ExtendedFluidType extends FluidType {
     public final Vector3f fogColor;
 
     //原版水的静止、流动、覆盖的灰度贴图
-    public static final ResourceLocation WATER_STILL_TEX = new ResourceLocation("block/water_still");
-    public static final ResourceLocation WATER_FLOWING_TEX = new ResourceLocation("block/water_flow");
-    public static final ResourceLocation WATER_OVERLAY = new ResourceLocation("block/water_still");
+    public static final ResourceLocation WATER_STILL_TEX = ResourceLocation.parse("block/water_still");
+    public static final ResourceLocation WATER_FLOWING_TEX = ResourceLocation.parse("block/water_flow");
+    public static final ResourceLocation WATER_OVERLAY = ResourceLocation.parse("block/water_still");
 
     // 流体GUI
     public static final ResourceLocation GUI_WATER = HBM.rl("textures/gui/fluids/water.png");

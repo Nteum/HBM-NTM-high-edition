@@ -1,10 +1,8 @@
 package com.hbm.gui.menu;
 
 import com.hbm.block.machine.MachineOreSlopper;
-import com.hbm.blockentity.machine.TileMinerLarge;
 import com.hbm.blockentity.machine.TileOreSloppper;
-import com.hbm.gui.ModMenuType;
-import com.hbm.gui.menu.slot.OutputSlot;
+import com.hbm.gui.HBMMenus;
 import com.hbm.registries.ModItems;
 import com.hbm.registries.ModTags;
 import com.hbm.utils.WorldUtils;
@@ -12,18 +10,15 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.ContainerData;
-import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
-import org.jetbrains.annotations.Nullable;
 
 public class MenuOreSlopper extends BaseMachineMenu<TileOreSloppper> {
     public MenuOreSlopper(int pContainerId, Inventory playerInventory, TileOreSloppper blockEntity, ContainerData containerData1) {
-        super(ModMenuType.typesMaps.get("menu_" + MachineOreSlopper.name).get(), pContainerId, playerInventory, blockEntity, containerData1);
+        super(HBMMenus.typesMaps.get("menu_" + MachineOreSlopper.name).get(), pContainerId, playerInventory, blockEntity, containerData1);
         ItemStackHandler items = blockEntity.getItems();
         // 控制物品进出由SlotItemHandler实现
         //Battery

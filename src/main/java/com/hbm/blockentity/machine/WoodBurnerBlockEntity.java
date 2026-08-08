@@ -8,7 +8,7 @@ import com.hbm.api.energy.ProxyEnergyHandler;
 import com.hbm.api.energy.TransmitUtils;
 import com.hbm.api.inventory.ModeBuilder;
 import com.hbm.block.machine.WoodBurnerBlock;
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.blockentity.base.BaseMachineBlockEntity;
 import com.hbm.registries.HBMCaps;
 import com.hbm.gui.menu.WoodBurnerMenu;
@@ -79,7 +79,7 @@ public class WoodBurnerBlockEntity extends BaseMachineBlockEntity {
     private boolean enabled = true;
 
     public WoodBurnerBlockEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntityType.WOOD_BURNER_ENTITY.get(), pos, state);
+        super(HBMTiles.WOOD_BURNER_ENTITY.get(), pos, state);
         this.items = NonNullList.withSize(3, ItemStack.EMPTY);
         this.slotModes = new ModeBuilder()
                 .addMode(Mode.INPUT)

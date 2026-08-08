@@ -5,7 +5,7 @@ import com.hbm.HBMLang;
 import com.hbm.api.Mode;
 import com.hbm.api.fluid.*;
 import com.hbm.block.machine.BlockFluidBarrel;
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.blockentity.base.BaseMachineBlockEntity;
 import com.hbm.gui.menu.BarrelMenu;
 import com.hbm.gui.menu.IPacketUpdate;
@@ -56,7 +56,7 @@ public class BarrelEntity extends BaseMachineBlockEntity implements IPacketUpdat
         }
     };
     public BarrelEntity(BlockPos pPos, BlockState pBlockState) {
-        super(ModBlockEntityType.BARREL_ENTITY.get(), pPos, pBlockState);
+        super(HBMTiles.BARREL_ENTITY.get(), pPos, pBlockState);
         this.items = NonNullList.withSize(4,ItemStack.EMPTY);
         this.properties = ((BlockFluidBarrel)pBlockState.getBlock()).barrelProperties;
         this.fluidHandler = new SingleFluidHandler(properties.capacity, Mode.BOTH);

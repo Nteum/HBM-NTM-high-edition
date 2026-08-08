@@ -1,7 +1,7 @@
 package com.hbm.blockentity.machine.rbmk;
 
 import com.hbm.block.machine.rbmk.BlockRBMKBase;
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.blockentity.base.UpdateableBlockEntity;
 import com.hbm.reactor.rbmk.RBMKColumnState;
 import com.hbm.reactor.rbmk.RBMKLinkable;
@@ -33,7 +33,7 @@ public class RBMKNumitronEntity extends UpdateableBlockEntity implements RBMKLin
     private final int[] colors = {0x55FF55, 0x55FF55};
 
     public RBMKNumitronEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntityType.RBMK_NUMITRON_ENTITY.get(), pos, state);
+        super(HBMTiles.RBMK_NUMITRON_ENTITY.get(), pos, state);
     }
 
     @Override

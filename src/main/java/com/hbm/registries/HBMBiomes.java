@@ -19,7 +19,7 @@ public class HBMBiomes {
 
     public static ResourceKey<Biome> register(String name)
     {
-        return ResourceKey.create(Registries.BIOME, new ResourceLocation(HBM.MODID, name));
+        return ResourceKey.create(Registries.BIOME, HBM.rl(name));
     }
     public static void setUp(){
         // Weights are kept intentionally low as we add minimal biomes

@@ -1,7 +1,7 @@
 package com.hbm.block.logistic;
 
 import com.hbm.block.base.BlockContainerBase;
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.blockentity.base.UpdateableBlockEntity;
 import com.hbm.blockentity.logistic.TileConveyorRouter;
 import net.minecraft.core.BlockPos;
@@ -35,6 +35,6 @@ public class ConveyorRouter extends BlockContainerBase {
         if (pLevel.isClientSide) {
             return null;
         }
-        return createTickerHelper(pBlockEntityType, ModBlockEntityType.TILE_CONVEYOR_ROUTER.get(), UpdateableBlockEntity::serverTicker);
+        return createTickerHelper(pBlockEntityType, HBMTiles.TILE_CONVEYOR_ROUTER.get(), UpdateableBlockEntity::serverTicker);
     }
 }

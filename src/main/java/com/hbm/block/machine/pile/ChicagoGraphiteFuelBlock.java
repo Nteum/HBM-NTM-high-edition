@@ -1,6 +1,6 @@
 package com.hbm.block.machine.pile;
 
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.blockentity.machine.pile.ChicagoFuelBlockEntity;
 import com.hbm.blockentity.machine.pile.ChicagoPileBlockEntity;
 import com.hbm.registries.ModBlocks;
@@ -30,7 +30,7 @@ public class ChicagoGraphiteFuelBlock extends ChicagoMachineBlock {
 
     @Override
     protected <T extends BlockEntity> BlockEntityTicker<T> createTicker(Level level, BlockEntityType<T> type) {
-        return createTickerHelper(type, ModBlockEntityType.CHICAGO_FUEL.get(), ChicagoPileBlockEntity::serverTick);
+        return createTickerHelper(type, HBMTiles.CHICAGO_FUEL.get(), ChicagoPileBlockEntity::serverTick);
     }
 
     @Override

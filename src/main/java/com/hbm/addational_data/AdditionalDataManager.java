@@ -4,22 +4,18 @@ import com.hbm.HBM;
 import com.hbm.addational_data.chunk.ChunkAdditionalDataProvider;
 import com.hbm.addational_data.chunk.IChunkAdditionalData;
 import com.hbm.addational_data.chunk.RadiationManager;
-import com.hbm.addational_data.entity.EntityAdditionalDataImpl;
 import com.hbm.addational_data.entity.EntityAdditionalDataProvider;
 import com.hbm.addational_data.entity.EntityEffectHandler;
 import com.hbm.addational_data.entity.IEntityAdditionalData;
-import com.hbm.network.ModMessages;
+import com.hbm.core.network.HBMNetwork;
 import com.hbm.network.packet.toclient.S2CEntitySyncPacket;
-import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraftforge.common.capabilities.*;
-import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
@@ -29,7 +25,6 @@ import net.minecraftforge.event.level.*;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.common.Mod;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
@@ -216,7 +211,7 @@ public class AdditionalDataManager {
     }
     public static void syncEntityData(Entity entity){
         getAdditionalData(entity).ifPresent(entityData -> {
-            if (entityData.shouldSync()) ModMessages.sendToEntity(new S2CEntitySyncPacket(entity), entity);
+            if (entityData.shouldSync()) HBMNetwork.sendToEntity(new S2CEntitySyncPacket(entity), entity);
         });
     }
 }

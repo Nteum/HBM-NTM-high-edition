@@ -5,7 +5,7 @@ import com.hbm.Inventory.fluid.ModFluids;
 import com.hbm.api.Mode;
 import com.hbm.api.fluid.BasicFluidHandler;
 import com.hbm.block.machine.BlockZirnoxReactor;
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.blockentity.base.DummyableBlockEntity;
 import com.hbm.gui.menu.ZirnoxMenu;
 
@@ -14,8 +14,8 @@ import com.hbm.item.zirnox.ItemZirnoxRod.ZirnoxRodType;
 import com.hbm.registries.ModBlocks;
 import com.hbm.registries.ModItems;
 import com.hbm.utils.InventoryUtils;
-import com.hbm.utils.multiblock.DummableHelper;
-import com.hbm.utils.multiblock.MultiblockData;
+import com.hbm.core.contents.multiblock.DummableHelper;
+import com.hbm.core.contents.multiblock.MultiblockData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
@@ -74,7 +74,7 @@ public class ZirnoxReactorBlockEntity extends DummyableBlockEntity {
     };
 
     public ZirnoxReactorBlockEntity(BlockPos pPos, BlockState pState) {
-        super(ModBlockEntityType.ZIRNOX_REACTOR_ENTITY.get(), pPos, pState);
+        super(HBMTiles.ZIRNOX_REACTOR_ENTITY.get(), pPos, pState);
         this.items = NonNullList.withSize(28, ItemStack.EMPTY);
         this.multiblockData = MultiblockData.mapping.get(ModBlocks.machine_zirnox.get());
         this.capabilitiesContent.addCapability(ForgeCapabilities.FLUID_HANDLER, this.fluidHandler);

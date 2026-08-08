@@ -3,7 +3,7 @@ package com.hbm.blockentity.machine.rbmk;
 import com.hbm.HBM;
 import com.hbm.api.Mode;
 import com.hbm.api.inventory.ModeBuilder;
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.blockentity.base.BaseMachineBlockEntity;
 import com.hbm.item.rbmk.ItemRBMKFuelRod;
 import com.hbm.reactor.rbmk.RBMKColumnState;
@@ -50,7 +50,7 @@ public class RBMKFuelChannelEntity extends BaseMachineBlockEntity {
     private final int[] dataSlots = new int[12];
 
     public RBMKFuelChannelEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntityType.RBMK_FUEL_CHANNEL_ENTITY.get(), pos, state);
+        super(HBMTiles.RBMK_FUEL_CHANNEL_ENTITY.get(), pos, state);
         this.items = NonNullList.withSize(2, ItemStack.EMPTY);
         this.slotModes = new ModeBuilder().addMode(Mode.INPUT).addMode(Mode.OUTPUT).get();
     }

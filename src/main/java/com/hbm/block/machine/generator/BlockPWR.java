@@ -1,7 +1,7 @@
 package com.hbm.block.machine.generator;
 
 import com.hbm.block.base.BlockContainerBase;
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.blockentity.machine.PWRBlockEntity;
 import com.hbm.blockentity.machine.PWRControllerBlockEntity;
 import net.minecraft.core.BlockPos;
@@ -50,7 +50,7 @@ public class BlockPWR extends BlockContainerBase {
         if (pLevel.isClientSide) {
             return null;
         }
-        return createTickerHelper(pBlockEntityType, ModBlockEntityType.PWR_BLOCK_ENTITY.get(), PWRBlockEntity::serverTick);
+        return createTickerHelper(pBlockEntityType, HBMTiles.PWR_BLOCK_ENTITY.get(), PWRBlockEntity::serverTick);
     }
 
     @Override

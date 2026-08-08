@@ -1,27 +1,20 @@
 package com.hbm.blockentity.logistic;
 
 import com.hbm.HBMKey;
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.blockentity.base.BasePipeBlockEntity;
 import com.hbm.utils.transport_net.FluidBackupSystem;
-import com.hbm.utils.transport_net.FluidNetwork;
-import com.hbm.utils.transport_net.FluidNetworkSystem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
-import net.minecraft.world.level.block.BarrelBlock;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
-import net.minecraftforge.client.model.data.ModelData;
-import net.minecraftforge.client.model.obj.ObjLoader;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.templates.FluidTank;
 import org.jetbrains.annotations.NotNull;
 
 public class PipeEntity extends BasePipeBlockEntity {
@@ -30,7 +23,7 @@ public class PipeEntity extends BasePipeBlockEntity {
     @OnlyIn(Dist.CLIENT) private Fluid clientFluid = Fluids.EMPTY;
 
     public PipeEntity(BlockPos pPos, BlockState pBlockState) {
-        super(ModBlockEntityType.PIPE_ENTITY.get(), pPos, pBlockState);
+        super(HBMTiles.PIPE_ENTITY.get(), pPos, pBlockState);
     }
 
     public Fluid getFluid(){

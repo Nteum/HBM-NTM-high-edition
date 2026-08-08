@@ -1,7 +1,7 @@
 package com.hbm.gui.menu;
 
 import com.hbm.blockentity.logistic.TileConveyorRouter;
-import com.hbm.gui.ModMenuType;
+import com.hbm.gui.HBMMenus;
 import com.hbm.gui.menu.slot.FilterSlot;
 import com.hbm.utils.WorldUtils;
 import net.minecraft.client.Minecraft;
@@ -16,7 +16,7 @@ import net.minecraftforge.items.ItemStackHandler;
 
 public class MenuConveyorRouter extends BaseMachineMenu<TileConveyorRouter> {
     public MenuConveyorRouter(int pContainerId, Inventory playerInventory, TileConveyorRouter blockEntity, ContainerData containerData1) {
-        super(ModMenuType.MENU_CONVEYOR_ROUTER.get(), pContainerId, playerInventory, blockEntity, containerData1);
+        super(HBMMenus.MENU_CONVEYOR_ROUTER.get(), pContainerId, playerInventory, blockEntity, containerData1);
 
         ItemStackHandler items = blockEntity.getItems();
         for(int j = 0; j < 2; j++) {

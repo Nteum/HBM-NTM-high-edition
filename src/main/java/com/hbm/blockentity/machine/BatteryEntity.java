@@ -4,7 +4,7 @@ import com.hbm.HBMKey;
 import com.hbm.HBMLang;
 import com.hbm.api.energy.*;
 import com.hbm.block.machine.BlockBattery;
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.blockentity.base.BaseMachineBlockEntity;
 import com.hbm.registries.HBMCaps;
 import com.hbm.gui.menu.BatteryMenu;
@@ -64,7 +64,7 @@ public class BatteryEntity extends BaseMachineBlockEntity {
         }
     };
     public BatteryEntity(BlockPos pPos, BlockState pBlockState) {
-        super(ModBlockEntityType.BATTERY_ENTITY.get(), pPos, pBlockState);
+        super(HBMTiles.BATTERY_ENTITY.get(), pPos, pBlockState);
         this.items = NonNullList.withSize(2, ItemStack.EMPTY);
         BlockBattery block = (BlockBattery)pBlockState.getBlock();
         type = block.type;

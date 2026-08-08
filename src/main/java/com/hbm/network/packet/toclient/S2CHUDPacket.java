@@ -1,14 +1,11 @@
 package com.hbm.network.packet.toclient;
 
-import com.hbm.addational_data.AdditionalDataManager;
 import com.hbm.network.ClientMsgHandler;
-import com.hbm.network.IHBMMessage;
+import com.hbm.core.network.IHBMMessage;
 import com.hbm.render.hud.ClientHUDDataCache;
-import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.Entity;
 import net.minecraftforge.network.NetworkEvent;
 
 import java.util.function.Supplier;

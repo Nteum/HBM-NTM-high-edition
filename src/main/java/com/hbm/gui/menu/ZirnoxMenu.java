@@ -1,6 +1,6 @@
 package com.hbm.gui.menu;
 
-import com.hbm.gui.ModMenuType;
+import com.hbm.gui.HBMMenus;
 import com.hbm.gui.menu.slot.OutputSlot;
 import com.hbm.item.zirnox.ItemZirnoxRod;
 import com.hbm.Inventory.fluid.ModFluids;
@@ -33,7 +33,7 @@ public class ZirnoxMenu extends BaseMachineMenu {
     }
 
     public ZirnoxMenu(int containerId, Inventory playerInventory, Container container, ContainerData data) {
-        super(ModMenuType.ZIRNOX_MENU.get(), containerId, container, data);
+        super(HBMMenus.ZIRNOX_MENU.get(), containerId, container, data);
         slotNum = SLOT_COUNT;
 
         // Fuel rods

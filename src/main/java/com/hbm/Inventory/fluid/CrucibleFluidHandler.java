@@ -1,5 +1,7 @@
 package com.hbm.Inventory.fluid;
 
+import com.hbm.api.Mode;
+import com.hbm.api.fluid.IExtendedFluidHandler;
 import com.hbm.datagen.recipe.ingredient.FluidStackIngredient;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
@@ -7,15 +9,29 @@ import net.minecraft.nbt.Tag;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.fluids.capability.templates.FluidTank;
 import org.jetbrains.annotations.NotNull;
 
-public class CrucibleFluidHandler implements IFluidHandler, INBTSerializable<CompoundTag> {
+import java.util.List;
+
+public class CrucibleFluidHandler implements IExtendedFluidHandler, INBTSerializable<CompoundTag> {
     private final NonNullList<FluidStack> content;
     private final int capacity;
     public CrucibleFluidHandler(int capacity){
         this.content = NonNullList.create();
         this.capacity = capacity;
     }
+
+    @Override
+    public List<FluidTank> getFluidTanks() {
+        return null;
+    }
+
+    @Override
+    public Mode getMode(int tank) {
+        return null;
+    }
+
     @Override
     public int getTanks() {
         return 1;
@@ -218,5 +234,10 @@ public class CrucibleFluidHandler implements IFluidHandler, INBTSerializable<Com
             // 否则在该位置插入新的一层
             this.content.add(n, fluidStack.copy());
         }
+    }
+
+    @Override
+    public void onContentsChanged() {
+
     }
 }

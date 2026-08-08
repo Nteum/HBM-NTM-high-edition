@@ -2,7 +2,7 @@ package com.hbm.blockentity.machine.rbmk;
 
 import com.hbm.api.Mode;
 import com.hbm.block.machine.rbmk.BlockRBMKControlRod;
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.blockentity.base.BaseMachineBlockEntity;
 import com.hbm.gui.menu.RBMKControlRodMenu;
 import com.hbm.item.rbmk.ItemRBMKControlRod;
@@ -55,7 +55,7 @@ public class RBMKControlRodEntity extends BaseMachineBlockEntity {
     private double heatUpper = 600.0D;
 
     public RBMKControlRodEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntityType.RBMK_CONTROL_ROD_ENTITY.get(), pos, state);
+        super(HBMTiles.RBMK_CONTROL_ROD_ENTITY.get(), pos, state);
         this.items = NonNullList.withSize(SLOT_COUNT, ItemStack.EMPTY);
         this.slotModes = java.util.List.of(Mode.BOTH);
         this.currentLevel = deriveInsertionFromState();

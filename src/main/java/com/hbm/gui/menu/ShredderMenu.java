@@ -1,6 +1,6 @@
 package com.hbm.gui.menu;
 
-import com.hbm.gui.ModMenuType;
+import com.hbm.gui.HBMMenus;
 import com.hbm.gui.menu.slot.BatterySlot;
 import com.hbm.gui.menu.slot.BladeSlot;
 import com.hbm.gui.menu.slot.OutputSlot;
@@ -24,7 +24,7 @@ public class ShredderMenu extends BaseMachineMenu {
     }
 
     public ShredderMenu(int id, Inventory playerInventory, Container container, ContainerData data) {
-        super(ModMenuType.SHREDDER_MENU.get(), id, container, data);
+        super(HBMMenus.SHREDDER_MENU.get(), id, container, data);
         this.slotNum = TOTAL_SLOTS;
 
         // inputs (3x3)

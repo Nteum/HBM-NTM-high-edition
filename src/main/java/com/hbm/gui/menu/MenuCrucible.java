@@ -1,8 +1,7 @@
 package com.hbm.gui.menu;
 
-import com.hbm.Inventory.fluid.CrucibleFluidHandler;
 import com.hbm.blockentity.machine.CrucibleEntity;
-import com.hbm.gui.ModMenuType;
+import com.hbm.gui.HBMMenus;
 import com.hbm.utils.WorldUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
@@ -11,14 +10,13 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
 public class MenuCrucible extends BaseMachineMenu<CrucibleEntity>{
     public CrucibleEntity be;
     public MenuCrucible(int pContainerId, Inventory pPlayerInventory, CrucibleEntity tile, ContainerData containerData) {
-        super(ModMenuType.MENU_CRUCIBLE.get(), pContainerId, tile, containerData);
+        super(HBMMenus.MENU_CRUCIBLE.get(), pContainerId, tile, containerData);
         this.slotNum = 9;
         be = tile;
         ItemStackHandler itemHandler = be.getItemHandler();

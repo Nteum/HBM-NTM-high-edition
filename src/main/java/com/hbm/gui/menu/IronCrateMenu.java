@@ -1,8 +1,7 @@
 package com.hbm.gui.menu;
 
-import com.hbm.block.machine.IronCrateBlock;
 import com.hbm.blockentity.machine.IronCrateBlockEntity;
-import com.hbm.gui.ModMenuType;
+import com.hbm.gui.HBMMenus;
 import com.hbm.registries.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
@@ -14,7 +13,6 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import org.jetbrains.annotations.NotNull;
 
@@ -39,7 +37,7 @@ public class IronCrateMenu extends AbstractContainerMenu {
     }
 
     public IronCrateMenu(int id, Inventory inventory, BlockEntity entity) {
-        super(ModMenuType.IRON_CRATE_MENU.get(), id);
+        super(HBMMenus.IRON_CRATE_MENU.get(), id);
         if (entity instanceof IronCrateBlockEntity crate) {
             this.blockEntity = crate;
         } else {

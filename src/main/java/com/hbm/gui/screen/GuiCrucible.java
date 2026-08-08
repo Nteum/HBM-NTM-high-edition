@@ -5,31 +5,22 @@ import com.hbm.HBMKey;
 import com.hbm.HBMLang;
 import com.hbm.Inventory.fluid.CrucibleFluidHandler;
 import com.hbm.Inventory.material.HBMMatter;
-import com.hbm.Inventory.recipe.ModRecipes;
 import com.hbm.Inventory.recipe.alloy.CrucibleRecipe;
 import com.hbm.blockentity.machine.CrucibleEntity;
 import com.hbm.gui.menu.MenuCrucible;
-import com.hbm.gui.screen.page.recipe.RecipePage;
 import com.hbm.gui.screen.page.recipe.RecipePageCrucible;
 import com.hbm.gui.screen.widget.BounceButton;
 import com.hbm.gui.screen.widget.MultiStateButton;
-import com.hbm.network.ModMessages;
+import com.hbm.core.network.HBMNetwork;
 import com.hbm.network.packet.toserver.C2SSyncTileMessage;
 import com.hbm.registries.HBMMatters;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.components.Button;
-import net.minecraft.client.gui.components.ImageButton;
-import net.minecraft.client.gui.screens.inventory.AbstractFurnaceScreen;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.protocol.game.ServerboundContainerButtonClickPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FastColor;
-import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.fluids.FluidStack;
 
 import java.util.ArrayList;
@@ -91,7 +82,7 @@ public class GuiCrucible extends BaseMachineGui<MenuCrucible> {
             this.recipePage.recipeChosen = null;
         }
         if (!syncTag.isEmpty()){
-            ModMessages.sendToServer(new C2SSyncTileMessage(this.menu.getPos(), syncTag));
+            HBMNetwork.sendToServer(new C2SSyncTileMessage(this.menu.getPos(), syncTag));
             syncTag = new CompoundTag();
         }
 

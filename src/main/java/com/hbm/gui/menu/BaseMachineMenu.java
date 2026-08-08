@@ -34,6 +34,10 @@ public abstract  class BaseMachineMenu <T extends BlockEntity> extends AbstractC
         this.addDataSlots(containerData1);
     }
 
+    public BaseMachineMenu(@Nullable MenuType<?> pMenuType, int id, Inventory playerInventory, FriendlyByteBuf buf){
+        super(pMenuType, id);
+    }
+
     /**
      * index排序：额外加入的物品槽...玩家物品槽...
      * */

@@ -3,7 +3,7 @@ package com.hbm.network.packet.toserver;
 import com.hbm.HBM;
 import com.hbm.blockentity.base.BaseMachineBlockEntity;
 import com.hbm.blockentity.base.UpdateableBlockEntity;
-import com.hbm.network.IHBMMessage;
+import com.hbm.core.network.IHBMMessage;
 import com.hbm.utils.WorldUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;

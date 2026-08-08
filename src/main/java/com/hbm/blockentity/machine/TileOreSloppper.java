@@ -2,28 +2,24 @@ package com.hbm.blockentity.machine;
 
 import com.hbm.HBMKey;
 import com.hbm.HBMLang;
-import com.hbm.Inventory.HBMUpgrade;
 import com.hbm.Inventory.fluid.ModFluids;
 import com.hbm.api.energy.BasicEnergyContainer;
-import com.hbm.api.energy.IEnergyHandler;
 import com.hbm.api.energy.TransmitUtils;
 import com.hbm.api.fluid.BasicFluidHandler;
 import com.hbm.block.machine.MachineOreSlopper;
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.blockentity.base.DefaultMachineBE;
-import com.hbm.blockentity.base.DummyableBlockEntity;
 import com.hbm.blockentity.interfaces.IUpgradeInfoProvider;
 import com.hbm.gui.menu.MenuOreSlopper;
-import com.hbm.item.env.ItemBedrockOre;
 import com.hbm.item.env.ItemBedrockOreCombine;
 import com.hbm.item.env.ItemBedrockOreRaw;
 import com.hbm.item.machine.ItemMachineUpgrade;
-import com.hbm.network.ModMessages;
+import com.hbm.core.network.HBMNetwork;
 import com.hbm.network.packet.toclient.S2CParticlePacket;
 import com.hbm.particle.ParticleSystem;
 import com.hbm.registries.*;
 import com.hbm.utils.InventoryUtils;
-import com.hbm.utils.multiblock.MultiblockModule;
+import com.hbm.core.contents.multiblock.MultiblockModule;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
@@ -43,7 +39,6 @@ import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.Fluids;
@@ -54,10 +49,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.wrapper.RangedWrapper;
-import net.minecraftforge.items.wrapper.RecipeWrapper;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -110,7 +103,7 @@ public class TileOreSloppper extends DefaultMachineBE implements IUpgradeInfoPro
         }
     };
     public TileOreSloppper(BlockPos pos, BlockState state) {
-        super(ModBlockEntityType.tileTypes.get("tile_" + MachineOreSlopper.name).get(), pos, state);
+        super(HBMTiles.tileTypes.get("tile_" + MachineOreSlopper.name).get(), pos, state);
     }
 
     @Override
@@ -184,7 +177,7 @@ public class TileOreSloppper extends DefaultMachineBE implements IUpgradeInfoPro
                 tag.putString(HBMKey.TYPE, "giblets");
                 tag.putInt("ent", e.getId());
                 tag.putInt("cDiv", 5);
-                ModMessages.sendToEntity(new S2CParticlePacket(tag, e.getX(), e.getY() + e.getEyeHeight() / 0.5, e.getZ()), e);
+                HBMNetwork.sendToEntity(new S2CParticlePacket(tag, e.getX(), e.getY() + e.getEyeHeight() / 0.5, e.getZ()), e);
                 // 音效
                 this.level.playSound(null, e.getOnPos(), SoundEvents.ZOMBIE_BREAK_WOODEN_DOOR, SoundSource.RECORDS , 0.2f, 0.95f + level.random.nextFloat() * 0.2f);
             }

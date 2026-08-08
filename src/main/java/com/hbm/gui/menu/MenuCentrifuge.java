@@ -2,26 +2,22 @@ package com.hbm.gui.menu;
 
 import com.hbm.block.machine.MachineCentrifuge;
 import com.hbm.blockentity.machine.TileMachineCentrifuge;
-import com.hbm.blockentity.machine.TileOreSloppper;
-import com.hbm.gui.ModMenuType;
+import com.hbm.gui.HBMMenus;
 import com.hbm.gui.menu.slot.OutputSlotItemHandler;
 import com.hbm.registries.ModTags;
 import com.hbm.utils.WorldUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.ContainerData;
-import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
-import org.jetbrains.annotations.Nullable;
 
 public class MenuCentrifuge extends BaseMachineMenu<TileMachineCentrifuge> {
     public MenuCentrifuge(int pContainerId, Inventory playerInventory, TileMachineCentrifuge blockEntity, ContainerData containerData1){
-        super(ModMenuType.getById(MachineCentrifuge.id), pContainerId, playerInventory, blockEntity, containerData1);
+        super(HBMMenus.getById(MachineCentrifuge.id), pContainerId, playerInventory, blockEntity, containerData1);
         ItemStackHandler items = blockEntity.getItems();
         // 输入槽
         this.addSlot(new SlotItemHandler(items, 0, 36, 50));

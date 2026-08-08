@@ -3,10 +3,9 @@ package com.hbm.gui.screen;
 import com.hbm.HBM;
 import com.hbm.HBMKey;
 import com.hbm.HBMLang;
-import com.hbm.blockentity.machine.PressEntity;
 import com.hbm.gui.menu.MenuConveyorRouter;
 import com.hbm.gui.screen.widget.MultiStateButton;
-import com.hbm.network.ModMessages;
+import com.hbm.core.network.HBMNetwork;
 import com.hbm.network.packet.toserver.C2SSyncTileMessage;
 import com.hbm.utils.math.BitUtil;
 import net.minecraft.client.gui.GuiGraphics;
@@ -40,7 +39,7 @@ public class GuiConveyorRouter extends BaseMachineGui<MenuConveyorRouter> {
                         multiStateButton.changeState();
                         CompoundTag tag = new CompoundTag();
                         tag.putInt(HBMKey.MODE, BitUtil.set(this.getMenu().getMode(), multiStateButton.getOrder() * 2, 2, multiStateButton.stateNow));
-                        ModMessages.sendToServer(new C2SSyncTileMessage(this.menu.getPos(), tag));
+                        HBMNetwork.sendToServer(new C2SSyncTileMessage(this.menu.getPos(), tag));
                     }
                 });
                 this.addRenderableWidget(buttons[i * 3 + j]);

@@ -1,7 +1,7 @@
 package com.hbm.blockentity.machine.rbmk;
 
 import com.hbm.block.machine.rbmk.BlockRBMKBase;
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.blockentity.base.UpdateableBlockEntity;
 import com.hbm.gui.menu.RBMKKeypadConfigMenu;
 import com.hbm.reactor.rbmk.RBMKColumnState;
@@ -49,7 +49,7 @@ public class RBMKKeypadEntity extends UpdateableBlockEntity implements RBMKLinka
     private final String[] commands = new String[CHANNELS];
 
     public RBMKKeypadEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntityType.RBMK_KEYPAD_ENTITY.get(), pos, state);
+        super(HBMTiles.RBMK_KEYPAD_ENTITY.get(), pos, state);
         for (int i = 0; i < CHANNELS; i++) {
             labels[i] = "Button " + (i + 1);
             channels[i] = "";

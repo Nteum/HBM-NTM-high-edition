@@ -1,7 +1,7 @@
 package com.hbm.gui.menu;
 
 import com.hbm.blockentity.machine.rbmk.RBMKBaseEntity;
-import com.hbm.gui.ModMenuType;
+import com.hbm.gui.HBMMenus;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -19,7 +19,7 @@ public class RBMKBaseMenu extends BaseMachineMenu {
     }
 
     public RBMKBaseMenu(int containerId, Inventory playerInventory, Container container, ContainerData data) {
-        super(ModMenuType.RBMK_BASE_MENU.get(), containerId, container, data);
+        super(HBMMenus.RBMK_BASE_MENU.get(), containerId, container, data);
         this.slotNum = 0;
         // 原版 RBMK 控制台不显示玩家物品栏
         this.addDataSlots(data);

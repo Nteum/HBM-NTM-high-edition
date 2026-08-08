@@ -1007,6 +1007,9 @@ public class ModItems {
     public static final RegisterObjectCollection<Item, HBMMatter> WIRE_FINE = new RegisterObjectCollection<>(HBMMatters.ALL_MATTERS, matter -> new WrappedItemRegistryBuilder("wire_" + matter.name(), ()->new Item(new Item.Properties()))
             .tab(ModTabs.PARTS.getKey()).loc(HBMKey.ORDERLY_GEN_EXCEPT_FIRST).model(itemModelGen -> itemModelGen.basicItem("wire_" + matter.name(), HBM.rl("wire_" + matter.name()))).tags(matter.grip())
             .color((stack, idx) -> matter.solidColorLight).build(), matter -> matter.wire() != null);
+    public static final RegisterObjectCollection<Item, ItemEnums.EnumElectrodeType> ARC_ELECTRODE
+            = new RegisterObjectCollection<>(ItemEnums.EnumElectrodeType.class, type -> new WrappedItemRegistryBuilder("arc_electrode_" + type.toString().toLowerCase(), ()->new ItemElectrode(new Item.Properties().durability(type.durability)))
+            .tab(ModTabs.PARTS.getKey()).loc(HBMKey.ORDERLY_GEN_EXCEPT_FIRST).model(itemModelGen -> itemModelGen.basicItem("arc_electrode_" + type.toString().toLowerCase(), HBM.rl("arc_electrode." + type.toString().toLowerCase()))).build());
 
     // 电池
     public static final RegistryObject<Item> BATTERY_CREATIVE = control("battery_creative",()->new BatteryItem(-1, 1_000_000L, new Item.Properties().stacksTo(1)), HBMKey.REVERSE_GEN);

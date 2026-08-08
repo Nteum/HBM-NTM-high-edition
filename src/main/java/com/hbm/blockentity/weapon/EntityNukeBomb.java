@@ -3,7 +3,7 @@ package com.hbm.blockentity.weapon;
 import com.hbm.block.weapon.NukeBomb;
 import com.hbm.blockentity.base.DummyableBlockEntity;
 import com.hbm.registries.ModBlocks;
-import com.hbm.utils.multiblock.MultiblockData;
+import com.hbm.core.contents.multiblock.MultiblockData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;

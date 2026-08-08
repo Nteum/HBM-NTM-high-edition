@@ -1,6 +1,6 @@
 package com.hbm.blockentity.machine.tokamak;
 
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.registries.HBMCaps;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -15,7 +15,7 @@ import org.jetbrains.annotations.Nullable;
 public class TokamakPortBlockEntity extends TokamakPeripheralBlockEntity {
 
     public TokamakPortBlockEntity(BlockPos pos, BlockState state) {
-        this(ModBlockEntityType.TOKAMAK_PORT_ENTITY.get(), pos, state);
+        this(HBMTiles.TOKAMAK_PORT_ENTITY.get(), pos, state);
     }
 
     private TokamakPortBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {

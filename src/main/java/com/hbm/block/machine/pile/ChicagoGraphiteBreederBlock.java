@@ -1,6 +1,6 @@
 package com.hbm.block.machine.pile;
 
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.blockentity.machine.pile.ChicagoBreederBlockEntity;
 import com.hbm.blockentity.machine.pile.ChicagoPileBlockEntity;
 import com.hbm.registries.ModBlocks;
@@ -29,7 +29,7 @@ public class ChicagoGraphiteBreederBlock extends ChicagoMachineBlock {
 
     @Override
     protected <T extends BlockEntity> BlockEntityTicker<T> createTicker(Level level, BlockEntityType<T> type) {
-        return createTickerHelper(type, ModBlockEntityType.CHICAGO_BREEDER.get(), ChicagoPileBlockEntity::serverTick);
+        return createTickerHelper(type, HBMTiles.CHICAGO_BREEDER.get(), ChicagoPileBlockEntity::serverTick);
     }
 
     @Override

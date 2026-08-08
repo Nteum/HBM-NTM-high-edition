@@ -3,52 +3,51 @@ package com.hbm.blockentity.machine;
 import com.hbm.HBM;
 import com.hbm.HBMKey;
 import com.hbm.HBMLang;
-import com.hbm.Inventory.HBMUpgrade;
 import com.hbm.Inventory.recipe.ModRecipes;
 import com.hbm.Inventory.recipe.RecipeCentrifuge;
 import com.hbm.api.energy.BasicEnergyContainer;
-import com.hbm.api.energy.IEnergyContainer;
 import com.hbm.api.energy.ProxyEnergyHandler;
 import com.hbm.api.energy.TransmitUtils;
 import com.hbm.block.machine.MachineCentrifuge;
-import com.hbm.block.machine.MachineOreSlopper;
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.blockentity.base.DefaultMachineBE;
 import com.hbm.blockentity.interfaces.IUpgradeInfoProvider;
 import com.hbm.gui.menu.MenuCentrifuge;
 import com.hbm.item.machine.ItemMachineUpgrade;
 import com.hbm.registries.HBMCaps;
 import com.hbm.registries.ModBlocks;
+import com.hbm.registries.ModSounds;
 import com.hbm.registries.ModTags;
 import com.hbm.utils.math.BobMth;
-import com.hbm.utils.multiblock.MultiblockModule;
+import com.hbm.core.contents.multiblock.MultiblockModule;
+import com.hbm.utils.sound.AudioWrapper;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.util.Mth;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeManager;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.ItemStackHandler;
-import net.minecraftforge.items.wrapper.CombinedInvWrapper;
 import net.minecraftforge.items.wrapper.RangedWrapper;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 public class TileMachineCentrifuge extends DefaultMachineBE implements IUpgradeInfoProvider{
     public int progress;
-    private int audioDuration = 0;
     private Map<ItemMachineUpgrade.UpgradeType, Integer> upgrades;
 
     //configurable values
@@ -75,7 +74,7 @@ public class TileMachineCentrifuge extends DefaultMachineBE implements IUpgradeI
         }
     };
     public TileMachineCentrifuge(BlockPos pos, BlockState state) {
-        super(ModBlockEntityType.getTypeById(MachineCentrifuge.id), pos, state);
+        super(HBMTiles.getTypeById(MachineCentrifuge.id), pos, state);
     }
 
     @Override
@@ -157,7 +156,7 @@ public class TileMachineCentrifuge extends DefaultMachineBE implements IUpgradeI
         int consumption = baseConsumption;
         int speed = 1;
 
-        upgrades = IUpgradeInfoProvider.getUpgradeNow(upgrades, this, this.items, 2,3);
+        upgrades = IUpgradeInfoProvider.getUpgradeNow(upgrades, this, this.items, 2,4);
 
         speed += upgrades.getOrDefault(ItemMachineUpgrade.UpgradeType.SPEED, 0);
         consumption += upgrades.getOrDefault(ItemMachineUpgrade.UpgradeType.SPEED, 0) * baseConsumption;
@@ -188,9 +187,49 @@ public class TileMachineCentrifuge extends DefaultMachineBE implements IUpgradeI
             this.recipeNow = null;
         }
 
-        if (progress != progressBefore)
+        if (progress != progressBefore){
             this.setChanged();
-        this.sendUpdatePacket();
+            this.sendUpdatePacket();
+        }
+    }
+
+    @OnlyIn(Dist.CLIENT) private int audioDuration = 0;
+    @OnlyIn(Dist.CLIENT) private AudioWrapper audio = null;
+    @Override
+    protected void onUpdateClient() {
+        super.onUpdateClient();
+        if(progress > 0) {
+            audioDuration += 2;
+        } else {
+            audioDuration -= 3;
+        }
+
+        audioDuration = Mth.clamp(audioDuration, 0, 60);
+
+        if(audioDuration > 10 && Minecraft.getInstance().player.distanceToSqr(this.worldPosition.getCenter()) < 25 * 25) {
+            if(audio == null) {
+                audio = createAudioLoop();
+                audio.startSound();
+            } else if(!audio.isPlaying()) {
+                audio = rebootAudio(audio);
+            }
+            audio.updateVolume(getVolume(1F));
+            audio.updatePitch((audioDuration - 10) / 100F + 0.5F);
+            audio.keepAlive();
+
+        } else {
+            if(audio != null) {
+                audio.stopSound();
+                audio = null;
+            }
+        }
+    }
+
+    @Override
+    public AudioWrapper createAudioLoop() {
+        AudioWrapper audioWrapper = new AudioWrapper(ModSounds.BLOCK_CENTRIFUGE_OPERATE.get(), 1.0F, 10F, 1.0F, true);
+        audioWrapper.setKeepAlive(20);
+        return audioWrapper;
     }
 
     @Override
@@ -205,6 +244,26 @@ public class TileMachineCentrifuge extends DefaultMachineBE implements IUpgradeI
         super.saveAdditional(pTag);
         pTag.put(HBMKey.ENERGY, this.energyContainer.serializeNBT());
         pTag.putInt(HBMKey.PROGRESS, this.progress);
+    }
+
+    @Override
+    public @NotNull CompoundTag getReducedUpdateTag() {
+        CompoundTag tag = super.getReducedUpdateTag();
+        tag.putInt(HBMKey.PROGRESS, this.progress);
+        return tag;
+    }
+
+    @Override
+    public void handleUpdatePacket(@NotNull CompoundTag tag) {
+        super.handleUpdatePacket(tag);
+        if (tag.contains(HBMKey.PROGRESS, Tag.TAG_INT))
+            this.progress = tag.getInt(HBMKey.PROGRESS);
+    }
+
+    @Override
+    public void onChunkUnloaded() {
+        super.onChunkUnloaded();
+        if(audio != null) { audio.stopSound(); audio = null; }
     }
 
     @Override

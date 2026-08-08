@@ -70,6 +70,8 @@
     "hbm:miner_large",
     "hbm:machine_ore_slopper",
     "hbm:machine_centrifuge",
+    "hbm:machine_crystallizer",
+    "hbm:machine_arc_furnace",
     "hbm:pwr_controller",
     "hbm:pwr_casing",
     "hbm:pwr_port",

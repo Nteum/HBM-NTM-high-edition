@@ -1,23 +1,20 @@
 package com.hbm.gui.menu;
 
 import com.hbm.blockentity.machine.TileFireboxBase;
-import com.hbm.gui.ModMenuType;
+import com.hbm.gui.HBMMenus;
 import com.hbm.utils.WorldUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.SimpleContainerData;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Tier;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
 public class MenuFirebox extends BaseMachineMenu{
     public TileFireboxBase be;
     public MenuFirebox(int pContainerId, Inventory pPlayerInventory, TileFireboxBase tile, ContainerData containerData) {
-        super(ModMenuType.MENU_FIREBOX.get(), pContainerId, tile, containerData);
+        super(HBMMenus.MENU_FIREBOX.get(), pContainerId, tile, containerData);
         be = tile;
         IItemHandler handler = tile.getItemHandler();
         // 燃料槽

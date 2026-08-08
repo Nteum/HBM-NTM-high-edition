@@ -5,15 +5,19 @@ import com.hbm.HBMKey;
 import com.hbm.api.Chunk3D;
 import com.hbm.api.Coord4D;
 import com.hbm.api.interferences.ITileWrapper;
-import com.hbm.network.ModMessages;
+import com.hbm.core.network.HBMNetwork;
 import com.hbm.network.packet.toclient.S2CSyncTileMessage;
 import com.hbm.utils.WorldUtils;
+import com.hbm.utils.sound.AudioWrapper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.SectionPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.PacketFlow;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -95,7 +99,7 @@ public abstract class UpdateableBlockEntity extends BlockEntity implements ITile
             // the entire chunk when most often we are just updating a TileEntityRenderer, so the chunk itself
             // does not need to and should not be redrawn
 //            ModMessages.sendToAllTracking(new UpdateTileMessage(this), tracking);
-            ModMessages.sendToAll(new S2CSyncTileMessage(this));
+            HBMNetwork.sendToAll(new S2CSyncTileMessage(this));
         }
     }
     // 1.7.10版本HBM更新机制，我在这里复现了它
@@ -111,7 +115,7 @@ public abstract class UpdateableBlockEntity extends BlockEntity implements ITile
 
         this.lastUpdateMsg = updateMsg.copy();
 
-        ModMessages.sendToAllAround(updateMsg, new PacketDistributor.TargetPoint(worldPosition.getX(), worldPosition.getY(), worldPosition.getZ(), range, level.dimension()));
+        HBMNetwork.sendToAllAround(updateMsg, new PacketDistributor.TargetPoint(worldPosition.getX(), worldPosition.getY(), worldPosition.getZ(), range, level.dimension()));
     }
     @NotNull
     protected Level getWorldNN() {
@@ -228,5 +232,36 @@ public abstract class UpdateableBlockEntity extends BlockEntity implements ITile
 
     public float getVolume(float baseVolume) {
         return muffled ? baseVolume * 0.1F : baseVolume;
+    }
+    //
+    public AudioWrapper createAudioLoop() { return null; }
+    public AudioWrapper rebootAudio(AudioWrapper wrapper) {
+        wrapper.stopSound();
+        AudioWrapper audio = createAudioLoop();
+        audio.startSound();
+        return audio;
+    }
+
+    public AudioWrapper getLoopedSound(SoundEvent sound, float x, float y, float z, float volume, float range, float pitch) {
+
+        AudioWrapper audio = new AudioWrapper(sound, SoundSource.BLOCKS);
+        audio.updatePosition(x, y, z);
+        audio.updateVolume(volume);
+        audio.updateRange(range);
+        return audio;
+    }
+
+    public AudioWrapper getLoopedSound(SoundEvent sound, float x, float y, float z, float volume, float range, float pitch, int keepAlive) {
+        AudioWrapper audio = getLoopedSound(sound, x, y, z, volume, range, pitch);
+        audio.setKeepAlive(keepAlive);
+        return audio;
+    }
+
+    public AudioWrapper getLoopedSound(SoundEvent sound, Entity entity, float volume, float range, float pitch, int keepAlive) {
+        AudioWrapper audio = new AudioWrapper(sound, SoundSource.BLOCKS);
+        audio.updateVolume(volume);
+        audio.updateRange(range);
+        audio.setKeepAlive(keepAlive);
+        return audio;
     }
 }

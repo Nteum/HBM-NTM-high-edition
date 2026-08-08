@@ -2,7 +2,7 @@ package com.hbm.block.logistic;
 
 import com.hbm.HBMKey;
 import com.hbm.block.interfaces.IFaceAttach;
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.blockentity.machine.TileConnector;
 import com.hbm.registries.ModItems;
 import com.hbm.utils.data.NBTUtils;
@@ -109,13 +109,13 @@ public class BlockConnector extends BaseEntityBlock implements IFaceAttach {
     public void neighborChanged(BlockState pState, Level pLevel, BlockPos pPos, Block pNeighborBlock, BlockPos pNeighborPos, boolean pMovedByPiston) {
         super.neighborChanged(pState, pLevel, pPos, pNeighborBlock, pNeighborPos, pMovedByPiston);
         if (pNeighborPos.relative(pState.getValue(BlockStateProperties.FACING)).equals(pPos))
-            pLevel.getBlockEntity(pPos, ModBlockEntityType.TILE_CONNECTOR.get()).ifPresent(TileConnector::neighbourChanged);
+            pLevel.getBlockEntity(pPos, HBMTiles.TILE_CONNECTOR.get()).ifPresent(TileConnector::neighbourChanged);
     }
 
     @Override
     public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pMovedByPiston) {
         super.onRemove(pState, pLevel, pPos, pNewState, pMovedByPiston);
-        pLevel.getBlockEntity(pPos, ModBlockEntityType.TILE_CONNECTOR.get()).ifPresent(TileConnector::onRemoveCallback);
+        pLevel.getBlockEntity(pPos, HBMTiles.TILE_CONNECTOR.get()).ifPresent(TileConnector::onRemoveCallback);
     }
 
     public static Vec3 getLinkPos(final BlockPos pos, final Direction facing){

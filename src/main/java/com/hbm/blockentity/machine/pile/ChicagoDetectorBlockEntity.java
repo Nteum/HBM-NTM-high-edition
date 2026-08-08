@@ -1,7 +1,7 @@
 package com.hbm.blockentity.machine.pile;
 
 import com.hbm.block.machine.pile.ChicagoPileStateProperties;
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 
 import com.hbm.registries.ModItems;
 import net.minecraft.core.BlockPos;
@@ -30,7 +30,7 @@ public class ChicagoDetectorBlockEntity extends ChicagoPileBlockEntity {
     private int neutrons;
 
     public ChicagoDetectorBlockEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntityType.CHICAGO_DETECTOR.get(), pos, state);
+        super(HBMTiles.CHICAGO_DETECTOR.get(), pos, state);
     }
 
     public void insertRod(ItemStack stack) {

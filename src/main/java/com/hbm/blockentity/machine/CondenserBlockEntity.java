@@ -1,7 +1,7 @@
 package com.hbm.blockentity.machine;
 
 import com.hbm.HBMKey;
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.blockentity.base.BaseMachineBlockEntity;
 import com.hbm.blockentity.machine.component.CondenserLogic;
 import net.minecraft.core.BlockPos;
@@ -30,7 +30,7 @@ public class CondenserBlockEntity extends BaseMachineBlockEntity {
     private final CondenserLogic logic;
 
     public CondenserBlockEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntityType.CONDENSER_ENTITY.get(), pos, state);
+        super(HBMTiles.CONDENSER_ENTITY.get(), pos, state);
         this.items = NonNullList.withSize(0, ItemStack.EMPTY);
         this.slotModes = NonNullList.create();
         this.logic = new CondenserLogic(STEAM_CAPACITY, WATER_CAPACITY, CONVERSION_RATE);

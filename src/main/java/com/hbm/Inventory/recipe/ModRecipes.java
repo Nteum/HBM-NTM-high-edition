@@ -3,7 +3,9 @@ package com.hbm.Inventory.recipe;
 import com.hbm.HBM;
 import com.hbm.HBMKey;
 import com.hbm.Inventory.recipe.base.RecipeSerializerBuilder;
+import com.hbm.block.machine.MachineArcFurnace;
 import com.hbm.block.machine.MachineCentrifuge;
+import com.hbm.block.machine.MachineCrystallizer;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -27,6 +29,8 @@ public class ModRecipes {
     public static final RegistryObject<RecipeSerializer<PWRFuelPrinterRecipe>> PWR_FUEL_PRINTER =
             SERIALIZER.register("pwr_fuel_printer", () -> new SimpleCraftingRecipeSerializer<>(PWRFuelPrinterRecipe::new));
     public static final RecipeHolder<RecipeCentrifuge> CENTRIFUGE = register(MachineCentrifuge.id, RecipeCentrifuge.factory);
+    public static final RecipeHolder<RecipeCrystallizer> CRYSTALLIZER = register(MachineCrystallizer.id, RecipeCrystallizer.factory);
+    public static final RecipeHolder<RecipeArcFurnace> ARC_FURNACE = register(MachineArcFurnace.id, RecipeArcFurnace.factory);
 //    public static final RegistryObject<RecipeSerializer<BlastFurnaceRecipe>> ALLOY_SERIALIZER =
 //            SERIALIZER.register(HBMKey.BLAST,()-> BlastFurnaceRecipe.Serializer.INSTANCE);
 //    public static final RegistryObject<RecipeSerializer<AssemblerRecipe>> ASSEMBLER_SERIALIZER =

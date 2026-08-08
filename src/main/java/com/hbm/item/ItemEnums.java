@@ -96,4 +96,17 @@ public class ItemEnums {
 	public enum EnumExpensiveType {
 		STEEL_PLATING, HEAVY_FRAME, CIRCUIT, LEAD_PLATING, FERRO_PLATING, COMPUTER, BRONZE_TUBES, PLASTIC, GOLD_DUST, DEGENERATE_MATTER, STAINLESS_BEAM, AVIONICS, ASTRO
 	}
+
+	public enum EnumElectrodeType {
+		GRAPHITE(	10),
+		LANTHANIUM(	100),
+		DESH(		500),
+		SATURNITE(	1500);
+
+		public int durability;
+
+		private EnumElectrodeType(int dura) {
+			this.durability = dura;
+		}
+	}
 }

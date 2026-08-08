@@ -2,7 +2,7 @@ package com.hbm.registries;
 
 import com.hbm.HBM;
 import com.hbm.HBMKey;
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.datagen.json.HBMJsonProvider;
 import com.hbm.datagen.LanguageProvider;
 import com.hbm.datagen.loot.BlockLootGen;
@@ -10,10 +10,8 @@ import com.hbm.datagen.model.BlockStateGen;
 import com.hbm.datagen.model.ItemModelGen;
 import com.hbm.datagen.tag.BlockTagsGen;
 import com.hbm.datagen.tag.ItemTagsGen;
-import com.hbm.gui.ModMenuType;
-import com.hbm.gui.screen.ICFScreen;
+import com.hbm.gui.HBMMenus;
 import com.hbm.item.interfaces.CreativeTabVariantItem;
-import com.hbm.render.blockentity.NukeBoyRender;
 import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.client.color.item.ItemColor;
 import net.minecraft.client.gui.screens.MenuScreens;
@@ -569,26 +567,26 @@ public abstract class WrappedRegistryBuilder<T> implements Supplier<T>{
 
         public void tileSupport(){
             if (this.tileData != null && this.tileData.tileFactory != null){
-                ModBlockEntityType.register("tile_" + name, this.tileData.tileFactory, this.registryObject);
-                if (this.dummyable) ModBlockEntityType.dummyableBlocks.add(registryObject);
+                HBMTiles.register("tile_" + name, this.tileData.tileFactory, this.registryObject);
+                if (this.dummyable) HBMTiles.dummyableBlocks.add(registryObject);
             }
         }
 
         public void menuSupport(){
             if (this.tileData != null && this.tileData.tileFactory != null && this.tileData.menuFactory != null){
-                ModMenuType.register("menu_" + name, this.tileData.menuFactory);
+                HBMMenus.register("menu_" + name, this.tileData.menuFactory);
             }
         }
 
         public void guiSupport(){
             if (this.tileData != null && this.tileData.menuFactory != null && this.tileData.guiFactory != null){
-                MenuScreens.register(ModMenuType.typesMaps.get("menu_" + name).get(), this.tileData.guiFactory);
+                MenuScreens.register(HBMMenus.typesMaps.get("menu_" + name).get(), this.tileData.guiFactory);
             }
         }
 
         public void rendererSupport(){
             if (this.tileData != null && this.tileData.tileFactory != null && this.tileData.rendererFactory != null)
-                BlockEntityRenderers.register(ModBlockEntityType.tileTypes.get("tile_" + name).get(), this.tileData.rendererFactory);
+                BlockEntityRenderers.register(HBMTiles.tileTypes.get("tile_" + name).get(), this.tileData.rendererFactory);
         }
     }
 

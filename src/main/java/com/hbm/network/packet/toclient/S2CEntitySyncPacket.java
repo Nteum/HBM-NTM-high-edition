@@ -1,6 +1,6 @@
 package com.hbm.network.packet.toclient;
 
-import com.hbm.network.IHBMMessage;
+import com.hbm.core.network.IHBMMessage;
 import com.hbm.addational_data.AdditionalDataManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;

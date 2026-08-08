@@ -1,5 +1,6 @@
 package com.hbm.api.fluid;
 
+import com.hbm.api.IContentsListener;
 import com.hbm.api.Mode;
 import it.unimi.dsi.fastutil.ints.IntArrayList;
 import it.unimi.dsi.fastutil.ints.IntList;
@@ -35,7 +36,7 @@ import java.util.List;
  * 2. 第二个限制是方向的限制，是否可以通过方块的某个面访问内部流体。这个由capabilitiesCache的方向实现，不在内部实现。
  * 3. 为了简化访问
  * */
-public interface IExtendedFluidHandler extends IFluidHandler, INBTSerializable<CompoundTag> {
+public interface IExtendedFluidHandler extends IFluidHandler, IContentsListener, INBTSerializable<CompoundTag> {
 
     List<FluidTank> getFluidTanks();
     Mode getMode(int tank);
@@ -81,8 +82,9 @@ public interface IExtendedFluidHandler extends IFluidHandler, INBTSerializable<C
      * 不指定tank编号，逐个检查对应的tank是否和流体类型兼容
      * */
     @Override
-    default int fill(FluidStack resource, FluidAction action){
+    default int fill(FluidStack input, FluidAction action){
 //        int amount = resource.getAmount();
+        FluidStack resource = input.copy();
         int amount = Math.min(resource.getAmount(), getInputLimit());
         resource.setAmount(amount);
         List<FluidTank> tanks = getFluidTanks();
@@ -99,13 +101,16 @@ public interface IExtendedFluidHandler extends IFluidHandler, INBTSerializable<C
         for (Integer tank : emptyTanks) {
             if (!resource.isEmpty()) resource.shrink(tanks.get(tank).fill(resource,action));
         }
+        if (action.execute() && input.getAmount() != resource.getAmount())
+            onContentsChanged();
         return amount - resource.getAmount();
     }
     /**
      * 不指定tank编号，逐个检查对应的tank是否和流体类型兼容
      * */
     @Override
-    default @NotNull FluidStack drain(FluidStack resource, FluidAction action){
+    default @NotNull FluidStack drain(FluidStack toDrain, FluidAction action){
+        FluidStack resource = toDrain.copy();
         if (resource.getAmount() > getOutputLimit()) resource.setAmount(getOutputLimit());
         if (resource.isEmpty()) return FluidStack.EMPTY;
         int drainAmount = 0;
@@ -119,6 +124,8 @@ public interface IExtendedFluidHandler extends IFluidHandler, INBTSerializable<C
         }
         FluidStack resultStack = resource.copy();
         resultStack.setAmount(drainAmount);
+        if (action.execute() && resultStack.getAmount() != toDrain.getAmount())
+            onContentsChanged();
         return resultStack;
     }
 
@@ -139,6 +146,8 @@ public interface IExtendedFluidHandler extends IFluidHandler, INBTSerializable<C
                 if (maxDrain == 0)break;
             }
         }
+        if (!resultStack.isEmpty())
+            onContentsChanged();
         return resultStack;
     }
 }

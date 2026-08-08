@@ -6,7 +6,7 @@ import com.hbm.api.Mode;
 import com.hbm.api.fluid.BasicFluidHandler;
 import com.hbm.block.machine.rbmk.BlockRBMKBase;
 import com.hbm.block.machine.rbmk.BlockRBMKSteamPort;
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.blockentity.base.BaseMachineBlockEntity;
 import com.hbm.utils.EnumUtils;
 import net.minecraft.core.BlockPos;
@@ -35,7 +35,7 @@ public class RBMKSteamPortEntity extends BaseMachineBlockEntity {
     private final BasicFluidHandler fluids = new BasicFluidHandler().addTank(TANK_CAPACITY, Mode.BOTH);
 
     public RBMKSteamPortEntity(final BlockPos pos, final BlockState state) {
-        super(ModBlockEntityType.RBMK_STEAM_PORT_ENTITY.get(), pos, state);
+        super(HBMTiles.RBMK_STEAM_PORT_ENTITY.get(), pos, state);
         this.items = NonNullList.create();
         this.slotModes = java.util.List.of();
         this.capabilitiesContent.addCapability(ForgeCapabilities.FLUID_HANDLER, fluids);

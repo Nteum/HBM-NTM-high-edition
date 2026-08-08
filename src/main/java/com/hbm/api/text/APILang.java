@@ -79,7 +79,7 @@ public enum APILang implements ILangEntry {
     private final String key;
 
     APILang(String type, String path) {
-        this(Util.makeDescriptionId(type, new ResourceLocation(HBM.MODID, path)));
+        this(Util.makeDescriptionId(type, ResourceLocation.fromNamespaceAndPath(HBM.MODID, path)));
     }
 
     APILang(String key) {

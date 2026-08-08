@@ -1,10 +1,9 @@
 package com.hbm.gui.menu;
 
-import com.hbm.gui.ModMenuType;
+import com.hbm.gui.HBMMenus;
 import com.hbm.gui.menu.slot.OutputSlot;
 import com.hbm.blockentity.machine.icf.ICFReactorBlockEntity;
 
-import com.hbm.item.icf.ItemICFPellet;
 import com.hbm.registries.ModItems;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
@@ -27,7 +26,7 @@ public class ICFMenu extends BaseMachineMenu {
     }
 
     public ICFMenu(int containerId, Inventory inventory, Container container, ContainerData data) {
-        super(ModMenuType.ICF_MENU.get(), containerId, container, data);
+        super(HBMMenus.ICF_MENU.get(), containerId, container, data);
         this.slotNum = SLOT_COUNT;
         // Input pellets
         for (int i = 0; i < 5; i++) {

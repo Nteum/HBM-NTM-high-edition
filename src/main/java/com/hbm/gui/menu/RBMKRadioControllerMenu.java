@@ -1,7 +1,7 @@
 package com.hbm.gui.menu;
 
 import com.hbm.blockentity.machine.rbmk.RBMKRadioControllerEntity;
-import com.hbm.gui.ModMenuType;
+import com.hbm.gui.HBMMenus;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.Container;
@@ -40,7 +40,7 @@ public class RBMKRadioControllerMenu extends BaseMachineMenu {
     }
 
     private RBMKRadioControllerMenu(int containerId, Inventory playerInventory, RBMKRadioControllerEntity controller, BlockPos pos, Container container, ContainerData data) {
-        super(ModMenuType.RBMK_RADIO_CONTROLLER_MENU.get(), containerId, container, data);
+        super(HBMMenus.RBMK_RADIO_CONTROLLER_MENU.get(), containerId, container, data);
         this.slotNum = 0;
         this.controller = controller;
         this.pos = pos;

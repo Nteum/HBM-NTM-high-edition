@@ -2,35 +2,17 @@ package com.hbm.gui.menu;
 
 import com.hbm.Inventory.recipe.AssemblerRecipe;
 import com.hbm.blockentity.machine.AssemblerEntity;
-import com.hbm.blockentity.machine.CrucibleEntity;
-import com.hbm.gui.ModMenuType;
-import com.hbm.gui.menu.slot.BatterySlot;
-import com.hbm.gui.menu.slot.OutputSlot;
-import com.hbm.gui.menu.slot.UpgradeSlot;
+import com.hbm.gui.HBMMenus;
 import com.hbm.registries.ModTags;
 import com.hbm.utils.WorldUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screens.inventory.AbstractFurnaceScreen;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.data.registries.VanillaRegistries;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.world.Container;
-import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.player.StackedContents;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.state.properties.SlabType;
-import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
-import net.minecraftforge.registries.ForgeRegistries;
-import org.jetbrains.annotations.Nullable;
 
 public class AssemblerMenu extends BaseMachineMenu{
     private AssemblerEntity be;
@@ -39,7 +21,7 @@ public class AssemblerMenu extends BaseMachineMenu{
         this(id, playerInventory, WorldUtils.getTileEntity(AssemblerEntity.class, Minecraft.getInstance().level, buf.readBlockPos()), new SimpleContainerData(3));
     }
     public AssemblerMenu(int pContainerId, Inventory pPlayerInventory, AssemblerEntity be, ContainerData containerData1) {
-        super(ModMenuType.ASSEMBLER_MENU.get(), pContainerId, be, containerData1);
+        super(HBMMenus.ASSEMBLER_MENU.get(), pContainerId, be, containerData1);
         this.be = be;
         ItemStackHandler handler = be.getItemHandler();
         slotNum = 17;

@@ -1,7 +1,7 @@
 package com.hbm.gui.menu;
 
 import com.hbm.blockentity.logistic.TileConveyorInserter;
-import com.hbm.gui.ModMenuType;
+import com.hbm.gui.HBMMenus;
 import com.hbm.utils.WorldUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
@@ -13,7 +13,7 @@ import net.minecraftforge.items.SlotItemHandler;
 
 public class MenuConveyorInserter extends BaseMachineMenu<TileConveyorInserter>{
     public MenuConveyorInserter(int pContainerId, Inventory playerInventory, TileConveyorInserter blockEntity, ContainerData containerData1) {
-        super(ModMenuType.MENU_CONVEYOR_INSERTER.get(), pContainerId, playerInventory, blockEntity, containerData1);
+        super(HBMMenus.MENU_CONVEYOR_INSERTER.get(), pContainerId, playerInventory, blockEntity, containerData1);
         this.slotNum = TileConveyorInserter.SLOT_NUM;
         ItemStackHandler items = blockEntity.getItems();
         for(int i = 0; i < 3; i++) {

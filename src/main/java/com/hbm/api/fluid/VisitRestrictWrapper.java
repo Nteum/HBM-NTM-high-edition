@@ -54,4 +54,9 @@ public class VisitRestrictWrapper implements IExtendedFluidHandler{
     public void deserializeNBT(CompoundTag nbt) {
         fluidHandler.deserializeNBT(nbt);
     }
+
+    @Override
+    public void onContentsChanged() {
+
+    }
 }

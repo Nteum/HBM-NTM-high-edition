@@ -1,6 +1,6 @@
 package com.hbm.gui.menu;
 
-import com.hbm.gui.ModMenuType;
+import com.hbm.gui.HBMMenus;
 import com.hbm.blockentity.machine.tokamak.TokamakControllerBlockEntity;
 import com.hbm.registries.HBMCaps;
 import com.hbm.registries.ModItems;
@@ -27,7 +27,7 @@ public class TokamakMenu extends BaseMachineMenu {
     }
 
     public TokamakMenu(int containerId, Inventory playerInventory, Container container, ContainerData data) {
-        super(ModMenuType.TOKAMAK_MENU.get(), containerId, container, data);
+        super(HBMMenus.TOKAMAK_MENU.get(), containerId, container, data);
         slotNum = 6;
         // 燃料/冷却槽
         this.addSlot(new Slot(container, 0, 26, 24)); // D

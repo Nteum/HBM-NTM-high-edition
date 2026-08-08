@@ -1,7 +1,7 @@
 package com.hbm.blockentity.machine.rbmk;
 
 import com.hbm.HBM;
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.blockentity.base.BaseMachineBlockEntity;
 import com.hbm.reactor.rbmk.RBMKColumnState;
 import com.hbm.reactor.rbmk.RBMKLevelContext;
@@ -29,7 +29,7 @@ public class RBMKHeaterEntity extends BaseMachineBlockEntity {
     private double heatBuffer;
 
     public RBMKHeaterEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntityType.RBMK_HEATER_ENTITY.get(), pos, state);
+        super(HBMTiles.RBMK_HEATER_ENTITY.get(), pos, state);
         this.items = net.minecraft.core.NonNullList.create();
         this.slotModes = Collections.emptyList();
     }

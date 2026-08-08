@@ -1,6 +1,6 @@
 package com.hbm.blockentity.machine.rbmk;
 
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.blockentity.base.BaseMachineBlockEntity;
 import com.hbm.reactor.rbmk.RBMKColumnState;
 import com.hbm.reactor.rbmk.RBMKLevelContext;
@@ -18,7 +18,7 @@ public class RBMKBoilerEntity extends BaseMachineBlockEntity implements RBMKTick
     private int compressionStage;
 
     public RBMKBoilerEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntityType.RBMK_BOILER_ENTITY.get(), pos, state);
+        super(HBMTiles.RBMK_BOILER_ENTITY.get(), pos, state);
         this.items = NonNullList.create();
         this.slotModes = java.util.List.of();
     }

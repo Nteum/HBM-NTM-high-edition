@@ -2,8 +2,9 @@ package com.hbm.network.packet.toclient;
 
 import com.hbm.HBM;
 import com.hbm.blockentity.base.UpdateableBlockEntity;
-import com.hbm.network.IHBMMessage;
-import com.hbm.network.ModMessages;
+import com.hbm.core.blockentity.BEUpdateable;
+import com.hbm.core.network.IHBMMessage;
+import com.hbm.core.network.HBMNetwork;
 import com.hbm.network.packet.toserver.S2CSyncFailMessage;
 import com.hbm.utils.WorldUtils;
 import net.minecraft.client.Minecraft;
@@ -27,6 +28,10 @@ public class S2CSyncTileMessage implements IHBMMessage {
         this(blockEntity.getBlockPos(), blockEntity.getReducedUpdateTag());
     }
 
+    public S2CSyncTileMessage(BEUpdateable blockEntity) {
+        this(blockEntity.getBlockPos(), blockEntity.getReducedUpdateTag());
+    }
+
     @Override
     public void handle(Supplier<NetworkEvent.Context> ctx) {
         ClientLevel world = Minecraft.getInstance().level;
@@ -37,7 +42,7 @@ public class S2CSyncTileMessage implements IHBMMessage {
             if (tile == null) {
                 HBM.LOGGER.warn("Update tile packet received for position: {} in world: {}, but no valid tile was found.", pos,
                         world.dimension().location());
-                ModMessages.sendToServer(new S2CSyncFailMessage(pos));
+                HBMNetwork.sendToServer(new S2CSyncFailMessage(pos));
             } else {
                 tile.handleUpdatePacket(updateTag);
             }

@@ -5,7 +5,7 @@ import com.hbm.HBMLang;
 import com.hbm.api.Mode;
 import com.hbm.api.fluid.BasicFluidHandler;
 import com.hbm.api.inventory.ModeBuilder;
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.blockentity.base.BaseMachineBlockEntity;
 import com.hbm.gui.menu.ICFPressMenu;
 
@@ -64,7 +64,7 @@ public class ICFPressBlockEntity extends BaseMachineBlockEntity implements MenuP
     };
 
     public ICFPressBlockEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntityType.ICF_PRESS_ENTITY.get(), pos, state);
+        super(HBMTiles.ICF_PRESS_ENTITY.get(), pos, state);
         this.items = NonNullList.withSize(8, ItemStack.EMPTY);
         this.slotModes = new ModeBuilder().addModes(
                 1, Mode.INPUT,

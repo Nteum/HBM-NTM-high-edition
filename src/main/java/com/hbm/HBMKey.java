@@ -6,10 +6,28 @@ import net.minecraftforge.registries.ForgeRegistries;
 //mod使用的key，仅用于mod内使用，不用于翻译
 public class HBMKey {
     public static final String MODID = "hbm";
-    //generic
+    // register
+    public static final String ORDERLY = "orderly";
+    public static final String REVERSE = "reverse";
+    public static final String ORDERLY_EXCEPT_FIRST = "orderly_except_first";
+    public static final String BASIC = "basic";
+    public static final String STANDALONE = "standalone";
+    public static final String PROPERTY = "property";
+    public static final String OVERLAY = "overlay";
+    public static final String OVERLAY_NO_BASE = "overlay_no_base";
+    public static final String DROP_SELF = "drop_self";
+    public static final String DROP_NONE = "drop_none";
+    public static final String SIMPLE = "simple";
+    public static final String HORIZONTAL = "horizontal";
+    // serialize or deserialize
+    public static final String ENERGY = "energy";
+    public static final String FLUID = "fluid";
+    public static final String NUM = "num";
     public static final String ITEM = "item";
+    public static final String IS_FORM = "is_form";
+    public static final String CORE = "core";
+    //generic
     public static final String TAG = "tag";
-    public static final String NUM = "nums";
     public static final String COUNT = "count";
     public static final String VOLUME = "volume";
     public static final String SIDE = "side";
@@ -34,6 +52,8 @@ public class HBMKey {
     public static final String SHAPE = "shape";
     public static final String INPUT = "input";
     public static final String OUTPUT = "output";
+    public static final String OUTPUT_ITEM = "output_item";
+    public static final String OUTPUT_FLUID = "output_fluid";
     // block state
     public static final String IS_CORE = "is_core";
     public static final String VARIANT = "variant";
@@ -67,14 +87,11 @@ public class HBMKey {
     public static final String REVERSE_GEN = "reverse_gen";
     public static final String ORDERLY_GEN_EXCEPT_FIRST = "orderly_gen_except_first";
     public static final String GEN_STANDALONE = "gen_standalone";
-    public static final String DROP_SELF = "drop_self";
-    public static final String DROP_NONE = "drop_none";
     public static final String DROP_STANDALONE = "drop_standalone";
     public static final String SHREDDER = "shredder";
     // key relate to capability
     public static final String DATA = "hbmdata";
     public static final String CAPS = "capability";
-    public static final String ENERGY = "energy";
     public static final String FLUIDS = "fluids";
     public static final String STORED = "stored";
     public static final String MODE = "mode";
@@ -97,6 +114,7 @@ public class HBMKey {
     public static final String HEAT = "heat";
     public static final String PRESSURE = "pressure";
     public static final String DELAY = "delay";
+    public static final String PRODUCTIVITY = "productivity";
     //cable
     public static final String FORBID_DIR = "forbidDir";
     public static final String CONN_LIMIT = "conn_limit";

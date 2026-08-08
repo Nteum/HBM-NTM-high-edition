@@ -1,14 +1,12 @@
 package com.hbm.gui.menu;
 
 import com.hbm.blockentity.machine.TileMinerLarge;
-import com.hbm.gui.ModMenuType;
-import com.hbm.gui.menu.slot.OutputSlot;
+import com.hbm.gui.HBMMenus;
 import com.hbm.item.misc.ItemDrillbit;
 import com.hbm.registries.ModTags;
 import com.hbm.utils.WorldUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.SimpleContainerData;
@@ -18,7 +16,7 @@ import net.minecraftforge.items.SlotItemHandler;
 
 public class MenuMinerLarge extends BaseMachineMenu<TileMinerLarge> {
     public MenuMinerLarge(int pContainerId, Inventory inContainer, TileMinerLarge be, ContainerData containerData1) {
-        super(ModMenuType.MENU_MINER_LARGE.get(), pContainerId, inContainer, containerData1);
+        super(HBMMenus.MENU_MINER_LARGE.get(), pContainerId, inContainer, containerData1);
         this.be = be;
         this.slotNum = be.getItemStackHandler().getSlots();
         //Battery: 0

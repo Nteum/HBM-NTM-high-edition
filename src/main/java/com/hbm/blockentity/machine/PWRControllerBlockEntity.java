@@ -5,7 +5,7 @@ import com.hbm.api.Mode;
 import com.hbm.api.fluid.BasicFluidHandler;
 import com.hbm.api.inventory.ModeBuilder;
 import com.hbm.api.math.MathUtils;
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.blockentity.base.BaseMachineBlockEntity;
 import com.hbm.gui.menu.PWRMenu;
 import com.hbm.item.pwr.ItemPWRFuel;
@@ -118,7 +118,7 @@ public class PWRControllerBlockEntity extends BaseMachineBlockEntity {
     };
 
     public PWRControllerBlockEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntityType.PWR_CONTROLLER_ENTITY.get(), pos, state);
+        super(HBMTiles.PWR_CONTROLLER_ENTITY.get(), pos, state);
         this.items = NonNullList.withSize(3, ItemStack.EMPTY);
         this.slotModes = new ModeBuilder().addModes(1, Mode.INPUT, 1, Mode.OUTPUT, 1, Mode.INPUT).get();
         this.capabilitiesContent.addCapability(ForgeCapabilities.ITEM_HANDLER, this);

@@ -1,5 +1,6 @@
 package com.hbm.blockentity.machine.pile;
 
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.registries.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -18,7 +19,7 @@ public class ChicagoSourceBlockEntity extends ChicagoPileBlockEntity {
     private SourceType type = SourceType.SOURCE;
 
     public ChicagoSourceBlockEntity(BlockPos pos, BlockState state) {
-        super(com.hbm.blockentity.ModBlockEntityType.CHICAGO_SOURCE.get(), pos, state);
+        super(HBMTiles.CHICAGO_SOURCE.get(), pos, state);
     }
 
     public void setType(SourceType type) {

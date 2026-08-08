@@ -4,7 +4,9 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.hbm.HBM;
+import com.hbm.Inventory.recipe.RecipeHelper;
 import com.hbm.datagen.recipe.ingredient.CountableIngredient;
+import com.hbm.datagen.recipe.ingredient.FluidStackIngredient;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.network.FriendlyByteBuf;
@@ -15,6 +17,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -33,7 +37,9 @@ public class RecipeSerializerBuilder {
     public static final int TYPE_STACK = 1;
     public static final int TYPE_INGREDIENT = 2;
     public static final int TYPE_COUNTABLE_INGREDIENT = 3;
-    public static final int TYPE_FLUID_INGREDIENT = 4;
+    public static final int TYPE_FLUID_STACK = 4;
+    public static final int TYPE_FLUID_INGREDIENT = 5;
+
 
     public RecipeSerializerBuilder integer(String name) {
         fieldSchemas.add(FieldSchemas.INT(name));
@@ -44,7 +50,16 @@ public class RecipeSerializerBuilder {
         return this;
     }
 
+    public RecipeSerializerBuilder ingredient(String name){
+        fieldSchemas.add(FieldSchemas.INGREDIENT(name));
+        return this;
+    }
+
     public RecipeSerializerBuilder countableIngredient(String name){
+        fieldSchemas.add(FieldSchemas.COUNTABLE_INGREDIENT(name));
+        return this;
+    }
+    public RecipeSerializerBuilder fluid(String name){
         fieldSchemas.add(FieldSchemas.COUNTABLE_INGREDIENT(name));
         return this;
     }
@@ -54,6 +69,7 @@ public class RecipeSerializerBuilder {
         FieldSchema<?> elementSchema = switch (typeKey) {
             case TYPE_STACK -> FieldSchemas.ITEM_STACK(name);
             case TYPE_COUNTABLE_INGREDIENT -> FieldSchemas.COUNTABLE_INGREDIENT(name);
+            case TYPE_FLUID_STACK -> FieldSchemas.FLUID(name);
             default -> FieldSchemas.INGREDIENT(name);
         };
 
@@ -140,6 +156,16 @@ public class RecipeSerializerBuilder {
             );
         }
 
+        public static FieldSchema<Float> FLOAT(String name) {
+            return new FieldSchema<>(
+                    name,
+                    GsonHelper::getAsFloat,
+                    FriendlyByteBuf::readFloat,
+                    FriendlyByteBuf::writeFloat,
+                    JsonObject::addProperty
+            );
+        }
+
         // 2. 单个 Item 的 FieldSchema
         public static FieldSchema<Item> ITEM(String name) {
             return new FieldSchema<>(
@@ -188,6 +214,34 @@ public class RecipeSerializerBuilder {
                     CountableIngredient.Serializer.INSTANCE::parse,
                     // Buffer 写
                     CountableIngredient.Serializer.INSTANCE::write,
+                    // JSON 写
+                    (json, key, ingrdeient) -> json.add(key, ingrdeient.toJson())
+            );
+        }
+
+        public static FieldSchema<FluidStack> FLUID(String name) {
+            return new FieldSchema<FluidStack>(
+                    name,
+                    // JSON 读 (使用原版 ShapedRecipe 的标准解析)
+                    (json, key) -> RecipeHelper.fluidStackFromJson(GsonHelper.getAsJsonObject(json, key)),
+                    // Buffer 读
+                    FriendlyByteBuf::readFluidStack,
+                    // Buffer 写
+                    FriendlyByteBuf::writeFluidStack,
+                    // JSON 写
+                    (json, key, fluid) -> json.add(key, RecipeHelper.fluidStackToJson(fluid))
+            );
+        }
+
+        public static FieldSchema<FluidStackIngredient> FLUID_INGREDIENT(String name) {
+            return new FieldSchema<FluidStackIngredient>(
+                    name,
+                    // JSON 读 (使用原版 ShapedRecipe 的标准解析)
+                    (json, key) -> FluidStackIngredient.fromJson(GsonHelper.getAsJsonObject(json, key)),
+                    // Buffer 读
+                    FluidStackIngredient::fromNetwork,
+                    // Buffer 写
+                    FluidStackIngredient::toNetwork,
                     // JSON 写
                     (json, key, ingrdeient) -> json.add(key, ingrdeient.toJson())
             );

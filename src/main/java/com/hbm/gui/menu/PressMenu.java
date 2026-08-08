@@ -1,13 +1,10 @@
 package com.hbm.gui.menu;
 
-import com.hbm.block.machine.BlockPress;
 import com.hbm.blockentity.machine.PressEntity;
-import com.hbm.gui.ModMenuType;
+import com.hbm.gui.HBMMenus;
 import com.hbm.registries.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.world.Container;
-import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -18,7 +15,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
 /**
@@ -29,7 +25,7 @@ public class PressMenu extends AbstractContainerMenu {
     public ContainerData containerData;
     Level level;
     public PressMenu(int pContainerId, Inventory pPlayerInventory, PressEntity press, ContainerData containerData){
-        super(ModMenuType.PRESS_MENU.get(), pContainerId);
+        super(HBMMenus.PRESS_MENU.get(), pContainerId);
 
         this.pressEntity = press;
         this.level = press.getLevel();

@@ -8,7 +8,7 @@ import com.hbm.api.energy.HybridEnergyStorage;
 import com.hbm.api.energy.ProxyEnergyHandler;
 import com.hbm.api.energy.TransmitUtils;
 import com.hbm.block.base.BlockContainerBase;
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.blockentity.base.DummyableBlockEntity;
 import com.hbm.blockentity.interfaces.IPower;
 import com.hbm.registries.HBMCaps;
@@ -17,7 +17,7 @@ import com.hbm.Inventory.recipe.AssemblerRecipe;
 import com.hbm.registries.ModBlocks;
 import com.hbm.registries.ModTags;
 import com.hbm.utils.InventoryUtils;
-import com.hbm.utils.multiblock.MultiblockData;
+import com.hbm.core.contents.multiblock.MultiblockData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -97,7 +97,7 @@ public class AssemblerEntity extends DummyableBlockEntity implements IPower {
         }
     };
     public AssemblerEntity(BlockPos pPos, BlockState pBlockState) {
-        super(ModBlockEntityType.ASSEMBLER_ENTITY.get(), pPos, pBlockState);
+        super(HBMTiles.ASSEMBLER_ENTITY.get(), pPos, pBlockState);
 //        items = NonNullList.withSize(17,ItemStack.EMPTY);
         this.capabilitiesContent.addCapability(HBMCaps.LONG_ENERGY, new ProxyEnergyHandler(energyContainer));
         this.capabilitiesContent.addCapability(ForgeCapabilities.ENERGY, this.forgeEnergy);
@@ -147,7 +147,7 @@ public class AssemblerEntity extends DummyableBlockEntity implements IPower {
         super.handleUpdatePacket(tag);
         this.running = tag.getBoolean(HBMKey.RUNNING);
         if (tag.contains(HBMKey.RECIPE_NOW)){
-            this.level.getRecipeManager().byKey(new ResourceLocation(tag.getString(HBMKey.RECIPE_NOW))).ifPresent(recipe -> {
+            this.level.getRecipeManager().byKey(ResourceLocation.parse(tag.getString(HBMKey.RECIPE_NOW))).ifPresent(recipe -> {
                 this.recipeNow = (AssemblerRecipe) recipe;
                 this.showItem = recipeNow.getResultItem(this.level.registryAccess());
             });
@@ -158,7 +158,7 @@ public class AssemblerEntity extends DummyableBlockEntity implements IPower {
     public void handleClientPacket(@NotNull CompoundTag tag) {
         super.handleClientPacket(tag);
         if (tag.contains(HBMKey.RECIPE_NOW, Tag.TAG_STRING)){
-            this.level.getRecipeManager().byKey(new ResourceLocation(tag.getString(HBMKey.RECIPE_NOW))).ifPresent(recipe -> {
+            this.level.getRecipeManager().byKey(ResourceLocation.parse(tag.getString(HBMKey.RECIPE_NOW))).ifPresent(recipe -> {
                 if (this.recipeNow == null || !this.running){    // 客户端选中配方不影响当前配方
                     this.recipeNow = (AssemblerRecipe) recipe;
                     this.setChanged();
@@ -272,7 +272,7 @@ public class AssemblerEntity extends DummyableBlockEntity implements IPower {
             this.energyContainer.deserializeNBT(pTag.getCompound(HBMKey.ENERGY));
         }
         if (pTag.contains("recipeNow")){
-            ResourceLocation resourceLocation = new ResourceLocation(pTag.getString("recipeNow"));
+            ResourceLocation resourceLocation = ResourceLocation.parse(pTag.getString("recipeNow"));
             this.recipeNow = (AssemblerRecipe) this.level.getRecipeManager().byKey(resourceLocation).orElse(null);
         }
         if (pTag.contains("items", Tag.TAG_COMPOUND)) {

@@ -1,6 +1,7 @@
 package com.hbm.Inventory.recipe;
 
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import com.hbm.HBMKey;
@@ -9,6 +10,8 @@ import com.hbm.datagen.recipe.ingredient.FluidStackIngredient;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.TagParser;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
@@ -21,6 +24,7 @@ import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -143,5 +147,64 @@ public class RecipeHelper {
             result.append(" ×" + countableIngredient.value.count);
         }
         return result;
+    }
+
+    public static FluidStack fluidStackFromJson(JsonObject json){
+        if (!json.has("fluid")) {
+            return FluidStack.EMPTY;
+        }
+
+        // 1. 获取流体种类
+        String fluidId = GsonHelper.getAsString(json, "fluid");
+        Fluid fluid = ForgeRegistries.FLUIDS.getValue(new ResourceLocation(fluidId));
+        if (fluid == null || fluid == Fluids.EMPTY) {
+            throw new JsonSyntaxException("Unknown fluid '" + fluidId + "'");
+        }
+
+        // 2. 获取流体数量 (默认为 1000mB / 1桶)
+        int amount = GsonHelper.getAsInt(json, "amount", 1000);
+
+        // 3. 读取可选的 NBT Tag
+        CompoundTag nbt = null;
+        if (json.has("tag")) {
+            try {
+                // 如果 "tag" 是 JsonObject，转成 String 后用 TagParser 解析成 CompoundTag
+                nbt = TagParser.parseTag(json.get("tag").toString());
+            } catch (Exception e) {
+                throw new JsonSyntaxException("Invalid NBT tag for fluid: " + e.getMessage());
+            }
+        }
+
+        // 4. 构建 FluidStack
+        return new FluidStack(fluid, amount, nbt);
+    }
+
+    public static JsonObject fluidStackToJson(FluidStack stack) {
+        JsonObject json = new JsonObject();
+
+        if (stack.isEmpty()) {
+            json.addProperty("fluid", "minecraft:empty");
+            json.addProperty("amount", 0);
+            return json;
+        }
+
+        // 1. 写入流体 ID
+        ResourceLocation fluidId = ForgeRegistries.FLUIDS.getKey(stack.getFluid());
+        json.addProperty("fluid", fluidId != null ? fluidId.toString() : "minecraft:empty");
+
+        // 2. 写入数量
+        json.addProperty("amount", stack.getAmount());
+
+        // 3. 如果有 NBT，序列化为 tag 字段
+        if (stack.hasTag()) {
+            // TagParser / Gson 工具或者直接讲 CompoundTag 转为 JsonElement
+            // 最直接的方法：使用 NBT 的 toString 结合 TagParser 解析，或使用原版 Dynamic
+            try {
+                JsonElement nbtJson = GsonHelper.parse(stack.getTag().toString());
+                json.add("tag", nbtJson);
+            } catch (Exception ignored) {}
+        }
+
+        return json;
     }
 }

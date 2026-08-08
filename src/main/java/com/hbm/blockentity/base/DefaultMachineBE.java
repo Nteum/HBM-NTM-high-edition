@@ -1,27 +1,20 @@
 package com.hbm.blockentity.base;
 
-import com.hbm.HBM;
 import com.hbm.HBMKey;
 import com.hbm.api.energy.IEnergyContainer;
-import com.hbm.api.energy.IEnergyHandler;
 import com.hbm.api.energy.ProxyEnergyHandler;
 import com.hbm.api.fluid.IExtendedFluidHandler;
-import com.hbm.block.machine.MachineOreSlopper;
 import com.hbm.blockentity.interfaces.IDummyable;
-import com.hbm.blockentity.machine.TileMinerLarge;
 import com.hbm.registries.HBMCaps;
 import com.hbm.utils.DirectionUtils;
-import com.hbm.utils.multiblock.MultiblockModule;
+import com.hbm.core.contents.multiblock.MultiblockModule;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -29,7 +22,6 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.items.IItemHandler;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -119,4 +111,7 @@ public abstract class DefaultMachineBE extends BaseMenuTile implements IDummyabl
             this.fluidHandler.deserializeNBT(nbt.getCompound(HBMKey.FLUIDS));
     }
 
+    public IFluidHandler getFluids(){
+        return this.fluidHandler;
+    }
 }

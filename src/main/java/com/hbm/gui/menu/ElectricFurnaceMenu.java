@@ -1,6 +1,6 @@
 package com.hbm.gui.menu;
 
-import com.hbm.gui.ModMenuType;
+import com.hbm.gui.HBMMenus;
 import com.hbm.gui.menu.slot.BatterySlot;
 import com.hbm.gui.menu.slot.OutputSlot;
 import com.hbm.gui.menu.slot.UpgradeSlot;
@@ -19,7 +19,7 @@ public class ElectricFurnaceMenu extends BaseMachineMenu{
         this(pContainerId, pPlayerInventory, new SimpleContainer(4),new SimpleContainerData(4));
     }
     public ElectricFurnaceMenu(int pContainerId, Inventory pPlayerInventory, Container inContainer, ContainerData containerData1) {
-        super(ModMenuType.ELECTRIC_FURNACE_MENU.get(), pContainerId, inContainer, containerData1);
+        super(HBMMenus.ELECTRIC_FURNACE_MENU.get(), pContainerId, inContainer, containerData1);
         slotNum = 4;
         this.addSlot(new Slot(container, 0, 56, 17));
         this.addSlot(new BatterySlot(container, 1, 56, 53));

@@ -61,7 +61,8 @@ public class AudioWrapper {
 		this.soundInstance = null;
 	}
 
-	public void setKeepAlive(int keepAlive) { }
+	public void setKeepAlive(int keepAlive) {
+	}
 	public void keepAlive() { }
 	
 	public void updatePosition(float x, float y, float z) { }

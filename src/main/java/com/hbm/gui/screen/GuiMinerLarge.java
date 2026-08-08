@@ -6,11 +6,10 @@ import com.hbm.HBMLang;
 import com.hbm.blockentity.machine.TileMinerLarge;
 import com.hbm.gui.menu.MenuMinerLarge;
 import com.hbm.item.misc.ItemDrillbit;
-import com.hbm.network.ModMessages;
+import com.hbm.core.network.HBMNetwork;
 import com.hbm.network.packet.toserver.C2SSyncTileMessage;
 import com.hbm.registries.ModSounds;
 import com.hbm.utils.math.BitUtil;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -133,7 +132,7 @@ public class GuiMinerLarge extends BaseMachineGui<MenuMinerLarge> {
             if (minecraft != null && minecraft.level != null) minecraft.level.playSound(null, menu.getPos(), ModSounds.BLOCK_LEVER_LARGE.get(), SoundSource.BLOCKS, 0.25f, 1.0f);
             CompoundTag tag = new CompoundTag();
             tag.putByte(HBMKey.STATE, (byte) state);
-            ModMessages.sendToServer(new C2SSyncTileMessage(menu.getPos(), tag));
+            HBMNetwork.sendToServer(new C2SSyncTileMessage(menu.getPos(), tag));
         }
         return super.mouseClicked(pX, pY, pButton);
     }

@@ -1,7 +1,7 @@
 package com.hbm.gui.menu;
 
 import com.hbm.blockentity.machine.rbmk.RBMKGaugeEntity;
-import com.hbm.gui.ModMenuType;
+import com.hbm.gui.HBMMenus;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.Container;
@@ -42,7 +42,7 @@ public class RBMKGaugeConfigMenu extends BaseMachineMenu {
     }
 
     private RBMKGaugeConfigMenu(int containerId, Inventory playerInventory, RBMKGaugeEntity gauge, BlockPos pos, Container container, ContainerData data) {
-        super(ModMenuType.RBMK_GAUGE_CONFIG_MENU.get(), containerId, container, data);
+        super(HBMMenus.RBMK_GAUGE_CONFIG_MENU.get(), containerId, container, data);
         this.slotNum = 0;
         this.gauge = gauge;
         this.pos = pos;

@@ -1,7 +1,7 @@
 package com.hbm.blockentity.machine.rbmk;
 
 import com.hbm.block.machine.rbmk.BlockRBMKBase;
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.blockentity.base.UpdateableBlockEntity;
 import com.hbm.reactor.rbmk.RBMKColumnState;
 import com.hbm.reactor.rbmk.RBMKLevelContext;
@@ -37,7 +37,7 @@ public class RBMKDisplayEntity extends UpdateableBlockEntity implements RBMKLink
     private int tickCounter;
 
     public RBMKDisplayEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntityType.RBMK_DISPLAY_ENTITY.get(), pos, state);
+        super(HBMTiles.RBMK_DISPLAY_ENTITY.get(), pos, state);
     }
 
     @Override

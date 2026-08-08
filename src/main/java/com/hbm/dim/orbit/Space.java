@@ -115,6 +115,4 @@ public class Space {
                 new NoiseBasedChunkGenerator(biomeSource, settings.getOrThrow(SPACE_NOISE_SETTINGS))
         ));
     }
-
-
 }

@@ -3,7 +3,7 @@ package com.hbm.blockentity.logistic;
 import com.hbm.HBMKey;
 import com.hbm.Inventory.filter.SidedItemManager;
 import com.hbm.block.logistic.Conveyor;
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.blockentity.base.CapabilityBlockEntity;
 import com.hbm.utils.DirectionUtils;
 import com.hbm.utils.InventoryUtils;
@@ -55,7 +55,7 @@ public class TileConveyor extends CapabilityBlockEntity {
     };
     SidedItemManager sidedItemManager;
     public TileConveyor(BlockPos pos, BlockState state) {
-        super(ModBlockEntityType.TILE_CONVEYOR.get(), pos, state);
+        super(HBMTiles.TILE_CONVEYOR.get(), pos, state);
         Direction facing = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
         int variant = state.getValue(Conveyor.VARIANT);
         Direction outputDir = Conveyor.getOutputDir(state);

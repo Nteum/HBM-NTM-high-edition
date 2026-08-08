@@ -82,8 +82,8 @@ if (shouldBumpBuildNumber) {
         def nextBuildNumber = resetBuild || buildNumber == null ? 1000 : buildNumber + 1
         def newVersion = "${base}-Build${nextBuildNumber}"
 
-        setProp('mod_version', newVersion)
-        setProp('mod_version_base', base)
+//        setProp('mod_version', newVersion)
+//        setProp('mod_version_base', base)
 
         def newText = lines.join(System.lineSeparator()) + System.lineSeparator()
         if (propsFile.exists()) {
@@ -94,7 +94,7 @@ if (shouldBumpBuildNumber) {
             propsFile.setText(newText, 'UTF-8')
         }
 
-        project.ext.set('mod_version', newVersion)
+//        project.ext.set('mod_version', newVersion)
     } else {
         logger.warn('mod_version not found in gradle.properties; build number bump skipped.')
     }

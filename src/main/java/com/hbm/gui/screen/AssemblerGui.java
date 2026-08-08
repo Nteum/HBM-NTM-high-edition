@@ -7,7 +7,7 @@ import com.hbm.Inventory.recipe.AssemblerRecipe;
 import com.hbm.Inventory.recipe.ModRecipes;
 import com.hbm.gui.menu.AssemblerMenu;
 import com.hbm.gui.screen.page.recipe.RecipePageVanilla;
-import com.hbm.network.ModMessages;
+import com.hbm.core.network.HBMNetwork;
 import com.hbm.network.packet.toserver.C2SSyncTileMessage;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ImageButton;
@@ -115,7 +115,7 @@ public class AssemblerGui extends BaseMachineGui<AssemblerMenu> {
         if (this.recipePage.recipeChosen != null){
             CompoundTag tag = new CompoundTag();
             tag.putString(HBMKey.RECIPE_NOW, this.recipePage.recipeChosen.getId().toString());
-            ModMessages.sendToServer(new C2SSyncTileMessage(this.menu.getPos(), tag));
+            HBMNetwork.sendToServer(new C2SSyncTileMessage(this.menu.getPos(), tag));
             this.recipePage.recipeChosen = null;
         }
     }

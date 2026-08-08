@@ -4,13 +4,12 @@ import com.hbm.HBM;
 import com.hbm.HBMKey;
 import com.hbm.HBMLang;
 import com.hbm.item.interfaces.IUpdateInHand;
-import com.hbm.network.ModMessages;
+import com.hbm.core.network.HBMNetwork;
 import com.hbm.network.packet.toclient.S2CHUDPacket;
 import com.hbm.registries.HBMDimensions;
 import com.hbm.world.feature.BedrockOreDefinition;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -70,6 +69,6 @@ public class ItemBedrockOreScanner extends Item implements IUpdateInHand {
         FluidStack boreFluid1 = BedrockOreDefinition.getBoreFluid(totalLevel);
         tag.putInt(HBMKey.TIER, tier);
         tag.put(HBMKey.FLUIDS, boreFluid1.writeToNBT(new CompoundTag()));
-        ModMessages.sendToPlayer(new S2CHUDPacket(id, 4000, tag), (ServerPlayer) player);
+        HBMNetwork.sendToPlayer(new S2CHUDPacket(id, 4000, tag), (ServerPlayer) player);
     }
 }

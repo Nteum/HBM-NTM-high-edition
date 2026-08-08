@@ -4,14 +4,14 @@ import com.hbm.HBMKey;
 import com.hbm.Inventory.material.BasicHeatHandler;
 import com.hbm.addational_data.Pollution;
 import com.hbm.api.fluid.BasicFluidHandler;
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.blockentity.base.DummyableBlockEntity;
 import com.hbm.blockentity.interfaces.IBurnFuel;
 import com.hbm.blockentity.interfaces.IMachinePolluting;
 import com.hbm.blockentity.interfaces.ITakeAir;
 import com.hbm.registries.HBMCaps;
 import com.hbm.registries.ModBlocks;
-import com.hbm.utils.multiblock.MultiblockData;
+import com.hbm.core.contents.multiblock.MultiblockData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -80,7 +80,7 @@ public abstract class TileFireboxBase extends DummyableBlockEntity implements IB
         }
     };
     public TileFireboxBase(BlockPos pos, BlockState state) {
-        super(ModBlockEntityType.TILE_FIREBOX.get(), pos, state);
+        super(HBMTiles.TILE_FIREBOX.get(), pos, state);
         this.multiblockData = MultiblockData.mapping.get(ModBlocks.HEATER_FIREBOX.get());
         this.burnTime = 0;
 //        this.heatEnergy = 0;

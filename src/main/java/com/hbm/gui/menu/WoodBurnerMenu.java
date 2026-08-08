@@ -1,7 +1,7 @@
 package com.hbm.gui.menu;
 
 import com.hbm.blockentity.machine.WoodBurnerBlockEntity;
-import com.hbm.gui.ModMenuType;
+import com.hbm.gui.HBMMenus;
 import com.hbm.gui.menu.slot.BatterySlot;
 import com.hbm.gui.menu.slot.OutputSlot;
 import com.hbm.registries.ModBlocks;
@@ -40,7 +40,7 @@ public class WoodBurnerMenu extends BaseMachineMenu {
     }
 
     private WoodBurnerMenu(int containerId, Inventory playerInventory, Context context, Level level, ContainerData data) {
-        super(ModMenuType.WOOD_BURNER_MENU.get(), containerId, resolveContainer(context), resolveData(data));
+        super(HBMMenus.WOOD_BURNER_MENU.get(), containerId, resolveContainer(context), resolveData(data));
         WoodBurnerBlockEntity blockEntity = context.blockEntity();
         BlockPos pos = context.pos();
         this.blockEntity = blockEntity;

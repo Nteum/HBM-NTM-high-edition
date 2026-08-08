@@ -8,12 +8,12 @@ import com.hbm.api.energy.HybridEnergyStorage;
 import com.hbm.api.energy.ProxyEnergyHandler;
 import com.hbm.api.inventory.ModeBuilder;
 import com.hbm.block.weapon.LaunchPad;
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.registries.HBMCaps;
 import com.hbm.entity.projectile.EntityThrowableNT;
 import com.hbm.gui.menu.LaunchPadMenu;
 import com.hbm.registries.ModBlocks;
-import com.hbm.utils.multiblock.MultiblockData;
+import com.hbm.core.contents.multiblock.MultiblockData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -48,7 +48,7 @@ public class LaunchPadTileEntity extends EntityLaunchPadBase {
 		}
 	};
 	public LaunchPadTileEntity(BlockPos pPos, BlockState pBlockState) {
-		super(ModBlockEntityType.LAUNCHPAD_ENTITY.get(),pPos, pBlockState, 7);
+		super(HBMTiles.LAUNCHPAD_ENTITY.get(),pPos, pBlockState, 7);
 		this.slotModes = new ModeBuilder().addModes(7, Mode.BOTH).get();
 		this.energyContainer = new BasicEnergyContainer(maxPower, maxPower, 0, 0);
 		this.forgeEnergy = new HybridEnergyStorage(this.energyContainer);

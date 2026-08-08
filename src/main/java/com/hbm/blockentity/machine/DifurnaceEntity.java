@@ -2,7 +2,7 @@ package com.hbm.blockentity.machine;
 
 import com.hbm.registries.ModItems;
 import com.hbm.block.machine.BlockDifurnace;
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.gui.menu.DifurnaceMenu;
 import com.hbm.Inventory.recipe.BlastFurnaceRecipe;
 import net.minecraft.core.BlockPos;
@@ -87,7 +87,7 @@ public class DifurnaceEntity extends BaseContainerBlockEntity implements Worldly
         }
     };
     public DifurnaceEntity(BlockPos pPos, BlockState pBlockState) {
-        super(ModBlockEntityType.DIFURNACE_ENTITY.get(), pPos, pBlockState);
+        super(HBMTiles.DIFURNACE_ENTITY.get(), pPos, pBlockState);
     }
 
     /**

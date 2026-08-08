@@ -3,10 +3,9 @@ package com.hbm.gui.screen;
 import com.hbm.HBM;
 import com.hbm.gui.menu.MenuConveyorInserter;
 import com.hbm.gui.screen.widget.MultiStateButton;
-import com.hbm.network.ModMessages;
+import com.hbm.core.network.HBMNetwork;
 import com.hbm.network.packet.toserver.C2SSyncTileMessage;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -27,7 +26,7 @@ public class GuiConveyorInserter extends BaseMachineGui<MenuConveyorInserter> {
             this.button.changeState();
             CompoundTag tag = new CompoundTag();
             tag.putBoolean("destroyer", this.button.stateNow > 0);
-            ModMessages.sendToServer(new C2SSyncTileMessage(this.menu.getPos(), tag));
+            HBMNetwork.sendToServer(new C2SSyncTileMessage(this.menu.getPos(), tag));
         });
         this.addRenderableWidget(this.button);
     }

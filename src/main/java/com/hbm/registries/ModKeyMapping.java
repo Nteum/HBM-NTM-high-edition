@@ -1,7 +1,6 @@
 package com.hbm.registries;
 
-import com.hbm.blockentity.tools.TileEntityGeiger;
-import com.hbm.network.ModMessages;
+import com.hbm.core.network.HBMNetwork;
 import com.hbm.network.packet.toserver.C2SKeyMessage;
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
@@ -66,7 +65,7 @@ public class ModKeyMapping {
         }
         // 有按键按下则发送数据包
         if (!keyNums.isEmpty()){
-            ModMessages.sendToServer(new C2SKeyMessage(keyNums.stream().mapToInt(Integer::intValue).toArray()));
+            HBMNetwork.sendToServer(new C2SKeyMessage(keyNums.stream().mapToInt(Integer::intValue).toArray()));
         }
     }
 }

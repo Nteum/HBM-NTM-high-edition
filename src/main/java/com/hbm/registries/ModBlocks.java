@@ -35,9 +35,7 @@ import com.hbm.block.machine.rbmk.BlockRBMKRadioController;
 import com.hbm.block.machine.rbmk.BlockRBMKSteamPort;
 import com.hbm.block.tools.GeigerCounter;
 import com.hbm.block.weapon.LaunchPad;
-import com.hbm.blockentity.machine.TileConnector;
-import com.hbm.blockentity.machine.TileMachineCentrifuge;
-import com.hbm.blockentity.machine.TileOreSloppper;
+import com.hbm.blockentity.machine.*;
 import com.hbm.blockentity.machine.rbmk.RBMKBoilerEntity;
 import com.hbm.blockentity.machine.rbmk.RBMKCoolerEntity;
 import com.hbm.blockentity.machine.rbmk.RBMKOutgasserEntity;
@@ -58,9 +56,13 @@ import com.hbm.datagen.LanguageProvider;
 import com.hbm.datagen.loot.BlockLootGen;
 import com.hbm.datagen.model.BlockStateGen;
 import com.hbm.datagen.tag.BlockTagsGen;
+import com.hbm.gui.menu.MenuArcFurnace;
 import com.hbm.gui.menu.MenuCentrifuge;
+import com.hbm.gui.menu.MenuCrystallizer;
 import com.hbm.gui.menu.MenuOreSlopper;
+import com.hbm.gui.screen.GuiArcFurnace;
 import com.hbm.gui.screen.GuiCentrifuge;
+import com.hbm.gui.screen.GuiCrystallizer;
 import com.hbm.gui.screen.GuiOreSlopper;
 import com.hbm.item.blockitem.IronCrateItem;
 import com.hbm.item.blockitem.ItemPosModify;
@@ -69,6 +71,8 @@ import com.hbm.item.tool.BatteryBlockItem;
 import com.hbm.reactor.rbmk.RBMKPeripheralType;
 import com.hbm.registries.WrappedRegistryBuilder.WrappedBlockRegistryBuilder;
 import com.hbm.debug.BlockDebug;
+import com.hbm.render.blockentity.RenderArcFurnace;
+import com.hbm.render.blockentity.RenderCrystallizer;
 import com.hbm.render.blockentity.RendererOreSlopper;
 import com.hbm.render.blockentity.RenderrerCentrifuge;
 import com.hbm.world.feature.BedrockOreDefinition;
@@ -138,6 +142,16 @@ public class ModBlocks {
             .tab(ModTabs.MACHINE.getKey()).loc("Centrifuge")
             .model((block, provider) -> provider.horizontalBlockWithItem(block, provider.genSimpleModel(block, HBM.rl("block/machines/centrifuge.obj"), HBM.rl("block/machine/centrifuge"), 3)))
             .tile(TileMachineCentrifuge::new, true).renderer(RenderrerCentrifuge::new).menu(MenuCentrifuge::new).gui(GuiCentrifuge::new)
+            .tags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL).build();
+    public static final RegistryObject<Block> MACHINE_CRYSTALLIZER = new WrappedBlockRegistryBuilder(MachineCrystallizer.id, () -> new MachineCrystallizer(Properties.copy(Blocks.IRON_BLOCK).strength(5.0f, 10.0f)))
+            .tab(ModTabs.MACHINE.getKey()).loc("Crystallizer")
+            .model((block, provider) -> provider.horizontalBlockWithItem(block, provider.genSimpleModel(block, HBM.rl("block/machines/acidizer.obj"), HBM.rl("block/machine/acidizer"), 6)))
+            .tile(TileCrystallizer::new, true).renderer(RenderCrystallizer::new).menu(MenuCrystallizer::new).gui(GuiCrystallizer::new)
+            .tags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL).build();
+    public static final RegistryObject<Block> MACHINE_ARC_FURNACE = new WrappedBlockRegistryBuilder(MachineArcFurnace.id, () -> new MachineArcFurnace(Properties.copy(Blocks.IRON_BLOCK).strength(5.0f, 10.0f)))
+            .tab(ModTabs.MACHINE.getKey()).loc("Arc Furnace")
+            .model((block, provider) -> provider.horizontalBlockWithItem(block, provider.genSimpleModel(block, HBM.rl("block/machines/arc_furnace.obj"), HBM.rl("block/machine/arc_furnace"), 5)))
+            .tile(TileArcFurnace::new, true).renderer(RenderArcFurnace::new).menu(MenuArcFurnace::new).gui(GuiArcFurnace::new)
             .tags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL).build();
 
     // Tokamak 聚变堆组件

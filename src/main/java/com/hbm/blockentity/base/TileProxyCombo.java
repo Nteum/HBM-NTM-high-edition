@@ -5,7 +5,7 @@ import com.hbm.api.energy.IEnergyHandler;
 import com.hbm.api.fluid.IExtendedFluidTank;
 import com.hbm.api.fluid.ISidedFluidHandler;
 import com.hbm.api.inventory.ISidedItemHandler;
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -29,7 +29,7 @@ public class TileProxyCombo extends TileProxyBase implements ISidedItemHandler, 
     }
 
     public TileProxyCombo(BlockPos pos, BlockState blockState) {
-        this(ModBlockEntityType.PROXY_ENTITY.get(), pos, blockState);
+        this(HBMTiles.PROXY_ENTITY.get(), pos, blockState);
     }
 
     @Override

@@ -9,7 +9,7 @@ import com.hbm.api.energy.HybridEnergyStorage;
 import com.hbm.api.energy.ProxyEnergyHandler;
 import com.hbm.api.fluid.BasicFluidHandler;
 import com.hbm.block.machine.BlockLitSingleBlockMachine;
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.blockentity.base.BaseMachineBlockEntity;
 import com.hbm.registries.HBMCaps;
 import net.minecraft.core.BlockPos;
@@ -46,7 +46,7 @@ public class ElectricBoilerEntity extends BaseMachineBlockEntity {
     private final BasicFluidHandler fluids;
 
     public ElectricBoilerEntity(BlockPos pPos, BlockState pBlockState) {
-        super(ModBlockEntityType.ELECTRIC_BOILER_ENTITY.get(), pPos, pBlockState);
+        super(HBMTiles.ELECTRIC_BOILER_ENTITY.get(), pPos, pBlockState);
         this.items = NonNullList.withSize(0, ItemStack.EMPTY);
         this.slotModes = List.of();
         this.fluids = buildFluidHandler();

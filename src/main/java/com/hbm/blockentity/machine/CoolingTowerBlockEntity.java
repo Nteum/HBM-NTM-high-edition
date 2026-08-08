@@ -1,12 +1,12 @@
 package com.hbm.blockentity.machine;
 
 import com.hbm.HBMKey;
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.blockentity.base.DummyableBlockEntity;
 import com.hbm.blockentity.base.TileProxyBase;
 import com.hbm.blockentity.machine.component.CondenserLogic;
 import com.hbm.registries.ModBlocks;
-import com.hbm.utils.multiblock.MultiblockData;
+import com.hbm.core.contents.multiblock.MultiblockData;
 import com.hbm.api.fluid.VisitRestrictWrapper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -46,7 +46,7 @@ public class CoolingTowerBlockEntity extends DummyableBlockEntity {
     private final CondenserLogic logic;
 
     public CoolingTowerBlockEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntityType.COOLING_TOWER_ENTITY.get(), pos, state);
+        super(HBMTiles.COOLING_TOWER_ENTITY.get(), pos, state);
         this.logic = new CondenserLogic(STEAM_CAPACITY, WATER_CAPACITY, CONVERSION_RATE);
         this.capabilitiesContent.addCapability(ForgeCapabilities.FLUID_HANDLER, logic.handler());
         this.multiblockData = MultiblockData.mapping.get(ModBlocks.machine_cooling_tower.get());

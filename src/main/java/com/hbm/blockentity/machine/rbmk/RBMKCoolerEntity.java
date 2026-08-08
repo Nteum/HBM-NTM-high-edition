@@ -1,6 +1,6 @@
 package com.hbm.blockentity.machine.rbmk;
 
-import com.hbm.blockentity.ModBlockEntityType;
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.blockentity.base.BaseMachineBlockEntity;
 import com.hbm.reactor.rbmk.RBMKLevelContext;
 import com.hbm.reactor.rbmk.RBMKManager;
@@ -15,7 +15,7 @@ import net.minecraft.world.level.block.state.BlockState;
 public class RBMKCoolerEntity extends BaseMachineBlockEntity implements RBMKTickableEntity {
 
     public RBMKCoolerEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntityType.RBMK_COOLER_ENTITY.get(), pos, state);
+        super(HBMTiles.RBMK_COOLER_ENTITY.get(), pos, state);
         this.items = NonNullList.create();
         this.slotModes = java.util.List.of();
     }
