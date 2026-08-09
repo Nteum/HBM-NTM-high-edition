@@ -11,6 +11,6 @@ import net.minecraft.world.entity.EquipmentSlot;
 public class ModelArmorDiesel extends ModelArmorBase{
     public ModelArmorDiesel() {
         super("Head","Body","LeftArm","RightArm","LeftLeg","RightLeg","LeftBoot","RightBoot");
-        armTexExtra = new ResourceLocation("hbm:textures/models/armor/bnuuy_arm.png");
+        armTexExtra = ResourceLocation.parse("hbm:textures/models/armor/bnuuy_arm.png");
     }
 }

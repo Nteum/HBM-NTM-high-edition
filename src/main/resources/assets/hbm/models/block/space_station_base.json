@@ -1,5 +1,5 @@
 {
-  "loader": "hbm:multi_parts_obj",
+  "loader": "hbm:triangle_parts_obj",
   "model": "hbm:models/block/space_station_base.obj",
   "flip_v": true,
   "mtl_override": "hbm:models/general.mtl",

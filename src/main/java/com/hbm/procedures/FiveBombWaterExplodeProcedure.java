@@ -39,7 +39,7 @@ public final class FiveBombWaterExplodeProcedure {
         if (!(world instanceof Level level)) {
             return;
         }
-        SoundEvent sound = ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("big_explosives:underwaterexplode"));
+        SoundEvent sound = ForgeRegistries.SOUND_EVENTS.getValue(ResourceLocation.parse("big_explosives:underwaterexplode"));
         if (sound == null) {
             return;
         }

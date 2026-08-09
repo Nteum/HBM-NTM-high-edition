@@ -535,6 +535,7 @@ public abstract class WrappedRegistryBuilder<T> implements Supplier<T>{
                 case HBMKey.MODEL_EXISTING -> provider.simpleBlockWithItem(get(), provider.genBuiltInModelFile(get(), "existing"));
                 case HBMKey.MODEL_CUBE_BOTTOM_TOP -> provider.simpleBlockWithItem(get(), provider.genBuiltInModelFile(get(), "cube_bottom_top"));
                 case HBMKey.MODEL_LEAVES -> provider.simpleBlockWithItem(get(), provider.genBuiltInModelFile(get(), "leaves"));
+                case HBMKey.MODEL_CROSS -> provider.simpleBlockWithItem(get(), provider.genBuiltInModelFile(get(), "cross"));
 //                case HBMKey.MODEL_FRONT_SIDE -> provider.frontSideBlockWithItem(get());
 //                case HBMKey.MODEL_FRONT_SIDE_TOP -> provider.frontSideTopBlockWithItem(get());
 //                case HBMKey.MODEL_DIFURNACE -> provider.difuranceBlockWithItem(get());

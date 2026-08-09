@@ -70,7 +70,7 @@ public class HBMConfigFeatures {
 
     public static final FeatureSpec<MeteCreator.CreatorConfiguration> METE_CREATOR_MOON = add(new FeatureSpec<>(
             "mete_creator_moon", ModFeatures.METE_CREATOR.get(),
-            new MeteCreator.CreatorConfiguration(ModBlocks.moon_rock.get().defaultBlockState(), Blocks.BASALT.defaultBlockState(), 8, 24),
+            new MeteCreator.CreatorConfiguration(ModBlocks.moon_rock.get().defaultBlockState(), Blocks.BASALT.defaultBlockState(), 8, 14),
             new PlacementModifier[]{RarityFilter.onAverageOnceEvery(50)}
     ));
 
@@ -109,6 +109,11 @@ public class HBMConfigFeatures {
 
     public static final FeatureSpec<MeteCreator.CreatorConfiguration> METEORITE = add(new FeatureSpec<>(
             "meteorite", ModFeatures.METEORITE.get(), new Meteorite.Configuration(false, false, false),
+            new PlacementModifier[]{RarityFilter.onAverageOnceEvery(50)}
+    ));
+
+    public static final FeatureSpec<OilBubbleFeature.Config> OIL_BUBBLE_MUN = add(new FeatureSpec<>(
+            "oil_bubble_mun", ModFeatures.BUBBLE.get(), OilBubbleFeature.Config.simple(ModBlocks.ORE_BRINE.get().defaultBlockState(), ModBlocks.moon_rock.get().defaultBlockState(), 8, 16, true),
             new PlacementModifier[]{RarityFilter.onAverageOnceEvery(50)}
     ));
 

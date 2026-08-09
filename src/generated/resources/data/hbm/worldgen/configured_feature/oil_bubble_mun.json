@@ -1,0 +1,14 @@
+{
+  "type": "hbm:oil_bubble",
+  "config": {
+    "block": {
+      "Name": "hbm:ore_brine"
+    },
+    "fuzzy": true,
+    "max_size": 16,
+    "min_size": 8,
+    "replace": {
+      "Name": "hbm:moon_rock"
+    }
+  }
+}

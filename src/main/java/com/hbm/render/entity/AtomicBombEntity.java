@@ -102,11 +102,11 @@ public class AtomicBombEntity extends PathfinderMob implements GeoEntity, Pipeli
     }
 
     public SoundEvent getHurtSound(DamageSource ds) {
-        return (SoundEvent) ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("intentionally_empty"));
+        return (SoundEvent) ForgeRegistries.SOUND_EVENTS.getValue(ResourceLocation.parse("intentionally_empty"));
     }
 
     public SoundEvent getDeathSound() {
-        return (SoundEvent) ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("intentionally_empty"));
+        return (SoundEvent) ForgeRegistries.SOUND_EVENTS.getValue(ResourceLocation.parse("intentionally_empty"));
     }
 
     public boolean causeFallDamage(float l, float d, DamageSource source) {

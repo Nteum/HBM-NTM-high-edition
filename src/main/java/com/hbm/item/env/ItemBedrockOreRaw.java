@@ -45,7 +45,7 @@ public class ItemBedrockOreRaw extends Item implements CreativeTabVariantItem {
 
     public static ResourceKey<Level> getOreBody(ItemStack stack) {
         String dimsion = NBTHelper.getStr(stack, HBMKey.DIMENSION, "");
-        return ResourceKey.create(Registries.DIMENSION, new ResourceLocation(dimsion));
+        return ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse(dimsion));
     }
 
     public static double getOreLevel(ServerLevel level, int x, int z, ItemBedrockOreCombine.CelestialBedrockOreType type) {

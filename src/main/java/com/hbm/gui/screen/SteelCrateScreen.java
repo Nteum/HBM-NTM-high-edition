@@ -13,7 +13,7 @@ import net.minecraft.world.entity.player.Inventory;
  */
 public class SteelCrateScreen extends AbstractContainerScreen<SteelCrateMenu> {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation("textures/gui/container/generic_54.png");
+    private static final ResourceLocation TEXTURE = ResourceLocation.parse("textures/gui/container/generic_54.png");
     private static final int ROWS = 6;
 
     public SteelCrateScreen(SteelCrateMenu menu, Inventory inventory, Component title) {

@@ -39,7 +39,7 @@ public final class ThermobaricExplosionHelper {
     }
 
     private static void playBlastSound(Level level, Vec3 center) {
-        SoundEvent sound = ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("big_explosives:big_bomb"));
+        SoundEvent sound = ForgeRegistries.SOUND_EVENTS.getValue(ResourceLocation.parse("big_explosives:big_bomb"));
         if (sound == null) {
             return;
         }

@@ -4,6 +4,7 @@ import com.hbm.blockentity.machine.TileSpaceStation;
 import com.hbm.render.RenderUtils;
 import com.hbm.render.model.Models;
 import com.hbm.render.model.engine.CustomPartsModel;
+import com.hbm.render.model.engine.TrianglePartsModel;
 import com.hbm.utils.DirectionUtils;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
@@ -14,6 +15,8 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelManager;
+import net.minecraft.core.registries.Registries;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public class SpaceStationRender implements BlockEntityRenderer<TileSpaceStation> {
     private final BakedModel model;
@@ -54,6 +57,34 @@ public class SpaceStationRender implements BlockEntityRenderer<TileSpaceStation>
             pPoseStack.mulPose(Axis.ZP.rotationDegrees(degree));
             pPoseStack.translate(2, 1.65, 0);
             RenderUtils.renderModel(customBakedModel.getPart("ArmXN"), pPoseStack, pBuffer, pPackedLight, pPackedOverlay, RenderType.cutout());
+            pPoseStack.popPose();
+        }else if (model instanceof TrianglePartsModel.Baked baked)
+        {
+            TrianglePartsModel.renderCutout(baked.getPart("Port"), pPoseStack, pBuffer, pPackedLight, pPackedOverlay);
+
+            pPoseStack.pushPose();
+            pPoseStack.translate(0, -1.65, 2);
+            pPoseStack.mulPose(Axis.XP.rotationDegrees(degree));
+            pPoseStack.translate(0, 1.65, -2);
+            TrianglePartsModel.renderCutout(baked.getPart("ArmZN"), pPoseStack, pBuffer, pPackedLight, pPackedOverlay);
+            pPoseStack.popPose();
+            pPoseStack.pushPose();
+            pPoseStack.translate(0, -1.65, -2);
+            pPoseStack.mulPose(Axis.XN.rotationDegrees(degree));
+            pPoseStack.translate(0, 1.65, 2);
+            TrianglePartsModel.renderCutout(baked.getPart("ArmZP"), pPoseStack, pBuffer, pPackedLight, pPackedOverlay);
+            pPoseStack.popPose();
+            pPoseStack.pushPose();
+            pPoseStack.translate(2, -1.65, 0);
+            pPoseStack.mulPose(Axis.ZN.rotationDegrees(degree));
+            pPoseStack.translate(-2, 1.65, 0);
+            TrianglePartsModel.renderCutout(baked.getPart("ArmXP"), pPoseStack, pBuffer, pPackedLight, pPackedOverlay);
+            pPoseStack.popPose();
+            pPoseStack.pushPose();
+            pPoseStack.translate(-2, -1.65, 0);
+            pPoseStack.mulPose(Axis.ZP.rotationDegrees(degree));
+            pPoseStack.translate(2, 1.65, 0);
+            TrianglePartsModel.renderCutout(baked.getPart("ArmXN"), pPoseStack, pBuffer, pPackedLight, pPackedOverlay);
             pPoseStack.popPose();
         }else {
             RenderUtils.renderModel(model, pPoseStack, pBuffer, pPackedLight, pPackedOverlay, RenderType.cutout());

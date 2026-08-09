@@ -9,6 +9,6 @@ import net.minecraft.resources.ResourceLocation;
 public class ModelArmorDesh extends ModelArmorBase{
     public ModelArmorDesh() {
         super("Head","Body","LeftArm","RightArm","LeftLeg","RightLeg","LeftBoot","RightBoot");
-        armTexExtra = new ResourceLocation("hbm:textures/models/armor/steamsuit_arm.png");
+        armTexExtra = ResourceLocation.parse("hbm:textures/models/armor/steamsuit_arm.png");
     }
 }

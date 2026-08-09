@@ -84,4 +84,11 @@ public class BlockEnums {
 		HALOGEN
 	}
 
+	public enum EnumDeadPlantType {
+		GENERIC,
+		GRASS,
+		FLOWER,
+		BIGFLOWER,
+		FERN
+	}
 }

@@ -10,7 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 public class ModelArmorT51 extends ModelArmorBase{
     public ModelArmorT51() {
         super("Helmet","Chest","LeftArm","RightArm","LeftLeg","RightLeg","LeftBoot","RightBoot");
-        armTexExtra = new ResourceLocation("hbm:textures/models/armor/t51_arm.png");
+        armTexExtra = ResourceLocation.parse("hbm:textures/models/armor/t51_arm.png");
     }
 
     @Override

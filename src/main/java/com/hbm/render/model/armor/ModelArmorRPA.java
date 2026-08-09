@@ -12,14 +12,14 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 
 public class ModelArmorRPA extends ModelArmorBase{
-    public static ResourceLocation chestplateTex = new ResourceLocation("hbm:textures/models/armor/rpa_chest.png");
+    public static ResourceLocation chestplateTex = ResourceLocation.parse("hbm:textures/models/armor/rpa_chest.png");
 //    AccessableRenderable.Component fan;
 //    AccessableRenderable.Component glow;
     BaseObjModel fan;
     BaseObjModel glow;
     public ModelArmorRPA() {
         super("Head","Body","LeftArm","RightArm","LeftLeg","RightLeg","LeftBoot","RightBoot","Fan","Glow");
-        armTexExtra = new ResourceLocation("hbm:textures/models/armor/rpa_arm.png");
+        armTexExtra = ResourceLocation.parse("hbm:textures/models/armor/rpa_arm.png");
     }
 
     @Override

@@ -337,27 +337,26 @@
       {
         "type": "minecraft:condition",
         "if_true": {
-          "type": "minecraft:stone_depth",
-          "add_surface_depth": false,
-          "offset": 0,
-          "secondary_depth_range": 0,
-          "surface_type": "floor"
+          "type": "minecraft:y_above",
+          "add_stone_depth": true,
+          "anchor": {
+            "absolute": -2
+          },
+          "surface_depth_multiplier": 0
         },
         "then_run": {
           "type": "minecraft:condition",
           "if_true": {
-            "type": "minecraft:water",
-            "add_stone_depth": false,
-            "offset": -1,
-            "surface_depth_multiplier": 0
+            "type": "minecraft:stone_depth",
+            "add_surface_depth": false,
+            "offset": 0,
+            "secondary_depth_range": 0,
+            "surface_type": "floor"
           },
           "then_run": {
             "type": "minecraft:block",
             "result_state": {
-              "Name": "minecraft:basalt",
-              "Properties": {
-                "axis": "y"
-              }
+              "Name": "hbm:moon_turf"
             }
           }
         }
@@ -372,14 +371,33 @@
           "surface_type": "floor"
         },
         "then_run": {
-          "type": "minecraft:condition",
-          "if_true": {
+          "type": "minecraft:block",
+          "result_state": {
+            "Name": "hbm:moon_rock"
+          }
+        }
+      },
+      {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:not",
+          "invert": {
             "type": "minecraft:y_above",
-            "add_stone_depth": false,
+            "add_stone_depth": true,
             "anchor": {
-              "absolute": 56
+              "absolute": -5
             },
             "surface_depth_multiplier": 0
+          }
+        },
+        "then_run": {
+          "type": "minecraft:condition",
+          "if_true": {
+            "type": "minecraft:stone_depth",
+            "add_surface_depth": false,
+            "offset": 0,
+            "secondary_depth_range": 0,
+            "surface_type": "floor"
           },
           "then_run": {
             "type": "minecraft:block",
@@ -394,22 +412,6 @@
         "if_true": {
           "type": "minecraft:stone_depth",
           "add_surface_depth": false,
-          "offset": 0,
-          "secondary_depth_range": 0,
-          "surface_type": "floor"
-        },
-        "then_run": {
-          "type": "minecraft:block",
-          "result_state": {
-            "Name": "hbm:moon_turf"
-          }
-        }
-      },
-      {
-        "type": "minecraft:condition",
-        "if_true": {
-          "type": "minecraft:stone_depth",
-          "add_surface_depth": true,
           "offset": 0,
           "secondary_depth_range": 0,
           "surface_type": "floor"

@@ -73,7 +73,7 @@ public final class FiveHundredKgBombEntityDiesProcedure {
     }
 
     private static void playBlastSound(Level level, double x, double y, double z) {
-        SoundEvent sound = ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("big_explosives:big_bomb"));
+        SoundEvent sound = ForgeRegistries.SOUND_EVENTS.getValue(ResourceLocation.parse("big_explosives:big_bomb"));
         if (sound == null) {
             return;
         }

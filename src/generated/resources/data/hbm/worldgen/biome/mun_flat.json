@@ -21,7 +21,8 @@
   "features": [
     [],
     [
-      "hbm:mete_creator_moon"
+      "hbm:mete_creator_moon",
+      "hbm:oil_bubble_mun"
     ]
   ],
   "has_precipitation": false,

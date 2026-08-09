@@ -57,11 +57,11 @@ public record AnimatableRenderDefinition(
 
     public static AnimatableRenderDefinition fromJson(final ResourceLocation fallbackId, final JsonObject json) {
         final ResourceLocation id = json.has("id")
-                ? new ResourceLocation(GsonHelper.getAsString(json, "id"))
+                ? ResourceLocation.parse(GsonHelper.getAsString(json, "id"))
                 : fallbackId;
-        final ResourceLocation model = new ResourceLocation(GsonHelper.getAsString(json, "model"));
+        final ResourceLocation model = ResourceLocation.parse(GsonHelper.getAsString(json, "model"));
         final ResourceLocation animation = json.has("animation")
-                ? new ResourceLocation(GsonHelper.getAsString(json, "animation"))
+                ? ResourceLocation.parse(GsonHelper.getAsString(json, "animation"))
                 : null;
         final RenderLayerType layer = json.has("render_type")
                 ? RenderLayerType.byName(GsonHelper.getAsString(json, "render_type"))
@@ -72,7 +72,7 @@ public record AnimatableRenderDefinition(
         final JsonObject textureObj = GsonHelper.getAsJsonObject(json, "textures");
         final ImmutableMap.Builder<String, ResourceLocation> textures = ImmutableMap.builder();
         for (String key : textureObj.keySet()) {
-            textures.put(key, new ResourceLocation(GsonHelper.getAsString(textureObj, key)));
+            textures.put(key, ResourceLocation.parse(GsonHelper.getAsString(textureObj, key)));
         }
 
         return new AnimatableRenderDefinition(id, model, animation, textures.build(), layer, shadowRadius, scale);

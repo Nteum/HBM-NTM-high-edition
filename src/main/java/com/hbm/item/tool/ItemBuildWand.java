@@ -133,7 +133,7 @@ public class ItemBuildWand extends Item {
             data.remove(TAG_UNDO_ROOT);
             return new UndoResult(UndoStatus.EMPTY, 0, null);
         }
-        ResourceLocation dimensionId = new ResourceLocation(dimensionKey);
+        ResourceLocation dimensionId = ResourceLocation.parse(dimensionKey);
         ServerLevel level = player.server.getLevel(ResourceKey.create(Registries.DIMENSION, dimensionId));
         if (level == null) {
             data.remove(TAG_UNDO_ROOT);
@@ -246,7 +246,7 @@ public class ItemBuildWand extends Item {
         if (tag == null || !tag.contains("Name", Tag.TAG_STRING)) {
             return Blocks.AIR.defaultBlockState();
         }
-        Block block = BuiltInRegistries.BLOCK.get(new ResourceLocation(tag.getString("Name")));
+        Block block = BuiltInRegistries.BLOCK.get(ResourceLocation.parse(tag.getString("Name")));
         BlockState state = block.defaultBlockState();
         if (tag.contains("Properties", Tag.TAG_COMPOUND)) {
             CompoundTag props = tag.getCompound("Properties");

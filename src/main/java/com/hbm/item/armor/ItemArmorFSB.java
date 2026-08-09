@@ -115,7 +115,7 @@ public class ItemArmorFSB extends ArmorItem implements IArmorDisableModel {
     }
 
     public ItemArmorFSB setOverlay(String path) {
-        this.overlay = new ResourceLocation(path);
+        this.overlay = ResourceLocation.parse(path);
         return this;
     }
 

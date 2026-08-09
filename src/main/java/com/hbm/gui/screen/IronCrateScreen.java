@@ -10,7 +10,7 @@ import net.minecraft.world.entity.player.Inventory;
 
 public class IronCrateScreen extends AbstractContainerScreen<IronCrateMenu> {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation("textures/gui/container/generic_54.png");
+    private static final ResourceLocation TEXTURE = ResourceLocation.parse("textures/gui/container/generic_54.png");
     private static final int ROWS = 4;
 
     public IronCrateScreen(IronCrateMenu menu, Inventory inventory, Component title) {

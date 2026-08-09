@@ -26,6 +26,6 @@ public final class BigExplosivesModSounds {
 
     private static RegistryObject<SoundEvent> register(String name) {
         return REGISTRY.register(name,
-                () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(BigExplosivesMod.MODID, name)));
+                () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(BigExplosivesMod.MODID, name)));
     }
 }

@@ -45,7 +45,7 @@ public class ItemModelReloader extends SimpleJsonResourceReloadListener {
         ModelResourceLocation modelLoc = new ModelResourceLocation(itemId, "inventory");
 
         // 2. 重新加载模型 JSON
-        ResourceLocation modelJsonLoc = new ResourceLocation(itemId.getNamespace(), "models/item/" + itemId.getPath() + ".json");
+        ResourceLocation modelJsonLoc = ResourceLocation.fromNamespaceAndPath(itemId.getNamespace(), "models/item/" + itemId.getPath() + ".json");
 
         ModelManager manager = mc.getModelManager();
         ItemRenderer itemRenderer = mc.getItemRenderer();

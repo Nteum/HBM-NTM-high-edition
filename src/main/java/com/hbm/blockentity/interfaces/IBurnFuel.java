@@ -1,9 +1,7 @@
 package com.hbm.blockentity.interfaces;
 
-import com.hbm.dim.orbit.Space;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.level.Level;
 import net.minecraftforge.common.ForgeHooks;
 
 public interface IBurnFuel extends ITakeAir{

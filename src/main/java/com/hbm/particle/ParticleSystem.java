@@ -410,7 +410,7 @@ public class ParticleSystem {
     }
 
     public static void vanilla(CompoundTag data, Vec3 position){
-        ParticleType<?> particleType = BuiltInRegistries.PARTICLE_TYPE.get(new ResourceLocation(data.getString("mode")));
+        ParticleType<?> particleType = BuiltInRegistries.PARTICLE_TYPE.get(ResourceLocation.parse(data.getString("mode")));
         Minecraft.getInstance().level.addParticle((ParticleOptions) particleType, position.x, position.y, position.z, data.getDouble("mX"), data.getDouble("mY"), data.getDouble("mZ"));
     }
 

@@ -78,7 +78,7 @@ public final class GeoRenderPipeline extends SimpleJsonResourceReloadListener {
         }
         final JsonObject entryJson = element.getAsJsonObject();
         final AnimatableRenderDefinition definition = AnimatableRenderDefinition.fromJson(
-                new ResourceLocation(fileId.getNamespace(), fileId.getPath()),
+                ResourceLocation.fromNamespaceAndPath(fileId.getNamespace(), fileId.getPath()),
                 entryJson
         );
         sink.put(definition.id(), definition);

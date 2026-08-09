@@ -42,7 +42,7 @@ public class HBMItemProperties {
                 return;
             }
 
-            ResourceLocation propId = new ResourceLocation(entry.propertyName);
+            ResourceLocation propId = ResourceLocation.parse(entry.propertyName);
             ItemProperties.register(item, propId, (stack, level, entity, seed) -> {
                 try {
                     return entry.condition.get() ? 1.0F : 0.0F;

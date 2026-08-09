@@ -8,14 +8,14 @@ import software.bernie.geckolib.model.GeoModel;
 
 public class GeckoAdvancedWorkbenchDisplayModel extends GeoModel<GeckoAdvancedWorkbenchDisplayItem> {
     public ResourceLocation getAnimationResource(GeckoAdvancedWorkbenchDisplayItem animatable) {
-        return new ResourceLocation(BigExplosivesMod.MODID, "animations/advancedworkbench_1.animation.json");
+        return ResourceLocation.fromNamespaceAndPath(BigExplosivesMod.MODID, "animations/advancedworkbench_1.animation.json");
     }
 
     public ResourceLocation getModelResource(GeckoAdvancedWorkbenchDisplayItem animatable) {
-        return new ResourceLocation(BigExplosivesMod.MODID, "geo/advancedworkbench_1.geo.json");
+        return ResourceLocation.fromNamespaceAndPath(BigExplosivesMod.MODID, "geo/advancedworkbench_1.geo.json");
     }
 
     public ResourceLocation getTextureResource(GeckoAdvancedWorkbenchDisplayItem entity) {
-        return new ResourceLocation(BigExplosivesMod.MODID, "textures/block/texture.png");
+        return ResourceLocation.fromNamespaceAndPath(BigExplosivesMod.MODID, "textures/block/texture.png");
     }
 }

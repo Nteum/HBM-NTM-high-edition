@@ -8,7 +8,10 @@
         {
           "biome": "hbm:mun_flat",
           "parameters": {
-            "continentalness": 0.0,
+            "continentalness": [
+              -1.0,
+              0.5
+            ],
             "depth": 0.0,
             "erosion": 0.0,
             "humidity": 0.0,
@@ -20,7 +23,10 @@
         {
           "biome": "hbm:mun_heightland",
           "parameters": {
-            "continentalness": 0.0,
+            "continentalness": [
+              0.5,
+              1.0
+            ],
             "depth": 0.0,
             "erosion": 0.0,
             "humidity": 0.0,

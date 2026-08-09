@@ -65,14 +65,14 @@ public class ModTags {
         }
         //注册forge tag，如果希望兼容其他模组，请注册此tag
         public static TagKey<Block> forgeTag(String pName) {
-            return TagKey.create(Registries.BLOCK, new ResourceLocation("forge",pName));
+            return TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath("forge",pName));
         }
         public static TagKey<Block> convertToBlockTag(TagKey<Item> itemTag) {
             return BlockTags.create(itemTag.location());
         }
 
         public static TagKey<Block> subBlockTag(TagKey<Block> base, TagKey<Item> matter) {
-            return BlockTags.create(new ResourceLocation(base.location().getNamespace(),
+            return BlockTags.create(ResourceLocation.fromNamespaceAndPath(base.location().getNamespace(),
                     base.location().getPath() + "/" + matter.location().getPath()));
         }
         public static TagGenEntry<Block> make(TagKey<Item> key){
@@ -114,7 +114,7 @@ public class ModTags {
             return TagKey.create(Registries.ITEM, HBM.rl(pName));
         }
         public static TagKey<Item> forgeTag(String pName) {
-            return TagKey.create(Registries.ITEM, new ResourceLocation("forge",pName));
+            return TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("forge",pName));
         }
         public static TagKey<Item> subTag(TagKey<Item> parent, TagKey<Item> child){
             return TagKey.create(Registries.ITEM, parent.location().withSuffix("/" + child.location().getPath()));
@@ -226,7 +226,7 @@ public class ModTags {
             return TagKey.create(Registries.FLUID, HBM.rl(pName));
         }
         public static TagKey<Fluid> forgeTag(String pName) {
-            return TagKey.create(Registries.FLUID, new ResourceLocation("forge",pName));
+            return TagKey.create(Registries.FLUID, ResourceLocation.fromNamespaceAndPath("forge",pName));
         }
     }
 }

@@ -1,10 +1,8 @@
 package com.hbm.blockentity.interfaces;
 
-import com.hbm.dim.orbit.Space;
+import com.hbm.space.dim.orbit.Space;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
-
-import java.util.List;
 
 /**
  * 检测机器周围的空气是否足够

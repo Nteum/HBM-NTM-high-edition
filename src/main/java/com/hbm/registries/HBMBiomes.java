@@ -1,12 +1,11 @@
 package com.hbm.registries;
 
 import com.hbm.HBM;
-import com.hbm.dim.moon.HBMMun;
+import com.hbm.space.dim.moon.HBMMun;
 import com.hbm.world.biome.HBMSurfaceRules;
 import com.hbm.world.biome.NoMansLand;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome;
 import terrablender.api.Regions;
 import terrablender.api.SurfaceRuleManager;

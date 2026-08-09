@@ -104,6 +104,10 @@ public class CustomPartsModel implements IUnbakedGeometry<CustomPartsModel> {
         this.emissiveAmbient = settings.emissiveAmbient;
         this.mtlOverride = settings.mtlOverride;
     }
+
+    /**
+     * forge原本的obj加载流程
+     */
     public static CustomPartsModel parse(ObjTokenizer tokenizer, ModelSettings settings) throws IOException
     {
         var model = new CustomPartsModel(settings);                 // 待生成的模型
@@ -132,9 +136,9 @@ public class CustomPartsModel implements IUnbakedGeometry<CustomPartsModel> {
         {
             String lib = materialLibraryOverrideLocation;
             if (lib.contains(":"))
-                mtllib = Loader.INSTANCE.loadMaterialLibrary(new ResourceLocation(lib));
+                mtllib = Loader.INSTANCE.loadMaterialLibrary(ResourceLocation.parse(lib));
             else
-                mtllib = Loader.INSTANCE.loadMaterialLibrary(new ResourceLocation(modelDomain, modelPath + lib));
+                mtllib = Loader.INSTANCE.loadMaterialLibrary(ResourceLocation.fromNamespaceAndPath(modelDomain, modelPath + lib));
         }
 
         String[] line;
@@ -149,8 +153,8 @@ public class CustomPartsModel implements IUnbakedGeometry<CustomPartsModel> {
 
                     String lib = line[1];
                     if (lib.contains(":"))
-                        mtllib = ObjLoader.INSTANCE.loadMaterialLibrary(new ResourceLocation(lib));
-                    else mtllib = ObjLoader.INSTANCE.loadMaterialLibrary(new ResourceLocation(modelDomain, modelPath + lib));
+                        mtllib = ObjLoader.INSTANCE.loadMaterialLibrary(ResourceLocation.parse(lib));
+                    else mtllib = ObjLoader.INSTANCE.loadMaterialLibrary(ResourceLocation.fromNamespaceAndPath(modelDomain, modelPath + lib));
                     break;
                 }
 
@@ -406,7 +410,7 @@ public class CustomPartsModel implements IUnbakedGeometry<CustomPartsModel> {
             boolean emissiveAmbient = GsonHelper.getAsBoolean(jsonObject, "emissive_ambient", true);
             String mtlOverride = GsonHelper.getAsString(jsonObject, "mtl_override", null);
 
-            return loadModel(new ModelSettings(new ResourceLocation(modelLocation), automaticCulling, shadeQuads, flipV, emissiveAmbient, mtlOverride));
+            return loadModel(new ModelSettings(ResourceLocation.parse(modelLocation), automaticCulling, shadeQuads, flipV, emissiveAmbient, mtlOverride));
         }
 
         public CustomPartsModel loadModel(ModelSettings settings)

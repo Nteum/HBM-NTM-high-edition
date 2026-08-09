@@ -1,8 +1,8 @@
 package com.hbm.datagen.levelgen;
 
 import com.hbm.HBM;
-import com.hbm.dim.moon.WorldGenMun;
-import com.hbm.dim.orbit.Space;
+import com.hbm.space.dim.moon.WorldGenMun;
+import com.hbm.space.dim.orbit.Space;
 import com.hbm.world.feature.HBMConfigFeatures;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;

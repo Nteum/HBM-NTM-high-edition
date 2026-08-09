@@ -65,6 +65,7 @@ import com.hbm.gui.screen.GuiArcFurnace;
 import com.hbm.gui.screen.GuiCentrifuge;
 import com.hbm.gui.screen.GuiCrystallizer;
 import com.hbm.gui.screen.GuiOreSlopper;
+import com.hbm.item.blockitem.BlockItemDummyable;
 import com.hbm.item.blockitem.IronCrateItem;
 import com.hbm.item.blockitem.ItemPosModify;
 import com.hbm.item.blockitem.SteelCrateItem;
@@ -343,6 +344,18 @@ public class ModBlocks {
     public static final RegistryObject<Block> FIRE_ORE_NETHER = add("ore_nether_fire",()->new BlockOre(BlockBehaviour.Properties.copy(Blocks.NETHER_BRICK_WALL)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
     public static final RegistryObject<Block> TIKITE_ORE_END = add("ore_tikite",()->new BlockOre(BlockBehaviour.Properties.copy(Blocks.END_STONE)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
     public static final RegistryObject<Block> SAND_BAG = add("sand_bag", ()->new BlockSandBag(BlockBehaviour.Properties.of().strength(1, 2.5f).lightLevel(litEmission(11))), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.ORDERLY_GEN, HBMKey.DROP_NONE);
+
+    public static final RegistryObject<Block> DIRT_DEAD = add("dirt_dead",()->new FallingBlock(BlockBehaviour.Properties.copy(Blocks.GRAVEL)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_SHOVEL);
+    public static final RegistryObject<Block> DIRT_OILY = add("dirt_oily",()->new FallingBlock(BlockBehaviour.Properties.copy(Blocks.GRAVEL)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_SHOVEL);
+    public static final RegistryObject<Block> SAND_DIRTY = add("sand_dirty",()->new FallingBlock(BlockBehaviour.Properties.copy(Blocks.SAND)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_SHOVEL);
+    public static final RegistryObject<Block> SAND_DIRTY_RED = add("sand_dirty_red",()->new FallingBlock(BlockBehaviour.Properties.copy(Blocks.SAND)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_SHOVEL);
+    public static final RegistryObject<Block> STONE_CRACKED = add("stone_cracked",()->new FallingBlock(BlockBehaviour.Properties.copy(Blocks.STONE)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE);
+    public static final WrappedRegistryBuilder.RegisterObjectCollection<Block, BlockEnums.EnumDeadPlantType> PLANT_DEAD = new WrappedRegistryBuilder.RegisterObjectCollection(BlockEnums.EnumDeadPlantType.class,
+            type -> add("plant_dead." + type.toString().toLowerCase(), ()->new DeadBushBlock(BlockBehaviour.Properties.copy(Blocks.DEAD_BUSH)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CROSS, HBMKey.REVERSE_GEN, HBMKey.DROP_NONE));
+    // todo
+    public static final RegistryObject<Block> ORE_BRINE = add("ore_brine",()->new Block(BlockBehaviour.Properties.copy(Blocks.STONE)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE);
+    // todo
+    public static final RegistryObject<Block> OIL_SPILL = add("oil_spill",()->new Block(BlockBehaviour.Properties.copy(Blocks.GRAVEL).sound(SoundType.SNOW).strength(0.1f)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF);
     // 气体
     public static final RegistryObject<Block> GAS_RADON = add("gas_radon", ()->new BlockGasRadon(Properties.copy(Blocks.AIR)), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, HBMKey.REVERSE_GEN, HBMKey.DROP_NONE);
     public static final RegistryObject<Block> GAS_RADON_DENSE = add("gas_radon_dense", ()->new BlockGasRadon(Properties.copy(Blocks.AIR)), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, HBMKey.REVERSE_GEN, HBMKey.DROP_NONE);
@@ -775,7 +788,12 @@ public class ModBlocks {
      * */
     public static final RegistryObject<Block> moon_rock = block("moon_rock", ()->new Block(Properties.of().sound(SoundType.STONE).strength(1.5f, 10f)));
     public static final RegistryObject<Block> moon_turf = block("moon_turf", ()->new FallingBlock(Properties.of().sound(SoundType.SAND).strength(0.5f)));
-    public static final RegistryObject<Block> SPACE_STATION_BASE = add("space_station_base", ()->new BlockSpaceStation(Properties.of().sound(SoundType.SAND).strength(0.5f)), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, HBMKey.ORDERLY_GEN, HBMKey.DROP_SELF);
+    public static final RegistryObject<Block> SPACE_STATION_BASE = new WrappedBlockRegistryBuilder("space_station_base", ()->new BlockSpaceStation(Properties.of().sound(SoundType.SAND).strength(0.5f)))
+            .tab(ModTabs.MACHINE.getKey()).model(HBMKey.MODEL_STANDALONE).item(block -> new BlockItemDummyable(block, new Item.Properties()))
+            .build();
+
+//            add("space_station_base", ()->new BlockSpaceStation(Properties.of().sound(SoundType.SAND).strength(0.5f)),
+//                    ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, HBMKey.ORDERLY_GEN, HBMKey.DROP_SELF);
     /**
      * 调试方块
      * */

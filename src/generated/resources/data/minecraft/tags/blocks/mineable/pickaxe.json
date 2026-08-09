@@ -73,6 +73,8 @@
     "hbm:ore_nether_plutonium",
     "hbm:ore_nether_fire",
     "hbm:ore_tikite",
+    "hbm:stone_cracked",
+    "hbm:ore_brine",
     "hbm:gas_radon",
     "hbm:gas_radon_dense",
     "hbm:gas_radon_asbestos",

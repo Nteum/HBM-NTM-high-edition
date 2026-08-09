@@ -8,9 +8,11 @@ import com.hbm.item.ItemBlockCustomModel;
 import com.hbm.item.armor.ItemArmorFSB;
 import com.hbm.item.armor.ItemArmorT51;
 import com.hbm.item.weapon.ItemGun;
+import com.hbm.registries.ModBlocks;
 import com.hbm.render.RenderUtils;
 import com.hbm.render.model.Models;
 import com.hbm.render.model.armor.ModelArmorT51;
+import com.hbm.render.model.engine.TrianglePartsModel;
 import com.hbm.render.model.item.SimpleBakedModelWrapper;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -77,6 +79,10 @@ public class SpecialItemRender extends BlockEntityWithoutLevelRenderer {
             itemGun.renderGun(pStack, pDisplayContext, pPoseStack, pBuffer, pPackedLight, pPackedOverlay);
         }else if (pStack.getItem() instanceof ItemBlockCustomModel itemBlockCustomModel){
             itemBlockCustomModel.renderItemModel(pDisplayContext, pPoseStack, pBuffer, pPackedLight, pPackedOverlay);
+        }
+        // 先用空间站试试水
+        else if (pStack.is(ModBlocks.SPACE_STATION_BASE.get().asItem())){
+            TrianglePartsModel.renderItem(pStack, pDisplayContext, pPoseStack, pBuffer, pPackedLight, pPackedOverlay, 1);
         }
 
         pPoseStack.popPose();

@@ -1,0 +1,9 @@
+{
+  "feature": "hbm:oil_bubble_mun",
+  "placement": [
+    {
+      "type": "minecraft:rarity_filter",
+      "chance": 50
+    }
+  ]
+}

@@ -1,21 +1,18 @@
 package com.hbm.main;
 
 import com.hbm.HBM;
-import com.hbm.Inventory.fluid.ModFluids;
-import com.hbm.core.contents.fluid.HBMFluids;
 import com.hbm.block.interfaces.ILookOverlay;
 import com.hbm.block.interfaces.ITooltipProvider;
 import com.hbm.blockentity.HBMTiles;
 import com.hbm.blockentity.logistic.PipeEntity;
 import com.hbm.config.ConfigLBSM;
-import com.hbm.dim.orbit.SpaceSpecialEffects;
+import com.hbm.space.dim.orbit.SpaceSpecialEffects;
 import com.hbm.entity.ModEntityType;
 import com.hbm.gui.HBMMenus;
 import com.hbm.gui.screen.*;
 import com.hbm.item.icf.ItemICFPellet;
 import com.hbm.item.pwr.ItemPWRFuel;
 import com.hbm.item.research.ItemBreedingRod;
-import com.hbm.item.tool.FluidBucketItem;
 import com.hbm.item.weapon.ItemMissile;
 import com.hbm.item.zirnox.ItemZirnoxRod;
 import com.hbm.particle.ModParticleTypes;
@@ -35,6 +32,7 @@ import com.hbm.render.entity.mob.GlyphidRender;
 import com.hbm.render.item.SpecialItemRender;
 import com.hbm.render.model.Models;
 import com.hbm.render.model.engine.CustomPartsModel;
+import com.hbm.render.model.engine.TrianglePartsModel;
 import com.hbm.render.model.entity.TestEntityModel;
 import com.hbm.render.overlay.AtomicFlashOverlay;
 import com.hbm.render.overlay.DebugTagOverlay;
@@ -335,6 +333,7 @@ public class ClientEventHandler {
     @SubscribeEvent
     public static void registerGeometryLoaders(ModelEvent.RegisterGeometryLoaders event){
         CustomPartsModel.Loader.register(event);
+        TrianglePartsModel.Loader.register(event);
 //        event.register(CustomPartsModel.Loader.LOADER_NAME, CustomPartsModel.Loader.INSTANCE);
         event.register("door", CustomPartsModel.Loader.INSTANCE);
         event.register("advanced_assembly_machine_loader", CustomPartsModel.Loader.INSTANCE);

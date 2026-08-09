@@ -147,6 +147,7 @@ public class BlockStateGen extends BlockStateProvider {
         horizontalBlockWithItem(ModBlocks.BLOCK_C4.get(), genBuiltInModelFile(ModBlocks.BLOCK_C4.get(), "orientable_vertical"));
         horizontalBlockWithItem(ModBlocks.BLOCK_SEMTEX.get(), genBuiltInModelFile(ModBlocks.BLOCK_SEMTEX.get(), "orientable_vertical"));
         simpleBlockWithItem(ModBlocks.STONE_POROUS.get(), models().getExistingFile(ResourceLocation.tryParse("block/stone")));
+
     }
     // 方块和物品：纯cube all
     public void simpleBlockWithItem(Block block){
@@ -311,8 +312,10 @@ public class BlockStateGen extends BlockStateProvider {
             case "existing" -> models().getExistingFile(HBM.rl(name));
             case "orientable" -> models().orientable(name + getOrBlank(nicknames, 0), blockTexture.withSuffix("_side" + getOrBlank(nicknames, 1)), blockTexture.withSuffix("_front" + getOrBlank(nicknames, 2)), blockTexture.withSuffix("_top" + getOrBlank(nicknames, 3)));
             case "orientable_vertical" -> models().orientableVertical(name, blockTexture.withSuffix("_side"), blockTexture.withSuffix("_front"));
+            case "cross" -> models().cross(name, blockTexture);
             default -> throw new IllegalStateException("Unexpected value: " + type);
         };
+
     }
     private static String getOrBlank(String[] array, int i){
         return array.length > i ? array[i] : "";
