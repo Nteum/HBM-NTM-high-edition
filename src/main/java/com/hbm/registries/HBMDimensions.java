@@ -16,13 +16,13 @@ import java.util.Set;
 
 public class HBMDimensions {
     public static final Set<ResourceKey<Level>> LEVELS = new HashSet<>(List.of(Level.OVERWORLD, Level.NETHER, Level.END));
-    public static final ResourceKey<Level> MOON_KEY = register(ResourceKey.create(Registries.DIMENSION, HBM.rl("mun")));
-    // 维度的 Key
-    public static final ResourceKey<LevelStem> MOON_LEVEL_KEY = ResourceKey.create(Registries.LEVEL_STEM, HBM.rl("hbm_moon"));
-    // 维度类型的 Key
-    public static final ResourceKey<DimensionType> MOON_TYPE = ResourceKey.create(Registries.DIMENSION_TYPE, HBM.rl("hbm_moon_type"));
-    // 噪声设置的 Key
-    public static final ResourceKey<NoiseGeneratorSettings> MOON_NOISE_SETTINGS = ResourceKey.create(Registries.NOISE_SETTINGS, HBM.rl("moon_settings"));
+//    public static final ResourceKey<Level> MOON_KEY = register(ResourceKey.create(Registries.DIMENSION, HBM.rl("mun")));
+//    // 维度的 Key
+//    public static final ResourceKey<LevelStem> MOON_LEVEL_KEY = ResourceKey.create(Registries.LEVEL_STEM, HBM.rl("hbm_moon"));
+//    // 维度类型的 Key
+//    public static final ResourceKey<DimensionType> MOON_TYPE = ResourceKey.create(Registries.DIMENSION_TYPE, HBM.rl("hbm_moon_type"));
+//    // 噪声设置的 Key
+//    public static final ResourceKey<NoiseGeneratorSettings> MOON_NOISE_SETTINGS = ResourceKey.create(Registries.NOISE_SETTINGS, HBM.rl("moon_settings"));
 
     public static final ResourceKey<Level> KERBIN = register(ResourceKey.create(Registries.DIMENSION, HBM.rl("kerbin")));
     public static final ResourceKey<Level> MINMUS = register(ResourceKey.create(Registries.DIMENSION, HBM.rl("minmus")));

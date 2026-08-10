@@ -2,6 +2,7 @@ package com.hbm.space.dim.orbit;
 
 import com.hbm.HBM;
 import com.hbm.registries.HBMDimensions;
+import com.hbm.space.dim.moon.WorldGenMun;
 import com.mojang.blaze3d.vertex.BufferBuilder;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.Tesselator;
@@ -26,7 +27,7 @@ public class CelestialBodies {
         BODIES = new HashSet<>();
         BODIES.add(new CelestialBody(new Vec3(0, 64, 0), 30, null, ResourceLocation.fromNamespaceAndPath("minecraft", "textures/environment/sun.png")));
         BODIES.add(new CelestialBody(new Vec3(2000, 64, 0), 15, Level.OVERWORLD, HBM.rl("textures/env/space/earth.png")));
-        BODIES.add(new CelestialBody(new Vec3(3000, 64, 0), 10, HBMDimensions.MOON_KEY, HBM.rl("textures/env/space/moon.png")));
+        BODIES.add(new CelestialBody(new Vec3(3000, 64, 0), 10, WorldGenMun.KEY_LEVEL, HBM.rl("textures/env/space/moon.png")));
     }
     public static void runServer(Level level){
         if (BODIES.isEmpty()) init();

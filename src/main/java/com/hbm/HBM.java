@@ -34,6 +34,7 @@ import com.hbm.Inventory.recipe.ModRecipes;
 import com.hbm.reactor.rbmk.RBMKManager;
 import com.hbm.reactor.pile.PileNeutronTicker;
 import com.hbm.render.model.Models;
+import com.hbm.space.dim.SpaceNoise;
 import com.hbm.world.feature.ModFeatures;
 import com.hbm.world.structure.ModStructureProcessors;
 import com.mojang.logging.LogUtils;
@@ -92,6 +93,7 @@ public class HBM {
         ServerEventHandler.registerEvents(MinecraftForge.EVENT_BUS, modEventBus);
 
         //模组内容的注册
+        SpaceNoise.DENSITY_FUNCTION_TYPES.register(modEventBus);
         HBMFluids.register(modEventBus);
         ModEntityType.ENTITY_TYPES.register(modEventBus);
 //        HBMFluids.registerFluid(modEventBus);

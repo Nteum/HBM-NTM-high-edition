@@ -10,6 +10,7 @@ import com.hbm.registries.HBMDimensions;
 import com.hbm.registries.HBMMatters;
 import com.hbm.registries.ModItems;
 import com.hbm.render.item.IMultiLayerItem;
+import com.hbm.space.dim.moon.WorldGenMun;
 import com.hbm.utils.data.NBTHelper;
 import com.hbm.utils.math.BitUtil;
 import net.minecraft.ChatFormatting;
@@ -167,7 +168,7 @@ public class ItemBedrockOreCombine extends ItemBedrockOre {
             );
 
             register(
-                    HBMDimensions.MOON_KEY,
+                    WorldGenMun.KEY_LEVEL,
                     T("light", o(HBMMatters.LITHIUM, 18), o(HBMMatters.IRON, 9), o(HBMMatters.SODIUM, 6), o(HBMMatters.CHLOROCALCITE, 3)),
                     T("heavy", o(HBMMatters.LEAD, 18), o(HBMMatters.ZINC, 9), o(HBMMatters.GOLD, 6), o(HBMMatters.BISMUTH, 3)),
                     T("rare", o(HBMMatters.COBALT, 18), o(HBMMatters.RAREEARTH, 9), o(HBMMatters.NEODYMIUM, 6), o(HBMMatters.STRONTIUM, 3)),

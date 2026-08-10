@@ -1,8 +1,9 @@
-package com.hbm.space.dim.moon;
+package com.hbm.space.dim.ike;
 
-import com.hbm.space.dim.SpaceSurfaceRules;
 import com.hbm.registries.ModBlocks;
 import com.hbm.registries.RegistryHelper;
+import com.hbm.space.dim.SpaceNoise;
+import com.hbm.space.dim.SpaceSurfaceRules;
 import com.hbm.world.feature.HBMConfigFeatures;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.Holder;
@@ -10,12 +11,13 @@ import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.data.worldgen.Carvers;
+import net.minecraft.data.worldgen.NoiseData;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.CubicSpline;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.*;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.dimension.BuiltinDimensionTypes;
@@ -24,48 +26,29 @@ import net.minecraft.world.level.dimension.LevelStem;
 import net.minecraft.world.level.levelgen.*;
 import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
+import net.minecraft.world.level.levelgen.synth.NormalNoise;
 
 import java.util.List;
 import java.util.OptionalLong;
 
-/**
-* 关于和低版本的对应，
- */
-public class WorldGenMun {
-    public static final String id = "mun";
-    public static final ResourceKey<Level> KEY_LEVEL = ResourceKey.create(Registries.DIMENSION, RegistryHelper.rl(id));
+public class WorldGenIke {
+    public static final String id = "ike";
     public static final ResourceKey<LevelStem> KEY_STEM = ResourceKey.create(Registries.LEVEL_STEM, RegistryHelper.rl(id));
     public static final ResourceKey<DimensionType> KEY_DIMENSION_TYPE = ResourceKey.create(Registries.DIMENSION_TYPE, RegistryHelper.rl(id + "_dim_type"));
     public static final ResourceKey<NoiseGeneratorSettings> KEY_NOISE = ResourceKey.create(Registries.NOISE_SETTINGS, RegistryHelper.rl(id + "_noise"));
     // 生物群系的key需要在bootstrap biomes和bootstrap level stem中都注册，否则会报错。
-    public static final ResourceKey<Biome> MOON_FLAT = ResourceKey.create(Registries.BIOME, RegistryHelper.rl("mun_flat"));
-    public static final ResourceKey<Biome> MOON_HEIGHTLAND = ResourceKey.create(Registries.BIOME, RegistryHelper.rl("mun_heightland"));
+    public static final ResourceKey<Biome> IKE_FLAT = ResourceKey.create(Registries.BIOME, RegistryHelper.rl("ike_flat"));
 
     public static void genBiomes(BootstapContext<Biome> context){
         HolderGetter<PlacedFeature> featureHolder = context.lookup(Registries.PLACED_FEATURE);
         HolderGetter<ConfiguredWorldCarver<?>> carverHolder = context.lookup(Registries.CONFIGURED_CARVER);
-        context.register(MOON_FLAT, new Biome.BiomeBuilder()
+        context.register(IKE_FLAT, new Biome.BiomeBuilder()
                 .hasPrecipitation(false)
                 .temperature(-1f)
                 .downfall(0.9f)
                 .specialEffects(new BiomeSpecialEffects.Builder()
                         .fogColor(12638463).waterColor(4159204).waterFogColor(329011).skyColor(0).ambientMoodSound(AmbientMoodSettings.LEGACY_CAVE_SETTINGS).build())
-                .mobSpawnSettings(new MobSpawnSettings.Builder().addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.COW, 4, 2, 10)).build())
-                .generationSettings(new BiomeGenerationSettings.Builder(featureHolder,carverHolder)
-                        .addCarver(GenerationStep.Carving.AIR, Carvers.CAVE)
-                        .addCarver(GenerationStep.Carving.AIR, Carvers.CAVE_EXTRA_UNDERGROUND)
-                        .addFeature(GenerationStep.Decoration.LAKES, HBMConfigFeatures.METE_CREATOR_MOON.placedKey())
-                        .addFeature(GenerationStep.Decoration.LAKES, HBMConfigFeatures.OIL_BUBBLE_MUN.placedKey())
-                        .build())
-                .build()
-        );
-        context.register(MOON_HEIGHTLAND, new Biome.BiomeBuilder()
-                .hasPrecipitation(false)
-                .temperature(-1f)
-                .downfall(0.9f)
-                .specialEffects(new BiomeSpecialEffects.Builder()
-                        .fogColor(12638463).waterColor(4159204).waterFogColor(329011).skyColor(0).ambientMoodSound(AmbientMoodSettings.LEGACY_CAVE_SETTINGS).build())
-                .mobSpawnSettings(new MobSpawnSettings.Builder().addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.COW, 4, 2, 10)).build())
+                .mobSpawnSettings(new MobSpawnSettings.Builder().build())
                 .generationSettings(new BiomeGenerationSettings.Builder(featureHolder,carverHolder)
                         .addCarver(GenerationStep.Carving.AIR, Carvers.CAVE)
                         .addCarver(GenerationStep.Carving.AIR, Carvers.CAVE_EXTRA_UNDERGROUND)
@@ -98,22 +81,48 @@ public class WorldGenMun {
         // 获取主世界的默认设置作为模板
         HolderGetter<NoiseGeneratorSettings> settings = context.lookup(Registries.NOISE_SETTINGS);
         Holder.Reference<NoiseGeneratorSettings> overworld = settings.getOrThrow(NoiseGeneratorSettings.OVERWORLD);
-        HolderGetter<DensityFunction> densityFunctions = context.lookup(Registries.DENSITY_FUNCTION);
+        HolderGetter<DensityFunction> functions = context.lookup(Registries.DENSITY_FUNCTION);
+        HolderGetter<NormalNoise.NoiseParameters> noises = context.lookup(Registries.NOISE);
 
-        // 注册月球专属设置
-        context.register(KEY_NOISE, new NoiseGeneratorSettings(
-                NoiseSettings.create(-64, 384, 1, 2),
-                ModBlocks.moon_rock.get().defaultBlockState(), // 默认方块换成月岩
-                Blocks.AIR.defaultBlockState(),               // 默认液体换成空气
-                NoiseRouterData.overworld(densityFunctions, context.lookup(Registries.NOISE), false, false),
-                SpaceSurfaceRules.moonSurfaceRules(),                  // 绑定你写的月球表面规则
-                List.of(),
-                -1,
-                false, // 禁用怪物自然生成
-                false,  // 启用含水层 (如果你想有地下岩浆或流体)
-                false, // 禁用主世界矿脉 (用你自己的)
-                false
-        ));
+        // 获取我们上面写好的陨石坑地形密度
+        DensityFunction myMoonTerrain = SpaceNoise.createCraterTerrain(context);
+
+        NoiseRouter router = new NoiseRouter(
+                DensityFunctions.zero(), // barrierNoise
+                DensityFunctions.zero(), // fluidLevelFloodedness
+                DensityFunctions.zero(), // fluidLevelSpread
+                DensityFunctions.zero(), // lava
+                DensityFunctions.noise(noises.getOrThrow(Noises.TEMPERATURE)),
+                DensityFunctions.noise(noises.getOrThrow(Noises.VEGETATION)),
+                SpaceNoise.getFunction(functions, NoiseRouterData.CONTINENTS),
+                SpaceNoise.getFunction(functions, NoiseRouterData.EROSION),
+                SpaceNoise.getFunction(functions, NoiseRouterData.DEPTH),
+                SpaceNoise.getFunction(functions, NoiseRouterData.RIDGES),
+                // ---------------------------------------------------------------------
+                // 关键部分：用我们自定义的地形同时赋值给 initialDensity 和 finalDensity
+                myMoonTerrain, // initialDensityWithoutJaggedness
+                myMoonTerrain, // finalDensity (真正决定渲染实体的密度场)
+                // ---------------------------------------------------------------------
+                DensityFunctions.zero(), // veinToggle (矿脉)
+                DensityFunctions.zero(), // veinRidges
+                DensityFunctions.zero()  // veinGap
+        );
+
+        NoiseGeneratorSettings generatorSettings = new NoiseGeneratorSettings(
+                NoiseSettings.create(0, 384, 1, 2), // 构建标准高度区间
+                Blocks.STONE.defaultBlockState(),     // 替换为你月球的基岩（如 Moon Rock）
+                Blocks.AIR.defaultBlockState(),       // 默认没有流体海洋（填空气）
+                router,
+                SpaceSurfaceRules.ikeSurfaceRules(),        // 加上之前写的 SurfaceRules (地表替换 Moon Turf)
+                List.of(),                           // Spawn targets
+                64,                                  // 海平面高度（如果有液体的话）
+                false,                               // disableMobGeneration
+                true,                                // aquifersEnabled (水层/洞穴含水层)
+                false,                               // oreVeinsEnabled
+                false                                // useLegacyRandomSource
+        );
+
+        context.register(KEY_NOISE, generatorSettings);
     }
 
     public static void genDimension(BootstapContext<LevelStem> context){
@@ -121,28 +130,18 @@ public class WorldGenMun {
         HolderGetter<NoiseGeneratorSettings> settings = context.lookup(Registries.NOISE_SETTINGS);
         HolderGetter<Biome> biomes = context.lookup(Registries.BIOME);
 
-        // 使用 Multi-Noise 放置你的月球群系
         // 群系的生成条件
         var biomeSource = MultiNoiseBiomeSource.createFromList(
                 new Climate.ParameterList<>(List.of(
                         Pair.of(Climate.parameters(
                                 Climate.Parameter.point(0),
                                 Climate.Parameter.point(0),
-                                Climate.Parameter.span(-1, 0.5f),
                                 Climate.Parameter.point(0),
-                                Climate.Parameter.point(0),
-                                Climate.Parameter.point(0),
-                                0f
-                        ), biomes.getOrThrow(MOON_FLAT)),
-                        Pair.of(Climate.parameters(
-                                Climate.Parameter.point(0),
-                                Climate.Parameter.point(0),
-                                Climate.Parameter.span(0.5f, 1),
                                 Climate.Parameter.point(0),
                                 Climate.Parameter.point(0),
                                 Climate.Parameter.point(0),
                                 0f
-                        ), biomes.getOrThrow(MOON_HEIGHTLAND))
+                        ), biomes.getOrThrow(IKE_FLAT))
                 ))
         );
 
@@ -151,4 +150,6 @@ public class WorldGenMun {
                 new NoiseBasedChunkGenerator(biomeSource, settings.getOrThrow(KEY_NOISE))
         ));
     }
+
+
 }

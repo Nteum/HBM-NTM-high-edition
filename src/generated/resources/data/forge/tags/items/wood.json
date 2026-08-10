@@ -1,11 +1,11 @@
 {
   "values": [
     {
-      "id": "#forge:barrels/wooden",
+      "id": "#minecraft:logs",
       "required": false
     },
     {
-      "id": "#minecraft:logs",
+      "id": "#forge:barrels/wooden",
       "required": false
     }
   ]

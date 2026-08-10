@@ -791,6 +791,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> SPACE_STATION_BASE = new WrappedBlockRegistryBuilder("space_station_base", ()->new BlockSpaceStation(Properties.of().sound(SoundType.SAND).strength(0.5f)))
             .tab(ModTabs.MACHINE.getKey()).model(HBMKey.MODEL_STANDALONE).item(block -> new BlockItemDummyable(block, new Item.Properties()))
             .build();
+    public static final RegistryObject<Block> DRES_ROCK = add("dres_rock",()->new Block(BlockBehaviour.Properties.copy(Blocks.STONE)), ModTabs.BLOCKS.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE);
 
 //            add("space_station_base", ()->new BlockSpaceStation(Properties.of().sound(SoundType.SAND).strength(0.5f)),
 //                    ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, HBMKey.ORDERLY_GEN, HBMKey.DROP_SELF);

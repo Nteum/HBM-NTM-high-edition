@@ -183,6 +183,7 @@
     "hbm:stone_resource.conglomerate",
     "hbm:stone_resource.calcium",
     "hbm:space_station_base",
+    "hbm:dres_rock",
     "#forge:machine",
     "#forge:ores",
     "#forge:storage_blocks"

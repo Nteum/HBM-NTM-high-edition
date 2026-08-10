@@ -1,6 +1,8 @@
 package com.hbm.datagen.levelgen;
 
 import com.hbm.HBM;
+import com.hbm.space.dim.SpaceNoise;
+import com.hbm.space.dim.ike.WorldGenIke;
 import com.hbm.space.dim.moon.WorldGenMun;
 import com.hbm.space.dim.orbit.Space;
 import com.hbm.world.feature.HBMConfigFeatures;
@@ -28,6 +30,8 @@ public class HBMWorldGenProvider extends DatapackBuiltinEntriesProvider {
             .add(Registries.BIOME, HBMWorldGenProvider::bootstrapBiomes)
             // 4. 维度类型
             .add(Registries.DIMENSION_TYPE, HBMWorldGenProvider::bootstrapType)
+//            // 噪声函数
+//            .add(Registries.DENSITY_FUNCTION_TYPE, SpaceNoise::bootstrap)
             // 5. 噪声设置 (Surface Rules 绑定在这里)
             .add(Registries.NOISE_SETTINGS, HBMWorldGenProvider::bootstrapNoise)
             // 6. 注册维度实例
@@ -39,22 +43,26 @@ public class HBMWorldGenProvider extends DatapackBuiltinEntriesProvider {
     private static void bootstrapBiomes(BootstapContext<Biome> context) {
         WorldGenMun.genBiomes(context);
         Space.genBiomes(context);
+        WorldGenIke.genBiomes(context);
     }
     // --- 步骤 1: 定义维度属性 ---
     private static void bootstrapType(BootstapContext<DimensionType> context) {
         WorldGenMun.genDimensionType(context);
         Space.genDimensionType(context);
+        WorldGenIke.genDimensionType(context);
     }
 
     // --- 步骤 2: 定义地形和表面规则 ---
     private static void bootstrapNoise(BootstapContext<NoiseGeneratorSettings> context) {
         WorldGenMun.genNoiseSetting(context);
         Space.genNoiseSetting(context);
+        WorldGenIke.genNoiseSetting(context);
     }
 
     // --- 步骤 3: 组合维度 ---
     private static void bootstrapDimension(BootstapContext<LevelStem> context) {
         WorldGenMun.genDimension(context);
         Space.genDimension(context);
+        WorldGenIke.genDimension(context);
     }
 }

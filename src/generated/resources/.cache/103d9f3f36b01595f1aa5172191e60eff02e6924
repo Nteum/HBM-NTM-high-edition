@@ -1,9 +1,12 @@
-// 1.20.1	2026-08-09T22:00:47.248568	Registries
+// 1.20.1	2026-08-10T21:55:53.111467	Registries
 63bb57650d2b0012ece62ea382e92a0e4bb29e18 data/hbm/dimension/hbm_space.json
+da58441a443a47c59c4ec297a2e01523e0567578 data/hbm/dimension/ike.json
 ad4549e376c7649349d2c6d2b9a5a275278db4cb data/hbm/dimension/mun.json
 7a58b77155283a8736b356754c0b0e3b0734132b data/hbm/dimension_type/hbm_space_type.json
+d3d43dc2af042ccfa6d547218d437faa5cbd935b data/hbm/dimension_type/ike_dim_type.json
 d3d43dc2af042ccfa6d547218d437faa5cbd935b data/hbm/dimension_type/mun_dim_type.json
 d8d313b2d3b1d756964d27139e67b80c489e80cf data/hbm/worldgen/biome/hbm_space_biome.json
+682d13b09e3c0bc14ad20f4a7092c99f958bb249 data/hbm/worldgen/biome/ike_flat.json
 f0687f8e4525705e076b13d1ca76e076786202bc data/hbm/worldgen/biome/mun_flat.json
 406127e0936c049262a373aa08667f285f88ded5 data/hbm/worldgen/biome/mun_heightland.json
 29c09620d64ee5750fef75a24d8e54fbddde251d data/hbm/worldgen/configured_feature/bedrock_ore_overworld.json
@@ -13,6 +16,7 @@ a2eef93d501821cd34205f1071e3f359aeb36cdf data/hbm/worldgen/configured_feature/gl
 01e6491e3be8d646bf3a7819bd74f4c45ea19d5d data/hbm/worldgen/configured_feature/oil_bubble_mun.json
 0ad185ef72e9f280e003e8a3fa43aa184193b391 data/hbm/worldgen/configured_feature/ore_sphere_overworld.json
 0457fbe09ca5f04c569f5f8a213a7ebbc2c6804d data/hbm/worldgen/configured_feature/uranium_ore_overworld.json
+2e3bb5f7b230d64233f08eac9f20c328048cb8ce data/hbm/worldgen/noise_settings/ike_noise.json
 d0dd1b11b32e3f704e7cb8e9f55fc0ef8c068e42 data/hbm/worldgen/noise_settings/mun_noise.json
 e8e3c12d0226ad3baa735bd919830eb61f19a6dd data/hbm/worldgen/noise_settings/space_settings.json
 07b29671c2cc6afcddb1176c0966b3413fae5706 data/hbm/worldgen/placed_feature/bedrock_ore_overworld.json

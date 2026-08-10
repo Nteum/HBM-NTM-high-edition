@@ -5,9 +5,13 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "hbm.refmap.json",
   "mixins": [
+    "obb.EntityMixin",
+    "obb.LevelMixin",
+    "obb.ProjectileUtilMixin"
   ],
   "client": [
-    "MixinBufferBuilder"
+    "MixinBufferBuilder",
+    "obb.EntityRenderDispatcherMixin"
   ],
   "injectors": {
     "defaultRequire": 1

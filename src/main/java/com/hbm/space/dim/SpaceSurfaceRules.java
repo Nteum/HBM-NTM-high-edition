@@ -68,4 +68,8 @@ public class SpaceSurfaceRules {
         );
     }
 
+    public static SurfaceRules.RuleSource ikeSurfaceRules() {
+//        return SurfaceRules.sequence();
+        return SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, SurfaceRules.state(Blocks.STONE.defaultBlockState()));
+    }
 }
