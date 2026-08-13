@@ -60,7 +60,11 @@ public class RecipeSerializerBuilder {
         return this;
     }
     public RecipeSerializerBuilder fluid(String name){
-        fieldSchemas.add(FieldSchemas.COUNTABLE_INGREDIENT(name));
+        fieldSchemas.add(FieldSchemas.FLUID(name));
+        return this;
+    }
+    public RecipeSerializerBuilder fluidIngredient(String name){
+        fieldSchemas.add(FieldSchemas.FLUID_INGREDIENT(name));
         return this;
     }
 

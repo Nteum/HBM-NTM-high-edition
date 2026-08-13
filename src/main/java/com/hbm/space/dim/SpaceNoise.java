@@ -50,20 +50,21 @@ public class SpaceNoise {
 //        DensityFunction baseHills = DensityFunctions.mul(new DensityFunctions.HolderHolder(jaggedKey), DensityFunctions.constant(12.0 * densityScale));
 
         VoronoiCraterDensity bigCraterNoise = new VoronoiCraterDensity(640);
-        // 3. 对环形山进行映射，取值过高和过低都会变成0或复数，这样就可以让中间一块形成山脉
+        // 3. 对环形山进行映射，取值过高和过低都会变成0或复数，这样就可以让中间一块形成山脉，
         CubicSpline<DensityFunctions.Spline.Point, DensityFunctions.Spline.Coordinate> craterSpline =
                 CubicSpline.builder(new DensityFunctions.Spline.Coordinate(Holder.direct(bigCraterNoise)))
-                        .addPoint(0.0f, 0.0f)
-                        .addPoint(0.1f, -0.4f)
-                        .addPoint(0.2f, -0.6f)
-                        .addPoint(0.7f, -0.6f)
-                        .addPoint(0.8f, -0.4f)
-                        .addPoint(0.9f, -0.2f)
-                        .addPoint(1.0f,  0f)
+                        .addPoint(0.0f, 0.3f)
+                        .addPoint(0.05f, 0.2f)
+                        .addPoint(0.1f, 0f)
+                        .addPoint(0.2f, -0.1f)
+                        .addPoint(0.7f, -0.1f)
+                        .addPoint(0.8f, -0.05f)
+                        .addPoint(0.9f, 0f)
+                        .addPoint(1.0f,  0.2f)
                         .addPoint(1.1f,  0.5f)
-                        .addPoint(1.2f,  0.7f)
-                        .addPoint(1.3f,  1.0f)
-                        .addPoint(1.4f,  0.3f)
+                        .addPoint(1.2f,  1.0f)
+                        .addPoint(1.3f,  0.3f)
+                        .addPoint(1.4f,  0.1f)
                         .addPoint(1.5f,  0.0f)
                         .addPoint(2.0f,  0.0f)
                         .build();
@@ -72,9 +73,9 @@ public class SpaceNoise {
         // 3. 对环形山进行映射，取值过高和过低都会变成0或复数，这样就可以让中间一块形成山脉
         CubicSpline<DensityFunctions.Spline.Point, DensityFunctions.Spline.Coordinate> smallCraterSpline =
                 CubicSpline.builder(new DensityFunctions.Spline.Coordinate(Holder.direct(smallCraterNoise)))
-                        .addPoint(0.0f, -0.4f)
+                        .addPoint(0.0f, -0.4f / 3)
                         .addPoint(0.8f, -0f)
-                        .addPoint(1.0f,  0.2f)
+                        .addPoint(1.0f,  0.2f / 3)
                         .addPoint(1.1f,  0f)
                         .addPoint(2.0f,  0.0f)
                         .build();

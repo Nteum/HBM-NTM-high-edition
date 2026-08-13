@@ -18,12 +18,11 @@ public abstract class MixinBufferBuilder implements DirectBufferAccess {
 
     @Unique
     private static final long HBM$BUF_ADDR_OFFSET = UnsafeHolder.fieldOffset(Buffer.class, "address");
-    // 由于做第三方模组的时候会出现类似报错，所以直接给所有@Shadow都加上了(remap = false)
+
     @Shadow private ByteBuffer buffer;
     @Shadow private int nextElementByte;
     @Shadow private int vertices;
-    // 在这个mod作为第三方魔族的时候，这里经常报错，我试图去掉abstract来避免出错
-//    @Shadow(remap = false) private void ensureCapacity(int pIncreaseAmount){ }
+
     @Shadow protected abstract void ensureCapacity(int pIncreaseAmount);
 //    com.mojang.blaze3d.vertex.BufferBuilder m_85722_(I)V # ensureCapacity
 

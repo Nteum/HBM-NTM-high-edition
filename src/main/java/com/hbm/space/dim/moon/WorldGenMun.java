@@ -1,5 +1,6 @@
 package com.hbm.space.dim.moon;
 
+import com.hbm.HBM;
 import com.hbm.space.dim.SpaceSurfaceRules;
 import com.hbm.registries.ModBlocks;
 import com.hbm.registries.RegistryHelper;
@@ -77,7 +78,7 @@ public class WorldGenMun {
     public static void genDimensionType(BootstapContext<DimensionType> context){
         context.register(KEY_DIMENSION_TYPE, new DimensionType(
                 OptionalLong.empty(), // 固定时间
-                false,  // 是否有天光 (月球可以设为 false 如果你想要黑暗天空)
+                true,  // 是否有天光 — 必须为 true，否则 LightEngine 不计算天光，地面全黑
                 false, // 是否有天顶 (类似地狱)
                 false, // 是否极热 (床爆炸)
                 true,  // 是否天然 (指南针转动)
@@ -88,8 +89,8 @@ public class WorldGenMun {
                 384,   // 高度
                 384,   // 逻辑高度
                 BlockTags.INFINIBURN_OVERWORLD,
-                BuiltinDimensionTypes.END_EFFECTS, // 渲染效果
-                0.1f,  // 环境光照
+                HBM.rl("moon_effects"), // 渲染效果
+                0.0f,  // 环境光照 — 0.1会让地下无火把也有10%基础亮度（橙色滤镜）
                 new DimensionType.MonsterSettings(false, false, ConstantInt.of(7), 3)
         ));
     }

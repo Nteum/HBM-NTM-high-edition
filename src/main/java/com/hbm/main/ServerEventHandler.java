@@ -87,7 +87,7 @@ public class ServerEventHandler {
         if (event.phase == TickEvent.Phase.END){
             Level level = event.level;
             if (level.dimension() == Space.LEVEL_KEY){
-                CelestialBodies.runServer(level);
+//                CelestialBodies.runServer(level);
             }
             // 能量系统
             if (EnergyNetworkSystem.has(level)) EnergyNetworkSystem.getOrCreate(level).tick();

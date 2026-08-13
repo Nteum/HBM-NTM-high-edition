@@ -13,7 +13,9 @@ import org.joml.Matrix4f;
 
 public class SpaceSpecialEffects extends DimensionSpecialEffects {
     public SpaceSpecialEffects() {
-        super(Float.NaN, false, SkyType.NONE, false, true);
+        // SkyType.NORMAL so the sky pass (renderSky) is not skipped;
+        // constantAmbientLight=false so light follows the day cycle
+        super(Float.NaN, false, SkyType.NORMAL, false, false);
     }
 
     @Override
@@ -67,7 +69,7 @@ public class SpaceSpecialEffects extends DimensionSpecialEffects {
         RenderSystem.enableCull();
 
         // 渲染天体
-        CelestialBodies.render(tesselator, bufferbuilder, level, ticks, partialTick, poseStack, camera, projectionMatrix);
+//        CelestialBodies.render(tesselator, bufferbuilder, level, ticks, partialTick, poseStack, camera, projectionMatrix);
         // 渲染太阳
 //        RenderSystem.setShaderTexture(0, new ResourceLocation("minecraft", "textures/environment/sun.png"));
 //        poseStack.pushPose();

@@ -1,8 +1,13 @@
 package com.hbm.registries;
 import com.hbm.HBM;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
@@ -15,9 +20,10 @@ import java.util.List;
 
 // 用于处理字符串、注册表，resourcelocation等等的工具。
 public class RegistryHelper {
-    public static ResourceLocation rl(String path){
-        return ResourceLocation.fromNamespaceAndPath(HBM.MODID, path);
-    }
+
+    /**
+     * 根据内部名称生成英文名
+     */
     public static String generateOrderlyName(String name){
         return Arrays.stream(name.split("_|\\.")).map(s -> s.substring(0,1).toUpperCase() + s.substring(1)).reduce("",(r, id) -> r + (r.isEmpty() ? "": " ") + id);
     }
@@ -32,6 +38,12 @@ public class RegistryHelper {
         return strings.subList(1, strings.size()).stream().reduce("",(r, id) -> r + (r.isEmpty() ? "": " ") + id) + " " + strings.get(0);
     }
 
+    /**
+     * 生成某个东西相应的RL
+     */
+    public static ResourceLocation rl(String path){
+        return ResourceLocation.fromNamespaceAndPath(HBM.MODID, path);
+    }
     public static ResourceLocation itemRL(Item item){
         return BuiltInRegistries.ITEM.getKey(item);
     }
@@ -68,6 +80,9 @@ public class RegistryHelper {
         return containIdx(array, idx) ? defaultValue : array[idx];
     }
 
+    /**
+     * 特定东西的序列化和反序列化
+     */
     public static String fluidKey(Fluid fluid){
         return ForgeRegistries.FLUIDS.getKey(fluid).toString();
     }
@@ -82,5 +97,37 @@ public class RegistryHelper {
 
     public static ResourceLocation fluidType(FluidType fluidType){
         return ForgeRegistries.FLUID_TYPES.get().getKey(fluidType);
+    }
+
+    /** 关于世界类型方面的判断 */
+    public static boolean worldIsSuperFlat(ServerLevel level){
+        return level.isFlat();
+    }
+
+    public static boolean worldCanSpawnLightingBolt(Level level, BlockPos pos){
+        // 1. 获取位置所在的生物群系
+        Biome biome = level.getBiome(pos).value();
+
+        // 2. 检查生物群系是否有降水（下雨或下雪）
+        //    原版中，下雪也算有降水，但闪电只会在下雨时出现，因此还需要检查温度
+        if (!biome.hasPrecipitation()) {
+            return false;
+        }
+
+        // 3. 检查生物群系的温度是否高到足以让降水变成雨，而不是雪
+        //    在 1.20.1 中，温度低于 0.15 时降水会变成雪，闪电不会在雪天出现
+        //    使用 getBaseTemperature() 获取生物群系的基础温度
+        if (biome.getBaseTemperature() < 0.15f) {
+            return false;
+        }
+
+        // 4. 检查该位置是否暴露在天空下（即头顶没有遮挡物）
+        //    使用 Level.canSeeSky() 方法
+        if (!level.canSeeSky(pos)) {
+            return false;
+        }
+
+        // 所有条件满足，可以生成闪电
+        return true;
     }
 }

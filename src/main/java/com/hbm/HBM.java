@@ -126,6 +126,7 @@ public class HBM {
         RBMKManager.init();
         PileNeutronTicker.init();
         CrackingRecipes.registerDefaults();
+        com.hbm.space.dim.SolarSystem.init(); //初始化太阳系天体注册表
         event.enqueueWork(HBMBiomes::setUp);    // 生物群系的注册
     }
 

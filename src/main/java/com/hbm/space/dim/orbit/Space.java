@@ -1,6 +1,7 @@
 package com.hbm.space.dim.orbit;
 
 import com.hbm.HBM;
+import com.hbm.space.dim.CelestialBody;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;

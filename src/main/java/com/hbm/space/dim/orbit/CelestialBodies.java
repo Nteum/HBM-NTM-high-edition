@@ -1,7 +1,7 @@
 package com.hbm.space.dim.orbit;
 
 import com.hbm.HBM;
-import com.hbm.registries.HBMDimensions;
+import com.hbm.space.dim.CelestialBody;
 import com.hbm.space.dim.moon.WorldGenMun;
 import com.mojang.blaze3d.vertex.BufferBuilder;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -23,26 +23,26 @@ import java.util.Set;
 public class CelestialBodies {
     protected static Set<CelestialBody> BODIES = Set.of();
 
-    protected static void init(){
-        BODIES = new HashSet<>();
-        BODIES.add(new CelestialBody(new Vec3(0, 64, 0), 30, null, ResourceLocation.fromNamespaceAndPath("minecraft", "textures/environment/sun.png")));
-        BODIES.add(new CelestialBody(new Vec3(2000, 64, 0), 15, Level.OVERWORLD, HBM.rl("textures/env/space/earth.png")));
-        BODIES.add(new CelestialBody(new Vec3(3000, 64, 0), 10, WorldGenMun.KEY_LEVEL, HBM.rl("textures/env/space/moon.png")));
-    }
-    public static void runServer(Level level){
-        if (BODIES.isEmpty()) init();
-        if (level instanceof ServerLevel serverLevel){
-            for (CelestialBody body : BODIES) {
-                body.runServer(serverLevel);
-            }
-        }
-    }
-    public static void render(Tesselator tesselator, BufferBuilder bufferbuilder, ClientLevel level, int ticks, float partialTick, PoseStack poseStack, Camera camera, Matrix4f projectionMatrix){
-        List<CelestialBody> sortedPlanets = new ArrayList<>(BODIES);
-        // 2. 根据距离平方进行降序排列 (距离大的排在前面，先渲染)
-        sortedPlanets.sort((b, a) -> Double.compare(a.location.distanceTo(camera.getPosition()), b.location.distanceTo(camera.getPosition())));
-        for (CelestialBody body : sortedPlanets) {
-            body.render(tesselator, bufferbuilder, level, ticks, partialTick, poseStack, camera, projectionMatrix);
-        }
-    }
+//    protected static void init(){
+//        BODIES = new HashSet<>();
+//        BODIES.add(new CelestialBody(new Vec3(0, 64, 0), 30, null, ResourceLocation.fromNamespaceAndPath("minecraft", "textures/environment/sun.png")));
+//        BODIES.add(new CelestialBody(new Vec3(2000, 64, 0), 15, Level.OVERWORLD, HBM.rl("textures/env/space/earth.png")));
+//        BODIES.add(new CelestialBody(new Vec3(3000, 64, 0), 10, WorldGenMun.KEY_LEVEL, HBM.rl("textures/env/space/moon.png")));
+//    }
+//    public static void runServer(Level level){
+//        if (BODIES.isEmpty()) init();
+//        if (level instanceof ServerLevel serverLevel){
+//            for (CelestialBody body : BODIES) {
+//                body.runServer(serverLevel);
+//            }
+//        }
+//    }
+//    public static void render(Tesselator tesselator, BufferBuilder bufferbuilder, ClientLevel level, int ticks, float partialTick, PoseStack poseStack, Camera camera, Matrix4f projectionMatrix){
+//        List<CelestialBody> sortedPlanets = new ArrayList<>(BODIES);
+//        // 2. 根据距离平方进行降序排列 (距离大的排在前面，先渲染)
+//        sortedPlanets.sort((b, a) -> Double.compare(a.location.distanceTo(camera.getPosition()), b.location.distanceTo(camera.getPosition())));
+//        for (CelestialBody body : sortedPlanets) {
+//            body.render(tesselator, bufferbuilder, level, ticks, partialTick, poseStack, camera, projectionMatrix);
+//        }
+//    }
 }

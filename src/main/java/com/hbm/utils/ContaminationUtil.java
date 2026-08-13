@@ -62,8 +62,8 @@ public class ContaminationUtil {
         AdditionalDataManager.setEntityData(entity, DataEntry.RADIATION, rad + amount);
     }
     public static void incrementDigamma(Entity entity, float amount){
-        Float rad = AdditionalDataManager.getEntityData(entity, DataEntry.DIGMMA).map(o -> (float) o).orElse(0f);
-        AdditionalDataManager.setEntityData(entity, DataEntry.DIGMMA, rad + amount);
+        Float rad = AdditionalDataManager.getEntityData(entity, DataEntry.DIGAMMA).map(o -> (float) o).orElse(0f);
+        AdditionalDataManager.setEntityData(entity, DataEntry.DIGAMMA, rad + amount);
     }
     public static enum HazardType {
         RADIATION,

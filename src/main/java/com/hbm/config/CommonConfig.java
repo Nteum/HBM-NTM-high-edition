@@ -31,6 +31,7 @@ public class CommonConfig {
 	public static final String CATEGORY_BIOMES = "17_biomes";
 	public static final String CATEGORY_WEAPONS = "18_weapons";
 	public static final String CATEGORY_RBMK = "19_rbmk";
+	public static final String CATEGORY_DIMS = "20_dims";
 
 	public static final String CATEGORY_528 = "528";
 	public static final String CATEGORY_LBSM = "LESS BULLSHIT MODE";
@@ -39,13 +40,13 @@ public class CommonConfig {
 
 	static {
 		ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
+
 		ConfigGeneral.addConfig(builder);
 		ConfigRBMK.addConfig(builder);
-
 		Config528.addConfig(builder);
 		ConfigLBSM.addConfig(builder);
-
 		ConfigWorld.addConfig(builder);
+		SpaceConfig.addToConfig(builder);
 
 		CONFIG_SPEC = builder.build();
 	}
@@ -57,6 +58,7 @@ public class CommonConfig {
 
 		Config528.loadConfig(event);
 		ConfigLBSM.loadConfig(CATEGORY_LBSM, event);
+		SpaceConfig.onLoad(event);
 	}
 
 	public static void addBoolean(ForgeConfigSpec.Builder builder, String name, boolean defaultValue, String comment){
@@ -70,6 +72,16 @@ public class CommonConfig {
 	}
 	public static void addStringList(ForgeConfigSpec.Builder builder, String name, List<String> defaultValue, String comment){
 		builder.comment(comment).defineList(name, defaultValue, s -> s instanceof String);
+	}
+
+	public static void addBoolean(ForgeConfigSpec.Builder builder, String name, String comment, boolean defaultValue){
+		builder.comment(comment).define(name, defaultValue);
+	}
+	public static void addInt(ForgeConfigSpec.Builder builder, String name, String comment, int defaultValue){
+		addInt(builder, name, defaultValue, Integer.MIN_VALUE, Integer.MAX_VALUE, comment);
+	}
+	public static void addInt(ForgeConfigSpec.Builder builder, String name, String comment, int defaultValue, int min, int max){
+		builder.comment(comment).defineInRange(name, defaultValue, min, max);
 	}
 
 	public static int parseStructureFlag(String flag) {

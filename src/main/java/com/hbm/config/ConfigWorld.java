@@ -367,5 +367,6 @@ public class ConfigWorld {
         craterBiomeInnerRad = builder.comment("RAD/s for the inner crater biome").define("17.R01_craterBiomeInnerRad", 25.0D);
         craterBiomeOuterRad = builder.comment("RAD/s for the outer crater biome").define("17.R02_craterBiomeOuterRad", 0.5D);
         craterBiomeWaterMult = builder.comment("Multiplier for RAD/s in crater biomes when in water").define("17.R03_craterBiomeWaterMult", 5.0D);
+        builder.pop();
     }
 }

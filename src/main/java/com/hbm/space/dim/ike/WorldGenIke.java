@@ -18,6 +18,7 @@ import net.minecraft.util.CubicSpline;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.*;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.dimension.BuiltinDimensionTypes;
@@ -33,6 +34,7 @@ import java.util.OptionalLong;
 
 public class WorldGenIke {
     public static final String id = "ike";
+    public static final ResourceKey<Level> KEY_LEVEL = ResourceKey.create(Registries.DIMENSION, RegistryHelper.rl(id));
     public static final ResourceKey<LevelStem> KEY_STEM = ResourceKey.create(Registries.LEVEL_STEM, RegistryHelper.rl(id));
     public static final ResourceKey<DimensionType> KEY_DIMENSION_TYPE = ResourceKey.create(Registries.DIMENSION_TYPE, RegistryHelper.rl(id + "_dim_type"));
     public static final ResourceKey<NoiseGeneratorSettings> KEY_NOISE = ResourceKey.create(Registries.NOISE_SETTINGS, RegistryHelper.rl(id + "_noise"));
@@ -60,7 +62,7 @@ public class WorldGenIke {
     public static void genDimensionType(BootstapContext<DimensionType> context){
         context.register(KEY_DIMENSION_TYPE, new DimensionType(
                 OptionalLong.empty(), // 固定时间
-                false,  // 是否有天光 (月球可以设为 false 如果你想要黑暗天空)
+                true,  // 是否有天光 — 必须为 true，否则 LightEngine 不计算天光，地面全黑
                 false, // 是否有天顶 (类似地狱)
                 false, // 是否极热 (床爆炸)
                 true,  // 是否天然 (指南针转动)
@@ -71,8 +73,8 @@ public class WorldGenIke {
                 384,   // 高度
                 384,   // 逻辑高度
                 BlockTags.INFINIBURN_OVERWORLD,
-                BuiltinDimensionTypes.END_EFFECTS, // 渲染效果
-                0.1f,  // 环境光照
+                com.hbm.HBM.rl("moon_effects"), // 渲染效果 — 天体天空
+                0.0f,  // 环境光照 — 0.1会让地下无火把也有10%基础亮度（橙色滤镜）
                 new DimensionType.MonsterSettings(false, false, ConstantInt.of(7), 3)
         ));
     }
