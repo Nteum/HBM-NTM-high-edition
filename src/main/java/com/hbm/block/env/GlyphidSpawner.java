@@ -1,6 +1,6 @@
 package com.hbm.block.env;
 
-import com.hbm.addational_data.Pollution;
+import com.hbm.core.contents.addational_data.Pollution;
 import com.hbm.block.HBMBlockProperties;
 import com.hbm.blockentity.HBMTiles;
 import com.hbm.config.MobConfig;

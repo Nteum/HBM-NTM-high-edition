@@ -1,12 +1,13 @@
 {
   "values": [
+    "hbm:block_osmiridium",
+    "hbm:block_thorium",
+    "hbm:block_thorium_fuel",
     "hbm:block_uranium",
     "hbm:block_u233",
     "hbm:block_u235",
     "hbm:block_u238",
     "hbm:block_uranium_fuel",
-    "hbm:block_thorium",
-    "hbm:block_thorium_fuel",
     "hbm:block_neptunium",
     "hbm:block_polonium",
     "hbm:block_mox_fuel",
@@ -21,7 +22,6 @@
     "hbm:block_niter",
     "hbm:block_nickel",
     "hbm:block_red_copper",
-    "hbm:block_osmiridium",
     "hbm:block_tungsten",
     "hbm:block_aluminium",
     "hbm:block_fluorite",
@@ -57,10 +57,10 @@
     "hbm:block_lithium",
     "hbm:block_zirconium",
     "hbm:block_white_phosphorus",
-    "hbm:block_australium",
     "hbm:block_boron",
     "hbm:block_lanthanium",
     "hbm:block_ra226",
-    "hbm:block_actinium"
+    "hbm:block_actinium",
+    "hbm:block_australium"
   ]
 }

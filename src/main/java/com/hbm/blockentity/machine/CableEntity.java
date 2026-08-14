@@ -4,7 +4,7 @@ import com.hbm.api.energy.fe.TransmitHelper;
 import com.hbm.blockentity.HBMTiles;
 import com.hbm.blockentity.base.BasePipeBlockEntity;
 import com.hbm.blockentity.interfaces.IConnector;
-import com.hbm.utils.transport_net.EnergyNetwork;
+import com.hbm.core.contents.transport_net.EnergyNetwork;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.state.BlockState;

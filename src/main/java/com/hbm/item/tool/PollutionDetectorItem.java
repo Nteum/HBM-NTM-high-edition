@@ -1,6 +1,6 @@
 package com.hbm.item.tool;
 
-import com.hbm.addational_data.Pollution;
+import com.hbm.core.contents.addational_data.Pollution;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;

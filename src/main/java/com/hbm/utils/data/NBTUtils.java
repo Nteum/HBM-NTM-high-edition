@@ -4,7 +4,7 @@ import com.hbm.HBM;
 import com.hbm.HBMKey;
 import com.hbm.api.Coord4D;
 import com.hbm.api.annotations.ParametersAreNotNullByDefault;
-import com.hbm.addational_data.DataEntry;
+import com.hbm.core.contents.addational_data.DataEntry;
 import it.unimi.dsi.fastutil.booleans.BooleanConsumer;
 import it.unimi.dsi.fastutil.bytes.ByteConsumer;
 import it.unimi.dsi.fastutil.floats.FloatConsumer;

@@ -1,7 +1,6 @@
 package com.hbm.blockentity.interfaces;
 
-import com.hbm.addational_data.Pollution;
-import com.hbm.registries.ModSounds;
+import com.hbm.core.contents.addational_data.Pollution;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;

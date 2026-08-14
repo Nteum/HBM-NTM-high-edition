@@ -247,6 +247,8 @@ public enum HBMLang implements ILangEntry {
     arc("arc"),
     washed("washed"),
     centrifuged("centrifuged"),
+    // 方块
+    BLOCK_SPEEDY_DESC("Increases speed to % %% Tier")
     ;
 
     private final String key;

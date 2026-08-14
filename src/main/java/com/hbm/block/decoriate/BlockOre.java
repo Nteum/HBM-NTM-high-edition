@@ -1,7 +1,6 @@
 package com.hbm.block.decoriate;
 
-import com.hbm.addational_data.chunk.RadiationManager;
-import com.hbm.handler.radiation.ChunkRadiationManager;
+import com.hbm.core.contents.addational_data.chunk.RadiationManager;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;

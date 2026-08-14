@@ -40,6 +40,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
 import net.minecraftforge.client.model.generators.ModelFile;
+import net.minecraftforge.client.model.generators.ModelProvider;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.network.IContainerFactory;
 import net.minecraftforge.registries.RegistryObject;
@@ -397,15 +398,23 @@ public abstract class WrappedRegistryBuilder<T> implements Supplier<T>{
         public MenuScreens.ScreenConstructor<M, G> guiFactory;
         public BlockEntityRendererProvider<T> rendererFactory;
     }
+
     public static class WrappedBlockRegistryBuilder extends WrappedRegistryBuilder<Block> {
         ResourceKey<CreativeModeTab> creativeKey;
+        // ====== model ======
         String genModelWay = HBMKey.MODEL_CUBE_ALL;
+        BlockStateGen.Type modelType = BlockStateGen.Type.CUBE_ALL;
         BiConsumer<Block, BlockStateGen> modelFactory;
+        ResourceLocation specificModelRL;
+        String modelRLSuffix;
+        ResourceLocation[] texRL;   // 额外规定的贴图的位置
+        String[] texSuffix;
+        // ==================
         BlockColor blockColor;
         String lootWay = HBMKey.DROP_SELF;
+        BiConsumer<Block, BlockLootGen> lootFactory;
         List<TagKey<Block>> tags;
         Function<Block, BlockItem> blockItem;
-        //
         tileData tileData;
         boolean dummyable = false;
 
@@ -425,6 +434,7 @@ public abstract class WrappedRegistryBuilder<T> implements Supplier<T>{
             }
             return this;
         }
+        //======================模型部分========================
 
         public WrappedBlockRegistryBuilder model(String genModelWay){
             this.genModelWay = genModelWay;
@@ -437,6 +447,41 @@ public abstract class WrappedRegistryBuilder<T> implements Supplier<T>{
             return this;
         }
 
+        public WrappedBlockRegistryBuilder modelType(BlockStateGen.Type modelType){
+            this.modelType = modelType;
+            return this;
+        }
+        public WrappedBlockRegistryBuilder modelRL(ResourceLocation specificModelRL){
+            this.specificModelRL = specificModelRL;
+            return this;
+        }
+        public WrappedBlockRegistryBuilder modelSuf(String modelRLSuffix){
+            this.modelRLSuffix = modelRLSuffix;
+            return this;
+        }
+        public WrappedBlockRegistryBuilder modelTex(ResourceLocation[] texRL){
+            this.texRL = texRL;
+            return this;
+        }
+        public WrappedBlockRegistryBuilder texSuf(String[] texSuffix){
+            this.texSuffix = texSuffix;
+            return this;
+        }
+        // 生成simple模型的方式
+        public WrappedBlockRegistryBuilder mSmp(String type, String ... textures){
+            this.genModelWay = HBMKey.SIMPLE;
+            this.modelType = switch (type){
+                case HBMKey.MODEL_CUBE_ALL -> BlockStateGen.Type.CUBE_ALL;
+                default -> BlockStateGen.Type.CUBE_ALL;
+            };
+            this.texRL = new ResourceLocation[textures.length];
+            for (int i = 0; i < textures.length; i++) {
+                this.texRL[i] = HBM.rl(textures[i]).withPrefix(ModelProvider.BLOCK_FOLDER + "/");
+            }
+            return this;
+        }
+
+        //========================================================
         public WrappedBlockRegistryBuilder color(BlockColor blockColor){
             this.blockColor = blockColor;
             return this;
@@ -447,7 +492,12 @@ public abstract class WrappedRegistryBuilder<T> implements Supplier<T>{
             this.lootWay = lootWay;
             return this;
         }
-
+        // 摆烂了，还是把重点放在lootgen的功能函数上吧。
+        public WrappedBlockRegistryBuilder loot(BiConsumer<Block, BlockLootGen> lootFactory){
+            this.lootFactory = lootFactory;
+            return this;
+        }
+        //=================================================
         public WrappedBlockRegistryBuilder loc(String genNameWay){
             this.genNameWay = genNameWay;
             return this;
@@ -525,6 +575,12 @@ public abstract class WrappedRegistryBuilder<T> implements Supplier<T>{
         }
 
         public void modelSupport(BlockStateGen provider){
+            provider.modelGenData.block = get();
+            provider.modelGenData.type = this.modelType;
+            provider.modelGenData.specificModelRL = this.specificModelRL;
+            provider.modelGenData.modelRLSuffix = this.modelRLSuffix;
+            provider.modelGenData.texRL = this.texRL;
+            provider.modelGenData.texSuffix = this.texSuffix;
             switch (genModelWay) {
                 case HBMKey.MODEL_CUBE_ALL -> provider.simpleBlockWithItem(get());
                 case HBMKey.MODEL_CUBE_TOP -> provider.simpleBlockWithItem(get(), provider.genBuiltInModelFile(get(), "cube_top"));
@@ -536,10 +592,9 @@ public abstract class WrappedRegistryBuilder<T> implements Supplier<T>{
                 case HBMKey.MODEL_CUBE_BOTTOM_TOP -> provider.simpleBlockWithItem(get(), provider.genBuiltInModelFile(get(), "cube_bottom_top"));
                 case HBMKey.MODEL_LEAVES -> provider.simpleBlockWithItem(get(), provider.genBuiltInModelFile(get(), "leaves"));
                 case HBMKey.MODEL_CROSS -> provider.simpleBlockWithItem(get(), provider.genBuiltInModelFile(get(), "cross"));
-//                case HBMKey.MODEL_FRONT_SIDE -> provider.frontSideBlockWithItem(get());
-//                case HBMKey.MODEL_FRONT_SIDE_TOP -> provider.frontSideTopBlockWithItem(get());
-//                case HBMKey.MODEL_DIFURNACE -> provider.difuranceBlockWithItem(get());
-//                case HBMKey.MODEL_HORIZONTAL_WITH_FILE -> provider.addObjHorizonalModel(get());
+                // 新方式
+                case HBMKey.SIMPLE-> provider.simpleBlockWithItem(get(), provider.modelGenData.build());
+                case HBMKey.HORIZONTAL -> provider.horizontalBlockItem(get(), provider.modelGenData.build());
                 default -> {
                     if (modelFactory instanceof BiConsumer<Block, BlockStateGen>) modelFactory.accept(get(), provider);
                 }
@@ -547,7 +602,8 @@ public abstract class WrappedRegistryBuilder<T> implements Supplier<T>{
         }
 
         public void lootSupport(BlockLootGen provider){
-            switch (lootWay){
+            if (this.lootFactory != null) this.lootFactory.accept(get(), provider);
+            else switch (lootWay){
                 case HBMKey.DROP_SELF -> provider.dropSelf(registryObject.get());
                 case HBMKey.DROP_NONE -> provider.add(registryObject.get(), BlockLootSubProvider.noDrop());
             }

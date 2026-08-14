@@ -1,7 +1,7 @@
 {
   "values": [
-    "hbm:block_uranium_fuel",
     "hbm:block_thorium_fuel",
+    "hbm:block_uranium_fuel",
     "hbm:block_mox_fuel",
     "hbm:block_pu_mix",
     "hbm:block_plutonium_fuel",

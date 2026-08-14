@@ -1,6 +1,6 @@
 package com.hbm.item.armor;
 
-import com.hbm.addational_data.entity.player.PlayerDataUtil;
+import com.hbm.core.contents.addational_data.entity.player.PlayerDataUtil;
 import com.hbm.core.network.HBMNetwork;
 import com.hbm.network.packet.toclient.S2CParticlePacket;
 import com.hbm.registries.ModSounds;

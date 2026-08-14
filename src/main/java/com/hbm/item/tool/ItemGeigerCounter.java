@@ -1,7 +1,7 @@
 package com.hbm.item.tool;
 
-import com.hbm.addational_data.AdditionalDataManager;
-import com.hbm.addational_data.DataEntry;
+import com.hbm.core.contents.addational_data.AdditionalDataManager;
+import com.hbm.core.contents.addational_data.DataEntry;
 import com.hbm.blockentity.tools.TileEntityGeiger;
 import com.hbm.registries.ModSounds;
 import com.hbm.utils.ContaminationUtil;

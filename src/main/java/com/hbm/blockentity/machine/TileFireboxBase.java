@@ -2,7 +2,7 @@ package com.hbm.blockentity.machine;
 
 import com.hbm.HBMKey;
 import com.hbm.Inventory.material.BasicHeatHandler;
-import com.hbm.addational_data.Pollution;
+import com.hbm.core.contents.addational_data.Pollution;
 import com.hbm.api.fluid.BasicFluidHandler;
 import com.hbm.blockentity.HBMTiles;
 import com.hbm.blockentity.base.DummyableBlockEntity;

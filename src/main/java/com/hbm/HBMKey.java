@@ -17,6 +17,7 @@ public class HBMKey {
     public static final String OVERLAY_NO_BASE = "overlay_no_base";
     public static final String DROP_SELF = "drop_self";
     public static final String DROP_NONE = "drop_none";
+    public static final String OTHER = "other";
     public static final String SIMPLE = "simple";
     public static final String HORIZONTAL = "horizontal";
     // serialize or deserialize

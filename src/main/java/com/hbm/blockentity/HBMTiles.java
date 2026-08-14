@@ -82,9 +82,9 @@ public class HBMTiles {
     public static final RegistryObject<BlockEntityType<NuclearBoilerEntity>> NUCLEAR_BOILER_ENTITY =
             REGISTER.register("nuclear_boiler_entity",()-> BlockEntityType.Builder.of(NuclearBoilerEntity::new, ModBlocks.machine_nuclear_boiler.get()).build(null));
     public static final RegistryObject<BlockEntityType<ChemplantEntity>> CHEMPLANT_ENTITY =
-            REGISTER.register("chemplant_entity",()-> BlockEntityType.Builder.of(ChemplantEntity::new, ModBlocks.CHEMPLANT.get()).build(null));
+            REGISTER.register("chemplant_entity",()-> BlockEntityType.Builder.of(ChemplantEntity::new, ModBlocks.MACHINE_CHEMPLANT.get()).build(null));
     public static final RegistryObject<BlockEntityType<BarrelEntity>> BARREL_ENTITY =
-            REGISTER.register("barrel_entity",()-> BlockEntityType.Builder.of(BarrelEntity::new, ModBlocks.PLASTIC_BARREL.get(),ModBlocks.CORRODED_BARREL.get(),ModBlocks.IRON_BARREL.get(),ModBlocks.STEEL_BARREL.get(),ModBlocks.TCALLOY_BARREL.get(),ModBlocks.ANTIMATTER_BARREL.get()).build(null));
+            REGISTER.register("barrel_entity",()-> BlockEntityType.Builder.of(BarrelEntity::new, ModBlocks.BARREL_PLASTIC.get(),ModBlocks.BARREL_CORRODED.get(),ModBlocks.IRON_BARREL.get(),ModBlocks.STEEL_BARREL.get(),ModBlocks.TCALLOY_BARREL.get(),ModBlocks.ANTIMATTER_BARREL.get()).build(null));
     public static final RegistryObject<BlockEntityType<CondenserBlockEntity>> CONDENSER_ENTITY =
             REGISTER.register("condenser_entity", () -> BlockEntityType.Builder.of(CondenserBlockEntity::new, ModBlocks.machine_condenser.get()).build(null));
     public static final RegistryObject<BlockEntityType<CoolingTowerBlockEntity>> COOLING_TOWER_ENTITY =
@@ -213,7 +213,7 @@ public class HBMTiles {
         ModBlocks.tileSupport();
         PROXY_ENTITY = REGISTER.register("proxy_entity",()-> BlockEntityType.Builder.of(TileProxyCombo::new,
                 combine(new ArrayList<>(dummyableBlocks.stream().map(Supplier::get).toList()),
-                        ModBlocks.machine_crucible.get(), ModBlocks.machine_assembler.get(), ModBlocks.machine_cracking_tower.get(), ModBlocks.CHEMPLANT.get(),
+                        ModBlocks.machine_crucible.get(), ModBlocks.machine_assembler.get(), ModBlocks.machine_cracking_tower.get(), ModBlocks.MACHINE_CHEMPLANT.get(),
                         ModBlocks.LAUNCH_PAD.get(), ModBlocks.bomb_boy.get(), ModBlocks.bomb_custom.get(), ModBlocks.bomb_fat_man.get(), ModBlocks.machine_zirnox.get(),
                         ModBlocks.SPACE_STATION_BASE.get(), ModBlocks.HEATER_FIREBOX.get())
         ).build(null));

@@ -7,7 +7,7 @@ import com.hbm.Inventory.fluid.CrucibleFluidHandler;
 import com.hbm.Inventory.material.HBMMatForm;
 import com.hbm.Inventory.recipe.ModRecipes;
 import com.hbm.Inventory.recipe.RecipeArcFurnace;
-import com.hbm.addational_data.Pollution;
+import com.hbm.core.contents.addational_data.Pollution;
 import com.hbm.api.energy.BasicEnergyContainer;
 import com.hbm.api.energy.ProxyEnergyHandler;
 import com.hbm.api.energy.TransmitUtils;

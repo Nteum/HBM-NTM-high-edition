@@ -497,3 +497,45 @@ java.lang.NullPointerException: Cannot invoke "com.hbm.space.dim.CelestialBody.g
 
 1. `genDimensionType` 等是 datagen 生成的（`src/generated/resources/`）——改 Java 后必须 **runData 重新生成**，否则生效的是旧 JSON
 2. 维度光照配置变更对**旧存档的已生成区块不生效**（光照数据已烘焙进 chunk）——测试前删存档或重载区块
+
+---
+
+## 第 11 批：结构文件批量移植（2026-08-15）
+
+### 完成工作
+
+1. **通用结构转换脚本** `tools/convert_structure.py`
+   - 支持 gzip NBT 读写（zlib raw inflate 兼容 Java 写入的特殊 gzip）
+   - 方块名映射：`hbm:tile.XXX` → `hbm:XXX`，vanilla 1.7.10 → 1.20.1 重命名表
+   - meta→BlockState 转换：楼梯 facing/half/shape、半砖 type/waterlogged、柱 axis
+   - wand_jigsaw → minecraft:jigsaw（orientation + final_state），wand_loot 保留 `hbm:wand_loot`
+   - 未知方块 → minecraft:air（结构仍可放置）
+   - 输出到 `src/main/resources/data/hbm/structures/`
+
+2. **全部 130 个旧结构文件已转换**（含 dresbmk/meteor/mohobase/munbase 子目录），0 失败
+
+3. **ModBlocks 注册新方块**（WrappedBlockRegistryBuilder 系统）：
+   - 混凝土族：brick_concrete 系列、concrete_smooth/pillar/slab/double_slab/stairs、concrete_asbestos 等
+   - 钢材族：steel_wall/corner/roof/beam/scaffold/grate/grate_wide/poles
+   - 砖块族：brick_compound/asbestos/fire/light/obsidian + 各 stairs
+   - deco 系列：deco_steel/rusty_steel/titanium/lead/beryllium/aluminium/rbmk/rbmk_smooth
+   - barrel：red_barrel/pink_barrel/vitrified_barrel
+   - crate：crate/crate_can/crate_lead/crate_metal/crate_red/crate_weapon
+   - 其他：reinforced_glass/pane、reinforced_sand/stone/brick、ladder_steel/tungsten/aluminium、bobblehead、pedestal、fence_metal、hev_battery、spikes、radiorec、tape_recorder、filing_cabinet、deco_computer/crt/toaster、rail_narrow、ore_coal_oil、gravel_obsidian、red_wire_coated、red_connector、balefire、barbed_wire、det_charge、gas_asbestos、wand_air/loot/jigsaw/logic/tandem、deco_loot
+
+### 待办（后续批次）
+- deco_pipe 系列（deco_pipe/quad/framed/rim 各变体）需 BlockPipe 类
+- door 系列（door_metal/bunker/office）需 DoorBlock 类
+- 机器方块（machine_fluidtank/diesel/hephaestus 等）需对应 Block 类
+- lightstone/dungeon_spawner/skeleton_holder/spotlight 等特殊方块
+- concrete_colored/concrete_colored_ext 彩色方块
+- plant_dead 植物、toxic_block/ntm_dirt 等缺纹理方块
+
+### 补充注册（同批次追加）
+- deco_pipe 全系列 24 变体（pipe/quad/rim/framed × 配色）→ 普通 Block + pipe_* 纹理
+- door_metal/office/bunker → 普通 Block（先保证结构显示，DoorBlock 功能待实现）
+- concrete_colored/concrete_colored_ext → 转换脚本临时映射为 hbm:concrete（16色/8色 Block 待实现）
+
+### 全局统计
+- 130/130 旧结构文件已转换（0 失败），含 gzip 兼容性修复（zlib raw inflate）
+- 新增注册方块 ~80 个

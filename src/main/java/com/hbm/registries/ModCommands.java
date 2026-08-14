@@ -2,7 +2,7 @@ package com.hbm.registries;
 
 import com.hbm.HBM;
 import com.hbm.HBMLang;
-import com.hbm.addational_data.Pollution;
+import com.hbm.core.contents.addational_data.Pollution;
 import com.hbm.commands.RadiationCommand;
 import com.hbm.commands.TestCommand;
 import com.hbm.commands.WandCommand;

@@ -93,7 +93,7 @@ public class ChemplantEntity extends DummyableBlockEntity {
         this.capabilitiesContent.addCapability(ForgeCapabilities.FLUID_HANDLER, this.fluidHandler);
         this.capabilitiesContent.addCapability(HBMCaps.LONG_ENERGY, new ProxyEnergyHandler(this.energyContainer));
         this.capabilitiesContent.addCapability(ForgeCapabilities.ENERGY, this.forgeEnergy);
-        this.multiblockData = MultiblockData.mapping.get(ModBlocks.CHEMPLANT.get());
+        this.multiblockData = MultiblockData.mapping.get(ModBlocks.MACHINE_CHEMPLANT.get());
     }
 
     @Override

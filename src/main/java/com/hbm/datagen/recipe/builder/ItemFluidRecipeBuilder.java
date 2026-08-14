@@ -5,7 +5,7 @@ import com.google.gson.JsonObject;
 import com.hbm.HBM;
 import com.hbm.HBMKey;
 import com.hbm.Inventory.recipe.ModRecipes;
-import com.hbm.addational_data.Pollution;
+import com.hbm.core.contents.addational_data.Pollution;
 import com.hbm.datagen.recipe.ingredient.CountableIngredient;
 import com.hbm.datagen.recipe.ingredient.FluidStackIngredient;
 import net.minecraft.core.registries.BuiltInRegistries;

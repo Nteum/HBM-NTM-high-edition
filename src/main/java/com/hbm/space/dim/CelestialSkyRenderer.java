@@ -1,7 +1,6 @@
 package com.hbm.space.dim;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.Random;
 
 import com.hbm.HBM;
@@ -19,8 +18,8 @@ import com.hbm.space.dim.orbit.OrbitalStation;
 import com.hbm.item.ISatChip;
 import com.hbm.space.render.AtmosphereRenderUtil;
 import com.hbm.handler.CelestialNukeShockHandler;
-import com.hbm.addational_data.AdditionalDataManager;
-import com.hbm.addational_data.DataEntry;
+import com.hbm.core.contents.addational_data.AdditionalDataManager;
+import com.hbm.core.contents.addational_data.DataEntry;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.BufferBuilder;

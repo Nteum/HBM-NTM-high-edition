@@ -1,34 +1,17 @@
 package com.hbm.utils.data;
 
 import com.hbm.HBM;
-import com.hbm.api.Coord4D;
 import com.hbm.api.annotations.ParametersAreNotNullByDefault;
-import com.hbm.addational_data.DataEntry;
-import it.unimi.dsi.fastutil.booleans.BooleanConsumer;
-import it.unimi.dsi.fastutil.bytes.ByteConsumer;
-import it.unimi.dsi.fastutil.floats.FloatConsumer;
+import com.hbm.core.contents.addational_data.DataEntry;
 import it.unimi.dsi.fastutil.ints.Int2ObjectFunction;
-import it.unimi.dsi.fastutil.shorts.ShortConsumer;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.NbtUtils;
 import net.minecraft.nbt.Tag;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.util.INBTSerializable;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.registries.IForgeRegistry;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.UUID;
 import java.util.function.Consumer;
-import java.util.function.DoubleConsumer;
-import java.util.function.IntConsumer;
-import java.util.function.LongConsumer;
 
 // 原版NBTUitls的基础上补充的一些内容
 @ParametersAreNotNullByDefault

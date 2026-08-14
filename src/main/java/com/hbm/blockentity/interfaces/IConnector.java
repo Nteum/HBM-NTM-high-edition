@@ -1,6 +1,6 @@
 package com.hbm.blockentity.interfaces;
 
-import com.hbm.utils.transport_net.EnergyNetwork;
+import com.hbm.core.contents.transport_net.EnergyNetwork;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 

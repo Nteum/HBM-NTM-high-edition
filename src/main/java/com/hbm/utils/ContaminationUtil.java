@@ -1,19 +1,16 @@
 package com.hbm.utils;
 
 import com.hbm.HBMLang;
-import com.hbm.addational_data.AdditionalDataManager;
-import com.hbm.addational_data.DataEntry;
-import com.hbm.addational_data.chunk.RadiationManager;
+import com.hbm.core.contents.addational_data.AdditionalDataManager;
+import com.hbm.core.contents.addational_data.DataEntry;
+import com.hbm.core.contents.addational_data.chunk.RadiationManager;
 import com.hbm.api.badthing.HazmatRegistry;
-import com.hbm.handler.radiation.ChunkRadiationManager;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-
-import java.util.Optional;
 
 public class ContaminationUtil {
     /**

@@ -1,13 +1,13 @@
 {
   "values": [
-    "hbm:dirt_dead",
-    "hbm:dirt_oily",
-    "hbm:sand_dirty",
-    "hbm:sand_dirty_red",
     "hbm:block_scrap",
     "hbm:block_yellowcake",
     "hbm:block_red_phosphorus",
     "hbm:block_fallout",
-    "hbm:block_foam"
+    "hbm:block_foam",
+    "hbm:dirt_dead",
+    "hbm:dirt_oily",
+    "hbm:sand_dirty",
+    "hbm:sand_dirty_red"
   ]
 }

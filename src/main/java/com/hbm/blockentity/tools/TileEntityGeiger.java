@@ -1,6 +1,6 @@
 package com.hbm.blockentity.tools;
 
-import com.hbm.addational_data.chunk.RadiationManager;
+import com.hbm.core.contents.addational_data.chunk.RadiationManager;
 import com.hbm.blockentity.HBMTiles;
 import com.hbm.blockentity.base.CapabilityBlockEntity;
 import com.hbm.registries.ModSounds;

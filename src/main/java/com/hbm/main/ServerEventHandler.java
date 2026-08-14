@@ -1,11 +1,10 @@
 package com.hbm.main;
 
-import com.hbm.addational_data.Pollution;
+import com.hbm.core.contents.addational_data.Pollution;
 import com.hbm.config.ClientConfig;
 import com.hbm.config.ServerConfig;
 import com.hbm.dev.AssetConsistencyChecker;
 import com.hbm.dev.ModelValidator;
-import com.hbm.space.dim.orbit.CelestialBodies;
 import com.hbm.space.dim.orbit.Space;
 import com.hbm.entity.ModEntityType;
 import com.hbm.entity.mob.EntityGlyphid;
@@ -13,9 +12,9 @@ import com.hbm.item.interfaces.IUpdateInHand;
 import com.hbm.registries.*;
 import com.hbm.item.env.ItemEggGlyphid;
 import com.hbm.network.ServerMsgHandler;
-import com.hbm.utils.transport_net.EnergyNetworkSystem;
-import com.hbm.utils.transport_net.FluidBackupSystem;
-import com.hbm.utils.transport_net.FluidNetworkSystem;
+import com.hbm.core.contents.transport_net.EnergyNetworkSystem;
+import com.hbm.core.contents.transport_net.FluidBackupSystem;
+import com.hbm.core.contents.transport_net.FluidNetworkSystem;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;

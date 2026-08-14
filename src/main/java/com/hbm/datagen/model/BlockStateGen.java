@@ -4,6 +4,7 @@ import com.hbm.HBM;
 import com.hbm.block.HBMBlockProperties;
 import com.hbm.block.env.BedRockOre;
 import com.hbm.registries.ModBlocks;
+import com.hbm.registries.RegistryHelper;
 import com.hbm.render.model.engine.CustomPartsModel;
 import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
@@ -21,10 +22,14 @@ import net.minecraftforge.registries.RegistryObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.BiFunction;
 import java.util.function.Function;
+
+import static com.hbm.registries.RegistryHelper.getOrDefault;
 
 public class BlockStateGen extends BlockStateProvider {
     private List<ICategoryStateProvider> categoryStateProviders = new ArrayList<>();
+    public ModelGenData modelGenData = new ModelGenData(this);
     public BlockStateGen(PackOutput output, String modid, ExistingFileHelper exFileHelper) {
         super(output, modid, exFileHelper);
     }
@@ -124,9 +129,9 @@ public class BlockStateGen extends BlockStateProvider {
         conveyor(ModBlocks.conveyor.get(), "block/conveyor");
         conveyorCrane(ModBlocks.CONVEYOR_INSERTER.get(), "block/conveyor_inserter");
         conveyorCrane(ModBlocks.CONVEYOR_EXTRACTOR.get(), "block/conveyor_extractor");
-        addHorizontalModel(ModBlocks.CHEMPLANT.get(), "block/chemplant/chemplant_new_body");
-        addHorizontalModel(ModBlocks.PLASTIC_BARREL.get(), "block/barrel/barrel_plastic");
-        addHorizontalModel(ModBlocks.CORRODED_BARREL.get(), "block/barrel/barrel_corroded");
+        addHorizontalModel(ModBlocks.MACHINE_CHEMPLANT.get(), "block/chemplant/chemplant_new_body");
+        addHorizontalModel(ModBlocks.BARREL_PLASTIC.get(), "block/barrel/barrel_plastic");
+        addHorizontalModel(ModBlocks.BARREL_CORRODED.get(), "block/barrel/barrel_corroded");
         addHorizontalModel(ModBlocks.IRON_BARREL.get(), "block/barrel/barrel_iron");
         addHorizontalModel(ModBlocks.STEEL_BARREL.get(), "block/barrel/barrel_steel");
         addHorizontalModel(ModBlocks.TCALLOY_BARREL.get(), "block/barrel/barrel_tcalloy");
@@ -289,10 +294,10 @@ public class BlockStateGen extends BlockStateProvider {
         });
     }
 
-    public String path(Block block){
+    public static String path(Block block){
         return key(block).getPath();
     }
-    public ResourceLocation key(Block block) {
+    public static ResourceLocation key(Block block) {
         return ForgeRegistries.BLOCKS.getKey(block);
     }
     public String name(Block block) {
@@ -318,7 +323,8 @@ public class BlockStateGen extends BlockStateProvider {
 
     }
     private static String getOrBlank(String[] array, int i){
-        return array.length > i ? array[i] : "";
+        return RegistryHelper.getOrBlank(array, i);
+//        return array.length > i ? array[i] : "";
     }
     // 输送带控制器，鬼知道为什么bob用了crane这个词
     // 就是纯纯的屎山，我都不知道该说什么，摊上这玩意算我倒霉，硬着头皮搞了三个晚上，
@@ -448,5 +454,143 @@ public class BlockStateGen extends BlockStateProvider {
                 .scale(0.5f * baseScale).end()
                 .end();
         return builder;
+    }
+
+    /**
+     * 模型文件生成的内容
+     */
+    public enum Type{
+        CUBE_ALL, CUBE_TOP, CUBE_BOTTOM_TOP, CUBE_COLUMN, LEAVES, EXISTING, ORIENTABLE, ORIENTABLE_VERTICAL, OBJ, STANDALONE
+    }
+    public static class ModelGenData{
+        BlockStateProvider parent;
+        public Type type = null;
+        public Block block;
+        /**
+         * 理想情况是完全由block生成所有的texture路径，但很多文件名和block名不匹配
+         */
+        public ResourceLocation specificModelRL;
+        public String modelRLSuffix;
+        public ResourceLocation[] texRL;   // 额外规定的贴图的位置
+        public String[] texSuffix;
+        public BiFunction<Block, BlockStateGen, ModelFile> factory;
+        public ResourceLocation existModelFile;
+        public int size;
+
+        public ModelGenData(BlockStateProvider provider){
+            this.parent = provider;
+        }
+
+        private void reset(){
+            type = null;
+            block = null;
+            specificModelRL = null;
+            modelRLSuffix = null;
+            texSuffix = null;
+            texRL = null;
+            factory = null;
+            existModelFile = null;
+            size = 0;
+        }
+
+        public ModelFile build(){
+            String name = specificModelRL == null ? path(block) : specificModelRL.getPath();
+            name = modelRLSuffix == null || modelRLSuffix.isEmpty() ? name : name + modelRLSuffix;
+            ResourceLocation blockTexture = specificModelRL == null ? blockTexture(block) : RegistryHelper.prefix(specificModelRL, ModelProvider.BLOCK_FOLDER + "/");
+
+            ModelFile model = switch (type){
+                case CUBE_ALL -> models().cubeAll(name, getOrDefault(texRL, 0, blockTexture.withSuffix(getOrBlank(texSuffix, 0))));
+                case CUBE_TOP -> models().cubeTop(
+                        name,
+                        getOrDefault(texRL, 0, blockTexture.withSuffix("_side" + getOrBlank(texSuffix, 0))),
+                        getOrDefault(texRL, 1, blockTexture.withSuffix("_top" + getOrBlank(texSuffix, 1)))
+                );case CUBE_BOTTOM_TOP -> models().cubeBottomTop(
+                        name,
+                        getOrDefault(texRL, 0, blockTexture.withSuffix("_side" + getOrBlank(texSuffix, 0))),
+                        getOrDefault(texRL, 1, blockTexture.withSuffix("_bottom" + getOrBlank(texSuffix, 1))),
+                        getOrDefault(texRL, 2, blockTexture.withSuffix("_top" + getOrBlank(texSuffix, 2)))
+                );case CUBE_COLUMN -> models().cubeColumn(
+                        name,
+                        getOrDefault(texRL, 0, blockTexture.withSuffix("_side" + getOrBlank(texSuffix, 1))),
+                        getOrDefault(texRL, 0, blockTexture.withSuffix("_end" + getOrBlank(texSuffix, 2)))
+                );case LEAVES -> models().leaves(name, getOrDefault(texRL, 0, blockTexture.withSuffix(getOrBlank(texSuffix, 1))));
+                case EXISTING -> models().getExistingFile(specificModelRL);
+                case ORIENTABLE -> models().orientable(
+                        name,
+                        getOrDefault(texRL, 0, blockTexture.withSuffix("_side" + getOrBlank(texSuffix, 1))),
+                        getOrDefault(texRL, 0, blockTexture.withSuffix("_front" + getOrBlank(texSuffix, 2))),
+                        getOrDefault(texRL, 0, blockTexture.withSuffix("_top" + getOrBlank(texSuffix, 3)))
+                );case ORIENTABLE_VERTICAL -> models().orientableVertical(
+                        name,
+                        getOrDefault(texRL, 0, blockTexture.withSuffix("_side" + getOrBlank(texSuffix, 1))),
+                        getOrDefault(texRL, 0, blockTexture.withSuffix("_front" + getOrBlank(texSuffix, 2)))
+                );case STANDALONE -> factory.apply(block, (BlockStateGen) parent);
+                case OBJ -> genObjJson(block, existModelFile, texRL == null || texRL.length == 0 ? blockTexture : texRL[0], size);
+            };
+            // 重置所有值
+            reset();
+            return model;
+        }
+
+        public BlockModelBuilder genObjJson(Block block, ResourceLocation model, ResourceLocation texture, float size){
+            BlockModelBuilder builder = models().getBuilder(path(block)).parent(models().getExistingFile(ResourceLocation.fromNamespaceAndPath("minecraft", "block/block")));
+            builder.customLoader(CustomPartsModel.LoaderBuilder::new).setModel(model).autoCull(false).flipV(true);
+            builder.renderType("cutout").texture("texture0", texture).texture("particle", texture);
+            // 由于模型还需要在renderer中复用，
+            builder.rootTransforms().translation(0.5f, 0, 0.5f);
+            float baseScale = 1 / size;
+            float offsetX = size / 6;
+            float offsetY = size / 2;
+            float offsetZ = 0;
+            // 1. GUI 界面（原版：旋转 30, 135, 0 | 缩放 0.625f）
+            // 💡 我们将原版缩放乘以你的基础缩放，位移加上你的基础位移
+            builder.transforms()
+                    .transform(ItemDisplayContext.GUI)
+                    .rotation(30, 135, 0)
+                    .translation(offsetX, - offsetY, offsetZ)
+                    .scale(0.625f * baseScale).end()
+
+                    // 2. 第三人称右手（原版：旋转 75, 45, 0 | 缩放 0.375f）
+                    .transform(ItemDisplayContext.THIRD_PERSON_RIGHT_HAND)
+                    .rotation(75, 45, 0)
+                    .translation(0 + offsetX, 2.5f , 0 + offsetZ)
+                    .scale(0.375f * baseScale).end()
+
+                    // 3. 第一人称右手（原版：旋转 0, 45, 0 | 缩放 0.4f）
+                    .transform(ItemDisplayContext.FIRST_PERSON_RIGHT_HAND)
+                    .rotation(0, 45, 0)
+                    .translation(offsetX, - offsetY, offsetZ)
+                    .scale(0.4f * baseScale).end()
+
+                    // 4. 地面掉落物（原版：缩放 0.25f）
+                    .transform(ItemDisplayContext.GROUND)
+                    .rotation(0, 0, 0)
+                    .translation(offsetX, 3.0f , offsetZ)
+                    .scale(0.25f * baseScale).end()
+
+                    // 5. 物品展示框（原版：缩放 0.5f）
+                    .transform(ItemDisplayContext.FIXED)
+                    .rotation(0, 0, 0)
+                    .translation(offsetX, - offsetY, offsetZ)
+                    .scale(0.5f * baseScale).end()
+                    .end();
+            return builder;
+        }
+
+        private BlockModelProvider models() {
+            return parent.models();
+        }
+
+        private ResourceLocation blockTexture(Block block){
+            return parent.blockTexture(block);
+        }
+    }
+
+    public void horizontalBlockItem(Block block, ModelFile modelFile) {
+        getVariantBuilder(block).forAllStatesExcept(state -> ConfiguredModel.builder()
+                .modelFile(modelFile)
+                .rotationY(((int) state.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot() + 180) % 360)
+                .build());
+        this.simpleBlockItem(block, modelFile);
     }
 }

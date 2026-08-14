@@ -3,7 +3,7 @@ package com.hbm.blockentity.logistic;
 import com.hbm.HBMKey;
 import com.hbm.blockentity.HBMTiles;
 import com.hbm.blockentity.base.BasePipeBlockEntity;
-import com.hbm.utils.transport_net.FluidBackupSystem;
+import com.hbm.core.contents.transport_net.FluidBackupSystem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;

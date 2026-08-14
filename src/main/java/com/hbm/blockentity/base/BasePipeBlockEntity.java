@@ -3,7 +3,7 @@ package com.hbm.blockentity.base;
 import com.hbm.HBMKey;
 import com.hbm.blockentity.interfaces.IConnector;
 import com.hbm.utils.math.BitUtil;
-import com.hbm.utils.transport_net.EnergyNetwork;
+import com.hbm.core.contents.transport_net.EnergyNetwork;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;

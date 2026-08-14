@@ -2,12 +2,10 @@ package com.hbm.core.contents.fluid;
 
 import com.hbm.HBM;
 import com.hbm.HBMKey;
-import com.hbm.addational_data.Pollution;
+import com.hbm.core.contents.addational_data.Pollution;
 import com.hbm.item.tool.FluidBucketItem;
 import com.hbm.registries.ModTabs;
-import com.hbm.registries.RegistryHelper;
 import com.hbm.registries.WrappedRegistryBuilder;
-import com.hbm.utils.data.NBTHelper;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 
@@ -15,7 +13,6 @@ import java.util.*;
 import java.util.function.Consumer;
 
 import com.hbm.core.contents.fluid.TraitData.*;
-import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -652,7 +649,8 @@ public class HBMFluids {
         }
 
         public void registerBlock(DeferredRegister<Block> BLOCKS){
-            this.block = BLOCKS.register(fluidType.getName(), () -> new LiquidBlock(source, BlockBehaviour.Properties.copy(Blocks.WATER).noLootTable()));
+            // 加_fluid避免出现和其他方块重名
+            this.block = BLOCKS.register(fluidType.getName() + "_fluid", () -> new LiquidBlock(source, BlockBehaviour.Properties.copy(Blocks.WATER).noLootTable()));
             fluidType.flowProperties.block(block);
         }
 
