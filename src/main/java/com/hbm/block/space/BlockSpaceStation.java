@@ -1,6 +1,6 @@
 package com.hbm.block.space;
 
-import com.hbm.block.base.BlockDummyable;
+import com.hbm.core.block.BlockDummyable;
 import com.hbm.blockentity.machine.TileSpaceStation;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.Block;

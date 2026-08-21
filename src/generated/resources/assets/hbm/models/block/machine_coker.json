@@ -1,0 +1,96 @@
+{
+  "parent": "minecraft:block/block",
+  "automatic_culling": false,
+  "display": {
+    "firstperson_righthand": {
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "scale": [
+        0.01818182,
+        0.01818182,
+        0.01818182
+      ],
+      "translation": [
+        3.6666667,
+        -11,
+        0
+      ]
+    },
+    "fixed": {
+      "scale": [
+        0.022727273,
+        0.022727273,
+        0.022727273
+      ],
+      "translation": [
+        3.6666667,
+        -11,
+        0
+      ]
+    },
+    "ground": {
+      "scale": [
+        0.011363637,
+        0.011363637,
+        0.011363637
+      ],
+      "translation": [
+        3.6666667,
+        3,
+        0
+      ]
+    },
+    "gui": {
+      "rotation": [
+        30,
+        135,
+        0
+      ],
+      "scale": [
+        0.028409092,
+        0.028409092,
+        0.028409092
+      ],
+      "translation": [
+        3.6666667,
+        -11,
+        0
+      ]
+    },
+    "thirdperson_righthand": {
+      "rotation": [
+        75,
+        45,
+        0
+      ],
+      "scale": [
+        0.017045455,
+        0.017045455,
+        0.017045455
+      ],
+      "translation": [
+        3.6666667,
+        2.5,
+        0
+      ]
+    }
+  },
+  "flip_v": true,
+  "loader": "hbm:multi_parts_obj",
+  "model": "hbm:models/block/coker/coker.obj",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "particle": "hbm:block/coker/coker",
+    "texture0": "hbm:block/coker/coker"
+  },
+  "transform": {
+    "translation": [
+      0.5,
+      0.0,
+      0.5
+    ]
+  }
+}

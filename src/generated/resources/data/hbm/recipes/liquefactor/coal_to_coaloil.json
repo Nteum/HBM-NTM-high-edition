@@ -1,0 +1,12 @@
+{
+  "type": "hbm:liquefactor",
+  "duration": 100,
+  "input": {
+    "count": 1,
+    "item": "minecraft:coal"
+  },
+  "output_fluid": {
+    "amount": 100,
+    "fluid": "hbm:coaloil"
+  }
+}

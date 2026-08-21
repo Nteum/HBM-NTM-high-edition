@@ -1,6 +1,6 @@
 package com.hbm.block.machine;
 
-import com.hbm.blockentity.machine.WoodBurnerBlockEntity;
+import com.hbm.blockentity.machine.WoodBurnerBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -15,6 +15,6 @@ public class WoodBurnerBlock extends BlockLitSingleBlockMachine {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new WoodBurnerBlockEntity(pos, state);
+        return new WoodBurnerBE(pos, state);
     }
 }

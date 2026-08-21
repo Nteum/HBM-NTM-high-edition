@@ -1,7 +1,6 @@
 package com.hbm.Inventory.recipe;
 
 import com.google.gson.JsonObject;
-import com.hbm.blockentity.machine.PressEntity;
 import com.hbm.item.tool.ItemStamp;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;

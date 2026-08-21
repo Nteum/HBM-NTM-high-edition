@@ -1,6 +1,6 @@
 package com.hbm.gui.menu;
 
-import com.hbm.blockentity.machine.rbmk.RBMKPeripheralEntity;
+import com.hbm.blockentity.machine.rbmk.RBMKPeripheralEntityBE;
 import com.hbm.gui.HBMMenus;
 import com.hbm.item.rbmk.ItemRBMKFuelRod;
 import com.hbm.reactor.rbmk.RBMKPeripheralType;
@@ -27,7 +27,7 @@ public class RBMKAutoloaderMenu extends BaseMachineMenu {
     private static final int SLOT_COUNT = INPUT_SLOTS + OUTPUT_SLOTS;
     private static final int DATA_SLOTS = 235;
 
-    private final RBMKPeripheralEntity peripheral;
+    private final RBMKPeripheralEntityBE peripheral;
 
     public RBMKAutoloaderMenu(int containerId, Inventory playerInventory) {
         this(containerId, playerInventory, null, new SimpleContainer(SLOT_COUNT), new SimpleContainerData(DATA_SLOTS));
@@ -37,17 +37,17 @@ public class RBMKAutoloaderMenu extends BaseMachineMenu {
         this(containerId, playerInventory, resolveAutoloader(playerInventory, buf));
     }
 
-    public RBMKAutoloaderMenu(int containerId, Inventory playerInventory, RBMKPeripheralEntity peripheral) {
+    public RBMKAutoloaderMenu(int containerId, Inventory playerInventory, RBMKPeripheralEntityBE peripheral) {
         this(containerId, playerInventory, peripheral,
                 peripheral != null ? peripheral : new SimpleContainer(SLOT_COUNT),
                 peripheral != null ? peripheral.getContainerData() : new SimpleContainerData(DATA_SLOTS));
     }
 
     public RBMKAutoloaderMenu(int containerId, Inventory playerInventory, Container container, ContainerData data) {
-        this(containerId, playerInventory, container instanceof RBMKPeripheralEntity entity ? entity : null, container, data);
+        this(containerId, playerInventory, container instanceof RBMKPeripheralEntityBE entity ? entity : null, container, data);
     }
 
-    private RBMKAutoloaderMenu(int containerId, Inventory playerInventory, RBMKPeripheralEntity peripheral, Container container, ContainerData data) {
+    private RBMKAutoloaderMenu(int containerId, Inventory playerInventory, RBMKPeripheralEntityBE peripheral, Container container, ContainerData data) {
         super(HBMMenus.RBMK_AUTOLOADER_MENU.get(), containerId, container, data);
         this.peripheral = peripheral;
         this.slotNum = SLOT_COUNT;
@@ -141,10 +141,10 @@ public class RBMKAutoloaderMenu extends BaseMachineMenu {
         return containerData.get(5);
     }
 
-    private static RBMKPeripheralEntity resolveAutoloader(Inventory playerInventory, FriendlyByteBuf buf) {
+    private static RBMKPeripheralEntityBE resolveAutoloader(Inventory playerInventory, FriendlyByteBuf buf) {
         Objects.requireNonNull(buf, "buffer missing block position");
         BlockPos pos = buf.readBlockPos();
-        if (playerInventory.player.level().getBlockEntity(pos) instanceof RBMKPeripheralEntity entity
+        if (playerInventory.player.level().getBlockEntity(pos) instanceof RBMKPeripheralEntityBE entity
                 && entity.getPeripheralType() == RBMKPeripheralType.AUTOLOADER) {
             return entity;
         }

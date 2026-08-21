@@ -9,7 +9,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class BaseContainerTile extends CapabilityBlockEntity{
+public abstract class BaseContainerTile extends CapabilityBE {
     protected LockCode lockKey = LockCode.NO_LOCK;
     protected ItemStackHandler items;
     public BaseContainerTile(BlockEntityType<?> type, BlockPos pos, BlockState state) {

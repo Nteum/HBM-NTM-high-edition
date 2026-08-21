@@ -2,17 +2,15 @@ package com.hbm.datagen.model;
 
 import com.hbm.HBM;
 import com.hbm.block.HBMBlockProperties;
-import com.hbm.block.env.BedRockOre;
 import com.hbm.registries.ModBlocks;
 import com.hbm.registries.RegistryHelper;
-import com.hbm.render.model.engine.CustomPartsModel;
+import com.hbm.core.client.model.CustomPartsModel;
 import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.PipeBlock;
 import net.minecraft.world.level.block.state.properties.*;
 import net.minecraftforge.client.model.generators.*;
@@ -25,7 +23,7 @@ import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-import static com.hbm.registries.RegistryHelper.getOrDefault;
+import static com.hbm.registries.RegistryHelper.*;
 
 public class BlockStateGen extends BlockStateProvider {
     private List<ICategoryStateProvider> categoryStateProviders = new ArrayList<>();
@@ -119,8 +117,8 @@ public class BlockStateGen extends BlockStateProvider {
         addHorizontalModel(ModBlocks.SPACE_STATION_BASE.get(), "block/space_station_base");
         simpleBlockWithItem(ModBlocks.CONNECTOR.get(), genBuiltInModelFile(ModBlocks.CONNECTOR.get(), "existing"));
         addHorizontalModel(ModBlocks.machine_assembler.get(), "block/machine_assembler");
-        addHorizontalModel(ModBlocks.machine_press.get(), "block/press");
-        addHorizontalModel(ModBlocks.HEATER_FIREBOX.get(), "block/firebox");
+//        addHorizontalModel(ModBlocks.machine_press.get(), "block/press");
+//        addHorizontalModel(ModBlocks.HEATER_FIREBOX.get(), "block/firebox");
         addHorizontalModel(ModBlocks.anvil_iron.get(),"block/anvil_iron");
         addHorizontalModel(ModBlocks.anvil_bismuth.get(),"block/anvil_bismuth");
         addHorizontalModel(ModBlocks.anvil_desh.get(),"block/anvil_desh");
@@ -130,24 +128,24 @@ public class BlockStateGen extends BlockStateProvider {
         conveyorCrane(ModBlocks.CONVEYOR_INSERTER.get(), "block/conveyor_inserter");
         conveyorCrane(ModBlocks.CONVEYOR_EXTRACTOR.get(), "block/conveyor_extractor");
         addHorizontalModel(ModBlocks.MACHINE_CHEMPLANT.get(), "block/chemplant/chemplant_new_body");
-        addHorizontalModel(ModBlocks.BARREL_PLASTIC.get(), "block/barrel/barrel_plastic");
-        addHorizontalModel(ModBlocks.BARREL_CORRODED.get(), "block/barrel/barrel_corroded");
-        addHorizontalModel(ModBlocks.IRON_BARREL.get(), "block/barrel/barrel_iron");
-        addHorizontalModel(ModBlocks.STEEL_BARREL.get(), "block/barrel/barrel_steel");
-        addHorizontalModel(ModBlocks.TCALLOY_BARREL.get(), "block/barrel/barrel_tcalloy");
-        addHorizontalModel(ModBlocks.ANTIMATTER_BARREL.get(), "block/barrel/barrel_antimatter");
-        addHorizontalModel(ModBlocks.GEIGER_COUNTER.get(), "block/geiger");
+//        addHorizontalModel(ModBlocks.BARREL_PLASTIC.get(), "block/barrel/barrel_plastic");
+//        addHorizontalModel(ModBlocks.BARREL_CORRODED.get(), "block/barrel/barrel_corroded");
+//        addHorizontalModel(ModBlocks.IRON_BARREL.get(), "block/barrel/barrel_iron");
+//        addHorizontalModel(ModBlocks.STEEL_BARREL.get(), "block/barrel/barrel_steel");
+//        addHorizontalModel(ModBlocks.TCALLOY_BARREL.get(), "block/barrel/barrel_tcalloy");
+//        addHorizontalModel(ModBlocks.ANTIMATTER_BARREL.get(), "blockstates/barrel/barrel_antimatter");
+//        addHorizontalModel(ModBlocks.GEIGER_COUNTER.get(), "block/geiger");
         addHorizontalModel(ModBlocks.LAUNCH_PAD.get(), "block/launch_pad");
-        pipeBlockWithItem(ModBlocks.FLUID_PIPE.get());
+        pipeBlockWithItem(ModBlocks.FLUID_DUCT_NEO.get());
         addHorizontalModel(ModBlocks.MINER_LARGE.get(), "block/miner_large");
         for (RegistryObject<Block> block : ModBlocks.BEDROCK_ORE.registryObjectMap.values()) {
             cubeWithOverlay(block.get(), ResourceLocation.tryParse("block/bedrock"), HBM.rl("block/ore_random_"), HBMBlockProperties.BEDROCK_ORE_VARIANT, "hbm:block/ore_bedrock");
         }
-        addBooleanStateWithOrientableModel(ModBlocks.machine_electric_furnace.get(), BlockStateProperties.LIT);
+//        addBooleanStateWithOrientableModel(ModBlocks.machine_electric_furnace.get(), BlockStateProperties.LIT);
         addBooleanStateWithOrientableModel(ModBlocks.machine_boiler.get(), BlockStateProperties.LIT);
         addBooleanStateWithOrientableModel(ModBlocks.machine_electric_boiler.get(), BlockStateProperties.LIT);
         addBooleanStateWithOrientableModel(ModBlocks.machine_nuclear_boiler.get(), BlockStateProperties.LIT);
-        addDifurnace(ModBlocks.machine_difurnace.get(), BlockStateProperties.LIT, HBMBlockProperties.WITH_HAT);
+        addDifurnace(ModBlocks.MACHINE_DIFURNACE.get(), BlockStateProperties.LIT, HBMBlockProperties.WITH_HAT);
         addBooleanStateWithFace(ModBlocks.BLOCK_SLAG.get(), HBMBlockProperties.VARIANT, genBuiltInModelFile(ModBlocks.BLOCK_SLAG.get(), "cube_all"), genBuiltInModelFile(ModBlocks.BLOCK_SLAG.get(), "cube_all", "_alter", "_alter"));
         horizontalBlockWithItem(ModBlocks.BLOCK_C4.get(), genBuiltInModelFile(ModBlocks.BLOCK_C4.get(), "orientable_vertical"));
         horizontalBlockWithItem(ModBlocks.BLOCK_SEMTEX.get(), genBuiltInModelFile(ModBlocks.BLOCK_SEMTEX.get(), "orientable_vertical"));
@@ -460,7 +458,7 @@ public class BlockStateGen extends BlockStateProvider {
      * 模型文件生成的内容
      */
     public enum Type{
-        CUBE_ALL, CUBE_TOP, CUBE_BOTTOM_TOP, CUBE_COLUMN, LEAVES, EXISTING, ORIENTABLE, ORIENTABLE_VERTICAL, OBJ, STANDALONE
+        CUBE_ALL, CUBE_TOP, CUBE_BOTTOM_TOP, CUBE_COLUMN, LEAVES, EXISTING, ORIENTABLE, ORIENTABLE_WITH_BOTTOM, ORIENTABLE_VERTICAL, OBJ, STANDALONE
     }
     public static class ModelGenData{
         BlockStateProvider parent;
@@ -475,7 +473,7 @@ public class BlockStateGen extends BlockStateProvider {
         public String[] texSuffix;
         public BiFunction<Block, BlockStateGen, ModelFile> factory;
         public ResourceLocation existModelFile;
-        public int size;
+        public float size;
 
         public ModelGenData(BlockStateProvider provider){
             this.parent = provider;
@@ -494,6 +492,11 @@ public class BlockStateGen extends BlockStateProvider {
         }
 
         public ModelFile build(){
+            ModelFile modelFile = buildNoReset();
+            reset();
+            return modelFile;
+        }
+        public ModelFile buildNoReset(){
             String name = specificModelRL == null ? path(block) : specificModelRL.getPath();
             name = modelRLSuffix == null || modelRLSuffix.isEmpty() ? name : name + modelRLSuffix;
             ResourceLocation blockTexture = specificModelRL == null ? blockTexture(block) : RegistryHelper.prefix(specificModelRL, ModelProvider.BLOCK_FOLDER + "/");
@@ -511,24 +514,28 @@ public class BlockStateGen extends BlockStateProvider {
                         getOrDefault(texRL, 2, blockTexture.withSuffix("_top" + getOrBlank(texSuffix, 2)))
                 );case CUBE_COLUMN -> models().cubeColumn(
                         name,
-                        getOrDefault(texRL, 0, blockTexture.withSuffix("_side" + getOrBlank(texSuffix, 1))),
-                        getOrDefault(texRL, 0, blockTexture.withSuffix("_end" + getOrBlank(texSuffix, 2)))
+                        getOrDefault(texRL, 0, blockTexture.withSuffix(containIdx(texSuffix, 1) ? "_side" : getOrBlank(texSuffix, 1))),
+                        getOrDefault(texRL, 1, blockTexture.withSuffix("_end" + getOrBlank(texSuffix, 2)))
                 );case LEAVES -> models().leaves(name, getOrDefault(texRL, 0, blockTexture.withSuffix(getOrBlank(texSuffix, 1))));
                 case EXISTING -> models().getExistingFile(specificModelRL);
                 case ORIENTABLE -> models().orientable(
                         name,
-                        getOrDefault(texRL, 0, blockTexture.withSuffix("_side" + getOrBlank(texSuffix, 1))),
-                        getOrDefault(texRL, 0, blockTexture.withSuffix("_front" + getOrBlank(texSuffix, 2))),
-                        getOrDefault(texRL, 0, blockTexture.withSuffix("_top" + getOrBlank(texSuffix, 3)))
+                        getOrDefault(texRL, 0, blockTexture.withSuffix(containIdx(texSuffix, 0) ? "_side" : getOrBlank(texSuffix, 0))),
+                        getOrDefault(texRL, 1, blockTexture.withSuffix(containIdx(texSuffix, 1) ? "_front" : getOrBlank(texSuffix, 1))),
+                        getOrDefault(texRL, 2, blockTexture.withSuffix(containIdx(texSuffix, 2) ? "_top" : getOrBlank(texSuffix, 2)))
+                );case ORIENTABLE_WITH_BOTTOM -> models().orientableWithBottom(
+                        name,
+                        getOrDefault(texRL, 0, blockTexture.withSuffix(containIdx(texSuffix, 0) ? "_side" : getOrBlank(texSuffix, 0))),
+                        getOrDefault(texRL, 1, blockTexture.withSuffix(containIdx(texSuffix, 1) ? "_front" : getOrBlank(texSuffix, 1))),
+                        getOrDefault(texRL, 2, blockTexture.withSuffix(containIdx(texSuffix, 2) ? "_bottom" : getOrBlank(texSuffix, 2))),
+                        getOrDefault(texRL, 3, blockTexture.withSuffix(containIdx(texSuffix, 3) ? "_top" : getOrBlank(texSuffix, 3)))
                 );case ORIENTABLE_VERTICAL -> models().orientableVertical(
                         name,
-                        getOrDefault(texRL, 0, blockTexture.withSuffix("_side" + getOrBlank(texSuffix, 1))),
-                        getOrDefault(texRL, 0, blockTexture.withSuffix("_front" + getOrBlank(texSuffix, 2)))
+                        getOrDefault(texRL, 0, blockTexture.withSuffix(containIdx(texSuffix, 0) ? "_side" : getOrBlank(texSuffix, 0))),
+                        getOrDefault(texRL, 1, blockTexture.withSuffix(containIdx(texSuffix, 1) ? "_front" : getOrBlank(texSuffix, 1)))
                 );case STANDALONE -> factory.apply(block, (BlockStateGen) parent);
                 case OBJ -> genObjJson(block, existModelFile, texRL == null || texRL.length == 0 ? blockTexture : texRL[0], size);
             };
-            // 重置所有值
-            reset();
             return model;
         }
 
@@ -590,7 +597,46 @@ public class BlockStateGen extends BlockStateProvider {
         getVariantBuilder(block).forAllStatesExcept(state -> ConfiguredModel.builder()
                 .modelFile(modelFile)
                 .rotationY(((int) state.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot() + 180) % 360)
-                .build());
+                .build(), HBMBlockProperties.IS_CORE);
         this.simpleBlockItem(block, modelFile);
+    }
+
+    public void horizontalBlockItem(Block block) {
+        if (block.defaultBlockState().hasProperty(BlockStateProperties.LIT)) {
+            this.modelGenData.modelRLSuffix = "_on";
+            String[] suf = this.modelGenData.texSuffix;
+            this.modelGenData.texSuffix = switch (this.modelGenData.type){
+                case ORIENTABLE -> suf == null ? new String[]{"_side", "_front_on", "_top"} : new String[]{suf[0], "_on" + suf[1], suf[2]};
+                case ORIENTABLE_WITH_BOTTOM -> suf == null ? new String[]{"_side", "_front_on", "_bottom", "_top"} : new String[]{suf[0], suf[1], "_on" + suf[2], suf[3]};
+                default -> this.modelGenData.texSuffix;
+            };
+
+            ModelFile modelFileOn = this.modelGenData.buildNoReset();
+
+            this.modelGenData.modelRLSuffix = "_off";
+            this.modelGenData.texSuffix = switch (this.modelGenData.type){
+                case ORIENTABLE -> suf == null ? new String[]{"_side", "_front_off", "_top"} : new String[]{suf[0], "_off" + suf[1], suf[2]};
+                case ORIENTABLE_WITH_BOTTOM -> suf == null ? new String[]{"_side", "_front_off", "_bottom", "_top"} : new String[]{suf[0], suf[1], "_off" + suf[2], suf[3]};
+                default -> this.modelGenData.texSuffix;
+            };
+            ModelFile modelFileOff = this.modelGenData.build();
+            getVariantBuilder(block).forAllStatesExcept(state -> ConfiguredModel.builder()
+                    .modelFile(state.getValue(BlockStateProperties.LIT) ? modelFileOn : modelFileOff)
+                    .rotationY(((int) state.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot() + 180) % 360)
+                    .build(), HBMBlockProperties.IS_CORE);
+            this.simpleBlockItem(block, modelFileOff);
+        } else if (block.defaultBlockState().hasProperty(HBMBlockProperties.BROKEN)) {
+            ModelFile modelFileNormal = this.modelGenData.buildNoReset();
+            this.modelGenData.modelRLSuffix = "_broken";
+            this.modelGenData.existModelFile = this.modelGenData.specificModelRL;
+            ModelFile modelFileExploded = this.modelGenData.build();
+            getVariantBuilder(block).forAllStatesExcept(state -> ConfiguredModel.builder()
+                    .modelFile(state.getValue(HBMBlockProperties.BROKEN) ? modelFileNormal : modelFileExploded)
+                    .rotationY(((int) state.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot() + 180) % 360)
+                    .build(), HBMBlockProperties.IS_CORE);
+            this.simpleBlockItem(block, modelFileNormal);
+        } else {
+                this.horizontalBlockItem(block, this.modelGenData.build());
+        }
     }
 }

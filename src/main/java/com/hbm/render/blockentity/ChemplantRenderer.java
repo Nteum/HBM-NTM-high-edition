@@ -1,6 +1,6 @@
 package com.hbm.render.blockentity;
 
-import com.hbm.blockentity.machine.ChemplantEntity;
+import com.hbm.blockentity.machine.ChemplantEntityBE;
 import com.hbm.render.RenderUtils;
 import com.hbm.render.model.Models;
 import com.hbm.utils.DirectionUtils;
@@ -17,7 +17,7 @@ import net.minecraft.client.resources.model.ModelManager;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class ChemplantRenderer implements BlockEntityRenderer<ChemplantEntity> {
+public class ChemplantRenderer implements BlockEntityRenderer<ChemplantEntityBE> {
     boolean running = true;
     public static BakedModel body_model;
     public static BakedModel piston_model;
@@ -29,7 +29,7 @@ public class ChemplantRenderer implements BlockEntityRenderer<ChemplantEntity> {
         spinner_model = modelManager.getModel(Models.CHEMPLANT_SPINNER);
     }
     @Override
-    public void render(ChemplantEntity pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, int pPackedOverlay) {
+    public void render(ChemplantEntityBE pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, int pPackedOverlay) {
         BlockState blockState = pBlockEntity.getBlockState();
         BlockRenderDispatcher blockRenderer = Minecraft.getInstance().getBlockRenderer();
         ModelBlockRenderer modelRenderer = blockRenderer.getModelRenderer();

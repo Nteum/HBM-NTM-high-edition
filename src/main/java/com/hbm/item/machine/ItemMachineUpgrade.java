@@ -72,20 +72,16 @@ public class ItemMachineUpgrade extends Item {
         LM_DESROYER,
         LM_SCREM,
         MUTEX,  // 1 - smelter;2 - shredder; 3 - centrifuge; 4 - crystallizer
-//        LM_SMELTER(true),
-//        LM_SHREDDER(true),
-//        LM_CENTRIFUGE(true),
-//        LM_CRYSTALLIZER(true),
         GS_SPEED,
         //
         RADIUS,HEALTH,NULLIFIER,GC_SPEED;
 
-//        public boolean mutex = false;
-//
-//        private UpgradeType() { }
-//
-//        private UpgradeType(boolean mutex) {
-//            this.mutex = mutex;
-//        }
+        public boolean mutex = false;
+
+        private UpgradeType() { }
+
+        private UpgradeType(boolean mutex) {
+            this.mutex = mutex;
+        }
     }
 }

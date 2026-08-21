@@ -1,21 +1,43 @@
 package com.hbm.core.blockentity;
 
 import com.hbm.HBM;
+import com.hbm.blockentity.HBMTiles;
 import com.hbm.core.network.HBMNetwork;
 import com.hbm.network.packet.toclient.S2CSyncTileMessage;
+import com.hbm.core.client.sounds.AudioWrapper;
+import com.hbm.registries.RegistryHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Extension of TileEntity that adds various helpers we use across the majority of our Tiles even those that are not an instance of TileEntityMekanism. Additionally, we
+ * improve the performance of markDirty by not firing neighbor updates unless the markDirtyComparator method is overridden.
+ */
 public abstract class BEUpdateable extends BlockEntity {
+
+    public BEUpdateable(BlockPos pos, BlockState state) {
+        super(HBMTiles.getTypeById(BEMachineBase.getId(state)), pos, state);
+    }
+
+    /** 保留旧的三参构造器，供仍显式传入 BE 类型的子类使用 */
     public BEUpdateable(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
     }
 
+    /**
+     * 命名默认就是方块自身的名字
+     */
+    protected static String getId(BlockState blockState){
+        return RegistryHelper.blockRL(blockState.getBlock()).getPath();
+    }
     /* 同步逻辑 */
 
     /**
@@ -81,5 +103,35 @@ public abstract class BEUpdateable extends BlockEntity {
     public static void serverTicker(Level level, BlockPos pPos, BlockState pState, BlockEntity pBlockEntity) {
         if (pBlockEntity instanceof BEUpdateable BEUpdateable) BEUpdateable.onUpdateServer();
     }
+    //
+    public AudioWrapper createAudioLoop() { return null; }
+    public AudioWrapper rebootAudio(AudioWrapper wrapper) {
+        wrapper.stopSound();
+        AudioWrapper audio = createAudioLoop();
+        audio.startSound();
+        return audio;
+    }
 
+    public AudioWrapper getLoopedSound(SoundEvent sound, float x, float y, float z, float volume, float range, float pitch) {
+
+        AudioWrapper audio = new AudioWrapper(sound, SoundSource.BLOCKS);
+        audio.updatePosition(x, y, z);
+        audio.updateVolume(volume);
+        audio.updateRange(range);
+        return audio;
+    }
+
+    public AudioWrapper getLoopedSound(SoundEvent sound, float x, float y, float z, float volume, float range, float pitch, int keepAlive) {
+        AudioWrapper audio = getLoopedSound(sound, x, y, z, volume, range, pitch);
+        audio.setKeepAlive(keepAlive);
+        return audio;
+    }
+
+    public AudioWrapper getLoopedSound(SoundEvent sound, Entity entity, float volume, float range, float pitch, int keepAlive) {
+        AudioWrapper audio = new AudioWrapper(sound, SoundSource.BLOCKS);
+        audio.updateVolume(volume);
+        audio.updateRange(range);
+        audio.setKeepAlive(keepAlive);
+        return audio;
+    }
 }

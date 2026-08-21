@@ -1,6 +1,6 @@
 package com.hbm.render.blockentity;
 
-import com.hbm.blockentity.weapon.NukeBombCustomEntity;
+import com.hbm.blockentity.bomb.NukeBombCustomEntityBE;
 import com.hbm.render.model.Models;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
@@ -14,7 +14,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import static com.hbm.render.RenderUtils.renderBlockModel;
 
-public class NukeCustomRender extends MultiPartRenderer<NukeBombCustomEntity> {
+public class NukeCustomRender extends MultiPartRenderer<NukeBombCustomEntityBE> {
     public static BakedModel bomb_model;
     public static BakedModel boy_model;
     public static BakedModel fat_man_model;
@@ -62,14 +62,14 @@ public class NukeCustomRender extends MultiPartRenderer<NukeBombCustomEntity> {
 //    }
 
     @Override
-    public void renderMultiPart(NukeBombCustomEntity pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, int pPackedOverlay) {
+    public void renderMultiPart(NukeBombCustomEntityBE pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, int pPackedOverlay) {
         BlockState blockState = pBlockEntity.getBlockState();
         BlockRenderDispatcher blockDispatcher = Minecraft.getInstance().getBlockRenderer();
         ModelBlockRenderer blockRenderer = blockDispatcher.getModelRenderer();
         renderBlockModel(modelFor(pBlockEntity.getProfile()),blockState,blockRenderer,pPoseStack,pBuffer,pPackedLight,pPackedOverlay,null);
     }
 
-    private BakedModel modelFor(NukeBombCustomEntity.CustomNukeProfile profile) {
+    private BakedModel modelFor(NukeBombCustomEntityBE.CustomNukeProfile profile) {
         return switch (profile) {
             case BOY -> boy_model;
             case FAT_MAN -> fat_man_model;

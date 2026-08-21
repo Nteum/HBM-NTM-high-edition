@@ -1,7 +1,6 @@
 package com.hbm.render.blockentity;
 
-import com.hbm.blockentity.machine.PressEntity;
-import com.hbm.registries.ModBlocks;
+import com.hbm.blockentity.machine.PressEntityBE;
 import com.hbm.render.RenderUtils;
 import com.hbm.render.model.Models;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -9,7 +8,6 @@ import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider.Context;
 import net.minecraft.client.renderer.entity.ItemRenderer;
@@ -17,9 +15,8 @@ import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelManager;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.state.BlockState;
 
-public class PressRenderer implements BlockEntityRenderer<PressEntity> {
+public class PressRenderer implements BlockEntityRenderer<PressEntityBE> {
     private BakedModel press_head;
     public PressRenderer(Context pContext){
         ModelManager modelManager = Minecraft.getInstance().getModelManager();
@@ -41,17 +38,17 @@ public class PressRenderer implements BlockEntityRenderer<PressEntity> {
      * 6. pPackedOverlay
      * */
     @Override
-    public void render(PressEntity pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, int pPackedOverlay) {
+    public void render(PressEntityBE pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, int pPackedOverlay) {
         //显示当前正在锻压的物品
         pPoseStack.pushPose();
         //位置平移
-        pPoseStack.translate(0.5,1.0,0.5);
+//        pPoseStack.translate(0.5,1.0,0.5);
         //旋转到在锻压机上平放（Axis.XN是绕X轴翻转）
         pPoseStack.mulPose(Axis.XN.rotationDegrees(-90));
         //大小缩小一半
         pPoseStack.scale(0.5F,0.5F,0.5F);
         ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
-        ItemStack itemStack = pBlockEntity.getItem(2);
+        ItemStack itemStack = pBlockEntity.getItemHandler().getStackInSlot(2);
         BakedModel model = itemRenderer.getModel(itemStack, pBlockEntity.getLevel(), null, 0);
         itemRenderer.render(itemStack, ItemDisplayContext.GUI,true,pPoseStack,pBuffer,pPackedLight,pPackedOverlay,model);
         pPoseStack.popPose();

@@ -1,0 +1,16 @@
+{
+  "type": "hbm:arc_welder",
+  "consumption": 500,
+  "duration": 100,
+  "inputs": [
+    {
+      "count": 2,
+      "item": "hbm:plate_steel"
+    }
+  ],
+  "output": [
+    {
+      "item": "hbm:plate_steel"
+    }
+  ]
+}

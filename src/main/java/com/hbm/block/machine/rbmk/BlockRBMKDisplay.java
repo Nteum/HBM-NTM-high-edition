@@ -2,8 +2,8 @@ package com.hbm.block.machine.rbmk;
 
 import com.hbm.block.machine.BaseSingleBlockMachine;
 import com.hbm.blockentity.HBMTiles;
-import com.hbm.blockentity.base.UpdateableBlockEntity;
-import com.hbm.blockentity.machine.rbmk.RBMKDisplayEntity;
+import com.hbm.core.blockentity.BEUpdateable;
+import com.hbm.blockentity.machine.rbmk.RBMKDisplayEntityBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -29,14 +29,14 @@ public class BlockRBMKDisplay extends BaseSingleBlockMachine {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new RBMKDisplayEntity(pos, state);
+        return new RBMKDisplayEntityBE(pos, state);
     }
 
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
         return blockEntityType == HBMTiles.RBMK_DISPLAY_ENTITY.get()
-                ? (level.isClientSide ? UpdateableBlockEntity::clientTicker : UpdateableBlockEntity::serverTicker)
+                ? (level.isClientSide ? BEUpdateable::clientTicker : BEUpdateable::serverTicker)
                 : null;
     }
 
@@ -70,7 +70,7 @@ public class BlockRBMKDisplay extends BaseSingleBlockMachine {
         if (!player.isCrouching()) {
             return InteractionResult.PASS;
         }
-        if (!level.isClientSide && level.getBlockEntity(pos) instanceof RBMKDisplayEntity display) {
+        if (!level.isClientSide && level.getBlockEntity(pos) instanceof RBMKDisplayEntityBE display) {
             display.rotateGrid();
         }
         return InteractionResult.sidedSuccess(level.isClientSide);

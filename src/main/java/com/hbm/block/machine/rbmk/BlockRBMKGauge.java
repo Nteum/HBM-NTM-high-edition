@@ -2,8 +2,8 @@ package com.hbm.block.machine.rbmk;
 
 import com.hbm.block.machine.BaseSingleBlockMachine;
 import com.hbm.blockentity.HBMTiles;
-import com.hbm.blockentity.base.UpdateableBlockEntity;
-import com.hbm.blockentity.machine.rbmk.RBMKGaugeEntity;
+import com.hbm.core.blockentity.BEUpdateable;
+import com.hbm.blockentity.machine.rbmk.RBMKGaugeEntityBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
@@ -36,14 +36,14 @@ public class BlockRBMKGauge extends BaseSingleBlockMachine {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new RBMKGaugeEntity(pos, state);
+        return new RBMKGaugeEntityBE(pos, state);
     }
 
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
         return blockEntityType == HBMTiles.RBMK_GAUGE_ENTITY.get()
-                ? (level.isClientSide ? UpdateableBlockEntity::clientTicker : UpdateableBlockEntity::serverTicker)
+                ? (level.isClientSide ? BEUpdateable::clientTicker : BEUpdateable::serverTicker)
                 : null;
     }
 
@@ -74,7 +74,7 @@ public class BlockRBMKGauge extends BaseSingleBlockMachine {
 
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        if (!(level.getBlockEntity(pos) instanceof RBMKGaugeEntity gauge)) {
+        if (!(level.getBlockEntity(pos) instanceof RBMKGaugeEntityBE gauge)) {
             return InteractionResult.PASS;
         }
         if (level.isClientSide) {

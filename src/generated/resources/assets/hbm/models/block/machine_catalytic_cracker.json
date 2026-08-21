@@ -1,0 +1,96 @@
+{
+  "parent": "minecraft:block/block",
+  "automatic_culling": false,
+  "display": {
+    "firstperson_righthand": {
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "scale": [
+        0.025,
+        0.025,
+        0.025
+      ],
+      "translation": [
+        2.6666667,
+        -8,
+        0
+      ]
+    },
+    "fixed": {
+      "scale": [
+        0.03125,
+        0.03125,
+        0.03125
+      ],
+      "translation": [
+        2.6666667,
+        -8,
+        0
+      ]
+    },
+    "ground": {
+      "scale": [
+        0.015625,
+        0.015625,
+        0.015625
+      ],
+      "translation": [
+        2.6666667,
+        3,
+        0
+      ]
+    },
+    "gui": {
+      "rotation": [
+        30,
+        135,
+        0
+      ],
+      "scale": [
+        0.0390625,
+        0.0390625,
+        0.0390625
+      ],
+      "translation": [
+        2.6666667,
+        -8,
+        0
+      ]
+    },
+    "thirdperson_righthand": {
+      "rotation": [
+        75,
+        45,
+        0
+      ],
+      "scale": [
+        0.0234375,
+        0.0234375,
+        0.0234375
+      ],
+      "translation": [
+        2.6666667,
+        2.5,
+        0
+      ]
+    }
+  },
+  "flip_v": true,
+  "loader": "hbm:multi_parts_obj",
+  "model": "hbm:models/block/catalytic_cracker/catalytic_cracker.obj",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "particle": "hbm:block/models/machines/catalytic_cracker",
+    "texture0": "hbm:block/models/machines/catalytic_cracker"
+  },
+  "transform": {
+    "translation": [
+      0.5,
+      0.0,
+      0.5
+    ]
+  }
+}

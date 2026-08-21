@@ -2,8 +2,8 @@ package com.hbm.block.machine.rbmk;
 
 import com.hbm.block.machine.BaseSingleBlockMachine;
 import com.hbm.blockentity.HBMTiles;
-import com.hbm.blockentity.base.UpdateableBlockEntity;
-import com.hbm.blockentity.machine.rbmk.RBMKRadioControllerEntity;
+import com.hbm.core.blockentity.BEUpdateable;
+import com.hbm.blockentity.machine.rbmk.RBMKRadioControllerEntityBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
@@ -31,14 +31,14 @@ public class BlockRBMKRadioController extends BaseSingleBlockMachine {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new RBMKRadioControllerEntity(pos, state);
+        return new RBMKRadioControllerEntityBE(pos, state);
     }
 
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
         return blockEntityType == HBMTiles.RBMK_RADIO_CONTROLLER_ENTITY.get()
-                ? (level.isClientSide ? UpdateableBlockEntity::clientTicker : UpdateableBlockEntity::serverTicker)
+                ? (level.isClientSide ? BEUpdateable::clientTicker : BEUpdateable::serverTicker)
                 : null;
     }
 
@@ -69,7 +69,7 @@ public class BlockRBMKRadioController extends BaseSingleBlockMachine {
 
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        if (!(level.getBlockEntity(pos) instanceof RBMKRadioControllerEntity controller)) {
+        if (!(level.getBlockEntity(pos) instanceof RBMKRadioControllerEntityBE controller)) {
             return InteractionResult.PASS;
         }
         if (level.isClientSide) {

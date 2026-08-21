@@ -1,18 +1,18 @@
 {
   "variants": {
     "facing=east": {
-      "model": "hbm:block/barrel/barrel_corroded",
+      "model": "hbm:block/barrel_corroded",
       "y": 90
     },
     "facing=north": {
-      "model": "hbm:block/barrel/barrel_corroded"
+      "model": "hbm:block/barrel_corroded"
     },
     "facing=south": {
-      "model": "hbm:block/barrel/barrel_corroded",
+      "model": "hbm:block/barrel_corroded",
       "y": 180
     },
     "facing=west": {
-      "model": "hbm:block/barrel/barrel_corroded",
+      "model": "hbm:block/barrel_corroded",
       "y": 270
     }
   }

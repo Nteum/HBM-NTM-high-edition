@@ -7,6 +7,19 @@
     "hbm:machine_battery",
     "hbm:battery_block_lithium",
     "hbm:battery_block_schrabidium",
-    "hbm:battery_block_dineutronium"
+    "hbm:battery_block_dineutronium",
+    "hbm:battery_creative",
+    "hbm:battery_sc.empty",
+    "hbm:battery_sc.waste",
+    "hbm:battery_sc.ra226",
+    "hbm:battery_sc.tc99",
+    "hbm:battery_sc.co60",
+    "hbm:battery_sc.pu238",
+    "hbm:battery_sc.po210",
+    "hbm:battery_sc.au198",
+    "hbm:battery_sc.pb209",
+    "hbm:battery_sc.am241",
+    "hbm:battery_potato",
+    "hbm:battery_potatos"
   ]
 }

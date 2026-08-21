@@ -1,7 +1,7 @@
 package com.hbm.core.contents.transport_net;
 
-import com.hbm.blockentity.base.BasePipeBlockEntity;
-import com.hbm.blockentity.logistic.PipeEntity;
+import com.hbm.core.blockentity.BEPipeBase;
+import com.hbm.blockentity.logistic.PipeEntityBEPipeBase;
 import com.hbm.utils.DirectionUtils;
 import com.hbm.utils.WorldUtils;
 import it.unimi.dsi.fastutil.ints.*;
@@ -21,39 +21,22 @@ import net.minecraftforge.common.util.NonNullConsumer;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import org.apache.commons.lang3.tuple.Pair;
-import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
 import java.util.*;
 
-public class FluidBackupSystem {
+/**
+ * 流体分配网络系统，继承 AbstractNetworkSystem。
+ * 相比旧版：
+ * 1. nodeMap/NodeInfo 迁移到基类的 MutableNodeData
+ * 2. 网络拓扑（合并/切分/连通分量）复用基类
+ * 3. 保留流体特有的机器-节点连接表 node2Machines、流体类型仲裁、供需分配逻辑
+ */
+public class FluidBackupSystem extends AbstractNetworkSystem<FluidBackupSystem.FluidNetwork> {
     public static Map<Level, FluidBackupSystem> INSTANCES = new HashMap<>();
 
-    protected final Level level;
-    // 所有需要的网络
-    protected final Int2ObjectMap<NetWork> nets = new Int2ObjectOpenHashMap<>();
-    // 所有节点的连接关系，连接节点包括其他管道，以及连接的机器
-    protected final Long2ObjectMap<NodeInfo> nodeMap = new Long2ObjectOpenHashMap<>();
-    // 所有机器的数据，数据结构（标识符、机器所属网络集合，机器的电能handler）
-    /**
-     * 机器的加入：机器不会主动加入，在加入节点的过程中检测机器加入，并加入对应网络。
-     * 机器的移除：1. 机器本身被破坏，可以给lazyoptional加listener，自身被移除的时候从代码中删除，但如何访问到机器总表？
-     * 机器的网络归属：一个机器可以归属多个网络，它的不通的面可能对应不同的能力，这样似乎不能单纯用点位来对应机器，而应该用lazyoptional做主键，但如果这样，需要访问机器位置的情况应该怎么办？
-     * 考虑情况：
-     *  1). 机器入网，可以只用lazyoptioal
-     *  2). 机器破坏，可以只用lazyoptional。监听事件，删除机器引用
-     *  3). 网络合并，对应的机器加总，不需要访问位置
-     *  4)。所连节点移除，需要判断所连节点是否被移除了，要么节点被移除的时候搜索连接方向是否有机器
-     *  5). 网络分割，比较麻烦的情况，需要知道节点和lazyoptional的对应关系。
-     * 目前考虑：不记录一个lazyoptional的总表，而是记录一个“节点 - 机器连接表”，主键是节点位置，值是节点不同方向连接的节点列表。
-     * */
+    // 所有机器的数据，"节点 - 机器连接表"，主键是节点位置，值是节点不同方向连接的机器
     protected final Long2ObjectMap<MachineAttachment[]> node2Machines = new Long2ObjectOpenHashMap<>();
-    // 待加入网络的节点，用于延迟加载
-    protected final LongSet tobeJoin = new LongOpenHashSet();
-    // 待离开网络的节点
-    protected final LongSet tobeLeave = new LongOpenHashSet();
-    protected Set<long[]> readyToLink = new HashSet<>();        //即将合并的网络合并处的节点表
-    protected IntSet readyToSplit = new IntOpenHashSet();       //即将切分的网络
     // 记录待注销的监听器绑定信息
     protected final Queue<MachineAttachment> listenersToUnregister = new ArrayDeque<>();
 
@@ -65,73 +48,31 @@ public class FluidBackupSystem {
         return INSTANCES.computeIfAbsent(level, FluidBackupSystem::new);
     }
     protected FluidBackupSystem(final Level level){
-        this.level = level;
+        super(level);
     }
 
-    public void tick(){
-        updateStructure();
-        if (nets.isEmpty()) return;
-        nets.forEach((code, net) -> net.tick());
+    @Override
+    protected FluidNetwork createNet(int netID){
+        return new FluidNetwork(this, netID, new LongOpenHashSet(), new HashSet<>());
     }
-    // 节点加入
-    public void join(@Nullable final BlockEntity be){
-        if (be == null) return;
-        long pos = be.getBlockPos().asLong();
-        if (!nodeMap.containsKey(pos)) tobeJoin.add(pos);
-    }
-    // 节点离开
-    public void leave(@Nullable final BlockEntity be){
-        if (be == null) return;
-        long pos = be.getBlockPos().asLong();
-        if (nodeMap.containsKey(pos)) tobeLeave.add(pos);
-    }
-    // 更新节点的状态
-    public void refresh(@Nullable final BlockEntity be){
-        if (be == null) return;
-        long pos = be.getBlockPos().asLong();
-        nodeMap.remove(pos);
-        tobeJoin.add(pos);
-    }
-
-    //连接连上
-    public void link(final BlockPos pos1, final BlockPos pos2){
-        long l1 = pos1.asLong();
-        long l2 = pos2.asLong();
-        if (nodeMap.containsKey(l1) && nodeMap.containsKey(l2)){
-            nodeMap.get(l1).connPos.add(l2);
-            nodeMap.get(l2).connPos.add(l1);
-            int net1 = nodeMap.get(l1).netId;
-            int net2 = nodeMap.get(l2).netId;
-            if (net1 != net2) readyToLink.add(new long[]{l1, l2});
-        }else {
-            if (!nodeMap.containsKey(l1)) join(level.getBlockEntity(pos1));
-            if (!nodeMap.containsKey(l2)) join(level.getBlockEntity(pos2));
-        }
-    }
-    //连接切断
-    public void cut(final BlockPos pos1, final BlockPos pos2){
-        long l1 = pos1.asLong();
-        long l2 = pos2.asLong();
-        int netId = -1;
-        if (nodeMap.containsKey(l1)){
-            nodeMap.get(l1).connPos.remove(l2);
-            netId = nodeMap.get(l1).netId;
-        }
-        if (nodeMap.containsKey(l2)){
-            nodeMap.get(l2).connPos.remove(l1);
-            netId = nodeMap.get(l2).netId;
-        }
-        if (netId >= 0) readyToSplit.add(netId);
+    /** 用节点集合创建一个新网络并注册到 nets，返回该网络 */
+    private FluidNetwork createNetWithNodes(LongSet longSet){
+        if (longSet.isEmpty()) return null;
+        int netID = createNetID();
+        FluidNetwork netWork = new FluidNetwork(this, netID, new LongOpenHashSet(), new HashSet<>());
+        netWork.rebuild(longSet);
+        nets.put(netID, netWork);
+        return netWork;
     }
 
     // 从更新队列中加入网络
-    // 从更新队列中加入网络
-    private void updateStructure() {
+    @Override
+    protected void updateStructure() {
         LongSet posCache;
         BlockPos blockPos, pos, pos1;
         BlockEntity be;
-        NodeInfo nodeInfo;
-        NetWork netWork;
+        MutableNodeData nodeInfo;
+        FluidNetwork netWork;
         Queue<Pair<BlockPos, Direction>> queue;
         IntSet netsToMerge;
         IntSet netsToUpdatePipe = new IntOpenHashSet();
@@ -171,8 +112,8 @@ public class FluidBackupSystem {
             Iterator<LongSet> iterator = parts.iterator();
             netWork.rebuild(iterator.next());
             while (iterator.hasNext()){
-                int code = createNet(iterator.next());
-                netsToUpdatePipe.add(code);
+                FluidNetwork newNet = createNetWithNodes(iterator.next());
+                if (newNet != null) netsToUpdatePipe.add(newNet.code);
             }
         }
 
@@ -183,9 +124,9 @@ public class FluidBackupSystem {
             blockPos = BlockPos.of(l);
             be = WorldUtils.getTileEntity(level, blockPos);
 
-            if (be instanceof BasePipeBlockEntity pipe) {
+            if (be instanceof BEPipeBase pipe) {
                 // 初始化起始点的 NodeInfo，先挂一个缺省占位 ID -1
-                nodeMap.put(l, new NodeInfo(-1, new LongOpenHashSet()));
+                nodeMap.put(l, new MutableNodeData(-1, new LongOpenHashSet()));
                 posCache = new LongOpenHashSet(List.of(l));     // 所有新加入的节点
                 netsToMerge = new IntOpenHashSet();             // 需要合并的网络
                 if (!pipe.getAttached().isEmpty()){
@@ -200,11 +141,11 @@ public class FluidBackupSystem {
                         fromDir = poll.getRight();
                         checkPosL = checkPos.asLong();
                         fromPosL = fromDir == null ? checkPosL : checkPos.relative(fromDir.getOpposite()).asLong();
-                        if ((be = WorldUtils.getTileEntity(level, checkPos)) instanceof BasePipeBlockEntity pipeTile){
+                        if ((be = WorldUtils.getTileEntity(level, checkPos)) instanceof BEPipeBase pipeTile){
                             // 如果不是起始点，需要初始化 NodeInfo
                             if (fromDir != null) {
                                 if (!nodeMap.containsKey(checkPosL)) {
-                                    nodeMap.put(checkPosL, new NodeInfo(-1, new LongOpenHashSet()));
+                                    nodeMap.put(checkPosL, new MutableNodeData(-1, new LongOpenHashSet()));
                                 }
                                 // 【修复 3】: 建立完整的双向物理连接
                                 nodeMap.get(fromPosL).connPos.add(checkPosL);
@@ -252,8 +193,9 @@ public class FluidBackupSystem {
                 int finalNetId;
                 if (netsToMerge.isEmpty()) {
                     // 四面八方完全是一个孤立新放的网络，直接完全新建
-                    finalNetId = createNet(posCache);
-                    netsToUpdatePipe.add(finalNetId);
+                    FluidNetwork created = createNetWithNodes(posCache);
+                    finalNetId = created == null ? -1 : created.code;
+                    if (created != null) netsToUpdatePipe.add(finalNetId);
                 } else {
                     // 至少靠着一个老网。我们捡起第一个老网的 ID 作为基础
                     finalNetId = netsToMerge.iterator().nextInt();
@@ -303,7 +245,7 @@ public class FluidBackupSystem {
             while (iterator.hasNext()) {
                 int deadNetId = iterator.nextInt();
 
-                NetWork deadNet = nets.get(deadNetId);
+                FluidNetwork deadNet = nets.get(deadNetId);
                 if (deadNet != null) {
                     netWork.merge(deadNet);
                     // 【修复 1】：致命伤修复，把被合并死掉的网络彻底从大表摘除！
@@ -318,10 +260,10 @@ public class FluidBackupSystem {
         }
         for (long pipePos : pipesToInit) {
             if (!nodeMap.containsKey(pipePos)) continue;
-            NodeInfo nodeinfo = nodeMap.get(pipePos);
-            NetWork net = nets.get(nodeinfo.netId);
+            MutableNodeData nodeinfo = nodeMap.get(pipePos);
+            FluidNetwork net = nets.get(nodeinfo.netId);
             if (net == null) continue;
-            PipeEntity pipe = WorldUtils.getTileEntity(PipeEntity.class, level, BlockPos.of(pipePos));
+            PipeEntityBEPipeBase pipe = WorldUtils.getTileEntity(PipeEntityBEPipeBase.class, level, BlockPos.of(pipePos));
             if (pipe == null) continue;
             pipe.network = net;
         }
@@ -342,61 +284,17 @@ public class FluidBackupSystem {
         listenersToUnregister.clear();
     }
 
-    protected List<LongSet> findParts(final NetWork network){
-        LongOpenHashSet remain = new LongOpenHashSet(network.nodes);
-        List<LongSet> result = new ArrayList<>();
-        while (!remain.isEmpty()){
-            long start = remain.iterator().nextLong();
-            LongSet component = new LongOpenHashSet();
-            ArrayDeque<Long> queue = new ArrayDeque<>();
-            queue.offerFirst(start);
-            while (!queue.isEmpty()){
-                long poll = queue.pollFirst();
-                component.add(poll);
-                remain.remove(poll);
-                NodeInfo nodeInfo = nodeMap.get(poll);
-                if (nodeInfo == null) continue;
-                for (long l : nodeInfo.connPos) {
-                    if (!component.contains(l) && nodeMap.containsKey(l)) queue.add(l);
-                }
-            }
-            result.add(component);
-        }
-        return result;
-    }
-
-    private int createNetID(){
-        int id;
-        while (nets.containsKey(id = this.level.random.nextInt(Integer.MAX_VALUE))) ;
-        return id;
-    }
-
-    private int createNet(LongSet longSet){
-        return createNet(longSet, -1);
-    }
-    private int createNet(LongSet longSet, int id){
-        if (longSet.isEmpty()) return -1;
-        int netID = id < 0 ? createNetID() : id;
-        NetWork netWork = new NetWork(this, netID, new LongOpenHashSet(), new HashSet<>());
-        netWork.rebuild(longSet);
-        nets.put(netID, netWork);
-        return netID;
-    }
-
-    public static class NetWork{
+    public static class FluidNetwork extends AbstractNetwork {
         FluidBackupSystem parent;
-        int id;
         LongSet nodes;
         Set<LazyOptional<IFluidHandler>> endpoints;
         private Fluid fluid = Fluids.EMPTY;
-        public NetWork(FluidBackupSystem parent, int id, LongSet nodes, Set<LazyOptional<IFluidHandler>> endpoints){
+        public FluidNetwork(FluidBackupSystem parent, int id, LongSet nodes, Set<LazyOptional<IFluidHandler>> endpoints){
+            super(id);
             this.parent = parent;
-            this.id = id;
             this.nodes = nodes;
             this.endpoints = endpoints;
-
-        }
-        public Fluid getFluid(){
+        }        public Fluid getFluid(){
             return fluid;
         }
         public FluidBackupSystem getParent(){
@@ -405,14 +303,16 @@ public class FluidBackupSystem {
         public void setFluid(final Fluid fluid) {
             this.fluid = fluid == null ? Fluids.EMPTY : fluid;
         }
+        @Override
         public boolean isEmpty(){
             return nodes.isEmpty() && endpoints.isEmpty();
         }
+        @Override
         public void addNodes(LongSet points){
             for (long point : points) {
                 if (!this.parent.nodeMap.containsKey(point)) continue;
                 this.nodes.add(point);
-                NodeInfo nodeInfo = this.parent.nodeMap.get(point);
+                MutableNodeData nodeInfo = this.parent.nodeMap.get(point);
                 for (long conn : nodeInfo.connPos) {
                     if (this.parent.node2Machines.containsKey(conn)){
                         Direction direction = DirectionUtils.posToDirection(BlockPos.of(point), BlockPos.of(conn));
@@ -422,17 +322,24 @@ public class FluidBackupSystem {
                         }
                     }
                 }
-                nodeInfo.netId = this.id;
+                nodeInfo.netId = this.code;
             }
+        }
+        @Override
+        public void addNode(long point){
+            LongSet single = new LongOpenHashSet();
+            single.add(point);
+            addNodes(single);
         }
         public void rebuild(LongSet points){
             this.nodes.clear();
             this.endpoints.clear();
             addNodes(points);
         }
+        @Override
         public void removeNode(long node){
             this.nodes.remove(node);
-            NodeInfo nodeInfo = this.parent.nodeMap.get(node);
+            MutableNodeData nodeInfo = this.parent.nodeMap.get(node);
             if (nodeInfo != null){
                 for (long conn : nodeInfo.connPos) {
                     if (this.parent.node2Machines.containsKey(conn)){
@@ -447,15 +354,15 @@ public class FluidBackupSystem {
             }
             // 如果网络已经空了，则移除网络。
             if (this.nodes.isEmpty()){
-                this.parent.nets.remove(this.id);
+                this.parent.nets.remove(this.code);
             }
         }
-        public void merge(NetWork other){
+        public void merge(FluidNetwork other){
             if (other == null || other == this || (this.fluid != Fluids.EMPTY && other.fluid != Fluids.EMPTY && this.fluid != other.fluid)) return;
             if (this.fluid == Fluids.EMPTY) this.fluid = other.fluid;
             this.nodes.addAll(other.nodes);
             for (long node : other.nodes) {
-                if (parent.nodeMap.containsKey(node)) parent.nodeMap.get(node).netId = this.id;
+                if (parent.nodeMap.containsKey(node)) parent.nodeMap.get(node).netId = this.code;
             }
             this.endpoints.addAll(other.endpoints);
             assignNet(other.nodes);
@@ -465,11 +372,12 @@ public class FluidBackupSystem {
         }
         public void assignNet(LongSet nodes){
             for (Long node : nodes) {
-                PipeEntity pipeEntity = WorldUtils.getTileEntity(PipeEntity.class, this.parent.level, BlockPos.of(node));
+                PipeEntityBEPipeBase pipeEntity = WorldUtils.getTileEntity(PipeEntityBEPipeBase.class, this.parent.level, BlockPos.of(node));
                 if (pipeEntity != null) pipeEntity.network = this;
-                if (parent.nodeMap.containsKey(node)) parent.nodeMap.get(node).netId = this.id;
+                if (parent.nodeMap.containsKey(node)) parent.nodeMap.get(node).netId = this.code;
             }
         }
+        @Override
         public void tick() {
             // 1. 类型仲裁 (保持你的设计)
             if (this.fluid == Fluids.EMPTY) {
@@ -480,7 +388,7 @@ public class FluidBackupSystem {
                             this.fluid = fluidStack.getFluid();
                             // 流体一旦更新则更新管道流体到客户端去。
                             for (long node : this.nodes) {
-                                PipeEntity pipeEntity = WorldUtils.getTileEntity(PipeEntity.class, parent.level, BlockPos.of(node));
+                                PipeEntityBEPipeBase pipeEntity = WorldUtils.getTileEntity(PipeEntityBEPipeBase.class, parent.level, BlockPos.of(node));
                                 if (pipeEntity != null) pipeEntity.syncToClient();
                             }
                             break;
@@ -592,16 +500,6 @@ public class FluidBackupSystem {
         }
     }
 
-    protected static class NodeInfo{
-        int netId;
-        LongSet connPos;
-        public NodeInfo(int netId, LongSet connPos){
-            this.netId = netId;
-            this.connPos = connPos;
-        }
-    }
-
-    protected record MachineAttachment(Direction side, LazyOptional<IFluidHandler> handler, InvalidationHandler listener) {}
     protected void removeMachineSide(long pos, Direction face){
         if (!node2Machines.containsKey(pos) || face == null) return;
         MachineAttachment machineAttachment = node2Machines.get(pos)[face.get3DDataValue()];
@@ -626,14 +524,27 @@ public class FluidBackupSystem {
 
         @Override
         public void accept(@Nonnull LazyOptional<IFluidHandler> handle) {
-            NetWork netWork = nets.get(parent.nodeMap.get(this.nodePos.relative(this.side).asLong()).netId);
-            if (netWork != null) netWork.endpoints.remove(handle);
-            else {
-                for (NetWork netWork1 : nets.values()) {
+            MutableNodeData nodeData = parent.nodeMap.get(this.nodePos.relative(this.side).asLong());
+            if (nodeData != null){
+                FluidNetwork netWork = nets.get(nodeData.netId);
+                if (netWork != null) netWork.endpoints.remove(handle);
+            }else {
+                for (FluidNetwork netWork1 : nets.values()) {
                     netWork1.endpoints.remove(handle);
                 }
             }
             parent.removeMachineSide(nodePos.asLong(), side);
+        }
+    }
+
+    protected static class MachineAttachment {
+        Direction side;
+        LazyOptional<IFluidHandler> handler;
+        InvalidationHandler listener;
+        MachineAttachment(Direction side, LazyOptional<IFluidHandler> handler, InvalidationHandler listener){
+            this.side = side;
+            this.handler = handler;
+            this.listener = listener;
         }
     }
 }

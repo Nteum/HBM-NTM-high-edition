@@ -1,0 +1,13 @@
+{
+  "type": "hbm:solidifier",
+  "duration": 100,
+  "input": {
+    "amount": 1000,
+    "fluid": "minecraft:lava"
+  },
+  "output": [
+    {
+      "item": "minecraft:obsidian"
+    }
+  ]
+}

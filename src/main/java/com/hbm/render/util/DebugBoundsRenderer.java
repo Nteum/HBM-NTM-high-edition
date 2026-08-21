@@ -1,9 +1,8 @@
 package com.hbm.render.util;
 
-import com.hbm.blockentity.base.BaseMachineBlockEntity; // 换成你机器的基类
-import com.hbm.blockentity.base.DummyableBlockEntity;
-import com.hbm.blockentity.base.TileProxyBase;
+import com.hbm.blockentity.base.DummyableBE;
 import com.hbm.blockentity.base.TileProxyCombo;
+import com.hbm.core.blockentity.BEProxy;
 import com.hbm.registries.HBMCaps;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -18,7 +17,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RenderLevelStageEvent;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 
 /**
  * 显示特定方块的边界，用于多方块机器的调试
@@ -62,9 +60,13 @@ public class DebugBoundsRenderer {
 
             float[] rgba;
             AABB box = new AABB(pos), renderBoundingBox = null;
-            if (be instanceof DummyableBlockEntity machine){
+            if (be instanceof DummyableBE machine){
                 rgba = new float[]{1.0f, 0.0f, 0.0f, 1.0f};
                 renderBoundingBox = machine.getRenderBoundingBox();
+            }else if (be instanceof BEProxy proxy){
+                if (proxy.getCapability(ForgeCapabilities.ITEM_HANDLER).isPresent()) rgba = new float[]{0.0f, 1.0f, 0.0f, 1.0f};
+                else if (proxy.getCapability(ForgeCapabilities.FLUID_HANDLER).isPresent() || proxy.getCapability(HBMCaps.LONG_ENERGY).isPresent()) rgba = new float[]{0.0f, 0.0f, 1.0f, 1.0f};
+                else rgba = new float[]{1.0f, 0.0f, 0.0f, 0.1f};
             }else if (be instanceof TileProxyCombo proxy){
                 if (proxy.getCapability(ForgeCapabilities.ITEM_HANDLER).isPresent()) rgba = new float[]{0.0f, 1.0f, 0.0f, 1.0f};
                 else if (proxy.getCapability(ForgeCapabilities.FLUID_HANDLER).isPresent() || proxy.getCapability(HBMCaps.LONG_ENERGY).isPresent()) rgba = new float[]{0.0f, 0.0f, 1.0f, 1.0f};

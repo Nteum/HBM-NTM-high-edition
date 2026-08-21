@@ -1,6 +1,6 @@
 package com.hbm.gui.menu;
 
-import com.hbm.blockentity.machine.GasTurbineBlockEntity;
+import com.hbm.blockentity.machine.GasTurbineBE;
 import com.hbm.gui.HBMMenus;
 import com.hbm.gui.menu.slot.BatterySlot;
 import com.hbm.registries.ModTags;
@@ -28,7 +28,7 @@ public class GasTurbineMenu extends BaseMachineMenu implements ITileAccess {
     private static final int SLIDER_BUTTON_BASE = 2000;
 
     @Nullable
-    private GasTurbineBlockEntity blockEntity;
+    private GasTurbineBE blockEntity;
 
     public GasTurbineMenu(int containerId, Inventory inventory) {
         this(containerId, inventory, new SimpleContainer(2), new SimpleContainerData(DATA_SIZE));
@@ -36,7 +36,7 @@ public class GasTurbineMenu extends BaseMachineMenu implements ITileAccess {
 
     public GasTurbineMenu(int containerId, Inventory inventory, Container container, ContainerData data) {
         super(HBMMenus.GAS_TURBINE_MENU.get(), containerId, container, data);
-        if (container instanceof GasTurbineBlockEntity turbine) {
+        if (container instanceof GasTurbineBE turbine) {
             this.blockEntity = turbine;
         }
         this.slotNum = 2;
@@ -56,13 +56,13 @@ public class GasTurbineMenu extends BaseMachineMenu implements ITileAccess {
 
     @Override
     public void setTile(BlockEntity blockEntity) {
-        if (blockEntity instanceof GasTurbineBlockEntity turbine) {
+        if (blockEntity instanceof GasTurbineBE turbine) {
             this.blockEntity = turbine;
         }
     }
 
     @Nullable
-    public GasTurbineBlockEntity getBlockEntity() {
+    public GasTurbineBE getBlockEntity() {
         return blockEntity;
     }
 
@@ -138,7 +138,7 @@ public class GasTurbineMenu extends BaseMachineMenu implements ITileAccess {
 
     @Override
     public boolean clickMenuButton(Player player, int id) {
-        if (this.container instanceof GasTurbineBlockEntity turbine) {
+        if (this.container instanceof GasTurbineBE turbine) {
             if (id == 0) {
                 if (turbine.getState() == 0) {
                     turbine.requestStart();

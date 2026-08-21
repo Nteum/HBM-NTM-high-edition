@@ -1,6 +1,6 @@
 package com.hbm.block.machine;
 
-import com.hbm.blockentity.machine.IronCrateBlockEntity;
+import com.hbm.blockentity.machine.IronCrateBE;
 import com.hbm.registries.ModSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
@@ -60,7 +60,7 @@ public class IronCrateBlock extends BaseEntityBlock implements EntityBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new IronCrateBlockEntity(pos, state);
+        return new IronCrateBE(pos, state);
     }
 
     @Override
@@ -78,7 +78,7 @@ public class IronCrateBlock extends BaseEntityBlock implements EntityBlock {
     public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
         BlockEntity blockEntity = builder.getOptionalParameter(net.minecraft.world.level.storage.loot.parameters.LootContextParams.BLOCK_ENTITY);
         ItemStack drop = new ItemStack(this);
-        if (blockEntity instanceof IronCrateBlockEntity crate && !crate.isEmpty()) {
+        if (blockEntity instanceof IronCrateBE crate && !crate.isEmpty()) {
             crate.saveToItem(drop);
         }
         return List.of(drop);
@@ -91,14 +91,14 @@ public class IronCrateBlock extends BaseEntityBlock implements EntityBlock {
             return;
         }
         BlockEntity blockEntity = level.getBlockEntity(pos);
-        if (blockEntity instanceof IronCrateBlockEntity crate && stack.hasTag()) {
+        if (blockEntity instanceof IronCrateBE crate && stack.hasTag()) {
             crate.loadFromItem(stack);
         }
     }
 
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        if (!level.isClientSide() && level.getBlockEntity(pos) instanceof IronCrateBlockEntity crate) {
+        if (!level.isClientSide() && level.getBlockEntity(pos) instanceof IronCrateBE crate) {
             NetworkHooks.openScreen((ServerPlayer) player, crate, pos);
             level.playSound(null, pos, ModSounds.BLOCK_CRATE_OPEN.get(), SoundSource.BLOCKS, 0.5F, 1.0F);
         }

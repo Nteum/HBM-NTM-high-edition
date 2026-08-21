@@ -1,9 +1,5 @@
 package com.hbm.gui.menu;
 
-import com.hbm.blockentity.machine.CrucibleEntity;
-import com.hbm.gui.menu.slot.FilterSlot;
-import com.hbm.utils.WorldUtils;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.Container;
@@ -30,6 +26,7 @@ public abstract  class BaseMachineMenu <T extends BlockEntity> extends AbstractC
     protected BaseMachineMenu(@Nullable MenuType<?> pMenuType, int pContainerId, Inventory playerInventory, T blockEntity, ContainerData containerData1) {
         super(pMenuType, pContainerId);
         this.be = blockEntity;
+        this.container = blockEntity instanceof Container c ? c : null;
         containerData = containerData1;
         this.addDataSlots(containerData1);
     }

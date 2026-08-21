@@ -1,6 +1,6 @@
 package com.hbm.gui.menu;
 
-import com.hbm.blockentity.machine.rbmk.RBMKRadioControllerEntity;
+import com.hbm.blockentity.machine.rbmk.RBMKRadioControllerEntityBE;
 import com.hbm.gui.HBMMenus;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
@@ -16,7 +16,7 @@ import java.util.Objects;
 public class RBMKRadioControllerMenu extends BaseMachineMenu {
 
     private final BlockPos pos;
-    private final RBMKRadioControllerEntity controller;
+    private final RBMKRadioControllerEntityBE controller;
 
     public RBMKRadioControllerMenu(int containerId, Inventory playerInventory) {
         this(containerId, playerInventory, null, null, new SimpleContainer(0), new SimpleContainerData(0));
@@ -26,7 +26,7 @@ public class RBMKRadioControllerMenu extends BaseMachineMenu {
         this(containerId, playerInventory, resolveController(playerInventory, buf));
     }
 
-    public RBMKRadioControllerMenu(int containerId, Inventory playerInventory, RBMKRadioControllerEntity controller) {
+    public RBMKRadioControllerMenu(int containerId, Inventory playerInventory, RBMKRadioControllerEntityBE controller) {
         this(containerId, playerInventory, controller,
                 controller != null ? controller.getBlockPos() : null,
                 new SimpleContainer(0),
@@ -34,12 +34,12 @@ public class RBMKRadioControllerMenu extends BaseMachineMenu {
     }
 
     public RBMKRadioControllerMenu(int containerId, Inventory playerInventory, Container container, ContainerData data) {
-        this(containerId, playerInventory, container instanceof RBMKRadioControllerEntity entity ? entity : null,
-                container instanceof RBMKRadioControllerEntity entity ? entity.getBlockPos() : null,
+        this(containerId, playerInventory, container instanceof RBMKRadioControllerEntityBE entity ? entity : null,
+                container instanceof RBMKRadioControllerEntityBE entity ? entity.getBlockPos() : null,
                 container, data);
     }
 
-    private RBMKRadioControllerMenu(int containerId, Inventory playerInventory, RBMKRadioControllerEntity controller, BlockPos pos, Container container, ContainerData data) {
+    private RBMKRadioControllerMenu(int containerId, Inventory playerInventory, RBMKRadioControllerEntityBE controller, BlockPos pos, Container container, ContainerData data) {
         super(HBMMenus.RBMK_RADIO_CONTROLLER_MENU.get(), containerId, container, data);
         this.slotNum = 0;
         this.controller = controller;
@@ -66,10 +66,10 @@ public class RBMKRadioControllerMenu extends BaseMachineMenu {
         return controller != null && controller.isPolling();
     }
 
-    private static RBMKRadioControllerEntity resolveController(Inventory playerInventory, FriendlyByteBuf buf) {
+    private static RBMKRadioControllerEntityBE resolveController(Inventory playerInventory, FriendlyByteBuf buf) {
         Objects.requireNonNull(buf, "buffer missing block position");
         BlockPos pos = buf.readBlockPos();
-        if (playerInventory.player.level().getBlockEntity(pos) instanceof RBMKRadioControllerEntity entity) {
+        if (playerInventory.player.level().getBlockEntity(pos) instanceof RBMKRadioControllerEntityBE entity) {
             return entity;
         }
         return null;

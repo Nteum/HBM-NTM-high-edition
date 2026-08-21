@@ -539,3 +539,682 @@ java.lang.NullPointerException: Cannot invoke "com.hbm.space.dim.CelestialBody.g
 ### 全局统计
 - 130/130 旧结构文件已转换（0 失败），含 gzip 兼容性修复（zlib raw inflate）
 - 新增注册方块 ~80 个
+
+---
+
+## 第 12 批：核心基础设施架构 Review 与重构（2026-08-15）
+
+### 1. transport_net 网络系统抽象
+- 新增基类 `AbstractNetwork`（节点集合+合并/切分语义）与 `AbstractNetworkSystem`（拓扑存储/join/leave/link/cut/延迟队列/BFS 连通分量/网络合并切分），作为分配网络通用骨架
+- `EnergyNetwork` / `EnergyNetworkSystem` 改为继承上述基类
+- `FluidBackupSystem` / `FluidNetwork`（原 NetWork）改为继承上述基类，重命名 NetWork→FluidNetwork，更新 PipeEntity 引用
+- 清理遗留的轻量级 `FluidNetworkSystem`（未被真正使用）：移除 BlockFluidPipe 中的死代码调用与 ServerEventHandler 中的 tick
+
+### 2. BECapabilities 增强
+- 新增 `SideAccessConfig`：每个面可配置物品槽/流体槽的 Mode（IN/BOTH/OUT/NONE）与能量模式（禁/入/出/双向）
+- `getItemHandler/getEnergyHandler/getFluidHandler` 改为消费 SideAccessConfig
+- **修复严重 bug**：`load()` 与 `saveAdditional()` 的函数体写反了（load 在写、save 在读），已纠正
+
+### 3. 多方块系统
+- 修复 `BEDummyable.onUpdateServer` 中 `distributed` 永不重置、`isFormed` 粘性为 false 的 bug：改为每 tick 复查代理完整性
+
+### 4. 各子系统 review 结论（详见会话记录）
+- addational_data：capability 直挂实体/chunk，需要注意 PersistentData 与 capability 的读写时机、玩家 respawn 保持
+- hazard：建议继续用 addational_data 存玩家状态，hazard 判定逻辑保持独立（参考 mek 物品能力但不必照搬）
+- recipe：SerializableRecipe 目前是模板，JSON 生成尚未启用
+- OBJ 模型：CustomPartsModel/TrianglePartsModel 支持分体渲染+默认 mtl
+
+---
+
+## 第 13 批：机器模块抽象 + 渲染/音效基础设施（2026-08-15）
+
+### 1. 机器模块抽象（core/contents/machine）
+- `MachineModuleBase<R extends Recipe<Container>>`：参考旧版 com.hbm.module.machine.ModuleMachineBase，将配方处理通用逻辑从 TE 剥离为可复用模块
+  - 槽位/罐位接线（input/outputSlots、inputTanks/outputTanks）配置一次
+  - 统一 hasInput/canProcess/process/consumeInput/produceOutput
+  - 整合 MachineItemHandler / IEnergyContainer / BasicFluidHandler
+- `ModuleContainer`：模块物品 handler 的 Container 视图，供配方 matches/assemble 使用
+- `AssemblerModule`：装配机示例，演示模式用法
+- 自动 IO（物品/流体进出）由 TE 通过 ItemTransferUtils/FluidTransferUtils + getInputSlots/getOutputSlots 完成
+
+### 2. 渲染 util（core/client/render/CoreRenderUtil）
+- 封装旧版 GL11 立即模式调用 → Tesselator/BufferBuilder 现代写法（begin/vertex/end、drawBox、vertexUV）
+- 状态机封装：depthTest/blend/cullFace/color
+- 矩阵操作：pushMatrix/translate
+- 每个方法附带对应旧 API 的注释说明；移植时拿不准的 GL 调用优先在此类封装
+
+### 3. 音效现代化（core/client/sounds）
+- `HBMUsableSound extends AbstractTickableSoundInstance`：现代循环音效，tick 内更新音量/位置
+- `AudioWrapper` 重写：改用 HBMUsableSound，增加 keepAlive 过期机制（机器停止后声音自动停止，防残留）
+- 保留旧 playLoopSound(Vec3, long) 签名兼容
+
+---
+
+## 第 14 批：GUI 泛化（2026-08-15）
+
+### 新增 core/client/gui/GuiMachineBase
+泛化旧版 com.hbm.inventory.gui.GuiInfoContainer 的公共逻辑（所有机器 GUI 都需要）：
+- drawElectricityInfo / drawFluidInfo / drawProgressInfo / drawCustomInfoStat（悬浮信息）
+- drawStackText（多行文本+物品的复杂悬浮框）
+- drawInfoPanel（gui_utility.png 信息图标，含旧 5 参签名兼容）
+- checkClick / isMouseInside（交互区域判定）
+- renderItem / renderItemWithCount（GUI 内物品渲染）
+- getUpgradeInfo（从 IUpgradeInfoProvider 收集升级信息）
+
+### 接线
+- com.hbm.gui.screen.BaseMachineGui 改为继承 GuiMachineBase，删除重复的 drawInfoPanel/drawCustomInfoStat/isMouseInside
+- 现有 GuiCrystallizer 等自动获得基类能力
+
+### 已有组件盘点
+- widget/：BarProgress、BarEnergy、BarFluid（带 tooltip 的动态条）、MultiStateButton、BounceButton、Rect
+- page/recipe/：RecipePage（现代配方选择页，替代旧 GUIScreenRecipeSelector）
+
+---
+
+## 第 15 批：升级系统抽象（2026-08-15）
+
+### 问题
+旧 UpgradeManagerNT 的 checkSlotsInternal 在移植时被整个注释掉，导致 getLevel 永远返回 0，
+升级系统实际失效（ElectricFurnace/Chemplant 的升级槽不生效）。
+
+### 改动
+1. 修复 UpgradeManagerNT：
+   - 恢复扫描逻辑：遍历升级槽，按 IUpgradeInfoProvider.getValidUpgrades() 过滤可接受类型
+   - 同类型叠加 tier 并用机器上限封顶；mutex 互斥类型只保留优先级最高者
+   - 槽位内容未变化时跳过重扫（缓存）
+   - 启用 ItemMachineUpgrade.UpgradeType.mutex 字段
+2. 新增 core/contents/upgrade/MachineUpgradeHandler（升级效果抽象层）：
+   - 三步职责分离：UpgradeManagerNT（扫描汇总）→ IUpgradeInfoProvider（声明可接受类型与效果）→ MachineUpgradeHandler（等级→倍率）
+   - 统一 speed/power/effect/overdrive/fortune 每级影响系数换算
+   - 机器只需：new MachineUpgradeHandler(this).speed(0.25).power(0.15) + 每 tick check + 用倍率
+3. 接线：ElectricFurnaceEntity / ChemplantEntity 改用 MachineUpgradeHandler，
+   消除手写 checkSlots/getLevel/公式 的重复代码
+
+---
+
+## 第 16 批：升级整合进配方模块 + 富文本 + 说明文本集中化（2026-08-15）
+
+### 1. MachineModuleBase 整合升级
+- 新增 enableUpgrades(槽范围, speed系数, power系数) 开启升级支持
+- canProcess/process 自动应用速度/功耗倍率，process 内部每 tick 调 updateUpgrades
+- 构造可选传入 owner BlockEntity（升级系统需要）
+
+### 2. 富文本解析器（api/text/RichText）
+- lang 字符串中支持 <red>、<gold>、<#RRGGBB> 等颜色标签 + <b>/<i>/<u>/<s>/<obf> 样式标签（可嵌套）
+- RichText.parse(str) → MutableComponent；RichText.parseLang(key) → 从 lang 取值并解析
+- 目的：取代原版大量 EnumChatFormatting 字符串拼接，翻译时直接在 lang 里标注样式
+
+### 3. 说明文本集中化（block/interfaces/ITooltipProvider 增强）
+- 说明文本写在 lang 的 "<物品id>.desc" 键中，支持富文本标签
+- addStandardInfo 按 SHIFT 显示说明（保留旧交互），否则显示提示
+- 覆盖 descKey() 可自定义说明键
+- 删除重复新建的 api/ITooltipProvider，统一使用 block/interfaces/ITooltipProvider
+
+---
+
+## 第 17 批：正式开始机器移植（2026-08-15）
+
+### 移植策略（按用户指示）
+- 以 ModBlocks 为索引，逐台移植，避免翻旧的不使用代码
+- 从易到难：先打通管线，再移植复杂的
+- 每台机器移植前确认 blockrender 位置（分散放置）
+- 上下文管理：一次一台
+
+### 第一台：machine_converter_he_rf（HE→RF 能量转换器）
+- 理由：无 GUI/无流体/无配方/单方块/普通模型，纯能量转换，验证能量能力接入管线
+- Block：com.hbm.block.machine.BlockConverterHeRf（继承 BlockMachineBase）
+- BE：com.hbm.blockentity.machine.ConverterHeRfEntityBE（继承 BaseMachineBlockEntity）
+  - HBMCaps.LONG_ENERGY 接收 HE（ProxyEnergyHandler）
+  - ForgeCapabilities.ENERGY 输出 FE（HybridEnergyStorage）
+  - 转换比例 5 HE → 1 RF（沿用旧版）
+- 注册：ModBlocks（registerMachineBlockWithItem）+ HBMTiles（CONVERTER_HE_RF_ENTITY）
+- 模型：cube_all 用 machine_converter_he_rf 纹理（已存在）
+- 资源：模型/blockstate/物品模型 三文件已建；lang zh_cn 已有
+- 编译通过
+
+### 遗留
+- 未加入 creative tab（保持最小改动）
+- 后续可移植反向 machine_converter_rf_he（复用模式）
+
+---
+
+## 第 18 批：WrappedBlockRegistryBuilder 自动生成验证 + 两台转换器（2026-08-16）
+
+### 关键里程碑：builder 自动生成资源管线打通
+- 用 WrappedBlockRegistryBuilder 注册方块 → runData 自动生成 model/blockstate/item model/loot/lang/tag
+- 验证：machine_converter_he_rf / machine_converter_rf_he 的 blockstate+模型+loot 全部自动生成成功
+- 结论：后续所有机器移植无需手写资源文件，只写 Block/BE/Menu/Screen + builder 注册
+
+### 已移植机器（本次 + 上次）
+1. machine_converter_he_rf（HE→RF，第17批）
+2. machine_converter_rf_he（RF→HE，本次）
+   - Block: BlockConverterHeRf / BlockConverterRfHe
+   - BE: ConverterHeRfEntity / ConverterRfHeEntity（双能量能力 LONG_ENERGY + Forge ENERGY）
+   - builder 注册：.tab(MACHINE).mSmp(cube_all).loot(drop_self).loc(reverse_gen).tile(::new)
+
+### 修复
+- ModBlocks: 移除 deco_rbmk/deco_rbmk_smooth 的重复 registerLegacyBlockItemAlias（与 DECO_RBMK 方块注册冲突，导致 datagen 崩溃）
+- 运行 runData 验证通过
+
+### 配方移植策略（用户指示）
+- 配方暂缓，用 datagen（src/main/java/com/hbm/datagen/recipe/provider）生成，先出示例，后续统一添加
+
+---
+
+## 第 19 批：machine_microwave 微波炉移植（2026-08-16）
+
+### 选型
+- 探索代理调查 10 台候选机器后选定：唯一"单方块+无流体+无自定义物品+无多方块"俱全
+- 只依赖 vanilla 熔炉配方（SMELTING），有 GUI 验证 Menu+Screen 管线
+
+### 移植内容
+- Block: BlockMicrowave（BlockMachineBase）
+- BE: MicrowaveEntity（BaseMachineBlockEntity）
+  - 3 槽：0输入（可熔炼食物）、1输出、2电池
+  - 能量：LONG_ENERGY + Forge ENERGY 双能力，覆盖 getEnergyContainer()
+  - 逻辑：speed 0-5 调节，speed>=5 过热爆炸（简化版 ExplosionVNT）
+  - 物品：自定义 ItemStackHandler 完全委托 items
+- Menu: MicrowaveMenu（BaseMachineMenu，SlotItemHandler）
+- GUI: MicrowaveGui（BaseMachineGui，能量/进度/速度条 + 速度按钮）
+  - 按钮通过现有 C2SSyncTileMessage 发到 handleClientPacket
+- 注册：builder（.tab/.mSmp/.loot/.loc/.tile）+ HBMMenus（IForgeMenuType）+ MenuScreens
+- runData 自动生成 blockstate/模型，中英文 lang 已有
+
+### 关键收获
+- WrappedBlockRegistryBuilder 全自动资源管线已完全打通（第3台验证）
+- MenuType 用 IForgeMenuType.create 配 (id,inv,buf) 构造
+- 跨包访问 BE 用 Menu 提供 getEntity() getter
+- 食物判断用 Item.isEdible()（1.20.1 无 ItemFood）
+
+### 已移植机器累计：3 台
+converter_he_rf / converter_rf_he / microwave
+
+---
+
+## 第 20 批：批量移植策略启动（2026-08-16）
+
+### 策略
+- 3-5台一批，同类型批量移植
+- 用探索代理批量调查机器依赖，避免逐个试错
+- 优先：无GUI/无渲染/单方块/无重依赖
+
+### 本批完成：machine_detector（功率检测器）
+- 收到电网能量→点亮→输出红石强信号15
+- Block: BlockDetector（LIT blockstate + isSignalSource + getDirectSignal）
+- BE: DetectorEntity（LONG_ENERGY 接收，每tick耗1能量）
+- builder 注册 + runData 自动生成资源，lang 已有
+- 编译通过
+
+### 批量调查结论（探索代理）
+- keyforge：单方块/无渲染/有GUI，依赖 ItemKeyPin+ItemKey（后者已移植），首推下一批
+- autocrafter：单方块/无渲染/有GUI，需先移 ModulePatternMatcher
+- 多数"看似简单"机器有隐藏依赖：大气系统(TileEntityMachineBase)、流体MK2、OBJ渲染、天体维度
+- 纯被动/能量型机器稀少，GUI型机器为主要批量对象
+
+### 已移植机器累计：4台
+converter_he_rf / converter_rf_he / microwave / detector
+
+---
+
+## 第 21 批：detector + keyforge 批量移植（2026-08-16）
+
+### 本批完成 2 台 + 2 物品（一次写完再一起 rundata）
+1. machine_detector（功率检测器，第20批启动本次收尾）
+   - LIT blockstate + 红石强信号，LONG_ENERGY 接收
+2. machine_keyforge（锁匠桌）
+   - 3槽：模板钥匙/复制目标/随机钥匙，复制 pin
+   - 移植物品：key（ItemKey）、key_pin（ItemKeyPin，NBT pins）
+   - Block/BE/Menu/GUI 全套，builder 注册
+- 一次编译 + 一次 runData，全部通过
+- keyforge 用 cube_all + machine_keyforge_side 纹理（避免 bottom_top 纹理命名问题）
+
+### 已移植机器累计：5台
+converter_he_rf / converter_rf_he / microwave / detector / keyforge
+（另有 key/key_pin 物品）
+
+### 批量移植工作流（已固定）
+1. 用脚本/探索代理确认依赖
+2. 一次写完全套（Block+BE+Menu+GUI+物品）
+3. 集中注册（builder + HBMMenus + MenuScreens）
+4. 攒几台后一次 compile + 一次 runData 排查
+
+---
+
+## 第 22 批：funnel 组合漏斗移植（2026-08-16）
+
+### 本批
+- machine_funnel（组合漏斗）完成
+  - 18槽（0-8输入、9-17输出），3种模式（3x3/2x2循环）
+  - 用 1.20.1 TransientCraftingContainer + RecipeManager 查合成配方
+  - mode 按钮走 C2SSyncTileMessage → handleClientPacket
+  - OBJ 渲染简化为普通 cube 模型（machine_funnel_side 纹理）
+  - Block/BE/Menu/GUI 全套，builder 注册，runData 通过
+
+### 探索代理调查结论（本批）
+- funnel：依赖基本齐备，最可行 ✅（已完成）
+- autocrafter：缺 ModulePatternMatcher + 矿辞工具，高难度
+- mixer：缺大量物品 + 流体 API 重写 + MixerRecipes，很高难度（暂缓）
+- ashpit：依赖未移植的火炉系统（灰烬来源），放弃
+
+### 已移植机器累计：6台
+converter_he_rf / converter_rf_he / microwave / detector / keyforge / funnel
+
+### 教训
+- 看似简单的机器常依赖未移植的"上游"系统（如 ashpit 需要火炉产生灰烬）
+- 探索代理批量调查比逐个试错省上下文
+
+---
+
+## 第 23 批：core 多方块体系统一 + solar/funnel 完整渲染（2026-08-16）
+
+### core 多方块体系统一（重要架构变更）
+- 用户指示：所有多方块机器统一继承 core/blockentity 的 BEDummyable（新体系），旧体系（DummyableBlockEntity + TileProxyCombo）不再用于新机器，后续 assembler 等也改
+- 改动：
+  - BEDummyable：加 setMultiblockData（从 MultiblockData 构建 MultiblockModule）、giveProxyCapabilities、distributeCapabilities 默认调 MultiblockData.distributeCaps；checkProxy 兼容 BEProxy/TileProxyBase
+  - core BlockDummyable.newBlockEntity：非核心方块返回 BEProxy（替代 TileProxyCombo）
+  - DummableHelper：fillSpace/resolveCorePos 同时识别 BEProxy 与 BEDummyable
+  - MultiblockData.distributeCaps：同时支持 DummyableBlockEntity 与 BEDummyable
+
+### machine_solar 完整移植（多方块 + TESR + OBJ）
+- Block: BlockSolarPanel（core BlockDummyable，5x5 平台，multiblock 注册）
+- BE: SolarPanelEntity（BEDummyable + MultiblockData，新能量体系 BasicEnergyHandler）
+- 太阳功率用 CelestialBody.getSunPower()（按天体日距平方反比，非 stub）
+- OBJ: 复制 solar_panel.obj + 纹理，Models.SOLAR_PANEL 注册
+- TESR: SolarPanelRenderer（按朝向旋转渲染）
+- MultiblockData 注册 machine_solar
+
+### machine_funnel 完整渲染
+- 复制 funnel.obj，用 forge:obj 方块模型（machine_funnel.json → funnel.obj）
+- 已知优化项：原版分 Top/Bottom/Side 三件贴不同纹理，当前用单一 side 纹理（后续可补 TESR 分件纹理）
+
+### 已移植机器累计：7台
+converter_he_rf / converter_rf_he / microwave / detector / keyforge / funnel / solar
+
+---
+
+## 第 24 批：科技线盘点 + OBJ 注册方式统一（2026-08-16）
+
+### 关键发现
+- 新工程已有大量已注册机器：MACHINE_ARC_FURNACE/CENTRIFUGE/CHEMPLANT/CRYSTALLIZER/ORE_SLOPPER（用 genSimpleModel + 自定义 loader）
+- block/machines/ 已有 OBJ：acidizer/arc_furnace/centrifuge/miner_large/ore_slopper/wood_burner
+- 我差点重复注册 centrifuge/crystallizer/arc_furnace（已删除重复）
+
+### builder 新增 .obj() 便捷方法
+- 用自定义 loader（CustomPartsModel.LoaderBuilder / hbm:multi_parts_obj）生成 OBJ 方块模型
+- 参数：model(obj路径)、texture(贴图)、size(缩放基数，不确定填1)
+- 机器用 HORIZONTAL（带朝向），装饰才 SIMPLE
+- genSimpleModel 已确认用自定义 loader（非 forge:obj），与 .obj() 等效
+
+### OBJ 机器统一做法（后续遵循）
+用 builder 的 .obj(model, texture, size) 或 .model(provider.genSimpleModel(...))，勿手写 forge:obj json
+
+### 已移植机器累计：7台
+converter_he_rf / converter_rf_he / microwave / detector / keyforge / funnel / solar
+（另有已注册的 arc_furnace/centrifuge/chemplant/crystallizer/ore_slopper 等）
+
+---
+
+## 第 25 批：科技线深度盘点 + 探索结论（2026-08-16）
+
+### 探索结论（diesel/liquefactor/sawmill 均未移植）
+- machine_diesel：单方块+GUI+渲染+污染基类，依赖 canister_empty 等
+- machine_liquefactor：多方块+GUI+渲染+配方系统（LiquefactionRecipes 缺失）
+- machine_sawmill：多方块+渲染+投掷实体（EntitySawblade）+缺失物品/方块
+- 共同缺口：旧基类 TileEntityMachinePolluting/TileEntityMachineBase 无新体系等价物；api.hbm.energymk2/fluidmk2 等已删需映射；IControlReceiver/IGUIProvider 等接口缺失
+
+### 关键判断
+- 大量机器移植卡在"通用基础设施缺失"（旧基类/接口/配方体系），非机器本身
+- 一次性补全这些基础设施（新体系 TileEntityMachineBase + 通用接口）会让后续所有机器受益
+- 但这是较大的架构工作，需要用户确认方向
+
+### 当前状态
+- 已移植（本轮）：solar（core多方块+TESR+OBJ）、funnel（OBJ）、detector、keyforge、microwave、converter×2
+- 新工程已有：arc_furnace/centrifuge/chemplant/crystallizer/ore_slopper/wood_burner/miner_large 等科技线机器
+- OBJ 注册方式已统一：builder.obj() 或 genSimpleModel（自定义 loader）
+
+---
+
+## 第 26 批：BEMachineBase 定位明确 + LiquefactionRecipe 配方（2026-08-16）
+
+### BEMachineBase 功能定位（用户明确）
+- 不另立旧版 TileEntityMachineBase 的 slots[]/ISidedInventory 功能
+- 直接复用 BECapabilities 已有的：items(MachineItemHandler)/energyContainer(HBMEnergyHandler)/fluidHandler + getItemHandler/getEnergyHandler/getFluidHandler + addCapability + createItemHandler 等
+- 机器子类移植时：items.getStackInSlot(i)、energyContainer.getEnergy()、capabilitiesContent.addCapability(...)
+- 已移除误加的旧版功能方法
+
+### 配方体系（用户指示）
+- 新配方类型继承 RecipeSerializerBuilder.AutoRecipe
+- 仿照 RecipeCentrifuge/RecipeCrystallizer：factory 静态字段 + (id,type,serializer) 构造 + onDataLoaded + matches/assemble
+- 在 ModRecipes 用 register() 注册
+
+### 新建 LiquefactionRecipe
+- 液化配方：CountableIngredient input → FluidStack outputFluid + duration
+- ModRecipes.LIQUEFACTOR 注册
+- 编译通过
+
+---
+
+## 第 27 批：machine_liquefactor 工业液化机（2026-08-16）
+
+### 移植内容（core 体系完整移植）
+- Block: BlockLiquefactor（core BlockDummyable + MultiblockData 3x1x1 高4 + 流体cap）
+- BE: LiquefactorEntity（BEDummyable + BECapabilities）
+  - 4槽：0输入/1电池/2-3升级；能量 BasicEnergyHandler；流体 BasicFluidHandler 1罐
+  - 配方：LiquefactionRecipe（AutoRecipe）用 CachedCheck 查询
+  - 升级：SPEED/POWER 手写
+- Menu/GUI: LiquefactorMenu/LiquefactorGui
+- OBJ: 复制 liquefactor.obj + 纹理，builder.obj() 生成
+- 配方: LiquefactionRecipeProvider（煤/褐煤→煤油示例）+ ModRecipes.LIQUEFACTOR 注册
+- runData 通过，配方 JSON 正确生成
+
+### 已移植机器累计：8台
+converter_he_rf / converter_rf_he / microwave / detector / keyforge / funnel / solar / liquefactor
+
+---
+
+## 第 28 批：machine_solidifier 工业固化机（2026-08-16）
+
+### 移植内容（core 体系，与 liquefactor 同构）
+- Block: BlockSolidifier（BlockDummyable + getMultiblockData 覆写，未用 mapping 静态注册——用户新指示）
+- BE: SolidifierEntity（BEDummyable，5槽：0输出/1电池/2-3升级/4罐标识 + 1流体罐）
+- 配方: SolidificationRecipe（AutoRecipe：流体→物品，output 用 list(TYPE_STACK)）
+- Menu/GUI: SolidifierMenu/SolidifierGui
+- OBJ + datagen 配方（lava→obsidian、water→ice）
+
+### 修复：AutoRecipe 的 .stack() 序列化 bug
+- .stack() 生成 ITEM schema（期望 Item），但配方字段是 ItemStack → 序列化失败
+- 改用 .list(OUTPUT, TYPE_STACK)（ITEM_STACK schema）解决
+- 液化配方（.fluid() FLUID schema）本来正确
+
+### 后续机器 MultiblockData 新做法（用户指示）
+- 由 BlockDummyable 子类的 getMultiblockData() 提供，不再在 MultiblockData.mapping 静态注册
+- 已注册的 liquefactor/solidifier 保持现状（在 mapping 注册了），后续机器用新法
+
+### 已移植机器累计：9台
+converter×2 / microwave / detector / keyforge / funnel / solar / liquefactor / solidifier
+
+---
+
+## 第 29 批：油系机器批量移植 5 台（2026-08-16）
+
+### 本批完成 5 台（core 体系 + AutoRecipe 配方 + datagen）
+1. machine_coker（焦化装置）— 热裂化重油→石油焦+油焦，22格多方块，热源驱动
+   - CokerRecipe（流体→物品+流体），配方：heavyoil→COKE_PETROLEUM+OIL_COKER
+2. machine_hydrotreater（加氢装置）— 油+氢→脱硫油+酸气，6格多方块，简化催化剂
+   - HydrotreatingRecipe（流体→3流体）
+3. machine_refinery（炼油厂）— 热油→重油/石脑油/轻油/石油气，8格多方块
+   - RefineryRecipe（流体→4流体列表），配方：HOTOIL→4馏分
+   - 简化：移除过压爆炸/火灾/污染
+4. machine_diesel（柴油发电机）— 单方块，烧燃料→发电（FT_Combustible燃烧能），红石控制
+   - 简化：移除污染/空气
+5. machine_radiator（散热器）— 废蒸汽→水，复用 CondenserLogic，5x5 多方块
+
+### 新增 HBMKey 常量
+- HYDROGEN / SOURGAS（加氢配方用）
+
+### 经验
+- 多方块机器 getMultiblockData() 覆写（不再依赖 mapping 静态注册）
+- 配方输出用 .list(TYPE_STACK / TYPE_FLUID_STACK)
+- BaseMachineBlockEntity（旧体系）无 fluidHandler 字段，用 BaseMachineBlockEntity 时自行持有 FluidTank + 注册 ForgeCapabilities.FLUID_HANDLER
+
+### 已移植机器累计：14台
+converter×2 / microwave / detector / keyforge / funnel / solar / liquefactor / solidifier / coker / hydrotreater / refinery / diesel / radiator
+
+---
+
+## 第 30 批：修复闪退 + 三项意见落实（2026-08-16）
+
+### 1. 关键修复：放置机器闪退（NPE）
+- 根因：BEMachineBase 构造 `getTypeById(HBMTiles.getId(getId(state)))` 双重加 "tile_" 前缀 → 查 `tile_tile_xxx` 为 null → NPE
+- 修复：改为 `getTypeById(getId(state))`（getTypeById 内部已加前缀）
+
+### 2. 意见1：ModBlocks 大写注册名
+- 新机器字段改为大写（MACHINE_LIQUEFACTOR/SOLIDIFIER/COKER/HYDROTREATER/REFINERY/DIESEL/RADIATOR/SOLAR/FUNNEL/DETECTOR/MICROWAVE/KEYFORGE）
+- 填入用户预留的占位声明处（MACHINE_* 无初始化处），不再在文件末尾小写堆砌
+- 同步更新 BE/MultiblockData 引用
+
+### 3. 意见2：obj size + 碰撞箱
+- obj size 按 MultiblockData 最大维度设置（coker 22/hydrotreater 6/refinery 8/liquefactor&solidifier 3/solar 2）
+- 所有 BlockDummyable 子类构造函数补 shape（coker 352格高、hydrotreater 96、refinery 128、liquefactor&solidifier 64、radiator 5x5平台）
+
+### 4. 意见3：测试
+- 新增 src/main/java/com/hbm/test/MachineTestSuite.java：服务器进入世界后自动自检
+  - 高空放置液化机/炼油厂 → 验证 BE 创建 → 注入流体 → 放物品 → 查配方 → 销毁验证无残留
+  - 接入 ServerEventHandler.levelTick（单机 OVERWORLD 首次执行）
+- runclient 进入存档即可看日志（HBM-MachineTest）
+- GameTest 框架尝试但 @GameTestHolder 不在 common 编译 classpath，放弃改用自检
+
+### 已移植机器累计：14台
+
+---
+
+## 第 31 批：测试移至 src/test + OBJ 解析修复（2026-08-16）
+
+### 1. 测试移至 src/test（用户要求）
+- 从 main 删除 MachineTestSuite（不再随模组打包）
+- 新增 src/test/java/com/hbm/test/MachineGameTests.java（GameTest 框架）
+  - 测试：放置液化机/炼油厂 → 验证 BE → 注入流体 → 放物品 → 查配方 → 销毁
+- build.gradle 配置 test sourceSet（依赖 main）+ client/server run 加载 test classpath
+- 生成 8x8x8 空结构 src/test/resources/data/hbm/gametest/structures/empty.nbt
+- 验证：compileTestJava 通过；jar 不含测试类（不打包生产）
+- runGameTestServer 因模组既有 client 类引用（ITooltipProvider 等）无法跑纯服务端，需用 runclient 的 /test 命令
+
+### 2. OBJ 模型解析 bug 修复（放置闪退相关）
+- 根因：Blender OBJ 混合 `f v/vt/vn` 和 `f v//vn` 格式，CustomPartsModel 对空 vt 索引执行 `--` 变 -1 → texCoords.get(-1) 越界
+- 修复：parse 时空索引映射为 0（makeQuad 用默认坐标），正常索引才减 1
+- 修复后液化机等 OBJ 模型可正常烘焙
+
+### 3. 闪退修复回顾（上批）
+- BEMachineBase 构造双重 "tile_" 前缀 → NPE，已修复
+
+### 已移植机器累计：14台
+
+---
+
+## 第 32 批：修复 GUI 打开闪退（Slot container null）（2026-08-16）
+
+### 根因
+- 打开机器界面（如高炉 difurnace）时 Slot.getItem NPE：Slot 的 container 为 null
+- MenuBase/BaseMachineMenu 的 BE 构造只设 be/containerData，未设 container
+- 子类如 DifurnaceMenu 用 `new Slot(container, ...)` → container null → 崩溃
+
+### 修复
+- MenuBase BE 构造：`container = blockEntity instanceof Container c ? c : null`
+- BaseMachineMenu BE 构造：同样处理
+- 对 BE 实现 Container 的机器（旧体系/BEMachineBase）生效；BEDummyable 机器用 SlotItemHandler 不受影响
+
+### 涉及
+- core/menu/MenuBase.java
+- gui/menu/BaseMachineMenu.java
+
+---
+
+## 第 33 批：机器 Menu/GUI 改用 builder 自动注册（2026-08-16）
+
+### 改动（用户建议）
+- 9 台新增机器的 Menu/GUI 注册从手动（HBMMenus + ClientEventHandler MenuScreens.register）改为 WrappedBlockRegistryBuilder 链式 `.menu(XxxMenu::new).gui(XxxGui::new)`
+- Menu 内 MenuType 获取从 `HBMMenus.XXX_MENU.get()` 改为 `HBMMenus.getById("machine_xxx")`（builder 自动注册 menu_machine_xxx）
+- 删除 HBMMenus 中 9 个手动 MenuType.register 和 ClientEventHandler 中 9 个手动 MenuScreens.register
+- 涉及机器：microwave/keyforge/funnel/liquefactor/solidifier/coker/hydrotreater/refinery/diesel
+
+### 顺带修复
+- FLUID_DUCT_NEO 既有残缺注册（`new WrappedBlockRegistryBuilder(...).build();` 缺链式调用 + `sound(ModSounds.)` 未完成）→ 补全为有效注册
+
+### skill 更新
+- hbm-1710-to-1201-porting SKILL.md 新增"第 4A 章：机器移植实战"（完整模板/builder 用法/已移植清单/bug 修复/测试/探索建议）
+
+### 已移植机器累计：14台
+
+---
+
+## 第 34 批：RTG + E-Press + Ashpit（2026-08-16）
+
+### 已移植机器：3 台
+
+| 文件 | 状态 | 说明 |
+|---|---|---|
+| `utils/RTGUtil.java` | ✅ | RTG 辅助工具（热量计算，简化掉衰变/配置） |
+| `item/misc/ItemRTGPellet.java` | ✅ | 增加 heat 字段；`pellet_rtg` 改为 ItemRTGPellet(heat=10) |
+| `block/machine/BlockRTG.java` | ✅ | RTG 方块（单方块） |
+| `blockentity/machine/RTGEntityBE.java` | ✅ | 15 槽 RTG 燃料棒 → heat → power(×5/tick)，输出 HE 到相邻方块 |
+| `gui/menu/RTGMenu.java` | ✅ | 15 槽位菜单 |
+| `gui/screen/RTGGui.java` | ✅ | 热量条+能量条（gui_rtg.png，ySize 188） |
+| `block/machine/BlockEPress.java` | ✅ | 电动锻压机方块（单方块） |
+| `blockentity/machine/EPressEntityBE.java` | ✅ | 5 槽（电池/模板/输入/输出/升级），用电能锻压，复用 ModRecipes.PRESS |
+| `gui/menu/EPressMenu.java` | ✅ | 5 槽位菜单 |
+| `gui/screen/EPressGui.java` | ✅ | 能量条+锻压进度（gui_epress.png，ySize 186） |
+| `block/machine/BlockAshpit.java` | ✅ | 灰烬收集器方块（单方块） |
+| `blockentity/machine/AshpitEntityBE.java` | ✅ | 5 槽灰烬、接收灰烬等级并合成 ash 物品（addAsh 供火箱/烟囱调用） |
+| `gui/menu/AshpitMenu.java` | ✅ | 5 槽位（只能取出）菜单 |
+| `gui/screen/AshpitGui.java` | ✅ | 灰烬槽位显示（gui_ashpit.png，ySize 168） |
+
+### 注册（ModBlocks，builder 链）
+- `MACHINE_ASHPIT` → `machine_ashpit`：cube_all 用 `models/machines/ashpit` 贴图，`.tile().menu().gui()`
+- `MACHINE_RTG_GREY` → `machine_rtg`：cube_all 用 `rtg` 贴图，`.tile().menu().gui()`（字段沿用参考名的 machine_rtg，注册名与 Menu/BE 一致）
+- `MACHINE_EPRESS` → `machine_epress`：cube_all 用 `machine_epress` 贴图，`.tile().menu().gui()`
+
+### 修复的预先存在 WIP bug（用户确认后修复）
+1. **BEUpdateable 构造器断编译**：工作区 WIP 把 `BEUpdateable(BlockEntityType, BlockPos, BlockState)` 改为 `(BlockPos, BlockState)`，但 CapabilityBE/BEProxy/BEPipeBase/全部 RBMK BE 仍调 3 参 → 加回 3 参构造器重载（保留新 2 参 + 旧 3 参），BECapabilities 同样处理
+2. **MACHINE_FURNACE_BRICK litEmission 崩溃**：`MachineBrickFurnace` 无 LIT 属性却用 `.lightLevel(litEmission(1))` → runData 静态初始化即崩（Block{minecraft:air}）。移除 litEmission
+3. **Meteorite 静态引用注册顺序**：`static List meteorOres = List.of(ModBlocks.ORE_METEOR_*.get())` 在类加载即求值 → 注册前为 null。改为懒加载 `getMeteorOres()`
+4. **TileEntityFurnaceBrick 孤立行**：`isItemValid` 内有孤立 `AbstractFurnaceBlockEntity` 语法错误 → 删除
+
+### 测试
+- MachineGameTests 新增 placeRTG/placeEPress/placeAshpit 三个 GameTest（验证 BE 创建、槽位数量、RTG 产热产电、Ashpit 灰烬转换）
+
+### 已移植机器累计：17台
+
+---
+
+## 第 35 批：Radiolysis + ArcWelder + MilkReformer（2026-08-17）
+
+### 已移植机器：3 台（全部改用用户 core 基类体系）
+
+| 文件 | 状态 | 说明 |
+|---|---|---|
+| `block/machine/BlockRadiolysis.java` | ✅ | 辐射裂解装置（3 格高多方块，BlockDummyable） |
+| `blockentity/machine/RadiolysisEntity.java` | ✅ | extends BEDummyable：10 RTG 槽产热→产 HE+裂解流体，3 罐（输入/输出1/输出2），15 槽 |
+| `gui/menu/RadiolysisMenu.java` | ✅ | 15 槽位（RTG/流体桶/消毒/电池） |
+| `gui/screen/RadiolysisGui.java` | ✅ | 能量条（gui_radiolysis.png，230x166） |
+| `Inventory/recipe/RadiolysisRecipe.java` | ✅ | AutoRecipe：流体→2 流体（input/output1/output2） |
+| `block/machine/BlockArcWelder.java` | ✅ | 电弧焊机（2 格高多方块） |
+| `blockentity/machine/ArcWelderEntity.java` | ✅ | extends BEDummyable：8 槽（3 输入/输出/电池/罐ID/2升级），1 罐，复用 ArcWelderRecipe |
+| `gui/menu/ArcWelderMenu.java` | ✅ | 8 槽位 |
+| `gui/screen/ArcWelderGui.java` | ✅ | 能量条+进度（gui_arc_welder.png，176x204） |
+| `Inventory/recipe/ArcWelderRecipe.java` | ✅ | AutoRecipe：多物品+可选流体→物品（inputs list + fluid + output） |
+| `block/machine/BlockMilkReformer.java` | ✅ | 牛奶改质器（7 格高多方块，placementOffset 1） |
+| `blockentity/machine/MilkReformerEntity.java` | ✅ | extends BEDummyable：11 槽，4 罐（牛奶/EMILK/CMILK/CREAM），硬编码 refine 逻辑 |
+| `gui/menu/MilkReformerMenu.java` | ✅ | 9 槽位（电池/牛奶/3产物桶出入） |
+| `gui/screen/MilkReformerGui.java` | ✅ | 能量条（gui_milk_reformer.png，176x238，纹理从参考复制） |
+
+### 注册（ModBlocks，builder 链）
+- `MACHINE_RADIOLYSIS` → `machine_radiolysis`：`.obj()` + `.tile(...,true)` + `.menu().gui()`
+- `MACHINE_ARC_WELDER` → `machine_arc_welder`：同上
+- `MACHINE_MILK_REFORMER` → `machine_milk_reformer`：同上
+- OBJ 模型复制：`block/radiolysis/radiolysis.obj`、`block/arc_welder/arc_welder.obj`、`block/milk_reformer/milk_reformer.obj`；贴图 `models/radiolysis.png`（复制）、`models/machines/milker.png`、`arc_welder.png`（已有）
+
+### 配方
+- ModRecipes 新增 `RADIOLYSIS` / `ARC_WELDER`
+- datagen providers：`RadiolysisRecipeProvider`（水→过氧化氢+氢气）、`ArcWelderRecipeProvider`（铁板/钢板→焊缝）
+- 复现并确认 bug #4：AutoRecipe `.stack()` 期望 Item 而非 ItemStack，输出用 `.list(TYPE_STACK)` + provider 传 `List.of(ItemStack)`
+
+### MultiblockData
+- mapping 新增 3 条：radiolysis(2,0,1,1,1,1)、arc_welder(1,0,1,0,1,1)、milk_reformer(6,0,1,1,1,1)
+- Block 内 getMultiblockData() 同名（供直接放置）
+
+### 采用用户 core 基类体系（重要）
+- BE 全部 extends `BEDummyable`（core），构造 `super(pos, state)`（type 由 blockstate 推导）
+- 能力：`MachineItemHandler`(items) / `createEnergyHandler(cap, IO)`(energyContainer) / `BasicFluidHandler`(fluidHandler)
+- `setMultiblockData(MultiblockData.mapping.get(ModBlocks.XXX.get()))`
+- 电池充电用 `TransmitUtils.dischargeItem`；RTG 热量用 `RTGUtil.updateRTGs(IItemHandler, slots)`（用户已改为接收 IItemHandler）
+- 升级扫描参考 LiquefactorEntity 手写（不用 MachineUpgradeHandler.check，因其需 List<ItemStack>）
+
+### 测试
+- MachineGameTests 新增 placeRadiolysis/placeArcWelder/placeMilkReformer（验证 BE 创建、槽位数、配方、RTG 产热产电、牛奶注入）
+
+### 已移植机器累计：20台
+
+---
+
+## 第 36 批：BlastFurnace + Mixer + CatalyticReformer + VacuumDistill + GasCent + CryoDistill + Stirling + Sawmill + CombustionEngine + BreedingReactor（2026-08-17）
+
+### 已移植机器：10 台（全部 core 基类体系）
+
+| 机器 | Block | BE 基类 | GUI | 配方 |
+|---|---|---|---|---|
+| 高炉 BlastFurnace | BlockBlastFurnace (7格) | BEDummyable | ✅ | 复用 BlastFurnaceRecipe |
+| 混合机 Mixer | BlockMixer (3格) | BEDummyable | ✅ | MixerRecipe |
+| 催化重整器 CatalyticReformer | BlockCatalyticReformer (3格) | BEDummyable | ✅ | ReformingRecipe |
+| 真空蒸馏塔 VacuumDistill | BlockVacuumDistill (9格) | BEDummyable | ✅ | VacuumRefineryRecipe |
+| 气体离心机 GasCent | BlockGasCent (4格) | BEDummyable | ✅ | GasCentrifugeRecipe |
+| 低温蒸馏器 CryoDistill | BlockCryoDistill (5格, offset 3) | BEDummyable | ✅ | CryoRecipe |
+| 斯特林机 Stirling | BlockStirling (2格, offset 1) | BEDummyable | 无（右键装齿轮） | 无 |
+| 锯木机 Sawmill | BlockSawmill (2格, offset 1) | BEDummyable | 无 | 无（硬编码原木→木板） |
+| 内燃机 CombustionEngine | BlockCombustionEngine (2格) | BEDummyable | ✅ | 无（FT_Combustible 燃烧） |
+| 增殖反应堆 BreedingReactor | BlockBreedingReactor (3格) | BEDummyable | ✅ | 复用 BreederRecipes |
+
+### 新增配方类（5 个，均继承 AutoRecipe）
+- `MixerRecipe`（2 流体+固体→流体）、`ReformingRecipe`（流体→3 流体）
+- `VacuumRefineryRecipe`（流体→4 流体）、`CryoRecipe`（流体→4 流体）、`GasCentrifugeRecipe`（流体→物品列表，简化掉 PseudoFluidType）
+- ModRecipes 注册 5 个类型 + datagen providers（Mixer/Reforming/VacuumRefinery/Cryo/GasCentrifuge）
+
+### 新增物品
+- `catalytic_converter`（催化重整器催化剂）
+
+### 顺带修复
+- **HBMFluids.SOURGAS 声明未初始化**（static 引用 NPE）→ 补初始化（sourgas，GASEOUS+腐蚀）
+
+### 注册与命名
+- `MACHINE_REACTOR_BREEDING` 注册名用 `machine_reactor`（参考名），避免与既有 `machine_reactor_breeding`（研究增殖堆）冲突
+- OBJ 模型复制 10 个到 `models/block/*/`，贴图全部已有
+- MultiblockData.mapping 新增 10 条
+
+### 经验（沿用 core 基类）
+- 发电机器（CombustionEngine/Stirling）energyContainer 用 `BasicEnergyHandler.OUTPUT` + `TransmitUtils.outputOnly`
+- FT_Combustible 在**旧版** ExtendedFluidType（FluidTrait 体系），非新 HbmFluidType（IFluidTrait）——用 `stack.getFluid().getFluidType()` + `instanceof ExtendedFluidType`
+- Forge 1.20.1 `FluidStack.getFluid()` 返回 `Fluid`，要 `.getFluidType()` 才是 `FluidType`
+- 清空流体罐用 `FluidStack.EMPTY`（不是 FluidTank.EMPTY）
+- ItemStack.is() 接受 Item/TagKey，不接受 Block（用 `Blocks.XXX.asItem()` 或 tag）
+
+### 测试
+- MachineGameTests 新增 10 个 GameTest（placeBlastFurnace/placeMixer/placeCatalyticReformer/placeVacuumDistill/placeGasCent/placeCryoDistill/placeCombustionEngine/placeStirling/placeSawmill/placeBreedingReactor）
+
+### 已移植机器累计：30台
+
+---
+
+## 第 37 批：SteamEngine + DeuteriumExtractor + Decon + CatalyticCracker + HeatBoiler + FractionTower + Alkylation + BigAssTank + SolarBoiler + Siren（2026-08-17）
+
+### 已移植机器：10 台（全部 core 基类体系，均无 GUI）
+
+| 机器 | Block | BE 基类 | 配方/逻辑 |
+|---|---|---|---|
+| 蒸汽机 SteamEngine | BlockSteamEngine (2格) | BEDummyable | FT_Coolable 蒸汽→废蒸汽+HE |
+| 氘提取器 DeuteriumExtractor | BlockDeuteriumExtractor (单方块) | BEMachineBase | 水→重水 |
+| 净化装置 Decon | BlockDecon (单方块) | BEMachineBase | 清除生物辐射 |
+| 催化裂化塔 CatalyticCracker | BlockCatalyticCracker (4格) | BEDummyable | 复用 CrackingRecipes（新工程已有） |
+| 热锅炉 HeatBoiler | BlockHeatBoiler (4格) | BEDummyable | FT_Heatable 水→蒸汽 |
+| 分馏塔 FractionTower | BlockFractionTower (3格) | BEDummyable | FractionRecipe（新移植） |
+| 烷基化 Alkylation | BlockAlkylation (4格) | BEDummyable | AlkylationRecipe（新移植） |
+| 大型储罐 BigAssTank | BlockBigAssTank (6格) | BEDummyable | 1600万 mB 流体储罐 |
+| 太阳能锅炉 SolarBoiler | BlockSolarBoiler (3格) | BEDummyable | 太阳功率水→蒸汽 |
+| 警报器 Siren | BlockSiren (单方块) | BEMachineBase | 红石触发声音（简化，无磁带） |
+
+### 新增配方类（2 个 AutoRecipe）
+- `FractionRecipe`（流体→2 流体）、`AlkylationRecipe`（流体+酸→2 流体）
+- ModRecipes 注册 FRACTION/ALKYLATION + datagen providers
+
+### 注册与命名
+- 7 台多方块注册 + MultiblockData mapping（steam_engine/catalytic_cracker/heat_boiler/fraction_tower/alkylation/bigass_tank/solar_boiler）
+- 3 台单方块（deuterium/decon/siren）用 BlockMachineBase + mSmp 模型
+- OBJ 复制：steam_engine/fraction_tower/catalytic_cracker/alkylation_unit/bigasstank/solar_boiler/boiler
+- 修复 MACHINE_STEAM_ENGINE 注册名（用直接字段，不用 _R 变体）
+
+### 顺带修复
+- **ModItems 去重脚本丢失 16 个 INGOT 注册**（INGOT_U235/U238/PU*/AM*/TH232/URANIUM 等变成 null stub）→ 用 HEAD 完整注册行恢复 stub
+- 去重后 compileJava + runData 全部通过
+
+### 测试
+- MachineGameTests 新增 10 个 GameTest（placeSteamEngine/placeDeuteriumExtractor/placeDecon/placeCatalyticCracker/placeHeatBoiler/placeFractionTower/placeAlkylation/placeBigAssTank/placeSolarBoiler/placeSiren）
+
+### 已移植机器累计：40台

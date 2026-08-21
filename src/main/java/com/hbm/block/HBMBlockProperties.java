@@ -9,6 +9,7 @@ public class HBMBlockProperties {
     // 多方块机器中是否位于中心方块
     public static final BooleanProperty IS_CORE = BooleanProperty.create(HBMKey.IS_CORE);
     public static final BooleanProperty WITH_HAT = BooleanProperty.create("with_hat");
+    public static final BooleanProperty BROKEN = BooleanProperty.create("broken");
     // 宽泛的双类别
     public static final BooleanProperty VARIANT = BooleanProperty.create("variant");
     // 任意存在三种变体的形态

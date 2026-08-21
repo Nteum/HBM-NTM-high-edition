@@ -1,11 +1,11 @@
 package com.hbm.gui.screen;
 
 import com.hbm.HBM;
-import com.hbm.blockentity.machine.ChemplantEntity;
+import com.hbm.blockentity.machine.ChemplantEntityBE;
 import com.hbm.gui.menu.ChemplantMenu;
-import com.hbm.gui.screen.widget.BarEnergy;
-import com.hbm.gui.screen.widget.BarFluid;
-import com.hbm.gui.screen.widget.BarProgress;
+import com.hbm.core.client.gui.widget.BarEnergy;
+import com.hbm.core.client.gui.widget.BarFluid;
+import com.hbm.core.client.gui.widget.BarProgress;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -50,7 +50,7 @@ public class ChemplantGui extends BaseMachineGui<ChemplantMenu> {
         this.barEnergy.progress = this.menu.containerData.get(2);
         this.barEnergy.maxProgress = this.menu.containerData.get(3);
         this.barEnergy.updateData();
-        if (this.menu.be instanceof ChemplantEntity entity){
+        if (this.menu.be instanceof ChemplantEntityBE entity){
             List fluidTanks = entity.getFluidTanks(null);
             for (int i = 0; i < fluidTanks.size(); i++) {
                 barFluids.get(i).fluid = ((IFluidTank)fluidTanks.get(i)).getFluid().getFluid();

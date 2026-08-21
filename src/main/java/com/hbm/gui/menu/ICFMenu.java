@@ -1,8 +1,8 @@
 package com.hbm.gui.menu;
 
+import com.hbm.blockentity.machine.icf.ICFReactorBE;
 import com.hbm.gui.HBMMenus;
 import com.hbm.gui.menu.slot.OutputSlot;
-import com.hbm.blockentity.machine.icf.ICFReactorBlockEntity;
 
 import com.hbm.registries.ModItems;
 import net.minecraft.world.Container;
@@ -33,13 +33,13 @@ public class ICFMenu extends BaseMachineMenu {
             this.addSlot(new Slot(container, i, 80 + i * 18, 18));
         }
         // Active pellet slot
-        this.addSlot(new Slot(container, ICFReactorBlockEntity.SLOT_ACTIVE, 116, 54));
+        this.addSlot(new Slot(container, ICFReactorBE.SLOT_ACTIVE, 116, 54));
         // Output slots
         for (int i = 0; i < 5; i++) {
-            this.addSlot(new OutputSlot(container, ICFReactorBlockEntity.SLOT_OUTPUT_START + i, 80 + i * 18, 90));
+            this.addSlot(new OutputSlot(container, ICFReactorBE.SLOT_OUTPUT_START + i, 80 + i * 18, 90));
         }
         // Coolant IO slot
-        this.addSlot(new Slot(container, ICFReactorBlockEntity.SLOT_COOLANT, 44, 90));
+        this.addSlot(new Slot(container, ICFReactorBE.SLOT_COOLANT, 44, 90));
         addPlayerSlot(inventory, PLAYER_INV_X_OFFSET, PLAYER_INV_Y_OFFSET);
         this.addDataSlots(data);
     }
@@ -57,11 +57,11 @@ public class ICFMenu extends BaseMachineMenu {
                 }
             } else {
                 if (current.is(ModItems.icf_pellet.get())) {
-                    if (!moveItemStackTo(current, 0, ICFReactorBlockEntity.SLOT_ACTIVE, false)) {
+                    if (!moveItemStackTo(current, 0, ICFReactorBE.SLOT_ACTIVE, false)) {
                         return ItemStack.EMPTY;
                     }
                 } else if (current.getItem() instanceof BucketItem) {
-                    if (!moveItemStackTo(current, ICFReactorBlockEntity.SLOT_COOLANT, ICFReactorBlockEntity.SLOT_COOLANT + 1, false)) {
+                    if (!moveItemStackTo(current, ICFReactorBE.SLOT_COOLANT, ICFReactorBE.SLOT_COOLANT + 1, false)) {
                         return ItemStack.EMPTY;
                     }
                 } else {

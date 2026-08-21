@@ -1,8 +1,8 @@
 package com.hbm.block.machine.rbmk;
 
-import com.hbm.block.base.BlockDummyable;
+import com.hbm.core.block.BlockDummyable;
 import com.hbm.block.interfaces.ILookOverlay;
-import com.hbm.blockentity.machine.rbmk.RBMKPeripheralEntity;
+import com.hbm.blockentity.machine.rbmk.RBMKPeripheralEntityBE;
 import com.hbm.reactor.rbmk.RBMKDoddOverlay;
 import com.hbm.reactor.rbmk.RBMKPeripheralType;
 import com.hbm.utils.DirectionUtils;
@@ -69,7 +69,7 @@ public class BlockRBMKPeripheralLarge extends BlockDummyable implements ILookOve
     @Nullable
     @Override
     protected BlockEntity mainBlockEntity(BlockPos pos, BlockState state) {
-        return new RBMKPeripheralEntity(pos, state);
+        return new RBMKPeripheralEntityBE(pos, state);
     }
 
     @Override

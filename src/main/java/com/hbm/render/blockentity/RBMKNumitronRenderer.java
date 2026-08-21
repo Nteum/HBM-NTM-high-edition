@@ -1,6 +1,6 @@
 package com.hbm.render.blockentity;
 
-import com.hbm.blockentity.machine.rbmk.RBMKNumitronEntity;
+import com.hbm.blockentity.machine.rbmk.RBMKNumitronEntityBE;
 import com.hbm.reactor.rbmk.RBMKMonitorMetric;
 import com.hbm.utils.DirectionUtils;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -16,7 +16,7 @@ import org.joml.Matrix4f;
 /**
  * Lightweight numeric face renderer for the RBMK numitron panel.
  */
-public class RBMKNumitronRenderer implements BlockEntityRenderer<RBMKNumitronEntity> {
+public class RBMKNumitronRenderer implements BlockEntityRenderer<RBMKNumitronEntityBE> {
 
     private static final float PANEL_SCALE = 1.0F / 128.0F;
     private static final float FACE_Z = 0.5030F;
@@ -30,7 +30,7 @@ public class RBMKNumitronRenderer implements BlockEntityRenderer<RBMKNumitronEnt
     }
 
     @Override
-    public void render(RBMKNumitronEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource buffer,
+    public void render(RBMKNumitronEntityBE blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource buffer,
                        int packedLight, int packedOverlay) {
         Font font = Minecraft.getInstance().font;
         BlockState state = blockEntity.getBlockState();
@@ -135,7 +135,7 @@ public class RBMKNumitronRenderer implements BlockEntityRenderer<RBMKNumitronEnt
     }
 
     @Override
-    public boolean shouldRenderOffScreen(RBMKNumitronEntity blockEntity) {
+    public boolean shouldRenderOffScreen(RBMKNumitronEntityBE blockEntity) {
         return true;
     }
 }

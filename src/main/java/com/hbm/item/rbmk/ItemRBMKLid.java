@@ -1,7 +1,7 @@
 package com.hbm.item.rbmk;
 
 import com.hbm.block.machine.rbmk.BlockRBMKBase;
-import com.hbm.blockentity.machine.rbmk.RBMKBaseEntity;
+import com.hbm.blockentity.machine.rbmk.RBMKBaseEntityBE;
 import com.hbm.reactor.rbmk.RBMKLidType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionResult;
@@ -32,7 +32,7 @@ public class ItemRBMKLid extends Item {
             return InteractionResult.SUCCESS;
         }
         BlockEntity blockEntity = level.getBlockEntity(pos);
-        if (!(blockEntity instanceof RBMKBaseEntity baseEntity)) {
+        if (!(blockEntity instanceof RBMKBaseEntityBE baseEntity)) {
             return InteractionResult.PASS;
         }
         boolean sneaking = context.getPlayer() != null && context.getPlayer().isShiftKeyDown();

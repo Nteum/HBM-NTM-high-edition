@@ -1,7 +1,7 @@
 package com.hbm.block.machine.tokamak;
 
 import com.hbm.block.base.BaseMachineBlock;
-import com.hbm.blockentity.machine.tokamak.TokamakControllerBlockEntity;
+import com.hbm.blockentity.machine.tokamak.TokamakControllerBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -21,6 +21,6 @@ public class TokamakControllerBlock extends BaseMachineBlock implements EntityBl
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new TokamakControllerBlockEntity(pos, state);
+        return new TokamakControllerBE(pos, state);
     }
 }

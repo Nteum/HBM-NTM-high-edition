@@ -1,10 +1,10 @@
 package com.hbm.gui.screen;
 
 import com.hbm.HBM;
-import com.hbm.blockentity.machine.BarrelEntity;
+import com.hbm.blockentity.machine.BarrelEntityBE;
 import com.hbm.gui.menu.BarrelMenu;
-import com.hbm.gui.screen.widget.BarFluid;
-import com.hbm.gui.screen.widget.MultiStateButton;
+import com.hbm.core.client.gui.widget.BarFluid;
+import com.hbm.core.client.gui.widget.MultiStateButton;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -35,7 +35,7 @@ public class BarrelGui extends BaseMachineGui<BarrelMenu> {
     protected void containerTick() {
         super.containerTick();
         this.modBtn.updateData(this.menu.getMode());
-        if (this.menu.be instanceof BarrelEntity entity){
+        if (this.menu.be instanceof BarrelEntityBE entity){
             FluidTank tank = entity.getFluidTanks().get(0);
             fluidBar.fluid = tank.getFluid().getFluid();
             fluidBar.progress = tank.getFluidAmount();

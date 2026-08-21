@@ -409,6 +409,8 @@ public abstract class WrappedRegistryBuilder<T> implements Supplier<T>{
         String modelRLSuffix;
         ResourceLocation[] texRL;   // 额外规定的贴图的位置
         String[] texSuffix;
+        ResourceLocation existModelFile;
+        float size;
         // ==================
         BlockColor blockColor;
         String lootWay = HBMKey.DROP_SELF;
@@ -453,6 +455,21 @@ public abstract class WrappedRegistryBuilder<T> implements Supplier<T>{
         }
         public WrappedBlockRegistryBuilder modelRL(ResourceLocation specificModelRL){
             this.specificModelRL = specificModelRL;
+            return this;
+        }
+        /**
+         * 用本模组自定义 OBJ 加载器生成方块模型（机器带朝向，HORIZONTAL）。
+         * @param model obj 文件路径（如 block/funnel/funnel，对应 assets/hbm/models/block/funnel/funnel.obj）
+         * @param texture 贴图路径（assets/hbm/textures/block/ 下，不含扩展名）
+         * @param size 模型缩放基数，不确定填 1
+         */
+        public WrappedBlockRegistryBuilder obj(String model, String texture, float size){
+            this.genModelWay = HBMKey.HORIZONTAL;
+            this.modelType = BlockStateGen.Type.OBJ;
+            this.specificModelRL = HBM.rl(model);
+            this.existModelFile = HBM.rl(model);
+            this.texRL = new ResourceLocation[]{ HBM.rl(texture).withPrefix(ModelProvider.BLOCK_FOLDER + "/") };
+            this.size = size;
             return this;
         }
         public WrappedBlockRegistryBuilder modelSuf(String modelRLSuffix){
@@ -581,6 +598,8 @@ public abstract class WrappedRegistryBuilder<T> implements Supplier<T>{
             provider.modelGenData.modelRLSuffix = this.modelRLSuffix;
             provider.modelGenData.texRL = this.texRL;
             provider.modelGenData.texSuffix = this.texSuffix;
+            provider.modelGenData.existModelFile = this.existModelFile;
+            provider.modelGenData.size = this.size;
             switch (genModelWay) {
                 case HBMKey.MODEL_CUBE_ALL -> provider.simpleBlockWithItem(get());
                 case HBMKey.MODEL_CUBE_TOP -> provider.simpleBlockWithItem(get(), provider.genBuiltInModelFile(get(), "cube_top"));
@@ -595,6 +614,7 @@ public abstract class WrappedRegistryBuilder<T> implements Supplier<T>{
                 // 新方式
                 case HBMKey.SIMPLE-> provider.simpleBlockWithItem(get(), provider.modelGenData.build());
                 case HBMKey.HORIZONTAL -> provider.horizontalBlockItem(get(), provider.modelGenData.build());
+                case HBMKey.HORIZONTAL_BISTATE -> provider.horizontalBlockItem(get());
                 default -> {
                     if (modelFactory instanceof BiConsumer<Block, BlockStateGen>) modelFactory.accept(get(), provider);
                 }

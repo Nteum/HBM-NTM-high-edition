@@ -1,7 +1,7 @@
 package com.hbm.block.machine.rbmk;
 
 import com.hbm.block.interfaces.ILookOverlay;
-import com.hbm.blockentity.machine.rbmk.RBMKFuelChannelEntity;
+import com.hbm.blockentity.machine.rbmk.RBMKFuelChannelEntityBE;
 import com.hbm.item.rbmk.ItemRBMKFuelRod;
 import com.hbm.reactor.rbmk.RBMKDoddOverlay;
 import net.minecraft.core.BlockPos;
@@ -73,7 +73,7 @@ public class BlockRBMKFuelChannel extends Block implements EntityBlock, ILookOve
             return InteractionResult.SUCCESS;
         }
         BlockEntity be = level.getBlockEntity(pos);
-        if (!(be instanceof RBMKFuelChannelEntity fuelChannel)) {
+        if (!(be instanceof RBMKFuelChannelEntityBE fuelChannel)) {
             return InteractionResult.PASS;
         }
 
@@ -95,7 +95,7 @@ public class BlockRBMKFuelChannel extends Block implements EntityBlock, ILookOve
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new RBMKFuelChannelEntity(pos, state);
+        return new RBMKFuelChannelEntityBE(pos, state);
     }
 
     @Nullable
@@ -105,7 +105,7 @@ public class BlockRBMKFuelChannel extends Block implements EntityBlock, ILookOve
             return null;
         }
         return (lvl, pos, st, be) -> {
-            if (be instanceof RBMKFuelChannelEntity fuelChannel) {
+            if (be instanceof RBMKFuelChannelEntityBE fuelChannel) {
                 fuelChannel.serverTick();
             }
         };
@@ -119,7 +119,7 @@ public class BlockRBMKFuelChannel extends Block implements EntityBlock, ILookOve
     @Override
     public int getSignal(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
         BlockEntity be = level.getBlockEntity(pos);
-        if (be instanceof RBMKFuelChannelEntity fuelChannel && fuelChannel.isBurning()) {
+        if (be instanceof RBMKFuelChannelEntityBE fuelChannel && fuelChannel.isBurning()) {
             return 15;
         }
         return 0;
@@ -133,7 +133,7 @@ public class BlockRBMKFuelChannel extends Block implements EntityBlock, ILookOve
     @Override
     public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
         BlockEntity be = level.getBlockEntity(pos);
-        if (be instanceof RBMKFuelChannelEntity fuelChannel) {
+        if (be instanceof RBMKFuelChannelEntityBE fuelChannel) {
             return fuelChannel.comparatorSignal();
         }
         return 0;
@@ -143,7 +143,7 @@ public class BlockRBMKFuelChannel extends Block implements EntityBlock, ILookOve
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean moved) {
         if (!state.is(newState.getBlock())) {
             BlockEntity be = level.getBlockEntity(pos);
-            if (be instanceof RBMKFuelChannelEntity fuelChannel) {
+            if (be instanceof RBMKFuelChannelEntityBE fuelChannel) {
                 fuelChannel.prepareForDrop();
                 if (level instanceof ServerLevel) {
                     Containers.dropContents(level, pos, fuelChannel);

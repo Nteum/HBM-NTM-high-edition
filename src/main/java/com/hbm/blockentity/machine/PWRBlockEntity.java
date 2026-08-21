@@ -26,7 +26,7 @@ public class PWRBlockEntity extends BlockEntity {
     @Nullable
     private BlockPos corePos;
     @Nullable
-    private PWRControllerBlockEntity cachedCore;
+    private PWRControllerBE cachedCore;
 
     public PWRBlockEntity(BlockPos pos, BlockState state) {
         super(HBMTiles.PWR_BLOCK_ENTITY.get(), pos, state);
@@ -48,7 +48,7 @@ public class PWRBlockEntity extends BlockEntity {
     }
 
     @Nullable
-    public PWRControllerBlockEntity getCore() {
+    public PWRControllerBE getCore() {
         if (cachedCore != null && !cachedCore.isRemoved()) {
             return cachedCore;
         }
@@ -56,7 +56,7 @@ public class PWRBlockEntity extends BlockEntity {
             return null;
         }
         BlockEntity blockEntity = level.getBlockEntity(corePos);
-        if (blockEntity instanceof PWRControllerBlockEntity controller) {
+        if (blockEntity instanceof PWRControllerBE controller) {
             cachedCore = controller;
             return controller;
         }
@@ -73,7 +73,7 @@ public class PWRBlockEntity extends BlockEntity {
         if (blockEntity.storedBlock == null || blockEntity.corePos == null) {
             return;
         }
-        PWRControllerBlockEntity core = blockEntity.getCore();
+        PWRControllerBE core = blockEntity.getCore();
         if (core == null || !core.isAssembled()) {
             blockEntity.restoreOriginal(level, pos, state);
         }
@@ -87,7 +87,7 @@ public class PWRBlockEntity extends BlockEntity {
         if (!state.is(originalState.getBlock())) {
             level.setBlock(pos, originalState, Block.UPDATE_ALL);
         }
-        PWRControllerBlockEntity core = getCore();
+        PWRControllerBE core = getCore();
         if (core != null) {
             core.setAssembled(false);
         }
@@ -103,7 +103,7 @@ public class PWRBlockEntity extends BlockEntity {
         if (!isPort()) {
             return LazyOptional.empty();
         }
-        PWRControllerBlockEntity core = getCore();
+        PWRControllerBE core = getCore();
         if (core != null) {
             return core.getCapability(cap, side);
         }

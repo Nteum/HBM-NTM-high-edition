@@ -24,12 +24,12 @@ abstract class TokamakPeripheralBlockEntity extends BlockEntity {
         }
         for (Direction dir : Direction.values()) {
             BlockEntity neighbor = level.getBlockEntity(worldPosition.relative(dir));
-            if (neighbor instanceof TokamakControllerBlockEntity controller) {
+            if (neighbor instanceof TokamakControllerBE controller) {
                 return new ControllerLink(controller, dir.getOpposite());
             }
         }
         return null;
     }
 
-    protected record ControllerLink(TokamakControllerBlockEntity controller, Direction directionFromController) {}
+    protected record ControllerLink(TokamakControllerBE controller, Direction directionFromController) {}
 }

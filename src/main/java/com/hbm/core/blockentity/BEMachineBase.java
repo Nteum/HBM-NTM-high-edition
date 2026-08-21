@@ -1,9 +1,14 @@
 package com.hbm.core.blockentity;
 
 import com.hbm.blockentity.HBMTiles;
+import com.hbm.core.contents.fluid.HBMFluids;
 import com.hbm.gui.HBMMenus;
 import com.hbm.registries.RegistryHelper;
+import com.hbm.space.dim.CelestialBody;
+import com.hbm.space.dim.orbit.Space;
+import com.hbm.space.dim.trait.CBT_Atmosphere;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -15,18 +20,32 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.fluids.capability.templates.FluidTank;
+import net.minecraftforge.items.ItemStackHandler;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
+import javax.annotation.Nonnull;
+import java.util.List;
+import java.util.stream.IntStream;
 
 import static com.hbm.HBM.MODID;
 
 /**
  * 有menu界面的机器的基类，如果不需要menu，可以直接不实现createMenu
+ *
+ * 并入旧版 TileEntityMachineBase 的功能（统一机器基类）：
+ * - 物品槽访问：items（MachineItemHandler）支持 slots 数组风格
+ * - 侧面物品访问：getAccessibleSlotsFromSide / canInsert / canExtract
+ * - 流体比例：getGaugeScaled
+ * - 按钮：handleButtonPacket
  */
 public abstract class BEMachineBase extends BECapabilities implements Nameable, MenuProvider {
+    protected ContainerData containerData;
     public BEMachineBase(BlockPos pos, BlockState state) {
-        super(HBMTiles.getTypeById(HBMTiles.getId(BEMachineBase.getId(state))), pos, state);
+        super(pos, state);
     }
 
     @Override
@@ -34,18 +53,17 @@ public abstract class BEMachineBase extends BECapabilities implements Nameable, 
         return getName();
     }
 
-    /**
-     * 命名默认就是方块自身的名字
-     */
-    protected static String getId(BlockState blockState){
-        return RegistryHelper.blockRL(blockState.getBlock()).getPath();
-    }
+
     @Override
     public Component getName() {
         return Component.translatable("block." + MODID + "." + getId(this.getBlockState()));
     }
 
     public ContainerData getContainerData(){
+        return containerData == null ? containerData = createContainerData() : containerData;
+    }
+
+    protected ContainerData createContainerData(){
         return new ContainerData() {
             @Override
             public int get(int p_39284_) {
@@ -63,7 +81,7 @@ public abstract class BEMachineBase extends BECapabilities implements Nameable, 
     }
 
     public MenuType<?> getMenuType(){
-        return HBMMenus.getById(HBMMenus.getId(this.getId(this.getBlockState())));
+        return HBMMenus.getById(this.getId(this.getBlockState()));
     }
 
     //========================直接从BaseContainerBlockEntity复制的=====================
@@ -88,4 +106,28 @@ public abstract class BEMachineBase extends BECapabilities implements Nameable, 
     }
 
     protected abstract AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory);
+
+    //============space =====================
+    public boolean breatheAir(int amount) {
+        return breatheAir(this.level, this.worldPosition.getX(), this.worldPosition.getY(), this.worldPosition.getZ(), amount);
+    }
+
+    public static boolean breatheAir(Level world, int x, int y, int z, int amount) {
+        CBT_Atmosphere atmosphere = world.dimension().equals(Space.LEVEL_KEY) ? null : CelestialBody.getTrait(world, CBT_Atmosphere.class);
+        if(atmosphere != null) {
+            if(atmosphere.hasFluid(HBMFluids.EARTHAIR.source().get(), 0.19) || atmosphere.hasFluid(HBMFluids.OXYGEN.source().get(), 0.09)) {
+                return true;
+            }
+        }
+
+//        List<AtmosphereBlob> blobs = ChunkAtmosphereManager.proxy.getBlobs(world, x, y, z);
+//        for(AtmosphereBlob blob : blobs) {
+//            if(blob.hasFluid(Fluids.EARTHAIR, 0.19) || blob.hasFluid(Fluids.OXYGEN, 0.09)) {
+//                blob.consume(amount);
+//                return true;
+//            }
+//        }
+
+        return false;
+    }
 }

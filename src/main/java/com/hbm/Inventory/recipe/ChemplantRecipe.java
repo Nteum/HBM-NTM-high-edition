@@ -2,7 +2,7 @@ package com.hbm.Inventory.recipe;
 
 import com.google.gson.JsonObject;
 import com.hbm.HBMKey;
-import com.hbm.blockentity.machine.ChemplantEntity;
+import com.hbm.blockentity.machine.ChemplantEntityBE;
 import com.hbm.datagen.recipe.ingredient.CountableIngredient;
 import com.hbm.datagen.recipe.ingredient.FluidStackIngredient;
 import net.minecraft.core.NonNullList;
@@ -20,7 +20,6 @@ import net.minecraftforge.fluids.FluidStack;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ChemplantRecipe implements Recipe<Container> {
     private final ResourceLocation id;
@@ -44,7 +43,7 @@ public class ChemplantRecipe implements Recipe<Container> {
 
     @Override
     public boolean matches(Container pContainer, Level pLevel) {
-        if (pContainer instanceof ChemplantEntity chemplantEntity){
+        if (pContainer instanceof ChemplantEntityBE chemplantEntity){
             return HBMRecipeMatcher.orderlessItemMatch(chemplantEntity.items.subList(12,16), inputItems)
                     && HBMRecipeMatcher.orderlessFluidMatch(chemplantEntity.getFluidTanks(null).subList(0,2), inputFluids);
         }
@@ -52,7 +51,7 @@ public class ChemplantRecipe implements Recipe<Container> {
     }
     /** 处理配方结果 */
     public void assemble(Container pContainer) {
-        if (pContainer instanceof ChemplantEntity chemplantEntity){
+        if (pContainer instanceof ChemplantEntityBE chemplantEntity){
             HBMRecipeMatcher.deductItems(chemplantEntity.items.subList(12,16), inputItems);
             HBMRecipeMatcher.deductFluids(chemplantEntity.getFluidTanks(null).subList(0,2), inputFluids);
             HBMRecipeMatcher.putResultItems(chemplantEntity.items.subList(4,8), resultItems);

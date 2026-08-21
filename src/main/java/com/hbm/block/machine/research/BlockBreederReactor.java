@@ -1,7 +1,7 @@
 package com.hbm.block.machine.research;
 
-import com.hbm.block.base.BlockDummyable;
-import com.hbm.blockentity.machine.research.BreederReactorBlockEntity;
+import com.hbm.core.block.BlockDummyable;
+import com.hbm.blockentity.machine.research.BreederReactorBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -16,7 +16,7 @@ public class BlockBreederReactor extends BlockDummyable {
 
     @Override
     protected BlockEntity mainBlockEntity(BlockPos pos, BlockState state) {
-        return new BreederReactorBlockEntity(pos, state);
+        return new BreederReactorBE(pos, state);
     }
 
     @Override

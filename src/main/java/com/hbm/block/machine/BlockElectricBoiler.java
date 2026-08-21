@@ -1,7 +1,6 @@
 package com.hbm.block.machine;
 
-import com.hbm.blockentity.machine.BoilerEntity;
-import com.hbm.blockentity.machine.ElectricBoilerEntity;
+import com.hbm.blockentity.machine.ElectricBoilerEntityBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -15,6 +14,6 @@ public class BlockElectricBoiler extends BlockLitSingleBlockMachine{
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new ElectricBoilerEntity(pPos,pState);
+        return new ElectricBoilerEntityBE(pPos,pState);
     }
 }

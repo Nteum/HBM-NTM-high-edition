@@ -2,10 +2,8 @@ package com.hbm.render.blockentity;
 
 import com.hbm.Inventory.fluid.ExtendedFluidType;
 import com.hbm.blockentity.machine.TileCrystallizer;
-import com.hbm.gui.screen.GuiCentrifuge;
-import com.hbm.main.ResourceManager;
 import com.hbm.render.RenderUtils;
-import com.hbm.render.model.engine.CustomPartsModel;
+import com.hbm.core.client.model.CustomPartsModel;
 import com.hbm.utils.DirectionUtils;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -19,7 +17,6 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.fluids.FluidStack;
-import org.lwjgl.opengl.GL11;
 
 public class RenderCrystallizer implements BlockEntityRenderer<TileCrystallizer> {
     BakedModel model;

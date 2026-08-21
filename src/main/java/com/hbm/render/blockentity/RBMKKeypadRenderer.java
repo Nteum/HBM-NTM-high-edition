@@ -1,6 +1,6 @@
 package com.hbm.render.blockentity;
 
-import com.hbm.blockentity.machine.rbmk.RBMKKeypadEntity;
+import com.hbm.blockentity.machine.rbmk.RBMKKeypadEntityBE;
 import com.hbm.utils.DirectionUtils;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
@@ -15,7 +15,7 @@ import org.joml.Matrix4f;
 /**
  * Simple 2x2 keypad overlay renderer.
  */
-public class RBMKKeypadRenderer implements BlockEntityRenderer<RBMKKeypadEntity> {
+public class RBMKKeypadRenderer implements BlockEntityRenderer<RBMKKeypadEntityBE> {
 
     private static final float PANEL_SCALE = 1.0F / 128.0F;
     private static final float FACE_Z = 0.5030F;
@@ -26,7 +26,7 @@ public class RBMKKeypadRenderer implements BlockEntityRenderer<RBMKKeypadEntity>
     }
 
     @Override
-    public void render(RBMKKeypadEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource buffer,
+    public void render(RBMKKeypadEntityBE blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource buffer,
                        int packedLight, int packedOverlay) {
         Font font = Minecraft.getInstance().font;
         BlockState state = blockEntity.getBlockState();
@@ -58,7 +58,7 @@ public class RBMKKeypadRenderer implements BlockEntityRenderer<RBMKKeypadEntity>
     }
 
     private static void renderButton(Font font, Matrix4f matrix, Matrix4f textMatrix, MultiBufferSource buffer,
-                                     RBMKKeypadEntity blockEntity,
+                                     RBMKKeypadEntityBE blockEntity,
                                      int slot, float x, float y, int packedLight) {
         if (!blockEntity.isActive(slot)) {
             return;
@@ -93,7 +93,7 @@ public class RBMKKeypadRenderer implements BlockEntityRenderer<RBMKKeypadEntity>
     }
 
     @Override
-    public boolean shouldRenderOffScreen(RBMKKeypadEntity blockEntity) {
+    public boolean shouldRenderOffScreen(RBMKKeypadEntityBE blockEntity) {
         return true;
     }
 }

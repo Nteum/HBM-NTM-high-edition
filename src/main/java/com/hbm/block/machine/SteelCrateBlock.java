@@ -1,6 +1,6 @@
 package com.hbm.block.machine;
 
-import com.hbm.blockentity.machine.SteelCrateBlockEntity;
+import com.hbm.blockentity.machine.SteelCrateBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -18,6 +18,6 @@ public class SteelCrateBlock extends IronCrateBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new SteelCrateBlockEntity(pos, state);
+        return new SteelCrateBE(pos, state);
     }
 }

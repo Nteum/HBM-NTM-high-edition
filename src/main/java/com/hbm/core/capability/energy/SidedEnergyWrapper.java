@@ -1,6 +1,6 @@
 package com.hbm.core.capability.energy;
 
-import com.hbm.core.api.HBMEnergyHandler;
+import com.hbm.core.api.capability.HBMEnergyHandler;
 import net.minecraft.core.Direction;
 
 public class SidedEnergyWrapper implements HBMEnergyHandler {

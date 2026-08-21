@@ -1,6 +1,6 @@
 package com.hbm.utils;
 
-import com.hbm.blockentity.base.DummyableBlockEntity;
+import com.hbm.blockentity.base.DummyableBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
@@ -107,7 +107,7 @@ public final class MultipartUtils {
         for (Vec3i offset : offsets2) {
             level.setBlock(blockPos.offset(offset),blockState,3);
             BlockEntity blockEntity = level.getBlockEntity(blockPos.offset(offset));
-            if (blockEntity instanceof DummyableBlockEntity multiPartBlockEntity){
+            if (blockEntity instanceof DummyableBE multiPartBlockEntity){
                 //填充方块实体记录中心点位
 //                multiPartBlockEntity.isCore = false;
 //                multiPartBlockEntity.corePos = new BlockPos(blockPos);

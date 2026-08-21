@@ -1,7 +1,7 @@
 package com.hbm.block.machine;
 
-import com.hbm.block.base.BlockDummyable;
-import com.hbm.blockentity.machine.CrucibleEntity;
+import com.hbm.blockentity.machine.CrucibleEntityBE;
+import com.hbm.core.block.BlockDummyable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -15,6 +15,6 @@ public class BlockCrucible extends BlockDummyable {
 
     @Override
     protected BlockEntity mainBlockEntity(BlockPos pPos, BlockState pState) {
-        return new CrucibleEntity(pPos,pState);
+        return new CrucibleEntityBE(pPos,pState);
     }
 }

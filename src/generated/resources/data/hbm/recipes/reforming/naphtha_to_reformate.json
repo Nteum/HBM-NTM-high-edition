@@ -1,0 +1,19 @@
+{
+  "type": "hbm:reforming",
+  "input": {
+    "amount": 100,
+    "fluid": "hbm:naphtha"
+  },
+  "output1": {
+    "amount": 50,
+    "fluid": "hbm:reformate"
+  },
+  "output2": {
+    "amount": 15,
+    "fluid": "hbm:petroleum"
+  },
+  "output3": {
+    "amount": 10,
+    "fluid": "hbm:hydrogen"
+  }
+}

@@ -1,7 +1,7 @@
 package com.hbm.block.machine;
 
-import com.hbm.block.base.BlockDummyable;
-import com.hbm.blockentity.machine.CrackingTowerEntity;
+import com.hbm.blockentity.machine.CrackingTowerEntityBE;
+import com.hbm.core.block.BlockDummyable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -16,7 +16,6 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import org.jetbrains.annotations.Nullable;
 
 public class BlockCrackingTower extends BlockDummyable {
 
@@ -28,7 +27,7 @@ public class BlockCrackingTower extends BlockDummyable {
 
     @Override
     protected BlockEntity mainBlockEntity(BlockPos pos, BlockState state) {
-        return new CrackingTowerEntity(pos, state);
+        return new CrackingTowerEntityBE(pos, state);
     }
 
     @Override

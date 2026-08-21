@@ -1,7 +1,7 @@
 package com.hbm.block.machine;
 
-import com.hbm.block.base.BlockDummyable;
-import com.hbm.blockentity.machine.AssemblerEntity;
+import com.hbm.blockentity.machine.AssemblerEntityBE;
+import com.hbm.core.block.BlockDummyable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -15,6 +15,6 @@ public class BlockAssembler extends BlockDummyable {
 
     @Override
     protected BlockEntity mainBlockEntity(BlockPos pPos, BlockState pState) {
-        return new AssemblerEntity(pPos,pState);
+        return new AssemblerEntityBE(pPos,pState);
     }
 }

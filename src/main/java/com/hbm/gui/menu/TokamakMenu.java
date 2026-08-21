@@ -1,7 +1,7 @@
 package com.hbm.gui.menu;
 
 import com.hbm.gui.HBMMenus;
-import com.hbm.blockentity.machine.tokamak.TokamakControllerBlockEntity;
+import com.hbm.blockentity.machine.tokamak.TokamakControllerBE;
 import com.hbm.registries.HBMCaps;
 import com.hbm.registries.ModItems;
 import com.hbm.registries.ModTags;
@@ -80,7 +80,7 @@ public class TokamakMenu extends BaseMachineMenu {
 
     @Override
     public boolean clickMenuButton(Player player, int id) {
-        if (this.container instanceof TokamakControllerBlockEntity controller) {
+        if (this.container instanceof TokamakControllerBE controller) {
             controller.setManualRunning(id == 1);
             return true;
         }

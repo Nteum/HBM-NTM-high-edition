@@ -1,6 +1,6 @@
 package com.hbm.network.packet.toserver;
 
-import com.hbm.blockentity.base.UpdateableBlockEntity;
+import com.hbm.core.blockentity.BEUpdateable;
 import com.hbm.core.network.IHBMMessage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
@@ -28,7 +28,7 @@ public class S2CSyncFailMessage implements IHBMMessage {
     public void handle(Supplier<NetworkEvent.Context> ctx) {
         ctx.get().enqueueWork(()->{
             Level level = Objects.requireNonNull(ctx.get().getSender()).level();
-            UpdateableBlockEntity blockEntity = (UpdateableBlockEntity) level.getBlockEntity(pos);
+            BEUpdateable blockEntity = (BEUpdateable) level.getBlockEntity(pos);
             if (blockEntity != null){
                 blockEntity.sendUpdatePacket();
             }

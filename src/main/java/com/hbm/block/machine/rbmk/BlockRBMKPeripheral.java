@@ -2,7 +2,7 @@ package com.hbm.block.machine.rbmk;
 
 import com.hbm.block.base.BlockMachineBase;
 import com.hbm.block.interfaces.ILookOverlay;
-import com.hbm.blockentity.machine.rbmk.RBMKPeripheralEntity;
+import com.hbm.blockentity.machine.rbmk.RBMKPeripheralEntityBE;
 import com.hbm.reactor.rbmk.RBMKDoddOverlay;
 import com.hbm.reactor.rbmk.RBMKPeripheralType;
 import net.minecraft.core.BlockPos;
@@ -18,7 +18,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 /**
- * Generic RBMK peripheral that reuses {@link RBMKPeripheralEntity} to expose
+ * Generic RBMK peripheral that reuses {@link RBMKPeripheralEntityBE} to expose
  * diagnostics for consoles, elements, reflectors, etc.
  */
 public class BlockRBMKPeripheral extends BlockMachineBase implements ILookOverlay {
@@ -37,7 +37,7 @@ public class BlockRBMKPeripheral extends BlockMachineBase implements ILookOverla
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new RBMKPeripheralEntity(pos, state);
+        return new RBMKPeripheralEntityBE(pos, state);
     }
 
     @Override

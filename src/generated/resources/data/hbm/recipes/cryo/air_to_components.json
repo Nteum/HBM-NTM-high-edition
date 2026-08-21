@@ -1,0 +1,23 @@
+{
+  "type": "hbm:cryo",
+  "input": {
+    "amount": 100,
+    "fluid": "hbm:earthair"
+  },
+  "output1": {
+    "amount": 60,
+    "fluid": "hbm:nitrogen"
+  },
+  "output2": {
+    "amount": 25,
+    "fluid": "hbm:oxygen"
+  },
+  "output3": {
+    "amount": 10,
+    "fluid": "hbm:krypton"
+  },
+  "output4": {
+    "amount": 5,
+    "fluid": "hbm:carbon_dioxide"
+  }
+}

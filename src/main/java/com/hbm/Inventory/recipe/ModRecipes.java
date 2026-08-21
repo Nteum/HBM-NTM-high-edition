@@ -32,6 +32,20 @@ public class ModRecipes {
     public static final RecipeHolder<RecipeCrystallizer> CRYSTALLIZER = register(MachineCrystallizer.id, RecipeCrystallizer.factory);
     public static final RecipeHolder<RecipeArcFurnace> ARC_FURNACE = register(MachineArcFurnace.id, RecipeArcFurnace.factory);
     public static final RecipeHolder<RecipeAtmosphere> ATMOSPHERE = register("atmosphere", RecipeAtmosphere.factory);
+    public static final RecipeHolder<LiquefactionRecipe> LIQUEFACTOR = register("liquefactor", LiquefactionRecipe.factory);
+    public static final RecipeHolder<SolidificationRecipe> SOLIDIFIER = register("solidifier", SolidificationRecipe.factory);
+    public static final RecipeHolder<CokerRecipe> COKER = register("coker", CokerRecipe.factory);
+    public static final RecipeHolder<HydrotreatingRecipe> HYDROTREATER = register("hydrotreater", HydrotreatingRecipe.factory);
+    public static final RecipeHolder<RefineryRecipe> REFINERY = register("refinery", RefineryRecipe.factory);
+    public static final RecipeHolder<RadiolysisRecipe> RADIOLYSIS = register("radiolysis", RadiolysisRecipe.factory);
+    public static final RecipeHolder<ArcWelderRecipe> ARC_WELDER = register("arc_welder", ArcWelderRecipe.factory);
+    public static final RecipeHolder<MixerRecipe> MIXER = register("mixer", MixerRecipe.factory);
+    public static final RecipeHolder<ReformingRecipe> REFORMING = register("reforming", ReformingRecipe.factory);
+    public static final RecipeHolder<VacuumRefineryRecipe> VACUUM_REFINERY = register("vacuum_refinery", VacuumRefineryRecipe.factory);
+    public static final RecipeHolder<CryoRecipe> CRYO = register("cryo", CryoRecipe.factory);
+    public static final RecipeHolder<GasCentrifugeRecipe> GAS_CENTRIFUGE = register("gas_centrifuge", GasCentrifugeRecipe.factory);
+    public static final RecipeHolder<FractionRecipe> FRACTION = register("fraction", FractionRecipe.factory);
+    public static final RecipeHolder<AlkylationRecipe> ALKYLATION = register("alkylation", AlkylationRecipe.factory);
 //    public static final RegistryObject<RecipeSerializer<BlastFurnaceRecipe>> ALLOY_SERIALIZER =
 //            SERIALIZER.register(HBMKey.BLAST,()-> BlastFurnaceRecipe.Serializer.INSTANCE);
 //    public static final RegistryObject<RecipeSerializer<AssemblerRecipe>> ASSEMBLER_SERIALIZER =

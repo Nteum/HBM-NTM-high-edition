@@ -1,7 +1,7 @@
 package com.hbm.block.machine;
 
-import com.hbm.block.base.BlockDummyable;
-import com.hbm.blockentity.machine.GasTurbineBlockEntity;
+import com.hbm.core.block.BlockDummyable;
+import com.hbm.blockentity.machine.GasTurbineBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -29,7 +29,7 @@ public class BlockTurbineGas extends BlockDummyable {
     @Nullable
     @Override
     protected BlockEntity mainBlockEntity(BlockPos pos, BlockState state) {
-        return new GasTurbineBlockEntity(pos, state);
+        return new GasTurbineBE(pos, state);
     }
 
     @Override

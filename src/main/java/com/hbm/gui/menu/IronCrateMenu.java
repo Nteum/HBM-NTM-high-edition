@@ -1,6 +1,6 @@
 package com.hbm.gui.menu;
 
-import com.hbm.blockentity.machine.IronCrateBlockEntity;
+import com.hbm.blockentity.machine.IronCrateBE;
 import com.hbm.gui.HBMMenus;
 import com.hbm.registries.ModBlocks;
 import net.minecraft.core.BlockPos;
@@ -28,7 +28,7 @@ public class IronCrateMenu extends AbstractContainerMenu {
     private static final int PLAYER_HOTBAR_OFFSET = PLAYER_INV_OFFSET + 27;
     private static final int TOTAL_SLOTS = PLAYER_HOTBAR_OFFSET + 9;
 
-    private final IronCrateBlockEntity blockEntity;
+    private final IronCrateBE blockEntity;
     private final Level level;
     private final ItemStack crateSignature;
 
@@ -38,10 +38,10 @@ public class IronCrateMenu extends AbstractContainerMenu {
 
     public IronCrateMenu(int id, Inventory inventory, BlockEntity entity) {
         super(HBMMenus.IRON_CRATE_MENU.get(), id);
-        if (entity instanceof IronCrateBlockEntity crate) {
+        if (entity instanceof IronCrateBE crate) {
             this.blockEntity = crate;
         } else {
-            this.blockEntity = new IronCrateBlockEntity(BlockPos.ZERO, ModBlocks.crate_iron.get().defaultBlockState());
+            this.blockEntity = new IronCrateBE(BlockPos.ZERO, ModBlocks.crate_iron.get().defaultBlockState());
         }
         this.level = inventory.player.level();
         this.crateSignature = new ItemStack(ModBlocks.crate_iron.get());
@@ -50,7 +50,7 @@ public class IronCrateMenu extends AbstractContainerMenu {
         addPlayerHotbar(inventory, 8, 162);
     }
 
-    private void addCrateSlots(IronCrateBlockEntity crate, int startX, int startY) {
+    private void addCrateSlots(IronCrateBE crate, int startX, int startY) {
         crate.getCapability(net.minecraftforge.common.capabilities.ForgeCapabilities.ITEM_HANDLER).ifPresent(handler -> {
             for (int row = 0; row < CRATE_ROWS; row++) {
                 for (int col = 0; col < CRATE_COLUMNS; col++) {

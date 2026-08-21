@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_deco_rbmk_smooth": {
+    "has_rbmk_blank": {
       "conditions": {
         "items": [
           {
             "items": [
-              "hbm:deco_rbmk_smooth"
+              "hbm:rbmk_blank"
             ]
           }
         ]
@@ -22,7 +22,7 @@
   },
   "requirements": [
     [
-      "has_deco_rbmk_smooth",
+      "has_rbmk_blank",
       "has_the_recipe"
     ]
   ],

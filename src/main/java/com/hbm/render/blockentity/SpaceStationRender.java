@@ -3,8 +3,8 @@ package com.hbm.render.blockentity;
 import com.hbm.blockentity.machine.TileSpaceStation;
 import com.hbm.render.RenderUtils;
 import com.hbm.render.model.Models;
-import com.hbm.render.model.engine.CustomPartsModel;
-import com.hbm.render.model.engine.TrianglePartsModel;
+import com.hbm.core.client.model.CustomPartsModel;
+import com.hbm.core.client.model.TrianglePartsModel;
 import com.hbm.utils.DirectionUtils;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
@@ -15,8 +15,6 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelManager;
-import net.minecraft.core.registries.Registries;
-import net.minecraftforge.registries.ForgeRegistries;
 
 public class SpaceStationRender implements BlockEntityRenderer<TileSpaceStation> {
     private final BakedModel model;

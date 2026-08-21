@@ -1,6 +1,6 @@
 package com.hbm.gui.menu;
 
-import com.hbm.blockentity.machine.rbmk.RBMKPeripheralEntity;
+import com.hbm.blockentity.machine.rbmk.RBMKPeripheralEntityBE;
 import com.hbm.gui.HBMMenus;
 import com.hbm.reactor.rbmk.RBMKPeripheralType;
 import net.minecraft.core.BlockPos;
@@ -50,7 +50,7 @@ public class RBMKPeripheralMenu extends BaseMachineMenu {
     private static final int DATA_SLOTS = TELEMETRY_SLOTS + GRID_SIZE * GRID_SIZE;
 
     private final BlockPos pos;
-    private final RBMKPeripheralEntity peripheral;
+    private final RBMKPeripheralEntityBE peripheral;
     private int pendingLinkX;
     private int pendingLinkY;
     private int pendingLinkZ;
@@ -63,7 +63,7 @@ public class RBMKPeripheralMenu extends BaseMachineMenu {
         this(containerId, playerInventory, resolvePeripheral(playerInventory, buf));
     }
 
-    public RBMKPeripheralMenu(int containerId, Inventory playerInventory, RBMKPeripheralEntity peripheral) {
+    public RBMKPeripheralMenu(int containerId, Inventory playerInventory, RBMKPeripheralEntityBE peripheral) {
         this(containerId, playerInventory, peripheral,
                 peripheral != null ? peripheral.getBlockPos() : null,
                 peripheral != null ? peripheral : new SimpleContainer(0),
@@ -71,12 +71,12 @@ public class RBMKPeripheralMenu extends BaseMachineMenu {
     }
 
     public RBMKPeripheralMenu(int containerId, Inventory playerInventory, Container container, ContainerData data) {
-        this(containerId, playerInventory, container instanceof RBMKPeripheralEntity peripheral ? peripheral : null,
-                container instanceof RBMKPeripheralEntity peripheral ? peripheral.getBlockPos() : null,
+        this(containerId, playerInventory, container instanceof RBMKPeripheralEntityBE peripheral ? peripheral : null,
+                container instanceof RBMKPeripheralEntityBE peripheral ? peripheral.getBlockPos() : null,
                 container, data);
     }
 
-    private RBMKPeripheralMenu(int containerId, Inventory playerInventory, RBMKPeripheralEntity peripheral, BlockPos pos, Container container, ContainerData data) {
+    private RBMKPeripheralMenu(int containerId, Inventory playerInventory, RBMKPeripheralEntityBE peripheral, BlockPos pos, Container container, ContainerData data) {
         super(HBMMenus.RBMK_PERIPHERAL_MENU.get(), containerId, container, data);
         this.slotNum = 0;
         this.peripheral = peripheral;
@@ -198,14 +198,14 @@ public class RBMKPeripheralMenu extends BaseMachineMenu {
         return pos;
     }
 
-    public RBMKPeripheralEntity getPeripheral() {
+    public RBMKPeripheralEntityBE getPeripheral() {
         return peripheral;
     }
 
-    private static RBMKPeripheralEntity resolvePeripheral(Inventory playerInventory, FriendlyByteBuf buf) {
+    private static RBMKPeripheralEntityBE resolvePeripheral(Inventory playerInventory, FriendlyByteBuf buf) {
         Objects.requireNonNull(buf, "buffer missing block position");
         BlockPos pos = buf.readBlockPos();
-        if (playerInventory.player.level().getBlockEntity(pos) instanceof RBMKPeripheralEntity entity) {
+        if (playerInventory.player.level().getBlockEntity(pos) instanceof RBMKPeripheralEntityBE entity) {
             return entity;
         }
         return null;

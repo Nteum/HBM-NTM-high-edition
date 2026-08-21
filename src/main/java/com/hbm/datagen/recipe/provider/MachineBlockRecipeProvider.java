@@ -33,7 +33,7 @@ public class MachineBlockRecipeProvider implements ISubRecipeProvider {
     }
 
     private static void basicMachines(Consumer<FinishedRecipe> consumer) {
-        shaped(ModBlocks.machine_difurnace.get())
+        shaped(ModBlocks.MACHINE_DIFURNACE.get())
                 .pattern("STS")
                 .pattern("CHC")
                 .pattern("SFS")
@@ -45,7 +45,7 @@ public class MachineBlockRecipeProvider implements ISubRecipeProvider {
                 .unlockedBy(hasName(ModItems.PLATE_STEEL.get()), hasItem(ModItems.PLATE_STEEL.get()))
                 .save(consumer);
 
-        shaped(ModBlocks.machine_electric_furnace.get())
+        shaped(ModBlocks.MACHINE_ELECTRIC_FURNACE.get())
                 .pattern("SLS")
                 .pattern("CFC")
                 .pattern("SRS")
@@ -54,7 +54,7 @@ public class MachineBlockRecipeProvider implements ISubRecipeProvider {
                 .define('C', ModItems.CIRCUIT_BASIC.get())
                 .define('F', Blocks.FURNACE)
                 .define('R', Items.REDSTONE_BLOCK)
-                .unlockedBy(hasName(ModBlocks.machine_difurnace.get()), hasItem(ModBlocks.machine_difurnace.get()))
+                .unlockedBy(hasName(ModBlocks.MACHINE_DIFURNACE.get()), hasItem(ModBlocks.MACHINE_DIFURNACE.get()))
                 .save(consumer);
 
         shaped(ModBlocks.machine_boiler.get())
@@ -92,7 +92,7 @@ public class MachineBlockRecipeProvider implements ISubRecipeProvider {
                 .unlockedBy(hasName(ModBlocks.machine_electric_boiler.get()), hasItem(ModBlocks.machine_electric_boiler.get()))
                 .save(consumer);
 
-        shaped(ModBlocks.machine_press.get())
+        shaped(ModBlocks.MACHINE_PRESS.get())
                 .pattern("IPI")
                 .pattern("BFB")
                 .pattern("IPI")

@@ -1,9 +1,11 @@
 package com.hbm.core.contents.multiblock;
 
 import com.hbm.block.HBMBlockProperties;
-import com.hbm.block.base.BlockDummyable;
+import com.hbm.blockentity.base.DummyableBE;
+import com.hbm.core.block.BlockDummyable;
+import com.hbm.core.blockentity.BEDummyable;
+import com.hbm.core.blockentity.BEProxy;
 import com.hbm.blockentity.base.DefaultMachineBE;
-import com.hbm.blockentity.base.DummyableBlockEntity;
 import com.hbm.blockentity.base.TileProxyBase;
 import com.hbm.blockentity.interfaces.IDummyable;
 import com.hbm.utils.DirectionUtils;
@@ -55,12 +57,16 @@ public class DummableHelper {
             BlockEntity blockEntity = level.getBlockEntity(corePos.offset(offset));
             if (blockEntity instanceof TileProxyBase tileProxyBase){
                 tileProxyBase.cachedPos = new BlockPos(corePos);
+            } else if (blockEntity instanceof BEProxy beProxy){
+                beProxy.cachedPos = new BlockPos(corePos);
             }
         }
         //中心方块实体设为core
         BlockEntity blockEntity = level.getBlockEntity(corePos);
-        if (blockEntity instanceof DummyableBlockEntity entity){
+        if (blockEntity instanceof DummyableBE entity){
             entity.isFormed = true;
+        }else if (blockEntity instanceof BEDummyable entity){
+            entity.setFormed(true);
         }else if (blockEntity instanceof DefaultMachineBE entity){
             entity.setFormed(true);
         }
@@ -77,7 +83,7 @@ public class DummableHelper {
         }
         try {
             BlockEntity coreEntity = level.getBlockEntity(corePos);
-            if (!(coreEntity instanceof IDummyable)){
+            if (!(coreEntity instanceof IDummyable || coreEntity instanceof BEDummyable)){
                 return;
             }
             Block block = blockState.getBlock();
@@ -117,6 +123,9 @@ public class DummableHelper {
         BlockEntity blockEntity = level.getBlockEntity(blockPos);
         if (blockEntity instanceof TileProxyBase tileProxyBase) {
             return tileProxyBase.cachedPos;
+        }
+        if (blockEntity instanceof BEProxy beProxy) {
+            return beProxy.cachedPos;
         }
         return blockPos;
     }

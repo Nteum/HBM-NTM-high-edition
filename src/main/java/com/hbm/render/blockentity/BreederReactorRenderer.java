@@ -1,6 +1,6 @@
 package com.hbm.render.blockentity;
 
-import com.hbm.blockentity.machine.research.BreederReactorBlockEntity;
+import com.hbm.blockentity.machine.research.BreederReactorBE;
 import com.hbm.render.model.Models;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
@@ -13,13 +13,13 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import static com.hbm.render.RenderUtils.renderBlockModel;
 
-public class BreederReactorRenderer extends MultiPartRenderer<BreederReactorBlockEntity> {
+public class BreederReactorRenderer extends MultiPartRenderer<BreederReactorBE> {
 
     public BreederReactorRenderer() {
     }
 
     @Override
-    public void renderMultiPart(BreederReactorBlockEntity entity, float partialTick, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
+    public void renderMultiPart(BreederReactorBE entity, float partialTick, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
         ModelManager modelManager = Minecraft.getInstance().getModelManager();
         BakedModel breederModel = modelManager.getModel(Models.BREEDER_REACTOR);
         if (breederModel == modelManager.getMissingModel()) {

@@ -1,8 +1,8 @@
 package com.hbm.network.packet.toserver;
 
 import com.hbm.HBM;
-import com.hbm.blockentity.base.BaseMachineBlockEntity;
-import com.hbm.blockentity.base.UpdateableBlockEntity;
+import com.hbm.core.blockentity.BEUpdateable;
+import com.hbm.blockentity.base.BaseMachineBE;
 import com.hbm.core.network.IHBMMessage;
 import com.hbm.utils.WorldUtils;
 import net.minecraft.core.BlockPos;
@@ -22,7 +22,7 @@ public class C2SSyncTileMessage implements IHBMMessage {
         this.pos = blockPos;
     }
 
-    public C2SSyncTileMessage(UpdateableBlockEntity blockEntity) {
+    public C2SSyncTileMessage(BEUpdateable blockEntity) {
         this(blockEntity.getBlockPos(), blockEntity.getClientSyncTag());
     }
     @Override
@@ -45,7 +45,7 @@ public class C2SSyncTileMessage implements IHBMMessage {
     /**
      * Validates the sender and target tile before allowing any client-provided
      * data to mutate server state. Older builds jumped straight into
-     * {@link UpdateableBlockEntity#handleClientPacket(CompoundTag)}, which meant
+     * {@link BEUpdateable#handleClientPacket(CompoundTag)}, which meant
      * any malicious client could spoof packets and tamper with machines it did
      * not own.
      */
@@ -61,7 +61,7 @@ public class C2SSyncTileMessage implements IHBMMessage {
             return;
         }
 
-        UpdateableBlockEntity tile = WorldUtils.getTileEntity(UpdateableBlockEntity.class, level, pos, true);
+        BEUpdateable tile = WorldUtils.getTileEntity(BEUpdateable.class, level, pos, true);
         if (tile == null) {
             HBM.LOGGER.warn("Player {} tried to sync tile at {} but none was found", sender.getGameProfile().getName(), pos);
             return;
@@ -75,14 +75,14 @@ public class C2SSyncTileMessage implements IHBMMessage {
         tile.handleClientPacket(updateTag);
     }
 
-    private boolean isSenderAuthorized(ServerPlayer sender, UpdateableBlockEntity tile) {
+    private boolean isSenderAuthorized(ServerPlayer sender, BEUpdateable tile) {
         // Require the player to be close to the tile to prevent remote tampering.
         final double maxDistanceSq = 16.0D * 16.0D; // 16-block interaction radius
         if (sender.distanceToSqr(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D) > maxDistanceSq) {
             return false;
         }
 
-        if (tile instanceof BaseMachineBlockEntity machine) {
+        if (tile instanceof BaseMachineBE machine) {
             // Reuse the machine's own access check so lockable machines stay protected.
             return machine.canOpen(sender);
         }

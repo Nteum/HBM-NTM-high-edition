@@ -1,7 +1,6 @@
 package com.hbm.network.packet.toclient;
 
 import com.hbm.HBM;
-import com.hbm.blockentity.base.UpdateableBlockEntity;
 import com.hbm.core.blockentity.BEUpdateable;
 import com.hbm.core.network.IHBMMessage;
 import com.hbm.core.network.HBMNetwork;
@@ -24,10 +23,6 @@ public class S2CSyncTileMessage implements IHBMMessage {
         this.pos = blockPos;
     }
 
-    public S2CSyncTileMessage(UpdateableBlockEntity blockEntity) {
-        this(blockEntity.getBlockPos(), blockEntity.getReducedUpdateTag());
-    }
-
     public S2CSyncTileMessage(BEUpdateable blockEntity) {
         this(blockEntity.getBlockPos(), blockEntity.getReducedUpdateTag());
     }
@@ -38,7 +33,7 @@ public class S2CSyncTileMessage implements IHBMMessage {
         //Only handle the update packet if the block is currently loaded
         if (WorldUtils.isBlockLoaded(world, pos)) {
 //            UpdateableBlockEntity tile = (UpdateableBlockEntity) world.getBlockEntity(pos);
-            UpdateableBlockEntity tile = WorldUtils.getTileEntity(UpdateableBlockEntity.class, world, pos, true);
+            BEUpdateable tile = WorldUtils.getTileEntity(BEUpdateable.class, world, pos, true);
             if (tile == null) {
                 HBM.LOGGER.warn("Update tile packet received for position: {} in world: {}, but no valid tile was found.", pos,
                         world.dimension().location());

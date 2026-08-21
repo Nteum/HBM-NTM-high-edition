@@ -2,11 +2,10 @@ package com.hbm.gui.screen;
 
 import com.hbm.HBM;
 import com.hbm.HBMLang;
-import com.hbm.blockentity.machine.PressEntity;
+import com.hbm.blockentity.machine.PressEntityBE;
+import com.hbm.core.client.gui.GuiMachineBase;
 import com.hbm.gui.menu.PressMenu;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.client.gui.screens.inventory.AbstractFurnaceScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
@@ -14,7 +13,7 @@ import net.minecraft.world.entity.player.Inventory;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PressGui extends BaseMachineGui<PressMenu> {
+public class PressGui extends GuiMachineBase<PressMenu> {
     private static final ResourceLocation TEXTURE = HBM.rl("textures/gui/gui_press.png");
     private static final ResourceLocation GAUGE = HBM.rl("textures/gui/gauges/small_bow.png");
 
@@ -38,9 +37,9 @@ public class PressGui extends BaseMachineGui<PressMenu> {
     protected void renderBg(GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY) {
         showBgTexture(pGuiGraphics, TEXTURE);
 
-        renderGauge(pGuiGraphics, GAUGE, this.leftPos + 25, topPos + 16, 18, 18, (menu.getSpeed()) / PressEntity.MAX_SPEED);
+        renderGauge(pGuiGraphics, GAUGE, this.leftPos + 25, topPos + 16, 18, 18, (menu.getSpeed()) / PressEntityBE.MAX_SPEED);
 
-        int k = (int) (menu.pressEntity.renderPress * 16 / PressEntity.MAX_PRESS);
+        int k = (int) (menu.pressEntity.renderPress * 16 / PressEntityBE.MAX_PRESS);
         pGuiGraphics.blit(TEXTURE, leftPos + 79, topPos + 35, 194, 0, 18, k);
 
         if (menu.getBurnTime() >= 20){
@@ -52,7 +51,7 @@ public class PressGui extends BaseMachineGui<PressMenu> {
     protected void renderTooltip(GuiGraphics pGuiGraphics, int pX, int pY) {
         List<Component> tooltips = new ArrayList<>();
         if (isHovering(25, 16, 18, 18, pX, pY)){
-            tooltips.add(HBMLang.GUI_TOOLTIP_PROGRESS.translate(String.format("%.2f", menu.getSpeed() * 100 / PressEntity.MAX_SPEED)));
+            tooltips.add(HBMLang.GUI_TOOLTIP_PROGRESS.translate(String.format("%.2f", menu.getSpeed() * 100 / PressEntityBE.MAX_SPEED)));
         }else if (isHovering(25, 34, 18, 18, pX, pY)){
             tooltips.add(HBMLang.GUI_TOOLTIP_LEFT_TIME.translate(String.format("%.2f", menu.getBurnTime() / 200)));
         }

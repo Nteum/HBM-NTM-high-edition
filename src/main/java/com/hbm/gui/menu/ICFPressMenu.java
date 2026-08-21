@@ -1,7 +1,7 @@
 package com.hbm.gui.menu;
 
+import com.hbm.blockentity.machine.icf.ICFPressBE;
 import com.hbm.gui.HBMMenus;
-import com.hbm.blockentity.machine.icf.ICFPressBlockEntity;
 
 import com.hbm.item.icf.ItemICFPellet;
 import com.hbm.registries.ModItems;
@@ -27,14 +27,14 @@ public class ICFPressMenu extends BaseMachineMenu {
     public ICFPressMenu(int containerId, Inventory inventory, Container container, ContainerData data) {
         super(HBMMenus.ICF_PRESS_MENU.get(), containerId, container, data);
         this.slotNum = SLOT_COUNT;
-        this.addSlot(new Slot(container, ICFPressBlockEntity.SLOT_EMPTY, 98, 17));
-        this.addSlot(new Slot(container, ICFPressBlockEntity.SLOT_OUTPUT, 98, 53));
-        this.addSlot(new Slot(container, ICFPressBlockEntity.SLOT_MUON, 8, 17));
-        this.addSlot(new Slot(container, ICFPressBlockEntity.SLOT_MUON_RETURN, 8, 53));
-        this.addSlot(new Slot(container, ICFPressBlockEntity.SLOT_FUEL_LEFT, 62, 53));
-        this.addSlot(new Slot(container, ICFPressBlockEntity.SLOT_FUEL_RIGHT, 134, 53));
-        this.addSlot(new Slot(container, ICFPressBlockEntity.SLOT_LEFT_BUFFER, 62, 17));
-        this.addSlot(new Slot(container, ICFPressBlockEntity.SLOT_RIGHT_BUFFER, 134, 17));
+        this.addSlot(new Slot(container, ICFPressBE.SLOT_EMPTY, 98, 17));
+        this.addSlot(new Slot(container, ICFPressBE.SLOT_OUTPUT, 98, 53));
+        this.addSlot(new Slot(container, ICFPressBE.SLOT_MUON, 8, 17));
+        this.addSlot(new Slot(container, ICFPressBE.SLOT_MUON_RETURN, 8, 53));
+        this.addSlot(new Slot(container, ICFPressBE.SLOT_FUEL_LEFT, 62, 53));
+        this.addSlot(new Slot(container, ICFPressBE.SLOT_FUEL_RIGHT, 134, 53));
+        this.addSlot(new Slot(container, ICFPressBE.SLOT_LEFT_BUFFER, 62, 17));
+        this.addSlot(new Slot(container, ICFPressBE.SLOT_RIGHT_BUFFER, 134, 17));
         addPlayerSlot(inventory, PLAYER_INV_X_OFFSET, PLAYER_INV_Y_OFFSET);
         this.addDataSlots(data);
     }
@@ -51,15 +51,15 @@ public class ICFPressMenu extends BaseMachineMenu {
                     return ItemStack.EMPTY;
                 }
             } else if (current.is(ModItems.icf_pellet_empty.get())) {
-                if (!moveItemStackTo(current, ICFPressBlockEntity.SLOT_EMPTY, ICFPressBlockEntity.SLOT_EMPTY + 1, false)) {
+                if (!moveItemStackTo(current, ICFPressBE.SLOT_EMPTY, ICFPressBE.SLOT_EMPTY + 1, false)) {
                     return ItemStack.EMPTY;
                 }
             } else if (current.is(ModItems.PARTICLE_MUON.get())) {
-                if (!moveItemStackTo(current, ICFPressBlockEntity.SLOT_MUON, ICFPressBlockEntity.SLOT_MUON + 1, false)) {
+                if (!moveItemStackTo(current, ICFPressBE.SLOT_MUON, ICFPressBE.SLOT_MUON + 1, false)) {
                     return ItemStack.EMPTY;
                 }
             } else if (ItemICFPellet.fuelFromStack(current) != null) {
-                if (!moveItemStackTo(current, ICFPressBlockEntity.SLOT_LEFT_BUFFER, ICFPressBlockEntity.SLOT_RIGHT_BUFFER + 1, false)) {
+                if (!moveItemStackTo(current, ICFPressBE.SLOT_LEFT_BUFFER, ICFPressBE.SLOT_RIGHT_BUFFER + 1, false)) {
                     return ItemStack.EMPTY;
                 }
             } else {

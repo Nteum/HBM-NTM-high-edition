@@ -1,12 +1,6 @@
 package com.hbm.reactor.rbmk;
 
-import com.hbm.blockentity.machine.rbmk.RBMKBaseEntity;
-import com.hbm.blockentity.machine.rbmk.RBMKBoilerEntity;
-import com.hbm.blockentity.machine.rbmk.RBMKControlRodEntity;
-import com.hbm.blockentity.machine.rbmk.RBMKCoolerEntity;
-import com.hbm.blockentity.machine.rbmk.RBMKFuelChannelEntity;
-import com.hbm.blockentity.machine.rbmk.RBMKHeaterEntity;
-import com.hbm.blockentity.machine.rbmk.RBMKOutgasserEntity;
+import com.hbm.blockentity.machine.rbmk.*;
 import com.hbm.item.rbmk.ItemRBMKFuelRod;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -36,25 +30,25 @@ public final class RBMKColumns {
         final BlockPos topPos = corePos.above();
         final BlockEntity topEntity = level.getBlockEntity(topPos);
 
-        if (topEntity instanceof RBMKFuelChannelEntity) {
+        if (topEntity instanceof RBMKFuelChannelEntityBE) {
             return RBMKColumnType.FUEL;
         }
-        if (topEntity instanceof RBMKControlRodEntity controlRod) {
+        if (topEntity instanceof RBMKControlRodEntityBE controlRod) {
             return controlRod.isAutoColumn() ? RBMKColumnType.CONTROL_AUTO : RBMKColumnType.CONTROL;
         }
-        if (topEntity instanceof RBMKBoilerEntity) {
+        if (topEntity instanceof RBMKBoilerEntityBE) {
             return RBMKColumnType.BOILER;
         }
-        if (topEntity instanceof RBMKOutgasserEntity) {
+        if (topEntity instanceof RBMKOutgasserEntityBE) {
             return RBMKColumnType.OUTGASSER;
         }
-        if (topEntity instanceof com.hbm.blockentity.machine.rbmk.RBMKStorageEntity) {
+        if (topEntity instanceof RBMKStorageEntityBE) {
             return RBMKColumnType.STORAGE;
         }
-        if (topEntity instanceof RBMKCoolerEntity) {
+        if (topEntity instanceof RBMKCoolerEntityBE) {
             return RBMKColumnType.COOLER;
         }
-        if (topEntity instanceof RBMKHeaterEntity) {
+        if (topEntity instanceof RBMKHeaterEntityBE) {
             return RBMKColumnType.HEATEX;
         }
 
@@ -124,29 +118,29 @@ public final class RBMKColumns {
         state.setSteamCompression(0);
         state.setMaxHeat(state.settings().meltdownHeat());
 
-        if (level.getBlockEntity(corePos) instanceof RBMKBaseEntity baseEntity) {
+        if (level.getBlockEntity(corePos) instanceof RBMKBaseEntityBE baseEntity) {
             state.setLidType(baseEntity.getLidType());
             state.setFluidBuffer(baseEntity.getWaterAmount(), baseEntity.getWaterCapacity(),
                     baseEntity.getSteamAmount(), baseEntity.getSteamCapacity());
         }
 
         final BlockEntity topEntity = level.getBlockEntity(corePos.above());
-        if (topEntity instanceof RBMKFuelChannelEntity fuelChannel) {
+        if (topEntity instanceof RBMKFuelChannelEntityBE fuelChannel) {
             populateFuelState(state, fuelChannel);
-        } else if (topEntity instanceof RBMKControlRodEntity controlRod) {
+        } else if (topEntity instanceof RBMKControlRodEntityBE controlRod) {
             state.setControlRodInsertion(controlRod.getInsertionFraction());
             state.setTargetControlRodInsertion(controlRod.getTargetInsertionFraction());
             state.setControlColor(controlRod.getSelectedColorIndex());
-        } else if (topEntity instanceof RBMKBoilerEntity boiler) {
+        } else if (topEntity instanceof RBMKBoilerEntityBE boiler) {
             state.setSteamCompression(boiler.compressionStage());
-        } else if (topEntity instanceof RBMKHeaterEntity heater) {
+        } else if (topEntity instanceof RBMKHeaterEntityBE heater) {
             state.setHasRod(heater.isActive());
         }
 
         state.setModerated(hasAdjacentType(level, corePos, RBMKColumnType.MODERATOR));
     }
 
-    private static void populateFuelState(final RBMKColumnState state, final RBMKFuelChannelEntity fuelChannel) {
+    private static void populateFuelState(final RBMKColumnState state, final RBMKFuelChannelEntityBE fuelChannel) {
         final ItemStack stack = fuelChannel.fuelStack();
         if (!(stack.getItem() instanceof ItemRBMKFuelRod fuelRod)) {
             return;

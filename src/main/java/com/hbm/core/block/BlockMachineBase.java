@@ -61,7 +61,7 @@ public abstract class BlockMachineBase extends BaseEntityBlock {
             if (blockEntity instanceof MenuProvider menuProvider){   //如果有界面则打开界面
                 NetworkHooks.openScreen((ServerPlayer) pPlayer, menuProvider, buf -> {
                     buf.writeBlockPos(pPos);
-                    if (blockEntity instanceof BEMachineBase BEMachineBase) buf.writeInt(BEMachineBase.getContainerData().getCount());
+                    if (blockEntity instanceof BEMachineBase machineBase) buf.writeInt(machineBase.getContainerData().getCount());
                     else buf.writeInt(0);
                 });
             }
@@ -76,21 +76,18 @@ public abstract class BlockMachineBase extends BaseEntityBlock {
     public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pMovedByPiston) {
         if (!pState.is(pNewState.getBlock())){
             BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
-            if (blockEntity instanceof Container){
-                if (pLevel instanceof ServerLevel){
-                    /** 掉落方块中的物品 */
+            if (pLevel instanceof ServerLevel){
+                /* 掉落方块中的物品 */
+                if (blockEntity instanceof Container){  // Container的情况
                     Containers.dropContents(pLevel,pPos,(Container) blockEntity);
-                }
-                pLevel.updateNeighbourForOutputSignal(pPos,this);
-            }else {
-                IItemHandler handler = blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).orElse(null);
-                if (handler != null && handler instanceof IItemHandlerModifiable handlerModifiable){
-                    if (pLevel instanceof ServerLevel){
-                        /** 掉落方块中的物品 */
+                    pLevel.updateNeighbourForOutputSignal(pPos,this);
+                }else { // 有itemhandler的情况
+                    IItemHandler handler = blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).orElse(null);
+                    if (handler != null && handler instanceof IItemHandlerModifiable handlerModifiable){
                         Containers.dropContents(pLevel,pPos,new RecipeWrapper(handlerModifiable));
+                        pLevel.updateNeighbourForOutputSignal(pPos,this);
                     }
                 }
-                pLevel.updateNeighbourForOutputSignal(pPos,this);
             }
             super.onRemove(pState, pLevel, pPos, pNewState, pMovedByPiston);
         }

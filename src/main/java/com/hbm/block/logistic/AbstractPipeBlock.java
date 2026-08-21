@@ -2,7 +2,7 @@ package com.hbm.block.logistic;
 
 import com.hbm.block.interfaces.IToolable;
 import com.hbm.block.interfaces.ToolType;
-import com.hbm.blockentity.base.BasePipeBlockEntity;
+import com.hbm.core.blockentity.BEPipeBase;
 ;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -76,8 +76,8 @@ public abstract class AbstractPipeBlock extends PipeBlock implements EntityBlock
         BlockPos neighbourPos = clickedPos.relative(direction);
         BlockState neighbourState = pLevel.getBlockState(neighbourPos);
         return pLevel.getBlockState(clickedPos).getBlock() instanceof AbstractPipeBlock ?
-                ((BasePipeBlockEntity) Objects.requireNonNull(pLevel.getBlockEntity(clickedPos))).isDirAllow(direction)
-                        && ((neighbourState.getBlock() instanceof AbstractPipeBlock && ((BasePipeBlockEntity) Objects.requireNonNull(pLevel.getBlockEntity(neighbourPos))).isDirAllow(direction.getOpposite())) || connBlockEntityCond(pLevel,neighbourState,clickedPos,neighbourPos))
+                ((BEPipeBase) Objects.requireNonNull(pLevel.getBlockEntity(clickedPos))).isDirAllow(direction)
+                        && ((neighbourState.getBlock() instanceof AbstractPipeBlock && ((BEPipeBase) Objects.requireNonNull(pLevel.getBlockEntity(neighbourPos))).isDirAllow(direction.getOpposite())) || connBlockEntityCond(pLevel,neighbourState,clickedPos,neighbourPos))
                 : connBlockEntityCond(pLevel,neighbourState,clickedPos,neighbourPos);
     }
     /** 子类自定义的管道连接限制 */
@@ -86,14 +86,14 @@ public abstract class AbstractPipeBlock extends PipeBlock implements EntityBlock
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return pLevel.isClientSide() ? BasePipeBlockEntity::clientTicker : BasePipeBlockEntity::serverTicker;
+        return pLevel.isClientSide() ? BEPipeBase::clientTicker : BEPipeBase::serverTicker;
     }
 
     @Override
     public boolean onScrew(UseOnContext context, ToolType tool) {
         Level level = context.getLevel();
         BlockPos pos = context.getClickedPos();
-        if (context.getHand() == InteractionHand.MAIN_HAND && level.getBlockEntity(pos) instanceof BasePipeBlockEntity pipeEntity){
+        if (context.getHand() == InteractionHand.MAIN_HAND && level.getBlockEntity(pos) instanceof BEPipeBase pipeEntity){
             Direction hitDir = cableHitDirection(pos.getCenter(),context.getClickLocation());
             hitDir = hitDir==null ? context.getClickedFace() : hitDir;
             //更新本方块状态
@@ -106,7 +106,7 @@ public abstract class AbstractPipeBlock extends PipeBlock implements EntityBlock
             BlockState neighbourState = level.getBlockState(neighbourPos);
             BlockEntity neighbourEntity = level.getBlockEntity(neighbourPos);
             BlockState oldState;
-            if (neighbourEntity instanceof BasePipeBlockEntity neighbourPipeEntity){
+            if (neighbourEntity instanceof BEPipeBase neighbourPipeEntity){
                 neighbourPipeEntity.setDirAllow(hitDir.getOpposite(), newDirAllowState);
                 neighbourPipeEntity.setChanged();
                 oldState = level.getBlockState(neighbourPos);

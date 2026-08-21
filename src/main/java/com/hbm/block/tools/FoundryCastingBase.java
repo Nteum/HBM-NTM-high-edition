@@ -1,10 +1,10 @@
 package com.hbm.block.tools;
 
 import com.hbm.block.base.BlockBase;
-import com.hbm.block.base.BlockDummyable;
+import com.hbm.core.blockentity.BEUpdateable;
+import com.hbm.core.block.BlockDummyable;
 import com.hbm.block.interfaces.ICrucibleAcceptor;
 import com.hbm.block.interfaces.ILookOverlay;
-import com.hbm.blockentity.base.UpdateableBlockEntity;
 import com.hbm.blockentity.tools.TileFoundryBase;
 import com.hbm.utils.WorldUtils;
 import net.minecraft.core.BlockPos;
@@ -61,7 +61,7 @@ public abstract class FoundryCastingBase extends BlockBase implements EntityBloc
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return pLevel.isClientSide() ? UpdateableBlockEntity::clientTicker : UpdateableBlockEntity::serverTicker;
+        return pLevel.isClientSide() ? BEUpdateable::clientTicker : BEUpdateable::serverTicker;
     }
 
     @Override

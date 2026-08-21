@@ -1,7 +1,7 @@
 package com.hbm.block.tools;
 
 import com.hbm.block.base.BlockContainerBase;
-import com.hbm.blockentity.tools.TileEntityGeiger;
+import com.hbm.blockentity.tools.TileEntityGeigerBE;
 import com.hbm.registries.ModSounds;
 import com.hbm.utils.ContaminationUtil;
 import com.hbm.utils.DirectionUtils;
@@ -33,7 +33,7 @@ public class GeigerCounter extends BlockContainerBase {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new TileEntityGeiger(pPos, pState);
+        return new TileEntityGeigerBE(pPos, pState);
     }
 
     @Override
@@ -44,7 +44,7 @@ public class GeigerCounter extends BlockContainerBase {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return TileEntityGeiger::ticker;
+        return TileEntityGeigerBE::ticker;
     }
 
     @Override

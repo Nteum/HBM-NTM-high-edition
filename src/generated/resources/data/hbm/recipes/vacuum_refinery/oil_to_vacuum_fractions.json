@@ -1,0 +1,23 @@
+{
+  "type": "hbm:vacuum_refinery",
+  "input": {
+    "amount": 100,
+    "fluid": "hbm:oil"
+  },
+  "output1": {
+    "amount": 40,
+    "fluid": "hbm:heavyoil_vacuum"
+  },
+  "output2": {
+    "amount": 25,
+    "fluid": "hbm:reformate"
+  },
+  "output3": {
+    "amount": 20,
+    "fluid": "hbm:lightoil_vacuum"
+  },
+  "output4": {
+    "amount": 15,
+    "fluid": "hbm:sourgas"
+  }
+}

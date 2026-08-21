@@ -1,7 +1,7 @@
 package com.hbm.block.machine.rbmk;
 
 import com.hbm.block.interfaces.ILookOverlay;
-import com.hbm.blockentity.machine.rbmk.RBMKControlRodEntity;
+import com.hbm.blockentity.machine.rbmk.RBMKControlRodEntityBE;
 import com.hbm.reactor.rbmk.RBMKDoddOverlay;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -79,7 +79,7 @@ public class BlockRBMKControlRod extends Block implements EntityBlock, ILookOver
         }
 
         BlockEntity entity = level.getBlockEntity(pos);
-        if (entity instanceof RBMKControlRodEntity controlRod && player instanceof ServerPlayer serverPlayer) {
+        if (entity instanceof RBMKControlRodEntityBE controlRod && player instanceof ServerPlayer serverPlayer) {
             NetworkHooks.openScreen(serverPlayer, controlRod, pos);
             return InteractionResult.CONSUME;
         }
@@ -90,7 +90,7 @@ public class BlockRBMKControlRod extends Block implements EntityBlock, ILookOver
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new RBMKControlRodEntity(pos, state);
+        return new RBMKControlRodEntityBE(pos, state);
     }
 
     @Nullable
@@ -100,7 +100,7 @@ public class BlockRBMKControlRod extends Block implements EntityBlock, ILookOver
             return null;
         }
         return (lvl, pos, st, be) -> {
-            if (be instanceof RBMKControlRodEntity controlRod) {
+            if (be instanceof RBMKControlRodEntityBE controlRod) {
                 controlRod.serverTick();
             }
         };

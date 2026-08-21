@@ -1,10 +1,8 @@
 package com.hbm.block.machine;
 
-import com.hbm.block.base.BlockDummyable;
+import com.hbm.core.block.BlockDummyable;
 import com.hbm.blockentity.machine.TileFireBox;
-import com.hbm.blockentity.machine.TileFireboxBase;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.Shapes;

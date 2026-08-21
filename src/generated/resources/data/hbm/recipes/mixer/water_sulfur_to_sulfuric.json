@@ -1,0 +1,13 @@
+{
+  "type": "hbm:mixer",
+  "duration": 50,
+  "input1": {
+    "amount": 800,
+    "fluid": "hbm:water"
+  },
+  "outputAmount": 500,
+  "solidInput": {
+    "count": 1,
+    "item": "hbm:powder_ash_coal"
+  }
+}

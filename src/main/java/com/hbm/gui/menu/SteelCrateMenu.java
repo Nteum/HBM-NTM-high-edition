@@ -1,7 +1,7 @@
 package com.hbm.gui.menu;
 
-import com.hbm.blockentity.machine.IronCrateBlockEntity;
-import com.hbm.blockentity.machine.SteelCrateBlockEntity;
+import com.hbm.blockentity.machine.IronCrateBE;
+import com.hbm.blockentity.machine.SteelCrateBE;
 import com.hbm.gui.HBMMenus;
 import com.hbm.registries.ModBlocks;
 import net.minecraft.core.BlockPos;
@@ -29,7 +29,7 @@ public class SteelCrateMenu extends AbstractContainerMenu {
     private static final int PLAYER_HOTBAR_OFFSET = PLAYER_INV_OFFSET + 27;
     private static final int TOTAL_SLOTS = PLAYER_HOTBAR_OFFSET + 9;
 
-    private final IronCrateBlockEntity blockEntity;
+    private final IronCrateBE blockEntity;
     private final Level level;
     private final ItemStack crateSignature;
 
@@ -39,10 +39,10 @@ public class SteelCrateMenu extends AbstractContainerMenu {
 
     public SteelCrateMenu(int containerId, Inventory inventory, BlockEntity entity) {
         super(HBMMenus.STEEL_CRATE_MENU.get(), containerId);
-        if (entity instanceof IronCrateBlockEntity crate) {
+        if (entity instanceof IronCrateBE crate) {
             this.blockEntity = crate;
         } else {
-            this.blockEntity = new SteelCrateBlockEntity(BlockPos.ZERO, ModBlocks.crate_steel.get().defaultBlockState());
+            this.blockEntity = new SteelCrateBE(BlockPos.ZERO, ModBlocks.crate_steel.get().defaultBlockState());
         }
         this.level = inventory.player.level();
         this.crateSignature = new ItemStack(ModBlocks.crate_steel.get());

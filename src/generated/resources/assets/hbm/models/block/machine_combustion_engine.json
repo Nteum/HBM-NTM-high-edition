@@ -1,0 +1,96 @@
+{
+  "parent": "minecraft:block/block",
+  "automatic_culling": false,
+  "display": {
+    "firstperson_righthand": {
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "scale": [
+        0.1,
+        0.1,
+        0.1
+      ],
+      "translation": [
+        0.6666667,
+        -2,
+        0
+      ]
+    },
+    "fixed": {
+      "scale": [
+        0.125,
+        0.125,
+        0.125
+      ],
+      "translation": [
+        0.6666667,
+        -2,
+        0
+      ]
+    },
+    "ground": {
+      "scale": [
+        0.0625,
+        0.0625,
+        0.0625
+      ],
+      "translation": [
+        0.6666667,
+        3,
+        0
+      ]
+    },
+    "gui": {
+      "rotation": [
+        30,
+        135,
+        0
+      ],
+      "scale": [
+        0.15625,
+        0.15625,
+        0.15625
+      ],
+      "translation": [
+        0.6666667,
+        -2,
+        0
+      ]
+    },
+    "thirdperson_righthand": {
+      "rotation": [
+        75,
+        45,
+        0
+      ],
+      "scale": [
+        0.09375,
+        0.09375,
+        0.09375
+      ],
+      "translation": [
+        0.6666667,
+        2.5,
+        0
+      ]
+    }
+  },
+  "flip_v": true,
+  "loader": "hbm:multi_parts_obj",
+  "model": "hbm:models/block/combustion_engine/combustion_engine.obj",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "particle": "hbm:block/models/machines/combustion_engine",
+    "texture0": "hbm:block/models/machines/combustion_engine"
+  },
+  "transform": {
+    "translation": [
+      0.5,
+      0.0,
+      0.5
+    ]
+  }
+}

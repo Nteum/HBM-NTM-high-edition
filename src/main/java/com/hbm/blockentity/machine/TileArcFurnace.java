@@ -21,7 +21,7 @@ import com.hbm.item.misc.ItemElectrode;
 import com.hbm.particle.ParticleSystem;
 import com.hbm.registries.*;
 import com.hbm.core.contents.multiblock.MultiblockModule;
-import com.hbm.utils.sound.AudioWrapper;
+import com.hbm.core.client.sounds.AudioWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -269,7 +269,7 @@ public class TileArcFurnace extends DefaultMachineBE implements IUpgradeInfoProv
 
         if(this.lid != this.prevLid) {
             if(this.audioLid == null || !this.audioLid.isPlaying()) {
-                this.audioLid = getLoopedSound(ModSounds.DOOR_WGH_START.get(), (float) center.x, (float) center.y, (float) center.z, this.getVolume(0.75F), 15F, 1.0F, 5);
+                this.audioLid = getLoopedSound(ModSounds.DOOR_WGH_START.get(), (float) center.x, (float) center.y, (float) center.z, 0.75f, 15F, 1.0F, 5);
                 this.audioLid.startSound();
             }
             this.audioLid.keepAlive();
@@ -281,12 +281,12 @@ public class TileArcFurnace extends DefaultMachineBE implements IUpgradeInfoProv
         }
 
         if((lid == 1 || lid == 0) && lid != prevLid && !(this.prevLid == 0 && this.lid == 1)) {
-            this.level.playLocalSound(this.worldPosition, ModSounds.DOOR_WGH_STOP.get(), SoundSource.BLOCKS, this.getVolume(1), 1F, true);
+            this.level.playLocalSound(this.worldPosition, ModSounds.DOOR_WGH_STOP.get(), SoundSource.BLOCKS, 1, 1F, true);
         }
 
         if(this.progress > 0) {
             if(this.audioProgress == null || !this.audioProgress.isPlaying()) {
-                this.audioProgress = getLoopedSound(ModSounds.BLOCK_ELECTRIC_HUM.get(), (float) center.x, (float) center.y, (float) center.z, this.getVolume(1.5F), 15F, 0.75F, 5);
+                this.audioProgress = getLoopedSound(ModSounds.BLOCK_ELECTRIC_HUM.get(), (float) center.x, (float) center.y, (float) center.z, 1.5f, 15F, 0.75F, 5);
                 this.audioProgress.startSound();
             }
             this.audioProgress.updatePitch(0.75F);

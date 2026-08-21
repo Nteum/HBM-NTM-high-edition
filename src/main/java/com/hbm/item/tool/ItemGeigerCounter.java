@@ -2,7 +2,7 @@ package com.hbm.item.tool;
 
 import com.hbm.core.contents.addational_data.AdditionalDataManager;
 import com.hbm.core.contents.addational_data.DataEntry;
-import com.hbm.blockentity.tools.TileEntityGeiger;
+import com.hbm.blockentity.tools.TileEntityGeigerBE;
 import com.hbm.registries.ModSounds;
 import com.hbm.utils.ContaminationUtil;
 import net.minecraft.core.BlockPos;
@@ -23,7 +23,7 @@ public class ItemGeigerCounter extends Item {
     public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
         if (pEntity instanceof Player && !pLevel.isClientSide()){
             Float rad = AdditionalDataManager.getEntityData(pEntity, DataEntry.RADIATION).map(o -> (float) o).orElse(0f);
-            TileEntityGeiger.show(pLevel, (BlockPos) null, (Player) pEntity, pEntity.tickCount, rad);
+            TileEntityGeigerBE.show(pLevel, (BlockPos) null, (Player) pEntity, pEntity.tickCount, rad);
         }
     }
 

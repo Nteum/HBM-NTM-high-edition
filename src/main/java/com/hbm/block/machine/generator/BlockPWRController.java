@@ -2,7 +2,7 @@ package com.hbm.block.machine.generator;
 
 import com.hbm.block.base.BlockMachineBase;
 import com.hbm.blockentity.machine.PWRBlockEntity;
-import com.hbm.blockentity.machine.PWRControllerBlockEntity;
+import com.hbm.blockentity.machine.PWRControllerBE;
 import com.hbm.registries.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -34,7 +34,7 @@ public class BlockPWRController extends BlockMachineBase {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new PWRControllerBlockEntity(pPos, pState);
+        return new PWRControllerBE(pPos, pState);
     }
 
     @Override
@@ -46,7 +46,7 @@ public class BlockPWRController extends BlockMachineBase {
             return InteractionResult.SUCCESS;
         }
         BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
-        if (!(blockEntity instanceof PWRControllerBlockEntity controller)) {
+        if (!(blockEntity instanceof PWRControllerBE controller)) {
             return InteractionResult.CONSUME;
         }
         if (!controller.isAssembled()) {
@@ -57,7 +57,7 @@ public class BlockPWRController extends BlockMachineBase {
         return InteractionResult.CONSUME;
     }
 
-    private void assemble(Level level, BlockPos pos, PWRControllerBlockEntity controller, Player player) {
+    private void assemble(Level level, BlockPos pos, PWRControllerBE controller, Player player) {
         Map<BlockPos, Block> assembly = new HashMap<>();
         Map<BlockPos, Block> rods = new HashMap<>();
         Map<BlockPos, Block> sources = new HashMap<>();

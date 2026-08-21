@@ -1,7 +1,7 @@
 package com.hbm.block.machine.icf;
 
-import com.hbm.block.base.BlockDummyable;
-import com.hbm.blockentity.machine.icf.ICFReactorBlockEntity;
+import com.hbm.core.block.BlockDummyable;
+import com.hbm.blockentity.machine.icf.ICFReactorBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -21,7 +21,7 @@ public class BlockICFReactor extends BlockDummyable {
 
     @Override
     protected BlockEntity mainBlockEntity(BlockPos pPos, BlockState pState) {
-        return new ICFReactorBlockEntity(pPos, pState);
+        return new ICFReactorBE(pPos, pState);
     }
 
     @Override

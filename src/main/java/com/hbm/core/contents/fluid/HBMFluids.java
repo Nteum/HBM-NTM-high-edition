@@ -248,6 +248,7 @@ public class HBMFluids {
         // 化工气体
         SYNGAS         = add(fuelGas("syngas", 0xC0C090, 1, 4));
         OXYHYDROGEN    = add(combustibleGas("oxyhydrogen", 0xFFE0E0, 0, FuelGrade.HIGH, 25_000, 0));
+        SOURGAS        = add(of("sourgas", 0xC9BE0D, 4, 0, 0, 10, b -> b.addTag(GASEOUS).gaseous().addData(new Corrosion(10))));
 
         // 卤代烃气体
         CHLOROMETHANE = add(of("chloromethane", 0xD3CF9E, 2, 4, 0, 25, b -> b.addTag(GASEOUS).gaseous().addData(new Corrosion(15)).addData(new Flammable(50_000))));

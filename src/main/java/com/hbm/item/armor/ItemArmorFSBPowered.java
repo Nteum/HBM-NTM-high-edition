@@ -3,10 +3,11 @@ package com.hbm.item.armor;
 import com.hbm.HBMLang;
 import com.hbm.api.energy.IEnergyHandler;
 import com.hbm.api.energy.TransmitUtils;
-import com.hbm.api.energy.ItemStackEnergyHandler;
+import com.hbm.core.api.capability.HBMEnergyHandler;
+import com.hbm.core.capability.ItemStackCapabilityProvider;
+import com.hbm.core.capability.energy.ItemStackEnergyHandler;
 import com.hbm.registries.HBMCaps;
-import com.hbm.capabilities.ItemCapabilityWrapper;
-import com.hbm.item.tool.BatteryItem;
+import com.hbm.core.item.ItemBattery;
 import com.hbm.utils.math.BobMth;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -18,7 +19,6 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,7 +30,7 @@ public class ItemArmorFSBPowered extends ItemArmorFSB{
     public long consumption;
     public long tickDrain;
     public ItemArmorFSBPowered(ArmorMaterial pMaterial, Type pType, Properties pProperties, long capacity, long in, long consum, long drain) {
-        super(pMaterial, pType, pProperties.durability(BatteryItem.DEFAULT_DAMAGE));
+        super(pMaterial, pType, pProperties.durability(ItemBattery.DEFAULT_DAMAGE));
         this.capacity = capacity;
         this.input = in;
         this.consumption = consum;
@@ -39,9 +39,10 @@ public class ItemArmorFSBPowered extends ItemArmorFSB{
 
     @Override
     public @Nullable ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundTag nbt) {
-        List<ItemCapabilityWrapper.ItemCapability> capabilities = new ArrayList<>();
-        capabilities.add(new ItemStackEnergyHandler(capacity, input, 0,true));
-        return new ItemCapabilityWrapper(stack, capabilities.toArray(ItemCapabilityWrapper.ItemCapability[]::new));
+        ItemStackCapabilityProvider provider = new ItemStackCapabilityProvider();
+        provider.addCapability(HBMCaps.LONG_ENERGY, new ItemStackEnergyHandler(stack, capacity, input, true));
+        return provider.update(stack, nbt);
+
     }
 
     @Override
@@ -53,13 +54,13 @@ public class ItemArmorFSBPowered extends ItemArmorFSB{
     public static long getCharge(ItemStack stack){
         long result = 0;
         IEnergyHandler energyHandler = stack.getCapability(HBMCaps.LONG_ENERGY).orElse(null);
-        if (energyHandler != null) result = energyHandler.getStored();
+        if (energyHandler instanceof HBMEnergyHandler hbmEnergyHandler) result = hbmEnergyHandler.getEnergy();
         return result;
     }
     public static long getCapacity(ItemStack stack){
         long result = 0;
         IEnergyHandler energyHandler = stack.getCapability(HBMCaps.LONG_ENERGY).orElse(null);
-        if (energyHandler != null) result = energyHandler.getCapacity();
+        if (energyHandler instanceof HBMEnergyHandler hbmEnergyHandler) result = hbmEnergyHandler.getCapacity();
         return result;
     }
 

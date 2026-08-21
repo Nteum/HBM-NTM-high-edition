@@ -2,7 +2,7 @@ package com.hbm.block.logistic;
 
 import com.hbm.block.HBMBlockProperties;
 import com.hbm.block.interfaces.*;
-import com.hbm.blockentity.base.UpdateableBlockEntity;
+import com.hbm.core.blockentity.BEUpdateable;
 import com.hbm.blockentity.logistic.TileConveyorMachine;
 import com.hbm.utils.DirectionUtils;
 import com.hbm.utils.WorldUtils;
@@ -45,7 +45,7 @@ public abstract class ConveyorMachineBase extends Block implements EntityBlock, 
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return pLevel.isClientSide() ? UpdateableBlockEntity::clientTicker : UpdateableBlockEntity::serverTicker;
+        return pLevel.isClientSide() ? BEUpdateable::clientTicker : BEUpdateable::serverTicker;
     }
 
     @Override

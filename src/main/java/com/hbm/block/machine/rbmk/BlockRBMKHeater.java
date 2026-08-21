@@ -1,7 +1,7 @@
 package com.hbm.block.machine.rbmk;
 
 import com.hbm.block.interfaces.ILookOverlay;
-import com.hbm.blockentity.machine.rbmk.RBMKHeaterEntity;
+import com.hbm.blockentity.machine.rbmk.RBMKHeaterEntityBE;
 import com.hbm.reactor.rbmk.RBMKDoddOverlay;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -69,7 +69,7 @@ public class BlockRBMKHeater extends Block implements EntityBlock, ILookOverlay 
     private static void toggle(Level level, BlockPos pos, BlockState state, boolean active) {
         level.setBlock(pos, state.setValue(LIT, active), Block.UPDATE_ALL);
         BlockEntity be = level.getBlockEntity(pos);
-        if (be instanceof RBMKHeaterEntity heater) {
+        if (be instanceof RBMKHeaterEntityBE heater) {
             heater.setActive(active);
         }
     }
@@ -77,7 +77,7 @@ public class BlockRBMKHeater extends Block implements EntityBlock, ILookOverlay 
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new RBMKHeaterEntity(pos, state);
+        return new RBMKHeaterEntityBE(pos, state);
     }
 
     @Nullable
@@ -87,7 +87,7 @@ public class BlockRBMKHeater extends Block implements EntityBlock, ILookOverlay 
             return null;
         }
         return (lvl, pos, st, be) -> {
-            if (be instanceof RBMKHeaterEntity heater) {
+            if (be instanceof RBMKHeaterEntityBE heater) {
                 heater.serverTick();
             }
         };

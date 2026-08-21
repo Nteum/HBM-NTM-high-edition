@@ -3,7 +3,7 @@ package com.hbm.render.blockentity;
 import com.hbm.blockentity.machine.TileOreSloppper;
 import com.hbm.registries.ModItems;
 import com.hbm.render.RenderUtils;
-import com.hbm.render.model.engine.CustomPartsModel;
+import com.hbm.core.client.model.CustomPartsModel;
 import com.hbm.utils.DirectionUtils;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;

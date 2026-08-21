@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 public class BEProxy extends BECapabilities {
     public BlockPos cachedPos;
     public BEProxy(BlockPos pos, BlockState state) {
-        super(HBMTiles.PROXY_ENTITY.get(), pos, state);
+        super(HBMTiles.PROXY.get(), pos, state);
     }
 
     public BlockEntity getBlockEntity(){

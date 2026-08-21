@@ -1,0 +1,25 @@
+{
+  "loader": "forge:obj",
+  "flip_v": true,
+  "model": "hbm:models/block/solar/solar_panel.obj",
+  "textures": {
+    "texture0": "hbm:block/solar/solar_panel",
+    "particle": "hbm:block/solar/solar_panel"
+  },
+  "ambientocclusion": false,
+  "display": {
+    "gui": {
+      "scale": [1.0,1.0,1.0],
+      "rotation": [30,225,0]
+    },
+    "ground": {
+      "scale": [0.5,0.5,0.5]
+    },
+    "thirdperson_righthand": {
+      "scale": [0.5,0.5,0.5]
+    },
+    "firstperson_righthand": {
+      "scale": [0.4,0.4,0.4]
+    }
+  }
+}

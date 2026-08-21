@@ -2,8 +2,8 @@ package com.hbm.block.machine.rbmk;
 
 import com.hbm.block.machine.BaseSingleBlockMachine;
 import com.hbm.blockentity.HBMTiles;
-import com.hbm.blockentity.base.UpdateableBlockEntity;
-import com.hbm.blockentity.machine.rbmk.RBMKGraphEntity;
+import com.hbm.core.blockentity.BEUpdateable;
+import com.hbm.blockentity.machine.rbmk.RBMKGraphEntityBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -33,14 +33,14 @@ public class BlockRBMKGraph extends BaseSingleBlockMachine {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new RBMKGraphEntity(pos, state);
+        return new RBMKGraphEntityBE(pos, state);
     }
 
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
         return blockEntityType == HBMTiles.RBMK_GRAPH_ENTITY.get()
-                ? (level.isClientSide ? UpdateableBlockEntity::clientTicker : UpdateableBlockEntity::serverTicker)
+                ? (level.isClientSide ? BEUpdateable::clientTicker : BEUpdateable::serverTicker)
                 : null;
     }
 
@@ -71,7 +71,7 @@ public class BlockRBMKGraph extends BaseSingleBlockMachine {
 
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        if (!(level.getBlockEntity(pos) instanceof RBMKGraphEntity graph)) {
+        if (!(level.getBlockEntity(pos) instanceof RBMKGraphEntityBE graph)) {
             return InteractionResult.PASS;
         }
         if (!level.isClientSide) {

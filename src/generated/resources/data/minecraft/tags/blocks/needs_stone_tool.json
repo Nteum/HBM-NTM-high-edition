@@ -3,6 +3,21 @@
     "hbm:block_insulator",
     "hbm:block_fiberglass",
     "hbm:block_asbestos",
-    "hbm:block_schrabidium_cluster"
+    "hbm:block_schrabidium_cluster",
+    "hbm:geiger",
+    "hbm:nuke_gadget",
+    "hbm:nuke_boy",
+    "hbm:nuke_man",
+    "hbm:machine_boiler",
+    "hbm:machine_furnace_brick",
+    "hbm:machine_rtg_furnace",
+    "hbm:machine_electric_furnace",
+    "hbm:fluid_duct_neo",
+    "hbm:barrel_corroded",
+    "hbm:barrel_iron",
+    "hbm:barrel_steel",
+    "hbm:barrel_tcalloy",
+    "hbm:barrel_antimatter",
+    "hbm:machine_press"
   ]
 }

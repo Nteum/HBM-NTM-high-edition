@@ -10,7 +10,7 @@ import com.hbm.api.fluid.SingleFluidHandler;
 import com.hbm.block.decoriate.BlockOre;
 import com.hbm.block.env.BedRockOre;
 import com.hbm.blockentity.HBMTiles;
-import com.hbm.blockentity.base.DummyableBlockEntity;
+import com.hbm.blockentity.base.DummyableBE;
 import com.hbm.blockentity.interfaces.IUpgradeInfoProvider;
 import com.hbm.config.ConfigWorld;
 import com.hbm.gui.menu.MenuMinerLarge;
@@ -59,7 +59,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class TileMinerLarge extends DummyableBlockEntity implements IUpgradeInfoProvider {
+public class TileMinerLarge extends DummyableBE implements IUpgradeInfoProvider {
     public static final long BASE_CONSUMPTION = 10_000L;
     public static final long MAX_POWER = 1_000_000;
     public static final int MAX_TANK_CAPACITY = 16_000;

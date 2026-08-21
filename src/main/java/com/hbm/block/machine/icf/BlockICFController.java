@@ -1,7 +1,7 @@
 package com.hbm.block.machine.icf;
 
 import com.hbm.block.base.BaseMachineBlock;
-import com.hbm.blockentity.machine.icf.ICFControllerBlockEntity;
+import com.hbm.blockentity.machine.icf.ICFControllerBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
@@ -27,14 +27,14 @@ public class BlockICFController extends BaseMachineBlock implements EntityBlock 
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new ICFControllerBlockEntity(pos, state);
+        return new ICFControllerBE(pos, state);
     }
 
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         if (!level.isClientSide) {
             BlockEntity blockEntity = level.getBlockEntity(pos);
-            if (blockEntity instanceof ICFControllerBlockEntity controller) {
+            if (blockEntity instanceof ICFControllerBE controller) {
                 if (player.isShiftKeyDown()) {
                     controller.toggleEnabled();
                     player.displayClientMessage(controller.isEnabled()

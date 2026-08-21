@@ -1,7 +1,7 @@
 package com.hbm.gui.menu;
 
 import com.hbm.Inventory.recipe.AssemblerRecipe;
-import com.hbm.blockentity.machine.AssemblerEntity;
+import com.hbm.blockentity.machine.AssemblerEntityBE;
 import com.hbm.gui.HBMMenus;
 import com.hbm.registries.ModTags;
 import com.hbm.utils.WorldUtils;
@@ -15,12 +15,12 @@ import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
 public class AssemblerMenu extends BaseMachineMenu{
-    private AssemblerEntity be;
+    private AssemblerEntityBE be;
     int[][] inputSlotPos = {{8, 18},{26, 18},{8, 36},{26, 36},{8, 54},{26, 54},{8, 72},{26, 72},{8, 90},{26, 90},{8, 108},{26, 108}};
     public AssemblerMenu(int id, Inventory playerInventory, FriendlyByteBuf buf) {
-        this(id, playerInventory, WorldUtils.getTileEntity(AssemblerEntity.class, Minecraft.getInstance().level, buf.readBlockPos()), new SimpleContainerData(3));
+        this(id, playerInventory, WorldUtils.getTileEntity(AssemblerEntityBE.class, Minecraft.getInstance().level, buf.readBlockPos()), new SimpleContainerData(3));
     }
-    public AssemblerMenu(int pContainerId, Inventory pPlayerInventory, AssemblerEntity be, ContainerData containerData1) {
+    public AssemblerMenu(int pContainerId, Inventory pPlayerInventory, AssemblerEntityBE be, ContainerData containerData1) {
         super(HBMMenus.ASSEMBLER_MENU.get(), pContainerId, be, containerData1);
         this.be = be;
         ItemStackHandler handler = be.getItemHandler();

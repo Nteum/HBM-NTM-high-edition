@@ -1,7 +1,7 @@
 package com.hbm.render.blockentity;
 
 
-import com.hbm.blockentity.machine.AssemblerEntity;
+import com.hbm.blockentity.machine.AssemblerEntityBE;
 import com.hbm.render.model.Models;
 import com.hbm.utils.DirectionUtils;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -22,7 +22,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import static com.hbm.render.RenderUtils.renderBlockModel;
 
-public class AssemblerRenderer implements BlockEntityRenderer<AssemblerEntity> {
+public class AssemblerRenderer implements BlockEntityRenderer<AssemblerEntityBE> {
     public static BakedModel model;
     public static BakedModel model1;
     public static BakedModel model2;
@@ -37,7 +37,7 @@ public class AssemblerRenderer implements BlockEntityRenderer<AssemblerEntity> {
         model3 = modelManager.getModel(Models.ASSEMBLER_BODY);
     }
     @Override
-    public void render(AssemblerEntity pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, int pPackedOverlay) {
+    public void render(AssemblerEntityBE pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, int pPackedOverlay) {
         BlockRenderDispatcher blockRenderer = Minecraft.getInstance().getBlockRenderer();
         ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
         ModelBlockRenderer modelRenderer = blockRenderer.getModelRenderer();

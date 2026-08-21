@@ -1,24 +1,24 @@
 {
   "values": [
-    "#forge:ores/fluorite",
+    "#forge:ores/tikite",
     "#forge:ores/niter",
     "#forge:ores/tungsten",
-    "#forge:ores/lead",
-    "#forge:ores/oil",
-    "#forge:ores/uranium",
-    "#forge:ores/rare_earth",
-    "#forge:ores/gas",
-    "#forge:ores/lithium",
-    "#forge:ores/coltan",
-    "#forge:ores/tikite",
+    "#forge:ores/sa326",
     "#forge:ores/beryllium",
     "#forge:ores/thorium",
-    "#forge:ores/cobalt",
-    "#forge:ores/sa326",
-    "#forge:ores/asbestos",
     "#forge:ores/aluminium",
-    "#forge:ores/plutonium",
+    "#forge:ores/rare_earth",
+    "#forge:ores/coltan",
+    "#forge:ores/gas",
+    "#forge:ores/uranium",
+    "#forge:ores/cobalt",
+    "#forge:ores/lithium",
+    "#forge:ores/titanium",
+    "#forge:ores/lead",
+    "#forge:ores/oil",
     "#forge:ores/smolder",
-    "#forge:ores/titanium"
+    "#forge:ores/fluorite",
+    "#forge:ores/plutonium",
+    "#forge:ores/asbestos"
   ]
 }

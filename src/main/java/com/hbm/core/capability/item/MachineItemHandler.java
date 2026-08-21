@@ -22,4 +22,9 @@ public class MachineItemHandler extends ItemStackHandler {
         Predicate<ItemStack> filter = slotFilters[slot];
         return filter == null || filter.test(stack);
     }
+
+    /** 通知内容变化，供模块/外部触发保存 */
+    public void notifyContentsChanged(int slot){
+        this.onContentsChanged(slot);
+    }
 }

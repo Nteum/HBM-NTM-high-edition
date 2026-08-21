@@ -1,6 +1,6 @@
 package com.hbm.render.blockentity;
 
-import com.hbm.blockentity.machine.rbmk.RBMKGraphEntity;
+import com.hbm.blockentity.machine.rbmk.RBMKGraphEntityBE;
 import com.hbm.reactor.rbmk.RBMKMonitorMetric;
 import com.hbm.utils.DirectionUtils;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -19,7 +19,7 @@ import org.joml.Matrix4f;
  * Two-channel RBMK graph panel renderer. Uses sampled history curves like the
  * legacy panel instead of generic text spark-lines.
  */
-public class RBMKGraphRenderer implements BlockEntityRenderer<RBMKGraphEntity> {
+public class RBMKGraphRenderer implements BlockEntityRenderer<RBMKGraphEntityBE> {
 
     private static final float PANEL_SCALE = 1.0F / 128.0F;
     private static final float FACE_Z = 0.5030F;
@@ -35,7 +35,7 @@ public class RBMKGraphRenderer implements BlockEntityRenderer<RBMKGraphEntity> {
     }
 
     @Override
-    public void render(RBMKGraphEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource buffer,
+    public void render(RBMKGraphEntityBE blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource buffer,
                        int packedLight, int packedOverlay) {
         Font font = Minecraft.getInstance().font;
         BlockState state = blockEntity.getBlockState();
@@ -156,7 +156,7 @@ public class RBMKGraphRenderer implements BlockEntityRenderer<RBMKGraphEntity> {
     }
 
     @Override
-    public boolean shouldRenderOffScreen(RBMKGraphEntity blockEntity) {
+    public boolean shouldRenderOffScreen(RBMKGraphEntityBE blockEntity) {
         return true;
     }
 }

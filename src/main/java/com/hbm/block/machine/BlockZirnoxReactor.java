@@ -1,7 +1,7 @@
 package com.hbm.block.machine;
 
-import com.hbm.block.base.BlockDummyable;
-import com.hbm.blockentity.machine.ZirnoxReactorBlockEntity;
+import com.hbm.core.block.BlockDummyable;
+import com.hbm.blockentity.machine.ZirnoxReactorBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -19,6 +19,6 @@ public class BlockZirnoxReactor extends BlockDummyable {
 
     @Override
     protected BlockEntity mainBlockEntity(BlockPos pPos, BlockState pState) {
-        return new ZirnoxReactorBlockEntity(pPos, pState);
+        return new ZirnoxReactorBE(pPos, pState);
     }
 }

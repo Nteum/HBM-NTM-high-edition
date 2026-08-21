@@ -3,7 +3,7 @@ package com.hbm.block.logistic;
 import com.hbm.block.HBMBlockProperties;
 import com.hbm.block.interfaces.IToolable;
 import com.hbm.block.interfaces.ToolType;
-import com.hbm.blockentity.base.UpdateableBlockEntity;
+import com.hbm.core.blockentity.BEUpdateable;
 import com.hbm.blockentity.logistic.TileConveyor;
 import com.hbm.utils.DirectionUtils;
 import com.hbm.utils.InventoryUtils;
@@ -227,7 +227,7 @@ public class Conveyor extends Block implements EntityBlock, IToolable {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return pLevel.isClientSide() ? UpdateableBlockEntity::clientTicker : UpdateableBlockEntity::serverTicker;
+        return pLevel.isClientSide() ? BEUpdateable::clientTicker : BEUpdateable::serverTicker;
     }
 
     @Override

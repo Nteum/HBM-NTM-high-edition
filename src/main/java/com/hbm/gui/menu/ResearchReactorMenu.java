@@ -1,6 +1,6 @@
 package com.hbm.gui.menu;
 
-import com.hbm.blockentity.machine.research.ResearchReactorBlockEntity;
+import com.hbm.blockentity.machine.research.ResearchReactorBE;
 import com.hbm.gui.HBMMenus;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
@@ -24,12 +24,12 @@ public class ResearchReactorMenu extends BaseMachineMenu {
     };
 
     public ResearchReactorMenu(int containerId, Inventory inventory) {
-        this(containerId, inventory, new SimpleContainer(ResearchReactorBlockEntity.SLOT_COUNT), new SimpleContainerData(5));
+        this(containerId, inventory, new SimpleContainer(ResearchReactorBE.SLOT_COUNT), new SimpleContainerData(5));
     }
 
     public ResearchReactorMenu(int containerId, Inventory inventory, Container container, ContainerData data) {
         super(HBMMenus.RESEARCH_REACTOR_MENU.get(), containerId, container, data);
-        this.slotNum = ResearchReactorBlockEntity.SLOT_COUNT;
+        this.slotNum = ResearchReactorBE.SLOT_COUNT;
 
         for (int i = 0; i < SLOT_POSITIONS.length; i++) {
             int[] pos = SLOT_POSITIONS[i];
@@ -67,7 +67,7 @@ public class ResearchReactorMenu extends BaseMachineMenu {
 
     @Override
     public boolean clickMenuButton(Player player, int id) {
-        if (container instanceof ResearchReactorBlockEntity reactor) {
+        if (container instanceof ResearchReactorBE reactor) {
             if (id >= 1000 && id <= 1100) {
                 double pct = (id - 1000) / 100.0D;
                 reactor.setTargetLevel(pct);

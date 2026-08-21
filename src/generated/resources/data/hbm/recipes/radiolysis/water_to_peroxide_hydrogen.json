@@ -1,0 +1,15 @@
+{
+  "type": "hbm:radiolysis",
+  "input": {
+    "amount": 100,
+    "fluid": "hbm:water"
+  },
+  "output1": {
+    "amount": 80,
+    "fluid": "hbm:peroxide"
+  },
+  "output2": {
+    "amount": 20,
+    "fluid": "hbm:hydrogen"
+  }
+}

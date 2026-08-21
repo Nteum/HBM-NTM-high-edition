@@ -6,6 +6,7 @@ import com.hbm.HBMKey;
 import com.hbm.block.BlockEnums;
 import com.hbm.block.HBMBlockProperties;
 import com.hbm.block.base.BlockBase;
+import com.hbm.block.bomb.NukeGadget;
 import com.hbm.block.decoriate.BlockMolten;
 import com.hbm.block.decoriate.BlockOre;
 import com.hbm.block.decoriate.BlockTest12;
@@ -36,11 +37,14 @@ import com.hbm.block.machine.rbmk.BlockRBMKRadioController;
 import com.hbm.block.machine.rbmk.BlockRBMKSteamPort;
 import com.hbm.block.tools.GeigerCounter;
 import com.hbm.block.weapon.LaunchPad;
+import com.hbm.blockentity.bomb.NukeBombBoyEntityBE;
+import com.hbm.blockentity.bomb.NukeBombCustomEntityBE;
+import com.hbm.blockentity.bomb.NukeBombFatEntityBE;
+import com.hbm.blockentity.bomb.TileNukeGadget;
+import com.hbm.blockentity.logistic.PipeEntityBEPipeBase;
 import com.hbm.blockentity.machine.*;
-import com.hbm.blockentity.machine.rbmk.RBMKBoilerEntity;
-import com.hbm.blockentity.machine.rbmk.RBMKCoolerEntity;
-import com.hbm.blockentity.machine.rbmk.RBMKOutgasserEntity;
-import com.hbm.blockentity.machine.rbmk.RBMKStorageEntity;
+import com.hbm.blockentity.machine.rbmk.*;
+import com.hbm.blockentity.machine.rbmk.RBMKOutgasserEntityBE;
 import com.hbm.block.machine.research.BlockResearchReactor;
 import com.hbm.block.machine.generator.BlockPWR;
 import com.hbm.block.machine.generator.BlockPWRController;
@@ -48,40 +52,33 @@ import com.hbm.block.machine.generator.BlockPWRPillar;
 import com.hbm.block.machine.generator.BlockGenericPWR;
 import com.hbm.block.space.BlockSpaceStation;
 import com.hbm.block.tools.FoundryMold;
-import com.hbm.block.weapon.NukeBoy;
-import com.hbm.block.weapon.NukeCustom;
-import com.hbm.block.weapon.NukeFat;
+import com.hbm.block.bomb.NukeBoy;
+import com.hbm.block.bomb.NukeCustom;
+import com.hbm.block.bomb.NukeFat;
+import com.hbm.blockentity.machine.rbmk.RBMKStorageEntityBE;
+import com.hbm.blockentity.tools.TileEntityGeigerBE;
 import com.hbm.config.ConfigBomb;
+import com.hbm.core.client.render.RendererBlockNaked;
 import com.hbm.core.contents.fluid.HBMFluids;
 import com.hbm.datagen.json.HBMJsonProvider;
 import com.hbm.datagen.LanguageProvider;
 import com.hbm.datagen.loot.BlockLootGen;
 import com.hbm.datagen.model.BlockStateGen;
 import com.hbm.datagen.tag.BlockTagsGen;
-import com.hbm.gui.menu.MenuArcFurnace;
-import com.hbm.gui.menu.MenuCentrifuge;
-import com.hbm.gui.menu.MenuCrystallizer;
-import com.hbm.gui.menu.MenuOreSlopper;
-import com.hbm.gui.screen.GuiArcFurnace;
-import com.hbm.gui.screen.GuiCentrifuge;
-import com.hbm.gui.screen.GuiCrystallizer;
-import com.hbm.gui.screen.GuiOreSlopper;
-import com.hbm.item.blockitem.BlockItemDummyable;
+import com.hbm.gui.menu.*;
+import com.hbm.gui.screen.*;
+import com.hbm.core.item.BlockItemDummyable;
 import com.hbm.item.blockitem.IronCrateItem;
 import com.hbm.item.blockitem.ItemPosModify;
 import com.hbm.item.blockitem.SteelCrateItem;
-import com.hbm.item.tool.BatteryBlockItem;
+import com.hbm.core.item.BlockItemBattery;
 import com.hbm.reactor.rbmk.RBMKPeripheralType;
 import com.hbm.registries.WrappedRegistryBuilder.WrappedBlockRegistryBuilder;
 import com.hbm.debug.BlockDebug;
-import com.hbm.render.blockentity.RenderArcFurnace;
-import com.hbm.render.blockentity.RenderCrystallizer;
-import com.hbm.render.blockentity.RendererOreSlopper;
-import com.hbm.render.blockentity.RenderrerCentrifuge;
+import com.hbm.render.blockentity.*;
 import com.hbm.world.feature.BedrockOreDefinition;
 import net.minecraft.core.Vec3i;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.*;
@@ -116,6 +113,8 @@ public class ModBlocks {
     static {
         HBMFluids.registerBlock(BLOCKS);
     }
+
+    private static final TagKey<Block>[] TAG_MACHINE = new TagKey[]{BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_STONE_TOOL};
 
     public static RegistryObject<Block> TEST_RENDER;
     public static RegistryObject<Block> TEST_BOMB;
@@ -843,8 +842,19 @@ public class ModBlocks {
     public static RegistryObject<Block> DECO_PIPE_QUAD_MARKED = new WrappedBlockRegistryBuilder("deco_pipe_quad_marked", ()->new Block(Properties.copy(Blocks.STONE).strength(2, 5))).tab(ModTabs.BLOCKS.getKey()).mSmp(HBMKey.MODEL_CUBE_ALL, "pipe_top_marked").build();
 
     public static RegistryObject<Block> BROADCASTER_PC;
-    public static RegistryObject<Block> GEIGER;
+    public static RegistryObject<Block> GEIGER = new WrappedBlockRegistryBuilder("geiger", ()->new GeigerCounter(BlockBehaviour.Properties.of().strength(5.0F).explosionResistance(10.0F)))
+            .tab(ModTabs.MACHINE.getKey()).loc(HBMKey.REVERSE_GEN).obj("block/geiger", "block/geiger", 1).tags(TAG_MACHINE)
+            .tile(TileEntityGeigerBE::new)
+            .build();
     public static RegistryObject<Block> HEV_BATTERY = block("hev_battery", ()->new Block(Properties.copy(Blocks.IRON_BLOCK).strength(2, 8)));
+
+    public static final RegistryObject<Block> MACHINE_DECON = new WrappedBlockRegistryBuilder("machine_decon", ()->new com.hbm.block.machine.BlockDecon(Properties.of().strength(5.0F).explosionResistance(10.0F)))
+            .tab(ModTabs.MACHINE.getKey())
+            .mSmp(HBMKey.MODEL_CUBE_BOTTOM_TOP, "decon_side", "decon_top")
+            .loot(HBMKey.DROP_SELF)
+            .loc(HBMKey.REVERSE_GEN)
+            .tile(com.hbm.blockentity.machine.DeconEntity::new)
+            .build();
 
     public static RegistryObject<Block> FENCE_METAL = block("fence_metal", ()->new Block(Properties.copy(Blocks.IRON_BARS).strength(5, 30)));
 
@@ -1026,14 +1036,27 @@ public class ModBlocks {
     public static RegistryObject<Block> SAFE;
     public static RegistryObject<Block> MASS_STORAGE;
 
-    public static RegistryObject<Block> NUKE_GADGET;
-    public static RegistryObject<Block> NUKE_BOY;
-    public static RegistryObject<Block> NUKE_MAN;
+    private static final Properties PROPERTIES_NUKE = Properties.copy(Blocks.IRON_BLOCK).strength(5, 200);
+    public static RegistryObject<Block> NUKE_GADGET = new WrappedBlockRegistryBuilder("nuke_gadget", ()->new NukeGadget(PROPERTIES_NUKE, ConfigBomb.gadgetRadius))
+            .tab(ModTabs.NUKE.getKey()).obj("models/block/bomb/gadget", "models/bombs/gadget", 3).tags(TAG_MACHINE)
+            .tile(TileNukeGadget::new, true).renderer(RendererBlockNaked::new)
+            .build();
+    public static RegistryObject<Block> NUKE_BOY = new WrappedBlockRegistryBuilder("nuke_boy", ()->new NukeBoy(PROPERTIES_NUKE, ConfigBomb.boyRadius))
+            .tab(ModTabs.NUKE.getKey()).obj("models/block/bomb/boy", "bomb/boy", 2).tags(TAG_MACHINE)
+            .tile(NukeBombBoyEntityBE::new, true).renderer(RendererBlockNaked::new)
+            .build();
+    public static RegistryObject<Block> NUKE_MAN = new WrappedBlockRegistryBuilder("nuke_man", ()->new NukeFat(PROPERTIES_NUKE, ConfigBomb.fatmanRadius))
+            .tab(ModTabs.NUKE.getKey()).obj("models/block/bomb/fat_man", "bomb/fat_man", 3).tags(TAG_MACHINE)
+            .tile(NukeBombFatEntityBE::new, true).renderer(RendererBlockNaked::new)
+            .build();
     public static RegistryObject<Block> NUKE_MIKE;
     public static RegistryObject<Block> NUKE_TSAR;
     public static RegistryObject<Block> NUKE_FLEIJA;
     public static RegistryObject<Block> NUKE_PROTOTYPE;
-    public static RegistryObject<Block> NUKE_CUSTOM;
+    public static RegistryObject<Block> NUKE_CUSTOM = new WrappedBlockRegistryBuilder("nuke_custom", ()->new NukeCustom(PROPERTIES_NUKE))
+            .tab(ModTabs.NUKE.getKey()).obj("models/block/bomb/boy", "bomb/custom_nuke", 2)
+            .tile(NukeBombCustomEntityBE::new, true).renderer(RendererBlockNaked::new)
+            .build();
     public static RegistryObject<Block> NUKE_SOLINIUM;
     public static RegistryObject<Block> NUKE_N2;
     public static RegistryObject<Block> NUKE_FSTBMB;
@@ -1043,22 +1066,48 @@ public class ModBlocks {
     public static RegistryObject<Block> PUMP_STEAM;
     public static RegistryObject<Block> PUMP_ELECTRIC;
 
-    public static RegistryObject<Block> HEATER_FIREBOX = add("firebox", ()->new BlockFireBox(Properties.copy(Blocks.IRON_BLOCK)), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, HBMKey.ORDERLY_GEN, HBMKey.DROP_SELF);
+    public static RegistryObject<Block> HEATER_FIREBOX = new WrappedBlockRegistryBuilder("firebox", ()->new BlockFireBox(Properties.copy(Blocks.IRON_BLOCK)))
+            .tab(ModTabs.MACHINE.getKey()).obj("block/machine/firebox", "machine/firebox", 3)
+            .tile(TileFireBox::new, true).menu(MenuFirebox::new).gui(GuiFirebox::new).renderer(RendererFirebox::new)
+            .build();
     public static RegistryObject<Block> HEATER_OVEN;
     public static RegistryObject<Block> HEATER_OILBURNER;
     public static RegistryObject<Block> HEATER_ELECTRIC;
     public static RegistryObject<Block> HEATER_HEATEX;
-    public static RegistryObject<Block> MACHINE_ASHPIT;
+    public static final RegistryObject<Block> MACHINE_ASHPIT = new WrappedBlockRegistryBuilder("machine_ashpit", ()->new com.hbm.block.machine.BlockAshpit(Properties.of().strength(5.0F).explosionResistance(10.0F)))
+            .tab(ModTabs.MACHINE.getKey())
+            .mSmp(HBMKey.MODEL_CUBE_ALL, "models/machines/ashpit")
+            .loot(HBMKey.DROP_SELF)
+            .loc(HBMKey.REVERSE_GEN)
+            .tile(com.hbm.blockentity.machine.AshpitEntityBE::new)
+            .menu(com.hbm.gui.menu.AshpitMenu::new).gui(com.hbm.gui.screen.AshpitGui::new)
+            .build();
 
     public static RegistryObject<Block> FURNACE_IRON;
     public static RegistryObject<Block> FURNACE_STEEL;
     public static RegistryObject<Block> FURNACE_COMBINATION;
-    public static RegistryObject<Block> MACHINE_STIRLING;
+    public static final RegistryObject<Block> MACHINE_STIRLING = new WrappedBlockRegistryBuilder("machine_stirling", ()->new com.hbm.block.machine.BlockStirling(Properties.of().strength(5.0F).explosionResistance(10.0F)))
+            .tab(ModTabs.MACHINE.getKey())
+            .obj("block/stirling/stirling", "models/machines/stirling", 2.0F)
+            .loot(HBMKey.DROP_SELF)
+            .loc(HBMKey.REVERSE_GEN)
+            .tile(com.hbm.blockentity.machine.StirlingEntity::new, true)
+            .build();
     public static RegistryObject<Block> MACHINE_STIRLING_STEEL;
     public static RegistryObject<Block> MACHINE_STIRLING_CREATIVE;
-    public static RegistryObject<Block> MACHINE_SAWMILL;
+    public static final RegistryObject<Block> MACHINE_SAWMILL = new WrappedBlockRegistryBuilder("machine_sawmill", ()->new com.hbm.block.machine.BlockSawmill(Properties.of().strength(5.0F).explosionResistance(10.0F)))
+            .tab(ModTabs.MACHINE.getKey())
+            .obj("block/sawmill/sawmill", "models/machines/sawmill", 2.0F)
+            .loot(HBMKey.DROP_SELF)
+            .loc(HBMKey.REVERSE_GEN)
+            .tile(com.hbm.blockentity.machine.SawmillEntity::new, true)
+            .build();
     public static RegistryObject<Block> MACHINE_CRUCIBLE;
-    public static RegistryObject<Block> MACHINE_BOILER;
+    public static RegistryObject<Block> MACHINE_BOILER = new WrappedBlockRegistryBuilder("machine_boiler", ()->new MachineHeatBoiler(Properties.of().strength(5.0F).explosionResistance(10.0F)))
+            .tab(ModTabs.MACHINE.getKey()).obj("block/machines/boiler", "models/machines/boiler", 4.0F).modelRL(HBM.rl("block/machines/boiler_burst")).model(HBMKey.HORIZONTAL_BISTATE)
+            .loot(HBMKey.DROP_SELF).loc(HBMKey.REVERSE_GEN).tags(TAG_MACHINE)
+            .tile(TileEntityHeatBoiler::new, true).renderer(RendererBoiler::new)
+            .build();
     public static RegistryObject<Block> MACHINE_INDUSTRIAL_BOILER;
 
     public static final RegistryObject<Block> FOUNDRY_MOLD = new WrappedBlockRegistryBuilder("foundry_mold", () -> new FoundryMold(Properties.copy(Blocks.STONE)))
@@ -1071,8 +1120,10 @@ public class ModBlocks {
     public static RegistryObject<Block> FOUNDRY_SLAGTAP;
     public static RegistryObject<Block> SLAG;
 
-    public static RegistryObject<Block> MACHINE_DIFURNACE_OFF;
-    public static RegistryObject<Block> MACHINE_DIFURNACE_ON;
+    public static RegistryObject<Block> MACHINE_DIFURNACE = new WrappedBlockRegistryBuilder("difurnace", ()->new BlockDifurnace(Properties.of().lightLevel(litEmission(13))))
+            .tab(ModTabs.MACHINE.getKey()).loc("Blast Furnace").model(HBMKey.STANDALONE)
+            .tile(DifurnaceEntity::new).menu(DifurnaceMenu::new).gui(DifurnaceGui::new)
+            .build();
     public static RegistryObject<Block> MACHINE_DIFURNACE_EXTENSION;
     public static RegistryObject<Block> MACHINE_DIFURNACE_RTG_OFF;
     public static RegistryObject<Block> MACHINE_DIFURNACE_RTG_ON;
@@ -1083,7 +1134,14 @@ public class ModBlocks {
             .model((block, provider) -> provider.horizontalBlockWithItem(block, provider.genSimpleModel(block, HBM.rl("block/machines/centrifuge.obj"), HBM.rl("block/machine/centrifuge"), 3)))
             .tile(TileMachineCentrifuge::new, true).renderer(RenderrerCentrifuge::new).menu(MenuCentrifuge::new).gui(GuiCentrifuge::new)
             .tags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL).build();
-    public static RegistryObject<Block> MACHINE_GASCENT;
+    public static final RegistryObject<Block> MACHINE_GASCENT = new WrappedBlockRegistryBuilder("machine_gascent", ()->new com.hbm.block.machine.BlockGasCent(Properties.of().strength(5.0F).explosionResistance(10.0F)))
+            .tab(ModTabs.MACHINE.getKey())
+            .obj("block/gascent/gascent", "models/machines/gascent", 4.0F)
+            .loot(HBMKey.DROP_SELF)
+            .loc(HBMKey.REVERSE_GEN)
+            .tile(com.hbm.blockentity.machine.GasCentEntity::new, true)
+            .menu(GasCentMenu::new).gui(GasCentGui::new)
+            .build();
 
     public static RegistryObject<Block> MACHINE_FEL;
     public static RegistryObject<Block> MACHINE_SILEX;
@@ -1094,17 +1152,68 @@ public class ModBlocks {
             .tile(TileCrystallizer::new, true).renderer(RenderCrystallizer::new).menu(MenuCrystallizer::new).gui(GuiCrystallizer::new)
             .tags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL).build();
 
+    public static final RegistryObject<Block> MACHINE_SOLAR = new WrappedBlockRegistryBuilder("machine_solar", ()->new com.hbm.block.machine.BlockSolarPanel(Properties.of().strength(5.0F).explosionResistance(10.0F)))
+            .tab(ModTabs.MACHINE.getKey())
+            .obj("block/solar/solar_panel", "solar/solar_panel", 2.0F)
+            .loot(HBMKey.DROP_SELF)
+            .loc(HBMKey.REVERSE_GEN)
+            .tile(com.hbm.blockentity.machine.SolarPanelEntity::new, true)
+            .renderer(com.hbm.render.blockentity.SolarPanelRenderer::new)
+            .build();
+
+    public static final RegistryObject<Block> MACHINE_HYDROTREATER = new WrappedBlockRegistryBuilder("machine_hydrotreater", ()->new com.hbm.block.machine.BlockHydrotreater(Properties.of().strength(5.0F).explosionResistance(10.0F)))
+            .tab(ModTabs.MACHINE.getKey())
+            .obj("block/hydrotreater/hydrotreater", "hydrotreater/hydrotreater", 6.0F)
+            .loot(HBMKey.DROP_SELF)
+            .loc(HBMKey.REVERSE_GEN)
+            .tile(com.hbm.blockentity.machine.HydrotreaterEntity::new, true)
+            .menu(HydrotreaterMenu::new).gui(HydrotreaterGui::new).build();
+
+    public static final RegistryObject<Block> MACHINE_RADIATOR = new WrappedBlockRegistryBuilder("machine_radiator", ()->new com.hbm.block.machine.BlockRadiator(Properties.of().strength(5.0F).explosionResistance(10.0F)))
+            .tab(ModTabs.MACHINE.getKey())
+            .mSmp(HBMKey.MODEL_CUBE_ALL, "block_steel_machine")
+            .loot(HBMKey.DROP_SELF)
+            .loc(HBMKey.REVERSE_GEN)
+            .tile(RadiatorEntityBE::new, true)
+            .build();
+
+    public static final RegistryObject<Block> MACHINE_ORE_SLOPPER = new WrappedBlockRegistryBuilder("machine_ore_slopper", () -> new MachineOreSlopper(Properties.of().strength(5.0f, 10.0f)))
+            .tab(ModTabs.MACHINE.getKey()).loc("Bedrock Ore Processor")
+            .model((block, provider) -> provider.horizontalBlockWithItem(block, provider.genSimpleModel(block, HBM.rl("block/machines/ore_slopper.obj"), HBM.rl("block/machine/ore_slopper"), 7)))
+            .tile(TileOreSloppper::new, true).renderer(RendererOreSlopper::new).menu(MenuOreSlopper::new).gui(GuiOreSlopper::new)
+            .tags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL).build();
+
     public static RegistryObject<Block> MACHINE_UF6_TANK;
 
     public static RegistryObject<Block> MACHINE_PUF6_TANK;
 
-    public static RegistryObject<Block> MACHINE_REACTOR_BREEDING;
+    public static final RegistryObject<Block> MACHINE_REACTOR_BREEDING = new WrappedBlockRegistryBuilder("machine_reactor", ()->new com.hbm.block.machine.BlockBreedingReactor(Properties.of().strength(5.0F).explosionResistance(10.0F)))
+            .tab(ModTabs.MACHINE.getKey())
+            .obj("block/breeder/breeder", "models/machines/breeder", 3.0F)
+            .loot(HBMKey.DROP_SELF)
+            .loc(HBMKey.REVERSE_GEN)
+            .tile(com.hbm.blockentity.machine.BreedingReactorEntity::new, true)
+            .menu(BreedingReactorMenu::new).gui(BreedingReactorGui::new)
+            .build();
 
     public static RegistryObject<Block> MACHINE_NUKE_FURNACE_OFF;
     public static RegistryObject<Block> MACHINE_NUKE_FURNACE_ON;
-
-    public static RegistryObject<Block> MACHINE_RTG_FURNACE_OFF;
-    public static RegistryObject<Block> MACHINE_RTG_FURNACE_ON;
+    public static RegistryObject<Block> MACHINE_FURNACE_BRICK = new WrappedBlockRegistryBuilder("machine_furnace_brick", ()->new MachineFurnaceBrick(Properties.copy(Blocks.BRICKS).strength(5, 10).lightLevel(litEmission(13))))
+            .tab(ModTabs.MACHINE.getKey()).loc("Bricked Furnace").tags(TAG_MACHINE).model(HBMKey.HORIZONTAL_BISTATE).modelType(BlockStateGen.Type.ORIENTABLE_WITH_BOTTOM)
+            .tile(TileEntityFurnaceBrick::new).menu(MenuFurnaceBrick::new).gui(GuiFurnaceBrick::new)
+            .build();
+    public static RegistryObject<Block> MACHINE_RTG_FURNACE = new WrappedBlockRegistryBuilder("machine_rtg_furnace", ()->new MachineFurnaceRtg(Properties.copy(Blocks.BRICKS).strength(5, 10).lightLevel(litEmission(13))))
+            .tab(ModTabs.MACHINE.getKey()).loc("RTG Furnace").tags(TAG_MACHINE).model(HBMKey.HORIZONTAL_BISTATE).modelType(BlockStateGen.Type.ORIENTABLE).texSuf(new String[]{"_side_alt", "_alt", "_base_alt"})
+            .tile(BERtgFurnace::new).menu(MenuRtgFurnace::new).gui(GuiRtgFurnace::new)
+            .build();
+    public static final RegistryObject<Block> MACHINE_BLAST_FURNACE = new WrappedBlockRegistryBuilder("machine_blast_furnace", ()->new com.hbm.block.machine.BlockBlastFurnace(Properties.of().strength(5.0F).explosionResistance(10.0F)))
+            .tab(ModTabs.MACHINE.getKey())
+            .obj("block/blast_furnace/blast_furnace", "models/machines/blast_furnace", 7.0F)
+            .loot(HBMKey.DROP_SELF)
+            .loc(HBMKey.REVERSE_GEN)
+            .tile(com.hbm.blockentity.machine.BlastFurnaceEntity::new, true)
+            .menu(BlastFurnaceMenu::new).gui(BlastFurnaceGui::new)
+            .build();
 
     public static RegistryObject<Block> MACHINE_GENERATOR;
 
@@ -1141,10 +1250,18 @@ public class ModBlocks {
     public static RegistryObject<Block> HADRON_CORE;
     public static RegistryObject<Block> HADRON_COOLER;
 
-    public static RegistryObject<Block> MACHINE_ELECTRIC_FURNACE_OFF;
-    public static RegistryObject<Block> MACHINE_ELECTRIC_FURNACE_ON;
+    public static RegistryObject<Block> MACHINE_ELECTRIC_FURNACE = new WrappedBlockRegistryBuilder("machine_electric_furnace", ()->new MachineFurnaceElectric(Properties.of().lightLevel(litEmission(13))))
+            .tab(ModTabs.MACHINE.getKey()).loc("Electric Furnace").tags(TAG_MACHINE).model(HBMKey.HORIZONTAL_BISTATE).modelType(BlockStateGen.Type.ORIENTABLE_WITH_BOTTOM)
+            .tile(TileEntityMachineElectricFurnace::new).menu(MenuFurnaceElectric::new).gui(GuiFurnaceElectric::new)
+            .build();
 
-    public static RegistryObject<Block> MACHINE_MICROWAVE;
+    public static final RegistryObject<Block> MACHINE_MICROWAVE = new WrappedBlockRegistryBuilder("machine_microwave", ()->new com.hbm.block.machine.BlockMicrowave(Properties.of().strength(5.0F).explosionResistance(10.0F)))
+            .tab(ModTabs.MACHINE.getKey())
+            .mSmp(HBMKey.MODEL_CUBE_ALL, "machine_microwave")
+            .loot(HBMKey.DROP_SELF)
+            .loc(HBMKey.REVERSE_GEN)
+            .tile(MicrowaveEntityBE::new)
+            .menu(MicrowaveMenu::new).gui(MicrowaveGui::new).build();
 
     public static RegistryObject<Block> MACHINE_ARC_FURNACE_OFF;
     public static RegistryObject<Block> MACHINE_ARC_FURNACE_ON;
@@ -1182,10 +1299,20 @@ public class ModBlocks {
     public static RegistryObject<Block> CABLE_SWITCH;
     public static RegistryObject<Block> CABLE_DETECTOR;
     public static RegistryObject<Block> CABLE_DIODE;
-    public static RegistryObject<Block> MACHINE_DETECTOR;
+    public static final RegistryObject<Block> MACHINE_DETECTOR = new WrappedBlockRegistryBuilder("machine_detector", ()->new com.hbm.block.machine.BlockDetector(Properties.of().strength(5.0F).explosionResistance(10.0F)))
+            .tab(ModTabs.MACHINE.getKey())
+            .mSmp(HBMKey.MODEL_CUBE_ALL, "machine_detector_off")
+            .loot(HBMKey.DROP_SELF)
+            .loc(HBMKey.REVERSE_GEN)
+            .tile(DetectorEntityBE::new)
+            .build();
     public static RegistryObject<Block> FLUID_DUCT;
     public static RegistryObject<Block> FLUID_DUCT_SOLID;
-    public static RegistryObject<Block> FLUID_DUCT_NEO;
+    public static RegistryObject<Block> FLUID_DUCT_NEO = new WrappedBlockRegistryBuilder("fluid_duct_neo", ()->new BlockFluidPipe(BlockBehaviour.Properties.of().strength(5.0F).explosionResistance(10.0F).sound(net.minecraft.world.level.block.SoundType.METAL)))
+            .tab(ModTabs.MACHINE.getKey()).model(HBMKey.MODEL_STANDALONE).loc("Universal Fluid Duct").tags(TAG_MACHINE)
+            .tile(PipeEntityBEPipeBase::new).color(BlockFluidPipe::getColor)
+            .build();
+
     public static RegistryObject<Block> FLUID_DUCT_BOX;
     public static RegistryObject<Block> FLUID_DUCT_PAINTABLE;
     public static RegistryObject<Block> FLUID_DUCT_GAUGE;
@@ -1236,13 +1363,28 @@ public class ModBlocks {
     public static RegistryObject<Block> LADDER_STEEL = block("ladder_steel", ()->new Block(Properties.copy(Blocks.LADDER).strength(2, 8)));
     public static RegistryObject<Block> LADDER_TUNGSTEN = block("ladder_tungsten", ()->new Block(Properties.copy(Blocks.LADDER).strength(2, 8)));
 
+    private static Properties PROPERTIES_BARREL = BlockBehaviour.Properties.of().strength(2.0F).explosionResistance(5.0F).requiresCorrectToolForDrops().sound(SoundType.METAL);
     public static RegistryObject<Block> BARREL_PLASTIC = add("barrel_plastic", ()->new BlockFluidBarrel(BlockBehaviour.Properties.of().strength(2.0F).explosionResistance(5.0F).requiresCorrectToolForDrops().sound(SoundType.STONE), BlockFluidBarrel.BarrelProperties.of().capacity(12000)), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, "Safe Barrel™", HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
-    public static RegistryObject<Block> BARREL_CORRODED = add("barrel_corroded", ()->new BlockFluidBarrel(BlockBehaviour.Properties.of().strength(2.0F).explosionResistance(5.0F).requiresCorrectToolForDrops().sound(SoundType.METAL),BlockFluidBarrel.BarrelProperties.of().capacity(6000).hotResist().corrosiveResistance().highCorroResist().leaky()), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, "Corroded Barrel", HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
-    public static RegistryObject<Block> BARREL_IRON;
-    public static RegistryObject<Block> BARREL_STEEL;
-    public static RegistryObject<Block> BARREL_TCALLOY;
-    public static RegistryObject<Block> BARREL_ANTIMATTER;
-
+    public static RegistryObject<Block> BARREL_CORRODED = new WrappedBlockRegistryBuilder("barrel_corroded", ()->new BlockFluidBarrel(PROPERTIES_BARREL, BlockFluidBarrel.BarrelProperties.of().capacity(6000).hotResist()))
+            .tab(ModTabs.MACHINE.getKey()).tags(TAG_MACHINE).loc(HBMKey.REVERSE_GEN).obj("models/block/barrel/barrel", "barrel_corroded", 1)
+            .tile(BarrelEntityBE::new).menu(BarrelMenu::new).gui(BarrelGui::new)
+            .build();
+    public static RegistryObject<Block> BARREL_IRON = new WrappedBlockRegistryBuilder("barrel_iron", ()->new BlockFluidBarrel(PROPERTIES_BARREL, BlockFluidBarrel.BarrelProperties.of().capacity(8000).hotResist()))
+            .tab(ModTabs.MACHINE.getKey()).tags(TAG_MACHINE).loc(HBMKey.REVERSE_GEN).obj("models/block/barrel/barrel", "barrel_iron", 1)
+            .tile(BarrelEntityBE::new).menu(BarrelMenu::new).gui(BarrelGui::new)
+            .build();
+    public static RegistryObject<Block> BARREL_STEEL = new WrappedBlockRegistryBuilder("barrel_steel", ()->new BlockFluidBarrel(PROPERTIES_BARREL, BlockFluidBarrel.BarrelProperties.of().capacity(16000).hotResist()))
+            .tab(ModTabs.MACHINE.getKey()).tags(TAG_MACHINE).loc(HBMKey.REVERSE_GEN).obj("models/block/barrel/barrel", "barrel_steel", 1)
+            .tile(BarrelEntityBE::new).menu(BarrelMenu::new).gui(BarrelGui::new)
+            .build();
+    public static RegistryObject<Block> BARREL_TCALLOY = new WrappedBlockRegistryBuilder("barrel_tcalloy", ()->new BlockFluidBarrel(PROPERTIES_BARREL, BlockFluidBarrel.BarrelProperties.of().capacity(24000).hotResist()))
+            .tab(ModTabs.MACHINE.getKey()).tags(TAG_MACHINE).loc("Technetium Steel Barrel").obj("models/block/barrel/barrel", "barrel_tcalloy", 1)
+            .tile(BarrelEntityBE::new).menu(BarrelMenu::new).gui(BarrelGui::new)
+            .build();
+    public static RegistryObject<Block> BARREL_ANTIMATTER = new WrappedBlockRegistryBuilder("barrel_antimatter", ()->new BlockFluidBarrel(PROPERTIES_BARREL, BlockFluidBarrel.BarrelProperties.of().capacity(16000).hotResist()))
+            .tab(ModTabs.MACHINE.getKey()).tags(TAG_MACHINE).loc("Magnetic Antimatter Container").obj("models/block/barrel/barrel", "barrel_antimatter", 1)
+            .tile(BarrelEntityBE::new).menu(BarrelMenu::new).gui(BarrelGui::new)
+            .build();
     public static RegistryObject<Block> MACHINE_TRANSFORMER;
     public static RegistryObject<Block> MACHINE_TRANSFORMER_20;
     public static RegistryObject<Block> MACHINE_TRANSFORMER_DNT;
@@ -1251,9 +1393,15 @@ public class ModBlocks {
     public static RegistryObject<Block> BOMB_MULTI_LARGE;
     public static final int guiID_bomb_multi_large = 18;
 
-    public static RegistryObject<Block> MACHINE_SOLAR_BOILER;
+    public static final RegistryObject<Block> MACHINE_SOLAR_BOILER = new WrappedBlockRegistryBuilder("machine_solar_boiler", ()->new com.hbm.block.machine.BlockSolarBoiler(Properties.of().strength(5.0F).explosionResistance(10.0F)))
+            .tab(ModTabs.MACHINE.getKey()).obj("block/machines/solar_boiler", "models/machines/solar_boiler", 3.0F).loot(HBMKey.DROP_SELF).loc(HBMKey.REVERSE_GEN)
+            .tile(com.hbm.blockentity.machine.SolarBoilerEntity::new, true).renderer(RendererSolarBoiler::new)
+            .build();
     public static final int guiID_solar_boiler = 18;
-    public static RegistryObject<Block> SOLAR_MIRROR;
+    public static RegistryObject<Block> SOLAR_MIRROR = new WrappedBlockRegistryBuilder("solar_mirror", ()->new SolarMirror(Properties.of().strength(5.0F).explosionResistance(10.0F)))
+            .tab(ModTabs.MACHINE.getKey()).obj("block/machines/solar_mirror", "models/machines/solar_mirror", 3.0F).model(HBMKey.SIMPLE).loot(HBMKey.DROP_SELF).loc(HBMKey.REVERSE_GEN)
+            .tile(TileEntitySolarMirror::new).renderer(RendererSolarMirror::new)
+            .build();
 
     public static RegistryObject<Block> STRUCT_LAUNCHER;
     public static RegistryObject<Block> STRUCT_SCAFFOLD;
@@ -1335,17 +1483,42 @@ public class ModBlocks {
     public static RegistryObject<Block> DFC_STABILIZER;
     public static RegistryObject<Block> DFC_CORE;
 
-    public static RegistryObject<Block> MACHINE_CONVERTER_HE_RF;
+    public static RegistryObject<Block> MACHINE_CONVERTER_HE_RF = new WrappedBlockRegistryBuilder("machine_converter_he_rf", ()->new com.hbm.block.machine.BlockConverterHeRf(Properties.of().strength(5.0F).explosionResistance(10.0F)))
+            .tab(ModTabs.MACHINE.getKey())
+            .mSmp(HBMKey.MODEL_CUBE_ALL, "machine_converter_he_rf")
+            .loot(HBMKey.DROP_SELF)
+            .loc(HBMKey.REVERSE_GEN)
+            .tile(ConverterHeRfEntityBE::new)
+            .build();
     public static final int guiID_converter_he_rf = 28;
-    public static RegistryObject<Block> MACHINE_CONVERTER_RF_HE;
+    public static RegistryObject<Block> MACHINE_CONVERTER_RF_HE = new WrappedBlockRegistryBuilder("machine_converter_rf_he", ()->new com.hbm.block.machine.BlockConverterRfHe(Properties.of().strength(5.0F).explosionResistance(10.0F)))
+            .tab(ModTabs.MACHINE.getKey())
+            .mSmp(HBMKey.MODEL_CUBE_ALL, "machine_converter_rf_he")
+            .loot(HBMKey.DROP_SELF)
+            .loc(HBMKey.REVERSE_GEN)
+            .tile(ConverterRfHeEntityBE::new)
+            .build();
 
     public static RegistryObject<Block> MACHINE_SCHRABIDIUM_TRANSMUTATOR;
 
     public static RegistryObject<Block> MACHINE_DISCHARGER;
 
 
-    public static RegistryObject<Block> MACHINE_DIESEL;
-    public static RegistryObject<Block> MACHINE_COMBUSTION_ENGINE;
+    public static final RegistryObject<Block> MACHINE_DIESEL = new WrappedBlockRegistryBuilder("machine_diesel", ()->new com.hbm.block.machine.BlockDiesel(Properties.of().strength(5.0F).explosionResistance(10.0F)))
+            .tab(ModTabs.MACHINE.getKey())
+            .obj("block/dieselgen/dieselgen", "dieselgen/dieselgen", 1.0F)
+            .loot(HBMKey.DROP_SELF)
+            .loc(HBMKey.REVERSE_GEN)
+            .tile(DieselEntityBE::new)
+            .menu(DieselMenu::new).gui(DieselGui::new).build();
+    public static final RegistryObject<Block> MACHINE_COMBUSTION_ENGINE = new WrappedBlockRegistryBuilder("machine_combustion_engine", ()->new com.hbm.block.machine.BlockCombustionEngine(Properties.of().strength(5.0F).explosionResistance(10.0F)))
+            .tab(ModTabs.MACHINE.getKey())
+            .obj("block/combustion_engine/combustion_engine", "models/machines/combustion_engine", 4.0F)
+            .loot(HBMKey.DROP_SELF)
+            .loc(HBMKey.REVERSE_GEN)
+            .tile(com.hbm.blockentity.machine.CombustionEngineEntity::new, true)
+            .menu(CombustionEngineMenu::new).gui(CombustionEngineGui::new)
+            .build();
 
     public static RegistryObject<Block> MACHINE_SHREDDER;
 
@@ -1357,12 +1530,26 @@ public class ModBlocks {
     public static RegistryObject<Block> FIELD_DISTURBER;
     public static RegistryObject<Block> TROLL_DISTURBER;
 
-    public static RegistryObject<Block> MACHINE_RTG_GREY;
+    public static final RegistryObject<Block> MACHINE_RTG_GREY = new WrappedBlockRegistryBuilder("machine_rtg", ()->new com.hbm.block.machine.BlockRTG(Properties.of().strength(5.0F).explosionResistance(10.0F)))
+            .tab(ModTabs.MACHINE.getKey())
+            .mSmp(HBMKey.MODEL_CUBE_ALL, "rtg")
+            .loot(HBMKey.DROP_SELF)
+            .loc(HBMKey.REVERSE_GEN)
+            .tile(com.hbm.blockentity.machine.RTGEntityBE::new)
+            .menu(com.hbm.gui.menu.RTGMenu::new).gui(com.hbm.gui.screen.RTGGui::new)
+            .build();
     public static RegistryObject<Block> MACHINE_AMGEN;
     public static RegistryObject<Block> MACHINE_GEO;
     public static RegistryObject<Block> MACHINE_MINIRTG;
     public static RegistryObject<Block> MACHINE_POWERRTG;
-    public static RegistryObject<Block> MACHINE_RADIOLYSIS;
+    public static final RegistryObject<Block> MACHINE_RADIOLYSIS = new WrappedBlockRegistryBuilder("machine_radiolysis", ()->new com.hbm.block.machine.BlockRadiolysis(Properties.of().strength(5.0F).explosionResistance(10.0F)))
+            .tab(ModTabs.MACHINE.getKey())
+            .obj("block/radiolysis/radiolysis", "models/radiolysis", 1.0F)
+            .loot(HBMKey.DROP_SELF)
+            .loc(HBMKey.REVERSE_GEN)
+            .tile(com.hbm.blockentity.machine.RadiolysisEntity::new, true)
+            .menu(RadiolysisMenu::new).gui(RadiolysisGui::new)
+            .build();
     public static RegistryObject<Block> MACHINE_HEPHAESTUS;
 
     public static RegistryObject<Block> MACHINE_WELL;
@@ -1374,34 +1561,117 @@ public class ModBlocks {
     public static RegistryObject<Block> CHIMNEY_BRICK;
     public static RegistryObject<Block> CHIMNEY_INDUSTRIAL;
 
-    public static RegistryObject<Block> MACHINE_REFINERY;
-    public static RegistryObject<Block> MACHINE_VACUUM_DISTILL;
-    public static RegistryObject<Block> MACHINE_FRACTION_TOWER;
+    public static final RegistryObject<Block> MACHINE_REFINERY = new WrappedBlockRegistryBuilder("machine_refinery", ()->new com.hbm.block.machine.BlockRefinery(Properties.of().strength(5.0F).explosionResistance(10.0F)))
+            .tab(ModTabs.MACHINE.getKey())
+            .obj("block/refinery/refinery", "refinery/refinery", 8.0F)
+            .loot(HBMKey.DROP_SELF)
+            .loc(HBMKey.REVERSE_GEN)
+            .tile(com.hbm.blockentity.machine.RefineryEntity::new, true)
+            .menu(RefineryMenu::new).gui(RefineryGui::new).build();
+    public static final RegistryObject<Block> MACHINE_VACUUM_DISTILL = new WrappedBlockRegistryBuilder("machine_vacuum_distill", ()->new com.hbm.block.machine.BlockVacuumDistill(Properties.of().strength(5.0F).explosionResistance(10.0F)))
+            .tab(ModTabs.MACHINE.getKey())
+            .obj("block/vacuum_distill/vacuum_distill", "models/machines/vacuum_distill", 9.0F)
+            .loot(HBMKey.DROP_SELF)
+            .loc(HBMKey.REVERSE_GEN)
+            .tile(com.hbm.blockentity.machine.VacuumDistillEntity::new, true)
+            .menu(VacuumDistillMenu::new).gui(VacuumDistillGui::new)
+            .build();
+    public static final RegistryObject<Block> MACHINE_FRACTION_TOWER = new WrappedBlockRegistryBuilder("machine_fraction_tower", ()->new com.hbm.block.machine.BlockFractionTower(Properties.of().strength(5.0F).explosionResistance(10.0F)))
+            .tab(ModTabs.MACHINE.getKey())
+            .obj("block/fraction_tower/fraction_tower", "models/machines/fraction_tower", 3.0F)
+            .loot(HBMKey.DROP_SELF)
+            .loc(HBMKey.REVERSE_GEN)
+            .tile(com.hbm.blockentity.machine.FractionTowerEntity::new, true)
+            .build();
     public static RegistryObject<Block> FRACTION_SPACER;
-    public static RegistryObject<Block> MACHINE_CATALYTIC_CRACKER;
-    public static RegistryObject<Block> MACHINE_CATALYTIC_REFORMER;
-    public static RegistryObject<Block> MACHINE_COKER;
-    public static RegistryObject<Block> MACHINE_MILK_REFORMER;
+    public static final RegistryObject<Block> MACHINE_CATALYTIC_CRACKER = new WrappedBlockRegistryBuilder("machine_catalytic_cracker", ()->new com.hbm.block.machine.BlockCatalyticCracker(Properties.of().strength(5.0F).explosionResistance(10.0F)))
+            .tab(ModTabs.MACHINE.getKey())
+            .obj("block/catalytic_cracker/catalytic_cracker", "models/machines/catalytic_cracker", 16.0F)
+            .loot(HBMKey.DROP_SELF)
+            .loc(HBMKey.REVERSE_GEN)
+            .tile(com.hbm.blockentity.machine.CatalyticCrackerEntity::new, true)
+            .build();
+    public static final RegistryObject<Block> MACHINE_CATALYTIC_REFORMER = new WrappedBlockRegistryBuilder("machine_catalytic_reformer", ()->new com.hbm.block.machine.BlockCatalyticReformer(Properties.of().strength(5.0F).explosionResistance(10.0F)))
+            .tab(ModTabs.MACHINE.getKey())
+            .obj("block/catalytic_reformer/catalytic_reformer", "models/machines/catalytic_reformer", 3.0F)
+            .loot(HBMKey.DROP_SELF)
+            .loc(HBMKey.REVERSE_GEN)
+            .tile(com.hbm.blockentity.machine.CatalyticReformerEntity::new, true)
+            .menu(CatalyticReformerMenu::new).gui(CatalyticReformerGui::new)
+            .build();
+    public static final RegistryObject<Block> MACHINE_COKER = new WrappedBlockRegistryBuilder("machine_coker", ()->new com.hbm.block.machine.BlockCoker(Properties.of().strength(5.0F).explosionResistance(10.0F)))
+            .tab(ModTabs.MACHINE.getKey())
+            .obj("block/coker/coker", "coker/coker", 22.0F)
+            .loot(HBMKey.DROP_SELF)
+            .loc(HBMKey.REVERSE_GEN)
+            .tile(com.hbm.blockentity.machine.CokerEntity::new, true)
+            .menu(CokerMenu::new).gui(CokerGui::new).build();
+    public static final RegistryObject<Block> MACHINE_MILK_REFORMER = new WrappedBlockRegistryBuilder("machine_milk_reformer", ()->new com.hbm.block.machine.BlockMilkReformer(Properties.of().strength(5.0F).explosionResistance(10.0F)))
+            .tab(ModTabs.MACHINE.getKey())
+            .obj("block/milk_reformer/milk_reformer", "models/machines/milker", 7.0F)
+            .loot(HBMKey.DROP_SELF)
+            .loc(HBMKey.REVERSE_GEN)
+            .tile(com.hbm.blockentity.machine.MilkReformerEntity::new, true)
+            .menu(MilkReformerMenu::new).gui(MilkReformerGui::new)
+            .build();
 
-    public static RegistryObject<Block> MACHINE_CRYO_DISTILL;
+    public static final RegistryObject<Block> MACHINE_CRYO_DISTILL = new WrappedBlockRegistryBuilder("machine_cryo_distill", ()->new com.hbm.block.machine.BlockCryoDistill(Properties.of().strength(5.0F).explosionResistance(10.0F)))
+            .tab(ModTabs.MACHINE.getKey())
+            .obj("block/cryo_distill/cryo_distill", "models/machines/cryo_distill", 8.0F)
+            .loot(HBMKey.DROP_SELF)
+            .loc(HBMKey.REVERSE_GEN)
+            .tile(com.hbm.blockentity.machine.CryoDistillEntity::new, true)
+            .menu(CryoDistillMenu::new).gui(CryoDistillGui::new)
+            .build();
 
     public static RegistryObject<Block> MACHINE_BOILER_OFF;
     public static RegistryObject<Block> MACHINE_BOILER_ON;
+    public static final RegistryObject<Block> MACHINE_HEAT_BOILER = new WrappedBlockRegistryBuilder("machine_heat_boiler", ()->new com.hbm.block.machine.BlockHeatBoiler(Properties.of().strength(5.0F).explosionResistance(10.0F)))
+            .tab(ModTabs.MACHINE.getKey())
+            .obj("block/boiler/boiler", "models/machines/boiler", 4.0F)
+            .loot(HBMKey.DROP_SELF)
+            .loc(HBMKey.REVERSE_GEN)
+            .tile(com.hbm.blockentity.machine.HeatBoilerEntity::new, true)
+            .build();
 
     public static RegistryObject<Block> MACHINE_BOILER_ELECTRIC_OFF;
     public static RegistryObject<Block> MACHINE_BOILER_ELECTRIC_ON;
 
-    public static RegistryObject<Block> MACHINE_STEAM_ENGINE;
+    public static final RegistryObject<Block> MACHINE_STEAM_ENGINE = new WrappedBlockRegistryBuilder("machine_steam_engine", ()->new com.hbm.block.machine.BlockSteamEngine(Properties.of().strength(5.0F).explosionResistance(10.0F)))
+            .tab(ModTabs.MACHINE.getKey())
+            .obj("block/steam_engine/steam_engine", "models/machines/steam_engine", 6.0F)
+            .loot(HBMKey.DROP_SELF)
+            .loc(HBMKey.REVERSE_GEN)
+            .tile(com.hbm.blockentity.machine.SteamEngineEntity::new, true)
+            .build();
     public static RegistryObject<Block> MACHINE_TURBINE;
     public static RegistryObject<Block> MACHINE_LARGE_TURBINE;
 
-    public static RegistryObject<Block> MACHINE_DEUTERIUM_EXTRACTOR;
+    public static final RegistryObject<Block> MACHINE_DEUTERIUM_EXTRACTOR = new WrappedBlockRegistryBuilder("machine_deuterium_extractor", ()->new com.hbm.block.machine.BlockDeuteriumExtractor(Properties.of().strength(5.0F).explosionResistance(10.0F)))
+            .tab(ModTabs.MACHINE.getKey())
+            .mSmp(HBMKey.MODEL_CUBE_BOTTOM_TOP, "deuterium_extractor_side", "deuterium_extractor_top_water")
+            .loot(HBMKey.DROP_SELF)
+            .loc(HBMKey.REVERSE_GEN)
+            .tile(com.hbm.blockentity.machine.DeuteriumExtractorEntity::new)
+            .build();
     public static RegistryObject<Block> MACHINE_DEUTERIUM_TOWER;
     public static RegistryObject<Block> MACHINE_ATMO_TOWER;
     public static RegistryObject<Block> MACHINE_ATMO_VENT;
 
-    public static RegistryObject<Block> MACHINE_LIQUEFACTOR;
-    public static RegistryObject<Block> MACHINE_SOLIDIFIER;
+    public static final RegistryObject<Block> MACHINE_LIQUEFACTOR = new WrappedBlockRegistryBuilder("machine_liquefactor", ()->new com.hbm.block.machine.BlockLiquefactor(Properties.of().strength(5.0F).explosionResistance(10.0F)))
+            .tab(ModTabs.MACHINE.getKey())
+            .obj("block/liquefactor/liquefactor", "liquefactor/liquefactor", 3.0F)
+            .loot(HBMKey.DROP_SELF)
+            .loc(HBMKey.REVERSE_GEN)
+            .tile(com.hbm.blockentity.machine.LiquefactorEntity::new, true)
+            .menu(LiquefactorMenu::new).gui(LiquefactorGui::new).build();
+    public static final RegistryObject<Block> MACHINE_SOLIDIFIER = new WrappedBlockRegistryBuilder("machine_solidifier", ()->new com.hbm.block.machine.BlockSolidifier(Properties.of().strength(5.0F).explosionResistance(10.0F)))
+            .tab(ModTabs.MACHINE.getKey())
+            .obj("block/solidifier/solidifier", "solidifier/solidifier", 3.0F)
+            .loot(HBMKey.DROP_SELF)
+            .loc(HBMKey.REVERSE_GEN)
+            .tile(com.hbm.blockentity.machine.SolidifierEntity::new, true)
+            .menu(SolidifierMenu::new).gui(SolidifierGui::new).build();
     public static RegistryObject<Block> MACHINE_COMPRESSOR;
 
     public static RegistryObject<Block> MACHINE_CHUNGUS;
@@ -1423,15 +1693,43 @@ public class ModBlocks {
 
     public static RegistryObject<Block> MACHINE_ASSEMBLER;
     public static RegistryObject<Block> MACHINE_ASSEMFAC;
-    public static RegistryObject<Block> MACHINE_ARC_WELDER;
+    public static final RegistryObject<Block> MACHINE_ARC_WELDER = new WrappedBlockRegistryBuilder("machine_arc_welder", ()->new com.hbm.block.machine.BlockArcWelder(Properties.of().strength(5.0F).explosionResistance(10.0F)))
+            .tab(ModTabs.MACHINE.getKey())
+            .obj("block/arc_welder/arc_welder", "models/machines/arc_welder", 1.0F)
+            .loot(HBMKey.DROP_SELF)
+            .loc(HBMKey.REVERSE_GEN)
+            .tile(com.hbm.blockentity.machine.ArcWelderEntity::new, true)
+            .menu(ArcWelderMenu::new).gui(ArcWelderGui::new)
+            .build();
 
     public static RegistryObject<Block> MACHINE_CHEMPLANT = add("chemplant", ()->new BlockChemplant(BlockBehaviour.Properties.of().strength(5.0F).explosionResistance(30.0F)), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, "Chemical Plant", HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
     public static RegistryObject<Block> MACHINE_CHEMFAC;
-    public static RegistryObject<Block> MACHINE_MIXER;
+    public static final RegistryObject<Block> MACHINE_MIXER = new WrappedBlockRegistryBuilder("machine_mixer", ()->new com.hbm.block.machine.BlockMixer(Properties.of().strength(5.0F).explosionResistance(10.0F)))
+            .tab(ModTabs.MACHINE.getKey())
+            .obj("block/mixer/mixer", "models/machines/mixer", 3.0F)
+            .loot(HBMKey.DROP_SELF)
+            .loc(HBMKey.REVERSE_GEN)
+            .tile(com.hbm.blockentity.machine.MixerEntity::new, true)
+            .menu(MixerMenu::new).gui(MixerGui::new)
+            .build();
 
     public static RegistryObject<Block> MACHINE_FLUIDTANK;
     public static RegistryObject<Block> MACHINE_BAT9000;
     public static RegistryObject<Block> MACHINE_ORBUS;
+    public static final RegistryObject<Block> MACHINE_BIGASS_TANK = new WrappedBlockRegistryBuilder("machine_bigass_tank", ()->new com.hbm.block.machine.BlockBigAssTank(Properties.of().strength(5.0F).explosionResistance(10.0F)))
+            .tab(ModTabs.MACHINE.getKey())
+            .obj("block/bigasstank/bigasstank", "models/machines/bigasstank", 9.0F)
+            .loot(HBMKey.DROP_SELF)
+            .loc(HBMKey.REVERSE_GEN)
+            .tile(com.hbm.blockentity.machine.BigAssTankEntity::new, true)
+            .build();
+    public static final RegistryObject<Block> MACHINE_ALKYLATION = new WrappedBlockRegistryBuilder("machine_alkylation", ()->new com.hbm.block.machine.BlockAlkylation(Properties.of().strength(5.0F).explosionResistance(10.0F)))
+            .tab(ModTabs.MACHINE.getKey())
+            .obj("block/alkylation/alkylation", "models/machines/alkylation_unit", 4.0F)
+            .loot(HBMKey.DROP_SELF)
+            .loc(HBMKey.REVERSE_GEN)
+            .tile(com.hbm.blockentity.machine.AlkylationEntity::new, true)
+            .build();
 
     public static RegistryObject<Block> LAUNCH_PAD = add("launch_pad", ()->new LaunchPad(BlockBehaviour.Properties.of().strength(5.0F).explosionResistance(10.0F)), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, "Launch Pad", HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
 
@@ -1454,16 +1752,38 @@ public class ModBlocks {
     public static RegistryObject<Block> MACHINE_SELENIUM;
 
     public static RegistryObject<Block> PRESS_PREHEATER = add("press_preheater", ()->new BlockBase(Properties.of()), ModTabs.MACHINE.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.ORDERLY_GEN, HBMKey.DROP_SELF);
-    public static RegistryObject<Block> MACHINE_PRESS;
-    public static RegistryObject<Block> MACHINE_EPRESS;
+    public static RegistryObject<Block> MACHINE_PRESS = new WrappedBlockRegistryBuilder("machine_press", ()->new BlockPress(Properties.of())).tab(ModTabs.MACHINE.getKey())
+            .model(HBMKey.HORIZONTAL).modelType(BlockStateGen.Type.EXISTING).modelRL(HBM.rl( "block/press")).loc("Burner Press").tags(TAG_MACHINE)
+            .tile(PressEntityBE::new).menu(PressMenu::new).gui(PressGui::new).renderer(PressRenderer::new)
+            .build();
+    public static final RegistryObject<Block> MACHINE_EPRESS = new WrappedBlockRegistryBuilder("machine_epress", ()->new com.hbm.block.machine.BlockEPress(Properties.of().strength(5.0F).explosionResistance(10.0F)))
+            .tab(ModTabs.MACHINE.getKey())
+            .mSmp(HBMKey.MODEL_CUBE_ALL, "machine_epress")
+            .loot(HBMKey.DROP_SELF)
+            .loc(HBMKey.REVERSE_GEN)
+            .tile(com.hbm.blockentity.machine.EPressEntityBE::new)
+            .menu(com.hbm.gui.menu.EPressMenu::new).gui(com.hbm.gui.screen.EPressGui::new)
+            .build();
     public static RegistryObject<Block> MACHINE_CONVEYOR_PRESS;
 
-    public static RegistryObject<Block> MACHINE_SIREN;
+    public static final RegistryObject<Block> MACHINE_SIREN = new WrappedBlockRegistryBuilder("machine_siren", ()->new com.hbm.block.machine.BlockSiren(Properties.of().strength(5.0F).explosionResistance(10.0F)))
+            .tab(ModTabs.MACHINE.getKey())
+            .mSmp(HBMKey.MODEL_CUBE_ALL, "machine_siren")
+            .loot(HBMKey.DROP_SELF)
+            .loc(HBMKey.REVERSE_GEN)
+            .tile(com.hbm.blockentity.machine.SirenEntity::new)
+            .build();
 
     public static RegistryObject<Block> MACHINE_RADGEN;
 
     public static RegistryObject<Block> MACHINE_SATLINKER;
-    public static RegistryObject<Block> MACHINE_KEYFORGE;
+    public static final RegistryObject<Block> MACHINE_KEY_FORGE = new WrappedBlockRegistryBuilder("machine_keyforge", ()->new com.hbm.block.machine.BlockKeyForge(Properties.of().strength(5.0F).explosionResistance(10.0F)))
+            .tab(ModTabs.MACHINE.getKey())
+            .mSmp(HBMKey.MODEL_CUBE_ALL, "machine_keyforge_side")
+            .loot(HBMKey.DROP_SELF)
+            .loc(HBMKey.REVERSE_GEN)
+            .tile(KeyForgeEntityBE::new)
+            .menu(KeyForgeMenu::new).gui(KeyForgeGui::new).build();
 
     public static RegistryObject<Block> MACHINE_ARMOR_TABLE;
 
@@ -1485,7 +1805,13 @@ public class ModBlocks {
     public static RegistryObject<Block> MACHINE_STORAGE_DRUM;
 
     public static RegistryObject<Block> MACHINE_AUTOCRAFTER;
-    public static RegistryObject<Block> MACHINE_FUNNEL;
+    public static final RegistryObject<Block> MACHINE_FUNNEL = new WrappedBlockRegistryBuilder("machine_funnel", ()->new com.hbm.block.machine.BlockFunnel(Properties.of().strength(5.0F).explosionResistance(10.0F)))
+            .tab(ModTabs.MACHINE.getKey())
+            .obj("block/funnel/funnel", "machine_funnel_side", 1.0F)
+            .loot(HBMKey.DROP_SELF)
+            .loc(HBMKey.REVERSE_GEN)
+            .tile(FunnelEntityBE::new)
+            .menu(FunnelMenu::new).gui(FunnelGui::new).build();
 
     public static RegistryObject<Block> ANVIL_IRON;
     public static RegistryObject<Block> ANVIL_LEAD;
@@ -1646,19 +1972,33 @@ public class ModBlocks {
 //    public static final RegistryObject<Block> CHEMPLANT = add("chemplant", ()->new BlockChemplant(BlockBehaviour.Properties.of().strength(5.0F).explosionResistance(30.0F)), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, "Chemical Plant", HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
 //    public static final RegistryObject<Block> PLASTIC_BARREL = add("barrel_plastic", ()->new BlockFluidBarrel(BlockBehaviour.Properties.of().strength(2.0F).explosionResistance(5.0F).requiresCorrectToolForDrops().sound(SoundType.STONE), BlockFluidBarrel.BarrelProperties.of().capacity(12000)), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, "Safe Barrel™", HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
 //    public static final RegistryObject<Block> CORRODED_BARREL = add("barrel_corroded", ()->new BlockFluidBarrel(BlockBehaviour.Properties.of().strength(2.0F).explosionResistance(5.0F).requiresCorrectToolForDrops().sound(SoundType.METAL),BlockFluidBarrel.BarrelProperties.of().capacity(6000).hotResist().corrosiveResistance().highCorroResist().leaky()), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, "Corroded Barrel", HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
-    public static final RegistryObject<Block> IRON_BARREL = add("barrel_iron", ()->new BlockFluidBarrel(BlockBehaviour.Properties.of().strength(2.0F).explosionResistance(5.0F).requiresCorrectToolForDrops().sound(SoundType.METAL),BlockFluidBarrel.BarrelProperties.of().capacity(8000).hotResist()), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, "Iron Barrel", HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
-    public static final RegistryObject<Block> STEEL_BARREL = add("barrel_steel", ()->new BlockFluidBarrel(BlockBehaviour.Properties.of().strength(2.0F).explosionResistance(5.0F).requiresCorrectToolForDrops().sound(SoundType.METAL),BlockFluidBarrel.BarrelProperties.of().capacity(16000).hotResist().corrosiveResistance()), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, "Steel Barrel", HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
-    public static final RegistryObject<Block> TCALLOY_BARREL = add("barrel_tcalloy", ()->new BlockFluidBarrel(BlockBehaviour.Properties.of().strength(2.0F).explosionResistance(5.0F).requiresCorrectToolForDrops().sound(SoundType.METAL),BlockFluidBarrel.BarrelProperties.of().capacity(24000).hotResist().highCorroResist()), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, "Technetium Steel Barrel", HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
-    public static final RegistryObject<Block> ANTIMATTER_BARREL = add("barrel_antimatter", ()->new BlockFluidBarrel(BlockBehaviour.Properties.of().strength(2.0F).explosionResistance(5.0F).requiresCorrectToolForDrops().sound(SoundType.METAL),BlockFluidBarrel.BarrelProperties.of().capacity(16000).hotResist().highCorroResist().antimatter()), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, "Magnetic Antimatter Container", HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
-    public static final RegistryObject<Block> FLUID_PIPE = add("fluid_pipe", ()->new BlockFluidPipe(BlockBehaviour.Properties.of().strength(5.0F).explosionResistance(10.0F)), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, "Fluid Pipe", HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
-    public static final RegistryObject<Block> GEIGER_COUNTER = add("geiger", ()->new GeigerCounter(BlockBehaviour.Properties.of().strength(5.0F).explosionResistance(10.0F)), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, "Geiger Counter", HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+//    public static final RegistryObject<Block> IRON_BARREL = add("barrel_iron", ()->new BlockFluidBarrel(BlockBehaviour.Properties.of().strength(2.0F).explosionResistance(5.0F).requiresCorrectToolForDrops().sound(SoundType.METAL),BlockFluidBarrel.BarrelProperties.of().capacity(8000).hotResist()), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, "Iron Barrel", HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+//    public static final RegistryObject<Block> STEEL_BARREL = add("barrel_steel", ()->new BlockFluidBarrel(BlockBehaviour.Properties.of().strength(2.0F).explosionResistance(5.0F).requiresCorrectToolForDrops().sound(SoundType.METAL),BlockFluidBarrel.BarrelProperties.of().capacity(16000).hotResist().corrosiveResistance()), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, "Steel Barrel", HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+//    public static final RegistryObject<Block> TCALLOY_BARREL = add("barrel_tcalloy", ()->new BlockFluidBarrel(BlockBehaviour.Properties.of().strength(2.0F).explosionResistance(5.0F).requiresCorrectToolForDrops().sound(SoundType.METAL),BlockFluidBarrel.BarrelProperties.of().capacity(24000).hotResist().highCorroResist()), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, "Technetium Steel Barrel", HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+//    public static final RegistryObject<Block> ANTIMATTER_BARREL = add("barrel_antimatter", ()->new BlockFluidBarrel(BlockBehaviour.Properties.of().strength(2.0F).explosionResistance(5.0F).requiresCorrectToolForDrops().sound(SoundType.METAL),BlockFluidBarrel.BarrelProperties.of().capacity(16000).hotResist().highCorroResist().antimatter()), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, "Magnetic Antimatter Container", HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+//    public static final RegistryObject<Block> FLUID_PIPE = add("fluid_pipe", ()->new BlockFluidPipe(BlockBehaviour.Properties.of().strength(5.0F).explosionResistance(10.0F)), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, "Fluid Pipe", HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+//    public static final RegistryObject<Block> GEIGER_COUNTER = add("geiger", ()->new GeigerCounter(BlockBehaviour.Properties.of().strength(5.0F).explosionResistance(10.0F)), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, "Geiger Counter", HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
 //    public static final RegistryObject<Block> LAUNCH_PAD = add("launch_pad", ()->new LaunchPad(BlockBehaviour.Properties.of().strength(5.0F).explosionResistance(10.0F)), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, "Launch Pad", HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
-    public static final RegistryObject<Block> machine_difurnace = registerMachineBlockWithItem("difurnace", ()->new BlockDifurnace(Properties.of().lightLevel(litEmission(13))));
-    public static final RegistryObject<Block> machine_electric_furnace = add("furnace_electric", ()->new BlockElectricFurnace(Properties.of().lightLevel(litEmission(13))), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
+//    public static final RegistryObject<Block> machine_difurnace = registerMachineBlockWithItem("difurnace", ()->new BlockDifurnace(Properties.of().lightLevel(litEmission(13))));
+//    public static final RegistryObject<Block> machine_converter_he_rf = new WrappedBlockRegistryBuilder("machine_converter_he_rf", ()->new com.hbm.block.machine.BlockConverterHeRf(Properties.of().strength(5.0F).explosionResistance(10.0F)))
+//            .tab(ModTabs.MACHINE.getKey())
+//            .mSmp(HBMKey.MODEL_CUBE_ALL, "machine_converter_he_rf")
+//            .loot(HBMKey.DROP_SELF)
+//            .loc(HBMKey.REVERSE_GEN)
+//            .tile(ConverterHeRfEntityBE::new)
+//            .build();
+//    public static final RegistryObject<Block> machine_converter_rf_he = new WrappedBlockRegistryBuilder("machine_converter_rf_he", ()->new com.hbm.block.machine.BlockConverterRfHe(Properties.of().strength(5.0F).explosionResistance(10.0F)))
+//            .tab(ModTabs.MACHINE.getKey())
+//            .mSmp(HBMKey.MODEL_CUBE_ALL, "machine_converter_rf_he")
+//            .loot(HBMKey.DROP_SELF)
+//            .loc(HBMKey.REVERSE_GEN)
+//            .tile(ConverterRfHeEntityBE::new)
+//            .build();
+//    public static final RegistryObject<Block> machine_electric_furnace = add("furnace_electric", ()->new BlockElectricFurnace(Properties.of().lightLevel(litEmission(13))), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
     public static final RegistryObject<Block> machine_boiler = add("boiler", ()->new BlockBoiler(Properties.of().lightLevel(litEmission(13))), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
     public static final RegistryObject<Block> machine_electric_boiler = add("boiler_electric", ()->new BlockElectricBoiler(Properties.of().lightLevel(litEmission(14))), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
     public static final RegistryObject<Block> machine_nuclear_boiler = add("boiler_nuclear", ()->new BlockNuclearBoiler(Properties.of().lightLevel(litEmission(15))), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, HBMKey.REVERSE_GEN, HBMKey.DROP_SELF, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
-    public static final RegistryObject<Block> machine_press = registerMachineBlockWithItem("machine_press", ()->new BlockPress(Properties.of()));
+//    public static final RegistryObject<Block> machine_press = registerMachineBlockWithItem("machine_press", ()->new BlockPress(Properties.of()));
 //    public static final RegistryObject<Block> PRESS_PREHEATER = add("press_preheater", ()->new BlockBase(Properties.of()), ModTabs.MACHINE.getKey(), HBMKey.MODEL_CUBE_ALL, HBMKey.ORDERLY_GEN, HBMKey.DROP_SELF);
     public static final RegistryObject<Block> machine_shredder = registerMachineBlockWithItem("machine_shredder", ()->new BlockShredder(Properties.of()));
     public static final RegistryObject<Block> machine_wood_burner = registerMachineBlockWithItem("machine_wood_burner",
@@ -1666,11 +2006,6 @@ public class ModBlocks {
                     .lightLevel(state -> state.getValue(WoodBurnerBlock.LIT) ? 13 : 0)));
     public static final RegistryObject<Block> MINER_LARGE = new WrappedBlockRegistryBuilder("miner_large", ()->new BlockMinerLarge(Properties.copy(Blocks.IRON_BLOCK).strength(5).explosionResistance(100)))
             .tab(ModTabs.MACHINE.getKey()).model(HBMKey.MODEL_STANDALONE).loc(HBMKey.REVERSE_GEN).loot(HBMKey.DROP_SELF).tags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL).item(block -> new ItemPosModify(block, new Vec3i(0, 4, 0), new Item.Properties())).build();
-    public static final RegistryObject<Block> MACHINE_ORE_SLOPPER = new WrappedBlockRegistryBuilder("machine_ore_slopper", () -> new MachineOreSlopper(Properties.of().strength(5.0f, 10.0f)))
-            .tab(ModTabs.MACHINE.getKey()).loc("Bedrock Ore Processor")
-            .model((block, provider) -> provider.horizontalBlockWithItem(block, provider.genSimpleModel(block, HBM.rl("block/machines/ore_slopper.obj"), HBM.rl("block/machine/ore_slopper"), 7)))
-            .tile(TileOreSloppper::new, true).renderer(RendererOreSlopper::new).menu(MenuOreSlopper::new).gui(GuiOreSlopper::new)
-            .tags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL).build();
 //    public static final RegistryObject<Block> MACHINE_CENTRIFUGE = new WrappedBlockRegistryBuilder(MachineCentrifuge.id, () -> new MachineCentrifuge(Properties.copy(Blocks.IRON_BLOCK).strength(5.0f, 10.0f)))
 //            .tab(ModTabs.MACHINE.getKey()).loc("Centrifuge")
 //            .model((block, provider) -> provider.horizontalBlockWithItem(block, provider.genSimpleModel(block, HBM.rl("block/machines/centrifuge.obj"), HBM.rl("block/machine/centrifuge"), 3)))
@@ -1736,12 +2071,12 @@ public class ModBlocks {
     public static final RegistryObject<Block> machine_rbmk_fuel_channel = registerMachineBlockWithItem("machine_rbmk_fuel_channel", () -> new BlockRBMKFuelChannel(Properties.of().strength(4.0F).explosionResistance(12.0F)));
     public static final RegistryObject<Block> machine_rbmk_control_rod = registerMachineBlockWithItem("machine_rbmk_control_rod", () -> new BlockRBMKControlRod(Properties.of().strength(4.0F).explosionResistance(12.0F)));
     public static final RegistryObject<Block> machine_rbmk_control_auto = registerMachineBlockWithItem("machine_rbmk_control_auto", () -> new BlockRBMKControlRod(Properties.of().strength(4.0F).explosionResistance(12.0F)));
-    public static final RegistryObject<Block> machine_rbmk_boiler = registerMachineBlockWithItem("machine_rbmk_boiler", () -> new BlockRBMKColumn(Properties.of().strength(4.0F).explosionResistance(12.0F), RBMKBoilerEntity::new));
+    public static final RegistryObject<Block> machine_rbmk_boiler = registerMachineBlockWithItem("machine_rbmk_boiler", () -> new BlockRBMKColumn(Properties.of().strength(4.0F).explosionResistance(12.0F), RBMKBoilerEntityBE::new));
     public static final RegistryObject<Block> machine_rbmk_moderator = registerMachineBlockWithItem("machine_rbmk_moderator", () -> new BlockRBMKColumn(Properties.of().strength(4.0F).explosionResistance(16.0F)));
     public static final RegistryObject<Block> machine_rbmk_absorber = registerMachineBlockWithItem("machine_rbmk_absorber", () -> new BlockRBMKColumn(Properties.of().strength(4.0F).explosionResistance(16.0F)));
-    public static final RegistryObject<Block> machine_rbmk_outgasser = registerMachineBlockWithItem("machine_rbmk_outgasser", () -> new BlockRBMKColumn(Properties.of().strength(4.0F).explosionResistance(16.0F), RBMKOutgasserEntity::new));
-    public static final RegistryObject<Block> machine_rbmk_storage = registerMachineBlockWithItem("machine_rbmk_storage", () -> new BlockRBMKColumn(Properties.of().strength(4.0F).explosionResistance(16.0F), RBMKStorageEntity::new));
-    public static final RegistryObject<Block> machine_rbmk_cooler = registerMachineBlockWithItem("machine_rbmk_cooler", () -> new BlockRBMKColumn(Properties.of().strength(4.0F).explosionResistance(16.0F), RBMKCoolerEntity::new));
+    public static final RegistryObject<Block> machine_rbmk_outgasser = registerMachineBlockWithItem("machine_rbmk_outgasser", () -> new BlockRBMKColumn(Properties.of().strength(4.0F).explosionResistance(16.0F), RBMKOutgasserEntityBE::new));
+    public static final RegistryObject<Block> machine_rbmk_storage = registerMachineBlockWithItem("machine_rbmk_storage", () -> new BlockRBMKColumn(Properties.of().strength(4.0F).explosionResistance(16.0F), RBMKStorageEntityBE::new));
+    public static final RegistryObject<Block> machine_rbmk_cooler = registerMachineBlockWithItem("machine_rbmk_cooler", () -> new BlockRBMKColumn(Properties.of().strength(4.0F).explosionResistance(16.0F), RBMKCoolerEntityBE::new));
     public static final RegistryObject<Block> machine_rbmk_console = registerMachineBlockWithItem("machine_rbmk_console", () -> new BlockRBMKPeripheralLarge(Properties.of().strength(4.0F).explosionResistance(16.0F), RBMKPeripheralType.CONSOLE, Shapes.block(), true, 1));
     public static final RegistryObject<Block> machine_rbmk_display = registerMachineBlockWithItem("machine_rbmk_display", () -> new BlockRBMKDisplay(Properties.of().strength(2.0F).explosionResistance(6.0F).sound(SoundType.METAL).noOcclusion()));
     public static final RegistryObject<Block> machine_rbmk_graph = registerMachineBlockWithItem("machine_rbmk_graph", () -> new BlockRBMKGraph(Properties.of().strength(2.0F).explosionResistance(6.0F).sound(SoundType.METAL).noOcclusion()));
@@ -1784,8 +2119,6 @@ public class ModBlocks {
         registerLegacyBlockItemAlias("rbmk_rod_mod", machine_rbmk_fuel_channel);
         registerLegacyBlockItemAlias("rbmk_rod_reasim", machine_rbmk_fuel_channel);
         registerLegacyBlockItemAlias("rbmk_rod_reasim_mod", machine_rbmk_fuel_channel);
-        registerLegacyBlockItemAlias("deco_rbmk", machine_rbmk_base);
-        registerLegacyBlockItemAlias("deco_rbmk_smooth", machine_rbmk_base);
     }
 //    public static final RegistryObject<Block> HEATER_FIREBOX = add("firebox", ()->new BlockFireBox(Properties.copy(Blocks.IRON_BLOCK)), ModTabs.MACHINE.getKey(), HBMKey.MODEL_STANDALONE, HBMKey.ORDERLY_GEN, HBMKey.DROP_SELF);
     //电力
@@ -1807,10 +2140,10 @@ public class ModBlocks {
                     .item(block -> new SteelCrateItem(block, new Item.Properties().stacksTo(1))).loc(HBMKey.REVERSE_GEN)
                     .build();
     //炸弹
-    public static final RegistryObject<Block> bomb_boy = registerBlockWithItem("bomb_boy",()->new NukeBoy(Properties.of(), ConfigBomb.boyRadius));
-    public static final RegistryObject<Block> bomb_fat_man = registerBlockWithItem("bomb_fat_man",()->new NukeFat(Properties.of(), ConfigBomb.manRadius));
-    public static final RegistryObject<Block> bomb_custom = registerBlockWithItem("bomb_custom",()->new NukeCustom(Properties.of(), ConfigBomb.manRadius));
-    public static final RegistryObject<Block> BOMB_FAT_MAN = bomb_fat_man;
+//    public static final RegistryObject<Block> bomb_boy = registerBlockWithItem("bomb_boy",()->new NukeBoy(Properties.of(), ConfigBomb.boyRadius));
+//    public static final RegistryObject<Block> bomb_fat_man = registerBlockWithItem("bomb_fat_man",()->new NukeFat(Properties.of(), ConfigBomb.manRadius));
+//    public static final RegistryObject<Block> bomb_custom = registerBlockWithItem("bomb_custom",()->new NukeCustom(Properties.of(), ConfigBomb.manRadius));
+//    public static final RegistryObject<Block> BOMB_FAT_MAN = bomb_fat_man;
     //发射台
     //装饰
     public static final RegistryObject<Block> TEST12 = registerBlockWithItem("test12",()->new BlockTest12(Properties.of()));
@@ -1990,7 +2323,7 @@ public class ModBlocks {
 
     public static RegistryObject<Block> registerBattery(final String name, final Supplier<? extends Block> blocksup){
         RegistryObject<Block> block = BLOCKS.register(name,blocksup);
-        ModItems.ITEMS.register(name,()->new BatteryBlockItem(block.get(),new Item.Properties()));
+        ModItems.ITEMS.register(name,()->new BlockItemBattery(block.get(),new Item.Properties()));
         return block;
     }
     private static RegistryObject<Block> registerMachineBattery(final String name, final Supplier<? extends Block> blocksup){

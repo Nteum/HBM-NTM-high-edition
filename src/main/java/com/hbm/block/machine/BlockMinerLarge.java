@@ -1,9 +1,8 @@
 package com.hbm.block.machine;
 
-import com.hbm.block.base.BlockDummyable;
+import com.hbm.core.block.BlockDummyable;
 import com.hbm.blockentity.machine.TileMinerLarge;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Vec3i;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;

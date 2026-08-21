@@ -1,7 +1,7 @@
 package com.hbm.block.machine;
 
-import com.hbm.block.base.BlockDummyable;
-import com.hbm.blockentity.machine.ChemplantEntity;
+import com.hbm.core.block.BlockDummyable;
+import com.hbm.blockentity.machine.ChemplantEntityBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -15,6 +15,6 @@ public class BlockChemplant extends BlockDummyable {
 
     @Override
     protected BlockEntity mainBlockEntity(BlockPos pPos, BlockState pState) {
-        return new ChemplantEntity(pPos,pState);
+        return new ChemplantEntityBE(pPos,pState);
     }
 }

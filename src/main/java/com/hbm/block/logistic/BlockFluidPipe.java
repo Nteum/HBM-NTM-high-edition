@@ -1,16 +1,17 @@
 package com.hbm.block.logistic;
 
 import com.hbm.block.interfaces.ILookOverlay;
-import com.hbm.blockentity.logistic.PipeEntity;
+import com.hbm.blockentity.logistic.PipeEntityBEPipeBase;
 import com.hbm.utils.DirectionUtils;
 import com.hbm.utils.EnumUtils;
 import com.hbm.utils.WorldUtils;
 import com.hbm.core.contents.transport_net.FluidBackupSystem;
-import com.hbm.core.contents.transport_net.FluidNetworkSystem;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
@@ -34,18 +35,18 @@ public class BlockFluidPipe extends AbstractPipeBlock implements EntityBlock, IL
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new PipeEntity(pPos,pState);
+        return new PipeEntityBEPipeBase(pPos,pState);
     }
 
     @Override
     public boolean connectsTo(BlockPos clickedPos, LevelAccessor pLevel, Direction direction) {
         BlockPos neighbourPos = clickedPos.relative(direction);
-        PipeEntity clickPipe = WorldUtils.getTileEntity(PipeEntity.class, pLevel, clickedPos);
+        PipeEntityBEPipeBase clickPipe = WorldUtils.getTileEntity(PipeEntityBEPipeBase.class, pLevel, clickedPos);
         if (clickPipe != null && !clickPipe.isDirAllow(direction)) {
             return false;
         }
         BlockEntity neighbourEntity = pLevel.getBlockEntity(neighbourPos);
-        if (neighbourEntity instanceof PipeEntity pipe){
+        if (neighbourEntity instanceof PipeEntityBEPipeBase pipe){
             // 既需要检查管道模式，也需要检查流体类型
             if (!pipe.isDirAllow(direction.getOpposite())) {
                 return false;
@@ -63,9 +64,8 @@ public class BlockFluidPipe extends AbstractPipeBlock implements EntityBlock, IL
         if (!(level instanceof Level serverLevel) || serverLevel.isClientSide) {
             return;
         }
-        PipeEntity pipe1 = WorldUtils.getTileEntity(PipeEntity.class, level, pos);
+        PipeEntityBEPipeBase pipe1 = WorldUtils.getTileEntity(PipeEntityBEPipeBase.class, level, pos);
         if (pipe1 == null) return;
-        FluidNetworkSystem fluidNetworkSystem = FluidNetworkSystem.getOrCreate(serverLevel);
         for (Direction direction : EnumUtils.DIRECTIONS) {
             BooleanProperty property = PROPERTY_BY_DIRECTION.get(direction);
             boolean oldValue = oldState.hasProperty(property) && oldState.getValue(property);
@@ -89,7 +89,7 @@ public class BlockFluidPipe extends AbstractPipeBlock implements EntityBlock, IL
             return;
         }
         if (!pLevel.isClientSide) {
-            PipeEntity pipeEntity = WorldUtils.getTileEntity(PipeEntity.class, pLevel, pPos);
+            PipeEntityBEPipeBase pipeEntity = WorldUtils.getTileEntity(PipeEntityBEPipeBase.class, pLevel, pPos);
             if (pipeEntity != null && pipeEntity.network != null && pipeEntity.network.getParent() != null){
                 pipeEntity.network.getParent().leave(pipeEntity);
             }
@@ -101,7 +101,7 @@ public class BlockFluidPipe extends AbstractPipeBlock implements EntityBlock, IL
     public void neighborChanged(BlockState pState, Level pLevel, BlockPos pPos, Block pNeighborBlock, BlockPos pNeighborPos, boolean pMovedByPiston) {
         super.neighborChanged(pState, pLevel, pPos, pNeighborBlock, pNeighborPos, pMovedByPiston);
         if (!pLevel.isClientSide && pLevel.getBlockState(pNeighborPos).hasBlockEntity()){
-            PipeEntity pipeTile = WorldUtils.getTileEntity(PipeEntity.class, pLevel, pPos);
+            PipeEntityBEPipeBase pipeTile = WorldUtils.getTileEntity(PipeEntityBEPipeBase.class, pLevel, pPos);
             BlockEntity neighbourTile = WorldUtils.getTileEntity(pLevel, pNeighborPos);
             if (pipeTile != null && neighbourTile != null && neighbourTile.getCapability(ForgeCapabilities.FLUID_HANDLER).isPresent()){
                 Direction facing = DirectionUtils.posToDirection(pPos, pNeighborPos);
@@ -113,7 +113,7 @@ public class BlockFluidPipe extends AbstractPipeBlock implements EntityBlock, IL
 
     @Override
     public List<Component> getDesc(Level level, BlockPos pos) {
-        PipeEntity pipeEntity = WorldUtils.getTileEntity(PipeEntity.class, level, pos);
+        PipeEntityBEPipeBase pipeEntity = WorldUtils.getTileEntity(PipeEntityBEPipeBase.class, level, pos);
         Fluid fluid = Fluids.EMPTY;
         if (pipeEntity != null) fluid = pipeEntity.getClientFluid();
         return List.of(
@@ -121,4 +121,15 @@ public class BlockFluidPipe extends AbstractPipeBlock implements EntityBlock, IL
                 Component.translatable(fluid.getFluidType().getDescriptionId()).withStyle(ChatFormatting.WHITE)
         );
     }
+
+    public static int getColor(BlockState state, @javax.annotation.Nullable BlockAndTintGetter level, @javax.annotation.Nullable BlockPos pos, int tintIndex){
+        if (tintIndex == 1 && level != null && pos != null) {
+            PipeEntityBEPipeBase be = WorldUtils.getTileEntity(PipeEntityBEPipeBase.class, level, pos);
+            if (be != null) {
+                return be.getFluidColor();
+            }
+        }
+        return -1;
+    }
+
 }

@@ -1,6 +1,6 @@
 package com.hbm.gui.menu;
 
-import com.hbm.blockentity.machine.CrucibleEntity;
+import com.hbm.blockentity.machine.CrucibleEntityBE;
 import com.hbm.gui.HBMMenus;
 import com.hbm.utils.WorldUtils;
 import net.minecraft.client.Minecraft;
@@ -13,9 +13,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
-public class MenuCrucible extends BaseMachineMenu<CrucibleEntity>{
-    public CrucibleEntity be;
-    public MenuCrucible(int pContainerId, Inventory pPlayerInventory, CrucibleEntity tile, ContainerData containerData) {
+public class MenuCrucible extends BaseMachineMenu<CrucibleEntityBE>{
+    public CrucibleEntityBE be;
+    public MenuCrucible(int pContainerId, Inventory pPlayerInventory, CrucibleEntityBE tile, ContainerData containerData) {
         super(HBMMenus.MENU_CRUCIBLE.get(), pContainerId, tile, containerData);
         this.slotNum = 9;
         be = tile;
@@ -29,7 +29,7 @@ public class MenuCrucible extends BaseMachineMenu<CrucibleEntity>{
         addPlayerSlot(pPlayerInventory, 0, 48);
     }
     public MenuCrucible(int id, Inventory playerInventory, FriendlyByteBuf buf) {
-        this(id, playerInventory, WorldUtils.getTileEntity(CrucibleEntity.class, Minecraft.getInstance().level, buf.readBlockPos()), new SimpleContainerData(9));
+        this(id, playerInventory, WorldUtils.getTileEntity(CrucibleEntityBE.class, Minecraft.getInstance().level, buf.readBlockPos()), new SimpleContainerData(9));
     }
 
     @Override
@@ -51,6 +51,6 @@ public class MenuCrucible extends BaseMachineMenu<CrucibleEntity>{
     }
 
     public BlockPos getPos(){
-        return this.be.getTilePos();
+        return this.be.getBlockPos();
     }
 }

@@ -1,5 +1,6 @@
 package com.hbm.blockentity.machine;
 
+import com.hbm.core.blockentity.BEMachineBase;
 import com.hbm.registries.ModItems;
 import com.hbm.block.machine.BlockDifurnace;
 import com.hbm.blockentity.HBMTiles;
@@ -33,7 +34,7 @@ import java.util.Map;
 /**
  * 熔炉（difurnace）对应的方块实体
  * */
-public class DifurnaceEntity extends BaseContainerBlockEntity implements WorldlyContainer, StackedContentsCompatible {
+public class DifurnaceEntity extends BEMachineBase implements WorldlyContainer, StackedContentsCompatible {
     public int progress = 0;
     public int fuel = 0;
     public static final int maxFuel = 12800;
@@ -65,6 +66,7 @@ public class DifurnaceEntity extends BaseContainerBlockEntity implements Worldly
         fuelPower.put(ModItems.BRIQUETTE_WOOD.get(),200);
     }
     //用于和menu传递的消息。
+    public static final int CONTAINER_SIZE = 2;
     protected final ContainerData containerData = new ContainerData() {
         @Override
         public int get(int pIndex) {
@@ -83,11 +85,11 @@ public class DifurnaceEntity extends BaseContainerBlockEntity implements Worldly
         }
         @Override
         public int getCount() {
-            return 2;
+            return CONTAINER_SIZE;
         }
     };
     public DifurnaceEntity(BlockPos pPos, BlockState pBlockState) {
-        super(HBMTiles.DIFURNACE_ENTITY.get(), pPos, pBlockState);
+        super(pPos, pBlockState);
     }
 
     /**
@@ -192,12 +194,6 @@ public class DifurnaceEntity extends BaseContainerBlockEntity implements Worldly
     public static int getFuel(ItemStack itemStack){
         Integer fuel_power = fuelPower.get(itemStack.getItem());
         return fuel_power == null?0:fuel_power;
-    }
-
-    /** 继承自BaseContainerBlockEntity */
-    @Override
-    protected Component getDefaultName() {
-        return Component.translatable("hbmxx.container.difurnace");
     }
 
     @Override

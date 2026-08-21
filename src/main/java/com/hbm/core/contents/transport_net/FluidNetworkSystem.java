@@ -1,7 +1,7 @@
 package com.hbm.core.contents.transport_net;
 
 import com.hbm.block.logistic.AbstractPipeBlock;
-import com.hbm.blockentity.logistic.PipeEntity;
+import com.hbm.blockentity.logistic.PipeEntityBEPipeBase;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.ChunkPos;
@@ -231,7 +231,7 @@ public class FluidNetworkSystem {
     }
 
     private void bindPipe(final BlockPos pos, final FluidNetwork network) {
-        if (!(level.getBlockEntity(pos) instanceof PipeEntity pipeEntity)) {
+        if (!(level.getBlockEntity(pos) instanceof PipeEntityBEPipeBase pipeEntity)) {
             return;
         }
 //        pipeEntity.network = network;

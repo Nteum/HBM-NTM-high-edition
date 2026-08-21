@@ -3,7 +3,7 @@ package com.hbm.render.blockentity;
 import com.hbm.HBM;
 import com.hbm.Inventory.fluid.CrucibleFluidHandler;
 import com.hbm.Inventory.material.HBMMatter;
-import com.hbm.blockentity.machine.CrucibleEntity;
+import com.hbm.blockentity.machine.CrucibleEntityBE;
 import com.hbm.registries.HBMMatters;
 import com.hbm.render.RenderUtils;
 import com.hbm.render.model.Models;
@@ -23,16 +23,14 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.FastColor;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.fluids.FluidStack;
 
 import static com.hbm.render.RenderUtils.renderBlockModel;
 
-public class CrucibleRenderer implements BlockEntityRenderer<CrucibleEntity> {
+public class CrucibleRenderer implements BlockEntityRenderer<CrucibleEntityBE> {
     public static final ResourceLocation FLUID_TEXTURE = HBM.rl("textures/block/fluid/lava_gray.png");
     public static BakedModel crucible_model;
 
@@ -41,7 +39,7 @@ public class CrucibleRenderer implements BlockEntityRenderer<CrucibleEntity> {
         crucible_model = modelManager.getModel(Models.CRUCIBLE);
     }
     @Override
-    public void render(CrucibleEntity crucible, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, int pPackedOverlay) {
+    public void render(CrucibleEntityBE crucible, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, int pPackedOverlay) {
         BlockRenderDispatcher blockRenderer = Minecraft.getInstance().getBlockRenderer();
         ModelBlockRenderer modelRenderer = blockRenderer.getModelRenderer();
         BlockState blockState = crucible.getBlockState();

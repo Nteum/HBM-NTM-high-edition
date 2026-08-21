@@ -4,7 +4,7 @@ import com.hbm.HBMKey;
 import com.hbm.Inventory.filter.SidedItemManager;
 import com.hbm.block.logistic.Conveyor;
 import com.hbm.blockentity.HBMTiles;
-import com.hbm.blockentity.base.CapabilityBlockEntity;
+import com.hbm.blockentity.base.CapabilityBE;
 import com.hbm.utils.DirectionUtils;
 import com.hbm.utils.InventoryUtils;
 import net.minecraft.core.BlockPos;
@@ -32,7 +32,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TileConveyor extends CapabilityBlockEntity {
+public class TileConveyor extends CapabilityBE {
     static int DOUBLE_CLICK_TIME = 10;
     public static int MAX_TRANSPORT_PROGRESS = 40;
     static float CONVEYOR_HEIGHT = 5.0f/16;
@@ -41,6 +41,7 @@ public class TileConveyor extends CapabilityBlockEntity {
     public Direction inDir;                // 物品输入的方向，默认就是null，当需要更新时才有取值。
 //    int variant;                    // 输送带状态，可以从blockstate获取，这样做是为了更新便利。
 //    Vec3 joinLoc;
+    boolean shouldSync = false;
     ItemStackHandler items = new ItemStackHandler(1){
         @Override
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {

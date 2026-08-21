@@ -1,7 +1,7 @@
 package com.hbm.gui.screen;
 
 import com.hbm.HBM;
-import com.hbm.blockentity.machine.rbmk.RBMKPeripheralEntity;
+import com.hbm.blockentity.machine.rbmk.RBMKPeripheralEntityBE;
 import com.hbm.gui.menu.RBMKPeripheralMenu;
 import com.hbm.core.network.HBMNetwork;
 import com.hbm.network.packet.toserver.C2SSyncTileMessage;
@@ -302,11 +302,11 @@ public class RBMKPeripheralScreen extends AbstractRBMKScreen<RBMKPeripheralMenu>
             graphics.blit(TEXTURE, leftPos + AZ5_BUTTON_X, topPos + AZ5_BUTTON_Y, 228, 172, AZ5_BUTTON_SIZE, AZ5_BUTTON_SIZE);
         }
 
-        RBMKPeripheralEntity peripheral = menu.getPeripheral();
+        RBMKPeripheralEntityBE peripheral = menu.getPeripheral();
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 2; col++) {
                 int slot = row * 2 + col;
-                RBMKPeripheralEntity.ConsoleScreen screen = peripheral != null ? peripheral.getScreen(slot) : null;
+                RBMKPeripheralEntityBE.ConsoleScreen screen = peripheral != null ? peripheral.getScreen(slot) : null;
                 RBMKScreenType type = screen != null ? screen.type() : RBMKScreenType.NONE;
                 graphics.blit(TEXTURE, leftPos + SCREEN_ICON_X + col * SCREEN_COL_STEP,
                         topPos + SCREEN_Y + row * SCREEN_ROW_STEP,
@@ -315,7 +315,7 @@ public class RBMKPeripheralScreen extends AbstractRBMKScreen<RBMKPeripheralMenu>
         }
 
         for (int i = 0; i < RBMKPeripheralMenu.GRID_SIZE * RBMKPeripheralMenu.GRID_SIZE; i++) {
-            RBMKPeripheralEntity.ConsoleColumn column = getConsoleColumn(i);
+            RBMKPeripheralEntityBE.ConsoleColumn column = getConsoleColumn(i);
             if (column == null) {
                 continue;
             }
@@ -354,7 +354,7 @@ public class RBMKPeripheralScreen extends AbstractRBMKScreen<RBMKPeripheralMenu>
         }
     }
 
-    private void drawHeatOverlay(GuiGraphics graphics, int x, int y, RBMKPeripheralEntity.ConsoleColumn column) {
+    private void drawHeatOverlay(GuiGraphics graphics, int x, int y, RBMKPeripheralEntityBE.ConsoleColumn column) {
         CompoundTag data = column.data();
         double maxHeat = Math.max(1.0D, data.getDouble("maxHeat"));
         int heatHeight = Mth.clamp((int) Math.ceil((data.getDouble("heat") - 20.0D) * 10.0D / maxHeat), 0, 10);
@@ -363,7 +363,7 @@ public class RBMKPeripheralScreen extends AbstractRBMKScreen<RBMKPeripheralMenu>
         }
     }
 
-    private void drawColumnOverlay(GuiGraphics graphics, int x, int y, RBMKPeripheralEntity.ConsoleColumn column) {
+    private void drawColumnOverlay(GuiGraphics graphics, int x, int y, RBMKPeripheralEntityBE.ConsoleColumn column) {
         CompoundTag data = column.data();
         switch (column.type()) {
             case CONTROL -> {
@@ -416,7 +416,7 @@ public class RBMKPeripheralScreen extends AbstractRBMKScreen<RBMKPeripheralMenu>
     }
 
     private void drawFluxGraph(GuiGraphics graphics) {
-        RBMKPeripheralEntity peripheral = menu.getPeripheral();
+        RBMKPeripheralEntityBE peripheral = menu.getPeripheral();
         int[] fluxBuffer = peripheral != null ? peripheral.getFluxBuffer() : new int[0];
         if (fluxBuffer.length < 2) {
             return;
@@ -448,7 +448,7 @@ public class RBMKPeripheralScreen extends AbstractRBMKScreen<RBMKPeripheralMenu>
     private void renderConsoleTooltip(GuiGraphics graphics, int mouseX, int mouseY) {
         int index = hoveredConsoleIndex(mouseX, mouseY);
         if (index >= 0) {
-            RBMKPeripheralEntity.ConsoleColumn column = getConsoleColumn(index);
+            RBMKPeripheralEntityBE.ConsoleColumn column = getConsoleColumn(index);
             if (column != null) {
                 graphics.renderComponentTooltip(this.font, column.getFancyStats(), mouseX, mouseY);
                 return;
@@ -480,7 +480,7 @@ public class RBMKPeripheralScreen extends AbstractRBMKScreen<RBMKPeripheralMenu>
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 2; col++) {
                 int slot = row * 2 + col;
-                RBMKPeripheralEntity.ConsoleScreen screen = menu.getPeripheral() != null ? menu.getPeripheral().getScreen(slot) : null;
+                RBMKPeripheralEntityBE.ConsoleScreen screen = menu.getPeripheral() != null ? menu.getPeripheral().getScreen(slot) : null;
                 int iconX = SCREEN_ICON_X + col * SCREEN_COL_STEP;
                 int iconY = SCREEN_Y + row * SCREEN_ROW_STEP;
                 if (isWithin(mouseX, mouseY, iconX, iconY, SCREEN_ICON_SIZE, SCREEN_ICON_SIZE)) {
@@ -557,7 +557,7 @@ public class RBMKPeripheralScreen extends AbstractRBMKScreen<RBMKPeripheralMenu>
     private void selectAllControlRods() {
         clearSelection();
         for (int i = 0; i < selection.length; i++) {
-            RBMKPeripheralEntity.ConsoleColumn column = getConsoleColumn(i);
+            RBMKPeripheralEntityBE.ConsoleColumn column = getConsoleColumn(i);
             if (column != null && (column.type() == RBMKColumnType.CONTROL || column.type() == RBMKColumnType.CONTROL_AUTO)) {
                 selection[i] = true;
             }
@@ -567,7 +567,7 @@ public class RBMKPeripheralScreen extends AbstractRBMKScreen<RBMKPeripheralMenu>
     private void selectColorGroup(int color) {
         clearSelection();
         for (int i = 0; i < selection.length; i++) {
-            RBMKPeripheralEntity.ConsoleColumn column = getConsoleColumn(i);
+            RBMKPeripheralEntityBE.ConsoleColumn column = getConsoleColumn(i);
             if (column == null) {
                 continue;
             }
@@ -621,8 +621,8 @@ public class RBMKPeripheralScreen extends AbstractRBMKScreen<RBMKPeripheralMenu>
         return mouseX >= x && mouseX < x + width && mouseY >= y && mouseY < y + height;
     }
 
-    private RBMKPeripheralEntity.ConsoleColumn getConsoleColumn(int index) {
-        RBMKPeripheralEntity peripheral = menu.getPeripheral();
+    private RBMKPeripheralEntityBE.ConsoleColumn getConsoleColumn(int index) {
+        RBMKPeripheralEntityBE peripheral = menu.getPeripheral();
         return peripheral != null ? peripheral.getConsoleColumn(index) : null;
     }
 

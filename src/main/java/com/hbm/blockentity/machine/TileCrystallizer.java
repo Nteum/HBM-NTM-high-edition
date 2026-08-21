@@ -23,7 +23,7 @@ import com.hbm.registries.ModBlocks;
 import com.hbm.registries.ModTags;
 import com.hbm.utils.math.BobMth;
 import com.hbm.core.contents.multiblock.MultiblockModule;
-import com.hbm.utils.sound.AudioWrapper;
+import com.hbm.core.client.sounds.AudioWrapper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
@@ -219,7 +219,7 @@ public class TileCrystallizer extends DefaultMachineBE implements IUpgradeInfoPr
                     audio = rebootAudio(audio);
                 }
                 audio.keepAlive();
-                audio.updateVolume(this.getVolume(1F));
+                audio.updateVolume(1);
                 audio.updatePitch(0.75F);
 
             } else {

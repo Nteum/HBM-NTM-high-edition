@@ -1,9 +1,9 @@
 package com.hbm.block.machine.rbmk;
 
-import com.hbm.block.base.BlockDummyable;
+import com.hbm.blockentity.machine.rbmk.RBMKBaseEntityBE;
+import com.hbm.core.block.BlockDummyable;
 import com.hbm.block.interfaces.ILookOverlay;
-import com.hbm.blockentity.machine.rbmk.RBMKFuelChannelEntity;
-import com.hbm.blockentity.machine.rbmk.RBMKBaseEntity;
+import com.hbm.blockentity.machine.rbmk.RBMKFuelChannelEntityBE;
 import com.hbm.registries.ModItems;
 import com.hbm.reactor.rbmk.RBMKColumnState;
 import com.hbm.reactor.rbmk.RBMKDoddOverlay;
@@ -58,7 +58,7 @@ public class BlockRBMKBase extends BlockDummyable implements ILookOverlay {
 
     @Override
     protected BlockEntity mainBlockEntity(BlockPos pPos, BlockState pState) {
-        return new RBMKBaseEntity(pPos, pState);
+        return new RBMKBaseEntityBE(pPos, pState);
     }
 
     @Override
@@ -79,7 +79,7 @@ public class BlockRBMKBase extends BlockDummyable implements ILookOverlay {
 
         final BlockPos corePos = getCore(state, level, pos);
         final BlockEntity blockEntity = level.getBlockEntity(corePos);
-        if (!(blockEntity instanceof RBMKBaseEntity baseEntity)) {
+        if (!(blockEntity instanceof RBMKBaseEntityBE baseEntity)) {
             player.displayClientMessage(Component.literal("RBMK 核心丢失: " + corePos.toShortString()), true);
             return InteractionResult.CONSUME;
         }
@@ -122,7 +122,7 @@ public class BlockRBMKBase extends BlockDummyable implements ILookOverlay {
                 columnState.settings().columnHeatFlow())), true);
 
         final BlockEntity aboveEntity = level.getBlockEntity(corePos.above());
-        if (aboveEntity instanceof RBMKFuelChannelEntity fuelChannel) {
+        if (aboveEntity instanceof RBMKFuelChannelEntityBE fuelChannel) {
             final ItemStack fuelStack = fuelChannel.fuelStack();
             final ItemStack spentStack = fuelChannel.spentFuelStack();
             final int remaining = fuelChannel.burnTimeRemaining();

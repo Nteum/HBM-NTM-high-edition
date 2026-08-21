@@ -1,6 +1,3 @@
 {
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "hbm:item/hev_battery"
-  }
+  "parent": "hbm:block/hev_battery"
 }

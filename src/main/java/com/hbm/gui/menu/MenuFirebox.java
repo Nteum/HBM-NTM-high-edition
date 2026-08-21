@@ -1,6 +1,8 @@
 package com.hbm.gui.menu;
 
+import com.hbm.blockentity.machine.DifurnaceEntity;
 import com.hbm.blockentity.machine.TileFireboxBase;
+import com.hbm.core.menu.MenuBase;
 import com.hbm.gui.HBMMenus;
 import com.hbm.utils.WorldUtils;
 import net.minecraft.client.Minecraft;
@@ -11,10 +13,10 @@ import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
-public class MenuFirebox extends BaseMachineMenu{
+public class MenuFirebox extends MenuBase<TileFireboxBase> {
     public TileFireboxBase be;
     public MenuFirebox(int pContainerId, Inventory pPlayerInventory, TileFireboxBase tile, ContainerData containerData) {
-        super(HBMMenus.MENU_FIREBOX.get(), pContainerId, tile, containerData);
+        super(pContainerId, pPlayerInventory, tile, containerData);
         be = tile;
         IItemHandler handler = tile.getItemHandler();
         // 燃料槽
@@ -26,7 +28,7 @@ public class MenuFirebox extends BaseMachineMenu{
     }
 
     public MenuFirebox(int id, Inventory playerInventory, FriendlyByteBuf buf) {
-        this(id, playerInventory, WorldUtils.getTileEntity(TileFireboxBase.class, Minecraft.getInstance().level, buf.readBlockPos()), new SimpleContainerData(5));
+        this(id, playerInventory, (TileFireboxBase) Minecraft.getInstance().level.getBlockEntity(buf.readBlockPos()), new SimpleContainerData(buf.readInt()));
     }
 
     public int getMaxBurnTime(){

@@ -106,8 +106,8 @@ public class ModTabs {
             .title(Component.translatable(HBMLang.HBM_MACHINE.key()))
             .icon(() -> Blocks.DIRT.asItem().getDefaultInstance())
             .displayItems((parameters, output) -> {
-                output.accept(ModBlocks.machine_difurnace.get());
-                output.accept(ModBlocks.machine_press.get());
+//                output.accept(ModBlocks.machine_difurnace.get());
+//                output.accept(ModBlocks.machine_press.get());
 //                output.accept(ModBlocks.machine_electric_furnace.get());
 //                output.accept(ModBlocks.machine_boiler.get());
 //                output.accept(ModBlocks.machine_electric_boiler.get());
@@ -190,16 +190,7 @@ public class ModTabs {
 //                HBMMachine.creativeTab(output);
             })
             .build());
-    public static final RegistryObject<CreativeModeTab> NUKE = CREATIVE_MODE_TABS.register("hbm_nuke", () -> CreativeModeTab.builder()
-            .title(Component.translatable(HBMLang.HBM_NUKE.key()))
-            .icon(() -> ModBlocks.bomb_fat_man.get().asItem().getDefaultInstance())
-            .displayItems((parameters, output) -> {
-                output.accept(ModBlocks.bomb_boy.get());
-                output.accept(ModBlocks.bomb_fat_man.get());
-                output.accept(ModBlocks.bomb_custom.get());
-                addItemsForTab(output, NUKE_KEY);
-            })
-            .build());
+    public static final RegistryObject<CreativeModeTab> NUKE = CREATIVE_MODE_TABS.register("hbm_nuke", () -> CreativeModeTab.builder().title(Component.translatable(HBMLang.HBM_NUKE.key())).icon(() -> ModBlocks.NUKE_MAN.get().asItem().getDefaultInstance()).build());
     public static final RegistryObject<CreativeModeTab> MISSILE = CREATIVE_MODE_TABS.register("hbm_missiles", () -> CreativeModeTab.builder()
             .title(Component.translatable(HBMLang.HBM_MISSILE.key()))
             .icon(() -> ModItems.MISSILE_NUCLEAR.get().getDefaultInstance())
@@ -217,8 +208,8 @@ public class ModTabs {
             .icon(Items.WOODEN_SWORD::getDefaultInstance)
             .displayItems((parameters, output) -> {
                 addItemsForTab(output, WEAPON_KEY);
-                output.accept(ModItems.REDSTONE_SWORD.get());
-                output.accept(ModItems.BIG_SWORD.get());
+//                output.accept(ModItems.REDSTONE_SWORD.get());
+//                output.accept(ModItems.BIG_SWORD.get());
                 output.accept(ModItems.grenade_generic.get());
                 output.accept(ModItems.grenade_strong.get());
                 output.accept(ModItems.grenade_fire.get());

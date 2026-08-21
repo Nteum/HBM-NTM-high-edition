@@ -1,6 +1,6 @@
 package com.hbm.render.blockentity;
 
-import com.hbm.blockentity.machine.research.ResearchReactorBlockEntity;
+import com.hbm.blockentity.machine.research.ResearchReactorBE;
 import com.hbm.render.model.Models;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
@@ -14,13 +14,13 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import static com.hbm.render.RenderUtils.renderBlockModel;
 
-public class ResearchReactorRenderer extends MultiPartRenderer<ResearchReactorBlockEntity> {
+public class ResearchReactorRenderer extends MultiPartRenderer<ResearchReactorBE> {
 
     public ResearchReactorRenderer(BlockEntityRendererProvider.Context context) {
     }
 
     @Override
-    public void renderMultiPart(ResearchReactorBlockEntity entity, float partialTick, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
+    public void renderMultiPart(ResearchReactorBE entity, float partialTick, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
         ModelManager modelManager = Minecraft.getInstance().getModelManager();
         BakedModel baseModel = modelManager.getModel(Models.RESEARCH_REACTOR_BASE);
         BakedModel rodModel = modelManager.getModel(Models.RESEARCH_REACTOR_RODS);

@@ -1,8 +1,8 @@
 package com.hbm.block.machine;
 
 import com.hbm.block.base.BlockMachineBase;
-import com.hbm.blockentity.machine.BatteryEntity;
-import com.hbm.item.tool.BatteryBlockItem;
+import com.hbm.blockentity.machine.BatteryEntityBE;
+import com.hbm.core.item.BlockItemBattery;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
@@ -27,7 +27,7 @@ public class BlockBattery extends BlockMachineBase {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new BatteryEntity(pPos, pState);
+        return new BatteryEntityBE(pPos, pState);
     }
 
 //    @Override
@@ -78,9 +78,9 @@ public class BlockBattery extends BlockMachineBase {
         List<ItemStack> drops = super.getDrops(state, builder);
         // 通过LootBuilder可以获得blockentity
         BlockEntity be = builder.getOptionalParameter(LootContextParams.BLOCK_ENTITY);
-        if (be instanceof BatteryEntity batteryBE && this.type != BatteryType.BASIC) {
+        if (be instanceof BatteryEntityBE batteryBE && this.type != BatteryType.BASIC) {
             for (ItemStack stack : drops) {
-                if (stack.getItem() instanceof BatteryBlockItem) {
+                if (stack.getItem() instanceof BlockItemBattery) {
                     CompoundTag nbt = stack.getOrCreateTag();
                     nbt.putLong("energy", batteryBE.getEnergy());
                 }
@@ -92,7 +92,7 @@ public class BlockBattery extends BlockMachineBase {
     @Override
     public void neighborChanged(BlockState pState, Level level, BlockPos pos, Block pNeighborBlock, BlockPos neighbor, boolean pMovedByPiston) {
         super.neighborChanged(pState, level, pos, pNeighborBlock, neighbor, pMovedByPiston);
-        if (level.getBlockEntity(pos) instanceof BatteryEntity battery){
+        if (level.getBlockEntity(pos) instanceof BatteryEntityBE battery){
             battery.onNeighbourChanged(neighbor);
         }
     }
@@ -100,7 +100,7 @@ public class BlockBattery extends BlockMachineBase {
     @Override
     public void onNeighborChange(BlockState state, LevelReader level, BlockPos pos, BlockPos neighbor) {
         super.onNeighborChange(state, level, pos, neighbor);
-        if (level.getBlockEntity(pos) instanceof BatteryEntity battery){
+        if (level.getBlockEntity(pos) instanceof BatteryEntityBE battery){
             battery.onNeighbourChanged(neighbor);
         }
     }

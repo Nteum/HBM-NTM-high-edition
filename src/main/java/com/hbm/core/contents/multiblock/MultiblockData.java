@@ -1,7 +1,7 @@
 package com.hbm.core.contents.multiblock;
 
 import com.hbm.blockentity.HBMTiles;
-import com.hbm.blockentity.base.DummyableBlockEntity;
+import com.hbm.blockentity.base.DummyableBE;
 import com.hbm.blockentity.base.TileProxyBase;
 import com.hbm.registries.HBMCaps;
 import com.hbm.registries.ModBlocks;
@@ -34,9 +34,9 @@ public class MultiblockData {
         mapping.put(ModBlocks.MACHINE_CHEMPLANT.get(), new MultiblockData(2, 0, 2 ,1 ,2 ,1)
                 .addCaps(HBMCaps.LONG_ENERGY,ForgeCapabilities.FLUID_HANDLER, -1,0,1, SOUTH, 0,0,1, SOUTH, -1,0,-2,Direction.NORTH, 0,0,-2,Direction.NORTH)
                 .addCaps(ForgeCapabilities.ITEM_HANDLER, 1,0,-1, Direction.EAST, -2,0,0,Direction.WEST));
-        mapping.put(ModBlocks.bomb_boy.get(), new MultiblockData(0,0,0,0,1,1));
-        mapping.put(ModBlocks.bomb_custom.get(), mapping.get(ModBlocks.bomb_boy.get()));
-        mapping.put(ModBlocks.bomb_fat_man.get(), new MultiblockData(1,0,0,1,1,1));
+//        mapping.put(ModBlocks.bomb_boy.get(), new MultiblockData(0,0,0,0,1,1));
+//        mapping.put(ModBlocks.bomb_custom.get(), mapping.get(ModBlocks.bomb_boy.get()));
+//        mapping.put(ModBlocks.bomb_fat_man.get(), new MultiblockData(1,0,0,1,1,1));
         mapping.put(ModBlocks.LAUNCH_PAD.get(), new MultiblockData(0, 0, 1, 1, 1, 1));
         mapping.put(ModBlocks.machine_rbmk_base.get(), new MultiblockData(0,0,0,0,0,0));
         List<Vec3i> rbmkConsoleOffsets = new ArrayList<>(square(new int[]{3, 0, 0, 0, 2, 2}));
@@ -52,6 +52,31 @@ public class MultiblockData {
                 .addCap(new Vec3i(0, 0, 2), ForgeCapabilities.FLUID_HANDLER, NORTH)
                 .addCap(new Vec3i(-2, 0, 0), ForgeCapabilities.FLUID_HANDLER, WEST)
                 .addCap(new Vec3i(1, 0, 2), ForgeCapabilities.FLUID_HANDLER, NORTH));
+        mapping.put(ModBlocks.MACHINE_SOLAR.get(), new MultiblockData(0, 0, 2, 2, 0, 0));
+        mapping.put(ModBlocks.MACHINE_LIQUEFACTOR.get(), new MultiblockData(3, 0, 1, 1, 1, 1));
+        mapping.put(ModBlocks.MACHINE_SOLIDIFIER.get(), new MultiblockData(3, 0, 1, 1, 1, 1));
+        mapping.put(ModBlocks.MACHINE_COKER.get(), new MultiblockData(22, 0, 1, 1, 1, 1));
+        mapping.put(ModBlocks.MACHINE_HYDROTREATER.get(), new MultiblockData(6, 0, 1, 1, 1, 1));
+        mapping.put(ModBlocks.MACHINE_REFINERY.get(), new MultiblockData(8, 0, 1, 1, 1, 1));
+        mapping.put(ModBlocks.MACHINE_RADIOLYSIS.get(), new MultiblockData(2, 0, 1, 1, 1, 1));
+        mapping.put(ModBlocks.MACHINE_ARC_WELDER.get(), new MultiblockData(1, 0, 1, 0, 1, 1));
+        mapping.put(ModBlocks.MACHINE_MILK_REFORMER.get(), new MultiblockData(6, 0, 1, 1, 1, 1));
+        mapping.put(ModBlocks.MACHINE_BLAST_FURNACE.get(), new MultiblockData(6, 0, 1, 1, 1, 1));
+        mapping.put(ModBlocks.MACHINE_MIXER.get(), new MultiblockData(2, 0, 0, 0, 0, 0));
+        mapping.put(ModBlocks.MACHINE_CATALYTIC_REFORMER.get(), new MultiblockData(2, 0, 1, 1, 2, 2));
+        mapping.put(ModBlocks.MACHINE_VACUUM_DISTILL.get(), new MultiblockData(8, 0, 1, 1, 1, 1));
+        mapping.put(ModBlocks.MACHINE_GASCENT.get(), new MultiblockData(3, 0, 0, 0, 0, 0));
+        mapping.put(ModBlocks.MACHINE_CRYO_DISTILL.get(), new MultiblockData(3, 2, 3, 3, 2, 2));
+        mapping.put(ModBlocks.MACHINE_COMBUSTION_ENGINE.get(), new MultiblockData(1, 0, 1, 0, 3, 2));
+        mapping.put(ModBlocks.MACHINE_REACTOR_BREEDING.get(), new MultiblockData(2, 0, 0, 0, 0, 0));        mapping.put(ModBlocks.MACHINE_STIRLING.get(), new MultiblockData(1, 0, 1, 1, 1, 1));
+        mapping.put(ModBlocks.MACHINE_SAWMILL.get(), new MultiblockData(1, 0, 1, 1, 1, 1));
+        mapping.put(ModBlocks.MACHINE_STEAM_ENGINE.get(), new MultiblockData(1, 0, 5, 1, 1, 1));
+        mapping.put(ModBlocks.MACHINE_CATALYTIC_CRACKER.get(), new MultiblockData(0, 0, 3, 3, 2, 3));
+        mapping.put(ModBlocks.MACHINE_HEAT_BOILER.get(), new MultiblockData(3, 0, 1, 1, 1, 1));
+        mapping.put(ModBlocks.MACHINE_FRACTION_TOWER.get(), new MultiblockData(2, 0, 1, 1, 1, 1));
+        mapping.put(ModBlocks.MACHINE_ALKYLATION.get(), new MultiblockData(3, 0, 2, 2, 1, 1));
+        mapping.put(ModBlocks.MACHINE_BIGASS_TANK.get(), new MultiblockData(5, 0, 4, 4, 4, 4));
+        mapping.put(ModBlocks.MACHINE_RADIATOR.get(), new MultiblockData(0, 0, 2, 2, 0, 0));
         mapping.put(ModBlocks.machine_cooling_tower.get(), new MultiblockData(12, 0, 4, 4, 4, 4)
                 .addCap(new Vec3i(0, 0, 4), ForgeCapabilities.FLUID_HANDLER, SOUTH)
                 .addCap(new Vec3i(4, 0, 0), ForgeCapabilities.FLUID_HANDLER, EAST)
@@ -195,7 +220,7 @@ public class MultiblockData {
         return list;
     }
 
-    public void assignCapabilities(DummyableBlockEntity be, Direction facing){
+    public void assignCapabilities(DummyableBE be, Direction facing){
         if (!be.hasLevel() || be.getLevel().isClientSide) return;
         Level level = be.getLevel();
         capsMap.forEach((offset, capMap) -> {
@@ -253,7 +278,8 @@ public class MultiblockData {
      * 为需要的方块实体添加能力，能力是从核心实体复制过去的，从而保证对核心实体的交互。
      * */
     public void distributeCaps(BlockEntity be){
-        if (!(be instanceof DummyableBlockEntity) || !be.hasLevel()) return;
+        if (!(be instanceof DummyableBE) && !(be instanceof com.hbm.core.blockentity.BEDummyable)) return;
+        if (!be.hasLevel()) return;
         BlockPos bePos = be.getBlockPos();
         Level level = be.getLevel();
         Direction facing = be.getBlockState().getValue(BlockStateProperties.HORIZONTAL_FACING);
@@ -264,8 +290,11 @@ public class MultiblockData {
                 Capability<?> proxyCap = setEntry.getKey();
                 Set<Direction> proxyDir = setEntry.getValue().stream().map(direction -> DirectionUtils.horizRot(SOUTH, facing, direction)).collect(Collectors.toSet());
                 if (level.getBlockEntity(proxyPos) instanceof TileProxyBase proxy && proxy.getBlockEntity()!= null && proxy.getBlockEntity().equals(be)){
-                    ((DummyableBlockEntity)be).giveProxyCapabilities(offset, proxy, proxyCap, proxyDir);
-//                    be.getCapability(proxyCap).ifPresent(handler -> proxy.capabilitiesContent.addCapability(proxyCap, handler, proxyDir));
+                    if (be instanceof DummyableBE dummyable){
+                        dummyable.giveProxyCapabilities(offset, proxy, proxyCap, proxyDir);
+                    } else if (be instanceof com.hbm.core.blockentity.BEDummyable dummyable){
+                        dummyable.giveProxyCapabilities(offset, proxy, proxyCap, proxyDir);
+                    }
                 }
             }
         }

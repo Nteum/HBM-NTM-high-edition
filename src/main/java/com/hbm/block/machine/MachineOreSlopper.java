@@ -1,6 +1,6 @@
 package com.hbm.block.machine;
 
-import com.hbm.block.base.BlockDummyable;
+import com.hbm.core.block.BlockDummyable;
 import com.hbm.blockentity.machine.TileOreSloppper;
 import com.hbm.registries.HBMCaps;
 import com.hbm.core.contents.multiblock.MultiblockData;

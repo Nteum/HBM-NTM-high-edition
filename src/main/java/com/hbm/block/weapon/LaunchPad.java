@@ -1,14 +1,13 @@
 package com.hbm.block.weapon;
 
-import com.hbm.block.base.BlockDummyable;
-import com.hbm.blockentity.weapon.LaunchPadTileEntity;
+import com.hbm.blockentity.weapon.LaunchPadTileEntityBE;
+import com.hbm.core.api.block.IBomb;
+import com.hbm.core.block.BlockDummyable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.TntBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.shapes.Shapes;
 
 public class LaunchPad extends BlockDummyable implements IBomb {
 	public LaunchPad(Properties pProperties) {
@@ -24,7 +23,7 @@ public class LaunchPad extends BlockDummyable implements IBomb {
 
 	@Override
 	protected BlockEntity mainBlockEntity(BlockPos pPos, BlockState pState) {
-		return new LaunchPadTileEntity(pPos, pState);
+		return new LaunchPadTileEntityBE(pPos, pState);
 	}
 	// 作用不明
 //	@Override
@@ -45,7 +44,7 @@ public class LaunchPad extends BlockDummyable implements IBomb {
 			BlockPos core = blockState.getValue(IS_CORE) ? pPos : getCore(blockState, pLevel, pPos);
 			if(core != null){
 				BlockEntity coreEntity = pLevel.getBlockEntity(core);
-				if(coreEntity instanceof LaunchPadTileEntity launchPad){
+				if(coreEntity instanceof LaunchPadTileEntityBE launchPad){
 					return launchPad.launchFromDesignator();
 				}
 			}
@@ -57,7 +56,7 @@ public class LaunchPad extends BlockDummyable implements IBomb {
 	public void neighborChanged(BlockState pState, Level pLevel, BlockPos pPos, Block pNeighborBlock, BlockPos pNeighborPos, boolean pMovedByPiston) {
 		if (!pLevel.isClientSide()){
 			if (pState.getValue(IS_CORE)){
-				if (pLevel.getBlockEntity(pPos) instanceof LaunchPadTileEntity launchPad){
+				if (pLevel.getBlockEntity(pPos) instanceof LaunchPadTileEntityBE launchPad){
 //					launchPad.updateRedstonePower(pPos);
 					if (pLevel.getBestNeighborSignal(pPos) > 0) launchPad.launchFromDesignator();
 				}

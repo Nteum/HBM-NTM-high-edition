@@ -1,0 +1,21 @@
+{
+  "type": "hbm:gas_centrifuge",
+  "duration": 150,
+  "input": {
+    "amount": 1200,
+    "fluid": "hbm:uf6"
+  },
+  "outputs": [
+    {
+      "count": 11,
+      "item": "hbm:nugget_u238"
+    },
+    {
+      "item": "hbm:nugget_u235"
+    },
+    {
+      "count": 4,
+      "item": "hbm:fluorite"
+    }
+  ]
+}

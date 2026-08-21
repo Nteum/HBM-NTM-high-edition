@@ -13,7 +13,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 
-public class TileProxyBase extends CapabilityBlockEntity implements ICustomLookTooltip {
+public class TileProxyBase extends CapabilityBE implements ICustomLookTooltip {
     public BlockPos cachedPos;
     public Component lookTooltip;
     public TileProxyBase(BlockEntityType<?> type, BlockPos pos, BlockState state) {

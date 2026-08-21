@@ -31,7 +31,14 @@ import java.util.*;
  * */
 public class Meteorite extends Feature<Meteorite.Configuration> {
     public static Set<Block> replacables;
-    public static List<Block> meteorOres = List.of(ModBlocks.ORE_METEOR_IRON.get(), ModBlocks.ORE_METEOR_ALUMINIUM.get(), ModBlocks.ORE_METEOR_COPPER.get(), ModBlocks.ORE_METEOR_RAREEARTH.get(), ModBlocks.ORE_METEOR_COBALT.get());
+
+    private static List<Block> meteorOres = null;
+    public static List<Block> getMeteorOres() {
+        if (meteorOres == null) {
+            meteorOres = List.of(ModBlocks.ORE_METEOR_IRON.get(), ModBlocks.ORE_METEOR_ALUMINIUM.get(), ModBlocks.ORE_METEOR_COPPER.get(), ModBlocks.ORE_METEOR_RAREEARTH.get(), ModBlocks.ORE_METEOR_COBALT.get());
+        }
+        return meteorOres;
+    }
     public Meteorite(Codec<Meteorite.Configuration> pCodec) {
         super(pCodec);
     }
@@ -63,23 +70,23 @@ public class Meteorite extends Feature<Meteorite.Configuration> {
                 case 301 -> {// Large ore-only meteorite
                     radius = 3;
                     var builder = SimpleWeightedRandomList.<BlockState>builder();
-                    for (Block block : meteorOres) {
+                    for (Block block : getMeteorOres()) {
                         builder.add(block.defaultBlockState(), 1);
                     }
-                    BLOCK_OPTIONS[0] = builder.add(ModBlocks.BLOCK_METEOR_BROKEN.get().defaultBlockState(), meteorOres.size()).build();
+                    BLOCK_OPTIONS[0] = builder.add(ModBlocks.BLOCK_METEOR_BROKEN.get().defaultBlockState(), getMeteorOres().size()).build();
                 }
                 case 302 -> {// Medium ore-only meteorite
                     radius = 2;
                     var builder = SimpleWeightedRandomList.<BlockState>builder();
-                    for (Block block : meteorOres) {
+                    for (Block block : getMeteorOres()) {
                         builder.add(block.defaultBlockState(), 1);
                     }
-                    BLOCK_OPTIONS[0] = builder.add(ModBlocks.BLOCK_METEOR_BROKEN.get().defaultBlockState(), meteorOres.size()).build();
+                    BLOCK_OPTIONS[0] = builder.add(ModBlocks.BLOCK_METEOR_BROKEN.get().defaultBlockState(), getMeteorOres().size()).build();
                 }
                 case 303 -> {// Small pure ore meteorite
                     radius = 1;
                     var builder = SimpleWeightedRandomList.<BlockState>builder();
-                    for (Block block : meteorOres) {
+                    for (Block block : getMeteorOres()) {
                         builder.add(block.defaultBlockState(), 1);
                     }
                     BLOCK_OPTIONS[0] = builder.build();
@@ -115,7 +122,7 @@ public class Meteorite extends Feature<Meteorite.Configuration> {
                     radius = 4;
                     BLOCK_OPTIONS[0] = SimpleWeightedRandomList.<BlockState>builder().add(ModBlocks.BLOCK_METEOR_BROKEN.get().defaultBlockState(), 1).build();
                     var builder = SimpleWeightedRandomList.<BlockState>builder();
-                    for (Block block : meteorOres) {
+                    for (Block block : getMeteorOres()) {
                         builder.add(block.defaultBlockState(), 1);
                     }
                     BLOCK_OPTIONS[3] = builder.build();
@@ -207,7 +214,7 @@ public class Meteorite extends Feature<Meteorite.Configuration> {
                     break;
                 case 3:
                     var builder = SimpleWeightedRandomList.<BlockState>builder();
-                    for (Block block : meteorOres) {
+                    for (Block block : getMeteorOres()) {
                         builder.add(block.defaultBlockState(), 1);
                     }
                     BLOCK_OPTIONS[0] = builder.build();

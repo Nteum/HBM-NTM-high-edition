@@ -1,8 +1,7 @@
 package com.hbm.render.blockentity;
 
 import com.hbm.block.base.BlockContainerBase;
-import com.hbm.blockentity.machine.rbmk.RBMKPeripheralEntity;
-import com.hbm.reactor.rbmk.RBMKColumnType;
+import com.hbm.blockentity.machine.rbmk.RBMKPeripheralEntityBE;
 import com.hbm.reactor.rbmk.RBMKPeripheralType;
 import com.hbm.render.ModRenderTypes;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -25,7 +24,7 @@ import org.jetbrains.annotations.Nullable;
  * RBMK console in-world overlay (map + six status screens), tuned to the
  * current Forge model orientation and with dedicated H2O/CR trend screens.
  */
-public class RBMKPeripheralRenderer implements BlockEntityRenderer<RBMKPeripheralEntity> {
+public class RBMKPeripheralRenderer implements BlockEntityRenderer<RBMKPeripheralEntityBE> {
 
     private static final double PANEL_PUSH = 1.0D / 128.0D;
     private static final double GRID_X = -0.3725D + PANEL_PUSH;
@@ -65,7 +64,7 @@ public class RBMKPeripheralRenderer implements BlockEntityRenderer<RBMKPeriphera
     }
 
     @Override
-    public void render(RBMKPeripheralEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource buffer,
+    public void render(RBMKPeripheralEntityBE blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource buffer,
                        int packedLight, int packedOverlay) {
         if (blockEntity.getPeripheralType() != RBMKPeripheralType.CONSOLE) {
             return;
@@ -103,7 +102,7 @@ public class RBMKPeripheralRenderer implements BlockEntityRenderer<RBMKPeriphera
         }
     }
 
-    private static void renderGrid(RBMKPeripheralEntity blockEntity, PoseStack poseStack, MultiBufferSource buffer) {
+    private static void renderGrid(RBMKPeripheralEntityBE blockEntity, PoseStack poseStack, MultiBufferSource buffer) {
         Matrix4f matrix = poseStack.last().pose();
         for (int row = 0; row < GRID_BG_SIZE; row++) {
             for (int col = 0; col < GRID_BG_SIZE; col++) {
@@ -116,7 +115,7 @@ public class RBMKPeripheralRenderer implements BlockEntityRenderer<RBMKPeriphera
         }
 
         for (int index = 0; index < 15 * 15; index++) {
-            RBMKPeripheralEntity.ConsoleColumn column = blockEntity.getConsoleColumn(index);
+            RBMKPeripheralEntityBE.ConsoleColumn column = blockEntity.getConsoleColumn(index);
             int row = index / 15;
             int col = index % 15;
 
@@ -140,11 +139,11 @@ public class RBMKPeripheralRenderer implements BlockEntityRenderer<RBMKPeriphera
         }
     }
 
-    private static void renderScreens(RBMKPeripheralEntity blockEntity, Font font, PoseStack poseStack, MultiBufferSource buffer,
+    private static void renderScreens(RBMKPeripheralEntityBE blockEntity, Font font, PoseStack poseStack, MultiBufferSource buffer,
                                       int packedLight) {
         Matrix4f matrix = poseStack.last().pose();
         for (int i = 0; i < 6; i++) {
-            RBMKPeripheralEntity.ConsoleScreen screen = blockEntity.getScreen(i);
+            RBMKPeripheralEntityBE.ConsoleScreen screen = blockEntity.getScreen(i);
 
             double y = SCREEN_Y_BASE - (i / 2) * SCREEN_Y_STEP;
             double z = (i % 2 == 0) ? SCREEN_Z_LEFT : SCREEN_Z_RIGHT;
@@ -319,7 +318,7 @@ public class RBMKPeripheralRenderer implements BlockEntityRenderer<RBMKPeriphera
     }
 
     @Nullable
-    private static String defaultReadout(RBMKPeripheralEntity blockEntity, int slot) {
+    private static String defaultReadout(RBMKPeripheralEntityBE blockEntity, int slot) {
         return switch (slot) {
             case 2 -> String.format("STM %04d", blockEntity.getTelemetrySteam());
             case 3 -> String.format("HT %.1f", blockEntity.getTelemetryHeat() / 10.0F);
@@ -329,7 +328,7 @@ public class RBMKPeripheralRenderer implements BlockEntityRenderer<RBMKPeriphera
         };
     }
 
-    private static int dotColor(RBMKPeripheralEntity.ConsoleColumn column) {
+    private static int dotColor(RBMKPeripheralEntityBE.ConsoleColumn column) {
         if (column.data().getByte("indicator") > 0) {
             return 0xFFFF00;
         }
@@ -350,7 +349,7 @@ public class RBMKPeripheralRenderer implements BlockEntityRenderer<RBMKPeriphera
         };
     }
 
-    private static int cellColor(RBMKPeripheralEntity.ConsoleColumn column, int index) {
+    private static int cellColor(RBMKPeripheralEntityBE.ConsoleColumn column, int index) {
         if (column.data().contains("color", Tag.TAG_ANY_NUMERIC)) {
             return switch (column.data().getInt("color")) {
                 case 0 -> 0xFF0000;
@@ -391,7 +390,7 @@ public class RBMKPeripheralRenderer implements BlockEntityRenderer<RBMKPeriphera
     }
 
     @Override
-    public boolean shouldRenderOffScreen(RBMKPeripheralEntity blockEntity) {
+    public boolean shouldRenderOffScreen(RBMKPeripheralEntityBE blockEntity) {
         return blockEntity.getPeripheralType() == RBMKPeripheralType.CONSOLE;
     }
 }

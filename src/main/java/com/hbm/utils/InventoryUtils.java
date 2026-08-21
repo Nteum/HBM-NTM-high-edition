@@ -1,6 +1,6 @@
 package com.hbm.utils;
 
-import com.hbm.blockentity.base.BaseMachineBlockEntity;
+import com.hbm.blockentity.base.BaseMachineBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
@@ -28,12 +28,12 @@ public class InventoryUtils {
     private InventoryUtils() {
     }
     @Nullable
-    public static Boolean extractItem(Level level, BaseMachineBlockEntity dest, Direction interactDir)
+    public static Boolean extractItem(Level level, BaseMachineBE dest, Direction interactDir)
     {
         return extractItem(level,dest,null,null,interactDir,allowAll);
     }
     @Nullable
-    public static Boolean extractItem(Level level, BaseMachineBlockEntity dest,List<Integer> extSlots, Direction interactDir)
+    public static Boolean extractItem(Level level, BaseMachineBE dest, List<Integer> extSlots, Direction interactDir)
     {
         return extractItem(level,dest,null,extSlots, interactDir,allowAll);
     }
@@ -45,7 +45,7 @@ public class InventoryUtils {
      * @return Null if we did nothing {no IItemHandler}, True if we moved an item, False if we moved no items
      */
     @Nullable
-    public static Boolean extractItem(Level level, BaseMachineBlockEntity dest, @Nullable BlockPos proxyPos, @Nullable List<Integer> extSlots, Direction interactDir,
+    public static Boolean extractItem(Level level, BaseMachineBE dest, @Nullable BlockPos proxyPos, @Nullable List<Integer> extSlots, Direction interactDir,
                                       Function<ItemStack,Boolean> extCond)
     {
         BlockPos destPos = proxyPos==null?dest.getBlockPos():proxyPos;
@@ -114,18 +114,18 @@ public class InventoryUtils {
                 })
                 .orElse(true);
     }
-    public static boolean insertItem(BaseMachineBlockEntity src, Direction interactDir)
+    public static boolean insertItem(BaseMachineBE src, Direction interactDir)
     {
         return insertItem(src,null,null,interactDir);
     }
-    public static boolean insertItem(BaseMachineBlockEntity src,List<Integer> intSlots, Direction interactDir)
+    public static boolean insertItem(BaseMachineBE src, List<Integer> intSlots, Direction interactDir)
     {
         return insertItem(src,null,intSlots,interactDir);
     }
     /** 向外界实体输出物品
      * Copied from TileEntityHopper#transferItemsOut and added capability support
      */
-    public static boolean insertItem(BaseMachineBlockEntity src,@Nullable BlockPos proxyPos,@Nullable List<Integer> intSlots, Direction interactDir)
+    public static boolean insertItem(BaseMachineBE src, @Nullable BlockPos proxyPos, @Nullable List<Integer> intSlots, Direction interactDir)
     {
         List<Integer> slotList = intSlots==null? IntStream.range(0,src.getContainerSize()).boxed().toList():intSlots;
         BlockPos srcPos = proxyPos==null?src.getBlockPos():proxyPos;

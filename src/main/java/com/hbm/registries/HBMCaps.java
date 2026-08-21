@@ -1,7 +1,7 @@
 package com.hbm.registries;
 
 import com.hbm.api.energy.IEnergyHandler;
-import com.hbm.api.heat.IHeatHandler;
+import com.hbm.core.api.capability.IHeatHandler;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.CapabilityToken;

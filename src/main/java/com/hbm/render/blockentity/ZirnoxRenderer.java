@@ -1,6 +1,6 @@
 package com.hbm.render.blockentity;
 
-import com.hbm.blockentity.machine.ZirnoxReactorBlockEntity;
+import com.hbm.blockentity.machine.ZirnoxReactorBE;
 import com.hbm.render.model.Models;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
@@ -14,7 +14,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import static com.hbm.render.RenderUtils.renderBlockModel;
 
-public class ZirnoxRenderer extends MultiPartRenderer<ZirnoxReactorBlockEntity> {
+public class ZirnoxRenderer extends MultiPartRenderer<ZirnoxReactorBE> {
     private final BakedModel baseModel;
 
     public ZirnoxRenderer(BlockEntityRendererProvider.Context context) {
@@ -23,7 +23,7 @@ public class ZirnoxRenderer extends MultiPartRenderer<ZirnoxReactorBlockEntity> 
     }
 
     @Override
-    public void renderMultiPart(ZirnoxReactorBlockEntity entity, float partialTick, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
+    public void renderMultiPart(ZirnoxReactorBE entity, float partialTick, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
         BlockState blockState = entity.getBlockState();
         BlockRenderDispatcher dispatcher = Minecraft.getInstance().getBlockRenderer();
         ModelBlockRenderer modelRenderer = dispatcher.getModelRenderer();

@@ -1,5 +1,6 @@
 package com.hbm.gui.menu;
 
+import com.hbm.blockentity.machine.ZirnoxReactorBE;
 import com.hbm.gui.HBMMenus;
 import com.hbm.gui.menu.slot.OutputSlot;
 import com.hbm.item.zirnox.ItemZirnoxRod;
@@ -120,7 +121,7 @@ public class ZirnoxMenu extends BaseMachineMenu {
 
     @Override
     public boolean clickMenuButton(Player player, int id) {
-        if (this.container instanceof com.hbm.blockentity.machine.ZirnoxReactorBlockEntity zirnox) {
+        if (this.container instanceof ZirnoxReactorBE zirnox) {
             if (id == 0) {
                 zirnox.toggleActive();
                 return true;

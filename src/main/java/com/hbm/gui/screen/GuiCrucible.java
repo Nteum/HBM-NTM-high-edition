@@ -6,11 +6,11 @@ import com.hbm.HBMLang;
 import com.hbm.Inventory.fluid.CrucibleFluidHandler;
 import com.hbm.Inventory.material.HBMMatter;
 import com.hbm.Inventory.recipe.alloy.CrucibleRecipe;
-import com.hbm.blockentity.machine.CrucibleEntity;
+import com.hbm.blockentity.machine.CrucibleEntityBE;
 import com.hbm.gui.menu.MenuCrucible;
-import com.hbm.gui.screen.page.recipe.RecipePageCrucible;
-import com.hbm.gui.screen.widget.BounceButton;
-import com.hbm.gui.screen.widget.MultiStateButton;
+import com.hbm.core.client.gui.page.recipe.RecipePageCrucible;
+import com.hbm.core.client.gui.widget.BounceButton;
+import com.hbm.core.client.gui.widget.MultiStateButton;
 import com.hbm.core.network.HBMNetwork;
 import com.hbm.network.packet.toserver.C2SSyncTileMessage;
 import com.hbm.registries.HBMMatters;
@@ -99,13 +99,13 @@ public class GuiCrucible extends BaseMachineGui<MenuCrucible> {
         super.renderBg(pGuiGraphics, pPartialTick, pMouseX, pMouseY);
         showBgTexture(pGuiGraphics, TEXTURE);
 
-        int hGauge = menu.getProgress() * 33 / CrucibleEntity.MAX_PROGRESS;
+        int hGauge = menu.getProgress() * 33 / CrucibleEntityBE.MAX_PROGRESS;
         if (hGauge > 0)pGuiGraphics.blit(TEXTURE, leftPos + 126, topPos + 82, 176, 0, hGauge, 5);
-        hGauge = menu.getHeat() * 33 / CrucibleEntity.MAX_HEAT;
+        hGauge = menu.getHeat() * 33 / CrucibleEntityBE.MAX_HEAT;
         if (hGauge > 0) pGuiGraphics.blit(TEXTURE, leftPos + 126, topPos + 91, 176, 5, hGauge, 5);
         // 物质条
         this.mouseOverMatter = null;
-        CrucibleEntity crucibleEntity = menu.be;
+        CrucibleEntityBE crucibleEntity = menu.be;
         if (crucibleEntity != null){
             renderMoltenMatters(pGuiGraphics, crucibleEntity.getStoreStack(), 17, 97, pMouseX, pMouseY);
             renderMoltenMatters(pGuiGraphics, crucibleEntity.getAlloyStack(), 62, 97, pMouseX, pMouseY);
@@ -137,20 +137,20 @@ public class GuiCrucible extends BaseMachineGui<MenuCrucible> {
         super.renderTooltip(pGuiGraphics, pX, pY);
         List<Component> tooltips = new ArrayList<>();
         if (isHovering(125, 81, 34, 7, pX, pY)){
-            tooltips.add(HBMLang.GUI_TOOLTIP_PARTIAL.translate(menu.getProgress(), CrucibleEntity.MAX_PROGRESS));
+            tooltips.add(HBMLang.GUI_TOOLTIP_PARTIAL.translate(menu.getProgress(), CrucibleEntityBE.MAX_PROGRESS));
         }else if (isHovering(125, 90, 34, 7, pX, pY)){
-            tooltips.add(HBMLang.GUI_TOOLTIP_PARTIAL.translate(menu.getHeat(), CrucibleEntity.MAX_HEAT).append("TU"));
+            tooltips.add(HBMLang.GUI_TOOLTIP_PARTIAL.translate(menu.getHeat(), CrucibleEntityBE.MAX_HEAT).append("TU"));
         }else if (isHovering(18, 18, 34, 79, pX, pY)){      // 存储槽
             if (this.mouseOverMatter != null){
                 tooltips.add(HBMLang.GUI_TOOLTIP_FLUID.translate(Component.translatable(this.mouseOverMatter.getFluid().getFluidType().getDescriptionId()), this.mouseOverMatter.getAmount()));
             }else {
-                tooltips.add(HBMLang.GUI_TOOLTIP_CRUCIBLE_CAPACITY.translate(CrucibleEntity.CAPACITY));
+                tooltips.add(HBMLang.GUI_TOOLTIP_CRUCIBLE_CAPACITY.translate(CrucibleEntityBE.CAPACITY));
             }
         }else if (isHovering(62, 18, 34, 79, pX, pY)){
             if (this.mouseOverMatter != null){
                 tooltips.add(HBMLang.GUI_TOOLTIP_FLUID.translate(Component.translatable(this.mouseOverMatter.getFluid().getFluidType().getDescriptionId()), this.mouseOverMatter.getAmount()));
             }else {
-                tooltips.add(HBMLang.GUI_TOOLTIP_CRUCIBLE_CAPACITY.translate(CrucibleEntity.CAPACITY));
+                tooltips.add(HBMLang.GUI_TOOLTIP_CRUCIBLE_CAPACITY.translate(CrucibleEntityBE.CAPACITY));
             }
         }else if (isHovering(107, 81, 18, 18, pX, pY)){
             tooltips.add(HBMLang.GUI_TOOLTIP_CRUCIBLE_BUTTON1.translate());

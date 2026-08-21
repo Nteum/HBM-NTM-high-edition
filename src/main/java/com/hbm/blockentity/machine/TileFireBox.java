@@ -35,9 +35,4 @@ public class TileFireBox extends TileFireboxBase{
     public AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory) {
         return new MenuFirebox(pContainerId, pInventory, this, containerData);
     }
-
-    @Override
-    public Component getDefaultName() {
-        return HBMLang.CONTAINER_FIREBOX.translate();
-    }
 }

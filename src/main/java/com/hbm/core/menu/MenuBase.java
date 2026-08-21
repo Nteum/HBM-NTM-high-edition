@@ -14,19 +14,20 @@ import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 
-public abstract  class MenuBase<T extends BEMachineBase> extends AbstractContainerMenu {
+public abstract class MenuBase<T extends BEMachineBase> extends AbstractContainerMenu {
     protected T be;
     public Container container;
     public ContainerData containerData;
     public int slotNum = 0;
-
-    protected MenuBase(int pContainerId, Inventory playerInventory, T blockEntity, ContainerData containerData1) {
+    // 主要的构造湖是
+    public MenuBase(int pContainerId, Inventory playerInventory, T blockEntity, ContainerData containerData1) {
         super(blockEntity.getMenuType(), pContainerId);
         this.be = blockEntity;
+        this.container = blockEntity instanceof Container c ? c : null;
         containerData = containerData1;
         this.addDataSlots(containerData1);
     }
-
+    // 用于响应右键点击注册属性
     public MenuBase(int id, Inventory playerInventory, FriendlyByteBuf buf) {
         this(id, playerInventory, (T) Minecraft.getInstance().level.getBlockEntity(buf.readBlockPos()), new SimpleContainerData(buf.readInt()));
     }
@@ -80,7 +81,7 @@ public abstract  class MenuBase<T extends BEMachineBase> extends AbstractContain
             this.addSlot(new Slot(container, StartIdx+i, slotPos[i][0], slotPos[i][1]));
         }
     }
-    void addPlayerSlot(Inventory pPlayerInventory,int xOffset,int yOffset){
+    protected void addPlayerSlot(Inventory pPlayerInventory,int xOffset,int yOffset){
         for(int i = 0; i < 3; ++i) {
             for(int j = 0; j < 9; ++j) {
                 this.addSlot(new Slot(pPlayerInventory, j + i * 9 + 9, 8 + j * 18 + xOffset, 84 + i * 18 + yOffset));

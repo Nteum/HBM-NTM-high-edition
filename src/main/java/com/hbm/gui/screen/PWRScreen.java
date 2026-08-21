@@ -1,7 +1,7 @@
 package com.hbm.gui.screen;
 
 import com.hbm.HBM;
-import com.hbm.blockentity.machine.PWRControllerBlockEntity;
+import com.hbm.blockentity.machine.PWRControllerBE;
 import com.hbm.gui.menu.PWRMenu;
 
 import com.hbm.item.pwr.ItemPWRFuel;
@@ -103,9 +103,9 @@ public class PWRScreen extends BaseMachineGui<PWRMenu> {
         }
 
         drawFluid(graphics, COOLANT_TEXTURE, this.leftPos + 8, this.topPos + 57, 16, 52,
-                menu.getCoolantAmount(), PWRControllerBlockEntity.COOLANT_CAPACITY);
+                menu.getCoolantAmount(), PWRControllerBE.COOLANT_CAPACITY);
         drawFluid(graphics, HOT_COOLANT_TEXTURE, this.leftPos + 26, this.topPos + 57, 16, 52,
-                menu.getHotCoolantAmount(), PWRControllerBlockEntity.COOLANT_CAPACITY);
+                menu.getHotCoolantAmount(), PWRControllerBE.COOLANT_CAPACITY);
     }
 
     @Override

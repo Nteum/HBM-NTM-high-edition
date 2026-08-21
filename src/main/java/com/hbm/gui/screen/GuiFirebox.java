@@ -2,8 +2,9 @@ package com.hbm.gui.screen;
 
 import com.hbm.HBM;
 import com.hbm.HBMLang;
-import com.hbm.blockentity.machine.PressEntity;
+import com.hbm.core.client.gui.GuiMachineBase;
 import com.hbm.gui.menu.MenuFirebox;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -11,18 +12,16 @@ import net.minecraft.world.entity.player.Inventory;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
-public class GuiFirebox extends BaseMachineGui<MenuFirebox> {
+public class GuiFirebox extends GuiMachineBase<MenuFirebox> {
     private static ResourceLocation TEXTURE = HBM.rl("textures/gui/machine/gui_firebox.png");
 
     public GuiFirebox(MenuFirebox pMenu, Inventory pPlayerInventory, Component pTitle) {
-        super(pMenu, pPlayerInventory, pTitle);
+        super(pMenu, pPlayerInventory, pTitle.copy().withStyle(ChatFormatting.WHITE));
     }
 
     @Override
     protected void renderBg(GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY) {
-        super.renderBg(pGuiGraphics, pPartialTick, pMouseX, pMouseY);
         showBgTexture(pGuiGraphics, TEXTURE);
         pGuiGraphics.blit(TEXTURE, leftPos + 81, topPos + 28, 176, 0, menu.getHeatEnergy() * 69 / menu.getMaxHeat(), 5);
         pGuiGraphics.blit(TEXTURE, leftPos + 81, topPos + 37, 176, 5, menu.getBurnTime() * 70 / Math.max(menu.getMaxBurnTime(), 1), 5);

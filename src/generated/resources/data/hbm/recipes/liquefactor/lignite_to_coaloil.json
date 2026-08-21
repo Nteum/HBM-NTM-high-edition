@@ -1,0 +1,12 @@
+{
+  "type": "hbm:liquefactor",
+  "duration": 100,
+  "input": {
+    "count": 1,
+    "item": "hbm:lignite"
+  },
+  "output_fluid": {
+    "amount": 50,
+    "fluid": "hbm:coaloil"
+  }
+}

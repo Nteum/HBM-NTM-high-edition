@@ -1,9 +1,9 @@
 package com.hbm.block.machine;
 
 import com.hbm.block.HBMBlockProperties;
-import com.hbm.block.base.BaseMachineBlock;
 import com.hbm.blockentity.HBMTiles;
 import com.hbm.blockentity.machine.DifurnaceEntity;
+import com.hbm.core.block.BlockMachineBase;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -21,7 +21,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import org.jetbrains.annotations.Nullable;
 
-public class BlockDifurnace extends BaseMachineBlock {
+public class BlockDifurnace extends BlockMachineBase {
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
     public static final BooleanProperty HAT = HBMBlockProperties.WITH_HAT;
     public BlockDifurnace(Properties pProperties) {
@@ -52,7 +52,7 @@ public class BlockDifurnace extends BaseMachineBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return pBlockEntityType == HBMTiles.DIFURNACE_ENTITY.get() ? DifurnaceEntity::tick : null;
+        return pBlockEntityType == HBMTiles.getTypeById("difurnace") ? DifurnaceEntity::tick : null;
     }
     //物品的动画效果
     @Override

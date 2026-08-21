@@ -4,7 +4,7 @@ import com.hbm.HBM;
 import com.hbm.HBMKey;
 import com.hbm.HBMLang;
 import com.hbm.gui.menu.MenuConveyorRouter;
-import com.hbm.gui.screen.widget.MultiStateButton;
+import com.hbm.core.client.gui.widget.MultiStateButton;
 import com.hbm.core.network.HBMNetwork;
 import com.hbm.network.packet.toserver.C2SSyncTileMessage;
 import com.hbm.utils.math.BitUtil;

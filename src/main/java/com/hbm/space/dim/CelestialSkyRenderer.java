@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 import com.hbm.HBM;
-import com.hbm.main.ClientEvents;
+import com.hbm.core.client.ClientEvents;
 import com.hbm.space.dim.SolarSystem.AstroMetric;
 import com.hbm.space.dim.trait.CBT_Atmosphere;
 import com.hbm.space.dim.trait.CBT_Destroyed;

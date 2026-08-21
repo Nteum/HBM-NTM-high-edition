@@ -1,16 +1,10 @@
 package com.hbm.reactor.rbmk;
 
-import com.hbm.block.base.BlockDummyable;
+import com.hbm.blockentity.machine.rbmk.*;
+import com.hbm.core.block.BlockDummyable;
 import com.hbm.block.machine.rbmk.BlockRBMKBase;
 import com.hbm.blockentity.base.TileProxyBase;
-import com.hbm.blockentity.machine.rbmk.RBMKBaseEntity;
-import com.hbm.blockentity.machine.rbmk.RBMKBoilerEntity;
-import com.hbm.blockentity.machine.rbmk.RBMKControlRodEntity;
-import com.hbm.blockentity.machine.rbmk.RBMKCoolerEntity;
-import com.hbm.blockentity.machine.rbmk.RBMKFuelChannelEntity;
-import com.hbm.blockentity.machine.rbmk.RBMKHeaterEntity;
-import com.hbm.blockentity.machine.rbmk.RBMKOutgasserEntity;
-import com.hbm.blockentity.machine.rbmk.RBMKPeripheralEntity;
+import com.hbm.blockentity.machine.rbmk.RBMKCoolerEntityBE;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -74,11 +68,11 @@ public final class RBMKDoddOverlay {
         }
         lines.add(Component.literal("core: " + corePos.toShortString()).withStyle(ChatFormatting.GRAY));
 
-        final RBMKBaseEntity base = level.getBlockEntity(corePos) instanceof RBMKBaseEntity be ? be : null;
+        final RBMKBaseEntityBE base = level.getBlockEntity(corePos) instanceof RBMKBaseEntityBE be ? be : null;
         final BlockEntity aboveEntity = level.getBlockEntity(corePos.above());
-        final RBMKFuelChannelEntity fuel = aboveEntity instanceof RBMKFuelChannelEntity fc ? fc : null;
-        final RBMKControlRodEntity controlRod = aboveEntity instanceof RBMKControlRodEntity cr ? cr : null;
-        final RBMKHeaterEntity heater = aboveEntity instanceof RBMKHeaterEntity he ? he : null;
+        final RBMKFuelChannelEntityBE fuel = aboveEntity instanceof RBMKFuelChannelEntityBE fc ? fc : null;
+        final RBMKControlRodEntityBE controlRod = aboveEntity instanceof RBMKControlRodEntityBE cr ? cr : null;
+        final RBMKHeaterEntityBE heater = aboveEntity instanceof RBMKHeaterEntityBE he ? he : null;
 
         final RBMKColumnState state = resolveState(level, corePos);
         final double globalControl = level instanceof ServerLevel serverLevel
@@ -103,14 +97,14 @@ public final class RBMKDoddOverlay {
             lines.add(Component.literal(String.format(Locale.ROOT,
                     "control: %.0f%% -> %.0f%%", state.controlRodInsertion() * 100.0D, state.targetControlRodInsertion() * 100.0D)));
             lines.add(Component.literal("color: " + state.controlColor()));
-        } else if (aboveEntity instanceof RBMKBoilerEntity boiler) {
+        } else if (aboveEntity instanceof RBMKBoilerEntityBE boiler) {
             lines.add(Component.literal(String.format(Locale.ROOT,
                     "steamCompression: %d", boiler.compressionStage())));
         } else if (heater != null) {
             lines.add(Component.literal("heater: " + (heater.isActive() ? "on" : "off")));
-        } else if (aboveEntity instanceof RBMKOutgasserEntity outgasser) {
+        } else if (aboveEntity instanceof RBMKOutgasserEntityBE outgasser) {
             lines.add(Component.literal(String.format(Locale.ROOT, "progress: %.1f", outgasser.progress())));
-        } else if (aboveEntity instanceof RBMKCoolerEntity) {
+        } else if (aboveEntity instanceof RBMKCoolerEntityBE) {
             lines.add(Component.literal("cooler: active"));
         }
 
@@ -121,23 +115,23 @@ public final class RBMKDoddOverlay {
 
     private static PeripheralDiagnostic resolvePeripheral(final Level level, final BlockPos hitPos, final BlockState hitState) {
         final BlockEntity hitEntity = level.getBlockEntity(hitPos);
-        if (hitEntity instanceof RBMKPeripheralEntity peripheral) {
+        if (hitEntity instanceof RBMKPeripheralEntityBE peripheral) {
             return new PeripheralDiagnostic(peripheral.getPeripheralType(), hitPos, peripheral.getLinkedColumn(), peripheral);
         }
         if (hitEntity instanceof TileProxyBase tileProxy && tileProxy.cachedPos != null
-                && level.getBlockEntity(tileProxy.cachedPos) instanceof RBMKPeripheralEntity peripheral) {
+                && level.getBlockEntity(tileProxy.cachedPos) instanceof RBMKPeripheralEntityBE peripheral) {
             return new PeripheralDiagnostic(peripheral.getPeripheralType(), tileProxy.cachedPos, peripheral.getLinkedColumn(), peripheral);
         }
         if (hitState.getBlock() instanceof BlockDummyable dummyable) {
             BlockPos core = dummyable.getCore(hitState, level, hitPos);
-            if (level.getBlockEntity(core) instanceof RBMKPeripheralEntity peripheral) {
+            if (level.getBlockEntity(core) instanceof RBMKPeripheralEntityBE peripheral) {
                 return new PeripheralDiagnostic(peripheral.getPeripheralType(), core, peripheral.getLinkedColumn(), peripheral);
             }
         }
         return null;
     }
 
-    private static boolean hasRod(final RBMKFuelChannelEntity fuel) {
+    private static boolean hasRod(final RBMKFuelChannelEntityBE fuel) {
         return fuel != null && !fuel.fuelStack().isEmpty();
     }
 
@@ -151,7 +145,7 @@ public final class RBMKDoddOverlay {
         }
 
         final RBMKColumnState fallback = new RBMKColumnState(corePos, RBMKSettings.DEFAULT, RBMKLidType.NONE);
-        if (level.getBlockEntity(corePos) instanceof RBMKBaseEntity base) {
+        if (level.getBlockEntity(corePos) instanceof RBMKBaseEntityBE base) {
             fallback.setLidType(base.getLidType());
         }
         RBMKColumns.populateState(level, fallback);
@@ -160,18 +154,18 @@ public final class RBMKDoddOverlay {
 
     private static BlockPos resolveCorePos(final Level level, final BlockPos hitPos, final BlockState hitState) {
         final BlockEntity hitEntity = level.getBlockEntity(hitPos);
-        if (hitEntity instanceof RBMKBaseEntity) {
+        if (hitEntity instanceof RBMKBaseEntityBE) {
             return hitPos;
         }
-        if (hitEntity instanceof RBMKPeripheralEntity peripheral && peripheral.getLinkedColumn() != null) {
+        if (hitEntity instanceof RBMKPeripheralEntityBE peripheral && peripheral.getLinkedColumn() != null) {
             return peripheral.getLinkedColumn();
         }
         if (hitEntity instanceof TileProxyBase tileProxy) {
-            if (tileProxy.cachedPos != null && level.getBlockEntity(tileProxy.cachedPos) instanceof RBMKBaseEntity) {
+            if (tileProxy.cachedPos != null && level.getBlockEntity(tileProxy.cachedPos) instanceof RBMKBaseEntityBE) {
                 return tileProxy.cachedPos;
             }
             if (tileProxy.cachedPos != null
-                    && level.getBlockEntity(tileProxy.cachedPos) instanceof RBMKPeripheralEntity peripheral
+                    && level.getBlockEntity(tileProxy.cachedPos) instanceof RBMKPeripheralEntityBE peripheral
                     && peripheral.getLinkedColumn() != null) {
                 return peripheral.getLinkedColumn();
             }
@@ -179,20 +173,20 @@ public final class RBMKDoddOverlay {
 
         if (hitState.getBlock() instanceof BlockRBMKBase baseBlock) {
             BlockPos core = baseBlock.getCore(hitState, level, hitPos);
-            if (level.getBlockEntity(core) instanceof RBMKBaseEntity) {
+            if (level.getBlockEntity(core) instanceof RBMKBaseEntityBE) {
                 return core;
             }
         }
         if (hitState.getBlock() instanceof BlockDummyable dummyable) {
             BlockPos core = dummyable.getCore(hitState, level, hitPos);
-            if (level.getBlockEntity(core) instanceof RBMKBaseEntity) {
+            if (level.getBlockEntity(core) instanceof RBMKBaseEntityBE) {
                 return core;
             }
-            if (level.getBlockEntity(core.below()) instanceof RBMKBaseEntity) {
+            if (level.getBlockEntity(core.below()) instanceof RBMKBaseEntityBE) {
                 return core.below();
             }
         }
-        if (level.getBlockEntity(hitPos.below()) instanceof RBMKBaseEntity) {
+        if (level.getBlockEntity(hitPos.below()) instanceof RBMKBaseEntityBE) {
             return hitPos.below();
         }
         if (RBMKColumns.classifyBlockPath(BuiltInRegistries.BLOCK.getKey(hitState.getBlock()).getPath()) != RBMKColumnType.BLANK) {
@@ -202,6 +196,6 @@ public final class RBMKDoddOverlay {
     }
 
     private record PeripheralDiagnostic(RBMKPeripheralType type, BlockPos pos,
-                                        BlockPos linkedColumn, RBMKPeripheralEntity entity) {
+                                        BlockPos linkedColumn, RBMKPeripheralEntityBE entity) {
     }
 }

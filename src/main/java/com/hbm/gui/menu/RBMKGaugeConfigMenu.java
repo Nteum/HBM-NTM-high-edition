@@ -1,6 +1,6 @@
 package com.hbm.gui.menu;
 
-import com.hbm.blockentity.machine.rbmk.RBMKGaugeEntity;
+import com.hbm.blockentity.machine.rbmk.RBMKGaugeEntityBE;
 import com.hbm.gui.HBMMenus;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
@@ -18,7 +18,7 @@ public class RBMKGaugeConfigMenu extends BaseMachineMenu {
     private static final int CHANNELS = 4;
 
     private final BlockPos pos;
-    private final RBMKGaugeEntity gauge;
+    private final RBMKGaugeEntityBE gauge;
 
     public RBMKGaugeConfigMenu(int containerId, Inventory playerInventory) {
         this(containerId, playerInventory, null, null, new SimpleContainer(0), new SimpleContainerData(0));
@@ -28,7 +28,7 @@ public class RBMKGaugeConfigMenu extends BaseMachineMenu {
         this(containerId, playerInventory, resolveGauge(playerInventory, buf));
     }
 
-    public RBMKGaugeConfigMenu(int containerId, Inventory playerInventory, RBMKGaugeEntity gauge) {
+    public RBMKGaugeConfigMenu(int containerId, Inventory playerInventory, RBMKGaugeEntityBE gauge) {
         this(containerId, playerInventory, gauge,
                 gauge != null ? gauge.getBlockPos() : null,
                 new SimpleContainer(0),
@@ -36,12 +36,12 @@ public class RBMKGaugeConfigMenu extends BaseMachineMenu {
     }
 
     public RBMKGaugeConfigMenu(int containerId, Inventory playerInventory, Container container, ContainerData data) {
-        this(containerId, playerInventory, container instanceof RBMKGaugeEntity entity ? entity : null,
-                container instanceof RBMKGaugeEntity entity ? entity.getBlockPos() : null,
+        this(containerId, playerInventory, container instanceof RBMKGaugeEntityBE entity ? entity : null,
+                container instanceof RBMKGaugeEntityBE entity ? entity.getBlockPos() : null,
                 container, data);
     }
 
-    private RBMKGaugeConfigMenu(int containerId, Inventory playerInventory, RBMKGaugeEntity gauge, BlockPos pos, Container container, ContainerData data) {
+    private RBMKGaugeConfigMenu(int containerId, Inventory playerInventory, RBMKGaugeEntityBE gauge, BlockPos pos, Container container, ContainerData data) {
         super(HBMMenus.RBMK_GAUGE_CONFIG_MENU.get(), containerId, container, data);
         this.slotNum = 0;
         this.gauge = gauge;
@@ -109,10 +109,10 @@ public class RBMKGaugeConfigMenu extends BaseMachineMenu {
         return gauge.getMaxValue(slot);
     }
 
-    private static RBMKGaugeEntity resolveGauge(Inventory playerInventory, FriendlyByteBuf buf) {
+    private static RBMKGaugeEntityBE resolveGauge(Inventory playerInventory, FriendlyByteBuf buf) {
         Objects.requireNonNull(buf, "buffer missing block position");
         BlockPos pos = buf.readBlockPos();
-        if (playerInventory.player.level().getBlockEntity(pos) instanceof RBMKGaugeEntity entity) {
+        if (playerInventory.player.level().getBlockEntity(pos) instanceof RBMKGaugeEntityBE entity) {
             return entity;
         }
         return null;

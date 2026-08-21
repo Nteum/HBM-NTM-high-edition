@@ -1,0 +1,96 @@
+{
+  "parent": "minecraft:block/block",
+  "automatic_culling": false,
+  "display": {
+    "firstperson_righthand": {
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "scale": [
+        0.05714286,
+        0.05714286,
+        0.05714286
+      ],
+      "translation": [
+        1.1666666,
+        -3.5,
+        0
+      ]
+    },
+    "fixed": {
+      "scale": [
+        0.071428575,
+        0.071428575,
+        0.071428575
+      ],
+      "translation": [
+        1.1666666,
+        -3.5,
+        0
+      ]
+    },
+    "ground": {
+      "scale": [
+        0.035714287,
+        0.035714287,
+        0.035714287
+      ],
+      "translation": [
+        1.1666666,
+        3,
+        0
+      ]
+    },
+    "gui": {
+      "rotation": [
+        30,
+        135,
+        0
+      ],
+      "scale": [
+        0.08928572,
+        0.08928572,
+        0.08928572
+      ],
+      "translation": [
+        1.1666666,
+        -3.5,
+        0
+      ]
+    },
+    "thirdperson_righthand": {
+      "rotation": [
+        75,
+        45,
+        0
+      ],
+      "scale": [
+        0.053571433,
+        0.053571433,
+        0.053571433
+      ],
+      "translation": [
+        1.1666666,
+        2.5,
+        0
+      ]
+    }
+  },
+  "flip_v": true,
+  "loader": "hbm:multi_parts_obj",
+  "model": "hbm:models/block/milk_reformer/milk_reformer.obj",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "particle": "hbm:block/models/machines/milker",
+    "texture0": "hbm:block/models/machines/milker"
+  },
+  "transform": {
+    "translation": [
+      0.5,
+      0.0,
+      0.5
+    ]
+  }
+}

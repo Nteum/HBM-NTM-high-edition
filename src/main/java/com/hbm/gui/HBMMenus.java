@@ -19,8 +19,8 @@ import java.util.Map;
 public class HBMMenus {
     public static final DeferredRegister<MenuType<?>> MOD_MENU_TYPES = DeferredRegister.create(Registries.MENU, HBM.MODID);
     public static final Map<String, RegistryObject<? extends MenuType>> typesMaps = new HashMap<>();
-    public static final RegistryObject<MenuType<DifurnaceMenu>> DIFURNACE_MENU =
-            MOD_MENU_TYPES.register("difurnace_menu",()->new MenuType<>(DifurnaceMenu::new, FeatureFlags.VANILLA_SET));
+//    public static final RegistryObject<MenuType<DifurnaceMenu>> DIFURNACE_MENU =
+//            MOD_MENU_TYPES.register("difurnace_menu",()->new MenuType<>(DifurnaceMenu::new, FeatureFlags.VANILLA_SET));
     public static final RegistryObject<MenuType<PressMenu>> PRESS_MENU =
             MOD_MENU_TYPES.register("press_menu",()->IForgeMenuType.create(PressMenu::new));
     public static final RegistryObject<MenuType<BatteryMenu>> BATTERY_MENU =
@@ -75,7 +75,7 @@ public class HBMMenus {
             MOD_MENU_TYPES.register("research_reactor_menu", () -> new MenuType<>(com.hbm.gui.menu.ResearchReactorMenu::new, FeatureFlags.VANILLA_SET));
     public static final RegistryObject<MenuType<com.hbm.gui.menu.BreederReactorMenu>> BREEDER_REACTOR_MENU =
             MOD_MENU_TYPES.register("breeder_reactor_menu", () -> new MenuType<>(com.hbm.gui.menu.BreederReactorMenu::new, FeatureFlags.VANILLA_SET));
-    public static final RegistryObject<MenuType<MenuFirebox>> MENU_FIREBOX = register("menu_firebox", MenuFirebox::new);
+//    public static final RegistryObject<MenuType<MenuFirebox>> MENU_FIREBOX = register("menu_firebox", MenuFirebox::new);
     public static final RegistryObject<MenuType<MenuCrucible>> MENU_CRUCIBLE = register("menu_crucible", MenuCrucible::new);
     public static final RegistryObject<MenuType<MenuConveyorExtractor>> MENU_CONVEYOR_EXTRACTOR = register("menu_conveyor_extractor", MenuConveyorExtractor::new);
     public static final RegistryObject<MenuType<MenuConveyorInserter>> MENU_CONVEYOR_INSERTER = register("menu_conveyor_inserter", MenuConveyorInserter::new);

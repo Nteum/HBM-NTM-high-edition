@@ -1,6 +1,6 @@
 package com.hbm.block.logistic;
 
-import com.hbm.blockentity.machine.CableEntity;
+import com.hbm.blockentity.machine.CableEntityBEPipeBase;
 import com.hbm.registries.HBMCaps;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.LevelAccessor;
@@ -19,7 +19,7 @@ public class BlockCable extends AbstractPipeBlock implements EntityBlock{
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new CableEntity(pPos,pState);
+        return new CableEntityBEPipeBase(pPos,pState);
     }
 
     @Override

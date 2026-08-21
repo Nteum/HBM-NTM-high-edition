@@ -1,7 +1,7 @@
 package com.hbm.gui.screen;
 
 import com.hbm.HBM;
-import com.hbm.blockentity.machine.ZirnoxReactorBlockEntity;
+import com.hbm.blockentity.machine.ZirnoxReactorBE;
 import com.hbm.gui.menu.ZirnoxMenu;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
@@ -31,19 +31,19 @@ public class ZirnoxScreen extends BaseMachineGui<ZirnoxMenu> {
         int heat = menu.getHeat();
         int pressure = menu.getPressure();
 
-        int steamGauge = scale(steam, ZirnoxReactorBlockEntity.STEAM_CAPACITY, 6);
+        int steamGauge = scale(steam, ZirnoxReactorBE.STEAM_CAPACITY, 6);
         graphics.blit(TEXTURE, leftPos + 160, topPos + 108, 238, 12 * steamGauge, 18, 12);
 
-        int co2Gauge = scale(co2, ZirnoxReactorBlockEntity.CO2_CAPACITY, 6);
+        int co2Gauge = scale(co2, ZirnoxReactorBE.CO2_CAPACITY, 6);
         graphics.blit(TEXTURE, leftPos + 142, topPos + 108, 238, 12 * co2Gauge, 18, 12);
 
-        int waterGauge = scale(water, ZirnoxReactorBlockEntity.WATER_CAPACITY, 6);
+        int waterGauge = scale(water, ZirnoxReactorBE.WATER_CAPACITY, 6);
         graphics.blit(TEXTURE, leftPos + 178, topPos + 108, 238, 12 * waterGauge, 18, 12);
 
-        int heatGauge = scale(heat, ZirnoxReactorBlockEntity.MAX_HEAT, 12);
+        int heatGauge = scale(heat, ZirnoxReactorBE.MAX_HEAT, 12);
         graphics.blit(TEXTURE, leftPos + 160, topPos + 33, 220, 18 * heatGauge, 18, 17);
 
-        int pressureGauge = scale(pressure, ZirnoxReactorBlockEntity.MAX_PRESSURE, 12);
+        int pressureGauge = scale(pressure, ZirnoxReactorBE.MAX_PRESSURE, 12);
         graphics.blit(TEXTURE, leftPos + 178, topPos + 33, 220, 18 * pressureGauge, 18, 17);
 
         if (menu.isOn()) {
@@ -77,11 +77,11 @@ public class ZirnoxScreen extends BaseMachineGui<ZirnoxMenu> {
                 List.of(Component.literal("Pressure: " + pressureBar + " bar")));
 
         drawCustomInfoStat(graphics, mouseX, mouseY, leftPos + 160, topPos + 108, 18, 12,
-                List.of(Component.literal("Steam: " + format(menu.getSteam()) + " / " + format(ZirnoxReactorBlockEntity.STEAM_CAPACITY) + " mB")));
+                List.of(Component.literal("Steam: " + format(menu.getSteam()) + " / " + format(ZirnoxReactorBE.STEAM_CAPACITY) + " mB")));
         drawCustomInfoStat(graphics, mouseX, mouseY, leftPos + 142, topPos + 108, 18, 12,
-                List.of(Component.literal("CO2: " + format(menu.getCarbonDioxide()) + " / " + format(ZirnoxReactorBlockEntity.CO2_CAPACITY) + " mB")));
+                List.of(Component.literal("CO2: " + format(menu.getCarbonDioxide()) + " / " + format(ZirnoxReactorBE.CO2_CAPACITY) + " mB")));
         drawCustomInfoStat(graphics, mouseX, mouseY, leftPos + 178, topPos + 108, 18, 12,
-                List.of(Component.literal("Water: " + format(menu.getWater()) + " / " + format(ZirnoxReactorBlockEntity.WATER_CAPACITY) + " mB")));
+                List.of(Component.literal("Water: " + format(menu.getWater()) + " / " + format(ZirnoxReactorBE.WATER_CAPACITY) + " mB")));
     }
 
     private static String format(int value) {

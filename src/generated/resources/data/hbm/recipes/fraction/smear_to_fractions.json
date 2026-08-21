@@ -1,0 +1,15 @@
+{
+  "type": "hbm:fraction",
+  "input": {
+    "amount": 100,
+    "fluid": "hbm:smear"
+  },
+  "output1": {
+    "amount": 60,
+    "fluid": "hbm:heatingoil"
+  },
+  "output2": {
+    "amount": 40,
+    "fluid": "hbm:lubricant"
+  }
+}

@@ -14,7 +14,7 @@ import com.hbm.item.env.ItemEggGlyphid;
 import com.hbm.network.ServerMsgHandler;
 import com.hbm.core.contents.transport_net.EnergyNetworkSystem;
 import com.hbm.core.contents.transport_net.FluidBackupSystem;
-import com.hbm.core.contents.transport_net.FluidNetworkSystem;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
@@ -116,8 +116,6 @@ public class ServerEventHandler {
     public static void serverTick(TickEvent.ServerTickEvent event){
         if (event.phase.equals(TickEvent.Phase.START)){
             ServerMsgHandler.tick(event);
-        }else if (event.phase.equals(TickEvent.Phase.END)){
-            FluidNetworkSystem.INSTANCES.values().forEach(FluidNetworkSystem::tick);
         }
     }
 

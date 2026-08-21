@@ -1,7 +1,7 @@
 package com.hbm.blockentity.tools;
 
 import com.hbm.HBMKey;
-import com.hbm.blockentity.base.CapabilityBlockEntity;
+import com.hbm.blockentity.base.CapabilityBE;
 import com.hbm.item.tool.ItemMold;
 import com.hbm.registries.HBMMatters;
 import net.minecraft.core.BlockPos;
@@ -22,7 +22,7 @@ import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class TileFoundryBase extends CapabilityBlockEntity {
+public abstract class TileFoundryBase extends CapabilityBE {
     // 第一个物品是浇筑模板，第二个物品是铸造的物品
     ItemStackHandler items = new ItemStackHandler(2){
         @Override

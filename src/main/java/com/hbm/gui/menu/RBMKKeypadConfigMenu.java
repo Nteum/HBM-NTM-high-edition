@@ -1,6 +1,6 @@
 package com.hbm.gui.menu;
 
-import com.hbm.blockentity.machine.rbmk.RBMKKeypadEntity;
+import com.hbm.blockentity.machine.rbmk.RBMKKeypadEntityBE;
 import com.hbm.gui.HBMMenus;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
@@ -18,7 +18,7 @@ public class RBMKKeypadConfigMenu extends BaseMachineMenu {
     private static final int CHANNELS = 4;
 
     private final BlockPos pos;
-    private final RBMKKeypadEntity keypad;
+    private final RBMKKeypadEntityBE keypad;
 
     public RBMKKeypadConfigMenu(int containerId, Inventory playerInventory) {
         this(containerId, playerInventory, null, null, new SimpleContainer(0), new SimpleContainerData(0));
@@ -28,7 +28,7 @@ public class RBMKKeypadConfigMenu extends BaseMachineMenu {
         this(containerId, playerInventory, resolveKeypad(playerInventory, buf));
     }
 
-    public RBMKKeypadConfigMenu(int containerId, Inventory playerInventory, RBMKKeypadEntity keypad) {
+    public RBMKKeypadConfigMenu(int containerId, Inventory playerInventory, RBMKKeypadEntityBE keypad) {
         this(containerId, playerInventory, keypad,
                 keypad != null ? keypad.getBlockPos() : null,
                 new SimpleContainer(0),
@@ -36,12 +36,12 @@ public class RBMKKeypadConfigMenu extends BaseMachineMenu {
     }
 
     public RBMKKeypadConfigMenu(int containerId, Inventory playerInventory, Container container, ContainerData data) {
-        this(containerId, playerInventory, container instanceof RBMKKeypadEntity entity ? entity : null,
-                container instanceof RBMKKeypadEntity entity ? entity.getBlockPos() : null,
+        this(containerId, playerInventory, container instanceof RBMKKeypadEntityBE entity ? entity : null,
+                container instanceof RBMKKeypadEntityBE entity ? entity.getBlockPos() : null,
                 container, data);
     }
 
-    private RBMKKeypadConfigMenu(int containerId, Inventory playerInventory, RBMKKeypadEntity keypad, BlockPos pos, Container container, ContainerData data) {
+    private RBMKKeypadConfigMenu(int containerId, Inventory playerInventory, RBMKKeypadEntityBE keypad, BlockPos pos, Container container, ContainerData data) {
         super(HBMMenus.RBMK_KEYPAD_CONFIG_MENU.get(), containerId, container, data);
         this.slotNum = 0;
         this.keypad = keypad;
@@ -102,10 +102,10 @@ public class RBMKKeypadConfigMenu extends BaseMachineMenu {
         return keypad.command(slot);
     }
 
-    private static RBMKKeypadEntity resolveKeypad(Inventory playerInventory, FriendlyByteBuf buf) {
+    private static RBMKKeypadEntityBE resolveKeypad(Inventory playerInventory, FriendlyByteBuf buf) {
         Objects.requireNonNull(buf, "buffer missing block position");
         BlockPos pos = buf.readBlockPos();
-        if (playerInventory.player.level().getBlockEntity(pos) instanceof RBMKKeypadEntity entity) {
+        if (playerInventory.player.level().getBlockEntity(pos) instanceof RBMKKeypadEntityBE entity) {
             return entity;
         }
         return null;

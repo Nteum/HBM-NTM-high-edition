@@ -4,7 +4,7 @@ import com.hbm.api.fluid.FluidUtils;
 import com.hbm.api.fluid.ItemStackFluidHandler;
 import com.hbm.capabilities.ItemCapabilityWrapper;
 import com.hbm.item.HBMCombat;
-import com.hbm.item.tool.BatteryItem;
+import com.hbm.core.item.ItemBattery;
 import com.hbm.utils.math.BobMth;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -31,10 +31,10 @@ public class ItemArmorFSBFueled extends ItemArmorFSB{
     public int consumption;
     public int drain;
     public ItemArmorFSBFueled(ArmorMaterial pMaterial, Type pType, Properties pProperties, Fluid fuel, int maxFuel, int fillRate, int consumption, int drain) {
-        this(pMaterial, pType, pProperties.durability(BatteryItem.DEFAULT_DAMAGE), fuel, maxFuel, fillRate, consumption, drain, null);
+        this(pMaterial, pType, pProperties.durability(ItemBattery.DEFAULT_DAMAGE), fuel, maxFuel, fillRate, consumption, drain, null);
     }
     public ItemArmorFSBFueled(ArmorMaterial pMaterial, Type pType, Properties pProperties, Fluid fuel, int maxFuel, int fillRate, int consumption, int drain, Supplier<HBMCombat.Suit> suit) {
-        super(pMaterial, pType, pProperties.durability(BatteryItem.DEFAULT_DAMAGE), suit);
+        super(pMaterial, pType, pProperties.durability(ItemBattery.DEFAULT_DAMAGE), suit);
         this.fluid = fuel;
         this.maxFuel = maxFuel;
         this.fillRate = fillRate;

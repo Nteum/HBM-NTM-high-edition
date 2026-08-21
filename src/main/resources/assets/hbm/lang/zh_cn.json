@@ -782,6 +782,7 @@
   "block.hbm.machine_silex": "SILEX激光同位素分离室",
   "block.hbm.machine_siren": "警报器",
   "block.hbm.machine_solar_boiler": "太阳能锅炉",
+  "block.hbm.machine_solar": "太阳能板",
   "block.hbm.machine_soldering_station": "焊接台",
   "block.hbm.machine_solidifier": "工业固化机",
   "block.hbm.machine_spp_bottom": "ZPE电位发生器 [底部]",

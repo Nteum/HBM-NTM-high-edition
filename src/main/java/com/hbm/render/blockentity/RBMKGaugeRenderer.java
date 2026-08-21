@@ -1,6 +1,6 @@
 package com.hbm.render.blockentity;
 
-import com.hbm.blockentity.machine.rbmk.RBMKGaugeEntity;
+import com.hbm.blockentity.machine.rbmk.RBMKGaugeEntityBE;
 import com.hbm.utils.DirectionUtils;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
@@ -17,7 +17,7 @@ import org.joml.Matrix4f;
 /**
  * Recreates the legacy 2x2 RBMK gauge panel with independent needle dials.
  */
-public class RBMKGaugeRenderer implements BlockEntityRenderer<RBMKGaugeEntity> {
+public class RBMKGaugeRenderer implements BlockEntityRenderer<RBMKGaugeEntityBE> {
 
     private static final float PANEL_SCALE = 1.0F / 128.0F;
     private static final float FACE_Z = 0.5030F;
@@ -30,7 +30,7 @@ public class RBMKGaugeRenderer implements BlockEntityRenderer<RBMKGaugeEntity> {
     }
 
     @Override
-    public void render(RBMKGaugeEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource buffer,
+    public void render(RBMKGaugeEntityBE blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource buffer,
                        int packedLight, int packedOverlay) {
         Font font = Minecraft.getInstance().font;
         BlockState state = blockEntity.getBlockState();
@@ -50,7 +50,7 @@ public class RBMKGaugeRenderer implements BlockEntityRenderer<RBMKGaugeEntity> {
         poseStack.popPose();
     }
 
-    private static void renderGauge(Font font, PoseStack poseStack, MultiBufferSource buffer, RBMKGaugeEntity entity,
+    private static void renderGauge(Font font, PoseStack poseStack, MultiBufferSource buffer, RBMKGaugeEntityBE entity,
                                     int slot, float x, float y, int packedLight) {
         if (!entity.isActive(slot)) {
             return;
@@ -113,7 +113,7 @@ public class RBMKGaugeRenderer implements BlockEntityRenderer<RBMKGaugeEntity> {
     }
 
     @Override
-    public boolean shouldRenderOffScreen(RBMKGaugeEntity blockEntity) {
+    public boolean shouldRenderOffScreen(RBMKGaugeEntityBE blockEntity) {
         return true;
     }
 }

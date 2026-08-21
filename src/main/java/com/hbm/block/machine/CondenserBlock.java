@@ -1,13 +1,12 @@
 package com.hbm.block.machine;
 
 import com.hbm.block.base.BaseMachineBlock;
-import com.hbm.blockentity.machine.CondenserBlockEntity;
+import com.hbm.blockentity.machine.CondenserBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
@@ -25,7 +24,7 @@ public class CondenserBlock extends BaseMachineBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new CondenserBlockEntity(pos, state);
+        return new CondenserBE(pos, state);
     }
 
     @Override

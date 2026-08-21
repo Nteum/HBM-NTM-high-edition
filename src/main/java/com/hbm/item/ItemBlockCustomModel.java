@@ -1,21 +1,14 @@
 package com.hbm.item;
 
 import com.hbm.block.interfaces.ICustomBlockItemModel;
+import com.hbm.core.item.BlockItemCapacities;
 import com.hbm.main.ClientEventHandler;
-import com.hbm.render.RenderUtils;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.resources.model.BakedModel;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemDisplayContext;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
@@ -27,7 +20,7 @@ import java.util.function.Consumer;
 /**
  * 可以自定义模型的方块物品，用于一些通过obj渲染的方块在gui中的显示
  * */
-public class ItemBlockCustomModel extends BlockItemHBM {
+public class ItemBlockCustomModel extends BlockItem {
     // 特殊物品的尺度，用于规定模型的缩放程度。
     float size = 1.0f;
     Vec3 offset = new Vec3(0,0,0);

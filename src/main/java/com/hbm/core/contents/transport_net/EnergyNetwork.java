@@ -14,25 +14,29 @@ import org.apache.commons.lang3.tuple.Triple;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EnergyNetwork {
+/**
+ * 能量分配网络。继承自 AbstractNetwork。
+ * 相比旧版将 transmitters 映射为 AbstractNetwork.nodes，网络合并切分逻辑上移到基类。
+ */
+public class EnergyNetwork extends AbstractNetwork {
     public byte INDEX_FORBID = 0;
     public byte INDEX_IN = 1;
     public byte INDEX_OUT = 2;
     public byte INDEX_INOUT = 3;
 
-    int code;
-    private final EnergyNetworkSystem parent;
-    protected LongSet transmitters = new LongOpenHashSet();
+    // 已接入本网络的机器集合（机器同时也在 nodes 中，见 EnergyNetworkSystem.addMachine）
     protected LongSet machines = new LongOpenHashSet();
-
     private final Long2LongMap transNeed = new Long2LongOpenHashMap();
+    private final EnergyNetworkSystem parent;
 
     public EnergyNetwork(EnergyNetworkSystem parent, int code){
+        super(code);
         this.parent = parent;
-        this.code = code;
     }
-    protected void tick(){
-        if (this.transmitters.size() <= this.machines.size()) removeNet();
+
+    @Override
+    public void tick(){
+        if (this.getNodes().size() <= this.machines.size()) removeNet();
         int pri;
         LazyOptional<IEnergyHandler> handlerLazyOptional;
         long sum, sum1, sum2, sum3, sum4, sumPri1, sumPri2, sumPri3, sumPri4, transNeeded, posL, last1, last2, last3, temp1, temp2;
@@ -44,6 +48,7 @@ public class EnergyNetwork {
         while (iterator.hasNext()){
             posL = iterator.nextLong();
             MutableTriple<Byte, IntSet, LazyOptional<IEnergyHandler>> triple = parent.machines.get(posL);
+            if (triple == null) continue;
             Byte left = triple.getLeft();
             handlerLazyOptional= triple.getRight();
             if (handlerLazyOptional.isPresent() && handlerLazyOptional.resolve().isPresent()){
@@ -87,6 +92,7 @@ public class EnergyNetwork {
         for (Long2LongMap.Entry entry : transNeed.long2LongEntrySet()) {
             posL = entry.getLongKey();
             MutableTriple<Byte, IntSet, LazyOptional<IEnergyHandler>> triple = parent.machines.get(posL);
+            if (triple == null) continue;
             LazyOptional<IEnergyHandler> right = triple.getRight();
             if (right.isPresent() && right.resolve().isPresent()){
                 energyHandler = right.resolve().get();
@@ -107,6 +113,7 @@ public class EnergyNetwork {
             for (Triple<Long, Long, Long> triple : tempInOut) {
                 posL = triple.getLeft();
                 MutableTriple<Byte, IntSet, LazyOptional<IEnergyHandler>> triple2 = parent.machines.get(posL);
+                if (triple2 == null) continue;
                 LazyOptional<IEnergyHandler> right = triple2.getRight();
                 if (right.isPresent() && right.resolve().isPresent()){
                     energyHandler = right.resolve().get();
@@ -126,71 +133,53 @@ public class EnergyNetwork {
         transNeed.clear();
     }
 
-    public void addTransmitter(final long l){
-        transmitters.add(l);
-        parent.nodeMap.getOrDefault(l, new MutablePair<>(-1, LongSet.of())).setLeft(code);
-        if (parent.machines.containsKey(l)) this.addMachine(l);
-        else setNetwork(l);
-    }
-
-    public void addTransmitters(final LongSet nodes){
-        nodes.forEach(this::addTransmitter);
-    }
-
     public void addMachine(final long l){
         machines.add(l);
         parent.machines.get(l).getMiddle().add(code);
     }
-    public void merge(EnergyNetwork other){
-        transmitters.addAll(other.transmitters);
-        machines.addAll(other.machines);
-        for (Long l : other.transmitters) {
-            parent.nodeMap.get(l).setLeft(code);
-            if (!parent.machines.containsKey(l)) setNetwork(l);
-        }
-        for (Long l : other.machines) {
-            IntSet netSet = parent.machines.get(l).getMiddle();
-            netSet.remove(other.code);
-            netSet.add(code);
+
+    public void removeMachineLink(final long machine){
+        MutableTriple<Byte, IntSet, LazyOptional<IEnergyHandler>> triple = parent.machines.get(machine);
+        if (triple != null){
+            triple.getMiddle().remove(code);
+            if (triple.getMiddle().isEmpty()){
+                parent.machines.remove(machine);
+                parent.nodeMap.remove(machine);
+            }
         }
     }
-    public void replaceTransmitters(final LongSet transmitters){
-        this.transmitters.clear();
-        this.machines.clear();
-        this.addTransmitters(transmitters);
+
+    /** 机器/导线从本网络移除 */
+    public void removeTransmitter(final long l){
+        this.getNodes().remove(l);
+        this.machines.remove(l);
+        // 如果网络变成空的，则从系统中移除网络，由于machine也在transmitter中，暂时只能用这种下策。
+        if (this.getNodes().size() <= this.machines.size()){
+            if (!machines.isEmpty()){
+                for (long machine : machines) {
+                    removeMachineLink(machine);
+                }
+            }
+            parent.nets.remove(code);
+        }
     }
+
     void setNetwork(final long l){
         BlockEntity blockEntity = parent.level.getBlockEntity(BlockPos.of(l));
         if (blockEntity instanceof IConnector connector){
             connector.setNetwork(this);
         }
     }
-    public void removeTransmitter(final long l){
-        this.transmitters.remove(l);
-        this.machines.remove(l);
-        // 如果网络变成空的，则从系统中移除网络，由于machine也在transmitter中，暂时只能用这种下策。
-        if (this.transmitters.size() <= this.machines.size()){
-            if (!machines.isEmpty()){
-                for (long machine : machines) {
-                    parent.removeMachineLink(machine, code);
-                }
-            }
-            parent.nets.remove(code);
-        }
-    }
+
+    /** 网络失效时清空 nodeMap 标记 */
     private void removeNet(){
-        for (long l : this.transmitters) {
-            parent.nodeMap.getOrDefault(l, new MutablePair<>(-1, LongSet.of())).setLeft(-1);
+        for (long l : this.getNodes()) {
+            AbstractNetworkSystem.MutableNodeData data = parent.nodeMap.get(l);
+            if (data != null) data.netId = -1;
         }
         for (long l : this.machines) {
-            parent.removeMachineLink(l, code);
+            removeMachineLink(l);
         }
         parent.nets.remove(code);
-    }
-    static byte getIoState(byte b){
-        return (byte) (b & 0x0F);
-    }
-    static byte getPriority(byte b){
-        return (byte) (b >> 4);
     }
 }

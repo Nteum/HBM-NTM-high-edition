@@ -1,11 +1,9 @@
 package com.hbm.Inventory.recipe;
 
-import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
-import com.google.gson.JsonSyntaxException;
 import com.hbm.HBM;
-import com.hbm.blockentity.machine.AssemblerEntity;
+import com.hbm.blockentity.machine.AssemblerEntityBE;
 import com.hbm.datagen.recipe.ingredient.CountableIngredient;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
@@ -67,10 +65,10 @@ public class AssemblerRecipe implements Recipe<Container> {
     @Override
     public boolean matches(Container pContainer, Level pLevel) {
         //比较复杂，还需要根据原版的RecipeMatcher修改
-        if (pContainer instanceof AssemblerEntity entity){
+        if (pContainer instanceof AssemblerEntityBE entity){
             int cnt = 0;
             List<ItemStack> inputs = new ArrayList<>();
-            for (int i : AssemblerEntity.ASSEMBLE_SLOTS) {
+            for (int i : AssemblerEntityBE.ASSEMBLE_SLOTS) {
                 if (!entity.getItemHandler().getStackInSlot(i).isEmpty())inputs.add(entity.getItemHandler().getStackInSlot(i));
             }
             return inputs.size() >= ingredients.size()
@@ -88,10 +86,10 @@ public class AssemblerRecipe implements Recipe<Container> {
 
     @Override
     public ItemStack assemble(Container pContainer, RegistryAccess pRegistryAccess) {
-        if (pContainer instanceof AssemblerEntity entity){
+        if (pContainer instanceof AssemblerEntityBE entity){
             for (CountableIngredient ingredient : this.ingredients) {
                 int tempCount = ingredient.value.count;
-                for (int i : AssemblerEntity.ASSEMBLE_SLOTS) {
+                for (int i : AssemblerEntityBE.ASSEMBLE_SLOTS) {
                     ItemStack itemStack = entity.getItemHandler().getStackInSlot(i);
                     if (ingredient.value.flagTag && itemStack.is(ingredient.value.tagKey)
                             || !ingredient.value.flagTag && itemStack.is(ingredient.value.itemStack.getItem())){

@@ -1,7 +1,6 @@
 package com.hbm.block.base;
 
-import com.hbm.blockentity.base.BaseMachineBlockEntity;
-import com.hbm.blockentity.base.UpdateableBlockEntity;
+import com.hbm.core.blockentity.BEUpdateable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -18,7 +17,6 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
-import net.minecraftforge.items.wrapper.InvWrapper;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
@@ -32,7 +30,7 @@ public abstract class BlockMachineBase extends BlockContainerBase{
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return pLevel.isClientSide() ? UpdateableBlockEntity::clientTicker : UpdateableBlockEntity::serverTicker;
+        return pLevel.isClientSide() ? BEUpdateable::clientTicker : BEUpdateable::serverTicker;
     }
     /** 右键 */
     @Override

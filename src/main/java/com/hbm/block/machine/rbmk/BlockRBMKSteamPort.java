@@ -2,7 +2,7 @@ package com.hbm.block.machine.rbmk;
 
 import com.hbm.api.fluid.FluidUtils;
 import com.hbm.block.interfaces.ILookOverlay;
-import com.hbm.blockentity.machine.rbmk.RBMKSteamPortEntity;
+import com.hbm.blockentity.machine.rbmk.RBMKSteamPortEntityBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
@@ -47,7 +47,7 @@ public class BlockRBMKSteamPort extends Block implements EntityBlock, ILookOverl
             return InteractionResult.SUCCESS;
         }
         final BlockEntity blockEntity = level.getBlockEntity(pos);
-        if (!(blockEntity instanceof RBMKSteamPortEntity port)) {
+        if (!(blockEntity instanceof RBMKSteamPortEntityBE port)) {
             return InteractionResult.PASS;
         }
 
@@ -71,7 +71,7 @@ public class BlockRBMKSteamPort extends Block implements EntityBlock, ILookOverl
     @Nullable
     @Override
     public BlockEntity newBlockEntity(final BlockPos pos, final BlockState state) {
-        return new RBMKSteamPortEntity(pos, state);
+        return new RBMKSteamPortEntityBE(pos, state);
     }
 
     @Nullable
@@ -82,7 +82,7 @@ public class BlockRBMKSteamPort extends Block implements EntityBlock, ILookOverl
             return null;
         }
         return (lvl, pos, st, be) -> {
-            if (be instanceof RBMKSteamPortEntity port) {
+            if (be instanceof RBMKSteamPortEntityBE port) {
                 port.serverTick();
             }
         };
@@ -91,7 +91,7 @@ public class BlockRBMKSteamPort extends Block implements EntityBlock, ILookOverl
     @Override
     public List<Component> getDesc(final Level level, final BlockPos pos) {
         final BlockEntity blockEntity = level.getBlockEntity(pos);
-        if (blockEntity instanceof RBMKSteamPortEntity port) {
+        if (blockEntity instanceof RBMKSteamPortEntityBE port) {
             return java.util.List.of(Component.literal(port.debugSummary()));
         }
         return java.util.List.of(Component.literal(inlet ? "RBMK water inlet" : "RBMK steam outlet"));

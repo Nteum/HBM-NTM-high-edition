@@ -20,7 +20,7 @@ import com.hbm.registries.ModSounds;
 import com.hbm.registries.ModTags;
 import com.hbm.utils.math.BobMth;
 import com.hbm.core.contents.multiblock.MultiblockModule;
-import com.hbm.utils.sound.AudioWrapper;
+import com.hbm.core.client.sounds.AudioWrapper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
@@ -213,7 +213,7 @@ public class TileMachineCentrifuge extends DefaultMachineBE implements IUpgradeI
             } else if(!audio.isPlaying()) {
                 audio = rebootAudio(audio);
             }
-            audio.updateVolume(getVolume(1F));
+            audio.updateVolume(1);
             audio.updatePitch((audioDuration - 10) / 100F + 0.5F);
             audio.keepAlive();
 

@@ -1,8 +1,7 @@
 package com.hbm.core.capability.energy;
 
 import com.hbm.api.IContentsListener;
-import com.hbm.api.energy.IEnergyHandler;
-import com.hbm.core.api.HBMEnergyHandler;
+import com.hbm.core.api.capability.HBMEnergyHandler;
 
 /**
  * 最基础的能量系统，我觉得它基本够应对99%的情况了

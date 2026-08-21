@@ -2,10 +2,9 @@ package com.hbm.render.blockentity;
 
 import com.hbm.HBM;
 import com.hbm.blockentity.machine.TileMinerLarge;
-import com.hbm.main.ResourceManager;
 import com.hbm.render.RenderUtils;
 import com.hbm.render.model.Models;
-import com.hbm.render.model.engine.CustomPartsModel;
+import com.hbm.core.client.model.CustomPartsModel;
 import com.hbm.utils.DirectionUtils;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
@@ -18,11 +17,9 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelManager;
-import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
-import org.lwjgl.opengl.GL11;
 
 public class RendererMinerLarge implements BlockEntityRenderer<TileMinerLarge> {
     public static final ResourceLocation cobble = HBM.rl("textures/models/machines/cobblestone.png");

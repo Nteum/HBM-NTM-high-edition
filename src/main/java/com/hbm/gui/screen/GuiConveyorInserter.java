@@ -2,7 +2,7 @@ package com.hbm.gui.screen;
 
 import com.hbm.HBM;
 import com.hbm.gui.menu.MenuConveyorInserter;
-import com.hbm.gui.screen.widget.MultiStateButton;
+import com.hbm.core.client.gui.widget.MultiStateButton;
 import com.hbm.core.network.HBMNetwork;
 import com.hbm.network.packet.toserver.C2SSyncTileMessage;
 import net.minecraft.client.gui.GuiGraphics;

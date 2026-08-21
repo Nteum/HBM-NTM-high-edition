@@ -7,12 +7,12 @@
     "hbm:nugget_mox_fuel",
     "hbm:nugget_americium_fuel",
     "hbm:nugget_schrabidium_fuel",
+    "hbm:nugget_hes",
+    "hbm:nugget_les",
     "hbm:nugget_dineutronium",
     "hbm:nugget_mercury_tiny",
     "hbm:nugget_am_mix",
     "hbm:nugget_sr90",
-    "hbm:nugget_hes",
-    "hbm:nugget_les",
     {
       "id": "#forge:nuggets/gold",
       "required": false

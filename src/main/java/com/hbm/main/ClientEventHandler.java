@@ -4,7 +4,7 @@ import com.hbm.HBM;
 import com.hbm.block.interfaces.ILookOverlay;
 import com.hbm.block.interfaces.ITooltipProvider;
 import com.hbm.blockentity.HBMTiles;
-import com.hbm.blockentity.logistic.PipeEntity;
+import com.hbm.blockentity.logistic.PipeEntityBEPipeBase;
 import com.hbm.config.ConfigLBSM;
 import com.hbm.space.dim.orbit.SpaceSpecialEffects;
 import com.hbm.entity.ModEntityType;
@@ -31,8 +31,8 @@ import com.hbm.render.entity.missile.MissileTaintRenderer;
 import com.hbm.render.entity.mob.GlyphidRender;
 import com.hbm.render.item.SpecialItemRender;
 import com.hbm.render.model.Models;
-import com.hbm.render.model.engine.CustomPartsModel;
-import com.hbm.render.model.engine.TrianglePartsModel;
+import com.hbm.core.client.model.CustomPartsModel;
+import com.hbm.core.client.model.TrianglePartsModel;
 import com.hbm.render.model.entity.TestEntityModel;
 import com.hbm.render.overlay.AtomicFlashOverlay;
 import com.hbm.render.overlay.DebugTagOverlay;
@@ -109,14 +109,14 @@ public class ClientEventHandler {
         /** 注册menu和gui */
         event.enqueueWork(()-> {
             // menu和screen的对应关系
-            MenuScreens.register(HBMMenus.DIFURNACE_MENU.get(), DifurnaceGui::new);
+//            MenuScreens.register(HBMMenus.DIFURNACE_MENU.get(), DifurnaceGui::new);
             MenuScreens.register(HBMMenus.PRESS_MENU.get(), PressGui::new);
             MenuScreens.register(HBMMenus.BATTERY_MENU.get(), BatteryGui::new);
             MenuScreens.register(HBMMenus.ASSEMBLER_MENU.get(), AssemblerGui::new);
             MenuScreens.register(HBMMenus.CHEMPLANT_MENU.get(), ChemplantGui::new);
             MenuScreens.register(HBMMenus.BARREL_MENU.get(), BarrelGui::new);
             MenuScreens.register(HBMMenus.GAS_TURBINE_MENU.get(), GasTurbineScreen::new);
-            MenuScreens.register(HBMMenus.ELECTRIC_FURNACE_MENU.get(), ElectricFurnaceGui::new);
+//             MenuScreens.register(HBMMenus.ELECTRIC_FURNACE_MENU.get(), ElectricFurnaceGui::new);
             MenuScreens.register(HBMMenus.LAUNCH_PAD_MENU.get(), LaunchPadGui::new);
             MenuScreens.register(HBMMenus.SHREDDER_MENU.get(), ShredderGui::new);
             MenuScreens.register(HBMMenus.TOKAMAK_MENU.get(), TokamakGui::new);
@@ -137,7 +137,7 @@ public class ClientEventHandler {
             MenuScreens.register(HBMMenus.ICF_PRESS_MENU.get(), ICFPressScreen::new);
             MenuScreens.register(HBMMenus.RESEARCH_REACTOR_MENU.get(), ResearchReactorScreen::new);
             MenuScreens.register(HBMMenus.BREEDER_REACTOR_MENU.get(), BreederReactorScreen::new);
-            MenuScreens.register(HBMMenus.MENU_FIREBOX.get(), GuiFirebox::new);
+//            MenuScreens.register(HBMMenus.MENU_FIREBOX.get(), GuiFirebox::new);
             MenuScreens.register(HBMMenus.MENU_CRUCIBLE.get(), GuiCrucible::new);
             MenuScreens.register(HBMMenus.MENU_CONVEYOR_INSERTER.get(), GuiConveyorInserter::new);
             MenuScreens.register(HBMMenus.MENU_CONVEYOR_EXTRACTOR.get(), GuiConveyorExtractor::new);
@@ -145,11 +145,11 @@ public class ClientEventHandler {
             MenuScreens.register(HBMMenus.MENU_MINER_LARGE.get(), GuiMinerLarge::new);
             ModBlocks.guiSupport();
             //方块实体渲染
-            BlockEntityRenderers.register(HBMTiles.PRESS_ENTITY.get(), PressRenderer::new);
+//            BlockEntityRenderers.register(HBMTiles.PRESS_ENTITY.get(), PressRenderer::new);
             BlockEntityRenderers.register(HBMTiles.ASSEMBLER_ENTITY.get(), AssemblerRenderer::new);
-            BlockEntityRenderers.register(HBMTiles.NUKE_BOMB_FAT_ENTITY.get(), NukeFatRender::new);
-            BlockEntityRenderers.register(HBMTiles.NUKE_BOMB_BOY_ENTITY.get(), NukeBoyRender::new);
-            BlockEntityRenderers.register(HBMTiles.NUKE_BOMB_CUSTOM_ENTITY.get(), NukeCustomRender::new);
+//            BlockEntityRenderers.register(HBMTiles.NUKE_BOMB_FAT_ENTITY.get(), NukeFatRender::new);
+//            BlockEntityRenderers.register(HBMTiles.NUKE_BOMB_BOY_ENTITY.get(), NukeBoyRender::new);
+//            BlockEntityRenderers.register(HBMTiles.NUKE_BOMB_CUSTOM_ENTITY.get(), NukeCustomRender::new);
             BlockEntityRenderers.register(HBMTiles.CHEMPLANT_ENTITY.get(), ChemplantRenderer::new);
             BlockEntityRenderers.register(HBMTiles.LAUNCHPAD_ENTITY.get(), LaunchPadRender::new);
             BlockEntityRenderers.register(HBMTiles.TOKAMAK_CONTROLLER.get(), TokamakRenderer::new);
@@ -158,7 +158,7 @@ public class ClientEventHandler {
             BlockEntityRenderers.register(HBMTiles.BREEDER_REACTOR_ENTITY.get(), ctx -> new BreederReactorRenderer());
             BlockEntityRenderers.register(HBMTiles.TILE_SPACE_STATION.get(), SpaceStationRender::new);
             BlockEntityRenderers.register(HBMTiles.TILE_CONNECTOR.get(), ConnectorRender::new);
-            BlockEntityRenderers.register(HBMTiles.TILE_FIREBOX.get(), RendererFirebox::new);
+//            BlockEntityRenderers.register(HBMTiles.TILE_FIREBOX.get(), RendererFirebox::new);
             BlockEntityRenderers.register(HBMTiles.CRUCIBLE_ENTITY.get(), CrucibleRenderer::new);
             BlockEntityRenderers.register(HBMTiles.TILE_FOUNDRY_MOLD.get(), RenderFoundryMold::new);
             BlockEntityRenderers.register(HBMTiles.TILE_CONVEYOR.get(), RendererConveyor::new);
@@ -220,15 +220,15 @@ public class ClientEventHandler {
             case 5 -> 0x8000ff;
             default -> -1;
         }, ModBlocks.CONVEYOR_ROUTER.get());
-        event.register((state, level, pos, tintIndex) -> {
-            if (tintIndex == 1 && level != null && pos != null) {
-                PipeEntity be = WorldUtils.getTileEntity(PipeEntity.class, level, pos);
-                if (be != null) {
-                    return be.getFluidColor();
-                }
-            }
-            return -1;
-        }, ModBlocks.FLUID_PIPE.get());
+//        event.register((state, level, pos, tintIndex) -> {
+//            if (tintIndex == 1 && level != null && pos != null) {
+//                PipeEntityBEPipeBase be = WorldUtils.getTileEntity(PipeEntityBEPipeBase.class, level, pos);
+//                if (be != null) {
+//                    return be.getFluidColor();
+//                }
+//            }
+//            return -1;
+//        }, ModBlocks.FLUID_PIPE.get());
         ModBlocks.blockColorSupport(event);
     }
     @SubscribeEvent

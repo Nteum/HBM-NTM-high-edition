@@ -1,14 +1,14 @@
 package com.hbm.blockentity.machine;
 
 import com.hbm.HBMKey;
-import com.hbm.Inventory.material.BasicHeatHandler;
+import com.hbm.core.capability.heat.BasicHeatHandler;
+import com.hbm.core.blockentity.BEDummyable;
 import com.hbm.core.contents.addational_data.Pollution;
 import com.hbm.api.fluid.BasicFluidHandler;
-import com.hbm.blockentity.HBMTiles;
-import com.hbm.blockentity.base.DummyableBlockEntity;
 import com.hbm.blockentity.interfaces.IBurnFuel;
 import com.hbm.blockentity.interfaces.IMachinePolluting;
 import com.hbm.blockentity.interfaces.ITakeAir;
+import com.hbm.core.contents.multiblock.MultiblockModule;
 import com.hbm.registries.HBMCaps;
 import com.hbm.registries.ModBlocks;
 import com.hbm.core.contents.multiblock.MultiblockData;
@@ -30,7 +30,7 @@ import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class TileFireboxBase extends DummyableBlockEntity implements IBurnFuel, IMachinePolluting {
+public abstract class TileFireboxBase extends BEDummyable implements IBurnFuel, IMachinePolluting {
     public int maxBurnTime;
     public int burnTime;            // 燃料还可以燃烧的时间
     public int burnHeat;            // 单位时间燃烧产生的热量
@@ -80,14 +80,14 @@ public abstract class TileFireboxBase extends DummyableBlockEntity implements IB
         }
     };
     public TileFireboxBase(BlockPos pos, BlockState state) {
-        super(HBMTiles.TILE_FIREBOX.get(), pos, state);
-        this.multiblockData = MultiblockData.mapping.get(ModBlocks.HEATER_FIREBOX.get());
+        super(pos, state);
+        this.multiblockModule = new MultiblockModule(MultiblockData.mapping.get(ModBlocks.HEATER_FIREBOX.get()));
         this.burnTime = 0;
 //        this.heatEnergy = 0;
         this.basicFluidHandler = new BasicFluidHandler(3, 50);
-        this.capabilitiesContent.addCapability(ForgeCapabilities.FLUID_HANDLER, this.basicFluidHandler);
+        this.addCapability(ForgeCapabilities.FLUID_HANDLER, this.basicFluidHandler);
         this.heatHandler = BasicHeatHandler.of(getMaxHeat());
-        this.capabilitiesContent.addCapability(HBMCaps.HEAT, this.heatHandler);
+        this.addCapability(HBMCaps.HEAT, this.heatHandler);
     }
 
     @Override

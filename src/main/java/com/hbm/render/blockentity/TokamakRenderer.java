@@ -1,7 +1,7 @@
 package com.hbm.render.blockentity;
 
 import com.hbm.HBM;
-import com.hbm.blockentity.machine.tokamak.TokamakControllerBlockEntity;
+import com.hbm.blockentity.machine.tokamak.TokamakControllerBE;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
@@ -21,14 +21,14 @@ import org.joml.Matrix4f;
  * - 使用能量紊流渲染类型模拟 Geckolib shader 样式
  * - 若资源缺失则自动使用紫黑方格，不影响功能
  */
-public class TokamakRenderer implements BlockEntityRenderer<TokamakControllerBlockEntity> {
+public class TokamakRenderer implements BlockEntityRenderer<TokamakControllerBE> {
 
     private static final ResourceLocation PLASMA_TEX = HBM.rl( "textures/effects/tokamak_plasma.png");
 
     public TokamakRenderer(BlockEntityRendererProvider.Context ctx) {}
 
     @Override
-    public void render(TokamakControllerBlockEntity tile, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
+    public void render(TokamakControllerBE tile, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
         if (tile == null) return;
         Level level = tile.getLevel();
         if (level == null) return;

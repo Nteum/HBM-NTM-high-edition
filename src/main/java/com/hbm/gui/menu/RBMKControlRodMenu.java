@@ -1,6 +1,6 @@
 package com.hbm.gui.menu;
 
-import com.hbm.blockentity.machine.rbmk.RBMKControlRodEntity;
+import com.hbm.blockentity.machine.rbmk.RBMKControlRodEntityBE;
 import com.hbm.gui.HBMMenus;
 import com.hbm.item.rbmk.ItemRBMKControlRod;
 import net.minecraft.world.Container;
@@ -53,7 +53,7 @@ public class RBMKControlRodMenu extends BaseMachineMenu {
 
     @Override
     public boolean clickMenuButton(Player player, int id) {
-        if (this.container instanceof RBMKControlRodEntity controlRod) {
+        if (this.container instanceof RBMKControlRodEntityBE controlRod) {
             if (id >= BUTTON_LEVEL_BASE && id < BUTTON_LEVEL_BASE + LEVEL_COUNT) {
                 double target = LEVEL_STEPS[id - BUTTON_LEVEL_BASE];
                 controlRod.setInsertionFraction(target);

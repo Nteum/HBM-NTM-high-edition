@@ -1,6 +1,6 @@
 package com.hbm.gui.menu;
 
-import com.hbm.blockentity.machine.WoodBurnerBlockEntity;
+import com.hbm.blockentity.machine.WoodBurnerBE;
 import com.hbm.gui.HBMMenus;
 import com.hbm.gui.menu.slot.BatterySlot;
 import com.hbm.gui.menu.slot.OutputSlot;
@@ -22,7 +22,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class WoodBurnerMenu extends BaseMachineMenu {
 
-    private final WoodBurnerBlockEntity blockEntity;
+    private final WoodBurnerBE blockEntity;
     private final Level level;
     private final BlockPos blockPos;
 
@@ -30,7 +30,7 @@ public class WoodBurnerMenu extends BaseMachineMenu {
         this(containerId, playerInventory, resolve(playerInventory, buf));
     }
 
-    public WoodBurnerMenu(int containerId, Inventory playerInventory, WoodBurnerBlockEntity blockEntity, ContainerData data) {
+    public WoodBurnerMenu(int containerId, Inventory playerInventory, WoodBurnerBE blockEntity, ContainerData data) {
         this(containerId, playerInventory, new Context(blockEntity, blockEntity != null ? blockEntity.getBlockPos() : playerInventory.player.blockPosition()),
                 blockEntity != null ? blockEntity.getLevel() : playerInventory.player.level(), data != null ? data : new SimpleContainerData(7));
     }
@@ -41,7 +41,7 @@ public class WoodBurnerMenu extends BaseMachineMenu {
 
     private WoodBurnerMenu(int containerId, Inventory playerInventory, Context context, Level level, ContainerData data) {
         super(HBMMenus.WOOD_BURNER_MENU.get(), containerId, resolveContainer(context), resolveData(data));
-        WoodBurnerBlockEntity blockEntity = context.blockEntity();
+        WoodBurnerBE blockEntity = context.blockEntity();
         BlockPos pos = context.pos();
         this.blockEntity = blockEntity;
         this.level = level;
@@ -66,11 +66,11 @@ public class WoodBurnerMenu extends BaseMachineMenu {
             return new Context(null, inventory.player.blockPosition());
         }
         BlockPos pos = buf.readBlockPos();
-        WoodBurnerBlockEntity blockEntity = null;
+        WoodBurnerBE blockEntity = null;
         Level level = inventory.player.level();
         if (level != null) {
             BlockEntity be = level.getBlockEntity(pos);
-            if (be instanceof WoodBurnerBlockEntity wood) {
+            if (be instanceof WoodBurnerBE wood) {
                 blockEntity = wood;
             }
         }
@@ -136,7 +136,7 @@ public class WoodBurnerMenu extends BaseMachineMenu {
         return containerData.get(1);
     }
 
-    private record Context(WoodBurnerBlockEntity blockEntity, BlockPos pos) {}
+    private record Context(WoodBurnerBE blockEntity, BlockPos pos) {}
 
     private static Container resolveContainer(Context context) {
         return context.blockEntity() != null ? context.blockEntity() : new SimpleContainer(3);

@@ -1,7 +1,7 @@
 package com.hbm.block.machine;
 
 import com.hbm.block.base.BlockMachineBase;
-import com.hbm.blockentity.machine.PressEntity;
+import com.hbm.blockentity.machine.PressEntityBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
@@ -23,7 +23,7 @@ public class BlockPress extends BlockMachineBase {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new PressEntity(pPos,pState);
+        return new PressEntityBE(pPos,pState);
     }
 
     @Override

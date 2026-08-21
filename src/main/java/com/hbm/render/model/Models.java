@@ -69,6 +69,7 @@ public class Models {
     public static final ResourceLocation SPACE_STATION_BASE = add(HBM.rl("block/space_station_base"));
     public static final ResourceLocation CONNECTOR = add(HBM.rl("block/connector"));
     public static final ResourceLocation PRESS_HEAD = add(HBM.rl("block/press/press_head"));
+    public static final ResourceLocation SOLAR_PANEL = add(HBM.rl("block/solar/solar_panel"));
     public static final ResourceLocation FIREBOX = add(HBM.rl("block/firebox"));
     public static final ResourceLocation MINER_LARGE = add(HBM.rl("block/miner_large"));
 //    public static final ResourceLocation CENTRIFUGE = add(HBM.rl("block/machine_centrifuge"));

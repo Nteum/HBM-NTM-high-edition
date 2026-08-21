@@ -1,8 +1,7 @@
 package com.hbm.render.blockentity;
 
-import com.hbm.blockentity.machine.rbmk.RBMKDisplayEntity;
-import com.hbm.blockentity.machine.rbmk.RBMKPeripheralEntity;
-import com.hbm.reactor.rbmk.RBMKColumnType;
+import com.hbm.blockentity.machine.rbmk.RBMKDisplayEntityBE;
+import com.hbm.blockentity.machine.rbmk.RBMKPeripheralEntityBE;
 import com.hbm.utils.DirectionUtils;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -18,7 +17,7 @@ import org.joml.Matrix4f;
  * renderer style: untextured colored cells + small status dots instead of
  * floating font glyphs.
  */
-public class RBMKDisplayRenderer implements BlockEntityRenderer<RBMKDisplayEntity> {
+public class RBMKDisplayRenderer implements BlockEntityRenderer<RBMKDisplayEntityBE> {
 
     private static final int GRID_SIZE = 7;
     private static final float PANEL_PUSH = 1.0F / 128.0F;
@@ -39,7 +38,7 @@ public class RBMKDisplayRenderer implements BlockEntityRenderer<RBMKDisplayEntit
     }
 
     @Override
-    public void render(RBMKDisplayEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource buffer,
+    public void render(RBMKDisplayEntityBE blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource buffer,
                        int packedLight, int packedOverlay) {
         BlockState state = blockEntity.getBlockState();
 
@@ -65,7 +64,7 @@ public class RBMKDisplayRenderer implements BlockEntityRenderer<RBMKDisplayEntit
         for (int row = 0; row < GRID_SIZE; row++) {
             for (int col = 0; col < GRID_SIZE; col++) {
                 int index = row * GRID_SIZE + col;
-                RBMKPeripheralEntity.ConsoleColumn column = blockEntity.getConsoleColumn(index);
+                RBMKPeripheralEntityBE.ConsoleColumn column = blockEntity.getConsoleColumn(index);
                 renderCell(buffer, pose, index, column);
             }
         }
@@ -73,7 +72,7 @@ public class RBMKDisplayRenderer implements BlockEntityRenderer<RBMKDisplayEntit
     }
 
     private static void renderCell(MultiBufferSource buffer, Matrix4f pose, int index,
-                                   RBMKPeripheralEntity.ConsoleColumn column) {
+                                   RBMKPeripheralEntityBE.ConsoleColumn column) {
         float x = CELL_X;
         float y = CELL_Y_BASE - (index / GRID_SIZE) * CELL_STEP;
         float z = CELL_Z_BASE - (index % GRID_SIZE) * CELL_STEP;
@@ -135,7 +134,7 @@ public class RBMKDisplayRenderer implements BlockEntityRenderer<RBMKDisplayEntit
         consumer.vertex(matrix, x, y0, z0).color(r, g, b, a).endVertex();
     }
 
-    private static int baseColor(RBMKPeripheralEntity.ConsoleColumn column, int index) {
+    private static int baseColor(RBMKPeripheralEntityBE.ConsoleColumn column, int index) {
         if (column.data().contains("color", Tag.TAG_ANY_NUMERIC)) {
             int color = column.data().getInt("color");
             return switch (color) {
@@ -176,7 +175,7 @@ public class RBMKDisplayRenderer implements BlockEntityRenderer<RBMKDisplayEntit
     }
 
     @Override
-    public boolean shouldRenderOffScreen(RBMKDisplayEntity blockEntity) {
+    public boolean shouldRenderOffScreen(RBMKDisplayEntityBE blockEntity) {
         return true;
     }
 }

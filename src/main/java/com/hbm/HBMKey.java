@@ -20,9 +20,12 @@ public class HBMKey {
     public static final String OTHER = "other";
     public static final String SIMPLE = "simple";
     public static final String HORIZONTAL = "horizontal";
+    public static final String HORIZONTAL_BISTATE = "horizontal_bistate";
     // serialize or deserialize
     public static final String ENERGY = "energy";
     public static final String FLUID = "fluid";
+    public static final String HYDROGEN = "hydrogen";
+    public static final String SOURGAS = "sour_gas";
     public static final String NUM = "num";
     public static final String ITEM = "item";
     public static final String IS_FORM = "is_form";

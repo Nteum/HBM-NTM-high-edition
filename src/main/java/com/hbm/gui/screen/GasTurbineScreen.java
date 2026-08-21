@@ -1,9 +1,9 @@
 package com.hbm.gui.screen;
 
 import com.hbm.HBM;
-import com.hbm.blockentity.machine.GasTurbineBlockEntity;
+import com.hbm.blockentity.machine.GasTurbineBE;
 import com.hbm.gui.menu.GasTurbineMenu;
-import com.hbm.gui.screen.widget.BarFluid;
+import com.hbm.core.client.gui.widget.BarFluid;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
@@ -55,7 +55,7 @@ public class GasTurbineScreen extends BaseMachineGui<GasTurbineMenu> {
     @Override
     protected void containerTick() {
         super.containerTick();
-        GasTurbineBlockEntity entity = menu.getBlockEntity();
+        GasTurbineBE entity = menu.getBlockEntity();
         if (entity != null) {
             List<FluidTank> tanks = entity.getFluids().getFluidTanks();
             if (tanks.size() >= 4) {
@@ -109,7 +109,7 @@ public class GasTurbineScreen extends BaseMachineGui<GasTurbineMenu> {
 
     private void drawEnergyBar(GuiGraphics graphics) {
         long energy = menu.getEnergy();
-        int width = (int) Math.min(142, energy * 142L / GasTurbineBlockEntity.CAPACITY);
+        int width = (int) Math.min(142, energy * 142L / GasTurbineBE.CAPACITY);
         if (width > 0) {
             graphics.blit(TEXTURE, leftPos + 26, topPos + 109, 0, 223, width, 16);
         }
@@ -240,7 +240,7 @@ public class GasTurbineScreen extends BaseMachineGui<GasTurbineMenu> {
         super.renderTooltip(graphics, mouseX, mouseY);
         if (isInside(mouseX, mouseY, 26, 109, 142, 16)) {
             List<Component> energyTip = List.of(
-                    Component.literal(String.format(Locale.ROOT, "%,d / %,d HE", menu.getEnergy(), GasTurbineBlockEntity.CAPACITY))
+                    Component.literal(String.format(Locale.ROOT, "%,d / %,d HE", menu.getEnergy(), GasTurbineBE.CAPACITY))
                             .withStyle(ChatFormatting.GREEN));
             graphics.renderComponentTooltip(this.font, energyTip, mouseX, mouseY);
         }

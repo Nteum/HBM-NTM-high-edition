@@ -200,6 +200,8 @@ public enum HBMLang implements ILangEntry {
     FUEL("Fuel"),
     FUEL_CAPACITY("Fuel Capacity: %s mB"),
     EMPTY("Empty"),
+    DISCHARGE_RATE("Discharge rate: %s HE/t"),
+    SHOW_HEAT("Heat : %s TU"),
     // effect
     EFFECT_RADIATION("effect","radiation"),
     // armor tooltip

@@ -1,6 +1,6 @@
 package com.hbm.gui.menu;
 
-import com.hbm.blockentity.machine.rbmk.RBMKBaseEntity;
+import com.hbm.blockentity.machine.rbmk.RBMKBaseEntityBE;
 import com.hbm.gui.HBMMenus;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
@@ -27,7 +27,7 @@ public class RBMKBaseMenu extends BaseMachineMenu {
 
     @Override
     public boolean clickMenuButton(Player player, int id) {
-        if (id == 0 && this.container instanceof RBMKBaseEntity base) {
+        if (id == 0 && this.container instanceof RBMKBaseEntityBE base) {
             base.triggerAz5();
             return true;
         }

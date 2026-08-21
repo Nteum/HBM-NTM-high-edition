@@ -1,7 +1,7 @@
 package com.hbm.block.machine;
 
-import com.hbm.block.base.BlockDummyable;
-import com.hbm.blockentity.machine.CoolingTowerBlockEntity;
+import com.hbm.blockentity.machine.CoolingTowerBE;
+import com.hbm.core.block.BlockDummyable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -29,7 +29,7 @@ public class CoolingTowerBlock extends BlockDummyable {
     @Nullable
     @Override
     protected BlockEntity mainBlockEntity(BlockPos pos, BlockState state) {
-        return new CoolingTowerBlockEntity(pos, state);
+        return new CoolingTowerBE(pos, state);
     }
 
     @Override

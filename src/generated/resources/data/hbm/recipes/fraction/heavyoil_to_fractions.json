@@ -1,0 +1,15 @@
+{
+  "type": "hbm:fraction",
+  "input": {
+    "amount": 100,
+    "fluid": "hbm:heavyoil"
+  },
+  "output1": {
+    "amount": 30,
+    "fluid": "hbm:bitumen"
+  },
+  "output2": {
+    "amount": 70,
+    "fluid": "hbm:smear"
+  }
+}

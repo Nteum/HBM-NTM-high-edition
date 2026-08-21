@@ -1,0 +1,15 @@
+{
+  "type": "hbm:alkylation",
+  "input": {
+    "amount": 100,
+    "fluid": "hbm:unsaturates"
+  },
+  "output1": {
+    "amount": 70,
+    "fluid": "hbm:aromatics"
+  },
+  "output2": {
+    "amount": 30,
+    "fluid": "hbm:petroleum"
+  }
+}

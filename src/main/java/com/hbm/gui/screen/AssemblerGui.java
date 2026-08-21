@@ -6,7 +6,7 @@ import com.hbm.HBMLang;
 import com.hbm.Inventory.recipe.AssemblerRecipe;
 import com.hbm.Inventory.recipe.ModRecipes;
 import com.hbm.gui.menu.AssemblerMenu;
-import com.hbm.gui.screen.page.recipe.RecipePageVanilla;
+import com.hbm.core.client.gui.page.recipe.RecipePageVanilla;
 import com.hbm.core.network.HBMNetwork;
 import com.hbm.network.packet.toserver.C2SSyncTileMessage;
 import net.minecraft.client.gui.GuiGraphics;

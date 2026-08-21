@@ -3,7 +3,7 @@ package com.hbm.blockentity.machine;
 import com.hbm.HBMKey;
 import com.hbm.block.logistic.BlockConnector;
 import com.hbm.blockentity.HBMTiles;
-import com.hbm.blockentity.base.CapabilityBlockEntity;
+import com.hbm.blockentity.base.CapabilityBE;
 import com.hbm.blockentity.interfaces.IConnector;
 import com.hbm.utils.data.NBTUtils;
 import com.hbm.core.contents.transport_net.EnergyNetwork;
@@ -21,7 +21,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class TileConnector extends CapabilityBlockEntity implements IConnector {
+public class TileConnector extends CapabilityBE implements IConnector {
     protected EnergyNetwork network;
     protected Set<BlockPos> connectedPos;
     private BlockPos tempPos = null;

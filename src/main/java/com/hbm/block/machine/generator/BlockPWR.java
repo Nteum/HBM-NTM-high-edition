@@ -3,7 +3,7 @@ package com.hbm.block.machine.generator;
 import com.hbm.block.base.BlockContainerBase;
 import com.hbm.blockentity.HBMTiles;
 import com.hbm.blockentity.machine.PWRBlockEntity;
-import com.hbm.blockentity.machine.PWRControllerBlockEntity;
+import com.hbm.blockentity.machine.PWRControllerBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.Level;
@@ -63,7 +63,7 @@ public class BlockPWR extends BlockContainerBase {
                     if (stored != null && pNewState.getBlock() != stored) {
                         pLevel.setBlock(pPos, stored.defaultBlockState(), Block.UPDATE_ALL);
                     }
-                    PWRControllerBlockEntity core = pwr.getCore();
+                    PWRControllerBE core = pwr.getCore();
                     if (core != null) {
                         core.setAssembled(false);
                     }

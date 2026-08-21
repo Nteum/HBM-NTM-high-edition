@@ -34,6 +34,13 @@ public class ClientConfig extends RunningConfig {
 	public static ConfigWrapper<Boolean> NEI_HIDE_SECRETS =					new ConfigWrapper(true);
 	public static ConfigWrapper<Boolean> COOLING_TOWER_PARTICLES =			new ConfigWrapper(true);
 	public static ConfigWrapper<Boolean> RENDER_REBAR_SIMPLE =				new ConfigWrapper(false);
+	public static ConfigWrapper<Integer> RENDER_HELIOSTAT_BEAM_LIMIT =		new ConfigWrapper(250);
+	public static ConfigWrapper<Integer> RENDER_REBAR_LIMIT =				new ConfigWrapper(250);
+	public static ConfigWrapper<Float> AUDIO_SHIP_HUM_VOLUME =				new ConfigWrapper(0.1F);
+	public static ConfigWrapper<Integer> TOOL_HUD_INDICATOR_X = 			new ConfigWrapper(0);
+	public static ConfigWrapper<Integer> TOOL_HUD_INDICATOR_Y = 			new ConfigWrapper(0);
+	public static ConfigWrapper<Boolean> SHOW_BLOCK_META_OVERLAY = 			new ConfigWrapper(false);
+	public static ConfigWrapper<Boolean> BADGES_HUD = 						new ConfigWrapper(true);
 	public static ConfigWrapper<Boolean> DEBUG_TAG_OVERLAY =				new ConfigWrapper(true);
 
 	private static void initDefaults() {
@@ -57,7 +64,13 @@ public class ClientConfig extends RunningConfig {
 		configMap.put("NEI_HIDE_SECRETS", NEI_HIDE_SECRETS);
 		configMap.put("COOLING_TOWER_PARTICLES", COOLING_TOWER_PARTICLES);
 		configMap.put("RENDER_REBAR_SIMPLE", RENDER_REBAR_SIMPLE);
-		configMap.put("DEBUG_TAG_OVERLAY", DEBUG_TAG_OVERLAY);
+		configMap.put("RENDER_HELIOSTAT_BEAM_LIMIT", RENDER_HELIOSTAT_BEAM_LIMIT);
+		configMap.put("RENDER_REBAR_LIMIT", RENDER_REBAR_LIMIT);
+		configMap.put("AUDIO_SHIP_HUM_VOLUME", AUDIO_SHIP_HUM_VOLUME);
+		configMap.put("TOOL_HUD_INDICATOR_X", TOOL_HUD_INDICATOR_X);
+		configMap.put("TOOL_HUD_INDICATOR_Y", TOOL_HUD_INDICATOR_Y);
+		configMap.put("SHOW_BLOCK_META_OVERLAY", SHOW_BLOCK_META_OVERLAY);
+		configMap.put("BADGES_HUD", BADGES_HUD);
 	}
 
 	/** Initializes defaults, then reads the config file if it exists, then writes the config file. */

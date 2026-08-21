@@ -1,6 +1,13 @@
 package com.hbm.gui.menu;
 
+import com.hbm.blockentity.machine.DifurnaceEntity;
+import com.hbm.blockentity.machine.TileFireboxBase;
+import com.hbm.core.blockentity.BEMachineBase;
+import com.hbm.core.menu.MenuBase;
 import com.hbm.gui.HBMMenus;
+import com.hbm.utils.WorldUtils;
+import net.minecraft.client.Minecraft;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -8,32 +15,52 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
 
-public class DifurnaceMenu  extends AbstractContainerMenu {
-    private final Container container;
-    private final ContainerData containerData;
+public class DifurnaceMenu  extends MenuBase<DifurnaceEntity> {
 
-    public DifurnaceMenu(int pContainerId, Inventory pPlayerInventory) {
-        this(pContainerId,pPlayerInventory,new SimpleContainer(4),new SimpleContainerData(2));
-    }
-    public DifurnaceMenu(int pContainerId, Inventory pPlayerInventory,Container inContainer, ContainerData containerData1){
-        super(HBMMenus.DIFURNACE_MENU.get(), pContainerId);
-        container = inContainer;
-        containerData = containerData1;
-        this.addSlot(new Slot(container,0,8,36));
-        this.addSlot(new Slot(container,1,80,18));
-        this.addSlot(new Slot(container,2,80,54));
-        this.addSlot(new Slot(container,3,134,36));
-        for(int i = 0; i < 3; ++i) {
-            for(int j = 0; j < 9; ++j) {
-                this.addSlot(new Slot(pPlayerInventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
+    public DifurnaceMenu(int pContainerId, Inventory playerInventory, DifurnaceEntity blockEntity, ContainerData containerData1) {
+        super(pContainerId, playerInventory, blockEntity, containerData1);
+        this.addSlot(new Slot(container, 0, 8, 36));
+        this.addSlot(new Slot(container, 1, 80, 18));
+        this.addSlot(new Slot(container, 2, 80, 54));
+        this.addSlot(new Slot(container, 3, 134, 36));
+        for (int i = 0; i < 3; ++i) {
+            for (int j = 0; j < 9; ++j) {
+                this.addSlot(new Slot(playerInventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
             }
         }
 
-        for(int k = 0; k < 9; ++k) {
-            this.addSlot(new Slot(pPlayerInventory, k, 8 + k * 18, 142));
+        for (int k = 0; k < 9; ++k) {
+            this.addSlot(new Slot(playerInventory, k, 8 + k * 18, 142));
         }
         this.addDataSlots(containerData1);
     }
+
+    public DifurnaceMenu(int id, Inventory playerInventory, FriendlyByteBuf buf) {
+        this(id, playerInventory, (DifurnaceEntity) Minecraft.getInstance().level.getBlockEntity(buf.readBlockPos()), new SimpleContainerData(DifurnaceEntity.CONTAINER_SIZE));
+    }
+
+//    public DifurnaceMenu(int pContainerId, Inventory pPlayerInventory) {
+//        this(pContainerId,pPlayerInventory,new SimpleContainer(4),new SimpleContainerData(2));
+//    }
+//    public DifurnaceMenu(int pContainerId, Inventory pPlayerInventory,Container inContainer, ContainerData containerData1){
+//        super(pContainerId);
+//        container = inContainer;
+//        containerData = containerData1;
+//        this.addSlot(new Slot(container,0,8,36));
+//        this.addSlot(new Slot(container,1,80,18));
+//        this.addSlot(new Slot(container,2,80,54));
+//        this.addSlot(new Slot(container,3,134,36));
+//        for(int i = 0; i < 3; ++i) {
+//            for(int j = 0; j < 9; ++j) {
+//                this.addSlot(new Slot(pPlayerInventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
+//            }
+//        }
+//
+//        for(int k = 0; k < 9; ++k) {
+//            this.addSlot(new Slot(pPlayerInventory, k, 8 + k * 18, 142));
+//        }
+//        this.addDataSlots(containerData1);
+//    }
 
     @Override
     public ItemStack quickMoveStack(Player pPlayer, int pIndex) {

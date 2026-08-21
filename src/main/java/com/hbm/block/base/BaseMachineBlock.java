@@ -1,8 +1,8 @@
 package com.hbm.block.base;
 
-import com.hbm.blockentity.base.BaseMachineBlockEntity;
+import com.hbm.blockentity.base.BaseMachineBE;
 //import com.hbm.handler.MoltiblockHandler;
-import com.hbm.blockentity.machine.PressEntity;
+import com.hbm.blockentity.machine.PressEntityBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -49,7 +49,7 @@ public abstract class BaseMachineBlock extends BaseEntityBlock implements Entity
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return pLevel.isClientSide() ? BaseMachineBlockEntity::clientTicker : BaseMachineBlockEntity::serverTicker;
+        return pLevel.isClientSide() ? BaseMachineBE::clientTicker : BaseMachineBE::serverTicker;
     }
 
     /** 右键 */
@@ -71,15 +71,15 @@ public abstract class BaseMachineBlock extends BaseEntityBlock implements Entity
     public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pMovedByPiston) {
         if (!pState.is(pNewState.getBlock())){
             BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
-            if (blockEntity instanceof BaseMachineBlockEntity){
+            if (blockEntity instanceof BaseMachineBE){
                 if (pLevel instanceof ServerLevel){
                     /** 掉落方块中的物品 */
-                    if (blockEntity instanceof PressEntity press){
+                    if (blockEntity instanceof PressEntityBE press){
                         for (int i = 0; i < press.getItemHandler().getSlots(); i++) {
                             Containers.dropItemStack(pLevel, pPos.getX(), pPos.getY(), pPos.getZ(), press.getItemHandler().getStackInSlot(i));
                         }
                     }else {
-                        Containers.dropContents(pLevel,pPos,(BaseMachineBlockEntity) blockEntity);
+                        Containers.dropContents(pLevel,pPos,(BaseMachineBE) blockEntity);
                     }
                 }
                 pLevel.updateNeighbourForOutputSignal(pPos,this);

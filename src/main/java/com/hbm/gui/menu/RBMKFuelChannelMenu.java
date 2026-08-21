@@ -1,8 +1,8 @@
 package com.hbm.gui.menu;
 
+import com.hbm.blockentity.machine.rbmk.RBMKFuelChannelEntityBE;
 import com.hbm.gui.HBMMenus;
 import com.hbm.item.rbmk.ItemRBMKFuelRod;
-import com.hbm.blockentity.machine.rbmk.RBMKFuelChannelEntity;
 import com.hbm.registries.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
@@ -39,7 +39,7 @@ public class RBMKFuelChannelMenu extends BaseMachineMenu {
     private final ContainerLevelAccess access;
 
     public RBMKFuelChannelMenu(int containerId, Inventory playerInventory) {
-        this(containerId, playerInventory, (RBMKFuelChannelEntity) null);
+        this(containerId, playerInventory, (RBMKFuelChannelEntityBE) null);
     }
 
     public RBMKFuelChannelMenu(int containerId, Inventory playerInventory, Container container, ContainerData data) {
@@ -50,11 +50,11 @@ public class RBMKFuelChannelMenu extends BaseMachineMenu {
         this(containerId, playerInventory, resolveFuelChannel(playerInventory, buf));
     }
 
-    public RBMKFuelChannelMenu(int containerId, Inventory playerInventory, RBMKFuelChannelEntity channel) {
+    public RBMKFuelChannelMenu(int containerId, Inventory playerInventory, RBMKFuelChannelEntityBE channel) {
         this(containerId, playerInventory, channel, channel != null ? channel.getContainerData() : new SimpleContainerData(DATA_FIELDS));
     }
 
-    public RBMKFuelChannelMenu(int containerId, Inventory playerInventory, RBMKFuelChannelEntity channel, ContainerData data) {
+    public RBMKFuelChannelMenu(int containerId, Inventory playerInventory, RBMKFuelChannelEntityBE channel, ContainerData data) {
         super(HBMMenus.RBMK_FUEL_CHANNEL_MENU.get(), containerId, channel != null ? channel : new SimpleContainer(SLOT_COUNT), data);
         this.access = channel != null && channel.getLevel() != null
                 ? ContainerLevelAccess.create(channel.getLevel(), channel.getBlockPos())
@@ -225,10 +225,10 @@ public class RBMKFuelChannelMenu extends BaseMachineMenu {
         return false;
     }
 
-    private static RBMKFuelChannelEntity resolveFuelChannel(Inventory playerInventory, FriendlyByteBuf buf) {
+    private static RBMKFuelChannelEntityBE resolveFuelChannel(Inventory playerInventory, FriendlyByteBuf buf) {
         Objects.requireNonNull(buf, "buffer missing block position");
         BlockPos pos = buf.readBlockPos();
-        if (playerInventory.player.level().getBlockEntity(pos) instanceof RBMKFuelChannelEntity entity) {
+        if (playerInventory.player.level().getBlockEntity(pos) instanceof RBMKFuelChannelEntityBE entity) {
             return entity;
         }
         return null;

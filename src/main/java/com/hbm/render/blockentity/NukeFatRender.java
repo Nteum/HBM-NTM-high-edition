@@ -1,6 +1,6 @@
 package com.hbm.render.blockentity;
 
-import com.hbm.blockentity.weapon.EntityNukeBomb;
+import com.hbm.blockentity.bomb.EntityNukeBombBE;
 import com.hbm.render.model.Models;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
@@ -14,11 +14,11 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import static com.hbm.render.RenderUtils.renderBlockModel;
 
-public class NukeFatRender extends MultiPartRenderer<EntityNukeBomb> {
+public class NukeFatRender extends MultiPartRenderer<EntityNukeBombBE> {
     public static BakedModel fat_man_model;
     public NukeFatRender(BlockEntityRendererProvider.Context pContext){
         ModelManager modelManager = Minecraft.getInstance().getModelManager();
-        fat_man_model = modelManager.getModel(Models.FAT_MAN);
+//        fat_man_model = modelManager.getModel(Models.FAT_MAN);
     }
 //    @Override
 //    public void render(NukeBombEntity pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, int pPackedOverlay) {
@@ -43,10 +43,11 @@ public class NukeFatRender extends MultiPartRenderer<EntityNukeBomb> {
 //    }
 
     @Override
-    public void renderMultiPart(EntityNukeBomb pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, int pPackedOverlay) {
+    public void renderMultiPart(EntityNukeBombBE pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, int pPackedOverlay) {
         BlockState blockState = pBlockEntity.getBlockState();
         BlockRenderDispatcher blockDispatcher = Minecraft.getInstance().getBlockRenderer();
         ModelBlockRenderer blockRenderer = blockDispatcher.getModelRenderer();
+        if (fat_man_model == null) fat_man_model = blockDispatcher.getBlockModel(blockState);
         renderBlockModel(fat_man_model,blockState,blockRenderer,pPoseStack,pBuffer,pPackedLight,pPackedOverlay,null);
     }
 }

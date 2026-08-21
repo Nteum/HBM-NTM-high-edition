@@ -1,6 +1,5 @@
 package com.hbm;
 
-import com.hbm.capabilities.network.TransmitterNetworkRegistry;
 import com.hbm.config.CommonConfig;
 import com.hbm.compat.bigexplosives.BigExplosivesMod;
 import com.hbm.compat.ballistix.BallistixCompat;
@@ -81,7 +80,6 @@ public class HBM {
     public HBM(FMLJavaModLoadingContext context) {
         //forge事件总线
         MinecraftForge.EVENT_BUS.register(this);
-        MinecraftForge.EVENT_BUS.addListener(this::onServerStopped);
         //模组事件总线
         IEventBus modEventBus = context.getModEventBus();
         modEventBus.addListener(this::commonSetup);
@@ -122,7 +120,6 @@ public class HBM {
     private void commonSetup(final FMLCommonSetupEvent event) {
         if (!CONFIG_PATH.toFile().exists()) CONFIG_PATH.toFile().mkdir();
         HBMNetwork.register(); //注册所有的消息
-        TransmitterNetworkRegistry.initiate(); //注册传输网络系统
         RBMKManager.init();
         PileNeutronTicker.init();
         CrackingRecipes.registerDefaults();
@@ -141,10 +138,6 @@ public class HBM {
 //            AssetConsistencyChecker.runIfRequested();
 //            ModelValidator.runIfRequested();
 //        });
-    }
-
-    private void onServerStopped(ServerStoppedEvent event){
-        TransmitterNetworkRegistry.reset();
     }
 
     /**

@@ -23,9 +23,9 @@ public final class BigExplosivesModTabs {
                         output.accept(BigExplosivesModItems.ATOM_BOMB.get());
                         output.accept(BigExplosivesModItems.FIVE_HUNDRED_KILOGRAM_BOMB.get());
                         // Also surface HBM’s placeable bomb blocks here (moved from weapons/tools)
-                        output.accept(ModBlocks.bomb_boy.get());
-                        output.accept(ModBlocks.bomb_fat_man.get());
-                        output.accept(ModBlocks.bomb_custom.get());
+                        output.accept(ModBlocks.NUKE_BOY.get());
+                        output.accept(ModBlocks.NUKE_MAN.get());
+                        output.accept(ModBlocks.NUKE_CUSTOM.get());
                     })
                     .build());
 

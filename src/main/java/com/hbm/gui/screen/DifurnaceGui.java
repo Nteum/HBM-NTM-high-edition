@@ -16,14 +16,14 @@ public class DifurnaceGui extends AbstractContainerScreen<DifurnaceMenu> {
         super(pMenu, pPlayerInventory, pTitle);
     }
 
-    /**
-     * 初始化gui
-     * */
-    @Override
-    protected void init() {
-        super.init();
-        titleLabelX = (imageWidth - font.width(title)) / 2;  //标题居中
-    }
+//    /**
+//     * 初始化gui
+//     * */
+//    @Override
+//    protected void init() {
+//        super.init();
+//        titleLabelX = (imageWidth - font.width(title)) / 2;  //标题居中
+//    }
     /**
      * 渲染GUI
      */

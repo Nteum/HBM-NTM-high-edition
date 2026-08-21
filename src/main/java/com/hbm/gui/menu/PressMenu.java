@@ -1,6 +1,7 @@
 package com.hbm.gui.menu;
 
-import com.hbm.blockentity.machine.PressEntity;
+import com.hbm.blockentity.machine.PressEntityBE;
+import com.hbm.core.menu.MenuBase;
 import com.hbm.gui.HBMMenus;
 import com.hbm.registries.ModBlocks;
 import net.minecraft.core.BlockPos;
@@ -20,12 +21,12 @@ import net.minecraftforge.items.SlotItemHandler;
 /**
  * 火力锻压机GUI
  * */
-public class PressMenu extends AbstractContainerMenu {
-    public PressEntity pressEntity;
+public class PressMenu extends MenuBase<PressEntityBE> {
+    public PressEntityBE pressEntity;
     public ContainerData containerData;
     Level level;
-    public PressMenu(int pContainerId, Inventory pPlayerInventory, PressEntity press, ContainerData containerData){
-        super(HBMMenus.PRESS_MENU.get(), pContainerId);
+    public PressMenu(int pContainerId, Inventory pPlayerInventory, PressEntityBE press, ContainerData containerData){
+        super(pContainerId, pPlayerInventory, press, containerData);
 
         this.pressEntity = press;
         this.level = press.getLevel();
@@ -60,10 +61,10 @@ public class PressMenu extends AbstractContainerMenu {
         this(id, playerInventory, getClientBlockEntity(playerInventory, buf), new SimpleContainerData(3));
     }
 
-    private static PressEntity getClientBlockEntity(Inventory inv, FriendlyByteBuf buf) {
+    private static PressEntityBE getClientBlockEntity(Inventory inv, FriendlyByteBuf buf) {
         BlockPos pos = buf.readBlockPos();
         BlockEntity be = inv.player.level().getBlockEntity(pos);
-        if (!(be instanceof PressEntity machine))
+        if (!(be instanceof PressEntityBE machine))
             throw new IllegalStateException("BlockEntity is not MachineBlockEntity");
         return machine;
     }
@@ -91,7 +92,7 @@ public class PressMenu extends AbstractContainerMenu {
         BlockPos pos = pressEntity.getBlockPos();
 
         if (player.distanceToSqr(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5) > 64) return false;
-        return level.getBlockState(pos).getBlock() == ModBlocks.machine_press.get();
+        return level.getBlockState(pos).getBlock() == ModBlocks.MACHINE_PRESS.get();
     }
 
     public float getSpeed(){

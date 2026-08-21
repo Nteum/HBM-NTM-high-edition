@@ -2,7 +2,7 @@ package com.hbm.gui.menu;
 
 import com.hbm.gui.HBMMenus;
 import com.hbm.gui.menu.slot.OutputSlot;
-import com.hbm.blockentity.machine.PWRControllerBlockEntity;
+import com.hbm.blockentity.machine.PWRControllerBE;
 import com.hbm.item.pwr.ItemPWRFuel;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
@@ -70,7 +70,7 @@ public class PWRMenu extends BaseMachineMenu {
 
     @Override
     public boolean clickMenuButton(Player player, int id) {
-        if (this.container instanceof PWRControllerBlockEntity controller) {
+        if (this.container instanceof PWRControllerBE controller) {
             controller.setRodTarget(id);
             return true;
         }

@@ -1,0 +1,25 @@
+{
+  "type": "hbm:refinery",
+  "input": {
+    "amount": 1000,
+    "fluid": "hbm:hotoil"
+  },
+  "output": [
+    {
+      "amount": 400,
+      "fluid": "hbm:heavyoil"
+    },
+    {
+      "amount": 200,
+      "fluid": "hbm:naphtha"
+    },
+    {
+      "amount": 200,
+      "fluid": "hbm:lightoil"
+    },
+    {
+      "amount": 200,
+      "fluid": "hbm:petroleum"
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 package com.hbm.block.machine;
 
 import com.hbm.block.base.BaseMachineBlock;
-import com.hbm.blockentity.machine.ShredderEntity;
+import com.hbm.blockentity.machine.ShredderEntityBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -15,6 +15,6 @@ public class BlockShredder extends BaseMachineBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new ShredderEntity(pos, state);
+        return new ShredderEntityBE(pos, state);
     }
 }
